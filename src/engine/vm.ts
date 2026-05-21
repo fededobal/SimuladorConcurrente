@@ -57,8 +57,10 @@ export class VirtualMachine {
   private logs: LogEntry[] = [];
 
   public onStateChange?: (state: VMState, logs: LogEntry[]) => void;
+  private program: Program;
 
-  constructor(private program: Program) {
+  constructor(program: Program) {
+    this.program = program;
     this.initialize();
   }
 

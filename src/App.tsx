@@ -6,7 +6,7 @@ import { ThreadScheduler } from './components/simulator/ThreadScheduler';
 import { tokenize } from './engine/lexer';
 import { Parser } from './engine/parser';
 import { VirtualMachine } from './engine/vm';
-import type { VMState, LogEntry } from './engine/vm';
+import type { VMState } from './engine/vm';
 import './index.css';
 
 const DEFAULT_CODE = `int contador = 0;
@@ -33,16 +33,13 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [speed, setSpeed] = useState(1000);
   
-  // VM Data
-  const [logs, setLogs] = useState<LogEntry[]>([]);
   const [currentState, setCurrentState] = useState<VMState | null>(null);
   
   const vmRef = useRef<VirtualMachine | null>(null);
   const timerRef = useRef<number | null>(null);
 
-  const syncStateToUI = (state: VMState, updatedLogs: LogEntry[]) => {
+  const syncStateToUI = (state: VMState) => {
     setCurrentState(state);
-    setLogs(updatedLogs);
 
     if (vmRef.current?.isFinished()) {
       stopSimulation();
@@ -51,7 +48,6 @@ function App() {
 
   const startSimulation = (startPaused = false) => {
     try {
-      setLogs([]);
       setCurrentState(null);
       setIsPaused(startPaused);
       
@@ -111,11 +107,12 @@ function App() {
 
   const activeState = currentState;
 
-  const activeLines = activeState?.threads.map(t => ({
-    line: (t as any).activeLine as number | undefined,
-    color: t.color,
-    state: t.state
-  })).filter((t): t is {line: number, color: string, state: string} => t.line !== undefined) || [];
+  const activeLines = activeState?.threads
+    .filter(t => (t as any).activeLine !== undefined)
+    .map(t => ({
+      line: (t as any).activeLine as number,
+      color: t.color
+    })) || [];
 
   return (
     <div className="app-container">
