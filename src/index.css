@@ -91,7 +91,7 @@ body {
   grid-row: 1 / 2;
 }
 
-.main-content > :nth-child(3) { /* LogViewer */
+.main-content > :nth-child(3) { /* ThreadScheduler */
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 }

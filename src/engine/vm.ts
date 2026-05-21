@@ -68,6 +68,7 @@ export class VirtualMachine {
       semaphores: this.semaphores,
       threads: this.threads.map(t => ({
         id: t.id, name: t.name, color: t.color, state: t.state,
+        activeLine: t.instructionStack.length > 0 ? (t.instructionStack[0] as any).line : undefined,
         localEnv: Object.fromEntries(Object.entries(t.localEnv).filter(([k]) => !k.startsWith('__')))
       }))
     })) as VMState;

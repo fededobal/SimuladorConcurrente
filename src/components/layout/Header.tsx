@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface HeaderProps {
-  onStart: () => void;
+  onStart: (startPaused?: boolean) => void;
   onStop: () => void;
   onPauseResume: () => void;
   onStep: () => void;
@@ -45,25 +45,31 @@ export const Header: React.FC<HeaderProps> = ({
           </select>
         </div>
 
+        {/* Botón Unificado de Paso a Paso */}
+        <button 
+          onClick={() => {
+            if (!isRunning) {
+              onStart(true);
+            } else {
+              onStep();
+            }
+          }} 
+          disabled={isRunning && !isPaused}
+          style={{ 
+            background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px',
+            cursor: (isRunning && !isPaused) ? 'not-allowed' : 'pointer', 
+            opacity: (isRunning && !isPaused) ? 0.5 : 1, 
+            fontWeight: 'bold', boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+          }}
+        >
+          ⏭ Paso a Paso
+        </button>
+
         {/* Botones de Control */}
         {!isRunning ? (
-          <>
-            <button 
-              onClick={() => {
-                onStart();
-                setTimeout(onPauseResume, 0); 
-              }} 
-              style={{ 
-                background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px',
-                cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
-              }}
-            >
-              ⏭ Paso a Paso
-            </button>
-            <button className="btn-run" onClick={onStart}>
-              ▶ Ejecutar
-            </button>
-          </>
+          <button className="btn-run" onClick={() => onStart(false)}>
+            ▶ Ejecutar
+          </button>
         ) : (
           <>
             <button 
@@ -75,17 +81,6 @@ export const Header: React.FC<HeaderProps> = ({
               }}
             >
               {isPaused ? '▶ Continuar' : '⏸ Pausar'}
-            </button>
-            
-            <button 
-              onClick={onStep} 
-              disabled={!isPaused}
-              style={{ 
-                background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px',
-                cursor: isPaused ? 'pointer' : 'not-allowed', opacity: isPaused ? 1 : 0.5, fontWeight: 'bold'
-              }}
-            >
-              ⏭ Paso a Paso
             </button>
             
             <button 

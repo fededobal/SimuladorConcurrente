@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Header } from './components/layout/Header';
 import { CodeEditor } from './components/simulator/CodeEditor';
 import { VariableTracker } from './components/simulator/VariableTracker';
-import { LogViewer } from './components/simulator/LogViewer';
+import { ThreadScheduler } from './components/simulator/ThreadScheduler';
 import { tokenize } from './engine/lexer';
 import { Parser } from './engine/parser';
 import { VirtualMachine } from './engine/vm';
@@ -36,7 +36,6 @@ function App() {
   // VM Data
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [currentState, setCurrentState] = useState<VMState | null>(null);
-  const [hoveredSnapshotId, setHoveredSnapshotId] = useState<string | null>(null);
   
   const vmRef = useRef<VirtualMachine | null>(null);
   const timerRef = useRef<number | null>(null);
@@ -47,24 +46,14 @@ function App() {
 
     if (vmRef.current?.isFinished()) {
       stopSimulation();
-      setLogs(prev => [...prev, {
-        id: 'fin',
-        type: 'INFO',
-        thread: 0,
-        resource: '',
-        message: 'Simulación Completada',
-        time: new Date().toLocaleTimeString(),
-        snapshot: state
-      }]);
     }
   };
 
-  const startSimulation = () => {
+  const startSimulation = (startPaused = false) => {
     try {
       setLogs([]);
       setCurrentState(null);
-      setHoveredSnapshotId(null);
-      setIsPaused(false);
+      setIsPaused(startPaused);
       
       const tokens = tokenize(code);
       const parser = new Parser(tokens);
@@ -75,16 +64,12 @@ function App() {
       vmRef.current = vm;
       
       setIsRunning(true);
+      if (startPaused) {
+        vm.step();
+      }
     } catch (e: any) {
-      setLogs([{
-        id: 'err',
-        type: 'ERROR',
-        thread: 0,
-        resource: '',
-        message: e.message,
-        time: new Date().toLocaleTimeString(),
-        snapshot: { variables: {}, semaphores: {}, threads: [] }
-      }]);
+      console.error(e);
+      alert(e.message);
     }
   };
 
@@ -107,7 +92,6 @@ function App() {
     }
   };
 
-  // Efecto para manejar el Timer de la Simulación Reactivamente
   useEffect(() => {
     if (isRunning && !isPaused) {
       timerRef.current = window.setInterval(() => {
@@ -117,7 +101,6 @@ function App() {
       }, speed);
     }
 
-    // Cleanup del timer anterior cuando se pausa, se detiene o cambia la velocidad
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -126,15 +109,13 @@ function App() {
     };
   }, [isRunning, isPaused, speed]);
 
-  const handleHoverLog = (id: string) => setHoveredSnapshotId(id);
-  const handleLeaveLog = () => setHoveredSnapshotId(null);
+  const activeState = currentState;
 
-  const hoveredSnapshot = hoveredSnapshotId 
-    ? logs.find(l => l.id === hoveredSnapshotId)?.snapshot || null 
-    : null;
-
-  const activeState = hoveredSnapshot || currentState;
-  const isHistorical = hoveredSnapshot !== null;
+  const activeLines = activeState?.threads.map(t => ({
+    line: (t as any).activeLine as number | undefined,
+    color: t.color,
+    state: t.state
+  })).filter((t): t is {line: number, color: string, state: string} => t.line !== undefined) || [];
 
   return (
     <div className="app-container">
@@ -150,9 +131,13 @@ function App() {
       />
       
       <main className="main-content">
-        <CodeEditor code={code} onChange={setCode} />
-        <VariableTracker state={activeState} isHistorical={isHistorical} />
-        <LogViewer logs={logs} onHoverLog={handleHoverLog} onLeaveLog={handleLeaveLog} />
+        <CodeEditor 
+          code={code} 
+          onChange={setCode} 
+          activeLines={activeLines} 
+        />
+        <VariableTracker state={activeState} isHistorical={false} />
+        <ThreadScheduler threads={activeState?.threads || []} />
       </main>
     </div>
   );

@@ -211,6 +211,14 @@ export class Parser {
   }
 
   private parseStatement(): Statement {
+    if (this.isAtEnd()) throw new Error('Unexpected EOF');
+    const line = this.peek().line;
+    const stmt = this.parseStatementInternal();
+    (stmt as any).line = line;
+    return stmt;
+  }
+
+  private parseStatementInternal(): Statement {
     const token = this.peek();
     const v = token.value;
 
