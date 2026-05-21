@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Simulador Concurrente (UNLP)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-19.2-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.0-purple.svg)](https://vitejs.dev/)
 
-Currently, two official plugins are available:
+Un entorno interactivo de desarrollo y simulación en el navegador diseñado para la materia **Programación Concurrente** de la Facultad de Informática (UNLP). 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este simulador permite a los estudiantes escribir, compilar y ejecutar pseudocódigo concurrente paso a paso, visualizando de forma gráfica y reactiva el entrelazado de hilos, las condiciones de carrera y la evolución de las variables compartidas y semáforos.
 
-## React Compiler
+## ✨ Características Principales
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Motor de Simulación a Medida:** Un analizador léxico/sintáctico (Parser) y una Máquina Virtual (VM) construidos desde cero en TypeScript para interpretar estrictamente la sintaxis de la cátedra.
+* **Soporte Extenso de Sintaxis:**
+    * Comandos guardados de Dijkstra (`if-fi`, `do-od`).
+    * Sentencias iterativas cuantificadas (`fa-af`).
+    * Hilos independientes (`process`) y bifurcación estructurada (`co-oc`).
+    * Primitivas de sincronización (`<await(B) S>`, `P()`, `V()`).
+    * Tipos abstractos como arreglos y Semáforos (`sem`).
+* **Time-Travel Debugger:** Permite pausar la ejecución y hacer *hover* sobre el log histórico de eventos (Scheduler) para ver una "fotografía" exacta del estado de la memoria en el pasado.
+* **Visualización Estructural de Semáforos:** Los semáforos se muestran como Tipos de Datos Abstractos completos, separando visualmente el valor del contador y la cola estricta de procesos bloqueados.
+* **Color-Coding de Hilos:** Cada proceso instanciado recibe una identidad cromática, permitiendo rastrear visualmente qué hilo mutó qué variable en la memoria compartida.
 
-## Expanding the ESLint configuration
+## 🚀 Inicio Rápido
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerrequisitos
+Asegúrate de tener instalado [Node.js](https://nodejs.org/) (versión 18+ recomendada) y `npm` (o `yarn`/`pnpm`).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Instalación
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1.  Clona el repositorio:
+    ```bash
+    git clone https://github.com/tu-usuario/SimuladorConcurrente.git
+    cd SimuladorConcurrente
+    ```
+2.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+3.  Inicia el servidor de desarrollo (Vite):
+    ```bash
+    npm run dev
+    ```
+4.  Abre tu navegador en `http://localhost:5173`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📚 Documentación de Referencia
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Dentro del directorio `/docs` encontrarás especificaciones fundamentales para entender el comportamiento del motor y el código que los alumnos deben utilizar:
+* [**`EBNF_sintaxis.md`**](./docs/EBNF_sintaxis.md): La gramática extendida de Backus-Naur que rige el analizador sintáctico del simulador.
+* [**`conceptos_concurrencia.md`**](./docs/conceptos_concurrencia.md): Resumen teórico de los conceptos de paralelismo, locks y barreras aplicables en el motor.
+* [**`semaforos.md`**](./docs/semaforos.md): Especificación sobre el comportamiento de los semáforos, *Split Binary Semaphores* y técnicas avanzadas como *Passing the Baton*.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Arquitectura del Proyecto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* **`src/engine/`**: El núcleo del simulador.
+    * `lexer.ts`: Tokenizador de expresiones regulares simples.
+    * `parser.ts`: Analizador sintáctico descendente recursivo (Recursive Descent Parser) que genera el AST (Abstract Syntax Tree).
+    * `vm.ts`: Motor de evaluación no determinístico. Controla el *scheduler* aleatorio, resuelve variables locales vs. globales e implementa la semántica de bloqueos.
+* **`src/components/`**: Interfaz de usuario React.
+    * `CodeEditor.tsx`: Editor de texto enriquecido con control de indentación automático y sincronización de números de línea.
+    * `VariableTracker.tsx`: Visor reactivo de tarjetas (cards) que muestra el estado de la memoria global y las colas de semáforos.
+    * `LogViewer.tsx`: Historial cronológico de cambios de estado y bifurcaciones.
