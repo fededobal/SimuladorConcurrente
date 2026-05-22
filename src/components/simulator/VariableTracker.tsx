@@ -108,7 +108,7 @@ const VariableCard = ({ name, data, isHistorical }: { name: string, data: Variab
           overflow: 'hidden',
           whiteSpace: 'nowrap'
         }}>
-          {JSON.stringify(data.value) !== JSON.stringify(data.previousValue) ? (
+          {(typeof data.value === 'number' || typeof data.value === 'boolean') && JSON.stringify(data.value) !== JSON.stringify(data.previousValue) ? (
             <>
               <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textDecoration: 'line-through', opacity: 0.7, flexShrink: 0 }} title="Valor anterior">
                 {String(data.previousValue).length > 10 ? String(data.previousValue).substring(0,10)+'...' : String(data.previousValue)}
@@ -120,7 +120,7 @@ const VariableCard = ({ name, data, isHistorical }: { name: string, data: Variab
             </>
           ) : (
             <span style={{ fontSize: '1.3rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {String(data.value)}
+              {Array.isArray(data.value) ? `[${data.value.join(', ')}]` : String(data.value)}
             </span>
           )}
         </div>
@@ -173,11 +173,13 @@ const VariableCard = ({ name, data, isHistorical }: { name: string, data: Variab
             </div>
             
             <div style={{ overflowY: 'auto', flex: 1, paddingRight: '0.5rem' }}>
-              <div style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-                <strong style={{ color: 'var(--text-secondary)' }}>Tipo:</strong>{' '}
-                {Array.isArray(data.value) ? `Arreglo (${data.value.length} elementos)` : typeof data.value}
-              </div>
-
+              <p style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>
+                Tipo: <strong style={{ color: 'var(--text-primary)' }}>
+                {Array.isArray(data.value) 
+                  ? `${data.type === 'Cola' ? 'Cola' : 'Arreglo'} (${data.value.length} elementos)` 
+                  : (data.type || typeof data.value)}
+                </strong>
+              </p>
               <div style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
                 <strong style={{ color: 'var(--text-secondary)' }}>Última modificación:</strong>{' '}
                 {data.lastModifiedBy ? (

@@ -9,6 +9,7 @@ export interface ThreadIdentity {
 }
 
 export interface VariableSnapshot {
+  type?: string;
   value: unknown;
   previousValue: unknown;
   lastModifiedBy?: ThreadIdentity;
@@ -83,12 +84,21 @@ export class VirtualMachine {
   private evaluateExpr(expr: string, thread: Thread | null): unknown {
     if (!expr || expr.trim() === '') return 0;
     try {
+      const replaceOutsideStrings = (str: string, searchRegex: RegExp, replaceValue: string) => {
+        return str.split('"').map((part, index) => {
+          if (index % 2 === 1) return part; // Inside string literal
+          return part.replace(searchRegex, replaceValue);
+        }).join('"');
+      };
+
       let e = expr;
-      e = e.replace(/\band\b/g, '&&').replace(/\bor\b/g, '||').replace(/\bnot\b/g, '!');
-      e = e.replace(/<>/g, '!=');
+      e = replaceOutsideStrings(e, /\band\b/gi, '&&');
+      e = replaceOutsideStrings(e, /\bor\b/gi, '||');
+      e = replaceOutsideStrings(e, /\bnot\b/gi, '!');
+      e = replaceOutsideStrings(e, /<>/g, '!=');
       
       // Parse empty buffer -> buffer.length === 0
-      e = e.replace(/\bempty\s+([a-zA-Z_]\w*)\b/g, '($1.length === 0)');
+      e = replaceOutsideStrings(e, /\bempty\s+([a-zA-Z_]\w*)\b/gi, '($1.length === 0)');
 
       // Local vars first (more specific, shadows globals)
       if (thread) {
@@ -96,19 +106,19 @@ export class VirtualMachine {
           if (key.startsWith('__')) continue;
           const rx = new RegExp('\\b' + key + '\\b', 'g');
           const val = thread.localEnv[key];
-          e = e.replace(rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
+          e = replaceOutsideStrings(e, rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
         }
       }
       // Global vars
       for (const key of Object.keys(this.variables)) {
         const rx = new RegExp('\\b' + key + '\\b', 'g');
         const val = this.variables[key].value;
-        e = e.replace(rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
+        e = replaceOutsideStrings(e, rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
       }
       // Semaphore values (for await conditions)
       for (const key of Object.keys(this.semaphores)) {
         const rx = new RegExp('\\b' + key + '\\b', 'g');
-        e = e.replace(rx, String(this.semaphores[key].value));
+        e = replaceOutsideStrings(e, rx, String(this.semaphores[key].value));
       }
       // eslint-disable-next-line no-new-func
       return new Function('return (' + e + ')')();
@@ -129,9 +139,10 @@ export class VirtualMachine {
 
     const checkExpr = (expr: string, locals: Set<string>, location: string) => {
       if (!expr) return;
-      const words = expr.match(/[a-zA-Z_]\w*/g) || [];
+      const exprWithoutStrings = expr.replace(/"[^"]*"/g, '');
+      const words = exprWithoutStrings.match(/[a-zA-Z_]\w*/g) || [];
       for (const w of words) {
-        if (/^(true|false|and|or|not|empty|length)$/.test(w)) continue;
+        if (/^(true|false|and|or|not|empty|length)$/i.test(w)) continue;
         if (!isNaN(Number(w))) continue;
         if (!declaredGlobals.has(w) && !locals.has(w)) {
           throw new Error(`Variable no declarada '${w}' en ${location}`);
@@ -280,7 +291,7 @@ export class VirtualMachine {
           else if (raw !== '') initVal = this.evaluateExpr(raw, null);
           else initVal = decl.varType === 'boolean' ? false : (decl.varType === 'text' ? "" : 0);
         }
-        this.variables[decl.name] = { value: initVal, previousValue: initVal };
+        this.variables[decl.name] = { type: decl.varType, value: initVal, previousValue: initVal };
       }
     }
 
@@ -493,7 +504,7 @@ export class VirtualMachine {
             break;
           }
           const prev = this.variables[stmt.target].value;
-          this.variables[stmt.target] = { value: val, previousValue: prev, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+          this.variables[stmt.target] = { ...this.variables[stmt.target], value: val, previousValue: prev, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': ' + stmt.target + ' = ' + String(val));
         }
         break;
@@ -508,7 +519,7 @@ export class VirtualMachine {
           : [];
         const prevArr = [...arr];
         arr[idx] = val;
-        this.variables[stmt.target] = { value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+        this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
         if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': ' + stmt.target + '[' + idx + '] = ' + String(val));
         break;
       }
@@ -523,7 +534,7 @@ export class VirtualMachine {
           if (!(stmt.target in this.variables)) break;
           const cur = Number(this.variables[stmt.target].value);
           const nv = stmt.op === '++' ? cur + 1 : cur - 1;
-          this.variables[stmt.target] = { value: nv, previousValue: cur, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+          this.variables[stmt.target] = { ...this.variables[stmt.target], value: nv, previousValue: cur, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': ' + stmt.target + stmt.op + ' => ' + nv);
         }
         break;
@@ -538,7 +549,7 @@ export class VirtualMachine {
         const arr = [...(this.variables[stmt.target].value as unknown[])];
         const prevArr = [...arr];
         arr.push(val);
-        this.variables[stmt.target] = { value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+        this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
         if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': push(' + stmt.target + ', ' + String(val) + ')');
         break;
       }
@@ -556,7 +567,7 @@ export class VirtualMachine {
         }
         const prevArr = [...arr];
         const val = arr.shift();
-        this.variables[stmt.target] = { value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+        this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
         
         if (this.isLocalVar(stmt.assignVar, thread)) {
            thread.localEnv[stmt.assignVar] = val;
@@ -568,7 +579,7 @@ export class VirtualMachine {
              break;
            }
            const prevVar = this.variables[stmt.assignVar].value;
-           this.variables[stmt.assignVar] = { value: val, previousValue: prevVar, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+           this.variables[stmt.assignVar] = { ...this.variables[stmt.assignVar], value: val, previousValue: prevVar, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
            if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => global ' + stmt.assignVar + '=' + String(val));
         }
         break;

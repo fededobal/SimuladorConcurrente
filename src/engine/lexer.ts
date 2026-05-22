@@ -99,14 +99,14 @@ export function tokenize(input: string): Token[] {
         if (rest.startsWith('(')) {
           tokens.push({ type: TokenType.KEYWORD, value: lowerId.toUpperCase(), line });
         } else {
-          tokens.push({ type: TokenType.IDENTIFIER, value: lowerId, line });
+          tokens.push({ type: TokenType.IDENTIFIER, value: id, line });
         }
       } else if (lowerId === 'and' || lowerId === 'or' || lowerId === 'not') {
         tokens.push({ type: TokenType.SYMBOL, value: lowerId, line });
       } else if (KEYWORDS.has(lowerId)) {
         tokens.push({ type: TokenType.KEYWORD, value: lowerId, line });
       } else {
-        tokens.push({ type: TokenType.IDENTIFIER, value: lowerId, line });
+        tokens.push({ type: TokenType.IDENTIFIER, value: id, line });
       }
       continue;
     }
@@ -120,7 +120,7 @@ export function tokenize(input: string): Token[] {
     }
 
     // Single symbols
-    if ('+-*/=<>(){}[];,.:'.includes(char)) {
+    if ('+-*/%=<>(){}[];,.:'.includes(char)) {
       tokens.push({ type: TokenType.SYMBOL, value: char, line });
       cursor++;
       continue;
