@@ -3,6 +3,7 @@ export const TokenType = {
   IDENTIFIER: 'IDENTIFIER',
   NUMBER: 'NUMBER',
   BOOLEAN: 'BOOLEAN',
+  STRING: 'STRING',
   SYMBOL: 'SYMBOL',
   EOF: 'EOF',
 } as const;
@@ -16,8 +17,8 @@ export interface Token {
 }
 
 const KEYWORDS = new Set([
-  'process', 'co', 'oc', 'sem', 'int', 'bool', 'while', 'if', 'else', 'fi',
-  'do', 'od', 'for', 'fa', 'af', 'st', 'to', 'skip', 'await'
+  'process', 'sem', 'int', 'boolean', 'text', 'Cola', 'while', 'if', 'else',
+  'for', 'push', 'pop', 'empty'
 ]);
 
 const BOOLEANS = new Set(['true', 'false']);
@@ -29,17 +30,46 @@ export function tokenize(input: string): Token[] {
 
   while (cursor < input.length) {
     const char = input[cursor];
-
-    // Line comments starting with #
-    if (char === '#') {
-      while (cursor < input.length && input[cursor] !== '\n') cursor++;
-      continue;
-    }
+    const nextChar = input[cursor + 1] || '';
 
     // Whitespace
     if (/\s/.test(char)) {
       if (char === '\n') line++;
       cursor++;
+      continue;
+    }
+
+    // Line comments //
+    if (char === '/' && nextChar === '/') {
+      while (cursor < input.length && input[cursor] !== '\n') cursor++;
+      continue;
+    }
+
+    // Block comments /* */
+    if (char === '/' && nextChar === '*') {
+      cursor += 2;
+      while (cursor < input.length) {
+        if (input[cursor] === '\n') line++;
+        if (input[cursor] === '*' && input[cursor + 1] === '/') {
+          cursor += 2;
+          break;
+        }
+        cursor++;
+      }
+      continue;
+    }
+
+    // Strings "..."
+    if (char === '"') {
+      let str = '';
+      cursor++; // skip "
+      while (cursor < input.length && input[cursor] !== '"') {
+        if (input[cursor] === '\n') line++;
+        str += input[cursor];
+        cursor++;
+      }
+      if (cursor < input.length && input[cursor] === '"') cursor++; // skip "
+      tokens.push({ type: TokenType.STRING, value: str, line });
       continue;
     }
 
@@ -71,7 +101,7 @@ export function tokenize(input: string): Token[] {
         } else {
           tokens.push({ type: TokenType.IDENTIFIER, value: id, line });
         }
-      } else if (id === 'and' || id === 'or' || id === 'not' || id === 'XOR') {
+      } else if (id === 'and' || id === 'or' || id === 'not') {
         tokens.push({ type: TokenType.SYMBOL, value: id, line });
       } else if (KEYWORDS.has(id)) {
         tokens.push({ type: TokenType.KEYWORD, value: id, line });
@@ -81,40 +111,16 @@ export function tokenize(input: string): Token[] {
       continue;
     }
 
-    const nextChar = input[cursor + 1] || '';
-    const nextNextChar = input[cursor + 2] || '';
-
-    // :=: (swap)
-    if (char === ':' && nextChar === '=' && nextNextChar === ':') {
-      tokens.push({ type: TokenType.SYMBOL, value: ':=:', line });
-      cursor += 3;
-      continue;
-    }
-
-    // [] Dijkstra separator
-    if (char === '[' && nextChar === ']') {
-      tokens.push({ type: TokenType.SYMBOL, value: '[]', line });
-      cursor += 2;
-      continue;
-    }
-
-    // // co-oc branch separator
-    if (char === '/' && nextChar === '/') {
-      tokens.push({ type: TokenType.SYMBOL, value: '//', line });
-      cursor += 2;
-      continue;
-    }
-
     // Two-char operators
     const twoChars = char + nextChar;
-    if (['==', '!=', '<=', '>=', '<>', '<<', '>>', '++', '--', '->', ':='].includes(twoChars)) {
+    if (['==', '!=', '<=', '>=', '++', '--', '..', '+=', '-='].includes(twoChars)) {
       tokens.push({ type: TokenType.SYMBOL, value: twoChars, line });
       cursor += 2;
       continue;
     }
 
     // Single symbols
-    if ('+-*/=<>(){}[];,!:'.includes(char)) {
+    if ('+-*/=<>(){}[];,.:'.includes(char)) {
       tokens.push({ type: TokenType.SYMBOL, value: char, line });
       cursor++;
       continue;

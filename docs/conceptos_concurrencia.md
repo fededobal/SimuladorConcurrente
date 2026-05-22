@@ -1,3 +1,4 @@
+
 # Programación Concurrente: Conceptos Básicos, Locks y Barreras
 
 Este documento resume los conceptos fundamentales de concurrencia, sincronización por variables compartidas, locks y barreras, excluyendo el uso de semáforos (basado en las teorías 1 y 2).
@@ -27,7 +28,9 @@ Este documento resume los conceptos fundamentales de concurrencia, sincronizaci�
 * **Interferencia:** Cuando un proceso realiza una acción que invalida las suposiciones de otro proceso sobre el estado de las variables.
 
 ## 3. Sentencias Concurrentes y Acción Atómica
-* **Creación de procesos:** `co ... oc` (ejecutan y se espera a que terminen todas las ramas), `process` (se ejecuta de manera independiente en background).
+* **Creación de procesos:** * `co ... oc`: Las ramas internas se ejecutan concurrentemente y el flujo principal espera a que terminen todas para continuar.
+  * `process`: Instancia procesos que se ejecutan de manera independiente en background. 
+  * **Arreglos de Procesos (Familias):** Como se observa en algoritmos de múltiples *workers* o en la barrera *Butterfly*, se pueden crear múltiples procesos idénticos de forma compacta utilizando cuantificadores. Las sintaxis aceptadas en la teoría son `process Nombre[id = N to M]`, `process Nombre[id: N..M]` o `process Nombre[id=N..M]`. Esto instancia un arreglo de procesos concurrentes donde cada uno recibe un identificador local único (por ejemplo, `i` o `id`).
 * **Acción Atómica:** Transformación de estado indivisible.
   * **Grano Fino:** Implementada por hardware (ej. lectura/escritura básica de variables simples).
   * **Propiedad "A lo sumo una vez" (ASV):** Una asignación o expresión $x=e$ parece atómica si contiene a lo sumo una referencia crítica (a una variable compartida modificada por otro) y $x$ no es referenciada por otro proceso.

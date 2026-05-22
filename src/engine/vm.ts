@@ -22,7 +22,7 @@ export interface SemaphoreSnapshot {
 }
 
 export interface Thread extends ThreadIdentity {
-  state: 'READY' | 'BLOCKED' | 'TERMINATED';
+  state: 'READY' | 'RUNNING' | 'BLOCKED' | 'TERMINATED';
   instructionStack: Statement[];
   localEnv: Record<string, unknown>;
   onTerminate?: () => void;
@@ -49,14 +49,18 @@ function genId(): string {
   return Math.random().toString(36).substring(2, 9);
 }
 
-export class VirtualMachine {
-  private variables: Record<string, VariableSnapshot> = {};
-  private semaphores: Record<string, SemaphoreSnapshot> = {};
-  private threads: Thread[] = [];
-  private threadCounter = 1;
-  private logs: LogEntry[] = [];
+export type VmPhase = 'CONTEXT_SWITCH' | 'INTENT' | 'EXECUTION';
 
+export class VirtualMachine {
+  public threads: Thread[] = [];
+  public variables: Record<string, VariableSnapshot> = {};
+  public semaphores: Record<string, SemaphoreSnapshot> = {};
+  public logs: LogEntry[] = [];
   public onStateChange?: (state: VMState, logs: LogEntry[]) => void;
+  public currentPhase: VmPhase = 'CONTEXT_SWITCH';
+  public activeThreadId: number | null = null;
+  
+  private threadCounter = 1;
   private program: Program;
 
   constructor(program: Program) {
@@ -82,19 +86,24 @@ export class VirtualMachine {
       let e = expr;
       e = e.replace(/\band\b/g, '&&').replace(/\bor\b/g, '||').replace(/\bnot\b/g, '!');
       e = e.replace(/<>/g, '!=');
+      
+      // Parse empty buffer -> buffer.length === 0
+      e = e.replace(/\bempty\s+([a-zA-Z_]\w*)\b/g, '($1.length === 0)');
+
       // Local vars first (more specific, shadows globals)
       if (thread) {
         for (const key of Object.keys(thread.localEnv)) {
           if (key.startsWith('__')) continue;
           const rx = new RegExp('\\b' + key + '\\b', 'g');
-          e = e.replace(rx, String(thread.localEnv[key]));
+          const val = thread.localEnv[key];
+          e = e.replace(rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
         }
       }
       // Global vars
       for (const key of Object.keys(this.variables)) {
         const rx = new RegExp('\\b' + key + '\\b', 'g');
         const val = this.variables[key].value;
-        e = e.replace(rx, Array.isArray(val) ? JSON.stringify(val) : String(val));
+        e = e.replace(rx, Array.isArray(val) ? JSON.stringify(val) : (typeof val === 'string' ? '"' + val + '"' : String(val)));
       }
       // Semaphore values (for await conditions)
       for (const key of Object.keys(this.semaphores)) {
@@ -108,9 +117,122 @@ export class VirtualMachine {
     }
   }
 
-  // Check if a variable name is local to this thread
   private isLocalVar(name: string, thread: Thread): boolean {
     return name in thread.localEnv && !name.startsWith('__');
+  }
+
+  private validateAST() {
+    const declaredGlobals = new Set<string>([
+      ...Object.keys(this.variables),
+      ...Object.keys(this.semaphores).map(s => s.split('[')[0])
+    ]);
+
+    const checkExpr = (expr: string, locals: Set<string>, location: string) => {
+      if (!expr) return;
+      const words = expr.match(/[a-zA-Z_]\w*/g) || [];
+      for (const w of words) {
+        if (/^(true|false|and|or|not|empty|length)$/.test(w)) continue;
+        if (!isNaN(Number(w))) continue;
+        if (!declaredGlobals.has(w) && !locals.has(w)) {
+          throw new Error(`Variable no declarada '${w}' en ${location}`);
+        }
+      }
+    };
+
+    const checkTarget = (target: string, locals: Set<string>, location: string) => {
+      if (!declaredGlobals.has(target) && !locals.has(target)) {
+        throw new Error(`Variable no declarada '${target}' en ${location}`);
+      }
+    };
+
+    const checkSem = (target: string, location: string) => {
+      if (!declaredGlobals.has(target)) {
+        throw new Error(`Semáforo no declarado '${target}' en ${location}`);
+      }
+    };
+
+    const traverse = (stmt: Statement, locals: Set<string>, processName: string) => {
+      switch (stmt.type) {
+        case 'Assign':
+          checkTarget(stmt.target, locals, `asignación en proceso ${processName}`);
+          checkExpr(stmt.exprString, locals, `expresión en proceso ${processName}`);
+          break;
+        case 'ArrayAssign':
+          checkTarget(stmt.target, locals, `asignación de arreglo en proceso ${processName}`);
+          checkExpr(stmt.indexExpr, locals, `índice en proceso ${processName}`);
+          checkExpr(stmt.exprString, locals, `expresión en proceso ${processName}`);
+          break;
+        case 'IncDec':
+          checkTarget(stmt.target, locals, `operación ${stmt.op} en proceso ${processName}`);
+          if (stmt.idxExpr) checkExpr(stmt.idxExpr, locals, `índice en proceso ${processName}`);
+          break;
+        case 'PVOp':
+          checkSem(stmt.target, `operación ${stmt.operation} en proceso ${processName}`);
+          if (stmt.arrayIdx) checkExpr(stmt.arrayIdx, locals, `índice de semáforo en proceso ${processName}`);
+          break;
+        case 'QueuePush':
+          checkTarget(stmt.target, locals, `push en proceso ${processName}`);
+          checkExpr(stmt.elementExpr, locals, `elemento push en proceso ${processName}`);
+          break;
+        case 'QueuePop':
+          checkTarget(stmt.target, locals, `pop en proceso ${processName}`);
+          checkTarget(stmt.assignVar, locals, `variable destino de pop en proceso ${processName}`);
+          break;
+        case 'If':
+          checkExpr(stmt.condition, locals, `condición if en proceso ${processName}`);
+          traverse(stmt.consequent, locals, processName);
+          if (stmt.alternate) traverse(stmt.alternate, locals, processName);
+          break;
+        case 'While':
+          checkExpr(stmt.condition, locals, `condición while en proceso ${processName}`);
+          traverse(stmt.body, locals, processName);
+          break;
+        case 'For': {
+          const newLocals = new Set(locals);
+          if (stmt.init) {
+            if (stmt.init.type === 'LocalDecl') {
+              newLocals.add(stmt.init.name);
+              checkExpr(stmt.init.initValue, newLocals, `inicialización for en proceso ${processName}`);
+            } else {
+              traverse(stmt.init, newLocals, processName);
+            }
+          }
+          if (stmt.cond) checkExpr(stmt.cond, newLocals, `condición for en proceso ${processName}`);
+          if (stmt.step) traverse(stmt.step, newLocals, processName);
+          traverse(stmt.body, newLocals, processName);
+          break;
+        }
+        case 'Block':
+        case 'Atomic':
+        case 'Await': {
+          if (stmt.type === 'Await') checkExpr((stmt as any).condition, locals, `condición await en proceso ${processName}`);
+          const blockLocals = new Set(locals);
+          const stmts = (stmt as any).statements || (stmt as any).body.statements;
+          for (const s of stmts) {
+            if (s.type === 'LocalDecl') {
+              blockLocals.add(s.name);
+              checkExpr(s.initValue, blockLocals, `declaración local en proceso ${processName}`);
+            } else {
+              traverse(s, blockLocals, processName);
+            }
+          }
+          break;
+        }
+      }
+    };
+
+    for (const node of this.program.body) {
+      if (node.type === 'ProcessDef') {
+        const proc = node as ProcessDef;
+        const locals = new Set<string>();
+        if (proc.quantDef) {
+          locals.add(proc.quantDef.id);
+          checkExpr(proc.quantDef.from, locals, `rango de proceso ${proc.name}`);
+          checkExpr(proc.quantDef.to, locals, `rango de proceso ${proc.name}`);
+        }
+        traverse(proc.body, locals, proc.name);
+      }
+    }
   }
 
   private initialize() {
@@ -120,22 +242,43 @@ export class VirtualMachine {
     for (const node of this.program.body) {
       if (node.type !== 'Declaration') continue;
       const decl = node as Declaration;
+      
       if (decl.varType === 'sem') {
-        const iv = decl.initValue ? Number(this.evaluateExpr(decl.initValue, null)) : 1;
-        this.semaphores[decl.name] = { name: decl.name, value: iv, blockedQueue: [] };
+        if (decl.isArray) {
+          const size = Number(this.evaluateExpr(decl.sizeExpr || '0', null));
+          const iv = decl.initValue !== '' ? Number(this.evaluateExpr(decl.initValue, null)) : 1;
+          for (let i = 0; i < size; i++) {
+             this.semaphores[`${decl.name}[${i}]`] = { name: `${decl.name}[${i}]`, value: iv, blockedQueue: [] };
+          }
+        } else {
+          const iv = decl.initValue !== '' ? Number(this.evaluateExpr(decl.initValue, null)) : 1;
+          this.semaphores[decl.name] = { name: decl.name, value: iv, blockedQueue: [] };
+        }
       } else {
         let initVal: unknown;
-        if (decl.isArray) {
-          const from = decl.sizeFrom ? Number(this.evaluateExpr(decl.sizeFrom, null)) : 0;
-          const to = decl.sizeTo ? Number(this.evaluateExpr(decl.sizeTo, null)) : 0;
-          const size = Math.max(0, to - from + 1);
-          initVal = new Array(size).fill(decl.varType === 'bool' ? false : 0);
+        if (decl.varType === 'Cola') {
+          initVal = [];
+        } else if (decl.isArray) {
+          const size = Number(this.evaluateExpr(decl.sizeExpr || '0', null));
+          const fillValRaw = decl.initValue;
+          let fillVal: unknown = 0;
+          if (decl.varType === 'boolean') fillVal = false;
+          if (decl.varType === 'text') fillVal = "";
+          
+          if (fillValRaw !== '') {
+            if (fillValRaw === 'true') fillVal = true;
+            else if (fillValRaw === 'false') fillVal = false;
+            else if (!isNaN(Number(fillValRaw))) fillVal = Number(fillValRaw);
+            else fillVal = this.evaluateExpr(fillValRaw, null);
+          }
+          initVal = new Array(Math.max(0, size)).fill(fillVal);
         } else {
           const raw = decl.initValue;
           if (raw === 'true') initVal = true;
           else if (raw === 'false') initVal = false;
           else if (raw !== '' && !isNaN(Number(raw))) initVal = Number(raw);
-          else initVal = this.evaluateExpr(raw, null);
+          else if (raw !== '') initVal = this.evaluateExpr(raw, null);
+          else initVal = decl.varType === 'boolean' ? false : (decl.varType === 'text' ? "" : 0);
         }
         this.variables[decl.name] = { value: initVal, previousValue: initVal };
       }
@@ -171,6 +314,8 @@ export class VirtualMachine {
       }
     }
 
+    this.validateAST();
+
     this.addLog(0, undefined, 'SISTEMA', 'Simulacion inicializada. ' + this.threads.length + ' proceso(s).');
     this.emitState();
   }
@@ -197,68 +342,155 @@ export class VirtualMachine {
   }
 
   public step() {
-    // Check co-oc children that finished
-    const coChildren = this.threads.filter(t => t.state === 'READY' && t.onTerminate && t.instructionStack.length === 0);
-    for (const child of coChildren) {
-      child.state = 'TERMINATED';
-      this.addLog(child.id, child.color, child.name, child.name + ': rama co-oc terminada');
-      if (child.onTerminate) child.onTerminate();
-      this.emitState();
-      return;
+    if (this.isFinished()) return;
+
+    if (this.currentPhase === 'CONTEXT_SWITCH') {
+      this.performContextSwitch();
+    } else if (this.currentPhase === 'INTENT') {
+      this.performIntent();
+    } else if (this.currentPhase === 'EXECUTION') {
+      this.performExecution();
+    }
+    
+    this.emitState();
+  }
+
+  private performContextSwitch() {
+    // Si hay un hilo RUNNING, lo volvemos READY para ceder la CPU (time-slicing / preemption)
+    if (this.activeThreadId !== null) {
+      const active = this.threads.find(t => t.id === this.activeThreadId);
+      if (active && active.state === 'RUNNING') {
+        active.state = 'READY';
+      }
     }
 
     const ready = this.threads.filter(t => t.state === 'READY');
     if (ready.length === 0) {
       if (!this.isFinished()) {
         this.addLog(0, undefined, 'DEADLOCK', 'Todos los hilos bloqueados (Deadlock).');
-        this.emitState();
       }
       return;
     }
 
     const thread = ready[Math.floor(Math.random() * ready.length)];
+    this.activeThreadId = thread.id;
+    thread.state = 'RUNNING';
+    this.currentPhase = 'INTENT';
+    
+    this.addLog(thread.id, thread.color, 'SCHEDULER', `[Scheduler] Cambio de contexto. CPU asignada al ${thread.name}.`);
+  }
+
+  private performIntent() {
+    const thread = this.threads.find(t => t.id === this.activeThreadId);
+    if (!thread || thread.state !== 'RUNNING') {
+      this.currentPhase = 'CONTEXT_SWITCH';
+      return this.step(); 
+    }
 
     if (thread.instructionStack.length === 0) {
       thread.state = 'TERMINATED';
       this.addLog(thread.id, thread.color, thread.name, thread.name + ': proceso terminado.');
       if (thread.onTerminate) thread.onTerminate();
-      this.emitState();
+      this.currentPhase = 'CONTEXT_SWITCH';
+      return this.step(); 
+    }
+
+    const stmt = thread.instructionStack[0]; 
+
+    if (this.isCriticalStatement(stmt, thread)) {
+      this.logIntent(stmt, thread);
+      this.currentPhase = 'EXECUTION';
+    } else {
+      this.currentPhase = 'EXECUTION';
+      this.performExecution();
+    }
+  }
+
+  private performExecution() {
+    const thread = this.threads.find(t => t.id === this.activeThreadId);
+    if (!thread || thread.state !== 'RUNNING') {
+      this.currentPhase = 'CONTEXT_SWITCH';
       return;
     }
 
     const stmt = thread.instructionStack.shift()!;
     this.executeStatement(stmt, thread, false);
-    this.emitState();
+
+    if (thread.state === 'RUNNING') {
+      thread.state = 'READY';
+      this.currentPhase = 'CONTEXT_SWITCH';
+      this.activeThreadId = null;
+    } else {
+      this.currentPhase = 'CONTEXT_SWITCH';
+      this.activeThreadId = null;
+    }
+  }
+
+  private isCriticalStatement(stmt: Statement, thread: Thread): boolean {
+    switch (stmt.type) {
+      case 'PVOp':
+      case 'QueuePush':
+      case 'QueuePop':
+        return true;
+      case 'Assign':
+      case 'ArrayAssign':
+      case 'IncDec':
+        return !this.isLocalVar(stmt.target, thread);
+      default:
+        return false;
+    }
+  }
+
+  private logIntent(stmt: Statement, thread: Thread) {
+    const prefix = '➤ [Intento] ';
+    switch (stmt.type) {
+      case 'PVOp': {
+        let targetName = stmt.target;
+        if ((stmt as any).arrayIdx !== undefined) targetName = `${stmt.target}[${this.evaluateExpr((stmt as any).arrayIdx, thread)}]`;
+        this.addLog(thread.id, thread.color, stmt.target, prefix + `${thread.name} se prepara para ejecutar ${stmt.type === 'PVOp' ? (stmt as any).operation : ''}(${targetName}).`);
+        break;
+      }
+      case 'QueuePush':
+        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} se prepara para intentar push en la cola '${(stmt as any).target}'.`);
+        break;
+      case 'QueuePop':
+        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} se prepara para extraer elemento de la cola '${(stmt as any).target}'.`);
+        break;
+      case 'Assign':
+      case 'ArrayAssign':
+      case 'IncDec':
+        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} intentará modificar la variable compartida '${(stmt as any).target}'.`);
+        break;
+    }
   }
 
   private executeStatement(stmt: Statement, thread: Thread, isAtomic: boolean): void {
     switch (stmt.type) {
       case 'Skip': break;
 
-      // ========= LOCAL VARIABLE DECLARATION =========
       case 'LocalDecl': {
         let initVal: unknown;
         const raw = stmt.initValue;
         if (raw === 'true') initVal = true;
         else if (raw === 'false') initVal = false;
         else if (raw !== '' && !isNaN(Number(raw))) initVal = Number(raw);
-        else initVal = this.evaluateExpr(raw, thread);
+        else if (raw !== '') initVal = this.evaluateExpr(raw, thread);
+        else initVal = stmt.varType === 'boolean' ? false : (stmt.varType === 'text' ? "" : 0);
         thread.localEnv[stmt.name] = initVal;
         if (!isAtomic) this.addLog(thread.id, thread.color, stmt.name, thread.name + ': local ' + stmt.varType + ' ' + stmt.name + ' = ' + String(initVal));
         break;
       }
 
-      // ========= ASSIGNMENT (checks local first, then global) =========
       case 'Assign': {
         const val = this.evaluateExpr(stmt.exprString, thread);
         if (this.isLocalVar(stmt.target, thread)) {
-          // Update local variable
           thread.localEnv[stmt.target] = val;
           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': ' + stmt.target + ' = ' + String(val) + ' (local)');
         } else {
-          // Update global variable (auto-create if not exists)
           if (!(stmt.target in this.variables)) {
-            this.variables[stmt.target] = { value: 0, previousValue: 0 };
+            this.addLog(thread.id, thread.color, 'ERROR', `Variable no declarada: ${stmt.target}`);
+            thread.state = 'TERMINATED';
+            break;
           }
           const prev = this.variables[stmt.target].value;
           this.variables[stmt.target] = { value: val, previousValue: prev, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
@@ -281,7 +513,6 @@ export class VirtualMachine {
         break;
       }
 
-      // ========= INC/DEC (checks local first, then global) =========
       case 'IncDec': {
         if (this.isLocalVar(stmt.target, thread)) {
           const cur = Number(thread.localEnv[stmt.target]);
@@ -298,20 +529,60 @@ export class VirtualMachine {
         break;
       }
 
-      case 'Swap': {
-        if (!(stmt.left in this.variables) || !(stmt.right in this.variables)) break;
-        const lv = this.variables[stmt.left].value;
-        const rv = this.variables[stmt.right].value;
-        this.variables[stmt.left] = { value: rv, previousValue: lv, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-        this.variables[stmt.right] = { value: lv, previousValue: rv, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-        if (!isAtomic) this.addLog(thread.id, thread.color, 'SWAP', thread.name + ': ' + stmt.left + ' :=: ' + stmt.right);
+      case 'QueuePush': {
+        if (!(stmt.target in this.variables)) {
+          this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': operacion push en variable no declarada o no es Cola');
+          break;
+        }
+        const val = this.evaluateExpr(stmt.elementExpr, thread);
+        const arr = [...(this.variables[stmt.target].value as unknown[])];
+        const prevArr = [...arr];
+        arr.push(val);
+        this.variables[stmt.target] = { value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+        if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': push(' + stmt.target + ', ' + String(val) + ')');
+        break;
+      }
+
+      case 'QueuePop': {
+        if (!(stmt.target in this.variables)) {
+          this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': operacion pop en variable no declarada o no es Cola');
+          break;
+        }
+        const arr = [...(this.variables[stmt.target].value as unknown[])];
+        if (arr.length === 0) {
+           this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': pop en cola vacia (' + stmt.target + ') abortando hilo.');
+           thread.state = 'TERMINATED';
+           break;
+        }
+        const prevArr = [...arr];
+        const val = arr.shift();
+        this.variables[stmt.target] = { value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+        
+        if (this.isLocalVar(stmt.assignVar, thread)) {
+           thread.localEnv[stmt.assignVar] = val;
+           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => local ' + stmt.assignVar + '=' + String(val));
+        } else {
+           if (!(stmt.assignVar in this.variables)) {
+             this.addLog(thread.id, thread.color, 'ERROR', `Variable no declarada: ${stmt.assignVar}`);
+             thread.state = 'TERMINATED';
+             break;
+           }
+           const prevVar = this.variables[stmt.assignVar].value;
+           this.variables[stmt.assignVar] = { value: val, previousValue: prevVar, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => global ' + stmt.assignVar + '=' + String(val));
+        }
         break;
       }
 
       case 'PVOp': {
-        const sem = this.semaphores[stmt.target];
+        let targetName = stmt.target;
+        if (stmt.arrayIdx !== undefined) {
+          const idx = Number(this.evaluateExpr(stmt.arrayIdx, thread));
+          targetName = `${stmt.target}[${idx}]`;
+        }
+        const sem = this.semaphores[targetName];
         if (!sem) {
-          this.addLog(thread.id, thread.color, 'ERROR', 'Semaforo no declarado: ' + stmt.target);
+          this.addLog(thread.id, thread.color, 'ERROR', 'Semaforo no declarado: ' + targetName);
           break;
         }
         if (stmt.operation === 'P') {
@@ -334,7 +605,7 @@ export class VirtualMachine {
               wokenThread.state = 'READY';
               if (wokenThread.instructionStack.length > 0) {
                 const top = wokenThread.instructionStack[0];
-                if (top.type === 'PVOp' && top.operation === 'P' && top.target === sem.name) {
+                if (top.type === 'PVOp' && top.operation === 'P') {
                   wokenThread.instructionStack.shift();
                 }
               }
@@ -357,32 +628,6 @@ export class VirtualMachine {
         break;
       }
 
-      case 'IfDijkstra': {
-        const trueGuards = stmt.guards.filter(g => this.evaluateExpr(g.condition, thread));
-        if (trueGuards.length > 0) {
-          const chosen = trueGuards[Math.floor(Math.random() * trueGuards.length)];
-          thread.instructionStack.unshift(...chosen.body.statements);
-          this.addLog(thread.id, thread.color, 'IF-FI', thread.name + ': guarda: ' + chosen.condition.trim());
-        } else {
-          this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': if-fi sin guarda verdadera (abort)');
-          thread.state = 'TERMINATED';
-        }
-        break;
-      }
-
-      case 'DoDijkstra': {
-        const trueGuards = stmt.guards.filter(g => this.evaluateExpr(g.condition, thread));
-        if (trueGuards.length > 0) {
-          const chosen = trueGuards[Math.floor(Math.random() * trueGuards.length)];
-          thread.instructionStack.unshift(stmt);
-          thread.instructionStack.unshift(...chosen.body.statements);
-          this.addLog(thread.id, thread.color, 'DO-OD', thread.name + ': guarda: ' + chosen.condition.trim());
-        } else {
-          this.addLog(thread.id, thread.color, 'DO-OD', thread.name + ': do-od terminado');
-        }
-        break;
-      }
-
       case 'While': {
         if (this.evaluateExpr(stmt.condition, thread)) {
           thread.instructionStack.unshift(stmt);
@@ -391,39 +636,14 @@ export class VirtualMachine {
         break;
       }
 
-      case 'ForQuantified': {
-        const from = Number(this.evaluateExpr(stmt.quant.from, thread));
-        const to = Number(this.evaluateExpr(stmt.quant.to, thread));
-        for (let i = to; i >= from; i--) {
-          const bodyClone = JSON.parse(JSON.stringify(stmt.body.statements)) as Statement[];
-          const substituted = this.substituteLocal(bodyClone, stmt.quant.id, i);
-          thread.instructionStack.unshift({ type: 'Block', statements: substituted });
-        }
-        break;
-      }
-
-      case 'ForCStyle': {
+      case 'For': {
         if (stmt.init) this.executeStatement(stmt.init, thread, true);
         const cond = stmt.cond || 'true';
         const bodyPlusStep: Statement[] = [...stmt.body.statements];
         if (stmt.step) bodyPlusStep.push(stmt.step as Statement);
-        thread.instructionStack.unshift({ type: 'While', condition: cond, body: { type: 'Block', statements: bodyPlusStep } });
-        break;
-      }
-
-      case 'ForAll': {
-        const fq = stmt.quants[0];
-        const from = Number(this.evaluateExpr(fq.from, thread));
-        const to = Number(this.evaluateExpr(fq.to, thread));
-        for (let i = to; i >= from; i--) {
-          if (stmt.stExpr) {
-            const condStmts = this.substituteLocal([{ type: 'Assign', target: '__dummy', exprString: stmt.stExpr }] as Statement[], fq.id, i);
-            const evalCond = this.evaluateExpr((condStmts[0] as { exprString: string }).exprString, thread);
-            if (!evalCond) continue;
-          }
-          const bodyClone = JSON.parse(JSON.stringify(stmt.body.statements)) as Statement[];
-          thread.instructionStack.unshift({ type: 'Block', statements: this.substituteLocal(bodyClone, fq.id, i) });
-        }
+        const syntheticWhile = { type: 'While', condition: cond, body: { type: 'Block', statements: bodyPlusStep } };
+        (syntheticWhile as any).line = (stmt as any).line;
+        thread.instructionStack.unshift(syntheticWhile as any);
         break;
       }
 
@@ -450,71 +670,9 @@ export class VirtualMachine {
         break;
       }
 
-      case 'CoOc': {
-        if (stmt.branches.length === 0) break;
-        thread.state = 'BLOCKED';
-        this.addLog(thread.id, thread.color, 'CO-OC', thread.name + ': lanzando ' + stmt.branches.length + ' ramas');
-        let remaining = stmt.branches.length;
-        const parentThread = thread;
-        for (let b = 0; b < stmt.branches.length; b++) {
-          const branch = stmt.branches[b];
-          const childId = this.threadCounter++;
-          const child: Thread = {
-            id: childId,
-            name: parentThread.name + '.co[' + b + ']',
-            color: THREAD_COLORS[childId % THREAD_COLORS.length],
-            state: 'READY',
-            instructionStack: JSON.parse(JSON.stringify(branch.statements)) as Statement[],
-            localEnv: { ...parentThread.localEnv },
-            onTerminate: () => {
-              remaining--;
-              if (remaining === 0) {
-                parentThread.state = 'READY';
-                this.addLog(0, undefined, 'CO-OC', 'Ramas terminadas => reanudando ' + parentThread.name);
-              }
-            }
-          };
-          this.threads.push(child);
-        }
-        break;
-      }
-
-      case 'CoOcQuantified': {
-        const qfrom = Number(this.evaluateExpr(stmt.quant.from, thread));
-        const qto = Number(this.evaluateExpr(stmt.quant.to, thread));
-        const count = qto - qfrom + 1;
-        if (count <= 0) break;
-        thread.state = 'BLOCKED';
-        this.addLog(thread.id, thread.color, 'CO-OC', thread.name + ': co cuantificado, ' + count + ' hilos');
-        let rem = count;
-        const par = thread;
-        for (let i = qfrom; i <= qto; i++) {
-          const ii = i;
-          const childId = this.threadCounter++;
-          const bodyClone = JSON.parse(JSON.stringify(stmt.body.statements)) as Statement[];
-          const child: Thread = {
-            id: childId,
-            name: par.name + '.' + stmt.quant.id + '[' + ii + ']',
-            color: THREAD_COLORS[childId % THREAD_COLORS.length],
-            state: 'READY',
-            instructionStack: this.substituteLocal(bodyClone, stmt.quant.id, ii),
-            localEnv: { ...par.localEnv, [stmt.quant.id]: ii },
-            onTerminate: () => {
-              rem--;
-              if (rem === 0) {
-                par.state = 'READY';
-                this.addLog(0, undefined, 'CO-OC', 'Hilos co cuantificados listos => reanudando ' + par.name);
-              }
-            }
-          };
-          this.threads.push(child);
-        }
-        break;
-      }
-
       default: {
         const anyStmt = stmt as { type: string };
-        this.addLog(thread.id, thread.color, 'WARN', 'Nodo sin implementar: ' + anyStmt.type);
+        this.addLog(thread.id, thread.color, 'WARN', 'Nodo sin implementar o invalido: ' + anyStmt.type);
       }
     }
   }

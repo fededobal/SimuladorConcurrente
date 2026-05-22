@@ -13,87 +13,112 @@ interface HeaderProps {
   isPaused: boolean;
 }
 
+// Icons as SVG components
+const PlayIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="5 3 19 12 5 21 5 3" />
+  </svg>
+);
+
+const PauseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="6" y="4" width="4" height="16" />
+    <rect x="14" y="4" width="4" height="16" />
+  </svg>
+);
+
+const StopIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+  </svg>
+);
+
+const StepIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="5 4 15 12 5 20 5 4" />
+    <line x1="19" y1="5" x2="19" y2="19" />
+  </svg>
+);
+
+const TimerIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="13" r="8" />
+    <polyline points="12 9 12 13 14 15" />
+    <line x1="12" y1="2" x2="12" y2="4" />
+    <line x1="10" y1="2" x2="14" y2="2" />
+  </svg>
+);
+
 export const Header: React.FC<HeaderProps> = ({ 
   onStart, onStop, onPauseResume, onStep, speed, onSpeedChange, isRunning, isPaused 
 }) => {
   return (
-    <header className="glass-panel header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h1>Simulador Concurrente (UNLP)</h1>
+    <header className="dashboard-header">
+      {/* Brand Identity */}
+      <div className="header-brand">
+        <h1>SIMULADOR CONCURRENTE</h1>
+        <span className="badge">UNLP</span>
+      </div>
       
-      <div className="controls" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      {/* Controls Area */}
+      <div className="header-controls">
         
-        {/* Selector de Velocidad */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
-          <label htmlFor="speed-select" style={{ fontSize: '0.9rem' }}>Velocidad:</label>
+        {/* Speed Control */}
+        <div className="speed-control-group">
+          <TimerIcon />
           <select 
-            id="speed-select"
+            className="speed-select"
             value={speed} 
             onChange={(e) => onSpeedChange(Number(e.target.value))}
-            style={{ 
-              background: 'rgba(255,255,255,0.1)', 
-              color: 'white', 
-              border: 'none', 
-              padding: '4px 8px', 
-              borderRadius: '4px',
-              outline: 'none'
-            }}
           >
-            <option style={{ background: '#1e293b' }} value={1500}>Lento</option>
-            <option style={{ background: '#1e293b' }} value={1000}>Normal</option>
-            <option style={{ background: '#1e293b' }} value={500}>Rápido</option>
-            <option style={{ background: '#1e293b' }} value={100}>Muy Rápido</option>
+            <option value={1500}>Lento</option>
+            <option value={1000}>Normal</option>
+            <option value={500}>Rápido</option>
+            <option value={100}>Muy Rápido</option>
           </select>
         </div>
 
-        {/* Botón Unificado de Paso a Paso */}
-        <button 
-          onClick={() => {
-            if (!isRunning) {
-              onStart(true);
-            } else {
-              onStep();
-            }
-          }} 
-          disabled={isRunning && !isPaused}
-          style={{ 
-            background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px',
-            cursor: (isRunning && !isPaused) ? 'not-allowed' : 'pointer', 
-            opacity: (isRunning && !isPaused) ? 0.5 : 1, 
-            fontWeight: 'bold', boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
-          }}
-        >
-          ⏭ Paso a Paso
-        </button>
+        <div className="control-separator"></div>
 
-        {/* Botones de Control */}
-        {!isRunning ? (
-          <button className="btn-run" onClick={() => onStart(false)}>
-            ▶ Ejecutar
+        {/* Action Buttons */}
+        <div className="action-buttons-group">
+          <button 
+            className={`control-btn btn-step ${isRunning && !isPaused ? 'disabled' : ''}`}
+            onClick={() => {
+              if (!isRunning) onStart(true);
+              else onStep();
+            }}
+            disabled={isRunning && !isPaused}
+          >
+            <div className="icon-wrapper"><StepIcon /></div>
+            <span className="btn-label">Paso a Paso</span>
           </button>
-        ) : (
-          <>
-            <button 
-              onClick={onPauseResume} 
-              style={{ 
-                background: isPaused ? '#10b981' : '#f59e0b', 
-                color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer',
-                fontWeight: 'bold'
-              }}
-            >
-              {isPaused ? '▶ Continuar' : '⏸ Pausar'}
+
+          {!isRunning ? (
+            <button className="control-btn btn-play" onClick={() => onStart(false)}>
+              <div className="icon-wrapper"><PlayIcon /></div>
+              <span className="btn-label">Ejecutar</span>
             </button>
-            
-            <button 
-              onClick={onStop} 
-              style={{ 
-                background: '#ef4444', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer',
-                fontWeight: 'bold'
-              }}
-            >
-              ⏹ Detener
-            </button>
-          </>
-        )}
+          ) : (
+            <>
+              <button 
+                className={`control-btn btn-pause ${isPaused ? 'active' : ''}`}
+                onClick={onPauseResume} 
+              >
+                <div className="icon-wrapper">{isPaused ? <PlayIcon /> : <PauseIcon />}</div>
+                <span className="btn-label">{isPaused ? 'Continuar' : 'Pausar'}</span>
+              </button>
+              
+              <button 
+                className="control-btn btn-stop"
+                onClick={onStop} 
+              >
+                <div className="icon-wrapper"><StopIcon /></div>
+                <span className="btn-label">Detener</span>
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
