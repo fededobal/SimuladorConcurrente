@@ -18,7 +18,7 @@ const highlightSyntax = (code: string) => {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
     
-  const tokenRegex = /(#[^\n]*)|("[^"]*")|\b(int|bool|sem)\b|\b(process|if|else|fi|while|do|od|for|fa|af|co|oc|st|to|skip|await)\b|\b(P|V)\b|\b(true|false)\b|\b(\d+)\b/g;
+  const tokenRegex = /(#[^\n]*)|("[^"]*")|\b(int|bool|sem)\b|\b(process|if|else|fi|while|do|od|for|fa|af|co|oc|st|to|skip|await|push|pop|empty)\b|\b(P|V)\b|\b(true|false)\b|\b(\d+)\b/gi;
   
   html = html.replace(tokenRegex, (match, comment, str, type, keyword, func, bool, num) => {
     if (comment) return `<span style="color: var(--syntax-comment)">${comment}</span>`;

@@ -91,22 +91,22 @@ export function tokenize(input: string): Token[] {
         id += input[cursor];
         cursor++;
       }
-      if (BOOLEANS.has(id)) {
-        tokens.push({ type: TokenType.BOOLEAN, value: id, line });
-      } else if (id === 'P' || id === 'V') {
-        // P and V are sem ops only when followed by '('
+      const lowerId = id.toLowerCase();
+      if (BOOLEANS.has(lowerId)) {
+        tokens.push({ type: TokenType.BOOLEAN, value: lowerId, line });
+      } else if (lowerId === 'p' || lowerId === 'v') {
         const rest = input.slice(cursor).trimStart();
         if (rest.startsWith('(')) {
-          tokens.push({ type: TokenType.KEYWORD, value: id, line });
+          tokens.push({ type: TokenType.KEYWORD, value: lowerId.toUpperCase(), line });
         } else {
-          tokens.push({ type: TokenType.IDENTIFIER, value: id, line });
+          tokens.push({ type: TokenType.IDENTIFIER, value: lowerId, line });
         }
-      } else if (id === 'and' || id === 'or' || id === 'not') {
-        tokens.push({ type: TokenType.SYMBOL, value: id, line });
-      } else if (KEYWORDS.has(id)) {
-        tokens.push({ type: TokenType.KEYWORD, value: id, line });
+      } else if (lowerId === 'and' || lowerId === 'or' || lowerId === 'not') {
+        tokens.push({ type: TokenType.SYMBOL, value: lowerId, line });
+      } else if (KEYWORDS.has(lowerId)) {
+        tokens.push({ type: TokenType.KEYWORD, value: lowerId, line });
       } else {
-        tokens.push({ type: TokenType.IDENTIFIER, value: id, line });
+        tokens.push({ type: TokenType.IDENTIFIER, value: lowerId, line });
       }
       continue;
     }
