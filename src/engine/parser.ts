@@ -10,7 +10,7 @@ export interface Program {
 
 export interface Declaration {
   type: 'Declaration';
-  varType: 'int' | 'boolean' | 'sem' | 'text' | 'Cola';
+  varType: 'int' | 'boolean' | 'sem' | 'text' | 'Cola' | 'double';
   name: string;
   isArray: boolean;
   sizeExpr?: string;
@@ -56,7 +56,7 @@ export interface Await { type: 'Await'; condition: string; body: Block; }
 
 export interface LocalDecl {
   type: 'LocalDecl';
-  varType: 'int' | 'boolean' | 'text';
+  varType: 'int' | 'boolean' | 'text' | 'double';
   name: string;
   initValue: string;
 }
@@ -107,7 +107,7 @@ export class Parser {
     const body: ASTNode[] = [];
     while (!this.isAtEnd()) {
       const v = this.peek().value;
-      if (v === 'int' || v === 'boolean' || v === 'sem' || v === 'text' || v === 'Cola') {
+      if (v === 'int' || v === 'boolean' || v === 'sem' || v === 'text' || v === 'Cola' || v === 'double') {
         body.push(this.parseDeclaration());
       } else if (v === 'process') {
         body.push(this.parseProcess());
@@ -119,7 +119,7 @@ export class Parser {
   }
 
   private parseDeclaration(): Declaration {
-    const varType = this.advance().value as 'int' | 'boolean' | 'sem' | 'text' | 'Cola';
+    const varType = this.advance().value as 'int' | 'boolean' | 'sem' | 'text' | 'Cola' | 'double';
     const name = this.consumeIdentifier('Se esperaba nombre de variable');
 
     let isArray = false;
@@ -165,7 +165,7 @@ export class Parser {
   }
 
   private parseLocalDecl(): LocalDecl {
-    const varType = this.advance().value as 'int' | 'boolean' | 'text';
+    const varType = this.advance().value as 'int' | 'boolean' | 'text' | 'double';
     const name = this.consumeIdentifier('Se esperaba nombre de variable local');
     let initValue = varType === 'boolean' ? 'false' : (varType === 'text' ? '""' : '0');
     if (this.match('=')) {
@@ -224,7 +224,7 @@ export class Parser {
     const token = this.peek();
     const v = token.value;
 
-    if (v === 'int' || v === 'boolean' || v === 'text') {
+    if (v === 'int' || v === 'boolean' || v === 'text' || v === 'double') {
       return this.parseLocalDecl();
     }
 
@@ -289,8 +289,8 @@ export class Parser {
       let init: Assign | LocalDecl | undefined;
       let id = '';
       
-      if (this.check('int') || this.check('boolean') || this.check('text')) {
-        const localType = this.advance().value as 'int' | 'boolean' | 'text';
+      if (this.check('int') || this.check('boolean') || this.check('text') || this.check('double')) {
+        const localType = this.advance().value as 'int' | 'boolean' | 'text' | 'double';
         id = this.consumeIdentifier('Se esperaba iterador');
         this.consume('=', "Se esperaba '='");
         const from = this.parseExpressionUntil([';', '..']);

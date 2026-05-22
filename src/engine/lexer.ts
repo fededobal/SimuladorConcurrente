@@ -17,8 +17,8 @@ export interface Token {
 }
 
 const KEYWORDS = new Set([
-  'process', 'sem', 'int', 'boolean', 'text', 'Cola', 'while', 'if', 'else',
-  'for', 'push', 'pop', 'empty'
+  'process', 'sem', 'int', 'boolean', 'text', 'Cola', 'while', 'if', 'else', 'double',
+  'fi', 'do', 'od', 'for', 'fa', 'af', 'co', 'oc', 'st', 'to', 'skip', 'await', 'push', 'pop', 'empty'
 ]);
 
 const BOOLEANS = new Set(['true', 'false']);
