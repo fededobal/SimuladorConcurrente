@@ -358,7 +358,7 @@ export class Parser {
           statements: [init, forStmt]
         };
       } else {
-        const forStmt = { type: 'For', init: init as Assign | undefined, cond, step, body };
+        const forStmt = { type: 'For', init: init as Assign | undefined, cond, step, body } as ForStatement;
         (forStmt as any).line = forTokenLine;
         return forStmt;
       }
