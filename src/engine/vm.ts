@@ -677,20 +677,20 @@ export class VirtualMachine {
     }
   }
 
-  private substituteLocal(stmts: Statement[], id: string, value: number): Statement[] {
-    const rx = new RegExp('\\b' + id + '\\b', 'g');
-    const sub = (obj: unknown): unknown => {
-      if (typeof obj === 'string') return obj.replace(rx, String(value));
-      if (Array.isArray(obj)) return obj.map(sub);
-      if (obj && typeof obj === 'object') {
-        const out: Record<string, unknown> = {};
-        for (const k of Object.keys(obj as object)) {
-          out[k] = sub((obj as Record<string, unknown>)[k]);
-        }
-        return out;
-      }
-      return obj;
-    };
-    return sub(stmts) as Statement[];
-  }
+  // private substituteLocal(stmts: Statement[], id: string, value: number): Statement[] {
+  //   const rx = new RegExp('\\b' + id + '\\b', 'g');
+  //   const sub = (obj: unknown): unknown => {
+  //     if (typeof obj === 'string') return obj.replace(rx, String(value));
+  //     if (Array.isArray(obj)) return obj.map(sub);
+  //     if (obj && typeof obj === 'object') {
+  //       const out: Record<string, unknown> = {};
+  //       for (const k of Object.keys(obj as object)) {
+  //         out[k] = sub((obj as Record<string, unknown>)[k]);
+  //       }
+  //       return out;
+  //     }
+  //     return obj;
+  //   };
+  //   return sub(stmts) as Statement[];
+  // }
 }
