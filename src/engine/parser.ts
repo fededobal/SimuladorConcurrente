@@ -44,8 +44,8 @@ export interface Skip { type: 'Skip'; }
 export interface IncDec { type: 'IncDec'; target: string; isArray: boolean; idxExpr?: string; op: '++' | '--'; }
 export interface PVOp { type: 'PVOp'; operation: 'P' | 'V'; target: string; arrayIdx?: string; }
 
-export interface QueuePush { type: 'QueuePush'; target: string; elementExpr: string; }
-export interface QueuePop { type: 'QueuePop'; target: string; assignVar: string; }
+export interface QueuePush { type: 'QueuePush'; target: string; elementExprs: string[]; }
+export interface QueuePop { type: 'QueuePop'; target: string; assignVars: string[]; }
 
 export interface IfStatement { type: 'If'; condition: string; consequent: Block; alternate?: Block; }
 export interface WhileStatement { type: 'While'; condition: string; body: Block; }
@@ -59,6 +59,8 @@ export interface LocalDecl {
   varType: 'int' | 'boolean' | 'text' | 'double';
   name: string;
   initValue: string;
+  isArray?: boolean;
+  sizeExpr?: string;
 }
 
 export class Parser {
@@ -167,12 +169,39 @@ export class Parser {
   private parseLocalDecl(): LocalDecl {
     const varType = this.advance().value as 'int' | 'boolean' | 'text' | 'double';
     const name = this.consumeIdentifier('Se esperaba nombre de variable local');
-    let initValue = varType === 'boolean' ? 'false' : (varType === 'text' ? '""' : '0');
-    if (this.match('=')) {
-      initValue = this.parseExpressionUntil([';']);
+    
+    let isArray = false;
+    let sizeExpr: string | undefined;
+
+    if (this.match('[')) {
+      isArray = true;
+      sizeExpr = this.parseExpressionUntil([']']);
+      this.consume(']', "Se esperaba ']' en declaracion de arreglo local");
     }
+
+    let initValue = '';
+
+    if (isArray) {
+      if (this.match('=')) {
+        this.consume('(', "Se esperaba '(' para inicializar arreglo");
+        this.consume('[', "Se esperaba '[' en inicializacion de arreglo");
+        this.parseExpressionUntil([']']); // discard inner size
+        this.consume(']', "Se esperaba ']' en inicializacion de arreglo");
+        initValue = this.parseExpressionUntil([')']);
+        if (initValue.length === 0) {
+          throw new Error('Parse error en linea ' + this.peek().line + ': Se esperaba un valor de inicializacion para el arreglo despues de [tamaño]');
+        }
+        this.consume(')', "Se esperaba ')' para inicializar arreglo");
+      }
+    } else {
+      initValue = varType === 'boolean' ? 'false' : (varType === 'text' ? '""' : '0');
+      if (this.match('=')) {
+        initValue = this.parseExpressionUntil([';']);
+      }
+    }
+    
     this.consume(';', "Se esperaba ';'");
-    return { type: 'LocalDecl', varType, name, initValue };
+    return { type: 'LocalDecl', varType, name, initValue, isArray, sizeExpr };
   }
 
   private parseProcess(): ProcessDef {
@@ -239,15 +268,23 @@ export class Parser {
       const target = this.consumeIdentifier('Se esperaba nombre de Cola');
       this.consume(',', "Se esperaba ','");
       if (op === 'push') {
-        const elementExpr = this.parseExpressionUntil([')']);
-        this.consume(')', "Se esperaba ')'");
+        const elementExprs: string[] = [];
+        elementExprs.push(this.parseExpressionUntil([',', ')']));
+        while (this.match(',')) {
+          elementExprs.push(this.parseExpressionUntil([',', ')']));
+        }
+        this.consume(')', "Se esperaba ')' despues de los argumentos");
         this.consume(';', "Se esperaba ';'");
-        return { type: 'QueuePush', target, elementExpr };
+        return { type: 'QueuePush', target, elementExprs };
       } else {
-        const assignVar = this.consumeIdentifier('Se esperaba variable destino para pop');
+        const assignVars: string[] = [];
+        assignVars.push(this.consumeIdentifier('Se esperaba variable destino para pop'));
+        while (this.match(',')) {
+          assignVars.push(this.consumeIdentifier('Se esperaba variable destino para pop'));
+        }
         this.consume(')', "Se esperaba ')'");
         this.consume(';', "Se esperaba ';'");
-        return { type: 'QueuePop', target, assignVar };
+        return { type: 'QueuePop', target, assignVars };
       }
     }
 

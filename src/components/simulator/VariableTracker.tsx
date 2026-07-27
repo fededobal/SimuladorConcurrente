@@ -1,60 +1,90 @@
 import React, { useEffect, useState, useRef } from 'react';
-import type { VMState, VariableSnapshot, SemaphoreSnapshot } from '../../engine/vm';
+import { ExternalLink } from 'lucide-react';
+import type { VMState, VariableSnapshot, SemaphoreSnapshot, LogEntry } from '../../engine/vm';
+
+// ─── Types ──────────────────────────────────────────────────────────────
 
 interface VariableTrackerProps {
   state: VMState | null;
   isHistorical: boolean;
+  onPopOut?: () => void;
+  stepIndex?: number;   // current step number from the simulation
+  logs?: LogEntry[];     // full log history – hook for future scrubber sync
 }
 
-export const VariableTracker: React.FC<VariableTrackerProps> = ({ state, isHistorical }) => {
-  if (!state) return (
-    <div className="glass-panel panel">
-      <div className="panel-header">Variables</div>
-      <div className="panel-content" style={{ opacity: 0.5 }}>Esperando simulación...</div>
-    </div>
-  );
+interface ChangeEntry {
+  from: unknown;
+  to: unknown;
+  by: { name: string; color: string } | null;
+  step: number;
+}
 
+// ─── Helpers ────────────────────────────────────────────────────────────
+
+/** Build a compact history (last N changes) for a variable from logs */
+function buildVarHistory(logs: LogEntry[], varName: string, maxEntries = 4): ChangeEntry[] {
+  if (!logs || logs.length === 0) return [];
+
+  const changes: ChangeEntry[] = [];
+  for (let i = 1; i < logs.length; i++) {
+    const prev = logs[i - 1].snapshot.variables[varName];
+    const curr = logs[i].snapshot.variables[varName];
+    if (!prev || !curr) continue;
+    if (JSON.stringify(prev.value) !== JSON.stringify(curr.value)) {
+      changes.push({
+        from: prev.value,
+        to: curr.value,
+        by: curr.lastModifiedBy ? { name: curr.lastModifiedBy.name, color: curr.lastModifiedBy.color } : null,
+        step: i,
+      });
+    }
+  }
+  return changes.slice(-maxEntries);
+}
+
+// ─── Pop-out button (shared) ────────────────────────────────────────────
+
+const PopOutButton = ({ onPopOut }: { onPopOut?: () => void }) => {
+  if (!onPopOut) return null;
   return (
-    <div className="glass-panel panel" style={{ opacity: isHistorical ? 0.7 : 1, transition: 'opacity 0.2s' }}>
-      <div className="panel-header">
-        Variables {isHistorical && <span style={{color: '#cca700', fontSize: '0.8rem'}}> (Snapshot Histórico)</span>}
-      </div>
-      <div className="panel-content" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        
-        {/* Render variables enteras */}
-        {Object.entries(state.variables).length > 0 && (
-          <div className="vars-section">
-            <h4 style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Variables compartidas</h4>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
-              {Object.entries(state.variables).map(([name, data]) => (
-                <VariableCard key={name} name={name} data={data} isHistorical={isHistorical} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Render semáforos */}
-        {Object.entries(state.semaphores).length > 0 && (
-          <div className="sems-section">
-            <h4 style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Semáforos</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {Object.entries(state.semaphores).map(([name, data]) => (
-                <SemaphoreCard key={name} name={name} data={data} isHistorical={isHistorical} />
-              ))}
-            </div>
-          </div>
-        )}
-
-      </div>
-    </div>
+    <button
+      onClick={onPopOut}
+      title="Desanclar panel"
+      style={{
+        background: 'rgba(255,255,255,0.1)',
+        border: '1px solid rgba(255,255,255,0.2)',
+        color: 'var(--text-primary)',
+        padding: '2px 6px',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'background 0.2s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
+    >
+      <ExternalLink size={14} />
+    </button>
   );
 };
 
-const VariableCard = ({ name, data, isHistorical }: { name: string, data: VariableSnapshot, isHistorical: boolean }) => {
+// ─── Variable Card (redesigned) ─────────────────────────────────────────
+
+const VariableCard = ({
+  name,
+  data,
+  isHistorical,
+  history,
+}: {
+  name: string;
+  data: VariableSnapshot;
+  isHistorical: boolean;
+  history: ChangeEntry[];
+}) => {
   const [flash, setFlash] = useState(false);
   const [flashColor, setFlashColor] = useState<string>('#569cd6');
-  const [showModal, setShowModal] = useState(false);
-  
   const valueStr = JSON.stringify(data.value);
   const prevValueStrRef = useRef(valueStr);
 
@@ -69,159 +99,89 @@ const VariableCard = ({ name, data, isHistorical }: { name: string, data: Variab
     }
   }, [valueStr, isHistorical, data.lastModifiedBy?.color]);
 
+  const modColor = data.lastModifiedBy?.color || 'var(--glass-border)';
+  const displayValue = Array.isArray(data.value) ? `[${data.value.join(', ')}]` : String(data.value);
+  const valLength = displayValue.length;
+  let valFontSize = '1.6rem';
+  if (valLength > 15) valFontSize = '1.2rem';
+  if (valLength > 30) valFontSize = '1rem';
+  if (valLength > 60) valFontSize = '0.8rem';
+
+  const formatHistVal = (v: any) => {
+    const s = Array.isArray(v) ? `[${v.join(',')}]` : String(v);
+    return s.length > 40 ? s.substring(0, 40) + '...' : s;
+  };
+
   return (
-    <>
-      <div
-        className={`var-card-enhanced${flash ? ' var-flash' : ''}`}
-        style={{
-          '--flash-color': flashColor,
-          cursor: 'pointer'
-        } as React.CSSProperties}
-        onClick={() => setShowModal(true)}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--syntax-variable)' }}>{name}</span>
-          {data.lastModifiedBy && (
-            <span style={{ 
-              fontSize: '0.65rem', 
-              background: data.lastModifiedBy.color, 
-              color: '#fff', 
-              padding: '1px 5px', 
-              borderRadius: '3px',
-              fontWeight: 600,
-              letterSpacing: '0.02em',
-              flexShrink: 0,
-              marginLeft: '0.5rem'
-            }}>
-              {data.lastModifiedBy.name}
-            </span>
-          )}
-        </div>
-        <div style={{ 
-          marginTop: '0.5rem', 
-          fontFamily: 'var(--font-mono)', 
-          fontWeight: 700, 
-          color: 'var(--text-primary)', 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '0.5rem',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap'
+    <div
+      className={`state-card${flash ? ' var-flash' : ''}`}
+      style={{ '--flash-color': flashColor, borderLeftColor: modColor } as React.CSSProperties}
+    >
+      {/* Row 1: name + current value */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
+          {name}
+        </span>
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 700,
+          fontSize: valFontSize,
+          color: 'var(--text-primary)',
+          lineHeight: 1.2,
+          wordBreak: 'break-all',
+          whiteSpace: 'pre-wrap',
+          textAlign: 'right',
+          flex: '1 1 auto',
+          minWidth: '0'
         }}>
-          {(typeof data.value === 'number' || typeof data.value === 'boolean') && JSON.stringify(data.value) !== JSON.stringify(data.previousValue) ? (
-            <>
-              <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textDecoration: 'line-through', opacity: 0.7, flexShrink: 0 }} title="Valor anterior">
-                {String(data.previousValue).length > 10 ? String(data.previousValue).substring(0,10)+'...' : String(data.previousValue)}
-              </span>
-              <span style={{ fontSize: '1rem', color: 'var(--flash-color)', opacity: 0.8, flexShrink: 0 }}>➔</span>
-              <span style={{ fontSize: '1.3rem', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {String(data.value)}
-              </span>
-            </>
-          ) : (
-            <span style={{ fontSize: '1.3rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {Array.isArray(data.value) ? `[${data.value.join(', ')}]` : String(data.value)}
-            </span>
-          )}
-        </div>
+          {displayValue}
+        </span>
       </div>
 
-      {showModal && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(4px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000
-          }}
-          onClick={() => setShowModal(false)}
-        >
-          <div 
-            style={{
-              background: 'var(--bg-primary)',
-              border: '1px solid var(--glass-border)',
-              borderRadius: '8px',
-              padding: '1.5rem',
-              width: '400px',
-              maxWidth: '90%',
-              maxHeight: '80vh',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
-            }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--glass-border)', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-              <h3 style={{ margin: 0, color: 'var(--syntax-variable)', fontFamily: 'var(--font-mono)' }}>Detalle: {name}</h3>
-              <button 
-                onClick={() => setShowModal(false)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  fontSize: '1.2rem',
-                  lineHeight: 1
-                }}
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div style={{ overflowY: 'auto', flex: 1, paddingRight: '0.5rem' }}>
-              <p style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>
-                Tipo: <strong style={{ color: 'var(--text-primary)' }}>
-                {Array.isArray(data.value) 
-                  ? `${data.type === 'Cola' ? 'Cola' : 'Arreglo'} (${data.value.length} elementos)` 
-                  : (data.type || typeof data.value)}
-                </strong>
-              </p>
-              <div style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-                <strong style={{ color: 'var(--text-secondary)' }}>Última modificación:</strong>{' '}
-                {data.lastModifiedBy ? (
-                  <span style={{ 
-                    background: data.lastModifiedBy.color, 
-                    color: '#fff', 
-                    padding: '2px 6px', 
-                    borderRadius: '3px',
-                    fontWeight: 600,
-                    fontSize: '0.8rem',
-                    marginLeft: '0.5rem'
-                  }}>
-                    {data.lastModifiedBy.name}
-                  </span>
-                ) : 'Ninguna'}
-              </div>
+      {/* Row 2: secondary context */}
+      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: 1.4 }}>
+        {data.lastModifiedBy ? (
+          <span>
+            <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', backgroundColor: data.lastModifiedBy.color, marginRight: 4, verticalAlign: 'middle' }} />
+            modificado por <span style={{ color: data.lastModifiedBy.color, fontWeight: 600 }}>{data.lastModifiedBy.name}</span>
+            {data.previousValue !== undefined && JSON.stringify(data.value) !== JSON.stringify(data.previousValue) && (
+              <span style={{ opacity: 0.7, wordBreak: 'break-all' }}> · antes: {formatHistVal(data.previousValue)}</span>
+            )}
+          </span>
+        ) : (
+          <span style={{ opacity: 0.5 }}>valor inicial</span>
+        )}
+      </div>
 
-              <div>
-                <strong style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Contenido:</strong>
-                <pre style={{
-                  background: 'rgba(0,0,0,0.2)',
-                  padding: '1rem',
-                  borderRadius: '4px',
-                  marginTop: '0.5rem',
-                  whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-all',
-                  fontFamily: 'var(--font-mono)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem'
-                }}>
-                  {Array.isArray(data.value) ? JSON.stringify(data.value, null, 2) : String(data.value)}
-                </pre>
-              </div>
+      {/* Row 3: mini history */}
+      {history.length > 0 && (
+        <div style={{ marginTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '5px' }}>
+          {history.map((h, i) => (
+            <div key={i} style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: i > 0 ? '2px' : 0, opacity: 0.7, flexWrap: 'wrap' }}>
+              <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', backgroundColor: h.by?.color || '#888', flexShrink: 0 }} />
+              <span style={{ fontFamily: 'var(--font-mono)', wordBreak: 'break-all', flex: '1 1 auto', minWidth: 0 }}>
+                {formatHistVal(h.from)} → {formatHistVal(h.to)}
+              </span>
+              <span style={{ opacity: 0.6, flexShrink: 0 }}>instante {h.step}</span>
             </div>
-          </div>
+          ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-const SemaphoreCard = ({ name, data, isHistorical }: { name: string, data: SemaphoreSnapshot, isHistorical: boolean }) => {
+// ─── Semaphore Card (redesigned) ────────────────────────────────────────
+
+const SemaphoreCard = ({
+  name,
+  data,
+  isHistorical,
+}: {
+  name: string;
+  data: SemaphoreSnapshot;
+  isHistorical: boolean;
+}) => {
   const [flash, setFlash] = useState(false);
   const [flashColor, setFlashColor] = useState<string>('#4ec9b0');
   const prevValRef = useRef(data.value);
@@ -240,81 +200,153 @@ const SemaphoreCard = ({ name, data, isHistorical }: { name: string, data: Semap
   }, [data.value, data.blockedQueue.length, isHistorical]);
 
   const isLocked = data.value === 0;
+  const isBinary = data.value <= 1 && data.blockedQueue.length === 0
+    ? true
+    : data.value <= 1; // heuristic: treat as binary if value is 0 or 1
+  const modColor = data.lastModifiedBy?.color || 'var(--glass-border)';
 
   return (
     <div
-      className={`sem-card-enhanced${flash ? ' var-flash' : ''}`}
-      style={{
-        '--flash-color': flashColor,
-      } as React.CSSProperties}
+      className={`state-card${flash ? ' var-flash' : ''}`}
+      style={{ '--flash-color': flashColor, borderLeftColor: modColor } as React.CSSProperties}
     >
-      {/* Semaphore header with lock icon */}
-      <div style={{ 
-        flex: '0 0 auto', 
-        borderRight: '1px solid var(--glass-border)', 
-        paddingRight: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '0.25rem',
-        minWidth: '80px'
-      }}>
-        <div style={{ fontWeight: 'bold', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--syntax-type)' }}>
-          sem {name}
-        </div>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '0.4rem',
-        }}>
+      {/* Row 1: name + value + status */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
+          {name}
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={{
-            fontSize: '1.3rem',
-            transition: 'transform 0.3s ease',
-            display: 'inline-block',
-            transform: isLocked ? 'scale(1.1)' : 'scale(1)',
-          }}>
-            {isLocked ? '🔒' : '🔓'}
-          </span>
-          <span style={{ 
-            fontSize: '1.5rem', 
             fontFamily: 'var(--font-mono)',
             fontWeight: 700,
+            fontSize: '1.6rem',
             color: isLocked ? '#f48771' : '#89d185',
-            transition: 'color 0.3s ease',
+            lineHeight: 1,
           }}>
             {data.value}
           </span>
+          {isBinary && (
+            <span style={{ fontSize: '1rem' }}>{isLocked ? '🔒' : '🔓'}</span>
+          )}
         </div>
       </div>
 
-      {/* Blocked queue */}
-      <div style={{ flex: '1 1 auto' }}>
-        <div style={{ 
-          fontSize: '0.75rem', 
-          color: 'var(--text-secondary)', 
-          marginBottom: '0.4rem',
-          fontFamily: 'var(--font-mono)',
-          letterSpacing: '0.03em'
-        }}>
-          Cola de Bloqueados
+      {/* Row 2: modifier info */}
+      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+        {data.lastModifiedBy ? (
+          <span>
+            <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', backgroundColor: data.lastModifiedBy.color, marginRight: 4, verticalAlign: 'middle' }} />
+            última modificación: <span style={{ color: data.lastModifiedBy.color, fontWeight: 600 }}>{data.lastModifiedBy.name}</span>
+          </span>
+        ) : (
+          <span style={{ opacity: 0.5 }}>valor inicial</span>
+        )}
+      </div>
+
+      {/* Row 3: FIFO queue */}
+      {data.blockedQueue.length > 0 && (
+        <div style={{ marginTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '5px' }}>
+          <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginBottom: '3px', fontWeight: 600 }}>
+            Esperando ({data.blockedQueue.length}):
+          </div>
+          <ol style={{ margin: 0, paddingLeft: '1.1rem', listStyleType: 'decimal' }}>
+            {data.blockedQueue.map((t, idx) => (
+              <li key={`${t.id}-${idx}`} style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: idx > 0 ? '1px' : 0 }}>
+                <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', backgroundColor: t.color, marginRight: 4, verticalAlign: 'middle' }} />
+                <span style={{ color: t.color, fontWeight: 600 }}>{t.name}</span>
+              </li>
+            ))}
+          </ol>
         </div>
-        <div className="blocked-queue-container">
-          {data.blockedQueue.length === 0 && (
-            <span className="blocked-queue-empty">Vacía</span>
+      )}
+      {data.blockedQueue.length === 0 && isLocked && (
+        <div style={{ marginTop: '4px', fontSize: '0.7rem', color: 'var(--text-secondary)', opacity: 0.5 }}>
+          Nadie esperando
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─── Main Component ─────────────────────────────────────────────────────
+
+export const VariableTracker: React.FC<VariableTrackerProps> = ({
+  state,
+  isHistorical,
+  onPopOut,
+  stepIndex,
+  logs,
+}) => {
+  const currentStep = stepIndex ?? (logs ? logs.length : 0);
+
+  // Empty state
+  if (!state) {
+    return (
+      <div className="glass-panel panel">
+        <div className="panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>Estado del programa</span>
+          <PopOutButton onPopOut={onPopOut} />
+        </div>
+        <div className="panel-content" style={{ opacity: 0.5 }}>Ejecutá la simulación para ver...</div>
+      </div>
+    );
+  }
+
+  const varEntries = Object.entries(state.variables);
+  const semEntries = Object.entries(state.semaphores);
+
+  return (
+    <div className="glass-panel panel" style={{ opacity: isHistorical ? 0.7 : 1, transition: 'opacity 0.2s' }}>
+      {/* Unified header */}
+      <div className="panel-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+          <span>Estado</span>
+          {currentStep > 0 && (
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 400 }}>
+              instante {currentStep}
+            </span>
           )}
-          {data.blockedQueue.map((t, idx) => (
-            <div
-              key={`${t.id}-${idx}`}
-              className="blocked-queue-badge"
-              style={{
-                '--badge-color': t.color,
-              } as React.CSSProperties}
-            >
-              <span className="blocked-queue-badge-dot" style={{ backgroundColor: t.color }} />
-              <span className="blocked-queue-badge-name">{t.name}</span>
-            </div>
-          ))}
+          {isHistorical && (
+            <span style={{ color: '#cca700', fontSize: '0.75rem' }}>(histórico)</span>
+          )}
         </div>
+        <PopOutButton onPopOut={onPopOut} />
+      </div>
+
+      <div className="panel-content" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', overflowY: 'auto' }}>
+        {/* Variables section */}
+        {varEntries.length > 0 && (
+          <div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem', fontWeight: 600 }}>
+              Variables
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {varEntries.map(([name, data]) => (
+                <VariableCard
+                  key={name}
+                  name={name}
+                  data={data}
+                  isHistorical={isHistorical}
+                  history={buildVarHistory(logs || [], name)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Semaphores section */}
+        {semEntries.length > 0 && (
+          <div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem', fontWeight: 600 }}>
+              Semáforos
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {semEntries.map(([name, data]) => (
+                <SemaphoreCard key={name} name={name} data={data} isHistorical={isHistorical} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -22,11 +22,15 @@ export interface SemaphoreSnapshot {
   lastModifiedBy?: ThreadIdentity;
 }
 
-export interface Thread extends ThreadIdentity {
+export interface Thread {
+  id: number;
+  name: string;
+  color: string;
   state: 'READY' | 'RUNNING' | 'BLOCKED' | 'TERMINATED';
   instructionStack: Statement[];
   localEnv: Record<string, unknown>;
   onTerminate?: () => void;
+  activeLine?: number; // Line currently being executed or just executed
 }
 
 export interface VMState {
@@ -44,6 +48,7 @@ export interface LogEntry {
   message: string;
   time: string;
   snapshot: VMState;
+  stepIndex: number;
 }
 
 function genId(): string {
@@ -60,7 +65,7 @@ export class VirtualMachine {
   public onStateChange?: (state: VMState, logs: LogEntry[]) => void;
   public currentPhase: VmPhase = 'CONTEXT_SWITCH';
   public activeThreadId: number | null = null;
-  
+
   private threadCounter = 1;
   private program: Program;
 
@@ -70,15 +75,23 @@ export class VirtualMachine {
   }
 
   private deepCloneState(): VMState {
-    return JSON.parse(JSON.stringify({
-      variables: this.variables,
-      semaphores: this.semaphores,
+    return {
+      variables: JSON.parse(JSON.stringify(this.variables)),
+      semaphores: JSON.parse(JSON.stringify(this.semaphores)),
       threads: this.threads.map(t => ({
-        id: t.id, name: t.name, color: t.color, state: t.state,
-        activeLine: t.instructionStack.length > 0 ? (t.instructionStack[0] as any).line : undefined,
-        localEnv: Object.fromEntries(Object.entries(t.localEnv).filter(([k]) => !k.startsWith('__')))
+        id: t.id,
+        name: t.name,
+        color: t.color,
+        state: t.state,
+        instructionStack: [], // UI doesn't need full AST copies in history
+        localEnv: Object.fromEntries(Object.entries(t.localEnv).filter(([k]) => !k.startsWith('__'))),
+        activeLine: t.state === 'TERMINATED'
+          ? undefined
+          : (t.activeLine !== undefined
+            ? t.activeLine
+            : (t.instructionStack.length > 0 ? (t.instructionStack[0] as any).line : undefined)),
       }))
-    })) as VMState;
+    };
   }
 
   private evaluateExpr(expr: string, thread: Thread | null): unknown {
@@ -96,7 +109,7 @@ export class VirtualMachine {
       e = replaceOutsideStrings(e, /\bor\b/gi, '||');
       e = replaceOutsideStrings(e, /\bnot\b/gi, '!');
       e = replaceOutsideStrings(e, /<>/g, '!=');
-      
+
       // Parse empty buffer -> buffer.length === 0
       e = replaceOutsideStrings(e, /\bempty\s+([a-zA-Z_]\w*)\b/gi, '($1.length === 0)');
 
@@ -182,12 +195,12 @@ export class VirtualMachine {
           if (stmt.arrayIdx) checkExpr(stmt.arrayIdx, locals, `índice de semáforo en proceso ${processName}`);
           break;
         case 'QueuePush':
-          checkTarget(stmt.target, locals, `push en proceso ${processName}`);
-          checkExpr(stmt.elementExpr, locals, `elemento push en proceso ${processName}`);
+          checkTarget(stmt.target, locals, `cola destino de push en proceso ${processName}`);
+          stmt.elementExprs.forEach(expr => checkExpr(expr, locals, `elemento push en proceso ${processName}`));
           break;
         case 'QueuePop':
-          checkTarget(stmt.target, locals, `pop en proceso ${processName}`);
-          checkTarget(stmt.assignVar, locals, `variable destino de pop en proceso ${processName}`);
+          checkTarget(stmt.target, locals, `cola origen de pop en proceso ${processName}`);
+          stmt.assignVars.forEach(v => checkTarget(v, locals, `variable destino de pop en proceso ${processName}`));
           break;
         case 'If':
           checkExpr(stmt.condition, locals, `condición if en proceso ${processName}`);
@@ -253,13 +266,13 @@ export class VirtualMachine {
     for (const node of this.program.body) {
       if (node.type !== 'Declaration') continue;
       const decl = node as Declaration;
-      
+
       if (decl.varType === 'sem') {
         if (decl.isArray) {
           const size = Number(this.evaluateExpr(decl.sizeExpr || '0', null));
           const iv = decl.initValue !== '' ? Number(this.evaluateExpr(decl.initValue, null)) : 1;
           for (let i = 0; i < size; i++) {
-             this.semaphores[`${decl.name}[${i}]`] = { name: `${decl.name}[${i}]`, value: iv, blockedQueue: [] };
+            this.semaphores[`${decl.name}[${i}]`] = { name: `${decl.name}[${i}]`, value: iv, blockedQueue: [] };
           }
         } else {
           const iv = decl.initValue !== '' ? Number(this.evaluateExpr(decl.initValue, null)) : 1;
@@ -275,7 +288,7 @@ export class VirtualMachine {
           let fillVal: unknown = 0;
           if (decl.varType === 'boolean') fillVal = false;
           if (decl.varType === 'text') fillVal = "";
-          
+
           if (fillValRaw !== '') {
             if (fillValRaw === 'true') fillVal = true;
             else if (fillValRaw === 'false') fillVal = false;
@@ -327,9 +340,11 @@ export class VirtualMachine {
 
     this.validateAST();
 
-    this.addLog(0, undefined, 'SISTEMA', 'Simulacion inicializada. ' + this.threads.length + ' proceso(s).');
+    this.activeThreadId = null;
     this.emitState();
   }
+
+  public currentStepIndex = 0;
 
   private addLog(threadId: number, threadColor: string | undefined, resource: string, message: string) {
     this.logs.push({
@@ -340,11 +355,12 @@ export class VirtualMachine {
       resource,
       message,
       time: new Date().toLocaleTimeString(),
-      snapshot: this.deepCloneState()
+      snapshot: this.deepCloneState(),
+      stepIndex: this.currentStepIndex
     });
   }
 
-  private emitState() {
+  public emitState() {
     if (this.onStateChange) this.onStateChange(this.deepCloneState(), [...this.logs]);
   }
 
@@ -353,127 +369,73 @@ export class VirtualMachine {
   }
 
   public step() {
-    if (this.isFinished()) return;
+    this.currentStepIndex++;
 
-    if (this.currentPhase === 'CONTEXT_SWITCH') {
-      this.performContextSwitch();
-    } else if (this.currentPhase === 'INTENT') {
-      this.performIntent();
-    } else if (this.currentPhase === 'EXECUTION') {
-      this.performExecution();
-    }
+    const readyThreads = this.threads.filter(t => t.state === 'READY');
     
+    if (readyThreads.length === 0) {
+      if (!this.isFinished() && !this.logs.find(l => l.resource === 'DEADLOCK')) {
+        this.addLog(0, undefined, 'DEADLOCK', 'Todos los hilos bloqueados (Deadlock).');
+      }
+      this.emitState();
+      return;
+    }
+
+    // Shuffle to simulate random lock acquisition / race conditions
+    const shuffled = [...readyThreads].sort(() => Math.random() - 0.5);
+
+    let executedAny = false;
+
+    for (const thread of shuffled) {
+      // It might have been blocked during this VERY step by another thread (e.g. semaphore)
+      if (thread.state !== 'READY') continue;
+
+      if (thread.instructionStack.length === 0) {
+        thread.state = 'TERMINATED';
+        if (thread.onTerminate) thread.onTerminate();
+        continue;
+      }
+
+      // Simulate processor speed difference: 20% chance to "miss" this CPU cycle
+      if (Math.random() < 0.2 && readyThreads.length > 1) {
+        // It just stays READY and doesn't execute an instruction this tick
+        continue;
+      }
+
+      executedAny = true;
+      this.activeThreadId = thread.id;
+      thread.state = 'RUNNING';
+
+      const stmt = thread.instructionStack.shift()!;
+      thread.activeLine = (stmt as any).line;
+      
+      this.executeStatement(stmt, thread, false);
+
+      // If it didn't block or terminate, it goes back to READY for the next global step
+      if (thread.state === 'RUNNING') {
+        thread.state = 'READY';
+      }
+      this.activeThreadId = null;
+    }
+
+    // If by random chance ALL threads missed their cycle, force at least one to execute
+    // so the simulator doesn't hang without advancing.
+    if (!executedAny && shuffled.length > 0) {
+      const fallbackThread = shuffled.find(t => t.state === 'READY' && t.instructionStack.length > 0);
+      if (fallbackThread) {
+        this.activeThreadId = fallbackThread.id;
+        fallbackThread.state = 'RUNNING';
+        const stmt = fallbackThread.instructionStack.shift()!;
+        fallbackThread.activeLine = (stmt as any).line;
+        this.executeStatement(stmt, fallbackThread, false);
+        if (fallbackThread.state === 'RUNNING') fallbackThread.state = 'READY';
+        this.activeThreadId = null;
+      }
+    }
+
     this.emitState();
   }
 
-  private performContextSwitch() {
-    // Si hay un hilo RUNNING, lo volvemos READY para ceder la CPU (time-slicing / preemption)
-    if (this.activeThreadId !== null) {
-      const active = this.threads.find(t => t.id === this.activeThreadId);
-      if (active && active.state === 'RUNNING') {
-        active.state = 'READY';
-      }
-    }
-
-    const ready = this.threads.filter(t => t.state === 'READY');
-    if (ready.length === 0) {
-      if (!this.isFinished()) {
-        this.addLog(0, undefined, 'DEADLOCK', 'Todos los hilos bloqueados (Deadlock).');
-      }
-      return;
-    }
-
-    const thread = ready[Math.floor(Math.random() * ready.length)];
-    this.activeThreadId = thread.id;
-    thread.state = 'RUNNING';
-    this.currentPhase = 'INTENT';
-    
-    this.addLog(thread.id, thread.color, 'SCHEDULER', `[Scheduler] Cambio de contexto. CPU asignada al ${thread.name}.`);
-  }
-
-  private performIntent() {
-    const thread = this.threads.find(t => t.id === this.activeThreadId);
-    if (!thread || thread.state !== 'RUNNING') {
-      this.currentPhase = 'CONTEXT_SWITCH';
-      return this.step(); 
-    }
-
-    if (thread.instructionStack.length === 0) {
-      thread.state = 'TERMINATED';
-      this.addLog(thread.id, thread.color, thread.name, thread.name + ': proceso terminado.');
-      if (thread.onTerminate) thread.onTerminate();
-      this.currentPhase = 'CONTEXT_SWITCH';
-      return this.step(); 
-    }
-
-    const stmt = thread.instructionStack[0]; 
-
-    if (this.isCriticalStatement(stmt, thread)) {
-      this.logIntent(stmt, thread);
-      this.currentPhase = 'EXECUTION';
-    } else {
-      this.currentPhase = 'EXECUTION';
-      this.performExecution();
-    }
-  }
-
-  private performExecution() {
-    const thread = this.threads.find(t => t.id === this.activeThreadId);
-    if (!thread || thread.state !== 'RUNNING') {
-      this.currentPhase = 'CONTEXT_SWITCH';
-      return;
-    }
-
-    const stmt = thread.instructionStack.shift()!;
-    this.executeStatement(stmt, thread, false);
-
-    if (thread.state === 'RUNNING') {
-      thread.state = 'READY';
-      this.currentPhase = 'CONTEXT_SWITCH';
-      this.activeThreadId = null;
-    } else {
-      this.currentPhase = 'CONTEXT_SWITCH';
-      this.activeThreadId = null;
-    }
-  }
-
-  private isCriticalStatement(stmt: Statement, thread: Thread): boolean {
-    switch (stmt.type) {
-      case 'PVOp':
-      case 'QueuePush':
-      case 'QueuePop':
-        return true;
-      case 'Assign':
-      case 'ArrayAssign':
-      case 'IncDec':
-        return !this.isLocalVar(stmt.target, thread);
-      default:
-        return false;
-    }
-  }
-
-  private logIntent(stmt: Statement, thread: Thread) {
-    const prefix = '➤ [Intento] ';
-    switch (stmt.type) {
-      case 'PVOp': {
-        let targetName = stmt.target;
-        if ((stmt as any).arrayIdx !== undefined) targetName = `${stmt.target}[${this.evaluateExpr((stmt as any).arrayIdx, thread)}]`;
-        this.addLog(thread.id, thread.color, stmt.target, prefix + `${thread.name} se prepara para ejecutar ${stmt.type === 'PVOp' ? (stmt as any).operation : ''}(${targetName}).`);
-        break;
-      }
-      case 'QueuePush':
-        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} se prepara para intentar push en la cola '${(stmt as any).target}'.`);
-        break;
-      case 'QueuePop':
-        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} se prepara para extraer elemento de la cola '${(stmt as any).target}'.`);
-        break;
-      case 'Assign':
-      case 'ArrayAssign':
-      case 'IncDec':
-        this.addLog(thread.id, thread.color, (stmt as any).target, prefix + `${thread.name} intentará modificar la variable compartida '${(stmt as any).target}'.`);
-        break;
-    }
-  }
 
   private executeStatement(stmt: Statement, thread: Thread, isAtomic: boolean): void {
     switch (stmt.type) {
@@ -545,12 +507,16 @@ export class VirtualMachine {
           this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': operacion push en variable no declarada o no es Cola');
           break;
         }
-        const val = this.evaluateExpr(stmt.elementExpr, thread);
+        const vals = stmt.elementExprs.map((expr: string) => this.evaluateExpr(expr, thread));
+        const valToPush = vals.length === 1 ? vals[0] : vals;
+        
         const arr = [...(this.variables[stmt.target].value as unknown[])];
         const prevArr = [...arr];
-        arr.push(val);
+        arr.push(valToPush);
         this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-        if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': push(' + stmt.target + ', ' + String(val) + ')');
+        
+        const valStr = vals.length === 1 ? String(vals[0]) : `[${vals.map(String).join(',')}]`;
+        if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': push(' + stmt.target + ', ' + valStr + ')');
         break;
       }
 
@@ -561,26 +527,36 @@ export class VirtualMachine {
         }
         const arr = [...(this.variables[stmt.target].value as unknown[])];
         if (arr.length === 0) {
-           this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': pop en cola vacia (' + stmt.target + ') abortando hilo.');
-           thread.state = 'TERMINATED';
-           break;
+          this.addLog(thread.id, thread.color, 'ERROR', thread.name + ': pop en cola vacia (' + stmt.target + ') abortando hilo.');
+          thread.state = 'TERMINATED';
+          break;
         }
         const prevArr = [...arr];
         const val = arr.shift();
         this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-        
-        if (this.isLocalVar(stmt.assignVar, thread)) {
-           thread.localEnv[stmt.assignVar] = val;
-           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => local ' + stmt.assignVar + '=' + String(val));
-        } else {
-           if (!(stmt.assignVar in this.variables)) {
-             this.addLog(thread.id, thread.color, 'ERROR', `Variable no declarada: ${stmt.assignVar}`);
-             thread.state = 'TERMINATED';
-             break;
-           }
-           const prevVar = this.variables[stmt.assignVar].value;
-           this.variables[stmt.assignVar] = { ...this.variables[stmt.assignVar], value: val, previousValue: prevVar, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-           if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => global ' + stmt.assignVar + '=' + String(val));
+
+        const vals = (stmt.assignVars.length > 1 && Array.isArray(val)) ? val : [val];
+        let logStr = '';
+
+        stmt.assignVars.forEach((assignVar: string, i: number) => {
+          const v = i < vals.length ? vals[i] : undefined;
+          if (this.isLocalVar(assignVar, thread)) {
+            thread.localEnv[assignVar] = v;
+            logStr += `local ${assignVar}=${String(v)} `;
+          } else {
+            if (!(assignVar in this.variables)) {
+              this.addLog(thread.id, thread.color, 'ERROR', `Variable no declarada: ${assignVar}`);
+              thread.state = 'TERMINATED';
+              return;
+            }
+            const prevVar = this.variables[assignVar].value;
+            this.variables[assignVar] = { ...this.variables[assignVar], value: v, previousValue: prevVar, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
+            logStr += `global ${assignVar}=${String(v)} `;
+          }
+        });
+
+        if (!isAtomic && thread.state !== 'TERMINATED') {
+          this.addLog(thread.id, thread.color, stmt.target, thread.name + ': pop(' + stmt.target + ') => ' + logStr.trim());
         }
         break;
       }

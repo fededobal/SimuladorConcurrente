@@ -1,14 +1,14 @@
 import React from 'react';
-
+import { Cpu } from 'lucide-react';
 interface HeaderProps {
   onStart: (startPaused?: boolean) => void;
   onStop: () => void;
   onPauseResume: () => void;
   onStep: () => void;
-  
+
   speed: number;
   onSpeedChange: (s: number) => void;
-  
+
   isRunning: boolean;
   isPaused: boolean;
 }
@@ -49,26 +49,29 @@ const TimerIcon = () => (
   </svg>
 );
 
-export const Header: React.FC<HeaderProps> = ({ 
-  onStart, onStop, onPauseResume, onStep, speed, onSpeedChange, isRunning, isPaused 
+export const Header: React.FC<HeaderProps> = ({
+  onStart, onStop, onPauseResume, onStep, speed, onSpeedChange, isRunning, isPaused
 }) => {
   return (
     <header className="dashboard-header">
       {/* Brand Identity */}
       <div className="header-brand">
-        <h1>SIMULADOR CONCURRENTE</h1>
-        <span className="badge">UNLP</span>
+        <Cpu size={24} color="#60a5fa" />
+        <h1>
+          <span className="fw-light">Simulador</span>
+          <span className="fw-bold">Concurrente</span>
+        </h1>
       </div>
-      
+
       {/* Controls Area */}
       <div className="header-controls">
-        
+
         {/* Speed Control */}
         <div className="speed-control-group">
           <TimerIcon />
-          <select 
+          <select
             className="speed-select"
-            value={speed} 
+            value={speed}
             onChange={(e) => onSpeedChange(Number(e.target.value))}
           >
             <option value={1500}>Lento</option>
@@ -82,7 +85,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Action Buttons */}
         <div className="action-buttons-group">
-          <button 
+          <button
             className={`control-btn btn-step ${isRunning && !isPaused ? 'disabled' : ''}`}
             onClick={() => {
               if (!isRunning) onStart(true);
@@ -101,17 +104,17 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           ) : (
             <>
-              <button 
+              <button
                 className={`control-btn btn-pause ${isPaused ? 'active' : ''}`}
-                onClick={onPauseResume} 
+                onClick={onPauseResume}
               >
                 <div className="icon-wrapper">{isPaused ? <PlayIcon /> : <PauseIcon />}</div>
                 <span className="btn-label">{isPaused ? 'Continuar' : 'Pausar'}</span>
               </button>
-              
-              <button 
+
+              <button
                 className="control-btn btn-stop"
-                onClick={onStop} 
+                onClick={onStop}
               >
                 <div className="icon-wrapper"><StopIcon /></div>
                 <span className="btn-label">Detener</span>

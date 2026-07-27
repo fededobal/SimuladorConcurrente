@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Header } from './components/layout/Header';
+import { FloatingWindow } from './components/layout/FloatingWindow';
 import { CodeEditor } from './components/simulator/CodeEditor';
 import { VariableTracker } from './components/simulator/VariableTracker';
-import { ThreadScheduler } from './components/simulator/ThreadScheduler';
-import { EventLog } from './components/simulator/EventLog';
+import { Timeline } from './components/simulator/Timeline';
+import { Group, Panel, Separator } from 'react-resizable-panels';
 import { tokenize } from './engine/lexer';
 import { Parser } from './engine/parser';
 import { VirtualMachine } from './engine/vm';
@@ -58,17 +59,33 @@ function App() {
     setCode(entry.code);
     pendingCursorRef.current = { start: entry.cursorStart, end: entry.cursorEnd };
   }, [code]);
-  
+
   // Execution State
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [speed, setSpeed] = useState(1000);
-  
+
   const [currentState, setCurrentState] = useState<VMState | null>(null);
   const [logs, setLogs] = useState<LogEntry[]>([]);
-  
+
   const vmRef = useRef<VirtualMachine | null>(null);
   const timerRef = useRef<number | null>(null);
+
+  // Floating windows state
+  const [floatedPanels, setFloatedPanels] = useState<Record<string, boolean>>({
+    code: false,
+    vars: false,
+    timeline: false
+  });
+
+  const [focusedWindow, setFocusedWindow] = useState<string | null>(null);
+
+  const toggleFloat = (panel: string) => {
+    setFloatedPanels(prev => ({ ...prev, [panel]: !prev[panel] }));
+    if (!floatedPanels[panel]) setFocusedWindow(panel);
+  };
+
+  const getZIndex = (panel: string) => panel === focusedWindow ? 100 : 90;
 
   const syncStateToUI = (state: VMState, newLogs: LogEntry[]) => {
     setCurrentState(state);
@@ -84,18 +101,21 @@ function App() {
       setCurrentState(null);
       setLogs([]);
       setIsPaused(startPaused);
-      
+
       const tokens = tokenize(code);
       const parser = new Parser(tokens);
       const ast = parser.parse();
-      
+
       const vm = new VirtualMachine(ast);
       vm.onStateChange = syncStateToUI;
       vmRef.current = vm;
-      
+      vm.emitState(); // Push initial state to UI
+
       setIsRunning(true);
       if (startPaused) {
-        vm.step();
+        setIsPaused(true);
+      } else {
+        setIsPaused(false);
       }
     } catch (e: any) {
       console.error(e);
@@ -141,16 +161,69 @@ function App() {
 
   const activeState = currentState;
 
-  const activeLines = activeState?.threads
+  const activeLines = (isRunning || isPaused) ? (activeState?.threads
     .filter(t => (t as any).activeLine !== undefined)
-    .map(t => ({
-      line: (t as any).activeLine as number,
-      color: t.color
-    })) || [];
+    .map(t => {
+      // Determinar si está bloqueado y por qué recurso (semáforo)
+      let blockedResource = '';
+      if (t.state === 'BLOCKED' && activeState) {
+        // Buscar en las colas de semáforos
+        for (const [semName, sem] of Object.entries(activeState.semaphores)) {
+          if (sem.blockedQueue.some(b => b.id === t.id)) {
+            blockedResource = semName;
+            break;
+          }
+        }
+      }
+      return {
+        line: (t as any).activeLine as number,
+        color: t.color,
+        state: t.state,
+        name: t.name,
+        blockedResource
+      };
+    }) || []) : [];
+
+  const renderCodeEditor = (isFloating = false) => (
+    <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CodeEditor
+        code={code}
+        onChange={setCodeWithHistory}
+        onUndo={handleUndo}
+        onRedo={handleRedo}
+        cursorRef={cursorRef}
+        pendingCursorRef={pendingCursorRef}
+        activeLines={activeLines}
+        onPopOut={!isFloating ? () => toggleFloat('code') : undefined}
+      />
+    </div>
+  );
+
+  const renderVars = (isFloating = false) => (
+    <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <VariableTracker
+        state={activeState}
+        isHistorical={false}
+        onPopOut={!isFloating ? () => toggleFloat('vars') : undefined}
+        logs={logs}
+        stepIndex={logs.length > 0 ? logs.length - 1 : 0}
+      />
+    </div>
+  );
+
+  const renderTimeline = (isFloating = false) => (
+    <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Timeline
+        logs={logs}
+        threads={activeState?.threads || []}
+        onPopOut={!isFloating ? () => toggleFloat('timeline') : undefined}
+      />
+    </div>
+  );
 
   return (
     <div className="app-container">
-      <Header 
+      <Header
         onStart={startSimulation}
         onStop={stopSimulation}
         onPauseResume={togglePause}
@@ -160,21 +233,86 @@ function App() {
         isRunning={isRunning}
         isPaused={isPaused}
       />
-      
-      <main className="main-content">
-        <CodeEditor 
-          code={code} 
-          onChange={setCodeWithHistory}
-          onUndo={handleUndo}
-          onRedo={handleRedo}
-          cursorRef={cursorRef}
-          pendingCursorRef={pendingCursorRef}
-          activeLines={activeLines} 
-        />
-        <VariableTracker state={activeState} isHistorical={false} />
-        <ThreadScheduler threads={activeState?.threads || []} />
-        <EventLog logs={logs} />
+
+      <main className="main-content" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+
+        <Group orientation="vertical" style={{ flex: 1 }}>
+
+          <Panel defaultSize={75} minSize={20}>
+            <Group orientation="horizontal">
+
+              {!floatedPanels.code && (
+                <Panel defaultSize={60} minSize={20}>
+                  {renderCodeEditor()}
+                </Panel>
+              )}
+
+              {!floatedPanels.code && !floatedPanels.vars && (
+                <Separator className="resize-handle-v" />
+              )}
+
+              {!floatedPanels.vars && (
+                <Panel defaultSize={40} minSize={20}>
+                  {renderVars()}
+                </Panel>
+              )}
+
+            </Group>
+          </Panel>
+
+          {!floatedPanels.timeline && (!floatedPanels.code || !floatedPanels.vars) && (
+            <Separator className="resize-handle-h" />
+          )}
+
+          {!floatedPanels.timeline && (
+            <Panel defaultSize={25} minSize={10}>
+              {renderTimeline()}
+            </Panel>
+          )}
+
+        </Group>
+
       </main>
+
+      {floatedPanels.code && (
+        <FloatingWindow
+          title="Código Fuente"
+          onClose={() => toggleFloat('code')}
+          defaultWidth={600}
+          defaultHeight={500}
+          zIndex={getZIndex('code')}
+          onFocus={() => setFocusedWindow('code')}
+        >
+          {renderCodeEditor(true)}
+        </FloatingWindow>
+      )}
+
+      {floatedPanels.vars && (
+        <FloatingWindow
+          title="Variables y Semáforos"
+          onClose={() => toggleFloat('vars')}
+          defaultWidth={450}
+          defaultHeight={600}
+          zIndex={getZIndex('vars')}
+          onFocus={() => setFocusedWindow('vars')}
+        >
+          {renderVars(true)}
+        </FloatingWindow>
+      )}
+
+      {floatedPanels.timeline && (
+        <FloatingWindow
+          title="Timeline de Ejecución"
+          onClose={() => toggleFloat('timeline')}
+          defaultWidth={800}
+          defaultHeight={300}
+          zIndex={getZIndex('timeline')}
+          onFocus={() => setFocusedWindow('timeline')}
+        >
+          {renderTimeline(true)}
+        </FloatingWindow>
+      )}
+
     </div>
   );
 }
