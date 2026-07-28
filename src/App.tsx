@@ -175,10 +175,14 @@ function App() {
           }
         }
       }
+      // Si está READY pero su próxima instrucción va a bloquearse apenas le toque el turno
+      // (semáforo ya en 0), lo mostramos como bloqueado para no sugerir que sigue "corriendo".
+      const effectiveState = t.state === 'READY' && (t as any).pendingBlocked ? 'BLOCKED' : t.state;
+
       return {
         line: (t as any).activeLine as number,
         color: t.color,
-        state: t.state,
+        state: effectiveState,
         name: t.name,
         blockedResource
       };

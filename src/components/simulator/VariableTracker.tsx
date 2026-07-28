@@ -145,7 +145,7 @@ const VariableCard = ({
             <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', backgroundColor: data.lastModifiedBy.color, marginRight: 4, verticalAlign: 'middle' }} />
             modificado por <span style={{ color: data.lastModifiedBy.color, fontWeight: 600 }}>{data.lastModifiedBy.name}</span>
             {data.previousValue !== undefined && JSON.stringify(data.value) !== JSON.stringify(data.previousValue) && (
-              <span style={{ opacity: 0.7, wordBreak: 'break-all' }}> · antes: {formatHistVal(data.previousValue)}</span>
+              <span style={{ opacity: 0.7, wordBreak: 'break-all' }}> · valor anterior: {formatHistVal(data.previousValue)}</span>
             )}
           </span>
         ) : (

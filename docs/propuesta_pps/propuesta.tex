@@ -1,0 +1,215 @@
+% ============================================================
+% Propuesta de PPS - "Simulador Concurrente"
+% Federico Dobal - Analista en TIC, Facultad de Informatica UNLP
+%
+% Como compilar: cualquier distribucion TeX (pdflatex) o subir el
+% .tex directo a Overleaf, ahi compila sin instalar nada.
+%
+% Las capturas van en recorrido_visual.tex: reemplazar los
+% recuadros grises "PLACEHOLDER" por \includegraphics, poniendo
+% los archivos de imagen en esta misma carpeta.
+% ============================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.rounded}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\definecolor{unlpblue}{HTML}{1B3B6F}
+\definecolor{boxgray}{HTML}{F4F5F7}
+\definecolor{boxline}{HTML}{C9CDD3}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=unlpblue,
+    urlcolor=unlpblue,
+    pdftitle={Propuesta PPS - Simulador Concurrente},
+    pdfauthor={Federico Dobal}
+}
+
+\titleformat{\section}{\large\bfseries\color{unlpblue}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{unlpblue}}{\thesubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.7em}
+\titlespacing*{\subsection}{0pt}{1.1em}{0.5em}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\begin{document}
+
+% ---------- Portada / encabezado ----------
+\begin{center}
+    {\Large\bfseries\color{unlpblue} Simulador Concurrente}\\[0.3em]
+    {\large Propuesta de Práctica Profesional Supervisada}\\[0.6em]
+    {\normalsize Carrera Analista en TIC --- Facultad de Informática, UNLP}
+\end{center}
+
+\vspace{0.8em}
+
+\begin{tabular}{ll}
+    \textbf{Alumno:} & Federico Dobal \\
+    \textbf{Destinatario:} & Prof. Franco Chichizola \\
+    \textbf{Fecha:} & 28 de julio de 2026 \\
+    \textbf{Demo en vivo:} & \url{https://simulador-concurrente.vercel.app/}
+\end{tabular}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ---------- Introducción ----------
+\section{Introducción}
+
+Este documento acompaña una demostración en vivo de \textbf{Simulador Concurrente}, una
+herramienta pensada para escribir y ejecutar programas concurrentes directamente desde el
+navegador. La idea es proponerlo como tema de Práctica Profesional Supervisada: ya existe
+un desarrollo funcional (el que se muestra en la demo), y lo que se busca es continuar su
+evolución --- nuevas construcciones del lenguaje, mejoras en la visualización, casos de
+prueba guiados --- bajo la supervisión de la cátedra.
+
+% ---------- Motivación ----------
+\section{Motivación}
+
+Durante la cursada de Programación Concurrente es habitual notar la falta de herramientas
+para probar y verificar la correctitud de un programa concurrente antes de entregarlo. Los
+ejercicios se resuelven en un pseudocódigo que, aunque sigue las convenciones de la
+cátedra, termina siendo bastante subjetivo a quien lo escribe: no hay forma de correrlo y
+ver si realmente funciona.
+
+A eso se suma que razonar sobre exclusión mutua, semáforos o barreras exige imaginar
+simultáneamente varios hilos avanzando en un orden que no se puede predecir. Es un
+ejercicio mental que cuesta hacer únicamente sobre el papel, y donde una condición de
+carrera puede pasar completamente desapercibida hasta que alguien la señala.
+
+Simulador Concurrente busca achicar esa brecha: se escribe el pseudocódigo tal como se
+define en la cátedra, se ejecuta paso a paso y se observa en tiempo real cómo evoluciona
+cada hilo, cada variable compartida y cada estructura de datos.
+
+% ---------- Descripción ----------
+\section{Descripción del simulador}
+
+Es una aplicación web de una sola página, construida en React 19 y TypeScript sobre Vite.
+No depende de ningún servidor: todo el análisis y la ejecución del pseudocódigo ocurren en
+el propio navegador, lo que la hace liviana y fácil de usar en una clase o un TP sin
+instalar nada.
+
+El lenguaje soportado cubre lo que normalmente aparece en los ejercicios de la materia:
+variables (\texttt{int}, \texttt{boolean}, \texttt{double}, \texttt{text}), semáforos y
+arreglos de semáforos, colas FIFO, procesos parametrizados (\texttt{process P[i: 0..4]}
+para instanciar varios hilos de una), bloques atómicos, espera condicional
+(\texttt{await}, la base para monitores) y las estructuras de control usuales
+(\texttt{if}, \texttt{while}, \texttt{for}).
+
+\begin{tcolorbox}[colback=boxgray, colframe=boxline, boxrule=0.5pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt]
+\texttt{\footnotesize
+sem mutex = 1;\\
+int comensales = 0;\\[2pt]
+process Filosofo[i: 0..4] \{\\
+\phantom{xx}< await(comensales < 4) comensales++; >\\
+\phantom{xx}P(mutex);\\
+\phantom{xx}\ldots\\
+\phantom{xx}V(mutex);\\
+\}
+}
+\end{tcolorbox}
+
+\subsection{Arquitectura del proyecto}
+
+El código se organiza en dos capas bien separadas: un \textbf{motor de simulación} que no
+sabe nada de interfaces gráficas (podría reutilizarse tal cual en otro contexto), y una
+\textbf{interfaz} en React que se limita a mostrar lo que el motor va calculando.
+
+\subsubsection*{Motor de simulación (\texttt{src/engine})}
+
+Al presionar ``Ejecutar'', el código pasa por tres etapas antes de empezar a correr:
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=0.9cm and 1.1cm,
+    box/.style={draw=unlpblue, thick, rounded corners=3pt, fill=boxgray,
+                minimum height=1.1cm, minimum width=2.5cm, align=center, font=\small},
+    lbl/.style={font=\scriptsize\itshape, color=unlpblue!70!black}
+]
+    \node[box] (src)  {Código\\fuente};
+    \node[box, right=of src]  (lex)  {Lexer};
+    \node[box, right=of lex]  (par)  {Parser};
+    \node[box, right=of par]  (vm)   {Máquina\\virtual};
+
+    \draw[-{Latex[length=2mm]}, unlpblue] (src) -- (lex) node[midway, above, lbl] {tokenize()};
+    \draw[-{Latex[length=2mm]}, unlpblue] (lex) -- (par) node[midway, above, lbl] {Token[]};
+    \draw[-{Latex[length=2mm]}, unlpblue] (par) -- (vm)  node[midway, above, lbl] {AST};
+\end{tikzpicture}
+\end{center}
+
+El \emph{lexer} convierte el texto en una lista de tokens (números, identificadores,
+palabras clave, operadores), descartando espacios y comentarios. El \emph{parser} arma con
+eso un árbol de sintaxis tipado, distinguiendo declaraciones globales, sentencias dentro de
+un proceso y definiciones de proceso. Y la \emph{máquina virtual} interpreta ese árbol
+directamente, sin compilar a ningún otro lenguaje intermedio.
+
+Lo más interesante pasa ahí: en cada paso de la simulación, la máquina virtual baraja los
+hilos que están listos para correr y elige uno al azar (incluso dejando que algún hilo
+``pierda el turno'' de vez en cuando), para que la ejecución se sienta tan no determinística
+como la de hilos reales. Los semáforos bloquean y despiertan hilos en orden FIFO, los
+bloques atómicos se ejecutan de un tirón, y cada paso relevante queda registrado con una
+foto completa del estado --- lo que permite después recorrer la ejecución hacia adelante y
+hacia atrás sin tener que volver a correr nada.
+
+\subsubsection*{Interfaz de usuario (\texttt{src/components})}
+
+Del lado visual la cosa es más simple: un editor de código con indentación automática y
+deshacer/rehacer, un panel que muestra el estado en vivo de cada hilo, variable y semáforo,
+y una línea de tiempo estilo diagrama de Gantt donde se ve qué hizo cada proceso a lo largo
+de la ejecución. Nada más --- la gracia está en que todo se actualiza solo, sin que el
+usuario tenga que ir refrescando nada a mano.
+
+\subsection{Recorrido visual}
+
+% ------------------------------------------------------------
+% Reemplazar cada recuadro por \includegraphics[width=\linewidth]{archivo.png}
+% ------------------------------------------------------------
+
+\textbf{Editor de código}
+
+\begin{center}
+\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
+CAPTURA --- editor con el pseudocódigo cargado
+}}
+\end{center}
+
+\textbf{Panel de estado en vivo}
+
+\begin{center}
+\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
+CAPTURA --- hilos, variables y semáforos durante la ejecución
+}}
+\end{center}
+
+\textbf{Línea de tiempo}
+
+\begin{center}
+\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
+CAPTURA --- diagrama de Gantt de la ejecución
+}}
+\end{center}
+
+\vspace{1.5em}
+\hrule
+\vspace{0.8em}
+
+\begin{center}
+\small La demo completa está disponible en \url{https://simulador-concurrente.vercel.app/}
+\end{center}
+
+\end{document}

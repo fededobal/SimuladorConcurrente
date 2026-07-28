@@ -111,6 +111,7 @@ export const Timeline: React.FC<TimelineProps> = ({ logs, threads, onPopOut }) =
                   {(() => {
                     let blocks: any[] = [];
                     let currentState = 'READY'; // Track state across steps
+                    let pendingBlocked = false; // READY thread that would block instantly (semaphore already exhausted)
 
                     visibleSteps.forEach((step, idx) => {
                       if (step.stepIndex > maxStepIndex) {
@@ -129,13 +130,18 @@ export const Timeline: React.FC<TimelineProps> = ({ logs, threads, onPopOut }) =
 
                       if (latestLog) {
                         const snapshotThread = latestLog.snapshot.threads.find(x => x.id === t.id);
-                        if (snapshotThread) currentState = snapshotThread.state;
+                        if (snapshotThread) {
+                          currentState = snapshotThread.state;
+                          pendingBlocked = !!snapshotThread.pendingBlocked;
+                        }
                       }
 
                       // En multiprocesador, un hilo que no está bloqueado ni terminado, siempre se está ejecutando (aunque tome más ciclos).
+                      // Excepción: si su próxima instrucción es P(sem) y sem ya está en 0, va a bloquearse
+                      // apenas le toque el turno, así que ya lo mostramos como bloqueado en vez de "ejecutando".
                       let displayState = currentState;
                       if (displayState === 'READY') {
-                        displayState = 'RUNNING';
+                        displayState = pendingBlocked ? 'BLOCKED' : 'RUNNING';
                       }
 
                       const isLatest = idx === visibleSteps.length - 1;

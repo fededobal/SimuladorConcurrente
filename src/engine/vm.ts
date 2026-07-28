@@ -31,6 +31,7 @@ export interface Thread {
   localEnv: Record<string, unknown>;
   onTerminate?: () => void;
   activeLine?: number; // Line currently being executed or just executed
+  pendingBlocked?: boolean; // READY thread whose next instruction would block right now (semaphore already exhausted)
 }
 
 export interface VMState {
@@ -90,8 +91,26 @@ export class VirtualMachine {
           : (t.activeLine !== undefined
             ? t.activeLine
             : (t.instructionStack.length > 0 ? (t.instructionStack[0] as any).line : undefined)),
+        pendingBlocked: t.state === 'READY' ? this.wouldBlockNow(t) : false,
       }))
     };
+  }
+
+  // A READY thread whose next instruction is P(sem) on an already-exhausted semaphore
+  // is guaranteed to block the instant it gets scheduled, even if it hasn't run yet
+  // this tick (e.g. it "missed" its cycle). Used so the UI doesn't show it as if it
+  // were freely executing/racing when the outcome is already decided.
+  private wouldBlockNow(thread: Thread): boolean {
+    if (thread.instructionStack.length === 0) return false;
+    const stmt = thread.instructionStack[0] as any;
+    if (stmt.type !== 'PVOp' || stmt.operation !== 'P') return false;
+    let targetName = stmt.target;
+    if (stmt.arrayIdx !== undefined) {
+      const idx = Number(this.evaluateExpr(stmt.arrayIdx, thread));
+      targetName = `${stmt.target}[${idx}]`;
+    }
+    const sem = this.semaphores[targetName];
+    return !!sem && sem.value <= 0;
   }
 
   private evaluateExpr(expr: string, thread: Thread | null): unknown {
@@ -372,7 +391,7 @@ export class VirtualMachine {
     this.currentStepIndex++;
 
     const readyThreads = this.threads.filter(t => t.state === 'READY');
-    
+
     if (readyThreads.length === 0) {
       if (!this.isFinished() && !this.logs.find(l => l.resource === 'DEADLOCK')) {
         this.addLog(0, undefined, 'DEADLOCK', 'Todos los hilos bloqueados (Deadlock).');
@@ -392,13 +411,12 @@ export class VirtualMachine {
 
       if (thread.instructionStack.length === 0) {
         thread.state = 'TERMINATED';
+        // Sin este log, el instante de terminación no queda registrado en ningún
+        // snapshot: la Timeline (que reconstruye el estado por instante a partir
+        // de los logs) repetiría el último estado conocido (READY -> "ejecutando")
+        // un tick de más antes de reflejar que el hilo ya terminó.
+        this.addLog(thread.id, thread.color, 'TERMINATED', thread.name + ': proceso terminado');
         if (thread.onTerminate) thread.onTerminate();
-        continue;
-      }
-
-      // Simulate processor speed difference: 20% chance to "miss" this CPU cycle
-      if (Math.random() < 0.2 && readyThreads.length > 1) {
-        // It just stays READY and doesn't execute an instruction this tick
         continue;
       }
 
@@ -408,7 +426,7 @@ export class VirtualMachine {
 
       const stmt = thread.instructionStack.shift()!;
       thread.activeLine = (stmt as any).line;
-      
+
       this.executeStatement(stmt, thread, false);
 
       // If it didn't block or terminate, it goes back to READY for the next global step
@@ -509,12 +527,12 @@ export class VirtualMachine {
         }
         const vals = stmt.elementExprs.map((expr: string) => this.evaluateExpr(expr, thread));
         const valToPush = vals.length === 1 ? vals[0] : vals;
-        
+
         const arr = [...(this.variables[stmt.target].value as unknown[])];
         const prevArr = [...arr];
         arr.push(valToPush);
         this.variables[stmt.target] = { ...this.variables[stmt.target], value: arr, previousValue: prevArr, lastModifiedBy: { id: thread.id, name: thread.name, color: thread.color } };
-        
+
         const valStr = vals.length === 1 ? String(vals[0]) : `[${vals.map(String).join(',')}]`;
         if (!isAtomic) this.addLog(thread.id, thread.color, stmt.target, thread.name + ': push(' + stmt.target + ', ' + valStr + ')');
         break;
@@ -584,7 +602,6 @@ export class VirtualMachine {
             this.addLog(thread.id, thread.color, sem.name, thread.name + ': P(' + sem.name + ') BLOQUEADO (valor=0)');
           }
         } else {
-          sem.lastModifiedBy = { id: thread.id, name: thread.name, color: thread.color };
           if (sem.blockedQueue.length > 0) {
             const woken = sem.blockedQueue.shift()!;
             const wokenThread = this.threads.find(t => t.id === woken.id);
@@ -597,9 +614,14 @@ export class VirtualMachine {
                 }
               }
             }
+            // El hand-off transfiere la posesión del semáforo directamente al hilo
+            // despertado (su P() se resuelve sin pasar por un valor intermedio), asi
+            // que pasa a ser el nuevo último modificador, no quien llamó a V().
+            sem.lastModifiedBy = { id: woken.id, name: woken.name, color: woken.color };
             this.addLog(thread.id, thread.color, sem.name, thread.name + ': V(' + sem.name + ') => despierta ' + woken.name);
           } else {
             sem.value++;
+            sem.lastModifiedBy = { id: thread.id, name: thread.name, color: thread.color };
             this.addLog(thread.id, thread.color, sem.name, thread.name + ': V(' + sem.name + '). Valor: ' + sem.value);
           }
         }
