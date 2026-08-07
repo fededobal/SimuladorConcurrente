@@ -39,7 +39,7 @@ function buildVarHistory(logs: LogEntry[], varName: string, maxEntries = 4): Cha
       });
     }
   }
-  return changes.slice(-maxEntries);
+  return changes.slice(-maxEntries).reverse();
 }
 
 // ─── Pop-out button (shared) ────────────────────────────────────────────
