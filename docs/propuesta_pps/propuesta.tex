@@ -1,13 +1,9 @@
 % ============================================================
-% Propuesta de PPS - "Simulador Concurrente"
+% Propuesta de PPS - "Simulador de Monitores"
 % Federico Dobal - Analista en TIC, Facultad de Informatica UNLP
 %
 % Como compilar: cualquier distribucion TeX (pdflatex) o subir el
-% .tex directo a Overleaf, ahi compila sin instalar nada.
-%
-% Las capturas van en recorrido_visual.tex: reemplazar los
-% recuadros grises "PLACEHOLDER" por \includegraphics, poniendo
-% los archivos de imagen en esta misma carpeta.
+% .tex directo a Overleaf.
 % ============================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -34,7 +30,7 @@
     colorlinks=true,
     linkcolor=unlpblue,
     urlcolor=unlpblue,
-    pdftitle={Propuesta PPS - Simulador Concurrente},
+    pdftitle={Propuesta PPS - Simulador de Monitores},
     pdfauthor={Federico Dobal}
 }
 
@@ -48,9 +44,9 @@
 
 \begin{document}
 
-% ---------- Portada / encabezado ----------
+% ---------- Portada ----------
 \begin{center}
-    {\Large\bfseries\color{unlpblue} Simulador Concurrente}\\[0.3em]
+    {\Large\bfseries\color{unlpblue} Simulador de Monitores}\\[0.3em]
     {\large Propuesta de Práctica Profesional Supervisada}\\[0.6em]
     {\normalsize Carrera Analista en TIC --- Facultad de Informática, UNLP}
 \end{center}
@@ -59,9 +55,10 @@
 
 \begin{tabular}{ll}
     \textbf{Alumno:} & Federico Dobal \\
-    \textbf{Destinatario:} & Prof. Franco Chichizola \\
-    \textbf{Fecha:} & 28 de julio de 2026 \\
-    \textbf{Demo en vivo:} & \url{https://simulador-concurrente.vercel.app/}
+    \textbf{Director:} & Lic. Leandro (por confirmar) \\
+    \textbf{Coordinador:} & Sebastián Dapoto \\
+    \textbf{Fecha:} & (por completar) \\
+    \textbf{Plazo estimado:} & 6 meses (límite marzo/abril 2027) \\
 \end{tabular}
 
 \vspace{1em}
@@ -71,145 +68,119 @@
 % ---------- Introducción ----------
 \section{Introducción}
 
-Este documento acompaña una demostración en vivo de \textbf{Simulador Concurrente}, una
-herramienta pensada para escribir y ejecutar programas concurrentes directamente desde el
-navegador. La idea es proponerlo como tema de Práctica Profesional Supervisada: ya existe
-un desarrollo funcional (el que se muestra en la demo), y lo que se busca es continuar su
-evolución --- nuevas construcciones del lenguaje, mejoras en la visualización, casos de
-prueba guiados --- bajo la supervisión de la cátedra.
+Se propone como tema de Práctica Profesional Supervisada el desarrollo de un
+\textbf{prototipo de herramienta de simulación de monitores} para la materia Programación
+Concurrente. La herramienta permite escribir pseudocódigo con monitores y variables
+condición, ejecutarlo de forma controlada y observar visualmente su comportamiento
+concurrente.
+
+Existe una versión previa de este trabajo orientada a \emph{semáforos}; a partir de la
+reunión con la dirección se redefinió el alcance para centrarlo \textbf{exclusivamente en
+monitores}, reescribiendo el núcleo. El prototipo no pretende ser la versión final de
+cátedra: busca ser una base clara y extensible para que futuros alumnos la continúen, y
+eventualmente el punto de partida de una tesina de Licenciatura.
 
 % ---------- Motivación ----------
 \section{Motivación}
 
-Durante la cursada de Programación Concurrente es habitual notar la falta de herramientas
-para probar y verificar la correctitud de un programa concurrente antes de entregarlo. Los
-ejercicios se resuelven en un pseudocódigo que, aunque sigue las convenciones de la
-cátedra, termina siendo bastante subjetivo a quien lo escribe: no hay forma de correrlo y
-ver si realmente funciona.
+Durante la cursada es habitual la falta de herramientas para \emph{probar} un programa
+concurrente antes de entregarlo. Los ejercicios se resuelven en un pseudocódigo que no se
+puede ejecutar, y razonar sobre exclusión mutua y sincronización por condición exige
+imaginar varios procesos avanzando en un orden impredecible --- un ejercicio mental difícil
+de hacer sobre papel, donde un error de sincronización puede pasar desapercibido.
 
-A eso se suma que razonar sobre exclusión mutua, semáforos o barreras exige imaginar
-simultáneamente varios hilos avanzando en un orden que no se puede predecir. Es un
-ejercicio mental que cuesta hacer únicamente sobre el papel, y donde una condición de
-carrera puede pasar completamente desapercibida hasta que alguien la señala.
-
-Simulador Concurrente busca achicar esa brecha: se escribe el pseudocódigo tal como se
-define en la cátedra, se ejecuta paso a paso y se observa en tiempo real cómo evoluciona
-cada hilo, cada variable compartida y cada estructura de datos.
+Los monitores agregan una dificultad propia: la exclusión mutua es \emph{implícita} y la
+disciplina de señalización (\emph{signal and continue}) hace que, entre un \texttt{signal} y
+el momento en que el proceso despertado realmente reanuda, el estado del monitor pueda haber
+cambiado. Ver esto en acción --- las colas de las variables condición, los procesos
+compitiendo por reingresar --- ayuda a entender por qué las condiciones se reevalúan en un
+\texttt{while} y no en un \texttt{if}.
 
 % ---------- Descripción ----------
-\section{Descripción del simulador}
+\section{Descripción del sistema}
 
-Es una aplicación web de una sola página, construida en React 19 y TypeScript sobre Vite.
-No depende de ningún servidor: todo el análisis y la ejecución del pseudocódigo ocurren en
-el propio navegador, lo que la hace liviana y fácil de usar en una clase o un TP sin
-instalar nada.
+Aplicación \textbf{cliente-servidor}:
 
-El lenguaje soportado cubre lo que normalmente aparece en los ejercicios de la materia:
-variables (\texttt{int}, \texttt{boolean}, \texttt{double}, \texttt{text}), semáforos y
-arreglos de semáforos, colas FIFO, procesos parametrizados (\texttt{process P[i: 0..4]}
-para instanciar varios hilos de una), bloques atómicos, espera condicional
-(\texttt{await}, la base para monitores) y las estructuras de control usuales
-(\texttt{if}, \texttt{while}, \texttt{for}).
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Núcleo (backend).} Implementado en \textbf{Java} sobre Spring Boot. Contiene
+        el analizador léxico, el sintáctico, el validador semántico y la \textbf{máquina
+        virtual de monitores}, más una API REST que crea simulaciones y las hace avanzar
+        instante a instante. El núcleo no depende del framework web y es testeable de forma
+        aislada.
+  \item \textbf{Interfaz (frontend).} Aplicación web en React y TypeScript. Editor de
+        código con resaltado, panel de monitores (variables permanentes, colas de las
+        variables condición, cola de entrada, dueño del \emph{lock}), lista de procesos,
+        línea de tiempo instante a instante e historial de eventos con \emph{time-travel}.
+\end{itemize}
+
+\subsection{El lenguaje}
+
+Pseudocódigo tipado estilo C, fiel a la notación de la cátedra:
 
 \begin{tcolorbox}[colback=boxgray, colframe=boxline, boxrule=0.5pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt]
 \texttt{\footnotesize
-sem mutex = 1;\\
-int comensales = 0;\\[2pt]
-process Filosofo[i: 0..4] \{\\
-\phantom{xx}< await(comensales < 4) comensales++; >\\
-\phantom{xx}P(mutex);\\
-\phantom{xx}\ldots\\
-\phantom{xx}V(mutex);\\
-\}
+monitor Buffer \{\\
+\phantom{xx}int dato = 0;\ boolean hayDato = false;\\
+\phantom{xx}cond libre, ocupado;\\[2pt]
+\phantom{xx}procedure depositar(d: in int) \{\\
+\phantom{xxxx}while (hayDato) wait(libre);\\
+\phantom{xxxx}dato = d;\ hayDato = true;\\
+\phantom{xxxx}signal(ocupado);\\
+\phantom{xx}\}\\
+\phantom{xx}procedure retirar(r: out int) \{ \ldots \}\\
+\}\\[2pt]
+process Productor \{ int i = 1; while (i <= 5) \{ Buffer.depositar(i); i++; \} \}
 }
 \end{tcolorbox}
 
-\subsection{Arquitectura del proyecto}
+\begin{itemize}[leftmargin=1.4em]
+  \item Solo monitores. Exclusión mutua \textbf{implícita}; sincronización por condición
+        \textbf{explícita} con \texttt{wait}, \texttt{signal}, \texttt{signal\_all}.
+  \item Disciplina única: \emph{signal and continue}. Sin \emph{signal and wait} ni
+        \texttt{wait} con prioridad.
+  \item Todo el estado compartido vive dentro de un monitor; fuera solo se permiten
+        constantes globales.
+  \item \texttt{process}, familias \texttt{process P[i: 0..N]}, \texttt{if}/\texttt{while}/
+        \texttt{for}, tipos \texttt{int}/\texttt{double}/\texttt{boolean}/\texttt{text} y
+        colas FIFO. Parámetros \texttt{in}/\texttt{out}/\texttt{inout}.
+\end{itemize}
 
-El código se organiza en dos capas bien separadas: un \textbf{motor de simulación} que no
-sabe nada de interfaces gráficas (podría reutilizarse tal cual en otro contexto), y una
-\textbf{interfaz} en React que se limita a mostrar lo que el motor va calculando.
+\subsection{Funcionalidades del simulador}
 
-\subsubsection*{Motor de simulación (\texttt{src/engine})}
+\begin{itemize}[leftmargin=1.4em]
+  \item Compilación con reporte de errores por número de línea.
+  \item Ejecución \textbf{paso a paso} y \textbf{completa}, con velocidad configurable.
+  \item No determinismo controlado: política \emph{aleatoria} o \emph{round-robin}, y en modo
+        paso a paso el usuario elige qué proceso ejecuta el próximo instante.
+  \item Línea de tiempo horizontal: qué hizo cada proceso en cada instante, sin backtracking
+        de la simulación (pero con \emph{time-travel} de solo lectura por \emph{hover}).
+  \item Identificación de cada instancia de proceso por nombre e ID, con color propio; ocre
+        para el estado bloqueado.
+  \item Detección de \emph{deadlock} de ejecución.
+\end{itemize}
 
-Al presionar ``Ejecutar'', el código pasa por tres etapas antes de empezar a correr:
+En esta versión no se verifican las cuatro propiedades de la sección crítica.
 
-\begin{center}
-\begin{tikzpicture}[
-    node distance=0.9cm and 1.1cm,
-    box/.style={draw=unlpblue, thick, rounded corners=3pt, fill=boxgray,
-                minimum height=1.1cm, minimum width=2.5cm, align=center, font=\small},
-    lbl/.style={font=\scriptsize\itshape, color=unlpblue!70!black}
-]
-    \node[box] (src)  {Código\\fuente};
-    \node[box, right=of src]  (lex)  {Lexer};
-    \node[box, right=of lex]  (par)  {Parser};
-    \node[box, right=of par]  (vm)   {Máquina\\virtual};
+% ---------- Alcance y entregables ----------
+\section{Alcance y entregables}
 
-    \draw[-{Latex[length=2mm]}, unlpblue] (src) -- (lex) node[midway, above, lbl] {tokenize()};
-    \draw[-{Latex[length=2mm]}, unlpblue] (lex) -- (par) node[midway, above, lbl] {Token[]};
-    \draw[-{Latex[length=2mm]}, unlpblue] (par) -- (vm)  node[midway, above, lbl] {AST};
-\end{tikzpicture}
-\end{center}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Núcleo Java (lexer, parser, validador, VM de monitores) con pruebas automatizadas
+        sobre los ejemplos de la teoría.
+  \item API REST y frontend web funcionales.
+  \item Documentación: teoría de monitores, especificación de sintaxis con gramática EBNF,
+        SRS (IEEE 830) y código fuente limpio y comentado para facilitar su continuación.
+  \item Informe técnico final (aprox. 20 páginas).
+\end{enumerate}
 
-El \emph{lexer} convierte el texto en una lista de tokens (números, identificadores,
-palabras clave, operadores), descartando espacios y comentarios. El \emph{parser} arma con
-eso un árbol de sintaxis tipado, distinguiendo declaraciones globales, sentencias dentro de
-un proceso y definiciones de proceso. Y la \emph{máquina virtual} interpreta ese árbol
-directamente, sin compilar a ningún otro lenguaje intermedio.
+\subsection{Proceso formal}
 
-Lo más interesante pasa ahí: en cada paso de la simulación, la máquina virtual baraja los
-hilos que están listos para correr y elige uno al azar (incluso dejando que algún hilo
-``pierda el turno'' de vez en cuando), para que la ejecución se sienta tan no determinística
-como la de hilos reales. Los semáforos bloquean y despiertan hilos en orden FIFO, los
-bloques atómicos se ejecutan de un tirón, y cada paso relevante queda registrado con una
-foto completa del estado --- lo que permite después recorrer la ejecución hacia adelante y
-hacia atrás sin tener que volver a correr nada.
-
-\subsubsection*{Interfaz de usuario (\texttt{src/components})}
-
-Del lado visual la cosa es más simple: un editor de código con indentación automática y
-deshacer/rehacer, un panel que muestra el estado en vivo de cada hilo, variable y semáforo,
-y una línea de tiempo estilo diagrama de Gantt donde se ve qué hizo cada proceso a lo largo
-de la ejecución. Nada más --- la gracia está en que todo se actualiza solo, sin que el
-usuario tenga que ir refrescando nada a mano.
-
-\subsection{Recorrido visual}
-
-% ------------------------------------------------------------
-% Reemplazar cada recuadro por \includegraphics[width=\linewidth]{archivo.png}
-% ------------------------------------------------------------
-
-\textbf{Editor de código}
-
-\begin{center}
-\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
-CAPTURA --- editor con el pseudocódigo cargado
-}}
-\end{center}
-
-\textbf{Panel de estado en vivo}
-
-\begin{center}
-\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
-CAPTURA --- hilos, variables y semáforos durante la ejecución
-}}
-\end{center}
-
-\textbf{Línea de tiempo}
-
-\begin{center}
-\fbox{\parbox[c][5cm][c]{0.9\linewidth}{\centering\color{gray}\itshape
-CAPTURA --- diagrama de Gantt de la ejecución
-}}
-\end{center}
+Propuesta a la coordinación (Sebastián Dapoto) $\rightarrow$ mesa de entradas $\rightarrow$
+Comisión de Enseñanza $\rightarrow$ Consejo Directivo. Al finalizar, el informe técnico
+sigue el mismo circuito de aprobación. La implementación puede avanzar en paralelo a la
+aprobación de la propuesta.
 
 \vspace{1.5em}
 \hrule
-\vspace{0.8em}
-
-\begin{center}
-\small La demo completa está disponible en \url{https://simulador-concurrente.vercel.app/}
-\end{center}
 
 \end{document}
