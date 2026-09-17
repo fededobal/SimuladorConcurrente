@@ -1,38 +1,35 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiRequestError } from './api';
-import type { LogEntry, SchedulingPolicy, Snapshot } from './types';
+import type { Snapshot } from './types';
 
 export type SimStatus =
-  | 'idle'
-  | 'ready'
-  | 'running'
-  | 'paused'
-  | 'finished'
-  | 'deadlock'
-  | 'error';
+  | 'idle' | 'ready' | 'running' | 'paused' | 'finished' | 'deadlock' | 'error';
 
 export interface SimError {
   message: string;
   line: number | null;
 }
 
-const SPEEDS = [1500, 1000, 500, 200] as const;
+export const SPEEDS = [1200, 600, 300, 120] as const;
 
 export function useSimulation(initialCode: string) {
-  const [code, setCode] = useState(initialCode);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [entries, setEntries] = useState<LogEntry[]>([]);
+  const [code, setCodeState] = useState(initialCode);
+  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [status, setStatus] = useState<SimStatus>('idle');
   const [error, setError] = useState<SimError | null>(null);
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [policy, setPolicy] = useState<SchedulingPolicy>('RANDOM');
-  const [speed, setSpeed] = useState<number>(1000);
+  const [speed, setSpeed] = useState<number>(600);
 
   const sessionRef = useRef<string | null>(null);
-  const timerRef = useRef<number | null>(null);
   const statusRef = useRef<SimStatus>('idle');
+  const timerRef = useRef<number | null>(null);
   const busyRef = useRef(false);
   statusRef.current = status;
+
+  // statusRef se actualiza en el acto: los callbacks async lo leen antes de re-renderizar
+  const setStat = (s: SimStatus) => {
+    statusRef.current = s;
+    setStatus(s);
+  };
 
   const clearTimer = () => {
     if (timerRef.current !== null) {
@@ -41,173 +38,122 @@ export function useSimulation(initialCode: string) {
     }
   };
 
-  const liveIndex = entries.length - 1;
-  const viewIndex = hoverIndex ?? liveIndex;
-  const snapshot: Snapshot | null = entries[viewIndex]?.snapshot ?? null;
-  const isHistorical = hoverIndex !== null && hoverIndex !== liveIndex;
+  const drop = useCallback(() => {
+    clearTimer();
+    const id = sessionRef.current;
+    if (id) void api.remove(id);
+    sessionRef.current = null;
+    setSnapshot(null);
+    setError(null);
+    setStat('idle');
+  }, []);
+
+  // editar el codigo invalida la simulacion en curso
+  const setCode = useCallback((next: string) => {
+    setCodeState(next);
+    if (sessionRef.current || statusRef.current !== 'idle') drop();
+  }, [drop]);
 
   const compile = useCallback(async (): Promise<boolean> => {
     clearTimer();
     setError(null);
-    setHoverIndex(null);
     try {
       const created = await api.create(code);
       sessionRef.current = created.id;
-      setSessionId(created.id);
-      setEntries([created.initial]);
-      const next: SimStatus = created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready';
-      setStatus(next);
-      statusRef.current = next;
+      setSnapshot(created.initial.snapshot);
+      setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
       const err = e as ApiRequestError;
       setError({ message: err.message, line: err.line ?? null });
-      setStatus('error');
-      statusRef.current = 'error';
-      setEntries([]);
-      setSessionId(null);
       sessionRef.current = null;
+      setSnapshot(null);
+      setStat('error');
       return false;
     }
   }, [code]);
 
-  const doStep = useCallback(
-    async (chosenProcessId?: number): Promise<boolean> => {
-      const id = sessionRef.current;
-      if (!id || busyRef.current) return false;
-      busyRef.current = true;
-      try {
-        const res = await api.step(id, policy, chosenProcessId);
-        if (res.entries.length > 0) {
-          setEntries((prev) => [...prev, ...res.entries]);
-        }
-        if (res.deadlock) {
-          setStatus('deadlock');
-          clearTimer();
-          return false;
-        }
-        if (res.finished) {
-          setStatus('finished');
-          clearTimer();
-          return false;
-        }
-        return true;
-      } catch (e) {
-        const err = e as ApiRequestError;
-        setError({ message: err.message, line: err.line ?? null });
-        setStatus('error');
-        clearTimer();
-        return false;
-      } finally {
-        busyRef.current = false;
-      }
-    },
-    [policy],
-  );
+  const doStep = useCallback(async (): Promise<boolean> => {
+    const id = sessionRef.current;
+    if (!id || busyRef.current) return false;
+    busyRef.current = true;
+    try {
+      const res = await api.step(id, 'RANDOM');
+      const last = res.entries[res.entries.length - 1];
+      if (last) setSnapshot(last.snapshot);
+      if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
+      if (res.finished) { setStat('finished'); clearTimer(); return false; }
+      return true;
+    } catch (e) {
+      const err = e as ApiRequestError;
+      setError({ message: err.message, line: err.line ?? null });
+      setStat('error');
+      clearTimer();
+      return false;
+    } finally {
+      busyRef.current = false;
+    }
+  }, []);
 
-  const stepOnce = useCallback(
-    async (chosenProcessId?: number) => {
-      setHoverIndex(null);
-      if (statusRef.current === 'idle' || statusRef.current === 'error') {
-        if (!(await compile())) return;
-      }
-      if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
-      setStatus('paused');
-      statusRef.current = 'paused';
-      await doStep(chosenProcessId);
-    },
-    [compile, doStep],
-  );
-
-  const play = useCallback(async () => {
-    setHoverIndex(null);
+  const step = useCallback(async () => {
     if (statusRef.current === 'idle' || statusRef.current === 'error') {
       if (!(await compile())) return;
     }
     if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
-    setStatus('running');
-    statusRef.current = 'running';
+    clearTimer();
+    setStat('paused');
+    await doStep();
+  }, [compile, doStep]);
+
+  const play = useCallback(async () => {
+    if (statusRef.current === 'idle' || statusRef.current === 'error') {
+      if (!(await compile())) return;
+    }
+    if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
+    setStat('running');
     clearTimer();
     timerRef.current = window.setInterval(async () => {
       if (statusRef.current !== 'running') return;
-      const cont = await doStep();
-      if (!cont) clearTimer();
+      if (!(await doStep())) clearTimer();
     }, speed);
   }, [compile, doStep, speed]);
 
   const pause = useCallback(() => {
     clearTimer();
-    if (statusRef.current === 'running') setStatus('paused');
+    if (statusRef.current === 'running') setStat('paused');
   }, []);
 
   const reset = useCallback(async () => {
     clearTimer();
-    setHoverIndex(null);
     const id = sessionRef.current;
-    if (!id) {
-      await compile();
-      return;
-    }
+    if (!id) { await compile(); return; }
     try {
       const created = await api.reset(id);
-      setEntries([created.initial]);
+      setSnapshot(created.initial.snapshot);
       setError(null);
-      setStatus('ready');
+      setStat('ready');
     } catch {
       await compile();
     }
   }, [compile]);
 
-  const stop = useCallback(() => {
-    clearTimer();
-    setHoverIndex(null);
-    const id = sessionRef.current;
-    if (id) void api.remove(id);
-    sessionRef.current = null;
-    setSessionId(null);
-    setEntries([]);
-    setStatus('idle');
-    setError(null);
-  }, []);
-
   // reajusta el intervalo si cambia la velocidad mientras corre
   useEffect(() => {
-    if (statusRef.current === 'running') {
-      clearTimer();
-      timerRef.current = window.setInterval(async () => {
-        if (statusRef.current !== 'running') return;
-        const cont = await doStep();
-        if (!cont) clearTimer();
-      }, speed);
-    }
+    if (statusRef.current !== 'running') return;
+    clearTimer();
+    timerRef.current = window.setInterval(async () => {
+      if (statusRef.current !== 'running') return;
+      if (!(await doStep())) clearTimer();
+    }, speed);
     return clearTimer;
   }, [speed, doStep]);
 
   useEffect(() => () => clearTimer(), []);
 
   return {
-    code,
-    setCode,
-    sessionId,
-    entries,
-    status,
-    error,
-    policy,
-    setPolicy,
-    speed,
-    setSpeed,
-    speeds: SPEEDS,
-    snapshot,
-    viewIndex,
-    liveIndex,
-    hoverIndex,
-    setHoverIndex,
-    isHistorical,
-    compile,
-    stepOnce,
-    play,
-    pause,
-    reset,
-    stop,
+    code, setCode,
+    snapshot, status, error,
+    speed, setSpeed, speeds: SPEEDS,
+    play, pause, step, reset,
   };
 }

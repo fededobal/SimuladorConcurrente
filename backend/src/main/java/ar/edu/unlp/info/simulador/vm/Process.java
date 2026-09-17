@@ -1,5 +1,7 @@
 package ar.edu.unlp.info.simulador.vm;
 
+import ar.edu.unlp.info.simulador.lang.parser.ast.Stmt;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -82,8 +84,19 @@ public final class Process {
         return a.monitorName() + "." + a.procedureName();
     }
 
+    /**
+     * Linea en la que la UI debe mostrar al proceso. Una activacion recien creada
+     * (un procedure al que se acaba de entrar, o un proceso que todavia no ejecuto
+     * nada) no tiene linea propia: en ese caso se usa la de su proxima sentencia
+     * pendiente y, si tampoco la hay, la del marco que la llamo. Asi un proceso vivo
+     * nunca queda sin linea y no desaparece del editor.
+     */
     public int currentLine() {
-        Activation a = current();
-        return a == null ? -1 : a.currentLine();
+        for (Activation a : callStack) {
+            if (a.currentLine() > 0) return a.currentLine();
+            Stmt next = a.pending().peekFirst();
+            if (next != null && next.line() > 0) return next.line();
+        }
+        return -1;
     }
 }

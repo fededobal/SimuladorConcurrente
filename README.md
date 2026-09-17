@@ -30,6 +30,18 @@ snapshots que devuelve cada paso.
 
 Requisitos: **JDK 21+**, **Maven 3.9+**, **Node 20+**.
 
+### Todo junto
+
+```bash
+./dev.sh
+```
+
+Levanta backend (`:8080`) y frontend (`:5173`) en un solo comando; `Ctrl-C` corta los dos.
+Libera los puertos antes de arrancar y corre `npm install` la primera vez. Fija `JAVA_HOME`
+al JDK 21 de Homebrew (exportá tu propio `JAVA_HOME` para usar otro).
+
+### Por separado
+
 ```bash
 # 1) Backend  (http://localhost:8080)
 cd backend

@@ -38,14 +38,16 @@ de un monitor.
 - Declaración: `tipo nombre[tamaño];` o `tipo nombre[tamaño] = ([tamaño] valorInicial);`
 - El `tamaño` es una expresión constante (literal o constante global).
 - Acceso base 0: `buf[i]`, `buf[(i + 1) % N]`.
-- Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §4).
+- Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
+- Se declaran dentro de un monitor o como locales de un proceso, nunca como constante global.
 
 ### Cola (FIFO)
 
 - Declaración: `Cola nombre;`
 - `push(cola, elemento);` — encola al final. Se admite `push(cola, a, b)` (encola una tupla).
 - `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura
-  una tupla. `pop` sobre cola vaciá es error de ejecución.
+  una tupla; la cantidad de destinos debe coincidir con la de la tupla encolada. `pop` sobre
+  cola vacía es error de ejecución.
 - `empty cola` — expresión booleana, `true` si la cola no tiene elementos.
 
 ---
@@ -206,15 +208,16 @@ sentencia     = decl_local
 
 decl_local    = tipo ident [ "[" expr "]" ] [ "=" init_valor ] ";" ;
 asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
-inc_dec       = ident ( "++" | "--" ) ";" ;
+inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
 llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
 op_cola       = "push" "(" ident "," expr { "," expr } ")" ";"
               | "pop"  "(" ident "," ident { "," ident } ")" ";" ;
 condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
 mientras      = "while" "(" expr ")" cuerpo ;
-para          = "for" "(" tipo_escalar ident "=" expr ";" expr ";" inc_step ")" cuerpo
-              | "for" "(" tipo_escalar ident "=" expr ".." expr ")" cuerpo ;
+para          = "for" "(" iterador "=" expr ";" [ expr ] ";" inc_step ")" cuerpo
+              | "for" "(" iterador "=" expr ".." expr ")" cuerpo ;
+iterador      = [ tipo_escalar ] ident ;   (* con tipo lo declara; sin tipo reusa una variable *)
 inc_step      = ident ( "++" | "--" ) | ident "=" expr ;
 cuerpo        = bloque | sentencia ;
 args          = expr { "," expr } ;

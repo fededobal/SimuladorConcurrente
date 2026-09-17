@@ -1,17 +1,9 @@
 import { useMemo } from 'react';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import { Header } from './components/Header';
+import { Play, Pause, SkipForward, RotateCcw } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
-import { MonitorsPanel } from './components/MonitorsPanel';
-import { ProcessList } from './components/ProcessList';
-import { Timeline } from './components/Timeline';
-import { EventLog } from './components/EventLog';
-import { useSimulation } from './useSimulation';
+import { useSimulation, type SimStatus } from './useSimulation';
 
-const DEFAULT_CODE = `// Buffer de un dato entre un productor y un consumidor.
-// El monitor da exclusion mutua; 'libre' y 'ocupado' sincronizan por condicion.
-
-monitor Buffer {
+const DEFAULT_CODE = `monitor Buffer {
   int dato = 0;
   boolean hayDato = false;
   cond libre, ocupado;
@@ -41,13 +33,30 @@ process Productor {
 
 process Consumidor {
   int x = 0;
-  int recibidos = 0;
-  while (recibidos < 5) {
+  int n = 0;
+  while (n < 5) {
     Buffer.retirar(x);
-    recibidos++;
+    n++;
   }
 }
 `;
+
+const SPEED_LABEL: Record<number, string> = {
+  1200: 'lento',
+  600: 'normal',
+  300: 'rápido',
+  120: 'muy rápido',
+};
+
+const STATUS_LABEL: Record<SimStatus, string> = {
+  idle: '',
+  ready: 'listo',
+  running: 'ejecutando',
+  paused: 'en pausa',
+  finished: 'fin',
+  deadlock: 'deadlock',
+  error: 'error',
+};
 
 export function App() {
   const sim = useSimulation(DEFAULT_CODE);
@@ -60,81 +69,64 @@ export function App() {
       .map((p) => ({ line: p.line, color: p.color, state: p.state, name: p.name }));
   }, [snapshot]);
 
-  const editorReadOnly = status !== 'idle' && status !== 'error';
-  const canPick = status === 'ready' || status === 'paused';
+  const running = status === 'running';
+  const done = status === 'finished' || status === 'deadlock';
 
   return (
     <div className="app">
-      <Header
-        status={status}
-        instant={snapshot?.instant ?? 0}
-        isHistorical={sim.isHistorical}
-        policy={sim.policy}
-        onPolicy={sim.setPolicy}
-        speed={sim.speed}
-        speeds={sim.speeds}
-        onSpeed={sim.setSpeed}
-        onPlay={sim.play}
-        onPause={sim.pause}
-        onStep={() => sim.stepOnce()}
-        onReset={sim.reset}
-        onStop={sim.stop}
-      />
+      <div className="bar">
+        {done ? (
+          <button className="btn btn-main" onClick={sim.reset}>
+            <RotateCcw size={14} /> Reiniciar
+          </button>
+        ) : running ? (
+          <button className="btn btn-main" onClick={sim.pause}>
+            <Pause size={14} /> Pausar
+          </button>
+        ) : (
+          <button className="btn btn-main" onClick={sim.play}>
+            <Play size={14} /> Ejecutar
+          </button>
+        )}
 
-      <div className="workspace">
-        <PanelGroup direction="vertical">
-          <Panel defaultSize={62} minSize={25}>
-            <PanelGroup direction="horizontal">
-              <Panel defaultSize={52} minSize={25}>
-                <div className="panel" style={{ height: '100%' }}>
-                  <div className="panel-header">
-                    Código
-                    {editorReadOnly && (
-                      <span className="muted" style={{ textTransform: 'none' }}>
-                        solo lectura durante la simulación
-                      </span>
-                    )}
-                  </div>
-                  <CodeEditor
-                    code={sim.code}
-                    onChange={sim.setCode}
-                    readOnly={editorReadOnly}
-                    activeLines={activeLines}
-                    errorLine={status === 'error' ? sim.error?.line ?? null : null}
-                  />
-                  {status === 'error' && sim.error && (
-                    <div className="error-bar">
-                      {sim.error.line != null ? `Línea ${sim.error.line}: ` : ''}
-                      {sim.error.message.replace(/^Linea \d+:\s*/, '')}
-                    </div>
-                  )}
-                </div>
-              </Panel>
-              <PanelResizeHandle className="resize-v" />
-              <Panel defaultSize={26} minSize={16}>
-                <MonitorsPanel snapshot={snapshot} />
-              </Panel>
-              <PanelResizeHandle className="resize-v" />
-              <Panel defaultSize={22} minSize={14}>
-                <ProcessList snapshot={snapshot} canPick={canPick} onPick={(id) => sim.stepOnce(id)} />
-              </Panel>
-            </PanelGroup>
-          </Panel>
+        <button className="btn" onClick={sim.step} disabled={running || done}>
+          <SkipForward size={14} /> Paso
+        </button>
 
-          <PanelResizeHandle className="resize-h" />
+        <select
+          className="sel"
+          value={sim.speed}
+          onChange={(e) => sim.setSpeed(Number(e.target.value))}
+        >
+          {sim.speeds.map((s) => (
+            <option key={s} value={s}>{SPEED_LABEL[s] ?? `${s}ms`}</option>
+          ))}
+        </select>
 
-          <Panel defaultSize={38} minSize={15}>
-            <PanelGroup direction="horizontal">
-              <Panel defaultSize={62} minSize={25}>
-                <Timeline entries={sim.entries} viewIndex={sim.viewIndex} onHover={sim.setHoverIndex} />
-              </Panel>
-              <PanelResizeHandle className="resize-v" />
-              <Panel defaultSize={38} minSize={20}>
-                <EventLog entries={sim.entries} viewIndex={sim.viewIndex} onHover={sim.setHoverIndex} />
-              </Panel>
-            </PanelGroup>
-          </Panel>
-        </PanelGroup>
+        <div className="spacer" />
+
+        <div className="meta">
+          <span className={`st${status === 'deadlock' || status === 'error' ? ' bad' : ''}`}>
+            {STATUS_LABEL[status]}
+          </span>
+          <span className="n">{snapshot?.instant ?? 0}</span>
+        </div>
+      </div>
+
+      <div className="stage">
+        <CodeEditor
+          code={sim.code}
+          onChange={sim.setCode}
+          readOnly={running}
+          activeLines={activeLines}
+          errorLine={status === 'error' ? sim.error?.line ?? null : null}
+        />
+        {status === 'error' && sim.error && (
+          <div className="err">
+            {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
+            {sim.error.message.replace(/^Linea \d+:\s*/, '')}
+          </div>
+        )}
       </div>
     </div>
   );
