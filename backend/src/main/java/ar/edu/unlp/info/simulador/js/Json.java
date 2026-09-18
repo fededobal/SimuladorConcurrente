@@ -116,8 +116,7 @@ final class Json {
         sb.append("{");
         campo(sb, "instant");   sb.append(s.instant()).append(',');
         campo(sb, "processes"); lista(sb, s.processes(), Json::processView); sb.append(',');
-        campo(sb, "monitors");  lista(sb, s.monitors(), Json::monitorView); sb.append(',');
-        campo(sb, "constants"); lista(sb, s.constants(), Json::varView);
+        campo(sb, "monitors");  lista(sb, s.monitors(), Json::monitorView);
         sb.append("}");
     }
 

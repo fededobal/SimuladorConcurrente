@@ -8,8 +8,7 @@ import java.util.List;
  */
 public record Snapshot(int instant,
                        List<ProcessView> processes,
-                       List<MonitorView> monitors,
-                       List<VarView> constants) {
+                       List<MonitorView> monitors) {
 
     /** Referencia liviana a un proceso (para colas). */
     public record ProcRef(int id, String name, String color) { }

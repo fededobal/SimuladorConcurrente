@@ -108,11 +108,12 @@ process Consumidor { int x = 0; Buffer.retirar(x); }
 
 - Solo monitores. Exclusión mutua **implícita**; sincronización por condición **explícita**
   con `wait` / `signal` / `signal_all` (disciplina *signal and continue*).
-- Todo el estado compartido vive dentro de un monitor. Fuera solo se permiten constantes
-  globales (`int N = 5;`).
-- `process`, familias `process P[i: 0..N]`, `if` / `while` / `for`, tipos
+- **No hay variables globales**: toda variable vive dentro de un monitor (permanente) o de
+  un proceso (local).
+- `process`, familias `process P[i: 0..5]`, `if` / `while` / `for` (estilo C y de rango:
+  `for (int i = 1..n)`, `for (1..n)`), tipos
   `int` / `double` / `boolean` / `text` y `Cola` FIFO (`push` / `pop` / `empty`).
-- Parámetros `in` / `out` / `inout`.
+- Parámetros `in` / `out`.
 
 ## Deploy
 

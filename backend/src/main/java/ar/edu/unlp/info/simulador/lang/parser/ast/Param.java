@@ -4,10 +4,10 @@ package ar.edu.unlp.info.simulador.lang.parser.ast;
 public record Param(String name, Type type, ParamMode mode, int line) {
 
     public boolean isOutput() {
-        return mode == ParamMode.OUT || mode == ParamMode.INOUT;
+        return mode == ParamMode.OUT;
     }
 
     public boolean isInput() {
-        return mode == ParamMode.IN || mode == ParamMode.INOUT;
+        return mode == ParamMode.IN;
     }
 }

@@ -32,7 +32,6 @@ public final class VirtualMachine {
     private final List<Process> processes = new ArrayList<>();
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
-    private final Map<String, Value> constants = new LinkedHashMap<>();
 
     private final List<LogEntry> log = new ArrayList<>();
 
@@ -50,21 +49,12 @@ public final class VirtualMachine {
     // ================================================================= init
 
     private void initialize() {
-        for (ConstDecl c : program.constants()) {
-            Value v = c.value() == null
-                    ? Value.defaultFor(c.type())
-                    : new ExprEvaluator(constants::get).eval(c.value()).coerceTo(c.type());
-            constants.put(c.name(), v);
-        }
-
         for (MonitorDef md : program.monitors()) {
             monitorDefs.put(md.name(), md);
             Monitor m = new Monitor(md.name());
             monitors.put(md.name(), m);
 
-            Function<String, Value> resolver = name ->
-                    m.hasVar(name) ? m.getVar(name) : constants.get(name);
-            ExprEvaluator ev = new ExprEvaluator(resolver);
+            ExprEvaluator ev = new ExprEvaluator(m::getVar);
 
             for (VarDecl vd : md.permanentVars()) {
                 m.vars().put(vd.name(), buildInitialValue(vd, ev));
@@ -103,7 +93,7 @@ public final class VirtualMachine {
         int colorIdx = 0;
         for (ProcessDef pd : program.processes()) {
             if (pd.isFamily()) {
-                ExprEvaluator ev = new ExprEvaluator(constants::get);
+                ExprEvaluator ev = new ExprEvaluator(name -> null);
                 int from = ev.evalInt(pd.quant().from());
                 int to = ev.evalInt(pd.quant().to());
                 for (int i = from; i <= to; i++) {
@@ -559,7 +549,7 @@ public final class VirtualMachine {
                 Monitor m = monitors.get(act.monitorName());
                 if (m.hasVar(name)) return m.getVar(name);
             }
-            return constants.get(name);
+            return null;
         };
     }
 
@@ -580,9 +570,6 @@ public final class VirtualMachine {
                 m.setVar(name, coerceLike(m.getVar(name), value), p.id());
                 return;
             }
-        }
-        if (constants.containsKey(name)) {
-            throw new RuntimeError("No se puede asignar a la constante global '" + name + "'", line);
         }
         throw new RuntimeError("Variable no definida: " + name, line);
     }
@@ -700,12 +687,7 @@ public final class VirtualMachine {
                     refs(m.entryQueueSnapshot())));
         }
 
-        List<Snapshot.VarView> consts = new ArrayList<>();
-        for (Map.Entry<String, Value> e : constants.entrySet()) {
-            consts.add(varView(e.getKey(), e.getValue(), null));
-        }
-
-        return new Snapshot(instant, pv, mv, consts);
+        return new Snapshot(instant, pv, mv);
     }
 
     private static Snapshot.VarView varView(String name, Value v, Integer writer) {

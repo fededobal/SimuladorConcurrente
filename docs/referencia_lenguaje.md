@@ -11,22 +11,22 @@ EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).
 
 ## 1. Palabras reservadas
 
-Son **28**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
+Son **27**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
 (escribir `int out = 0;` es error de sintaxis).
 
 | Grupo | Palabras |
 |---|---|
 | Declaraciones | `monitor` `procedure` `cond` `process` |
 | Tipos | `int` `double` `boolean` `text` `Cola` |
-| Modos de parámetro | `in` `out` `inout` |
+| Modos de parámetro | `in` `out` |
 | Control | `if` `else` `while` `for` `skip` |
 | Sincronización | `wait` `signal` `signal_all` |
 | Colas | `push` `pop` `empty` |
 | Operadores lógicos | `and` `or` `not` |
 | Literales | `true` `false` |
 
-`sem` y `await` están **reservadas como rechazadas**: si aparecen, el compilador avisa que
-pertenecen a la versión de semáforos y no existen acá.
+No hay rastro de semáforos: `sem`, `await`, `p` y `v` **no son palabras reservadas**, son
+identificadores comunes y se pueden usar como nombre de variable.
 
 ### Símbolos
 
@@ -56,61 +56,31 @@ Un `/*` sin cerrar es error de compilación. Un `//` adentro de una cadena
 
 ## 2. Estructura del programa
 
-Tres clases de declaraciones de nivel superior, en cualquier orden, y **al menos un
+Dos clases de declaraciones de nivel superior, en cualquier orden, y **al menos un
 proceso**:
 
 ```c
-int N = 5;                    // 1. constantes globales (solo lectura)
+monitor Recurso { ... }       // 1. monitores
 
-monitor Recurso { ... }       // 2. monitores
-
-process Cliente[i: 1..N] { }  // 3. procesos
+process Cliente[i: 1..5] { }  // 2. procesos
 ```
 
-Todo el estado compartido **mutable** vive dentro de un monitor. No hay variables globales
-que se puedan asignar.
-
-### Constantes globales
-
-```c
-int N = 5;
-double TASA = 0.75;
-boolean DEBUG = true;
-text TITULO = "buffer";
-int M;              // sin valor: queda en el default del tipo
-int TOTAL = 2 + 3;  // el valor puede ser una expresión
-```
-
-No pueden ser arreglos ni `Cola`. Asignarles algo después es error.
-
----
-
-## 3. Tipos y valores
-
-| Tipo | Literales | Valor inicial |
-|---|---|---|
-| `int` | `0`, `42` | `0` |
-| `double` | `3.14`, `0.5` | `0.0` |
-| `boolean` | `true`, `false` | `false` |
-| `text` | `"hola"` | `""` |
-| `Cola` | — se llena con `push` | vacía |
-
-- `7 / 2` da `3` (ambos `int`); `7.0 / 2` da `3.5`. `%` solo tiene sentido entre enteros.
-- `+` con un `text` de un lado concatena: `"n=" + 5` → `"n=5"`.
-- `1 == 1.0` es `true`.
+**No hay variables globales**, de ningún tipo: toda variable vive dentro de un monitor
+(permanente, compartida) o dentro de un proceso (local, privada). Es la regla central del
+modelo: el estado compartido solo se toca con la exclusión mutua del monitor.
 
 ### Arreglos
 
 ```c
 int a[3];                 // los 3 en 0
 int b[3] = ([3] 0);       // forma explícita de la cátedra
-int c[N];                 // el tamaño puede ser una constante global
+int c[3];                 // el tamaño es una expresión constante
 ```
 
-Índice base 0: `a[0]`, `a[(i + 1) % N]`. Un índice fuera de rango es error de ejecución
+Índice base 0: `a[0]`, `a[(i + 1) % 3]`. Un índice fuera de rango es error de ejecución
 (`Indice 5 fuera de rango para 'a' (tamano 2)`).
 
-Se declaran dentro de un monitor o como locales de un proceso — **no** como constante global.
+Se declaran dentro de un monitor o como locales de un proceso.
 
 ### Cola (FIFO)
 
@@ -150,7 +120,7 @@ llamar a otro monitor ni usar `wait`/`signal`.
 ```c
 cond libre;
 cond libre, ocupado;   // varias en una línea
-cond turno[N];         // arreglo de condiciones (condiciones privadas)
+cond turno[3];         // arreglo de condiciones (condiciones privadas)
 ```
 
 Si la `cond` es un arreglo hay que indexarla siempre: `wait(turno[i])`, `signal(turno[i])`.
@@ -160,18 +130,16 @@ Si la `cond` es un arreglo hay que indexarla siempre: `wait(turno[i])`, `signal(
 ```c
 procedure depositar(d: in int) { ... }
 procedure retirar(r: out int) { ... }
-procedure ajustar(v: inout double) { ... }
 procedure mirar(x: int) { ... }          // sin modo = in
 procedure nada() { ... }
 ```
 
 - **`in`** (default): solo lectura, asignarle adentro es error.
 - **`out`**: se copia al argumento del llamador al retornar.
-- **`inout`**: entra y sale.
-- El argumento de un `out`/`inout` tiene que ser una variable o un elemento de arreglo
+- El argumento de un `out` tiene que ser una variable o un elemento de arreglo
   asignable — `M.dar(3)` es error.
 - Los parámetros son **escalares**: no se pasan arreglos ni `Cola`.
-- No hay valor de retorno; los resultados salen por `out`/`inout`.
+- No hay valor de retorno; los resultados salen por `out`.
 
 ### Operaciones de condición
 
@@ -201,11 +169,10 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 }
 ```
 
-- `desde` y `hasta` pueden ser constantes globales: `process P[i: 0..N]`.
 - El iterador es de **solo lectura** dentro del cuerpo.
 - Si `desde > hasta` no se instancia ningún proceso.
-- En el cuerpo se ven: las locales del proceso, el iterador y las constantes globales. Los
-  nombres de monitor solo aparecen en llamadas.
+- En el cuerpo se ven: las locales del proceso y el iterador. Los nombres de monitor solo
+  aparecen en llamadas.
 
 ---
 
@@ -242,14 +209,18 @@ while (i < 3) { s = s + i; i++; }
 
 ### `for`
 
-Cuatro formas, todas válidas:
+Cinco formas, todas válidas — las de C y las de la cátedra:
 
 ```c
-for (int i = 0; i < N; i++) { ... }    // declara el iterador
-for (i = 0; i < N; i++) { ... }        // reusa una variable existente
-for (int i = 1..N) { ... }             // rango, inclusivo en ambos extremos
-for (i = 1..N) { ... }                 // rango con variable existente
+for (int i = 0; i < n; i++) { ... }    // estilo C, declara el iterador
+for (i = 0; i < n; i++) { ... }        // estilo C, reusa una variable existente
+for (int i = 1..n) { ... }             // rango, inclusivo en ambos extremos
+for (i = 1..n) { ... }                 // rango con variable existente
+for (1..n) { ... }                     // rango sin iterador: solo repite
 ```
+
+En `for (1..n)` el iterador existe pero no tiene nombre, así que el cuerpo no puede leerlo:
+se usa cuando solo importa **cuántas veces** repetir.
 
 El paso puede ser `i++`, `i--` o `i = expr`:
 
@@ -290,15 +261,15 @@ La comparación **no encadena**: `1 < 2 < 3` es error de sintaxis. Hay que escri
 
 | Dónde estás | Qué ves |
 |---|---|
-| Cuerpo de un `process` | sus locales, el iterador de la familia, las constantes globales |
-| Cuerpo de un `procedure` | sus parámetros, sus locales, las permanentes y `cond` del monitor, las constantes globales |
-| Inicialización del monitor | las permanentes del monitor y las constantes globales |
+| Cuerpo de un `process` | sus locales y el iterador de la familia |
+| Cuerpo de un `procedure` | sus parámetros, sus locales, las permanentes y `cond` del monitor |
+| Inicialización del monitor | las permanentes del monitor |
 
 Lo importante: **las variables locales de un proceso no se ven adentro de un monitor**. Si un
 procedure necesita un dato del proceso, entra por parámetro; si tiene que devolver algo, sale
 por un `out`.
 
-No se puede asignar a: una constante global, un parámetro `in`, ni el iterador de una familia.
+No se puede asignar a: un parámetro `in` ni el iterador de una familia.
 
 ---
 
@@ -310,15 +281,14 @@ Errores de compilación (con número de línea), verificados:
 - `La llamada a M.p espera 1 argumento(s) y recibio 0`
 - `El argumento para el parametro 'x' (out) debe ser una variable o un elemento de arreglo`
 - `Nombre no declarado en este alcance: y`
-- `No se puede asignar a 'N' (es constante, parametro in o iterador)`
+- `No se puede asignar a 'i' (es constante, parametro in o iterador)`
 - `Variable condicion no declarada: c` · `La cond 'c' es un arreglo: falta el indice`
 - `wait/signal/signal_all solo pueden usarse dentro de un procedure de monitor`
 - `El codigo de inicializacion del monitor M no puede llamar a monitores ni usar wait/signal`
-- `Las constantes globales no pueden ser arreglos`
+- `No hay variables globales: las variables van dentro de un monitor o de un process`
 - `El programa debe tener al menos un proceso`
-- `Nombre global duplicado: N` · `Procedure duplicado 'p' en el monitor M`
+- `Ya existe un monitor o un process llamado M` · `Procedure duplicado 'p' en el monitor M`
 - `Comentario de bloque sin cerrar` · `Cadena de texto sin cerrar`
-- `'sem' pertenece a la version de semaforos y no se soporta...`
 
 Errores de ejecución (terminan ese proceso): índice fuera de rango, división o módulo por
 cero, `pop` sobre cola vacía, tupla desencolada con menos componentes que destinos.
@@ -331,11 +301,13 @@ Si ningún proceso queda listo y no todos terminaron, el simulador reporta **dea
 
 Fuera del alcance de esta versión, a propósito:
 
-- Semáforos: `sem`, `P`, `V`. Bloque atómico `< >`. `await`.
+- Semáforos: `sem`, `P`, `V`. Bloque atómico `< >`. `await`. No están reservados: son
+  nombres libres.
 - `signal and wait`, `signal` con prioridad, `minrank`, `empty(cv)` sobre una condición.
 - `break`, `continue`, `return`.
 - Funciones o procedures fuera de un monitor; recursión.
-- Variables globales mutables.
+- El modo de parámetro `inout`: solo `in` y `out`.
+- Variables globales, mutables o constantes.
 - Arreglos o `Cola` como parámetro de un procedure.
 - Arreglos multidimensionales.
 - Pasaje de mensajes, `send`/`receive`.
@@ -345,10 +317,8 @@ Fuera del alcance de esta versión, a propósito:
 ## 11. Ejemplo que usa casi todo
 
 ```c
-int N = 3;
-
 monitor Asignador {
-  int libres = N;
+  int libres = 3;
   boolean tomado[3] = ([3] false);
   int otorgados = 0;
   cond hayLibre;

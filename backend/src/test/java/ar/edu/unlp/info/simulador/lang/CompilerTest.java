@@ -45,13 +45,21 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaAsignacionAConstante() {
+    void rechazaVariablesGlobales() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 int N = 5;
-                monitor M { procedure op() { N = 6; } }
+                monitor M { procedure op() { skip; } }
                 process P { M.op(); }
                 """));
-        assertTrue(ex.getMessage().toLowerCase().contains("constante"), ex.getMessage());
+        assertTrue(ex.getMessage().toLowerCase().contains("global"), ex.getMessage());
+    }
+
+    @Test
+    void rechazaParametroInout() {
+        assertThrows(CompilationException.class, () -> Compiler.compile("""
+                monitor M { procedure op(a: inout int) { a = 1; } }
+                process P { int x = 0; M.op(x); }
+                """));
     }
 
     @Test
@@ -85,11 +93,29 @@ class CompilerTest {
                 """));
     }
 
+    /** Los semaforos no existen: 'sem', 'await', 'p' y 'v' son identificadores comunes. */
     @Test
-    void rechazaSemaforos() {
-        assertThrows(CompilationException.class, () -> Compiler.compile("""
-                sem mutex = 1;
-                process P { P(mutex); }
+    void semaforosNoSonPalabrasReservadas() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M {
+                  int sem = 0;
+                  procedure op(await: in int) { sem = await; }
+                }
+                process P { int p = 1; int v = 2; M.op(p); M.op(v); }
+                """));
+    }
+
+    @Test
+    void aceptaLasTresFormasDelFor() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M { int n = 0; procedure op() { n++; } }
+                process P {
+                  int i = 0;
+                  for (int k = 0; k < 3; k++) { M.op(); }
+                  for (int k = 1..3) { M.op(); }
+                  for (i = 1..3) { M.op(); }
+                  for (1..3) { M.op(); }
+                }
                 """));
     }
 

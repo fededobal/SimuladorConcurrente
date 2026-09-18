@@ -45,7 +45,7 @@ const KEYWORDS: Record<string, string> = {
   push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl',
 
   int: 'tok-type', double: 'tok-type', boolean: 'tok-type', text: 'tok-type', Cola: 'tok-type',
-  in: 'tok-type', out: 'tok-type', inout: 'tok-type',
+  in: 'tok-type', out: 'tok-type',
 
   true: 'tok-lit', false: 'tok-lit',
 };

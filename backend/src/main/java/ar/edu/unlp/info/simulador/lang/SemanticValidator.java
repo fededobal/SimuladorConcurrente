@@ -18,7 +18,6 @@ import java.util.Set;
 public final class SemanticValidator {
 
     private final Program program;
-    private final Set<String> constants = new HashSet<>();
     private final Map<String, MonitorInfo> monitors = new HashMap<>();
 
     private record MonitorInfo(Set<String> vars,
@@ -33,7 +32,7 @@ public final class SemanticValidator {
         if (program.processes().isEmpty()) {
             throw new CompilationException("El programa debe tener al menos un proceso");
         }
-        collectGlobals();
+        collectTopLevel();
         for (MonitorDef m : program.monitors()) {
             validateMonitor(m);
         }
@@ -44,17 +43,11 @@ public final class SemanticValidator {
 
     // ---------------------------------------------------------------- recoleccion
 
-    private void collectGlobals() {
+    private void collectTopLevel() {
         Set<String> topLevel = new HashSet<>();
-        for (ConstDecl c : program.constants()) {
-            if (!topLevel.add(c.name())) {
-                throw new CompilationException("Nombre global duplicado: " + c.name(), c.line());
-            }
-            constants.add(c.name());
-        }
         for (MonitorDef m : program.monitors()) {
             if (!topLevel.add(m.name())) {
-                throw new CompilationException("Nombre global duplicado: " + m.name(), m.line());
+                throw new CompilationException("Ya existe un monitor o un process llamado " + m.name(), m.line());
             }
             Set<String> vars = new HashSet<>();
             Map<String, Boolean> conds = new HashMap<>();
@@ -88,7 +81,7 @@ public final class SemanticValidator {
         }
         for (ProcessDef p : program.processes()) {
             if (!topLevel.add(p.name())) {
-                throw new CompilationException("Nombre global duplicado: " + p.name(), p.line());
+                throw new CompilationException("Ya existe un monitor o un process llamado " + p.name(), p.line());
             }
         }
     }
@@ -99,7 +92,6 @@ public final class SemanticValidator {
         MonitorInfo info = monitors.get(m.name());
 
         Scope initScope = new Scope(null, m.name());
-        initScope.readOnly.addAll(constants);
         initScope.assignable.addAll(info.vars());
         for (String cond : info.conds().keySet()) initScope.conds.add(cond);
         for (Stmt s : m.initStmts()) {
@@ -112,7 +104,6 @@ public final class SemanticValidator {
 
         for (ProcedureDef pr : m.procedures()) {
             Scope scope = new Scope(m.name(), m.name());
-            scope.readOnly.addAll(constants);
             scope.assignable.addAll(info.vars());
             for (String cond : info.conds().keySet()) scope.conds.add(cond);
             for (Param param : pr.params()) {
@@ -128,7 +119,6 @@ public final class SemanticValidator {
 
     private void validateProcess(ProcessDef p) {
         Scope scope = new Scope(null, null);
-        scope.readOnly.addAll(constants);
         if (p.isFamily()) {
             scope.readOnly.add(p.quant().iterator());
             checkExpr(p.quant().from(), scope);
@@ -308,7 +298,7 @@ public final class SemanticValidator {
 
     private void checkAssignable(String name, Scope scope, int line) {
         if (scope.assignable.contains(name)) return;
-        if (constants.contains(name) || scope.readOnly.contains(name)) {
+        if (scope.readOnly.contains(name)) {
             throw new CompilationException("No se puede asignar a '" + name
                     + "' (es constante, parametro in o iterador)", line);
         }

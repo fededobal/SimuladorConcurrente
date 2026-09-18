@@ -5,7 +5,5 @@ public enum ParamMode {
     /** Solo lectura (default). */
     IN,
     /** Se copia al argumento del llamador al retornar. */
-    OUT,
-    /** Lectura y copia de vuelta. */
-    INOUT
+    OUT
 }

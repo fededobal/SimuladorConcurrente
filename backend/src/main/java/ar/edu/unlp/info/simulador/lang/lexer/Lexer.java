@@ -18,14 +18,11 @@ public final class Lexer {
             "if", "else", "while", "for", "skip",
             "wait", "signal", "signal_all",
             "push", "pop", "empty",
-            "in", "out", "inout",
+            "in", "out",
             "true", "false",
             "int", "double", "boolean", "text", "Cola",
             "and", "or", "not"
     );
-
-    /** Palabras que existian en la version de semaforos y ya no se soportan. */
-    private static final Set<String> REMOVED = Set.of("sem", "await");
 
     private static final Set<String> TWO_CHAR = Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
     private static final String SINGLE_CHAR = "+-*/%=<>(){}[];,:.!";
@@ -139,11 +136,6 @@ public final class Lexer {
             sb.append(advance());
         }
         String word = sb.toString();
-        if (REMOVED.contains(word)) {
-            throw new CompilationException(
-                    "'" + word + "' pertenece a la version de semaforos y no se soporta en el "
-                            + "simulador de monitores", startLine);
-        }
         TokenType type = KEYWORDS.contains(word) ? TokenType.KEYWORD : TokenType.IDENTIFIER;
         return new Token(type, word, startLine, startCol);
     }

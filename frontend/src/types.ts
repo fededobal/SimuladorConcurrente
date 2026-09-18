@@ -46,7 +46,6 @@ export interface Snapshot {
   instant: number;
   processes: ProcessView[];
   monitors: MonitorView[];
-  constants: VarView[];
 }
 
 export interface LogEntry {

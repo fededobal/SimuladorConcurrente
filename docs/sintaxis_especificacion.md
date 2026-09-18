@@ -8,16 +8,14 @@ en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de **monit
 
 ## 1. Estructura del programa
 
-Un programa tiene tres tipos de declaraciones de nivel superior, en cualquier orden:
+Un programa tiene dos tipos de declaraciones de nivel superior, en cualquier orden:
 
-1. **Constantes globales** — variables escalares declaradas fuera de todo monitor/proceso.
-   Son de **solo lectura**; sirven para tamaños de arreglo y rangos de familias de procesos
-   (`int N = 5;`). Asignarles un valor es error semántico.
-2. **Monitores** — `monitor Nombre { ... }`.
-3. **Procesos** — `process Nombre { ... }` o `process Nombre[i: desde..hasta] { ... }`.
+1. **Monitores** — `monitor Nombre { ... }`.
+2. **Procesos** — `process Nombre { ... }` o `process Nombre[i: desde..hasta] { ... }`.
 
-Debe haber **al menos un proceso**. El estado compartido mutable **solo** puede vivir dentro
-de un monitor.
+Debe haber **al menos un proceso**. **No existen las variables globales**: toda variable se
+declara dentro de un monitor (permanente) o dentro de un proceso (local). El estado
+compartido, por lo tanto, solo puede vivir dentro de un monitor.
 
 **Comentarios:** `// línea` y `/* bloque */`.
 
@@ -36,10 +34,10 @@ de un monitor.
 ### Arreglos
 
 - Declaración: `tipo nombre[tamaño];` o `tipo nombre[tamaño] = ([tamaño] valorInicial);`
-- El `tamaño` es una expresión constante (literal o constante global).
+- El `tamaño` es una expresión constante.
 - Acceso base 0: `buf[i]`, `buf[(i + 1) % N]`.
 - Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
-- Se declaran dentro de un monitor o como locales de un proceso, nunca como constante global.
+- Se declaran dentro de un monitor o como locales de un proceso.
 
 ### Cola (FIFO)
 
@@ -84,11 +82,11 @@ procedure nombre(p1: modo tipo, p2: modo tipo, ...) {
 
 - **Modos de parámetro:** `in` (default — solo lectura), `out` (se copia al argumento del
   llamador al retornar; el argumento debe ser una variable/elemento de arreglo, no una
-  expresión), `inout` (ambas).
+  expresión).
 - Si el modo se omite: `procedure op(x: int)` equivale a `procedure op(x: in int)`.
-- Sin valor de retorno: los resultados salen por parámetros `out`/`inout`.
+- Sin valor de retorno: los resultados salen por parámetros `out`.
 - Dentro del cuerpo se ven: parámetros, variables locales del procedure, variables
-  permanentes del monitor y constantes globales. **No** se ven las locales del `process`
+  permanentes del monitor. **No** se ven las locales del `process`
   que llamó.
 
 ### 3.3 Operaciones sobre variables condición
@@ -117,8 +115,8 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 - La familia instancia `hasta - desde + 1` procesos; cada uno recibe `iterador` como
   constante local (`process Filosofo[id: 0..4]` → `Filosofo[0]` … `Filosofo[4]`).
 - `desde` y `hasta` son expresiones constantes.
-- En el cuerpo de un proceso se ven: sus variables locales, el iterador y las constantes
-  globales. Los nombres de monitor solo se usan para llamadas `Monitor.procedure(...)`.
+- En el cuerpo de un proceso se ven: sus variables locales y el iterador. Los nombres de
+  monitor solo se usan para llamadas `Monitor.procedure(...)`.
 
 ---
 
@@ -134,8 +132,9 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Cola | `push(c, e);` `pop(c, x);` |
 | Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
 | Mientras | `while (cond) { ... }` |
-| For (contador) | `for (int i = 0; i < N; i++) { ... }` |
-| For (rango) | `for (int i = 1..N) { ... }` |
+| For (contador) | `for (int i = 0; i < n; i++) { ... }` |
+| For (rango) | `for (int i = 1..n) { ... }` · `for (i = 1..n) { ... }` |
+| For (rango sin iterador) | `for (1..n) { ... }` |
 | Skip | `skip;` |
 
 Toda sentencia (o la evaluación de una guarda, o una llamada a monitor) es un **paso
@@ -164,7 +163,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
   - `Monitor.op(args)` con el monitor libre: el proceso entra y ejecuta el cuerpo.
   - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada; reintenta al
     liberarse.
-  - Al retornar del procedure: se copian los `out`/`inout`, se libera el monitor y **todos**
+  - Al retornar del procedure: se copian los `out`, se libera el monitor y **todos**
     los de la cola de entrada vuelven a competir.
 - **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver `monitores.md`).
 - **Deadlock:** ningún proceso listo y no todos terminados → se informa.
@@ -174,9 +173,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 ## 8. Gramática (EBNF)
 
 ```ebnf
-programa      = { const_global | monitor | proceso } ;
-
-const_global  = tipo_escalar ident [ "=" expr ] ";" ;
+programa      = { monitor | proceso } ;
 
 (* ---------- monitores ---------- *)
 monitor       = "monitor" ident "{" { miembro_monitor } "}" ;
@@ -187,7 +184,7 @@ cond_decl     = "cond" ident [ "[" expr "]" ] { "," ident [ "[" expr "]" ] } ";"
 procedure     = "procedure" ident "(" [ params ] ")" bloque ;
 params        = param { "," param } ;
 param         = ident ":" [ modo ] tipo_escalar ;
-modo          = "in" | "out" | "inout" ;
+modo          = "in" | "out" ;
 
 (* ---------- procesos ---------- *)
 proceso       = "process" ident [ "[" ident ":" expr ".." expr "]" ] bloque ;
@@ -216,8 +213,10 @@ op_cola       = "push" "(" ident "," expr { "," expr } ")" ";"
 condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
 mientras      = "while" "(" expr ")" cuerpo ;
 para          = "for" "(" iterador "=" expr ";" [ expr ] ";" inc_step ")" cuerpo
-              | "for" "(" iterador "=" expr ".." expr ")" cuerpo ;
+              | "for" "(" iterador "=" expr ".." expr ")" cuerpo
+              | "for" "(" expr ".." expr ")" cuerpo ;
 iterador      = [ tipo_escalar ] ident ;   (* con tipo lo declara; sin tipo reusa una variable *)
+                                           (* sin iterador: solo repite, no es visible *)
 inc_step      = ident ( "++" | "--" ) | ident "=" expr ;
 cuerpo        = bloque | sentencia ;
 args          = expr { "," expr } ;
@@ -246,6 +245,9 @@ numero        = digito { digito } [ "." digito { digito } ] ;
 texto         = '"' { caracter } '"' ;
 ```
 
-**Palabras reservadas:** `monitor procedure cond process if else while for skip
-wait signal signal_all push pop empty in out inout true false int double boolean text Cola
+**Palabras reservadas (27):** `monitor procedure cond process if else while for skip
+wait signal signal_all push pop empty in out true false int double boolean text Cola
 and or not`.
+
+No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores
+comunes y pueden usarse como nombres.

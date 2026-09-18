@@ -18,6 +18,7 @@ public final class Parser {
 
     private final List<Token> tokens;
     private int current = 0;
+    private int anonimos = 0;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
@@ -26,7 +27,6 @@ public final class Parser {
     // ================================================================= programa
 
     public Program parseProgram() {
-        List<ConstDecl> constants = new ArrayList<>();
         List<MonitorDef> monitors = new ArrayList<>();
         List<ProcessDef> processes = new ArrayList<>();
 
@@ -36,30 +36,13 @@ public final class Parser {
             } else if (check("process")) {
                 processes.add(parseProcess());
             } else if (isScalarType(peek()) || check("Cola")) {
-                constants.add(parseConstDecl());
+                throw error("No hay variables globales: las variables van dentro de un monitor "
+                        + "(permanentes) o de un process (locales)");
             } else {
-                throw error("Se esperaba 'monitor', 'process' o una constante global");
+                throw error("Se esperaba 'monitor' o 'process'");
             }
         }
-        return new Program(constants, monitors, processes);
-    }
-
-    private ConstDecl parseConstDecl() {
-        Token typeTok = advance();
-        if (typeTok.is("Cola")) {
-            throw error("Las colas solo pueden declararse dentro de un monitor");
-        }
-        Type type = Type.fromKeyword(typeTok.lexeme());
-        String name = consumeIdent("Se esperaba el nombre de la constante");
-        if (check("[")) {
-            throw error("Las constantes globales no pueden ser arreglos");
-        }
-        Expr value = null;
-        if (match("=")) {
-            value = parseExpr();
-        }
-        consume(";", "Se esperaba ';' al final de la constante global");
-        return new ConstDecl(name, type, value, typeTok.line());
+        return new Program(monitors, processes);
     }
 
     // ================================================================= monitor
@@ -130,8 +113,6 @@ public final class Parser {
             mode = ParamMode.IN;
         } else if (match("out")) {
             mode = ParamMode.OUT;
-        } else if (match("inout")) {
-            mode = ParamMode.INOUT;
         }
         if (!isScalarType(peek())) {
             throw error("Se esperaba un tipo escalar (int, double, boolean, text) para el parametro");
@@ -315,28 +296,48 @@ public final class Parser {
         return new Stmt.WhileStmt(cond, body, kw.line());
     }
 
+    /**
+     * Las tres formas del 'for':
+     *
+     * <pre>
+     *   for (int i = 0; i &lt; n; i++) { }   estilo C
+     *   for (int i = 1..n) { }             rango con iterador declarado (catedra)
+     *   for (i = 1..n) { }                 rango sobre un iterador ya declarado
+     *   for (1..n) { }                     rango sin iterador: solo repite (catedra)
+     * </pre>
+     */
     private Stmt parseFor() {
         Token kw = advance();
         consume("(", "Se esperaba '(' despues de 'for'");
 
         String id;
         Stmt init;
+        boolean rangoAnonimo = false;
         if (isScalarType(peek())) {
             Type it = Type.fromKeyword(advance().lexeme());
             id = consumeIdent("Se esperaba el nombre del iterador");
             consume("=", "Se esperaba '=' despues del iterador");
             Expr from = parseExpr();
             init = VarDecl.scalar(id, it, from, kw.line());
-        } else if (peek().is(TokenType.IDENTIFIER)) {
+        } else if (peek().is(TokenType.IDENTIFIER) && next().is("=")) {
             id = advance().lexeme();
             consume("=", "Se esperaba '=' despues del iterador");
             Expr from = parseExpr();
             init = new Stmt.Assign(id, null, from, kw.line());
         } else {
-            throw error("El 'for' debe inicializar un iterador, p. ej. for (int i = 0; ...)");
+            // for (1..n): el iterador existe igual, pero con un nombre que el codigo fuente
+            // no puede escribir (lleva '#'), asi que no colisiona ni es visible.
+            rangoAnonimo = true;
+            id = "for#" + (++anonimos);
+            Expr from = parseExpr();
+            init = VarDecl.scalar(id, Type.INT, from, kw.line());
         }
 
-        if (match("..")) {
+        if (rangoAnonimo) {
+            consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
+                    + "p. ej. for (int i = 0; i < n; i++) o for (1..n)");
+        }
+        if (rangoAnonimo || match("..")) {
             Expr to = parseExpr();
             consume(")", "Se esperaba ')' en el 'for' de rango");
             Stmt.Block body = parseBlockOrStatement();
@@ -524,6 +525,11 @@ public final class Parser {
 
     private Token peek() {
         return tokens.get(current);
+    }
+
+    /** Token siguiente al actual, para decidir con un simbolo de anticipacion. */
+    private Token next() {
+        return tokens.get(Math.min(current + 1, tokens.size() - 1));
     }
 
     private Token previous() {
