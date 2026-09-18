@@ -23,6 +23,8 @@ Reglas:
   y configuración de Claude Code. (Federico Dobal, 2026-09-18)
 - Registrar la huella del núcleo en `simulador.hash` al regenerar el motor, y sumar los
   scripts `smoke` y `check` al frontend. (Federico Dobal, 2026-09-18)
+- Agregar tests de regresión para los bugs B1 a B6 de la revisión (desactivados hasta
+  arreglarlos) y tests del contrato del puente `SimuladorJs`. (Federico Dobal, 2026-09-18)
 
 ## [0.1.0] - 2026-09-17
 
