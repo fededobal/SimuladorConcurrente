@@ -5,7 +5,12 @@ import type {
   StepResponse,
 } from './types';
 
-const BASE = '/api/simulations';
+// En desarrollo queda vacio y el proxy de Vite manda /api a localhost:8080. En un deploy
+// no hay proxy: hay que apuntar VITE_API_URL al origen donde corre el backend Spring Boot
+// (p. ej. https://simulador-api.midominio.com), que ademas tiene que permitir CORS.
+const ORIGEN = import.meta.env.VITE_API_URL ?? '';
+
+const BASE = `${ORIGEN}/api/simulations`;
 
 export class ApiRequestError extends Error {
   line: number | null;
