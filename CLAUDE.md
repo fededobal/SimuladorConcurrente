@@ -2,9 +2,10 @@
 
 PPS (Analista en TIC, Facultad de Informática, UNLP) de Federico Dobal. Herramienta
 didáctica para Programación Concurrente: el alumno escribe pseudocódigo con la notación de
-la cátedra y lo ve ejecutarse paso a paso. **Hoy implementa monitores; el proyecto va a
-crecer a muchos otros conceptos** (semáforos, locks, barreras, pasaje de mensajes, etc.).
-Todo cambio se diseña pensando en que convivan varios conceptos sobre la misma VM.
+la cátedra y lo ve ejecutarse paso a paso. **El alcance es solo monitores** (*signal and
+continue*); no se suman otros conceptos (ADR 0003). Lo que viene es visualización: visor de
+variables, variables condición y sus colas, estructuras de datos (`Cola`, `ColaOrdenada`,
+arreglos) y un historial en forma de línea de tiempo (sin *time-travel*).
 
 Usuarios: alumnos y docentes. La claridad de lo que se ve importa tanto como que el código
 ande.
@@ -54,8 +55,8 @@ frontend/src/api.ts → useSimulation.ts → componentes
 
 ## Semántica
 
-Fuente de verdad: la teoría de la cátedra en `docs/` (hoy `docs/monitores.md`). Modelo
-común, invariantes y casos canónicos por concepto: skill `semantica-concurrencia`.
+Fuente de verdad: la teoría de la cátedra en `docs/monitores.md`. Modelo, invariantes y
+casos canónicos: skill `semantica-concurrencia`.
 Decisiones vigentes: *signal and continue* en monitores; un instante puede avanzar varios
 procesos (`PROB_AVANCE`); no hay variables globales.
 
@@ -67,7 +68,6 @@ procesos (`PROB_AVANCE`); no hay variables globales.
 | `commit` | cada commit: partir, CHANGELOG, mensaje con descripción |
 | `motor-java-js` | cambios en `lang/`, `vm/`, `js/`: tests → regenerar → smoke |
 | `extender-lenguaje` | agregar/cambiar una construcción del lenguaje |
-| `nuevo-concepto-concurrencia` | sumar un concepto (semáforos, mensajes, barreras…) |
 | `semantica-concurrencia` | modificar la VM o explicar un resultado |
 | `revisar-codigo` | revisar un diff antes de commitear o un PR |
 | `documentar-pps` | cualquier documento, README o entregable de la PPS |
@@ -77,4 +77,5 @@ procesos (`PROB_AVANCE`); no hay variables globales.
 - Cambio de más de un archivo: plan corto primero, esperar OK.
 - Mostrar diff/resumen antes de commitear; nunca `git push` sin pedido.
 - Si un pedido contradice la teoría de la cátedra o estas reglas, decirlo antes de hacerlo.
-- Informe de revisión con bugs pendientes (B1–B6) y propuestas: `docs/informe-revision.md`.
+- Informe de revisión (bugs B1–B6, ya corregidos, y propuestas): `docs/informe-revision.md`.
+  Decisiones vigentes: `docs/decisiones/`.

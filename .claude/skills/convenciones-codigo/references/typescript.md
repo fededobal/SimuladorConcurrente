@@ -18,8 +18,8 @@ TypeScript estricto (`strict` en tsconfig), React 19 con componentes funcionales
 - Solo `api.ts` (o su sucesor `motor/cliente.ts`) importa `engine/`.
 - Estado de la simulación en un hook (`useSimulation`); los componentes reciben datos y
   callbacks por props, no llaman al motor.
-- Componentes de recursos por concepto en `componentes/recursos/` con un registro
-  `tipo → componente`, para sumar conceptos sin tocar los demás.
+- Un componente por panel (variables, variables condición, estructuras de datos,
+  historial), que recibe su parte del snapshot por props.
 - Nada de lógica de simulación en la UI: si algo se calcula sobre el estado de la VM, va
   al núcleo y llega en el snapshot.
 

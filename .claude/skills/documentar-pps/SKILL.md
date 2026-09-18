@@ -41,7 +41,7 @@ es: **podría firmarlo un profesional del área y defenderlo oralmente línea po
 | `README.md` | quien llega al repo | cambia cómo se ejecuta, la arquitectura o el alcance |
 | `docs/lenguaje/referencia.md` (hoy `docs/referencia_lenguaje.md`) | alumno | cambia el lenguaje |
 | `docs/lenguaje/especificacion.md` (hoy `docs/sintaxis_especificacion.md`) | docente, desarrollador | cambia el lenguaje (EBNF y semántica) |
-| `docs/teoria/*.md` | alumno | la cátedra cambia la notación o se agrega un concepto |
+| `docs/monitores.md` | alumno | la cátedra cambia la notación o la teoría |
 | `docs/decisiones/NNNN-*.md` | tribunal, futuros desarrolladores | cada decisión de arquitectura o alcance |
 | `CHANGELOG.md` | todos | cada commit (ver skill `commit`) |
 | `docs/pps/*` | cátedra de PPS | hitos de la PPS |

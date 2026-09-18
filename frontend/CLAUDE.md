@@ -1,7 +1,8 @@
 # Frontend (React 19 + TypeScript + Vite)
 
 Convenciones: skill `convenciones-codigo` (leer `references/typescript.md` antes de escribir).
-Cada concepto de concurrencia tiene su panel en `componentes/recursos/`, registrado por tipo.
+Los paneles nuevos (variables, variables condición, estructuras de datos, historial) leen
+el snapshot que llega por `useSimulation`; no llaman al motor.
 
 - `src/engine/simulador.js` es GENERADO por TeaVM. No se edita, no se formatea, no se lintea.
   `src/engine/simulador.d.ts` sí se mantiene a mano y tiene que coincidir con `SimuladorJs.java`.

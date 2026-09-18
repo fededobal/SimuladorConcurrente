@@ -31,9 +31,15 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Quitar la skill `nuevo-concepto-concurrencia` y las menciones a otros conceptos de
+  concurrencia en las reglas del repositorio. (Federico Dobal, 2026-09-18)
 - Eliminar la API REST de Spring Boot, que la interfaz no usaba desde que el motor corre en
   el navegador. El núcleo queda sin dependencias de Spring. (Federico Dobal, 2026-09-18)
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
+
+### Documentación
+- Registrar en el ADR 0003 que el alcance del simulador es solo monitores y cuáles son las
+  funcionalidades previstas; el ADR 0002 queda reemplazado. (Federico Dobal, 2026-09-18)
 
 ### Interno
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios

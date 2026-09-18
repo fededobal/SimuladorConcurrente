@@ -49,8 +49,8 @@ todos los caminos de salida de un monitor en `VirtualMachine`).
 **6. Convenciones y registro** (skills `convenciones-codigo`, `commit`)
 - Nombres, idioma, tamaño de métodos/clases, determinismo, sin dependencias nuevas.
 - ¿Hay entrada en `CHANGELOG.md` con autor y fecha? ¿El mensaje tiene descripción?
-- Si agrega un concepto de concurrencia: ¿sigue `nuevo-concepto-concurrencia`
-  (paquete propio, modelo explícito, canónicos)?
+- Si agrega una primitiva de sincronización que no es de monitores: el alcance es solo
+  monitores (ADR 0003); señalarlo antes de revisar el resto.
 
 **7. Higiene**
 - Commits atómicos; nada de `__MACOSX`, `.DS_Store`, `target/`, `dist/`.

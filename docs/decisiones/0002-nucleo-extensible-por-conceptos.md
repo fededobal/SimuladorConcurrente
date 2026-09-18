@@ -1,6 +1,6 @@
 # 0002. Organizar el núcleo para soportar varios conceptos de concurrencia
 
-- Estado: propuesta
+- Estado: reemplazada por 0003 (el alcance se limitó a monitores)
 - Fecha: 2026-09-18
 
 ## Contexto

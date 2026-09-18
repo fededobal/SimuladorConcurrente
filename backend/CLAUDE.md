@@ -1,8 +1,8 @@
 # Núcleo (lang + vm + puente js)
 
 Convenciones: skill `convenciones-codigo` (leer `references/java.md` antes de escribir).
-El núcleo va a soportar varios conceptos de concurrencia: cada primitiva nueva en su propio
-paquete de `vm/` y detrás de un modelo explícito (skill `nuevo-concepto-concurrencia`).
+El alcance es solo monitores (ADR 0003). `VirtualMachine` ronda las 800 líneas: si una
+funcionalidad nueva la hace crecer, partirla primero en un commit `refactor(vm)` aparte.
 
 Esto no es un "backend": es el **motor** del simulador. Casi todo corre en el navegador vía TeaVM.
 

@@ -12,9 +12,8 @@ cd frontend && npm install
 
 ## 1. Reglas del repo
 
-El proyecto empezó con monitores pero va a abarcar muchos conceptos de concurrencia. Las
-reglas están pensadas para que cada concepto nuevo se sume sin romper los anteriores
-(ver `.claude/skills/nuevo-concepto-concurrencia`). Las convenciones de código están en
+El simulador cubre solo monitores (ver `docs/decisiones/0003-alcance-solo-monitores.md`).
+Las convenciones de código están en
 `.claude/skills/convenciones-codigo/` y valen igual para personas y agentes.
 
 1. **`main` siempre anda.** Lo que está en `main` se publica en Vercel. Si no compila o no

@@ -73,8 +73,7 @@ El hook avisa si falta.
 
 5. **Mensaje.**
    - Prefijos: `feat fix docs test refactor perf build ci chore style revert`.
-   - Alcances: `lexer parser validador vm puente motor ui editor api docs repo ci` y el
-     nombre del concepto cuando corresponda (`monitores`, `semaforos`, `mensajes`, …).
+   - Alcances: `lexer parser validador vm puente motor ui editor docs repo ci`.
    - Imperativo: "agregar", "corregir", "liberar".
    - `feat` solo si alumno o docente notan algo nuevo.
    - Cambio incompatible: `feat(lenguaje)!:` y en la descripción `BREAKING CHANGE: …`.
