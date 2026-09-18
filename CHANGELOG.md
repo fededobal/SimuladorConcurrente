@@ -52,6 +52,8 @@ Reglas:
   frontend compile sin errores de lint. (Federico Dobal, 2026-09-18)
 - Renombrar la carpeta `backend/` a `nucleo/`: sin servidor, contiene el motor del
   simulador que se compila a JavaScript. (Federico Dobal, 2026-09-18)
+- Reunir los programas de ejemplo en `ejemplos/`, con el resultado esperado en su encabezado,
+  y verificarlos con 25 semillas en JUnit y en el smoke del motor. (Federico Dobal, 2026-09-18)
 - El hook `pre-commit` acepta un cambio del núcleo cuyo motor regenerado sale idéntico, y
   exige en cambio que no queden cambios del motor sin agregar al commit. (Federico Dobal, 2026-09-18)
 

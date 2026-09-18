@@ -9,6 +9,7 @@
 // Cuando arregles un bug conocido, movelo de CONOCIDOS a CANONICOS.
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { join } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
 
 const RAIZ = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const motor = await import(pathToFileURL(join(RAIZ, 'frontend', 'src', 'engine', 'simulador.js')).href);
@@ -102,6 +103,22 @@ for (const [nombre, code, ok] of CANONICOS) {
   if (!bien) fallas++;
   console.log(`  ${bien ? 'OK   ' : 'FALLA'} ${nombre}${bien ? '' : '  -> ' + mostrar(r)}`);
 }
+// Los ejemplos de la interfaz: la segunda linea declara lo esperado
+// ("// espera: fin M.x=1 ..." o "// espera: deadlock"), igual que en EjemplosTest.
+console.log('Ejemplos');
+const DIR_EJEMPLOS = join(RAIZ, 'ejemplos');
+for (const archivo of readdirSync(DIR_EJEMPLOS).filter((f) => f.endsWith('.mon')).sort()) {
+  const code = readFileSync(join(DIR_EJEMPLOS, archivo), 'utf8');
+  const [tipo, ...vars] = (code.split('\n')[1] ?? '').replace(/^\/\/\s*espera:\s*/, '').trim().split(/\s+/);
+  const r = correr(code);
+  const bien = tipo === 'deadlock'
+    ? r.deadlock
+    : tipo === 'fin' && r.finished && !r.kinds.has('ERROR')
+      && vars.every((v) => { const [mv, val] = v.split('='); return r.vars[mv] === val; });
+  if (!bien) fallas++;
+  console.log(`  ${bien ? 'OK   ' : 'FALLA'} ${archivo}${bien ? '' : '  -> ' + mostrar(r)}`);
+}
+
 console.log('Bugs conocidos (se esperan en FALLA hasta arreglarlos)');
 for (const [nombre, code, ok] of CONOCIDOS) {
   const r = correr(code);

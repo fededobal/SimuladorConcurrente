@@ -1,0 +1,25 @@
+// signal_all: una barrera que despierta a todos los que esperan
+// espera: fin Barrera.pasaron=5
+monitor Barrera {
+  boolean abierta = false;
+  int pasaron = 0;
+  cond puerta;
+
+  procedure esperar() {
+    while (not abierta) wait(puerta);
+    pasaron = pasaron + 1;
+  }
+
+  procedure abrir() {
+    abierta = true;
+    signal_all(puerta);
+  }
+}
+
+process Trabajador[i: 0..4] {
+  Barrera.esperar();
+}
+
+process Portero {
+  Barrera.abrir();
+}

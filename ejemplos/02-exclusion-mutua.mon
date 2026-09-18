@@ -1,0 +1,18 @@
+// Exclusión mutua implícita: nunca hay dos procesos dentro del monitor
+// espera: fin Cuenta.x=4 Cuenta.maxDentro=1
+monitor Cuenta {
+  int x = 0;
+  int dentro = 0;
+  int maxDentro = 0;
+
+  procedure sumar() {
+    dentro = dentro + 1;
+    if (dentro > maxDentro) maxDentro = dentro;
+    x = x + 1;
+    dentro = dentro - 1;
+  }
+}
+
+process P[i: 0..3] {
+  Cuenta.sumar();
+}

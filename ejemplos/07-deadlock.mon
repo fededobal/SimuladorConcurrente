@@ -1,0 +1,13 @@
+// Deadlock: un wait que nadie señaliza
+// espera: deadlock
+monitor M {
+  cond c;
+
+  procedure bloquear() {
+    wait(c);
+  }
+}
+
+process P {
+  M.bloquear();
+}
