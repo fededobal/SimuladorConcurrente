@@ -1,62 +1,113 @@
-# Simulador Concurrente (UNLP)
+# Simulador de Monitores (UNLP)
 
-[![React](https://img.shields.io/badge/React-19.2-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue.svg)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.0-purple.svg)](https://vitejs.dev/)
+Herramienta de simulación **de monitores** para la materia *Programación Concurrente* de la
+Facultad de Informática (UNLP). Permite escribir pseudocódigo con monitores y variables
+condición, ejecutarlo paso a paso o completo, y observar de forma visual la exclusión mutua
+implícita, las colas de las variables condición y la competencia por entrar al monitor bajo
+la disciplina **signal and continue**.
 
-Un entorno interactivo de desarrollo y simulación en el navegador diseñado para la materia **Programación Concurrente** de la Facultad de Informática (UNLP). 
+Proyecto de Práctica Profesional Supervisada (Analista en TIC). Reemplaza al prototipo
+anterior basado en semáforos, que queda archivado en [`legacy/`](./legacy) solo como
+referencia visual.
 
-Este simulador permite a los estudiantes escribir, compilar y ejecutar pseudocódigo concurrente paso a paso, visualizando de forma gráfica y reactiva el entrelazado de hilos, las condiciones de carrera y la evolución de las variables compartidas y semáforos.
+## Arquitectura
 
-## ✨ Características Principales
+Monorepo con dos partes independientes:
 
-* **Motor de Simulación a Medida:** Un analizador léxico/sintáctico (Parser) y una Máquina Virtual (VM) construidos desde cero en TypeScript para interpretar estrictamente la sintaxis de la cátedra.
-* **Soporte Extenso de Sintaxis:**
-    * Comandos guardados de Dijkstra (`if-fi`, `do-od`).
-    * Sentencias iterativas cuantificadas (`fa-af`).
-    * Hilos independientes (`process`) y bifurcación estructurada (`co-oc`).
-    * Primitivas de sincronización (`<await(B) S>`, `P()`, `V()`).
-    * Tipos abstractos como arreglos y Semáforos (`sem`).
-* **Time-Travel Debugger:** Permite pausar la ejecución y hacer *hover* sobre el log histórico de eventos (Scheduler) para ver una "fotografía" exacta del estado de la memoria en el pasado.
-* **Visualización Estructural de Semáforos:** Los semáforos se muestran como Tipos de Datos Abstractos completos, separando visualmente el valor del contador y la cola estricta de procesos bloqueados.
-* **Color-Coding de Hilos:** Cada proceso instanciado recibe una identidad cromática, permitiendo rastrear visualmente qué hilo mutó qué variable en la memoria compartida.
+| Carpeta | Qué es | Stack |
+|---|---|---|
+| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y una API REST que lo expone | Java 21, Spring Boot 3, Maven |
+| [`frontend/`](./frontend) | Interfaz web: editor, panel de monitores, línea de tiempo, historial | React 19, TypeScript, Vite |
+| [`docs/`](./docs) | Teoría, gramática, SRS, propuesta de PPS | — |
+| [`legacy/`](./legacy) | Prototipo previo (semáforos), archivado | — |
 
-## 🚀 Inicio Rápido
+El núcleo (`backend/src/main/java/.../lang` + `.../vm`) no depende de Spring y podría
+reutilizarse en otro contexto. La comunicación es REST con estado en memoria en el servidor;
+el frontend maneja la "ejecución completa" (bucle de pasos) y el *time-travel* acumulando los
+snapshots que devuelve cada paso.
 
-### Prerrequisitos
-Asegúrate de tener instalado [Node.js](https://nodejs.org/) (versión 18+ recomendada) y `npm` (o `yarn`/`pnpm`).
+## Cómo correrlo
 
-### Instalación
+Requisitos: **JDK 21+**, **Maven 3.9+**, **Node 20+**.
 
-1.  Clona el repositorio:
-    ```bash
-    git clone https://github.com/tu-usuario/SimuladorConcurrente.git
-    cd SimuladorConcurrente
-    ```
-2.  Instala las dependencias:
-    ```bash
-    npm install
-    ```
-3.  Inicia el servidor de desarrollo (Vite):
-    ```bash
-    npm run dev
-    ```
-4.  Abre tu navegador en `http://localhost:5173`.
+### Todo junto
 
-## 📚 Documentación de Referencia
+```bash
+./dev.sh
+```
 
-Dentro del directorio `/docs` encontrarás especificaciones fundamentales para entender el comportamiento del motor y el código que los alumnos deben utilizar:
-* [**`EBNF_sintaxis.md`**](./docs/EBNF_sintaxis.md): La gramática extendida de Backus-Naur que rige el analizador sintáctico del simulador.
-* [**`conceptos_concurrencia.md`**](./docs/conceptos_concurrencia.md): Resumen teórico de los conceptos de paralelismo, locks y barreras aplicables en el motor.
-* [**`semaforos.md`**](./docs/semaforos.md): Especificación sobre el comportamiento de los semáforos, *Split Binary Semaphores* y técnicas avanzadas como *Passing the Baton*.
+Levanta backend (`:8080`) y frontend (`:5173`) en un solo comando; `Ctrl-C` corta los dos.
+Libera los puertos antes de arrancar y corre `npm install` la primera vez. Fija `JAVA_HOME`
+al JDK 21 de Homebrew (exportá tu propio `JAVA_HOME` para usar otro).
 
-## 🛠️ Arquitectura del Proyecto
+### Por separado
 
-* **`src/engine/`**: El núcleo del simulador.
-    * `lexer.ts`: Tokenizador de expresiones regulares simples.
-    * `parser.ts`: Analizador sintáctico descendente recursivo (Recursive Descent Parser) que genera el AST (Abstract Syntax Tree).
-    * `vm.ts`: Motor de evaluación no determinístico. Controla el *scheduler* aleatorio, resuelve variables locales vs. globales e implementa la semántica de bloqueos.
-* **`src/components/`**: Interfaz de usuario React.
-    * `CodeEditor.tsx`: Editor de texto enriquecido con control de indentación automático y sincronización de números de línea.
-    * `VariableTracker.tsx`: Visor reactivo de tarjetas (cards) que muestra el estado de la memoria global y las colas de semáforos.
-    * `LogViewer.tsx`: Historial cronológico de cambios de estado y bifurcaciones.
+```bash
+# 1) Backend  (http://localhost:8080)
+cd backend
+mvn spring-boot:run
+
+# 2) Frontend (http://localhost:5173)  — en otra terminal
+cd frontend
+npm install
+npm run dev
+```
+
+En desarrollo el frontend hace peticiones a `/api/...` y Vite las redirige al backend
+(sin CORS). Abrir <http://localhost:5173>.
+
+### Tests del núcleo
+
+```bash
+cd backend && mvn test
+```
+
+Incluye los programas canónicos de la teoría (contador `TOTAL`, buffer de un dato con
+`cond`, buffer limitado, broadcast con `signal_all`) y verificación de deadlock, exclusión
+mutua y parámetros `out`.
+
+## El lenguaje
+
+Pseudocódigo tipado estilo C. Ver la especificación completa y la gramática EBNF en
+[`docs/sintaxis_especificacion.md`](./docs/sintaxis_especificacion.md) y la teoría en
+[`docs/monitores.md`](./docs/monitores.md).
+
+```c
+monitor Buffer {
+  int dato = 0;
+  boolean hayDato = false;
+  cond libre, ocupado;
+
+  procedure depositar(d: in int) {
+    while (hayDato) wait(libre);
+    dato = d; hayDato = true;
+    signal(ocupado);
+  }
+  procedure retirar(r: out int) {
+    while (not hayDato) wait(ocupado);
+    r = dato; hayDato = false;
+    signal(libre);
+  }
+}
+
+process Productor { int i = 1; while (i <= 5) { Buffer.depositar(i); i++; } }
+process Consumidor { int x = 0; Buffer.retirar(x); }
+```
+
+- Solo monitores. Exclusión mutua **implícita**; sincronización por condición **explícita**
+  con `wait` / `signal` / `signal_all` (disciplina *signal and continue*).
+- Todo el estado compartido vive dentro de un monitor. Fuera solo se permiten constantes
+  globales (`int N = 5;`).
+- `process`, familias `process P[i: 0..N]`, `if` / `while` / `for`, tipos
+  `int` / `double` / `boolean` / `text` y `Cola` FIFO (`push` / `pop` / `empty`).
+- Parámetros `in` / `out` / `inout`.
+
+## API REST
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| `POST` | `/api/simulations` | Compila el código y crea una simulación. `400` con `{error, line}` si falla. |
+| `POST` | `/api/simulations/{id}/step` | Avanza un instante. Body: `{chosenProcessId?, policy}` (`RANDOM` \| `ROUND_ROBIN`). |
+| `POST` | `/api/simulations/{id}/reset` | Reinicia al instante 0. |
+| `GET` | `/api/simulations/{id}` | Estado completo (para reconexión). |
+| `DELETE` | `/api/simulations/{id}` | Libera la simulación. |

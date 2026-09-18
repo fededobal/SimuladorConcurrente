@@ -1,124 +1,251 @@
-# Especificación de Sintaxis y Semántica: Simulador Concurrente
+# Especificación de Sintaxis y Semántica — Lenguaje de Monitores
 
-**Contexto para el Agente (Antigravity):** Este documento define la totalidad de las estructuras, tipos de datos, operaciones y reglas gramaticales que el parser y el motor de ejecución del simulador deben soportar. El lenguaje es un pseudocódigo tipado de estilo C, diseñado específicamente para la enseñanza de Programación Concurrente (Memoria Compartida).
-
----
-
-## 1. Estructura General del Programa
-El código fuente se divide en dos secciones lógicas implícitas:
-1.  **Zona de Declaración Global:** Donde se definen variables compartidas y semáforos. Todo lo declarado fuera de un proceso es global y accesible por cualquier hilo.
-2.  **Zona de Procesos:** Definición de los bloques `process` que contienen el código secuencial que ejecutará cada hilo.
-
-**Comentarios:**
-* De una línea: `// comentario`
-* Multilínea: `/* comentario */`
+Define el lenguaje que acepta el núcleo del simulador (lexer + parser + VM, implementados
+en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de **monitores**
+(memoria compartida, disciplina *signal and continue*). Ver `monitores.md` para la teoría.
 
 ---
 
-## 2. Tipos de Datos Primitivos y Variables Compartidas
-El analizador debe reconocer los siguientes tipos de datos y permitir su asignación en la zona global o local.
+## 1. Estructura del programa
 
-### Primitivos
-* `int`: Números enteros. Ej: `int contador = 0;`
-* `boolean`: Valores de verdad (`true` o `false`). Ej: `boolean flag = true;`
-* `text`: Cadenas de texto. Ej: `text mensaje = "Iniciando";`
+Un programa tiene tres tipos de declaraciones de nivel superior, en cualquier orden:
 
-### Arreglos (Arrays)
-Se debe soportar la declaración de arreglos estáticos y su inicialización masiva o por defecto.
-* **Sintaxis:** `tipo nombre[tamaño];` o `tipo nombre[tamaño] = ([tamaño] valor_inicial);`
-* **Ejemplos:**
-    * `int buffer[10];` (Arreglo de 10 enteros no inicializado).
-    * `int valores[5] = ([5] 0);` (Arreglo de 5 enteros, todos inicializados en 0).
-* **Acceso:** Lectura/escritura mediante índice base 0. Ej: `buffer[0] = 1;` o `x = buffer[i];`
+1. **Constantes globales** — variables escalares declaradas fuera de todo monitor/proceso.
+   Son de **solo lectura**; sirven para tamaños de arreglo y rangos de familias de procesos
+   (`int N = 5;`). Asignarles un valor es error semántico.
+2. **Monitores** — `monitor Nombre { ... }`.
+3. **Procesos** — `process Nombre { ... }` o `process Nombre[i: desde..hasta] { ... }`.
 
----
+Debe haber **al menos un proceso**. El estado compartido mutable **solo** puede vivir dentro
+de un monitor.
 
-## 3. Semáforos (Sincronización)
-El motor de ejecución debe manejar los semáforos como un tipo de dato especial con estado interno (contador y cola de bloqueados asociada).
-
-### Declaración
-* **Semáforo simple:** `sem nombre = valor_inicial;` (Ej: `sem mutex = 1;`)
-* **Arreglo de semáforos:** `sem nombre[tamaño] = ([tamaño] valor_inicial);` (Ej: `sem tenedores[5] = ([5] 1);`). Tambien se pueden declarar semaforos sin inicializar simplemente con `sem nombre[tamaño]` 
-
-### Operaciones
-Las operaciones atómicas estándar de Dijkstra deben ser interceptadas por el Scheduler del simulador.
-* `P(semáforo)`: Decrementa el contador. Si el valor resultante es `< 0`, el hilo actual cambia su estado a `BLOCKED` y entra en la cola del semáforo. La CPU pasa a otro hilo.
-* `V(semáforo)`: Incrementa el contador. Si el valor es `<= 0` (lo que implica que hay hilos esperando), saca al primer hilo de la cola (política FIFO) y lo pasa a estado `READY`.
-* **Soporte para arreglos:** Debe soportar operaciones indexadas. Ej: `P(tenedores[i]);` o `V(tenedores[(i+1)%5]);`
+**Comentarios:** `// línea` y `/* bloque */`.
 
 ---
 
-## 4. Estructuras de Datos Complejas: Colas (Queues)
-El simulador debe incluir una estructura `Cola` nativa, frecuentemente utilizada en modelos de Productor/Consumidor.
+## 2. Tipos y valores
 
-### Declaración y Uso
-* **Declaración:** `Cola nombre;` (Ej: `Cola buffer;`)
-* **Métodos nativos requeridos:**
-    * `push()`: Inserta un elemento al final de la cola. Por ejemplo: `push(buffer,elemento)`
-    * `pop()`: Retira y retorna el primer elemento de la cola. Puede asignarse a una variable. Ej: `pop(buffer,x);`
-    * `empty buffer`: Retorna un booleano `true` si la cola no tiene elementos o sino `false`.
+| Tipo | Literales | Default |
+|---|---|---|
+| `int` | `0`, `42` | `0` |
+| `double` | `3.14`, `0.5` | `0.0` |
+| `boolean` | `true`, `false` | `false` |
+| `text` | `"hola"` | `""` |
+| `Cola` | — (se llena con `push`) | vacía |
+
+### Arreglos
+
+- Declaración: `tipo nombre[tamaño];` o `tipo nombre[tamaño] = ([tamaño] valorInicial);`
+- El `tamaño` es una expresión constante (literal o constante global).
+- Acceso base 0: `buf[i]`, `buf[(i + 1) % N]`.
+- Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
+- Se declaran dentro de un monitor o como locales de un proceso, nunca como constante global.
+
+### Cola (FIFO)
+
+- Declaración: `Cola nombre;`
+- `push(cola, elemento);` — encola al final. Se admite `push(cola, a, b)` (encola una tupla).
+- `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura
+  una tupla; la cantidad de destinos debe coincidir con la de la tupla encolada. `pop` sobre
+  cola vacía es error de ejecución.
+- `empty cola` — expresión booleana, `true` si la cola no tiene elementos.
 
 ---
 
-## 5. Estructuras de Control
-El código interno de los procesos debe soportar anidamiento de las siguientes estructuras de control estándar.
+## 3. Monitores
 
-### Condicionales
-```c
-if (condicion) {
-    // sentencias
-} else {
-    // sentencias
+```
+monitor Nombre {
+    <declaraciones de variables permanentes>
+    <declaraciones de variables condición>
+    <sentencias de inicialización>         // opcional, se ejecutan una vez
+    <procedures>
 }
 ```
 
-### Bucles
-**While:**
-```c
-while (condicion) {
-    // sentencias
+- Las variables permanentes y las `cond` solo son visibles dentro del monitor.
+- El **orden** dentro del monitor es libre, pero por convención: permanentes, `cond`,
+  inicialización, procedures.
+
+### 3.1 Variables condición
+
+```
+cond noVacio;
+cond turno[N];      // arreglo de variables condición (variables condición privadas)
+```
+
+### 3.2 Procedures
+
+```
+procedure nombre(p1: modo tipo, p2: modo tipo, ...) {
+    <sentencias>
 }
 ```
 
-**For:**
-```c
-for (int i = 0; i < N; i = i + 1) {
-    // sentencias
-}
-```
-*Nota para el parser: Permitir sintaxis de incremento acortada como `i++` o `i += 1` si es posible.*
+- **Modos de parámetro:** `in` (default — solo lectura), `out` (se copia al argumento del
+  llamador al retornar; el argumento debe ser una variable/elemento de arreglo, no una
+  expresión), `inout` (ambas).
+- Si el modo se omite: `procedure op(x: int)` equivale a `procedure op(x: in int)`.
+- Sin valor de retorno: los resultados salen por parámetros `out`/`inout`.
+- Dentro del cuerpo se ven: parámetros, variables locales del procedure, variables
+  permanentes del monitor y constantes globales. **No** se ven las locales del `process`
+  que llamó.
+
+### 3.3 Operaciones sobre variables condición
+
+Solo válidas dentro de un procedure (con el monitor tomado):
+
+- `wait(cv);` — siempre demora; libera el monitor.
+- `signal(cv);` — despierta al primero de `cv` (no-op si está vacía); el que señaliza sigue.
+- `signal_all(cv);` — despierta a todos los de `cv`.
+- Con arreglos: `wait(turno[id]); signal(turno[id]);`
 
 ---
 
-## 6. Declaración de Procesos (Hilos)
-El motor debe parsear los procesos para convertirlos en los hilos (Threads) que manejará el Scheduler.
+## 4. Procesos
 
-### Proceso Único
-Define un único hilo en el simulador.
-```c
-process NombreProceso {
-    // Código local e interacciones
+```
+process Nombre {
+    <sentencias>
+}
+
+process Nombre[iterador: desde..hasta] {   // familia de procesos
+    <sentencias>
 }
 ```
 
-### Arreglo de Procesos (Procesos Parametrizados)
-Fundamental para simular concurrencia masiva (ej: 5 filósofos, N lectores). El parser debe instanciar múltiples hilos basados en el rango definido, inyectando la variable de iteración como contexto local.
-* **Sintaxis requerida:** `process Nombre[variable : inicio..fin]`
-* **Ejemplo:**
-```c
-process Filosofo[id: 0..4] {
-    while (true) {
-        P(tenedores[id]);
-        P(tenedores[(id + 1) % 5]);
-        // Comer
-        V(tenedores[id]);
-        V(tenedores[(id + 1) % 5]);
-    }
-}
-```
-*El Scheduler debe generar 5 hilos (Filosofo 0, Filosofo 1, ..., Filosofo 4), cada uno con su variable local `id` constante.*
+- La familia instancia `hasta - desde + 1` procesos; cada uno recibe `iterador` como
+  constante local (`process Filosofo[id: 0..4]` → `Filosofo[0]` … `Filosofo[4]`).
+- `desde` y `hasta` son expresiones constantes.
+- En el cuerpo de un proceso se ven: sus variables locales, el iterador y las constantes
+  globales. Los nombres de monitor solo se usan para llamadas `Monitor.procedure(...)`.
 
 ---
 
-## 7. Variables Locales
-Cualquier variable declarada dentro del bloque `{ }` de un proceso (`int x = 0;`) debe existir únicamente en el contexto (Stack) de ese hilo específico y no debe ser visible en el panel de "Variables Compartidas" del frontend, salvo que la UI tenga una vista específica para el estado interno del hilo activo.
+## 5. Sentencias
+
+| Sentencia | Forma |
+|---|---|
+| Declaración local | `int x = 0;` `boolean b;` `int a[3] = ([3] 0);` |
+| Asignación | `x = expr;` `a[i] = expr;` |
+| Incremento / decremento | `x++;` `x--;` |
+| Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
+| Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
+| Cola | `push(c, e);` `pop(c, x);` |
+| Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
+| Mientras | `while (cond) { ... }` |
+| For (contador) | `for (int i = 0; i < N; i++) { ... }` |
+| For (rango) | `for (int i = 1..N) { ... }` |
+| Skip | `skip;` |
+
+Toda sentencia (o la evaluación de una guarda, o una llamada a monitor) es un **paso
+atómico** del scheduler: en cada instante avanza exactamente un proceso una sentencia.
+
+---
+
+## 6. Expresiones
+
+- Aritméticas: `+ - * / %` sobre `int`/`double`.
+- Comparación: `== != < <= > >=`.
+- Booleanas: `and` `or` `not` (equivalentes: `&& || !`).
+- Acceso a arreglo: `a[expr]`.
+- `empty cola`.
+- Paréntesis para agrupar.
+
+Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+ -` → `* / %` → unario.
+
+---
+
+## 7. Semántica de ejecución (resumen)
+
+- **Un instante = una sentencia de un proceso.** El scheduler elige el proceso: por política
+  (`random` o `round-robin`) o, en modo paso a paso, lo elige el usuario.
+- **Exclusión mutua implícita:** a lo sumo un proceso dentro de cada monitor.
+  - `Monitor.op(args)` con el monitor libre: el proceso entra y ejecuta el cuerpo.
+  - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada; reintenta al
+    liberarse.
+  - Al retornar del procedure: se copian los `out`/`inout`, se libera el monitor y **todos**
+    los de la cola de entrada vuelven a competir.
+- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver `monitores.md`).
+- **Deadlock:** ningún proceso listo y no todos terminados → se informa.
+
+---
+
+## 8. Gramática (EBNF)
+
+```ebnf
+programa      = { const_global | monitor | proceso } ;
+
+const_global  = tipo_escalar ident [ "=" expr ] ";" ;
+
+(* ---------- monitores ---------- *)
+monitor       = "monitor" ident "{" { miembro_monitor } "}" ;
+miembro_monitor = var_perm | cond_decl | procedure | sentencia ;
+var_perm      = tipo ident [ "[" expr "]" ] [ "=" init_valor ] ";" ;
+cond_decl     = "cond" ident [ "[" expr "]" ] { "," ident [ "[" expr "]" ] } ";" ;
+
+procedure     = "procedure" ident "(" [ params ] ")" bloque ;
+params        = param { "," param } ;
+param         = ident ":" [ modo ] tipo_escalar ;
+modo          = "in" | "out" | "inout" ;
+
+(* ---------- procesos ---------- *)
+proceso       = "process" ident [ "[" ident ":" expr ".." expr "]" ] bloque ;
+
+(* ---------- sentencias ---------- *)
+bloque        = "{" { sentencia } "}" ;
+sentencia     = decl_local
+              | asignacion
+              | inc_dec
+              | llamada_monitor
+              | op_cond
+              | op_cola
+              | condicional
+              | mientras
+              | para
+              | "skip" ";"
+              | bloque ;
+
+decl_local    = tipo ident [ "[" expr "]" ] [ "=" init_valor ] ";" ;
+asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
+inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
+llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;
+op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
+op_cola       = "push" "(" ident "," expr { "," expr } ")" ";"
+              | "pop"  "(" ident "," ident { "," ident } ")" ";" ;
+condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
+mientras      = "while" "(" expr ")" cuerpo ;
+para          = "for" "(" iterador "=" expr ";" [ expr ] ";" inc_step ")" cuerpo
+              | "for" "(" iterador "=" expr ".." expr ")" cuerpo ;
+iterador      = [ tipo_escalar ] ident ;   (* con tipo lo declara; sin tipo reusa una variable *)
+inc_step      = ident ( "++" | "--" ) | ident "=" expr ;
+cuerpo        = bloque | sentencia ;
+args          = expr { "," expr } ;
+
+init_valor    = expr | "(" "[" expr "]" expr ")" ;
+
+(* ---------- expresiones ---------- *)
+expr          = expr_or ;
+expr_or       = expr_and { ( "or" | "||" ) expr_and } ;
+expr_and      = expr_not { ( "and" | "&&" ) expr_not } ;
+expr_not      = [ "not" | "!" ] expr_cmp ;
+expr_cmp      = expr_add [ ( "==" | "!=" | "<" | "<=" | ">" | ">=" ) expr_add ] ;
+expr_add      = expr_mul { ( "+" | "-" ) expr_mul } ;
+expr_mul      = expr_un { ( "*" | "/" | "%" ) expr_un } ;
+expr_un       = [ "-" ] primario ;
+primario      = numero | texto | "true" | "false"
+              | "empty" ident
+              | ident [ "[" expr "]" ]
+              | "(" expr ")" ;
+
+(* ---------- léxico ---------- *)
+tipo          = tipo_escalar | "Cola" ;
+tipo_escalar  = "int" | "double" | "boolean" | "text" ;
+ident         = letra { letra | digito | "_" } ;
+numero        = digito { digito } [ "." digito { digito } ] ;
+texto         = '"' { caracter } '"' ;
+```
+
+**Palabras reservadas:** `monitor procedure cond process if else while for skip
+wait signal signal_all push pop empty in out inout true false int double boolean text Cola
+and or not`.
