@@ -457,7 +457,7 @@ public final class VirtualMachine {
         ExprEvaluator ev = evaluator(p, act);
         if (inc.index() == null) {
             Value cur = readName(p, act, inc.target(), inc.line());
-            Value next = new Value.IntVal(cur.asLong() + (inc.increment() ? 1 : -1));
+            Value next = stepped(cur, inc.increment(), inc.line());
             assignScalar(p, act, inc.target(), next, inc.line());
             event(p, "ASSIGN", inc.target(),
                     p.name() + ": " + inc.target() + (inc.increment() ? "++" : "--")
@@ -466,12 +466,25 @@ public final class VirtualMachine {
             int idx = ev.evalInt(inc.index());
             Value.ArrayVal arr = asArray(p, act, inc.target(), inc.line());
             checkIndex(arr, idx, inc.target(), inc.line());
-            long nv = arr.get(idx).asLong() + (inc.increment() ? 1 : -1);
-            arr.set(idx, new Value.IntVal(nv));
+            Value next = stepped(arr.get(idx), inc.increment(), inc.line());
+            arr.set(idx, next);
             touchIfMonitorVar(p, act, inc.target());
             event(p, "ASSIGN", inc.target(),
                     p.name() + ": " + inc.target() + "[" + idx + "]"
-                            + (inc.increment() ? "++" : "--") + " => " + nv);
+                            + (inc.increment() ? "++" : "--") + " => " + next.display());
+        }
+    }
+
+    /** {@code ++}/{@code --} conservan el tipo: un double suma 1.0 y un int no desborda en silencio. */
+    private static Value stepped(Value cur, boolean increment, int line) {
+        int delta = increment ? 1 : -1;
+        if (cur instanceof Value.DoubleVal) {
+            return new Value.DoubleVal(cur.asDouble() + delta);
+        }
+        try {
+            return new Value.IntVal(Math.addExact(cur.asLong(), delta));
+        } catch (ArithmeticException e) {
+            throw RuntimeError.overflow(line);
         }
     }
 

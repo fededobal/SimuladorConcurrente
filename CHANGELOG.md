@@ -22,6 +22,8 @@ Reglas:
   mostraba `Error: null`. (Federico Dobal, 2026-09-18)
 - Devolver como error, y no como excepción, una falla al inicializar las variables de un
   monitor. Ninguna función del motor lanza excepciones hacia la interfaz. (Federico Dobal, 2026-09-18)
+- `++` y `--` sobre un `double` (variable o elemento de arreglo) suman o restan 1.0 en lugar
+  de truncar el valor. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)

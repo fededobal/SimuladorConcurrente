@@ -79,13 +79,13 @@ const CANONICOS = [
   ['error en la inicializacion del monitor vuelve como error (B5)', `
     monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !r.excepcion && (r.compilacion || r.kinds?.has('ERROR'))],
+  ['d++ sobre double no trunca (B2)', `
+    monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }`,
+    (r) => r.vars?.['M.d'] === '2.5'],
 ];
 
 // Bugs verificados el 18/09/2026 (ver docs/informe-revision.md, seccion 3).
 const CONOCIDOS = [
-  ['B2 d++ sobre double no trunca', `
-    monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }`,
-    (r) => r.vars?.['M.d'] === '2.5'],
   ['B4 literal enorme es error de compilacion', `
     monitor M { int x = 99999999999999999999; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !!r.compilacion],

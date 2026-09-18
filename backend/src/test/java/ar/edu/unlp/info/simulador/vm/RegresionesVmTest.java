@@ -39,13 +39,21 @@ class RegresionesVmTest {
     }
 
     @Test
-    @Disabled("B2: execIncDec hace asLong() + 1 y trunca los double")
     void incrementoDeDoubleNoTrunca() {
         RunResult r = TestSupport.run("""
                 monitor M { double d = 1.5; procedure f() { d++; } }
                 process A { M.f(); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
         assertEquals("2.5", TestSupport.finalVar(r, "M", "d"));
+    }
+
+    @Test
+    void decrementoDeElementoDoubleNoTrunca() {
+        RunResult r = TestSupport.run("""
+                monitor M { double a[2] = ([2] 1.5); double d = 0; procedure f() { a[0]--; d = a[0]; } }
+                process A { M.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("0.5", TestSupport.finalVar(r, "M", "d"));
     }
 
     @Test
