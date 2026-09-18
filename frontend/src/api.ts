@@ -1,3 +1,4 @@
+import { crear, liberar, paso, reiniciar } from './engine/simulador.js';
 import type {
   ApiError,
   SchedulingPolicy,
@@ -5,12 +6,10 @@ import type {
   StepResponse,
 } from './types';
 
-// En desarrollo queda vacio y el proxy de Vite manda /api a localhost:8080. En un deploy
-// no hay proxy: hay que apuntar VITE_API_URL al origen donde corre el backend Spring Boot
-// (p. ej. https://simulador-api.midominio.com), que ademas tiene que permitir CORS.
-const ORIGEN = import.meta.env.VITE_API_URL ?? '';
-
-const BASE = `${ORIGEN}/api/simulations`;
+// El nucleo (lexer, parser, validador y VM de monitores) esta escrito en Java y vive en
+// backend/src/main/java. TeaVM lo compila a engine/simulador.js, asi que corre entero
+// dentro del navegador: no hay servidor, ni red, ni latencia. La API REST de Spring sigue
+// existiendo y expone el mismo nucleo, pero el frontend ya no la necesita.
 
 export class ApiRequestError extends Error {
   line: number | null;
@@ -20,58 +19,30 @@ export class ApiRequestError extends Error {
   }
 }
 
-async function parse<T>(reqP: Promise<Response>): Promise<T> {
-  let res: Response;
-  try {
-    res = await reqP;
-  } catch {
-    // fetch solo rechaza por fallas de red: el backend caido o dormido, o el navegador
-    // bloqueando la respuesta porque el origen de esta pagina no esta habilitado en CORS.
-    throw new ApiRequestError(
-      ORIGEN
-        ? `No se pudo conectar con el backend (${ORIGEN}). Puede estar caido o dormido, o este origen no estar habilitado en su CORS.`
-        : 'No se pudo conectar con el backend. Revisa que este corriendo en http://localhost:8080.',
-      null,
-    );
-  }
-  if (!res.ok) {
-    let err: ApiError = { error: `Error HTTP ${res.status}`, line: null };
-    try {
-      err = await res.json();
-    } catch {
-      /* respuesta sin cuerpo JSON */
-    }
+/** El puente devuelve o el DTO pedido o un ApiError; los distingue el campo `error`. */
+function parse<T>(json: string): T {
+  const data = JSON.parse(json) as T | ApiError;
+  if (data !== null && typeof data === 'object' && 'error' in data) {
+    const err = data as ApiError;
     throw new ApiRequestError(err.error, err.line);
   }
-  return res.json() as Promise<T>;
+  return data as T;
 }
 
 export const api = {
-  create(code: string, seed?: number): Promise<SimulationCreated> {
-    return parse(
-      fetch(BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, seed }),
-      }),
-    );
+  create(code: string, seed?: number): SimulationCreated {
+    return parse<SimulationCreated>(crear(code, seed ?? -1));
   },
 
-  reset(id: string): Promise<SimulationCreated> {
-    return parse(fetch(`${BASE}/${id}/reset`, { method: 'POST' }));
+  reset(): SimulationCreated {
+    return parse<SimulationCreated>(reiniciar());
   },
 
-  step(id: string, policy: SchedulingPolicy, chosenProcessId?: number): Promise<StepResponse> {
-    return parse(
-      fetch(`${BASE}/${id}/step`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ policy, chosenProcessId: chosenProcessId ?? null }),
-      }),
-    );
+  step(policy: SchedulingPolicy, chosenProcessId?: number): StepResponse {
+    return parse<StepResponse>(paso(policy, chosenProcessId ?? -1));
   },
 
-  remove(id: string): Promise<void> {
-    return fetch(`${BASE}/${id}`, { method: 'DELETE' }).then(() => undefined);
+  remove(): void {
+    liberar();
   },
 };

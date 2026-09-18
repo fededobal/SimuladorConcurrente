@@ -19,13 +19,12 @@ export function useSimulation(initialCode: string) {
   const [error, setError] = useState<SimError | null>(null);
   const [speed, setSpeed] = useState<number>(600);
 
-  const sessionRef = useRef<string | null>(null);
+  const activaRef = useRef(false);
   const statusRef = useRef<SimStatus>('idle');
   const timerRef = useRef<number | null>(null);
-  const busyRef = useRef(false);
   statusRef.current = status;
 
-  // statusRef se actualiza en el acto: los callbacks async lo leen antes de re-renderizar
+  // statusRef se actualiza en el acto: el intervalo lo lee antes de re-renderizar
   const setStat = (s: SimStatus) => {
     statusRef.current = s;
     setStatus(s);
@@ -40,9 +39,8 @@ export function useSimulation(initialCode: string) {
 
   const drop = useCallback(() => {
     clearTimer();
-    const id = sessionRef.current;
-    if (id) void api.remove(id);
-    sessionRef.current = null;
+    if (activaRef.current) api.remove();
+    activaRef.current = false;
     setSnapshot(null);
     setError(null);
     setStat('idle');
@@ -54,34 +52,32 @@ export function useSimulation(initialCode: string) {
   // editar el codigo invalida la simulacion en curso
   const setCode = useCallback((next: string) => {
     setCodeState(next);
-    if (sessionRef.current || statusRef.current !== 'idle') drop();
+    if (activaRef.current || statusRef.current !== 'idle') drop();
   }, [drop]);
 
-  const compile = useCallback(async (): Promise<boolean> => {
+  const compile = useCallback((): boolean => {
     clearTimer();
     setError(null);
     try {
-      const created = await api.create(code);
-      sessionRef.current = created.id;
+      const created = api.create(code);
+      activaRef.current = true;
       setSnapshot(created.initial.snapshot);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
       const err = e as ApiRequestError;
       setError({ message: err.message, line: err.line ?? null });
-      sessionRef.current = null;
+      activaRef.current = false;
       setSnapshot(null);
       setStat('error');
       return false;
     }
   }, [code]);
 
-  const doStep = useCallback(async (): Promise<boolean> => {
-    const id = sessionRef.current;
-    if (!id || busyRef.current) return false;
-    busyRef.current = true;
+  const doStep = useCallback((): boolean => {
+    if (!activaRef.current) return false;
     try {
-      const res = await api.step(id, 'RANDOM');
+      const res = api.step('RANDOM');
       const last = res.entries[res.entries.length - 1];
       if (last) setSnapshot(last.snapshot);
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
@@ -93,31 +89,29 @@ export function useSimulation(initialCode: string) {
       setStat('error');
       clearTimer();
       return false;
-    } finally {
-      busyRef.current = false;
     }
   }, []);
 
-  const step = useCallback(async () => {
+  const step = useCallback(() => {
     if (statusRef.current === 'idle' || statusRef.current === 'error') {
-      if (!(await compile())) return;
+      if (!compile()) return;
     }
     if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
     clearTimer();
     setStat('paused');
-    await doStep();
+    doStep();
   }, [compile, doStep]);
 
-  const play = useCallback(async () => {
+  const play = useCallback(() => {
     if (statusRef.current === 'idle' || statusRef.current === 'error') {
-      if (!(await compile())) return;
+      if (!compile()) return;
     }
     if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
     setStat('running');
     clearTimer();
-    timerRef.current = window.setInterval(async () => {
+    timerRef.current = window.setInterval(() => {
       if (statusRef.current !== 'running') return;
-      if (!(await doStep())) clearTimer();
+      if (!doStep()) clearTimer();
     }, speed);
   }, [compile, doStep, speed]);
 
@@ -126,17 +120,16 @@ export function useSimulation(initialCode: string) {
     if (statusRef.current === 'running') setStat('paused');
   }, []);
 
-  const reset = useCallback(async () => {
+  const reset = useCallback(() => {
     clearTimer();
-    const id = sessionRef.current;
-    if (!id) { await compile(); return; }
+    if (!activaRef.current) { compile(); return; }
     try {
-      const created = await api.reset(id);
+      const created = api.reset();
       setSnapshot(created.initial.snapshot);
       setError(null);
       setStat('ready');
     } catch {
-      await compile();
+      compile();
     }
   }, [compile]);
 
@@ -144,9 +137,9 @@ export function useSimulation(initialCode: string) {
   useEffect(() => {
     if (statusRef.current !== 'running') return;
     clearTimer();
-    timerRef.current = window.setInterval(async () => {
+    timerRef.current = window.setInterval(() => {
       if (statusRef.current !== 'running') return;
-      if (!(await doStep())) clearTimer();
+      if (!doStep()) clearTimer();
     }, speed);
     return clearTimer;
   }, [speed, doStep]);

@@ -16,45 +16,57 @@ Monorepo con dos partes independientes:
 
 | Carpeta | Qué es | Stack |
 |---|---|---|
-| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y una API REST que lo expone | Java 21, Spring Boot 3, Maven |
+| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores), el puente a JavaScript y una API REST que expone el mismo núcleo | Java 21, Spring Boot 3, TeaVM, Maven |
 | [`frontend/`](./frontend) | Interfaz web: editor, panel de monitores, línea de tiempo, historial | React 19, TypeScript, Vite |
 | [`docs/`](./docs) | Teoría, gramática, SRS, propuesta de PPS | — |
 | [`legacy/`](./legacy) | Prototipo previo (semáforos), archivado | — |
 
-El núcleo (`backend/src/main/java/.../lang` + `.../vm`) no depende de Spring y podría
-reutilizarse en otro contexto. La comunicación es REST con estado en memoria en el servidor;
-el frontend maneja la "ejecución completa" (bucle de pasos) y el *time-travel* acumulando los
-snapshots que devuelve cada paso.
+El núcleo (`backend/src/main/java/.../lang` + `.../vm`) no depende de Spring: sólo usa
+`java.util`. Eso permite compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y
+correrlo dentro del navegador, sin servidor:
+
+```
+lang/ + vm/  ──(javac)──>  bytecode  ──(TeaVM)──>  frontend/src/engine/simulador.js
+    ▲                                                          │
+    └── js/SimuladorJs.java  (puente @JSExport)                └── lo importa src/api.ts
+```
+
+`frontend/src/engine/simulador.js` es **código generado y commiteado**: no se edita a mano.
+Se regenera con `npm run engine` desde `frontend/` (o `mvn -Pweb package` desde `backend/`),
+y hay que hacerlo cada vez que se toca el núcleo Java. Se commitea porque el hosting sirve
+archivos estáticos y no tiene JDK ni Maven para generarlo en el deploy.
+
+`api/` expone el mismo núcleo por REST (Spring Boot, estado en memoria). Queda como segunda
+puerta de entrada al núcleo y para pruebas de integración, pero el frontend no la usa: llama
+al motor compilado de forma directa y sincrónica. El *time-travel* lo arma el frontend
+acumulando los snapshots que devuelve cada paso.
 
 ## Cómo correrlo
 
-Requisitos: **JDK 21+**, **Maven 3.9+**, **Node 20+**.
-
-### Todo junto
+Requisitos: **Node 20+** para correr la app. Para regenerar el motor, además **JDK 21+** y
+**Maven 3.9+**.
 
 ```bash
 ./dev.sh
 ```
 
-Levanta backend (`:8080`) y frontend (`:5173`) en un solo comando; `Ctrl-C` corta los dos.
-Libera los puertos antes de arrancar y corre `npm install` la primera vez. Fija `JAVA_HOME`
-al JDK 21 de Homebrew (exportá tu propio `JAVA_HOME` para usar otro).
+Abre <http://localhost:5173>. Corre `npm install` la primera vez y genera el motor si falta.
 
-### Por separado
+### Al tocar el núcleo Java
 
 ```bash
-# 1) Backend  (http://localhost:8080)
-cd backend
-mvn spring-boot:run
-
-# 2) Frontend (http://localhost:5173)  — en otra terminal
 cd frontend
-npm install
-npm run dev
+npm run engine     # recompila lang/ + vm/ a src/engine/simulador.js
 ```
 
-En desarrollo el frontend hace peticiones a `/api/...` y Vite las redirige al backend
-(sin CORS). Abrir <http://localhost:5173>.
+### La API REST (opcional)
+
+No hace falta para usar el simulador, pero expone el mismo núcleo:
+
+```bash
+cd backend
+mvn spring-boot:run     # http://localhost:8080
+```
 
 ### Tests del núcleo
 
@@ -104,23 +116,12 @@ process Consumidor { int x = 0; Buffer.retirar(x); }
 
 ## Deploy
 
-El frontend es estatico y va a Vercel (`vercel.json`), pero el nucleo es Java: Vercel no lo
-ejecuta, asi que el backend se despliega aparte y el frontend lo apunta por URL. Si falta ese
-paso, la app compila pero cada pedido a `/api/...` cae en el 404 de Vercel.
+Sitio estático: `vercel.json` compila `frontend/` y publica `frontend/dist`. No hay servicio
+que desplegar ni variables de entorno que configurar, porque el simulador corre entero en el
+navegador de quien abre la página.
 
-1. **Backend** en Render (o Railway / Fly, cualquiera que corra Docker): hay un
-   `backend/Dockerfile` y un `render.yaml` listos. En Render, *New > Blueprint* sobre el repo
-   toma el `render.yaml`; a mano, *New > Web Service* con runtime Docker, dockerfile path
-   `./backend/Dockerfile` y context `./backend`. El puerto sale de `PORT`, que el host inyecta.
-2. **CORS**: en el backend, variable de entorno `CORS_ORIGINS` con el dominio de Vercel.
-   Admite comodines, por ejemplo `https://mi-simulador.vercel.app,https://*.vercel.app`
-   (el segundo habilita tambien los preview deploys).
-3. **Frontend**: en Vercel, *Settings > Environment Variables*, `VITE_API_URL` con el origen
-   del backend sin barra final (ver `frontend/.env.example`) y **redeploy** — es una variable
-   de build, un deploy viejo no la toma.
-
-En el plan gratuito de Render el servicio se duerme tras unos minutos sin trafico: la primera
-ejecucion despues de la siesta tarda algunas decenas de segundos en responder.
+Lo único a recordar: si tocaste el núcleo Java, regenerá el motor (`npm run engine`) y
+commiteá `frontend/src/engine/simulador.js` antes de pushear — el deploy no puede generarlo.
 
 ## API REST
 

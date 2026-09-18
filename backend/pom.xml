@@ -20,6 +20,7 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <teavm.version>0.15.0</teavm.version>
     </properties>
 
     <dependencies>
@@ -36,6 +37,15 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Solo las anotaciones de interop (@JSExport) que usa el puente js/. TeaVM
+             aporta su propia implementacion de la biblioteca estandar al compilar. -->
+        <dependency>
+            <groupId>org.teavm</groupId>
+            <artifactId>teavm-jso</artifactId>
+            <version>${teavm.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -46,4 +56,58 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--
+          Compila el nucleo a JavaScript para que corra en el navegador, sin backend.
+          No corre en el build normal: se invoca a mano con
+
+              mvn -Pweb package
+
+          y deja el modulo generado en frontend/src/engine/, que se commitea (Vercel no
+          tiene JDK ni Maven, asi que no puede generarlo en el deploy).
+        -->
+        <profile>
+            <id>web</id>
+            <dependencies>
+                <!-- Emulacion de la biblioteca estandar que TeaVM usa como classpath al
+                     compilar. Solo hace falta para generar el JS, no para el backend. -->
+                <dependency>
+                    <groupId>org.teavm</groupId>
+                    <artifactId>teavm-classlib</artifactId>
+                    <version>${teavm.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.teavm</groupId>
+                        <artifactId>teavm-maven-plugin</artifactId>
+                        <version>${teavm.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <phase>process-classes</phase>
+                                <configuration>
+                                    <mainClass>ar.edu.unlp.info.simulador.js.SimuladorJs</mainClass>
+                                    <targetDirectory>${project.basedir}/../frontend/src/engine</targetDirectory>
+                                    <targetFileName>simulador.js</targetFileName>
+                                    <targetType>JAVASCRIPT</targetType>
+                                    <jsModuleType>ES2015</jsModuleType>
+                                    <optimizationLevel>ADVANCED</optimizationLevel>
+                                    <minifying>true</minifying>
+                                    <debugInformationGenerated>false</debugInformationGenerated>
+                                    <sourceMapsGenerated>false</sourceMapsGenerated>
+                                    <sourceFilesCopied>false</sourceFilesCopied>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
