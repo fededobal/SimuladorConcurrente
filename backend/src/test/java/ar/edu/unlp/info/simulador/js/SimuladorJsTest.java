@@ -47,7 +47,6 @@ class SimuladorJsTest {
     }
 
     @Test
-    @Disabled("B5: crear solo atrapa CompilationException; un RuntimeError del init se escapa a JS")
     void errorEnLaInicializacionDelMonitorVuelveComoError() {
         String json = assertDoesNotThrow(() -> SimuladorJs.crear("""
                 monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } }
@@ -57,7 +56,6 @@ class SimuladorJsTest {
     }
 
     @Test
-    @Disabled("B3: paso no atrapa excepciones que no sean RuntimeError (overflow)")
     void pasoNuncaLanza() {
         SimuladorJs.crear("""
                 monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } }

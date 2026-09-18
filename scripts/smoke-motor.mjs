@@ -73,6 +73,12 @@ const CANONICOS = [
     monitor M { int x = 0; procedure f() { x = 10 / x; } procedure g() { x = x + 1; } }
     process A { M.f(); } process B { M.g(); }`,
     (r) => r.finished && !r.deadlock && r.vars['M.x'] === '1' && r.kinds.has('ERROR')],
+  ['overflow es error de ejecucion, no excepcion (B3)', `
+    monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } } process A { M.f(); }`,
+    (r) => !r.excepcion && r.kinds?.has('ERROR')],
+  ['error en la inicializacion del monitor vuelve como error (B5)', `
+    monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } } process A { M.f(); }`,
+    (r) => !r.excepcion && (r.compilacion || r.kinds?.has('ERROR'))],
 ];
 
 // Bugs verificados el 18/09/2026 (ver docs/informe-revision.md, seccion 3).
@@ -80,15 +86,9 @@ const CONOCIDOS = [
   ['B2 d++ sobre double no trunca', `
     monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }`,
     (r) => r.vars?.['M.d'] === '2.5'],
-  ['B3 overflow es error de ejecucion, no excepcion', `
-    monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } } process A { M.f(); }`,
-    (r) => !r.excepcion && r.kinds?.has('ERROR')],
   ['B4 literal enorme es error de compilacion', `
     monitor M { int x = 99999999999999999999; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !!r.compilacion],
-  ['B5 error en la inicializacion del monitor vuelve como error', `
-    monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } } process A { M.f(); }`,
-    (r) => !r.excepcion && (r.compilacion || r.kinds?.has('ERROR'))],
 ];
 
 let fallas = 0;

@@ -18,6 +18,10 @@ Reglas:
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
   se informaba como interbloqueo. (Federico Dobal, 2026-09-18)
+- Informar el desborde de un entero como error de ejecución con su línea; antes la interfaz
+  mostraba `Error: null`. (Federico Dobal, 2026-09-18)
+- Devolver como error, y no como excepción, una falla al inicializar las variables de un
+  monitor. Ninguna función del motor lanza excepciones hacia la interfaz. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)

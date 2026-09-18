@@ -3,6 +3,7 @@ package ar.edu.unlp.info.simulador.js;
 import ar.edu.unlp.info.simulador.lang.CompilationException;
 import ar.edu.unlp.info.simulador.lang.Compiler;
 import ar.edu.unlp.info.simulador.vm.LogEntry;
+import ar.edu.unlp.info.simulador.vm.RuntimeError;
 import ar.edu.unlp.info.simulador.vm.SchedulingPolicy;
 import ar.edu.unlp.info.simulador.vm.VirtualMachine;
 import org.teavm.jso.JSExport;
@@ -49,6 +50,13 @@ public final class SimuladorJs {
         } catch (CompilationException e) {
             vm = null;
             return Json.error(e.getMessage(), e.getLine());
+        } catch (RuntimeError e) {
+            // La inicializacion de las variables del monitor se ejecuta al crear la VM.
+            vm = null;
+            return Json.error("Error al inicializar: " + e.getMessage(), e.getLine());
+        } catch (RuntimeException e) {
+            vm = null;
+            return errorInterno();
         }
     }
 
@@ -56,8 +64,7 @@ public final class SimuladorJs {
     @JSExport
     public static String reiniciar() {
         if (vm == null) return sinSimulacion();
-        vm = new VirtualMachine(Compiler.compile(codigo), semilla);
-        return creada();
+        return crear(codigo, semilla);
     }
 
     /**
@@ -70,7 +77,12 @@ public final class SimuladorJs {
     @JSExport
     public static String paso(String policy, int elegido) {
         if (vm == null) return sinSimulacion();
-        List<LogEntry> entries = vm.step(elegido < 0 ? null : elegido, politica(policy));
+        List<LogEntry> entries;
+        try {
+            entries = vm.step(elegido < 0 ? null : elegido, politica(policy));
+        } catch (RuntimeException e) {
+            return errorInterno();
+        }
 
         StringBuilder sb = new StringBuilder("{\"entries\":");
         Json.lista(sb, entries, Json::logEntry);
@@ -119,6 +131,15 @@ public final class SimuladorJs {
             case "ROUND_ROBIN", "ROUNDROBIN", "RR" -> SchedulingPolicy.ROUND_ROBIN;
             default -> SchedulingPolicy.RANDOM;
         };
+    }
+
+    /**
+     * Ultima red: una excepcion que no es del alumno es un bug del simulador. Se devuelve
+     * como error para que no cruce a JS como {@code Error: null}.
+     */
+    private static String errorInterno() {
+        return Json.error("Error interno del simulador. Reportalo con el programa que lo produjo.",
+                -1);
     }
 
     private static String sinSimulacion() {

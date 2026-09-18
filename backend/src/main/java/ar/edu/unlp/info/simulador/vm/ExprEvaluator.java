@@ -75,7 +75,7 @@ public final class ExprEvaluator {
         return switch (u.op()) {
             case "-" -> operand instanceof Value.DoubleVal
                     ? new Value.DoubleVal(-operand.asDouble())
-                    : new Value.IntVal(-operand.asLong());
+                    : new Value.IntVal(negateExact(operand.asLong(), u.line()));
             case "not" -> new Value.BoolVal(!operand.asBool());
             default -> throw new RuntimeError("Operador unario desconocido: " + u.op(), u.line());
         };
@@ -98,13 +98,16 @@ public final class ExprEvaluator {
                 if (l instanceof Value.TextVal || r instanceof Value.TextVal) {
                     yield new Value.TextVal(l.asText() + r.asText());
                 }
-                yield arith(l, r, Double::sum, Math::addExact);
+                yield arith(l, r, Double::sum, Math::addExact, b.line());
             }
-            case "-" -> arith(l, r, (x, y) -> x - y, Math::subtractExact);
-            case "*" -> arith(l, r, (x, y) -> x * y, Math::multiplyExact);
+            case "-" -> arith(l, r, (x, y) -> x - y, Math::subtractExact, b.line());
+            case "*" -> arith(l, r, (x, y) -> x * y, Math::multiplyExact, b.line());
             case "/" -> {
                 if (bothInt(l, r)) {
                     if (r.asLong() == 0) throw new RuntimeError("Division por cero", b.line());
+                    if (l.asLong() == Long.MIN_VALUE && r.asLong() == -1) {
+                        throw RuntimeError.overflow(b.line());
+                    }
                     yield new Value.IntVal(l.asLong() / r.asLong());
                 }
                 if (r.asDouble() == 0) throw new RuntimeError("Division por cero", b.line());
@@ -127,11 +130,21 @@ public final class ExprEvaluator {
     private interface DoubleOp { double apply(double a, double b); }
     private interface LongOp { long apply(long a, long b); }
 
-    private static Value arith(Value l, Value r, DoubleOp dOp, LongOp lOp) {
+    /** Las operaciones enteras usan las variantes exactas de Math: un desborde es error del alumno. */
+    private static Value arith(Value l, Value r, DoubleOp dOp, LongOp lOp, int line) {
         if (bothInt(l, r)) {
-            return new Value.IntVal(lOp.apply(l.asLong(), r.asLong()));
+            try {
+                return new Value.IntVal(lOp.apply(l.asLong(), r.asLong()));
+            } catch (ArithmeticException e) {
+                throw RuntimeError.overflow(line);
+            }
         }
         return new Value.DoubleVal(dOp.apply(l.asDouble(), r.asDouble()));
+    }
+
+    private static long negateExact(long v, int line) {
+        if (v == Long.MIN_VALUE) throw RuntimeError.overflow(line);
+        return -v;
     }
 
     private static boolean bothInt(Value l, Value r) {

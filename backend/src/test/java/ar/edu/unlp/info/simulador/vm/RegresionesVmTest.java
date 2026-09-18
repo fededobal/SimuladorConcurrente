@@ -49,7 +49,6 @@ class RegresionesVmTest {
     }
 
     @Test
-    @Disabled("B3: Math.addExact lanza ArithmeticException, que no es RuntimeError y se escapa")
     void overflowEsErrorDeEjecucion() {
         RunResult r = assertDoesNotThrow(() -> TestSupport.run("""
                 monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } }

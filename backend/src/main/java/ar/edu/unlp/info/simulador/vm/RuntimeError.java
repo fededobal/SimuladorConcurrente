@@ -13,6 +13,11 @@ public class RuntimeError extends RuntimeException {
         this.line = line;
     }
 
+    /** Resultado entero que no entra en un {@code int} del lenguaje (64 bits). */
+    public static RuntimeError overflow(int line) {
+        return new RuntimeError("Desborde de entero: el resultado no entra en un int", line);
+    }
+
     public int getLine() {
         return line;
     }
