@@ -30,6 +30,7 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 | `boolean` | `true`, `false` | `false` |
 | `text` | `"hola"` | `""` |
 | `Cola` | — (se llena con `push`) | vacía |
+| `ColaOrdenada` | — (se llena con `push`) | vacía |
 
 ### Arreglos
 
@@ -39,13 +40,20 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 - Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
 - Se declaran dentro de un monitor o como locales de un proceso.
 
-### Cola (FIFO)
+### Cola (FIFO) y ColaOrdenada (prioridad)
 
-- Declaración: `Cola nombre;`
-- `push(cola, elemento);` — encola al final. Se admite `push(cola, a, b)` (encola una tupla).
-- `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura
-  una tupla; la cantidad de destinos debe coincidir con la de la tupla encolada. `pop` sobre
+- Declaración: `Cola nombre;` · `ColaOrdenada nombre;`
+- `push(cola, elemento);` — se admite `push(cola, a, b, ...)`, que encola una tupla (un
+  registro de varias componentes).
+  - En `Cola` encola **al final**.
+  - En `ColaOrdenada` **inserta ordenado por la primera componente**; a igual clave respeta
+    el orden de llegada (inserción estable, FIFO entre iguales).
+- `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura la
+  tupla: `x` recibe la primera componente (la clave de orden) e `y` la siguiente. `pop` sobre
   cola vacía es error de ejecución.
+- **Aridad fija**: la cantidad de componentes queda fijada por el primer `push`/`pop` de esa
+  cola. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son
+  estáticamente visibles y la inconsistencia es **error de compilación**, no de ejecución.
 - `empty cola` — expresión booleana, `true` si la cola no tiene elementos.
 
 ---
@@ -129,7 +137,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Incremento / decremento | `x++;` `x--;` |
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
-| Cola | `push(c, e);` `pop(c, x);` |
+| Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `pop(c, x);` `pop(c, x, y);` |
 | Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
 | Mientras | `while (cond) { ... }` |
 | For (contador) | `for (int i = 0; i < n; i++) { ... }` |
@@ -238,16 +246,16 @@ primario      = numero | texto | "true" | "false"
               | "(" expr ")" ;
 
 (* ---------- léxico ---------- *)
-tipo          = tipo_escalar | "Cola" ;
+tipo          = tipo_escalar | "Cola" | "ColaOrdenada" ;
 tipo_escalar  = "int" | "double" | "boolean" | "text" ;
 ident         = letra { letra | digito | "_" } ;
 numero        = digito { digito } [ "." digito { digito } ] ;
 texto         = '"' { caracter } '"' ;
 ```
 
-**Palabras reservadas (27):** `monitor procedure cond process if else while for skip
+**Palabras reservadas (28):** `monitor procedure cond process if else while for skip
 wait signal signal_all push pop empty in out true false int double boolean text Cola
-and or not`.
+ColaOrdenada and or not`.
 
 No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores
 comunes y pueden usarse como nombres.

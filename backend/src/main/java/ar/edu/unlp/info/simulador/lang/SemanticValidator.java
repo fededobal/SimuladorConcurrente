@@ -43,6 +43,33 @@ public final class SemanticValidator {
 
     // ---------------------------------------------------------------- recoleccion
 
+    /**
+     * Cantidad de componentes de cada cola, por sitio de declaracion. Una cola no puede ser
+     * parametro ni elemento de arreglo, asi que todos sus push/pop son visibles aca: el
+     * primer uso fija N y cualquier otro con distinta cantidad es error de compilacion.
+     */
+    private final Map<String, Integer> aridadCola = new HashMap<>();
+    private final Map<String, Integer> lineaAridad = new HashMap<>();
+
+    private void checkAridadCola(String clave, String cola, int usados, String op, int line) {
+        Integer previa = aridadCola.get(clave);
+        if (previa == null) {
+            aridadCola.put(clave, usados);
+            lineaAridad.put(clave, line);
+            return;
+        }
+        if (previa != usados) {
+            throw new CompilationException("La cola '" + cola + "' maneja " + previa
+                    + " componente(s) (fijado en la linea " + lineaAridad.get(clave) + ") y este "
+                    + op + " usa " + usados, line);
+        }
+    }
+
+    /** Clave del sitio de declaracion de una cola; null si el nombre no es una cola. */
+    private static String claveCola(Scope scope, String nombre) {
+        return scope.colas.get(nombre);
+    }
+
     private void collectTopLevel() {
         Set<String> topLevel = new HashSet<>();
         for (MonitorDef m : program.monitors()) {
@@ -88,12 +115,22 @@ public final class SemanticValidator {
 
     // ---------------------------------------------------------------- monitor
 
+    /** Las colas permanentes son la misma cola en todos los procedures del monitor. */
+    private static void registrarColas(MonitorDef m, Scope scope) {
+        for (VarDecl v : m.permanentVars()) {
+            if (v.type().isQueue()) {
+                scope.colas.put(v.name(), m.name() + "." + v.name());
+            }
+        }
+    }
+
     private void validateMonitor(MonitorDef m) {
         MonitorInfo info = monitors.get(m.name());
 
         Scope initScope = new Scope(null, m.name());
         initScope.assignable.addAll(info.vars());
         for (String cond : info.conds().keySet()) initScope.conds.add(cond);
+        registrarColas(m, initScope);
         for (Stmt s : m.initStmts()) {
             if (containsMonitorInteraction(s)) {
                 throw new CompilationException("El codigo de inicializacion del monitor " + m.name()
@@ -106,6 +143,7 @@ public final class SemanticValidator {
             Scope scope = new Scope(m.name(), m.name());
             scope.assignable.addAll(info.vars());
             for (String cond : info.conds().keySet()) scope.conds.add(cond);
+            registrarColas(m, scope);
             for (Param param : pr.params()) {
                 if (param.isOutput()) {
                     scope.assignable.add(param.name());
@@ -136,6 +174,7 @@ public final class SemanticValidator {
         final Set<String> readOnly = new HashSet<>();
         final Set<String> assignable = new HashSet<>();
         final Set<String> conds = new HashSet<>();
+        final Map<String, String> colas = new HashMap<>();
 
         Scope(String monitorName, String selfMonitor) {
             this.monitorName = monitorName;
@@ -147,6 +186,7 @@ public final class SemanticValidator {
             s.readOnly.addAll(readOnly);
             s.assignable.addAll(assignable);
             s.conds.addAll(conds);
+            s.colas.putAll(colas);
             return s;
         }
 
@@ -169,6 +209,10 @@ public final class SemanticValidator {
                 if (vd.sizeExpr() != null) checkExpr(vd.sizeExpr(), scope);
                 if (vd.initExpr() != null) checkExpr(vd.initExpr(), scope);
                 scope.assignable.add(vd.name());
+                if (vd.type().isQueue()) {
+                    // la linea distingue dos colas homonimas declaradas en bloques distintos
+                    scope.colas.put(vd.name(), "local:" + vd.name() + "#" + vd.line());
+                }
             }
             case Stmt.Assign a -> {
                 if (a.index() != null) checkExpr(a.index(), scope);
@@ -206,10 +250,20 @@ public final class SemanticValidator {
             case Stmt.QueuePush qp -> {
                 requireKnown(qp.queue(), scope, qp.line());
                 for (Expr e : qp.elements()) checkExpr(e, scope);
+                String clave = claveCola(scope, qp.queue());
+                if (clave == null) {
+                    throw new CompilationException("'" + qp.queue() + "' no es una cola", qp.line());
+                }
+                checkAridadCola(clave, qp.queue(), qp.elements().size(), "push", qp.line());
             }
             case Stmt.QueuePop qp -> {
                 requireKnown(qp.queue(), scope, qp.line());
                 for (String t : qp.targets()) checkAssignable(t, scope, qp.line());
+                String clave = claveCola(scope, qp.queue());
+                if (clave == null) {
+                    throw new CompilationException("'" + qp.queue() + "' no es una cola", qp.line());
+                }
+                checkAridadCola(clave, qp.queue(), qp.targets().size(), "pop", qp.line());
             }
         }
     }

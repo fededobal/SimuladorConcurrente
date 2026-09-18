@@ -2,9 +2,7 @@ package ar.edu.unlp.info.simulador.vm;
 
 import ar.edu.unlp.info.simulador.lang.parser.ast.Type;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
 /**
@@ -42,21 +40,55 @@ public sealed interface Value {
         }
     }
 
-    /** Cola FIFO. */
+    /**
+     * Cola FIFO ({@code Cola}) o cola de prioridad ({@code ColaOrdenada}). La ordenada
+     * inserta segun la primera componente del elemento y, a igualdad, respeta el orden de
+     * llegada (insercion estable): entre dos elementos con la misma clave sale antes el que
+     * se encolo primero.
+     */
     final class QueueVal implements Value {
-        private final Deque<Value> items;
+        private final List<Value> items;
+        private final boolean ordenada;
 
-        public QueueVal() { this.items = new ArrayDeque<>(); }
-        private QueueVal(Deque<Value> items) { this.items = items; }
+        public QueueVal() { this(false); }
+        public QueueVal(boolean ordenada) { this(new ArrayList<>(), ordenada); }
+        private QueueVal(List<Value> items, boolean ordenada) {
+            this.items = items;
+            this.ordenada = ordenada;
+        }
 
-        public void push(Value v) { items.addLast(v); }
-        public Value pop() { return items.pollFirst(); }
+        public boolean isOrdenada() { return ordenada; }
+
+        public void push(Value v) {
+            if (!ordenada) {
+                items.add(v);
+                return;
+            }
+            Value clave = claveDe(v);
+            int i = 0;
+            while (i < items.size() && comparar(claveDe(items.get(i)), clave) <= 0) i++;
+            items.add(i, v);
+        }
+
+        public Value pop() { return items.isEmpty() ? null : items.remove(0); }
         public boolean isEmpty() { return items.isEmpty(); }
         public int size() { return items.size(); }
         public List<Value> snapshot() { return new ArrayList<>(items); }
 
         public QueueVal copy() {
-            return new QueueVal(new ArrayDeque<>(items));
+            return new QueueVal(new ArrayList<>(items), ordenada);
+        }
+
+        /** El criterio de orden es la primera componente: la 'x' de push(c, x, y, z). */
+        private static Value claveDe(Value v) {
+            return v instanceof ArrayVal tupla && tupla.size() > 0 ? tupla.get(0) : v;
+        }
+
+        private static int comparar(Value a, Value b) {
+            if (a instanceof TextVal || b instanceof TextVal) {
+                return a.asText().compareTo(b.asText());
+            }
+            return Double.compare(a.asDouble(), b.asDouble());
         }
     }
 
@@ -68,7 +100,8 @@ public sealed interface Value {
             case DOUBLE -> new DoubleVal(0);
             case BOOLEAN -> new BoolVal(false);
             case TEXT -> new TextVal("");
-            case COLA -> new QueueVal();
+            case COLA -> new QueueVal(false);
+            case COLA_ORDENADA -> new QueueVal(true);
         };
     }
 
@@ -79,7 +112,7 @@ public sealed interface Value {
             case DOUBLE -> new DoubleVal(asDouble());
             case BOOLEAN -> new BoolVal(asBool());
             case TEXT -> new TextVal(asText());
-            case COLA -> this;
+            case COLA, COLA_ORDENADA -> this;
         };
     }
 

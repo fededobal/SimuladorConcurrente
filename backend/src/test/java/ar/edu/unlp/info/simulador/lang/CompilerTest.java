@@ -63,6 +63,32 @@ class CompilerTest {
     }
 
     @Test
+    void aceptaColaOrdenada() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M {
+                  ColaOrdenada c;
+                  procedure guardar(prio: in int, dato: in int) { push(c, prio, dato); }
+                  procedure sacar(p: out int, d: out int) { pop(c, p, d); }
+                }
+                process P { int a = 0; int b = 0; M.guardar(2, 20); M.sacar(a, b); }
+                """));
+    }
+
+    /** La aridad de una cola queda fijada por su primer uso, y se verifica al compilar. */
+    @Test
+    void rechazaAridadInconsistenteEnUnaCola() {
+        CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
+                monitor M {
+                  ColaOrdenada c;
+                  procedure guardar(x: in int) { push(c, x, 1); }
+                  procedure sacar(r: out int) { pop(c, r); }
+                }
+                process P { int a = 0; M.guardar(1); M.sacar(a); }
+                """));
+        assertTrue(ex.getMessage().contains("componente"), ex.getMessage());
+    }
+
+    @Test
     void rechazaMonitorInexistente() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 process P { NoExiste.op(); }

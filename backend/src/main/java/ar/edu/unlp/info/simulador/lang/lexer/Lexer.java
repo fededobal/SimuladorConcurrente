@@ -20,7 +20,7 @@ public final class Lexer {
             "push", "pop", "empty",
             "in", "out",
             "true", "false",
-            "int", "double", "boolean", "text", "Cola",
+            "int", "double", "boolean", "text", "Cola", "ColaOrdenada",
             "and", "or", "not"
     );
 

@@ -117,8 +117,8 @@ public final class VirtualMachine {
     }
 
     private Value buildInitialValue(VarDecl vd, ExprEvaluator ev) {
-        if (vd.type() == Type.COLA) {
-            return new Value.QueueVal();
+        if (vd.type().isQueue()) {
+            return Value.defaultFor(vd.type());
         }
         if (vd.isArray()) {
             int size = ev.evalInt(vd.sizeExpr());
@@ -346,8 +346,8 @@ public final class VirtualMachine {
     private void execLocalDecl(Process p, Activation act, VarDecl vd) {
         ExprEvaluator ev = evaluator(p, act);
         Value v;
-        if (vd.type() == Type.COLA) {
-            v = new Value.QueueVal();
+        if (vd.type().isQueue()) {
+            v = Value.defaultFor(vd.type());
         } else if (vd.isArray()) {
             int size = ev.evalInt(vd.sizeExpr());
             Value fill = vd.initExpr() == null ? Value.defaultFor(vd.type())
@@ -701,7 +701,7 @@ public final class VirtualMachine {
             case Value.DoubleVal ignored -> "double";
             case Value.BoolVal ignored -> "boolean";
             case Value.TextVal ignored -> "text";
-            case Value.QueueVal ignored -> "Cola";
+            case Value.QueueVal q -> q.isOrdenada() ? "ColaOrdenada" : "Cola";
             case Value.ArrayVal a -> a.elementType().name().toLowerCase() + "[]";
         };
     }

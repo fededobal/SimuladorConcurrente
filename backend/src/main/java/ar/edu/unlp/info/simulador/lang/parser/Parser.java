@@ -35,7 +35,7 @@ public final class Parser {
                 monitors.add(parseMonitor());
             } else if (check("process")) {
                 processes.add(parseProcess());
-            } else if (isScalarType(peek()) || check("Cola")) {
+            } else if (isScalarType(peek()) || isQueueType(peek())) {
                 throw error("No hay variables globales: las variables van dentro de un monitor "
                         + "(permanentes) o de un process (locales)");
             } else {
@@ -62,7 +62,7 @@ public final class Parser {
                 conds.addAll(parseCondDecls());
             } else if (check("procedure")) {
                 procedures.add(parseProcedure());
-            } else if (isScalarType(peek()) || check("Cola")) {
+            } else if (isScalarType(peek()) || isQueueType(peek())) {
                 perm.add(parseVarDecl());
             } else {
                 init.add(parseStatement());
@@ -204,9 +204,9 @@ public final class Parser {
         Type type = Type.fromKeyword(typeTok.lexeme());
         String name = consumeIdent("Se esperaba el nombre de la variable");
 
-        if (type == Type.COLA) {
+        if (type.isQueue()) {
             consume(";", "Se esperaba ';' al final de la declaracion de la cola");
-            return new VarDecl(name, Type.COLA, false, null, null, typeTok.line());
+            return new VarDecl(name, type, false, null, null, typeTok.line());
         }
 
         boolean isArray = false;
@@ -583,6 +583,10 @@ public final class Parser {
 
     private boolean isScalarType(Token t) {
         return t.is(TokenType.KEYWORD) && SCALAR_TYPES.contains(t.lexeme());
+    }
+
+    private boolean isQueueType(Token t) {
+        return t.is("Cola") || t.is("ColaOrdenada");
     }
 
     private static String describe(Token t) {

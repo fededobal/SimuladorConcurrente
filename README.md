@@ -112,7 +112,8 @@ process Consumidor { int x = 0; Buffer.retirar(x); }
   un proceso (local).
 - `process`, familias `process P[i: 0..5]`, `if` / `while` / `for` (estilo C y de rango:
   `for (int i = 1..n)`, `for (1..n)`), tipos
-  `int` / `double` / `boolean` / `text` y `Cola` FIFO (`push` / `pop` / `empty`).
+  `int` / `double` / `boolean` / `text`, `Cola` FIFO y `ColaOrdenada` de prioridad
+  (`push` / `pop` / `empty`).
 - Parámetros `in` / `out`.
 
 ## Deploy

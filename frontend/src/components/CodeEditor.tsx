@@ -44,7 +44,8 @@ const KEYWORDS: Record<string, string> = {
   and: 'tok-ctrl', or: 'tok-ctrl', not: 'tok-ctrl',
   push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl',
 
-  int: 'tok-type', double: 'tok-type', boolean: 'tok-type', text: 'tok-type', Cola: 'tok-type',
+  int: 'tok-type', double: 'tok-type', boolean: 'tok-type', text: 'tok-type',
+  Cola: 'tok-type', ColaOrdenada: 'tok-type',
   in: 'tok-type', out: 'tok-type',
 
   true: 'tok-lit', false: 'tok-lit',

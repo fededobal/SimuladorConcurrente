@@ -11,13 +11,13 @@ EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).
 
 ## 1. Palabras reservadas
 
-Son **27**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
+Son **28**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
 (escribir `int out = 0;` es error de sintaxis).
 
 | Grupo | Palabras |
 |---|---|
 | Declaraciones | `monitor` `procedure` `cond` `process` |
-| Tipos | `int` `double` `boolean` `text` `Cola` |
+| Tipos | `int` `double` `boolean` `text` `Cola` `ColaOrdenada` |
 | Modos de parámetro | `in` `out` |
 | Control | `if` `else` `while` `for` `skip` |
 | Sincronización | `wait` `signal` `signal_all` |
@@ -93,10 +93,39 @@ pop(c, a, b);        // desestructura la tupla: a=7, b=9
 boolean v = empty c; // sin paréntesis
 ```
 
-La cantidad de destinos del `pop` tiene que coincidir con la de la tupla encolada:
-`push(c, 1, 2)` seguido de `pop(c, x)` es error de ejecución. `pop` sobre cola vacía también.
+Cada cola maneja **una cantidad fija de componentes**, que queda fijada por su primer
+`push`/`pop`. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son
+visibles al compilar, así que la inconsistencia se detecta **antes de correr**:
+
+```
+Linea 5: La cola 'c' maneja 2 componente(s) (fijado en la linea 4) y este pop usa 1
+```
+
+`pop` sobre cola vacía sí es error de ejecución.
 
 `empty` se escribe **sin paréntesis**: `empty c`, no `empty(c)`.
+
+### ColaOrdenada (cola de prioridad)
+
+Mismas operaciones que `Cola` — `push`, `pop`, `empty` — pero el `push` **inserta ordenado
+por la primera componente** en vez de al final:
+
+```c
+ColaOrdenada c;
+push(c, 3, "tercero");
+push(c, 1, "primero");
+push(c, 2, "segundo");
+pop(c, p, d);          // p=1, d="primero"
+```
+
+- Ordena por la **primera** componente (`x` en `push(c, x, y, z)`). Las demás viajan con
+  ella como un registro y salen por los destinos restantes del `pop`.
+- A **igual clave, sale primero el que se encoló antes** (inserción estable, FIFO entre
+  iguales). Encolar `(1,"a") (1,"b") (0,"cero") (1,"c")` desencola `cero a b c`.
+- Con una sola componente, ordena por el valor: `5 1 4 1 3` sale `1 1 3 4 5`.
+- Los números se comparan numéricamente; si alguna clave es `text`, la comparación es
+  alfabética.
+- `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
 ---
 
@@ -180,7 +209,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 
 | Instrucción | Formas aceptadas |
 |---|---|
-| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` |
+| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` · `ColaOrdenada c;` |
 | Asignación | `x = expr;` · `a[i] = expr;` |
 | Incremento | `x++;` · `x--;` · `a[i]++;` · `a[i]--;` |
 | Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` |
@@ -290,8 +319,10 @@ Errores de compilación (con número de línea), verificados:
 - `Ya existe un monitor o un process llamado M` · `Procedure duplicado 'p' en el monitor M`
 - `Comentario de bloque sin cerrar` · `Cadena de texto sin cerrar`
 
+- `La cola 'c' maneja 2 componente(s) (fijado en la linea 4) y este pop usa 1`
+
 Errores de ejecución (terminan ese proceso): índice fuera de rango, división o módulo por
-cero, `pop` sobre cola vacía, tupla desencolada con menos componentes que destinos.
+cero, `pop` sobre cola vacía.
 
 Si ningún proceso queda listo y no todos terminaron, el simulador reporta **deadlock**.
 
@@ -304,6 +335,7 @@ Fuera del alcance de esta versión, a propósito:
 - Semáforos: `sem`, `P`, `V`. Bloque atómico `< >`. `await`. No están reservados: son
   nombres libres.
 - `signal and wait`, `signal` con prioridad, `minrank`, `empty(cv)` sobre una condición.
+- Sacar de una `ColaOrdenada` por otro criterio que no sea la primera componente.
 - `break`, `continue`, `return`.
 - Funciones o procedures fuera de un monitor; recursión.
 - El modo de parámetro `inout`: solo `in` y `out`.
