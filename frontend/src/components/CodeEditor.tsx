@@ -294,11 +294,62 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, p
     const capa = capaRef.current;
     if (!capa) return;
     const medir = () => {
-      const cs = getComputedStyle(capa);
-      const alto = parseFloat(cs.lineHeight);
-      const top = parseFloat(cs.paddingTop);
-      if (Number.isFinite(alto) && alto > 0 && Number.isFinite(top)) {
-        setMetrica((prev) => (prev.alto === alto && prev.top === top ? prev : { top, alto }));
+      // Para obtener la posicion real de los renglones medimos con un par de <span>
+      // efimeros en vez de confiar en getComputedStyle: asi el stripe queda alineado
+      // pase lo que pase con la fuente, el zoom o la resolucion de pantalla.
+      //
+      // Los spans se insertan como inline-block de ancho/alto cero al comienzo del
+      // <pre>; su offset vertical coincide con el tope de la linea en la que caen.
+      // El primer \n del <pre> basta para que el segundo span baje a la 2da linea.
+      const probe = document.createElement('span');
+      probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:top;';
+      const probe2 = probe.cloneNode() as HTMLSpanElement;
+
+      // Insertar al inicio (antes del primer caracter de la 1ra linea).
+      capa.insertBefore(probe, capa.firstChild);
+      // Insertar justo despues del primer \n (inicio de la 2da linea).
+      // Buscamos el primer TextNode que contenga \n.
+      let inserted2 = false;
+      const walker = document.createTreeWalker(capa, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) {
+        const tn = walker.currentNode as Text;
+        const nlIdx = tn.textContent!.indexOf('\n');
+        if (nlIdx >= 0) {
+          // Partir el texto en dos: antes-del-\n y despues-del-\n, insertar probe2 despues del split.
+          const after = tn.splitText(nlIdx + 1);
+          after.parentNode!.insertBefore(probe2, after);
+          inserted2 = true;
+          break;
+        }
+      }
+
+      if (inserted2) {
+        const areaRect = capa.offsetParent?.getBoundingClientRect()
+          ?? capa.parentElement!.getBoundingClientRect();
+        const r0 = probe.getBoundingClientRect();
+        const r1 = probe2.getBoundingClientRect();
+        const top = r0.top - areaRect.top;
+        const alto = r1.top - r0.top;
+        if (alto > 0) {
+          setMetrica((prev) =>
+            prev.alto === alto && prev.top === top ? prev : { top, alto },
+          );
+        }
+      }
+
+      // Limpiar: quitar los probes y reunir los nodos de texto partidos.
+      probe.remove();
+      probe2.remove();
+      capa.normalize();
+
+      // Si no pudimos medir (contenido vacio), caemos al calculo CSS.
+      if (!inserted2) {
+        const cs = getComputedStyle(capa);
+        const alto = parseFloat(cs.lineHeight);
+        const top = parseFloat(cs.paddingTop);
+        if (Number.isFinite(alto) && alto > 0 && Number.isFinite(top)) {
+          setMetrica((prev) => (prev.alto === alto && prev.top === top ? prev : { top, alto }));
+        }
       }
     };
     medir();
