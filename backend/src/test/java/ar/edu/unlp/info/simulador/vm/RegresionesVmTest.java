@@ -21,6 +21,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RegresionesVmTest {
 
     @Test
+    void elLogNoCreceSinTopeEnUnaEjecucionLarga() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M { int x = 0; procedure f() { x = x + 1; } }
+                process P[i: 1..20] { while (true) { M.f(); } }
+                """, 3);
+        for (int i = 0; i < 3000; i++) vm.step(null, SchedulingPolicy.RANDOM);
+        assertFalse(vm.isFinished());
+        assertEquals(VirtualMachine.TOPE_LOG, vm.allLogs().size());
+        // Se conservan los ultimos: el evento mas nuevo es del instante actual.
+        assertEquals(vm.instant(), vm.allLogs().get(VirtualMachine.TOPE_LOG - 1).instant());
+    }
+
+    @Test
     void errorDentroDelMonitorLiberaElLock() {
         RunResult r = TestSupport.run("""
                 monitor M {

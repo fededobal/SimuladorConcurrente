@@ -61,7 +61,7 @@ export function useSimulation(initialCode: string) {
     try {
       const created = api.create(code);
       activaRef.current = true;
-      setSnapshot(created.initial.snapshot);
+      setSnapshot(created.snapshot);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
@@ -78,8 +78,7 @@ export function useSimulation(initialCode: string) {
     if (!activaRef.current) return false;
     try {
       const res = api.step('RANDOM');
-      const last = res.entries[res.entries.length - 1];
-      if (last) setSnapshot(last.snapshot);
+      setSnapshot(res.snapshot);
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
       return true;

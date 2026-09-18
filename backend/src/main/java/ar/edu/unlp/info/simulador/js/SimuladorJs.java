@@ -70,7 +70,7 @@ public final class SimuladorJs {
      *
      * @param policy  {@code RANDOM} o {@code ROUND_ROBIN}
      * @param elegido id del proceso a ejecutar, o negativo para que decida la politica
-     * @return JSON con forma {@code StepResponse}
+     * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final
      */
     @JSExport
     public static String paso(String policy, int elegido) {
@@ -84,6 +84,8 @@ public final class SimuladorJs {
 
         StringBuilder sb = new StringBuilder("{\"entries\":");
         Json.lista(sb, entries, Json::logEntry);
+        sb.append(",\"snapshot\":");
+        Json.snapshot(sb, vm.snapshot());
         sb.append(",\"finished\":").append(vm.isFinished())
           .append(",\"deadlock\":").append(vm.isDeadlocked())
           .append(",\"instant\":").append(vm.instant())
@@ -91,12 +93,14 @@ public final class SimuladorJs {
         return sb.toString();
     }
 
-    /** Estado completo, con todo el log acumulado (para el time-travel). */
+    /** Estado actual y los ultimos eventos del log (para el historial). */
     @JSExport
     public static String estado() {
         if (vm == null) return sinSimulacion();
         StringBuilder sb = new StringBuilder("{\"log\":");
         Json.lista(sb, vm.allLogs(), Json::logEntry);
+        sb.append(",\"snapshot\":");
+        Json.snapshot(sb, vm.snapshot());
         sb.append(",\"finished\":").append(vm.isFinished())
           .append(",\"deadlock\":").append(vm.isDeadlocked())
           .append(",\"instant\":").append(vm.instant())
@@ -115,8 +119,8 @@ public final class SimuladorJs {
 
     private static String creada() {
         StringBuilder sb = new StringBuilder("{\"id\":\"local\",\"seed\":");
-        sb.append(semilla).append(",\"initial\":");
-        Json.logEntry(sb, vm.initialEntry());
+        sb.append(semilla).append(",\"snapshot\":");
+        Json.snapshot(sb, vm.snapshot());
         sb.append(",\"finished\":").append(vm.isFinished())
           .append(",\"deadlock\":").append(vm.isDeadlocked())
           .append('}');

@@ -47,8 +47,8 @@ usá la skill `nuevo-concepto-concurrencia` antes de implementar nada.
    devuelve el recurso y despierta a quien corresponda según el concepto.
 4. Misma semilla + misma política = misma ejecución (el docente reproduce "el caso raro").
 5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.
-6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Hoy el log sí
-   crece: bug B6 del informe.
+6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Los eventos no
+   llevan el estado; el log guarda los últimos `TOPE_LOG` y la salida los últimos `TOPE_SALIDA`.
 7. La semántica implementada coincide con la de la cátedra. Si hay que apartarse (por
    ejemplo, para visualizar mejor), se documenta en un ADR.
 

@@ -121,7 +121,7 @@ final class Json {
         sb.append("}");
     }
 
-    private static void snapshot(StringBuilder sb, Snapshot s) {
+    static void snapshot(StringBuilder sb, Snapshot s) {
         sb.append("{");
         campo(sb, "instant");   sb.append(s.instant()).append(',');
         campo(sb, "processes"); lista(sb, s.processes(), Json::processView); sb.append(',');
@@ -138,8 +138,7 @@ final class Json {
         campo(sb, "processColor"); str(sb, e.processColor()); sb.append(',');
         campo(sb, "kind");         str(sb, e.kind()); sb.append(',');
         campo(sb, "resource");     str(sb, e.resource()); sb.append(',');
-        campo(sb, "message");      str(sb, e.message()); sb.append(',');
-        campo(sb, "snapshot");     snapshot(sb, e.snapshot());
+        campo(sb, "message");      str(sb, e.message());
         sb.append("}");
     }
 

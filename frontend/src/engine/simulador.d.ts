@@ -11,7 +11,7 @@ export function reiniciar(): string;
 /** Avanza un instante. elegido negativo = decide la politica. */
 export function paso(policy: string, elegido: number): string;
 
-/** Estado completo con todo el log acumulado. */
+/** Estado actual y los ultimos eventos del log. */
 export function estado(): string;
 
 /** Libera la simulacion en curso. */

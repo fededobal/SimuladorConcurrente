@@ -48,9 +48,8 @@ public final class TestSupport {
         return m.vars().stream().filter(v -> v.name().equals(var)).findFirst().orElseThrow().value();
     }
 
-    /** Valor final de una variable permanente tras la ultima entrada del log. */
+    /** Valor de una variable permanente al terminar la ejecucion. */
     public static String finalVar(RunResult r, String monitorName, String var) {
-        Snapshot last = r.logs().get(r.logs().size() - 1).snapshot();
-        return varValue(monitor(last, monitorName), var);
+        return varValue(monitor(r.vm().snapshot(), monitorName), var);
     }
 }

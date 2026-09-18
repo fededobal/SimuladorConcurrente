@@ -26,6 +26,9 @@ Reglas:
   de truncar el valor. (Federico Dobal, 2026-09-18)
 - Un número entero demasiado grande en el programa es un error de compilación en español y
   con su línea. (Federico Dobal, 2026-09-18)
+- Evitar que la memoria crezca sin tope en ejecuciones largas: los eventos ya no guardan el
+  estado completo y el registro conserva los últimos 2000. Con 50 procesos y 2000 pasos, el
+  consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
 - Eliminar la API REST de Spring Boot, que la interfaz no usaba desde que el motor corre en

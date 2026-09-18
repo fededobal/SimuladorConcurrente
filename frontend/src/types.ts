@@ -64,19 +64,19 @@ export interface LogEntry {
   kind: string;
   resource: string;
   message: string;
-  snapshot: Snapshot;
 }
 
 export interface SimulationCreated {
   id: string;
   seed: number;
-  initial: LogEntry;
+  snapshot: Snapshot;
   finished: boolean;
   deadlock: boolean;
 }
 
 export interface StepResponse {
   entries: LogEntry[];
+  snapshot: Snapshot;
   finished: boolean;
   deadlock: boolean;
   instant: number;

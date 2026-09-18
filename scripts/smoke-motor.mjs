@@ -20,14 +20,12 @@ function correr(code, { seed = 7, pasos = 5000, policy = 'RANDOM' } = {}) {
   try { creado = JSON.parse(motor.crear(code, seed)); }
   catch (e) { return { excepcion: `crear: ${e?.message ?? e}` }; }
   if (creado.error) return { compilacion: creado.error, linea: creado.line };
-  let r = { finished: creado.finished, deadlock: creado.deadlock, entries: [creado.initial] };
-  let ultimo = creado.initial;
+  let r = { finished: creado.finished, deadlock: creado.deadlock, snapshot: creado.snapshot };
   for (let i = 0; i < pasos && !r.finished && !r.deadlock; i++) {
     try { r = JSON.parse(motor.paso(policy, -1)); }
     catch (e) { return { excepcion: `paso: ${e?.message ?? e}` }; }
-    if (r.entries.length) ultimo = r.entries.at(-1);
   }
-  const s = ultimo.snapshot;
+  const s = r.snapshot;
   const kinds = new Set(JSON.parse(motor.estado()).log.map((l) => l.kind));
   const vars = {};
   for (const m of s.monitors) for (const v of m.vars) vars[`${m.name}.${v.name}`] = v.value;
@@ -85,6 +83,10 @@ const CANONICOS = [
   ['literal enorme es error de compilacion (B4)', `
     monitor M { int x = 99999999999999999999; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !!r.compilacion?.includes('fuera de rango')],
+  ['el log tiene tope en una ejecucion larga (B6)', `
+    monitor M { int x = 0; procedure f() { x = x + 1; } }
+    process P[i: 1..4] { while (true) { M.f(); } }`,
+    (r) => !r.finished && JSON.parse(motor.estado()).log.length <= 2000],
 ];
 
 // Bugs verificados el 18/09/2026 (ver docs/informe-revision.md, seccion 3).

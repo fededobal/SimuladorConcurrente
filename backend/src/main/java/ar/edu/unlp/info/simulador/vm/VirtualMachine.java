@@ -2,12 +2,13 @@ package ar.edu.unlp.info.simulador.vm;
 
 import ar.edu.unlp.info.simulador.lang.parser.ast.*;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 import java.util.function.Function;
 
 /**
@@ -32,6 +33,13 @@ public final class VirtualMachine {
 
     private static final int STRUCTURAL_CAP = 4000;
 
+    /**
+     * Tope de eventos guardados en el log. Los eventos no llevan el estado completo (se pide
+     * aparte con {@link #snapshot()}), pero igual un programa que no termina los acumularia
+     * sin fin: se conservan solo los ultimos.
+     */
+    static final int TOPE_LOG = 2000;
+
     private final Program program;
     private final Random random;
 
@@ -40,7 +48,10 @@ public final class VirtualMachine {
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
-    private final List<LogEntry> log = new ArrayList<>();
+    private final Deque<LogEntry> log = new ArrayDeque<>();
+    /** Eventos del instante en curso: lo que devuelve {@link #step}. */
+    private List<LogEntry> stepEntries = new ArrayList<>();
+    private int nextEventId = 0;
 
     private int instant = 0;
     private int rrCursor = -1;
@@ -157,7 +168,7 @@ public final class VirtualMachine {
      * @return los eventos generados por este instante
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy) {
-        int mark = log.size();
+        stepEntries = new ArrayList<>();
 
         if (isFinished()) {
             return List.of();
@@ -169,7 +180,7 @@ public final class VirtualMachine {
                 instant++;
                 systemLog("DEADLOCK", "Interbloqueo: ningun proceso puede avanzar");
             }
-            return tail(mark);
+            return stepEntries;
         }
 
         instant++;
@@ -199,7 +210,7 @@ public final class VirtualMachine {
             deadlockLogged = true;
             systemLog("DEADLOCK", "Interbloqueo: ningun proceso puede avanzar");
         }
-        return tail(mark);
+        return stepEntries;
     }
 
     /**
@@ -245,10 +256,6 @@ public final class VirtualMachine {
             turno.add(listos.get(0));   // el shuffle ya lo eligio al azar
         }
         return turno;
-    }
-
-    private List<LogEntry> tail(int fromIndex) {
-        return new ArrayList<>(log.subList(fromIndex, log.size()));
     }
 
     // ================================================================= ejecucion de un proceso
@@ -739,15 +746,9 @@ public final class VirtualMachine {
         return instant;
     }
 
+    /** Los ultimos eventos de la ejecucion (a lo sumo {@link #TOPE_LOG}), del mas viejo al mas nuevo. */
     public List<LogEntry> allLogs() {
         return List.copyOf(log);
-    }
-
-    /** Evento sintetico con el estado inicial (instante 0), para que el frontend arranque. */
-    public LogEntry initialEntry() {
-        return new LogEntry(UUID.randomUUID().toString(), 0, null, null, "INIT", "",
-                "Programa compilado - " + processes.size() + " proceso(s), "
-                        + monitors.size() + " monitor(es)", snapshot());
     }
 
     public Snapshot snapshot() {
@@ -820,12 +821,17 @@ public final class VirtualMachine {
 
     private void event(Process p, String kind, String resource, String message) {
         if (!logging) return;
-        log.add(new LogEntry(UUID.randomUUID().toString(), instant, p.id() < 0 ? null : p.id(),
-                p.id() < 0 ? null : p.color(), kind, resource, message, snapshot()));
+        record(new LogEntry("e" + nextEventId++, instant, p.id() < 0 ? null : p.id(),
+                p.id() < 0 ? null : p.color(), kind, resource, message));
     }
 
     private void systemLog(String kind, String message) {
-        log.add(new LogEntry(UUID.randomUUID().toString(), instant, null, null, kind, "", message,
-                snapshot()));
+        record(new LogEntry("e" + nextEventId++, instant, null, null, kind, "", message));
+    }
+
+    private void record(LogEntry e) {
+        log.addLast(e);
+        if (log.size() > TOPE_LOG) log.removeFirst();
+        stepEntries.add(e);
     }
 }

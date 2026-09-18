@@ -1,17 +1,17 @@
 package ar.edu.unlp.info.simulador.vm;
 
 /**
- * Evento registrado durante la ejecucion. Lleva un snapshot completo del estado justo
- * despues del evento.
+ * Evento registrado durante la ejecucion. No lleva el estado: guardar un snapshot completo
+ * por evento hacia crecer la memoria sin tope (bug B6); el estado se pide aparte con
+ * {@link VirtualMachine#snapshot()}.
  *
- * @param id           identificador unico
+ * @param id           identificador unico dentro de la simulacion ({@code e0}, {@code e1}, ...)
  * @param instant      numero de instante (paso global)
  * @param processId    proceso involucrado, o null si es un evento del sistema
  * @param processColor color del proceso, o null
  * @param kind         categoria del evento (ENTER, RETURN, ASSIGN, WAIT, SIGNAL, BLOCKED, ...)
  * @param resource     recurso afectado (monitor, cond, variable), o "" si no aplica
  * @param message      mensaje legible para el historial
- * @param snapshot     estado luego del evento
  */
 public record LogEntry(String id,
                        int instant,
@@ -19,5 +19,4 @@ public record LogEntry(String id,
                        String processColor,
                        String kind,
                        String resource,
-                       String message,
-                       Snapshot snapshot) { }
+                       String message) { }

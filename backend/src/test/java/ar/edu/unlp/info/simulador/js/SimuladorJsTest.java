@@ -24,8 +24,8 @@ class SimuladorJsTest {
     void crearDevuelveLaFormaDeSimulationCreated() {
         String json = SimuladorJs.crear(BUFFER, 1);
         assertTrue(json.startsWith("{\"id\":\"local\""), json);
-        assertTrue(json.contains("\"initial\":{"), json);
-        assertTrue(json.contains("\"snapshot\":{"), json);
+        assertTrue(json.contains("\"seed\":1,"), json);
+        assertTrue(json.contains("\"snapshot\":{\"instant\":0,"), json);
     }
 
     @Test
@@ -33,6 +33,7 @@ class SimuladorJsTest {
         SimuladorJs.crear(BUFFER, 1);
         String json = SimuladorJs.paso("ROUND_ROBIN", -1);
         assertTrue(json.startsWith("{\"entries\":["), json);
+        assertTrue(json.contains("\"snapshot\":{"), json);
         assertTrue(json.contains("\"finished\":"), json);
         assertTrue(json.contains("\"deadlock\":"), json);
         assertTrue(json.contains("\"output\":["), json);

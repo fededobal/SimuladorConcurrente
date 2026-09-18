@@ -25,7 +25,7 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 ## Invariantes (todo cambio a la VM tiene que conservarlas)
 
 1. En cada snapshot, cada monitor tiene como mucho un `lockOwner`, y ese proceso no está
-   `TERMINATED`. ← hoy se viola cuando un proceso falla adentro (bug B1).
+   `TERMINATED`. Un proceso que falla adentro suelta el lock (bug B1, corregido).
 2. Un proceso está en a lo sumo una cola (una `cond` o una cola de entrada).
 3. Todo camino que saca a un proceso de un monitor (return, wait, **error**) suelta el lock
    y despierta la cola de entrada.
@@ -33,8 +33,8 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
    el docente tiene que poder mostrar "el caso raro" otra vez).
 5. `DEADLOCK` significa interbloqueo del programa del alumno, nunca un error interno del
    simulador. Un error de ejecución se informa como `ERROR` con línea.
-6. El log y la salida no crecen sin tope en ejecuciones largas (hoy el log sí crece: bug B6
-   del informe de revisión).
+6. El log y la salida no crecen sin tope en ejecuciones largas (`TOPE_LOG`, `TOPE_SALIDA`);
+   los eventos no guardan el estado completo.
 
 ## Programas canónicos (deben andar siempre)
 
