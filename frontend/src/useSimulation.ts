@@ -12,6 +12,9 @@ export interface SimError {
 
 export const SPEEDS = [1200, 600, 300, 120] as const;
 
+/** Semillas cortas, para que se puedan leer en voz alta o anotar en el pizarrón. */
+const semillaAlAzar = () => Math.floor(Math.random() * 1_000_000);
+
 export function useSimulation(initialCode: string) {
   const [code, setCodeState] = useState(initialCode);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
@@ -19,6 +22,9 @@ export function useSimulation(initialCode: string) {
   const [error, setError] = useState<SimError | null>(null);
   const [speed, setSpeed] = useState<number>(600);
   const [policy, setPolicyState] = useState<SchedulingPolicy>('RANDOM');
+  // null: cada corrida usa una semilla nueva. Un numero: todas usan esa (se repite la corrida).
+  const [fixedSeed, setFixedSeed] = useState<number | null>(null);
+  const [lastSeed, setLastSeed] = useState<number | null>(null);
 
   const activaRef = useRef(false);
   const statusRef = useRef<SimStatus>('idle');
@@ -50,6 +56,7 @@ export function useSimulation(initialCode: string) {
     if (activaRef.current) api.remove();
     activaRef.current = false;
     setSnapshot(null);
+    setLastSeed(null);
     setError(null);
     setStat('idle');
   }, []);
@@ -67,8 +74,9 @@ export function useSimulation(initialCode: string) {
     clearTimer();
     setError(null);
     try {
-      const created = api.create(code);
+      const created = api.create(code, fixedSeed ?? semillaAlAzar());
       activaRef.current = true;
+      setLastSeed(created.seed);
       setSnapshot(created.snapshot);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
@@ -80,7 +88,7 @@ export function useSimulation(initialCode: string) {
       setStat('error');
       return false;
     }
-  }, [code]);
+  }, [code, fixedSeed]);
 
   const doStep = useCallback((): boolean => {
     if (!activaRef.current) return false;
@@ -153,6 +161,7 @@ export function useSimulation(initialCode: string) {
     snapshot, status, error,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
+    fixedSeed, setFixedSeed, lastSeed,
     play, pause, step, stop,
   };
 }

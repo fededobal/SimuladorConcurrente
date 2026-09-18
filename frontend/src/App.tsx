@@ -109,12 +109,36 @@ export function App() {
           ))}
         </select>
 
+        <input
+          className="sel seed-in"
+          inputMode="numeric"
+          placeholder="semilla al azar"
+          value={sim.fixedSeed ?? ''}
+          onChange={(e) => {
+            const v = e.target.value.replace(/\D/g, '').slice(0, 9);
+            sim.setFixedSeed(v === '' ? null : Number(v));
+          }}
+          disabled={running}
+          aria-label="Semilla fija (vacío: una nueva en cada corrida)"
+          title="Vacío: cada corrida usa una semilla nueva. Con un número: todas las corridas repiten el mismo entrelazado."
+        />
+
         <div className="spacer" />
 
         <div className="meta">
           <span className={`st${status === 'deadlock' || status === 'error' ? ' bad' : ''}`}>
             {STATUS_LABEL[status]}
           </span>
+          {sim.lastSeed !== null && (
+            <button
+              className="seed"
+              onClick={() => sim.setFixedSeed(sim.lastSeed)}
+              disabled={running || sim.fixedSeed === sim.lastSeed}
+              title="Fijar esta semilla para repetir la misma corrida"
+            >
+              semilla {sim.lastSeed}
+            </button>
+          )}
           <span className="n">{snapshot?.instant ?? 0}</span>
         </div>
       </div>
