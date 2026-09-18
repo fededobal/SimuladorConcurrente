@@ -21,7 +21,19 @@ export class ApiRequestError extends Error {
 }
 
 async function parse<T>(reqP: Promise<Response>): Promise<T> {
-  const res = await reqP;
+  let res: Response;
+  try {
+    res = await reqP;
+  } catch {
+    // fetch solo rechaza por fallas de red: el backend caido o dormido, o el navegador
+    // bloqueando la respuesta porque el origen de esta pagina no esta habilitado en CORS.
+    throw new ApiRequestError(
+      ORIGEN
+        ? `No se pudo conectar con el backend (${ORIGEN}). Puede estar caido o dormido, o este origen no estar habilitado en su CORS.`
+        : 'No se pudo conectar con el backend. Revisa que este corriendo en http://localhost:8080.',
+      null,
+    );
+  }
   if (!res.ok) {
     let err: ApiError = { error: `Error HTTP ${res.status}`, line: null };
     try {
