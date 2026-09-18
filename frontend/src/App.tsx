@@ -125,6 +125,7 @@ export function App() {
           readOnly={running}
           activeLines={activeLines}
           errorLine={status === 'error' ? sim.error?.line ?? null : null}
+          pasoMs={sim.speed}
         />
         {status === 'error' && sim.error && (
           <div className="err">

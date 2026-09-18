@@ -194,7 +194,10 @@ button { cursor: pointer; }
   padding-right: 18px;
   pointer-events: none;
   overflow: hidden;
-  transition: top 0.15s ease;
+  /* --desliz lo fija el editor segun la velocidad de la simulacion */
+  transition: top var(--desliz, 150ms) cubic-bezier(0.33, 0, 0.2, 1),
+              background var(--desliz, 150ms) linear,
+              border-color var(--desliz, 150ms) linear;
 }
 .stripe .who {
   font-family: var(--sans);

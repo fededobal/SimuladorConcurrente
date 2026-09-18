@@ -14,12 +14,18 @@ interface Props {
   readOnly: boolean;
   activeLines: ActiveLine[];
   errorLine: number | null;
+  /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
+  pasoMs: number;
 }
 
 // Tienen que coincidir con --pad-top y --line-h de index.css:
 // con eso la franja cae exactamente sobre su renglon.
 const PAD_TOP = 14;
 const LINE_H = 22;
+
+/** Ancho aproximado de un caracter de la etiqueta (10px, tipografia sans). */
+const ANCHO_CHAR = 5.6;
+const HUECO_ETIQUETA = 10;
 
 /** Sangria de un nivel. El lenguaje no usa tabs. */
 const TAB = '  ';
@@ -269,21 +275,36 @@ function comentar(ta: TA) {
 
 // ===================================================================== componente
 
-export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine }: Props) {
+export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, pasoMs }: Props) {
+  // El deslizamiento ocupa la mayor parte del instante pero termina antes del siguiente:
+  // si durara lo mismo, las franjas nunca se verian quietas sobre el renglon que ejecutan.
+  const desliz = Math.min(Math.round(pasoMs * 0.65), 420);
   const lines = code.split('\n');
 
-  const stripes = useMemo(() => {
-    const byLine = new Map<number, ActiveLine[]>();
+  // Una franja POR PROCESO, no por linea. Es lo que hace que el avance se vea suave: al
+  // moverse de renglon sobrevive el mismo nodo del DOM y la transicion de CSS lo desliza.
+  // Si se agrupara por linea, React desmontaria la franja vieja y montaria otra, y no hay
+  // nada que animar entre dos elementos distintos.
+  const marcas = useMemo(() => {
+    const porLinea = new Map<number, ActiveLine[]>();
     for (const a of activeLines) {
       if (a.line < 1) continue;
-      const list = byLine.get(a.line) ?? [];
+      const list = porLinea.get(a.line) ?? [];
       list.push(a);
-      byLine.set(a.line, list);
+      porLinea.set(a.line, list);
     }
-    return [...byLine.entries()].map(([line, procs]) => {
-      procs.sort((x, y) => RANK[x.state] - RANK[y.state]);
-      return { line, procs, lead: procs[0] };
-    });
+    // Ahora que avanzan varios procesos a la vez, compartir renglon es normal: las
+    // etiquetas se corren para no taparse entre si.
+    const salida: Array<ActiveLine & { corrimiento: number }> = [];
+    for (const procs of porLinea.values()) {
+      procs.sort((x, y) => RANK[x.state] - RANK[y.state] || x.name.localeCompare(y.name));
+      let corrimiento = 0;
+      for (const p of procs) {
+        salida.push({ ...p, corrimiento });
+        corrimiento += p.name.length * ANCHO_CHAR + HUECO_ETIQUETA;
+      }
+    }
+    return salida;
   }, [activeLines]);
 
   const onKeyDown = (e: React.KeyboardEvent<TA>) => {
@@ -305,27 +326,32 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine }:
   };
 
   return (
-    <div className="editor">
+    <div className="editor" style={{ ['--desliz' as string]: `${desliz}ms` }}>
       <div className="doc">
         <div className="gutter">{lines.map((_, i) => `${i + 1}\n`).join('')}</div>
         <div className="area">
           <pre className="layer" dangerouslySetInnerHTML={{ __html: highlight(code) + '\n' }} />
 
-          {stripes.map(({ line, procs, lead }) => (
+          {marcas.map((p) => (
             <div
-              key={line}
+              key={p.name}
               className="stripe"
-              style={{ top: PAD_TOP + (line - 1) * LINE_H, ...stripeStyle(lead.color, lead.state) }}
+              style={{
+                top: PAD_TOP + (p.line - 1) * LINE_H,
+                ...stripeStyle(p.color, p.state),
+                zIndex: RANK[p.state] === 0 ? 2 : 1,
+              }}
             >
-              {procs.map((p) => (
-                <span
-                  key={p.name}
-                  className="who"
-                  style={{ color: p.color, opacity: NAME_ALPHA[p.state] }}
-                >
-                  {p.name}
-                </span>
-              ))}
+              <span
+                className="who"
+                style={{
+                  color: p.color,
+                  opacity: NAME_ALPHA[p.state],
+                  transform: `translateX(${-p.corrimiento}px)`,
+                }}
+              >
+                {p.name}
+              </span>
             </div>
           ))}
 
@@ -362,12 +388,12 @@ function stripeStyle(color: string, state: ProcessState): React.CSSProperties {
   }
   if (state === 'READY') {
     return {
-      background: `color-mix(in srgb, ${color} 7%, transparent)`,
+      background: `color-mix(in srgb, ${color} 5%, transparent)`,
       borderLeft: `2px solid color-mix(in srgb, ${color} 50%, transparent)`,
     };
   }
   return {
-    background: `color-mix(in srgb, ${color} 18%, transparent)`,
+    background: `color-mix(in srgb, ${color} 13%, transparent)`,
     borderLeft: `2px solid ${color}`,
   };
 }
