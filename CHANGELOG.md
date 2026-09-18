@@ -29,6 +29,8 @@ Reglas:
   scripts `smoke` y `check` al frontend. (Federico Dobal, 2026-09-18)
 - Agregar tests de regresión para los bugs B1 a B6 de la revisión (desactivados hasta
   arreglarlos) y tests del contrato del puente `SimuladorJs`. (Federico Dobal, 2026-09-18)
+- Verificar en cada push y PR los tests del núcleo, que el motor esté al día y que el
+  frontend compile sin errores de lint. (Federico Dobal, 2026-09-18)
 
 ## [0.1.0] - 2026-09-17
 
