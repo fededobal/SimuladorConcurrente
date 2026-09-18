@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/** Habilita CORS para el frontend de desarrollo (Vite). */
+/** Habilita CORS para el frontend (Vite en desarrollo, el dominio del deploy en produccion). */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins(allowedOrigins)
+                .allowedOriginPatterns(allowedOrigins)
                 .allowedMethods("GET", "POST", "DELETE", "OPTIONS");
     }
 }

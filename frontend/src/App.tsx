@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Play, Pause, SkipForward, RotateCcw } from 'lucide-react';
+import { Play, Pause, SkipForward, RotateCcw, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { useSimulation, type SimStatus } from './useSimulation';
 
@@ -71,6 +71,7 @@ export function App() {
 
   const running = status === 'running';
   const done = status === 'finished' || status === 'deadlock';
+  const active = status !== 'idle' && status !== 'error';
 
   return (
     <div className="app">
@@ -91,6 +92,10 @@ export function App() {
 
         <button className="btn" onClick={sim.step} disabled={running || done}>
           <SkipForward size={14} /> Paso
+        </button>
+
+        <button className="btn" onClick={sim.stop} disabled={!active}>
+          <Square size={14} /> Detener
         </button>
 
         <select

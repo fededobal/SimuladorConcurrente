@@ -102,6 +102,26 @@ process Consumidor { int x = 0; Buffer.retirar(x); }
   `int` / `double` / `boolean` / `text` y `Cola` FIFO (`push` / `pop` / `empty`).
 - Parámetros `in` / `out` / `inout`.
 
+## Deploy
+
+El frontend es estatico y va a Vercel (`vercel.json`), pero el nucleo es Java: Vercel no lo
+ejecuta, asi que el backend se despliega aparte y el frontend lo apunta por URL. Si falta ese
+paso, la app compila pero cada pedido a `/api/...` cae en el 404 de Vercel.
+
+1. **Backend** en Render (o Railway / Fly, cualquiera que corra Docker): hay un
+   `backend/Dockerfile` y un `render.yaml` listos. En Render, *New > Blueprint* sobre el repo
+   toma el `render.yaml`; a mano, *New > Web Service* con runtime Docker, dockerfile path
+   `./backend/Dockerfile` y context `./backend`. El puerto sale de `PORT`, que el host inyecta.
+2. **CORS**: en el backend, variable de entorno `CORS_ORIGINS` con el dominio de Vercel.
+   Admite comodines, por ejemplo `https://mi-simulador.vercel.app,https://*.vercel.app`
+   (el segundo habilita tambien los preview deploys).
+3. **Frontend**: en Vercel, *Settings > Environment Variables*, `VITE_API_URL` con el origen
+   del backend sin barra final (ver `frontend/.env.example`) y **redeploy** — es una variable
+   de build, un deploy viejo no la toma.
+
+En el plan gratuito de Render el servicio se duerme tras unos minutos sin trafico: la primera
+ejecucion despues de la siesta tarda algunas decenas de segundos en responder.
+
 ## API REST
 
 | Método | Ruta | Descripción |

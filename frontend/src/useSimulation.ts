@@ -48,6 +48,9 @@ export function useSimulation(initialCode: string) {
     setStat('idle');
   }, []);
 
+  // detiene la simulacion y devuelve el editor a modo edicion
+  const stop = useCallback(() => drop(), [drop]);
+
   // editar el codigo invalida la simulacion en curso
   const setCode = useCallback((next: string) => {
     setCodeState(next);
@@ -154,6 +157,6 @@ export function useSimulation(initialCode: string) {
     code, setCode,
     snapshot, status, error,
     speed, setSpeed, speeds: SPEEDS,
-    play, pause, step, reset,
+    play, pause, step, reset, stop,
   };
 }
