@@ -19,7 +19,7 @@ Monorepo sin servidor: todo corre en el navegador.
 | Carpeta | Qué es | Stack |
 |---|---|---|
 | [`nucleo/`](./nucleo) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y el puente a JavaScript | Java 21, TeaVM, Maven |
-| [`frontend/`](./frontend) | Interfaz web: editor con la línea de cada proceso, pantalla de salida, ejemplos, semilla, política y enlaces para compartir | React 19, TypeScript, Vite |
+| [`frontend/`](./frontend) | Interfaz web: editor con la línea de cada proceso, pantalla de salida, ejemplos, semilla y política | React 19, TypeScript, Vite |
 | [`ejemplos/`](./ejemplos) | Programas de ejemplo (`.mon`): los ofrece la interfaz y los prueban JUnit y el smoke | — |
 | [`docs/`](./docs) | Teoría de monitores, referencia y especificación del lenguaje, decisiones de diseño (ADR) | — |
 | [`scripts/`](./scripts) | Smoke del motor compilado, huella del núcleo, hooks, revisión de estilo | Node |
@@ -60,8 +60,6 @@ regenerado): `sh scripts/instalar-hooks.sh`. Las reglas están en [`CONTRIBUTING
   o turnos en ronda (avanzan todos, por turno).
 - **Semilla**: cada corrida usa una semilla nueva, que se muestra en la barra. Al hacer clic
   en ella (o al escribir una) queda fija y todas las corridas repiten el mismo entrelazado.
-- **Compartir**: copia un enlace con el programa, la semilla y la política. El programa va
-  comprimido en el fragmento de la URL (`#p=...`), que no llega a ningún servidor.
 
 ### Al tocar el núcleo Java
 

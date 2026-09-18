@@ -23,8 +23,6 @@ Reglas:
 - Semilla visible: la barra muestra la semilla de cada corrida y permite fijarla (con un clic o
   escribiéndola) para repetir exactamente el mismo entrelazado. Sin semilla fija, cada corrida
   sigue siendo distinta. (Federico Dobal, 2026-09-18)
-- Botón "Compartir": copia un enlace con el programa, la semilla y la política. Quien lo abre
-  ve el mismo programa y puede repetir la misma corrida. No usa servidor. (Federico Dobal, 2026-09-18)
 
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
@@ -42,6 +40,8 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Quitar el botón "Compartir" de la barra, que se había agregado en esta misma versión.
+  (Federico Dobal, 2026-09-18)
 - Sacar de `main` el prototipo de semáforos (`legacy/`); queda en el tag de git
   `prototipo-semaforos`. (Federico Dobal, 2026-09-18)
 - Quitar la skill `nuevo-concepto-concurrencia` y las menciones a otros conceptos de
