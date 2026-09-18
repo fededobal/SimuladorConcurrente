@@ -222,7 +222,16 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | Nada | `skip;` |
 
 Cada sentencia (y cada evaluación de guarda, y cada llamada a monitor) es **un paso atómico**
-del scheduler: en cada instante avanza un solo proceso, una sola sentencia.
+del scheduler. En un mismo instante **avanzan varios procesos a la vez**, cada uno una
+sentencia: los procesos corren en paralelo, no entrelazados de a uno.
+
+No todos avanzan en cada instante —unos van más rápido que otros, como en la realidad— y el
+orden dentro del instante es el que decide **quién gana el monitor** cuando dos lo piden a la
+vez. El que pierde queda en la cola de entrada.
+
+Que corran en paralelo no rompe nada: la exclusión mutua del monitor sigue serializando todo
+lo que toca estado compartido. Por eso un contador dentro de un monitor da siempre el mismo
+total, corran los procesos como corran — que es justamente la garantía que dan los monitores.
 
 ### `if` / `while`
 

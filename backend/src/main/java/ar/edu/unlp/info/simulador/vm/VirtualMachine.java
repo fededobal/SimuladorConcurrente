@@ -24,6 +24,9 @@ public final class VirtualMachine {
     };
 
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
+    /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
+    private static final int PROB_AVANCE = 80;
+
     private static final int STRUCTURAL_CAP = 4000;
 
     private final Program program;
@@ -137,8 +140,17 @@ public final class VirtualMachine {
     // ================================================================= scheduling
 
     /**
-     * Avanza un instante: ejecuta una sentencia del proceso elegido (o del que decida la
-     * politica). Devuelve los eventos generados por este instante.
+     * Avanza un instante. Los procesos corren en paralelo de verdad: en un mismo instante
+     * avanzan varios, no uno solo. Eso es lo que hace visible la contencion — dos procesos
+     * que piden el mismo monitor a la vez, y uno se queda en la cola de entrada.
+     *
+     * <p>Cual avanza y en que orden lo decide la politica. El orden dentro del instante
+     * importa: es el que resuelve quien gana el monitor cuando varios lo piden a la vez.
+     *
+     * <p>Si se pide un proceso puntual ({@code chosenProcessId}), avanza solo ese: es el
+     * modo paso a paso, para seguir a un proceso sin que el resto se mueva.
+     *
+     * @return los eventos generados por este instante
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy) {
         int mark = log.size();
@@ -146,8 +158,8 @@ public final class VirtualMachine {
         if (isFinished()) {
             return List.of();
         }
-        Process p = pick(chosenProcessId, policy);
-        if (p == null) {
+        List<Process> turno = elegirTurno(chosenProcessId, policy);
+        if (turno.isEmpty()) {
             if (!deadlockLogged) {
                 deadlockLogged = true;
                 instant++;
@@ -157,15 +169,22 @@ public final class VirtualMachine {
         }
 
         instant++;
-        p.setState(Process.State.RUNNING);
-        try {
-            advance(p);
-        } catch (RuntimeError re) {
-            p.fail(re.getMessage());
-            event(p, "ERROR", "", p.name() + ": error de ejecucion - " + re.getMessage());
-        }
-        if (p.state() == Process.State.RUNNING) {
-            p.setState(Process.State.READY);
+        for (Process p : turno) {
+            // Entre que se armo el turno y le toca, otro pudo haberlo bloqueado tomando el
+            // monitor que este queria: solo avanza si sigue listo.
+            if (p.state() != Process.State.READY) {
+                continue;
+            }
+            p.setState(Process.State.RUNNING);
+            try {
+                advance(p);
+            } catch (RuntimeError re) {
+                p.fail(re.getMessage());
+                event(p, "ERROR", "", p.name() + ": error de ejecucion - " + re.getMessage());
+            }
+            if (p.state() == Process.State.RUNNING) {
+                p.setState(Process.State.READY);
+            }
         }
         if (isDeadlocked() && !deadlockLogged) {
             deadlockLogged = true;
@@ -174,32 +193,53 @@ public final class VirtualMachine {
         return tail(mark);
     }
 
-    private List<LogEntry> tail(int fromIndex) {
-        return new ArrayList<>(log.subList(fromIndex, log.size()));
-    }
-
-    private Process pick(Integer chosenProcessId, SchedulingPolicy policy) {
-        List<Process> ready = processes.stream()
+    /**
+     * Los procesos que avanzan en este instante, en el orden en que lo hacen.
+     *
+     * <p>No avanzan siempre todos: cada proceso listo entra al turno con probabilidad alta
+     * pero no segura, y siempre entra al menos uno. Si avanzaran todos en cada instante el
+     * programa correria en lockstep y los alumnos verian siempre el mismo entrelazado; que
+     * unos avancen mas rapido que otros es lo que hace aparecer los casos raros.
+     */
+    private List<Process> elegirTurno(Integer chosenProcessId, SchedulingPolicy policy) {
+        List<Process> listos = processes.stream()
                 .filter(pr -> pr.state() == Process.State.READY)
-                .toList();
-        if (ready.isEmpty()) return null;
-
+                .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+        if (listos.isEmpty()) {
+            return List.of();
+        }
+        // Paso a paso: el usuario eligio un proceso y quiere ver solo ese.
         if (chosenProcessId != null) {
-            for (Process pr : ready) {
-                if (pr.id() == chosenProcessId) return pr;
+            for (Process pr : listos) {
+                if (pr.id() == chosenProcessId) return List.of(pr);
             }
         }
+
         if (policy == SchedulingPolicy.ROUND_ROBIN) {
+            // Turnos parejos: se empieza por el siguiente al ultimo que arranco.
             int n = processes.size();
+            List<Process> orden = new ArrayList<>();
             for (int k = 1; k <= n; k++) {
                 Process cand = processes.get((rrCursor + k) % n);
-                if (cand.state() == Process.State.READY) {
-                    rrCursor = processes.indexOf(cand);
-                    return cand;
-                }
+                if (cand.state() == Process.State.READY) orden.add(cand);
             }
+            rrCursor = processes.indexOf(orden.get(0));
+            return orden;
         }
-        return ready.get(random.nextInt(ready.size()));
+
+        java.util.Collections.shuffle(listos, random);
+        List<Process> turno = new ArrayList<>();
+        for (Process pr : listos) {
+            if (random.nextInt(100) < PROB_AVANCE) turno.add(pr);
+        }
+        if (turno.isEmpty()) {
+            turno.add(listos.get(0));   // el shuffle ya lo eligio al azar
+        }
+        return turno;
+    }
+
+    private List<LogEntry> tail(int fromIndex) {
+        return new ArrayList<>(log.subList(fromIndex, log.size()));
     }
 
     // ================================================================= ejecucion de un proceso

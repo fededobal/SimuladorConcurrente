@@ -146,7 +146,9 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Skip | `skip;` |
 
 Toda sentencia (o la evaluación de una guarda, o una llamada a monitor) es un **paso
-atómico** del scheduler: en cada instante avanza exactamente un proceso una sentencia.
+atómico** del scheduler. En cada instante avanzan varios procesos, una sentencia cada uno
+(paralelismo real, no entrelazado de a uno); el orden dentro del instante decide quién gana
+el monitor cuando varios lo piden a la vez.
 
 ---
 
