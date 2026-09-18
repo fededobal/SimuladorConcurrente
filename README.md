@@ -55,9 +55,20 @@ regenerado): `sh scripts/instalar-hooks.sh`. Las reglas están en [`CONTRIBUTING
 
 ### En la interfaz
 
-- **Ejemplos**: carga los programas de [`ejemplos/`](./ejemplos).
-- **Política**: turnos al azar (en cada instante avanza un subconjunto de los procesos listos)
-  o turnos en ronda (avanzan todos, por turno).
+La barra tiene seis controles:
+
+- **Ejecutar / Pausar**: compila el programa y lo corre instante a instante; mientras corre,
+  el botón pasa a Pausar.
+- **Paso**: avanza un solo instante (si no hay simulación en curso, compila primero).
+- **Detener**: termina la simulación y devuelve el editor a modo edición.
+- **Velocidad**: lento, normal, rápido o muy rápido.
+- **Turnos**: al azar (en cada instante avanza un subconjunto de los procesos listos) o en
+  ronda (avanzan todos, por turno). Se puede cambiar en medio de una ejecución.
+- **Ejemplos**: carga los programas de [`ejemplos/`](./ejemplos); si el editor tiene un
+  programa propio, pide confirmación antes de reemplazarlo.
+
+Cada corrida arranca con una semilla nueva, así que dos ejecuciones con turnos al azar
+pueden mostrar entrelazados distintos.
 
 ### Al tocar el núcleo Java
 

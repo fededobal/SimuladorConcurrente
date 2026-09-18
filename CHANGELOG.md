@@ -55,6 +55,7 @@ Reglas:
 - Sincronizar el README con la versión sin servidor (interfaz actual, carpetas, ejemplos,
   semilla, política y enlaces) y corregir la definición de instante en la referencia y la
   especificación del lenguaje: evaluar una guarda no consume un paso. (Federico Dobal, 2026-09-18)
+- Describir en el README los seis controles de la barra. (Federico Dobal, 2026-09-18)
 
 ### Interno
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios
