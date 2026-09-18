@@ -15,8 +15,10 @@ if printf '%s\n' "$staged" | grep -Eq '^backend/(pom\.xml|src/main/java/ar/edu/u
   if ! node scripts/motor-hash.mjs --check; then
     exit 1
   fi
-  if ! printf '%s\n' "$staged" | grep -q '^frontend/src/engine/simulador.js$'; then
-    echo "  pre-commit: tocaste el núcleo pero simulador.js no está en este commit."
+  # La huella ya coincide; falta que el motor regenerado entre al commit. Si TeaVM generó
+  # un simulador.js idéntico (por ejemplo, solo cambiaron comentarios) no hay nada que agregar.
+  if ! git diff --quiet -- frontend/src/engine/simulador.js frontend/src/engine/simulador.hash; then
+    echo "  pre-commit: el motor regenerado tiene cambios que no están en este commit."
     echo "  Agregalo:  git add frontend/src/engine/simulador.js frontend/src/engine/simulador.hash"
     exit 1
   fi

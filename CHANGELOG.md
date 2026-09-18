@@ -39,6 +39,8 @@ Reglas:
   arreglarlos) y tests del contrato del puente `SimuladorJs`. (Federico Dobal, 2026-09-18)
 - Verificar en cada push y PR los tests del núcleo, que el motor esté al día y que el
   frontend compile sin errores de lint. (Federico Dobal, 2026-09-18)
+- El hook `pre-commit` acepta un cambio del núcleo cuyo motor regenerado sale idéntico, y
+  exige en cambio que no queden cambios del motor sin agregar al commit. (Federico Dobal, 2026-09-18)
 
 ## [0.1.0] - 2026-09-17
 
