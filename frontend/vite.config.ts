@@ -5,5 +5,6 @@ import react from '@vitejs/plugin-react';
 // desde el nucleo Java), asi que no hay servidor al que redirigir: alcanza con servir.
 export default defineConfig({
   plugins: [react()],
-  server: { port: 5173 },
+  // ejemplos/ esta fuera de frontend/: el servidor de desarrollo tiene que poder leerlo.
+  server: { port: 5173, fs: { allow: ['..'] } },
 });

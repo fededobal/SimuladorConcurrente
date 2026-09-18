@@ -3,46 +3,7 @@ import { Play, Pause, SkipForward, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
-
-const DEFAULT_CODE = `monitor Buffer {
-  int dato = 0;
-  boolean hayDato = false;
-  cond libre, ocupado;
-
-  procedure depositar(d: in int) {
-    while (hayDato) wait(libre);
-    dato = d;
-    hayDato = true;
-    signal(ocupado);
-  }
-
-  procedure retirar(r: out int) {
-    while (not hayDato) wait(ocupado);
-    r = dato;
-    hayDato = false;
-    signal(libre);
-  }
-}
-
-process Productor {
-  int i = 1;
-  while (i <= 5) {
-    Buffer.depositar(i);
-    write("deposite ", i);
-    i++;
-  }
-}
-
-process Consumidor {
-  int x = 0;
-  int n = 0;
-  while (n < 5) {
-    Buffer.retirar(x);
-    write("retire ", x);
-    n++;
-  }
-}
-`;
+import { EJEMPLOS } from './ejemplos';
 
 const SPEED_LABEL: Record<number, string> = {
   1200: 'lento',
@@ -62,7 +23,7 @@ const STATUS_LABEL: Record<SimStatus, string> = {
 };
 
 export function App() {
-  const sim = useSimulation(DEFAULT_CODE);
+  const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
   const { snapshot, status } = sim;
 
   const activeLines: ActiveLine[] = useMemo(() => {
@@ -74,6 +35,17 @@ export function App() {
 
   const running = status === 'running';
   const active = status !== 'idle' && status !== 'error';
+
+  const cargarEjemplo = (id: string) => {
+    const ejemplo = EJEMPLOS.find((e) => e.id === id);
+    if (!ejemplo) return;
+    // Si el editor tiene un programa propio, avisar antes de pisarlo.
+    const propio = !EJEMPLOS.some((e) => e.codigo === sim.code);
+    if (propio && !window.confirm('Se reemplaza el programa del editor por el ejemplo. ¿Seguir?')) {
+      return;
+    }
+    sim.setCode(ejemplo.codigo);
+  };
 
   return (
     <div className="app">
@@ -103,6 +75,19 @@ export function App() {
         >
           {sim.speeds.map((s) => (
             <option key={s} value={s}>{SPEED_LABEL[s] ?? `${s}ms`}</option>
+          ))}
+        </select>
+
+        <select
+          className="sel"
+          value=""
+          onChange={(e) => cargarEjemplo(e.target.value)}
+          disabled={running}
+          aria-label="Cargar un programa de ejemplo"
+        >
+          <option value="" disabled>Ejemplos…</option>
+          {EJEMPLOS.map((e) => (
+            <option key={e.id} value={e.id}>{e.titulo}</option>
           ))}
         </select>
 
