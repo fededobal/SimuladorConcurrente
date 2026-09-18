@@ -505,7 +505,12 @@ public final class Parser {
             if (t.lexeme().contains(".")) {
                 return new Expr.DoubleLit(Double.parseDouble(t.lexeme()), t.line());
             }
-            return new Expr.IntLit(Long.parseLong(t.lexeme()), t.line());
+            try {
+                return new Expr.IntLit(Long.parseLong(t.lexeme()), t.line());
+            } catch (NumberFormatException e) {
+                throw new CompilationException("Numero fuera de rango: " + t.lexeme()
+                        + " no entra en un int (maximo 9223372036854775807)", t.line());
+            }
         }
         if (t.is(TokenType.STRING)) {
             advance();

@@ -4,7 +4,6 @@ import ar.edu.unlp.info.simulador.TestSupport;
 import ar.edu.unlp.info.simulador.TestSupport.RunResult;
 import ar.edu.unlp.info.simulador.lang.CompilationException;
 import ar.edu.unlp.info.simulador.lang.Compiler;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -66,7 +65,6 @@ class RegresionesVmTest {
     }
 
     @Test
-    @Disabled("B4: Long.parseLong en el parser lanza NumberFormatException sin linea")
     void literalFueraDeRangoEsErrorDeCompilacion() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { int x = 99999999999999999999; procedure f() { x = 1; } }
