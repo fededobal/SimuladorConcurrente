@@ -6,6 +6,3 @@
 # Motor generado por TeaVM: no se revisa en diffs ni cuenta en las estadisticas de GitHub.
 frontend/src/engine/simulador.js linguist-generated=true -diff
 frontend/src/engine/simulador.hash linguist-generated=true
-
-# Prototipo archivado
-legacy/** linguist-vendored=true

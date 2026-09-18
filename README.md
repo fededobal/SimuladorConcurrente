@@ -9,8 +9,8 @@ lo próximo es visualizar el estado del monitor: variables, colas de las variabl
 estructuras de datos y un historial en forma de línea de tiempo.
 
 Proyecto de Práctica Profesional Supervisada (Analista en TIC). Reemplaza al prototipo
-anterior basado en semáforos, que queda archivado en [`legacy/`](./legacy) solo como
-referencia visual.
+anterior basado en semáforos, que queda archivado en el tag de git `prototipo-semaforos`
+(`git checkout prototipo-semaforos -- legacy/` lo recupera).
 
 ## Arquitectura
 
@@ -23,7 +23,6 @@ Monorepo sin servidor: todo corre en el navegador.
 | [`ejemplos/`](./ejemplos) | Programas de ejemplo (`.mon`): los ofrece la interfaz y los prueban JUnit y el smoke | — |
 | [`docs/`](./docs) | Teoría de monitores, referencia y especificación del lenguaje, decisiones de diseño (ADR) | — |
 | [`scripts/`](./scripts) | Smoke del motor compilado, huella del núcleo, hooks, revisión de estilo | Node |
-| [`legacy/`](./legacy) | Prototipo previo (semáforos), archivado | — |
 
 El núcleo (`nucleo/src/main/java/.../lang` + `.../vm`) sólo usa `java.util`. Eso permite
 compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y correrlo dentro del

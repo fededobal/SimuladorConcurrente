@@ -42,6 +42,8 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Sacar de `main` el prototipo de semáforos (`legacy/`); queda en el tag de git
+  `prototipo-semaforos`. (Federico Dobal, 2026-09-18)
 - Quitar la skill `nuevo-concepto-concurrencia` y las menciones a otros conceptos de
   concurrencia en las reglas del repositorio. (Federico Dobal, 2026-09-18)
 - Eliminar la API REST de Spring Boot, que la interfaz no usaba desde que el motor corre en
