@@ -21,6 +21,8 @@ Reglas:
 ### Interno
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios
   y configuración de Claude Code. (Federico Dobal, 2026-09-18)
+- Registrar la huella del núcleo en `simulador.hash` al regenerar el motor, y sumar los
+  scripts `smoke` y `check` al frontend. (Federico Dobal, 2026-09-18)
 
 ## [0.1.0] - 2026-09-17
 
