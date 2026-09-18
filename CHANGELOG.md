@@ -51,6 +51,9 @@ Reglas:
 ### Documentación
 - Registrar en el ADR 0003 que el alcance del simulador es solo monitores y cuáles son las
   funcionalidades previstas; el ADR 0002 queda reemplazado. (Federico Dobal, 2026-09-18)
+- Sincronizar el README con la versión sin servidor (interfaz actual, carpetas, ejemplos,
+  semilla, política y enlaces) y corregir la definición de instante en la referencia y la
+  especificación del lenguaje: evaluar una guarda no consume un paso. (Federico Dobal, 2026-09-18)
 
 ### Interno
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios

@@ -223,11 +223,14 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | Bloque | `{ ... }` suelto |
 | Nada | `skip;` |
 
-Cada sentencia (y cada evaluación de guarda, y cada llamada a monitor) es **un paso atómico**
-del scheduler. En un mismo instante **avanzan varios procesos a la vez**, cada uno una
-sentencia: los procesos corren en paralelo, no entrelazados de a uno.
+Cada sentencia (asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`,
+`skip`) es **un paso atómico** del scheduler. Los bloques y la evaluación de las guardas de
+`if`, `while` y `for` no ocupan un paso propio: se resuelven junto con la sentencia que
+sigue. En un mismo instante **avanzan varios procesos a la vez**, cada uno una sentencia:
+los procesos corren en paralelo, no entrelazados de a uno.
 
-No todos avanzan en cada instante —unos van más rápido que otros, como en la realidad— y el
+Con turnos al azar no todos avanzan en cada instante —unos van más rápido que otros, como
+en la realidad—; con turnos en ronda avanzan todos los listos. En los dos casos, el
 orden dentro del instante es el que decide **quién gana el monitor** cuando dos lo piden a la
 vez. El que pierde queda en la cola de entrada.
 

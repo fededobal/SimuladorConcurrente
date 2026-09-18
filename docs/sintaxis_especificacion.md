@@ -146,10 +146,12 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | For (rango sin iterador) | `for (1..n) { ... }` |
 | Skip | `skip;` |
 
-Toda sentencia (o la evaluación de una guarda, o una llamada a monitor) es un **paso
-atómico** del scheduler. En cada instante avanzan varios procesos, una sentencia cada uno
-(paralelismo real, no entrelazado de a uno); el orden dentro del instante decide quién gana
-el monitor cuando varios lo piden a la vez.
+Toda sentencia observable (asignación, `++`/`--`, llamada a monitor, `wait`/`signal`,
+`write`, `push`/`pop`, `skip`) es un **paso atómico** del scheduler. Los bloques y la
+evaluación de las guardas de `if`, `while` y `for` no consumen un instante: se resuelven
+junto con la sentencia siguiente. En cada instante avanzan varios procesos, una sentencia
+cada uno (paralelismo real, no entrelazado de a uno); el orden dentro del instante decide
+quién gana el monitor cuando varios lo piden a la vez.
 
 ---
 
@@ -168,8 +170,11 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 
 ## 7. Semántica de ejecución (resumen)
 
-- **Un instante = una sentencia de un proceso.** El scheduler elige el proceso: por política
-  (`random` o `round-robin`) o, en modo paso a paso, lo elige el usuario.
+- **Un instante = un turno del scheduler.** Con la política `random`, cada proceso listo
+  entra al turno con probabilidad `PROB_AVANCE` (80 %) y al menos uno avanza; con
+  `round-robin`, avanzan todos los listos, por turno. Cada proceso del turno ejecuta una
+  sentencia observable. El núcleo permite además avanzar un único proceso elegido, que la
+  interfaz todavía no ofrece.
 - **Exclusión mutua implícita:** a lo sumo un proceso dentro de cada monitor.
   - `Monitor.op(args)` con el monitor libre: el proceso entra y ejecuta el cuerpo.
   - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada; reintenta al

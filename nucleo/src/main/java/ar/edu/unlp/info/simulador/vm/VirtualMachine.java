@@ -12,9 +12,10 @@ import java.util.Random;
 import java.util.function.Function;
 
 /**
- * Maquina virtual del simulador de monitores. Ejecuta un {@link Program} paso a paso: en
- * cada instante avanza exactamente un proceso una sentencia (accion atomica). Implementa la
- * exclusion mutua implicita de los monitores y la disciplina <em>signal and continue</em>.
+ * Maquina virtual del simulador de monitores. Ejecuta un {@link Program} por instantes: en
+ * cada instante avanzan uno o varios procesos, una sentencia observable cada uno (ver
+ * {@link #step}). Implementa la exclusion mutua implicita de los monitores y la disciplina
+ * <em>signal and continue</em>.
  */
 public final class VirtualMachine {
 
