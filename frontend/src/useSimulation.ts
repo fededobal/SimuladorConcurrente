@@ -93,20 +93,28 @@ export function useSimulation(initialCode: string) {
   }, []);
 
   const step = useCallback(() => {
-    if (statusRef.current === 'idle' || statusRef.current === 'error') {
+    if (
+      statusRef.current === 'idle' ||
+      statusRef.current === 'error' ||
+      statusRef.current === 'finished' ||
+      statusRef.current === 'deadlock'
+    ) {
       if (!compile()) return;
     }
-    if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
     clearTimer();
     setStat('paused');
     doStep();
   }, [compile, doStep]);
 
   const play = useCallback(() => {
-    if (statusRef.current === 'idle' || statusRef.current === 'error') {
+    if (
+      statusRef.current === 'idle' ||
+      statusRef.current === 'error' ||
+      statusRef.current === 'finished' ||
+      statusRef.current === 'deadlock'
+    ) {
       if (!compile()) return;
     }
-    if (statusRef.current === 'finished' || statusRef.current === 'deadlock') return;
     setStat('running');
     clearTimer();
     timerRef.current = window.setInterval(() => {
@@ -119,19 +127,6 @@ export function useSimulation(initialCode: string) {
     clearTimer();
     if (statusRef.current === 'running') setStat('paused');
   }, []);
-
-  const reset = useCallback(() => {
-    clearTimer();
-    if (!activaRef.current) { compile(); return; }
-    try {
-      const created = api.reset();
-      setSnapshot(created.initial.snapshot);
-      setError(null);
-      setStat('ready');
-    } catch {
-      compile();
-    }
-  }, [compile]);
 
   // reajusta el intervalo si cambia la velocidad mientras corre
   useEffect(() => {
@@ -150,6 +145,6 @@ export function useSimulation(initialCode: string) {
     code, setCode,
     snapshot, status, error,
     speed, setSpeed, speeds: SPEEDS,
-    play, pause, step, reset, stop,
+    play, pause, step, stop,
   };
 }

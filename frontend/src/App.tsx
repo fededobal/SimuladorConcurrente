@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Play, Pause, SkipForward, RotateCcw, Square } from 'lucide-react';
+import { Play, Pause, SkipForward, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
@@ -73,17 +73,12 @@ export function App() {
   }, [snapshot]);
 
   const running = status === 'running';
-  const done = status === 'finished' || status === 'deadlock';
   const active = status !== 'idle' && status !== 'error';
 
   return (
     <div className="app">
       <div className="bar">
-        {done ? (
-          <button className="btn btn-main" onClick={sim.reset}>
-            <RotateCcw size={14} /> Reiniciar
-          </button>
-        ) : running ? (
+        {running ? (
           <button className="btn btn-main" onClick={sim.pause}>
             <Pause size={14} /> Pausar
           </button>
@@ -93,7 +88,7 @@ export function App() {
           </button>
         )}
 
-        <button className="btn" onClick={sim.step} disabled={running || done}>
+        <button className="btn" onClick={sim.step} disabled={running}>
           <SkipForward size={14} /> Paso
         </button>
 
