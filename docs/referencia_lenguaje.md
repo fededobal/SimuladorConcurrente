@@ -2,7 +2,7 @@
 
 Lista completa de palabras reservadas, instrucciones y expresiones que acepta el núcleo
 (lexer + parser + validador semántico + VM). Cada forma de esta página fue **probada contra
-el backend**: 94 casos de sintaxis y 38 de semántica en ejecución.
+el núcleo**: 94 casos de sintaxis y 38 de semántica en ejecución.
 
 Para la teoría de monitores ver [`monitores.md`](monitores.md); para la gramática formal en
 EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).

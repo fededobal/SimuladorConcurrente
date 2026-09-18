@@ -4,7 +4,7 @@ Convenciones: skill `convenciones-codigo` (leer `references/java.md` antes de es
 El alcance es solo monitores (ADR 0003). `VirtualMachine` ronda las 800 líneas: si una
 funcionalidad nueva la hace crecer, partirla primero en un commit `refactor(vm)` aparte.
 
-Esto no es un "backend": es el **motor** del simulador. Casi todo corre en el navegador vía TeaVM.
+Es el **motor** del simulador (por eso `nucleo/` y no `backend/`). Casi todo corre en el navegador vía TeaVM.
 
 - `lang/` y `vm/`: Java 21 puro. Nada de Spring, reflexión, `Class.forName`, serialización
   automática, hilos ni I/O. TeaVM compila estático: lo que no alcanza desde

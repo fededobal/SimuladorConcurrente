@@ -7,7 +7,7 @@ import type {
 } from './types';
 
 // El nucleo (lexer, parser, validador y VM de monitores) esta escrito en Java y vive en
-// backend/src/main/java. TeaVM lo compila a engine/simulador.js, asi que corre entero
+// nucleo/src/main/java. TeaVM lo compila a engine/simulador.js, asi que corre entero
 // dentro del navegador: no hay servidor, ni red, ni latencia.
 
 export class ApiRequestError extends Error {

@@ -52,7 +52,7 @@
 
     <profiles>
         <!--
-          Compila el nucleo a JavaScript para que corra en el navegador, sin backend.
+          Compila el nucleo a JavaScript para que corra en el navegador, sin servidor.
           No corre en el build normal: se invoca a mano con
 
               mvn -Pweb package

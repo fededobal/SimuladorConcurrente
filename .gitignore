@@ -14,9 +14,9 @@ dist-ssr
 *.local
 *.tsbuildinfo
 
-# Java / backend
-backend/target/
-backend/.mvn/wrapper/maven-wrapper.jar
+# Java / nucleo
+nucleo/target/
+nucleo/.mvn/wrapper/maven-wrapper.jar
 *.class
 hs_err_pid*
 

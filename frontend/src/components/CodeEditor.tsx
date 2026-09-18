@@ -41,7 +41,7 @@ const NAME_ALPHA: Record<ProcessState, number> = {
 
 // ===================================================================== pintado
 
-/** Mismas palabras reservadas que Lexer.KEYWORDS en el backend. */
+/** Mismas palabras reservadas que Lexer.KEYWORDS en el nucleo. */
 const KEYWORDS: Record<string, string> = {
   monitor: 'tok-decl', procedure: 'tok-decl', cond: 'tok-decl', process: 'tok-decl',
 
@@ -71,7 +71,7 @@ const INICIO_IDENT = /[A-Za-z_]/;
 const IDENT = /[A-Za-z0-9_]/;
 
 /**
- * Recorre el codigo igual que el lexer del backend en vez de encadenar reemplazos
+ * Recorre el codigo igual que el lexer del nucleo en vez de encadenar reemplazos
  * de regex. Asi un `//` dentro de una cadena no arranca un comentario y una palabra
  * reservada dentro de un comentario no se colorea como codigo.
  */

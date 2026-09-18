@@ -2,7 +2,7 @@
 name: motor-java-js
 description: >
   Flujo obligatorio para cualquier cambio en el núcleo Java del simulador
-  (backend/.../lang, vm, js o pom.xml) que termina compilado a JavaScript con TeaVM en
+  (nucleo/.../lang, vm, js o pom.xml) que termina compilado a JavaScript con TeaVM en
   frontend/src/engine/simulador.js. Cubre qué APIs de Java se pueden usar, cómo mantener
   el puente SimuladorJs/Json alineado con types.ts, y la secuencia tests → regenerar →
   smoke. Usala siempre que se modifique el lexer, parser, validador, la VirtualMachine,
@@ -18,7 +18,7 @@ cambio está terminado cuando anda en **los dos**.
 ## Secuencia
 
 ```bash
-cd backend && mvn -q test                 # 1. lógica correcta en la JVM
+cd nucleo && mvn -q test                 # 1. lógica correcta en la JVM
 cd ../frontend && npm run engine          # 2. compila a simulador.js + actualiza simulador.hash
 npm run smoke                             # 3. el JS compilado se comporta igual
 npm run build                             # 4. el front sigue tipando contra el motor

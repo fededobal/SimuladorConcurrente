@@ -1,4 +1,4 @@
-// Espejo de los DTOs del backend (ar.edu.unlp.info.simulador.vm.Snapshot / LogEntry).
+// Espejo de los records del nucleo (ar.edu.unlp.info.simulador.vm.Snapshot / LogEntry).
 
 export interface ProcRef {
   id: number;

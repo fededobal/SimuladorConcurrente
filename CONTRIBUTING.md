@@ -18,7 +18,7 @@ Las convenciones de código están en
 
 1. **`main` siempre anda.** Lo que está en `main` se publica en Vercel. Si no compila o no
    pasa `npm run check`, no va a `main`.
-2. **El motor generado viaja con su fuente.** Si tocás `backend/.../lang`, `vm`, `js` o el
+2. **El motor generado viaja con su fuente.** Si tocás `nucleo/.../lang`, `vm`, `js` o el
    `pom.xml`, en el mismo commit van `frontend/src/engine/simulador.js` y `simulador.hash`
    (`npm run engine`). El hook te frena si te olvidás.
 3. **Nada se edita en `simulador.js` a mano.** Nunca.

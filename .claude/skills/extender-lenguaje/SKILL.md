@@ -22,7 +22,7 @@ Si contradice `docs/monitores.md`, frená y preguntá: la notación la define la
 
 ## Lugares a tocar, en orden
 
-Rutas relativas a `backend/src/main/java/ar/edu/unlp/info/simulador/` salvo indicación.
+Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulador/` salvo indicación.
 
 | # | Dónde | Qué |
 |---|---|---|

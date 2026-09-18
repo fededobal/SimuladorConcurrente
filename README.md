@@ -16,12 +16,12 @@ Monorepo con dos partes independientes:
 
 | Carpeta | Qué es | Stack |
 |---|---|---|
-| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y el puente a JavaScript | Java 21, TeaVM, Maven |
+| [`nucleo/`](./nucleo) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y el puente a JavaScript | Java 21, TeaVM, Maven |
 | [`frontend/`](./frontend) | Interfaz web: editor, panel de monitores, línea de tiempo, historial | React 19, TypeScript, Vite |
 | [`docs/`](./docs) | Teoría, gramática, SRS, propuesta de PPS | — |
 | [`legacy/`](./legacy) | Prototipo previo (semáforos), archivado | — |
 
-El núcleo (`backend/src/main/java/.../lang` + `.../vm`) sólo usa `java.util`. Eso permite compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y
+El núcleo (`nucleo/src/main/java/.../lang` + `.../vm`) sólo usa `java.util`. Eso permite compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y
 correrlo dentro del navegador, sin servidor:
 
 ```
@@ -31,7 +31,7 @@ lang/ + vm/  ──(javac)──>  bytecode  ──(TeaVM)──>  frontend/src/
 ```
 
 `frontend/src/engine/simulador.js` es **código generado y commiteado**: no se edita a mano.
-Se regenera con `npm run engine` desde `frontend/` (o `mvn -Pweb package` desde `backend/`),
+Se regenera con `npm run engine` desde `frontend/` (o `mvn -Pweb package` desde `nucleo/`),
 y hay que hacerlo cada vez que se toca el núcleo Java. Se commitea porque el hosting sirve
 archivos estáticos y no tiene JDK ni Maven para generarlo en el deploy.
 
@@ -56,7 +56,7 @@ npm run engine     # recompila lang/ + vm/ a src/engine/simulador.js
 ### Tests del núcleo
 
 ```bash
-cd backend && mvn test
+cd nucleo && mvn test
 ```
 
 Incluye los programas canónicos de la teoría (contador `TOTAL`, buffer de un dato con

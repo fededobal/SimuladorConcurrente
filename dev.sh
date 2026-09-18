@@ -2,7 +2,7 @@
 # Levanta el simulador en http://localhost:5173. Ctrl-C lo corta. Uso: ./dev.sh
 #
 # El nucleo Java se compila a JavaScript con TeaVM y corre dentro del navegador, asi que
-# no hay backend que levantar. Si tocas backend/src/main/java, regenera el motor con:
+# no hay servidor que levantar. Si tocas nucleo/src/main/java, regenera el motor con:
 #
 #     cd frontend && npm run engine
 set -euo pipefail

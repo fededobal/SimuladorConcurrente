@@ -17,7 +17,7 @@ TypeScript + Vite**. Todo corre en el navegador; no hay servidor en producción 
 sirve estáticos). No proponer cambiar de lenguajes ni de stack.
 
 ```
-backend/src/main/java/ar/edu/unlp/info/simulador/
+nucleo/src/main/java/ar/edu/unlp/info/simulador/
   lang/   lexer → parser → AST → SemanticValidator      (Java puro, solo java.util)
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
   js/     SimuladorJs (@JSExport) + Json (a mano)        ← puente al navegador
@@ -30,7 +30,7 @@ frontend/src/api.ts → useSimulation.ts → componentes
 | Qué | Dónde | Comando |
 |---|---|---|
 | Levantar | raíz | `./dev.sh` → http://localhost:5173 |
-| Tests del núcleo | `backend/` | `mvn -q test` |
+| Tests del núcleo | `nucleo/` | `mvn -q test` |
 | Regenerar motor | `frontend/` | `npm run engine` |
 | Probar motor compilado | `frontend/` | `npm run smoke` |
 | Chequeo completo del front | `frontend/` | `npm run check` |
