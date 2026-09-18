@@ -4,12 +4,18 @@ import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
+import type { SchedulingPolicy } from './types';
 
 const SPEED_LABEL: Record<number, string> = {
   1200: 'lento',
   600: 'normal',
   300: 'rápido',
   120: 'muy rápido',
+};
+
+const POLICY_LABEL: Record<SchedulingPolicy, string> = {
+  RANDOM: 'turnos al azar',
+  ROUND_ROBIN: 'turnos en ronda',
 };
 
 const STATUS_LABEL: Record<SimStatus, string> = {
@@ -75,6 +81,18 @@ export function App() {
         >
           {sim.speeds.map((s) => (
             <option key={s} value={s}>{SPEED_LABEL[s] ?? `${s}ms`}</option>
+          ))}
+        </select>
+
+        <select
+          className="sel"
+          value={sim.policy}
+          onChange={(e) => sim.setPolicy(e.target.value as SchedulingPolicy)}
+          aria-label="Política de planificación"
+          title="Al azar: en cada instante avanza un subconjunto aleatorio de los procesos listos. En ronda: avanzan todos los listos, por turno."
+        >
+          {(Object.keys(POLICY_LABEL) as SchedulingPolicy[]).map((p) => (
+            <option key={p} value={p}>{POLICY_LABEL[p]}</option>
           ))}
         </select>
 

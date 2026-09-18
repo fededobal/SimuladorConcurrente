@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiRequestError } from './api';
-import type { Snapshot } from './types';
+import type { SchedulingPolicy, Snapshot } from './types';
 
 export type SimStatus =
   | 'idle' | 'ready' | 'running' | 'paused' | 'finished' | 'deadlock' | 'error';
@@ -18,11 +18,19 @@ export function useSimulation(initialCode: string) {
   const [status, setStatus] = useState<SimStatus>('idle');
   const [error, setError] = useState<SimError | null>(null);
   const [speed, setSpeed] = useState<number>(600);
+  const [policy, setPolicyState] = useState<SchedulingPolicy>('RANDOM');
 
   const activaRef = useRef(false);
   const statusRef = useRef<SimStatus>('idle');
   const timerRef = useRef<number | null>(null);
+  // el intervalo lee la politica en cada paso: cambiarla no reinicia la simulacion
+  const policyRef = useRef<SchedulingPolicy>('RANDOM');
   statusRef.current = status;
+
+  const setPolicy = useCallback((p: SchedulingPolicy) => {
+    policyRef.current = p;
+    setPolicyState(p);
+  }, []);
 
   // statusRef se actualiza en el acto: el intervalo lo lee antes de re-renderizar
   const setStat = (s: SimStatus) => {
@@ -77,7 +85,7 @@ export function useSimulation(initialCode: string) {
   const doStep = useCallback((): boolean => {
     if (!activaRef.current) return false;
     try {
-      const res = api.step('RANDOM');
+      const res = api.step(policyRef.current);
       setSnapshot(res.snapshot);
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
@@ -144,6 +152,7 @@ export function useSimulation(initialCode: string) {
     code, setCode,
     snapshot, status, error,
     speed, setSpeed, speeds: SPEEDS,
+    policy, setPolicy,
     play, pause, step, stop,
   };
 }

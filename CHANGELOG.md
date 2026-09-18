@@ -18,6 +18,8 @@ Reglas:
 ### Agregado
 - Menú "Ejemplos" en la barra para cargar los programas de `ejemplos/`. Si el editor tiene un
   programa propio, pide confirmación antes de reemplazarlo. (Federico Dobal, 2026-09-18)
+- Selector de política de planificación: turnos al azar o en ronda (*round robin*). Se puede
+  cambiar en medio de una ejecución. (Federico Dobal, 2026-09-18)
 
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
