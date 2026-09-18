@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ProcessState } from '../types';
 
 export interface ActiveLine {
@@ -18,8 +18,9 @@ interface Props {
   pasoMs: number;
 }
 
-// Tienen que coincidir con --pad-top y --line-h de index.css:
-// con eso la franja cae exactamente sobre su renglon.
+// Valores de arranque, iguales a --pad-top y --line-h de index.css. No se usan para
+// posicionar: apenas monta, se miden los reales del DOM. Duplicar la metrica en el CSS y en
+// el JS es como se desalinean las franjas cuando una de las dos cambia.
 const PAD_TOP = 14;
 const LINE_H = 22;
 
@@ -278,7 +279,35 @@ function comentar(ta: TA) {
 export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, pasoMs }: Props) {
   // El deslizamiento ocupa la mayor parte del instante pero termina antes del siguiente:
   // si durara lo mismo, las franjas nunca se verian quietas sobre el renglon que ejecutan.
-  const desliz = Math.min(Math.round(pasoMs * 0.65), 420);
+  // Corto y con salida rapida: la franja llega enseguida al renglon y se queda ahi. Si el
+  // deslizamiento ocupara casi todo el instante, la banda pasaria mas tiempo entre dos
+  // renglones que sobre el que se esta ejecutando, que es justo lo que hay que evitar.
+  const desliz = Math.min(Math.round(pasoMs * 0.45), 260);
+
+  // La metrica real del texto, leida del DOM. Con line-height fraccionario (o si cambia el
+  // tamano de fuente) el calculo a mano se va corriendo un poco por renglon y termina
+  // desalineado varias lineas mas abajo.
+  const capaRef = useRef<HTMLPreElement>(null);
+  const [metrica, setMetrica] = useState({ top: PAD_TOP, alto: LINE_H });
+
+  useLayoutEffect(() => {
+    const capa = capaRef.current;
+    if (!capa) return;
+    const medir = () => {
+      const cs = getComputedStyle(capa);
+      const alto = parseFloat(cs.lineHeight);
+      const top = parseFloat(cs.paddingTop);
+      if (Number.isFinite(alto) && alto > 0 && Number.isFinite(top)) {
+        setMetrica((prev) => (prev.alto === alto && prev.top === top ? prev : { top, alto }));
+      }
+    };
+    medir();
+    const obs = new ResizeObserver(medir);
+    obs.observe(capa);
+    return () => obs.disconnect();
+  }, []);
+
+  const yDe = (linea: number) => metrica.top + (linea - 1) * metrica.alto;
   const lines = code.split('\n');
 
   // Una franja POR PROCESO, no por linea. Es lo que hace que el avance se vea suave: al
@@ -330,14 +359,15 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, p
       <div className="doc">
         <div className="gutter">{lines.map((_, i) => `${i + 1}\n`).join('')}</div>
         <div className="area">
-          <pre className="layer" dangerouslySetInnerHTML={{ __html: highlight(code) + '\n' }} />
+          <pre ref={capaRef} className="layer" dangerouslySetInnerHTML={{ __html: highlight(code) + '\n' }} />
 
           {marcas.map((p) => (
             <div
               key={p.name}
               className="stripe"
               style={{
-                top: PAD_TOP + (p.line - 1) * LINE_H,
+                top: yDe(p.line),
+                height: metrica.alto,
                 ...stripeStyle(p.color, p.state),
                 zIndex: RANK[p.state] === 0 ? 2 : 1,
               }}
@@ -359,7 +389,8 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, p
             <div
               className="stripe"
               style={{
-                top: PAD_TOP + (errorLine - 1) * LINE_H,
+                top: yDe(errorLine),
+                height: metrica.alto,
                 background: 'color-mix(in srgb, var(--danger) 15%, transparent)',
                 borderLeft: '2px solid var(--danger)',
               }}
