@@ -52,8 +52,6 @@ Reglas prácticas:
   3. `frontend/src/types.ts`
   4. `SimuladorJsTest` (contrato) y, si es visible, un chequeo en `scripts/smoke-motor.mjs`
   5. `frontend/src/engine/simulador.d.ts` solo si cambia la firma de una función exportada
-- `api/` (Spring) usa Jackson sobre los mismos records: si reactivás la API, verificá que
-  ambos serializadores produzcan los mismos nombres.
 
 ## Commit
 

@@ -16,8 +16,8 @@ Esto no es un "backend": es el **motor** del simulador. Casi todo corre en el na
   en ejecución. Nunca dejes escapar otra excepción (ArithmeticException,
   NumberFormatException, IndexOutOfBounds…): convertila.
 - Todo mensaje al alumno en español, sin tildes rotas (el archivo es UTF-8) y con línea.
-- `api/` (Spring) no lo usa el frontend. No agregues features ahí salvo que se decida
-  reactivar el servidor (ver `docs/decisiones/`).
+- No hay servidor: la API REST de Spring se eliminó (ADR 0001). Si algún día hace falta,
+  está en el historial de git.
 - Tests: `TestSupport.run(src, policy, seed, maxSteps)` y `finalVar(...)`. Con
   `RANDOM` probá varias semillas (0..24) como en `VirtualMachineTest`.
 - Después de tocar algo acá: `mvn -q test` → `cd ../frontend && npm run engine && npm run smoke`.

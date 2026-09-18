@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const RAIZ = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const BASE = join(RAIZ, 'backend', 'src', 'main', 'java', 'ar', 'edu', 'unlp', 'info', 'simulador');
-// Solo lo que alcanza TeaVM: api/ (Spring) no entra al motor.
+// Lo que alcanza TeaVM desde el puente js/.
 const FUENTES = ['lang', 'vm', 'js'].map((d) => join(BASE, d));
 const EXTRA = [join(RAIZ, 'backend', 'pom.xml')];
 const SELLO = join(RAIZ, 'frontend', 'src', 'engine', 'simulador.hash');

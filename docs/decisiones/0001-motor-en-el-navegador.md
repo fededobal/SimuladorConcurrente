@@ -33,7 +33,8 @@ frontend lo invoca de forma sincrónica. El sitio se publica como estático (Ver
   `scripts/smoke-motor.mjs`, que prueba el motor compilado.
 - La serialización a JSON es manual (TeaVM no soporta Jackson): el contrato con
   `frontend/src/types.ts` se mantiene a mano y se prueba en `SimuladorJsTest`.
-- La API REST de Spring queda sin uso por el frontend. Pendiente decidir si se elimina o se
-  mueve a un módulo opcional (ver informe de revisión, sección 5).
+- La API REST de Spring quedó sin uso por el frontend y se eliminó el 2026-09-18 junto con
+  la dependencia de Spring Boot. Si en el futuro hiciera falta un servidor (por ejemplo, para
+  entregas), el código está en el historial de git.
 - El motor corre en el hilo principal del navegador; ejecuciones pesadas pueden trabar la
   interfaz. Opción futura: Web Worker.

@@ -4,40 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
-        <relativePath/>
-    </parent>
-
     <groupId>ar.edu.unlp.info</groupId>
     <artifactId>simulador-monitores</artifactId>
     <version>0.1.0</version>
     <name>Simulador de Monitores</name>
-    <description>Nucleo (lexer + parser + VM) y API REST del simulador de monitores para Programacion Concurrente (UNLP)</description>
+    <description>Nucleo (lexer + parser + VM) del simulador de monitores para Programacion Concurrente (UNLP), compilado a JavaScript con TeaVM</description>
 
     <properties>
-        <java.version>21</java.version>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <teavm.version>0.15.0</teavm.version>
+        <junit.version>5.10.3</junit.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Solo las anotaciones de interop (@JSExport) que usa el puente js/. TeaVM
              aporta su propia implementacion de la biblioteca estandar al compilar. -->
         <dependency>
@@ -46,13 +26,26 @@
             <version>${teavm.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
             </plugin>
         </plugins>
     </build>
@@ -71,7 +64,7 @@
             <id>web</id>
             <dependencies>
                 <!-- Emulacion de la biblioteca estandar que TeaVM usa como classpath al
-                     compilar. Solo hace falta para generar el JS, no para el backend. -->
+                     compilar. Solo hace falta para generar el JS, no para los tests. -->
                 <dependency>
                     <groupId>org.teavm</groupId>
                     <artifactId>teavm-classlib</artifactId>

@@ -6,11 +6,11 @@ import ar.edu.unlp.info.simulador.vm.Snapshot;
 import java.util.List;
 
 /**
- * Serializacion manual de los DTOs a JSON. En el backend de esto se encarga Jackson, pero
- * Jackson usa reflexion y TeaVM compila de forma estatica: hay que escribirlo a mano.
+ * Serializacion manual a JSON. Jackson usa reflexion y TeaVM compila de forma estatica:
+ * hay que escribirlo a mano.
  *
- * <p>Las formas producidas son exactamente las que declara {@code frontend/src/types.ts},
- * las mismas que devuelve la API REST. Asi el frontend no distingue de donde vienen.
+ * <p>Las formas producidas son exactamente las que declara {@code frontend/src/types.ts};
+ * el contrato se prueba en {@code SimuladorJsTest}.
  */
 final class Json {
 
@@ -159,7 +159,7 @@ final class Json {
         sb.append(']');
     }
 
-    /** Error con la misma forma que el {@code ApiError} de la API REST. */
+    /** Error de compilacion o de ejecucion: {@code {error, line}} ({@code ApiError} en types.ts). */
     static String error(String mensaje, int linea) {
         StringBuilder sb = new StringBuilder("{");
         campo(sb, "error"); str(sb, mensaje); sb.append(',');

@@ -16,13 +16,12 @@ Monorepo con dos partes independientes:
 
 | Carpeta | Qué es | Stack |
 |---|---|---|
-| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores), el puente a JavaScript y una API REST que expone el mismo núcleo | Java 21, Spring Boot 3, TeaVM, Maven |
+| [`backend/`](./backend) | **Núcleo** (lexer + parser + validador + máquina virtual de monitores) y el puente a JavaScript | Java 21, TeaVM, Maven |
 | [`frontend/`](./frontend) | Interfaz web: editor, panel de monitores, línea de tiempo, historial | React 19, TypeScript, Vite |
 | [`docs/`](./docs) | Teoría, gramática, SRS, propuesta de PPS | — |
 | [`legacy/`](./legacy) | Prototipo previo (semáforos), archivado | — |
 
-El núcleo (`backend/src/main/java/.../lang` + `.../vm`) no depende de Spring: sólo usa
-`java.util`. Eso permite compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y
+El núcleo (`backend/src/main/java/.../lang` + `.../vm`) sólo usa `java.util`. Eso permite compilarlo **entero a JavaScript con [TeaVM](https://teavm.org)** y
 correrlo dentro del navegador, sin servidor:
 
 ```
@@ -35,11 +34,6 @@ lang/ + vm/  ──(javac)──>  bytecode  ──(TeaVM)──>  frontend/src/
 Se regenera con `npm run engine` desde `frontend/` (o `mvn -Pweb package` desde `backend/`),
 y hay que hacerlo cada vez que se toca el núcleo Java. Se commitea porque el hosting sirve
 archivos estáticos y no tiene JDK ni Maven para generarlo en el deploy.
-
-`api/` expone el mismo núcleo por REST (Spring Boot, estado en memoria). Queda como segunda
-puerta de entrada al núcleo y para pruebas de integración, pero el frontend no la usa: llama
-al motor compilado de forma directa y sincrónica. El *time-travel* lo arma el frontend
-acumulando los snapshots que devuelve cada paso.
 
 ## Cómo correrlo
 
@@ -57,15 +51,6 @@ Abre <http://localhost:5173>. Corre `npm install` la primera vez y genera el mot
 ```bash
 cd frontend
 npm run engine     # recompila lang/ + vm/ a src/engine/simulador.js
-```
-
-### La API REST (opcional)
-
-No hace falta para usar el simulador, pero expone el mismo núcleo:
-
-```bash
-cd backend
-mvn spring-boot:run     # http://localhost:8080
 ```
 
 ### Tests del núcleo
@@ -124,13 +109,3 @@ navegador de quien abre la página.
 
 Lo único a recordar: si tocaste el núcleo Java, regenerá el motor (`npm run engine`) y
 commiteá `frontend/src/engine/simulador.js` antes de pushear — el deploy no puede generarlo.
-
-## API REST
-
-| Método | Ruta | Descripción |
-|---|---|---|
-| `POST` | `/api/simulations` | Compila el código y crea una simulación. `400` con `{error, line}` si falla. |
-| `POST` | `/api/simulations/{id}/step` | Avanza un instante. Body: `{chosenProcessId?, policy}` (`RANDOM` \| `ROUND_ROBIN`). |
-| `POST` | `/api/simulations/{id}/reset` | Reinicia al instante 0. |
-| `GET` | `/api/simulations/{id}` | Estado completo (para reconexión). |
-| `DELETE` | `/api/simulations/{id}` | Libera la simulación. |

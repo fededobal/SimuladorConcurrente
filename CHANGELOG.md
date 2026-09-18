@@ -28,6 +28,8 @@ Reglas:
   con su línea. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Eliminar la API REST de Spring Boot, que la interfaz no usaba desde que el motor corre en
+  el navegador. El núcleo queda sin dependencias de Spring. (Federico Dobal, 2026-09-18)
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Interno

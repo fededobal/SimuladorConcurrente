@@ -12,13 +12,11 @@ import java.util.List;
 
 /**
  * Puente entre el nucleo Java y el navegador. TeaVM compila esta clase (y todo lo que
- * alcanza desde aca: {@code lang} y {@code vm}) a JavaScript; {@code api} y Spring quedan
- * afuera porque no son alcanzables.
+ * alcanza desde aca: {@code lang} y {@code vm}) a JavaScript.
  *
- * <p>Es el equivalente en el browser de {@code SimulationController} + {@code
- * SimulationService}, con dos simplificaciones: hay una sola simulacion viva (la de la
- * pestania), asi que no hace falta el registro de sesiones ni los ids; y el intercambio es
- * por strings JSON, el tipo mas simple de cruzar la frontera Java/JS.
+ * <p>Hay una sola simulacion viva (la de la pestania), asi que no hace falta registro de
+ * sesiones ni ids; el intercambio es por strings JSON, el tipo mas simple de cruzar la
+ * frontera Java/JS.
  */
 public final class SimuladorJs {
 

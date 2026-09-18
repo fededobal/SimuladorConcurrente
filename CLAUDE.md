@@ -20,7 +20,6 @@ backend/src/main/java/ar/edu/unlp/info/simulador/
   lang/   lexer → parser → AST → SemanticValidator      (Java puro, solo java.util)
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
   js/     SimuladorJs (@JSExport) + Json (a mano)        ← puente al navegador
-  api/    Spring Boot REST — sin uso por el frontend (ver docs/decisiones/)
         └─ TeaVM (mvn -Pweb) ─→ frontend/src/engine/simulador.js  ← GENERADO, commiteado
 frontend/src/api.ts → useSimulation.ts → componentes
 ```

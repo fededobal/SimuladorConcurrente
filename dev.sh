@@ -5,10 +5,6 @@
 # no hay backend que levantar. Si tocas backend/src/main/java, regenera el motor con:
 #
 #     cd frontend && npm run engine
-#
-# La API REST de Spring sigue existiendo y expone el mismo nucleo; para levantarla:
-#
-#     cd backend && mvn spring-boot:run
 set -euo pipefail
 cd "$(dirname "$0")"
 

@@ -8,8 +8,7 @@ import type {
 
 // El nucleo (lexer, parser, validador y VM de monitores) esta escrito en Java y vive en
 // backend/src/main/java. TeaVM lo compila a engine/simulador.js, asi que corre entero
-// dentro del navegador: no hay servidor, ni red, ni latencia. La API REST de Spring sigue
-// existiendo y expone el mismo nucleo, pero el frontend ya no la necesita.
+// dentro del navegador: no hay servidor, ni red, ni latencia.
 
 export class ApiRequestError extends Error {
   line: number | null;
