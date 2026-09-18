@@ -42,10 +42,18 @@ export interface ProcessView {
   error: string | null;
 }
 
+export interface OutputLine {
+  instant: number;
+  process: string;
+  color: string;
+  text: string;
+}
+
 export interface Snapshot {
   instant: number;
   processes: ProcessView[];
   monitors: MonitorView[];
+  output: OutputLine[];
 }
 
 export interface LogEntry {

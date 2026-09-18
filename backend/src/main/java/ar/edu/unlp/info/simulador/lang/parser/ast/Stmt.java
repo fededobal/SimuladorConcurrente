@@ -8,7 +8,7 @@ import java.util.List;
  */
 public sealed interface Stmt
         permits Stmt.Block, Stmt.Assign, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,
-                Stmt.QueuePush, Stmt.QueuePop, Stmt.IfStmt, Stmt.WhileStmt, Stmt.ForStmt,
+                Stmt.QueuePush, Stmt.QueuePop, Stmt.Write, Stmt.IfStmt, Stmt.WhileStmt, Stmt.ForStmt,
                 Stmt.Skip, VarDecl {
 
     int line();
@@ -31,6 +31,9 @@ public sealed interface Stmt
 
     /** {@code push(cola, e1, e2, ...);} */
     record QueuePush(String queue, List<Expr> elements, int line) implements Stmt { }
+
+    /** {@code write(e1, e2, ...);} - escribe una linea en la pantalla de salida. */
+    record Write(List<Expr> args, int line) implements Stmt { }
 
     /** {@code pop(cola, x, y, ...);} */
     record QueuePop(String queue, List<String> targets, int line) implements Stmt { }

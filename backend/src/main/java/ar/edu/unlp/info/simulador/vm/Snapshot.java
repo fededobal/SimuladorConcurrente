@@ -8,7 +8,11 @@ import java.util.List;
  */
 public record Snapshot(int instant,
                        List<ProcessView> processes,
-                       List<MonitorView> monitors) {
+                       List<MonitorView> monitors,
+                       List<OutputLine> output) {
+
+    /** Linea escrita con {@code write}, con el proceso que la escribio (para pintarla). */
+    public record OutputLine(int instant, String process, String color, String text) { }
 
     /** Referencia liviana a un proceso (para colas). */
     public record ProcRef(int id, String name, String color) { }

@@ -256,6 +256,9 @@ public final class SemanticValidator {
                 }
                 checkAridadCola(clave, qp.queue(), qp.elements().size(), "push", qp.line());
             }
+            case Stmt.Write w -> {
+                for (Expr e : w.args()) checkExpr(e, scope);
+            }
             case Stmt.QueuePop qp -> {
                 requireKnown(qp.queue(), scope, qp.line());
                 for (String t : qp.targets()) checkAssignable(t, scope, qp.line());

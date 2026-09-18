@@ -138,6 +138,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
 | Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `pop(c, x);` `pop(c, x, y);` |
+| Salida | `write(e);` `write(e1, e2, ...);` — concatena y escribe una línea |
 | Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
 | Mientras | `while (cond) { ... }` |
 | For (contador) | `for (int i = 0; i < n; i++) { ... }` |
@@ -207,6 +208,7 @@ sentencia     = decl_local
               | llamada_monitor
               | op_cond
               | op_cola
+              | escritura
               | condicional
               | mientras
               | para
@@ -220,6 +222,7 @@ llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
 op_cola       = "push" "(" ident "," expr { "," expr } ")" ";"
               | "pop"  "(" ident "," ident { "," ident } ")" ";" ;
+escritura     = "write" "(" [ expr { "," expr } ] ")" ";" ;
 condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
 mientras      = "while" "(" expr ")" cuerpo ;
 para          = "for" "(" iterador "=" expr ";" [ expr ] ";" inc_step ")" cuerpo
@@ -255,8 +258,8 @@ numero        = digito { digito } [ "." digito { digito } ] ;
 texto         = '"' { caracter } '"' ;
 ```
 
-**Palabras reservadas (28):** `monitor procedure cond process if else while for skip
-wait signal signal_all push pop empty in out true false int double boolean text Cola
+**Palabras reservadas (29):** `monitor procedure cond process if else while for skip
+wait signal signal_all push pop empty write in out true false int double boolean text Cola
 ColaOrdenada and or not`.
 
 No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores

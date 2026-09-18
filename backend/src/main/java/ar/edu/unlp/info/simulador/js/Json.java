@@ -112,11 +112,21 @@ final class Json {
         sb.append("}");
     }
 
+    private static void outputLine(StringBuilder sb, Snapshot.OutputLine o) {
+        sb.append("{");
+        campo(sb, "instant"); sb.append(o.instant()).append(',');
+        campo(sb, "process"); str(sb, o.process()); sb.append(',');
+        campo(sb, "color");   str(sb, o.color()); sb.append(',');
+        campo(sb, "text");    str(sb, o.text());
+        sb.append("}");
+    }
+
     private static void snapshot(StringBuilder sb, Snapshot s) {
         sb.append("{");
         campo(sb, "instant");   sb.append(s.instant()).append(',');
         campo(sb, "processes"); lista(sb, s.processes(), Json::processView); sb.append(',');
-        campo(sb, "monitors");  lista(sb, s.monitors(), Json::monitorView);
+        campo(sb, "monitors");  lista(sb, s.monitors(), Json::monitorView); sb.append(',');
+        campo(sb, "output");    lista(sb, s.output(), Json::outputLine);
         sb.append("}");
     }
 

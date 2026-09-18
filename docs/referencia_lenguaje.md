@@ -11,7 +11,7 @@ EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).
 
 ## 1. Palabras reservadas
 
-Son **28**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
+Son **29**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
 (escribir `int out = 0;` es error de sintaxis).
 
 | Grupo | Palabras |
@@ -22,6 +22,7 @@ Son **28**. Ninguna puede usarse como nombre de variable, monitor, procedure o p
 | Control | `if` `else` `while` `for` `skip` |
 | Sincronización | `wait` `signal` `signal_all` |
 | Colas | `push` `pop` `empty` |
+| Salida | `write` |
 | Operadores lógicos | `and` `or` `not` |
 | Literales | `true` `false` |
 
@@ -215,6 +216,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` |
 | Condición | `wait(cv);` · `signal(cv);` · `signal_all(cv);` · con índice: `wait(cv[i]);` |
 | Cola | `push(c, e);` · `push(c, e1, e2);` · `pop(c, x);` · `pop(c, x, y);` |
+| Salida | `write(e);` · `write(e1, e2, ...);` |
 | Condicional | `if (e) S` · `if (e) S else S` · con o sin llaves |
 | Mientras | `while (e) S` · con o sin llaves |
 | For | ver abajo |
@@ -292,6 +294,24 @@ ejecuta.
 
 La comparación **no encadena**: `1 < 2 < 3` es error de sintaxis. Hay que escribir
 `1 < 2 and 2 < 3`.
+
+### `write`
+
+Escribe una línea en la pantalla de salida, a la derecha del editor:
+
+```c
+write("deposite ", i);          // -> deposite 3
+write("total: ", a + b, " u");  // -> total: 7 u
+```
+
+Los argumentos se concatenan tal cual, sin separador: si querés un espacio, ponelo en el
+texto. Cada `write` es **una línea** y **un paso** del scheduler, como cualquier sentencia.
+
+Cada línea queda pintada con el color del proceso que la escribió. Eso es lo que hace útil
+la pantalla: como los procesos corren en paralelo, **el orden de la salida cambia entre
+corridas**, y verlo es la forma más directa de entender el entrelazado.
+
+`write` se puede usar tanto en un proceso como dentro de un procedure de monitor.
 
 ---
 

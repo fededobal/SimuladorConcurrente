@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Play, Pause, SkipForward, RotateCcw, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
+import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 
 const DEFAULT_CODE = `monitor Buffer {
@@ -27,6 +28,7 @@ process Productor {
   int i = 1;
   while (i <= 5) {
     Buffer.depositar(i);
+    write("deposite ", i);
     i++;
   }
 }
@@ -36,6 +38,7 @@ process Consumidor {
   int n = 0;
   while (n < 5) {
     Buffer.retirar(x);
+    write("retire ", x);
     n++;
   }
 }
@@ -118,21 +121,25 @@ export function App() {
         </div>
       </div>
 
-      <div className="stage">
-        <CodeEditor
-          code={sim.code}
-          onChange={sim.setCode}
-          readOnly={running}
-          activeLines={activeLines}
-          errorLine={status === 'error' ? sim.error?.line ?? null : null}
-          pasoMs={sim.speed}
-        />
-        {status === 'error' && sim.error && (
-          <div className="err">
-            {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
-            {sim.error.message.replace(/^Linea \d+:\s*/, '')}
-          </div>
-        )}
+      <div className="cuerpo">
+        <div className="stage">
+          <CodeEditor
+            code={sim.code}
+            onChange={sim.setCode}
+            readOnly={running}
+            activeLines={activeLines}
+            errorLine={status === 'error' ? sim.error?.line ?? null : null}
+            pasoMs={sim.speed}
+          />
+          {status === 'error' && sim.error && (
+            <div className="err">
+              {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
+              {sim.error.message.replace(/^Linea \d+:\s*/, '')}
+            </div>
+          )}
+        </div>
+
+        <OutputPanel lines={snapshot?.output ?? []} />
       </div>
     </div>
   );

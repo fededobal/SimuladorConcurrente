@@ -177,6 +177,9 @@ public final class Parser {
         if (t.isKeyword("push") || t.isKeyword("pop")) {
             return parseQueueOp();
         }
+        if (t.isKeyword("write")) {
+            return parseWrite();
+        }
         if (t.isKeyword("if")) {
             return parseIf();
         }
@@ -248,6 +251,20 @@ public final class Parser {
         consume(")", "Se esperaba ')'");
         consume(";", "Se esperaba ';'");
         return new Stmt.CondOp(kind, name, index, kw.line());
+    }
+
+    private Stmt parseWrite() {
+        Token kw = advance();
+        consume("(", "Se esperaba '(' despues de 'write'");
+        List<Expr> args = new ArrayList<>();
+        if (!check(")")) {
+            do {
+                args.add(parseExpr());
+            } while (match(","));
+        }
+        consume(")", "Se esperaba ')' al cerrar el write");
+        consume(";", "Se esperaba ';' al final del write");
+        return new Stmt.Write(args, kw.line());
     }
 
     private Stmt parseQueueOp() {

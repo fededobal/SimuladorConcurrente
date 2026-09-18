@@ -27,12 +27,16 @@ public final class VirtualMachine {
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
     private static final int PROB_AVANCE = 80;
 
+    /** Tope de lineas guardadas: un bucle largo no puede comerse la memoria. */
+    private static final int TOPE_SALIDA = 500;
+
     private static final int STRUCTURAL_CAP = 4000;
 
     private final Program program;
     private final Random random;
 
     private final List<Process> processes = new ArrayList<>();
+    private final List<Snapshot.OutputLine> salida = new ArrayList<>();
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
@@ -370,6 +374,10 @@ public final class VirtualMachine {
                 execCondOp(p, act, co);
                 yield true;
             }
+            case Stmt.Write w -> {
+                execWrite(p, act, w);
+                yield true;
+            }
             case Stmt.QueuePush qp -> {
                 execQueuePush(p, act, qp);
                 yield true;
@@ -538,6 +546,21 @@ public final class VirtualMachine {
                                 + " proceso(s)");
             }
         }
+    }
+
+    /** Concatena los argumentos y deja una linea en la pantalla de salida. */
+    private void execWrite(Process p, Activation act, Stmt.Write w) {
+        ExprEvaluator ev = evaluator(p, act);
+        StringBuilder sb = new StringBuilder();
+        for (Expr e : w.args()) sb.append(ev.eval(e).display());
+        String texto = sb.toString();
+        if (salida.size() < TOPE_SALIDA) {
+            salida.add(new Snapshot.OutputLine(instant, p.name(), p.color(), texto));
+        } else if (salida.size() == TOPE_SALIDA) {
+            salida.add(new Snapshot.OutputLine(instant, p.name(), p.color(),
+                    "... salida truncada en " + TOPE_SALIDA + " lineas"));
+        }
+        event(p, "WRITE", "", p.name() + ": write(" + texto + ")");
     }
 
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {
@@ -727,7 +750,7 @@ public final class VirtualMachine {
                     refs(m.entryQueueSnapshot())));
         }
 
-        return new Snapshot(instant, pv, mv);
+        return new Snapshot(instant, pv, mv, List.copyOf(salida));
     }
 
     private static Snapshot.VarView varView(String name, Value v, Integer writer) {
