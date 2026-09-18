@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build)",
+      "Bash(npm run engine)",
+      "Bash(npm run smoke)",
+      "Bash(npm run check)",
+      "Bash(node scripts/smoke-motor.mjs:*)",
+      "Bash(node scripts/motor-hash.mjs:*)",
+      "Bash(mvn -q test:*)",
+      "Bash(mvn test:*)",
+      "Bash(mvn -q -Pweb -DskipTests package)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)"
+    ],
+    "deny": [
+      "Edit(frontend/src/engine/simulador.js)",
+      "Write(frontend/src/engine/simulador.js)",
+      "Read(.env*)"
+    ]
+  }
+}

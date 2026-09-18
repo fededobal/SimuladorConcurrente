@@ -1,0 +1,5 @@
+# Unifica las identidades que aparecen en el historial (git shortlog, blame, stats).
+# Para ver las identidades: git log --format='%an <%ae>' | sort -u
+Federico Dobal <dobalfede@gmail.com> <130794002+fededobal@users.noreply.github.com>
+Federico Dobal <dobalfede@gmail.com> <fededobal@MacBook-Air-de-Federico.local>
+Federico Dobal <dobalfede@gmail.com> fededobal <dobalfede@gmail.com>

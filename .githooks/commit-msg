@@ -1,0 +1,55 @@
+#!/usr/bin/env sh
+# Valida cada commit:
+#   1. Primera linea:  tipo(alcance opcional): descripcion en imperativo  (<= 72 caracteres)
+#   2. Descripcion (cuerpo) despues de una linea en blanco: recomendada; aviso si falta.
+#   3. CHANGELOG.md actualizado con una entrada del autor (excepto commits de tipo style).
+# Se saltea en merges, reverts y fixup!/squash! generados por git.
+msg_file="$1"
+primera=$(grep -v '^#' "$msg_file" | head -n 1)
+
+case "$primera" in
+  Merge*|Revert*|fixup!*|squash!*) exit 0 ;;
+esac
+
+rechazar() {
+  echo ""
+  echo "  Commit rechazado: $1"
+  echo ""
+  echo "  Formato:"
+  echo "    tipo(alcance): que hace este commit, en imperativo"
+  echo "    <linea en blanco>"
+  echo "    Descripcion: por que se hizo, que problema resuelve."
+  echo ""
+  echo "  Ejemplo:"
+  echo "    fix(vm): liberar el monitor cuando un proceso falla adentro"
+  echo ""
+  echo "    Un error de ejecucion dejaba el lock tomado y la UI mostraba DEADLOCK."
+  echo ""
+  echo "  Guia completa: CONTRIBUTING.md  (o en Claude Code: /commit)"
+  exit 1
+}
+
+patron='^(feat|fix|docs|test|refactor|perf|build|ci|chore|style|revert)(\([a-z0-9-]+\))?!?: .{3,}$'
+printf '%s' "$primera" | grep -Eq "$patron" || rechazar "\"$primera\" no tiene el formato tipo(alcance): mensaje"
+
+largo=$(printf '%s' "$primera" | wc -m | tr -d ' ')
+[ "$largo" -gt 72 ] && rechazar "la primera linea tiene $largo caracteres (maximo 72); el resto va en la descripcion"
+
+tipo=$(printf '%s' "$primera" | sed -E 's/^([a-z]+).*/\1/')
+
+# Descripcion: se recomienda siempre; se avisa si falta.
+cuerpo=$(grep -v '^#' "$msg_file" | tail -n +3 | grep -v '^[[:space:]]*$' | head -n 1)
+if [ -z "$cuerpo" ] && [ "$tipo" != "style" ]; then
+  echo "  aviso: el commit no tiene descripcion. Si se puede, agregá el porqué (git commit --amend)."
+fi
+
+# CHANGELOG
+if [ "$tipo" != "style" ]; then
+  if ! git diff --cached --name-only | grep -qx 'CHANGELOG.md'; then
+    rechazar "falta la entrada en CHANGELOG.md (seccion [Sin publicar])"
+  fi
+  autor=$(git config user.name)
+  if ! git diff --cached -U0 -- CHANGELOG.md | grep '^+' | grep -v '^+++' | grep -qF "($autor, "; then
+    rechazar "CHANGELOG.md no tiene una entrada nueva con \"($autor, AAAA-MM-DD)\""
+  fi
+fi
