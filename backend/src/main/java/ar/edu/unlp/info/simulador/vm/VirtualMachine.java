@@ -184,7 +184,12 @@ public final class VirtualMachine {
                 advance(p);
             } catch (RuntimeError re) {
                 p.fail(re.getMessage());
+                List<Monitor> released = releaseMonitorsOf(p);
                 event(p, "ERROR", "", p.name() + ": error de ejecucion - " + re.getMessage());
+                for (Monitor m : released) {
+                    event(p, "RELEASE", m.name(),
+                            p.name() + ": libera " + m.name() + " al terminar con error");
+                }
             }
             if (p.state() == Process.State.RUNNING) {
                 p.setState(Process.State.READY);
@@ -307,6 +312,25 @@ public final class VirtualMachine {
             p.setState(Process.State.TERMINATED);
             event(p, "TERMINATED", "", p.name() + ": termina");
         }
+    }
+
+    /**
+     * Suelta todo monitor tomado por un proceso que termino con error y despierta su cola
+     * de entrada. Sin esto el lock queda en manos de un proceso muerto y los demas se
+     * bloquean para siempre: la UI mostraria un DEADLOCK que el programa del alumno no tiene.
+     *
+     * @return los monitores liberados, en orden de declaracion
+     */
+    private List<Monitor> releaseMonitorsOf(Process p) {
+        List<Monitor> released = new ArrayList<>();
+        for (Monitor m : monitors.values()) {
+            if (m.lockOwner() == p) {
+                m.setLockOwner(null);
+                wakeEntryQueue(m);
+                released.add(m);
+            }
+        }
+        return released;
     }
 
     private void wakeEntryQueue(Monitor m) {

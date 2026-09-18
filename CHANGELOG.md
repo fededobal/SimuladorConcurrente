@@ -15,6 +15,10 @@ Reglas:
 
 ## [Sin publicar]
 
+### Corregido
+- Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
+  se informaba como interbloqueo. (Federico Dobal, 2026-09-18)
+
 ### Eliminado
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 

@@ -69,14 +69,14 @@ const CANONICOS = [
       procedure sacar() { pop(c, primero); } }
     process P { M.cargar(); M.sacar(); }`,
     (r) => r.finished && r.vars['M.primero'] === '1'],
+  ['error dentro del monitor libera el lock (B1)', `
+    monitor M { int x = 0; procedure f() { x = 10 / x; } procedure g() { x = x + 1; } }
+    process A { M.f(); } process B { M.g(); }`,
+    (r) => r.finished && !r.deadlock && r.vars['M.x'] === '1' && r.kinds.has('ERROR')],
 ];
 
 // Bugs verificados el 18/09/2026 (ver docs/informe-revision.md, seccion 3).
 const CONOCIDOS = [
-  ['B1 error dentro del monitor no se reporta como deadlock', `
-    monitor M { int x = 0; procedure f() { x = 10 / x; } procedure g() { x = x + 1; } }
-    process A { M.f(); } process B { M.g(); }`,
-    (r) => r.finished && !r.deadlock],
   ['B2 d++ sobre double no trunca', `
     monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }`,
     (r) => r.vars?.['M.d'] === '2.5'],

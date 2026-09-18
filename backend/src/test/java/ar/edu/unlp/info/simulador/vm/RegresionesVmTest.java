@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RegresionesVmTest {
 
     @Test
-    @Disabled("B1: un RuntimeError dentro de un procedure no libera el monitor -> falso DEADLOCK")
     void errorDentroDelMonitorLiberaElLock() {
         RunResult r = TestSupport.run("""
                 monitor M {
