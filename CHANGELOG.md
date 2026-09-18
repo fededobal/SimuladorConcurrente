@@ -20,9 +20,6 @@ Reglas:
   programa propio, pide confirmación antes de reemplazarlo. (Federico Dobal, 2026-09-18)
 - Selector de política de planificación: turnos al azar o en ronda (*round robin*). Se puede
   cambiar en medio de una ejecución. (Federico Dobal, 2026-09-18)
-- Semilla visible: la barra muestra la semilla de cada corrida y permite fijarla (con un clic o
-  escribiéndola) para repetir exactamente el mismo entrelazado. Sin semilla fija, cada corrida
-  sigue siendo distinta. (Federico Dobal, 2026-09-18)
 
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
@@ -40,6 +37,8 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Quitar de la barra la semilla visible y el campo para fijarla, agregados en esta misma
+  versión; cada corrida vuelve a usar una semilla nueva sin mostrarla. (Federico Dobal, 2026-09-18)
 - Quitar el botón "Compartir" de la barra, que se había agregado en esta misma versión.
   (Federico Dobal, 2026-09-18)
 - Sacar de `main` el prototipo de semáforos (`legacy/`); queda en el tag de git

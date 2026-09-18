@@ -99,19 +99,6 @@ button { cursor: pointer; }
 .meta .n { color: var(--text); }
 .meta .st { color: var(--dimmer); font-size: 11px; }
 .meta .st.bad { color: var(--danger); }
-.meta .seed {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--dimmer);
-  font: inherit;
-  cursor: pointer;
-}
-.meta .seed:hover:not(:disabled) { color: var(--text); text-decoration: underline; }
-.meta .seed:disabled { cursor: default; }
-
-.seed-in { width: 120px; font-family: var(--mono); color: var(--text); }
-.seed-in::placeholder { color: var(--dimmer); }
 
 /* ------------------------------------------------------------------ editor */
 
