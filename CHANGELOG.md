@@ -23,6 +23,8 @@ Reglas:
 - Semilla visible: la barra muestra la semilla de cada corrida y permite fijarla (con un clic o
   escribiéndola) para repetir exactamente el mismo entrelazado. Sin semilla fija, cada corrida
   sigue siendo distinta. (Federico Dobal, 2026-09-18)
+- Botón "Compartir": copia un enlace con el programa, la semilla y la política. Quien lo abre
+  ve el mismo programa y puede repetir la misma corrida. No usa servidor. (Federico Dobal, 2026-09-18)
 
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación

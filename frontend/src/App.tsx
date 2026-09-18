@@ -1,10 +1,11 @@
-import { useMemo } from 'react';
-import { Play, Pause, SkipForward, Square } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, Play, Pause, SkipForward, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import type { SchedulingPolicy } from './types';
+import { enlaceCompartido, leerCompartido } from './compartir';
 
 const SPEED_LABEL: Record<number, string> = {
   1200: 'lento',
@@ -31,6 +32,43 @@ const STATUS_LABEL: Record<SimStatus, string> = {
 export function App() {
   const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
   const { snapshot, status } = sim;
+  const { setCode, setFixedSeed, setPolicy } = sim;
+  const [aviso, setAviso] = useState<string | null>(null);
+
+  // Al abrir un enlace compartido: cargar programa, semilla y politica, y limpiar la URL
+  // para que al recargar no vuelva a pisar lo que el alumno haya editado.
+  useEffect(() => {
+    let vigente = true;
+    leerCompartido(window.location.hash).then((c) => {
+      if (!vigente || !c) return;
+      setCode(c.codigo);
+      setFixedSeed(c.semilla);
+      setPolicy(c.politica);
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    });
+    return () => { vigente = false; };
+  }, [setCode, setFixedSeed, setPolicy]);
+
+  useEffect(() => {
+    if (aviso === null) return;
+    const t = window.setTimeout(() => setAviso(null), 2500);
+    return () => window.clearTimeout(t);
+  }, [aviso]);
+
+  const compartir = async () => {
+    const url = await enlaceCompartido({
+      codigo: sim.code,
+      semilla: sim.fixedSeed ?? sim.lastSeed,
+      politica: sim.policy,
+    });
+    try {
+      await navigator.clipboard.writeText(url);
+      setAviso('enlace copiado');
+    } catch {
+      window.history.replaceState(null, '', url);
+      setAviso('copiá el enlace de la barra de direcciones');
+    }
+  };
 
   const activeLines: ActiveLine[] = useMemo(() => {
     if (!snapshot) return [];
@@ -123,9 +161,18 @@ export function App() {
           title="Vacío: cada corrida usa una semilla nueva. Con un número: todas las corridas repiten el mismo entrelazado."
         />
 
+        <button
+          className="btn"
+          onClick={compartir}
+          title="Copia un enlace con el programa, la semilla y la política. Quien lo abra ve la misma corrida."
+        >
+          <Link size={14} /> Compartir
+        </button>
+
         <div className="spacer" />
 
         <div className="meta">
+          {aviso && <span className="st">{aviso}</span>}
           <span className={`st${status === 'deadlock' || status === 'error' ? ' bad' : ''}`}>
             {STATUS_LABEL[status]}
           </span>
