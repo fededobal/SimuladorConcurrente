@@ -1,4 +1,4 @@
-// Parámetros out: el procedimiento devuelve un valor al proceso que llama
+// Parámetros out
 // espera: fin TOTAL.cant=3
 monitor TOTAL {
   int cant = 0;

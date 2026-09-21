@@ -1,4 +1,4 @@
-// Deadlock: un wait que nadie señaliza
+// Deadlock
 // espera: deadlock
 monitor M {
   cond c;

@@ -1,4 +1,4 @@
-// Buffer de un dato: productor y consumidor con variables condición
+// Productor/Consumidor
 // espera: fin Buffer.dato=5 Buffer.hayDato=false
 monitor Buffer {
   int dato = 0;

@@ -1,4 +1,4 @@
-// Exclusión mutua implícita: nunca hay dos procesos dentro del monitor
+// Exclusión mutua implícita
 // espera: fin Cuenta.x=4 Cuenta.maxDentro=1
 monitor Cuenta {
   int x = 0;

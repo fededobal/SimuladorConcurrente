@@ -1,4 +1,4 @@
-// Cola FIFO dentro del monitor: buffer sin límite
+// Cola FIFO dentro del monitor
 // espera: fin BufferN.suma=100
 monitor BufferN {
   Cola items;

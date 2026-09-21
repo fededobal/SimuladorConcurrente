@@ -21,6 +21,9 @@ Reglas:
 - Selector de política de planificación: turnos al azar o en ronda (*round robin*). Se puede
   cambiar en medio de una ejecución. (Federico Dobal, 2026-09-18)
 
+### Cambiado
+- Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
+
 ### Corregido
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
   se informaba como interbloqueo. (Federico Dobal, 2026-09-18)

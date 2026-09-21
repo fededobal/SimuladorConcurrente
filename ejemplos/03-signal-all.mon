@@ -1,4 +1,4 @@
-// signal_all: una barrera que despierta a todos los que esperan
+// Barrera con signal_all
 // espera: fin Barrera.pasaron=5
 monitor Barrera {
   boolean abierta = false;

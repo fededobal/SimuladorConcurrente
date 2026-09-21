@@ -1,4 +1,4 @@
-// ColaOrdenada: sale primero el de menor valor
+// ColaOrdenada
 // espera: fin Turnos.primero=1
 monitor Turnos {
   ColaOrdenada pendientes;
