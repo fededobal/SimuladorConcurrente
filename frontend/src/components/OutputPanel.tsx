@@ -26,9 +26,7 @@ export function OutputPanel({ lines }: Props) {
       </header>
       <div className="lineas">
         {lines.length === 0 ? (
-          <p className="vacio">
-            Lo que escriba <code>write(...)</code> aparece acá.
-          </p>
+          <p className="vacio" />
         ) : (
           lines.map((l, i) => (
             <div key={i} className="linea">

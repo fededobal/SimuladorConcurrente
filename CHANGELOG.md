@@ -40,6 +40,8 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 
 ### Eliminado
+- Quitar el texto de ayuda del panel de salida cuando todavía no hay nada escrito.
+  (Federico Dobal, 2026-09-21)
 - Quitar de la barra la semilla visible y el campo para fijarla, agregados en esta misma
   versión; cada corrida vuelve a usar una semilla nueva sin mostrarla. (Federico Dobal, 2026-09-18)
 - Quitar el botón "Compartir" de la barra, que se había agregado en esta misma versión.
