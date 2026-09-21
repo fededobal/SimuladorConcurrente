@@ -63,6 +63,8 @@ Reglas:
 - Describir en el README los seis controles de la barra. (Federico Dobal, 2026-09-18)
 
 ### Interno
+- Ignorar en git la carpeta `.ua/`, donde Understand-Anything guarda el grafo de
+  conocimiento local del proyecto. (Federico Dobal, 2026-09-21)
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios
   y configuración de Claude Code. (Federico Dobal, 2026-09-18)
 - Registrar la huella del núcleo en `simulador.hash` al regenerar el motor, y sumar los

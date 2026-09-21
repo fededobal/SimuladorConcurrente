@@ -33,3 +33,6 @@ hs_err_pid*
 
 .vercel
 .env*
+
+# Grafo de conocimiento local de Understand-Anything
+.ua/
