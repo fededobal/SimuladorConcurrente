@@ -66,6 +66,8 @@ public final class VirtualMachine {
     private int nextEventId = 0;
 
     private int instant = 0;
+    /** Procesos que avanzaron en el ultimo instante: la UI los marca como "ejecutando". */
+    private final java.util.Set<Integer> advancedLastStep = new java.util.HashSet<>();
     private int rrCursor = -1;
     private boolean logging = true;
     private boolean deadlockLogged = false;
@@ -224,6 +226,7 @@ public final class VirtualMachine {
         }
 
         instant++;
+        advancedLastStep.clear();
         for (Process p : turno) {
             // Entre que se armo el turno y le toca, otro pudo haberlo bloqueado tomando el
             // monitor que este queria: solo avanza si sigue listo.
@@ -231,6 +234,7 @@ public final class VirtualMachine {
                 continue;
             }
             p.setState(Process.State.RUNNING);
+            advancedLastStep.add(p.id());
             try {
                 advance(p);
             } catch (RuntimeError re) {
@@ -864,6 +868,8 @@ public final class VirtualMachine {
             List<Snapshot.VarView> locals = new ArrayList<>();
             if (act != null) {
                 for (Map.Entry<String, Value> e : act.locals().entrySet()) {
+                    // los nombres con '#' son internos (iterador de for (1..n), cota de rango)
+                    if (e.getKey().indexOf('#') >= 0) continue;
                     locals.add(varView(e.getKey(), e.getValue(), null));
                 }
             }
@@ -875,7 +881,8 @@ public final class VirtualMachine {
                     p.currentLocation(),
                     p.currentLine(),
                     locals,
-                    p.errorMessage()));
+                    p.errorMessage(),
+                    advancedLastStep.contains(p.id())));
         }
 
         List<Snapshot.MonitorView> mv = new ArrayList<>();

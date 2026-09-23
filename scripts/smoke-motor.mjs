@@ -127,6 +127,15 @@ const CANONICOS = [
     monitor A { procedure f() { B.esperar(); } procedure g() { B.abrir(); } }
     process P { A.f(); } process Q { skip; skip; A.g(); }`,
     (r) => r.finished && !r.deadlock],
+  ['el error de ejecucion llega con el proceso y su linea (VI-1)', `
+    monitor M { boolean listo = false; cond c;
+      procedure esperar() { while (not listo) wait(c); }
+      procedure avisar() { int x = 1 / 0; listo = true; signal(c); } }
+    process A { M.esperar(); } process B { skip; skip; M.avisar(); }`,
+    (r) => r.deadlock && r.snapshot.processes.some((p) => p.error === 'Division por cero' && p.line === 4)],
+  ['el snapshot marca quien avanzo (VS-11)', `
+    process A { skip; skip; } process B { skip; skip; }`,
+    (r) => r.finished && r.snapshot.processes.every((p) => typeof p.advanced === 'boolean')],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

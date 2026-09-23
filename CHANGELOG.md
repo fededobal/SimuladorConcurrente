@@ -16,6 +16,13 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- La interfaz muestra los errores de ejecución: el proceso, la línea (marcada en rojo en el
+  editor) y el mensaje. Si después la simulación queda en interbloqueo o termina, el estado
+  dice "deadlock tras un error" o "fin con errores". Antes el proceso desaparecía del
+  editor sin ningún aviso. (Federico Dobal, 2026-09-23)
+- La franja de cada proceso distingue a los que avanzaron en el último instante
+  ("ejecutando") de los que están listos; el snapshot trae el campo `advanced`.
+  (Federico Dobal, 2026-09-23)
 - `empty(c)` con paréntesis, además de `empty c`. (Federico Dobal, 2026-09-23)
 - Menú "Ejemplos" en la barra para cargar los programas de `ejemplos/`. Si el editor tiene un
   programa propio, pide confirmación antes de reemplazarlo. (Federico Dobal, 2026-09-18)
@@ -50,6 +57,8 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- El iterador oculto de `for (1..n)` y la cota de los `for` de rango ya no aparecen entre
+  las variables del proceso. (Federico Dobal, 2026-09-23)
 - `%` con operandos `double` calcula el resto real: `5.5 % 2` da `1.5`; antes truncaba los
   operandos y `5 % 0.5` daba "Módulo por cero". (Federico Dobal, 2026-09-23)
 - Comparar dos `int` de forma exacta (antes se comparaban como `double` y por encima de 2^53

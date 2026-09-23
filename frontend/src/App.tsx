@@ -36,10 +36,31 @@ export function App() {
     if (!snapshot) return [];
     return snapshot.processes
       .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
-      .map((p) => ({ line: p.line, color: p.color, state: p.state, name: p.name }));
+      // el motor devuelve READY a los que avanzaron: se muestran como "ejecutando"
+      .map((p) => ({
+        line: p.line,
+        color: p.color,
+        state: p.advanced && p.state === 'READY' ? 'RUNNING' : p.state,
+        name: p.name,
+      }));
   }, [snapshot]);
 
+  // Procesos que terminaron por un error de ejecucion: se muestran con su linea.
+  const fallidos = useMemo(
+    () => snapshot?.processes.filter((p) => p.error !== null) ?? [],
+    [snapshot],
+  );
+  const errorLines = useMemo(() => {
+    if (status === 'error') return sim.error?.line != null ? [sim.error.line] : [];
+    return fallidos.filter((p) => p.line > 0).map((p) => p.line);
+  }, [status, sim.error, fallidos]);
+
   const running = status === 'running';
+  // un interbloqueo despues de un error no es un problema de sincronizacion del programa
+  const etiqueta = fallidos.length === 0 ? STATUS_LABEL[status]
+    : status === 'deadlock' ? 'deadlock tras un error'
+      : status === 'finished' ? 'fin con errores' : STATUS_LABEL[status];
+  const mal = status === 'deadlock' || status === 'error' || fallidos.length > 0;
   // solo se puede detener una simulacion que todavia puede avanzar
   const active = status === 'ready' || status === 'running' || status === 'paused';
 
@@ -113,9 +134,7 @@ export function App() {
         <div className="spacer" />
 
         <div className="meta">
-          <span className={`st${status === 'deadlock' || status === 'error' ? ' bad' : ''}`}>
-            {STATUS_LABEL[status]}
-          </span>
+          <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
           <span className="n">{snapshot?.instant ?? 0}</span>
         </div>
       </div>
@@ -127,13 +146,23 @@ export function App() {
             onChange={sim.setCode}
             readOnly={running}
             activeLines={activeLines}
-            errorLine={status === 'error' ? sim.error?.line ?? null : null}
+            errorLines={errorLines}
             pasoMs={sim.speed}
           />
           {status === 'error' && sim.error && (
             <div className="err">
               {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
               {sim.error.message.replace(/^Linea \d+:\s*/, '')}
+            </div>
+          )}
+          {status !== 'error' && fallidos.length > 0 && (
+            <div className="err" role="alert">
+              {fallidos.map((p) => (
+                <div key={p.id}>
+                  <span style={{ color: p.color }}>{p.name}</span>
+                  {p.line > 0 ? `, línea ${p.line}` : ''}: error de ejecución: {p.error}
+                </div>
+              ))}
             </div>
           )}
         </div>

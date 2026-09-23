@@ -108,7 +108,8 @@ final class Json {
         campo(sb, "location");    str(sb, p.location()); sb.append(',');
         campo(sb, "line");        sb.append(p.line()).append(',');
         campo(sb, "locals");      lista(sb, p.locals(), Json::varView); sb.append(',');
-        campo(sb, "error");       str(sb, p.error());
+        campo(sb, "error");       str(sb, p.error()); sb.append(',');
+        campo(sb, "advanced");    sb.append(p.advanced());
         sb.append("}");
     }
 

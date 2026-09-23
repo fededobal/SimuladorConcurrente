@@ -13,7 +13,8 @@ interface Props {
   onChange: (code: string) => void;
   readOnly: boolean;
   activeLines: ActiveLine[];
-  errorLine: number | null;
+  /** Lineas con error: la de compilacion o las de los procesos que fallaron al ejecutar. */
+  errorLines: readonly number[];
   /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
   pasoMs: number;
 }
@@ -284,7 +285,7 @@ function comentar(ta: TA) {
 
 // ===================================================================== componente
 
-export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, pasoMs }: Props) {
+export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, pasoMs }: Props) {
   // El deslizamiento ocupa la mayor parte del instante pero termina antes del siguiente:
   // si durara lo mismo, las franjas nunca se verian quietas sobre el renglon que ejecutan.
   // Corto y con salida rapida: la franja llega enseguida al renglon y se queda ahi. Si el
@@ -444,17 +445,18 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLine, p
             </div>
           ))}
 
-          {errorLine != null && (
+          {errorLines.map((linea) => (
             <div
+              key={`error-${linea}`}
               className="stripe"
               style={{
-                top: yDe(errorLine),
+                top: yDe(linea),
                 height: metrica.alto,
                 background: 'color-mix(in srgb, var(--danger) 15%, transparent)',
                 borderLeft: '2px solid var(--danger)',
               }}
             />
-          )}
+          ))}
 
           <textarea
             value={code}

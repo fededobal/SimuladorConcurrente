@@ -278,4 +278,41 @@ class VirtualMachineTest {
         assertTrue(r.logs().stream().anyMatch(l -> l.kind().equals("RELEASE")
                 && l.message().contains("mientras llama a B.dar")));
     }
+
+    /** VS-11: el snapshot marca que procesos avanzaron en el ultimo instante. */
+    @Test
+    void snapshotMarcaLosProcesosQueAvanzaron() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M { cond c; procedure f() { wait(c); } }
+                process A { M.f(); }
+                process B { skip; skip; skip; }
+                """, 0);
+        vm.step(1, SchedulingPolicy.ROUND_ROBIN);
+        java.util.List<Snapshot.ProcessView> ps = vm.snapshot().processes();
+        assertTrue(ps.get(0).advanced());
+        assertTrue(!ps.get(1).advanced());
+    }
+
+    /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */
+    @Test
+    void errorDeEjecucionQuedaConSuLinea() {
+        RunResult r = TestSupport.run("""
+                monitor M { int x = 0;
+                  procedure f() {
+                    x = 1 / x;
+                  } }
+                process P { M.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        Snapshot.ProcessView p = r.vm().snapshot().processes().get(0);
+        assertEquals("Division por cero", p.error());
+        assertEquals(3, p.line());
+    }
+
+    /** VS-6: los nombres internos (for (1..n), cota del rango) no aparecen en el snapshot. */
+    @Test
+    void variablesInternasNoSeMuestran() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process P { for (1..3) { skip; } }", 0);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        assertTrue(vm.snapshot().processes().get(0).locals().isEmpty());
+    }
 }

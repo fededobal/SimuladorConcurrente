@@ -3,8 +3,8 @@ package ar.edu.unlp.info.simulador.vm;
 import java.util.List;
 
 /**
- * Fotografia inmutable del estado completo de la simulacion en un instante. Cada
- * {@link LogEntry} lleva una; el frontend las acumula para el time-travel.
+ * Fotografia inmutable del estado completo de la simulacion en un instante. Se pide con
+ * {@link VirtualMachine#snapshot()} despues de cada paso; los eventos no la llevan.
  */
 public record Snapshot(int instant,
                        List<ProcessView> processes,
@@ -37,5 +37,6 @@ public record Snapshot(int instant,
                               String location,
                               int line,
                               List<VarView> locals,
-                              String error) { }
+                              String error,
+                              boolean advanced) { }
 }

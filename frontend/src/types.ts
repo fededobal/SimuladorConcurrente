@@ -40,6 +40,8 @@ export interface ProcessView {
   line: number;
   locals: VarView[];
   error: string | null;
+  /** true si avanzo en el ultimo instante (se muestra como "ejecutando"). */
+  advanced: boolean;
 }
 
 export interface OutputLine {
