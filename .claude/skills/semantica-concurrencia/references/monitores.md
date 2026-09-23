@@ -20,6 +20,10 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 - **signal_all(c)**: todos los de `c` a la cola de entrada.
 - **Retorno de procedure**: copia parámetros `out`, suelta el lock, despierta a la cola de
   entrada.
+- **Llamada de un procedure de A a B** (llamada abierta, ADR 0004): evalúa los argumentos
+  con A tomado, suelta A (evento `RELEASE`), entra a B o espera en su cola, y al retornar
+  compite por A como después de un `wait`. Los `out` hacia variables de A se escriben al
+  reingresar. Un proceso tiene a lo sumo un monitor tomado.
 - **Deadlock**: no terminó y ningún proceso está `READY`.
 
 ## Invariantes (todo cambio a la VM tiene que conservarlas)
@@ -29,8 +33,9 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 2. Un proceso está en a lo sumo una cola (una `cond` o una cola de entrada).
 3. Todo camino que saca a un proceso de un monitor (return, wait, **error**) suelta el lock
    y despierta la cola de entrada.
-4. Con la misma semilla y la misma política, la ejecución es idéntica (reproducibilidad:
-   el docente tiene que poder mostrar "el caso raro" otra vez).
+4. Con la misma semilla y la misma política, la ejecución es idéntica, en la JVM y en el
+   navegador (`AzarTest` y el smoke fijan una traza). La interfaz no expone la semilla: cada
+   ejecución usa una nueva y la reproducción se hace desde el núcleo.
 5. `DEADLOCK` significa interbloqueo del programa del alumno, nunca un error interno del
    simulador. Un error de ejecución se informa como `ERROR` con línea.
 6. El log y la salida no crecen sin tope en ejecuciones largas (`TOPE_LOG`, `TOPE_SALIDA`);

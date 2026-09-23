@@ -37,5 +37,6 @@ hs_err_pid*
 # Grafo de conocimiento local de Understand-Anything
 .ua/
 
-# Documentación: por ahora no se publica en el repositorio
-/docs/
+# Documentación privada: informes de revisión y de verificación (el resto de docs/ se versiona)
+/docs/informe-revision.md
+/docs/verificacion-*.md

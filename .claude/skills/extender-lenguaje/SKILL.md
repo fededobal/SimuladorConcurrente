@@ -29,7 +29,7 @@ Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulador/` salvo indic
 | 1 | `lang/lexer/Lexer.java` → `KEYWORDS` (y `TWO_CHAR`/`SINGLE_CHAR` si es símbolo) | palabra/símbolo nuevo |
 | 2 | `lang/parser/ast/Stmt.java` o `Expr.java` (o `Type.java`) | record nuevo; agregarlo al `permits` si es `Stmt` |
 | 3 | `lang/parser/Parser.java` | producción nueva; mensajes "Se esperaba …" en español |
-| 4 | `lang/SemanticValidator.java` | `checkStmt`/`checkExpr`: alcance, dónde se permite, aridad |
+| 4 | `lang/SemanticValidator.java`, `lang/ExprTyper.java`, `lang/Scope.java` | `checkStmt` (alcance, dónde se permite, aridad), tipos de expresiones (`typeOf`) y nombres (sin tapado) |
 | 5 | `vm/VirtualMachine.java` → `executeStmt` | ejecución; `yield true` si consume instante; `event(...)` con mensaje legible |
 | 6 | `vm/ExprEvaluator.java` / `vm/Value.java` | si es expresión o tipo |
 | 7 | `vm/Snapshot.java` + `js/Json.java` + `frontend/src/types.ts` | solo si el alumno tiene que *ver* algo nuevo |
@@ -42,8 +42,8 @@ Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulador/` salvo indic
 
 Truco: `Stmt`, `Expr` y `Value` son `sealed` y se recorren con `switch` exhaustivos. Al
 agregar un record, compilá (`mvn -q test-compile`): cada `switch` incompleto es un error y
-te marca un lugar de la tabla (hoy: ~25 casos en `SemanticValidator`, ~12 en
-`VirtualMachine`, ~9 en `ExprEvaluator`). No agregues `default ->` para silenciarlo.
+te marca un lugar de la tabla (hoy: ~15 casos en `SemanticValidator`, ~9 en `ExprTyper`,
+~12 en `VirtualMachine`, ~9 en `ExprEvaluator`). No agregues `default ->` para silenciarlo.
 
 ## Para quitar algo
 

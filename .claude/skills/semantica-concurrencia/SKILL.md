@@ -36,7 +36,9 @@ cátedra: `docs/monitores.md`).
    recurso y en ninguna otra.
 3. Todo camino que saca a un proceso de una sección protegida (retorno, espera, error)
    devuelve el lock y despierta a la cola de entrada.
-4. Misma semilla + misma política = misma ejecución (el docente reproduce "el caso raro").
+4. Misma semilla + misma política = misma ejecución, en la JVM y en el navegador (el azar
+   sale de `vm/Azar`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
+   ejecución y no permite repetir una corrida: la reproducción es desde el núcleo (tests).
 5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.
 6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Los eventos no
    llevan el estado; el log guarda los últimos `TOPE_LOG` y la salida los últimos `TOPE_SALIDA`.

@@ -137,6 +137,16 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Volver a versionar la documentación técnica de `docs/` (teoría, referencia, especificación y
+  decisiones), que las reglas del repositorio y las skills tratan como fuente de verdad; solo
+  quedan fuera los informes de revisión y de verificación. (Federico Dobal, 2026-09-23)
+- Actualizar `monitores.md` (sin `inout` ni constantes globales, el buffer limitado compila,
+  llamadas abiertas entre monitores), la referencia (tipos y conversiones, alcance sin tapado,
+  `for` con cota fija, `empty(c)`, topes, mensajes con tildes, cadenas sin escapes) y la
+  especificación, con la EBNF alineada con el parser. ADR 0004: llamadas abiertas.
+  (Federico Dobal, 2026-09-23)
+- El README enlaza la documentación y describe los errores de ejecución y las franjas.
+  (Federico Dobal, 2026-09-23)
 - Registrar en el ADR 0003 que el alcance del simulador es solo monitores y cuáles son las
   funcionalidades previstas; el ADR 0002 queda reemplazado. (Federico Dobal, 2026-09-18)
 - Sincronizar el README con la versión sin servidor (interfaz actual, carpetas, ejemplos,
@@ -147,6 +157,10 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Actualizar `CLAUDE.md` y las skills `semantica-concurrencia` y `extender-lenguaje` con las
+  decisiones vigentes: invariante 4 (misma semilla, mismo resultado en JVM y navegador, sin
+  repetir corridas desde la interfaz), llamadas abiertas y las clases nuevas del validador.
+  (Federico Dobal, 2026-09-23)
 - Corregir comentarios y Javadoc que no correspondían al código (política de turnos, copia de
   arreglos, pasos atómicos, cómo regenerar el motor). (Federico Dobal, 2026-09-23)
 - `InvariantesTest` controla después de cada paso las invariantes de la VM (exclusión mutua,

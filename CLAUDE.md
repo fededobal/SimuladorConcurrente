@@ -18,7 +18,7 @@ sirve estáticos). No proponer cambiar de lenguajes ni de stack.
 
 ```
 nucleo/src/main/java/ar/edu/unlp/info/simulador/
-  lang/   lexer → parser → AST → SemanticValidator      (Java puro, solo java.util)
+  lang/   lexer → parser → AST → SemanticValidator (+ ExprTyper, Scope)  (Java puro)
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
   js/     SimuladorJs (@JSExport) + Json (a mano)        ← puente al navegador
         └─ TeaVM (mvn -Pweb) ─→ frontend/src/engine/simulador.js  ← GENERADO, commiteado
@@ -58,7 +58,9 @@ frontend/src/api.ts → useSimulation.ts → componentes
 Fuente de verdad: la teoría de la cátedra en `docs/monitores.md`. Modelo, invariantes y
 casos canónicos: skill `semantica-concurrencia`.
 Decisiones vigentes: *signal and continue* en monitores; un instante puede avanzar varios
-procesos (`PROB_AVANCE`); no hay variables globales.
+procesos (`PROB_AVANCE`); no hay variables globales; llamadas abiertas entre monitores
+(ADR 0004); tipos controlados al compilar (solo `int`→`double` y número→`text`); el azar
+sale de `vm/Azar` para que la JVM y el navegador coincidan.
 
 ## Skills (`.claude/skills/`)
 

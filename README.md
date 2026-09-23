@@ -16,13 +16,14 @@ Todo corre en el navegador.
 - Ejecutarlo de corrido o de a un instante (Ejecutar, Pausar, Paso, Detener), con cuatro
   velocidades.
 - Seguir cada proceso en el código: una franja de color marca la línea en la que está y
-  cambia de aspecto si el proceso está ejecutando, listo o bloqueado (en la entrada del
-  monitor o en una variable condición).
+  cambia de aspecto si el proceso avanzó en el último instante, está listo o está bloqueado
+  (en la entrada de un monitor o en una variable condición).
 - Elegir la política de turnos: al azar, donde en cada instante avanza un subconjunto de los
   procesos listos, o en ronda. Se puede cambiar durante la ejecución.
 - Ver en una pantalla de salida lo que escriben los procesos con `write(...)`.
 - Detectar el interbloqueo (*deadlock*) cuando ningún proceso puede avanzar.
-- Leer los errores de compilación y de ejecución en español, con la línea donde ocurrieron.
+- Leer los errores de compilación y de ejecución en español, con la línea donde ocurrieron
+  (marcada en rojo). El compilador también controla los tipos y el alcance de los nombres.
 - Cargar programas de ejemplo desde el menú Ejemplos (buffer, exclusión mutua,
   `signal_all`, colas, interbloqueo, entre otros).
 
@@ -52,6 +53,13 @@ monitor Buffer {
 process Productor { for (int i = 1..5) { Buffer.depositar(i); } }
 process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x); } }
 ```
+
+## Documentación
+
+- [Referencia del lenguaje](docs/referencia_lenguaje.md): qué se puede escribir, con ejemplos.
+- [Especificación](docs/sintaxis_especificacion.md): gramática (EBNF) y semántica.
+- [Monitores](docs/monitores.md): la teoría de la cátedra y cómo la implementa el simulador.
+- [Decisiones de diseño](docs/decisiones/): ADR del proyecto.
 
 ## Cómo correrlo
 
