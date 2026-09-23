@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CompilerTest {
@@ -149,6 +150,53 @@ class CompilerTest {
     void rechazaProgramaSinProcesos() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { int x = 0; }
+                """));
+    }
+
+    @Test
+    void aceptaVariasVariablesEnUnaDeclaracion() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M {
+                  int a, b = 1, v[3] = ([3] 0), w[2];
+                  Cola c1, c2;
+                  procedure op(x: in text) { text lista, comp; lista = x; comp = lista; }
+                }
+                process P {
+                  text lista, comp = "c";
+                  int i = 0, j;
+                  if (i == 0) int k, m;
+                  M.op(comp);
+                }
+                """));
+    }
+
+    @Test
+    void rechazaComaSinNombreEnLaDeclaracion() {
+        CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
+                monitor M { procedure op() { skip; } }
+                process P {
+                  int a, ;
+                  M.op();
+                }
+                """));
+        assertTrue(ex.getMessage().contains("nombre de la variable"), ex.getMessage());
+        assertEquals(3, ex.getLine());
+    }
+
+    @Test
+    void rechazaVariablePermanenteRepetidaEnLaLista() {
+        CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
+                monitor M { int a, a; procedure op() { skip; } }
+                process P { M.op(); }
+                """));
+        assertTrue(ex.getMessage().contains("duplicada"), ex.getMessage());
+    }
+
+    @Test
+    void aceptaColaOrdenadaLocal() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M { procedure op() { skip; } }
+                process P { ColaOrdenada pendientes; push(pendientes, 1); M.op(); }
                 """));
     }
 }

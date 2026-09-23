@@ -20,6 +20,8 @@ Reglas:
   programa propio, pide confirmación antes de reemplazarlo. (Federico Dobal, 2026-09-18)
 - Selector de política de planificación: turnos al azar o en ronda (*round robin*). Se puede
   cambiar en medio de una ejecución. (Federico Dobal, 2026-09-18)
+- Declarar varias variables del mismo tipo en una línea: `text lista, comp;`,
+  `int i = 0, j;`. Cada nombre lleva su propio tamaño y valor inicial. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
@@ -40,6 +42,7 @@ Reglas:
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
 - Tab sangra también una línea en blanco; antes no hacía nada si el renglón estaba vacío.
   (Federico Dobal, 2026-09-23)
+- Una `ColaOrdenada` local de un proceso se reconoce como declaración. (Federico Dobal, 2026-09-23)
 
 ### Eliminado
 - Quitar el texto de ayuda del panel de salida cuando todavía no hay nada escrito.

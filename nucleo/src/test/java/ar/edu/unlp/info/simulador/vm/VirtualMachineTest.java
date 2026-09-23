@@ -168,4 +168,21 @@ class VirtualMachineTest {
                 """, 0);
         assertEquals(6, vm.snapshot().processes().size());
     }
+
+    /** En {@code int a, b = 5;} el valor inicial es solo de {@code b}; {@code a} queda en 0. */
+    @Test
+    void declaracionConListaInicializaCadaNombreAparte() {
+        RunResult r = TestSupport.run("""
+                monitor M {
+                    int a, b = 5;
+                    int recibido = 0;
+                    procedure guardar(v: in int) { recibido = v; }
+                }
+                process P { int x, y = 7; M.guardar(x + y); }
+                """, SchedulingPolicy.RANDOM, 1, 1000);
+        assertTrue(r.finished());
+        assertEquals("0", TestSupport.finalVar(r, "M", "a"));
+        assertEquals("5", TestSupport.finalVar(r, "M", "b"));
+        assertEquals("7", TestSupport.finalVar(r, "M", "recibido"));
+    }
 }

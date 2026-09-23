@@ -128,6 +128,7 @@ process Consumidor { int x = 0; Buffer.retirar(x); }
   `for (int i = 1..n)`, `for (1..n)`), tipos
   `int` / `double` / `boolean` / `text`, `Cola` FIFO y `ColaOrdenada` de prioridad
   (`push` / `pop` / `empty`), y `write(...)` para imprimir en la pantalla de salida.
+- Varias variables del mismo tipo en una declaración: `text lista, comp;` · `int i = 0, j;`.
 - Parámetros `in` / `out`.
 
 ## Deploy

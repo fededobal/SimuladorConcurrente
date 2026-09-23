@@ -54,6 +54,11 @@ const CANONICOS = [
     process W[i: 0..4] { Gate.esperar(); }
     process Opener { Gate.abrir(); }`,
     (r) => r.finished && r.vars['Gate.through'] === '5'],
+  ['declaracion con lista de nombres', `
+    monitor M { int a, b = 5; int recibido = 0;
+      procedure guardar(v: in int) { recibido = v; } }
+    process P { text lista, comp; int x, y = 7; M.guardar(x + y); }`,
+    (r) => r.finished && r.vars['M.a'] === '0' && r.vars['M.b'] === '5' && r.vars['M.recibido'] === '7'],
   ['deadlock real se detecta', `
     monitor M { cond c; procedure bloquear() { wait(c); } }
     process P { M.bloquear(); }`,

@@ -40,6 +40,13 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 - Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
 - Se declaran dentro de un monitor o como locales de un proceso.
 
+### Varias variables en una declaración
+
+`tipo a, b, ...;` equivale a declarar cada nombre por separado con el mismo tipo, en ese
+orden y en la misma línea. Cada nombre lleva su propio tamaño de arreglo y su propio valor
+inicial: en `int a, b = 0;` el `= 0` es solo de `b`, y `a` toma el valor por defecto. Como
+local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
+
 ### Cola (FIFO) y ColaOrdenada (prioridad)
 
 - Declaración: `Cola nombre;` · `ColaOrdenada nombre;`
@@ -194,7 +201,7 @@ programa      = { monitor | proceso } ;
 (* ---------- monitores ---------- *)
 monitor       = "monitor" ident "{" { miembro_monitor } "}" ;
 miembro_monitor = var_perm | cond_decl | procedure | sentencia ;
-var_perm      = tipo ident [ "[" expr "]" ] [ "=" init_valor ] ";" ;
+var_perm      = decl_var ;
 cond_decl     = "cond" ident [ "[" expr "]" ] { "," ident [ "[" expr "]" ] } ";" ;
 
 procedure     = "procedure" ident "(" [ params ] ")" bloque ;
@@ -220,7 +227,9 @@ sentencia     = decl_local
               | "skip" ";"
               | bloque ;
 
-decl_local    = tipo ident [ "[" expr "]" ] [ "=" init_valor ] ";" ;
+decl_local    = decl_var ;
+decl_var      = tipo item_decl { "," item_decl } ";" ;
+item_decl     = ident [ "[" expr "]" ] [ "=" init_valor ] ;   (* el valor inicial es de ese nombre solo *)
 asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
 inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
 llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;

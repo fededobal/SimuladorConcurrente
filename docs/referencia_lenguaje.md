@@ -210,7 +210,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 
 | Instrucción | Formas aceptadas |
 |---|---|
-| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` · `ColaOrdenada c;` |
+| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` · `ColaOrdenada c;` · varias del mismo tipo: `text lista, comp;` · `int i = 0, j;` |
 | Asignación | `x = expr;` · `a[i] = expr;` |
 | Incremento | `x++;` · `x--;` · `a[i]++;` · `a[i]--;` |
 | Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` |
@@ -222,6 +222,9 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | For | ver abajo |
 | Bloque | `{ ... }` suelto |
 | Nada | `skip;` |
+
+En una declaración con varios nombres, el valor inicial es solo del nombre que lo lleva:
+`int i = 0, j;` deja `j` en `0` por ser el valor por defecto, no por el `= 0` de `i`.
 
 Cada sentencia (asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`,
 `skip`) es **un paso atómico** del scheduler. Los bloques y la evaluación de las guardas de

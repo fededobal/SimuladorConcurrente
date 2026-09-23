@@ -35,7 +35,7 @@ public final class Parser {
                 monitors.add(parseMonitor());
             } else if (check("process")) {
                 processes.add(parseProcess());
-            } else if (isScalarType(peek()) || isQueueType(peek())) {
+            } else if (isDeclStart(peek())) {
                 throw error("No hay variables globales: las variables van dentro de un monitor "
                         + "(permanentes) o de un process (locales)");
             } else {
@@ -62,8 +62,8 @@ public final class Parser {
                 conds.addAll(parseCondDecls());
             } else if (check("procedure")) {
                 procedures.add(parseProcedure());
-            } else if (isScalarType(peek()) || isQueueType(peek())) {
-                perm.add(parseVarDecl());
+            } else if (isDeclStart(peek())) {
+                perm.addAll(parseVarDecls());
             } else {
                 init.add(parseStatement());
             }
@@ -146,7 +146,7 @@ public final class Parser {
         Token open = consume("{", "Se esperaba '{'");
         List<Stmt> statements = new ArrayList<>();
         while (!check("}") && !atEnd()) {
-            statements.add(parseStatement());
+            statements.addAll(parseStatements());
         }
         consume("}", "Se esperaba '}'");
         return new Stmt.Block(statements, open.line());
@@ -156,16 +156,21 @@ public final class Parser {
         if (check("{")) {
             return parseBlock();
         }
-        Stmt s = parseStatement();
-        return new Stmt.Block(List.of(s), s.line());
+        List<Stmt> statements = parseStatements();
+        return new Stmt.Block(statements, statements.get(0).line());
+    }
+
+    /** Una sentencia, o varias si es una declaracion con lista de nombres ({@code int a, b;}). */
+    private List<Stmt> parseStatements() {
+        if (isDeclStart(peek())) {
+            return new ArrayList<>(parseVarDecls());
+        }
+        return List.of(parseStatement());
     }
 
     private Stmt parseStatement() {
         Token t = peek();
 
-        if (isScalarType(t) || t.isKeyword("Cola")) {
-            return parseVarDecl();
-        }
         if (t.isKeyword("skip")) {
             advance();
             consume(";", "Se esperaba ';' despues de 'skip'");
@@ -202,14 +207,28 @@ public final class Parser {
         throw error("Sentencia no valida");
     }
 
-    private VarDecl parseVarDecl() {
+    /**
+     * {@code tipo nombre [, nombre]* ;}. Cada nombre lleva su propio tamano de arreglo y su
+     * propio valor inicial: en {@code int a, b = 0;} solo {@code b} arranca en 0.
+     */
+    private List<VarDecl> parseVarDecls() {
         Token typeTok = advance();
         Type type = Type.fromKeyword(typeTok.lexeme());
+        List<VarDecl> result = new ArrayList<>();
+        do {
+            result.add(parseVarDeclItem(type, typeTok.line()));
+        } while (match(","));
+        consume(";", type.isQueue()
+                ? "Se esperaba ';' al final de la declaracion de la cola"
+                : "Se esperaba ';' al final de la declaracion");
+        return result;
+    }
+
+    private VarDecl parseVarDeclItem(Type type, int line) {
         String name = consumeIdent("Se esperaba el nombre de la variable");
 
         if (type.isQueue()) {
-            consume(";", "Se esperaba ';' al final de la declaracion de la cola");
-            return new VarDecl(name, type, false, null, null, typeTok.line());
+            return new VarDecl(name, type, false, null, null, line);
         }
 
         boolean isArray = false;
@@ -230,8 +249,7 @@ public final class Parser {
         } else if (match("=")) {
             init = parseExpr();
         }
-        consume(";", "Se esperaba ';' al final de la declaracion");
-        return new VarDecl(name, type, isArray, size, init, typeTok.line());
+        return new VarDecl(name, type, isArray, size, init, line);
     }
 
     private Stmt parseCondOp() {
@@ -609,6 +627,10 @@ public final class Parser {
 
     private boolean isQueueType(Token t) {
         return t.is("Cola") || t.is("ColaOrdenada");
+    }
+
+    private boolean isDeclStart(Token t) {
+        return isScalarType(t) || isQueueType(t);
     }
 
     private static String describe(Token t) {
