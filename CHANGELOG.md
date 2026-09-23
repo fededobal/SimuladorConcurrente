@@ -43,6 +43,8 @@ Reglas:
 - Tab sangra también una línea en blanco; antes no hacía nada si el renglón estaba vacío.
   (Federico Dobal, 2026-09-23)
 - Una `ColaOrdenada` local de un proceso se reconoce como declaración. (Federico Dobal, 2026-09-23)
+- El menú "Ejemplos" oculta la segunda línea solo si es la de `// espera:`; antes la descartaba
+  siempre y un ejemplo sin ella perdía una línea de código. (Federico Dobal, 2026-09-23)
 
 ### Eliminado
 - Quitar el texto de ayuda del panel de salida cuando todavía no hay nada escrito.
