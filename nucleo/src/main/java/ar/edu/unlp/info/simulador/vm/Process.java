@@ -80,6 +80,7 @@ public final class Process {
     /** Ubicacion actual para la UI: {@code Monitor.procedure} o null si esta en su cuerpo. */
     public String currentLocation() {
         Activation a = current();
+        if (a != null && a.isEntering()) a = callStack.stream().skip(1).findFirst().orElse(null);
         if (a == null || !a.isProcedure()) return null;
         return a.monitorName() + "." + a.procedureName();
     }
@@ -93,6 +94,8 @@ public final class Process {
      */
     public int currentLine() {
         for (Activation a : callStack) {
+            // un procedure al que todavia no entro se muestra en la linea de la llamada
+            if (a.isEntering()) continue;
             if (a.currentLine() > 0) return a.currentLine();
             Stmt next = a.pending().peekFirst();
             if (next != null && next.line() > 0) return next.line();

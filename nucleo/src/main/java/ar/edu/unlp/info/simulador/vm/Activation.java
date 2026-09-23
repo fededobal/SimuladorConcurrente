@@ -3,6 +3,7 @@ package ar.edu.unlp.info.simulador.vm;
 import ar.edu.unlp.info.simulador.lang.parser.ast.Stmt;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,11 +25,23 @@ public final class Activation {
     /** Sentencias pendientes de ejecutar (se consumen del frente). */
     private final Deque<Stmt> pending = new ArrayDeque<>();
 
-    /** Parametros out/inout: nombre del parametro -> lugar del llamador donde copiar al retornar. */
+    /** Parametros out: nombre del parametro -> lugar del llamador donde copiar al retornar. */
     private final Map<String, LValue> outBindings = new LinkedHashMap<>();
 
-    /** true si el proceso volvio de un wait y todavia debe re-adquirir el lock del monitor. */
+    /**
+     * true si el proceso tiene que tomar el monitor de esta activacion antes de seguir: al
+     * entrar al procedure, al volver de un wait o al volver de una llamada abierta.
+     */
     private boolean needsLock = false;
+
+    /** true mientras el proceso todavia no entro al procedure (espera en la cola de entrada). */
+    private boolean entering = false;
+
+    /**
+     * Parametros out de una llamada abierta que se escriben al reingresar a este monitor: en
+     * el momento del retorno el proceso no lo tiene tomado.
+     */
+    private final List<Map.Entry<LValue, Value>> deferredWrites = new ArrayList<>();
 
     private int currentLine = -1;
 
@@ -61,6 +74,20 @@ public final class Activation {
 
     public boolean needsLock() { return needsLock; }
     public void setNeedsLock(boolean v) { this.needsLock = v; }
+
+    public boolean isEntering() { return entering; }
+    public void setEntering(boolean v) { this.entering = v; }
+
+    public void deferWrite(LValue target, Value value) {
+        deferredWrites.add(Map.entry(target, value));
+    }
+
+    /** @return las escrituras pendientes, en orden, y las vacia */
+    public List<Map.Entry<LValue, Value>> takeDeferredWrites() {
+        List<Map.Entry<LValue, Value>> out = new ArrayList<>(deferredWrites);
+        deferredWrites.clear();
+        return out;
+    }
 
     public int currentLine() { return currentLine; }
     public void setCurrentLine(int line) { this.currentLine = line; }

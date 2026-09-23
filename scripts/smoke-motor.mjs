@@ -121,6 +121,12 @@ const CANONICOS = [
   ['un for no pisa el iterador de la familia (VI-6)', `
     process P[i: 0..1] { for (int i = 0..5) { skip; } }`,
     (r) => !!r.compilacion?.includes('Ya existe')],
+  ['llamada abierta: el llamador suelta su monitor (D-5, ADR 0004)', `
+    monitor B { boolean listo = false; cond c;
+      procedure esperar() { while (not listo) wait(c); } procedure abrir() { listo = true; signal(c); } }
+    monitor A { procedure f() { B.esperar(); } procedure g() { B.abrir(); } }
+    process P { A.f(); } process Q { skip; skip; A.g(); }`,
+    (r) => r.finished && !r.deadlock],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

@@ -27,6 +27,10 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Llamadas abiertas entre monitores: un procedure de A que llama a B libera A durante la
+  llamada y vuelve a competir por A al retornar, como después de un `wait`. Antes retenía A
+  y podía quedar en interbloqueo aunque cada monitor estuviera bien sincronizado (ADR 0004).
+  (Federico Dobal, 2026-09-23)
 - El compilador controla los tipos: una condición tiene que ser `boolean`, un índice `int`,
   y una asignación, un argumento o un valor inicial tienen que coincidir con el tipo del
   destino. Solo se convierten solos un `int` a `double` y un número a `text`. Antes estos

@@ -1,7 +1,7 @@
 package ar.edu.unlp.info.simulador.vm;
 
 /**
- * Lugar donde escribir el valor de un parametro {@code out}/{@code inout} al retornar de un
+ * Lugar donde escribir el valor de un parametro {@code out} al retornar de un
  * procedure. Se resuelve contra el proceso y la activacion del llamador (que siguen en la
  * pila mientras el procedure ejecuta).
  *

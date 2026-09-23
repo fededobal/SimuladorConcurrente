@@ -239,4 +239,43 @@ class VirtualMachineTest {
         assertEquals("linea 101", out.get(1).text());
         assertEquals("linea 600", out.get(500).text());
     }
+
+    /**
+     * D-5, llamada abierta: P llama de A a B y espera en B; Q necesita A para avisarle. Con la
+     * llamada cerrada, P retenia A y el programa quedaba en interbloqueo.
+     */
+    @Test
+    void llamadaAbiertaSueltaElMonitorDelLlamador() {
+        String programa = """
+                monitor B { boolean listo = false; cond c;
+                  procedure esperar() { while (not listo) wait(c); }
+                  procedure abrir() { listo = true; signal(c); } }
+                monitor A { int vueltas = 0;
+                  procedure f() { vueltas++; B.esperar(); vueltas++; }
+                  procedure g() { B.abrir(); } }
+                process P { A.f(); }
+                process Q { skip; skip; A.g(); }
+                """;
+        for (int seed = 0; seed < 25; seed++) {
+            RunResult r = TestSupport.run(programa, SchedulingPolicy.RANDOM, seed, 5000);
+            assertTrue(r.finished(), "seed " + seed);
+            assertEquals("2", TestSupport.finalVar(r, "A", "vueltas"), "seed " + seed);
+        }
+        assertTrue(TestSupport.run(programa, SchedulingPolicy.ROUND_ROBIN, 0, 5000).finished());
+    }
+
+    /** D-5: un out hacia una permanente del llamador se escribe al reingresar, con el monitor tomado. */
+    @Test
+    void outDeUnaLlamadaAbiertaLlegaAlLlamador() {
+        RunResult r = TestSupport.run("""
+                monitor B { int n = 0; procedure dar(r: out int) { n++; r = 100 + n; } }
+                monitor A { int guardado = 0; int copia = 0;
+                  procedure f() { B.dar(guardado); copia = guardado; } }
+                process P[i: 1..3] { A.f(); }
+                """, SchedulingPolicy.RANDOM, 3, 5000);
+        assertTrue(r.finished());
+        assertEquals(TestSupport.finalVar(r, "A", "guardado"), TestSupport.finalVar(r, "A", "copia"));
+        assertTrue(r.logs().stream().anyMatch(l -> l.kind().equals("RELEASE")
+                && l.message().contains("mientras llama a B.dar")));
+    }
 }
