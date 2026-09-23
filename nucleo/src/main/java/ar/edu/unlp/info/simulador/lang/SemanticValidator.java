@@ -66,7 +66,7 @@ public final class SemanticValidator {
         }
         if (previa != usados) {
             throw new CompilationException("La cola '" + cola + "' maneja " + previa
-                    + " componente(s) (fijado en la linea " + lineaAridad.get(clave) + ") y este "
+                    + " componente(s) (fijado en la línea " + lineaAridad.get(clave) + ") y este "
                     + op + " usa " + usados, line);
         }
     }
@@ -100,7 +100,7 @@ public final class SemanticValidator {
                 Set<String> pnames = new HashSet<>();
                 for (Param param : pr.params()) {
                     if (!pnames.add(param.name())) {
-                        throw new CompilationException("Parametro duplicado '" + param.name()
+                        throw new CompilationException("Parámetro duplicado '" + param.name()
                                 + "' en " + m.name() + "." + pr.name(), param.line());
                     }
                 }
@@ -129,7 +129,7 @@ public final class SemanticValidator {
         Scope init = root.child();
         for (Stmt s : m.initStmts()) {
             if (containsMonitorInteraction(s)) {
-                throw new CompilationException("El codigo de inicializacion del monitor " + m.name()
+                throw new CompilationException("El código de inicialización del monitor " + m.name()
                         + " no puede llamar a monitores ni usar wait/signal", s.line());
             }
             checkStmt(s, init);
@@ -168,7 +168,8 @@ public final class SemanticValidator {
     private void checkStmt(Stmt s, Scope scope) {
         switch (s) {
             case Stmt.Block b -> checkBlock(b, scope);
-            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL, "local:" + vd.name() + "#" + vd.line());
+            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL, "local:" + vd.name() + "#"
+                    + vd.line());
             case Stmt.Assign a -> checkAssign(a, scope);
             case Stmt.IncDec inc -> {
                 Type t = targetType(inc.target(), inc.index(), scope, inc.line());
@@ -235,7 +236,8 @@ public final class SemanticValidator {
             if (vd.initExpr() != null) {
                 ExprTyper.checkAssignable(vd.type(), vd.initExpr(), inner, vd.name(), vd.line());
             }
-            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERADOR, null),
+            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERADOR,
+                    null),
                     vd.line());
             iterator = vd.name();
         } else {
@@ -264,8 +266,10 @@ public final class SemanticValidator {
             throw new CompilationException("Monitor no declarado: " + call.monitor(), call.line());
         }
         if (scope.inProcedure && call.monitor().equals(scope.monitor)) {
-            throw new CompilationException("Un procedure de " + call.monitor() + " no puede llamar a "
-                    + call.monitor() + "." + call.procedure() + ": el proceso ya está dentro del monitor",
+            throw new CompilationException("Un procedure de " + call.monitor()
+                    + " no puede llamar a "
+                    + call.monitor() + "." + call.procedure()
+                            + ": el proceso ya está dentro del monitor",
                     call.line());
         }
         ProcedureDef pd = info.procedures().get(call.procedure());
@@ -275,7 +279,7 @@ public final class SemanticValidator {
         }
         if (pd.params().size() != call.args().size()) {
             throw new CompilationException("La llamada a " + call.monitor() + "." + call.procedure()
-                    + " espera " + pd.params().size() + " argumento(s) y recibio "
+                    + " espera " + pd.params().size() + " argumento(s) y recibió "
                     + call.args().size(), call.line());
         }
         for (int i = 0; i < pd.params().size(); i++) {
@@ -286,7 +290,7 @@ public final class SemanticValidator {
                 continue;
             }
             if (!(arg instanceof Expr.VarRef) && !(arg instanceof Expr.ArrayAccess)) {
-                throw new CompilationException("El argumento para el parametro '" + param.name()
+                throw new CompilationException("El argumento para el parámetro '" + param.name()
                         + "' (out) debe ser una variable o un elemento de arreglo", call.line());
             }
             Type argType = ExprTyper.typeOf(arg, scope);
@@ -294,8 +298,8 @@ public final class SemanticValidator {
             checkWritable(name, scope, call.line());
             if (!ExprTyper.assignable(argType, param.type())) {
                 throw new CompilationException("El parámetro out '" + param.name() + "' es "
-                        + param.type().keyword() + " y no se puede guardar en '" + name + "', que es "
-                        + argType.keyword(), call.line());
+                        + param.type().keyword() + " y no se puede guardar en '" + name
+                        + "', que es " + argType.keyword(), call.line());
             }
         }
     }
@@ -307,16 +311,19 @@ public final class SemanticValidator {
         }
         Boolean isArray = monitors.get(scope.monitor).conds().get(co.cond());
         if (isArray == null) {
-            throw new CompilationException("Variable condicion no declarada: " + co.cond(), co.line());
+            throw new CompilationException("Variable condición no declarada: " + co.cond(),
+                    co.line());
         }
         if (isArray && co.index() == null) {
-            throw new CompilationException("La cond '" + co.cond() + "' es un arreglo: falta el indice",
+            throw new CompilationException("La cond '" + co.cond()
+                    + "' es un arreglo: falta el índice",
                     co.line());
         }
         if (!isArray && co.index() != null) {
             throw new CompilationException("La cond '" + co.cond() + "' no es un arreglo", co.line());
         }
-        if (co.index() != null) ExprTyper.expect(co.index(), Type.INT, scope, "El índice de la cond");
+        if (co.index() != null) ExprTyper.expect(co.index(), Type.INT, scope,
+                "El índice de la cond");
     }
 
     // ---------------------------------------------------------------- nombres
@@ -335,7 +342,8 @@ public final class SemanticValidator {
         Symbol sym = checkWritable(name, scope, line);
         VarType t = sym.type();
         if (index != null) {
-            if (!t.isArray()) throw new CompilationException("'" + name + "' no es un arreglo", line);
+            if (!t.isArray()) throw new CompilationException("'" + name + "' no es un arreglo",
+                    line);
             ExprTyper.expect(index, Type.INT, scope, "El índice de '" + name + "'");
             return t.base();
         }
@@ -354,7 +362,7 @@ public final class SemanticValidator {
         Symbol sym = ExprTyper.known(name, scope, line);
         if (sym.readOnly()) {
             throw new CompilationException("No se puede asignar a '" + name
-                    + "' (es constante, parametro in o iterador)", line);
+                    + "' (es constante, parámetro in o iterador)", line);
         }
         if (scope.isFrozen(name)) {
             throw new CompilationException("No se puede modificar el iterador '" + name

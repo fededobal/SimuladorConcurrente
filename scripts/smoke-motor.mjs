@@ -132,7 +132,7 @@ const CANONICOS = [
       procedure esperar() { while (not listo) wait(c); }
       procedure avisar() { int x = 1 / 0; listo = true; signal(c); } }
     process A { M.esperar(); } process B { skip; skip; M.avisar(); }`,
-    (r) => r.deadlock && r.snapshot.processes.some((p) => p.error === 'Division por cero' && p.line === 4)],
+    (r) => r.deadlock && r.snapshot.processes.some((p) => p.error === 'División por cero' && p.line === 4)],
   ['el snapshot marca quien avanzo (VS-11)', `
     process A { skip; skip; } process B { skip; skip; }`,
     (r) => r.finished && r.snapshot.processes.every((p) => typeof p.advanced === 'boolean')],

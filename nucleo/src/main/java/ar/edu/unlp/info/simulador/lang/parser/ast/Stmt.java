@@ -3,8 +3,9 @@ package ar.edu.unlp.info.simulador.lang.parser.ast;
 import java.util.List;
 
 /**
- * Sentencia del lenguaje. Cada sentencia (o la evaluacion de una guarda, o una llamada a
- * monitor) es un paso atomico del scheduler.
+ * Sentencia del lenguaje. Cada sentencia observable (asignacion, llamada a monitor,
+ * wait/signal, write, push/pop, skip, declaracion local) es un paso atomico del scheduler;
+ * los bloques y las guardas de if, while y for se resuelven junto con la siguiente.
  */
 public sealed interface Stmt
         permits Stmt.Block, Stmt.Assign, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,

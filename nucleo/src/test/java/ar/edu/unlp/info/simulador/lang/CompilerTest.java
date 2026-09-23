@@ -352,4 +352,19 @@ class CompilerTest {
     void comparacionEncadenadaExplicaElError() {
         assertTrue(errorDe("process P { boolean b = 1 < 2 < 3; }").contains("no se encadenan"));
     }
+
+    /** VS-9: caracteres que llegan al copiar de un PDF o un procesador de texto. */
+    @Test
+    void espaciosInvisiblesYComillasTipograficas() {
+        assertDoesNotThrow(() -> Compiler.compile("\uFEFFprocess P {\u00A0skip; }"));
+        assertTrue(errorDe("process P { write(\u201Chola\u201D); }").contains("comillas rectas"));
+    }
+
+    /** VS-1: los mensajes llevan tildes. */
+    @Test
+    void mensajesConTildes() {
+        CompilationException ex = assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P {\n int x = ; }"));
+        assertTrue(ex.getMessage().startsWith("Línea 2: Se esperaba una expresión"), ex.getMessage());
+    }
 }

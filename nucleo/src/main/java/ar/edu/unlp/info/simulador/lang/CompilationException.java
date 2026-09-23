@@ -23,6 +23,6 @@ public class CompilationException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return line > 0 ? "Linea " + line + ": " + super.getMessage() : super.getMessage();
+        return line > 0 ? "Línea " + line + ": " + super.getMessage() : super.getMessage();
     }
 }

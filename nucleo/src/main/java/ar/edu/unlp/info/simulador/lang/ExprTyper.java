@@ -52,7 +52,8 @@ final class ExprTyper {
     static void expect(Expr e, Type wanted, Scope scope, String what) {
         Type t = typeOf(e, scope);
         if (t != wanted) {
-            throw error(what + " tiene que ser " + wanted.keyword() + " y es " + t.keyword(), e.line());
+            throw error(what + " tiene que ser " + wanted.keyword() + " y es " + t.keyword(),
+                    e.line());
         }
     }
 
@@ -82,7 +83,8 @@ final class ExprTyper {
     private static Type scalarOf(String name, Scope scope, int line) {
         Scope.VarType t = known(name, scope, line).type();
         if (t.isArray()) {
-            throw error("'" + name + "' es un arreglo: falta el índice, por ejemplo " + name + "[0]",
+            throw error("'" + name + "' es un arreglo: falta el índice, por ejemplo " + name
+                    + "[0]",
                     line);
         }
         if (t.isQueue()) {
@@ -94,10 +96,12 @@ final class ExprTyper {
     private static Type unary(Expr.Unary u, Scope scope) {
         Type t = typeOf(u.operand(), scope);
         if (u.op().equals("not")) {
-            if (t != Type.BOOLEAN) throw error("'not' se aplica a un boolean, no a un " + t.keyword(), u.line());
+            if (t != Type.BOOLEAN) throw error("'not' se aplica a un boolean, no a un "
+                    + t.keyword(), u.line());
             return Type.BOOLEAN;
         }
-        if (!isNumeric(t)) throw error("El '-' se aplica a un número, no a un " + t.keyword(), u.line());
+        if (!isNumeric(t)) throw error("El '-' se aplica a un número, no a un " + t.keyword(),
+                u.line());
         return t;
     }
 

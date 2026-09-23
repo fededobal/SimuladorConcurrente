@@ -152,7 +152,7 @@ export function App() {
           {status === 'error' && sim.error && (
             <div className="err">
               {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
-              {sim.error.message.replace(/^Linea \d+:\s*/, '')}
+              {sim.error.message.replace(/^L[ií]nea \d+:\s*/, '')}
             </div>
           )}
           {status !== 'error' && fallidos.length > 0 && (

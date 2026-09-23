@@ -158,6 +158,6 @@ public final class SimuladorJs {
     }
 
     private static String sinSimulacion() {
-        return Json.error("No hay una simulacion activa", -1);
+        return Json.error("No hay una simulación activa", -1);
     }
 }

@@ -27,7 +27,9 @@ public final class VirtualMachine {
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
     private static final int PROB_AVANCE = 80;
 
-    /** Tope de lineas de salida guardadas (las ultimas): un bucle largo no puede comerse la memoria. */
+    /**
+     * Tope de lineas de salida guardadas (las ultimas): un bucle largo no puede comerse la memoria.
+     */
     private static final int TOPE_SALIDA = 500;
 
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
@@ -220,7 +222,7 @@ public final class VirtualMachine {
             if (!deadlockLogged) {
                 deadlockLogged = true;
                 instant++;
-                systemLog("DEADLOCK", "Interbloqueo: ningun proceso puede avanzar");
+                systemLog("DEADLOCK", "Interbloqueo: ningún proceso puede avanzar");
             }
             return stepEntries;
         }
@@ -251,7 +253,7 @@ public final class VirtualMachine {
         }
         if (isDeadlocked() && !deadlockLogged) {
             deadlockLogged = true;
-            systemLog("DEADLOCK", "Interbloqueo: ningun proceso puede avanzar");
+            systemLog("DEADLOCK", "Interbloqueo: ningún proceso puede avanzar");
         }
         return stepEntries;
     }
@@ -260,7 +262,7 @@ public final class VirtualMachine {
     private void failProcess(Process p, String message) {
         p.fail(message);
         List<Monitor> released = releaseMonitorsOf(p);
-        event(p, "ERROR", "", p.name() + ": error de ejecucion - " + message);
+        event(p, "ERROR", "", p.name() + ": error de ejecución - " + message);
         for (Monitor m : released) {
             event(p, "RELEASE", m.name(),
                     p.name() + ": libera " + m.name() + " al terminar con error");
@@ -459,7 +461,8 @@ public final class VirtualMachine {
                 }
                 if (f.limit() != null) {
                     // la cota del rango se fija al entrar: cambiarla adentro no cambia las vueltas
-                    act.locals().put(f.limit().name(), evaluator(p, act).eval(f.limit().initExpr()));
+                    act.locals().put(f.limit().name(), evaluator(p,
+                            act).eval(f.limit().initExpr()));
                 }
                 List<Stmt> loopBody = new ArrayList<>(f.body().statements());
                 loopBody.add(f.step());
@@ -654,7 +657,7 @@ public final class VirtualMachine {
         }
         ConditionVariable cv = m.conds().get(key);
         if (cv == null) {
-            throw new RuntimeError("Variable condicion no declarada: " + key, co.line());
+            throw new RuntimeError("Variable condición no declarada: " + key, co.line());
         }
         switch (co.kind()) {
             case WAIT -> {
@@ -669,7 +672,7 @@ public final class VirtualMachine {
             case SIGNAL -> {
                 if (cv.isEmpty()) {
                     event(p, "SIGNAL", m.name() + "." + key,
-                            p.name() + ": signal(" + key + ") - sin efecto (cola vacia)");
+                            p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
                 } else {
                     Process w = cv.dequeue();
                     m.entryQueue().addLast(w);
@@ -724,7 +727,7 @@ public final class VirtualMachine {
     private void execQueuePop(Process p, Activation act, Stmt.QueuePop qp) {
         Value.QueueVal q = asQueue(p, act, qp.queue(), qp.line());
         if (q.isEmpty()) {
-            throw new RuntimeError("pop sobre la cola vacia '" + qp.queue() + "'", qp.line());
+            throw new RuntimeError("pop sobre la cola vacía '" + qp.queue() + "'", qp.line());
         }
         Value v = q.pop();
         touchIfMonitorVar(p, act, qp.queue());
@@ -733,7 +736,7 @@ public final class VirtualMachine {
         } else {
             if (!(v instanceof Value.ArrayVal tuple) || tuple.size() < qp.targets().size()) {
                 throw new RuntimeError("El elemento desencolado no tiene suficientes componentes "
-                        + "para el pop multiple", qp.line());
+                        + "para el pop múltiple", qp.line());
             }
             for (int i = 0; i < qp.targets().size(); i++) {
                 assignScalar(p, act, qp.targets().get(i), tuple.get(i), qp.line());

@@ -7,7 +7,8 @@ import java.util.List;
 
 /**
  * Valor en tiempo de ejecucion. Los escalares son inmutables; {@link ArrayVal} y
- * {@link QueueVal} tienen contenido mutable y se copian al tomar un snapshot.
+ * {@link QueueVal} tienen contenido mutable. El compilador no deja asignarlos ni pasarlos
+ * enteros, asi que cada uno pertenece a una sola variable; el snapshot los muestra como texto.
  */
 public sealed interface Value {
 
@@ -218,7 +219,8 @@ public sealed interface Value {
                 }
                 yield (long) d.v();
             }
-            default -> throw new RuntimeError("Se esperaba un numero y se encontro " + display(), -1);
+            default -> throw new RuntimeError("Se esperaba un número y se encontró " + display(),
+                    -1);
         };
     }
 
@@ -226,13 +228,14 @@ public sealed interface Value {
         return switch (this) {
             case IntVal i -> i.v();
             case DoubleVal d -> d.v();
-            default -> throw new RuntimeError("Se esperaba un numero y se encontro " + display(), -1);
+            default -> throw new RuntimeError("Se esperaba un número y se encontró " + display(),
+                    -1);
         };
     }
 
     default boolean asBool() {
         if (this instanceof BoolVal b) return b.v();
-        throw new RuntimeError("Se esperaba un booleano y se encontro " + display(), -1);
+        throw new RuntimeError("Se esperaba un booleano y se encontró " + display(), -1);
     }
 
     default String asText() {

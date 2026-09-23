@@ -106,22 +106,22 @@ public final class ExprEvaluator {
             case "*" -> arith(l, r, (x, y) -> x * y, Math::multiplyExact, b.line());
             case "/" -> {
                 if (bothInt(l, r)) {
-                    if (r.asLong() == 0) throw new RuntimeError("Division por cero", b.line());
+                    if (r.asLong() == 0) throw new RuntimeError("División por cero", b.line());
                     if (l.asLong() == Long.MIN_VALUE && r.asLong() == -1) {
                         throw RuntimeError.overflow(b.line());
                     }
                     yield new Value.IntVal(l.asLong() / r.asLong());
                 }
-                if (r.asDouble() == 0) throw new RuntimeError("Division por cero", b.line());
+                if (r.asDouble() == 0) throw new RuntimeError("División por cero", b.line());
                 yield finite(l.asDouble() / r.asDouble(), b.line());
             }
             case "%" -> {
                 if (bothInt(l, r)) {
-                    if (r.asLong() == 0) throw new RuntimeError("Modulo por cero", b.line());
+                    if (r.asLong() == 0) throw new RuntimeError("Módulo por cero", b.line());
                     yield new Value.IntVal(l.asLong() % r.asLong());
                 }
                 // con double, el resto real: 5.5 % 2 es 1.5 (antes truncaba a 1.0)
-                if (r.asDouble() == 0) throw new RuntimeError("Modulo por cero", b.line());
+                if (r.asDouble() == 0) throw new RuntimeError("Módulo por cero", b.line());
                 yield finite(l.asDouble() % r.asDouble(), b.line());
             }
             case "==" -> new Value.BoolVal(Value.sameValue(l, r, b.line()));

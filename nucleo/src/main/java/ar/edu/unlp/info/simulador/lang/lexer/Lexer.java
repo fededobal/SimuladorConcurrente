@@ -42,7 +42,8 @@ public final class Lexer {
             char c = peek();
 
             if (c == '\n') { advance(); continue; }
-            if (Character.isWhitespace(c)) { advance(); continue; }
+            if (Character.isWhitespace(c) || c == '\u00A0'
+                    || c == '\uFEFF') { advance(); continue; }
 
             if (c == '/' && peekNext() == '/') { skipLineComment(); continue; }
             if (c == '/' && peekNext() == '*') { skipBlockComment(); continue; }
@@ -151,6 +152,11 @@ public final class Lexer {
     private Token readSymbol() {
         int startLine = line, startCol = col;
         char c = peek();
+        if (c == '\u201C' || c == '\u201D' || c == '\u2018' || c == '\u2019') {
+            // frecuentes al copiar el enunciado de un PDF o de un procesador de texto
+            throw new CompilationException("Comilla tipográfica " + c + ": las cadenas van entre "
+                    + "comillas rectas (\")", startLine);
+        }
         char n = peekNext();
         String two = "" + c + n;
         if (TWO_CHAR.contains(two)) {
@@ -162,6 +168,6 @@ public final class Lexer {
             advance();
             return new Token(TokenType.SYMBOL, String.valueOf(c), startLine, startCol);
         }
-        throw new CompilationException("Caracter inesperado '" + c + "'", startLine);
+        throw new CompilationException("Carácter inesperado '" + c + "'", startLine);
     }
 }

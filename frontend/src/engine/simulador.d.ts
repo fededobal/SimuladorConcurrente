@@ -1,6 +1,7 @@
 // Tipos del modulo que genera TeaVM a partir de ar.edu.unlp.info.simulador.js.SimuladorJs.
-// simulador.js es codigo generado: no se edita a mano, se regenera con `mvn -Pweb package`
-// desde nucleo/. Todas las funciones devuelven JSON; api.ts lo parsea y tipa.
+// simulador.js es codigo generado: no se edita a mano, se regenera con `npm run engine` desde
+// frontend/ (compila con TeaVM y actualiza simulador.hash). Todas las funciones devuelven
+// JSON; api.ts lo parsea y tipa.
 
 /** Compila y arranca una simulacion. seed negativa = la elige el reloj. */
 export function crear(code: string, seed: number): string;

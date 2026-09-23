@@ -304,7 +304,7 @@ class VirtualMachineTest {
                 process P { M.f(); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
         Snapshot.ProcessView p = r.vm().snapshot().processes().get(0);
-        assertEquals("Division por cero", p.error());
+        assertEquals("División por cero", p.error());
         assertEquals(3, p.line());
     }
 

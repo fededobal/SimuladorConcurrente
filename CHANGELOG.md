@@ -57,6 +57,10 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Los mensajes de error llevan tildes ("Línea", "División por cero", "Índice", "tamaño",
+  "expresión"...). Un espacio no separable o una marca BOM, que llegan al copiar de un PDF,
+  cuentan como espacio, y una comilla tipográfica explica que van comillas rectas. El modo
+  `inout` tiene su propio mensaje. (Federico Dobal, 2026-09-23)
 - El iterador oculto de `for (1..n)` y la cota de los `for` de rango ya no aparecen entre
   las variables del proceso. (Federico Dobal, 2026-09-23)
 - `%` con operandos `double` calcula el resto real: `5.5 % 2` da `1.5`; antes truncaba los
@@ -143,6 +147,8 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Corregir comentarios y Javadoc que no correspondían al código (política de turnos, copia de
+  arreglos, pasos atómicos, cómo regenerar el motor). (Federico Dobal, 2026-09-23)
 - `InvariantesTest` controla después de cada paso las invariantes de la VM (exclusión mutua,
   colas, determinismo, deadlock honesto, topes y resultado de los ejemplos) sobre 36
   programas, con 25 semillas y las dos políticas. (Federico Dobal, 2026-09-23)
