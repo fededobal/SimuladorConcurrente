@@ -143,6 +143,9 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `InvariantesTest` controla después de cada paso las invariantes de la VM (exclusión mutua,
+  colas, determinismo, deadlock honesto, topes y resultado de los ejemplos) sobre 36
+  programas, con 25 semillas y las dos políticas. (Federico Dobal, 2026-09-23)
 - Ignorar en git la carpeta `.ua/`, donde Understand-Anything guarda el grafo de
   conocimiento local del proyecto. (Federico Dobal, 2026-09-21)
 - Incorporar reglas del repositorio, hooks de git, integración continua, registro de cambios
