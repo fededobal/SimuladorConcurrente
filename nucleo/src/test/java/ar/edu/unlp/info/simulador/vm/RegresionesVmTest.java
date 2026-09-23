@@ -205,4 +205,22 @@ class RegresionesVmTest {
         assertEquals("1.0E20 3.0 0.30000000000000004",
                 r.vm().snapshot().output().get(0).text());
     }
+
+    /** VB-1/VB-2: los double grandes y los literales largos no dependen de Double.toString/parseDouble. */
+    @Test
+    void doublesGrandesYLiteralesLargosSeFormateanSinLaBiblioteca() {
+        RunResult r = TestSupport.run("""
+                process P {
+                  double m = 9223372036854775807.0 * 4.0;
+                  write(m, " ", -100000000000000000000000.0, " ", 0.1, " ", 0000000000000000000001.25,
+                        " ", 4503599627370497.5, " ", 123456789.125);
+                }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals(FORMATO_DOUBLES,
+                r.vm().snapshot().output().get(0).text());
+    }
+
+    /** Mismo texto que espera scripts/smoke-motor.mjs en el navegador. */
+    static final String FORMATO_DOUBLES =
+            "3.68934881474191E19 -1.0E23 0.1 1.25 4503599627370498.0 1.23456789125E8";
 }

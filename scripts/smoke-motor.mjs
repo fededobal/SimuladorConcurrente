@@ -106,6 +106,12 @@ const CANONICOS = [
   ['tamano negativo es error del proceso, no deadlock (VI-2, VI-3)', `
     process P { int a[-1]; skip; }`,
     (r) => !r.excepcion && r.finished && !r.deadlock && r.kinds.has('ERROR')],
+  ['doubles grandes y literales largos se muestran igual que en la JVM (VB-1)', `
+    process P { double m = 9223372036854775807.0 * 4.0;
+      write(m, " ", -100000000000000000000000.0, " ", 0.1, " ", 0000000000000000000001.25,
+            " ", 4503599627370497.5, " ", 123456789.125); }`,
+    (r) => r.snapshot?.output?.[0]?.text
+      === '3.68934881474191E19 -1.0E23 0.1 1.25 4503599627370498.0 1.23456789125E8'],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],
@@ -138,6 +144,22 @@ for (const archivo of readdirSync(DIR_EJEMPLOS).filter((f) => f.endsWith('.mon')
       && vars.every((v) => { const [mv, val] = v.split('='); return r.vars[mv] === val; });
   if (!bien) fallas++;
   console.log(`  ${bien ? 'OK   ' : 'FALLA'} ${archivo}${bien ? '' : '  -> ' + mostrar(r)}`);
+}
+
+// Paridad del azar (VB-1): misma semilla, mismo entrelazado que la JVM. La traza es la de
+// AzarTest#trazaDelEjemploDeExclusionConSemillaFija; si una cambia, tiene que cambiar la otra.
+console.log('Paridad con la JVM');
+{
+  const TRAZA = '4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R |';
+  motor.crear(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
+  let traza = '';
+  for (let i = 0; i < 6; i++) {
+    for (const e of JSON.parse(motor.paso('RANDOM', -1)).entries) traza += `${e.processId}${e.kind[0]} `;
+    traza += '| ';
+  }
+  const bien = traza.trim() === TRAZA;
+  if (!bien) fallas++;
+  console.log(`  ${bien ? 'OK   ' : 'FALLA'} azar con semilla 0 igual que en la JVM${bien ? '' : '  -> ' + traza.trim()}`);
 }
 
 console.log('Bugs conocidos (se esperan en FALLA hasta arreglarlos)');

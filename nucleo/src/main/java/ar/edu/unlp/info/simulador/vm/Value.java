@@ -94,6 +94,29 @@ public sealed interface Value {
 
     // ---------------------------------------------------------------- helpers
 
+    /**
+     * Un double de modulo 2^53 o mayor en notacion cientifica con 15 cifras. No usa
+     * Double.toString: para esos valores TeaVM elige otros digitos que la JVM (1.0E23 contra
+     * 9.999999999999999E22). Solo divisiones y un redondeo, que dan igual en los dos lados.
+     */
+    private static String scientific(double d) {
+        double m = Math.abs(d);
+        int exp = 0;
+        while (m >= 10.0) {
+            m /= 10.0;
+            exp++;
+        }
+        long digits = Math.round(m * 1e14);
+        if (digits >= 1_000_000_000_000_000L) {
+            digits /= 10;
+            exp++;
+        }
+        String s = Long.toString(digits);
+        int end = s.length();
+        while (end > 2 && s.charAt(end - 1) == '0') end--;
+        return (d < 0 ? "-" : "") + s.charAt(0) + "." + s.substring(1, end) + "E" + exp;
+    }
+
     /** Elementos que se muestran de un arreglo o una cola; el resto se resume. */
     int MOSTRAR_ELEMENTOS = 50;
 
@@ -168,7 +191,7 @@ public sealed interface Value {
         return switch (this) {
             case TextVal t -> t.v();
             case IntVal i -> Long.toString(i.v());
-            case DoubleVal d -> Double.toString(d.v());
+            case DoubleVal d -> display();
             case BoolVal b -> Boolean.toString(b.v());
             default -> display();
         };
@@ -186,9 +209,8 @@ public sealed interface Value {
                 // Enteros exactos (|d| < 2^53) sin notacion cientifica. No se usa Math.rint ni
                 // se convierte a long un valor mayor: en TeaVM esas operaciones no dan lo mismo
                 // que en la JVM.
-                if (Math.floor(d.v()) == d.v() && Math.abs(d.v()) < 9007199254740992.0) {
-                    yield Long.toString((long) d.v()) + ".0";
-                }
+                if (Math.abs(d.v()) >= 9007199254740992.0) yield scientific(d.v());
+                if (Math.floor(d.v()) == d.v()) yield Long.toString((long) d.v()) + ".0";
                 yield Double.toString(d.v());
             }
             case BoolVal b -> Boolean.toString(b.v());

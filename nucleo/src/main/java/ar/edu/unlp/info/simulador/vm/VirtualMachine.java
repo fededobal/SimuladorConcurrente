@@ -8,7 +8,6 @@ import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.function.Function;
 
 /**
@@ -52,7 +51,7 @@ public final class VirtualMachine {
     static final int TOPE_LOG = 2000;
 
     private final Program program;
-    private final Random random;
+    private final Azar random;
 
     private final List<Process> processes = new ArrayList<>();
     private final List<Snapshot.OutputLine> salida = new ArrayList<>();
@@ -71,7 +70,7 @@ public final class VirtualMachine {
 
     public VirtualMachine(Program program, long seed) {
         this.program = program;
-        this.random = new Random(seed);
+        this.random = new Azar(seed);
         initialize();
     }
 
@@ -296,7 +295,7 @@ public final class VirtualMachine {
             return orden;
         }
 
-        java.util.Collections.shuffle(listos, random);
+        random.mezclar(listos);
         List<Process> turno = new ArrayList<>();
         for (Process pr : listos) {
             if (random.nextInt(100) < PROB_AVANCE) turno.add(pr);

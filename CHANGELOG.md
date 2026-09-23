@@ -29,6 +29,13 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Con turnos al azar, el navegador ejecuta el mismo entrelazado que la JVM para la misma
+  semilla: el scheduler usa un generador propio en lugar de `java.util.Random`, que TeaVM
+  implementa con otro `nextInt`. Los tests JUnit prueban ahora las mismas corridas que ven
+  los alumnos. (Federico Dobal, 2026-09-23)
+- Mostrar los `double` muy grandes y leer los literales decimales largos sin
+  `Double.toString` ni `Double.parseDouble`, que en TeaVM dan otros dígitos que en la JVM.
+  (Federico Dobal, 2026-09-23)
 - Informar como error de ejecución, con su línea, un tamaño de arreglo o de `cond` negativo;
   antes aparecía "Error interno del simulador". (Federico Dobal, 2026-09-23)
 - Controlar el rango de índices, tamaños, cotas de familias e índices de `cond` antes de

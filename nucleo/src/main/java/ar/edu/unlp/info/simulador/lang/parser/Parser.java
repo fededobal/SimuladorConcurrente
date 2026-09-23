@@ -579,7 +579,7 @@ public final class Parser {
         if (t.is(TokenType.NUMBER)) {
             advance();
             if (t.lexeme().contains(".")) {
-                double d = Double.parseDouble(t.lexeme());
+                double d = decimal(t.lexeme());
                 if (Double.isInfinite(d)) {
                     throw new CompilationException("Numero fuera de rango: el literal "
                             + "decimal es demasiado grande", t.line());
@@ -625,6 +625,31 @@ public final class Parser {
     }
 
     // ================================================================= helpers
+
+    /**
+     * Valor de un literal decimal ("123.45"). No usa Double.parseDouble: TeaVM redondea
+     * distinto que la JVM algunos literales largos. Con hasta 18 cifras es una sola division
+     * de enteros exactos, que ambos redondean igual; las cifras de mas se escalan por 10.
+     */
+    private static double decimal(String lexema) {
+        int punto = lexema.indexOf('.');
+        String cifras = lexema.substring(0, punto) + lexema.substring(punto + 1);
+        int inicio = 0;
+        while (inicio < cifras.length() - 1 && cifras.charAt(inicio) == '0') inicio++;
+        cifras = cifras.substring(inicio);
+        int usadas = Math.min(cifras.length(), 18);
+        double valor = Long.parseLong(cifras.substring(0, usadas));
+        int escala = (lexema.length() - punto - 1) - (cifras.length() - usadas);
+        for (; escala > 22; escala--) valor /= 10.0;
+        for (; escala < 0; escala++) valor *= 10.0;
+        return valor / POTENCIAS_DE_10[escala];
+    }
+
+    /** 10^0 .. 10^22: todas exactas en un double. */
+    private static final double[] POTENCIAS_DE_10 = {
+        1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11,
+        1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19, 1e20, 1e21, 1e22
+    };
 
     private Token peek() {
         return tokens.get(current);
