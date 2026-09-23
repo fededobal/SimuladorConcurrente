@@ -29,6 +29,28 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Informar como error de ejecución, con su línea, un tamaño de arreglo o de `cond` negativo;
+  antes aparecía "Error interno del simulador". (Federico Dobal, 2026-09-23)
+- Controlar el rango de índices, tamaños, cotas de familias e índices de `cond` antes de
+  convertirlos a `int`: `a[4294967296]` ya no lee `a[0]`. (Federico Dobal, 2026-09-23)
+- Tratar un resultado `double` infinito o indefinido como error de ejecución; en el
+  navegador hacía fallar al motor. Un literal decimal demasiado grande es error de
+  compilación. (Federico Dobal, 2026-09-23)
+- Mostrar los `double` grandes igual en la JVM y en el navegador (`1.0E20`); antes la JVM
+  mostraba `9223372036854775807.0`. (Federico Dobal, 2026-09-23)
+- Aceptar solo dígitos ASCII en números e identificadores, como la gramática; un dígito
+  árabe se aceptaba en la JVM y no en el navegador. (Federico Dobal, 2026-09-23)
+- Limitar el anidamiento de bloques y expresiones con un error de compilación claro; antes
+  un programa muy anidado terminaba en "Error interno" solo en el navegador.
+  (Federico Dobal, 2026-09-23)
+- Informar como error que la inicialización de un monitor no termina; antes se cortaba en
+  silencio a los 100 000 pasos. (Federico Dobal, 2026-09-23)
+- Terminar solo el proceso afectado ante un error interno, en lugar de dejar la simulación
+  en un interbloqueo falso, y que ninguna función del puente lance una excepción.
+  (Federico Dobal, 2026-09-23)
+- Limitar los arreglos a 100 000 elementos y los procesos a 5000, y abreviar los arreglos
+  largos al mostrarlos; antes un programa así congelaba o cerraba la pestaña.
+  (Federico Dobal, 2026-09-23)
 - Deshabilitar "Detener" cuando la simulación terminó o quedó en interbloqueo: ya no puede
   avanzar. (Federico Dobal, 2026-09-23)
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación

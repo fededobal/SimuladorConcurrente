@@ -25,14 +25,24 @@ public final class VirtualMachine {
             "#84cc16", "#a855f7", "#14b8a6", "#eab308"
     };
 
-    /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
     private static final int PROB_AVANCE = 80;
 
     /** Tope de lineas guardadas: un bucle largo no puede comerse la memoria. */
     private static final int TOPE_SALIDA = 500;
 
+    /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
     private static final int STRUCTURAL_CAP = 4000;
+
+    /**
+     * Topes de tamano. Sin ellos, {@code int a[2000000000]} o una familia de cien mil procesos
+     * congelan o cierran la pestana: el motor corre en el hilo principal del navegador.
+     */
+    static final int TOPE_ELEMENTOS = 100_000;
+    static final int TOPE_PROCESOS = 5_000;
+
+    /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
+    static final int TOPE_INICIALIZACION = 100_000;
 
     /**
      * Tope de eventos guardados en el log. Los eventos no llevan el estado completo (se pide
@@ -80,7 +90,8 @@ public final class VirtualMachine {
             }
             for (CondDecl cd : md.conds()) {
                 if (cd.isArray()) {
-                    int size = ev.evalInt(cd.sizeExpr());
+                    int size = arraySize(ev, cd.sizeExpr(), cd.line());
+                    m.condArraySizes().put(cd.name(), size);
                     for (int i = 0; i < size; i++) {
                         String key = cd.name() + "[" + i + "]";
                         m.conds().put(key, new ConditionVariable(key));
@@ -102,7 +113,12 @@ public final class VirtualMachine {
             sys.push(act);
             m.setLockOwner(sys);
             int guard = 0;
-            while (!sys.isFinished() && guard++ < 100_000) {
+            while (!sys.isFinished()) {
+                if (guard++ >= TOPE_INICIALIZACION) {
+                    throw new RuntimeError("La inicialización del monitor " + md.name()
+                            + " no terminó después de " + TOPE_INICIALIZACION
+                            + " pasos: revisá si tiene un ciclo infinito", sys.currentLine());
+                }
                 advance(sys);
             }
             m.setLockOwner(null);
@@ -113,9 +129,15 @@ public final class VirtualMachine {
         for (ProcessDef pd : program.processes()) {
             if (pd.isFamily()) {
                 ExprEvaluator ev = new ExprEvaluator(name -> null);
-                int from = ev.evalInt(pd.quant().from());
-                int to = ev.evalInt(pd.quant().to());
-                for (int i = from; i <= to; i++) {
+                long from = ev.evalLong(pd.quant().from());
+                long to = ev.evalLong(pd.quant().to());
+                // con cotas enormes to - from desborda: un conteo negativo tambien es "demasiados"
+                long count = to < from ? 0 : to - from + 1;
+                if (count < 0 || count > TOPE_PROCESOS - processes.size()) {
+                    throw tooManyProcesses(pd.line());
+                }
+                for (long k = 0; k < count; k++) {
+                    long i = from + k;
                     Process p = new Process(processes.size() + 1, pd.name() + "[" + i + "]",
                             PALETTE[colorIdx++ % PALETTE.length]);
                     Activation frame = Activation.processFrame();
@@ -125,6 +147,7 @@ public final class VirtualMachine {
                     processes.add(p);
                 }
             } else {
+                if (processes.size() >= TOPE_PROCESOS) throw tooManyProcesses(pd.line());
                 Process p = new Process(processes.size() + 1, pd.name(),
                         PALETTE[colorIdx++ % PALETTE.length]);
                 Activation frame = Activation.processFrame();
@@ -135,12 +158,27 @@ public final class VirtualMachine {
         }
     }
 
+    private static RuntimeError tooManyProcesses(int line) {
+        return new RuntimeError("Demasiados procesos: el simulador admite hasta "
+                + TOPE_PROCESOS + " en total", line);
+    }
+
+    /** Tamano de un arreglo de variables o de cond: entre 0 y {@link #TOPE_ELEMENTOS}. */
+    private static int arraySize(ExprEvaluator ev, Expr sizeExpr, int line) {
+        long size = ev.evalLong(sizeExpr);
+        if (size < 0 || size > TOPE_ELEMENTOS) {
+            throw new RuntimeError("Tamaño de arreglo inválido: " + size
+                    + " (tiene que estar entre 0 y " + TOPE_ELEMENTOS + ")", line);
+        }
+        return (int) size;
+    }
+
     private Value buildInitialValue(VarDecl vd, ExprEvaluator ev) {
         if (vd.type().isQueue()) {
             return Value.defaultFor(vd.type());
         }
         if (vd.isArray()) {
-            int size = ev.evalInt(vd.sizeExpr());
+            int size = arraySize(ev, vd.sizeExpr(), vd.line());
             Value fill = vd.initExpr() == null
                     ? Value.defaultFor(vd.type())
                     : ev.eval(vd.initExpr()).coerceTo(vd.type());
@@ -195,13 +233,12 @@ public final class VirtualMachine {
             try {
                 advance(p);
             } catch (RuntimeError re) {
-                p.fail(re.getMessage());
-                List<Monitor> released = releaseMonitorsOf(p);
-                event(p, "ERROR", "", p.name() + ": error de ejecucion - " + re.getMessage());
-                for (Monitor m : released) {
-                    event(p, "RELEASE", m.name(),
-                            p.name() + ": libera " + m.name() + " al terminar con error");
-                }
+                failProcess(p, re.getMessage());
+            } catch (Throwable t) {
+                // Un error que no es del alumno (un bug del simulador, o memoria/pila agotada)
+                // igual termina solo ese proceso: si quedara RUNNING, el instante siguiente lo
+                // tomaria por un interbloqueo que el programa no tiene.
+                failProcess(p, "error interno del simulador");
             }
             if (p.state() == Process.State.RUNNING) {
                 p.setState(Process.State.READY);
@@ -212,6 +249,17 @@ public final class VirtualMachine {
             systemLog("DEADLOCK", "Interbloqueo: ningun proceso puede avanzar");
         }
         return stepEntries;
+    }
+
+    /** Termina el proceso con error, suelta sus monitores y lo registra en el log. */
+    private void failProcess(Process p, String message) {
+        p.fail(message);
+        List<Monitor> released = releaseMonitorsOf(p);
+        event(p, "ERROR", "", p.name() + ": error de ejecucion - " + message);
+        for (Monitor m : released) {
+            event(p, "RELEASE", m.name(),
+                    p.name() + ": libera " + m.name() + " al terminar con error");
+        }
     }
 
     /**
@@ -429,7 +477,7 @@ public final class VirtualMachine {
         if (vd.type().isQueue()) {
             v = Value.defaultFor(vd.type());
         } else if (vd.isArray()) {
-            int size = ev.evalInt(vd.sizeExpr());
+            int size = arraySize(ev, vd.sizeExpr(), vd.line());
             Value fill = vd.initExpr() == null ? Value.defaultFor(vd.type())
                     : ev.eval(vd.initExpr()).coerceTo(vd.type());
             Value[] elems = new Value[size];
@@ -451,9 +499,9 @@ public final class VirtualMachine {
             assignScalar(p, act, a.target(), value, a.line());
             event(p, "ASSIGN", a.target(), p.name() + ": " + a.target() + " = " + value.display());
         } else {
-            int idx = ev.evalInt(a.index());
+            long index = ev.evalLong(a.index());
             Value.ArrayVal arr = asArray(p, act, a.target(), a.line());
-            checkIndex(arr, idx, a.target(), a.line());
+            int idx = checkIndex(arr, index, a.target(), a.line());
             arr.set(idx, value.coerceTo(arr.elementType()));
             touchIfMonitorVar(p, act, a.target());
             event(p, "ASSIGN", a.target(),
@@ -471,9 +519,9 @@ public final class VirtualMachine {
                     p.name() + ": " + inc.target() + (inc.increment() ? "++" : "--")
                             + " => " + next.display());
         } else {
-            int idx = ev.evalInt(inc.index());
+            long index = ev.evalLong(inc.index());
             Value.ArrayVal arr = asArray(p, act, inc.target(), inc.line());
-            checkIndex(arr, idx, inc.target(), inc.line());
+            int idx = checkIndex(arr, index, inc.target(), inc.line());
             Value next = stepped(arr.get(idx), inc.increment(), inc.line());
             arr.set(idx, next);
             touchIfMonitorVar(p, act, inc.target());
@@ -536,7 +584,8 @@ public final class VirtualMachine {
                 } else {
                     Expr.ArrayAccess aa = (Expr.ArrayAccess) argExpr;
                     targetName = aa.name();
-                    idx = ev.evalInt(aa.index());
+                    // ya se evaluo (y controlo el rango) como argumento: entra en un int
+                    idx = (int) ev.evalLong(aa.index());
                 }
                 newAct.outBindings().put(param.name(), new LValue(callerAct, targetName, idx));
             }
@@ -551,7 +600,13 @@ public final class VirtualMachine {
         Monitor m = monitors.get(act.monitorName());
         String key = co.cond();
         if (co.index() != null) {
-            key = co.cond() + "[" + evaluator(p, act).evalInt(co.index()) + "]";
+            long index = evaluator(p, act).evalLong(co.index());
+            int size = m.condArraySizes().getOrDefault(co.cond(), 0);
+            if (index < 0 || index >= size) {
+                throw new RuntimeError("Índice " + index + " fuera de rango para la cond '"
+                        + co.cond() + "' (tamaño " + size + ")", co.line());
+            }
+            key = co.cond() + "[" + index + "]";
         }
         ConditionVariable cv = m.conds().get(key);
         if (cv == null) {
@@ -706,11 +761,12 @@ public final class VirtualMachine {
         throw new RuntimeError("'" + name + "' no es una cola", line);
     }
 
-    private static void checkIndex(Value.ArrayVal arr, int idx, String name, int line) {
+    /** @return el indice como int, una vez controlado que esta dentro del arreglo */
+    private static int checkIndex(Value.ArrayVal arr, long idx, String name, int line) {
         if (idx < 0 || idx >= arr.size()) {
-            throw new RuntimeError("Indice " + idx + " fuera de rango para '" + name
-                    + "' (tamano " + arr.size() + ")", line);
+            throw RuntimeError.indexOutOfRange(idx, name, arr.size(), line);
         }
+        return (int) idx;
     }
 
     private void touchIfMonitorVar(Process p, Activation act, String name) {

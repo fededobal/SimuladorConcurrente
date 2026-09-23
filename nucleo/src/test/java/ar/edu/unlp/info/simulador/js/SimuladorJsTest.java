@@ -65,4 +65,23 @@ class SimuladorJsTest {
             for (int i = 0; i < 20; i++) SimuladorJs.paso("ROUND_ROBIN", -1);
         });
     }
+
+    /** VI-13: ningun programa, por patologico que sea, hace lanzar a una funcion exportada. */
+    @Test
+    void programasPatologicosVuelvenComoError() {
+        String[] programas = {
+            "process P { int a[2000000000]; skip; }",
+            "process P[i: 0..100000] { skip; }",
+            "process P { int x = " + "(".repeat(3000) + "1" + ")".repeat(3000) + "; }",
+            "monitor M { int x = 0; while (true) { } procedure f() { skip; } } process P { M.f(); }",
+        };
+        for (String codigo : programas) {
+            String creado = assertDoesNotThrow(() -> SimuladorJs.crear(codigo, 1));
+            if (creado.startsWith("{\"error\"")) continue;
+            assertDoesNotThrow(() -> {
+                for (int i = 0; i < 5; i++) SimuladorJs.paso("RANDOM", -1);
+                SimuladorJs.estado();
+            });
+        }
+    }
 }

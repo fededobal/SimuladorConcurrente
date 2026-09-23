@@ -16,6 +16,8 @@ public final class Monitor {
     private final String name;
     private final Map<String, Value> vars = new LinkedHashMap<>();
     private final Map<String, ConditionVariable> conds = new LinkedHashMap<>();
+    /** Tamano de cada arreglo de cond ({@code cond turno[5]}), para informar un indice fuera de rango. */
+    private final Map<String, Integer> condArraySizes = new LinkedHashMap<>();
     /** Ultimo proceso que escribio cada variable permanente (para el color-coding de la UI). */
     private final Map<String, Integer> lastWriter = new LinkedHashMap<>();
 
@@ -46,6 +48,8 @@ public final class Monitor {
     public Integer lastWriter(String n) { return lastWriter.get(n); }
 
     public ConditionVariable cond(String n) { return conds.get(n); }
+
+    public Map<String, Integer> condArraySizes() { return condArraySizes; }
 
     public Process lockOwner() { return lockOwner; }
 

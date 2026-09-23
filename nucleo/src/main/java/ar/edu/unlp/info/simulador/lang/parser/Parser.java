@@ -5,7 +5,9 @@ import ar.edu.unlp.info.simulador.lang.lexer.Token;
 import ar.edu.unlp.info.simulador.lang.lexer.TokenType;
 import ar.edu.unlp.info.simulador.lang.parser.ast.*;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -16,9 +18,18 @@ public final class Parser {
 
     private static final List<String> SCALAR_TYPES = List.of("int", "double", "boolean", "text");
 
+    /**
+     * Topes de anidamiento. El parser, el validador y el evaluador son recursivos, y la pila
+     * del navegador es mas chica que la de la JVM: sin tope, un programa que en los tests
+     * anda termina en "Error interno" para el alumno.
+     */
+    private static final int MAX_ANIDAMIENTO = 100;
+    private static final int MAX_PROFUNDIDAD_EXPR = 200;
+
     private final List<Token> tokens;
     private int current = 0;
     private int anonimos = 0;
+    private int nivel = 0;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
@@ -169,6 +180,13 @@ public final class Parser {
     }
 
     private Stmt parseStatement() {
+        entrar();
+        Stmt s = parseStatementSinTope();
+        nivel--;
+        return s;
+    }
+
+    private Stmt parseStatementSinTope() {
         Token t = peek();
 
         if (t.isKeyword("skip")) {
@@ -443,7 +461,41 @@ public final class Parser {
     // ================================================================= expresiones
 
     private Expr parseExpr() {
-        return parseOr();
+        entrar();
+        Expr e = parseOr();
+        nivel--;
+        controlarProfundidad(e);
+        return e;
+    }
+
+    private void entrar() {
+        if (++nivel > MAX_ANIDAMIENTO) {
+            throw error("El programa tiene demasiados niveles de anidamiento (máximo "
+                    + MAX_ANIDAMIENTO + ")");
+        }
+    }
+
+    /**
+     * Una suma de miles de terminos no anida parentesis pero arma un arbol igual de hondo.
+     * Se mide sin recursion, justamente para no agotar la pila.
+     */
+    private static void controlarProfundidad(Expr raiz) {
+        Deque<Expr> pendientes = new ArrayDeque<>();
+        Deque<Integer> niveles = new ArrayDeque<>();
+        pendientes.push(raiz);
+        niveles.push(1);
+        while (!pendientes.isEmpty()) {
+            Expr e = pendientes.pop();
+            int n = niveles.pop();
+            if (n > MAX_PROFUNDIDAD_EXPR) {
+                throw new CompilationException("Expresión demasiado larga o anidada (máximo "
+                        + MAX_PROFUNDIDAD_EXPR + " operaciones encadenadas)", e.line());
+            }
+            for (Expr hijo : e.children()) {
+                pendientes.push(hijo);
+                niveles.push(n + 1);
+            }
+        }
     }
 
     private Expr parseOr() {
@@ -469,7 +521,10 @@ public final class Parser {
     private Expr parseNot() {
         if (match("not") || match("!")) {
             int line = previous().line();
-            return new Expr.Unary("not", parseNot(), line);
+            entrar();
+            Expr operand = parseNot();
+            nivel--;
+            return new Expr.Unary("not", operand, line);
         }
         return parseComparison();
     }
@@ -510,7 +565,10 @@ public final class Parser {
     private Expr parseUnary() {
         if (match("-")) {
             int line = previous().line();
-            return new Expr.Unary("-", parseUnary(), line);
+            entrar();
+            Expr operand = parseUnary();
+            nivel--;
+            return new Expr.Unary("-", operand, line);
         }
         return parsePrimary();
     }
@@ -521,7 +579,12 @@ public final class Parser {
         if (t.is(TokenType.NUMBER)) {
             advance();
             if (t.lexeme().contains(".")) {
-                return new Expr.DoubleLit(Double.parseDouble(t.lexeme()), t.line());
+                double d = Double.parseDouble(t.lexeme());
+                if (Double.isInfinite(d)) {
+                    throw new CompilationException("Numero fuera de rango: el literal "
+                            + "decimal es demasiado grande", t.line());
+                }
+                return new Expr.DoubleLit(d, t.line());
             }
             try {
                 return new Expr.IntLit(Long.parseLong(t.lexeme()), t.line());

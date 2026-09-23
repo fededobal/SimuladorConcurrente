@@ -18,6 +18,18 @@ public class RuntimeError extends RuntimeException {
         return new RuntimeError("Desborde de entero: el resultado no entra en un int", line);
     }
 
+    /** Resultado double infinito o indefinido (NaN). */
+    public static RuntimeError notRepresentable(int line) {
+        return new RuntimeError("Resultado no representable: la cuenta con double se desborda "
+                + "o no está definida", line);
+    }
+
+    /** Indice fuera de los limites de un arreglo, con el valor tal como se calculo. */
+    public static RuntimeError indexOutOfRange(long index, String name, int size, int line) {
+        return new RuntimeError("Índice " + index + " fuera de rango para '" + name
+                + "' (tamaño " + size + ")", line);
+    }
+
     public int getLine() {
         return line;
     }

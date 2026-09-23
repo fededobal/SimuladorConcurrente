@@ -94,6 +94,26 @@ public sealed interface Value {
 
     // ---------------------------------------------------------------- helpers
 
+    /** Elementos que se muestran de un arreglo o una cola; el resto se resume. */
+    int MOSTRAR_ELEMENTOS = 50;
+
+    /**
+     * Lista de valores entre delimitadores. Un arreglo grande se abrevia: el snapshot se
+     * serializa en cada instante y mostrarlo entero congelaria la interfaz.
+     */
+    private static String joined(String open, List<Value> items, String close) {
+        StringBuilder sb = new StringBuilder(open);
+        int shown = Math.min(items.size(), MOSTRAR_ELEMENTOS);
+        for (int i = 0; i < shown; i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(items.get(i).display());
+        }
+        if (shown < items.size()) {
+            sb.append(", … (").append(items.size()).append(" elementos)");
+        }
+        return sb.append(close).toString();
+    }
+
     static Value defaultFor(Type type) {
         return switch (type) {
             case INT -> new IntVal(0);
@@ -119,7 +139,13 @@ public sealed interface Value {
     default long asLong() {
         return switch (this) {
             case IntVal i -> i.v();
-            case DoubleVal d -> (long) d.v();
+            case DoubleVal d -> {
+                // Fuera del rango de long, la JVM satura y TeaVM da otro numero: se corta aca.
+                if (d.v() < -9.223372036854775808E18 || d.v() >= 9.223372036854775808E18) {
+                    throw new RuntimeError("El valor " + display() + " no entra en un int", -1);
+                }
+                yield (long) d.v();
+            }
             case BoolVal b -> b.v() ? 1 : 0;
             default -> throw new RuntimeError("Se esperaba un numero y se encontro " + display(), -1);
         };
@@ -157,30 +183,18 @@ public sealed interface Value {
         return switch (this) {
             case IntVal i -> Long.toString(i.v());
             case DoubleVal d -> {
-                if (d.v() == Math.rint(d.v()) && !Double.isInfinite(d.v())) {
+                // Enteros exactos (|d| < 2^53) sin notacion cientifica. No se usa Math.rint ni
+                // se convierte a long un valor mayor: en TeaVM esas operaciones no dan lo mismo
+                // que en la JVM.
+                if (Math.floor(d.v()) == d.v() && Math.abs(d.v()) < 9007199254740992.0) {
                     yield Long.toString((long) d.v()) + ".0";
                 }
                 yield Double.toString(d.v());
             }
             case BoolVal b -> Boolean.toString(b.v());
             case TextVal t -> t.v();
-            case ArrayVal a -> {
-                StringBuilder sb = new StringBuilder("[");
-                for (int i = 0; i < a.size(); i++) {
-                    if (i > 0) sb.append(", ");
-                    sb.append(a.get(i).display());
-                }
-                yield sb.append("]").toString();
-            }
-            case QueueVal q -> {
-                StringBuilder sb = new StringBuilder("<");
-                List<Value> items = q.snapshot();
-                for (int i = 0; i < items.size(); i++) {
-                    if (i > 0) sb.append(", ");
-                    sb.append(items.get(i).display());
-                }
-                yield sb.append(">").toString();
-            }
+            case ArrayVal a -> joined("[", List.of(a.raw()), "]");
+            case QueueVal q -> joined("<", q.snapshot(), ">");
         };
     }
 }

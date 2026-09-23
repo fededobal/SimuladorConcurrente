@@ -30,8 +30,12 @@ public final class ExprEvaluator {
         };
     }
 
-    public int evalInt(Expr e) {
-        return (int) eval(e).asLong();
+    /**
+     * Evalua una expresion entera sin truncar: quien la usa como indice o tamano controla el
+     * rango sobre el long, asi 4294967296 no se confunde con 0.
+     */
+    public long evalLong(Expr e) {
+        return eval(e).asLong();
     }
 
     public boolean evalBool(Expr e) {
@@ -53,13 +57,11 @@ public final class ExprEvaluator {
         if (!(base instanceof Value.ArrayVal arr)) {
             throw new RuntimeError("'" + a.name() + "' no es un arreglo", a.line());
         }
-        int idx = (int) eval(a.index()).asLong();
+        long idx = evalLong(a.index());
         if (idx < 0 || idx >= arr.size()) {
-            throw new RuntimeError(
-                    "Indice " + idx + " fuera de rango para '" + a.name() + "' (tamano " + arr.size() + ")",
-                    a.line());
+            throw RuntimeError.indexOutOfRange(idx, a.name(), arr.size(), a.line());
         }
-        return arr.get(idx);
+        return arr.get((int) idx);
     }
 
     private Value evalEmpty(Expr.EmptyQueue q) {
@@ -111,7 +113,7 @@ public final class ExprEvaluator {
                     yield new Value.IntVal(l.asLong() / r.asLong());
                 }
                 if (r.asDouble() == 0) throw new RuntimeError("Division por cero", b.line());
-                yield new Value.DoubleVal(l.asDouble() / r.asDouble());
+                yield finite(l.asDouble() / r.asDouble(), b.line());
             }
             case "%" -> {
                 if (r.asLong() == 0) throw new RuntimeError("Modulo por cero", b.line());
@@ -139,7 +141,16 @@ public final class ExprEvaluator {
                 throw RuntimeError.overflow(line);
             }
         }
-        return new Value.DoubleVal(dOp.apply(l.asDouble(), r.asDouble()));
+        return finite(dOp.apply(l.asDouble(), r.asDouble()), line);
+    }
+
+    /**
+     * Un double infinito o NaN es error del alumno, igual que el desborde de un int. Ademas,
+     * TeaVM no puede convertir esos valores a long y el motor del navegador fallaria.
+     */
+    private static Value finite(double d, int line) {
+        if (!Double.isFinite(d)) throw RuntimeError.notRepresentable(line);
+        return new Value.DoubleVal(d);
     }
 
     private static long negateExact(long v, int line) {

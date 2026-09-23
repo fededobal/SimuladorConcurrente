@@ -93,6 +93,22 @@ const CANONICOS = [
     monitor M { int x = 0; procedure f() { x = x + 1; } }
     process P[i: 1..4] { while (true) { M.f(); } }`,
     (r) => !r.finished && JSON.parse(motor.estado()).log.length <= 2000],
+  // Verificacion del 23/09/2026 (docs/verificacion-2026-09-23.md)
+  ['double infinito es error de ejecucion y no rompe el puente (VB-2)', `
+    process P { for (double x = 1${'0'.repeat(300)}.0 * 10000000000.0; x < 0.0; x++) { skip; } skip; }`,
+    (r) => !r.excepcion && r.finished && r.kinds.has('ERROR')],
+  ['anidamiento excesivo es error de compilacion (VB-3)', `
+    process P { int x = ${'('.repeat(3000)}1${')'.repeat(3000)}; }`,
+    (r) => !!r.compilacion?.includes('anidamiento')],
+  ['digito no ASCII no es un numero (VB-3)', `
+    process P { int x = \u0663; }`,
+    (r) => !!r.compilacion?.includes('inesperado')],
+  ['tamano negativo es error del proceso, no deadlock (VI-2, VI-3)', `
+    process P { int a[-1]; skip; }`,
+    (r) => !r.excepcion && r.finished && !r.deadlock && r.kinds.has('ERROR')],
+  ['indice mayor que un int no se trunca (VI-4)', `
+    process P { int a[3]; int r; r = a[4294967296]; }`,
+    (r) => r.finished && r.kinds.has('ERROR')],
 ];
 
 // Bugs verificados el 18/09/2026 (ver docs/informe-revision.md, seccion 3).

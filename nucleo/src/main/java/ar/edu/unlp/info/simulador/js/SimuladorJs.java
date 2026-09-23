@@ -52,7 +52,9 @@ public final class SimuladorJs {
             // La inicializacion de las variables del monitor se ejecuta al crear la VM.
             vm = null;
             return Json.error("Error al inicializar: " + e.getMessage(), e.getLine());
-        } catch (RuntimeException e) {
+        } catch (Throwable t) {
+            // Throwable y no RuntimeException: un StackOverflowError o un OutOfMemoryError
+            // tambien tienen que volver como JSON, nunca cruzar a JS como excepcion.
             vm = null;
             return errorInterno();
         }
@@ -75,37 +77,39 @@ public final class SimuladorJs {
     @JSExport
     public static String paso(String policy, int elegido) {
         if (vm == null) return sinSimulacion();
-        List<LogEntry> entries;
         try {
-            entries = vm.step(elegido < 0 ? null : elegido, politica(policy));
-        } catch (RuntimeException e) {
-            return errorInterno();
+            List<LogEntry> entries = vm.step(elegido < 0 ? null : elegido, politica(policy));
+            StringBuilder sb = new StringBuilder("{\"entries\":");
+            Json.lista(sb, entries, Json::logEntry);
+            sb.append(",\"snapshot\":");
+            Json.snapshot(sb, vm.snapshot());
+            sb.append(",\"finished\":").append(vm.isFinished())
+              .append(",\"deadlock\":").append(vm.isDeadlocked())
+              .append(",\"instant\":").append(vm.instant())
+              .append('}');
+            return sb.toString();
+        } catch (Throwable t) {
+            return descartar();
         }
-
-        StringBuilder sb = new StringBuilder("{\"entries\":");
-        Json.lista(sb, entries, Json::logEntry);
-        sb.append(",\"snapshot\":");
-        Json.snapshot(sb, vm.snapshot());
-        sb.append(",\"finished\":").append(vm.isFinished())
-          .append(",\"deadlock\":").append(vm.isDeadlocked())
-          .append(",\"instant\":").append(vm.instant())
-          .append('}');
-        return sb.toString();
     }
 
     /** Estado actual y los ultimos eventos del log (para el historial). */
     @JSExport
     public static String estado() {
         if (vm == null) return sinSimulacion();
-        StringBuilder sb = new StringBuilder("{\"log\":");
-        Json.lista(sb, vm.allLogs(), Json::logEntry);
-        sb.append(",\"snapshot\":");
-        Json.snapshot(sb, vm.snapshot());
-        sb.append(",\"finished\":").append(vm.isFinished())
-          .append(",\"deadlock\":").append(vm.isDeadlocked())
-          .append(",\"instant\":").append(vm.instant())
-          .append('}');
-        return sb.toString();
+        try {
+            StringBuilder sb = new StringBuilder("{\"log\":");
+            Json.lista(sb, vm.allLogs(), Json::logEntry);
+            sb.append(",\"snapshot\":");
+            Json.snapshot(sb, vm.snapshot());
+            sb.append(",\"finished\":").append(vm.isFinished())
+              .append(",\"deadlock\":").append(vm.isDeadlocked())
+              .append(",\"instant\":").append(vm.instant())
+              .append('}');
+            return sb.toString();
+        } catch (Throwable t) {
+            return descartar();
+        }
     }
 
     /** Libera la simulacion en curso. */
@@ -142,6 +146,15 @@ public final class SimuladorJs {
     private static String errorInterno() {
         return Json.error("Error interno del simulador. Reportalo con el programa que lo produjo.",
                 -1);
+    }
+
+    /**
+     * Tras un error interno el estado de la VM no es confiable: se descarta, y el siguiente
+     * paso pide volver a crear la simulacion en lugar de seguir con datos rotos.
+     */
+    private static String descartar() {
+        vm = null;
+        return errorInterno();
     }
 
     private static String sinSimulacion() {

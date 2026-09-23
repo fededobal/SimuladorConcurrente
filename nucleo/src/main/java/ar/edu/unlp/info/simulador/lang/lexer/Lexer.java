@@ -48,7 +48,7 @@ public final class Lexer {
             if (c == '/' && peekNext() == '*') { skipBlockComment(); continue; }
 
             if (c == '"') { tokens.add(readString()); continue; }
-            if (Character.isDigit(c)) { tokens.add(readNumber()); continue; }
+            if (isDigit(c)) { tokens.add(readNumber()); continue; }
             if (Character.isLetter(c) || c == '_') { tokens.add(readIdentifier()); continue; }
 
             tokens.add(readSymbol());
@@ -80,6 +80,14 @@ public final class Lexer {
             col++;
         }
         return c;
+    }
+
+    /**
+     * Solo los digitos ASCII, como dice la gramatica. Character.isDigit acepta tambien los de
+     * otros alfabetos (por ejemplo, el arabe), que la JVM sabe convertir y TeaVM no.
+     */
+    private static boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
     }
 
     private void skipLineComment() {
@@ -121,10 +129,10 @@ public final class Lexer {
     private Token readNumber() {
         int startLine = line, startCol = col;
         StringBuilder sb = new StringBuilder();
-        while (!atEnd() && Character.isDigit(peek())) sb.append(advance());
-        if (peek() == '.' && Character.isDigit(peekNext())) {
+        while (!atEnd() && isDigit(peek())) sb.append(advance());
+        if (peek() == '.' && isDigit(peekNext())) {
             sb.append(advance()); // .
-            while (!atEnd() && Character.isDigit(peek())) sb.append(advance());
+            while (!atEnd() && isDigit(peek())) sb.append(advance());
         }
         return new Token(TokenType.NUMBER, sb.toString(), startLine, startCol);
     }
@@ -132,7 +140,7 @@ public final class Lexer {
     private Token readIdentifier() {
         int startLine = line, startCol = col;
         StringBuilder sb = new StringBuilder();
-        while (!atEnd() && (Character.isLetterOrDigit(peek()) || peek() == '_')) {
+        while (!atEnd() && (Character.isLetter(peek()) || isDigit(peek()) || peek() == '_')) {
             sb.append(advance());
         }
         String word = sb.toString();

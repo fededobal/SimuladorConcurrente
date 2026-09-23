@@ -199,4 +199,44 @@ class CompilerTest {
                 process P { ColaOrdenada pendientes; push(pendientes, 1); M.op(); }
                 """));
     }
+
+    /** La gramatica define digitos ASCII; un digito arabe da el mismo error en JVM y navegador. */
+    @Test
+    void digitosNoAsciiNoSonNumeros() {
+        CompilationException ex = assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P { int x = \u0663; }"));
+        assertTrue(ex.getMessage().contains("inesperado"), ex.getMessage());
+    }
+
+    @Test
+    void anidamientoExcesivoEsErrorDeCompilacion() {
+        String hondo = "(".repeat(150) + "1" + ")".repeat(150);
+        CompilationException ex = assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P { int x = " + hondo + "; }"));
+        assertTrue(ex.getMessage().contains("anidamiento"), ex.getMessage());
+
+        String bloques = "{".repeat(150) + "skip;" + "}".repeat(150);
+        assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P { " + bloques + " }"));
+
+        String razonable = "(".repeat(40) + "1" + ")".repeat(40);
+        assertDoesNotThrow(() -> Compiler.compile("process P { int x = " + razonable + "; }"));
+    }
+
+    /** 1 + 1 + ... no anida parentesis pero arma un arbol igual de hondo. */
+    @Test
+    void expresionDemasiadoLargaEsErrorDeCompilacion() {
+        String suma = "1" + " + 1".repeat(300);
+        CompilationException ex = assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P { int x = " + suma + "; }"));
+        assertTrue(ex.getMessage().contains("demasiado larga"), ex.getMessage());
+        assertEquals(1, ex.getLine());
+    }
+
+    @Test
+    void literalDecimalInfinitoEsErrorDeCompilacion() {
+        CompilationException ex = assertThrows(CompilationException.class,
+                () -> Compiler.compile("process P { double d = 1" + "0".repeat(400) + ".0; }"));
+        assertTrue(ex.getMessage().contains("fuera de rango"), ex.getMessage());
+    }
 }
