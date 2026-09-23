@@ -38,6 +38,8 @@ Reglas:
 - Evitar que la memoria crezca sin tope en ejecuciones largas: los eventos ya no guardan el
   estado completo y el registro conserva los últimos 2000. Con 50 procesos y 2000 pasos, el
   consumo pasa de unos 1000 MB a menos de 2 MB. (Federico Dobal, 2026-09-18)
+- Tab sangra también una línea en blanco; antes no hacía nada si el renglón estaba vacío.
+  (Federico Dobal, 2026-09-23)
 
 ### Eliminado
 - Quitar el texto de ayuda del panel de salida cuando todavía no hay nada escrito.

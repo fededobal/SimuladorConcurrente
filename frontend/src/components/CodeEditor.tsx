@@ -168,6 +168,14 @@ function reemplazar(ta: TA, desde: number, hasta: number, texto: string, selA?: 
 /** Tab / Shift+Tab sobre las lineas que toca la seleccion. */
 function sangrar(ta: TA, quitar: boolean) {
   const { value: v, selectionStart: s, selectionEnd: t } = ta;
+
+  // Sin seleccion, Tab sangra donde esta el cursor, aunque el renglon este vacio: si no,
+  // no habria forma de sangrar una linea en blanco antes de escribirla.
+  if (!quitar && s === t) {
+    reemplazar(ta, s, t, TAB);
+    return;
+  }
+
   const desde = inicioLinea(v, s);
   const hasta = finLinea(v, t);
 
