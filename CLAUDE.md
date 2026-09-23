@@ -30,7 +30,7 @@ frontend/src/api.ts → useSimulation.ts → componentes
 | Qué | Dónde | Comando |
 |---|---|---|
 | Levantar | raíz | `./dev.sh` → http://localhost:5173 |
-| Tests del núcleo | `nucleo/` | `mvn -q test` |
+| Tests del núcleo | `nucleo/` | `mvn -q test` (con JDK 21: si `java` es otra versión, fijar `JAVA_HOME`) |
 | Regenerar motor | `frontend/` | `npm run engine` |
 | Probar motor compilado | `frontend/` | `npm run smoke` |
 | Chequeo completo del front | `frontend/` | `npm run check` |

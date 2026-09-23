@@ -64,6 +64,9 @@ process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x)
 ## Cómo correrlo
 
 Requisitos: Node 20 o posterior. Para modificar el núcleo Java, además JDK 21 y Maven 3.9.
+Si `java -version` muestra otra versión, Maven falla al compilar: hay que apuntar
+`JAVA_HOME` al JDK 21 antes de los comandos de Maven o de `npm run engine`, por ejemplo
+`export JAVA_HOME=$(/usr/libexec/java_home -v 21)` en macOS.
 
 ```bash
 ./dev.sh

@@ -58,8 +58,14 @@ class EjemplosTest {
                     assertFalse(r.logs().stream().anyMatch(l -> l.kind().equals("ERROR")),
                             "hubo un error de ejecucion");
                     for (int i = 1; i < espera.length; i++) {
-                        String[] mv = espera[i].split("[.=]");
-                        assertEquals(mv[2], TestSupport.finalVar(r, mv[0], mv[1]), espera[i]);
+                        // Monitor.var=valor: se parte en el primer '.' y el primer '=', asi el
+                        // valor puede tener puntos (M.d=2.5)
+                        int punto = espera[i].indexOf('.');
+                        int igual = espera[i].indexOf('=');
+                        String monitor = espera[i].substring(0, punto);
+                        String var = espera[i].substring(punto + 1, igual);
+                        assertEquals(espera[i].substring(igual + 1),
+                                TestSupport.finalVar(r, monitor, var), espera[i]);
                     }
                 }
                 default -> throw new AssertionError(

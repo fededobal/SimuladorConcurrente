@@ -157,6 +157,9 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `EjemplosTest` lee la línea `// espera:` partiendo en el primer punto y el primer `=`, así
+  un valor esperado puede tener decimales. El README, `CLAUDE.md` y `.java-version` indican
+  que el núcleo necesita JDK 21. (Federico Dobal, 2026-09-23)
 - Actualizar `CLAUDE.md` y las skills `semantica-concurrencia` y `extender-lenguaje` con las
   decisiones vigentes: invariante 4 (misma semilla, mismo resultado en JVM y navegador, sin
   repetir corridas desde la interfaz), llamadas abiertas y las clases nuevas del validador.
