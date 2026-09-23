@@ -22,6 +22,8 @@ Reglas:
   cambiar en medio de una ejecución. (Federico Dobal, 2026-09-18)
 - Declarar varias variables del mismo tipo en una línea: `text lista, comp;`,
   `int i = 0, j;`. Cada nombre lleva su propio tamaño y valor inicial. (Federico Dobal, 2026-09-23)
+- Ejemplo del corralón (práctica de monitores, punto 4a): un empleado atiende a los clientes
+  en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)

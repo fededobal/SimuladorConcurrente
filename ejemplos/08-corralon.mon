@@ -1,0 +1,51 @@
+// Punto 4a) Corralón
+// espera: fin Corralon.cAtenciones=<>
+monitor Corralon {
+  Cola cAtenciones;
+  cond esperaEmp, esperaCli[10], esperaListas[10];
+  text comprobantes[10];
+  text listas;
+  
+  procedure comprar(id: in int, lista: in text, comp: out text) {
+    push(cAtenciones,id); // pido atención del empleado
+    signal(esperaEmp);
+    wait(esperaCli[id]);
+    listas = lista; // me atiende y entrego la lista
+    signal(esperaListas[id]);
+    wait(esperaCli[id]);
+    comp = comprobantes[id]; // recibo comprobante
+  }
+  
+  procedure esperarCliente(id: out int, lista: out text) {
+    while(empty cAtenciones) {
+      wait(esperaEmp);
+    }
+    pop(cAtenciones,id);
+    signal(esperaCli[id]); // atiendo cliente
+    wait(esperaListas[id]); // recibo lista del cliente
+    lista = listas;
+  }
+  
+  procedure entregarComprobante(id: in int, comp: in text) {
+    comprobantes[id] = comp;
+    signal(esperaCli[id]);
+  }
+}
+
+process Empleado {
+  text lista;
+  text comp;
+  int id;
+  for(int i = 1..10) {
+    Corralon.esperarCliente(id,lista);
+    // genera comprobante
+    comp = "comp";
+    Corralon.entregarComprobante(id,comp);
+  }
+}
+
+process Cliente[id: 0..9] {
+  text lista = "lista";
+  text comp;
+  Corralon.comprar(id,lista,comp);
+}
