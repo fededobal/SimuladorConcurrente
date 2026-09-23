@@ -36,3 +36,6 @@ hs_err_pid*
 
 # Grafo de conocimiento local de Understand-Anything
 .ua/
+
+# Documentación: por ahora no se publica en el repositorio
+/docs/

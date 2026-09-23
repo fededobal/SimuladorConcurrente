@@ -88,6 +88,8 @@ Reglas:
   y verificarlos con 25 semillas en JUnit y en el smoke del motor. (Federico Dobal, 2026-09-18)
 - El hook `pre-commit` acepta un cambio del núcleo cuyo motor regenerado sale idéntico, y
   exige en cambio que no queden cambios del motor sin agregar al commit. (Federico Dobal, 2026-09-18)
+- Dejar `docs/` fuera del repositorio: se ignora y se deja de seguir, pero los archivos quedan
+  en la copia local. (Federico Dobal, 2026-09-23)
 
 ## [0.1.0] - 2026-09-17
 
