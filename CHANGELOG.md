@@ -70,6 +70,8 @@ Reglas:
   semilla, política y enlaces) y corregir la definición de instante en la referencia y la
   especificación del lenguaje: evaluar una guarda no consume un paso. (Federico Dobal, 2026-09-18)
 - Describir en el README los seis controles de la barra. (Federico Dobal, 2026-09-18)
+- README más breve: qué permite hacer el simulador y cómo correrlo, sin enlaces a `docs/`.
+  (Federico Dobal, 2026-09-23)
 
 ### Interno
 - Ignorar en git la carpeta `.ua/`, donde Understand-Anything guarda el grafo de
