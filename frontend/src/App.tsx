@@ -40,7 +40,8 @@ export function App() {
   }, [snapshot]);
 
   const running = status === 'running';
-  const active = status !== 'idle' && status !== 'error';
+  // solo se puede detener una simulacion que todavia puede avanzar
+  const active = status === 'ready' || status === 'running' || status === 'paused';
 
   const cargarEjemplo = (id: string) => {
     const ejemplo = EJEMPLOS.find((e) => e.id === id);

@@ -29,6 +29,8 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Deshabilitar "Detener" cuando la simulación terminó o quedó en interbloqueo: ya no puede
+  avanzar. (Federico Dobal, 2026-09-23)
 - Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación
   se informaba como interbloqueo. (Federico Dobal, 2026-09-18)
 - Informar el desborde de un entero como error de ejecución con su línea; antes la interfaz
