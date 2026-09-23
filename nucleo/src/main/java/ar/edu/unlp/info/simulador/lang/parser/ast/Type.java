@@ -25,7 +25,15 @@ public enum Type {
         return this == COLA || this == COLA_ORDENADA;
     }
 
+    /** Como se escribe el tipo en el programa del alumno. */
     public String keyword() {
-        return this == COLA_ORDENADA ? "ColaOrdenada" : "Cola";
+        return switch (this) {
+            case INT -> "int";
+            case DOUBLE -> "double";
+            case BOOLEAN -> "boolean";
+            case TEXT -> "text";
+            case COLA -> "Cola";
+            case COLA_ORDENADA -> "ColaOrdenada";
+        };
     }
 }

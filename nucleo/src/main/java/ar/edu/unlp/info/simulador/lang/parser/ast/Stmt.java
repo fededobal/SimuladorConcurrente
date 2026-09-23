@@ -47,8 +47,11 @@ public sealed interface Stmt
      * {@code for (init; condition; step) body}. La forma de rango
      * {@code for (int i = a..b)} se normaliza a esta en el parser.
      * {@code init} es un {@link VarDecl} (iterador nuevo) o un {@link Assign} (variable existente).
+     * {@code limit} es null salvo en la forma de rango: una variable oculta con la cota
+     * {@code b}, que se evalua una sola vez al entrar al for.
      */
-    record ForStmt(Stmt init, Expr condition, Stmt step, Block body, int line) implements Stmt { }
+    record ForStmt(Stmt init, VarDecl limit, Expr condition, Stmt step, Block body, int line)
+            implements Stmt { }
 
     record Skip(int line) implements Stmt { }
 }

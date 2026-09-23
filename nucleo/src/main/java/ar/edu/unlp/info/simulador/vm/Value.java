@@ -184,15 +184,28 @@ public sealed interface Value {
         };
     }
 
-    /** Convierte este valor al tipo declarado de destino (int<->double, resto exacto). */
-    default Value coerceTo(Type target) {
-        return switch (target) {
-            case INT -> new IntVal(asLong());
-            case DOUBLE -> new DoubleVal(asDouble());
-            case BOOLEAN -> new BoolVal(asBool());
-            case TEXT -> new TextVal(asText());
-            case COLA, COLA_ORDENADA -> this;
+    /**
+     * El valor que queda al guardar este en una variable del tipo {@code target}. Mismas
+     * reglas que el compilador: el mismo tipo, un int en un double y un numero en un text.
+     * Llega a fallar en ejecucion solo con lo que el compilador no puede saber (un pop).
+     *
+     * @param destino nombre de la variable, para el mensaje de error
+     */
+    default Value assignTo(Type target, String destino, int line) {
+        Value v = switch (target) {
+            case INT -> this instanceof IntVal ? this : null;
+            case DOUBLE -> this instanceof DoubleVal ? this
+                    : this instanceof IntVal i ? new DoubleVal(i.v()) : null;
+            case BOOLEAN -> this instanceof BoolVal ? this : null;
+            case TEXT -> this instanceof TextVal ? this
+                    : isNumeric() ? new TextVal(display()) : null;
+            case COLA, COLA_ORDENADA -> null;
         };
+        if (v == null) {
+            throw new RuntimeError("No se puede guardar un " + typeName() + " (" + display()
+                    + ") en '" + destino + "', que es " + target.keyword(), line);
+        }
+        return v;
     }
 
     default long asLong() {

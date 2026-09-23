@@ -1,5 +1,7 @@
 package ar.edu.unlp.info.simulador.lang;
 
+import ar.edu.unlp.info.simulador.lang.Scope.Symbol;
+import ar.edu.unlp.info.simulador.lang.Scope.VarType;
 import ar.edu.unlp.info.simulador.lang.parser.ast.*;
 
 import java.util.ArrayDeque;
@@ -10,19 +12,23 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Chequeos semanticos sobre el AST: nombres declarados, alcance (los locales del proceso no
- * se ven dentro de un monitor), existencia de monitores/procedures/cond, aridad de las
- * llamadas, parametros {@code out} ligados a lvalues, {@code wait}/{@code signal} solo dentro
- * de procedures, y prohibicion de asignar a constantes.
+ * Chequeos semanticos sobre el AST: nombres declarados y su alcance (los locales del proceso
+ * no se ven dentro de un monitor, ningun nombre tapa a otro), tipos de expresiones y de
+ * asignaciones ({@link ExprTyper}), existencia de monitores, procedures y cond, aridad de las
+ * llamadas, parametros {@code out} ligados a variables, {@code wait}/{@code signal} solo
+ * dentro de procedures, y prohibicion de modificar constantes, parametros in e iteradores.
  */
 public final class SemanticValidator {
+
+    private static final String PERMANENTE = "una variable permanente";
+    private static final String LOCAL = "una variable local";
+    private static final String PARAMETRO = "un parámetro";
+    private static final String ITERADOR = "un iterador";
 
     private final Program program;
     private final Map<String, MonitorInfo> monitors = new HashMap<>();
 
-    private record MonitorInfo(Set<String> vars,
-                               Map<String, Boolean> conds,
-                               Map<String, ProcedureDef> procedures) { }
+    private record MonitorInfo(Map<String, Boolean> conds, Map<String, ProcedureDef> procedures) { }
 
     public SemanticValidator(Program program) {
         this.program = program;
@@ -65,11 +71,6 @@ public final class SemanticValidator {
         }
     }
 
-    /** Clave del sitio de declaracion de una cola; null si el nombre no es una cola. */
-    private static String claveCola(Scope scope, String nombre) {
-        return scope.colas.get(nombre);
-    }
-
     private void collectTopLevel() {
         Set<String> topLevel = new HashSet<>();
         for (MonitorDef m : program.monitors()) {
@@ -104,7 +105,7 @@ public final class SemanticValidator {
                     }
                 }
             }
-            monitors.put(m.name(), new MonitorInfo(vars, conds, procs));
+            monitors.put(m.name(), new MonitorInfo(conds, procs));
         }
         for (ProcessDef p : program.processes()) {
             if (!topLevel.add(p.name())) {
@@ -113,87 +114,49 @@ public final class SemanticValidator {
         }
     }
 
-    // ---------------------------------------------------------------- monitor
-
-    /** Las colas permanentes son la misma cola en todos los procedures del monitor. */
-    private static void registrarColas(MonitorDef m, Scope scope) {
-        for (VarDecl v : m.permanentVars()) {
-            if (v.type().isQueue()) {
-                scope.colas.put(v.name(), m.name() + "." + v.name());
-            }
-        }
-    }
+    // ---------------------------------------------------------------- monitor y proceso
 
     private void validateMonitor(MonitorDef m) {
-        MonitorInfo info = monitors.get(m.name());
+        // Las permanentes se inicializan en orden: cada una ve a las anteriores.
+        Scope root = new Scope(null, m.name(), false);
+        for (VarDecl v : m.permanentVars()) {
+            checkVarDecl(v, root, PERMANENTE, m.name() + "." + v.name());
+        }
+        for (CondDecl c : m.conds()) {
+            if (c.isArray()) ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
+        }
 
-        Scope initScope = new Scope(null, m.name());
-        initScope.assignable.addAll(info.vars());
-        for (String cond : info.conds().keySet()) initScope.conds.add(cond);
-        registrarColas(m, initScope);
+        Scope init = root.child();
         for (Stmt s : m.initStmts()) {
             if (containsMonitorInteraction(s)) {
                 throw new CompilationException("El codigo de inicializacion del monitor " + m.name()
                         + " no puede llamar a monitores ni usar wait/signal", s.line());
             }
-            checkStmt(s, initScope);
+            checkStmt(s, init);
         }
 
         for (ProcedureDef pr : m.procedures()) {
-            Scope scope = new Scope(m.name(), m.name());
-            scope.assignable.addAll(info.vars());
-            for (String cond : info.conds().keySet()) scope.conds.add(cond);
-            registrarColas(m, scope);
+            Scope scope = new Scope(root, m.name(), true);
             for (Param param : pr.params()) {
-                if (param.isOutput()) {
-                    scope.assignable.add(param.name());
-                } else {
-                    scope.readOnly.add(param.name());
-                }
+                declare(scope, param.name(), new Symbol(new VarType(param.type(), false),
+                        !param.isOutput(), PARAMETRO, null), param.line());
             }
             checkBlock(pr.body(), scope);
         }
     }
 
     private void validateProcess(ProcessDef p) {
-        Scope scope = new Scope(null, null);
+        Scope scope = new Scope(null, null, false);
         if (p.isFamily()) {
-            scope.readOnly.add(p.quant().iterator());
-            checkExpr(p.quant().from(), scope);
-            checkExpr(p.quant().to(), scope);
+            ExprTyper.expect(p.quant().from(), Type.INT, scope, "La cota de la familia");
+            ExprTyper.expect(p.quant().to(), Type.INT, scope, "La cota de la familia");
+            scope.declare(p.quant().iterator(), new Symbol(new VarType(Type.INT, false), true,
+                    "el iterador de la familia", null), p.line());
         }
         checkBlock(p.body(), scope);
     }
 
-    // ---------------------------------------------------------------- scope
-
-    /** Alcance mutable durante el recorrido de un bloque. */
-    private static final class Scope {
-        final String monitorName;   // monitor cuyas permanentes/cond se ven; null en procesos
-        final String selfMonitor;   // monitor propio (para cond); null en procesos e init sin monitor
-        final Set<String> readOnly = new HashSet<>();
-        final Set<String> assignable = new HashSet<>();
-        final Set<String> conds = new HashSet<>();
-        final Map<String, String> colas = new HashMap<>();
-
-        Scope(String monitorName, String selfMonitor) {
-            this.monitorName = monitorName;
-            this.selfMonitor = selfMonitor;
-        }
-
-        Scope child() {
-            Scope s = new Scope(monitorName, selfMonitor);
-            s.readOnly.addAll(readOnly);
-            s.assignable.addAll(assignable);
-            s.conds.addAll(conds);
-            s.colas.putAll(colas);
-            return s;
-        }
-
-        boolean known(String name) {
-            return readOnly.contains(name) || assignable.contains(name);
-        }
-    }
+    // ---------------------------------------------------------------- sentencias
 
     private void checkBlock(Stmt.Block block, Scope parent) {
         Scope scope = parent.child();
@@ -205,76 +168,105 @@ public final class SemanticValidator {
     private void checkStmt(Stmt s, Scope scope) {
         switch (s) {
             case Stmt.Block b -> checkBlock(b, scope);
-            case VarDecl vd -> {
-                if (vd.sizeExpr() != null) checkExpr(vd.sizeExpr(), scope);
-                if (vd.initExpr() != null) checkExpr(vd.initExpr(), scope);
-                scope.assignable.add(vd.name());
-                if (vd.type().isQueue()) {
-                    // la linea distingue dos colas homonimas declaradas en bloques distintos
-                    scope.colas.put(vd.name(), "local:" + vd.name() + "#" + vd.line());
-                }
-            }
-            case Stmt.Assign a -> {
-                if (a.index() != null) checkExpr(a.index(), scope);
-                checkExpr(a.value(), scope);
-                checkAssignable(a.target(), scope, a.line());
-            }
+            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL, "local:" + vd.name() + "#" + vd.line());
+            case Stmt.Assign a -> checkAssign(a, scope);
             case Stmt.IncDec inc -> {
-                if (inc.index() != null) checkExpr(inc.index(), scope);
-                checkAssignable(inc.target(), scope, inc.line());
+                Type t = targetType(inc.target(), inc.index(), scope, inc.line());
+                if (t != Type.INT && t != Type.DOUBLE) {
+                    throw new CompilationException("'" + inc.target() + "' es " + t.keyword()
+                            + ": ++ y -- se aplican a números", inc.line());
+                }
             }
             case Stmt.Skip ignored -> { }
             case Stmt.IfStmt iff -> {
-                checkExpr(iff.condition(), scope);
+                ExprTyper.expect(iff.condition(), Type.BOOLEAN, scope, "La condición del if");
                 checkBlock(iff.thenBranch(), scope);
                 if (iff.elseBranch() != null) checkBlock(iff.elseBranch(), scope);
             }
             case Stmt.WhileStmt w -> {
-                checkExpr(w.condition(), scope);
+                ExprTyper.expect(w.condition(), Type.BOOLEAN, scope, "La condición del while");
                 checkBlock(w.body(), scope);
             }
-            case Stmt.ForStmt f -> {
-                Scope inner = scope.child();
-                if (f.init() instanceof VarDecl vd) {
-                    if (vd.initExpr() != null) checkExpr(vd.initExpr(), inner);
-                    inner.assignable.add(vd.name());
-                } else {
-                    checkStmt(f.init(), inner);
-                }
-                checkExpr(f.condition(), inner);
-                checkStmt(f.step(), inner);
-                checkBlock(f.body(), inner);
-            }
+            case Stmt.ForStmt f -> checkFor(f, scope);
             case Stmt.MonitorCall call -> checkMonitorCall(call, scope);
             case Stmt.CondOp co -> checkCondOp(co, scope);
             case Stmt.QueuePush qp -> {
-                requireKnown(qp.queue(), scope, qp.line());
-                for (Expr e : qp.elements()) checkExpr(e, scope);
-                String clave = claveCola(scope, qp.queue());
-                if (clave == null) {
-                    throw new CompilationException("'" + qp.queue() + "' no es una cola", qp.line());
-                }
+                String clave = queueKey(qp.queue(), scope, qp.line());
+                for (Expr e : qp.elements()) ExprTyper.typeOf(e, scope);
                 checkAridadCola(clave, qp.queue(), qp.elements().size(), "push", qp.line());
             }
             case Stmt.Write w -> {
-                for (Expr e : w.args()) checkExpr(e, scope);
+                for (Expr e : w.args()) ExprTyper.checkWriteArg(e, scope);
             }
             case Stmt.QueuePop qp -> {
-                requireKnown(qp.queue(), scope, qp.line());
-                for (String t : qp.targets()) checkAssignable(t, scope, qp.line());
-                String clave = claveCola(scope, qp.queue());
-                if (clave == null) {
-                    throw new CompilationException("'" + qp.queue() + "' no es una cola", qp.line());
-                }
+                String clave = queueKey(qp.queue(), scope, qp.line());
+                for (String t : qp.targets()) targetType(t, null, scope, qp.line());
                 checkAridadCola(clave, qp.queue(), qp.targets().size(), "pop", qp.line());
             }
         }
+    }
+
+    private void checkVarDecl(VarDecl vd, Scope scope, String origin, String queueKey) {
+        if (vd.sizeExpr() != null) {
+            ExprTyper.expect(vd.sizeExpr(), Type.INT, scope, "El tamaño de '" + vd.name() + "'");
+        }
+        if (vd.initExpr() != null) {
+            ExprTyper.checkAssignable(vd.type(), vd.initExpr(), scope, vd.name(), vd.line());
+        }
+        declare(scope, vd.name(), new Symbol(new VarType(vd.type(), vd.isArray()), false, origin,
+                vd.type().isQueue() ? queueKey : null), vd.line());
+    }
+
+    private void checkAssign(Stmt.Assign a, Scope scope) {
+        Type t = targetType(a.target(), a.index(), scope, a.line());
+        String destino = a.index() == null ? a.target() : a.target() + "[...]";
+        ExprTyper.checkAssignable(t, a.value(), scope, destino, a.line());
+    }
+
+    /**
+     * El iterador se declara (o se reutiliza) en un alcance propio del for; en el cuerpo queda
+     * congelado: solo lo cambia el paso del for. En la forma de rango la cota es un int que
+     * se evalua una vez.
+     */
+    private void checkFor(Stmt.ForStmt f, Scope outer) {
+        Scope inner = outer.child();
+        String iterator;
+        if (f.init() instanceof VarDecl vd) {
+            if (vd.initExpr() != null) {
+                ExprTyper.checkAssignable(vd.type(), vd.initExpr(), inner, vd.name(), vd.line());
+            }
+            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERADOR, null),
+                    vd.line());
+            iterator = vd.name();
+        } else {
+            checkAssign((Stmt.Assign) f.init(), inner);
+            iterator = ((Stmt.Assign) f.init()).target();
+        }
+        if (f.limit() != null) {
+            if (ExprTyper.known(iterator, inner, f.line()).type().base() != Type.INT) {
+                throw new CompilationException("El iterador de un for de rango tiene que ser int",
+                        f.line());
+            }
+            ExprTyper.expect(f.limit().initExpr(), Type.INT, inner, "La cota del for");
+            inner.declare(f.limit().name(), new Symbol(new VarType(Type.INT, false), true,
+                    ITERADOR, null), f.line());
+        }
+        ExprTyper.expect(f.condition(), Type.BOOLEAN, inner, "La condición del for");
+        checkStmt(f.step(), inner);
+        Scope body = inner.child();
+        body.freeze(iterator);
+        checkBlock(f.body(), body);
     }
 
     private void checkMonitorCall(Stmt.MonitorCall call, Scope scope) {
         MonitorInfo info = monitors.get(call.monitor());
         if (info == null) {
             throw new CompilationException("Monitor no declarado: " + call.monitor(), call.line());
+        }
+        if (scope.inProcedure && call.monitor().equals(scope.monitor)) {
+            throw new CompilationException("Un procedure de " + call.monitor() + " no puede llamar a "
+                    + call.monitor() + "." + call.procedure() + ": el proceso ya está dentro del monitor",
+                    call.line());
         }
         ProcedureDef pd = info.procedures().get(call.procedure());
         if (pd == null) {
@@ -289,29 +281,31 @@ public final class SemanticValidator {
         for (int i = 0; i < pd.params().size(); i++) {
             Param param = pd.params().get(i);
             Expr arg = call.args().get(i);
-            checkExpr(arg, scope);
-            if (param.isOutput()) {
-                String name = lvalueName(arg);
-                if (name == null) {
-                    throw new CompilationException("El argumento para el parametro '" + param.name()
-                            + "' (" + param.mode().name().toLowerCase() + ") debe ser una variable "
-                            + "o un elemento de arreglo", call.line());
-                }
-                if (!scope.assignable.contains(name)) {
-                    throw new CompilationException("No se puede pasar '" + name + "' a un parametro "
-                            + param.mode().name().toLowerCase() + " porque no es asignable", call.line());
-                }
+            if (!param.isOutput()) {
+                ExprTyper.checkAssignable(param.type(), arg, scope, param.name(), call.line());
+                continue;
+            }
+            if (!(arg instanceof Expr.VarRef) && !(arg instanceof Expr.ArrayAccess)) {
+                throw new CompilationException("El argumento para el parametro '" + param.name()
+                        + "' (out) debe ser una variable o un elemento de arreglo", call.line());
+            }
+            Type argType = ExprTyper.typeOf(arg, scope);
+            String name = arg instanceof Expr.VarRef v ? v.name() : ((Expr.ArrayAccess) arg).name();
+            checkWritable(name, scope, call.line());
+            if (!ExprTyper.assignable(argType, param.type())) {
+                throw new CompilationException("El parámetro out '" + param.name() + "' es "
+                        + param.type().keyword() + " y no se puede guardar en '" + name + "', que es "
+                        + argType.keyword(), call.line());
             }
         }
     }
 
     private void checkCondOp(Stmt.CondOp co, Scope scope) {
-        if (scope.selfMonitor == null || scope.monitorName == null) {
+        if (!scope.inProcedure) {
             throw new CompilationException("wait/signal/signal_all solo pueden usarse dentro de un "
                     + "procedure de monitor", co.line());
         }
-        Map<String, Boolean> conds = monitors.get(scope.selfMonitor).conds();
-        Boolean isArray = conds.get(co.cond());
+        Boolean isArray = monitors.get(scope.monitor).conds().get(co.cond());
         if (isArray == null) {
             throw new CompilationException("Variable condicion no declarada: " + co.cond(), co.line());
         }
@@ -322,50 +316,59 @@ public final class SemanticValidator {
         if (!isArray && co.index() != null) {
             throw new CompilationException("La cond '" + co.cond() + "' no es un arreglo", co.line());
         }
-        if (co.index() != null) checkExpr(co.index(), scope);
+        if (co.index() != null) ExprTyper.expect(co.index(), Type.INT, scope, "El índice de la cond");
     }
 
-    // ---------------------------------------------------------------- expresiones
+    // ---------------------------------------------------------------- nombres
 
-    private void checkExpr(Expr e, Scope scope) {
-        switch (e) {
-            case Expr.IntLit ignored -> { }
-            case Expr.DoubleLit ignored -> { }
-            case Expr.BoolLit ignored -> { }
-            case Expr.TextLit ignored -> { }
-            case Expr.VarRef v -> requireKnown(v.name(), scope, v.line());
-            case Expr.ArrayAccess a -> {
-                requireKnown(a.name(), scope, a.line());
-                checkExpr(a.index(), scope);
-            }
-            case Expr.EmptyQueue q -> requireKnown(q.queue(), scope, q.line());
-            case Expr.Unary u -> checkExpr(u.operand(), scope);
-            case Expr.Binary b -> {
-                checkExpr(b.left(), scope);
-                checkExpr(b.right(), scope);
-            }
+    /** Declara una variable controlando que no tape a otra ni a una cond del monitor. */
+    private void declare(Scope scope, String name, Symbol sym, int line) {
+        if (scope.monitor != null && monitors.get(scope.monitor).conds().containsKey(name)) {
+            throw new CompilationException("Ya existe una variable condición llamada '" + name
+                    + "': elegí otro nombre", line);
         }
+        scope.declare(name, sym, line);
     }
 
-    private void requireKnown(String name, Scope scope, int line) {
-        if (!scope.known(name)) {
-            throw new CompilationException("Nombre no declarado en este alcance: " + name, line);
+    /** Tipo del destino de una asignacion, ++/-- o pop, controlando que se pueda escribir. */
+    private Type targetType(String name, Expr index, Scope scope, int line) {
+        Symbol sym = checkWritable(name, scope, line);
+        VarType t = sym.type();
+        if (index != null) {
+            if (!t.isArray()) throw new CompilationException("'" + name + "' no es un arreglo", line);
+            ExprTyper.expect(index, Type.INT, scope, "El índice de '" + name + "'");
+            return t.base();
         }
+        if (t.isArray()) {
+            throw new CompilationException("No se puede asignar el arreglo '" + name
+                    + "' completo: hay que indicar el índice, por ejemplo " + name + "[0]", line);
+        }
+        if (t.isQueue()) {
+            throw new CompilationException("No se puede asignar la cola '" + name
+                    + "': se usa con push y pop", line);
+        }
+        return t.base();
     }
 
-    private void checkAssignable(String name, Scope scope, int line) {
-        if (scope.assignable.contains(name)) return;
-        if (scope.readOnly.contains(name)) {
+    private Symbol checkWritable(String name, Scope scope, int line) {
+        Symbol sym = ExprTyper.known(name, scope, line);
+        if (sym.readOnly()) {
             throw new CompilationException("No se puede asignar a '" + name
                     + "' (es constante, parametro in o iterador)", line);
         }
-        throw new CompilationException("Nombre no declarado en este alcance: " + name, line);
+        if (scope.isFrozen(name)) {
+            throw new CompilationException("No se puede modificar el iterador '" + name
+                    + "' dentro del for: lo cambia solo el paso del for", line);
+        }
+        return sym;
     }
 
-    private static String lvalueName(Expr arg) {
-        if (arg instanceof Expr.VarRef v) return v.name();
-        if (arg instanceof Expr.ArrayAccess a) return a.name();
-        return null;
+    private static String queueKey(String name, Scope scope, int line) {
+        Symbol sym = ExprTyper.known(name, scope, line);
+        if (sym.queueKey() == null) {
+            throw new CompilationException("'" + name + "' no es una cola", line);
+        }
+        return sym.queueKey();
     }
 
     private boolean containsMonitorInteraction(Stmt s) {

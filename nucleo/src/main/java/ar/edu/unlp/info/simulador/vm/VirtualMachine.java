@@ -182,14 +182,14 @@ public final class VirtualMachine {
             int size = arraySize(ev, vd.sizeExpr(), vd.line());
             Value fill = vd.initExpr() == null
                     ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).coerceTo(vd.type());
+                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
             Value[] elems = new Value[size];
             for (int i = 0; i < size; i++) elems[i] = fill;
             return new Value.ArrayVal(vd.type(), elems);
         }
         return vd.initExpr() == null
                 ? Value.defaultFor(vd.type())
-                : ev.eval(vd.initExpr()).coerceTo(vd.type());
+                : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
     }
 
     // ================================================================= scheduling
@@ -421,12 +421,17 @@ public final class VirtualMachine {
                 if (f.init() instanceof VarDecl vd) {
                     Value v = vd.initExpr() == null
                             ? Value.defaultFor(vd.type())
-                            : evaluator(p, act).eval(vd.initExpr()).coerceTo(vd.type());
+                            : evaluator(p, act).eval(vd.initExpr())
+                                    .assignTo(vd.type(), vd.name(), vd.line());
                     act.locals().put(vd.name(), v);
                 } else {
                     Stmt.Assign asg = (Stmt.Assign) f.init();
                     assignScalar(p, act, asg.target(),
                             evaluator(p, act).eval(asg.value()), asg.line());
+                }
+                if (f.limit() != null) {
+                    // la cota del rango se fija al entrar: cambiarla adentro no cambia las vueltas
+                    act.locals().put(f.limit().name(), evaluator(p, act).eval(f.limit().initExpr()));
                 }
                 List<Stmt> loopBody = new ArrayList<>(f.body().statements());
                 loopBody.add(f.step());
@@ -480,13 +485,13 @@ public final class VirtualMachine {
         } else if (vd.isArray()) {
             int size = arraySize(ev, vd.sizeExpr(), vd.line());
             Value fill = vd.initExpr() == null ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).coerceTo(vd.type());
+                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
             Value[] elems = new Value[size];
             for (int i = 0; i < size; i++) elems[i] = fill;
             v = new Value.ArrayVal(vd.type(), elems);
         } else {
             v = vd.initExpr() == null ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).coerceTo(vd.type());
+                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
         }
         act.locals().put(vd.name(), v);
         event(p, "DECL", vd.name(), p.name() + ": " + vd.type().name().toLowerCase()
@@ -503,7 +508,7 @@ public final class VirtualMachine {
             long index = ev.evalLong(a.index());
             Value.ArrayVal arr = asArray(p, act, a.target(), a.line());
             int idx = checkIndex(arr, index, a.target(), a.line());
-            arr.set(idx, value.coerceTo(arr.elementType()));
+            arr.set(idx, value.assignTo(arr.elementType(), a.target() + "[" + idx + "]", a.line()));
             touchIfMonitorVar(p, act, a.target());
             event(p, "ASSIGN", a.target(),
                     p.name() + ": " + a.target() + "[" + idx + "] = " + value.display());
@@ -573,7 +578,8 @@ public final class VirtualMachine {
             Param param = pd.params().get(i);
             Expr argExpr = call.args().get(i);
             if (param.isInput()) {
-                newAct.locals().put(param.name(), argValues.get(i).coerceTo(param.type()));
+                newAct.locals().put(param.name(),
+                        argValues.get(i).assignTo(param.type(), param.name(), call.line()));
             } else {
                 newAct.locals().put(param.name(), Value.defaultFor(param.type()));
             }
@@ -725,13 +731,13 @@ public final class VirtualMachine {
 
     private void assignScalar(Process p, Activation act, String name, Value value, int line) {
         if (act.locals().containsKey(name)) {
-            act.locals().put(name, coerceLike(act.locals().get(name), value));
+            act.locals().put(name, coerceLike(act.locals().get(name), value, name, line));
             return;
         }
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
             if (m.hasVar(name)) {
-                m.setVar(name, coerceLike(m.getVar(name), value), p.id());
+                m.setVar(name, coerceLike(m.getVar(name), value, name, line), p.id());
                 return;
             }
         }
@@ -740,12 +746,13 @@ public final class VirtualMachine {
 
     private void writeLValue(Process p, LValue lv, Value value) {
         Activation act = lv.callerActivation();
+        int line = act.currentLine();   // la de la llamada, que sigue siendo la sentencia actual
         if (lv.index() == null) {
-            assignScalar(p, act, lv.name(), value, -1);
+            assignScalar(p, act, lv.name(), value, line);
         } else {
-            Value.ArrayVal arr = asArray(p, act, lv.name(), -1);
-            checkIndex(arr, lv.index(), lv.name(), -1);
-            arr.set(lv.index(), value.coerceTo(arr.elementType()));
+            Value.ArrayVal arr = asArray(p, act, lv.name(), line);
+            checkIndex(arr, lv.index(), lv.name(), line);
+            arr.set(lv.index(), value.assignTo(arr.elementType(), lv.name(), line));
             touchIfMonitorVar(p, act, lv.name());
         }
     }
@@ -779,13 +786,21 @@ public final class VirtualMachine {
         }
     }
 
-    private static Value coerceLike(Value prev, Value value) {
+    /**
+     * El valor a guardar en una variable que hoy vale {@code prev}: su tipo es el de la
+     * declaracion. Un arreglo o una cola no se reemplazan enteros (el compilador ya lo
+     * rechaza; esto cubre lo que llega en ejecucion).
+     */
+    private static Value coerceLike(Value prev, Value value, String name, int line) {
         return switch (prev) {
-            case Value.IntVal ignored -> value.coerceTo(Type.INT);
-            case Value.DoubleVal ignored -> value.coerceTo(Type.DOUBLE);
-            case Value.BoolVal ignored -> value.coerceTo(Type.BOOLEAN);
-            case Value.TextVal ignored -> value.coerceTo(Type.TEXT);
-            default -> value;
+            case Value.IntVal ignored -> value.assignTo(Type.INT, name, line);
+            case Value.DoubleVal ignored -> value.assignTo(Type.DOUBLE, name, line);
+            case Value.BoolVal ignored -> value.assignTo(Type.BOOLEAN, name, line);
+            case Value.TextVal ignored -> value.assignTo(Type.TEXT, name, line);
+            case Value.ArrayVal ignored -> throw new RuntimeError("No se puede asignar el arreglo '"
+                    + name + "' completo: hay que indicar el índice", line);
+            case Value.QueueVal ignored -> throw new RuntimeError("No se puede asignar la cola '"
+                    + name + "': se usa con push y pop", line);
         };
     }
 

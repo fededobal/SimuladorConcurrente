@@ -394,9 +394,12 @@ public final class Parser {
             Expr to = parseExpr();
             consume(")", "Se esperaba ')' en el 'for' de rango");
             Stmt.Block body = parseBlockOrStatement();
-            Expr cond = new Expr.Binary("<=", new Expr.VarRef(id, kw.line()), to, kw.line());
+            // la cota se evalua una vez, en una variable que el codigo fuente no puede nombrar
+            VarDecl limit = VarDecl.scalar("hasta#" + (++anonimos), Type.INT, to, kw.line());
+            Expr cond = new Expr.Binary("<=", new Expr.VarRef(id, kw.line()),
+                    new Expr.VarRef(limit.name(), kw.line()), kw.line());
             Stmt step = new Stmt.IncDec(id, null, true, kw.line());
-            return new Stmt.ForStmt(init, cond, step, body, kw.line());
+            return new Stmt.ForStmt(init, limit, cond, step, body, kw.line());
         }
 
         consume(";", "Se esperaba ';' en el 'for'");
@@ -405,7 +408,7 @@ public final class Parser {
         Stmt step = parseForStep(kw.line());
         consume(")", "Se esperaba ')' en el 'for'");
         Stmt.Block body = parseBlockOrStatement();
-        return new Stmt.ForStmt(init, cond, step, body, kw.line());
+        return new Stmt.ForStmt(init, null, cond, step, body, kw.line());
     }
 
     private Stmt parseForStep(int line) {
@@ -535,6 +538,10 @@ public final class Parser {
             String op = previous().lexeme();
             int line = previous().line();
             Expr right = parseAdd();
+            if (check("==") || check("!=") || check("<") || check("<=") || check(">") || check(">=")) {
+                throw error("Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí "
+                        + "'a < b and b < c'");
+            }
             return new Expr.Binary(op, left, right, line);
         }
         return left;
@@ -603,7 +610,10 @@ public final class Parser {
         }
         if (t.isKeyword("empty")) {
             advance();
+            // se acepta con y sin parentesis: empty c y empty(c)
+            boolean parentesis = match("(");
             String queue = consumeIdent("Se esperaba el nombre de la cola despues de 'empty'");
+            if (parentesis) consume(")", "Se esperaba ')' despues del nombre de la cola");
             return new Expr.EmptyQueue(queue, t.line());
         }
         if (t.is("(")) {

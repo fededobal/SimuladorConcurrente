@@ -115,9 +115,12 @@ const CANONICOS = [
   ['modulo con double y comparaciones exactas (VI-7, VI-8)', `
     process P { int a = 9007199254740993; int b = 9007199254740992; write(5.5 % 2, " ", a > b); }`,
     (r) => r.snapshot?.output?.[0]?.text === '1.5 true'],
-  ['comparar tipos distintos es error (VI-8)', `
+  ['comparar tipos distintos es error de compilacion (VI-8, D-1)', `
     process P { boolean b = "10" == 10; }`,
-    (r) => r.finished && r.kinds.has('ERROR')],
+    (r) => !!r.compilacion?.includes('No se puede comparar')],
+  ['un for no pisa el iterador de la familia (VI-6)', `
+    process P[i: 0..1] { for (int i = 0..5) { skip; } }`,
+    (r) => !!r.compilacion?.includes('Ya existe')],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

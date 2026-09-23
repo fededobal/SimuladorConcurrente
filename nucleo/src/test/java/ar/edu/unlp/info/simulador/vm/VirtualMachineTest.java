@@ -205,15 +205,12 @@ class VirtualMachineTest {
         assertEquals("false true true true", r.vm().snapshot().output().get(0).text());
     }
 
-    /** VI-8: comparar clases distintas, u ordenar por boolean, es error y no un resultado arbitrario. */
+    /**
+     * VI-8: ordenar una ColaOrdenada por claves de clases distintas es error. Las comparaciones
+     * del programa ({@code "10" == 10}) ya se rechazan al compilar (CompilerTest).
+     */
     @Test
-    void compararTiposDistintosEsError() {
-        for (String expr : new String[] {"\"10\" == 10", "true == 1", "true < false", "\"a\" < 1"}) {
-            RunResult r = TestSupport.run("process P { boolean b = " + expr + "; }",
-                    SchedulingPolicy.ROUND_ROBIN, 0, 100);
-            String error = r.vm().snapshot().processes().get(0).error();
-            assertTrue(error != null && error.contains("No se puede comparar"), expr + " -> " + error);
-        }
+    void colaOrdenadaConClavesMezcladasEsError() {
         RunResult cola = TestSupport.run("""
                 monitor M { ColaOrdenada c; procedure f() { push(c, 9); push(c, "10"); } }
                 process P { M.f(); }
@@ -221,14 +218,14 @@ class VirtualMachineTest {
         assertTrue(cola.vm().snapshot().processes().get(0).error().contains("No se puede comparar"));
     }
 
-    /** VI-8: un boolean no es un numero (antes int x = true valia 1 y double d = true fallaba). */
+    /** D-3: la cota del for de rango se evalua una sola vez, al entrar. */
     @Test
-    void booleanNoSeUsaComoNumero() {
-        for (String sentencia : new String[] {"int x = true;", "int a[2]; a[true] = 1;", "int y = -true;"}) {
-            RunResult r = TestSupport.run("process P { " + sentencia + " }",
-                    SchedulingPolicy.ROUND_ROBIN, 0, 100);
-            assertTrue(r.vm().snapshot().processes().get(0).error() != null, sentencia);
-        }
+    void cotaDelForDeRangoSeEvaluaUnaVez() {
+        RunResult r = TestSupport.run("""
+                monitor M { int n = 3; int vueltas = 0; procedure f() { for (int i = 1..n) { n = 6; vueltas++; } } }
+                process P { M.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 1000);
+        assertEquals("3", TestSupport.finalVar(r, "M", "vueltas"));
     }
 
     /** VI-10: la salida conserva las ultimas lineas y avisa cuantas descarto. */

@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- `empty(c)` con paréntesis, además de `empty c`. (Federico Dobal, 2026-09-23)
 - Menú "Ejemplos" en la barra para cargar los programas de `ejemplos/`. Si el editor tiene un
   programa propio, pide confirmación antes de reemplazarlo. (Federico Dobal, 2026-09-18)
 - Selector de política de planificación: turnos al azar o en ronda (*round robin*). Se puede
@@ -26,6 +27,22 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- El compilador controla los tipos: una condición tiene que ser `boolean`, un índice `int`,
+  y una asignación, un argumento o un valor inicial tienen que coincidir con el tipo del
+  destino. Solo se convierten solos un `int` a `double` y un número a `text`. Antes estos
+  errores aparecían al ejecutar, y `int x = 2.9` truncaba en silencio. (Federico Dobal, 2026-09-23)
+- Un nombre no puede tapar a otro que ya se ve (permanente, parámetro, iterador, local o
+  `cond`): un `for (int i ...)` dentro de `process P[i: ...]` modificaba el iterador de la
+  familia, y una local dentro de un `if` seguía tapando a la permanente después del bloque.
+  (Federico Dobal, 2026-09-23)
+- La cota de un `for` de rango se evalúa una sola vez, al entrar, y el iterador de un `for`
+  no se puede modificar dentro del cuerpo. (Federico Dobal, 2026-09-23)
+- Un arreglo o una cola no se asignan, pasan como argumento ni encolan enteros: es error de
+  compilación. Antes `a = 5` convertía el arreglo en un número y `a = b` lo compartía.
+  (Federico Dobal, 2026-09-23)
+- Llamar desde un procedure a otro del mismo monitor es error de compilación. `empty` sobre
+  algo que no es cola también, y la comparación encadenada (`1 < 2 < 3`) explica cómo
+  escribirla. (Federico Dobal, 2026-09-23)
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
