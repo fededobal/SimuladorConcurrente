@@ -27,7 +27,7 @@ public final class VirtualMachine {
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
     private static final int PROB_AVANCE = 80;
 
-    /** Tope de lineas guardadas: un bucle largo no puede comerse la memoria. */
+    /** Tope de lineas de salida guardadas (las ultimas): un bucle largo no puede comerse la memoria. */
     private static final int TOPE_SALIDA = 500;
 
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
@@ -54,7 +54,9 @@ public final class VirtualMachine {
     private final Azar random;
 
     private final List<Process> processes = new ArrayList<>();
-    private final List<Snapshot.OutputLine> salida = new ArrayList<>();
+    private final Deque<Snapshot.OutputLine> salida = new ArrayDeque<>();
+    /** Lineas de salida descartadas por el tope: se avisa al principio de la salida. */
+    private int salidaDescartada = 0;
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
@@ -653,11 +655,11 @@ public final class VirtualMachine {
         StringBuilder sb = new StringBuilder();
         for (Expr e : w.args()) sb.append(ev.eval(e).display());
         String texto = sb.toString();
-        if (salida.size() < TOPE_SALIDA) {
-            salida.add(new Snapshot.OutputLine(instant, p.name(), p.color(), texto));
-        } else if (salida.size() == TOPE_SALIDA) {
-            salida.add(new Snapshot.OutputLine(instant, p.name(), p.color(),
-                    "... salida truncada en " + TOPE_SALIDA + " lineas"));
+        salida.addLast(new Snapshot.OutputLine(instant, p.name(), p.color(), texto));
+        // se conservan las ultimas: lo que el programa escribe ahora es lo que importa ver
+        if (salida.size() > TOPE_SALIDA) {
+            salida.removeFirst();
+            salidaDescartada++;
         }
         event(p, "WRITE", "", p.name() + ": write(" + texto + ")");
     }
@@ -844,23 +846,24 @@ public final class VirtualMachine {
                     refs(m.entryQueueSnapshot())));
         }
 
-        return new Snapshot(instant, pv, mv, List.copyOf(salida));
+        return new Snapshot(instant, pv, mv, outputView());
+    }
+
+    /** La salida guardada, con un aviso adelante si el tope descarto lineas anteriores. */
+    private List<Snapshot.OutputLine> outputView() {
+        List<Snapshot.OutputLine> out = new ArrayList<>(salida.size() + 1);
+        if (salidaDescartada > 0) {
+            out.add(new Snapshot.OutputLine(salida.peekFirst().instant(), "", "#888888",
+                    "… se descartaron " + salidaDescartada
+                            + " líneas anteriores (se muestran las últimas " + TOPE_SALIDA + ")"));
+        }
+        out.addAll(salida);
+        return out;
     }
 
     private static Snapshot.VarView varView(String name, Value v, Integer writer) {
         boolean isArray = v instanceof Value.ArrayVal;
-        return new Snapshot.VarView(name, typeName(v), v.display(), isArray, writer);
-    }
-
-    private static String typeName(Value v) {
-        return switch (v) {
-            case Value.IntVal ignored -> "int";
-            case Value.DoubleVal ignored -> "double";
-            case Value.BoolVal ignored -> "boolean";
-            case Value.TextVal ignored -> "text";
-            case Value.QueueVal q -> q.isOrdenada() ? "ColaOrdenada" : "Cola";
-            case Value.ArrayVal a -> a.elementType().name().toLowerCase() + "[]";
-        };
+        return new Snapshot.VarView(name, v.typeName(), v.display(), isArray, writer);
     }
 
     private static Snapshot.ProcRef ref(Process p) {

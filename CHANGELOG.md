@@ -29,6 +29,14 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- `%` con operandos `double` calcula el resto real: `5.5 % 2` da `1.5`; antes truncaba los
+  operandos y `5 % 0.5` daba "Módulo por cero". (Federico Dobal, 2026-09-23)
+- Comparar dos `int` de forma exacta (antes se comparaban como `double` y por encima de 2^53
+  se confundían) y tratar como error de ejecución comparar u ordenar valores de clases
+  distintas: `"10" == 10` daba `true` y una `ColaOrdenada` con claves mezcladas quedaba en
+  un orden arbitrario. Un `boolean` ya no se usa como número. (Federico Dobal, 2026-09-23)
+- La salida conserva las últimas 500 líneas y avisa cuántas descartó; antes guardaba las
+  primeras y dejaba de mostrar lo que el programa escribía. (Federico Dobal, 2026-09-23)
 - Con turnos al azar, el navegador ejecuta el mismo entrelazado que la JVM para la misma
   semilla: el scheduler usa un generador propio en lugar de `java.util.Random`, que TeaVM
   implementa con otro `nextInt`. Los tests JUnit prueban ahora las mismas corridas que ven

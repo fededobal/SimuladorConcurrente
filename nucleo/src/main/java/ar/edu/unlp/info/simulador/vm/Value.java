@@ -66,7 +66,7 @@ public sealed interface Value {
             }
             Value clave = claveDe(v);
             int i = 0;
-            while (i < items.size() && comparar(claveDe(items.get(i)), clave) <= 0) i++;
+            while (i < items.size() && compare(claveDe(items.get(i)), clave, -1) <= 0) i++;
             items.add(i, v);
         }
 
@@ -83,13 +83,49 @@ public sealed interface Value {
         private static Value claveDe(Value v) {
             return v instanceof ArrayVal tupla && tupla.size() > 0 ? tupla.get(0) : v;
         }
+    }
 
-        private static int comparar(Value a, Value b) {
-            if (a instanceof TextVal || b instanceof TextVal) {
-                return a.asText().compareTo(b.asText());
-            }
-            return Double.compare(a.asDouble(), b.asDouble());
-        }
+    // ---------------------------------------------------------------- comparaciones
+
+    /**
+     * Igualdad del lenguaje. Dos numeros se comparan como numeros (dos int, exactos como
+     * long: por encima de 2^53 un double los confundiria); textos con textos y booleanos con
+     * booleanos. Mezclar clases distintas es error: "10" == 10 era true y true == 1, error.
+     */
+    static boolean sameValue(Value a, Value b, int line) {
+        if (a instanceof IntVal x && b instanceof IntVal y) return x.v() == y.v();
+        if (a.isNumeric() && b.isNumeric()) return a.asDouble() == b.asDouble();
+        if (a instanceof TextVal x && b instanceof TextVal y) return x.v().equals(y.v());
+        if (a instanceof BoolVal x && b instanceof BoolVal y) return x.v() == y.v();
+        throw mixedTypes(a, b, line);
+    }
+
+    /**
+     * Orden del lenguaje (relaciones y claves de ColaOrdenada): numeros entre si, textos en
+     * orden alfabetico. Un booleano o una mezcla de clases no tienen orden.
+     */
+    static int compare(Value a, Value b, int line) {
+        if (a instanceof IntVal x && b instanceof IntVal y) return Long.compare(x.v(), y.v());
+        if (a.isNumeric() && b.isNumeric()) return Double.compare(a.asDouble(), b.asDouble());
+        if (a instanceof TextVal x && b instanceof TextVal y) return x.v().compareTo(y.v());
+        throw mixedTypes(a, b, line);
+    }
+
+    private static RuntimeError mixedTypes(Value a, Value b, int line) {
+        return new RuntimeError("No se puede comparar un " + a.typeName() + " (" + a.display()
+                + ") con un " + b.typeName() + " (" + b.display() + ")", line);
+    }
+
+    /** Nombre del tipo como lo escribe el alumno: int, double, boolean, text, int[], Cola... */
+    default String typeName() {
+        return switch (this) {
+            case IntVal ignored -> "int";
+            case DoubleVal ignored -> "double";
+            case BoolVal ignored -> "boolean";
+            case TextVal ignored -> "text";
+            case QueueVal q -> q.isOrdenada() ? "ColaOrdenada" : "Cola";
+            case ArrayVal a -> a.elementType().name().toLowerCase() + "[]";
+        };
     }
 
     // ---------------------------------------------------------------- helpers
@@ -169,7 +205,6 @@ public sealed interface Value {
                 }
                 yield (long) d.v();
             }
-            case BoolVal b -> b.v() ? 1 : 0;
             default -> throw new RuntimeError("Se esperaba un numero y se encontro " + display(), -1);
         };
     }

@@ -116,15 +116,20 @@ public final class ExprEvaluator {
                 yield finite(l.asDouble() / r.asDouble(), b.line());
             }
             case "%" -> {
-                if (r.asLong() == 0) throw new RuntimeError("Modulo por cero", b.line());
-                yield new Value.IntVal(l.asLong() % r.asLong());
+                if (bothInt(l, r)) {
+                    if (r.asLong() == 0) throw new RuntimeError("Modulo por cero", b.line());
+                    yield new Value.IntVal(l.asLong() % r.asLong());
+                }
+                // con double, el resto real: 5.5 % 2 es 1.5 (antes truncaba a 1.0)
+                if (r.asDouble() == 0) throw new RuntimeError("Modulo por cero", b.line());
+                yield finite(l.asDouble() % r.asDouble(), b.line());
             }
-            case "==" -> new Value.BoolVal(equalValues(l, r));
-            case "!=" -> new Value.BoolVal(!equalValues(l, r));
-            case "<" -> new Value.BoolVal(l.asDouble() < r.asDouble());
-            case "<=" -> new Value.BoolVal(l.asDouble() <= r.asDouble());
-            case ">" -> new Value.BoolVal(l.asDouble() > r.asDouble());
-            case ">=" -> new Value.BoolVal(l.asDouble() >= r.asDouble());
+            case "==" -> new Value.BoolVal(Value.sameValue(l, r, b.line()));
+            case "!=" -> new Value.BoolVal(!Value.sameValue(l, r, b.line()));
+            case "<" -> new Value.BoolVal(Value.compare(l, r, b.line()) < 0);
+            case "<=" -> new Value.BoolVal(Value.compare(l, r, b.line()) <= 0);
+            case ">" -> new Value.BoolVal(Value.compare(l, r, b.line()) > 0);
+            case ">=" -> new Value.BoolVal(Value.compare(l, r, b.line()) >= 0);
             default -> throw new RuntimeError("Operador desconocido: " + b.op(), b.line());
         };
     }
@@ -160,15 +165,5 @@ public final class ExprEvaluator {
 
     private static boolean bothInt(Value l, Value r) {
         return l instanceof Value.IntVal && r instanceof Value.IntVal;
-    }
-
-    private static boolean equalValues(Value l, Value r) {
-        if (l instanceof Value.TextVal || r instanceof Value.TextVal) {
-            return l.asText().equals(r.asText());
-        }
-        if (l instanceof Value.BoolVal || r instanceof Value.BoolVal) {
-            return l.asBool() == r.asBool();
-        }
-        return l.asDouble() == r.asDouble();
     }
 }

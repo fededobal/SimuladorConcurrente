@@ -112,6 +112,12 @@ const CANONICOS = [
             " ", 4503599627370497.5, " ", 123456789.125); }`,
     (r) => r.snapshot?.output?.[0]?.text
       === '3.68934881474191E19 -1.0E23 0.1 1.25 4503599627370498.0 1.23456789125E8'],
+  ['modulo con double y comparaciones exactas (VI-7, VI-8)', `
+    process P { int a = 9007199254740993; int b = 9007199254740992; write(5.5 % 2, " ", a > b); }`,
+    (r) => r.snapshot?.output?.[0]?.text === '1.5 true'],
+  ['comparar tipos distintos es error (VI-8)', `
+    process P { boolean b = "10" == 10; }`,
+    (r) => r.finished && r.kinds.has('ERROR')],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

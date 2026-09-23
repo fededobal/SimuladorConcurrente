@@ -185,4 +185,61 @@ class VirtualMachineTest {
         assertEquals("5", TestSupport.finalVar(r, "M", "b"));
         assertEquals("7", TestSupport.finalVar(r, "M", "recibido"));
     }
+
+    /** VI-7: con double, % es el resto real y no trunca los operandos. */
+    @Test
+    void moduloConDouble() {
+        RunResult r = TestSupport.run("""
+                process P { write(5.5 % 2, " ", 7.5 % 2.5, " ", 5 % 0.5, " ", -7 % 2); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("1.5 0.0 0.0 -1", r.vm().snapshot().output().get(0).text());
+    }
+
+    /** VI-8: dos int se comparan exactos, aun por encima de 2^53. */
+    @Test
+    void comparacionDeEnterosGrandesEsExacta() {
+        RunResult r = TestSupport.run("""
+                process P { int a = 9007199254740993; int b = 9007199254740992;
+                            write(a == b, " ", a > b, " ", 1 == 1.0, " ", "b" > "a"); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("false true true true", r.vm().snapshot().output().get(0).text());
+    }
+
+    /** VI-8: comparar clases distintas, u ordenar por boolean, es error y no un resultado arbitrario. */
+    @Test
+    void compararTiposDistintosEsError() {
+        for (String expr : new String[] {"\"10\" == 10", "true == 1", "true < false", "\"a\" < 1"}) {
+            RunResult r = TestSupport.run("process P { boolean b = " + expr + "; }",
+                    SchedulingPolicy.ROUND_ROBIN, 0, 100);
+            String error = r.vm().snapshot().processes().get(0).error();
+            assertTrue(error != null && error.contains("No se puede comparar"), expr + " -> " + error);
+        }
+        RunResult cola = TestSupport.run("""
+                monitor M { ColaOrdenada c; procedure f() { push(c, 9); push(c, "10"); } }
+                process P { M.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertTrue(cola.vm().snapshot().processes().get(0).error().contains("No se puede comparar"));
+    }
+
+    /** VI-8: un boolean no es un numero (antes int x = true valia 1 y double d = true fallaba). */
+    @Test
+    void booleanNoSeUsaComoNumero() {
+        for (String sentencia : new String[] {"int x = true;", "int a[2]; a[true] = 1;", "int y = -true;"}) {
+            RunResult r = TestSupport.run("process P { " + sentencia + " }",
+                    SchedulingPolicy.ROUND_ROBIN, 0, 100);
+            assertTrue(r.vm().snapshot().processes().get(0).error() != null, sentencia);
+        }
+    }
+
+    /** VI-10: la salida conserva las ultimas lineas y avisa cuantas descarto. */
+    @Test
+    void salidaConservaLasUltimasLineas() {
+        RunResult r = TestSupport.run("process P { for (int i = 1..600) { write(\"linea \", i); } }",
+                SchedulingPolicy.ROUND_ROBIN, 0, 5000);
+        java.util.List<Snapshot.OutputLine> out = r.vm().snapshot().output();
+        assertEquals(501, out.size());
+        assertTrue(out.get(0).text().contains("se descartaron 100"), out.get(0).text());
+        assertEquals("linea 101", out.get(1).text());
+        assertEquals("linea 600", out.get(500).text());
+    }
 }
