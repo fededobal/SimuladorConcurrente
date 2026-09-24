@@ -40,6 +40,10 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Al liberarse un monitor, el primero de la cola de entrada entra en ese mismo instante y el
+  resto sigue esperando en orden de llegada. Antes se despertaba a toda la cola y el
+  siguiente entraba recién en un instante posterior, con el monitor libre mientras tanto
+  (ADR 0005). (Federico Dobal, 2026-09-23)
 - En la línea de tiempo y el editor, el estado "listo" pasa a llamarse "sin turno": un
   proceso que podía avanzar pero al que el planificador no eligió en ese instante.
   (Federico Dobal, 2026-09-23)

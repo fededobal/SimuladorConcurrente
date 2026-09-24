@@ -56,5 +56,5 @@ class AzarTest {
         assertEquals(TRAZA_02_SEMILLA_0, traza.toString().trim());
     }
 
-    static final String TRAZA_02_SEMILLA_0 = "4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R |";
+    static final String TRAZA_02_SEMILLA_0 = "4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 1E |";
 }

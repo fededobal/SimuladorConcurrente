@@ -343,6 +343,52 @@ class VirtualMachineTest {
         return (h * 60 + 360) % 360;
     }
 
+    // A entra primero; B y C quedan en la cola de entrada, en ese orden (ronda: A, B, C).
+    private static final String COLA_DE_ENTRADA = """
+            monitor M { int x = 0; procedure f() { x = x + 1; } }
+            process A { M.f(); }
+            process B { M.f(); }
+            process C { M.f(); }
+            """;
+
+    /** ADR 0005: el que espera en la cola de entrada entra en el mismo instante en que el otro sale. */
+    @Test
+    void alSalirDelMonitorEntraElPrimeroDeLaColaEnElMismoInstante() {
+        VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, 0);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A entra, B y C a la cola
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A: x = x + 1
+        java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+
+        java.util.List<String> kinds = ev.stream().map(e -> e.kind() + ":" + e.processId()).toList();
+        int retorno = kinds.indexOf("RETURN:1");
+        int entrada = kinds.indexOf("ENTER:2");
+        assertTrue(retorno >= 0 && entrada > retorno, "eventos del instante: " + kinds);
+
+        Snapshot s = vm.snapshot();
+        assertEquals(2, s.monitors().get(0).lockOwner().id());
+        Snapshot.ProcessView b = s.processes().get(1);
+        assertEquals("READY", b.state());
+        assertTrue(b.advanced(), "la entrada por traspaso es la accion de B en este instante");
+    }
+
+    /** ADR 0005: el traspaso respeta el orden de llegada y el resto de la cola sigue esperando. */
+    @Test
+    void elTraspasoRespetaElOrdenDeLaColaDeEntrada() {
+        VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, 0);
+        for (int i = 0; i < 3; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        Snapshot s = vm.snapshot();
+        Snapshot.ProcessView c = s.processes().get(2);
+        assertEquals("BLOCKED", c.state());
+        assertEquals("MONITOR_ENTRY", c.blockReason());
+        assertEquals(java.util.List.of(3),
+                s.monitors().get(0).entryQueue().stream().map(Snapshot.ProcRef::id).toList());
+
+        // B hace su asignacion y retorna: le toca a C
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        assertEquals(3, vm.snapshot().monitors().get(0).lockOwner().id());
+    }
+
     /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */
     @Test
     void errorDeEjecucionQuedaConSuLinea() {

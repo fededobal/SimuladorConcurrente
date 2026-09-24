@@ -26,7 +26,10 @@ public final class Monitor {
 
     /** Proceso que tiene el acceso exclusivo, o null si el monitor esta libre. */
     private Process lockOwner;
-    /** Procesos que compiten por entrar (llamaron con el monitor ocupado, o fueron despertados). */
+    /**
+     * Procesos que compiten por entrar (llamaron con el monitor ocupado, o fueron despertados),
+     * en orden de llegada: al liberarse el monitor, entra el primero (ADR 0005).
+     */
     private final Deque<Process> entryQueue = new ArrayDeque<>();
 
     public Monitor(String name) {

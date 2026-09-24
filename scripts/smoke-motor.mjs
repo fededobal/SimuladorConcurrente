@@ -145,6 +145,21 @@ const CANONICOS = [
       return turnos.length > 0 && turnos.every((t, k) => t === k)
         && ps.every((p) => p.advanced === (p.advanceOrder >= 0));
     }],
+  ['al salir del monitor entra el primero de la cola en el mismo instante (ADR 0005)', `
+    monitor M { int x = 0; procedure f() { x = x + 1; } }
+    process A { M.f(); } process B { M.f(); } process C { M.f(); }`,
+    () => {
+      JSON.parse(motor.crear(`monitor M { int x = 0; procedure f() { x = x + 1; } }
+        process A { M.f(); } process B { M.f(); } process C { M.f(); }`, 0));
+      motor.paso('ROUND_ROBIN', -1);
+      motor.paso('ROUND_ROBIN', -1);
+      const r = JSON.parse(motor.paso('ROUND_ROBIN', -1));
+      const kinds = r.entries.map((e) => `${e.kind}:${e.processId}`);
+      const m = r.snapshot.monitors[0];
+      const b = r.snapshot.processes[1];
+      return kinds.indexOf('ENTER:2') > kinds.indexOf('RETURN:1') && kinds.includes('RETURN:1')
+        && m.lockOwner?.id === 2 && b.advanced && m.entryQueue.map((p) => p.id).join() === '3';
+    }],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],
@@ -183,7 +198,7 @@ for (const archivo of readdirSync(DIR_EJEMPLOS).filter((f) => f.endsWith('.mon')
 // AzarTest#trazaDelEjemploDeExclusionConSemillaFija; si una cambia, tiene que cambiar la otra.
 console.log('Paridad con la JVM');
 {
-  const TRAZA = '4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R |';
+  const TRAZA = '4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 1E |';
   motor.crear(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
   let traza = '';
   for (let i = 0; i < 6; i++) {

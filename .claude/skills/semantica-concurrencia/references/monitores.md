@@ -13,13 +13,15 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
   cada uno con `PROB_AVANCE`% de chance, al menos uno). Cada proceso del turno ejecuta hasta
   una sentencia *observable* (las estructurales — bloques, evaluar guardas de `if/while/for` —
   no consumen instante). Con proceso elegido, avanza solo ese.
-- **wait(c)**: suelta el lock, despierta a toda la cola de entrada (compiten), se encola en
-  `c`, queda `COND_WAIT` y marca `needsLock` para reingresar.
+- **Liberar el monitor** (ADR 0005): se registra el evento de salida y el lock pasa al
+  primero de la cola de entrada, que entra en ese momento (`ENTER`/`REENTER`); esa entrada
+  es su acción del instante. El resto de la cola sigue esperando, FIFO.
+- **wait(c)**: se encola en `c`, queda `COND_WAIT`, marca `needsLock` para reingresar y
+  libera el monitor.
 - **signal(c)**: si `c` no está vacía, el primero pasa a la cola de entrada
   (`MONITOR_ENTRY`); el que señaliza **sigue** (*signal and continue*). Vacía ⇒ no hace nada.
 - **signal_all(c)**: todos los de `c` a la cola de entrada.
-- **Retorno de procedure**: copia parámetros `out`, suelta el lock, despierta a la cola de
-  entrada.
+- **Retorno de procedure**: copia parámetros `out` y libera el monitor.
 - **Llamada de un procedure de A a B** (llamada abierta, ADR 0004): evalúa los argumentos
   con A tomado, suelta A (evento `RELEASE`), entra a B o espera en su cola, y al retornar
   compite por A como después de un `wait`. Los `out` hacia variables de A se escriben al
@@ -31,8 +33,8 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 1. En cada snapshot, cada monitor tiene como mucho un `lockOwner`, y ese proceso no está
    `TERMINATED`. Un proceso que falla adentro suelta el lock (bug B1, corregido).
 2. Un proceso está en a lo sumo una cola (una `cond` o una cola de entrada).
-3. Todo camino que saca a un proceso de un monitor (return, wait, **error**) suelta el lock
-   y despierta la cola de entrada.
+3. Todo camino que saca a un proceso de un monitor (return, wait, llamada abierta,
+   **error**) libera el monitor: el primero de la cola de entrada entra (ADR 0005).
 4. Con la misma semilla y la misma política, la ejecución es idéntica, en la JVM y en el
    navegador (`AzarTest` y el smoke fijan una traza). La interfaz no expone la semilla: cada
    ejecución usa una nueva y la reproducción se hace desde el núcleo.

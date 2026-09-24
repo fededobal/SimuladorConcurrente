@@ -236,9 +236,9 @@ public final class VirtualMachine {
         instant++;
         advancedLastStep.clear();
         for (Process p : turno) {
-            // Entre que se armo el turno y le toca, otro pudo haberlo bloqueado tomando el
-            // monitor que este queria: solo avanza si sigue listo.
-            if (p.state() != Process.State.READY) {
+            // Solo avanza si sigue listo, y una vez por instante: el que recibio un monitor
+            // por traspaso ya hizo su accion del instante, que fue entrar.
+            if (p.state() != Process.State.READY || advancedLastStep.contains(p.id())) {
                 continue;
             }
             p.setState(Process.State.RUNNING);
@@ -264,14 +264,18 @@ public final class VirtualMachine {
         return stepEntries;
     }
 
-    /** Termina el proceso con error, suelta sus monitores y lo registra en el log. */
+    /**
+     * Termina el proceso con error, lo registra en el log y suelta sus monitores. Sin esto el
+     * lock queda en manos de un proceso muerto y los demas se bloquean para siempre: la UI
+     * mostraria un DEADLOCK que el programa del alumno no tiene.
+     */
     private void failProcess(Process p, String message) {
         p.fail(message);
-        List<Monitor> released = releaseMonitorsOf(p);
         event(p, "ERROR", "", p.name() + ": error de ejecución - " + message);
-        for (Monitor m : released) {
+        for (Monitor m : monitorsHeldBy(p)) {
             event(p, "RELEASE", m.name(),
                     p.name() + ": libera " + m.name() + " al terminar con error");
+            releaseMonitor(m);
         }
     }
 
@@ -358,14 +362,20 @@ public final class VirtualMachine {
      */
     private void reacquireMonitor(Process p, Activation act) {
         Monitor m = monitors.get(act.monitorName());
-        String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
         if (!m.isFree()) {
+            String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
             m.entryQueue().addLast(p);
             p.block(Process.BlockReason.MONITOR_ENTRY, m.name());
             event(p, "BLOCKED", m.name(), p.name() + ": espera para "
                     + (act.isEntering() ? "entrar a " : "reingresar a ") + destino);
             return;
         }
+        takeMonitor(p, act, m);
+    }
+
+    /** El proceso toma el monitor libre para la activacion que lo necesitaba. */
+    private void takeMonitor(Process p, Activation act, Monitor m) {
+        String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
         m.setLockOwner(p);
         act.setNeedsLock(false);
         if (act.isEntering()) {
@@ -395,11 +405,10 @@ public final class VirtualMachine {
                     writeLValue(p, e.getValue(), value);
                 }
             }
-            m.setLockOwner(null);
-            wakeEntryQueue(m);
             event(p, "RETURN", m.name(),
                     p.name() + ": retorna de " + m.name() + "." + act.procedureName()
                             + ", libera el monitor");
+            releaseMonitor(m);
         }
         if (p.callStack().isEmpty()) {
             p.setState(Process.State.TERMINATED);
@@ -407,29 +416,38 @@ public final class VirtualMachine {
         }
     }
 
-    /**
-     * Suelta todo monitor tomado por un proceso que termino con error y despierta su cola
-     * de entrada. Sin esto el lock queda en manos de un proceso muerto y los demas se
-     * bloquean para siempre: la UI mostraria un DEADLOCK que el programa del alumno no tiene.
-     *
-     * @return los monitores liberados, en orden de declaracion
-     */
-    private List<Monitor> releaseMonitorsOf(Process p) {
-        List<Monitor> released = new ArrayList<>();
+    /** Los monitores que tiene tomados el proceso, en orden de declaracion. */
+    private List<Monitor> monitorsHeldBy(Process p) {
+        List<Monitor> held = new ArrayList<>();
         for (Monitor m : monitors.values()) {
-            if (m.lockOwner() == p) {
-                m.setLockOwner(null);
-                wakeEntryQueue(m);
-                released.add(m);
-            }
+            if (m.lockOwner() == p) held.add(m);
         }
-        return released;
+        return held;
     }
 
-    private void wakeEntryQueue(Monitor m) {
-        while (!m.entryQueue().isEmpty()) {
+    /**
+     * Suelta el monitor y se lo pasa al primero de la cola de entrada, que entra en ese
+     * momento: esa entrada es su accion del instante (ADR 0005). Si cada proceso de la cola
+     * tuviera que esperar su proximo turno para reintentar, el monitor quedaria un instante
+     * vacio con procesos esperandolo, que no es lo que describe la teoria. El resto de la
+     * cola sigue esperando, en orden de llegada.
+     *
+     * <p>El que llama ya registro su evento de salida (RETURN, WAIT o RELEASE): el ENTER del
+     * que entra tiene que quedar despues en el log.
+     */
+    private void releaseMonitor(Monitor m) {
+        m.setLockOwner(null);
+        while (m.isFree() && !m.entryQueue().isEmpty()) {
             Process w = m.entryQueue().pollFirst();
             w.unblock();
+            if (!advancedLastStep.contains(w.id())) advancedLastStep.add(w.id());
+            try {
+                takeMonitor(w, w.current(), m);
+            } catch (RuntimeError re) {
+                // un out que falla al escribirse al reingresar es un error de w, no del que
+                // solto el monitor; failProcess vuelve a soltarlo para el siguiente
+                failProcess(w, re.getMessage());
+            }
         }
     }
 
@@ -636,11 +654,10 @@ public final class VirtualMachine {
         newAct.pushFront(pd.body().statements());
         if (callerAct.isProcedure()) {
             Monitor caller = monitors.get(callerAct.monitorName());
-            caller.setLockOwner(null);
-            wakeEntryQueue(caller);
             callerAct.setNeedsLock(true);
             event(p, "RELEASE", caller.name(), p.name() + ": libera " + caller.name()
                     + " mientras llama a " + m.name() + "." + pd.name());
+            releaseMonitor(caller);
         }
         p.push(newAct);
         newAct.setNeedsLock(true);
@@ -667,13 +684,12 @@ public final class VirtualMachine {
         }
         switch (co.kind()) {
             case WAIT -> {
-                m.setLockOwner(null);
-                wakeEntryQueue(m);
                 cv.enqueue(p);
                 p.block(Process.BlockReason.COND_WAIT, m.name() + "." + key);
                 act.setNeedsLock(true);
                 event(p, "WAIT", m.name() + "." + key,
                         p.name() + ": wait(" + key + ") - libera el monitor y se demora");
+                releaseMonitor(m);
             }
             case SIGNAL -> {
                 if (cv.isEmpty()) {

@@ -23,7 +23,8 @@ todos los caminos de salida de un monitor en `VirtualMachine`).
 ## Checklist, de más grave a menos
 
 **1. Correctitud de la simulación** (skill `semantica-concurrencia`)
-- ¿Todo camino de salida de un monitor suelta el lock y despierta la cola de entrada?
+- ¿Todo camino de salida de un monitor lo libera con `releaseMonitor` (traspaso al primero
+  de la cola de entrada, ADR 0005), después de registrar su evento de salida?
 - ¿Se conserva *signal and continue*? ¿La reproducibilidad por semilla?
 - ¿Algún error interno puede terminar mostrándose como `DEADLOCK`?
 
