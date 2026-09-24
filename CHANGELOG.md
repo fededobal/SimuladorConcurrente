@@ -16,6 +16,12 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Línea de tiempo abajo de la pantalla: una fila por proceso y una columna por instante con
+  su estado (ejecutando, compitiendo por el monitor, esperando en una variable condición o
+  listo). Ejecutando se pinta con el color del proceso y, dentro de un monitor, cada instante
+  lleva una "M". En cada instante suben arriba los procesos que avanzaron, en el orden de su
+  turno. Las franjas del editor usan los mismos colores. El snapshot trae el campo `advanceOrder` con el turno de cada proceso.
+  (Federico Dobal, 2026-09-23)
 - La interfaz muestra los errores de ejecución: el proceso, la línea (marcada en rojo en el
   editor) y el mensaje. Si después la simulación queda en interbloqueo o termina, el estado
   dice "deadlock tras un error" o "fin con errores". Antes el proceso desaparecía del

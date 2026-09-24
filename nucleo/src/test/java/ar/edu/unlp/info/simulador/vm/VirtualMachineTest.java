@@ -293,6 +293,29 @@ class VirtualMachineTest {
         assertTrue(!ps.get(1).advanced());
     }
 
+    /**
+     * La linea de tiempo ordena a los que avanzaron segun su turno: advanceOrder numera sin
+     * huecos (0, 1, ...) a los que avanzaron y deja -1 a los demas.
+     */
+    @Test
+    void snapshotNumeraElTurnoDeLosQueAvanzaron() {
+        for (long seed = 0; seed < 20; seed++) {
+            VirtualMachine vm = TestSupport.compileAndBuild(
+                    "process P[i: 0..4] { skip; skip; skip; }", seed);
+            vm.step(null, SchedulingPolicy.RANDOM);
+            java.util.List<Integer> turnos = new java.util.ArrayList<>();
+            for (Snapshot.ProcessView p : vm.snapshot().processes()) {
+                assertEquals(p.advanced(), p.advanceOrder() >= 0);
+                if (p.advanced()) turnos.add(p.advanceOrder());
+            }
+            java.util.Collections.sort(turnos);
+            for (int k = 0; k < turnos.size(); k++) {
+                assertEquals(k, turnos.get(k));
+            }
+            assertTrue(!turnos.isEmpty());
+        }
+    }
+
     /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */
     @Test
     void errorDeEjecucionQuedaConSuLinea() {

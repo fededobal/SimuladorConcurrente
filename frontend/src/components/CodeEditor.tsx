@@ -1,10 +1,11 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ProcessState } from '../types';
+import { STATE_CLASS, type VisibleState } from '../processStates';
 
+/** Renglon donde esta parado un proceso: la franja toma el color del estado, el nombre el del proceso. */
 export interface ActiveLine {
   line: number;
   color: string;
-  state: ProcessState;
+  state: VisibleState;
   name: string;
 }
 
@@ -32,12 +33,13 @@ const HUECO_ETIQUETA = 10;
 /** Sangria de un nivel. El lenguaje no usa tabs. */
 const TAB = '  ';
 
-const RANK: Record<ProcessState, number> = {
-  RUNNING: 0, BLOCKED: 1, READY: 2, TERMINATED: 3,
+const RANK: Record<VisibleState, number> = {
+  RUNNING_MONITOR: 0, RUNNING_PROCESS: 0, COMPETING: 1, WAITING: 2, READY: 3, TERMINATED: 4,
 };
 
-const NAME_ALPHA: Record<ProcessState, number> = {
-  RUNNING: 1, BLOCKED: 0.8, READY: 0.45, TERMINATED: 0.3,
+const NAME_ALPHA: Record<VisibleState, number> = {
+  RUNNING_MONITOR: 1, RUNNING_PROCESS: 1, COMPETING: 0.8, WAITING: 0.8, READY: 0.45,
+  TERMINATED: 0.3,
 };
 
 // ===================================================================== pintado
@@ -424,11 +426,11 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
           {marcas.map((p) => (
             <div
               key={p.name}
-              className="stripe"
+              className={`stripe ${STATE_CLASS[p.state]}`}
               style={{
                 top: yDe(p.line),
                 height: metrica.alto,
-                ...stripeStyle(p.color, p.state),
+                ['--st-proceso' as string]: p.color,
                 zIndex: RANK[p.state] === 0 ? 2 : 1,
               }}
             >
@@ -469,23 +471,4 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
       </div>
     </div>
   );
-}
-
-function stripeStyle(color: string, state: ProcessState): React.CSSProperties {
-  if (state === 'BLOCKED') {
-    return {
-      background: `repeating-linear-gradient(135deg, color-mix(in srgb, ${color} 17%, transparent) 0 5px, transparent 5px 10px)`,
-      borderLeft: `2px dashed ${color}`,
-    };
-  }
-  if (state === 'READY') {
-    return {
-      background: `color-mix(in srgb, ${color} 5%, transparent)`,
-      borderLeft: `2px solid color-mix(in srgb, ${color} 50%, transparent)`,
-    };
-  }
-  return {
-    background: `color-mix(in srgb, ${color} 13%, transparent)`,
-    borderLeft: `2px solid ${color}`,
-  };
 }

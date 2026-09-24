@@ -4,6 +4,8 @@ import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
+import { Timeline } from './components/Timeline';
+import { visibleState } from './processStates';
 import type { SchedulingPolicy } from './types';
 
 const SPEED_LABEL: Record<number, string> = {
@@ -36,12 +38,8 @@ export function App() {
     if (!snapshot) return [];
     return snapshot.processes
       .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
-      // el motor devuelve READY a los que avanzaron: se muestran como "ejecutando"
       .map((p) => ({
-        line: p.line,
-        color: p.color,
-        state: p.advanced && p.state === 'READY' ? 'RUNNING' : p.state,
-        name: p.name,
+        line: p.line, color: p.color, state: visibleState(p, snapshot.monitors), name: p.name,
       }));
   }, [snapshot]);
 
@@ -169,6 +167,8 @@ export function App() {
 
         <OutputPanel lines={snapshot?.output ?? []} />
       </div>
+
+      <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} />
     </div>
   );
 }

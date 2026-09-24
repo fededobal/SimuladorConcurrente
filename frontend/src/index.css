@@ -16,6 +16,17 @@
 
   --danger: #e06c75;
 
+  /* estados de proceso: los comparten las franjas del editor y la linea de tiempo */
+  --st-competing: #f59e0b;
+  --st-waiting: #ef4444;
+  --st-ready: #6c6c78;
+
+  /* linea de tiempo: iguales a las constantes de Timeline.tsx */
+  --tl-row-h: 22px;
+  --tl-ruler-h: 18px;
+  --tl-name-w: 120px;
+  --tl-cell-w: 16px;
+
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -282,6 +293,27 @@ button { cursor: pointer; }
               background var(--desliz, 150ms) linear,
               border-color var(--desliz, 150ms) linear;
 }
+/* color por estado; el rayado distingue a los bloqueados sin depender solo del color */
+/* --st-proceso lo fija cada franja y cada fila con el color de su proceso */
+.st-running-process, .st-running-monitor { --st: var(--st-proceso, var(--text)); }
+.st-competing { --st: var(--st-competing); }
+.st-waiting   { --st: var(--st-waiting); }
+.st-ready     { --st: var(--st-ready); }
+
+.stripe.st-running-monitor, .stripe.st-running-process {
+  background: color-mix(in srgb, var(--st) 13%, transparent);
+  border-left: 2px solid var(--st);
+}
+.stripe.st-ready {
+  background: color-mix(in srgb, var(--st) 6%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--st) 60%, transparent);
+}
+.stripe.st-competing, .stripe.st-waiting {
+  background: repeating-linear-gradient(135deg,
+    color-mix(in srgb, var(--st) 18%, transparent) 0 5px, transparent 5px 10px);
+  border-left: 2px dashed var(--st);
+}
+
 .stripe .who {
   font-family: var(--sans);
   font-size: 10px;
@@ -307,3 +339,159 @@ button { cursor: pointer; }
   font-family: var(--mono);
   font-size: 12px;
 }
+
+/* ------------------------------------------------------------------ linea de tiempo */
+
+.timeline {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 34vh;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+.timeline > header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.tl-leyenda {
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.tl-leyenda li { display: flex; align-items: center; gap: 5px; }
+.tl-muestra {
+  display: inline-block;
+  width: 18px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.tl-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.tl-plano {
+  position: relative;
+  min-width: 100%;
+  /* una raya tenue por instante, desde el borde de los nombres */
+  background: repeating-linear-gradient(90deg,
+    transparent 0 calc(var(--tl-cell-w) - 1px), var(--line-soft) calc(var(--tl-cell-w) - 1px) var(--tl-cell-w))
+    var(--tl-name-w) 0 / auto no-repeat;
+}
+
+.tl-regla {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: var(--tl-ruler-h);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dimmer);
+}
+.tl-regla > span {
+  position: absolute;
+  top: 3px;
+  width: var(--tl-cell-w);
+  text-align: center;
+  overflow: visible;
+  white-space: nowrap;
+}
+.tl-regla > span.actual { color: var(--text); }
+.tl-esquina {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: var(--tl-name-w);
+  height: 100%;
+  padding: 3px 12px 0;
+  background: var(--panel);
+  font-family: var(--sans);
+  border-right: 1px solid var(--line);
+}
+
+.tl-cursor {
+  position: absolute;
+  bottom: 0;
+  width: var(--tl-cell-w);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  pointer-events: none;
+}
+
+.tl-fila {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--tl-row-h);
+  /* al reordenarse, cada fila se desliza a su lugar nuevo */
+  transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tl-nombre {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  width: var(--tl-name-w);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tl-tramo {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 2px;
+}
+
+/* muestras de la leyenda y tramos: mismo relleno, mas intenso que la franja del editor */
+.tl-tramo.st-running-monitor, .tl-tramo.st-running-process {
+  background: color-mix(in srgb, var(--st) 75%, transparent);
+}
+/* en la leyenda no hay un proceso: la muestra combina colores de la paleta */
+.tl-muestra.st-running-process, .tl-muestra.st-running-monitor {
+  background: linear-gradient(90deg, #3b82f6 0 33%, #ec4899 33% 66%, #06b6d4 66%);
+  opacity: 0.8;
+}
+
+/* "M" de cada instante ejecutado dentro de un monitor */
+.tl-tramo.st-running-monitor { display: flex; }
+.tl-m, .tl-muestra.st-running-monitor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--bg);
+}
+.tl-m { width: var(--tl-cell-w); flex-shrink: 0; }
+.tl-tramo.st-competing, .tl-muestra.st-competing,
+.tl-tramo.st-waiting, .tl-muestra.st-waiting {
+  background: repeating-linear-gradient(135deg,
+    var(--st) 0 3px, color-mix(in srgb, var(--st) 30%, transparent) 3px 6px);
+}
+/* listo: barra fina, se lee como "presente pero sin avanzar" */
+.tl-tramo.st-ready { top: 9px; bottom: 9px; background: color-mix(in srgb, var(--st) 55%, transparent); }
+.tl-muestra.st-ready { height: 4px; background: color-mix(in srgb, var(--st) 55%, transparent); }

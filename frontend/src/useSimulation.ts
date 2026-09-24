@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiRequestError } from './api';
+import { appendInstant, EMPTY_TIMELINE, startTimeline, type Timeline } from './timeline';
 import type { SchedulingPolicy, Snapshot } from './types';
 
 export type SimStatus =
@@ -15,6 +16,7 @@ export const SPEEDS = [1200, 600, 300, 120] as const;
 export function useSimulation(initialCode: string) {
   const [code, setCodeState] = useState(initialCode);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [timeline, setTimeline] = useState<Timeline>(EMPTY_TIMELINE);
   const [status, setStatus] = useState<SimStatus>('idle');
   const [error, setError] = useState<SimError | null>(null);
   const [speed, setSpeed] = useState<number>(600);
@@ -50,6 +52,7 @@ export function useSimulation(initialCode: string) {
     if (activaRef.current) api.remove();
     activaRef.current = false;
     setSnapshot(null);
+    setTimeline(EMPTY_TIMELINE);
     setError(null);
     setStat('idle');
   }, []);
@@ -70,6 +73,7 @@ export function useSimulation(initialCode: string) {
       const created = api.create(code);
       activaRef.current = true;
       setSnapshot(created.snapshot);
+      setTimeline(startTimeline(created.snapshot));
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
@@ -77,6 +81,7 @@ export function useSimulation(initialCode: string) {
       setError({ message: err.message, line: err.line ?? null });
       activaRef.current = false;
       setSnapshot(null);
+      setTimeline(EMPTY_TIMELINE);
       setStat('error');
       return false;
     }
@@ -87,6 +92,7 @@ export function useSimulation(initialCode: string) {
     try {
       const res = api.step(policyRef.current);
       setSnapshot(res.snapshot);
+      setTimeline((t) => appendInstant(t, res.snapshot));
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
       return true;
@@ -150,7 +156,7 @@ export function useSimulation(initialCode: string) {
 
   return {
     code, setCode,
-    snapshot, status, error,
+    snapshot, timeline, status, error,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
     play, pause, step, stop,

@@ -28,6 +28,10 @@ public record Snapshot(int instant,
                               ProcRef lockOwner,
                               List<ProcRef> entryQueue) { }
 
+    /**
+     * Estado de un proceso. {@code advanceOrder} es su posicion en el turno del ultimo
+     * instante (0 el primero que avanzo) o -1 si no avanzo.
+     */
     public record ProcessView(int id,
                               String name,
                               String color,
@@ -38,5 +42,6 @@ public record Snapshot(int instant,
                               int line,
                               List<VarView> locals,
                               String error,
-                              boolean advanced) { }
+                              boolean advanced,
+                              int advanceOrder) { }
 }

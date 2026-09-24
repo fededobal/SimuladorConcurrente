@@ -136,6 +136,15 @@ const CANONICOS = [
   ['el snapshot marca quien avanzo (VS-11)', `
     process A { skip; skip; } process B { skip; skip; }`,
     (r) => r.finished && r.snapshot.processes.every((p) => typeof p.advanced === 'boolean')],
+  ['el snapshot numera el turno de los que avanzaron', `
+    process P[i: 0..4] { skip; skip; skip; }`,
+    () => {
+      JSON.parse(motor.crear('process P[i: 0..4] { skip; skip; skip; }', 3));
+      const ps = JSON.parse(motor.paso('RANDOM', -1)).snapshot.processes;
+      const turnos = ps.filter((p) => p.advanced).map((p) => p.advanceOrder).sort((x, y) => x - y);
+      return turnos.length > 0 && turnos.every((t, k) => t === k)
+        && ps.every((p) => p.advanced === (p.advanceOrder >= 0));
+    }],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

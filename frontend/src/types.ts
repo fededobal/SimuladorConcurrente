@@ -42,6 +42,8 @@ export interface ProcessView {
   error: string | null;
   /** true si avanzo en el ultimo instante (se muestra como "ejecutando"). */
   advanced: boolean;
+  /** Posicion en el turno del ultimo instante (0 el primero que avanzo), o -1 si no avanzo. */
+  advanceOrder: number;
 }
 
 export interface OutputLine {

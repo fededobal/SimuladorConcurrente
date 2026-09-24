@@ -68,8 +68,11 @@ public final class VirtualMachine {
     private int nextEventId = 0;
 
     private int instant = 0;
-    /** Procesos que avanzaron en el ultimo instante: la UI los marca como "ejecutando". */
-    private final java.util.Set<Integer> advancedLastStep = new java.util.HashSet<>();
+    /**
+     * Ids de los procesos que avanzaron en el ultimo instante, en el orden en que les toco el
+     * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo.
+     */
+    private final List<Integer> advancedLastStep = new ArrayList<>();
     private int rrCursor = -1;
     private boolean logging = true;
     private boolean deadlockLogged = false;
@@ -885,7 +888,8 @@ public final class VirtualMachine {
                     p.currentLine(),
                     locals,
                     p.errorMessage(),
-                    advancedLastStep.contains(p.id())));
+                    advancedLastStep.contains(p.id()),
+                    advancedLastStep.indexOf(p.id())));
         }
 
         List<Snapshot.MonitorView> mv = new ArrayList<>();
