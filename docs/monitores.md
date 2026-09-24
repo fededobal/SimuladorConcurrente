@@ -90,9 +90,11 @@ procedure retirar(...) {
 2. **En la cola de una variable condición** — hizo `wait(cv)` y espera un `signal`.
 3. **Ejecutando dentro del monitor** — tiene el acceso exclusivo.
 
-En el simulador, el proceso que compite o espera en una variable condición figura como
-bloqueado (su franja en el editor es rayada), y el que avanzó en el último instante, como
-ejecutando.
+En el simulador, el proceso que compite figura en ámbar rayado y el que espera en una
+variable condición, en rojo rayado. El que avanzó en el último instante figura como
+ejecutando, con el color del proceso; en la línea de tiempo, cada instante que ejecutó
+dentro de un monitor lleva además una "M". Un proceso que podía avanzar pero al que el
+planificador no le dio turno en ese instante figura como "sin turno".
 
 ### 2.3 Llamadas entre monitores
 

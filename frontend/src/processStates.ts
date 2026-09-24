@@ -16,7 +16,7 @@ export const STATE_LABEL: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'ejecutando en el monitor',
   COMPETING: 'compitiendo',
   WAITING: 'esperando',
-  READY: 'listo',
+  READY: 'sin turno',
   TERMINATED: 'terminado',
 };
 
@@ -26,7 +26,7 @@ export const STATE_HINT: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'ejecutando dentro de un monitor, con el monitor tomado',
   COMPETING: 'compitiendo por entrar al monitor',
   WAITING: 'esperando, dormido en una variable condición',
-  READY: 'listo, pero no le tocó avanzar en este instante',
+  READY: 'sin turno: podía avanzar, pero no le tocó en este instante',
   TERMINATED: 'terminado',
 };
 

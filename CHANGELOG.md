@@ -40,6 +40,9 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- En la línea de tiempo y el editor, el estado "listo" pasa a llamarse "sin turno": un
+  proceso que podía avanzar pero al que el planificador no eligió en ese instante.
+  (Federico Dobal, 2026-09-23)
 - Los colores de proceso ya no incluyen rojos, amarillos ni verdes: quedan reservados para
   los estados (rojo esperando, amarillo compitiendo). (Federico Dobal, 2026-09-23)
 - Llamadas abiertas entre monitores: un procedure de A que llama a B libera A durante la
