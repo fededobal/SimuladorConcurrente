@@ -316,6 +316,33 @@ class VirtualMachineTest {
         }
     }
 
+    /**
+     * Rojo, amarillo y verde son de los estados en la interfaz: ningun proceso los recibe.
+     * Se controla el tono (HSL) de los colores de doce procesos, uno por color de la paleta.
+     */
+    @Test
+    void coloresDeProcesoNoUsanLosDeLosEstados() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process P[i: 0..11] { skip; }", 0);
+        for (Snapshot.ProcessView p : vm.snapshot().processes()) {
+            double tono = tono(p.color());
+            assertTrue(tono >= 180 && tono <= 335, p.name() + " tiene el color " + p.color());
+        }
+    }
+
+    /** Tono en grados (0 rojo, 60 amarillo, 120 verde, 240 azul) de un color #rrggbb. */
+    private static double tono(String hex) {
+        double r = Integer.parseInt(hex.substring(1, 3), 16) / 255.0;
+        double g = Integer.parseInt(hex.substring(3, 5), 16) / 255.0;
+        double b = Integer.parseInt(hex.substring(5, 7), 16) / 255.0;
+        double max = Math.max(r, Math.max(g, b));
+        double d = max - Math.min(r, Math.min(g, b));
+        double h;
+        if (max == r) h = ((g - b) / d) % 6;
+        else if (max == g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        return (h * 60 + 360) % 360;
+    }
+
     /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */
     @Test
     void errorDeEjecucionQuedaConSuLinea() {

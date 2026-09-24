@@ -18,10 +18,13 @@ import java.util.function.Function;
  */
 public final class VirtualMachine {
 
+    // Sin rojos, amarillos ni verdes (tampoco naranja, lima o verde azulado): la interfaz
+    // reserva esos colores para los estados (rojo esperando, amarillo compitiendo), y un
+    // proceso de ese color se confundiria con un estado.
     private static final String[] PALETTE = {
-            "#ef4444", "#3b82f6", "#10b981", "#f59e0b",
-            "#8b5cf6", "#ec4899", "#06b6d4", "#f97316",
-            "#84cc16", "#a855f7", "#14b8a6", "#eab308"
+            "#3b82f6", "#ec4899", "#06b6d4", "#a855f7",
+            "#6366f1", "#d946ef", "#0ea5e9", "#8b5cf6",
+            "#93c5fd", "#f0abfc", "#67e8f9", "#c4b5fd"
     };
 
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
