@@ -16,6 +16,9 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- La línea de tiempo se agranda o achica arrastrando su borde superior (también con las
+  flechas del teclado). El navegador recuerda el alto elegido; doble clic en el borde vuelve
+  al alto automático. (Federico Dobal, 2026-09-23)
 - Línea de tiempo abajo de la pantalla: una fila por proceso y una columna por instante con
   su estado (ejecutando, compitiendo por el monitor, esperando en una variable condición o
   listo). Ejecutando se pinta con el color del proceso y, dentro de un monitor, cada instante
