@@ -118,7 +118,9 @@ public final class SemanticValidator {
 
     private void validateMonitor(MonitorDef m) {
         // Las permanentes se inicializan en orden: cada una ve a las anteriores.
-        Scope root = new Scope(null, m.name(), false);
+        Set<String> condNames = new HashSet<>();
+        for (CondDecl c : m.conds()) condNames.add(c.name());
+        Scope root = new Scope(null, m.name(), false, condNames);
         for (VarDecl v : m.permanentVars()) {
             checkVarDecl(v, root, PERMANENTE, m.name() + "." + v.name());
         }
@@ -136,7 +138,7 @@ public final class SemanticValidator {
         }
 
         for (ProcedureDef pr : m.procedures()) {
-            Scope scope = new Scope(root, m.name(), true);
+            Scope scope = new Scope(root, m.name(), true, condNames);
             for (Param param : pr.params()) {
                 declare(scope, param.name(), new Symbol(new VarType(param.type(), false),
                         !param.isOutput(), PARAMETRO, null), param.line());
@@ -146,7 +148,7 @@ public final class SemanticValidator {
     }
 
     private void validateProcess(ProcessDef p) {
-        Scope scope = new Scope(null, null, false);
+        Scope scope = new Scope(null, null, false, Set.of());
         if (p.isFamily()) {
             ExprTyper.expect(p.quant().from(), Type.INT, scope, "La cota de la familia");
             ExprTyper.expect(p.quant().to(), Type.INT, scope, "La cota de la familia");

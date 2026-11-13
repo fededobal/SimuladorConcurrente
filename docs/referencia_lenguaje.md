@@ -456,6 +456,8 @@ Errores de compilación (con número de línea), verificados:
 - `El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)`
 - `El tipo se llama bool, no boolean` · `El resto de la división se escribe mod, no %`
 - `Los parámetros de distinto grupo se separan con ';' (la coma separa nombres del mismo tipo)`
+- `En la práctica no se permite preguntar si una variable condición está vacía` (al escribir
+  `empty(cv)` sobre una `cond`: para saber si hay procesos dormidos, se cuentan con un entero)
 - `Comentario de bloque sin cerrar` · `Cadena de texto sin cerrar` · `Comilla tipográfica “: las cadenas van entre comillas rectas (")`
 - `La cola 'c' maneja 2 componente(s) (fijado en la línea 4) y este pop usa 1`
 - `El programa tiene demasiados niveles de anidamiento (máximo 100)`

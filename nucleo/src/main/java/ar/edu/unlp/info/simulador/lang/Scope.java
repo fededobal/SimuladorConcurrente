@@ -36,15 +36,23 @@ final class Scope {
     final String monitor;
     /** true dentro de un procedure: ahi se permiten wait y signal. */
     final boolean inProcedure;
+    /** Nombres de las variables condicion del monitor (vacio en un proceso). */
+    private final Set<String> conds;
 
-    Scope(Scope parent, String monitor, boolean inProcedure) {
+    Scope(Scope parent, String monitor, boolean inProcedure, Set<String> conds) {
         this.parent = parent;
         this.monitor = monitor;
         this.inProcedure = inProcedure;
+        this.conds = conds;
     }
 
     Scope child() {
-        return new Scope(this, monitor, inProcedure);
+        return new Scope(this, monitor, inProcedure, conds);
+    }
+
+    /** true si el nombre es una variable condicion del monitor y no la tapa otro simbolo. */
+    boolean isCond(String name) {
+        return conds.contains(name) && lookup(name) == null;
     }
 
     /** @return el simbolo visible con ese nombre, o null si no existe */

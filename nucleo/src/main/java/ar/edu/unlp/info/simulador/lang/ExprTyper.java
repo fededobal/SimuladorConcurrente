@@ -29,6 +29,10 @@ final class ExprTyper {
                 yield t.base();
             }
             case Expr.EmptyQueue q -> {
+                if (scope.isCond(q.queue())) {
+                    throw error("En la práctica no se permite preguntar si una variable condición "
+                            + "está vacía", q.line());
+                }
                 if (!known(q.queue(), scope, q.line()).type().isQueue()) {
                     throw error("'" + q.queue() + "' no es una cola: empty se usa con una Cola o "
                             + "una ColaOrdenada", q.line());

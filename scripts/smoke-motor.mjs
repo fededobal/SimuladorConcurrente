@@ -194,6 +194,10 @@ const CANONICOS = [
       procedure f() { push(c, (7, "adn")); pop(c, (id, s)); } }
     process P { M.f(); }`,
     (r) => r.finished && r.vars['M.id'] === '7' && r.vars['M.s'] === 'adn'],
+  ['empty sobre una cond se rechaza como en la practica', `
+    monitor M { cond cola; bool b; procedure f() { b = empty(cola); } }
+    process P { M.f(); }`,
+    (r) => !!r.compilacion?.endsWith('En la práctica no se permite preguntar si una variable condición está vacía')],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

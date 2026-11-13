@@ -436,4 +436,15 @@ class CompilerTest {
         assertTrue(errorDe("monitor M { procedure f(int a, int b) { skip; } }\n"
                 + "process P { M.f(1, 2); }").contains(esperado));
     }
+
+    /** La catedra no usa empty sobre una variable condicion: el mensaje lo dice. */
+    @Test
+    void emptySobreUnaCondNoSePermite() {
+        String esperado = "Línea 2: En la práctica no se permite preguntar si una variable "
+                + "condición está vacía";
+        assertEquals(esperado, errorDe("monitor M { cond cola; bool b;\n"
+                + "procedure f() { b = empty(cola); } }\nprocess P { M.f(); }"));
+        assertEquals(esperado, errorDe("monitor M { cond turno[3]; bool b;\n"
+                + "procedure f() { b = empty(turno[1]); } }\nprocess P { M.f(); }"));
+    }
 }

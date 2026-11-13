@@ -684,6 +684,12 @@ public final class Parser {
             // se acepta con y sin parentesis: empty c y empty(c)
             boolean parentesis = match("(");
             String queue = consumeIdent("Se esperaba el nombre de la cola después de 'empty'");
+            if (match("[")) {
+                // empty(turno[i]): solo puede ser una cond (no hay arreglos de colas); el
+                // validador lo informa con el nombre
+                parseExpr();
+                consume("]", "Se esperaba ']' en el índice");
+            }
             if (parentesis) consume(")", "Se esperaba ')' después del nombre de la cola");
             return new Expr.EmptyQueue(queue, t.line());
         }
