@@ -199,6 +199,18 @@ button { cursor: pointer; }
 .mon-estados dd { min-width: 0; font-family: var(--mono); font-size: 10.5px; }
 .mon-estados .cond { color: var(--dim); }
 .mon-wait { list-style: none; }
+.mon-mas-nombres {
+  margin-left: 6px;
+  padding: 0 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: none;
+  color: var(--dim);
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.mon-mas-nombres:hover { color: var(--text); border-color: var(--dimmer); }
 .mon-estados .nadie { color: var(--dimmer); }
 
 /* ------------------------------------------------------------------ salida */

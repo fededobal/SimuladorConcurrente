@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import {
   arrowsOf, shortName, tokenPosition, tokensOf, TOKENS_PER_ZONE,
   type Arrow, type Token, type Zone,
@@ -137,16 +137,31 @@ function notaDelDueno(p: ProcessView | undefined, ahora: number): string {
   return `, esperando en ${p.blockedOn ?? 'otro monitor'}`;
 }
 
-/** Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie. */
+/** Cuantos nombres se muestran de una lista antes de ofrecer abrirla entera. */
+const MAX_NOMBRES = 6;
+
+/**
+ * Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie.
+ * Con mas de {@link MAX_NOMBRES}, muestra los primeros y un boton para ver el resto.
+ */
 function Nombres({ procs }: { procs: readonly ProcRef[] }) {
+  const [abierta, setAbierta] = useState(false);
   if (procs.length === 0) return <span className="nadie">—</span>;
+  const recortada = procs.length > MAX_NOMBRES && !abierta;
+  const visibles = recortada ? procs.slice(0, MAX_NOMBRES) : procs;
   return (
     <>
-      {procs.map((p, i) => (
+      {visibles.map((p, i) => (
         <span key={p.id} style={{ color: p.color }}>
-          {p.name}{i < procs.length - 1 ? ', ' : ''}
+          {p.name}{i < visibles.length - 1 ? ', ' : ''}
         </span>
       ))}
+      {procs.length > MAX_NOMBRES && (
+        <button type="button" className="mon-mas-nombres" onClick={() => setAbierta(!abierta)}
+          aria-expanded={abierta}>
+          {recortada ? `+${procs.length - MAX_NOMBRES} más` : 'ver menos'}
+        </button>
+      )}
     </>
   );
 }
