@@ -16,7 +16,9 @@ interface Props {
 export function MonitorVars({ vars, processes }: Props) {
   if (vars.length === 0) return null;
   return (
-    <dl className="mon-datos" aria-label="Variables del monitor">
+    <section className="mon-datos-seccion" aria-label="Variables del monitor">
+      <h4>Variables del monitor</h4>
+      <dl className="mon-datos">
       {vars.map((v) => {
         const writer = v.lastWriterId === null ? undefined : processes.get(v.lastWriterId);
         return (
@@ -35,7 +37,8 @@ export function MonitorVars({ vars, processes }: Props) {
           </div>
         );
       })}
-    </dl>
+      </dl>
+    </section>
   );
 }
 

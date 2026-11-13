@@ -353,14 +353,17 @@ button { cursor: pointer; }
 .monitores.extendido .mon-estados { font-size: 12.5px; }
 .monitores.extendido .mon-estados dd { font-size: 12px; }
 
-/* variables del monitor dibujadas segun su estructura */
+/* variables del monitor dibujadas segun su estructura, bajo su propio titulo */
+.mon-datos-seccion {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+}
+.mon-datos-seccion h4 { font-size: 11.5px; font-weight: 600; color: var(--dim); margin-bottom: 6px; }
 .mon-datos {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 4px 12px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--line-soft);
   font-size: 11.5px;
   line-height: 1.5;
 }
