@@ -35,9 +35,9 @@ escribe ningún protocolo de entrada/salida: es responsabilidad del monitor.
 Si un proceso llama a un procedure mientras otro está adentro, queda demorado en la **cola
 de entrada** del monitor hasta que el monitor se libere.
 
-En el simulador, la cola de entrada se atiende en orden de llegada: cuando el monitor se
-libera, el primero de la cola entra en ese mismo instante y el resto sigue esperando
-(ADR 0005).
+Cuando el monitor se libera, todos los procesos de la cola de entrada compiten por él y
+**no acceden en orden de llegada** (Explicación práctica 3). En el simulador, uno de ellos,
+elegido al azar, entra en ese mismo instante y el resto sigue esperando (ADR 0005 y 0006).
 
 ### 1.2 Sincronización por condición — explícita
 

@@ -43,6 +43,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Cuando un monitor se libera, entra en ese mismo instante uno de los procesos de la cola de entrada elegido al azar, y no el que llegó primero. Así lo explica la cátedra en la explicación práctica de monitores (ADR 0006). (Federico Dobal, 2026-11-13)
 - Al liberarse un monitor, el primero de la cola de entrada entra en ese mismo instante y el
   resto sigue esperando en orden de llegada. Antes se despertaba a toda la cola y el
   siguiente entraba recién en un instante posterior, con el monitor libre mientras tanto

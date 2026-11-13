@@ -1,8 +1,6 @@
 package ar.edu.unlp.info.simulador.vm;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +25,11 @@ public final class Monitor {
     /** Proceso que tiene el acceso exclusivo, o null si el monitor esta libre. */
     private Process lockOwner;
     /**
-     * Procesos que compiten por entrar (llamaron con el monitor ocupado, o fueron despertados),
-     * en orden de llegada: al liberarse el monitor, entra el primero (ADR 0005).
+     * Procesos que compiten por entrar (llamaron con el monitor ocupado, o fueron despertados).
+     * Se guardan en orden de llegada solo para mostrarlos; al liberarse el monitor entra
+     * cualquiera de ellos, elegido al azar (ADR 0006).
      */
-    private final Deque<Process> entryQueue = new ArrayDeque<>();
+    private final List<Process> entryQueue = new ArrayList<>();
 
     public Monitor(String name) {
         this.name = name;
@@ -63,7 +62,13 @@ public final class Monitor {
 
     public boolean isFree() { return lockOwner == null; }
 
-    public Deque<Process> entryQueue() { return entryQueue; }
+    /** El proceso pasa a competir por el monitor. */
+    public void addEntrant(Process p) { entryQueue.add(p); }
+
+    public int entrantCount() { return entryQueue.size(); }
+
+    /** Saca de la cola de entrada al proceso de la posicion indicada. */
+    public Process removeEntrant(int index) { return entryQueue.remove(index); }
 
     public List<Process> entryQueueSnapshot() { return new ArrayList<>(entryQueue); }
 }

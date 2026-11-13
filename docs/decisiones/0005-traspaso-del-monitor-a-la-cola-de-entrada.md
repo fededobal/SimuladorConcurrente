@@ -1,6 +1,6 @@
 # 0005. Traspasar el monitor al primero de la cola de entrada
 
-- Estado: aceptada
+- Estado: aceptada; el orden de entrada lo reemplaza 0006
 - Fecha: 2026-09-23
 
 ## Contexto

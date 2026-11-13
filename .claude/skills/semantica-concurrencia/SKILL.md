@@ -27,8 +27,8 @@ cátedra: `docs/monitores.md`).
   avanza solo ese.
 - **Deadlock**: no terminó y ningún proceso está `READY`.
 - **Error de ejecución**: el proceso termina con `ERROR` y línea; **libera todo recurso que
-  tuviera tomado** (el lock de cada monitor en el que estaba), que pasa al primero de su cola
-  de entrada.
+  tuviera tomado** (el lock de cada monitor en el que estaba), que pasa a uno de su cola de
+  entrada, elegido al azar.
 
 ## Invariantes
 
@@ -36,7 +36,7 @@ cátedra: `docs/monitores.md`).
 2. Un proceso está bloqueado en a lo sumo un recurso a la vez, y figura en la cola de ese
    recurso y en ninguna otra.
 3. Todo camino que saca a un proceso de una sección protegida (retorno, espera, error)
-   devuelve el lock y se lo pasa al primero de la cola de entrada (ADR 0005).
+   devuelve el lock y se lo pasa a uno de la cola de entrada, al azar (ADR 0005 y 0006).
 4. Misma semilla + misma política = misma ejecución, en la JVM y en el navegador (el azar
    sale de `vm/Azar`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
    ejecución y no permite repetir una corrida: la reproducción es desde el núcleo (tests).

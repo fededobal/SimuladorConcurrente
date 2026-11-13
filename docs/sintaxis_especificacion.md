@@ -202,9 +202,9 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 - **Exclusión mutua implícita:** a lo sumo un proceso dentro de cada monitor.
   - `Monitor.op(args)` con el monitor libre: el proceso entra y ejecuta el cuerpo.
   - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada.
-  - Al liberarse el monitor (retorno, `wait`, llamada a otro monitor o error), el primero de
-    la cola de entrada lo toma en ese mismo instante y el resto sigue esperando, en orden de
-    llegada (ADR 0005).
+  - Al liberarse el monitor (retorno, `wait`, llamada a otro monitor o error), un proceso de
+    la cola de entrada, elegido al azar, lo toma en ese mismo instante y el resto sigue
+    esperando. No se respeta el orden de llegada (ADR 0005 y 0006).
   - Al retornar del procedure: se copian los `out` y se libera el monitor.
   - Llamada desde un procedure de A a un procedure de B: los argumentos se evalúan con A
     tomado; el proceso libera A, entra a B (o espera en su cola de entrada) y, al retornar,

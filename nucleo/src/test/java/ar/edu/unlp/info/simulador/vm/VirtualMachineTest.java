@@ -351,42 +351,47 @@ class VirtualMachineTest {
             process C { M.f(); }
             """;
 
-    /** ADR 0005: el que espera en la cola de entrada entra en el mismo instante en que el otro sale. */
+    /** ADR 0005: uno de los que esperan en la cola de entrada entra en el mismo instante. */
     @Test
-    void alSalirDelMonitorEntraElPrimeroDeLaColaEnElMismoInstante() {
+    void alSalirDelMonitorEntraUnoDeLaColaEnElMismoInstante() {
         VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, 0);
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A entra, B y C a la cola
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A: x = x + 1
         java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN);
 
+        Snapshot s = vm.snapshot();
+        int dueno = s.monitors().get(0).lockOwner().id();
+        assertTrue(dueno == 2 || dueno == 3, "entro " + dueno);
         java.util.List<String> kinds = ev.stream().map(e -> e.kind() + ":" + e.processId()).toList();
         int retorno = kinds.indexOf("RETURN:1");
-        int entrada = kinds.indexOf("ENTER:2");
+        int entrada = kinds.indexOf("ENTER:" + dueno);
         assertTrue(retorno >= 0 && entrada > retorno, "eventos del instante: " + kinds);
 
-        Snapshot s = vm.snapshot();
-        assertEquals(2, s.monitors().get(0).lockOwner().id());
-        Snapshot.ProcessView b = s.processes().get(1);
-        assertEquals("READY", b.state());
-        assertTrue(b.advanced(), "la entrada por traspaso es la accion de B en este instante");
+        Snapshot.ProcessView entro = s.processes().get(dueno - 1);
+        assertEquals("READY", entro.state());
+        assertTrue(entro.advanced(), "la entrada por traspaso es su accion en este instante");
+        int otro = dueno == 2 ? 3 : 2;
+        assertEquals(java.util.List.of(otro),
+                s.monitors().get(0).entryQueue().stream().map(Snapshot.ProcRef::id).toList());
     }
 
-    /** ADR 0005: el traspaso respeta el orden de llegada y el resto de la cola sigue esperando. */
+    /**
+     * ADR 0006: cuando el monitor se libera compiten todos los de la cola de entrada y entra
+     * cualquiera, no el que llego primero. B llega antes que C y aun asi, segun la semilla,
+     * a veces entra C. Las semillas son como las del reloj que usa la interfaz: con turnos en
+     * ronda este es el primer sorteo, y el generador (el de java.util.Random) da el mismo
+     * primer valor para semillas chicas consecutivas.
+     */
     @Test
-    void elTraspasoRespetaElOrdenDeLaColaDeEntrada() {
-        VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, 0);
-        for (int i = 0; i < 3; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
-        Snapshot s = vm.snapshot();
-        Snapshot.ProcessView c = s.processes().get(2);
-        assertEquals("BLOCKED", c.state());
-        assertEquals("MONITOR_ENTRY", c.blockReason());
-        assertEquals(java.util.List.of(3),
-                s.monitors().get(0).entryQueue().stream().map(Snapshot.ProcRef::id).toList());
-
-        // B hace su asignacion y retorna: le toca a C
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
-        assertEquals(3, vm.snapshot().monitors().get(0).lockOwner().id());
+    void laEntradaAlMonitorNoRespetaElOrdenDeLlegada() {
+        java.util.Set<Integer> entraron = new java.util.HashSet<>();
+        for (int k = 0; k < 25; k++) {
+            long seed = 1_763_000_000_000L + k * 7_919L;
+            VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, seed);
+            for (int i = 0; i < 3; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+            entraron.add(vm.snapshot().monitors().get(0).lockOwner().id());
+        }
+        assertEquals(java.util.Set.of(2, 3), entraron);
     }
 
     /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */

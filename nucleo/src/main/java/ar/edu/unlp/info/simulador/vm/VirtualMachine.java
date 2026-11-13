@@ -261,7 +261,7 @@ public final class VirtualMachine {
         Monitor m = monitors.get(act.monitorName());
         if (!m.isFree()) {
             String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
-            m.entryQueue().addLast(p);
+            m.addEntrant(p);
             p.block(Process.BlockReason.MONITOR_ENTRY, m.name());
             event(p, "BLOCKED", m.name(), p.name() + ": espera para "
                     + (act.isEntering() ? "entrar a " : "reingresar a ") + destino);
@@ -323,19 +323,19 @@ public final class VirtualMachine {
     }
 
     /**
-     * Suelta el monitor y se lo pasa al primero de la cola de entrada, que entra en ese
-     * momento: esa entrada es su accion del instante (ADR 0005). Si cada proceso de la cola
-     * tuviera que esperar su proximo turno para reintentar, el monitor quedaria un instante
-     * vacio con procesos esperandolo, que no es lo que describe la teoria. El resto de la
-     * cola sigue esperando, en orden de llegada.
+     * Suelta el monitor y se lo pasa a uno de los que compiten por el, que entra en ese
+     * momento: esa entrada es su accion del instante (ADR 0005). Cual entra se elige al azar
+     * entre todos los de la cola de entrada, sin importar el orden de llegada, porque asi lo
+     * explica la catedra (ADR 0006). Si hay uno solo no se sortea, para no consumir azar.
      *
      * <p>El que llama ya registro su evento de salida (RETURN, WAIT o RELEASE): el ENTER del
      * que entra tiene que quedar despues en el log.
      */
     private void releaseMonitor(Monitor m) {
         m.setLockOwner(null);
-        while (m.isFree() && !m.entryQueue().isEmpty()) {
-            Process w = m.entryQueue().pollFirst();
+        while (m.isFree() && m.entrantCount() > 0) {
+            int n = m.entrantCount();
+            Process w = m.removeEntrant(n == 1 ? 0 : random.nextInt(n));
             w.unblock();
             if (!advancedLastStep.contains(w.id())) advancedLastStep.add(w.id());
             try {
@@ -579,7 +579,7 @@ public final class VirtualMachine {
                             p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
                 } else {
                     Process w = cv.dequeue();
-                    m.entryQueue().addLast(w);
+                    m.addEntrant(w);
                     w.block(Process.BlockReason.MONITOR_ENTRY, m.name());
                     event(p, "SIGNAL", m.name() + "." + key,
                             p.name() + ": signal(" + key + ") - despierta a " + w.name()
@@ -589,7 +589,7 @@ public final class VirtualMachine {
             case SIGNAL_ALL -> {
                 List<Process> all = cv.drain();
                 for (Process w : all) {
-                    m.entryQueue().addLast(w);
+                    m.addEntrant(w);
                     w.block(Process.BlockReason.MONITOR_ENTRY, m.name());
                 }
                 event(p, "SIGNAL_ALL", m.name() + "." + key,
