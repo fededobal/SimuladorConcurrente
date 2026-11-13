@@ -17,8 +17,14 @@ public record Snapshot(int instant,
     /** Referencia liviana a un proceso (para colas). */
     public record ProcRef(int id, String name, String color) { }
 
-    /** Variable con su valor renderizado y quien la escribio por ultima vez. */
-    public record VarView(String name, String type, String value, boolean isArray, Integer lastWriterId) { }
+    /**
+     * Variable con su valor renderizado y quien la escribio por ultima vez. Un arreglo o una
+     * cola trae ademas sus elementos uno por uno (los primeros {@link Value#MOSTRAR_ELEMENTOS};
+     * {@code size} es el total), para que la interfaz los dibuje como celdas; en un escalar
+     * {@code elements} es null y {@code size} 0.
+     */
+    public record VarView(String name, String type, String value, boolean isArray, Integer lastWriterId,
+                          List<String> elements, int size) { }
 
     public record CondView(String name, List<ProcRef> queue) { }
 

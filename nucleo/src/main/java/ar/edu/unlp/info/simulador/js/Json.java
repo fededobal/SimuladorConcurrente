@@ -76,7 +76,12 @@ final class Json {
         campo(sb, "type");         str(sb, v.type()); sb.append(',');
         campo(sb, "value");        str(sb, v.value()); sb.append(',');
         campo(sb, "isArray");      sb.append(v.isArray()).append(',');
-        campo(sb, "lastWriterId"); num(sb, v.lastWriterId());
+        campo(sb, "lastWriterId"); num(sb, v.lastWriterId()); sb.append(',');
+        campo(sb, "elements");
+        if (v.elements() == null) sb.append("null");
+        else lista(sb, v.elements(), Json::str);
+        sb.append(',');
+        campo(sb, "size");         sb.append(v.size());
         sb.append("}");
     }
 

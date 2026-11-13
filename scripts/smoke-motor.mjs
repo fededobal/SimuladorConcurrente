@@ -83,6 +83,14 @@ const CANONICOS = [
   ['error en la inicializacion del monitor vuelve como error (B5)', `
     monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !r.excepcion && (r.compilacion || r.kinds?.has('ERROR'))],
+  ['colas y arreglos llegan con sus elementos uno por uno', `
+    monitor M { Cola c; int a[2]; push(c, 3); push(c, 1); a[1] = 9; procedure f() { skip; } }
+    process P { M.f(); }`,
+    (r) => {
+      const v = Object.fromEntries((r.snapshot?.monitors[0].vars ?? []).map((x) => [x.name, x]));
+      return JSON.stringify(v.c?.elements) === '["3","1"]' && v.c.size === 2
+        && JSON.stringify(v.a?.elements) === '["0","9"]' && v.a.size === 2;
+    }],
   ['d++ sobre double no trunca (B2)', `
     monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }`,
     (r) => r.vars?.['M.d'] === '2.5'],

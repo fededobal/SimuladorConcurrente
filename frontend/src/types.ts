@@ -12,6 +12,10 @@ export interface VarView {
   value: string;
   isArray: boolean;
   lastWriterId: number | null;
+  /** Elementos de un arreglo o una cola (los primeros 50); null en un escalar. */
+  elements: string[] | null;
+  /** Cantidad total de elementos; 0 en un escalar. */
+  size: number;
 }
 
 export interface CondView {

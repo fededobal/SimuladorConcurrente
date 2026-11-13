@@ -191,6 +191,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- El snapshot trae los elementos de cada arreglo y cola uno por uno (`elements`, hasta 50) y la cantidad total (`size`), además del texto; en un escalar `elements` es null. Con eso la interfaz dibuja celdas sin tener que interpretar el texto. (Federico Dobal, 2026-11-13)
 - Separar de la máquina virtual la carga del programa, el acceso a variables, la salida y la construcción del snapshot, para poder sumarle funcionalidad sin que siga creciendo. (Federico Dobal, 2026-11-13)
 - `EjemplosTest` lee la línea `// espera:` partiendo en el primer punto y el primer `=`, así
   un valor esperado puede tener decimales. El README, `CLAUDE.md` y `.java-version` indican

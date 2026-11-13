@@ -72,8 +72,20 @@ final class SnapshotBuilder {
     }
 
     private static Snapshot.VarView varView(String name, Value v, Integer writer) {
-        boolean isArray = v instanceof Value.ArrayVal;
-        return new Snapshot.VarView(name, v.typeName(), v.display(), isArray, writer);
+        List<Value> items = switch (v) {
+            case Value.ArrayVal a -> List.of(a.raw());
+            case Value.QueueVal q -> q.snapshot();
+            default -> null;
+        };
+        List<String> elements = null;
+        if (items != null) {
+            elements = new ArrayList<>();
+            for (int i = 0; i < Math.min(items.size(), Value.MOSTRAR_ELEMENTOS); i++) {
+                elements.add(items.get(i).display());
+            }
+        }
+        return new Snapshot.VarView(name, v.typeName(), v.display(), v instanceof Value.ArrayVal,
+                writer, elements, items == null ? 0 : items.size());
     }
 
     private static Snapshot.ProcRef ref(Process p) {

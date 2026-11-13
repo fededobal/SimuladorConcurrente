@@ -4,8 +4,10 @@ import ar.edu.unlp.info.simulador.TestSupport;
 import ar.edu.unlp.info.simulador.TestSupport.RunResult;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VirtualMachineTest {
@@ -382,6 +384,34 @@ class VirtualMachineTest {
             assertTrue(contraste >= 4.5,
                     p.name() + " tiene el color " + p.color() + " con contraste " + contraste);
         }
+    }
+
+    /**
+     * La interfaz dibuja colas y arreglos como celdas: el snapshot trae los elementos uno por
+     * uno ademas del texto. Un escalar no trae elementos.
+     */
+    @Test
+    void snapshotTraeLosElementosDeColasYArreglos() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M {
+                  Cola c; ColaOrdenada o; int a[3]; int n = 7;
+                  push(c, 5); push(c, 9); push(o, (2, 20)); push(o, (1, 10)); a[1] = 4;
+                  procedure f() { skip; }
+                }
+                process P { M.f(); }
+                """, 0);
+        Snapshot.MonitorView m = vm.snapshot().monitors().get(0);
+        assertEquals(List.of("5", "9"), var(m, "c").elements());
+        assertEquals(2, var(m, "c").size());
+        assertEquals(List.of("[1, 10]", "[2, 20]"), var(m, "o").elements());
+        assertEquals(List.of("0", "4", "0"), var(m, "a").elements());
+        assertEquals(3, var(m, "a").size());
+        assertNull(var(m, "n").elements());
+        assertEquals(0, var(m, "n").size());
+    }
+
+    private static Snapshot.VarView var(Snapshot.MonitorView m, String name) {
+        return m.vars().stream().filter((v) -> v.name().equals(name)).findFirst().orElseThrow();
     }
 
     /** Luminancia relativa (WCAG) de un color #rrggbb, entre 0 (negro) y 1 (blanco). */
