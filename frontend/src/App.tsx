@@ -177,7 +177,7 @@ export function App() {
       <div
         ref={abajo.panelRef}
         className="abajo"
-        style={abajo.height === null ? undefined : { height: abajo.height }}
+        style={abajo.height === null ? undefined : { height: abajo.height, maxHeight: 'none' }}
       >
         <div className="tl-asa" {...abajo.handleProps} />
         <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} />

@@ -68,7 +68,6 @@ export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
       {texto}
     </text>
   );
-  const condsConProcesos = monitor.conds.filter((c) => c.queue.length > 0);
 
   return (
     <section className="mon" aria-label={`Monitor ${monitor.name}`}>
@@ -119,19 +118,13 @@ export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
         ))}
       </svg>
 
-      <dl className="mon-colas">
-        {monitor.entryQueue.length > 0 && (
-          <div>
-            <dt>entrada</dt>
-            <dd><Nombres procs={monitor.entryQueue} /></dd>
-          </div>
-        )}
-        {condsConProcesos.map((c) => (
-          <div key={c.name}>
-            <dt>{c.name}</dt>
-            <dd><Nombres procs={c.queue} /></dd>
-          </div>
-        ))}
+      <dl className="mon-estados">
+        <dt>Compitiendo</dt>
+        <dd><Nombres procs={monitor.entryQueue} /></dd>
+        <dt>En monitor</dt>
+        <dd><Nombres procs={monitor.lockOwner ? [monitor.lockOwner] : []} /></dd>
+        <dt>En wait</dt>
+        <dd><EnWait monitor={monitor} /></dd>
       </dl>
     </section>
   );
@@ -144,13 +137,30 @@ function notaDelDueno(p: ProcessView | undefined, ahora: number): string {
   return `, esperando en ${p.blockedOn ?? 'otro monitor'}`;
 }
 
-/** Nombres en orden de cola, cada uno con el color de su proceso. */
+/** Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie. */
 function Nombres({ procs }: { procs: readonly ProcRef[] }) {
+  if (procs.length === 0) return <span className="nadie">—</span>;
   return (
     <>
       {procs.map((p, i) => (
         <span key={p.id} style={{ color: p.color }}>
           {p.name}{i < procs.length - 1 ? ', ' : ''}
+        </span>
+      ))}
+    </>
+  );
+}
+
+/** Los procesos dormidos, con la variable condicion de cada uno, en el orden de su cola. */
+function EnWait({ monitor }: { monitor: MonitorView }) {
+  const dormidos = monitor.conds.flatMap((c) => c.queue.map((p) => ({ p, cond: c.name })));
+  if (dormidos.length === 0) return <span className="nadie">—</span>;
+  return (
+    <>
+      {dormidos.map(({ p, cond }, i) => (
+        <span key={p.id}>
+          <span style={{ color: p.color }}>{p.name}</span>
+          <span className="cond"> ({cond}){i < dormidos.length - 1 ? ', ' : ''}</span>
         </span>
       ))}
     </>
