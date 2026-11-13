@@ -1,6 +1,6 @@
 # 0004. Liberar el monitor del llamador en las llamadas entre monitores
 
-- Estado: aceptada
+- Estado: reemplazada por 0007
 - Fecha: 2026-09-23
 
 ## Contexto

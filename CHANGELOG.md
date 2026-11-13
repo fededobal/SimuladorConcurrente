@@ -43,6 +43,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Cuando un procedure de un monitor llama a otro monitor, conserva el suyo hasta que la llamada termina, aunque haga wait en el otro, como explica la cátedra (ADR 0007, reemplaza al 0004). El mensaje de interbloqueo dice qué monitor retiene cada proceso bloqueado y el snapshot informa los monitores tomados de cada proceso (campo holding). (Federico Dobal, 2026-11-13)
 - Cuando un monitor se libera, entra en ese mismo instante uno de los procesos de la cola de entrada elegido al azar, y no el que llegó primero. Así lo explica la cátedra en la explicación práctica de monitores (ADR 0006). (Federico Dobal, 2026-11-13)
 - Al liberarse un monitor, el primero de la cola de entrada entra en ese mismo instante y el
   resto sigue esperando en orden de llegada. Antes se despertaba a toda la cola y el

@@ -44,6 +44,8 @@ export interface ProcessView {
   advanced: boolean;
   /** Posicion en el turno del ultimo instante (0 el primero que avanzo), o -1 si no avanzo. */
   advanceOrder: number;
+  /** Monitores que tiene tomados (con llamadas cerradas, puede retener uno mientras espera en otro). */
+  holding: string[];
 }
 
 export interface OutputLine {

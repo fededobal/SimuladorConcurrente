@@ -210,8 +210,8 @@ procedure nada() { ... }
   devolver a una variable `int`, `double` o `text`, pero no a una `boolean`.
 - No hay valor de retorno; los resultados salen por `out`.
 - Un procedure no puede llamar a otro de su propio monitor (error de compilación). Sí puede
-  llamar a otro monitor: mientras dura esa llamada, libera el suyo y al volver compite otra
-  vez por él (llamada abierta, ver `monitores.md` §2.3).
+  llamar a otro monitor, y **conserva el suyo** hasta que esa llamada termina, aunque haga
+  `wait` en el otro (ver `monitores.md` §2.3).
 
 ### Operaciones de condición
 

@@ -64,9 +64,9 @@ class InvariantesTest {
         Snapshot.ProcRef p1 = new Snapshot.ProcRef(1, "A", "#000");
         Snapshot.ProcRef p2 = new Snapshot.ProcRef(2, "B", "#000");
         Snapshot.ProcessView a = new Snapshot.ProcessView(1, "A", "#000", "TERMINATED", null, null,
-                null, -1, List.of(), null, false, -1);
+                null, -1, List.of(), null, false, -1, List.of());
         Snapshot.ProcessView b = new Snapshot.ProcessView(2, "B", "#000", "BLOCKED", "COND_WAIT",
-                "M.c", "M.f", 3, List.of(), null, false, -1);
+                "M.c", "M.f", 3, List.of(), null, false, -1, List.of());
         Snapshot.MonitorView m = new Snapshot.MonitorView("M", List.of(),
                 List.of(new Snapshot.CondView("c", List.of(p2))), p1, List.of(p2));
         Snapshot s = new Snapshot(1, List.of(a, b), List.of(m), List.of());

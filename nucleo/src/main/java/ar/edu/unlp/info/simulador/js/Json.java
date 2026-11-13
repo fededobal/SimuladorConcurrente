@@ -110,7 +110,8 @@ final class Json {
         campo(sb, "locals");      lista(sb, p.locals(), Json::varView); sb.append(',');
         campo(sb, "error");       str(sb, p.error()); sb.append(',');
         campo(sb, "advanced");    sb.append(p.advanced()).append(',');
-        campo(sb, "advanceOrder"); sb.append(p.advanceOrder());
+        campo(sb, "advanceOrder"); sb.append(p.advanceOrder()).append(',');
+        campo(sb, "holding");     lista(sb, p.holding(), Json::str);
         sb.append("}");
     }
 

@@ -125,7 +125,7 @@ public final class VirtualMachine {
             if (!deadlockLogged) {
                 deadlockLogged = true;
                 instant++;
-                systemLog("DEADLOCK", "Interbloqueo: ningún proceso puede avanzar");
+                systemLog("DEADLOCK", deadlockMessage());
             }
             return stepEntries;
         }
@@ -156,7 +156,7 @@ public final class VirtualMachine {
         }
         if (isDeadlocked() && !deadlockLogged) {
             deadlockLogged = true;
-            systemLog("DEADLOCK", "Interbloqueo: ningún proceso puede avanzar");
+            systemLog("DEADLOCK", deadlockMessage());
         }
         return stepEntries;
     }
@@ -253,9 +253,9 @@ public final class VirtualMachine {
     }
 
     /**
-     * Toma el monitor de la activacion o espera en su cola de entrada. Sirve para las tres
+     * Toma el monitor de la activacion o espera en su cola de entrada. Sirve para las dos
      * situaciones en que un proceso compite por un monitor: la primera entrada a un
-     * procedure, la vuelta de un wait y la vuelta de una llamada abierta a otro monitor.
+     * procedure y la vuelta de un wait.
      */
     private void reacquireMonitor(Process p, Activation act) {
         Monitor m = monitors.get(act.monitorName());
@@ -281,26 +281,16 @@ public final class VirtualMachine {
         } else {
             event(p, "REENTER", m.name(), p.name() + ": reingresa a " + destino);
         }
-        // Los out de una llamada abierta que apuntan a este monitor se escriben ahora, con
-        // el monitor otra vez tomado.
-        for (Map.Entry<LValue, Value> w : act.takeDeferredWrites()) {
-            vars.writeLValue(p.id(), w.getKey(), w.getValue());
-        }
     }
 
     private void finalizeActivation(Process p, Activation act) {
         p.pop();
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
-            Activation caller = p.current();
+            // Si el llamador es un procedure de otro monitor, lo sigue teniendo tomado
+            // (llamada cerrada, ADR 0007): los out se escriben ya.
             for (Map.Entry<String, LValue> e : act.outBindings().entrySet()) {
-                Value value = act.locals().get(e.getKey());
-                if (caller != null && caller.isProcedure()) {
-                    // el llamador solto su monitor (llamada abierta): escribe al reingresar
-                    caller.deferWrite(e.getValue(), value);
-                } else {
-                    vars.writeLValue(p.id(), e.getValue(), value);
-                }
+                vars.writeLValue(p.id(), e.getValue(), act.locals().get(e.getKey()));
             }
             event(p, "RETURN", m.name(),
                     p.name() + ": retorna de " + m.name() + "." + act.procedureName()
@@ -311,6 +301,26 @@ public final class VirtualMachine {
             p.setState(Process.State.TERMINATED);
             event(p, "TERMINATED", "", p.name() + ": termina");
         }
+    }
+
+    /**
+     * Describe el interbloqueo. Con llamadas cerradas, un proceso puede quedar esperando en
+     * un monitor mientras retiene otro; eso se nombra, porque es lo que el alumno tiene que
+     * ver para entender por que nadie avanza.
+     */
+    private String deadlockMessage() {
+        StringBuilder sb = new StringBuilder("Interbloqueo: ningún proceso puede avanzar");
+        for (Process p : processes) {
+            List<Monitor> held = monitorsHeldBy(p);
+            if (p.state() != Process.State.BLOCKED || held.isEmpty()) continue;
+            sb.append(". ").append(p.name()).append(" espera en ").append(p.blockedOn())
+                    .append(" y retiene ");
+            for (int i = 0; i < held.size(); i++) {
+                if (i > 0) sb.append(i == held.size() - 1 ? " y " : ", ");
+                sb.append(held.get(i).name());
+            }
+        }
+        return sb.toString();
     }
 
     /** Los monitores que tiene tomados el proceso, en orden de declaracion. */
@@ -488,10 +498,10 @@ public final class VirtualMachine {
     }
 
     /**
-     * Llamada a un procedure. Los argumentos se evaluan una vez, al llamar. Si el llamador
-     * esta dentro de otro monitor, lo suelta mientras dura la llamada y vuelve a competir por
-     * el al retornar (llamada abierta, ADR 0004). Despues el proceso entra al monitor llamado
-     * o espera en su cola de entrada.
+     * Llamada a un procedure. Los argumentos se evaluan una vez, al llamar. Despues el proceso
+     * entra al monitor llamado o espera en su cola de entrada. Si el llamador esta dentro de
+     * otro monitor, lo sigue teniendo tomado hasta que la llamada termina por completo,
+     * aunque haga wait en el monitor llamado (llamada cerrada, ADR 0007).
      */
     private boolean execMonitorCall(Process p, Activation callerAct, Stmt.MonitorCall call) {
         Monitor m = monitors.get(call.monitor());
@@ -499,10 +509,11 @@ public final class VirtualMachine {
         ProcedureDef pd = md.procedure(call.procedure());
 
         if (m.lockOwner() == p) {
-            // El compilador rechaza la llamada directa y con llamadas abiertas no hay otra
-            // forma de llegar aca: queda como control.
-            throw new RuntimeError("Llamada al monitor '" + m.name()
-                    + "' desde adentro del mismo monitor", call.line());
+            // El compilador rechaza la llamada directa; se llega aca con un ciclo entre
+            // monitores (A llama a B, que llama a A). Con la llamada cerrada el proceso se
+            // esperaria a si mismo para siempre.
+            throw new RuntimeError(p.name() + " ya está dentro de " + m.name()
+                    + " y no puede volver a llamarlo desde otro monitor", call.line());
         }
 
         ExprEvaluator ev = vars.evaluator(callerAct);
@@ -534,13 +545,6 @@ public final class VirtualMachine {
             }
         }
         newAct.pushFront(pd.body().statements());
-        if (callerAct.isProcedure()) {
-            Monitor caller = monitors.get(callerAct.monitorName());
-            callerAct.setNeedsLock(true);
-            event(p, "RELEASE", caller.name(), p.name() + ": libera " + caller.name()
-                    + " mientras llama a " + m.name() + "." + pd.name());
-            releaseMonitor(caller);
-        }
         p.push(newAct);
         newAct.setNeedsLock(true);
         newAct.setEntering(true);

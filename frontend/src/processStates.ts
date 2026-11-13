@@ -1,4 +1,4 @@
-import type { MonitorView, ProcessView } from './types';
+import type { ProcessView } from './types';
 
 /**
  * Estado de un proceso tal como lo ve el alumno. El editor y la linea de tiempo lo pintan
@@ -45,12 +45,12 @@ export const STATE_CLASS: Record<VisibleState, string> = {
  * y en ese mismo instante quedo bloqueado (hizo wait, o encontro el monitor tomado) se
  * muestra bloqueado, que es donde esta parado ahora.
  */
-export function visibleState(p: ProcessView, monitors: readonly MonitorView[]): VisibleState {
+export function visibleState(p: ProcessView): VisibleState {
   if (p.state === 'TERMINATED') return 'TERMINATED';
   if (p.state === 'BLOCKED') return p.blockReason === 'COND_WAIT' ? 'WAITING' : 'COMPETING';
   // el motor devuelve READY a los que avanzaron: se muestran como "ejecutando"
   if (!p.advanced && p.state !== 'RUNNING') return 'READY';
-  // Dentro del monitor es tener su lock. Con las llamadas abiertas (ADR 0004), el que
-  // llama a otro monitor suelta el anterior, asi que tiene a lo sumo uno.
-  return monitors.some((m) => m.lockOwner?.id === p.id) ? 'RUNNING_MONITOR' : 'RUNNING_PROCESS';
+  // Dentro del monitor es tener algun lock. Con las llamadas cerradas (ADR 0007), el que
+  // llama a otro monitor conserva el anterior, asi que puede tener varios.
+  return p.holding.length > 0 ? 'RUNNING_MONITOR' : 'RUNNING_PROCESS';
 }

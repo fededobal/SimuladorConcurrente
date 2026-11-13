@@ -39,7 +39,7 @@ export function App() {
     return snapshot.processes
       .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
       .map((p) => ({
-        line: p.line, color: p.color, state: visibleState(p, snapshot.monitors), name: p.name,
+        line: p.line, color: p.color, state: visibleState(p), name: p.name,
       }));
   }, [snapshot]);
 

@@ -40,7 +40,7 @@ export function appendInstant(t: Timeline, s: Snapshot): Timeline {
   if (s.instant === 0 || (last !== undefined && s.instant <= last.instant)) return t;
 
   const states: Record<number, VisibleState> = {};
-  for (const p of s.processes) states[p.id] = visibleState(p, s.monitors);
+  for (const p of s.processes) states[p.id] = visibleState(p);
 
   const advanced = s.processes
     .filter((p) => p.advanceOrder >= 0)

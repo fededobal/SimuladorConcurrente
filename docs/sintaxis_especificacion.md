@@ -116,8 +116,8 @@ procedure nombre(p1: modo tipo, p2: modo tipo, ...) {
 - Ningún nombre puede tapar a otro visible (permanente, parámetro, iterador, `cond` u otra
   local).
 - Un procedure no puede llamar a otro de su propio monitor. Puede llamar a otro monitor con
-  **llamada abierta**: libera el suyo mientras dura la llamada y al volver compite otra vez
-  por él (ADR 0004).
+  **llamada cerrada**: conserva el suyo hasta que la llamada termina por completo
+  (ADR 0007).
 
 ### 3.3 Operaciones sobre variables condición
 
@@ -206,12 +206,13 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
     la cola de entrada, elegido al azar, lo toma en ese mismo instante y el resto sigue
     esperando. No se respeta el orden de llegada (ADR 0005 y 0006).
   - Al retornar del procedure: se copian los `out` y se libera el monitor.
-  - Llamada desde un procedure de A a un procedure de B: los argumentos se evalúan con A
-    tomado; el proceso libera A, entra a B (o espera en su cola de entrada) y, al retornar,
-    compite por A como después de un `wait`. Los `out` hacia variables de A se escriben al
-    reingresar.
+  - Llamada desde un procedure de A a un procedure de B: el proceso conserva A, entra a B
+    (o espera en su cola de entrada) y, si hace `wait` en B, libera solo B. Al retornar
+    libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
+    llama a A) es error de ejecución.
 - **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver `monitores.md`).
-- **Deadlock:** ningún proceso listo y no todos terminados → se informa.
+- **Deadlock:** ningún proceso listo y no todos terminados → se informa, junto con los
+  monitores que retiene cada proceso bloqueado.
 - **Errores de ejecución:** terminan el proceso que los provoca y liberan su monitor.
 - **Topes:** hasta 5000 procesos, 100 000 elementos por arreglo, 100 niveles de anidamiento
   y 200 operaciones encadenadas por expresión; la pantalla de salida guarda las últimas 500

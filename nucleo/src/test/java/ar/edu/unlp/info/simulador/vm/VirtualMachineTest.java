@@ -241,11 +241,12 @@ class VirtualMachineTest {
     }
 
     /**
-     * D-5, llamada abierta: P llama de A a B y espera en B; Q necesita A para avisarle. Con la
-     * llamada cerrada, P retenia A y el programa quedaba en interbloqueo.
+     * ADR 0007, llamada cerrada: P llama de A a B y espera en B; Q necesita A para avisarle.
+     * P retiene A mientras espera en B, asi que Q no entra nunca: es el interbloqueo del que
+     * advierte la catedra, y el mensaje dice quien retiene que.
      */
     @Test
-    void llamadaAbiertaSueltaElMonitorDelLlamador() {
+    void llamadaCerradaRetieneElMonitorDelLlamador() {
         String programa = """
                 monitor B { boolean listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
@@ -256,17 +257,42 @@ class VirtualMachineTest {
                 process P { A.f(); }
                 process Q { skip; skip; A.g(); }
                 """;
+        int interbloqueos = 0;
         for (int seed = 0; seed < 25; seed++) {
             RunResult r = TestSupport.run(programa, SchedulingPolicy.RANDOM, seed, 5000);
-            assertTrue(r.finished(), "seed " + seed);
-            assertEquals("2", TestSupport.finalVar(r, "A", "vueltas"), "seed " + seed);
+            // si Q llega a A antes que P, abre B primero y el programa termina
+            if (!r.deadlock()) continue;
+            interbloqueos++;
+            String mensaje = r.logs().get(r.logs().size() - 1).message();
+            assertTrue(mensaje.contains("P espera en B.c y retiene A"), mensaje);
+            assertEquals(java.util.List.of("A"), r.vm().snapshot().processes().get(0).holding());
         }
-        assertTrue(TestSupport.run(programa, SchedulingPolicy.ROUND_ROBIN, 0, 5000).finished());
+        assertTrue(interbloqueos >= 20, "interbloqueos: " + interbloqueos);
+        assertTrue(TestSupport.run(programa, SchedulingPolicy.ROUND_ROBIN, 0, 5000).deadlock());
     }
 
-    /** D-5: un out hacia una permanente del llamador se escribe al reingresar, con el monitor tomado. */
+    /** ADR 0007: mientras dura la llamada a B, A sigue tomado y nadie mas entra. */
     @Test
-    void outDeUnaLlamadaAbiertaLlegaAlLlamador() {
+    void llamadaCerradaNoSueltaElMonitorDelLlamador() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor B { int n = 0; procedure f() { n++; n++; } }
+                monitor A { procedure f() { B.f(); } procedure g() { skip; } }
+                process P { A.f(); }
+                process Q { skip; A.g(); }
+                """, 0);
+        for (int i = 0; i < 3; i++) vm.step(1, SchedulingPolicy.ROUND_ROBIN);   // P entra a A y a B
+        vm.step(2, SchedulingPolicy.ROUND_ROBIN);
+        vm.step(2, SchedulingPolicy.ROUND_ROBIN);   // Q pide A
+        Snapshot s = vm.snapshot();
+        assertEquals(1, TestSupport.monitor(s, "A").lockOwner().id());
+        assertEquals(1, TestSupport.monitor(s, "B").lockOwner().id());
+        assertEquals(java.util.List.of("B", "A"), s.processes().get(0).holding());
+        assertEquals("MONITOR_ENTRY", s.processes().get(1).blockReason());
+    }
+
+    /** ADR 0007: un out hacia una permanente del llamador se escribe al retornar, sin soltar A. */
+    @Test
+    void outDeUnaLlamadaCerradaLlegaAlLlamador() {
         RunResult r = TestSupport.run("""
                 monitor B { int n = 0; procedure dar(r: out int) { n++; r = 100 + n; } }
                 monitor A { int guardado = 0; int copia = 0;
@@ -274,9 +300,22 @@ class VirtualMachineTest {
                 process P[i: 1..3] { A.f(); }
                 """, SchedulingPolicy.RANDOM, 3, 5000);
         assertTrue(r.finished());
-        assertEquals(TestSupport.finalVar(r, "A", "guardado"), TestSupport.finalVar(r, "A", "copia"));
-        assertTrue(r.logs().stream().anyMatch(l -> l.kind().equals("RELEASE")
-                && l.message().contains("mientras llama a B.dar")));
+        assertEquals("103", TestSupport.finalVar(r, "A", "guardado"));
+        assertEquals("103", TestSupport.finalVar(r, "A", "copia"));
+        assertTrue(r.logs().stream().noneMatch(l -> l.kind().equals("RELEASE")));
+    }
+
+    /** Un ciclo entre monitores (A llama a B, que llama a A) es error del proceso, no un cuelgue. */
+    @Test
+    void cicloEntreMonitoresEsErrorDeEjecucion() {
+        RunResult r = TestSupport.run("""
+                monitor A { procedure f() { B.g(); } procedure h() { skip; } }
+                monitor B { procedure g() { A.h(); } }
+                process P { A.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertTrue(r.finished());
+        assertEquals("P ya está dentro de A y no puede volver a llamarlo desde otro monitor",
+                r.vm().snapshot().processes().get(0).error());
     }
 
     /** VS-11: el snapshot marca que procesos avanzaron en el ultimo instante. */

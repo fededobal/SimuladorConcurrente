@@ -102,11 +102,14 @@ planificador no le dio turno en ese instante figura como "sin turno".
 
 ### 2.3 Llamadas entre monitores
 
-Un procedure de un monitor A puede llamar a un procedure de otro monitor B. El simulador usa
-**llamadas abiertas** (ADR 0004): al llamar a B, el proceso libera A; al volver de B, compite
-otra vez por A, igual que después de un `wait`. Los argumentos se evalúan antes de liberar A,
-y un parámetro `out` que apunta a una variable de A se escribe recién al reingresar. Por eso,
-después de la llamada el procedure no puede suponer que el estado de A sigue igual.
+Un procedure de un monitor A puede llamar a un procedure de otro monitor B. Como explica la
+cátedra (Explicación práctica 3), **el monitor desde donde se hizo la llamada se mantiene
+ocupado** hasta que el procedure de B termina por completo, aunque el proceso haga `wait` en
+B (llamada cerrada, ADR 0007). Mientras tanto, ningún otro proceso puede entrar a A.
+
+Hay que tener cuidado: si el proceso espera en B algo que solo puede hacer otro proceso
+que necesita entrar a A, nadie avanza. En ese caso el simulador informa el interbloqueo y
+dice qué monitor retiene cada proceso bloqueado, por ejemplo "P espera en B.c y retiene A".
 
 Un procedure no puede llamar a otro procedure de su propio monitor: es error de compilación.
 

@@ -30,7 +30,8 @@ public record Snapshot(int instant,
 
     /**
      * Estado de un proceso. {@code advanceOrder} es su posicion en el turno del ultimo
-     * instante (0 el primero que avanzo) o -1 si no avanzo.
+     * instante (0 el primero que avanzo) o -1 si no avanzo. {@code holding} son los monitores
+     * que tiene tomados: con llamadas cerradas puede retener uno mientras espera en otro.
      */
     public record ProcessView(int id,
                               String name,
@@ -43,5 +44,6 @@ public record Snapshot(int instant,
                               List<VarView> locals,
                               String error,
                               boolean advanced,
-                              int advanceOrder) { }
+                              int advanceOrder,
+                              List<String> holding) { }
 }

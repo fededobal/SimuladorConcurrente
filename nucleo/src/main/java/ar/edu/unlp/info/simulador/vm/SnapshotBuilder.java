@@ -17,7 +17,7 @@ final class SnapshotBuilder {
                           List<Integer> advanced, List<Snapshot.OutputLine> output) {
         List<Snapshot.ProcessView> pv = new ArrayList<>();
         for (Process p : processes) {
-            pv.add(processView(p, advanced));
+            pv.add(processView(p, advanced, monitors));
         }
         List<Snapshot.MonitorView> mv = new ArrayList<>();
         for (Monitor m : monitors) {
@@ -26,7 +26,12 @@ final class SnapshotBuilder {
         return new Snapshot(instant, pv, mv, output);
     }
 
-    private static Snapshot.ProcessView processView(Process p, List<Integer> advanced) {
+    private static Snapshot.ProcessView processView(Process p, List<Integer> advanced,
+                                                    Collection<Monitor> monitors) {
+        List<String> holding = new ArrayList<>();
+        for (Monitor m : monitors) {
+            if (m.lockOwner() == p) holding.add(m.name());
+        }
         Activation act = p.current();
         List<Snapshot.VarView> locals = new ArrayList<>();
         if (act != null) {
@@ -46,7 +51,8 @@ final class SnapshotBuilder {
                 locals,
                 p.errorMessage(),
                 advanced.contains(p.id()),
-                advanced.indexOf(p.id()));
+                advanced.indexOf(p.id()),
+                holding);
     }
 
     private static Snapshot.MonitorView monitorView(Monitor m) {
