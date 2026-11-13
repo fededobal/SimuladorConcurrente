@@ -25,8 +25,8 @@ class InvariantesTest {
     static final int SEMILLAS = 25;
     static final int MAX_PASOS = 4000;
     static final int TOPE_LOG = VirtualMachine.TOPE_LOG;
-    /** VirtualMachine.TOPE_SALIDA es privado; la salida admite ademas una linea de aviso. */
-    static final int TOPE_SALIDA = 500;
+    /** La salida admite ademas una linea de aviso. */
+    static final int TOPE_SALIDA = OutputBuffer.TOPE_SALIDA;
 
     private static final Set<String> EN_MONITOR = Set.of(
             "ASSIGN", "DECL", "SKIP", "WRITE", "PUSH", "POP", "SIGNAL", "SIGNAL_ALL");

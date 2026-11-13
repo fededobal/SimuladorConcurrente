@@ -8,7 +8,6 @@ import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Maquina virtual del simulador de monitores. Ejecuta un {@link Program} por instantes: en
@@ -18,32 +17,11 @@ import java.util.function.Function;
  */
 public final class VirtualMachine {
 
-    // Sin rojos, amarillos ni verdes (tampoco naranja, lima o verde azulado): la interfaz
-    // reserva esos colores para los estados (rojo esperando, amarillo compitiendo), y un
-    // proceso de ese color se confundiria con un estado.
-    private static final String[] PALETTE = {
-            "#3b82f6", "#ec4899", "#06b6d4", "#a855f7",
-            "#6366f1", "#d946ef", "#0ea5e9", "#8b5cf6",
-            "#93c5fd", "#f0abfc", "#67e8f9", "#c4b5fd"
-    };
-
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
     private static final int PROB_AVANCE = 80;
 
-    /**
-     * Tope de lineas de salida guardadas (las ultimas): un bucle largo no puede comerse la memoria.
-     */
-    private static final int TOPE_SALIDA = 500;
-
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
     private static final int STRUCTURAL_CAP = 4000;
-
-    /**
-     * Topes de tamano. Sin ellos, {@code int a[2000000000]} o una familia de cien mil procesos
-     * congelan o cierran la pestana: el motor corre en el hilo principal del navegador.
-     */
-    static final int TOPE_ELEMENTOS = 100_000;
-    static final int TOPE_PROCESOS = 5_000;
 
     /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
     static final int TOPE_INICIALIZACION = 100_000;
@@ -59,10 +37,9 @@ public final class VirtualMachine {
     private final Azar random;
 
     private final List<Process> processes = new ArrayList<>();
-    private final Deque<Snapshot.OutputLine> salida = new ArrayDeque<>();
-    /** Lineas de salida descartadas por el tope: se avisa al principio de la salida. */
-    private int salidaDescartada = 0;
+    private final OutputBuffer salida = new OutputBuffer();
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
+    private final VariableAccess vars = new VariableAccess(monitors);
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
     private final Deque<LogEntry> log = new ArrayDeque<>();
@@ -91,29 +68,14 @@ public final class VirtualMachine {
     private void initialize() {
         for (MonitorDef md : program.monitors()) {
             monitorDefs.put(md.name(), md);
-            Monitor m = new Monitor(md.name());
-            monitors.put(md.name(), m);
-
-            ExprEvaluator ev = new ExprEvaluator(m::getVar);
-
-            for (VarDecl vd : md.permanentVars()) {
-                m.vars().put(vd.name(), buildInitialValue(vd, ev));
-            }
-            for (CondDecl cd : md.conds()) {
-                if (cd.isArray()) {
-                    int size = arraySize(ev, cd.sizeExpr(), cd.line());
-                    m.condArraySizes().put(cd.name(), size);
-                    for (int i = 0; i < size; i++) {
-                        String key = cd.name() + "[" + i + "]";
-                        m.conds().put(key, new ConditionVariable(key));
-                    }
-                } else {
-                    m.conds().put(cd.name(), new ConditionVariable(cd.name()));
-                }
-            }
+            monitors.put(md.name(), ProgramLoader.buildMonitor(md));
         }
+        runInitCode();
+        processes.addAll(ProgramLoader.buildProcesses(program.processes()));
+    }
 
-        // codigo de inicializacion de cada monitor (sin registrar eventos)
+    /** Corre el codigo de inicializacion de cada monitor, sin registrar eventos. */
+    private void runInitCode() {
         logging = false;
         for (MonitorDef md : program.monitors()) {
             if (md.initStmts().isEmpty()) continue;
@@ -135,71 +97,6 @@ public final class VirtualMachine {
             m.setLockOwner(null);
         }
         logging = true;
-
-        int colorIdx = 0;
-        for (ProcessDef pd : program.processes()) {
-            if (pd.isFamily()) {
-                ExprEvaluator ev = new ExprEvaluator(name -> null);
-                long from = ev.evalLong(pd.quant().from());
-                long to = ev.evalLong(pd.quant().to());
-                // con cotas enormes to - from desborda: un conteo negativo tambien es "demasiados"
-                long count = to < from ? 0 : to - from + 1;
-                if (count < 0 || count > TOPE_PROCESOS - processes.size()) {
-                    throw tooManyProcesses(pd.line());
-                }
-                for (long k = 0; k < count; k++) {
-                    long i = from + k;
-                    Process p = new Process(processes.size() + 1, pd.name() + "[" + i + "]",
-                            PALETTE[colorIdx++ % PALETTE.length]);
-                    Activation frame = Activation.processFrame();
-                    frame.locals().put(pd.quant().iterator(), new Value.IntVal(i));
-                    frame.pushFront(pd.body().statements());
-                    p.push(frame);
-                    processes.add(p);
-                }
-            } else {
-                if (processes.size() >= TOPE_PROCESOS) throw tooManyProcesses(pd.line());
-                Process p = new Process(processes.size() + 1, pd.name(),
-                        PALETTE[colorIdx++ % PALETTE.length]);
-                Activation frame = Activation.processFrame();
-                frame.pushFront(pd.body().statements());
-                p.push(frame);
-                processes.add(p);
-            }
-        }
-    }
-
-    private static RuntimeError tooManyProcesses(int line) {
-        return new RuntimeError("Demasiados procesos: el simulador admite hasta "
-                + TOPE_PROCESOS + " en total", line);
-    }
-
-    /** Tamano de un arreglo de variables o de cond: entre 0 y {@link #TOPE_ELEMENTOS}. */
-    private static int arraySize(ExprEvaluator ev, Expr sizeExpr, int line) {
-        long size = ev.evalLong(sizeExpr);
-        if (size < 0 || size > TOPE_ELEMENTOS) {
-            throw new RuntimeError("Tamaño de arreglo inválido: " + size
-                    + " (tiene que estar entre 0 y " + TOPE_ELEMENTOS + ")", line);
-        }
-        return (int) size;
-    }
-
-    private Value buildInitialValue(VarDecl vd, ExprEvaluator ev) {
-        if (vd.type().isQueue()) {
-            return Value.defaultFor(vd.type());
-        }
-        if (vd.isArray()) {
-            int size = arraySize(ev, vd.sizeExpr(), vd.line());
-            Value fill = vd.initExpr() == null
-                    ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
-            Value[] elems = new Value[size];
-            for (int i = 0; i < size; i++) elems[i] = fill;
-            return new Value.ArrayVal(vd.type(), elems);
-        }
-        return vd.initExpr() == null
-                ? Value.defaultFor(vd.type())
-                : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
     }
 
     // ================================================================= scheduling
@@ -387,7 +284,7 @@ public final class VirtualMachine {
         // Los out de una llamada abierta que apuntan a este monitor se escriben ahora, con
         // el monitor otra vez tomado.
         for (Map.Entry<LValue, Value> w : act.takeDeferredWrites()) {
-            writeLValue(p, w.getKey(), w.getValue());
+            vars.writeLValue(p.id(), w.getKey(), w.getValue());
         }
     }
 
@@ -402,7 +299,7 @@ public final class VirtualMachine {
                     // el llamador solto su monitor (llamada abierta): escribe al reingresar
                     caller.deferWrite(e.getValue(), value);
                 } else {
-                    writeLValue(p, e.getValue(), value);
+                    vars.writeLValue(p.id(), e.getValue(), value);
                 }
             }
             event(p, "RETURN", m.name(),
@@ -459,13 +356,13 @@ public final class VirtualMachine {
                 yield false;
             }
             case Stmt.IfStmt iff -> {
-                boolean cond = evaluator(p, act).evalBool(iff.condition());
+                boolean cond = vars.evaluator(act).evalBool(iff.condition());
                 act.pushFront((cond ? iff.thenBranch() : iff.elseBranch() == null
                         ? new Stmt.Block(List.of(), s.line()) : iff.elseBranch()).statements());
                 yield false;
             }
             case Stmt.WhileStmt w -> {
-                if (evaluator(p, act).evalBool(w.condition())) {
+                if (vars.evaluator(act).evalBool(w.condition())) {
                     act.pushFront(w);
                     act.pushFront(w.body().statements());
                 }
@@ -475,18 +372,17 @@ public final class VirtualMachine {
                 if (f.init() instanceof VarDecl vd) {
                     Value v = vd.initExpr() == null
                             ? Value.defaultFor(vd.type())
-                            : evaluator(p, act).eval(vd.initExpr())
+                            : vars.evaluator(act).eval(vd.initExpr())
                                     .assignTo(vd.type(), vd.name(), vd.line());
                     act.locals().put(vd.name(), v);
                 } else {
                     Stmt.Assign asg = (Stmt.Assign) f.init();
-                    assignScalar(p, act, asg.target(),
-                            evaluator(p, act).eval(asg.value()), asg.line());
+                    vars.assignScalar(p.id(), act, asg.target(),
+                            vars.evaluator(act).eval(asg.value()), asg.line());
                 }
                 if (f.limit() != null) {
                     // la cota del rango se fija al entrar: cambiarla adentro no cambia las vueltas
-                    act.locals().put(f.limit().name(), evaluator(p,
-                            act).eval(f.limit().initExpr()));
+                    act.locals().put(f.limit().name(), vars.evaluator(act).eval(f.limit().initExpr()));
                 }
                 List<Stmt> loopBody = new ArrayList<>(f.body().statements());
                 loopBody.add(f.step());
@@ -533,59 +429,45 @@ public final class VirtualMachine {
     // ---------------------------------------------------------------- sentencias leaf
 
     private void execLocalDecl(Process p, Activation act, VarDecl vd) {
-        ExprEvaluator ev = evaluator(p, act);
-        Value v;
-        if (vd.type().isQueue()) {
-            v = Value.defaultFor(vd.type());
-        } else if (vd.isArray()) {
-            int size = arraySize(ev, vd.sizeExpr(), vd.line());
-            Value fill = vd.initExpr() == null ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
-            Value[] elems = new Value[size];
-            for (int i = 0; i < size; i++) elems[i] = fill;
-            v = new Value.ArrayVal(vd.type(), elems);
-        } else {
-            v = vd.initExpr() == null ? Value.defaultFor(vd.type())
-                    : ev.eval(vd.initExpr()).assignTo(vd.type(), vd.name(), vd.line());
-        }
+        Value v = ProgramLoader.initialValue(vd, vars.evaluator(act));
         act.locals().put(vd.name(), v);
         event(p, "DECL", vd.name(), p.name() + ": " + vd.type().name().toLowerCase()
                 + " " + vd.name() + " = " + v.display());
     }
 
     private void execAssign(Process p, Activation act, Stmt.Assign a) {
-        ExprEvaluator ev = evaluator(p, act);
+        ExprEvaluator ev = vars.evaluator(act);
         Value value = ev.eval(a.value());
         if (a.index() == null) {
-            assignScalar(p, act, a.target(), value, a.line());
+            vars.assignScalar(p.id(), act, a.target(), value, a.line());
             event(p, "ASSIGN", a.target(), p.name() + ": " + a.target() + " = " + value.display());
         } else {
             long index = ev.evalLong(a.index());
-            Value.ArrayVal arr = asArray(p, act, a.target(), a.line());
-            int idx = checkIndex(arr, index, a.target(), a.line());
+            Value.ArrayVal arr = vars.asArray(act, a.target(), a.line());
+            int idx = VariableAccess.checkIndex(arr, index, a.target(), a.line());
             arr.set(idx, value.assignTo(arr.elementType(), a.target() + "[" + idx + "]", a.line()));
-            touchIfMonitorVar(p, act, a.target());
+            vars.touchIfMonitorVar(p.id(), act, a.target());
             event(p, "ASSIGN", a.target(),
                     p.name() + ": " + a.target() + "[" + idx + "] = " + value.display());
         }
     }
 
     private void execIncDec(Process p, Activation act, Stmt.IncDec inc) {
-        ExprEvaluator ev = evaluator(p, act);
+        ExprEvaluator ev = vars.evaluator(act);
         if (inc.index() == null) {
-            Value cur = readName(p, act, inc.target(), inc.line());
+            Value cur = vars.read(act, inc.target(), inc.line());
             Value next = stepped(cur, inc.increment(), inc.line());
-            assignScalar(p, act, inc.target(), next, inc.line());
+            vars.assignScalar(p.id(), act, inc.target(), next, inc.line());
             event(p, "ASSIGN", inc.target(),
                     p.name() + ": " + inc.target() + (inc.increment() ? "++" : "--")
                             + " => " + next.display());
         } else {
             long index = ev.evalLong(inc.index());
-            Value.ArrayVal arr = asArray(p, act, inc.target(), inc.line());
-            int idx = checkIndex(arr, index, inc.target(), inc.line());
+            Value.ArrayVal arr = vars.asArray(act, inc.target(), inc.line());
+            int idx = VariableAccess.checkIndex(arr, index, inc.target(), inc.line());
             Value next = stepped(arr.get(idx), inc.increment(), inc.line());
             arr.set(idx, next);
-            touchIfMonitorVar(p, act, inc.target());
+            vars.touchIfMonitorVar(p.id(), act, inc.target());
             event(p, "ASSIGN", inc.target(),
                     p.name() + ": " + inc.target() + "[" + idx + "]"
                             + (inc.increment() ? "++" : "--") + " => " + next.display());
@@ -623,7 +505,7 @@ public final class VirtualMachine {
                     + "' desde adentro del mismo monitor", call.line());
         }
 
-        ExprEvaluator ev = evaluator(p, callerAct);
+        ExprEvaluator ev = vars.evaluator(callerAct);
         List<Value> argValues = new ArrayList<>();
         for (Expr arg : call.args()) argValues.add(ev.eval(arg));
 
@@ -670,7 +552,7 @@ public final class VirtualMachine {
         Monitor m = monitors.get(act.monitorName());
         String key = co.cond();
         if (co.index() != null) {
-            long index = evaluator(p, act).evalLong(co.index());
+            long index = vars.evaluator(act).evalLong(co.index());
             int size = m.condArraySizes().getOrDefault(co.cond(), 0);
             if (index < 0 || index >= size) {
                 throw new RuntimeError("Índice " + index + " fuera de rango para la cond '"
@@ -719,151 +601,48 @@ public final class VirtualMachine {
 
     /** Concatena los argumentos y deja una linea en la pantalla de salida. */
     private void execWrite(Process p, Activation act, Stmt.Write w) {
-        ExprEvaluator ev = evaluator(p, act);
+        ExprEvaluator ev = vars.evaluator(act);
         StringBuilder sb = new StringBuilder();
         for (Expr e : w.args()) sb.append(ev.eval(e).display());
         String texto = sb.toString();
-        salida.addLast(new Snapshot.OutputLine(instant, p.name(), p.color(), texto));
-        // se conservan las ultimas: lo que el programa escribe ahora es lo que importa ver
-        if (salida.size() > TOPE_SALIDA) {
-            salida.removeFirst();
-            salidaDescartada++;
-        }
+        salida.add(instant, p, texto);
         event(p, "WRITE", "", p.name() + ": write(" + texto + ")");
     }
 
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {
-        ExprEvaluator ev = evaluator(p, act);
-        Value.QueueVal q = asQueue(p, act, qp.queue(), qp.line());
+        ExprEvaluator ev = vars.evaluator(act);
+        Value.QueueVal q = vars.asQueue(act, qp.queue(), qp.line());
         List<Value> vals = new ArrayList<>();
         for (Expr e : qp.elements()) vals.add(ev.eval(e));
         Value pushed = vals.size() == 1
                 ? vals.get(0)
                 : new Value.ArrayVal(Type.INT, vals.toArray(new Value[0]));
         q.push(pushed);
-        touchIfMonitorVar(p, act, qp.queue());
+        vars.touchIfMonitorVar(p.id(), act, qp.queue());
         event(p, "PUSH", qp.queue(),
                 p.name() + ": push(" + qp.queue() + ", " + pushed.display() + ")");
     }
 
     private void execQueuePop(Process p, Activation act, Stmt.QueuePop qp) {
-        Value.QueueVal q = asQueue(p, act, qp.queue(), qp.line());
+        Value.QueueVal q = vars.asQueue(act, qp.queue(), qp.line());
         if (q.isEmpty()) {
             throw new RuntimeError("pop sobre la cola vacía '" + qp.queue() + "'", qp.line());
         }
         Value v = q.pop();
-        touchIfMonitorVar(p, act, qp.queue());
+        vars.touchIfMonitorVar(p.id(), act, qp.queue());
         if (qp.targets().size() == 1) {
-            assignScalar(p, act, qp.targets().get(0), v, qp.line());
+            vars.assignScalar(p.id(), act, qp.targets().get(0), v, qp.line());
         } else {
             if (!(v instanceof Value.ArrayVal tuple) || tuple.size() < qp.targets().size()) {
                 throw new RuntimeError("El elemento desencolado no tiene suficientes componentes "
                         + "para el pop múltiple", qp.line());
             }
             for (int i = 0; i < qp.targets().size(); i++) {
-                assignScalar(p, act, qp.targets().get(i), tuple.get(i), qp.line());
+                vars.assignScalar(p.id(), act, qp.targets().get(i), tuple.get(i), qp.line());
             }
         }
         event(p, "POP", qp.queue(),
                 p.name() + ": pop(" + qp.queue() + ") => " + v.display());
-    }
-
-    // ---------------------------------------------------------------- scope / lvalues
-
-    private ExprEvaluator evaluator(Process p, Activation act) {
-        return new ExprEvaluator(scopeOf(p, act));
-    }
-
-    private Function<String, Value> scopeOf(Process p, Activation act) {
-        return name -> {
-            if (act.locals().containsKey(name)) return act.locals().get(name);
-            if (act.isProcedure()) {
-                Monitor m = monitors.get(act.monitorName());
-                if (m.hasVar(name)) return m.getVar(name);
-            }
-            return null;
-        };
-    }
-
-    private Value readName(Process p, Activation act, String name, int line) {
-        Value v = scopeOf(p, act).apply(name);
-        if (v == null) throw new RuntimeError("Variable no definida: " + name, line);
-        return v;
-    }
-
-    private void assignScalar(Process p, Activation act, String name, Value value, int line) {
-        if (act.locals().containsKey(name)) {
-            act.locals().put(name, coerceLike(act.locals().get(name), value, name, line));
-            return;
-        }
-        if (act.isProcedure()) {
-            Monitor m = monitors.get(act.monitorName());
-            if (m.hasVar(name)) {
-                m.setVar(name, coerceLike(m.getVar(name), value, name, line), p.id());
-                return;
-            }
-        }
-        throw new RuntimeError("Variable no definida: " + name, line);
-    }
-
-    private void writeLValue(Process p, LValue lv, Value value) {
-        Activation act = lv.callerActivation();
-        int line = act.currentLine();   // la de la llamada, que sigue siendo la sentencia actual
-        if (lv.index() == null) {
-            assignScalar(p, act, lv.name(), value, line);
-        } else {
-            Value.ArrayVal arr = asArray(p, act, lv.name(), line);
-            checkIndex(arr, lv.index(), lv.name(), line);
-            arr.set(lv.index(), value.assignTo(arr.elementType(), lv.name(), line));
-            touchIfMonitorVar(p, act, lv.name());
-        }
-    }
-
-    private Value.ArrayVal asArray(Process p, Activation act, String name, int line) {
-        Value v = readName(p, act, name, line);
-        if (v instanceof Value.ArrayVal arr) return arr;
-        throw new RuntimeError("'" + name + "' no es un arreglo", line);
-    }
-
-    private Value.QueueVal asQueue(Process p, Activation act, String name, int line) {
-        Value v = readName(p, act, name, line);
-        if (v instanceof Value.QueueVal q) return q;
-        throw new RuntimeError("'" + name + "' no es una cola", line);
-    }
-
-    /** @return el indice como int, una vez controlado que esta dentro del arreglo */
-    private static int checkIndex(Value.ArrayVal arr, long idx, String name, int line) {
-        if (idx < 0 || idx >= arr.size()) {
-            throw RuntimeError.indexOutOfRange(idx, name, arr.size(), line);
-        }
-        return (int) idx;
-    }
-
-    private void touchIfMonitorVar(Process p, Activation act, String name) {
-        if (act.isProcedure()) {
-            Monitor m = monitors.get(act.monitorName());
-            if (m.hasVar(name)) {
-                m.setVar(name, m.getVar(name), p.id());
-            }
-        }
-    }
-
-    /**
-     * El valor a guardar en una variable que hoy vale {@code prev}: su tipo es el de la
-     * declaracion. Un arreglo o una cola no se reemplazan enteros (el compilador ya lo
-     * rechaza; esto cubre lo que llega en ejecucion).
-     */
-    private static Value coerceLike(Value prev, Value value, String name, int line) {
-        return switch (prev) {
-            case Value.IntVal ignored -> value.assignTo(Type.INT, name, line);
-            case Value.DoubleVal ignored -> value.assignTo(Type.DOUBLE, name, line);
-            case Value.BoolVal ignored -> value.assignTo(Type.BOOLEAN, name, line);
-            case Value.TextVal ignored -> value.assignTo(Type.TEXT, name, line);
-            case Value.ArrayVal ignored -> throw new RuntimeError("No se puede asignar el arreglo '"
-                    + name + "' completo: hay que indicar el índice", line);
-            case Value.QueueVal ignored -> throw new RuntimeError("No se puede asignar la cola '"
-                    + name + "': se usa con push y pop", line);
-        };
     }
 
     // ================================================================= estado / snapshots
@@ -887,74 +666,8 @@ public final class VirtualMachine {
     }
 
     public Snapshot snapshot() {
-        List<Snapshot.ProcessView> pv = new ArrayList<>();
-        for (Process p : processes) {
-            Activation act = p.current();
-            List<Snapshot.VarView> locals = new ArrayList<>();
-            if (act != null) {
-                for (Map.Entry<String, Value> e : act.locals().entrySet()) {
-                    // los nombres con '#' son internos (iterador de for (1..n), cota de rango)
-                    if (e.getKey().indexOf('#') >= 0) continue;
-                    locals.add(varView(e.getKey(), e.getValue(), null));
-                }
-            }
-            pv.add(new Snapshot.ProcessView(
-                    p.id(), p.name(), p.color(),
-                    p.state().name(),
-                    p.blockReason() == null ? null : p.blockReason().name(),
-                    p.blockedOn(),
-                    p.currentLocation(),
-                    p.currentLine(),
-                    locals,
-                    p.errorMessage(),
-                    advancedLastStep.contains(p.id()),
-                    advancedLastStep.indexOf(p.id())));
-        }
-
-        List<Snapshot.MonitorView> mv = new ArrayList<>();
-        for (Monitor m : monitors.values()) {
-            List<Snapshot.VarView> vars = new ArrayList<>();
-            for (Map.Entry<String, Value> e : m.vars().entrySet()) {
-                vars.add(varView(e.getKey(), e.getValue(), m.lastWriter(e.getKey())));
-            }
-            List<Snapshot.CondView> conds = new ArrayList<>();
-            for (ConditionVariable cv : m.conds().values()) {
-                conds.add(new Snapshot.CondView(cv.name(), refs(cv.waiting())));
-            }
-            mv.add(new Snapshot.MonitorView(
-                    m.name(), vars, conds,
-                    m.lockOwner() == null || m.lockOwner().id() < 0 ? null : ref(m.lockOwner()),
-                    refs(m.entryQueueSnapshot())));
-        }
-
-        return new Snapshot(instant, pv, mv, outputView());
-    }
-
-    /** La salida guardada, con un aviso adelante si el tope descarto lineas anteriores. */
-    private List<Snapshot.OutputLine> outputView() {
-        List<Snapshot.OutputLine> out = new ArrayList<>(salida.size() + 1);
-        if (salidaDescartada > 0) {
-            out.add(new Snapshot.OutputLine(salida.peekFirst().instant(), "", "#888888",
-                    "… se descartaron " + salidaDescartada
-                            + " líneas anteriores (se muestran las últimas " + TOPE_SALIDA + ")"));
-        }
-        out.addAll(salida);
-        return out;
-    }
-
-    private static Snapshot.VarView varView(String name, Value v, Integer writer) {
-        boolean isArray = v instanceof Value.ArrayVal;
-        return new Snapshot.VarView(name, v.typeName(), v.display(), isArray, writer);
-    }
-
-    private static Snapshot.ProcRef ref(Process p) {
-        return new Snapshot.ProcRef(p.id(), p.name(), p.color());
-    }
-
-    private static List<Snapshot.ProcRef> refs(List<Process> ps) {
-        List<Snapshot.ProcRef> out = new ArrayList<>();
-        for (Process p : ps) out.add(ref(p));
-        return out;
+        return SnapshotBuilder.build(instant, processes, monitors.values(), advancedLastStep,
+                salida.view());
     }
 
     // ================================================================= logging
