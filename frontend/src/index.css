@@ -295,7 +295,14 @@ button { cursor: pointer; }
   font-size: 11.5px;
   line-height: 1.55;
 }
-.mon-estados dt { color: var(--dim); font-weight: 500; }
+/* el rotulo termina en una flecha hacia los nombres, alineada en columna */
+.mon-estados dt {
+  display: flex;
+  color: var(--dim);
+  font-weight: 500;
+}
+.mon-estados dt::after { content: '\2192'; margin-left: auto; padding-left: 8px; color: var(--dimmer); }
+.mon-estados dt:empty::after { content: none; }
 .mon-estados dd { min-width: 0; font-family: var(--mono); font-size: 11px; }
 .mon-estados .cond { color: var(--dim); }
 .mon-wait { list-style: none; }

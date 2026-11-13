@@ -52,6 +52,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- En las listas de cada monitor, una flecha separa el rótulo (Compitiendo, En monitor, En wait) de los nombres de los procesos. (Federico Dobal, 2026-11-13)
 - En el dibujo del monitor las tres zonas son cuadrados con las esquinas redondeadas, rotulados "Compitiendo", "En wait" y "En monitor" en lugar de los números 1, 2 y 3, con los mismos nombres que las listas de abajo. (Federico Dobal, 2026-11-13)
 - En el panel Monitores cada monitor es un bloque con marco y una banda con su nombre, para distinguir uno de otro cuando hay varios. (Federico Dobal, 2026-11-13)
 - Interfaz en un tema claro y sobrio, pensado para el aula: fondo gris, cada panel como una tarjeta blanca con aire alrededor, un solo color de acento y menos colores en la sintaxis. Los estados de la línea de tiempo y del editor pasan a tonos apagados (ocre compitiendo, ladrillo esperando, verde en delay) y conservan el rayado, los puntos y la "M", para no depender solo del color. Se quita el modo oscuro. (Federico Dobal, 2026-11-13)
