@@ -140,7 +140,7 @@ public final class SemanticValidator {
         for (Stmt s : m.initStmts()) {
             if (containsMonitorInteraction(s)) {
                 throw new CompilationException("El código de inicialización del monitor " + m.name()
-                        + " no puede llamar a monitores ni usar wait/signal", s.line());
+                        + " no puede llamar a monitores ni usar wait, signal o delay", s.line());
             }
             checkStmt(s, init);
         }
@@ -214,6 +214,8 @@ public final class SemanticValidator {
                 for (String t : qp.targets()) targetType(t, null, scope, qp.line());
                 checkAridadCola(clave, qp.queue(), qp.targets().size(), "pop", qp.line());
             }
+            case Stmt.Delay d -> ExprTyper.expect(d.seconds(), Type.INT, scope,
+                    "El tiempo del delay");
         }
     }
 
@@ -406,7 +408,10 @@ public final class SemanticValidator {
         stack.push(s);
         while (!stack.isEmpty()) {
             Stmt cur = stack.pop();
-            if (cur instanceof Stmt.MonitorCall || cur instanceof Stmt.CondOp) return true;
+            if (cur instanceof Stmt.MonitorCall || cur instanceof Stmt.CondOp
+                    || cur instanceof Stmt.Delay) {
+                return true;
+            }
             switch (cur) {
                 case Stmt.Block b -> b.statements().forEach(stack::push);
                 case Stmt.IfStmt iff -> {

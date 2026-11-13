@@ -40,6 +40,7 @@ export function App() {
       .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
       .map((p) => ({
         line: p.line, color: p.color, state: visibleState(p), name: p.name,
+        delayEndsAt: p.delayEndsAt,
       }));
   }, [snapshot]);
 
@@ -54,13 +55,14 @@ export function App() {
   }, [status, sim.error, fallidos]);
 
   const running = status === 'running';
+  // solo se puede detener una simulacion que todavia puede avanzar
+  const active = status === 'ready' || status === 'running' || status === 'paused';
   // un interbloqueo despues de un error no es un problema de sincronizacion del programa
-  const etiqueta = fallidos.length === 0 ? STATUS_LABEL[status]
+  const etiqueta = sim.waiting && active ? 'esperando que termine un delay'
+    : fallidos.length === 0 ? STATUS_LABEL[status]
     : status === 'deadlock' ? 'deadlock tras un error'
       : status === 'finished' ? 'fin con errores' : STATUS_LABEL[status];
   const mal = status === 'deadlock' || status === 'error' || fallidos.length > 0;
-  // solo se puede detener una simulacion que todavia puede avanzar
-  const active = status === 'ready' || status === 'running' || status === 'paused';
 
   const cargarEjemplo = (id: string) => {
     const ejemplo = EJEMPLOS.find((e) => e.id === id);

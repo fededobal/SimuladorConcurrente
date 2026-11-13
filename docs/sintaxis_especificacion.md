@@ -221,6 +221,9 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
     libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
     llama a A) es error de ejecución.
 - **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver `monitores.md`).
+- **`delay(s)`:** el proceso queda demorado `s` segundos de tiempo real y conserva los
+  monitores que tenga tomados. El núcleo no lee el reloj: la interfaz le informa la hora en
+  cada paso. Un proceso en `delay` no cuenta para el interbloqueo.
 - **Deadlock:** ningún proceso listo y no todos terminados → se informa, junto con los
   monitores que retiene cada proceso bloqueado.
 - **Errores de ejecución:** terminan el proceso que los provoca y liberan su monitor.
@@ -263,6 +266,7 @@ sentencia     = decl_local
               | mientras
               | para
               | "skip" ";"
+              | "delay" "(" expr ")" ";"           (* expr int: segundos, de 0 a 3600 *)
               | bloque ;
 
 decl_local    = decl_var ;
@@ -321,9 +325,9 @@ comentario    = "//" { caracter } fin_de_linea | "/*" { caracter } "*/" ;
                    marca BOM cuentan como espacio *)
 ```
 
-**Palabras reservadas (30):** `monitor procedure cond process if else while for skip
+**Palabras reservadas (31):** `monitor procedure cond process if else while for skip
 wait signal signal_all push pop empty write in out true false int double bool text Cola
-ColaOrdenada and or not mod`. `monitor`, `procedure` y `process` no distinguen mayúsculas
+ColaOrdenada and or not mod delay`. `monitor`, `procedure` y `process` no distinguen mayúsculas
 de minúsculas. `boolean` y el símbolo `%` no existen: el compilador indica que se escriben
 `bool` y `mod`.
 

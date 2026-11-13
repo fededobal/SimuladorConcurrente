@@ -38,7 +38,7 @@ export const api = {
   },
 
   step(policy: SchedulingPolicy, chosenProcessId?: number): StepResponse {
-    return parse<StepResponse>(paso(policy, chosenProcessId ?? -1));
+    return parse<StepResponse>(paso(policy, chosenProcessId ?? -1, Date.now()));
   },
 
   remove(): void {

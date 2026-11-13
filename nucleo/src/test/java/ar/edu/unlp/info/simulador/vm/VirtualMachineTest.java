@@ -546,4 +546,54 @@ class VirtualMachineTest {
         assertEquals("Índice 3 fuera de rango para el monitor 'M' (va de 1 a 2)",
                 r.vm().snapshot().processes().get(0).error());
     }
+
+    /** delay demora en tiempo real: el reloj lo informa quien llama a step. */
+    @Test
+    void delayDemoraEnTiempoReal() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process P { delay(2); write(\"listo\"); }", 0);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 10_000);   // ejecuta el delay
+        Snapshot s = vm.snapshot();
+        assertEquals("DELAY", s.processes().get(0).blockReason());
+        assertEquals(12_000L, s.processes().get(0).delayEndsAt());
+
+        java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN, 11_000);
+        assertTrue(ev.isEmpty());
+        assertTrue(vm.isWaitingForDelay());
+        assertTrue(!vm.isDeadlocked());
+        assertEquals(1, vm.instant(), "esperar no hace pasar el instante");
+
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 12_000);
+        assertEquals("listo", vm.snapshot().output().get(0).text());
+    }
+
+    /** Un delay dentro del monitor no lo suelta: el otro proceso espera en la cola de entrada. */
+    @Test
+    void delayDentroDelMonitorLoRetiene() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M { int n = 0; procedure f() { delay(1); n++; } }
+                process P { M.f(); }
+                process Q { skip; M.f(); }
+                """, 0);
+        vm.step(1, SchedulingPolicy.ROUND_ROBIN, 0);   // P entra
+        vm.step(1, SchedulingPolicy.ROUND_ROBIN, 0);   // P: delay(1)
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 100);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 200);
+        Snapshot s = vm.snapshot();
+        assertEquals(1, s.monitors().get(0).lockOwner().id());
+        assertEquals("MONITOR_ENTRY", s.processes().get(1).blockReason());
+        assertTrue(vm.isWaitingForDelay());
+        for (int t = 1000; !vm.isFinished() && t < 5000; t += 100) {
+            vm.step(null, SchedulingPolicy.ROUND_ROBIN, t);
+        }
+        assertTrue(vm.isFinished());
+        assertEquals("2", TestSupport.varValue(vm.snapshot().monitors().get(0), "n"));
+    }
+
+    @Test
+    void delayFueraDeRangoEsErrorDeEjecucion() {
+        RunResult r = TestSupport.run("process P { int s = -1; delay(s); }",
+                SchedulingPolicy.ROUND_ROBIN, 0, 10);
+        assertEquals("El delay tiene que ser de 0 a 3600 segundos y es de -1",
+                r.vm().snapshot().processes().get(0).error());
+    }
 }

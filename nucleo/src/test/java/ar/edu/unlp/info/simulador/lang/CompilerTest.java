@@ -464,4 +464,14 @@ class CompilerTest {
         assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { id = 3; } }\nprocess P { E[0].f(); }")
                 .contains("No se puede asignar a 'id'"));
     }
+
+    /** delay recibe segundos enteros y no se usa en la inicializacion de un monitor. */
+    @Test
+    void delayEnSegundosEnteros() {
+        assertDoesNotThrow(() -> Compiler.compile(
+                "monitor M { procedure f() { delay(1); } }\nprocess P { delay(2); M.f(); }"));
+        assertTrue(errorDe("process P { delay(true); }").contains("El tiempo del delay tiene que ser int"));
+        assertTrue(errorDe("monitor M { int x = 0; delay(1); }\nprocess P { skip; }")
+                .contains("no puede llamar a monitores ni usar wait, signal o delay"));
+    }
 }

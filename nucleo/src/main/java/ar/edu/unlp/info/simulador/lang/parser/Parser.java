@@ -245,6 +245,14 @@ public final class Parser {
         if (t.isKeyword("write")) {
             return parseWrite();
         }
+        if (t.isKeyword("delay")) {
+            advance();
+            consume("(", "Se esperaba '(' después de 'delay'");
+            Expr seconds = parseExpr();
+            consume(")", "Se esperaba ')' al cerrar el delay");
+            consume(";", "Se esperaba ';' al final del delay");
+            return new Stmt.Delay(seconds, t.line());
+        }
         if (t.isKeyword("if")) {
             return parseIf();
         }

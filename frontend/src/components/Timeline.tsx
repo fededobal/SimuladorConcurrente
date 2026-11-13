@@ -23,7 +23,7 @@ const RULER_EVERY = 5;
 
 /** Estados que aparecen en la leyenda (el terminado es la ausencia de barra). */
 const LEGEND: readonly VisibleState[] = [
-  'RUNNING_PROCESS', 'RUNNING_MONITOR', 'COMPETING', 'WAITING', 'READY',
+  'RUNNING_PROCESS', 'RUNNING_MONITOR', 'COMPETING', 'WAITING', 'DELAYED', 'READY',
 ];
 
 /** Una "M" por instante: el tramo junta varios instantes, pero cada uno fue en el monitor. */

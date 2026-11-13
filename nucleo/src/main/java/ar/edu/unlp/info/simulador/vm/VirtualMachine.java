@@ -23,6 +23,9 @@ public final class VirtualMachine {
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
     private static final int STRUCTURAL_CAP = 4000;
 
+    /** Segundos maximos de un delay: una hora alcanza para cualquier ejercicio. */
+    static final int TOPE_DELAY = 3600;
+
     /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
     static final int TOPE_INICIALIZACION = 100_000;
 
@@ -54,6 +57,11 @@ public final class VirtualMachine {
      */
     private final List<Integer> advancedLastStep = new ArrayList<>();
     private int rrCursor = -1;
+    /**
+     * Reloj de la simulacion, en ms. No lo lee la VM (el nucleo es determinista): lo informa
+     * quien llama a {@link #step(Integer, SchedulingPolicy, long)}, y solo lo usa delay.
+     */
+    private long clockMs = 0;
     private boolean logging = true;
     private boolean deadlockLogged = false;
 
@@ -115,12 +123,26 @@ public final class VirtualMachine {
      * @return los eventos generados por este instante
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy) {
+        return step(chosenProcessId, policy, clockMs);
+    }
+
+    /**
+     * Igual que {@link #step(Integer, SchedulingPolicy)}, informando la hora actual en ms.
+     * Antes de elegir el turno, los procesos cuyo delay ya termino vuelven a estar listos.
+     * Si nadie puede avanzar pero hay procesos demorados, no pasa el instante: se espera.
+     */
+    public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy, long nowMs) {
         stepEntries = new ArrayList<>();
+        clockMs = Math.max(clockMs, nowMs);
 
         if (isFinished()) {
             return List.of();
         }
+        wakeDelayed();
         List<Process> turno = elegirTurno(chosenProcessId, policy);
+        if (turno.isEmpty() && isWaitingForDelay()) {
+            return stepEntries;
+        }
         if (turno.isEmpty()) {
             if (!deadlockLogged) {
                 deadlockLogged = true;
@@ -404,6 +426,10 @@ public final class VirtualMachine {
                 event(p, "SKIP", "", p.name() + ": skip");
                 yield true;
             }
+            case Stmt.Delay d -> {
+                execDelay(p, act, d);
+                yield true;
+            }
             case VarDecl vd -> {
                 execLocalDecl(p, act, vd);
                 yield true;
@@ -617,6 +643,21 @@ public final class VirtualMachine {
         }
     }
 
+    /**
+     * Demora al proceso la cantidad de segundos indicada, en tiempo real. Si esta dentro de
+     * un monitor, lo sigue teniendo tomado mientras tanto.
+     */
+    private void execDelay(Process p, Activation act, Stmt.Delay d) {
+        long seconds = vars.evaluator(act).evalLong(d.seconds());
+        if (seconds < 0 || seconds > TOPE_DELAY) {
+            throw new RuntimeError("El delay tiene que ser de 0 a " + TOPE_DELAY
+                    + " segundos y es de " + seconds, d.line());
+        }
+        p.delayUntil(clockMs + seconds * 1000);
+        event(p, "DELAY", "", p.name() + ": delay(" + seconds + ") - se demora " + seconds
+                + (seconds == 1 ? " segundo" : " segundos"));
+    }
+
     /** Concatena los argumentos y deja una linea en la pantalla de salida. */
     private void execWrite(Process p, Activation act, Stmt.Write w) {
         ExprEvaluator ev = vars.evaluator(act);
@@ -671,7 +712,25 @@ public final class VirtualMachine {
 
     public boolean isDeadlocked() {
         return !isFinished()
-                && processes.stream().noneMatch(pr -> pr.state() == Process.State.READY);
+                && processes.stream().noneMatch(pr -> pr.state() == Process.State.READY
+                        || pr.isDelayed());
+    }
+
+    /** true si ningun proceso esta listo pero alguno espera que termine su delay. */
+    public boolean isWaitingForDelay() {
+        return processes.stream().noneMatch(pr -> pr.state() == Process.State.READY)
+                && processes.stream().anyMatch(Process::isDelayed);
+    }
+
+    /** Hora del reloj de la simulacion, en ms: la ultima informada a {@link #step}. */
+    public long clockMs() {
+        return clockMs;
+    }
+
+    private void wakeDelayed() {
+        for (Process p : processes) {
+            if (p.isDelayed() && p.delayEndsAt() <= clockMs) p.unblock();
+        }
     }
 
     public int instant() {

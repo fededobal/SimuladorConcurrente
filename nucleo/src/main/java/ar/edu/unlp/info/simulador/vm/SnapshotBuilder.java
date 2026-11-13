@@ -52,7 +52,8 @@ final class SnapshotBuilder {
                 p.errorMessage(),
                 advanced.contains(p.id()),
                 advanced.indexOf(p.id()),
-                holding);
+                holding,
+                p.isDelayed() ? p.delayEndsAt() : null);
     }
 
     private static Snapshot.MonitorView monitorView(Monitor m) {

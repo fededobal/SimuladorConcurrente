@@ -8,7 +8,8 @@ import type { ProcessView } from './types';
  * ademas una "M".
  */
 export type VisibleState =
-  | 'RUNNING_PROCESS' | 'RUNNING_MONITOR' | 'COMPETING' | 'WAITING' | 'READY' | 'TERMINATED';
+  | 'RUNNING_PROCESS' | 'RUNNING_MONITOR' | 'COMPETING' | 'WAITING' | 'DELAYED' | 'READY'
+  | 'TERMINATED';
 
 /** Nombre corto del estado (leyenda). */
 export const STATE_LABEL: Record<VisibleState, string> = {
@@ -16,6 +17,7 @@ export const STATE_LABEL: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'ejecutando en el monitor',
   COMPETING: 'compitiendo',
   WAITING: 'esperando',
+  DELAYED: 'en delay',
   READY: 'sin turno',
   TERMINATED: 'terminado',
 };
@@ -26,6 +28,7 @@ export const STATE_HINT: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'ejecutando dentro de un monitor, con el monitor tomado',
   COMPETING: 'compitiendo por entrar al monitor',
   WAITING: 'esperando, dormido en una variable condición',
+  DELAYED: 'demorado por un delay hasta que pase el tiempo; si está en un monitor, lo sigue teniendo tomado',
   READY: 'sin turno: podía avanzar, pero no le tocó en este instante',
   TERMINATED: 'terminado',
 };
@@ -36,6 +39,7 @@ export const STATE_CLASS: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'st-running-monitor',
   COMPETING: 'st-competing',
   WAITING: 'st-waiting',
+  DELAYED: 'st-delayed',
   READY: 'st-ready',
   TERMINATED: 'st-terminated',
 };
@@ -47,7 +51,10 @@ export const STATE_CLASS: Record<VisibleState, string> = {
  */
 export function visibleState(p: ProcessView): VisibleState {
   if (p.state === 'TERMINATED') return 'TERMINATED';
-  if (p.state === 'BLOCKED') return p.blockReason === 'COND_WAIT' ? 'WAITING' : 'COMPETING';
+  if (p.state === 'BLOCKED') {
+    if (p.blockReason === 'DELAY') return 'DELAYED';
+    return p.blockReason === 'COND_WAIT' ? 'WAITING' : 'COMPETING';
+  }
   // el motor devuelve READY a los que avanzaron: se muestran como "ejecutando"
   if (!p.advanced && p.state !== 'RUNNING') return 'READY';
   // Dentro del monitor es tener algun lock. Con las llamadas cerradas (ADR 0007), el que

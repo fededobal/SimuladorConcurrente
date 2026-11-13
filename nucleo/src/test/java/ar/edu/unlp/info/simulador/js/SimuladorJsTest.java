@@ -31,7 +31,7 @@ class SimuladorJsTest {
     @Test
     void pasoDevuelveLaFormaDeStepResponse() {
         SimuladorJs.crear(BUFFER, 1);
-        String json = SimuladorJs.paso("ROUND_ROBIN", -1);
+        String json = SimuladorJs.paso("ROUND_ROBIN", -1, 0);
         assertTrue(json.startsWith("{\"entries\":["), json);
         assertTrue(json.contains("\"snapshot\":{"), json);
         assertTrue(json.contains("\"finished\":"), json);
@@ -62,7 +62,7 @@ class SimuladorJsTest {
                 process A { M.f(); }
                 """, 1);
         assertDoesNotThrow(() -> {
-            for (int i = 0; i < 20; i++) SimuladorJs.paso("ROUND_ROBIN", -1);
+            for (int i = 0; i < 20; i++) SimuladorJs.paso("ROUND_ROBIN", -1, 0);
         });
     }
 
@@ -79,7 +79,7 @@ class SimuladorJsTest {
             String creado = assertDoesNotThrow(() -> SimuladorJs.crear(codigo, 1));
             if (creado.startsWith("{\"error\"")) continue;
             assertDoesNotThrow(() -> {
-                for (int i = 0; i < 5; i++) SimuladorJs.paso("RANDOM", -1);
+                for (int i = 0; i < 5; i++) SimuladorJs.paso("RANDOM", -1, 0);
                 SimuladorJs.estado();
             });
         }

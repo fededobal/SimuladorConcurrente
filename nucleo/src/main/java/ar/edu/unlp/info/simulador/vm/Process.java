@@ -14,7 +14,9 @@ public final class Process {
         /** Espera para entrar a un monitor ocupado (cola de entrada). */
         MONITOR_ENTRY,
         /** Demorado en la cola de una variable condicion tras hacer wait. */
-        COND_WAIT
+        COND_WAIT,
+        /** Demorado por un delay, hasta que pase el tiempo indicado. */
+        DELAY
     }
 
     private final int id;
@@ -29,6 +31,9 @@ public final class Process {
     private final Deque<Activation> callStack = new ArrayDeque<>();
 
     private String errorMessage;
+
+    /** Hora (en ms del reloj de la simulacion) en que termina su delay; -1 si no esta demorado. */
+    private long delayEndsAt = -1;
 
     public Process(int id, String name, String color) {
         this.id = id;
@@ -56,6 +61,19 @@ public final class Process {
         this.state = State.READY;
         this.blockReason = null;
         this.blockedOn = null;
+        this.delayEndsAt = -1;
+    }
+
+    /** Demora el proceso hasta {@code endsAt} (ms del reloj de la simulacion). */
+    public void delayUntil(long endsAt) {
+        block(BlockReason.DELAY, null);
+        this.delayEndsAt = endsAt;
+    }
+
+    public long delayEndsAt() { return delayEndsAt; }
+
+    public boolean isDelayed() {
+        return state == State.BLOCKED && blockReason == BlockReason.DELAY;
     }
 
     public Deque<Activation> callStack() { return callStack; }

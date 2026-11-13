@@ -29,7 +29,7 @@ Todo corre en el navegador.
 
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y
-`signal_all`, procesos y familias de procesos (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, los tipos `int`,
+`signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, los tipos `int`,
 `double`, `bool` y `text`, arreglos, `Cola` y `ColaOrdenada`. No hay variables globales.
 
 ```c

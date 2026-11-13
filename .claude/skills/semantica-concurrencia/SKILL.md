@@ -25,7 +25,7 @@ cátedra: `docs/monitores.md`).
   `ROUND_ROBIN`, `PROB_AVANCE`); cada uno ejecuta hasta una sentencia observable. Las
   estructurales (bloques, evaluar guardas) no consumen instante. Con proceso elegido,
   avanza solo ese.
-- **Deadlock**: no terminó y ningún proceso está `READY`.
+- **Deadlock**: no terminó, ningún proceso está `READY` y ninguno está en `delay`.
 - **Error de ejecución**: el proceso termina con `ERROR` y línea; **libera todo recurso que
   tuviera tomado** (el lock de cada monitor en el que estaba), que pasa a uno de su cola de
   entrada, elegido al azar.
@@ -37,7 +37,8 @@ cátedra: `docs/monitores.md`).
    recurso y en ninguna otra.
 3. Todo camino que saca a un proceso de una sección protegida (retorno, espera, error)
    devuelve el lock y se lo pasa a uno de la cola de entrada, al azar (ADR 0005 y 0006).
-4. Misma semilla + misma política = misma ejecución, en la JVM y en el navegador (el azar
+4. Misma semilla + misma política (+ mismas horas informadas a `step`, si hay `delay`) =
+   misma ejecución, en la JVM y en el navegador (el azar
    sale de `vm/Azar`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
    ejecución y no permite repetir una corrida: la reproducción es desde el núcleo (tests).
 5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.

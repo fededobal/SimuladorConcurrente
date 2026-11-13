@@ -19,6 +19,8 @@ export function useSimulation(initialCode: string) {
   const [timeline, setTimeline] = useState<Timeline>(EMPTY_TIMELINE);
   const [status, setStatus] = useState<SimStatus>('idle');
   const [error, setError] = useState<SimError | null>(null);
+  // nadie puede avanzar hasta que termine algun delay (no es un deadlock)
+  const [waiting, setWaiting] = useState(false);
   const [speed, setSpeed] = useState<number>(600);
   const [policy, setPolicyState] = useState<SchedulingPolicy>('RANDOM');
 
@@ -54,6 +56,7 @@ export function useSimulation(initialCode: string) {
     setSnapshot(null);
     setTimeline(EMPTY_TIMELINE);
     setError(null);
+    setWaiting(false);
     setStat('idle');
   }, []);
 
@@ -74,6 +77,7 @@ export function useSimulation(initialCode: string) {
       activaRef.current = true;
       setSnapshot(created.snapshot);
       setTimeline(startTimeline(created.snapshot));
+      setWaiting(false);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
@@ -93,6 +97,7 @@ export function useSimulation(initialCode: string) {
       const res = api.step(policyRef.current);
       setSnapshot(res.snapshot);
       setTimeline((t) => appendInstant(t, res.snapshot));
+      setWaiting(res.waiting);
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
       return true;
@@ -156,7 +161,7 @@ export function useSimulation(initialCode: string) {
 
   return {
     code, setCode,
-    snapshot, timeline, status, error,
+    snapshot, timeline, status, error, waiting,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
     play, pause, step, stop,

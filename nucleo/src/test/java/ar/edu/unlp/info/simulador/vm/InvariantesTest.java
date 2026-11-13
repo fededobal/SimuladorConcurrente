@@ -64,9 +64,9 @@ class InvariantesTest {
         Snapshot.ProcRef p1 = new Snapshot.ProcRef(1, "A", "#000");
         Snapshot.ProcRef p2 = new Snapshot.ProcRef(2, "B", "#000");
         Snapshot.ProcessView a = new Snapshot.ProcessView(1, "A", "#000", "TERMINATED", null, null,
-                null, -1, List.of(), null, false, -1, List.of());
+                null, -1, List.of(), null, false, -1, List.of(), null);
         Snapshot.ProcessView b = new Snapshot.ProcessView(2, "B", "#000", "BLOCKED", "COND_WAIT",
-                "M.c", "M.f", 3, List.of(), null, false, -1, List.of());
+                "M.c", "M.f", 3, List.of(), null, false, -1, List.of(), null);
         Snapshot.MonitorView m = new Snapshot.MonitorView("M", List.of(),
                 List.of(new Snapshot.CondView("c", List.of(p2))), p1, List.of(p2));
         Snapshot s = new Snapshot(1, List.of(a, b), List.of(m), List.of());
@@ -241,6 +241,13 @@ class InvariantesTest {
             if (!p.state().equals("BLOCKED")) {
                 if (!colas.isEmpty()) {
                     violacion(nombre, "2-colas", c, p.name() + " " + p.state() + " figura en " + colas);
+                }
+                continue;
+            }
+            if ("DELAY".equals(p.blockReason())) {
+                // demorado por un delay: no esta en ninguna cola
+                if (!colas.isEmpty()) {
+                    violacion(nombre, "2-colas", c, p.name() + " en delay figura en " + colas);
                 }
                 continue;
             }

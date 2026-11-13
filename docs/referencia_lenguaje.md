@@ -11,7 +11,7 @@ EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).
 
 ## 1. Palabras reservadas
 
-Son **30**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
+Son **31**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
 (escribir `int out = 0;` es error de sintaxis). `monitor`, `procedure` y `process` se
 aceptan con cualquier combinación de mayúsculas (`Monitor`, `Procedure`, `PROCESS`), como
 las escribe la cátedra; el resto se escribe tal cual figura en la tabla.
@@ -25,6 +25,7 @@ las escribe la cátedra; el resto se escribe tal cual figura en la tabla.
 | Sincronización | `wait` `signal` `signal_all` |
 | Colas | `push` `pop` `empty` |
 | Salida | `write` |
+| Tiempo | `delay` |
 | Operadores | `and` `or` `not` `mod` |
 | Literales | `true` `false` |
 
@@ -300,6 +301,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | For | ver abajo |
 | Bloque | `{ ... }` suelto |
 | Nada | `skip;` |
+| Demora | `delay(segundos);` |
 
 En una declaración con varios nombres, el valor inicial es solo del nombre que lo lleva:
 `int i = 0, j;` deja `j` en `0` por ser el valor por defecto, no por el `= 0` de `i`.
@@ -318,6 +320,24 @@ vez. El que pierde queda en la cola de entrada.
 Que corran en paralelo no rompe nada: la exclusión mutua del monitor sigue serializando todo
 lo que toca estado compartido. Por eso un contador dentro de un monitor da siempre el mismo
 total, corran los procesos como corran — que es justamente la garantía que dan los monitores.
+
+### `delay`
+
+```c
+delay(5);          // el proceso se demora 5 segundos
+delay(t * 2);      // cualquier expresión int, de 0 a 3600
+```
+
+Demora al proceso esa cantidad de **segundos reales**, contados desde el instante en que
+ejecuta el `delay`. Mientras tanto el proceso figura "en delay" (verde punteado) y, al lado
+de su nombre en el editor, un contador muestra los segundos que faltan. Si el `delay` está
+dentro de un procedure, el proceso **sigue teniendo tomado el monitor**: los demás esperan
+en la cola de entrada, como en el ejercicio del partido de fútbol de la práctica.
+
+Si ningún proceso puede avanzar pero alguno está en `delay`, no es un interbloqueo: el
+simulador espera a que termine. No se puede usar en el código de inicialización de un
+monitor. Como depende del reloj, un programa con `delay` no se repite igual aunque se use
+la misma semilla.
 
 ### `if` / `while`
 

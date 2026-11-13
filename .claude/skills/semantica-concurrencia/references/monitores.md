@@ -27,13 +27,18 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
   conserva A y entra a B o espera en su cola. Un `wait` en B libera solo B. Al retornar
   libera B, escribe los `out` y sigue en A. Un proceso puede tener varios monitores tomados
   (`holding` en el snapshot). Un ciclo A → B → A es error de ejecución.
-- **Deadlock**: no terminó y ningún proceso está `READY`.
+- **delay(s)**: el proceso queda `BLOCKED(DELAY)` hasta `reloj + s·1000` ms, sin soltar sus
+  monitores y sin estar en ninguna cola. El reloj lo informa la interfaz en cada `step`; al
+  principio del paso se despiertan los que vencieron. Si nadie está listo pero alguno está en
+  delay, el paso no hace nada (no hay instante ni deadlock).
+- **Deadlock**: no terminó, ningún proceso está `READY` y ninguno está en delay.
 
 ## Invariantes (todo cambio a la VM tiene que conservarlas)
 
 1. En cada snapshot, cada monitor tiene como mucho un `lockOwner`, y ese proceso no está
    `TERMINATED`. Un proceso que falla adentro suelta el lock (bug B1, corregido).
-2. Un proceso está en a lo sumo una cola (una `cond` o una cola de entrada).
+2. Un proceso está en a lo sumo una cola (una `cond` o una cola de entrada); uno en delay no
+   está en ninguna.
 3. Todo camino que saca a un proceso de un monitor (return, wait, **error**) libera el monitor: entra uno de la cola de entrada, al azar (ADR 0005 y 0006).
 4. Con la misma semilla y la misma política, la ejecución es idéntica, en la JVM y en el
    navegador (`AzarTest` y el smoke fijan una traza). La interfaz no expone la semilla: cada

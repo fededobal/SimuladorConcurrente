@@ -19,6 +19,7 @@
   /* estados de proceso: los comparten las franjas del editor y la linea de tiempo */
   --st-competing: #f59e0b;
   --st-waiting: #ef4444;
+  --st-delayed: #22c55e;
   --st-ready: #6c6c78;
 
   /* linea de tiempo: iguales a las constantes de Timeline.tsx */
@@ -298,6 +299,7 @@ button { cursor: pointer; }
 .st-running-process, .st-running-monitor { --st: var(--st-proceso, var(--text)); }
 .st-competing { --st: var(--st-competing); }
 .st-waiting   { --st: var(--st-waiting); }
+.st-delayed   { --st: var(--st-delayed); }
 .st-ready     { --st: var(--st-ready); }
 
 .stripe.st-running-monitor, .stripe.st-running-process {
@@ -319,6 +321,20 @@ button { cursor: pointer; }
   font-size: 10px;
   letter-spacing: 0.02em;
   white-space: nowrap;
+}
+
+/* demorado por un delay: franja punteada y un contador con los segundos que faltan */
+.stripe.st-delayed {
+  background: color-mix(in srgb, var(--st) 9%, transparent);
+  border-left: 2px dotted var(--st);
+}
+.delay-count {
+  margin-left: 5px;
+  padding: 0 4px;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  color: var(--bg);
+  background: var(--st-delayed);
 }
 
 .tok-comment { color: var(--tok-comment); font-style: italic; }
@@ -523,5 +539,9 @@ button { cursor: pointer; }
     var(--st) 0 3px, color-mix(in srgb, var(--st) 30%, transparent) 3px 6px);
 }
 /* sin turno: barra fina, se lee como "presente pero sin avanzar" */
+.tl-tramo.st-delayed, .tl-muestra.st-delayed {
+  background: radial-gradient(circle, var(--st) 1.5px, transparent 2px) 0 50% / 6px 6px repeat-x,
+    color-mix(in srgb, var(--st) 22%, transparent);
+}
 .tl-tramo.st-ready { top: 9px; bottom: 9px; background: color-mix(in srgb, var(--st) 55%, transparent); }
 .tl-muestra.st-ready { height: 4px; background: color-mix(in srgb, var(--st) 55%, transparent); }

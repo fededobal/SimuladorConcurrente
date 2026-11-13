@@ -10,7 +10,7 @@ import java.util.List;
 public sealed interface Stmt
         permits Stmt.Block, Stmt.Assign, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,
                 Stmt.QueuePush, Stmt.QueuePop, Stmt.Write, Stmt.IfStmt, Stmt.WhileStmt, Stmt.ForStmt,
-                Stmt.Skip, VarDecl {
+                Stmt.Skip, Stmt.Delay, VarDecl {
 
     int line();
 
@@ -59,4 +59,7 @@ public sealed interface Stmt
             implements Stmt { }
 
     record Skip(int line) implements Stmt { }
+
+    /** {@code delay(segundos);}: el proceso se demora ese tiempo real, sin soltar sus monitores. */
+    record Delay(Expr seconds, int line) implements Stmt { }
 }

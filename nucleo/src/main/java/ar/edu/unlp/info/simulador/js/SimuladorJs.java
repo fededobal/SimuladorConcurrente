@@ -72,13 +72,16 @@ public final class SimuladorJs {
      *
      * @param policy  {@code RANDOM} o {@code ROUND_ROBIN}
      * @param elegido id del proceso a ejecutar, o negativo para que decida la politica
+     * @param ahoraMs hora actual en ms (la de {@code Date.now()}): la usa delay, que demora en
+     *                tiempo real; el nucleo no lee el reloj para seguir siendo determinista
      * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final
      */
     @JSExport
-    public static String paso(String policy, int elegido) {
+    public static String paso(String policy, int elegido, double ahoraMs) {
         if (vm == null) return sinSimulacion();
         try {
-            List<LogEntry> entries = vm.step(elegido < 0 ? null : elegido, politica(policy));
+            List<LogEntry> entries = vm.step(elegido < 0 ? null : elegido, politica(policy),
+                    (long) ahoraMs);
             StringBuilder sb = new StringBuilder("{\"entries\":");
             Json.lista(sb, entries, Json::logEntry);
             sb.append(",\"snapshot\":");
@@ -86,6 +89,7 @@ public final class SimuladorJs {
             sb.append(",\"finished\":").append(vm.isFinished())
               .append(",\"deadlock\":").append(vm.isDeadlocked())
               .append(",\"instant\":").append(vm.instant())
+              .append(",\"waiting\":").append(vm.isWaitingForDelay())
               .append('}');
             return sb.toString();
         } catch (Throwable t) {

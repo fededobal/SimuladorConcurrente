@@ -111,7 +111,8 @@ final class Json {
         campo(sb, "error");       str(sb, p.error()); sb.append(',');
         campo(sb, "advanced");    sb.append(p.advanced()).append(',');
         campo(sb, "advanceOrder"); sb.append(p.advanceOrder()).append(',');
-        campo(sb, "holding");     lista(sb, p.holding(), Json::str);
+        campo(sb, "holding");     lista(sb, p.holding(), Json::str); sb.append(',');
+        campo(sb, "delayEndsAt"); sb.append(p.delayEndsAt() == null ? "null" : p.delayEndsAt());
         sb.append("}");
     }
 

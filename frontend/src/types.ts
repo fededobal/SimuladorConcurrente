@@ -34,7 +34,7 @@ export interface ProcessView {
   name: string;
   color: string;
   state: ProcessState;
-  blockReason: 'MONITOR_ENTRY' | 'COND_WAIT' | null;
+  blockReason: 'MONITOR_ENTRY' | 'COND_WAIT' | 'DELAY' | null;
   blockedOn: string | null;
   location: string | null;
   line: number;
@@ -46,6 +46,8 @@ export interface ProcessView {
   advanceOrder: number;
   /** Monitores que tiene tomados (con llamadas cerradas, puede retener uno mientras espera en otro). */
   holding: string[];
+  /** Hora (ms, mismo reloj que Date.now()) en que termina su delay, o null si no esta demorado. */
+  delayEndsAt: number | null;
 }
 
 export interface OutputLine {
@@ -86,6 +88,8 @@ export interface StepResponse {
   finished: boolean;
   deadlock: boolean;
   instant: number;
+  /** true si nadie puede avanzar pero hay procesos esperando que termine su delay. */
+  waiting: boolean;
 }
 
 export interface ApiError {

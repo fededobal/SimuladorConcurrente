@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { STATE_CLASS, type VisibleState } from '../processStates';
 
 /** Renglon donde esta parado un proceso: la franja toma el color del estado, el nombre el del proceso. */
@@ -7,6 +7,8 @@ export interface ActiveLine {
   color: string;
   state: VisibleState;
   name: string;
+  /** Hora (ms, como Date.now()) en que termina su delay, o null si no esta demorado. */
+  delayEndsAt: number | null;
 }
 
 interface Props {
@@ -29,16 +31,39 @@ const LINE_H = 22;
 /** Ancho aproximado de un caracter de la etiqueta (10px, tipografia sans). */
 const ANCHO_CHAR = 5.6;
 const HUECO_ETIQUETA = 10;
+/** Ancho aproximado del contador de un delay ("12s"), con su margen. */
+const ANCHO_CONTADOR = 30;
+
+/**
+ * La hora actual, refrescada varias veces por segundo mientras {@code activo}: el contador de
+ * un delay baja en tiempo real aunque la simulacion este en pausa.
+ */
+function useAhora(activo: boolean): number {
+  const [ahora, setAhora] = useState(() => Date.now());
+  useEffect(() => {
+    if (!activo) return;
+    setAhora(Date.now());
+    const id = window.setInterval(() => setAhora(Date.now()), 200);
+    return () => window.clearInterval(id);
+  }, [activo]);
+  return ahora;
+}
+
+/** Segundos que le faltan a un delay, redondeados hacia arriba (nunca negativos). */
+function segundosRestantes(fin: number, ahora: number): number {
+  return Math.max(0, Math.ceil((fin - ahora) / 1000));
+}
 
 /** Sangria de un nivel. El lenguaje no usa tabs. */
 const TAB = '  ';
 
 const RANK: Record<VisibleState, number> = {
-  RUNNING_MONITOR: 0, RUNNING_PROCESS: 0, COMPETING: 1, WAITING: 2, READY: 3, TERMINATED: 4,
+  RUNNING_MONITOR: 0, RUNNING_PROCESS: 0, COMPETING: 1, WAITING: 2, DELAYED: 2, READY: 3,
+  TERMINATED: 4,
 };
 
 const NAME_ALPHA: Record<VisibleState, number> = {
-  RUNNING_MONITOR: 1, RUNNING_PROCESS: 1, COMPETING: 0.8, WAITING: 0.8, READY: 0.45,
+  RUNNING_MONITOR: 1, RUNNING_PROCESS: 1, COMPETING: 0.8, WAITING: 0.8, DELAYED: 0.8, READY: 0.45,
   TERMINATED: 0.3,
 };
 
@@ -397,11 +422,13 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
       let corrimiento = 0;
       for (const p of procs) {
         salida.push({ ...p, corrimiento });
-        corrimiento += p.name.length * ANCHO_CHAR + HUECO_ETIQUETA;
+        corrimiento += p.name.length * ANCHO_CHAR + HUECO_ETIQUETA
+          + (p.delayEndsAt !== null ? ANCHO_CONTADOR : 0);
       }
     }
     return salida;
   }, [activeLines]);
+  const ahora = useAhora(marcas.some((m) => m.delayEndsAt !== null));
 
   const onKeyDown = (e: React.KeyboardEvent<TA>) => {
     if (readOnly) return;
@@ -448,6 +475,14 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
                 }}
               >
                 {p.name}
+                {p.delayEndsAt !== null && (
+                  <span
+                    className="delay-count"
+                    title={`delay: faltan ${segundosRestantes(p.delayEndsAt, ahora)} s`}
+                  >
+                    {segundosRestantes(p.delayEndsAt, ahora)}s
+                  </span>
+                )}
               </span>
             </div>
           ))}
