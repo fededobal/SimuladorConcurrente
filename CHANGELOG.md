@@ -83,6 +83,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- El editor resalta delay como palabra reservada. (Federico Dobal, 2026-11-13)
 - Los mensajes de error llevan tildes ("Línea", "División por cero", "Índice", "tamaño",
   "expresión"...). Un espacio no separable o una marca BOM, que llegan al copiar de un PDF,
   cuentan como espacio, y una comilla tipográfica explica que van comillas rectas. El modo

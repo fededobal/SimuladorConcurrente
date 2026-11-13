@@ -82,7 +82,7 @@ const KEYWORDS: Record<string, string> = {
 
   if: 'tok-ctrl', else: 'tok-ctrl', while: 'tok-ctrl', for: 'tok-ctrl', skip: 'tok-ctrl',
   and: 'tok-ctrl', or: 'tok-ctrl', not: 'tok-ctrl', mod: 'tok-ctrl',
-  push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl', write: 'tok-ctrl',
+  push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl', write: 'tok-ctrl', delay: 'tok-sync',
 
   int: 'tok-type', double: 'tok-type', bool: 'tok-type', text: 'tok-type',
   Cola: 'tok-type', ColaOrdenada: 'tok-type',
