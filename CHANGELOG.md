@@ -52,6 +52,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Pantalla en dos columnas: a la izquierda el editor con la línea de tiempo debajo, a la derecha el panel Monitores a toda altura. La salida deja de tener un lugar fijo: se abre con el botón "Salida" de la barra, que muestra cuántas líneas hay, y se cierra con el mismo botón o con Escape. (Federico Dobal, 2026-11-13)
 - En las listas de cada monitor, una flecha separa el rótulo (Compitiendo, En monitor, En wait) de los nombres de los procesos. (Federico Dobal, 2026-11-13)
 - En el dibujo del monitor las tres zonas son cuadrados con las esquinas redondeadas, rotulados "Compitiendo", "En wait" y "En monitor" en lugar de los números 1, 2 y 3, con los mismos nombres que las listas de abajo. (Federico Dobal, 2026-11-13)
 - En el panel Monitores cada monitor es un bloque con marco y una banda con su nombre, para distinguir uno de otro cuando hay varios. (Federico Dobal, 2026-11-13)

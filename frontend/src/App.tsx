@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Play, Pause, SkipForward, Square, ZoomIn, ZoomOut } from 'lucide-react';
+import { Play, Pause, SkipForward, Square, Terminal, ZoomIn, ZoomOut } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { Dock } from './components/Dock';
 import { OutputPanel } from './components/OutputPanel';
@@ -43,12 +43,12 @@ export function App() {
   const zoom = useEditorZoom();
 
   // Cada panel se agranda o achica arrastrando el borde que mira al editor.
-  const abajo = useDragSize('simulador.panelInferior.alto', 'y', 'Cambiar el alto del panel de abajo');
-  const salida = useDragSize('simulador.salida.ancho', 'x', 'Cambiar el ancho de la salida');
+  const abajo = useDragSize('simulador.panelInferior.alto', 'y', 'Cambiar el alto de la línea de tiempo');
   const monitores = useDragSize('simulador.monitores.ancho', 'x', 'Cambiar el ancho de los monitores');
   const ampliado = useDragSize('simulador.ampliado.ancho', 'x', 'Cambiar el ancho del panel ampliado');
 
-  // Un panel ampliado ocupa la derecha a toda altura; los otros dos se ocultan hasta cerrarlo.
+  // Un panel ampliado ocupa la derecha a toda altura y los demas se ocultan hasta cerrarlo.
+  // La salida no tiene lugar fijo: se abre asi, desde el boton de la barra.
   const [expanded, setExpanded] = useState<PanelId | null>(null);
   useEffect(() => {
     if (expanded === null) return;
@@ -169,6 +169,18 @@ export function App() {
 
         <div className="spacer" />
 
+        <button
+          className="btn"
+          onClick={toggle('output')}
+          aria-pressed={expanded === 'output'}
+          title="Ver lo que escriben los procesos con write()"
+        >
+          <Terminal size={14} /> Salida
+          {(snapshot?.output.length ?? 0) > 0 && (
+            <span className="cuenta">{snapshot?.output.length}</span>
+          )}
+        </button>
+
         <div className="zoom" role="group" aria-label="Tamaño de letra del editor">
           <button className="btn btn-icono" onClick={zoom.zoomOut} disabled={!zoom.canZoomOut}
             aria-label="Achicar la letra del código" title="Achicar la letra del código">
@@ -187,47 +199,46 @@ export function App() {
       </div>
 
       <div className="cuerpo">
-        <div className="stage tarjeta">
-          <CodeEditor
-            code={sim.code}
-            onChange={sim.setCode}
-            readOnly={running}
-            activeLines={activeLines}
-            errorLines={errorLines}
-            pasoMs={sim.speed}
-            fontSize={zoom.fontSize}
-          />
-          {status === 'error' && sim.error && (
-            <div className="err">
-              {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
-              {sim.error.message.replace(/^L[ií]nea \d+:\s*/, '')}
-            </div>
-          )}
-          {status !== 'error' && fallidos.length > 0 && (
-            <div className="err" role="alert">
-              {fallidos.map((p) => (
-                <div key={p.id}>
-                  <span style={{ color: p.color }}>{p.name}</span>
-                  {p.line > 0 ? `, línea ${p.line}` : ''}: error de ejecución: {p.error}
-                </div>
-              ))}
-            </div>
+        <div className="columna">
+          <div className="stage tarjeta">
+            <CodeEditor
+              code={sim.code}
+              onChange={sim.setCode}
+              readOnly={running}
+              activeLines={activeLines}
+              errorLines={errorLines}
+              pasoMs={sim.speed}
+              fontSize={zoom.fontSize}
+            />
+            {status === 'error' && sim.error && (
+              <div className="err">
+                {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
+                {sim.error.message.replace(/^L[ií]nea \d+:\s*/, '')}
+              </div>
+            )}
+            {status !== 'error' && fallidos.length > 0 && (
+              <div className="err" role="alert">
+                {fallidos.map((p) => (
+                  <div key={p.id}>
+                    <span style={{ color: p.color }}>{p.name}</span>
+                    {p.line > 0 ? `, línea ${p.line}` : ''}: error de ejecución: {p.error}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {expanded === null && (
+            <Dock drag={abajo} className="abajo">{panel('timeline')}</Dock>
           )}
         </div>
 
         {expanded === null ? (
-          <Dock drag={salida} className="dock-salida">{panel('output')}</Dock>
+          <Dock drag={monitores} className="dock-monitores">{panel('monitors')}</Dock>
         ) : (
           <Dock drag={ampliado} className="dock-ampliado">{panel(expanded)}</Dock>
         )}
       </div>
-
-      {expanded === null && (
-        <Dock drag={abajo} className="abajo">
-          {panel('timeline')}
-          <Dock drag={monitores} className="dock-monitores">{panel('monitors')}</Dock>
-        </Dock>
-      )}
     </div>
   );
 }

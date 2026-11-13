@@ -153,6 +153,15 @@ button { cursor: pointer; }
   display: flex;
   gap: var(--gap);
 }
+/* columna izquierda: el editor arriba y la linea de tiempo abajo */
+.columna {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
 
 .stage {
   flex: 1;
@@ -380,7 +389,14 @@ button { cursor: pointer; }
 
 /* ------------------------------------------------------------------ salida */
 
-.dock-salida { width: 270px; }
+.bar .cuenta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+}
 
 .salida {
   display: flex;
@@ -606,13 +622,12 @@ button { cursor: pointer; }
 
 /* ------------------------------------------------------------------ linea de tiempo */
 
-/* Panel de abajo: linea de tiempo a la izquierda y monitores a la derecha. Toma el alto de
-   su contenido (bajo al abrir, crece con los procesos) hasta un poco mas de la mitad de la
-   pantalla; arrastrando el asa manda el alto elegido. */
+/* La linea de tiempo, debajo del editor. Toma el alto de su contenido (bajo al abrir, crece
+   con los procesos) hasta un poco mas de la mitad de la pantalla; arrastrando el asa manda
+   el alto elegido. */
 .abajo {
   min-height: 150px;
   max-height: 55vh;
-  gap: var(--gap);
 }
 .timeline {
   flex: 1;
@@ -770,7 +785,7 @@ button { cursor: pointer; }
 
 @media (max-width: 720px) {
   .cuerpo { flex-direction: column; }
-  .dock-salida, .dock-ampliado { width: auto; max-height: 40%; }
+  .dock-monitores, .dock-ampliado { width: auto; max-height: 45%; }
   .asa-x { display: none; }
   .tl-leyenda { display: none; }
 }
