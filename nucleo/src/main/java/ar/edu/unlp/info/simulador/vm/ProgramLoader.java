@@ -22,6 +22,7 @@ final class ProgramLoader {
      */
     static final int TOPE_ELEMENTOS = 100_000;
     static final int TOPE_PROCESOS = 5_000;
+    static final int TOPE_MONITORES = 1_000;
 
     // Sin rojos, amarillos ni verdes (tampoco naranja, lima o verde azulado): la interfaz
     // reserva esos colores para los estados (rojo esperando, amarillo compitiendo), y un
@@ -34,9 +35,37 @@ final class ProgramLoader {
 
     private ProgramLoader() { }
 
-    /** El monitor con sus permanentes y condiciones ya inicializadas. */
-    static Monitor buildMonitor(MonitorDef md) {
-        Monitor m = new Monitor(md.name());
+    /**
+     * Los monitores de una definicion: uno, o uno por indice si es un arreglo de monitores
+     * ({@code Escritorio[0]}, {@code Escritorio[1]}...), cada uno con su propio estado.
+     */
+    static List<Monitor> buildMonitors(MonitorDef md) {
+        if (!md.isFamily()) {
+            return List.of(buildMonitor(md, md.name(), null, 0));
+        }
+        ExprEvaluator bounds = new ExprEvaluator(name -> null);
+        long from = bounds.evalLong(md.quant().from());
+        long to = bounds.evalLong(md.quant().to());
+        long count = to < from ? 0 : to - from + 1;
+        if (count < 0 || count > TOPE_MONITORES) {
+            throw new RuntimeError("Demasiados monitores en " + md.name()
+                    + ": el simulador admite hasta " + TOPE_MONITORES + " por arreglo", md.line());
+        }
+        List<Monitor> family = new ArrayList<>();
+        for (long k = 0; k < count; k++) {
+            long i = from + k;
+            family.add(buildMonitor(md, md.name() + "[" + i + "]", md.quant().iterator(), i));
+        }
+        return family;
+    }
+
+    /**
+     * El monitor con sus permanentes y condiciones ya inicializadas. En un arreglo de
+     * monitores, el indice va primero entre las permanentes: las demas pueden usarlo.
+     */
+    private static Monitor buildMonitor(MonitorDef md, String name, String iterator, long index) {
+        Monitor m = new Monitor(name, md.name());
+        if (iterator != null) m.vars().put(iterator, new Value.IntVal(index));
         ExprEvaluator ev = new ExprEvaluator(m::getVar);
         for (VarDecl vd : md.permanentVars()) {
             m.vars().put(vd.name(), initialValue(vd, ev));

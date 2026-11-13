@@ -475,4 +475,75 @@ class VirtualMachineTest {
         assertEquals("16", TestSupport.finalVar(r, "M", "suma"));
         assertEquals("adn", TestSupport.finalVar(r, "M", "s"));
     }
+
+    /**
+     * Ejercicio 4 de la explicacion practica (banco con tres escritorios), con la notacion de
+     * la catedra: arreglo de monitores, parametros con ';', bool y Monitor con mayuscula.
+     */
+    static final String BANCO = """
+            Monitor Banco {
+              Cola elibres; cond esperaC; int esperando = 0, cantLibres = 0;
+              Procedure llegada(idE: out int) {
+                if (cantLibres == 0) { esperando++; wait(esperaC); }
+                else cantLibres--;
+                pop(elibres, idE);
+              }
+              Procedure proximo(idE: in int) {
+                push(elibres, idE);
+                if (esperando > 0) { esperando--; signal(esperaC); }
+                else cantLibres++;
+              }
+            }
+            Monitor Escritorio[id: 0..2] {
+              cond vcCliente, vcEmpleado; text datos, resultados; bool listo = false;
+              int atendidos = 0;
+              Procedure atencion(D: in text; R: out text) {
+                datos = D; listo = true; signal(vcEmpleado);
+                wait(vcCliente); R = resultados; signal(vcEmpleado);
+              }
+              Procedure esperarDatos(D: out text) { if (not listo) wait(vcEmpleado); D = datos; }
+              Procedure enviarResultados(R: in text) {
+                resultados = R; signal(vcCliente); wait(vcEmpleado); listo = false; atendidos++;
+              }
+            }
+            Process Cliente[c: 0..5] {
+              int idE; text res;
+              Banco.llegada(idE);
+              Escritorio[idE].atencion("papel", res);
+            }
+            Process Empleado[e: 0..2] {
+              text d;
+              for (1..2) {
+                Banco.proximo(e);
+                Escritorio[e].esperarDatos(d);
+                Escritorio[e].enviarResultados(d + " sellado");
+              }
+            }
+            """;
+
+    @Test
+    void arregloDeMonitoresConElEjercicioDelBanco() {
+        for (int seed = 0; seed < 25; seed++) {
+            RunResult r = TestSupport.run(BANCO, SchedulingPolicy.RANDOM, seed, 20000);
+            assertTrue(r.finished(), "seed " + seed);
+            int total = 0;
+            for (int i = 0; i < 3; i++) {
+                Snapshot.MonitorView m = TestSupport.monitor(r.vm().snapshot(), "Escritorio[" + i + "]");
+                assertEquals(String.valueOf(i), TestSupport.varValue(m, "id"));
+                total += Integer.parseInt(TestSupport.varValue(m, "atendidos"));
+            }
+            assertEquals(6, total, "seed " + seed);
+        }
+    }
+
+    /** Un indice fuera del arreglo de monitores es error de ejecucion del proceso que llama. */
+    @Test
+    void indiceFueraDelArregloDeMonitores() {
+        RunResult r = TestSupport.run("""
+                monitor M[i: 1..2] { int x = 0; procedure f() { x = i; } }
+                process P { M[3].f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("Índice 3 fuera de rango para el monitor 'M' (va de 1 a 2)",
+                r.vm().snapshot().processes().get(0).error());
+    }
 }

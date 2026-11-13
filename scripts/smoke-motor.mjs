@@ -198,6 +198,10 @@ const CANONICOS = [
     monitor M { cond cola; bool b; procedure f() { b = empty(cola); } }
     process P { M.f(); }`,
     (r) => !!r.compilacion?.endsWith('En la práctica no se permite preguntar si una variable condición está vacía')],
+  ['arreglo de monitores: cada indice tiene su propio estado', `
+    monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
+    process P[k: 0..2] { E[k].f(k); }`,
+    (r) => r.finished && r.vars['E[0].n'] === '0' && r.vars['E[1].n'] === '11' && r.vars['E[2].n'] === '22'],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

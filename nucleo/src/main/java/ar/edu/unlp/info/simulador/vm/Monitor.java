@@ -12,6 +12,8 @@ import java.util.Map;
 public final class Monitor {
 
     private final String name;
+    /** Nombre del monitor en el programa: el mismo que {@code name}, o la familia si es un arreglo. */
+    private final String definition;
     private final Map<String, Value> vars = new LinkedHashMap<>();
     private final Map<String, ConditionVariable> conds = new LinkedHashMap<>();
     /**
@@ -31,11 +33,14 @@ public final class Monitor {
      */
     private final List<Process> entryQueue = new ArrayList<>();
 
-    public Monitor(String name) {
+    public Monitor(String name, String definition) {
         this.name = name;
+        this.definition = definition;
     }
 
     public String name() { return name; }
+
+    public String definition() { return definition; }
 
     public Map<String, Value> vars() { return vars; }
 

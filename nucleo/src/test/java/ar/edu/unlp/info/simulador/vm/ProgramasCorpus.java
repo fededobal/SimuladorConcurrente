@@ -220,6 +220,14 @@ final class ProgramasCorpus {
                 monitor M { int x = 0; procedure f() { x++; } }
                 process P[i: 1..3] { for (1..300) { write("linea ", i); M.f(); } }
                 """);
+        p.put("var/arreglo-de-monitores", VirtualMachineTest.BANCO);
+        p.put("var/llamada-cerrada-con-wait", """
+                monitor B { bool listo = false; cond c;
+                  procedure esperar() { while (not listo) wait(c); }
+                  procedure abrir() { listo = true; signal(c); } }
+                monitor A { procedure f() { B.esperar(); } procedure g() { B.abrir(); } }
+                process P { A.f(); } process Q { skip; skip; A.g(); }
+                """);
         return p;
     }
 

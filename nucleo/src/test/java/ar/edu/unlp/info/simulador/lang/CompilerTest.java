@@ -447,4 +447,21 @@ class CompilerTest {
         assertEquals(esperado, errorDe("monitor M { cond turno[3]; bool b;\n"
                 + "procedure f() { b = empty(turno[1]); } }\nprocess P { M.f(); }"));
     }
+
+    /** Arreglo de monitores: el indice es obligatorio, int y de solo lectura adentro. */
+    @Test
+    void arregloDeMonitores() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor Escritorio[id: 0..2] { int n = id * 10; procedure f(x: in int) { n = id + x; } }
+                process P { int k = 1; int a[2]; Escritorio[k].f(1); a[0] = 2; Escritorio[a[0]].f(2); }
+                """));
+        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E.f(); }")
+                .contains("El monitor E es un arreglo: falta el índice"));
+        assertTrue(errorDe("monitor E { procedure f() { skip; } }\nprocess P { E[0].f(); }")
+                .contains("El monitor E no es un arreglo"));
+        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E[true].f(); }")
+                .contains("El índice del monitor tiene que ser int"));
+        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { id = 3; } }\nprocess P { E[0].f(); }")
+                .contains("No se puede asignar a 'id'"));
+    }
 }

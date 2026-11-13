@@ -87,6 +87,10 @@ monitor Nombre {
 ```
 
 - Las variables permanentes y las `cond` solo son visibles dentro del monitor.
+- **Arreglo de monitores:** `monitor Escritorio[id: 0..2] { ... }` declara un monitor por
+  índice, cada uno con su propio estado, `cond` y cola de entrada. `id` es una constante
+  `int` visible en todo el monitor. Se llama con `Escritorio[expr].procedure(...)`; el índice
+  es obligatorio y un valor fuera del rango es error de ejecución.
 - El **orden** dentro del monitor es libre, pero por convención: permanentes, `cond`,
   inicialización, procedures.
 
@@ -163,7 +167,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Declaración local | `int x = 0;` `bool b;` `int a[3] = ([3] 0);` |
 | Asignación | `x = expr;` `a[i] = expr;` |
 | Incremento / decremento | `x++;` `x--;` |
-| Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
+| Llamada a monitor | `Monitor.procedure(arg1, arg2);` `Escritorio[i].procedure(arg);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
 | Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `push(c, (e1, e2));` `pop(c, x);` `pop(c, x, y);` `pop(c, (x, y));` |
 | Salida | `write(e);` `write(e1, e2, ...);` — concatena y escribe una línea |
@@ -232,7 +236,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 programa      = { monitor | proceso } ;
 
 (* ---------- monitores ---------- *)
-monitor       = "monitor" ident "{" { miembro_monitor } "}" ;
+monitor       = "monitor" ident [ "[" ident ":" expr ".." expr "]" ] "{" { miembro_monitor } "}" ;
 miembro_monitor = var_perm | cond_decl | procedure | sentencia ;
 var_perm      = decl_var ;
 cond_decl     = "cond" ident [ "[" expr "]" ] { "," ident [ "[" expr "]" ] } ";" ;
@@ -270,7 +274,7 @@ item_decl     = ident [ "=" expr ]                                    (* escalar
                    interno de ([n] v) no se controla: vale el de la declaracion *)
 asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
 inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
-llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;
+llamada_monitor = ident [ "[" expr "]" ] "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
 op_cola       = "push" "(" ident "," ( exprs | "(" expr "," exprs ")" ) ")" ";"
               | "pop"  "(" ident "," ( idents | "(" idents ")" ) ")" ";" ;

@@ -61,6 +61,7 @@ public final class Parser {
     private MonitorDef parseMonitor() {
         Token kw = consume("monitor", "Se esperaba 'monitor'");
         String name = consumeIdent("Se esperaba el nombre del monitor");
+        ProcessDef.QuantDef quant = match("[") ? parseQuant("del arreglo de monitores") : null;
         consume("{", "Se esperaba '{' para abrir el monitor");
 
         List<VarDecl> perm = new ArrayList<>();
@@ -80,7 +81,7 @@ public final class Parser {
             }
         }
         consume("}", "Se esperaba '}' para cerrar el monitor");
-        return new MonitorDef(name, perm, conds, init, procedures, kw.line());
+        return new MonitorDef(name, quant, perm, conds, init, procedures, kw.line());
     }
 
     private List<CondDecl> parseCondDecls() {
@@ -176,18 +177,20 @@ public final class Parser {
     private ProcessDef parseProcess() {
         Token kw = consume("process", "Se esperaba 'process'");
         String name = consumeIdent("Se esperaba el nombre del proceso");
-        ProcessDef.QuantDef quant = null;
-        if (match("[")) {
-            String iterator = consumeIdent("Se esperaba el iterador de la familia de procesos");
-            consume(":", "Se esperaba ':' en el cuantificador");
-            Expr from = parseExpr();
-            consume("..", "Se esperaba '..' en el cuantificador");
-            Expr to = parseExpr();
-            consume("]", "Se esperaba ']' al cerrar el cuantificador");
-            quant = new ProcessDef.QuantDef(iterator, from, to);
-        }
+        ProcessDef.QuantDef quant = match("[") ? parseQuant("de la familia de procesos") : null;
         Stmt.Block body = parseBlock();
         return new ProcessDef(name, quant, body, kw.line());
+    }
+
+    /** {@code [iterador: desde..hasta]}, ya consumido el '['. */
+    private ProcessDef.QuantDef parseQuant(String deQue) {
+        String iterator = consumeIdent("Se esperaba el iterador " + deQue);
+        consume(":", "Se esperaba ':' en el cuantificador");
+        Expr from = parseExpr();
+        consume("..", "Se esperaba '..' en el cuantificador");
+        Expr to = parseExpr();
+        consume("]", "Se esperaba ']' al cerrar el cuantificador");
+        return new ProcessDef.QuantDef(iterator, from, to);
     }
 
     // ================================================================= sentencias
@@ -255,8 +258,8 @@ public final class Parser {
             return parseBlock();
         }
         if (t.is(TokenType.IDENTIFIER)) {
-            // llamada a monitor:  Ident '.' Ident '(' ... ')' ';'
-            if (current + 1 < tokens.size() && tokens.get(current + 1).is(".")) {
+            // llamada a monitor:  Ident ['[' expr ']'] '.' Ident '(' ... ')' ';'
+            if (next().is(".") || isIndexedMonitorCall()) {
                 return parseMonitorCall();
             }
             return parseAssignOrIncDec();
@@ -494,8 +497,31 @@ public final class Parser {
         return new Stmt.Assign(target, null, value, line);
     }
 
+    /**
+     * true si lo que sigue es {@code Ident[...].}: una llamada a un arreglo de monitores, y no
+     * una asignacion a un elemento de arreglo ({@code a[i] = ...}).
+     */
+    private boolean isIndexedMonitorCall() {
+        if (!next().is("[")) return false;
+        int depth = 0;
+        for (int i = current + 1; i < tokens.size(); i++) {
+            Token t = tokens.get(i);
+            if (t.is(TokenType.EOF)) return false;
+            if (t.is("[")) depth++;
+            if (t.is("]") && --depth == 0) {
+                return i + 1 < tokens.size() && tokens.get(i + 1).is(".");
+            }
+        }
+        return false;
+    }
+
     private Stmt parseMonitorCall() {
         Token monTok = advance();
+        Expr index = null;
+        if (match("[")) {
+            index = parseExpr();
+            consume("]", "Se esperaba ']' en el índice del monitor");
+        }
         consume(".", "Se esperaba '.'");
         String proc = consumeIdent("Se esperaba el nombre del procedure");
         consume("(", "Se esperaba '(' en la llamada al monitor");
@@ -507,7 +533,7 @@ public final class Parser {
         }
         consume(")", "Se esperaba ')' en la llamada al monitor");
         consume(";", "Se esperaba ';' al final de la llamada al monitor");
-        return new Stmt.MonitorCall(monTok.lexeme(), proc, args, monTok.line());
+        return new Stmt.MonitorCall(monTok.lexeme(), index, proc, args, monTok.line());
     }
 
     private Stmt parseAssignOrIncDec() {

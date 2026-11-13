@@ -188,6 +188,29 @@ monitor. Las sentencias sueltas en el cuerpo son el código de inicialización y
 llamar a otro monitor ni usar `wait`/`signal`. Si la inicialización no termina en 100 000
 pasos (por ejemplo, un `while (true)`), el programa no arranca y se informa el error.
 
+### Arreglos de monitores
+
+```c
+monitor Escritorio[id: 0..2] {
+    cond vcCliente;
+    text datos;
+    procedure atencion(D: in text; R: out text) { ... }
+}
+
+process Cliente[c: 0..5] {
+    int idE; text res;
+    ...
+    Escritorio[idE].atencion("papel", res);
+}
+```
+
+Declara un monitor por índice (`Escritorio[0]`, `Escritorio[1]`, `Escritorio[2]`), cada uno
+con sus propias variables permanentes, `cond` y cola de entrada. Adentro, `id` vale el índice
+de ese monitor y es de solo lectura. Las llamadas llevan el índice, que puede ser cualquier
+expresión `int`; un índice fuera del rango es error de ejecución. Llamar sin índice a un
+arreglo de monitores, o con índice a un monitor común, es error de compilación. Se admiten
+hasta 1000 monitores por arreglo.
+
 ### Variables condición
 
 ```c
@@ -268,7 +291,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 | Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` · `ColaOrdenada c;` · varias del mismo tipo: `text lista, comp;` · `int i = 0, j;` |
 | Asignación | `x = expr;` · `a[i] = expr;` |
 | Incremento | `x++;` · `x--;` · `a[i]++;` · `a[i]--;` |
-| Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` |
+| Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` · `Escritorio[i].procedure(a);` |
 | Condición | `wait(cv);` · `signal(cv);` · `signal_all(cv);` · con índice: `wait(cv[i]);` |
 | Cola | `push(c, e);` · `push(c, e1, e2);` · `pop(c, x);` · `pop(c, x, y);` |
 | Salida | `write(e);` · `write(e1, e2, ...);` |

@@ -68,7 +68,7 @@ public final class VirtualMachine {
     private void initialize() {
         for (MonitorDef md : program.monitors()) {
             monitorDefs.put(md.name(), md);
-            monitors.put(md.name(), ProgramLoader.buildMonitor(md));
+            for (Monitor m : ProgramLoader.buildMonitors(md)) monitors.put(m.name(), m);
         }
         runInitCode();
         processes.addAll(ProgramLoader.buildProcesses(program.processes()));
@@ -77,18 +77,18 @@ public final class VirtualMachine {
     /** Corre el codigo de inicializacion de cada monitor, sin registrar eventos. */
     private void runInitCode() {
         logging = false;
-        for (MonitorDef md : program.monitors()) {
+        for (Monitor m : monitors.values()) {
+            MonitorDef md = monitorDefs.get(m.definition());
             if (md.initStmts().isEmpty()) continue;
-            Monitor m = monitors.get(md.name());
-            Process sys = new Process(-1, "«init " + md.name() + "»", "#888888");
-            Activation act = new Activation(md.name(), "«init»");
+            Process sys = new Process(-1, "«init " + m.name() + "»", "#888888");
+            Activation act = new Activation(m.name(), "«init»");
             act.pushFront(md.initStmts());
             sys.push(act);
             m.setLockOwner(sys);
             int guard = 0;
             while (!sys.isFinished()) {
                 if (guard++ >= TOPE_INICIALIZACION) {
-                    throw new RuntimeError("La inicialización del monitor " + md.name()
+                    throw new RuntimeError("La inicialización del monitor " + m.name()
                             + " no terminó después de " + TOPE_INICIALIZACION
                             + " pasos: revisá si tiene un ciclo infinito", sys.currentLine());
                 }
@@ -504,8 +504,8 @@ public final class VirtualMachine {
      * aunque haga wait en el monitor llamado (llamada cerrada, ADR 0007).
      */
     private boolean execMonitorCall(Process p, Activation callerAct, Stmt.MonitorCall call) {
-        Monitor m = monitors.get(call.monitor());
         MonitorDef md = monitorDefs.get(call.monitor());
+        Monitor m = monitors.get(instanceName(callerAct, call, md));
         ProcedureDef pd = md.procedure(call.procedure());
 
         if (m.lockOwner() == p) {
@@ -550,6 +550,20 @@ public final class VirtualMachine {
         newAct.setEntering(true);
         reacquireMonitor(p, newAct);
         return true;
+    }
+
+    /** El monitor al que va la llamada: en un arreglo de monitores, el del indice evaluado. */
+    private String instanceName(Activation callerAct, Stmt.MonitorCall call, MonitorDef md) {
+        if (call.index() == null) return call.monitor();
+        long index = vars.evaluator(callerAct).evalLong(call.index());
+        String name = call.monitor() + "[" + index + "]";
+        if (!monitors.containsKey(name)) {
+            ExprEvaluator bounds = new ExprEvaluator(n -> null);
+            throw new RuntimeError("Índice " + index + " fuera de rango para el monitor '"
+                    + call.monitor() + "' (va de " + bounds.evalLong(md.quant().from()) + " a "
+                    + bounds.evalLong(md.quant().to()) + ")", call.line());
+        }
+        return name;
     }
 
     private void execCondOp(Process p, Activation act, Stmt.CondOp co) {

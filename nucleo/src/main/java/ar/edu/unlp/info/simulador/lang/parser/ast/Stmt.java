@@ -22,8 +22,12 @@ public sealed interface Stmt
     /** {@code target++;} / {@code target--;} (opcionalmente indexado). */
     record IncDec(String target, Expr index, boolean increment, int line) implements Stmt { }
 
-    /** {@code Monitor.procedure(args);} */
-    record MonitorCall(String monitor, String procedure, List<Expr> args, int line) implements Stmt { }
+    /**
+     * {@code Monitor.procedure(args);} o, en un arreglo de monitores,
+     * {@code Monitor[index].procedure(args);} ({@code index} es null si no hay indice).
+     */
+    record MonitorCall(String monitor, Expr index, String procedure, List<Expr> args, int line)
+            implements Stmt { }
 
     enum CondOpKind { WAIT, SIGNAL, SIGNAL_ALL }
 

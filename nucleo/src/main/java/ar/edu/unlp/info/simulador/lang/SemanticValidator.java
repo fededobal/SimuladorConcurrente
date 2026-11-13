@@ -28,7 +28,8 @@ public final class SemanticValidator {
     private final Program program;
     private final Map<String, MonitorInfo> monitors = new HashMap<>();
 
-    private record MonitorInfo(Map<String, Boolean> conds, Map<String, ProcedureDef> procedures) { }
+    private record MonitorInfo(Map<String, Boolean> conds, Map<String, ProcedureDef> procedures,
+                               boolean family) { }
 
     public SemanticValidator(Program program) {
         this.program = program;
@@ -105,7 +106,7 @@ public final class SemanticValidator {
                     }
                 }
             }
-            monitors.put(m.name(), new MonitorInfo(conds, procs));
+            monitors.put(m.name(), new MonitorInfo(conds, procs, m.isFamily()));
         }
         for (ProcessDef p : program.processes()) {
             if (!topLevel.add(p.name())) {
@@ -121,6 +122,13 @@ public final class SemanticValidator {
         Set<String> condNames = new HashSet<>();
         for (CondDecl c : m.conds()) condNames.add(c.name());
         Scope root = new Scope(null, m.name(), false, condNames);
+        if (m.isFamily()) {
+            Scope bounds = new Scope(null, null, false, Set.of());
+            ExprTyper.expect(m.quant().from(), Type.INT, bounds, "La cota del arreglo de monitores");
+            ExprTyper.expect(m.quant().to(), Type.INT, bounds, "La cota del arreglo de monitores");
+            root.declare(m.quant().iterator(), new Symbol(new VarType(Type.INT, false), true,
+                    "el índice del monitor", null), m.line());
+        }
         for (VarDecl v : m.permanentVars()) {
             checkVarDecl(v, root, PERMANENTE, m.name() + "." + v.name());
         }
@@ -266,6 +274,18 @@ public final class SemanticValidator {
         MonitorInfo info = monitors.get(call.monitor());
         if (info == null) {
             throw new CompilationException("Monitor no declarado: " + call.monitor(), call.line());
+        }
+        if (info.family() && call.index() == null) {
+            throw new CompilationException("El monitor " + call.monitor() + " es un arreglo: "
+                    + "falta el índice, por ejemplo " + call.monitor() + "[0]." + call.procedure()
+                    + "(...)", call.line());
+        }
+        if (!info.family() && call.index() != null) {
+            throw new CompilationException("El monitor " + call.monitor() + " no es un arreglo: "
+                    + "se llama sin índice", call.line());
+        }
+        if (call.index() != null) {
+            ExprTyper.expect(call.index(), Type.INT, scope, "El índice del monitor");
         }
         if (scope.inProcedure && call.monitor().equals(scope.monitor)) {
             throw new CompilationException("Un procedure de " + call.monitor()
