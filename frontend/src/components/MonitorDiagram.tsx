@@ -144,10 +144,15 @@ const MAX_NOMBRES = 6;
  * Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie.
  * Con mas de {@link MAX_NOMBRES}, muestra los primeros y un boton para ver el resto.
  */
-function Nombres({ procs }: { procs: readonly ProcRef[] }) {
+function Nombres({ procs, sinLimite = false }: {
+  procs: readonly ProcRef[];
+  /** true si quien la usa ya recorto la lista (En wait cuenta el total de sus grupos). */
+  sinLimite?: boolean;
+}) {
   const [abierta, setAbierta] = useState(false);
   if (procs.length === 0) return <span className="nadie">—</span>;
-  const recortada = procs.length > MAX_NOMBRES && !abierta;
+  const limitada = !sinLimite && procs.length > MAX_NOMBRES;
+  const recortada = limitada && !abierta;
   const visibles = recortada ? procs.slice(0, MAX_NOMBRES) : procs;
   return (
     <>
@@ -156,28 +161,60 @@ function Nombres({ procs }: { procs: readonly ProcRef[] }) {
           {p.name}{i < visibles.length - 1 ? ', ' : ''}
         </span>
       ))}
-      {procs.length > MAX_NOMBRES && (
-        <button type="button" className="mon-mas-nombres" onClick={() => setAbierta(!abierta)}
-          aria-expanded={abierta}>
-          {recortada ? `+${procs.length - MAX_NOMBRES} más` : 'ver menos'}
-        </button>
+      {limitada && (
+        <MasMenos abierta={abierta} faltan={procs.length - MAX_NOMBRES}
+          onClick={() => setAbierta(!abierta)} />
       )}
     </>
   );
 }
 
-/** Los procesos dormidos, agrupados por variable condicion, cada grupo en el orden de su cola. */
+/**
+ * Los procesos dormidos, agrupados por variable condicion, cada grupo en el orden de su cola.
+ * El limite de {@link MAX_NOMBRES} cuenta procesos, no grupos: con un arreglo de cond (una
+ * por cliente) cada grupo tiene uno solo y la lista igual seria larga.
+ */
 function EnWait({ monitor }: { monitor: MonitorView }) {
+  const [abierta, setAbierta] = useState(false);
   const conds = monitor.conds.filter((c) => c.queue.length > 0);
   if (conds.length === 0) return <span className="nadie">—</span>;
+  const total = conds.reduce((n, c) => n + c.queue.length, 0);
+  const recortada = total > MAX_NOMBRES && !abierta;
+
+  // con la lista recortada, se toman procesos en orden hasta llegar al limite
+  let quedan = recortada ? MAX_NOMBRES : total;
+  const grupos: Array<{ name: string; queue: readonly ProcRef[] }> = [];
+  for (const c of conds) {
+    if (quedan === 0) break;
+    const queue = c.queue.slice(0, quedan);
+    quedan -= queue.length;
+    grupos.push({ name: c.name, queue });
+  }
+
   return (
-    <ul className="mon-wait">
-      {conds.map((c) => (
-        <li key={c.name}>
-          <span className="cond">{c.name}:</span> <Nombres procs={c.queue} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="mon-wait">
+        {grupos.map((c) => (
+          <li key={c.name}>
+            <span className="cond">{c.name}:</span> <Nombres procs={c.queue} sinLimite />
+          </li>
+        ))}
+      </ul>
+      {total > MAX_NOMBRES && (
+        <MasMenos abierta={abierta} faltan={total - MAX_NOMBRES} onClick={() => setAbierta(!abierta)} />
+      )}
+    </>
+  );
+}
+
+/** Boton para abrir o cerrar una lista recortada. */
+function MasMenos({ abierta, faltan, onClick }: {
+  abierta: boolean; faltan: number; onClick: () => void;
+}) {
+  return (
+    <button type="button" className="mon-mas-nombres" onClick={onClick} aria-expanded={abierta}>
+      {abierta ? 'ver menos' : `+${faltan} más`}
+    </button>
   );
 }
 
