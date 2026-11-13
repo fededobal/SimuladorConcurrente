@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- En el dibujo de cada monitor, tocar una zona (Compitiendo, En wait o En monitor) o un punto limita la lista de abajo a esa zona, completa y sin plegar, con la cantidad de procesos y un botón "ver todo" para volver; la zona elegida se marca con el borde oscuro. También con el teclado (Tab, Enter). (Federico Dobal, 2026-11-13)
 - Los paneles Salida, Línea de tiempo y Monitores se amplían con el botón de su encabezado (o con un clic sobre el dibujo de un monitor): el panel pasa a la derecha del editor a toda altura, así el alumno sigue viendo el código mientras mira el detalle, y se cierra con el mismo botón o con Escape. Todos los paneles se agrandan o achican arrastrando el borde que mira al editor, también con las flechas del teclado; el navegador recuerda cada tamaño. (Federico Dobal, 2026-11-13)
 - Cada monitor del panel muestra sus variables permanentes dibujadas según su estructura: un escalar con su valor, un arreglo como celdas con su índice, una Cola o ColaOrdenada como casilleros con el frente a la izquierda, y un punto con el color del último proceso que escribió cada una. (Federico Dobal, 2026-11-13)
 - Una fila "En wait(cond)" por cada variable condición con alguien esperando, en el orden en que se declararon; las filas Compitiendo y En monitor también aparecen solo cuando hay alguien. Plegado muestra hasta cinco procesos y un botón "+n más" abre el resto. Si el monitor no tiene ningún proceso, lo dice en una línea. (Federico Dobal, 2026-11-13)

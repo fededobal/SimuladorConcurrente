@@ -280,6 +280,21 @@ button { cursor: pointer; }
 .mon > .mon-dibujo { margin-left: auto; margin-right: auto; }
 .mon-dibujo.ampliable { cursor: zoom-in; }
 .mon-zona { fill: var(--panel-soft); stroke: var(--line-strong); stroke-width: 1; }
+/* cada zona se toca: filtra la lista de abajo; la elegida lleva el borde oscuro */
+.mon-zona-g, .mon-punto { cursor: pointer; }
+.mon-zona-g:hover .mon-zona { stroke: var(--dim); }
+.mon-zona-g.elegida .mon-zona { stroke: var(--text); stroke-width: 1.5; }
+.mon-zona-g.elegida .mon-zona-titulo { fill: var(--text); }
+.mon-zona-g:focus-visible { outline: none; }
+.mon-zona-g:focus-visible .mon-zona { stroke: var(--accent); stroke-width: 1.5; }
+.mon-filtro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 11.5px;
+}
+.mon-filtro .titulo { font-weight: 600; }
 .mon-zona-titulo { font-family: var(--sans); font-size: 8.5px; font-weight: 600; fill: var(--dim); }
 .mon-mas { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
 .mon-flecha { fill: none; stroke: var(--line-strong); stroke-width: 1; }

@@ -51,6 +51,9 @@ const ESQUINA = 6;
 export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }: Props) {
   const id = useId();
   const punta = `${id}-punta`;
+  // zona tocada en el dibujo: la lista de abajo se limita a ella, entera y sin plegar
+  const [zona, setZona] = useState<Zone | null>(null);
+  const elegir = (z: Zone) => setZona((actual) => (actual === z ? null : z));
   const activas = arrowsOf(monitor.name, entries);
   const tokens = tokensOf(monitor);
 
@@ -112,10 +115,21 @@ export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }:
         {([1, 2, 3] as const).map((z) => {
           const [cx, cy] = CENTRO[z];
           return (
-            <g key={z}>
+            <g
+              key={z}
+              className={`mon-zona-g${zona === z ? ' elegida' : ''}`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={zona === z}
+              aria-label={`${ZONA_TITULO[z]}: ${total[z]} ${total[z] === 1 ? 'proceso' : 'procesos'}`}
+              onClick={(e) => { e.stopPropagation(); elegir(z); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); elegir(z); }
+              }}
+            >
               <rect x={cx - R} y={cy - R} width={2 * R} height={2 * R} rx={ESQUINA}
                 className="mon-zona">
-                <title>{`${ZONA_TITULO[z]}: ${ZONA_TEXTO[z]}`}</title>
+                <title>{`${ZONA_TITULO[z]}: ${ZONA_TEXTO[z]} · clic para ver la lista`}</title>
               </rect>
               <text x={cx} y={cy - R + 11} textAnchor="middle" className="mon-zona-titulo">
                 {ZONA_TITULO[z]}
@@ -130,27 +144,43 @@ export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }:
         })}
 
         {visibles.map((t) => (
-          <Punto key={t.proc.id} token={t} x={t.x} y={t.y} proceso={processes.get(t.proc.id)} />
+          <Punto key={t.proc.id} token={t} x={t.x} y={t.y} proceso={processes.get(t.proc.id)}
+            onClick={() => elegir(t.zone)} />
         ))}
       </svg>
 
+      {zona !== null && (
+        <div className="mon-filtro">
+          <span className="titulo">
+            {ZONA_TITULO[zona]} · {total[zona]} {total[zona] === 1 ? 'proceso' : 'procesos'}
+          </span>
+          <button type="button" className="mon-mas-nombres" onClick={() => setZona(null)}>
+            ver todo
+          </button>
+        </div>
+      )}
       {/* solo las colas con alguien: una fila vacia no cuenta nada */}
       <dl className="mon-estados">
-        {monitor.entryQueue.length > 0 && (
+        {(zona === null || zona === 1) && monitor.entryQueue.length > 0 && (
           <>
             <dt>Compitiendo</dt>
-            <dd><Nombres procs={monitor.entryQueue} /></dd>
+            <dd><Nombres procs={monitor.entryQueue} sinLimite={zona !== null} /></dd>
           </>
         )}
-        {monitor.lockOwner && (
+        {(zona === null || zona === 3) && monitor.lockOwner && (
           <>
             <dt>En monitor</dt>
             <dd><Nombres procs={[monitor.lockOwner]} /></dd>
           </>
         )}
-        <Esperas conds={monitor.conds} />
+        {(zona === null || zona === 2) && (
+          <Esperas conds={monitor.conds} sinLimite={zona !== null} />
+        )}
       </dl>
-      {tokens.length === 0 && <p className="mon-vacio">Ningún proceso en este monitor.</p>}
+      {zona === null && tokens.length === 0 && (
+        <p className="mon-vacio">Ningún proceso en este monitor.</p>
+      )}
+      {zona !== null && total[zona] === 0 && <p className="mon-vacio">Nadie en esta zona.</p>}
       <MonitorVars vars={monitor.vars} processes={processes} />
     </section>
   );
@@ -167,10 +197,14 @@ function notaDelDueno(p: ProcessView | undefined, ahora: number): string {
  * Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie.
  * Con mas de {@link MAX_VISIBLES}, muestra los primeros y un boton para ver el resto.
  */
-function Nombres({ procs }: { procs: readonly ProcRef[] }) {
+function Nombres({ procs, sinLimite = false }: {
+  procs: readonly ProcRef[];
+  /** true cuando se mira una sola zona: se muestran todos. */
+  sinLimite?: boolean;
+}) {
   const [abierta, setAbierta] = useState(false);
   if (procs.length === 0) return <span className="nadie">—</span>;
-  const limitada = procs.length > MAX_VISIBLES;
+  const limitada = !sinLimite && procs.length > MAX_VISIBLES;
   const recortada = limitada && !abierta;
   const visibles = recortada ? procs.slice(0, MAX_VISIBLES) : procs;
   return (
@@ -193,14 +227,14 @@ function Nombres({ procs }: { procs: readonly ProcRef[] }) {
  * que se declararon; las vacias no se muestran. Plegado, hasta {@link MAX_VISIBLES} procesos
  * y un boton "+n mas" con los que faltan.
  */
-function Esperas({ conds }: { conds: readonly CondView[] }) {
+function Esperas({ conds, sinLimite }: { conds: readonly CondView[]; sinLimite: boolean }) {
   const [abierta, setAbierta] = useState(false);
   const ocupadas = conds.filter((c) => c.queue.length > 0);
   const total = ocupadas.reduce((n, c) => n + c.queue.length, 0);
 
   let visibles: CondView[] = ocupadas;
   let mostrados = total;
-  if (!abierta && total > MAX_VISIBLES) {
+  if (!sinLimite && !abierta && total > MAX_VISIBLES) {
     visibles = [];
     let quedan = MAX_VISIBLES;
     for (const c of ocupadas) {
@@ -219,7 +253,7 @@ function Esperas({ conds }: { conds: readonly CondView[] }) {
           <dd><Nombres procs={c.queue} /></dd>
         </Fragment>
       ))}
-      {total > MAX_VISIBLES && (
+      {!sinLimite && total > MAX_VISIBLES && (
         <>
           <dt />
           <dd>
@@ -237,6 +271,8 @@ interface PuntoProps {
   readonly x: number;
   readonly y: number;
   readonly proceso: ProcessView | undefined;
+  /** Tocar el punto elige su zona, igual que tocar el rectangulo. */
+  readonly onClick: () => void;
 }
 
 /**
@@ -245,13 +281,14 @@ interface PuntoProps {
  * punto queda fuera de su zona. Si es el dueno pero no esta ejecutando (en delay o esperando
  * en otro monitor), lleva un anillo punteado.
  */
-function Punto({ token, x, y, proceso }: PuntoProps) {
+function Punto({ token, x, y, proceso, onClick }: PuntoProps) {
   const noEjecuta = token.zone === 3 && proceso?.state === 'BLOCKED';
   const titulo = token.cond ? `${token.proc.name}: dormido en ${token.cond}`
     : token.zone === 1 ? `${token.proc.name}: compite por entrar`
       : `${token.proc.name}: tiene el monitor`;
   return (
-    <g transform={`translate(${x} ${y})`}>
+    <g transform={`translate(${x} ${y})`} className="mon-punto"
+      onClick={(e) => { e.stopPropagation(); onClick(); }}>
       <title>{titulo}</title>
       {noEjecuta && <circle r={RADIO_PUNTO + 3} className="mon-anillo" />}
       <circle r={RADIO_PUNTO} fill={token.proc.color} />
