@@ -24,13 +24,15 @@ final class ProgramLoader {
     static final int TOPE_PROCESOS = 5_000;
     static final int TOPE_MONITORES = 1_000;
 
-    // Sin rojos, amarillos ni verdes (tampoco naranja, lima o verde azulado): la interfaz
-    // reserva esos colores para los estados (rojo esperando, amarillo compitiendo), y un
-    // proceso de ese color se confundiria con un estado.
+    // Tonos apagados entre el azul y el magenta, lo bastante oscuros para leerse como texto
+    // sobre el fondo claro de la interfaz (contraste de 4,5:1 o mas contra blanco). Sin
+    // rojos, amarillos ni verdes (tampoco naranja, lima o verde azulado): la interfaz
+    // reserva esos colores para los estados (ladrillo esperando, ocre compitiendo, verde en
+    // delay), y un proceso de ese color se confundiria con un estado.
     private static final String[] PALETTE = {
-            "#3b82f6", "#ec4899", "#06b6d4", "#a855f7",
-            "#6366f1", "#d946ef", "#0ea5e9", "#8b5cf6",
-            "#93c5fd", "#f0abfc", "#67e8f9", "#c4b5fd"
+            "#4f6d9e", "#a05f92", "#2f6b78", "#7f6aa6",
+            "#4a7a98", "#9a5f80", "#6672b0", "#3d7590",
+            "#8a5a9e", "#5a6b8c", "#7368b2", "#86548a"
     };
 
     private ProgramLoader() { }

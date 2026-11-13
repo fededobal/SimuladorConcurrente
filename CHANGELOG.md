@@ -47,6 +47,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Paleta de procesos en tonos apagados entre el azul y el magenta, con contraste de 4,5:1 o más sobre blanco para que los nombres se lean como texto; un test lo verifica junto con el tono. (Federico Dobal, 2026-11-13)
 - En el panel Monitores, cada lista de procesos muestra hasta 6 nombres; si hay más, un botón "+N más" la despliega entera y "ver menos" la vuelve a cerrar. (Federico Dobal, 2026-11-13)
 - En el panel Monitores, los procesos en wait se agrupan por variable condición, una línea por cada una que tiene procesos. (Federico Dobal, 2026-11-13)
 - El panel de abajo toma el alto de su contenido: al abrir la página es bajo y crece con los procesos hasta un poco más de la mitad de la pantalla. El panel Monitores es más ancho y, debajo de cada dibujo, lista los procesos compitiendo, en monitor y en wait (con su variable condición). (Federico Dobal, 2026-11-13)

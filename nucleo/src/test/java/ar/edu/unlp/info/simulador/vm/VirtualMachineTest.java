@@ -4,6 +4,7 @@ import ar.edu.unlp.info.simulador.TestSupport;
 import ar.edu.unlp.info.simulador.TestSupport.RunResult;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -366,6 +367,31 @@ class VirtualMachineTest {
             double tono = tono(p.color());
             assertTrue(tono >= 180 && tono <= 335, p.name() + " tiene el color " + p.color());
         }
+    }
+
+    /**
+     * El nombre de cada proceso se escribe con su color sobre fondo blanco (salida, linea de
+     * tiempo, colas del monitor): el contraste tiene que llegar al 4,5:1 que pide WCAG AA
+     * para texto comun. Un color claro de proceso no se leeria.
+     */
+    @Test
+    void coloresDeProcesoSeLeenSobreFondoBlanco() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process P[i: 0..11] { skip; }", 0);
+        for (Snapshot.ProcessView p : vm.snapshot().processes()) {
+            double contraste = 1.05 / (luminancia(p.color()) + 0.05);
+            assertTrue(contraste >= 4.5,
+                    p.name() + " tiene el color " + p.color() + " con contraste " + contraste);
+        }
+    }
+
+    /** Luminancia relativa (WCAG) de un color #rrggbb, entre 0 (negro) y 1 (blanco). */
+    private static double luminancia(String hex) {
+        double[] rgb = new double[3];
+        for (int i = 0; i < 3; i++) {
+            double c = Integer.parseInt(hex.substring(1 + 2 * i, 3 + 2 * i), 16) / 255.0;
+            rgb[i] = c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        }
+        return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
     }
 
     /** Tono en grados (0 rojo, 60 amarillo, 120 verde, 240 azul) de un color #rrggbb. */
