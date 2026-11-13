@@ -98,8 +98,8 @@ En el simulador, el panel **Monitores** (abajo a la derecha, junto a la línea d
 dibuja cada monitor con estas tres zonas, como en la teoría (Teoría 4, diapositivas 12 a 19):
 los procesos son puntos de su color y se resalta la flecha que se recorrió en el último
 instante (Call, entra, wait, signal o Return). Debajo del dibujo se listan los procesos en
-cada estado: compitiendo (cola de entrada), en monitor y en wait (con la variable condición
-de cada uno, en el orden de su cola).
+cada estado: compitiendo (cola de entrada), en monitor y en wait (agrupados por variable
+condición, cada grupo en el orden de su cola).
 
 En el editor y en la línea de tiempo, el proceso que compite figura en ámbar rayado y el que
 espera en una variable condición, en rojo rayado. El que avanzó en el último instante figura como

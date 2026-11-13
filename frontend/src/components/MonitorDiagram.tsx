@@ -151,19 +151,18 @@ function Nombres({ procs }: { procs: readonly ProcRef[] }) {
   );
 }
 
-/** Los procesos dormidos, con la variable condicion de cada uno, en el orden de su cola. */
+/** Los procesos dormidos, agrupados por variable condicion, cada grupo en el orden de su cola. */
 function EnWait({ monitor }: { monitor: MonitorView }) {
-  const dormidos = monitor.conds.flatMap((c) => c.queue.map((p) => ({ p, cond: c.name })));
-  if (dormidos.length === 0) return <span className="nadie">—</span>;
+  const conds = monitor.conds.filter((c) => c.queue.length > 0);
+  if (conds.length === 0) return <span className="nadie">—</span>;
   return (
-    <>
-      {dormidos.map(({ p, cond }, i) => (
-        <span key={p.id}>
-          <span style={{ color: p.color }}>{p.name}</span>
-          <span className="cond"> ({cond}){i < dormidos.length - 1 ? ', ' : ''}</span>
-        </span>
+    <ul className="mon-wait">
+      {conds.map((c) => (
+        <li key={c.name}>
+          <span className="cond">{c.name}:</span> <Nombres procs={c.queue} />
+        </li>
       ))}
-    </>
+    </ul>
   );
 }
 

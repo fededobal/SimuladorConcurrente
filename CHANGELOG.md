@@ -47,6 +47,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- En el panel Monitores, los procesos en wait se agrupan por variable condición, una línea por cada una que tiene procesos. (Federico Dobal, 2026-11-13)
 - El panel de abajo toma el alto de su contenido: al abrir la página es bajo y crece con los procesos hasta un poco más de la mitad de la pantalla. El panel Monitores es más ancho y, debajo de cada dibujo, lista los procesos compitiendo, en monitor y en wait (con su variable condición). (Federico Dobal, 2026-11-13)
 - El panel Monitores pasa abajo a la derecha, junto a la línea de tiempo; entre los dos ocupan algo más de la mitad de la pantalla y el alto se sigue cambiando arrastrando el borde. El dibujo es más chico y sobrio (trazos grises, sin rellenos ni etiquetas de color) y los puntos de los procesos ya no se salen de su zona en algunos navegadores. (Federico Dobal, 2026-11-13)
 - Escribir empty sobre una variable condición da el error "En la práctica no se permite preguntar si una variable condición está vacía". Antes el mensaje decía que el nombre no estaba declarado. (Federico Dobal, 2026-11-13)
