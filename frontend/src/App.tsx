@@ -1,14 +1,19 @@
-import { useMemo } from 'react';
-import { Play, Pause, SkipForward, Square } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Play, Pause, SkipForward, Square, ZoomIn, ZoomOut } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
+import { Dock } from './components/Dock';
 import { OutputPanel } from './components/OutputPanel';
 import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import { Timeline } from './components/Timeline';
 import { visibleState } from './processStates';
-import { useDragHeight } from './useDragHeight';
+import { useDragSize } from './useDragSize';
+import { useEditorZoom } from './useEditorZoom';
 import type { SchedulingPolicy } from './types';
+
+/** Paneles que se pueden ampliar al costado del editor (el editor siempre queda a la vista). */
+type PanelId = 'output' | 'timeline' | 'monitors';
 
 const SPEED_LABEL: Record<number, string> = {
   1200: 'lento',
@@ -34,9 +39,26 @@ const STATUS_LABEL: Record<SimStatus, string> = {
 
 export function App() {
   const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
-  // el panel de abajo (linea de tiempo y monitores) se agranda arrastrando su borde
-  const abajo = useDragHeight('simulador.panelInferior.alto');
   const { snapshot, status } = sim;
+  const zoom = useEditorZoom();
+
+  // Cada panel se agranda o achica arrastrando el borde que mira al editor.
+  const abajo = useDragSize('simulador.panelInferior.alto', 'y', 'Cambiar el alto del panel de abajo');
+  const salida = useDragSize('simulador.salida.ancho', 'x', 'Cambiar el ancho de la salida');
+  const monitores = useDragSize('simulador.monitores.ancho', 'x', 'Cambiar el ancho de los monitores');
+  const ampliado = useDragSize('simulador.ampliado.ancho', 'x', 'Cambiar el ancho del panel ampliado');
+
+  // Un panel ampliado ocupa la derecha a toda altura; los otros dos se ocultan hasta cerrarlo.
+  const [expanded, setExpanded] = useState<PanelId | null>(null);
+  useEffect(() => {
+    if (expanded === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setExpanded(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [expanded]);
+  const toggle = (id: PanelId) => () => setExpanded((actual) => (actual === id ? null : id));
 
   const activeLines: ActiveLine[] = useMemo(() => {
     if (!snapshot) return [];
@@ -79,9 +101,19 @@ export function App() {
     sim.setCode(ejemplo.codigo);
   };
 
+  const panel = (id: PanelId) => {
+    const props = { expanded: expanded === id, onToggleExpand: toggle(id) };
+    switch (id) {
+      case 'output': return <OutputPanel lines={snapshot?.output ?? []} {...props} />;
+      case 'timeline':
+        return <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} {...props} />;
+      case 'monitors': return <MonitorPanel snapshot={snapshot} entries={sim.entries} {...props} />;
+    }
+  };
+
   return (
     <div className="app">
-      <div className="bar">
+      <div className="bar tarjeta">
         {running ? (
           <button className="btn btn-main" onClick={sim.pause}>
             <Pause size={14} /> Pausar
@@ -137,6 +169,17 @@ export function App() {
 
         <div className="spacer" />
 
+        <div className="zoom" role="group" aria-label="Tamaño de letra del editor">
+          <button className="btn btn-icono" onClick={zoom.zoomOut} disabled={!zoom.canZoomOut}
+            aria-label="Achicar la letra del código" title="Achicar la letra del código">
+            <ZoomOut size={15} />
+          </button>
+          <button className="btn btn-icono" onClick={zoom.zoomIn} disabled={!zoom.canZoomIn}
+            aria-label="Agrandar la letra del código" title="Agrandar la letra del código">
+            <ZoomIn size={15} />
+          </button>
+        </div>
+
         <div className="meta">
           <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
           <span className="n">{snapshot?.instant ?? 0}</span>
@@ -144,7 +187,7 @@ export function App() {
       </div>
 
       <div className="cuerpo">
-        <div className="stage">
+        <div className="stage tarjeta">
           <CodeEditor
             code={sim.code}
             onChange={sim.setCode}
@@ -152,6 +195,7 @@ export function App() {
             activeLines={activeLines}
             errorLines={errorLines}
             pasoMs={sim.speed}
+            fontSize={zoom.fontSize}
           />
           {status === 'error' && sim.error && (
             <div className="err">
@@ -171,18 +215,19 @@ export function App() {
           )}
         </div>
 
-        <OutputPanel lines={snapshot?.output ?? []} />
+        {expanded === null ? (
+          <Dock drag={salida} className="dock-salida">{panel('output')}</Dock>
+        ) : (
+          <Dock drag={ampliado} className="dock-ampliado">{panel(expanded)}</Dock>
+        )}
       </div>
 
-      <div
-        ref={abajo.panelRef}
-        className="abajo"
-        style={abajo.height === null ? undefined : { height: abajo.height, maxHeight: 'none' }}
-      >
-        <div className="tl-asa" {...abajo.handleProps} />
-        <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} />
-        <MonitorPanel snapshot={snapshot} entries={sim.entries} />
-      </div>
+      {expanded === null && (
+        <Dock drag={abajo} className="abajo">
+          {panel('timeline')}
+          <Dock drag={monitores} className="dock-monitores">{panel('monitors')}</Dock>
+        </Dock>
+      )}
     </div>
   );
 }

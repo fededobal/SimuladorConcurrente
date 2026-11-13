@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
+import { ExpandButton } from './ExpandButton';
 import { STATE_CLASS, STATE_HINT, STATE_LABEL, type VisibleState } from '../processStates';
 import type { Timeline as TimelineData } from '../timeline';
 import type { ProcessView } from '../types';
@@ -7,6 +8,8 @@ interface Props {
   timeline: TimelineData;
   /** Procesos del snapshot actual: de aca salen el nombre y el color de cada fila. */
   processes: readonly ProcessView[];
+  expanded: boolean;
+  onToggleExpand: () => void;
 }
 
 // Iguales a --tl-* de index.css: posicionan las filas y los tramos, que son absolutos.
@@ -53,7 +56,7 @@ function segmentsOf(id: number, timeline: TimelineData): Segment[] {
  * quedo cada proceso. Las filas se reordenan en cada instante (los que avanzaron suben) y
  * se deslizan a su lugar nuevo en vez de saltar, para que se pueda seguir a cada proceso.
  */
-export function Timeline({ timeline, processes }: Props) {
+export function Timeline({ timeline, processes, expanded, onToggleExpand }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order } = timeline;
 
@@ -79,12 +82,9 @@ export function Timeline({ timeline, processes }: Props) {
   const alto = RULER_H + order.length * ROW_H + BOTTOM_PAD;
 
   return (
-    <section
-      className="timeline"
-      aria-label="Línea de tiempo"
-    >
-      <header>
-        línea de tiempo
+    <section className="timeline tarjeta" aria-label="Línea de tiempo">
+      <header className="panel-head">
+        <span className="titulo">Línea de tiempo</span>
         <ul className="tl-leyenda">
           {LEGEND.map((s) => (
             <li key={s} title={STATE_HINT[s]}>
@@ -95,6 +95,7 @@ export function Timeline({ timeline, processes }: Props) {
             </li>
           ))}
         </ul>
+        <ExpandButton expanded={expanded} onClick={onToggleExpand} />
       </header>
 
       <div className="tl-scroll" ref={scrollRef} onScroll={onScroll}>

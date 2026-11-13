@@ -1,10 +1,12 @@
-import { useId, useState } from 'react';
+import { Fragment, useId, useState } from 'react';
 import {
   arrowsOf, shortName, tokenPosition, tokensOf, TOKENS_PER_ZONE,
   type Arrow, type Token, type Zone,
 } from '../monitorDiagram';
+import { MasMenos, MAX_VISIBLES } from './MasMenos';
+import { MonitorVars } from './MonitorVars';
 import { segundosRestantes } from '../useAhora';
-import type { LogEntry, MonitorView, ProcessView, ProcRef } from '../types';
+import type { CondView, LogEntry, MonitorView, ProcessView, ProcRef } from '../types';
 
 interface Props {
   readonly monitor: MonitorView;
@@ -13,10 +15,13 @@ interface Props {
   /** Eventos del ultimo paso: resaltan las flechas que se recorrieron. */
   readonly entries: readonly LogEntry[];
   readonly ahora: number;
+  /** Si se puede ampliar, un clic sobre el dibujo lo hace. */
+  readonly onExpand?: () => void;
 }
 
 // Geometria del dibujo (unidades del viewBox). Copia la disposicion de la teoria: la zona 1
-// a la izquierda, la 3 a la derecha y la 2 arriba, entre las dos.
+// (compitiendo) a la izquierda, la 3 (en monitor) a la derecha y la 2 (en wait) arriba,
+// entre las dos. Cada zona es un cuadrado de lado 2R con las esquinas redondeadas.
 const W = 300;
 const H = 146;
 const R = 34;
@@ -26,17 +31,24 @@ const [X2, Y2] = CENTRO[2];
 const [X3] = CENTRO[3];
 const RADIO_PUNTO = 7;
 
+/** Rotulo de cada zona, arriba del cuadrado; el mismo nombre que en las listas de abajo. */
+const ZONA_TITULO: Record<Zone, string> = { 1: 'Compitiendo', 2: 'En wait', 3: 'En monitor' };
+
 const ZONA_TEXTO: Record<Zone, string> = {
   1: 'espera acceso al monitor',
   2: 'cola por variable condición',
   3: 'ejecutando en el monitor',
 };
+/** Redondeo de las esquinas de cada zona. */
+const ESQUINA = 6;
 
 /**
  * Un monitor dibujado como en la teoria: tres zonas y los procesos como puntos. Debajo, en
- * texto, quien esta en cada cola y en que orden.
+ * texto, quien esta en cada cola (la de entrada y la de cada variable condicion) y en que
+ * orden, y las variables del monitor con su estructura. En el panel ampliado el dibujo es
+ * mas grande (lo da el CSS); no cambia de forma.
  */
-export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
+export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }: Props) {
   const id = useId();
   const punta = `${id}-punta`;
   const activas = arrowsOf(monitor.name, entries);
@@ -76,8 +88,9 @@ export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
         <span className="mon-estado">{estado}</span>
       </header>
 
-      <svg className="mon-dibujo" viewBox={`0 0 ${W} ${H}`} role="img"
-        aria-label={`${monitor.name}: ${estado}`}>
+      <svg className={`mon-dibujo${onExpand ? ' ampliable' : ''}`} viewBox={`0 0 ${W} ${H}`}
+        role="img" aria-label={`${monitor.name}: ${estado}`} onClick={onExpand}>
+        {onExpand && <title>Clic para ampliar</title>}
         <defs>
           <marker id={punta} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5"
             markerHeight="5" orient="auto-start-reverse">
@@ -91,19 +104,22 @@ export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
         {rotulo('entra', 'entra', (X1 + X3) / 2, Y1 + 13, 'middle')}
         {flecha('return', `M${X3 + R + 1},${Y1} L${W - 2},${Y1}`)}
         {rotulo('return', 'Return', W - 2, Y1 - 6, 'end')}
-        {flecha('wait', `M${X3 - 21},${Y1 - 27} Q${X3 - 22},${Y2 + 6} ${X2 + R + 1},${Y2 + 2}`)}
+        {flecha('wait', `M${X3 - 21},${Y1 - R - 1} Q${X3 - 22},${Y2 + 6} ${X2 + R + 1},${Y2 + 2}`)}
         {rotulo('wait', 'wait', X3 - 16, Y2 + 14)}
-        {flecha('signal', `M${X2 - R - 1},${Y2 + 2} Q${X1 + 22},${Y2 + 6} ${X1 + 21},${Y1 - 28}`)}
+        {flecha('signal', `M${X2 - R - 1},${Y2 + 2} Q${X1 + 22},${Y2 + 6} ${X1 + 21},${Y1 - R - 2}`)}
         {rotulo('signal', 'signal', X1 + 16, Y2 + 14, 'end')}
 
         {([1, 2, 3] as const).map((z) => {
           const [cx, cy] = CENTRO[z];
           return (
             <g key={z}>
-              <circle cx={cx} cy={cy} r={R} className="mon-zona">
-                <title>{`${z}: ${ZONA_TEXTO[z]}`}</title>
-              </circle>
-              <text x={cx} y={cy - R + 11} textAnchor="middle" className="mon-num">{z}</text>
+              <rect x={cx - R} y={cy - R} width={2 * R} height={2 * R} rx={ESQUINA}
+                className="mon-zona">
+                <title>{`${ZONA_TITULO[z]}: ${ZONA_TEXTO[z]}`}</title>
+              </rect>
+              <text x={cx} y={cy - R + 11} textAnchor="middle" className="mon-zona-titulo">
+                {ZONA_TITULO[z]}
+              </text>
               {total[z] > TOKENS_PER_ZONE && (
                 <text x={cx + 17} y={cy + 17} dy="0.35em" textAnchor="middle" className="mon-mas">
                   +{total[z] - (TOKENS_PER_ZONE - 1)}
@@ -123,9 +139,9 @@ export function MonitorDiagram({ monitor, processes, entries, ahora }: Props) {
         <dd><Nombres procs={monitor.entryQueue} /></dd>
         <dt>En monitor</dt>
         <dd><Nombres procs={monitor.lockOwner ? [monitor.lockOwner] : []} /></dd>
-        <dt>En wait</dt>
-        <dd><EnWait monitor={monitor} /></dd>
+        <Esperas conds={monitor.conds} />
       </dl>
+      <MonitorVars vars={monitor.vars} processes={processes} />
     </section>
   );
 }
@@ -137,23 +153,16 @@ function notaDelDueno(p: ProcessView | undefined, ahora: number): string {
   return `, esperando en ${p.blockedOn ?? 'otro monitor'}`;
 }
 
-/** Cuantos nombres se muestran de una lista antes de ofrecer abrirla entera. */
-const MAX_NOMBRES = 6;
-
 /**
  * Nombres en orden de cola, cada uno con el color de su proceso; un guion si no hay nadie.
- * Con mas de {@link MAX_NOMBRES}, muestra los primeros y un boton para ver el resto.
+ * Con mas de {@link MAX_VISIBLES}, muestra los primeros y un boton para ver el resto.
  */
-function Nombres({ procs, sinLimite = false }: {
-  procs: readonly ProcRef[];
-  /** true si quien la usa ya recorto la lista (En wait cuenta el total de sus grupos). */
-  sinLimite?: boolean;
-}) {
+function Nombres({ procs }: { procs: readonly ProcRef[] }) {
   const [abierta, setAbierta] = useState(false);
   if (procs.length === 0) return <span className="nadie">—</span>;
-  const limitada = !sinLimite && procs.length > MAX_NOMBRES;
+  const limitada = procs.length > MAX_VISIBLES;
   const recortada = limitada && !abierta;
-  const visibles = recortada ? procs.slice(0, MAX_NOMBRES) : procs;
+  const visibles = recortada ? procs.slice(0, MAX_VISIBLES) : procs;
   return (
     <>
       {visibles.map((p, i) => (
@@ -162,7 +171,7 @@ function Nombres({ procs, sinLimite = false }: {
         </span>
       ))}
       {limitada && (
-        <MasMenos abierta={abierta} faltan={procs.length - MAX_NOMBRES}
+        <MasMenos abierta={abierta} faltan={procs.length - MAX_VISIBLES}
           onClick={() => setAbierta(!abierta)} />
       )}
     </>
@@ -170,51 +179,51 @@ function Nombres({ procs, sinLimite = false }: {
 }
 
 /**
- * Los procesos dormidos, agrupados por variable condicion, cada grupo en el orden de su cola.
- * El limite de {@link MAX_NOMBRES} cuenta procesos, no grupos: con un arreglo de cond (una
- * por cliente) cada grupo tiene uno solo y la lista igual seria larga.
+ * Una fila "En wait(cond)" por variable condicion, en el orden en que se declararon. Con un
+ * arreglo de cond (una por cliente) son muchas filas, asi que plegado muestra solo las que
+ * tienen a alguien esperando, hasta {@link MAX_VISIBLES} procesos, y un boton abre todas.
  */
-function EnWait({ monitor }: { monitor: MonitorView }) {
+function Esperas({ conds }: { conds: readonly CondView[] }) {
   const [abierta, setAbierta] = useState(false);
-  const conds = monitor.conds.filter((c) => c.queue.length > 0);
-  if (conds.length === 0) return <span className="nadie">—</span>;
   const total = conds.reduce((n, c) => n + c.queue.length, 0);
-  const recortada = total > MAX_NOMBRES && !abierta;
 
-  // con la lista recortada, se toman procesos en orden hasta llegar al limite
-  let quedan = recortada ? MAX_NOMBRES : total;
-  const grupos: Array<{ name: string; queue: readonly ProcRef[] }> = [];
-  for (const c of conds) {
-    if (quedan === 0) break;
-    const queue = c.queue.slice(0, quedan);
-    quedan -= queue.length;
-    grupos.push({ name: c.name, queue });
+  let visibles: CondView[] = [...conds];
+  if (!abierta) {
+    visibles = [];
+    let quedan = MAX_VISIBLES;
+    for (const c of conds) {
+      if (c.queue.length === 0 || quedan === 0) continue;
+      visibles.push({ name: c.name, queue: c.queue.slice(0, quedan) });
+      quedan -= Math.min(c.queue.length, quedan);
+    }
   }
+  const ocultas = conds.length - visibles.length;
+  const recortadas = !abierta && (ocultas > 0 || visibles.some((c, i) => c.queue.length < conds[i].queue.length));
 
   return (
     <>
-      <ul className="mon-wait">
-        {grupos.map((c) => (
-          <li key={c.name}>
-            <span className="cond">{c.name}:</span> <Nombres procs={c.queue} sinLimite />
-          </li>
-        ))}
-      </ul>
-      {total > MAX_NOMBRES && (
-        <MasMenos abierta={abierta} faltan={total - MAX_NOMBRES} onClick={() => setAbierta(!abierta)} />
+      {visibles.map((c) => (
+        <Fragment key={c.name}>
+          <dt>En wait(<span className="cond">{c.name}</span>)</dt>
+          <dd><Nombres procs={c.queue} /></dd>
+        </Fragment>
+      ))}
+      {total === 0 && !abierta && (
+        <>
+          <dt>En wait</dt>
+          <dd><span className="nadie">—</span></dd>
+        </>
+      )}
+      {(recortadas || abierta) && conds.length > 0 && (
+        <>
+          <dt />
+          <dd>
+            <MasMenos abierta={abierta} faltan={ocultas} onClick={() => setAbierta(!abierta)}
+              texto={`ver las ${conds.length} cond`} />
+          </dd>
+        </>
       )}
     </>
-  );
-}
-
-/** Boton para abrir o cerrar una lista recortada. */
-function MasMenos({ abierta, faltan, onClick }: {
-  abierta: boolean; faltan: number; onClick: () => void;
-}) {
-  return (
-    <button type="button" className="mon-mas-nombres" onClick={onClick} aria-expanded={abierta}>
-      {abierta ? 'ver menos' : `+${faltan} más`}
-    </button>
   );
 }
 

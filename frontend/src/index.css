@@ -1,26 +1,38 @@
+/*
+ * Tema claro y sobrio, pensado para un alumno que mira la pantalla un rato largo o la ve
+ * proyectada: fondo gris frio, cada panel como una tarjeta blanca con aire alrededor, un
+ * solo color de acento y estados en tonos apagados. El color lo ponen los procesos, y
+ * siempre acompanado de una forma (rayado, puntos, la "M") para no depender solo de el.
+ */
 :root {
-  --bg: #0e0e11;
-  --panel: #131317;
-  --line: #22222a;
-  --line-soft: #1a1a20;
-  --text: #dcdce2;
-  --dim: #6c6c78;
-  --dimmer: #43434e;
+  --bg: #e9ecf0;
+  --panel: #ffffff;
+  --panel-soft: #f5f7fa;
+  --line: #d5dae2;
+  --line-soft: #eef1f4;
+  --line-strong: #c3cad5;
+  --text: #1f2933;
+  --dim: #5f6b7a;
+  --dimmer: #9aa5b4;
+  --accent: #2456a4;
+  --accent-soft: #eef2f8;
 
-  --tok-comment: #4f4f5c;
-  --tok-decl: #a78bfa;
-  --tok-sync: #7dd3fc;
-  --tok-type: #71717a;
-  --tok-ctrl: #f2f2f5;
-  --tok-lit: #9aab86;
+  --tok-comment: #7a8290;
+  --tok-decl: #2456a4;
+  --tok-sync: #2456a4;
+  --tok-type: #5f6b7a;
+  --tok-ctrl: #1f2933;
+  --tok-lit: #8a5a1f;
 
-  --danger: #e06c75;
+  --danger: #a33a2e;
+  --danger-bg: #fbeeec;
+  --danger-line: #efc9c3;
 
   /* estados de proceso: los comparten las franjas del editor y la linea de tiempo */
-  --st-competing: #f59e0b;
-  --st-waiting: #ef4444;
-  --st-delayed: #22c55e;
-  --st-ready: #6c6c78;
+  --st-competing: #b48f4a;
+  --st-waiting: #b5665c;
+  --st-delayed: #6b9a72;
+  --st-ready: #a7afb9;
 
   /* linea de tiempo: iguales a las constantes de Timeline.tsx */
   --tl-row-h: 22px;
@@ -34,7 +46,11 @@
   --pad-top: 14px;
   --line-h: 22px;
 
-  color-scheme: dark;
+  /* aire entre tarjetas; las asas de arrastre viven en ese hueco */
+  --gap: 10px;
+  --radius: 8px;
+
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,6 +67,7 @@ body {
 
 button, select { font-family: inherit; font-size: inherit; color: inherit; }
 button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 /* ------------------------------------------------------------------ shell */
 
@@ -58,6 +75,15 @@ button { cursor: pointer; }
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+/* toda tarjeta: la barra, el editor y cada panel */
+.tarjeta {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 /* ------------------------------------------------------------------ bar */
@@ -66,9 +92,7 @@ button { cursor: pointer; }
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel);
+  padding: 8px 12px;
   flex-shrink: 0;
 }
 
@@ -76,48 +100,58 @@ button { cursor: pointer; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 30px;
+  height: 32px;
   padding: 0 12px;
-  background: transparent;
-  border: 1px solid var(--line);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
   transition: background 0.12s, border-color 0.12s;
 }
-.btn:hover:not(:disabled) { background: #1b1b21; border-color: #30303a; }
-.btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.btn-main { background: #1a1a20; border-color: #2e2e38; }
-.btn-main:hover:not(:disabled) { background: #22222a; border-color: #3a3a46; }
+.btn:hover:not(:disabled) { background: var(--panel-soft); border-color: var(--dimmer); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-main { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-main:hover:not(:disabled) { background: #1d478a; border-color: #1d478a; }
 
 .sel {
-  height: 30px;
-  padding: 0 8px;
-  background: transparent;
-  border: 1px solid var(--line);
+  height: 32px;
+  padding: 0 28px 0 10px;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  color: var(--dim);
+  color: var(--text);
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%235f6b7a' stroke-width='1.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
-.sel:hover { border-color: #30303a; }
+.sel:hover:not(:disabled) { border-color: var(--dimmer); }
+.sel:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .spacer { flex: 1; }
 
+.btn-icono { width: 32px; padding: 0; justify-content: center; color: var(--dim); }
+.btn-icono:hover:not(:disabled) { color: var(--text); }
+.zoom { display: flex; gap: 4px; margin-right: 6px; }
+
 .meta {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
-  font-family: var(--mono);
+  align-items: center;
+  gap: 10px;
   color: var(--dim);
-  font-size: 12px;
+  font-size: 12.5px;
 }
-.meta .n { color: var(--text); }
-.meta .st { color: var(--dimmer); font-size: 11px; }
-.meta .st.bad { color: var(--danger); }
+.meta .n { font-family: var(--mono); color: var(--text); font-weight: 600; }
+.meta .st { padding: 2px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--text); }
+.meta .st:empty { display: none; }
+.meta .st.bad { background: var(--danger-bg); color: var(--danger); }
 
-/* ------------------------------------------------------------------ editor */
+/* ------------------------------------------------------------------ cuerpo */
 
 .cuerpo {
   flex: 1;
   min-height: 0;
   display: flex;
+  gap: var(--gap);
 }
 
 .stage {
@@ -126,29 +160,83 @@ button { cursor: pointer; }
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
+/* ------------------------------------------------------------------ paneles */
+
+/* Un panel que se agranda o achica arrastrando el borde que mira al editor (arriba o a la
+   izquierda). El asa ocupa el hueco entre tarjetas, asi no tapa contenido. */
+.dock {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+.dock > .tarjeta { flex: 1; min-width: 0; min-height: 0; }
+
+.asa {
+  position: absolute;
+  z-index: 5;
+  touch-action: none;
+}
+.asa-y { top: calc(-1 * var(--gap)); left: 0; right: 0; height: var(--gap); cursor: row-resize; }
+.asa-x { left: calc(-1 * var(--gap)); top: 0; bottom: 0; width: var(--gap); cursor: col-resize; }
+.asa::after {
+  content: '';
+  position: absolute;
+  border-radius: 2px;
+  background: transparent;
+  transition: background 0.12s;
+}
+.asa-y::after { left: 0; right: 0; top: 4px; height: 2px; }
+.asa-x::after { top: 0; bottom: 0; left: 4px; width: 2px; }
+.asa:hover::after, .asa:focus-visible::after, .asa:active::after { background: var(--accent); }
+.asa:focus-visible { outline: none; }
+
+/* encabezado comun a los paneles: titulo, extras y el boton de ampliar a la derecha */
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px 7px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.panel-head .titulo { white-space: nowrap; }
+.panel-head .titulo[title] { cursor: help; }
+
+.amp {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--dim);
+  flex-shrink: 0;
+}
+.amp:hover { background: var(--accent-soft); border-color: var(--line); color: var(--text); }
+
+/* panel ampliado: a la derecha del editor, a toda altura; los demas paneles se ocultan */
+.dock-ampliado { width: 58%; }
+
 /* ------------------------------------------------------------------ monitores */
+
+.dock-monitores { width: 400px; }
 
 /* Un dibujo por monitor, como el de la teoria. Trazos finos y grises: el color lo ponen los
    procesos, igual que en el editor y la linea de tiempo. */
 .monitores {
-  width: 400px;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--line);
-  min-height: 0;
-}
-.monitores > header {
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--line);
-  color: var(--dim);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  cursor: help;
+  overflow: hidden;
 }
 .monitores .lista {
   flex: 1;
@@ -156,33 +244,45 @@ button { cursor: pointer; }
   overflow-y: auto;
 }
 
+/* cada monitor es un bloque con su propio marco y una banda con el nombre: con varios
+   monitores se ve donde termina uno y empieza el otro */
 .mon {
-  padding: 8px 12px 10px;
-  border-bottom: 1px solid var(--line-soft);
+  margin: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
 }
 .mon > header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  font-size: 11px;
+  padding: 6px 12px;
+  background: var(--panel-soft);
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
 }
-.mon-nombre { font-family: var(--mono); color: var(--text); }
+.mon > :not(header) { margin-left: 12px; margin-right: 12px; }
+.mon > svg { margin-top: 6px; }
+.mon > :last-child { margin-bottom: 10px; }
+.mon-nombre { font-family: var(--mono); font-weight: 600; }
 .mon-estado { color: var(--dim); }
 
 .mon-dibujo { display: block; width: 100%; max-width: 300px; height: auto; margin: 2px auto 0; }
-.mon-zona { fill: none; stroke: var(--dimmer); stroke-width: 1; }
-.mon-num { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
+.mon > .mon-dibujo { margin-left: auto; margin-right: auto; }
+.mon-dibujo.ampliable { cursor: zoom-in; }
+.mon-zona { fill: var(--panel-soft); stroke: var(--line-strong); stroke-width: 1; }
+.mon-zona-titulo { font-family: var(--sans); font-size: 8.5px; font-weight: 600; fill: var(--dim); }
 .mon-mas { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
-.mon-flecha { fill: none; stroke: var(--dimmer); stroke-width: 1; }
-.mon-flecha.activa { stroke: var(--dim); stroke-width: 1.5; }
+.mon-flecha { fill: none; stroke: var(--line-strong); stroke-width: 1; }
+.mon-flecha.activa { stroke: var(--text); stroke-width: 1.5; }
 .mon-punta { fill: var(--dim); }
-.mon-rotulo { font-family: var(--sans); font-size: 9px; fill: var(--dimmer); }
-.mon-rotulo.activo { fill: var(--text); }
+.mon-rotulo { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
+.mon-rotulo.activo { fill: var(--text); font-weight: 600; }
 .mon-punto-texto {
   font-family: var(--sans);
   font-size: 6.5px;
-  font-weight: 600;
-  fill: #0e0e11;
+  font-weight: 700;
+  fill: #fff;
   pointer-events: none;
 }
 .mon-anillo { fill: none; stroke: var(--dim); stroke-width: 1; stroke-dasharray: 2 2; }
@@ -190,21 +290,21 @@ button { cursor: pointer; }
 .mon-estados {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1px 10px;
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 1.5;
+  gap: 2px 12px;
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.55;
 }
-.mon-estados dt { color: var(--dim); }
-.mon-estados dd { min-width: 0; font-family: var(--mono); font-size: 10.5px; }
+.mon-estados dt { color: var(--dim); font-weight: 500; }
+.mon-estados dd { min-width: 0; font-family: var(--mono); font-size: 11px; }
 .mon-estados .cond { color: var(--dim); }
 .mon-wait { list-style: none; }
 .mon-mas-nombres {
   margin-left: 6px;
-  padding: 0 5px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: none;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--panel);
   color: var(--dim);
   font: inherit;
   font-size: 10px;
@@ -213,35 +313,80 @@ button { cursor: pointer; }
 .mon-mas-nombres:hover { color: var(--text); border-color: var(--dimmer); }
 .mon-estados .nadie { color: var(--dimmer); }
 
+/* version extendida (panel ampliado): dibujo grande, listas completas y las variables */
+.monitores.extendido .mon { margin: 12px 16px; }
+.monitores.extendido .mon > header { padding: 8px 14px; font-size: 13px; }
+.monitores.extendido .mon > :not(header) { margin-left: 16px; margin-right: 16px; }
+.monitores.extendido .mon-dibujo { max-width: 420px; }
+.monitores.extendido .mon-estados { font-size: 12.5px; }
+.monitores.extendido .mon-estados dd { font-size: 12px; }
+
+/* variables del monitor dibujadas segun su estructura */
+.mon-datos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+.mon-dato { display: contents; }
+.mon-datos dt { display: flex; flex-direction: column; font-family: var(--mono); font-size: 11px; }
+.mon-datos dt .tipo { color: var(--dimmer); font-size: 10px; }
+.mon-datos dd { min-width: 0; display: flex; align-items: flex-start; gap: 6px; font-family: var(--mono); font-size: 11px; }
+.mon-datos .quien {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+.mon-datos .escalar { white-space: pre-wrap; word-break: break-word; }
+.mon-datos .nadie { color: var(--dimmer); }
+.celdas { display: flex; flex-wrap: wrap; gap: 3px; align-items: flex-start; }
+/* en una cola las celdas van pegadas, como los casilleros del dibujo de la teoria */
+.celdas.cola { gap: 0; }
+.celda { display: flex; flex-direction: column; align-items: center; }
+.celda-valor {
+  min-width: 22px;
+  padding: 1px 5px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  background: var(--panel);
+  text-align: center;
+  white-space: pre;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* una celda vacia (texto "") conserva su alto */
+.celda-valor:empty::after { content: '\00a0'; }
+.celdas.cola .celda-valor { border-radius: 0; margin-left: -1px; }
+.celdas.cola .celda:first-child .celda-valor { border-radius: 3px 0 0 3px; margin-left: 0; }
+.celdas.cola .celda:last-child .celda-valor { border-radius: 0 3px 3px 0; }
+.celda-nota { font-size: 9px; line-height: 1.3; color: var(--dimmer); }
+.celda-mas { align-self: center; color: var(--dim); font-size: 10.5px; padding-left: 4px; }
+.monitores.extendido .mon-datos { font-size: 12.5px; }
+.monitores.extendido .mon-datos dt, .monitores.extendido .mon-datos dd { font-size: 12px; }
+
 /* ------------------------------------------------------------------ salida */
 
+.dock-salida { width: 270px; }
+
 .salida {
-  width: 260px;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--line);
-  background: var(--panel);
-}
-.salida > header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--line);
-  color: var(--dim);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 .salida .cuenta {
   font-family: var(--mono);
-  font-size: 10px;
-  padding: 1px 5px;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 1px 7px;
   border-radius: 999px;
-  background: #1b1b21;
-  letter-spacing: 0;
+  background: var(--accent-soft);
 }
 .salida .lineas {
   flex: 1;
@@ -250,43 +395,33 @@ button { cursor: pointer; }
   padding: 8px 0;
   font-family: var(--mono);
   font-size: 11.5px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 .salida .vacio {
-  padding: 0 12px;
+  padding: 0 14px;
   color: var(--dim);
   font-family: var(--sans);
   font-size: 11px;
   line-height: 1.5;
 }
-.salida .vacio code {
-  font-family: var(--mono);
-  font-size: 10.5px;
-}
 .salida .linea {
   display: flex;
-  gap: 7px;
-  padding: 1px 12px;
+  gap: 8px;
+  padding: 1px 14px;
   white-space: pre-wrap;
   word-break: break-word;
 }
-.salida .linea:hover { background: #17171c; }
+.salida .linea:hover { background: var(--panel-soft); }
 .salida .t {
-  color: #4a4a57;
+  color: var(--dimmer);
   min-width: 2ch;
   text-align: right;
   flex-shrink: 0;
 }
-.salida .quien {
-  flex-shrink: 0;
-  opacity: 0.85;
-}
+.salida .quien { flex-shrink: 0; }
 .salida .texto { color: var(--text); }
 
-@media (max-width: 720px) {
-  .cuerpo { flex-direction: column; }
-  .salida { width: auto; max-height: 30%; border-left: none; border-top: 1px solid var(--line); }
-}
+/* ------------------------------------------------------------------ editor */
 
 .editor {
   flex: 1;
@@ -320,7 +455,7 @@ button { cursor: pointer; }
   padding: var(--pad-top) 12px;
   text-align: right;
   color: var(--dimmer);
-  background: var(--line-soft);
+  background: var(--panel-soft);
   border-right: 1px solid var(--line);
   user-select: none;
   white-space: pre;
@@ -388,43 +523,64 @@ button { cursor: pointer; }
 .st-ready     { --st: var(--st-ready); }
 
 .stripe.st-running-monitor, .stripe.st-running-process {
-  background: color-mix(in srgb, var(--st) 13%, transparent);
-  border-left: 2px solid var(--st);
+  background: color-mix(in srgb, var(--st) 9%, transparent);
+  border-left: 3px solid var(--st);
 }
 .stripe.st-ready {
-  background: color-mix(in srgb, var(--st) 6%, transparent);
-  border-left: 2px solid color-mix(in srgb, var(--st) 60%, transparent);
+  background: color-mix(in srgb, var(--st) 10%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--st) 70%, transparent);
 }
 .stripe.st-competing, .stripe.st-waiting {
   background: repeating-linear-gradient(135deg,
-    color-mix(in srgb, var(--st) 18%, transparent) 0 5px, transparent 5px 10px);
-  border-left: 2px dashed var(--st);
+    color-mix(in srgb, var(--st) 14%, transparent) 0 5px, transparent 5px 10px);
+  border-left: 3px dashed var(--st);
 }
 
+/* un halo casi blanco separa el nombre del rayado de la franja */
 .stripe .who {
+  padding: 0 4px;
+  border-radius: 3px;
+  background: color-mix(in srgb, #fff 70%, transparent);
   font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.02em;
+  font-size: 10.5px;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
+
+/* "+n": procesos de mas en el renglon; es lo unico de la franja que recibe clics */
+.who-mas {
+  pointer-events: auto;
+  margin-right: 5px;
+  padding: 0 5px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--dim);
+  font: inherit;
+  font-size: 10px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.who-mas:hover { color: var(--text); border-color: var(--dimmer); }
 
 /* demorado por un delay: franja punteada y un contador con los segundos que faltan */
 .stripe.st-delayed {
   background: color-mix(in srgb, var(--st) 9%, transparent);
-  border-left: 2px dotted var(--st);
+  border-left: 3px dotted var(--st);
 }
 .delay-count {
   margin-left: 5px;
-  padding: 0 4px;
+  padding: 0 5px;
+  border: 1px solid var(--st-delayed);
   border-radius: 6px;
   font-variant-numeric: tabular-nums;
-  color: var(--bg);
-  background: var(--st-delayed);
+  color: var(--text);
+  background: color-mix(in srgb, var(--st-delayed) 18%, #fff);
 }
 
 .tok-comment { color: var(--tok-comment); font-style: italic; }
-.tok-decl    { color: var(--tok-decl); }
-.tok-sync    { color: var(--tok-sync); }
+.tok-decl    { color: var(--tok-decl); font-weight: 600; }
+.tok-sync    { color: var(--tok-sync); font-weight: 600; }
 .tok-ctrl    { color: var(--tok-ctrl); }
 .tok-type    { color: var(--tok-type); }
 .tok-lit     { color: var(--tok-lit); }
@@ -434,8 +590,8 @@ button { cursor: pointer; }
 .err {
   flex-shrink: 0;
   padding: 9px 16px;
-  border-top: 1px solid #3a2226;
-  background: #1c1315;
+  border-top: 1px solid var(--danger-line);
+  background: var(--danger-bg);
   color: var(--danger);
   font-family: var(--mono);
   font-size: 12px;
@@ -447,70 +603,33 @@ button { cursor: pointer; }
    su contenido (bajo al abrir, crece con los procesos) hasta un poco mas de la mitad de la
    pantalla; arrastrando el asa manda el alto elegido. */
 .abajo {
-  position: relative;
-  flex-shrink: 0;
   min-height: 150px;
   max-height: 55vh;
-  display: flex;
-  border-top: 1px solid var(--line);
-  background: var(--panel);
+  gap: var(--gap);
 }
 .timeline {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* asa para arrastrar el borde superior: mas alta que el borde, para que sea facil de agarrar */
-.tl-asa {
-  position: absolute;
-  top: -4px;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  height: 8px;
-  cursor: row-resize;
-  touch-action: none;
-}
-.tl-asa::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 3px;
-  height: 2px;
-  background: transparent;
-  transition: background 0.12s;
-}
-.tl-asa:hover::after, .tl-asa:focus-visible::after, .tl-asa:active::after {
-  background: var(--tok-sync);
-}
-.tl-asa:focus-visible { outline: none; }
-.timeline > header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--line);
-  color: var(--dim);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  flex-shrink: 0;
-}
+/* con poco ancho (panel ampliado al costado) la leyenda pasa a dos renglones */
 .tl-leyenda {
   display: flex;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  min-width: 0;
   list-style: none;
-  text-transform: none;
-  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--dim);
 }
-.tl-leyenda li { display: flex; align-items: center; gap: 5px; }
+.tl-leyenda li { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
 .tl-muestra {
   display: inline-block;
-  width: 18px;
-  height: 10px;
+  width: 20px;
+  height: 11px;
   border-radius: 2px;
 }
 
@@ -536,7 +655,7 @@ button { cursor: pointer; }
   z-index: 3;
   height: var(--tl-ruler-h);
   background: var(--panel);
-  border-bottom: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 10px;
   color: var(--dimmer);
@@ -549,7 +668,7 @@ button { cursor: pointer; }
   overflow: visible;
   white-space: nowrap;
 }
-.tl-regla > span.actual { color: var(--text); }
+.tl-regla > span.actual { color: var(--text); font-weight: 600; }
 .tl-esquina {
   position: sticky;
   left: 0;
@@ -566,7 +685,7 @@ button { cursor: pointer; }
   position: absolute;
   bottom: 0;
   width: var(--tl-cell-w);
-  background: color-mix(in srgb, var(--text) 5%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
   pointer-events: none;
 }
 
@@ -575,6 +694,7 @@ button { cursor: pointer; }
   left: 0;
   right: 0;
   height: var(--tl-row-h);
+  border-bottom: 1px solid var(--line-soft);
   /* al reordenarse, cada fila se desliza a su lugar nuevo */
   transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -604,13 +724,10 @@ button { cursor: pointer; }
 }
 
 /* muestras de la leyenda y tramos: mismo relleno, mas intenso que la franja del editor */
-.tl-tramo.st-running-monitor, .tl-tramo.st-running-process {
-  background: color-mix(in srgb, var(--st) 75%, transparent);
-}
+.tl-tramo.st-running-monitor, .tl-tramo.st-running-process { background: var(--st); }
 /* en la leyenda no hay un proceso: la muestra combina colores de la paleta */
 .tl-muestra.st-running-process, .tl-muestra.st-running-monitor {
-  background: linear-gradient(90deg, #3b82f6 0 33%, #ec4899 33% 66%, #06b6d4 66%);
-  opacity: 0.8;
+  background: linear-gradient(90deg, #4f6d9e 0 33%, #a05f92 33% 66%, #2f6b78 66%);
 }
 
 /* "M" de cada instante ejecutado dentro de un monitor */
@@ -623,18 +740,30 @@ button { cursor: pointer; }
   font-size: 9px;
   font-weight: 700;
   line-height: 1;
-  color: var(--bg);
+  color: #fff;
 }
 .tl-m { width: var(--tl-cell-w); flex-shrink: 0; }
+/* rayado suave: el color al 80 % y huecos casi blancos */
 .tl-tramo.st-competing, .tl-muestra.st-competing,
 .tl-tramo.st-waiting, .tl-muestra.st-waiting {
   background: repeating-linear-gradient(135deg,
-    var(--st) 0 3px, color-mix(in srgb, var(--st) 30%, transparent) 3px 6px);
+    color-mix(in srgb, var(--st) 80%, transparent) 0 3px,
+    color-mix(in srgb, var(--st) 22%, transparent) 3px 6px);
 }
-/* sin turno: barra fina, se lee como "presente pero sin avanzar" */
+/* en delay: puntos sobre un fondo tenue */
 .tl-tramo.st-delayed, .tl-muestra.st-delayed {
   background: radial-gradient(circle, var(--st) 1.5px, transparent 2px) 0 50% / 6px 6px repeat-x,
-    color-mix(in srgb, var(--st) 22%, transparent);
+    color-mix(in srgb, var(--st) 20%, transparent);
 }
-.tl-tramo.st-ready { top: 9px; bottom: 9px; background: color-mix(in srgb, var(--st) 55%, transparent); }
-.tl-muestra.st-ready { height: 4px; background: color-mix(in srgb, var(--st) 55%, transparent); }
+/* sin turno: barra fina, se lee como "presente pero sin avanzar" */
+.tl-tramo.st-ready { top: 9px; bottom: 9px; background: var(--st); }
+.tl-muestra.st-ready { height: 4px; background: var(--st); }
+
+/* ------------------------------------------------------------------ pantallas angostas */
+
+@media (max-width: 720px) {
+  .cuerpo { flex-direction: column; }
+  .dock-salida, .dock-ampliado { width: auto; max-height: 40%; }
+  .asa-x { display: none; }
+  .tl-leyenda { display: none; }
+}

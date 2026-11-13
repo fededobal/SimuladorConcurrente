@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react';
+import { ExpandButton } from './ExpandButton';
 import type { OutputLine } from '../types';
 
 interface Props {
-  lines: OutputLine[];
+  readonly lines: readonly OutputLine[];
+  readonly expanded: boolean;
+  readonly onToggleExpand: () => void;
 }
 
 /**
@@ -10,7 +13,7 @@ interface Props {
  * que la escribio, que es lo que deja ver el entrelazado — con varios procesos corriendo a
  * la vez, el orden de la salida es justamente lo que cambia entre corridas.
  */
-export function OutputPanel({ lines }: Props) {
+export function OutputPanel({ lines, expanded, onToggleExpand }: Props) {
   const fin = useRef<HTMLDivElement>(null);
 
   // seguir la ultima linea, como una consola
@@ -19,14 +22,15 @@ export function OutputPanel({ lines }: Props) {
   }, [lines.length]);
 
   return (
-    <aside className="salida">
-      <header>
-        salida
+    <aside className="salida tarjeta" aria-label="Salida">
+      <header className="panel-head">
+        <span className="titulo">Salida</span>
         {lines.length > 0 && <span className="cuenta">{lines.length}</span>}
+        <ExpandButton expanded={expanded} onClick={onToggleExpand} />
       </header>
       <div className="lineas">
         {lines.length === 0 ? (
-          <p className="vacio" />
+          <p className="vacio">Acá aparece lo que escriben los procesos con write().</p>
         ) : (
           lines.map((l, i) => (
             <div key={i} className="linea">

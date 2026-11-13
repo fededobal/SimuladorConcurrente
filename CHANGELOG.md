@@ -16,6 +16,11 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Los paneles Salida, Línea de tiempo y Monitores se amplían con el botón de su encabezado (o con un clic sobre el dibujo de un monitor): el panel pasa a la derecha del editor a toda altura, así el alumno sigue viendo el código mientras mira el detalle, y se cierra con el mismo botón o con Escape. Todos los paneles se agrandan o achican arrastrando el borde que mira al editor, también con las flechas del teclado; el navegador recuerda cada tamaño. (Federico Dobal, 2026-11-13)
+- Cada monitor del panel muestra sus variables permanentes dibujadas según su estructura: un escalar con su valor, un arreglo como celdas con su índice, una Cola o ColaOrdenada como casilleros con el frente a la izquierda, y un punto con el color del último proceso que escribió cada una. (Federico Dobal, 2026-11-13)
+- Una fila "En wait(cond)" por cada variable condición del monitor, en el orden en que se declararon, con su cola de procesos. Plegado muestra solo las cond con alguien esperando, hasta cinco procesos, y un botón despliega todas. (Federico Dobal, 2026-11-13)
+- Versión extendida de cada monitor, al ampliar el panel: el dibujo más grande y las listas con más aire. Todo lo que puede desbordarse (listas de procesos, celdas de arreglos y colas, etiquetas de procesos en un mismo renglón del editor) muestra hasta cinco elementos y un botón "+n más" para abrir el resto. (Federico Dobal, 2026-11-13)
+- Zoom del editor de código: dos botones en la barra agrandan o achican solo la letra del programa; el navegador recuerda el tamaño. (Federico Dobal, 2026-11-13)
 - Panel Monitores: cada monitor se dibuja como en la teoría, con las zonas 1 (espera acceso), 2 (cola por variable condición) y 3 (ejecutando). Los procesos son puntos de su color que se mueven entre zonas, y se resalta la flecha recorrida en el último instante (Call, entra, wait, signal, Return). Debajo se listan la cola de entrada, la cola de cada cond en orden y los eventos del instante en ese monitor. El dueño que está en delay o esperando en otro monitor lleva un anillo y una aclaración. (Federico Dobal, 2026-11-13)
 - Instrucción delay(segundos): el proceso se demora ese tiempo real y, si está en un monitor, lo sigue teniendo tomado. Al lado de su nombre en el editor aparece un contador con los segundos que faltan, y la línea de tiempo lo muestra con el estado "en delay". Un proceso en delay no cuenta como interbloqueo: la simulación espera que termine. (Federico Dobal, 2026-11-13)
 - Arreglos de monitores, como en la cátedra: monitor Escritorio[id: 0..2] declara un monitor por índice, cada uno con sus variables, cond y cola de entrada, y se llama con Escritorio[i].atencion(...). Adentro, id es el índice de ese monitor. (Federico Dobal, 2026-11-13)
@@ -47,6 +52,9 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- En el dibujo del monitor las tres zonas son cuadrados con las esquinas redondeadas, rotulados "Compitiendo", "En wait" y "En monitor" en lugar de los números 1, 2 y 3, con los mismos nombres que las listas de abajo. (Federico Dobal, 2026-11-13)
+- En el panel Monitores cada monitor es un bloque con marco y una banda con su nombre, para distinguir uno de otro cuando hay varios. (Federico Dobal, 2026-11-13)
+- Interfaz en un tema claro y sobrio, pensado para el aula: fondo gris, cada panel como una tarjeta blanca con aire alrededor, un solo color de acento y menos colores en la sintaxis. Los estados de la línea de tiempo y del editor pasan a tonos apagados (ocre compitiendo, ladrillo esperando, verde en delay) y conservan el rayado, los puntos y la "M", para no depender solo del color. Se quita el modo oscuro. (Federico Dobal, 2026-11-13)
 - Paleta de procesos en tonos apagados entre el azul y el magenta, con contraste de 4,5:1 o más sobre blanco para que los nombres se lean como texto; un test lo verifica junto con el tono. (Federico Dobal, 2026-11-13)
 - En el panel Monitores, cada lista de procesos muestra hasta 6 nombres; si hay más, un botón "+N más" la despliega entera y "ver menos" la vuelve a cerrar. (Federico Dobal, 2026-11-13)
 - En el panel Monitores, los procesos en wait se agrupan por variable condición, una línea por cada una que tiene procesos. (Federico Dobal, 2026-11-13)

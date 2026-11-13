@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { segundosRestantes, useAhora } from '../useAhora';
+import { MAX_VISIBLES } from './MasMenos';
 import { STATE_CLASS, type VisibleState } from '../processStates';
 
 /** Renglon donde esta parado un proceso: la franja toma el color del estado, el nombre el del proceso. */
@@ -21,6 +22,8 @@ interface Props {
   errorLines: readonly number[];
   /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
   pasoMs: number;
+  /** Tamano de letra del codigo, en px (zoom del editor). */
+  fontSize: number;
 }
 
 // Valores de arranque, iguales a --pad-top y --line-h de index.css. No se usan para
@@ -299,7 +302,9 @@ function comentar(ta: TA) {
 
 // ===================================================================== componente
 
-export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, pasoMs }: Props) {
+export function CodeEditor({
+  code, onChange, readOnly, activeLines, errorLines, pasoMs, fontSize,
+}: Props) {
   // El deslizamiento ocupa la mayor parte del instante pero termina antes del siguiente:
   // si durara lo mismo, las franjas nunca se verian quietas sobre el renglon que ejecutan.
   // Corto y con salida rapida: la franja llega enseguida al renglon y se queda ahi. Si el
@@ -384,6 +389,14 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
   const yDe = (linea: number) => metrica.top + (linea - 1) * metrica.alto;
   const lines = code.split('\n');
 
+  // Renglones cuyas etiquetas el alumno abrio enteras (con mas de MAX_VISIBLES procesos).
+  const [abiertas, setAbiertas] = useState<ReadonlySet<number>>(new Set());
+  const alternar = (linea: number) => setAbiertas((prev) => {
+    const next = new Set(prev);
+    if (!next.delete(linea)) next.add(linea);
+    return next;
+  });
+
   // Una franja POR PROCESO, no por linea. Es lo que hace que el avance se vea suave: al
   // moverse de renglon sobrevive el mismo nodo del DOM y la transicion de CSS lo desliza.
   // Si se agrupara por linea, React desmontaria la franja vieja y montaria otra, y no hay
@@ -397,19 +410,25 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
       porLinea.set(a.line, list);
     }
     // Ahora que avanzan varios procesos a la vez, compartir renglon es normal: las
-    // etiquetas se corren para no taparse entre si.
-    const salida: Array<ActiveLine & { corrimiento: number }> = [];
-    for (const procs of porLinea.values()) {
+    // etiquetas se corren para no taparse entre si. Con mas de MAX_VISIBLES en el mismo
+    // renglon, las demas se esconden y la ultima visible lleva un boton "+n" que las abre.
+    const salida: Array<ActiveLine & { corrimiento: number; oculta: boolean; faltan: number }> = [];
+    for (const [linea, procs] of porLinea) {
       procs.sort((x, y) => RANK[x.state] - RANK[y.state] || x.name.localeCompare(y.name));
+      const abierta = abiertas.has(linea);
+      const visibles = abierta ? procs.length : Math.min(procs.length, MAX_VISIBLES);
       let corrimiento = 0;
-      for (const p of procs) {
-        salida.push({ ...p, corrimiento });
+      procs.forEach((p, i) => {
+        const oculta = i >= visibles;
+        const ultima = i === visibles - 1 && procs.length > MAX_VISIBLES;
+        salida.push({ ...p, corrimiento, oculta, faltan: ultima ? procs.length - visibles : 0 });
+        if (oculta) return;
         corrimiento += p.name.length * ANCHO_CHAR + HUECO_ETIQUETA
           + (p.delayEndsAt !== null ? ANCHO_CONTADOR : 0);
-      }
+      });
     }
     return salida;
-  }, [activeLines]);
+  }, [activeLines, abiertas]);
   const ahora = useAhora(marcas.some((m) => m.delayEndsAt !== null));
 
   const onKeyDown = (e: React.KeyboardEvent<TA>) => {
@@ -431,7 +450,15 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
   };
 
   return (
-    <div className="editor" style={{ ['--desliz' as string]: `${desliz}ms` }}>
+    <div
+      className="editor"
+      style={{
+        ['--desliz' as string]: `${desliz}ms`,
+        // el interlineado acompana a la letra; las franjas se miden del DOM, asi que siguen
+        ['--line-h' as string]: `${Math.round(fontSize * 1.7)}px`,
+        fontSize,
+      }}
+    >
       <div className="doc">
         <div className="gutter">{lines.map((_, i) => `${i + 1}\n`).join('')}</div>
         <div className="area">
@@ -448,24 +475,38 @@ export function CodeEditor({ code, onChange, readOnly, activeLines, errorLines, 
                 zIndex: RANK[p.state] === 0 ? 2 : 1,
               }}
             >
-              <span
-                className="who"
-                style={{
-                  color: p.color,
-                  opacity: NAME_ALPHA[p.state],
-                  transform: `translateX(${-p.corrimiento}px)`,
-                }}
-              >
-                {p.name}
-                {p.delayEndsAt !== null && (
-                  <span
-                    className="delay-count"
-                    title={`delay: faltan ${segundosRestantes(p.delayEndsAt, ahora)} s`}
-                  >
-                    {segundosRestantes(p.delayEndsAt, ahora)}s
-                  </span>
-                )}
-              </span>
+              {!p.oculta && (
+                <span
+                  className="who"
+                  style={{
+                    color: p.color,
+                    opacity: NAME_ALPHA[p.state],
+                    transform: `translateX(${-p.corrimiento}px)`,
+                  }}
+                >
+                  {(p.faltan > 0 || (abiertas.has(p.line) && p.corrimiento === 0)) && (
+                    <button
+                      type="button"
+                      className="who-mas"
+                      onClick={() => alternar(p.line)}
+                      aria-expanded={abiertas.has(p.line)}
+                      title={abiertas.has(p.line) ? 'ver menos'
+                        : `${p.faltan} procesos más en este renglón`}
+                    >
+                      {abiertas.has(p.line) ? 'ver menos' : `+${p.faltan}`}
+                    </button>
+                  )}
+                  {p.name}
+                  {p.delayEndsAt !== null && (
+                    <span
+                      className="delay-count"
+                      title={`delay: faltan ${segundosRestantes(p.delayEndsAt, ahora)} s`}
+                    >
+                      {segundosRestantes(p.delayEndsAt, ahora)}s
+                    </span>
+                  )}
+                </span>
+              )}
             </div>
           ))}
 
