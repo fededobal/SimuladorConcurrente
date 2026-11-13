@@ -134,13 +134,23 @@ export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }:
         ))}
       </svg>
 
+      {/* solo las colas con alguien: una fila vacia no cuenta nada */}
       <dl className="mon-estados">
-        <dt>Compitiendo</dt>
-        <dd><Nombres procs={monitor.entryQueue} /></dd>
-        <dt>En monitor</dt>
-        <dd><Nombres procs={monitor.lockOwner ? [monitor.lockOwner] : []} /></dd>
+        {monitor.entryQueue.length > 0 && (
+          <>
+            <dt>Compitiendo</dt>
+            <dd><Nombres procs={monitor.entryQueue} /></dd>
+          </>
+        )}
+        {monitor.lockOwner && (
+          <>
+            <dt>En monitor</dt>
+            <dd><Nombres procs={[monitor.lockOwner]} /></dd>
+          </>
+        )}
         <Esperas conds={monitor.conds} />
       </dl>
+      {tokens.length === 0 && <p className="mon-vacio">Ningún proceso en este monitor.</p>}
       <MonitorVars vars={monitor.vars} processes={processes} />
     </section>
   );
@@ -179,26 +189,27 @@ function Nombres({ procs }: { procs: readonly ProcRef[] }) {
 }
 
 /**
- * Una fila "En wait(cond)" por variable condicion, en el orden en que se declararon. Con un
- * arreglo de cond (una por cliente) son muchas filas, asi que plegado muestra solo las que
- * tienen a alguien esperando, hasta {@link MAX_VISIBLES} procesos, y un boton abre todas.
+ * Una fila "En wait(cond)" por cada variable condicion con alguien esperando, en el orden en
+ * que se declararon; las vacias no se muestran. Plegado, hasta {@link MAX_VISIBLES} procesos
+ * y un boton "+n mas" con los que faltan.
  */
 function Esperas({ conds }: { conds: readonly CondView[] }) {
   const [abierta, setAbierta] = useState(false);
-  const total = conds.reduce((n, c) => n + c.queue.length, 0);
+  const ocupadas = conds.filter((c) => c.queue.length > 0);
+  const total = ocupadas.reduce((n, c) => n + c.queue.length, 0);
 
-  let visibles: CondView[] = [...conds];
-  if (!abierta) {
+  let visibles: CondView[] = ocupadas;
+  let mostrados = total;
+  if (!abierta && total > MAX_VISIBLES) {
     visibles = [];
     let quedan = MAX_VISIBLES;
-    for (const c of conds) {
-      if (c.queue.length === 0 || quedan === 0) continue;
+    for (const c of ocupadas) {
+      if (quedan === 0) break;
       visibles.push({ name: c.name, queue: c.queue.slice(0, quedan) });
       quedan -= Math.min(c.queue.length, quedan);
     }
+    mostrados = MAX_VISIBLES;
   }
-  const ocultas = conds.length - visibles.length;
-  const recortadas = !abierta && (ocultas > 0 || visibles.some((c, i) => c.queue.length < conds[i].queue.length));
 
   return (
     <>
@@ -208,18 +219,12 @@ function Esperas({ conds }: { conds: readonly CondView[] }) {
           <dd><Nombres procs={c.queue} /></dd>
         </Fragment>
       ))}
-      {total === 0 && !abierta && (
-        <>
-          <dt>En wait</dt>
-          <dd><span className="nadie">—</span></dd>
-        </>
-      )}
-      {(recortadas || abierta) && conds.length > 0 && (
+      {total > MAX_VISIBLES && (
         <>
           <dt />
           <dd>
-            <MasMenos abierta={abierta} faltan={ocultas} onClick={() => setAbierta(!abierta)}
-              texto={`ver las ${conds.length} cond`} />
+            <MasMenos abierta={abierta} faltan={total - mostrados}
+              onClick={() => setAbierta(!abierta)} />
           </dd>
         </>
       )}
