@@ -198,10 +198,15 @@ Si la `cond` es un arreglo hay que indexarla siempre: `wait(turno[i])`, `signal(
 ```c
 procedure depositar(d: in int) { ... }
 procedure retirar(r: out int) { ... }
-procedure mirar(x: int) { ... }          // sin modo = in
+procedure mirar(x: int) { ... }                      // sin modo = in
 procedure nada() { ... }
+procedure Pasar(idP, edad: in int; R: out text) { ... } // grupos con ';'
+procedure request(int id, tiempo; text nombre) { ... }  // estilo C: siempre in
 ```
 
+- Los grupos de parámetros se separan con **`;`**; la coma separa nombres del mismo modo y
+  tipo. `(a: in int, b: in int)` es error: se escribe `(a, b: in int)` o
+  `(a: in int; b: in int)`.
 - **`in`** (default): solo lectura, asignarle adentro es error.
 - **`out`**: se copia al argumento del llamador al retornar.
 - El argumento de un `out` tiene que ser una variable o un elemento de arreglo
@@ -445,6 +450,7 @@ Errores de compilación (con número de línea), verificados:
 - `Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí 'a < b and b < c'`
 - `El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)`
 - `El tipo se llama bool, no boolean` · `El resto de la división se escribe mod, no %`
+- `Los parámetros de distinto grupo se separan con ';' (la coma separa nombres del mismo tipo)`
 - `Comentario de bloque sin cerrar` · `Cadena de texto sin cerrar` · `Comilla tipográfica “: las cadenas van entre comillas rectas (")`
 - `La cola 'c' maneja 2 componente(s) (fijado en la línea 4) y este pop usa 1`
 - `El programa tiene demasiados niveles de anidamiento (máximo 100)`

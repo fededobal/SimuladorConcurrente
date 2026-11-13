@@ -1,6 +1,12 @@
 package ar.edu.unlp.info.simulador.lang;
 
+import ar.edu.unlp.info.simulador.lang.parser.ast.Param;
+import ar.edu.unlp.info.simulador.lang.parser.ast.ParamMode;
+import ar.edu.unlp.info.simulador.lang.parser.ast.Program;
+import ar.edu.unlp.info.simulador.lang.parser.ast.Type;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -68,8 +74,8 @@ class CompilerTest {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   ColaOrdenada c;
-                  procedure guardar(prio: in int, dato: in int) { push(c, prio, dato); }
-                  procedure sacar(p: out int, d: out int) { pop(c, p, d); }
+                  procedure guardar(prio: in int; dato: in int) { push(c, prio, dato); }
+                  procedure sacar(p: out int; d: out int) { pop(c, p, d); }
                 }
                 process P { int a = 0; int b = 0; M.guardar(2, 20); M.sacar(a, b); }
                 """));
@@ -393,5 +399,41 @@ class CompilerTest {
                 PROCESS P { M.p(); }
                 process Q { M.p(); }
                 """));
+    }
+
+    /** Parametros como la catedra: ';' entre grupos y ',' entre nombres del mismo tipo. */
+    @Test
+    void parametrosAgrupadosYSeparadosConPuntoYComa() {
+        Program p = Compiler.compile("""
+                monitor M { int s = 0; text u = "";
+                  procedure f(a, b: in int; r: out text) { s = a + b; r = "ok"; } }
+                process P { text t; M.f(1, 2, t); }
+                """);
+        List<Param> params = p.monitors().get(0).procedure("f").params();
+        assertEquals(List.of("a", "b", "r"), params.stream().map(Param::name).toList());
+        assertEquals(List.of(ParamMode.IN, ParamMode.IN, ParamMode.OUT),
+                params.stream().map(Param::mode).toList());
+    }
+
+    /** Parametros al estilo C: tipo adelante, de entrada. */
+    @Test
+    void parametrosEstiloC() {
+        Program p = Compiler.compile("""
+                monitor M { int s = 0; procedure f(int a, b; text t) { s = a + b; } }
+                process P { M.f(1, 2, "x"); }
+                """);
+        List<Param> params = p.monitors().get(0).procedure("f").params();
+        assertEquals(List.of(Type.INT, Type.INT, Type.TEXT), params.stream().map(Param::type).toList());
+        assertTrue(params.stream().allMatch(Param::isInput));
+    }
+
+    /** La coma no separa grupos de parametros: el mensaje dice que va ';'. */
+    @Test
+    void comaEntreGruposDeParametrosEsError() {
+        String esperado = "Los parámetros de distinto grupo se separan con ';'";
+        assertTrue(errorDe("monitor M { procedure f(a: in int, b: in int) { skip; } }\n"
+                + "process P { M.f(1, 2); }").contains(esperado));
+        assertTrue(errorDe("monitor M { procedure f(int a, int b) { skip; } }\n"
+                + "process P { M.f(1, 2); }").contains(esperado));
     }
 }

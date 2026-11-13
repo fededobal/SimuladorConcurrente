@@ -183,6 +183,12 @@ const CANONICOS = [
   ['% se rechaza con un mensaje que dice que escribir', `
     process P { int x = 7 % 3; }`,
     (r) => !!r.compilacion?.endsWith('El resto de la división se escribe mod, no %')],
+  ['parametros agrupados con ; y estilo C', `
+    monitor M { int s = 0; text u = "";
+      procedure f(a, b: in int; r: out text) { s = a + b; r = "ok"; }
+      procedure g(int a, b; text t) { u = t; } }
+    process P { text t; M.f(1, 2, t); M.g(3, 4, t); }`,
+    (r) => r.finished && r.vars['M.s'] === '3' && r.vars['M.u'] === 'ok'],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

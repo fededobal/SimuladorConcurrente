@@ -100,10 +100,16 @@ cond turno[N];      // arreglo de variables condición (variables condición pri
 ### 3.2 Procedures
 
 ```
-procedure nombre(p1: modo tipo, p2: modo tipo, ...) {
+procedure nombre(p1, p2: modo tipo; p3: modo tipo; ...) {
     <sentencias>
 }
 ```
+
+- Los grupos de parámetros se separan con `;` y, dentro de un grupo, la coma separa
+  nombres del mismo modo y tipo: `procedure Pasar(idP, edad: in int; R: out text)`.
+- También se acepta la forma de C, con el tipo adelante y siempre de entrada:
+  `procedure request(int id, tiempo; text nombre)`.
+- Una coma entre grupos es error de compilación.
 
 - **Modos de parámetro:** `in` (default — solo lectura), `out` (se copia al argumento del
   llamador al retornar; el argumento debe ser una variable/elemento de arreglo, no una
@@ -232,8 +238,9 @@ var_perm      = decl_var ;
 cond_decl     = "cond" ident [ "[" expr "]" ] { "," ident [ "[" expr "]" ] } ";" ;
 
 procedure     = "procedure" ident "(" [ params ] ")" bloque ;
-params        = param { "," param } ;
-param         = ident ":" [ modo ] tipo_escalar ;
+params        = grupo_param { ";" grupo_param } ;
+grupo_param   = ident { "," ident } ":" [ modo ] tipo_escalar
+              | tipo_escalar ident { "," ident } ;      (* forma de C: modo in *)
 modo          = "in" | "out" ;
 
 (* ---------- procesos ---------- *)

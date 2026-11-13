@@ -105,25 +105,38 @@ public final class Parser {
         Token kw = consume("procedure", "Se esperaba 'procedure'");
         String name = consumeIdent("Se esperaba el nombre del procedure");
         consume("(", "Se esperaba '(' después del nombre del procedure");
-        List<Param> params = new ArrayList<>();
-        if (!check(")")) {
-            do {
-                params.add(parseParam());
-            } while (match(","));
-        }
+        List<Param> params = parseParams();
         consume(")", "Se esperaba ')' al cerrar los parámetros");
         Stmt.Block body = parseBlock();
         return new ProcedureDef(name, params, body, kw.line());
     }
 
-    private Param parseParam() {
-        Token nameTok = consumeIdentToken("Se esperaba el nombre del parámetro");
+    /**
+     * Grupos de parametros separados por ';'. Dentro de un grupo, la coma separa nombres del
+     * mismo tipo. Un grupo se escribe como la catedra ({@code idP, edad: in int}) o al estilo
+     * C ({@code int a, b}, siempre de entrada).
+     */
+    private List<Param> parseParams() {
+        List<Param> params = new ArrayList<>();
+        if (check(")")) return params;
+        do {
+            params.addAll(isScalarType(peek()) ? parseCStyleGroup() : parseParamGroup());
+        } while (match(";"));
+        return params;
+    }
+
+    /** {@code nombre {, nombre} : [modo] tipo} */
+    private List<Param> parseParamGroup() {
+        List<Token> names = new ArrayList<>();
+        do {
+            names.add(consumeIdentToken("Se esperaba el nombre del parámetro"));
+        } while (match(","));
         consume(":", "Se esperaba ':' después del nombre del parámetro");
         ParamMode mode = ParamMode.IN;
-        if (match("in")) {
-            mode = ParamMode.IN;
-        } else if (match("out")) {
+        if (match("out")) {
             mode = ParamMode.OUT;
+        } else {
+            match("in");
         }
         if (peek().is("inout")) {
             throw error("El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)");
@@ -133,7 +146,29 @@ public final class Parser {
                     + "para el parámetro");
         }
         Type type = Type.fromKeyword(advance().lexeme());
-        return new Param(nameTok.lexeme(), type, mode, nameTok.line());
+        rejectCommaBetweenGroups();
+        List<Param> group = new ArrayList<>();
+        for (Token n : names) group.add(new Param(n.lexeme(), type, mode, n.line()));
+        return group;
+    }
+
+    /** {@code tipo nombre {, nombre}}, al estilo C: parametros de entrada. */
+    private List<Param> parseCStyleGroup() {
+        Type type = Type.fromKeyword(advance().lexeme());
+        List<Param> group = new ArrayList<>();
+        do {
+            if (isScalarType(peek())) rejectCommaBetweenGroups();
+            Token n = consumeIdentToken("Se esperaba el nombre del parámetro");
+            group.add(new Param(n.lexeme(), type, ParamMode.IN, n.line()));
+        } while (match(","));
+        return group;
+    }
+
+    private void rejectCommaBetweenGroups() {
+        if (check(",") || isScalarType(peek())) {
+            throw error("Los parámetros de distinto grupo se separan con ';' "
+                    + "(la coma separa nombres del mismo tipo)");
+        }
     }
 
     // ================================================================= proceso

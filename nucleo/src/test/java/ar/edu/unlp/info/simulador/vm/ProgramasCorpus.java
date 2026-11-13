@@ -155,7 +155,7 @@ final class ProgramasCorpus {
                 process E[i: 1..6] { RW.pedidoEscribir(); skip; RW.liberaEscribir(); }
                 """);
         p.put("var/out-elemento-arreglo", """
-                monitor M { int n = 0; procedure dar(r: out int, s: out text) { n++; r = n * 10; s = "v"; } }
+                monitor M { int n = 0; procedure dar(r: out int; s: out text) { n++; r = n * 10; s = "v"; } }
                 process P[i: 0..3] { int a[3]; text t[2]; for (int k = 0..2) { M.dar(a[k], t[k mod 2]); }
                   write(a[0], " ", a[1], " ", a[2], t[0], t[1]); }
                 """);
