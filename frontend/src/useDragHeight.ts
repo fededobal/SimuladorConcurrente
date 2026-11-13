@@ -41,7 +41,7 @@ export function useDragHeight(storageKey: string) {
     const h = readStored(storageKey);
     return h === null ? null : clamp(h);
   });
-  const panelRef = useRef<HTMLElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ y: number; h: number; last: number | null } | null>(null);
 
   const apply = useCallback((h: number | null) => {
@@ -78,7 +78,7 @@ export function useDragHeight(storageKey: string) {
   const handleProps = {
     role: 'separator',
     'aria-orientation': 'horizontal' as const,
-    'aria-label': 'Cambiar el alto de la línea de tiempo',
+    'aria-label': 'Cambiar el alto del panel de abajo',
     title: 'Arrastrar para cambiar el alto (doble clic: alto automático)',
     tabIndex: 0,
     onPointerDown,

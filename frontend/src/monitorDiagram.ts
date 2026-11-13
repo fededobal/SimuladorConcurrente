@@ -57,11 +57,6 @@ export function arrowsOf(monitor: string, entries: readonly LogEntry[]): Set<Arr
   return out;
 }
 
-/** Los eventos del ultimo paso que tocan a este monitor, para contarlos debajo del dibujo. */
-export function eventsOf(monitor: string, entries: readonly LogEntry[]): LogEntry[] {
-  return entries.filter((e) => e.processId !== null && isAbout(e, monitor));
-}
-
 /**
  * Nombre corto para el punto de un proceso: inicial e indice en una familia ("Cliente[3]"
  * da "C3"), dos letras si es un proceso suelto ("Productor" da "Pr"). El nombre completo
@@ -74,15 +69,15 @@ export function shortName(name: string): string {
 }
 
 /** Cuantos puntos entran en una zona; el resto se cuenta con "+n". */
-export const TOKENS_PER_ZONE = 9;
+export const TOKENS_PER_ZONE = 6;
 
 /**
- * Posicion del i-esimo punto dentro de una zona de centro (cx, cy): una grilla de 3 x 3
- * debajo del numero de la zona. La zona 3 tiene a lo sumo un proceso, que va al centro.
+ * Posicion del i-esimo punto dentro de una zona de centro (cx, cy): dos filas de tres debajo
+ * del numero de la zona. La zona 3 tiene a lo sumo un proceso, que va al centro.
  */
 export function tokenPosition(zone: Zone, i: number, cx: number, cy: number): [number, number] {
-  if (zone === 3) return [cx, cy + 6];
+  if (zone === 3) return [cx, cy + 4];
   const col = i % 3;
   const row = Math.floor(i / 3);
-  return [cx + (col - 1) * 23, cy - 10 + row * 22];
+  return [cx + (col - 1) * 17, cy - 3 + row * 17];
 }

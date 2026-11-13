@@ -2,7 +2,6 @@ import { useLayoutEffect, useMemo, useRef } from 'react';
 import { STATE_CLASS, STATE_HINT, STATE_LABEL, type VisibleState } from '../processStates';
 import type { Timeline as TimelineData } from '../timeline';
 import type { ProcessView } from '../types';
-import { useDragHeight } from '../useDragHeight';
 
 interface Props {
   timeline: TimelineData;
@@ -57,7 +56,6 @@ function segmentsOf(id: number, timeline: TimelineData): Segment[] {
 export function Timeline({ timeline, processes }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order } = timeline;
-  const { height, panelRef, handleProps } = useDragHeight('simulador.lineaDeTiempo.alto');
 
   const byId = useMemo(() => new Map(processes.map((p) => [p.id, p])), [processes]);
   const segments = useMemo(
@@ -82,12 +80,9 @@ export function Timeline({ timeline, processes }: Props) {
 
   return (
     <section
-      ref={panelRef}
       className="timeline"
       aria-label="Línea de tiempo"
-      style={height === null ? undefined : { height, maxHeight: 'none' }}
     >
-      <div className="tl-asa" {...handleProps} />
       <header>
         línea de tiempo
         <ul className="tl-leyenda">

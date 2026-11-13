@@ -7,6 +7,7 @@ import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import { Timeline } from './components/Timeline';
 import { visibleState } from './processStates';
+import { useDragHeight } from './useDragHeight';
 import type { SchedulingPolicy } from './types';
 
 const SPEED_LABEL: Record<number, string> = {
@@ -33,6 +34,8 @@ const STATUS_LABEL: Record<SimStatus, string> = {
 
 export function App() {
   const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
+  // el panel de abajo (linea de tiempo y monitores) se agranda arrastrando su borde
+  const abajo = useDragHeight('simulador.panelInferior.alto');
   const { snapshot, status } = sim;
 
   const activeLines: ActiveLine[] = useMemo(() => {
@@ -168,11 +171,18 @@ export function App() {
           )}
         </div>
 
-        <MonitorPanel snapshot={snapshot} entries={sim.entries} />
         <OutputPanel lines={snapshot?.output ?? []} />
       </div>
 
-      <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} />
+      <div
+        ref={abajo.panelRef}
+        className="abajo"
+        style={abajo.height === null ? undefined : { height: abajo.height }}
+      >
+        <div className="tl-asa" {...abajo.handleProps} />
+        <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} />
+        <MonitorPanel snapshot={snapshot} entries={sim.entries} />
+      </div>
     </div>
   );
 }

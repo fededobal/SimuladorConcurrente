@@ -94,11 +94,11 @@ procedure retirar(...) {
 2. **En la cola de una variable condición** — hizo `wait(cv)` y espera un `signal`.
 3. **Ejecutando dentro del monitor** — tiene el acceso exclusivo.
 
-En el simulador, el panel **Monitores** dibuja cada monitor con estas tres zonas, como en la
-teoría (Teoría 4, diapositivas 12 a 19): los procesos son puntos de su color que pasan de una
-zona a otra, y se resalta la flecha que se recorrió en el último instante (Call, entra, wait,
-signal o Return). Debajo del dibujo figuran la cola de entrada, la cola de cada variable
-condición en orden y lo que pasó en ese monitor en el último instante.
+En el simulador, el panel **Monitores** (abajo a la derecha, junto a la línea de tiempo)
+dibuja cada monitor con estas tres zonas, como en la teoría (Teoría 4, diapositivas 12 a 19):
+los procesos son puntos de su color y se resalta la flecha que se recorrió en el último
+instante (Call, entra, wait, signal o Return). Debajo del dibujo figuran, en orden, los
+procesos de la cola de entrada y de cada variable condición que no esté vacía.
 
 En el editor y en la línea de tiempo, el proceso que compite figura en ámbar rayado y el que
 espera en una variable condición, en rojo rayado. El que avanzó en el último instante figura como

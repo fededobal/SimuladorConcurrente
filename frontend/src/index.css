@@ -130,179 +130,72 @@ button { cursor: pointer; }
 
 /* ------------------------------------------------------------------ monitores */
 
-/* Un dibujo por monitor, como el de la teoria: zona 1 (espera acceso, ambar como
-   "compitiendo"), zona 2 (cola por variable condicion, roja como "esperando") y zona 3
-   (ejecutando). Los colores son los mismos que los de la linea de tiempo. */
+/* Un dibujo por monitor, como el de la teoria. Trazos finos y grises: el color lo ponen los
+   procesos, igual que en el editor y la linea de tiempo. */
 .monitores {
-  width: 400px;
+  width: 340px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--line);
-  background: var(--bg);
+  min-height: 0;
 }
 .monitores > header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 10px;
-  padding: 8px 12px;
+  padding: 6px 12px;
   border-bottom: 1px solid var(--line);
   color: var(--dim);
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   flex-shrink: 0;
+  cursor: help;
 }
-.monitores .leyenda {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 10.5px;
-}
-.monitores .leyenda .mon-z { margin-left: 6px; }
 .monitores .lista {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.monitores .vacio {
-  color: var(--dim);
-  font-size: 11.5px;
-  line-height: 1.5;
 }
 
 .mon {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  padding: 8px 10px 10px;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--line-soft);
 }
 .mon > header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 2px;
+  font-size: 11px;
 }
-.mon-nombre {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--tok-decl);
-}
-.mon-estado { font-size: 11px; color: var(--dim); }
-.mon-estado.ocupado { color: var(--text); }
+.mon-nombre { font-family: var(--mono); color: var(--text); }
+.mon-estado { color: var(--dim); }
 
-.mon-dibujo { display: block; width: 100%; height: auto; }
-
-.mon-zona {
-  fill: color-mix(in srgb, var(--zona) 7%, transparent);
-  stroke: var(--zona);
-  stroke-width: 1.5;
-}
-.mon-zona.z1 { --zona: var(--st-competing); stroke-dasharray: 5 3; }
-.mon-zona.z2 { --zona: var(--st-waiting); stroke-dasharray: 5 3; }
-.mon-zona.z3 { --zona: var(--text); }
-.mon-num {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 700;
-  fill: var(--dim);
-}
-.mon-mas { font-family: var(--sans); font-size: 11px; font-weight: 700; fill: var(--text); }
-
-.mon-flecha {
-  fill: none;
-  stroke: var(--dimmer);
-  stroke-width: 1.5;
-  transition: stroke 200ms, stroke-width 200ms;
-}
-.mon-flecha.activa { stroke: var(--text); stroke-width: 2.5; }
-.mon-punta { fill: var(--dimmer); }
-.mon-punta.activa { fill: var(--text); }
-.mon-rotulo { font-family: var(--sans); font-size: 11px; fill: var(--dim); }
-.mon-rotulo.activo { fill: var(--text); font-weight: 700; }
-
-.mon-punto { transition: transform var(--desliz-mon, 280ms) ease-out; }
+.mon-dibujo { display: block; width: 100%; max-width: 300px; height: auto; margin: 2px auto 0; }
+.mon-zona { fill: none; stroke: var(--dimmer); stroke-width: 1; }
+.mon-num { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
+.mon-mas { font-family: var(--sans); font-size: 9px; fill: var(--dim); }
+.mon-flecha { fill: none; stroke: var(--dimmer); stroke-width: 1; }
+.mon-flecha.activa { stroke: var(--dim); stroke-width: 1.5; }
+.mon-punta { fill: var(--dim); }
+.mon-rotulo { font-family: var(--sans); font-size: 9px; fill: var(--dimmer); }
+.mon-rotulo.activo { fill: var(--text); }
 .mon-punto-texto {
   font-family: var(--sans);
-  font-size: 8.5px;
-  font-weight: 700;
+  font-size: 6.5px;
+  font-weight: 600;
   fill: #0e0e11;
   pointer-events: none;
 }
-.mon-anillo { fill: none; stroke-width: 2; }
-.mon-anillo.delay { stroke: var(--st-delayed); stroke-dasharray: 2 2; }
-.mon-anillo.retiene { stroke: var(--text); stroke-dasharray: 4 2; }
-.mon-delay {
-  font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 700;
-  fill: var(--st-delayed);
-}
-
-.mon-z {
-  display: inline-grid;
-  place-items: center;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  border: 1.5px dashed var(--zona);
-  color: var(--text);
-  font-size: 9px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.mon-z.z1 { --zona: var(--st-competing); }
-.mon-z.z2 { --zona: var(--st-waiting); }
-.mon-z.z3 { --zona: var(--text); border-style: solid; }
+.mon-anillo { fill: none; stroke: var(--dim); stroke-width: 1; stroke-dasharray: 2 2; }
 
 .mon-colas {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   margin-top: 4px;
-  font-size: 11px;
-}
-.mon-colas li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 6px;
-}
-.mon-cola-nombre { color: var(--dim); font-family: var(--mono); font-size: 11px; }
-.mon-chips { display: inline-flex; flex-wrap: wrap; gap: 3px; }
-.mon-chip {
   font-family: var(--mono);
   font-size: 10.5px;
-  padding: 0 5px;
-  border-radius: 4px;
-  color: var(--c);
-  background: color-mix(in srgb, var(--c) 15%, transparent);
+  line-height: 1.5;
 }
-.mon-vacia { color: var(--dimmer); font-style: italic; }
-.mon-nota { color: var(--dim); font-size: 10.5px; }
-
-.mon-eventos {
-  list-style: none;
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px solid var(--line-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--text);
-}
-.mon-eventos li { border-left: 2px solid var(--dimmer); padding-left: 6px; }
+.mon-colas > div { display: flex; gap: 8px; }
+.mon-colas dt { color: var(--dim); flex-shrink: 0; }
+.mon-colas dd { min-width: 0; }
 
 /* ------------------------------------------------------------------ salida */
 
@@ -534,15 +427,21 @@ button { cursor: pointer; }
 
 /* ------------------------------------------------------------------ linea de tiempo */
 
-.timeline {
+/* Panel de abajo: linea de tiempo a la izquierda y monitores a la derecha. Arranca en un
+   poco mas de la mitad de la pantalla; arrastrando el asa manda el alto elegido. */
+.abajo {
   position: relative;
   flex-shrink: 0;
+  height: 55vh;
   display: flex;
-  flex-direction: column;
-  /* alto automatico hasta que se arrastra el asa; despues manda el alto elegido */
-  max-height: 34vh;
   border-top: 1px solid var(--line);
   background: var(--panel);
+}
+.timeline {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* asa para arrastrar el borde superior: mas alta que el borde, para que sea facil de agarrar */
