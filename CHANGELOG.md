@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- push y pop aceptan la tupla entre paréntesis, como la escribe la cátedra: push(C, (idC, S)) y pop(C, (IdC, S)). La forma sin paréntesis sigue valiendo. (Federico Dobal, 2026-11-13)
 - La línea de tiempo se agranda o achica arrastrando su borde superior (también con las
   flechas del teclado). El navegador recuerda el alto elegido; doble clic en el borde vuelve
   al alto automático. (Federico Dobal, 2026-09-23)

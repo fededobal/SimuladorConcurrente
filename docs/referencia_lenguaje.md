@@ -93,10 +93,15 @@ compilación. La excepción es `write(a)`, que muestra el arreglo entero.
 Cola c;
 push(c, 1);          // encola un elemento
 push(c, 7, 9);       // encola UNA tupla de dos componentes
+push(c, (7, 9));     // lo mismo, con la tupla entre paréntesis
 pop(c, x);           // desencola el frente
 pop(c, a, b);        // desestructura la tupla: a=7, b=9
-bool v = empty c; // también empty(c)
+pop(c, (a, b));      // lo mismo, con paréntesis
+bool v = empty c;    // también empty(c)
 ```
+
+La tupla puede escribirse con paréntesis o sin ellos. Un paréntesis con una sola expresión
+no es una tupla: `push(c, (a + b) * 2)` encola un solo número.
 
 Cada cola maneja **una cantidad fija de componentes**, que queda fijada por su primer
 `push`/`pop`. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son

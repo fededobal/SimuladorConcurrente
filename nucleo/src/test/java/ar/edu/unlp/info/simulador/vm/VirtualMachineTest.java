@@ -455,4 +455,24 @@ class VirtualMachineTest {
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);
         assertTrue(vm.snapshot().processes().get(0).locals().isEmpty());
     }
+
+    /** Como en la catedra, push y pop aceptan la tupla entre parentesis o sin ellos. */
+    @Test
+    void tuplasConYSinParentesis() {
+        RunResult r = TestSupport.run("""
+                monitor M { Cola c; int id = 0; text s = ""; int suma = 0;
+                  procedure f() {
+                    push(c, (7, "adn"));
+                    push(c, (1 + 2) * 3, "x");
+                    pop(c, (id, s));
+                    int a; text b;
+                    pop(c, a, b);
+                    suma = id + a;
+                  } }
+                process P { M.f(); }
+                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertTrue(r.finished());
+        assertEquals("16", TestSupport.finalVar(r, "M", "suma"));
+        assertEquals("adn", TestSupport.finalVar(r, "M", "s"));
+    }
 }

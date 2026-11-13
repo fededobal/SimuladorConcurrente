@@ -165,7 +165,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Incremento / decremento | `x++;` `x--;` |
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
-| Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `pop(c, x);` `pop(c, x, y);` |
+| Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `push(c, (e1, e2));` `pop(c, x);` `pop(c, x, y);` `pop(c, (x, y));` |
 | Salida | `write(e);` `write(e1, e2, ...);` — concatena y escribe una línea |
 | Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
 | Mientras | `while (cond) { ... }` |
@@ -272,8 +272,10 @@ asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
 inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
 llamada_monitor = ident "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
-op_cola       = "push" "(" ident "," expr { "," expr } ")" ";"
-              | "pop"  "(" ident "," ident { "," ident } ")" ";" ;
+op_cola       = "push" "(" ident "," ( exprs | "(" expr "," exprs ")" ) ")" ";"
+              | "pop"  "(" ident "," ( idents | "(" idents ")" ) ")" ";" ;
+exprs         = expr { "," expr } ;
+idents        = ident { "," ident } ;
 escritura     = "write" "(" [ expr { "," expr } ] ")" ";" ;
 condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
 mientras      = "while" "(" expr ")" cuerpo ;

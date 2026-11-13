@@ -189,6 +189,11 @@ const CANONICOS = [
       procedure g(int a, b; text t) { u = t; } }
     process P { text t; M.f(1, 2, t); M.g(3, 4, t); }`,
     (r) => r.finished && r.vars['M.s'] === '3' && r.vars['M.u'] === 'ok'],
+  ['tuplas con y sin parentesis en push y pop', `
+    monitor M { Cola c; int id = 0; text s = "";
+      procedure f() { push(c, (7, "adn")); pop(c, (id, s)); } }
+    process P { M.f(); }`,
+    (r) => r.finished && r.vars['M.id'] === '7' && r.vars['M.s'] === 'adn'],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

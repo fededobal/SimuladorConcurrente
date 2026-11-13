@@ -342,28 +342,59 @@ public final class Parser {
         return new Stmt.Write(args, kw.line());
     }
 
+    /**
+     * {@code push(c, e1, e2)} y {@code pop(c, x, y)}. Como en la catedra, los componentes
+     * tambien se pueden escribir como tupla entre parentesis: {@code push(c, (e1, e2))} y
+     * {@code pop(c, (x, y))}.
+     */
     private Stmt parseQueueOp() {
         Token kw = advance();
         consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
         String queue = consumeIdent("Se esperaba el nombre de la cola");
         consume(",", "Se esperaba ',' después del nombre de la cola");
+        Stmt op;
         if (kw.is("push")) {
-            List<Expr> elems = new ArrayList<>();
-            do {
-                elems.add(parseExpr());
-            } while (match(","));
-            consume(")", "Se esperaba ')'");
-            consume(";", "Se esperaba ';'");
-            return new Stmt.QueuePush(queue, elems, kw.line());
+            List<Expr> elems = parseTupleOfExprs();
+            if (elems == null) {
+                elems = new ArrayList<>();
+                do {
+                    elems.add(parseExpr());
+                } while (match(","));
+            }
+            op = new Stmt.QueuePush(queue, elems, kw.line());
         } else {
+            boolean tuple = match("(");
             List<String> targets = new ArrayList<>();
             do {
                 targets.add(consumeIdent("Se esperaba una variable destino para 'pop'"));
             } while (match(","));
-            consume(")", "Se esperaba ')'");
-            consume(";", "Se esperaba ';'");
-            return new Stmt.QueuePop(queue, targets, kw.line());
+            if (tuple) consume(")", "Se esperaba ')' al cerrar la tupla");
+            op = new Stmt.QueuePop(queue, targets, kw.line());
         }
+        consume(")", "Se esperaba ')'");
+        consume(";", "Se esperaba ';'");
+        return op;
+    }
+
+    /**
+     * Una tupla {@code (e1, e2, ...)}, o null si lo que sigue no lo es: un parentesis con una
+     * sola expresion es una expresion agrupada, como {@code push(c, (a + b) * 2)}.
+     */
+    private List<Expr> parseTupleOfExprs() {
+        if (!check("(")) return null;
+        int start = current;
+        advance();
+        Expr first = parseExpr();
+        if (!match(",")) {
+            current = start;
+            return null;
+        }
+        List<Expr> elems = new ArrayList<>(List.of(first));
+        do {
+            elems.add(parseExpr());
+        } while (match(","));
+        consume(")", "Se esperaba ')' al cerrar la tupla");
+        return elems;
     }
 
     private Stmt parseIf() {
