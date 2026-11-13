@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { segundosRestantes, useAhora } from '../useAhora';
 import { STATE_CLASS, type VisibleState } from '../processStates';
 
 /** Renglon donde esta parado un proceso: la franja toma el color del estado, el nombre el del proceso. */
@@ -34,25 +35,6 @@ const HUECO_ETIQUETA = 10;
 /** Ancho aproximado del contador de un delay ("12s"), con su margen. */
 const ANCHO_CONTADOR = 30;
 
-/**
- * La hora actual, refrescada varias veces por segundo mientras {@code activo}: el contador de
- * un delay baja en tiempo real aunque la simulacion este en pausa.
- */
-function useAhora(activo: boolean): number {
-  const [ahora, setAhora] = useState(() => Date.now());
-  useEffect(() => {
-    if (!activo) return;
-    setAhora(Date.now());
-    const id = window.setInterval(() => setAhora(Date.now()), 200);
-    return () => window.clearInterval(id);
-  }, [activo]);
-  return ahora;
-}
-
-/** Segundos que le faltan a un delay, redondeados hacia arriba (nunca negativos). */
-function segundosRestantes(fin: number, ahora: number): number {
-  return Math.max(0, Math.ceil((fin - ahora) / 1000));
-}
 
 /** Sangria de un nivel. El lenguaje no usa tabs. */
 const TAB = '  ';

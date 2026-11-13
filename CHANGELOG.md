@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Panel Monitores: cada monitor se dibuja como en la teoría, con las zonas 1 (espera acceso), 2 (cola por variable condición) y 3 (ejecutando). Los procesos son puntos de su color que se mueven entre zonas, y se resalta la flecha recorrida en el último instante (Call, entra, wait, signal, Return). Debajo se listan la cola de entrada, la cola de cada cond en orden y los eventos del instante en ese monitor. El dueño que está en delay o esperando en otro monitor lleva un anillo y una aclaración. (Federico Dobal, 2026-11-13)
 - Instrucción delay(segundos): el proceso se demora ese tiempo real y, si está en un monitor, lo sigue teniendo tomado. Al lado de su nombre en el editor aparece un contador con los segundos que faltan, y la línea de tiempo lo muestra con el estado "en delay". Un proceso en delay no cuenta como interbloqueo: la simulación espera que termine. (Federico Dobal, 2026-11-13)
 - Arreglos de monitores, como en la cátedra: monitor Escritorio[id: 0..2] declara un monitor por índice, cada uno con sus variables, cond y cola de entrada, y se llama con Escritorio[i].atencion(...). Adentro, id es el índice de ese monitor. (Federico Dobal, 2026-11-13)
 - push y pop aceptan la tupla entre paréntesis, como la escribe la cátedra: push(C, (idC, S)) y pop(C, (IdC, S)). La forma sin paréntesis sigue valiendo. (Federico Dobal, 2026-11-13)

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiRequestError } from './api';
 import { appendInstant, EMPTY_TIMELINE, startTimeline, type Timeline } from './timeline';
-import type { SchedulingPolicy, Snapshot } from './types';
+import type { LogEntry, SchedulingPolicy, Snapshot } from './types';
 
 export type SimStatus =
   | 'idle' | 'ready' | 'running' | 'paused' | 'finished' | 'deadlock' | 'error';
@@ -21,6 +21,8 @@ export function useSimulation(initialCode: string) {
   const [error, setError] = useState<SimError | null>(null);
   // nadie puede avanzar hasta que termine algun delay (no es un deadlock)
   const [waiting, setWaiting] = useState(false);
+  // eventos del ultimo paso que hizo algo: el dibujo de los monitores resalta sus flechas
+  const [entries, setEntries] = useState<readonly LogEntry[]>([]);
   const [speed, setSpeed] = useState<number>(600);
   const [policy, setPolicyState] = useState<SchedulingPolicy>('RANDOM');
 
@@ -57,6 +59,7 @@ export function useSimulation(initialCode: string) {
     setTimeline(EMPTY_TIMELINE);
     setError(null);
     setWaiting(false);
+    setEntries([]);
     setStat('idle');
   }, []);
 
@@ -78,6 +81,7 @@ export function useSimulation(initialCode: string) {
       setSnapshot(created.snapshot);
       setTimeline(startTimeline(created.snapshot));
       setWaiting(false);
+      setEntries([]);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
@@ -98,6 +102,8 @@ export function useSimulation(initialCode: string) {
       setSnapshot(res.snapshot);
       setTimeline((t) => appendInstant(t, res.snapshot));
       setWaiting(res.waiting);
+      // esperar un delay no hace nada: se sigue mostrando lo ultimo que paso
+      if (res.entries.length > 0) setEntries(res.entries);
       if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
       return true;
@@ -161,7 +167,7 @@ export function useSimulation(initialCode: string) {
 
   return {
     code, setCode,
-    snapshot, timeline, status, error, waiting,
+    snapshot, timeline, status, error, waiting, entries,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
     play, pause, step, stop,

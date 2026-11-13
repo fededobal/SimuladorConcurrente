@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Play, Pause, SkipForward, Square } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { OutputPanel } from './components/OutputPanel';
+import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import { Timeline } from './components/Timeline';
@@ -167,6 +168,7 @@ export function App() {
           )}
         </div>
 
+        <MonitorPanel snapshot={snapshot} entries={sim.entries} />
         <OutputPanel lines={snapshot?.output ?? []} />
       </div>
 
