@@ -15,26 +15,6 @@ function clamp(axis: DragAxis, size: number): number {
   return Math.round(Math.min(Math.max(size, MIN_SIZE[axis]), total - ROOM[axis]));
 }
 
-// Recordar el tamano es una comodidad de quien mira: si el navegador no deja guardar
-// (ventana privada, almacenamiento bloqueado), el panel arranca con su tamano automatico.
-function readStored(key: string): number | null {
-  try {
-    const v = Number(localStorage.getItem(key));
-    return Number.isFinite(v) && v > 0 ? v : null;
-  } catch {
-    return null;
-  }
-}
-
-function store(key: string, size: number | null) {
-  try {
-    if (size === null) localStorage.removeItem(key);
-    else localStorage.setItem(key, String(size));
-  } catch {
-    // sin almacenamiento: el tamano dura lo que dura la pestana
-  }
-}
-
 /** Lo que devuelve el hook: lo consume `Dock`, que dibuja el panel y su asa. */
 export interface DragSize {
   readonly axis: DragAxis;
@@ -47,21 +27,17 @@ export interface DragSize {
 /**
  * Tamano de un panel que se agranda o achica arrastrando el borde que mira al editor: el
  * de arriba si cambia el alto, el izquierdo si cambia el ancho. Tambien con las flechas del
- * teclado sobre el asa. Doble clic en el asa vuelve al tamano automatico.
+ * teclado sobre el asa. Doble clic en el asa vuelve al tamano automatico. El tamano dura lo
+ * que dura la pagina: al recargar, cada panel vuelve a su lugar y tamano iniciales.
  */
-export function useDragSize(storageKey: string, axis: DragAxis, label: string): DragSize {
-  const [size, setSize] = useState<number | null>(() => {
-    const s = readStored(storageKey);
-    return s === null ? null : clamp(axis, s);
-  });
+export function useDragSize(axis: DragAxis, label: string): DragSize {
+  const [size, setSize] = useState<number | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ from: number; size: number; last: number | null } | null>(null);
+  const drag = useRef<{ from: number; size: number } | null>(null);
 
   const apply = useCallback((s: number | null) => {
-    const next = s === null ? null : clamp(axis, s);
-    setSize(next);
-    store(storageKey, next);
-  }, [storageKey, axis]);
+    setSize(s === null ? null : clamp(axis, s));
+  }, [axis]);
 
   const measure = () => {
     const rect = panelRef.current?.getBoundingClientRect();
@@ -74,18 +50,15 @@ export function useDragSize(storageKey: string, axis: DragAxis, label: string): 
     if (!panelRef.current || e.button !== 0) return;
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
-    drag.current = { from: pointerAt(e), size: measure(), last: null };
+    drag.current = { from: pointerAt(e), size: measure() };
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
     if (!d) return;
     // el borde esta del lado del editor: alejar el puntero del panel lo agranda
-    d.last = clamp(axis, d.size + d.from - pointerAt(e));
-    setSize(d.last);
+    setSize(clamp(axis, d.size + d.from - pointerAt(e)));
   };
-  // se guarda al soltar, no en cada movimiento
   const onPointerUp = () => {
-    if (drag.current?.last != null) store(storageKey, drag.current.last);
     drag.current = null;
   };
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

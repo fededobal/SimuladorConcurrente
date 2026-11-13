@@ -43,9 +43,9 @@ export function App() {
   const zoom = useEditorZoom();
 
   // Cada panel se agranda o achica arrastrando el borde que mira al editor.
-  const abajo = useDragSize('simulador.panelInferior.alto', 'y', 'Cambiar el alto de la línea de tiempo');
-  const monitores = useDragSize('simulador.monitores.ancho', 'x', 'Cambiar el ancho de los monitores');
-  const ampliado = useDragSize('simulador.ampliado.ancho', 'x', 'Cambiar el ancho del panel ampliado');
+  const abajo = useDragSize('y', 'Cambiar el alto de la línea de tiempo');
+  const monitores = useDragSize('x', 'Cambiar el ancho de los monitores');
+  const ampliado = useDragSize('x', 'Cambiar el ancho del panel ampliado');
 
   // Un panel ampliado ocupa la derecha a toda altura y los demas se ocultan hasta cerrarlo.
   // La salida no tiene lugar fijo: se abre asi, desde el boton de la barra.

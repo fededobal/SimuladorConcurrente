@@ -17,7 +17,7 @@ Reglas:
 
 ### Agregado
 - En el dibujo de cada monitor, tocar una zona (Compitiendo, En wait o En monitor) o un punto limita la lista de abajo a esa zona, completa y sin plegar, con la cantidad de procesos y un botón "ver todo" para volver; la zona elegida se marca con el borde oscuro. También con el teclado (Tab, Enter). (Federico Dobal, 2026-11-13)
-- Los paneles Salida, Línea de tiempo y Monitores se amplían con el botón de su encabezado (o con un clic sobre el dibujo de un monitor): el panel pasa a la derecha del editor a toda altura, así el alumno sigue viendo el código mientras mira el detalle, y se cierra con el mismo botón o con Escape. Todos los paneles se agrandan o achican arrastrando el borde que mira al editor, también con las flechas del teclado; el navegador recuerda cada tamaño. (Federico Dobal, 2026-11-13)
+- Los paneles Salida, Línea de tiempo y Monitores se amplían con el botón de su encabezado (o con un clic sobre el dibujo de un monitor): el panel pasa a la derecha del editor a toda altura, así el alumno sigue viendo el código mientras mira el detalle, y se cierra con el mismo botón o con Escape. Todos los paneles se agrandan o achican arrastrando el borde que mira al editor, también con las flechas del teclado; al recargar la página vuelven a su tamaño y lugar iniciales. (Federico Dobal, 2026-11-13)
 - Cada monitor del panel muestra sus variables permanentes dibujadas según su estructura: un escalar con su valor, un arreglo como celdas con su índice, una Cola o ColaOrdenada como casilleros con el frente a la izquierda, y un punto con el color del último proceso que escribió cada una. (Federico Dobal, 2026-11-13)
 - Una fila "En wait(cond)" por cada variable condición con alguien esperando, en el orden en que se declararon; las filas Compitiendo y En monitor también aparecen solo cuando hay alguien. Plegado muestra hasta cinco procesos y un botón "+n más" abre el resto. Si el monitor no tiene ningún proceso, lo dice en una línea. (Federico Dobal, 2026-11-13)
 - Versión extendida de cada monitor, al ampliar el panel: el dibujo más grande y las listas con más aire. Todo lo que puede desbordarse (listas de procesos, celdas de arreglos y colas, etiquetas de procesos en un mismo renglón del editor) muestra hasta cinco elementos y un botón "+n más" para abrir el resto. (Federico Dobal, 2026-11-13)
@@ -27,8 +27,7 @@ Reglas:
 - Arreglos de monitores, como en la cátedra: monitor Escritorio[id: 0..2] declara un monitor por índice, cada uno con sus variables, cond y cola de entrada, y se llama con Escritorio[i].atencion(...). Adentro, id es el índice de ese monitor. (Federico Dobal, 2026-11-13)
 - push y pop aceptan la tupla entre paréntesis, como la escribe la cátedra: push(C, (idC, S)) y pop(C, (IdC, S)). La forma sin paréntesis sigue valiendo. (Federico Dobal, 2026-11-13)
 - La línea de tiempo se agranda o achica arrastrando su borde superior (también con las
-  flechas del teclado). El navegador recuerda el alto elegido; doble clic en el borde vuelve
-  al alto automático. (Federico Dobal, 2026-09-23)
+  flechas del teclado). Doble clic en el borde vuelve al alto automático. (Federico Dobal, 2026-09-23)
 - Línea de tiempo abajo de la pantalla: una fila por proceso y una columna por instante con
   su estado (ejecutando, compitiendo por el monitor, esperando en una variable condición o
   listo). Ejecutando se pinta con el color del proceso y, dentro de un monitor, cada instante
@@ -53,6 +52,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Los paneles ya no recuerdan su tamaño entre recargas: al abrir la página, cada uno arranca en su tamaño y lugar iniciales. (Federico Dobal, 2026-11-13)
 - Pantalla en dos columnas: a la izquierda el editor con la línea de tiempo debajo, a la derecha el panel Monitores a toda altura. La salida deja de tener un lugar fijo: se abre con el botón "Salida" de la barra, que muestra cuántas líneas hay, y se cierra con el mismo botón o con Escape. (Federico Dobal, 2026-11-13)
 - En las listas de cada monitor, una flecha separa el rótulo (Compitiendo, En monitor, En wait) de los nombres de los procesos. (Federico Dobal, 2026-11-13)
 - En el dibujo del monitor las tres zonas son cuadrados con las esquinas redondeadas, rotulados "Compitiendo", "En wait" y "En monitor" en lugar de los números 1, 2 y 3, con los mismos nombres que las listas de abajo. (Federico Dobal, 2026-11-13)
