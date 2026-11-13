@@ -2,7 +2,7 @@
 // espera: fin Buffer.dato=5 Buffer.hayDato=false
 monitor Buffer {
   int dato = 0;
-  boolean hayDato = false;
+  bool hayDato = false;
   cond libre, ocupado;
 
   procedure depositar(d: in int) {

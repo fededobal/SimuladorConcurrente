@@ -27,13 +27,13 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 |---|---|---|
 | `int` | `0`, `42` | `0` |
 | `double` | `3.14`, `0.5` | `0.0` |
-| `boolean` | `true`, `false` | `false` |
+| `bool` | `true`, `false` | `false` |
 | `text` | `"hola"` | `""` |
 | `Cola` | — (se llena con `push`) | vacía |
 | `ColaOrdenada` | — (se llena con `push`) | vacía |
 
 **Tipos estáticos.** El compilador calcula el tipo de cada expresión y controla que las
-condiciones sean `boolean`, que índices, tamaños y cotas sean `int`, y que lo que se guarda
+condiciones sean `bool`, que índices, tamaños y cotas sean `int`, y que lo que se guarda
 en una variable, se pasa como argumento o vuelve por un `out` sea del tipo del destino. Las
 únicas conversiones automáticas son `int` → `double` y número → `text`; `+` con un operando
 `text` concatena. Las cadenas no tienen secuencias de escape.
@@ -44,8 +44,8 @@ en una variable, se pasa como argumento o vuelve por un `out` sea del tipo del d
 - El `tamaño` es una expresión `int`, entre 0 y 100 000.
 - Un arreglo se usa elemento por elemento; asignarlo, pasarlo o encolarlo entero es error de
   compilación (solo `write` lo acepta entero).
-- Acceso base 0: `buf[i]`, `buf[(i + 1) % N]`.
-- Aplica a `int`, `double`, `boolean`, `text` y a `cond` (ver §3.1).
+- Acceso base 0: `buf[i]`, `buf[(i + 1) mod N]`.
+- Aplica a `int`, `double`, `bool`, `text` y a `cond` (ver §3.1).
 - Se declaran dentro de un monitor o como locales de un proceso.
 
 ### Varias variables en una declaración
@@ -69,9 +69,9 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
 - **Aridad fija**: la cantidad de componentes queda fijada por el primer `push`/`pop` de esa
   cola. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son
   estáticamente visibles y la inconsistencia es **error de compilación**, no de ejecución.
-- `empty cola` o `empty(cola)` — expresión booleana, `true` si la cola no tiene elementos.
+- `empty cola` o `empty(cola)` — expresión boola, `true` si la cola no tiene elementos.
 - Las claves de una `ColaOrdenada` se comparan como números o como textos (orden alfabético);
-  mezclarlas o usar `boolean` es error de ejecución.
+  mezclarlas o usar `bool` es error de ejecución.
 
 ---
 
@@ -154,7 +154,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 
 | Sentencia | Forma |
 |---|---|
-| Declaración local | `int x = 0;` `boolean b;` `int a[3] = ([3] 0);` |
+| Declaración local | `int x = 0;` `bool b;` `int a[3] = ([3] 0);` |
 | Asignación | `x = expr;` `a[i] = expr;` |
 | Incremento / decremento | `x++;` `x--;` |
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` |
@@ -181,14 +181,14 @@ quién gana el monitor cuando varios lo piden a la vez.
 
 ## 6. Expresiones
 
-- Aritméticas: `+ - * / %` sobre `int`/`double`.
+- Aritméticas: `+ - * / mod` sobre `int`/`double`.
 - Comparación: `== != < <= > >=`.
 - Booleanas: `and` `or` `not` (equivalentes: `&& || !`).
 - Acceso a arreglo: `a[expr]`.
 - `empty cola`.
 - Paréntesis para agrupar.
 
-Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+ -` → `* / %` → unario.
+Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+ -` → `* / mod` → unario.
 
 ---
 
@@ -287,7 +287,7 @@ expr_not      = { "not" | "!" } expr_cmp ;
 expr_cmp      = expr_add [ ( "==" | "!=" | "<" | "<=" | ">" | ">=" ) expr_add ] ;
                 (* no se encadena: a < b < c es error *)
 expr_add      = expr_mul { ( "+" | "-" ) expr_mul } ;
-expr_mul      = expr_un { ( "*" | "/" | "%" ) expr_un } ;
+expr_mul      = expr_un { ( "*" | "/" | "mod" ) expr_un } ;
 expr_un       = { "-" } primario ;
 primario      = numero | texto | "true" | "false"
               | "empty" ( ident | "(" ident ")" )
@@ -296,7 +296,7 @@ primario      = numero | texto | "true" | "false"
 
 (* ---------- léxico ---------- *)
 tipo          = tipo_escalar | tipo_cola ;
-tipo_escalar  = "int" | "double" | "boolean" | "text" ;
+tipo_escalar  = "int" | "double" | "bool" | "text" ;
 tipo_cola     = "Cola" | "ColaOrdenada" ;
 ident         = ( letra | "_" ) { letra | digito | "_" } ;   (* que no sea palabra reservada *)
 letra         = (* cualquier letra, incluidas ñ y las vocales con tilde *) ;
@@ -308,9 +308,11 @@ comentario    = "//" { caracter } fin_de_linea | "/*" { caracter } "*/" ;
                    marca BOM cuentan como espacio *)
 ```
 
-**Palabras reservadas (29):** `monitor procedure cond process if else while for skip
-wait signal signal_all push pop empty write in out true false int double boolean text Cola
-ColaOrdenada and or not`.
+**Palabras reservadas (30):** `monitor procedure cond process if else while for skip
+wait signal signal_all push pop empty write in out true false int double bool text Cola
+ColaOrdenada and or not mod`. `monitor`, `procedure` y `process` no distinguen mayúsculas
+de minúsculas. `boolean` y el símbolo `%` no existen: el compilador indica que se escriben
+`bool` y `mod`.
 
 No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores
 comunes y pueden usarse como nombres.

@@ -44,6 +44,11 @@ const NAME_ALPHA: Record<VisibleState, number> = {
 
 // ===================================================================== pintado
 
+/** Como en el Lexer: estas se aceptan con cualquier combinacion de mayusculas. */
+const KEYWORDS_SIN_MAYUSCULAS: Record<string, string> = {
+  monitor: 'tok-decl', procedure: 'tok-decl', process: 'tok-decl',
+};
+
 /** Mismas palabras reservadas que Lexer.KEYWORDS en el nucleo. */
 const KEYWORDS: Record<string, string> = {
   monitor: 'tok-decl', procedure: 'tok-decl', cond: 'tok-decl', process: 'tok-decl',
@@ -51,10 +56,10 @@ const KEYWORDS: Record<string, string> = {
   wait: 'tok-sync', signal: 'tok-sync', signal_all: 'tok-sync',
 
   if: 'tok-ctrl', else: 'tok-ctrl', while: 'tok-ctrl', for: 'tok-ctrl', skip: 'tok-ctrl',
-  and: 'tok-ctrl', or: 'tok-ctrl', not: 'tok-ctrl',
+  and: 'tok-ctrl', or: 'tok-ctrl', not: 'tok-ctrl', mod: 'tok-ctrl',
   push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl', write: 'tok-ctrl',
 
-  int: 'tok-type', double: 'tok-type', boolean: 'tok-type', text: 'tok-type',
+  int: 'tok-type', double: 'tok-type', bool: 'tok-type', text: 'tok-type',
   Cola: 'tok-type', ColaOrdenada: 'tok-type',
   in: 'tok-type', out: 'tok-type',
 
@@ -123,7 +128,7 @@ function highlight(code: string): string {
       let j = i;
       while (j < n && IDENT.test(code[j])) j++;
       const palabra = code.slice(i, j);
-      const cls = KEYWORDS[palabra];
+      const cls = KEYWORDS[palabra] ?? KEYWORDS_SIN_MAYUSCULAS[palabra.toLowerCase()];
       out += cls ? span(cls, palabra) : escapeHtml(palabra);
       i = j;
       continue;

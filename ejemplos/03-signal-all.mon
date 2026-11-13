@@ -1,7 +1,7 @@
 // Barrera con signal_all
 // espera: fin Barrera.pasaron=5
 monitor Barrera {
-  boolean abierta = false;
+  bool abierta = false;
   int pasaron = 0;
   cond puerta;
 

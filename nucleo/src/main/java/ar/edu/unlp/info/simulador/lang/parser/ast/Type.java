@@ -8,7 +8,7 @@ public enum Type {
         return switch (kw) {
             case "int" -> INT;
             case "double" -> DOUBLE;
-            case "boolean" -> BOOLEAN;
+            case "bool" -> BOOLEAN;
             case "text" -> TEXT;
             case "Cola" -> COLA;
             case "ColaOrdenada" -> COLA_ORDENADA;
@@ -30,7 +30,7 @@ public enum Type {
         return switch (this) {
             case INT -> "int";
             case DOUBLE -> "double";
-            case BOOLEAN -> "boolean";
+            case BOOLEAN -> "bool";
             case TEXT -> "text";
             case COLA -> "Cola";
             case COLA_ORDENADA -> "ColaOrdenada";

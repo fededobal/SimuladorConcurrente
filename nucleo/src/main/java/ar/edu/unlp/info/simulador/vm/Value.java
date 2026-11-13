@@ -122,7 +122,7 @@ public sealed interface Value {
         return switch (this) {
             case IntVal ignored -> "int";
             case DoubleVal ignored -> "double";
-            case BoolVal ignored -> "boolean";
+            case BoolVal ignored -> "bool";
             case TextVal ignored -> "text";
             case QueueVal q -> q.isOrdenada() ? "ColaOrdenada" : "Cola";
             case ArrayVal a -> a.elementType().name().toLowerCase() + "[]";

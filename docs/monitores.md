@@ -185,7 +185,7 @@ Muestra la **exclusión mutua implícita**: nunca hay dos procesos dentro de `TO
 ```
 monitor Buffer {
     int dato;
-    boolean hayDato = false;
+    bool hayDato = false;
     cond P, C;
     procedure Enviar(D: in int) {
         if (hayDato) wait(P);
@@ -210,12 +210,12 @@ monitor BufferLimitado {
     cond notLleno, notVacio;
     procedure depositar(dato: in int) {
         while (cantidad == N) wait(notLleno);
-        buf[libre] = dato; libre = (libre + 1) % N; cantidad++;
+        buf[libre] = dato; libre = (libre + 1) mod N; cantidad++;
         signal(notVacio);
     }
     procedure retirar(res: out int) {
         while (cantidad == 0) wait(notVacio);
-        res = buf[ocupado]; ocupado = (ocupado + 1) % N; cantidad--;
+        res = buf[ocupado]; ocupado = (ocupado + 1) mod N; cantidad--;
         signal(notLleno);
     }
 }

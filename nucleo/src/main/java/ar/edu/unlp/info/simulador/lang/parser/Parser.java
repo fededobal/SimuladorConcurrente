@@ -16,7 +16,7 @@ import java.util.List;
  */
 public final class Parser {
 
-    private static final List<String> SCALAR_TYPES = List.of("int", "double", "boolean", "text");
+    private static final List<String> SCALAR_TYPES = List.of("int", "double", "bool", "text");
 
     /**
      * Topes de anidamiento. El parser, el validador y el evaluador son recursivos, y la pila
@@ -129,7 +129,7 @@ public final class Parser {
             throw error("El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)");
         }
         if (!isScalarType(peek())) {
-            throw error("Se esperaba un tipo escalar (int, double, boolean, text) "
+            throw error("Se esperaba un tipo escalar (int, double, bool, text) "
                     + "para el parámetro");
         }
         Type type = Type.fromKeyword(advance().lexeme());
@@ -565,7 +565,7 @@ public final class Parser {
 
     private Expr parseMul() {
         Expr left = parseUnary();
-        while (matchAny("*", "/", "%")) {
+        while (matchAny("*", "/", "mod")) {
             String op = previous().lexeme();
             int line = previous().line();
             Expr right = parseUnary();

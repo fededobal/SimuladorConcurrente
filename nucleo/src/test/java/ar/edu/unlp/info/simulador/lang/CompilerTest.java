@@ -27,7 +27,7 @@ class CompilerTest {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor Buffer {
                     int dato = 0;
-                    boolean hayDato = false;
+                    bool hayDato = false;
                     cond P, C;
                     procedure Enviar(D: in int) {
                         if (hayDato) wait(P);
@@ -247,13 +247,13 @@ class CompilerTest {
     /** D-1: los errores de tipos se informan al compilar. */
     @Test
     void chequeaTiposAlCompilar() {
-        assertTrue(errorDe("process P { int x = 1; if (x) skip; }").contains("tiene que ser boolean"));
+        assertTrue(errorDe("process P { int x = 1; if (x) skip; }").contains("tiene que ser bool"));
         assertTrue(errorDe("process P { int x = \"a\" * 2; }").contains("se aplica a números"));
         assertTrue(errorDe("process P { int x = \"hola\"; }").contains("No se puede guardar un text"));
         assertTrue(errorDe("process P { int x = 2.9; }").contains("No se puede guardar un double"));
-        assertTrue(errorDe("process P { boolean b = \"10\" == 10; }").contains("No se puede comparar"));
-        assertTrue(errorDe("process P { int x = true; }").contains("No se puede guardar un boolean"));
-        assertTrue(errorDe("process P { text t = true; }").contains("No se puede guardar un boolean"));
+        assertTrue(errorDe("process P { bool b = \"10\" == 10; }").contains("No se puede comparar"));
+        assertTrue(errorDe("process P { int x = true; }").contains("No se puede guardar un bool"));
+        assertTrue(errorDe("process P { text t = true; }").contains("No se puede guardar un bool"));
         assertTrue(errorDe("process P { int a[2]; a[1.5] = 1; }").contains("tiene que ser int"));
         assertTrue(errorDe("""
                 monitor M { procedure f(x: in int) { skip; } }
@@ -266,7 +266,7 @@ class CompilerTest {
         // conversiones permitidas: int a double, numero a text, + con text concatena
         assertDoesNotThrow(() -> Compiler.compile("""
                 process P { double d = 3; text t = 5; text u = 2.5; text v = "x" + 1 + true;
-                            boolean b = 1 < 2.5 and "a" < "b"; }
+                            bool b = 1 < 2.5 and "a" < "b"; }
                 """));
     }
 
@@ -342,15 +342,15 @@ class CompilerTest {
     /** VS-4: empty solo sobre colas, con o sin parentesis. */
     @Test
     void emptySoloSobreColasYConParentesisOpcionales() {
-        assertTrue(errorDe("process P { int a[2]; boolean b = empty a; }").contains("no es una cola"));
+        assertTrue(errorDe("process P { int a[2]; bool b = empty a; }").contains("no es una cola"));
         assertDoesNotThrow(() -> Compiler.compile(
-                "process P { Cola c; boolean b = empty c; boolean d = empty(c) and not empty(c); }"));
+                "process P { Cola c; bool b = empty c; bool d = empty(c) and not empty(c); }"));
     }
 
     /** VS-8: la comparacion encadenada se rechaza con un mensaje que la explica. */
     @Test
     void comparacionEncadenadaExplicaElError() {
-        assertTrue(errorDe("process P { boolean b = 1 < 2 < 3; }").contains("no se encadenan"));
+        assertTrue(errorDe("process P { bool b = 1 < 2 < 3; }").contains("no se encadenan"));
     }
 
     /** VS-9: caracteres que llegan al copiar de un PDF o un procesador de texto. */
@@ -366,5 +366,32 @@ class CompilerTest {
         CompilationException ex = assertThrows(CompilationException.class,
                 () -> Compiler.compile("process P {\n int x = ; }"));
         assertTrue(ex.getMessage().startsWith("Línea 2: Se esperaba una expresión"), ex.getMessage());
+    }
+
+    /** Notacion de la catedra: el tipo logico es bool; boolean se rechaza con un mensaje que lo dice. */
+    @Test
+    void elTipoLogicoSeLlamaBool() {
+        assertDoesNotThrow(() -> Compiler.compile("process P { bool listo = true; }"));
+        assertEquals("Línea 1: El tipo se llama bool, no boolean",
+                errorDe("process P { boolean listo = true; }"));
+    }
+
+    /** Notacion de la catedra: el resto de la division es mod; % se rechaza. */
+    @Test
+    void elRestoSeEscribeMod() {
+        assertDoesNotThrow(() -> Compiler.compile("process P { int x = 7 mod 3; }"));
+        assertEquals("Línea 1: El resto de la división se escribe mod, no %",
+                errorDe("process P { int x = 7 % 3; }"));
+        assertTrue(errorDe("process P { int x = 7 mod true; }").contains("'mod' se aplica a números"));
+    }
+
+    /** La catedra escribe Monitor, Procedure y Process con mayuscula: se aceptan en cualquier forma. */
+    @Test
+    void monitorProcedureYProcessSinDistinguirMayusculas() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                Monitor M { int x = 0; Procedure p() { x = 1; } }
+                PROCESS P { M.p(); }
+                process Q { M.p(); }
+                """));
     }
 }

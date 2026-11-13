@@ -20,12 +20,18 @@ public final class Lexer {
             "push", "pop", "empty", "write",
             "in", "out",
             "true", "false",
-            "int", "double", "boolean", "text", "Cola", "ColaOrdenada",
-            "and", "or", "not"
+            "int", "double", "bool", "text", "Cola", "ColaOrdenada",
+            "and", "or", "not", "mod"
     );
 
+    /**
+     * Palabras que la catedra escribe a veces con mayuscula ({@code Monitor}, {@code Procedure},
+     * {@code Process}): se aceptan con cualquier combinacion y se normalizan a minuscula.
+     */
+    private static final List<String> CASE_INSENSITIVE = List.of("monitor", "procedure", "process");
+
     private static final Set<String> TWO_CHAR = Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
-    private static final String SINGLE_CHAR = "+-*/%=<>(){}[];,:.!";
+    private static final String SINGLE_CHAR = "+-*/=<>(){}[];,:.!";
 
     private final String src;
     private int pos = 0;
@@ -145,6 +151,12 @@ public final class Lexer {
             sb.append(advance());
         }
         String word = sb.toString();
+        if (word.equals("boolean")) {
+            throw new CompilationException("El tipo se llama bool, no boolean", startLine);
+        }
+        for (String kw : CASE_INSENSITIVE) {
+            if (word.equalsIgnoreCase(kw)) return new Token(TokenType.KEYWORD, kw, startLine, startCol);
+        }
         TokenType type = KEYWORDS.contains(word) ? TokenType.KEYWORD : TokenType.IDENTIFIER;
         return new Token(type, word, startLine, startCol);
     }
@@ -163,6 +175,9 @@ public final class Lexer {
             advance();
             advance();
             return new Token(TokenType.SYMBOL, two, startLine, startCol);
+        }
+        if (c == '%') {
+            throw new CompilationException("El resto de la división se escribe mod, no %", startLine);
         }
         if (SINGLE_CHAR.indexOf(c) >= 0) {
             advance();

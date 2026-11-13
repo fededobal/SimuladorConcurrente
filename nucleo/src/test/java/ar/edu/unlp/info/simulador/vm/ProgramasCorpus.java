@@ -45,7 +45,7 @@ final class ProgramasCorpus {
                 process P[i: 0..3] { Cuenta.sumar(); }
                 """);
         p.put("canon/buffer", """
-                monitor Buf { int dato = 0; boolean hay = false; int recibidos = 0; int suma = 0; cond p; cond c;
+                monitor Buf { int dato = 0; bool hay = false; int recibidos = 0; int suma = 0; cond p; cond c;
                   procedure enviar(d: in int) { while (hay) wait(p); dato = d; hay = true; signal(c); }
                   procedure recibir() { while (not hay) wait(c); suma = suma + dato;
                                         recibidos = recibidos + 1; hay = false; signal(p); } }
@@ -53,7 +53,7 @@ final class ProgramasCorpus {
                 process Cons { int k = 0; for (k = 1; k <= 5; k++) { Buf.recibir(); } }
                 """);
         p.put("canon/signal_all", """
-                monitor Gate { boolean open = false; int through = 0; cond g;
+                monitor Gate { bool open = false; int through = 0; cond g;
                   procedure esperar() { while (not open) wait(g); through = through + 1; }
                   procedure abrir() { open = true; signal_all(g); } }
                 process W[i: 0..4] { Gate.esperar(); }
@@ -114,9 +114,9 @@ final class ProgramasCorpus {
                 monitor B { int buf[3]; int ocupado = 0, libre = 0, cantidad = 0; int suma = 0; int n = 0;
                   cond notLleno, notVacio;
                   procedure depositar(d: in int) { while (cantidad == 3) wait(notLleno);
-                    buf[libre] = d; libre = (libre + 1) % 3; cantidad++; signal(notVacio); }
+                    buf[libre] = d; libre = (libre + 1) mod 3; cantidad++; signal(notVacio); }
                   procedure retirar(r: out int) { while (cantidad == 0) wait(notVacio);
-                    r = buf[ocupado]; ocupado = (ocupado + 1) % 3; cantidad--; suma = suma + r; n++; signal(notLleno); } }
+                    r = buf[ocupado]; ocupado = (ocupado + 1) mod 3; cantidad--; suma = suma + r; n++; signal(notLleno); } }
                 process Prod[i: 1..15] { B.depositar(i); B.depositar(i); }
                 process Cons[j: 1..15] { int x; B.retirar(x); B.retirar(x); }
                 """);
@@ -134,13 +134,13 @@ final class ProgramasCorpus {
                 process P[i: 0..9] { T.pedir(i); T.liberar(i); }
                 """);
         p.put("var/filosofos-5", """
-                monitor Mesa { boolean ocupado[5]; cond libre[5]; int comidas = 0;
+                monitor Mesa { bool ocupado[5]; cond libre[5]; int comidas = 0;
                   procedure tomar(i: in int) {
-                    while (ocupado[i] or ocupado[(i + 1) % 5]) wait(libre[i]);
-                    ocupado[i] = true; ocupado[(i + 1) % 5] = true; }
+                    while (ocupado[i] or ocupado[(i + 1) mod 5]) wait(libre[i]);
+                    ocupado[i] = true; ocupado[(i + 1) mod 5] = true; }
                   procedure dejar(i: in int) {
-                    ocupado[i] = false; ocupado[(i + 1) % 5] = false; comidas++;
-                    signal(libre[(i + 4) % 5]); signal(libre[(i + 1) % 5]); } }
+                    ocupado[i] = false; ocupado[(i + 1) mod 5] = false; comidas++;
+                    signal(libre[(i + 4) mod 5]); signal(libre[(i + 1) mod 5]); } }
                 process F[i: 0..4] { for (1..3) { Mesa.tomar(i); skip; Mesa.dejar(i); } }
                 """);
         p.put("var/lectores-escritores-30", """
@@ -156,7 +156,7 @@ final class ProgramasCorpus {
                 """);
         p.put("var/out-elemento-arreglo", """
                 monitor M { int n = 0; procedure dar(r: out int, s: out text) { n++; r = n * 10; s = "v"; } }
-                process P[i: 0..3] { int a[3]; text t[2]; for (int k = 0..2) { M.dar(a[k], t[k % 2]); }
+                process P[i: 0..3] { int a[3]; text t[2]; for (int k = 0..2) { M.dar(a[k], t[k mod 2]); }
                   write(a[0], " ", a[1], " ", a[2], t[0], t[1]); }
                 """);
         p.put("var/anidada-simple", """
@@ -166,7 +166,7 @@ final class ProgramasCorpus {
                 process Q[i: 1..3] { B.inc(); }
                 """);
         p.put("var/anidada-wait-en-B", """
-                monitor B { boolean listo = false; cond c; int pasaron = 0;
+                monitor B { bool listo = false; cond c; int pasaron = 0;
                   procedure esperar() { while (not listo) wait(c); pasaron++; }
                   procedure abrir() { listo = true; signal_all(c); } }
                 monitor A { int dentro = 0; procedure f() { dentro++; B.esperar(); dentro--; } }
@@ -175,7 +175,7 @@ final class ProgramasCorpus {
                 process R { A.f(); }
                 """);
         p.put("var/anidada-lockout", """
-                monitor B { boolean listo = false; cond c;
+                monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure abrir() { listo = true; signal(c); } }
                 monitor A { procedure f() { B.esperar(); } procedure g() { B.abrir(); } }
@@ -196,7 +196,7 @@ final class ProgramasCorpus {
                 process Q[i: 1..4] { A.g(); B.g(); }
                 """);
         p.put("var/error-y-espera-eterna", """
-                monitor M { boolean listo = false; cond c;
+                monitor M { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure avisar() { int x = 1 / 0; listo = true; signal(c); } }
                 process A { M.esperar(); }
@@ -213,7 +213,7 @@ final class ProgramasCorpus {
                 monitor M { int turno = 0; cond c; int senales = 0;
                   procedure avanzar() { signal(c); senales++; turno++; signal_all(c); }
                   procedure esperar(t: in int) { while (turno < t) wait(c); } }
-                process W[i: 1..10] { M.esperar(i % 4); }
+                process W[i: 1..10] { M.esperar(i mod 4); }
                 process S { for (1..4) { M.avanzar(); } }
                 """);
         p.put("var/write-mucho", """

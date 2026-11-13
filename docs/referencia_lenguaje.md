@@ -11,19 +11,21 @@ EBNF, [`sintaxis_especificacion.md`](sintaxis_especificacion.md).
 
 ## 1. Palabras reservadas
 
-Son **29**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
-(escribir `int out = 0;` es error de sintaxis).
+Son **30**. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
+(escribir `int out = 0;` es error de sintaxis). `monitor`, `procedure` y `process` se
+aceptan con cualquier combinación de mayúsculas (`Monitor`, `Procedure`, `PROCESS`), como
+las escribe la cátedra; el resto se escribe tal cual figura en la tabla.
 
 | Grupo | Palabras |
 |---|---|
 | Declaraciones | `monitor` `procedure` `cond` `process` |
-| Tipos | `int` `double` `boolean` `text` `Cola` `ColaOrdenada` |
+| Tipos | `int` `double` `bool` `text` `Cola` `ColaOrdenada` |
 | Modos de parámetro | `in` `out` |
 | Control | `if` `else` `while` `for` `skip` |
 | Sincronización | `wait` `signal` `signal_all` |
 | Colas | `push` `pop` `empty` |
 | Salida | `write` |
-| Operadores lógicos | `and` `or` `not` |
+| Operadores | `and` `or` `not` `mod` |
 | Literales | `true` `false` |
 
 No hay rastro de semáforos: `sem`, `await`, `p` y `v` **no son palabras reservadas**, son
@@ -33,7 +35,7 @@ identificadores comunes y se pueden usar como nombre de variable.
 
 | | |
 |---|---|
-| Aritméticos | `+` `-` `*` `/` `%` |
+| Aritméticos | `+` `-` `*` `/` (el resto es la palabra `mod`) |
 | Comparación | `==` `!=` `<` `<=` `>` `>=` |
 | Lógicos (alias) | `&&` `\|\|` `!` |
 | Asignación | `=` `++` `--` |
@@ -78,7 +80,7 @@ int b[3] = ([3] 0);       // forma explícita de la cátedra
 int c[3];                 // el tamaño es una expresión int
 ```
 
-Índice base 0: `a[0]`, `a[(i + 1) % 3]`. Un índice fuera de rango es error de ejecución
+Índice base 0: `a[0]`, `a[(i + 1) mod 3]`. Un índice fuera de rango es error de ejecución
 (`Índice 5 fuera de rango para 'a' (tamaño 2)`). El tamaño va de 0 a 100 000 elementos.
 
 Se declaran dentro de un monitor o como locales de un proceso. Un arreglo se usa siempre
@@ -93,7 +95,7 @@ push(c, 1);          // encola un elemento
 push(c, 7, 9);       // encola UNA tupla de dos componentes
 pop(c, x);           // desencola el frente
 pop(c, a, b);        // desestructura la tupla: a=7, b=9
-boolean v = empty c; // también empty(c)
+bool v = empty c; // también empty(c)
 ```
 
 Cada cola maneja **una cantidad fija de componentes**, que queda fijada por su primer
@@ -130,7 +132,7 @@ pop(c, p, d);          // p=1, d="primero"
   iguales). Encolar `(1,"a") (1,"b") (0,"cero") (1,"c")` desencola `cero a b c`.
 - Con una sola componente, ordena por el valor: `5 1 4 1 3` sale `1 1 3 4 5`.
 - Las claves se comparan como números o, si son `text`, en orden alfabético. Mezclar
-  números y textos en la misma cola, o usar claves `boolean`, es error de ejecución.
+  números y textos en la misma cola, o usar claves `bool`, es error de ejecución.
 - `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
 ---
@@ -141,18 +143,18 @@ pop(c, p, d);          // p=1, d="primero"
 |---|---|---|
 | `int` | enteros de 64 bits | `0` |
 | `double` | números con decimales | `0.0` |
-| `boolean` | `true`, `false` | `false` |
+| `bool` | `true`, `false` | `false` |
 | `text` | cadenas entre comillas dobles | `""` |
 
 El compilador controla los tipos: una condición (`if`, `while`, `for`) tiene que ser
-`boolean`; un índice, un tamaño o una cota de familia, `int`; y lo que se guarda en una
+`bool`; un índice, un tamaño o una cota de familia, `int`; y lo que se guarda en una
 variable, se pasa como argumento o se devuelve por un `out` tiene que coincidir con el tipo
 del destino. Las únicas conversiones automáticas son:
 
 - un `int` donde va un `double` (`double d = 3;` guarda `3.0`);
 - un número donde va un `text` (`text t = 5;` guarda `"5"`).
 
-`int x = 2.9;` es error de compilación: no se trunca en silencio. Un `boolean` no es un
+`int x = 2.9;` es error de compilación: no se trunca en silencio. Un `bool` no es un
 número (`int x = true;` es error).
 
 Las cadenas no tienen secuencias de escape: `\` es un carácter común y una comilla doble
@@ -207,7 +209,7 @@ procedure nada() { ... }
 - Los parámetros son **escalares**: no se pasan arreglos ni `Cola`.
 - El tipo del argumento tiene que coincidir con el del parámetro, con las conversiones de
   §3. En un `out` el valor va del parámetro al argumento: `procedure dar(r: out int)` puede
-  devolver a una variable `int`, `double` o `text`, pero no a una `boolean`.
+  devolver a una variable `int`, `double` o `text`, pero no a una `bool`.
 - No hay valor de retorno; los resultados salen por `out`.
 - Un procedure no puede llamar a otro de su propio monitor (error de compilación). Sí puede
   llamar a otro monitor, y **conserva el suyo** hasta que esa llamada termina, aunque haga
@@ -340,7 +342,7 @@ es un ciclo infinito.
 | 3 | `not` `!` | prefijo |
 | 4 | `==` `!=` `<` `<=` `>` `>=` | **no asociativo** |
 | 5 | `+` `-` | izquierda |
-| 6 | `*` `/` `%` | izquierda |
+| 6 | `*` `/` `mod` | izquierda |
 | 7 (mayor) | `-` unario | prefijo |
 
 Primarios: un número, una cadena, `true`, `false`, `empty cola` (o `empty(cola)`), una
@@ -350,12 +352,12 @@ Tipos de las operaciones:
 
 - `+ - * /` entre números: `int` si los dos son `int`, si no `double`. `/` entre dos `int`
   es la división entera (`7 / 2` da `3`).
-- `%` entre dos `int` es el resto entero; con algún `double`, el resto real (`5.5 % 2` da `1.5`).
+- `mod` entre dos `int` es el resto entero; con algún `double`, el resto real (`5.5 mod 2` da `1.5`).
 - `+` con un `text` concatena: `"total: " + 3` da `"total: 3"`.
 - `==` y `!=` comparan dos números o dos valores del mismo tipo; `< <= > >=`, dos números o
   dos `text` (orden alfabético). Comparar un `text` con un número es error de compilación.
   Dos `int` se comparan exactos, sin redondeo.
-- `and`, `or` y `not` se aplican a `boolean`.
+- `and`, `or` y `not` se aplican a `bool`.
 
 Una expresión puede anidar hasta 100 niveles de paréntesis y encadenar hasta 200
 operaciones; más que eso es error de compilación (lo mismo vale para bloques anidados).
@@ -430,7 +432,7 @@ Errores de compilación (con número de línea), verificados:
 - `No se puede asignar a 'i' (es constante, parámetro in o iterador)`
 - `No se puede modificar el iterador 'i' dentro del for: lo cambia solo el paso del for`
 - `Ya existe una variable permanente llamada 'cant': elegí otro nombre para no taparla`
-- `La condición del if tiene que ser boolean y es int` · `No se puede guardar un double en 'x', que es int`
+- `La condición del if tiene que ser bool y es int` · `No se puede guardar un double en 'x', que es int`
 - `No se puede comparar un text con un int usando '=='` · `El operador '*' se aplica a números, no a un text y un int`
 - `'a' es un arreglo: falta el índice, por ejemplo a[0]` · `No se puede asignar el arreglo 'a' completo: hay que indicar el índice, por ejemplo a[0]`
 - `Variable condición no declarada: c` · `La cond 'c' es un arreglo: falta el índice`
@@ -442,6 +444,7 @@ Errores de compilación (con número de línea), verificados:
 - `Ya existe un monitor o un process llamado M` · `Procedure duplicado 'p' en el monitor M`
 - `Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí 'a < b and b < c'`
 - `El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)`
+- `El tipo se llama bool, no boolean` · `El resto de la división se escribe mod, no %`
 - `Comentario de bloque sin cerrar` · `Cadena de texto sin cerrar` · `Comilla tipográfica “: las cadenas van entre comillas rectas (")`
 - `La cola 'c' maneja 2 componente(s) (fijado en la línea 4) y este pop usa 1`
 - `El programa tiene demasiados niveles de anidamiento (máximo 100)`
@@ -482,7 +485,7 @@ Fuera del alcance de esta versión, a propósito:
 ```c
 monitor Asignador {
   int libres = 3;
-  boolean tomado[3] = ([3] false);
+  bool tomado[3] = ([3] false);
   int otorgados = 0;
   cond hayLibre;
 

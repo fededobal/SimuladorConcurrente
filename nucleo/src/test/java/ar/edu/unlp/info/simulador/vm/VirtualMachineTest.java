@@ -49,7 +49,7 @@ class VirtualMachineTest {
     private static final String BUFFER = """
             monitor Buf {
                 int dato = 0;
-                boolean hay = false;
+                bool hay = false;
                 int recibidos = 0;
                 int suma = 0;
                 cond p;
@@ -84,7 +84,7 @@ class VirtualMachineTest {
     // signal_all despierta a todos: los 5 W pasan la barrera.
     private static final String BROADCAST = """
             monitor Gate {
-                boolean open = false;
+                bool open = false;
                 int through = 0;
                 cond g;
                 procedure esperar() {
@@ -186,11 +186,11 @@ class VirtualMachineTest {
         assertEquals("7", TestSupport.finalVar(r, "M", "recibido"));
     }
 
-    /** VI-7: con double, % es el resto real y no trunca los operandos. */
+    /** VI-7: con double, mod es el resto real y no trunca los operandos. */
     @Test
     void moduloConDouble() {
         RunResult r = TestSupport.run("""
-                process P { write(5.5 % 2, " ", 7.5 % 2.5, " ", 5 % 0.5, " ", -7 % 2); }
+                process P { write(5.5 mod 2, " ", 7.5 mod 2.5, " ", 5 mod 0.5, " ", -7 mod 2); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
         assertEquals("1.5 0.0 0.0 -1", r.vm().snapshot().output().get(0).text());
     }
@@ -248,7 +248,7 @@ class VirtualMachineTest {
     @Test
     void llamadaCerradaRetieneElMonitorDelLlamador() {
         String programa = """
-                monitor B { boolean listo = false; cond c;
+                monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure abrir() { listo = true; signal(c); } }
                 monitor A { int vueltas = 0;

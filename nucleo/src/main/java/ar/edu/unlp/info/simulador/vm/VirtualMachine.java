@@ -441,7 +441,7 @@ public final class VirtualMachine {
     private void execLocalDecl(Process p, Activation act, VarDecl vd) {
         Value v = ProgramLoader.initialValue(vd, vars.evaluator(act));
         act.locals().put(vd.name(), v);
-        event(p, "DECL", vd.name(), p.name() + ": " + vd.type().name().toLowerCase()
+        event(p, "DECL", vd.name(), p.name() + ": " + vd.type().keyword()
                 + " " + vd.name() + " = " + v.display());
     }
 

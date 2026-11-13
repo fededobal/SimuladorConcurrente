@@ -115,7 +115,7 @@ public final class ExprEvaluator {
                 if (r.asDouble() == 0) throw new RuntimeError("División por cero", b.line());
                 yield finite(l.asDouble() / r.asDouble(), b.line());
             }
-            case "%" -> {
+            case "mod" -> {
                 if (bothInt(l, r)) {
                     if (r.asLong() == 0) throw new RuntimeError("Módulo por cero", b.line());
                     yield new Value.IntVal(l.asLong() % r.asLong());

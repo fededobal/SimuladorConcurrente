@@ -30,12 +30,12 @@ Todo corre en el navegador.
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), `wait`, `signal` y `signal_all`, procesos y familias de procesos
 (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, los tipos `int`,
-`double`, `boolean` y `text`, arreglos, `Cola` y `ColaOrdenada`. No hay variables globales.
+`double`, `bool` y `text`, arreglos, `Cola` y `ColaOrdenada`. No hay variables globales.
 
 ```c
 monitor Buffer {
   int dato = 0;
-  boolean hayDato = false;
+  bool hayDato = false;
   cond libre, ocupado;
 
   procedure depositar(d: in int) {

@@ -41,14 +41,14 @@ const CANONICOS = [
     process P[i: 0..3] { Cuenta.sumar(); }`,
     (r) => r.finished && r.vars['Cuenta.x'] === '4' && r.vars['Cuenta.maxDentro'] === '1'],
   ['buffer de un dato (signal and continue)', `
-    monitor Buf { int dato = 0; boolean hay = false; int suma = 0; cond p; cond c;
+    monitor Buf { int dato = 0; bool hay = false; int suma = 0; cond p; cond c;
       procedure enviar(d: in int) { while (hay) wait(p); dato = d; hay = true; signal(c); }
       procedure recibir() { while (not hay) wait(c); suma = suma + dato; hay = false; signal(p); } }
     process Prod { for (int i = 1..5) { Buf.enviar(i); } }
     process Cons { for (int k = 1..5) { Buf.recibir(); } }`,
     (r) => r.finished && r.vars['Buf.suma'] === '15'],
   ['signal_all despierta a todos', `
-    monitor Gate { boolean open = false; int through = 0; cond g;
+    monitor Gate { bool open = false; int through = 0; cond g;
       procedure esperar() { while (not open) wait(g); through = through + 1; }
       procedure abrir() { open = true; signal_all(g); } }
     process W[i: 0..4] { Gate.esperar(); }
@@ -113,22 +113,22 @@ const CANONICOS = [
     (r) => r.snapshot?.output?.[0]?.text
       === '3.68934881474191E19 -1.0E23 0.1 1.25 4503599627370498.0 1.23456789125E8'],
   ['modulo con double y comparaciones exactas (VI-7, VI-8)', `
-    process P { int a = 9007199254740993; int b = 9007199254740992; write(5.5 % 2, " ", a > b); }`,
+    process P { int a = 9007199254740993; int b = 9007199254740992; write(5.5 mod 2, " ", a > b); }`,
     (r) => r.snapshot?.output?.[0]?.text === '1.5 true'],
   ['comparar tipos distintos es error de compilacion (VI-8, D-1)', `
-    process P { boolean b = "10" == 10; }`,
+    process P { bool b = "10" == 10; }`,
     (r) => !!r.compilacion?.includes('No se puede comparar')],
   ['un for no pisa el iterador de la familia (VI-6)', `
     process P[i: 0..1] { for (int i = 0..5) { skip; } }`,
     (r) => !!r.compilacion?.includes('Ya existe')],
   ['llamada cerrada: el llamador retiene su monitor (ADR 0007)', `
-    monitor B { boolean listo = false; cond c;
+    monitor B { bool listo = false; cond c;
       procedure esperar() { while (not listo) wait(c); } procedure abrir() { listo = true; signal(c); } }
     monitor A { procedure f() { B.esperar(); } procedure g() { B.abrir(); } }
     process P { A.f(); } process Q { skip; skip; A.g(); }`,
     (r) => r.deadlock && r.snapshot.processes[0].holding.join() === 'A'],
   ['el error de ejecucion llega con el proceso y su linea (VI-1)', `
-    monitor M { boolean listo = false; cond c;
+    monitor M { bool listo = false; cond c;
       procedure esperar() { while (not listo) wait(c); }
       procedure avisar() { int x = 1 / 0; listo = true; signal(c); } }
     process A { M.esperar(); } process B { skip; skip; M.avisar(); }`,
@@ -176,6 +176,13 @@ const CANONICOS = [
       }
       return entraron.has(2) && entraron.has(3);
     }],
+  ['notacion de la catedra: bool, mod y Monitor/Procedure/Process con mayuscula', `
+    Monitor M { bool listo = false; int r = 0; Procedure p() { r = 7 mod 3; listo = true; } }
+    Process P { M.p(); }`,
+    (r) => r.finished && r.vars['M.r'] === '1' && r.vars['M.listo'] === 'true'],
+  ['% se rechaza con un mensaje que dice que escribir', `
+    process P { int x = 7 % 3; }`,
+    (r) => !!r.compilacion?.endsWith('El resto de la división se escribe mod, no %')],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],

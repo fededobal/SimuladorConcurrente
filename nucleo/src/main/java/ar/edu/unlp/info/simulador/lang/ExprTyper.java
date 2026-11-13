@@ -96,7 +96,7 @@ final class ExprTyper {
     private static Type unary(Expr.Unary u, Scope scope) {
         Type t = typeOf(u.operand(), scope);
         if (u.op().equals("not")) {
-            if (t != Type.BOOLEAN) throw error("'not' se aplica a un boolean, no a un "
+            if (t != Type.BOOLEAN) throw error("'not' se aplica a un bool, no a un "
                     + t.keyword(), u.line());
             return Type.BOOLEAN;
         }
@@ -111,13 +111,13 @@ final class ExprTyper {
         return switch (b.op()) {
             case "and", "or" -> {
                 if (l != Type.BOOLEAN || r != Type.BOOLEAN) {
-                    throw error("'" + b.op() + "' une dos boolean, no un " + l.keyword() + " y un "
+                    throw error("'" + b.op() + "' une dos bool, no un " + l.keyword() + " y un "
                             + r.keyword(), b.line());
                 }
                 yield Type.BOOLEAN;
             }
             case "+" -> l == Type.TEXT || r == Type.TEXT ? Type.TEXT : numeric(b, l, r);
-            case "-", "*", "/", "%" -> numeric(b, l, r);
+            case "-", "*", "/", "mod" -> numeric(b, l, r);
             case "==", "!=" -> {
                 if (!(isNumeric(l) && isNumeric(r)) && l != r) throw cannotCompare(b, l, r);
                 yield Type.BOOLEAN;
