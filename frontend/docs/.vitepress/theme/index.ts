@@ -3,16 +3,27 @@ import DefaultTheme from 'vitepress/theme';
 import './custom.css';
 
 /**
- * Tema por defecto más un enlace al simulador en la barra. Va como enlace propio y no como
- * item de `nav` porque VitePress antepone la base (/docs/) a todo enlace interno, y el
- * simulador vive en la raíz del mismo sitio.
+ * Tema por defecto más un botón "Volver al simulador" arriba de la barra lateral. El
+ * simulador vive en la raíz del mismo sitio; como el enrutador de VitePress intercepta los
+ * clics a la misma dirección y buscaría "/" dentro de la documentación, la navegación se
+ * hace a mano con location.assign.
  */
 export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'nav-bar-content-after': () =>
-        h('a', { class: 'enlace-simulador', href: '/' }, 'Simulador'),
+      'sidebar-nav-before': () =>
+        h('a', {
+          class: 'volver-simulador',
+          href: '/',
+          onClick: (e: MouseEvent) => {
+            e.preventDefault();
+            window.location.assign('/');
+          },
+        }, [
+          h('span', { 'aria-hidden': 'true' }, '←'),
+          ' Volver al simulador',
+        ]),
     });
   },
 };

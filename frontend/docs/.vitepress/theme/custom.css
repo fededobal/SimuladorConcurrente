@@ -34,14 +34,20 @@
 /* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
 .vp-doc div[class*='language-'] code { font-size: 13.5px; }
 
-/* enlace al simulador en la barra, con el estilo de los items de navegación del tema */
-.enlace-simulador {
-  display: flex;
+/* botón para volver al simulador, arriba de la barra lateral, con recuadro */
+.volver-simulador {
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  margin: 0 0 20px;
   padding: 0 12px;
-  font-size: 14px;
+  height: 32px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--vp-c-text-1);
   white-space: nowrap;
+  text-decoration: none;
 }
-.enlace-simulador:hover { color: var(--vp-c-brand-1); }
+.volver-simulador:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
