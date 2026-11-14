@@ -54,7 +54,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
-- Barra más ordenada: una línea separa los controles de ejecución de las opciones, y el número del instante lleva su rótulo. La línea de tiempo y el panel Monitores, vacíos antes de la primera ejecución, explican qué van a mostrar. (Federico Dobal, 2026-11-13)
+- Barra más ordenada: una línea separa los controles de ejecución de las opciones; los selectores llevan su rótulo ("velocidad", "turnos") y los botones una explicación emergente; el número del instante lleva su rótulo. La línea de tiempo y el panel Monitores, vacíos antes de la primera ejecución, explican qué van a mostrar. (Federico Dobal, 2026-11-13)
 - Línea de tiempo rediseñada para leerse mejor: las filas quedan fijas en el orden de declaración, con una línea entre familias, en vez de subir las que avanzaron; las esperas se dibujan en un tono de fondo y dicen su causa ("espera entrar a Corralon", "wait(esperaCli[3])"); dentro del monitor el tramo es liso, con el nombre del monitor una vez (recortado con puntos suspensivos a los caracteres que entren si no cabe entero), en lugar de una "M" por instante; fuera del monitor, el mismo color más claro. (Federico Dobal, 2026-11-13)
 - Los paneles ya no recuerdan su tamaño entre recargas: al abrir la página, cada uno arranca en su tamaño y lugar iniciales. (Federico Dobal, 2026-11-13)
 - Pantalla en dos columnas: a la izquierda el editor con la línea de tiempo debajo, a la derecha el panel Monitores a toda altura. La salida deja de tener un lugar fijo: se abre con el botón "Salida" de la barra, que muestra cuántas líneas hay, y se cierra con el mismo botón o con Escape. (Federico Dobal, 2026-11-13)

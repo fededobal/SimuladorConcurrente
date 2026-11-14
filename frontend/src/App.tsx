@@ -23,8 +23,8 @@ const SPEED_LABEL: Record<number, string> = {
 };
 
 const POLICY_LABEL: Record<SchedulingPolicy, string> = {
-  RANDOM: 'turnos al azar',
-  ROUND_ROBIN: 'turnos en ronda',
+  RANDOM: 'al azar',
+  ROUND_ROBIN: 'en ronda',
 };
 
 const STATUS_LABEL: Record<SimStatus, string> = {
@@ -115,46 +115,56 @@ export function App() {
     <div className="app">
       <div className="bar tarjeta">
         {running ? (
-          <button className="btn btn-main" onClick={sim.pause}>
+          <button className="btn btn-main" onClick={sim.pause} title="Pausar la simulación">
             <Pause size={14} /> Pausar
           </button>
         ) : (
-          <button className="btn btn-main" onClick={sim.play}>
+          <button className="btn btn-main" onClick={sim.play}
+            title="Ejecutar la simulación: avanza sola, un instante por vez">
             <Play size={14} /> Ejecutar
           </button>
         )}
 
-        <button className="btn" onClick={sim.step} disabled={running}>
+        <button className="btn" onClick={sim.step} disabled={running}
+          title="Avanzar un solo instante">
           <SkipForward size={14} /> Paso
         </button>
 
-        <button className="btn" onClick={sim.stop} disabled={!active}>
+        <button className="btn" onClick={sim.stop} disabled={!active}
+          title="Detener y volver al principio del programa">
           <Square size={14} /> Detener
         </button>
 
         <span className="bar-sep" aria-hidden="true" />
 
-        <select
-          className="sel"
-          value={sim.speed}
-          onChange={(e) => sim.setSpeed(Number(e.target.value))}
-        >
-          {sim.speeds.map((s) => (
-            <option key={s} value={s}>{SPEED_LABEL[s] ?? `${s}ms`}</option>
-          ))}
-        </select>
+        <label className="campo" title="Cuánto dura cada instante en pantalla">
+          <span>velocidad</span>
+          <select
+            className="sel"
+            value={sim.speed}
+            onChange={(e) => sim.setSpeed(Number(e.target.value))}
+          >
+            {sim.speeds.map((s) => (
+              <option key={s} value={s}>{SPEED_LABEL[s] ?? `${s}ms`}</option>
+            ))}
+          </select>
+        </label>
 
-        <select
-          className="sel"
-          value={sim.policy}
-          onChange={(e) => sim.setPolicy(e.target.value as SchedulingPolicy)}
-          aria-label="Política de planificación"
+        <label
+          className="campo"
           title="Al azar: en cada instante avanza un subconjunto aleatorio de los procesos listos. En ronda: avanzan todos los listos, por turno."
         >
-          {(Object.keys(POLICY_LABEL) as SchedulingPolicy[]).map((p) => (
-            <option key={p} value={p}>{POLICY_LABEL[p]}</option>
-          ))}
-        </select>
+          <span>turnos</span>
+          <select
+            className="sel"
+            value={sim.policy}
+            onChange={(e) => sim.setPolicy(e.target.value as SchedulingPolicy)}
+          >
+            {(Object.keys(POLICY_LABEL) as SchedulingPolicy[]).map((p) => (
+              <option key={p} value={p}>{POLICY_LABEL[p]}</option>
+            ))}
+          </select>
+        </label>
 
         <select
           className="sel"
