@@ -114,6 +114,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Documentación: al plegar o desplegar la barra lateral ya no se mueve la barra superior; solo se deslizan la barra lateral y el contenido. (Federico Dobal, 2026-11-14)
 - En la documentación, el enlace al simulador caía en una página 404 porque el enrutador del sitio lo tomaba como una página propia. Lo reemplaza un botón "Volver al simulador", arriba a la izquierda, que navega de verdad a la raíz. (Federico Dobal, 2026-11-13)
 - Mensajes de nombre repetido: "Ya existe un parámetro llamado" (antes "llamada"), y al declarar una cond con el nombre de una variable permanente el error dice que la que ya existe es la variable, no que la cond está duplicada. (Federico Dobal, 2026-11-13)
 - El límite de 6 procesos de "En wait" cuenta el total de procesos dormidos; antes se aplicaba a cada variable condición y, con un arreglo de cond (una por proceso), la lista salía entera. (Federico Dobal, 2026-11-13)
