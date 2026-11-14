@@ -38,5 +38,3 @@ cantidad restante.
 |---|---|---|
 | de compilación | debajo del editor, con la línea en rojo | el programa no arranca |
 | de ejecución | el proceso queda en rojo, con su línea y su mensaje | termina solo ese proceso; los demás siguen |
-
-La lista de mensajes está en [Qué avisa el compilador](/lenguaje/errores).

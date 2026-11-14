@@ -39,7 +39,7 @@ export default defineConfig({
   // las decisiones de diseño (quedan en docs/ para el nucleo y la PPS; el sitio es solo de uso)
   srcExclude: [
     'informe-revision.md', 'verificacion-*.md', 'clases-materia/**', 'pps/**',
-    'monitores/**', 'decisiones/**',
+    'monitores/**', 'decisiones/**', 'lenguaje/especificacion.md',
   ],
   vite: {
     plugins: [resolverDesdeFrontend()],
@@ -96,10 +96,6 @@ export default defineConfig({
           },
           { text: 'Expresiones', link: '/lenguaje/expresiones' },
           { text: 'Alcance de los nombres', link: '/lenguaje/alcance' },
-          { text: 'Qué avisa el compilador', link: '/lenguaje/errores' },
-          { text: 'Qué no existe', link: '/lenguaje/no-existe' },
-          { text: 'Ejemplo completo', link: '/lenguaje/ejemplo-completo' },
-          { text: 'Especificación (EBNF)', link: '/lenguaje/especificacion' },
         ],
       },
       {

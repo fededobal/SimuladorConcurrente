@@ -33,8 +33,7 @@ comportan los monitores. Un instante es un paso en el que cada proceso que tiene
 ejecuta una sentencia; no hay tiempo real salvo en `delay`. Cuando un monitor se libera,
 entra uno de los procesos que esperaban, elegido al azar, sin respetar el orden de llegada.
 Un procedure que llama a otro monitor conserva el suyo hasta que esa llamada termina. No
-hay semáforos, pasaje de mensajes ni otras disciplinas de señalización; la lista completa
-está en [Qué no existe](/lenguaje/no-existe).
+hay semáforos, pasaje de mensajes ni otras disciplinas de señalización.
 :::
 
 ## Créditos

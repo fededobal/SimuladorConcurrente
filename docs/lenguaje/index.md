@@ -3,7 +3,7 @@
 Esta sección describe todo lo que acepta el núcleo del simulador: palabras reservadas,
 tipos, monitores, procesos, instrucciones y expresiones. Los ejemplos compilan y se
 comportan como se describe; los programas de ejemplo del menú se ejecutan en los tests del
-núcleo. La gramática formal está en la [especificación](./especificacion).
+núcleo.
 
 Un programa tiene dos clases de declaraciones de nivel superior, en cualquier orden, y **al
 menos un proceso**:
