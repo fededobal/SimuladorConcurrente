@@ -30,8 +30,8 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 | `double` | `3.14`, `0.5` | `0.0` |
 | `bool` | `true`, `false` | `false` |
 | `text` | `"hola"` | `""` |
-| `Cola` | (se llena con `push`) | vacía |
-| `ColaOrdenada` | (se llena con `push`) | vacía |
+| `Cola` | (se llena con `push`) | Vacía |
+| `ColaOrdenada` | (se llena con `push`) | Vacía |
 
 **Tipos estáticos.** El compilador calcula el tipo de cada expresión y controla que las
 condiciones sean `bool`, que índices, tamaños y cotas sean `int`, y que lo que se guarda
@@ -190,10 +190,10 @@ El iterador de un `for` no se puede modificar dentro del cuerpo: lo cambia solo 
 
 | Regla | Detalle |
 |---|---|
-| paso atómico | toda sentencia observable: asignación, `++`/`--`, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
-| sin paso propio | los bloques y las guardas de `if`, `while` y `for`: van con la sentencia siguiente |
-| por instante | avanzan varios procesos, una sentencia cada uno (paralelismo, no entrelazado de a uno) |
-| orden dentro del instante | decide quién gana el monitor cuando varios lo piden a la vez |
+| Paso atómico | Toda sentencia observable: asignación, `++`/`--`, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
+| Sin paso propio | Los bloques y las guardas de `if`, `while` y `for`: van con la sentencia siguiente |
+| Por instante | Avanzan varios procesos, una sentencia cada uno (paralelismo, no entrelazado de a uno) |
+| Orden dentro del instante | Decide quién gana el monitor cuando varios lo piden a la vez |
 
 ---
 

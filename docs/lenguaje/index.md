@@ -34,10 +34,10 @@ Un `/*` sin cerrar es error de compilación. Un `//` adentro de una cadena
 
 | Regla | Detalle |
 |---|---|
-| una sentencia, un paso | asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
-| las guardas no cuentan | la evaluación de `if`, `while` y `for` y los bloques van junto con la sentencia siguiente |
-| varios a la vez | en un instante avanzan varios procesos, una sentencia cada uno; corren en paralelo, no de a uno |
-| quién gana el monitor | el orden dentro del instante; el que pierde queda en la cola de entrada |
+| Una sentencia, un paso | Asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
+| Las guardas no cuentan | La evaluación de `if`, `while` y `for` y los bloques van junto con la sentencia siguiente |
+| Varios a la vez | En un instante avanzan varios procesos, una sentencia cada uno; corren en paralelo, no de a uno |
+| Quién gana el monitor | El orden dentro del instante; el que pierde queda en la cola de entrada |
 
 ::: tip
 La exclusión mutua del monitor serializa todo lo que toca estado compartido: un contador

@@ -2,9 +2,9 @@
 
 | Dónde estás | Qué ves |
 |---|---|
-| Cuerpo de un `process` | sus locales y el iterador de la familia |
-| Cuerpo de un `procedure` | sus parámetros, sus locales, las permanentes y `cond` del monitor |
-| Inicialización del monitor | las permanentes del monitor |
+| Cuerpo de un `process` | Sus locales y el iterador de la familia |
+| Cuerpo de un `procedure` | Sus parámetros, sus locales, las permanentes y `cond` del monitor |
+| Inicialización del monitor | Las permanentes del monitor |
 
 Lo importante: **las variables locales de un proceso no se ven adentro de un monitor**. Si
 un procedure necesita un dato del proceso, entra por parámetro; si tiene que devolver algo,

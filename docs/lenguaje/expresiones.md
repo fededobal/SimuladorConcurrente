@@ -2,13 +2,13 @@
 
 | Nivel | Operadores | Asociatividad |
 |---|---|---|
-| 1 (menor) | `or` `\|\|` | izquierda |
-| 2 | `and` `&&` | izquierda |
-| 3 | `not` `!` | prefijo |
-| 4 | `==` `!=` `<` `<=` `>` `>=` | no asociativo |
-| 5 | `+` `-` | izquierda |
-| 6 | `*` `/` `mod` | izquierda |
-| 7 (mayor) | `-` unario | prefijo |
+| 1 (menor) | `or` `\|\|` | Izquierda |
+| 2 | `and` `&&` | Izquierda |
+| 3 | `not` `!` | Prefijo |
+| 4 | `==` `!=` `<` `<=` `>` `>=` | No asociativo |
+| 5 | `+` `-` | Izquierda |
+| 6 | `*` `/` `mod` | Izquierda |
+| 7 (mayor) | `-` unario | Prefijo |
 
 Primarios: un número, una cadena, `true`, `false`, `empty cola` (o `empty(cola)`), una
 variable, un elemento de arreglo (`a[i]`) o una expresión entre paréntesis.

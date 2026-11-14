@@ -7,12 +7,12 @@ simulación corre, es de solo lectura.
 
 | Tecla | Qué hace |
 |---|---|
-| Tab | sangra la línea o las líneas seleccionadas |
-| Shift + Tab | quita un nivel de sangría |
-| Cmd o Ctrl + / | comenta o descomenta las líneas seleccionadas |
-| Enter | mantiene la sangría de la línea anterior |
-| `(` `[` `{` `"` | se cierran solos |
-| Botones flotantes arriba a la derecha | agrandan o achican la letra (se recuerda entre visitas) |
+| Tab | Sangra la línea o las líneas seleccionadas |
+| Shift + Tab | Quita un nivel de sangría |
+| Cmd o Ctrl + / | Comenta o descomenta las líneas seleccionadas |
+| Enter | Mantiene la sangría de la línea anterior |
+| `(` `[` `{` `"` | Se cierran solos |
+| Botones flotantes arriba a la derecha | Agrandan o achican la letra (se recuerda entre visitas) |
 
 ## La franja de cada proceso
 
@@ -21,11 +21,11 @@ aspecto de su [estado](./ejecucion#estados-de-un-proceso):
 
 | Aspecto | Estado |
 |---|---|
-| lisa, del color del proceso | ejecutando (clara fuera del monitor, plena adentro) |
-| rayada ocre | compitiendo por entrar a un monitor |
-| rayada ladrillo | esperando en una variable condición |
-| punteada verde, con contador de segundos | en `delay` |
-| gris | sin turno en este instante |
+| Lisa, del color del proceso | Ejecutando (clara fuera del monitor, plena adentro) |
+| Rayada ocre | Compitiendo por entrar a un monitor |
+| Rayada ladrillo | Esperando en una variable condición |
+| Punteada verde, con contador de segundos | En `delay` |
+| Gris | Sin turno en este instante |
 
 ::: tip
 Con varios procesos en el mismo renglón se muestran hasta cinco nombres y un botón con la
@@ -36,5 +36,5 @@ cantidad restante.
 
 | Tipo | Dónde se ve | Qué pasa |
 |---|---|---|
-| de compilación | debajo del editor, con la línea en rojo | el programa no arranca |
-| de ejecución | el proceso queda en rojo, con su línea y su mensaje | termina solo ese proceso; los demás siguen |
+| De compilación | Debajo del editor, con la línea en rojo | El programa no arranca |
+| De ejecución | El proceso queda en rojo, con su línea y su mensaje | Termina solo ese proceso; los demás siguen |

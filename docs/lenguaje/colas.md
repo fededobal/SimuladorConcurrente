@@ -21,10 +21,10 @@ bool v = empty c;         // también empty(c)
 
 | Forma | Qué declara |
 |---|---|
-| `Cola c(int)` | elementos de una componente |
-| `Cola p(int, text)` | tuplas de dos componentes |
-| `ColaOrdenada g(int, text, text)` | tuplas de tres; la primera es la clave de orden |
-| `ColaOrdenada g(int, (text, text))` | **la misma cola** que la anterior: el grupo solo separa la clave del resto |
+| `Cola c(int)` | Elementos de una componente |
+| `Cola p(int, text)` | Tuplas de dos componentes |
+| `ColaOrdenada g(int, text, text)` | Tuplas de tres; la primera es la clave de orden |
+| `ColaOrdenada g(int, (text, text))` | **La misma cola** que la anterior: el grupo solo separa la clave del resto |
 
 - Las componentes son tipos escalares: `int`, `double`, `bool`, `text`. Una cola no guarda
   colas ni arreglos.
@@ -54,9 +54,9 @@ pop(g, (id, (nombre, apellido)));
 
 | Control | Antes de correr |
 |---|---|
-| cantidad de componentes | la de la declaración, en `push` y en `pop` |
-| tipo de cada componente | con las conversiones de siempre: `int` donde va `double`, número donde va `text` |
-| destinos del `pop` | cada variable tiene que poder guardar su componente |
+| Cantidad de componentes | La de la declaración, en `push` y en `pop` |
+| Tipo de cada componente | Con las conversiones de siempre: `int` donde va `double`, número donde va `text` |
+| Destinos del `pop` | Cada variable tiene que poder guardar su componente |
 
 Mensajes típicos:
 

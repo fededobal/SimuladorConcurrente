@@ -5,9 +5,9 @@ Se abre con el botón Salida de la barra y muestra lo que los procesos escriben 
 
 | Qué | Cómo |
 |---|---|
-| cada `write` | una línea, con el instante y el nombre del proceso en su color |
-| capacidad | las últimas 500 líneas; si hay más, un aviso dice cuántas se descartaron |
-| cerrar | el botón Salida, el de la esquina del panel o Escape |
+| Cada `write` | Una línea, con el instante y el nombre del proceso en su color |
+| Capacidad | Las últimas 500 líneas; si hay más, un aviso dice cuántas se descartaron |
+| Cerrar | El botón Salida, el de la esquina del panel o Escape |
 
 ::: tip
 Con turnos al azar, el orden de la salida cambia entre corridas: es la forma más directa de

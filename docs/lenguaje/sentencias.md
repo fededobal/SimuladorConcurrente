@@ -11,7 +11,7 @@
 | Salida | `write(e);` · `write(e1, e2, ...);` |
 | Condicional | `if (e) S` · `if (e) S else S` · con o sin llaves |
 | Mientras | `while (e) S` · con o sin llaves |
-| For | cinco formas, ver [`for`](./instrucciones/for) |
+| For | Cinco formas, ver [`for`](./instrucciones/for) |
 | Bloque | `{ ... }` suelto |
 | Nada | `skip;` |
 | Demora | `delay(segundos);` |

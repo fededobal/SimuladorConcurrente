@@ -2,31 +2,31 @@
 
 | Control | Qué hace |
 |---|---|
-| **Ejecutar** / **Pausar** | la simulación avanza sola, un instante por vez, hasta pausarla o hasta que termina o se traba |
-| **Paso** | avanza un solo instante |
-| **Detener** | vuelve al principio del programa y vacía la línea de tiempo y la salida |
-| **Velocidad** | cuánto dura cada instante en pantalla (tabla siguiente) |
-| **Turnos** | la política de planificación (tabla siguiente); se puede cambiar durante la ejecución |
-| **Ejemplos** | carga un [programa de ejemplo](/ejemplos); pide confirmación si el editor tiene un programa propio |
-| **Salida** | abre la [pantalla de salida](./salida); el número es la cantidad de líneas |
-| **Documentación** | abre este sitio |
-| Estado e instante | listo, ejecutando, en pausa, fin, deadlock o error, y el número del instante actual |
+| **Ejecutar** / **Pausar** | La simulación avanza sola, un instante por vez, hasta pausarla o hasta que termina o se traba |
+| **Paso** | Avanza un solo instante |
+| **Detener** | Vuelve al principio del programa y vacía la línea de tiempo y la salida |
+| **Velocidad** | Cuánto dura cada instante en pantalla (tabla siguiente) |
+| **Turnos** | La política de planificación (tabla siguiente); se puede cambiar durante la ejecución |
+| **Ejemplos** | Carga un [programa de ejemplo](/ejemplos); pide confirmación si el editor tiene un programa propio |
+| **Salida** | Abre la [pantalla de salida](./salida); el número es la cantidad de líneas |
+| **Documentación** | Abre este sitio |
+| Estado e instante | Listo, ejecutando, en pausa, fin, deadlock o error, y el número del instante actual |
 
 ## Velocidades
 
 | Opción | Duración de un instante |
 |---|---|
-| lento | 1,2 s |
-| normal | 0,6 s |
-| rápido | 0,3 s |
-| muy rápido | 0,12 s |
+| Lento | 1,2 s |
+| Normal | 0,6 s |
+| Rápido | 0,3 s |
+| Muy rápido | 0,12 s |
 
 ## Turnos
 
 | Política | Quién avanza en cada instante | Para qué sirve |
 |---|---|---|
-| **al azar** | cada proceso listo entra al turno con una probabilidad del 80 %; al menos uno avanza | ver que el resultado depende del entrelazado: dos corridas pueden diferir |
-| **en ronda** | todos los procesos listos, por turno | seguir el programa con calma y de forma repetible |
+| **Al azar** | Cada proceso listo entra al turno con una probabilidad del 80 %; al menos uno avanza | Ver que el resultado depende del entrelazado: dos corridas pueden diferir |
+| **En ronda** | Todos los procesos listos, por turno | Seguir el programa con calma y de forma repetible |
 
 ::: tip
 En las dos políticas, el orden dentro del instante decide quién gana el monitor cuando

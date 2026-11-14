@@ -11,10 +11,10 @@ monitor Nombre {
 
 | Regla | Detalle |
 |---|---|
-| orden libre | permanentes, `cond`, inicialización y procedures pueden ir en cualquier orden |
-| visibilidad | las permanentes y las `cond` solo se ven adentro del monitor |
-| inicialización | las sentencias sueltas del cuerpo; corren una vez, antes de que nadie use el monitor |
-| límites de la inicialización | no puede llamar a otro monitor ni usar `wait`, `signal` o `delay`; si no termina en 100 000 pasos, el programa no arranca |
+| Orden libre | Permanentes, `cond`, inicialización y procedures pueden ir en cualquier orden |
+| Visibilidad | Las permanentes y las `cond` solo se ven adentro del monitor |
+| Inicialización | Las sentencias sueltas del cuerpo; corren una vez, antes de que nadie use el monitor |
+| Límites de la inicialización | No puede llamar a otro monitor ni usar `wait`, `signal` o `delay`; si no termina en 100 000 pasos, el programa no arranca |
 
 ## Arreglos de monitores
 
@@ -34,11 +34,11 @@ process Cliente[c: 0..5] {
 
 | Regla | Detalle |
 |---|---|
-| un monitor por índice | `Escritorio[0]`, `Escritorio[1]`, `Escritorio[2]`, cada uno con sus variables, `cond` y cola de entrada |
-| `id` adentro | vale el índice de ese monitor; es de solo lectura |
-| la llamada lleva el índice | cualquier expresión `int`; fuera del rango es error de ejecución |
-| errores de compilación | llamar sin índice a un arreglo de monitores, o con índice a un monitor común |
-| tope | 1000 monitores por arreglo |
+| Un monitor por índice | `Escritorio[0]`, `Escritorio[1]`, `Escritorio[2]`, cada uno con sus variables, `cond` y cola de entrada |
+| `id` adentro | Vale el índice de ese monitor; es de solo lectura |
+| La llamada lleva el índice | Cualquier expresión `int`; fuera del rango es error de ejecución |
+| Errores de compilación | Llamar sin índice a un arreglo de monitores, o con índice a un monitor común |
+| Tope | 1000 monitores por arreglo |
 
 ## Variables condición
 

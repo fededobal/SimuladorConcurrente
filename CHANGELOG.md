@@ -58,6 +58,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Documentación: todas las celdas de las tablas empiezan con mayúscula, salvo las que empiezan con un nombre del lenguaje en código. (Federico Dobal, 2026-11-14)
 - Documentación: ocultar y mostrar la barra lateral se anima con una transición en vez de reacomodar la página de golpe, y la barra superior tiene fondo blanco translúcido con desenfoque. (Federico Dobal, 2026-11-14)
 - En la documentación, el título "Simulador de Monitores" de la barra se quita: a la izquierda queda solo el botón "Volver al simulador". (Federico Dobal, 2026-11-13)
 - El error por una variable fuera de un monitor o un proceso dice solo "No se permiten variables globales". (Federico Dobal, 2026-11-13)

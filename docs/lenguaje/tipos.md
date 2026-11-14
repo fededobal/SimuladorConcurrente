@@ -2,10 +2,10 @@
 
 | Tipo | Valores | Por defecto |
 |---|---|---|
-| `int` | enteros de 64 bits | `0` |
-| `double` | números con decimales | `0.0` |
+| `int` | Enteros de 64 bits | `0` |
+| `double` | Números con decimales | `0.0` |
 | `bool` | `true`, `false` | `false` |
-| `text` | cadenas entre comillas dobles | `""` |
+| `text` | Cadenas entre comillas dobles | `""` |
 
 Las colas, `Cola` y `ColaOrdenada`, se describen en su [propia página](./colas).
 
