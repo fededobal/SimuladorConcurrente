@@ -34,12 +34,11 @@
 /* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
 .vp-doc div[class*='language-'] code { font-size: 13.5px; }
 
-/* botón para volver al simulador, arriba de la barra lateral, con recuadro */
+/* botón para volver al simulador, en el lugar del título de la barra, con recuadro */
 .volver-simulador {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 0 0 20px;
   padding: 0 12px;
   height: 32px;
   border: 1px solid var(--vp-c-divider);

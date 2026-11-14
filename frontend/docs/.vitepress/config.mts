@@ -51,7 +51,8 @@ export default defineConfig({
   appearance: false,
   head: [['link', { rel: 'icon', href: '/docs/favicon.svg' }]],
   themeConfig: {
-    siteTitle: 'Simulador de Monitores',
+    // sin titulo en la barra: a la izquierda va solo el boton "Volver al simulador"
+    siteTitle: false,
     sidebar: [
       {
         text: 'Introducción',
