@@ -214,6 +214,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- En desarrollo, el servidor de Vite redirige `/docs/` al de VitePress (puerto 5174) y `./dev.sh` levanta los dos, así el botón Documentación funciona también en local. (Federico Dobal, 2026-11-13)
 - El snapshot trae los elementos de cada arreglo y cola uno por uno (`elements`, hasta 50) y la cantidad total (`size`), además del texto; en un escalar `elements` es null. Con eso la interfaz dibuja celdas sin tener que interpretar el texto. (Federico Dobal, 2026-11-13)
 - Separar de la máquina virtual la carga del programa, el acceso a variables, la salida y la construcción del snapshot, para poder sumarle funcionalidad sin que siga creciendo. (Federico Dobal, 2026-11-13)
 - `EjemplosTest` lee la línea `// espera:` partiendo en el primer punto y el primer `=`, así

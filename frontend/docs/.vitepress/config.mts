@@ -1,8 +1,27 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitepress';
+import type { Plugin } from 'vite';
 
-/** Ruta absoluta de un paquete de frontend/node_modules: los .md estan fuera y no lo verian. */
-const pkg = (name: string) => fileURLToPath(import.meta.resolve(name));
+const FRONTEND = fileURLToPath(new URL('../../', import.meta.url));
+const DOCS = fileURLToPath(new URL('../../../docs/', import.meta.url));
+
+/**
+ * Los .md viven en docs/, fuera de frontend/, y VitePress toma ese directorio como raiz de
+ * Vite: un import de `vue` desde una pagina no encuentra node_modules. Este plugin vuelve a
+ * resolver los imports de paquetes que salen de docs/ como si salieran de frontend/, sin
+ * tocar la resolucion del resto (un alias de `vue` rompia el prebundle en desarrollo).
+ */
+function resolverDesdeFrontend(): Plugin {
+  return {
+    name: 'resolver-desde-frontend',
+    enforce: 'pre',
+    async resolveId(id, importer, options) {
+      if (!importer || !importer.startsWith(DOCS)) return null;
+      if (id.startsWith('.') || id.startsWith('/') || id.startsWith('\0') || id.includes(':')) return null;
+      return this.resolve(id, FRONTEND + 'package.json', { ...options, skipSelf: true });
+    },
+  };
+}
 
 // Sitio de documentación del simulador. Los textos viven en docs/ (raíz del repo); la
 // configuración está acá para que VitePress resuelva sus paquetes desde frontend/. Se
@@ -17,15 +36,8 @@ export default defineConfig({
   outDir: '../dist/docs',
   // documentos privados y material de la cátedra que no forman parte del sitio
   srcExclude: ['informe-revision.md', 'verificacion-*.md', 'clases-materia/**', 'pps/**'],
-  // VitePress toma srcDir como raiz de Vite y los .md estan fuera de frontend/: vue, que
-  // es lo que importan, se fija por ruta absoluta (vitepress ya se resuelve solo)
   vite: {
-    resolve: {
-      alias: [
-        { find: /^vue$/, replacement: pkg('vue') },
-        { find: /^vue\/server-renderer$/, replacement: pkg('vue/server-renderer') },
-      ],
-    },
+    plugins: [resolverDesdeFrontend()],
     server: { fs: { allow: ['../..'] } },
   },
   cleanUrls: true,

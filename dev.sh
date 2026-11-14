@@ -21,5 +21,10 @@ if [ ! -f frontend/src/engine/simulador.js ]; then
   ( cd frontend && npm run engine )
 fi
 
-echo "-> http://localhost:5173"
-cd frontend && exec npm run dev
+# La documentacion (VitePress) corre en el 5174 y Vite la sirve bajo /docs/.
+lsof -ti:5174 -sTCP:LISTEN | xargs -r kill 2>/dev/null || true
+( cd frontend && npm run docs:dev > /dev/null 2>&1 ) &
+trap 'kill 0' EXIT
+
+echo "-> http://localhost:5173  (documentación en http://localhost:5173/docs/)"
+cd frontend && npm run dev
