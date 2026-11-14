@@ -111,9 +111,10 @@ function fits(text: string, width: number, bold = false): boolean {
 }
 
 /**
- * El nombre entero si entra; si no, todos los caracteres que entren. En una familia se
- * conserva el indice ("Clien[3]"), que es lo que distingue a un proceso de otro; si ni asi
- * entra, la abreviatura del punto del dibujo ("C3"); si no, nada.
+ * El nombre entero si entra; si no, todos los caracteres que entren seguidos de puntos
+ * suspensivos. En una familia se conserva el indice ("Clien…[3]"), que es lo que distingue
+ * a un proceso de otro; si ni asi entra, la abreviatura del punto del dibujo ("C3"); si no,
+ * nada.
  */
 function nameThatFits(name: string, width: number, bold: boolean): string {
   if (fits(name, width, bold)) return name;
@@ -121,7 +122,7 @@ function nameThatFits(name: string, width: number, bold: boolean): string {
   const base = fam ? fam[1] : name;
   const indice = fam ? fam[2] : '';
   for (let n = base.length - 1; n >= 2; n--) {
-    const recortado = base.slice(0, n) + indice;
+    const recortado = base.slice(0, n) + '…' + indice;
     if (fits(recortado, width, bold)) return recortado;
   }
   const corto = shortName(name);
