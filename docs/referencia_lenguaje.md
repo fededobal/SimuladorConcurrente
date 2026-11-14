@@ -518,7 +518,7 @@ Errores de compilación (con número de línea), verificados:
 - `wait/signal/signal_all solo pueden usarse dentro de un procedure de monitor`
 - `El código de inicialización del monitor M no puede llamar a monitores ni usar wait/signal`
 - `Un procedure de A no puede llamar a A.g: el proceso ya está dentro del monitor`
-- `No hay variables globales: las variables van dentro de un monitor (permanentes) o de un process (locales)`
+- `No se permiten variables globales`
 - `El programa debe tener al menos un proceso`
 - `Ya existe un monitor o un process llamado M` · `Procedure duplicado 'p' en el monitor M`
 - `Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí 'a < b and b < c'`

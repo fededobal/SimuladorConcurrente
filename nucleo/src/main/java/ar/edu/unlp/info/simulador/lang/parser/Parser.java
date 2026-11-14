@@ -47,8 +47,7 @@ public final class Parser {
             } else if (check("process")) {
                 processes.add(parseProcess());
             } else if (isDeclStart(peek())) {
-                throw error("No hay variables globales: las variables van dentro de un monitor "
-                        + "(permanentes) o de un process (locales)");
+                throw error("No se permiten variables globales");
             } else {
                 throw error("Se esperaba 'monitor' o 'process'");
             }
