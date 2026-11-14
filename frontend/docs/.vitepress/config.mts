@@ -63,6 +63,12 @@ export default defineConfig({
         text: 'Simulador',
         items: [
           { text: 'La pantalla', link: '/simulador/' },
+          { text: 'Barra de controles', link: '/simulador/barra' },
+          { text: 'Editor', link: '/simulador/editor' },
+          { text: 'Línea de tiempo', link: '/simulador/linea-de-tiempo' },
+          { text: 'Monitores', link: '/simulador/monitores' },
+          { text: 'Salida', link: '/simulador/salida' },
+          { text: 'Ejecución', link: '/simulador/ejecucion' },
         ],
       },
       {
