@@ -26,7 +26,11 @@ const BOTTOM_PAD = 14;
 /** Anchos de columna (px) que recorre el zoom; el del medio es el de arranque. */
 const CELL_WIDTHS = [8, 12, 16, 22, 30] as const;
 const DEFAULT_CELL = 2;
-/** Ancho aproximado de un caracter del rotulo de un tramo (9.5px, tipografia sans). */
+/** Tipografia de los rotulos de los tramos; igual a .tl-tramo en index.css. */
+const FUENTE_ROTULO = "9.5px system-ui, -apple-system, 'Segoe UI', sans-serif";
+/** Margen interno de un tramo a cada lado del rotulo; igual al padding de .tl-tramo. */
+const MARGEN_ROTULO = 4;
+/** Ancho aproximado de un caracter, por si no hay canvas para medir. */
 const ANCHO_CHAR = 5.4;
 const ANCHO_TARJETA = 300;
 
@@ -91,9 +95,26 @@ function labelOf(s: Segment): string {
   }
 }
 
-/** El texto que entra en un tramo de ese ancho: el largo, una abreviatura o nada. */
-function fits(text: string, width: number): boolean {
-  return width >= text.length * ANCHO_CHAR + 12;
+// Se mide el texto de verdad en vez de estimarlo: una estimacion con margen descartaba
+// nombres que entraban, y el tramo mostraba la abreviatura sin necesidad.
+let medidor: CanvasRenderingContext2D | null | undefined;
+function textWidth(text: string, bold: boolean): number {
+  if (medidor === undefined) medidor = document.createElement('canvas').getContext('2d');
+  if (!medidor) return text.length * ANCHO_CHAR;
+  medidor.font = (bold ? '600 ' : '') + FUENTE_ROTULO;
+  return medidor.measureText(text).width;
+}
+
+/** true si el rotulo entra en un tramo de ese ancho con su margen. */
+function fits(text: string, width: number, bold = false): boolean {
+  return text !== '' && width >= textWidth(text, bold) + 2 * MARGEN_ROTULO;
+}
+
+/** El nombre entero si entra; si no, la misma abreviatura que el punto del dibujo; si no, nada. */
+function nameThatFits(name: string, width: number, bold: boolean): string {
+  if (fits(name, width, bold)) return name;
+  const corto = shortName(name);
+  return fits(corto, width, bold) ? corto : '';
 }
 
 /**
@@ -231,10 +252,7 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
                     style={{ left: NAME_W + s.from * cell, width, background: owner?.color }}
                     title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
                   >
-                    {owner
-                      ? (fits(owner.name, width) ? owner.name
-                        : fits(shortName(owner.name), width) ? shortName(owner.name) : '')
-                      : (fits('libre', width) ? 'libre' : '')}
+                    {owner ? nameThatFits(owner.name, width, true) : (fits('libre', width) ? 'libre' : '')}
                   </div>
                 );
               })}
@@ -258,8 +276,8 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
                 {segments.get(id)?.map((s) => {
                   const width = s.length * cell;
                   const label = labelOf(s);
-                  const text = fits(label, width) ? label
-                    : s.state === 'RUNNING_MONITOR' && width >= 2 * cell ? 'M' : '';
+                  const text = s.state === 'RUNNING_MONITOR' ? nameThatFits(label, width, true)
+                    : fits(label, width) ? label : '';
                   return (
                     <div
                       key={s.from}
