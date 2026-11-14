@@ -132,6 +132,8 @@ export function App() {
           <Square size={14} /> Detener
         </button>
 
+        <span className="bar-sep" aria-hidden="true" />
+
         <select
           className="sel"
           value={sim.speed}
@@ -181,19 +183,9 @@ export function App() {
           )}
         </button>
 
-        <div className="zoom" role="group" aria-label="Tamaño de letra del editor">
-          <button className="btn btn-icono" onClick={zoom.zoomOut} disabled={!zoom.canZoomOut}
-            aria-label="Achicar la letra del código" title="Achicar la letra del código">
-            <ZoomOut size={15} />
-          </button>
-          <button className="btn btn-icono" onClick={zoom.zoomIn} disabled={!zoom.canZoomIn}
-            aria-label="Agrandar la letra del código" title="Agrandar la letra del código">
-            <ZoomIn size={15} />
-          </button>
-        </div>
-
         <div className="meta">
           <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
+          <span className="rotulo">instante</span>
           <span className="n">{snapshot?.instant ?? 0}</span>
         </div>
       </div>
@@ -201,6 +193,17 @@ export function App() {
       <div className="cuerpo">
         <div className="columna">
           <div className="stage tarjeta">
+            {/* el zoom va sobre el editor, que es lo que agranda; en la barra quedaba lejos */}
+            <div className="editor-zoom" role="group" aria-label="Tamaño de letra del código">
+              <button className="amp" onClick={zoom.zoomOut} disabled={!zoom.canZoomOut}
+                aria-label="Achicar la letra del código" title="Achicar la letra del código">
+                <ZoomOut size={14} />
+              </button>
+              <button className="amp" onClick={zoom.zoomIn} disabled={!zoom.canZoomIn}
+                aria-label="Agrandar la letra del código" title="Agrandar la letra del código">
+                <ZoomIn size={14} />
+              </button>
+            </div>
             <CodeEditor
               code={sim.code}
               onChange={sim.setCode}

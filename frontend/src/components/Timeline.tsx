@@ -211,6 +211,9 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
       </header>
 
       <div className="tl-scroll" ref={scrollRef} onScroll={onScroll}>
+        {columns.length === 0 && (
+          <p className="tl-vacio">Con Ejecutar o Paso, acá se dibuja cómo avanza cada proceso instante a instante.</p>
+        )}
         <div
           className="tl-plano"
           style={{ width: ancho, height: alto, ['--tl-cell-w' as string]: `${cell}px` }}

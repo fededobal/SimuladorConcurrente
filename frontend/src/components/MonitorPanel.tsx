@@ -34,6 +34,14 @@ export function MonitorPanel({ snapshot, entries, expanded, onToggleExpand }: Pr
         <ExpandButton expanded={expanded} onClick={onToggleExpand} />
       </header>
       <div className="lista">
+        {!snapshot && (
+          <p className="panel-vacio">
+            Con Ejecutar o Paso, acá se dibuja cada monitor con sus colas de procesos y sus variables.
+          </p>
+        )}
+        {snapshot?.monitors.length === 0 && (
+          <p className="panel-vacio">El programa no declara monitores.</p>
+        )}
         {snapshot?.monitors.map((m) => (
           <MonitorDiagram key={m.name} monitor={m} processes={processes} entries={entries}
             ahora={ahora} onExpand={expanded ? undefined : onToggleExpand} />
