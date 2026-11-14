@@ -24,8 +24,8 @@ Las convenciones de código están en
 3. **Nada se edita en `simulador.js` a mano.** Nunca.
 4. **Cambio de comportamiento ⇒ test.** JUnit para el núcleo; si el alumno lo ve, además un
    caso en `scripts/smoke-motor.mjs`.
-5. **Cambio del lenguaje ⇒ docs.** `docs/referencia_lenguaje.md` y
-   `docs/sintaxis_especificacion.md` en el mismo commit o en el siguiente de la misma rama.
+5. **Cambio del lenguaje ⇒ docs.** Las páginas de `docs/lenguaje/` (la que corresponda y
+   `especificacion.md`) en el mismo commit o en el siguiente de la misma rama.
 6. **Decisiones grandes quedan escritas.** Una página en `docs/decisiones/` (ver plantilla).
    Para la PPS esto vale oro: es la justificación de cada elección.
 7. **Todo commit lleva su entrada en `CHANGELOG.md`** con autor y fecha.

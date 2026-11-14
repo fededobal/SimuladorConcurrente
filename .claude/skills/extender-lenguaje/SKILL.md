@@ -18,7 +18,7 @@ Antes de codificar, escribí en 3–5 líneas y mostrale al usuario:
    procedure, proceso?),
 3. qué errores de compilación nuevos aparecen y con qué mensaje,
 4. si rompe programas existentes (⇒ commit con `!` y `BREAKING CHANGE`).
-Si contradice `docs/monitores.md`, frená y preguntá: la notación la define la cátedra.
+Si contradice `docs/monitores/`, frená y preguntá: la notación la define la cátedra.
 
 ## Lugares a tocar, en orden
 
@@ -34,8 +34,8 @@ Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulador/` salvo indic
 | 6 | `vm/ExprEvaluator.java` / `vm/Value.java` | si es expresión o tipo |
 | 7 | `vm/Snapshot.java` + `js/Json.java` + `frontend/src/types.ts` | solo si el alumno tiene que *ver* algo nuevo |
 | 8 | `frontend/src/components/CodeEditor.tsx` → `KEYWORDS` | resaltado; misma lista que el Lexer |
-| 9 | `docs/referencia_lenguaje.md` | explicación para el alumno + ejemplo |
-| 10 | `docs/sintaxis_especificacion.md` | regla EBNF y semántica formal |
+| 9 | `docs/lenguaje/` (la página del tema o de la instrucción; `sentencias.md` si cambia la tabla) | explicación para el alumno + ejemplo |
+| 10 | `docs/lenguaje/especificacion.md` | regla EBNF y semántica formal |
 | 11 | `README.md` (lista de "El lenguaje") | una línea |
 | 12 | Tests | `CompilerTest` (acepta/rechaza), `VirtualMachineTest` (comportamiento), `scripts/smoke-motor.mjs` (un caso) |
 | 13 | Motor | `npm run engine && npm run smoke` (skill `motor-java-js`) |

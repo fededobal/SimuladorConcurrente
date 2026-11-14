@@ -16,7 +16,7 @@ un instante sin avanzar, con el monitor libre. Sobre los ocho programas de `ejem
 25 semillas y las dos políticas de planificación, las 7407 salidas de la cola de entrada
 que se registraron pasaron por ese instante intermedio (medido comparando el motor anterior
 y el nuevo con el mismo programa de medición, 23/09/2026). La teoría de la cátedra
-(`docs/monitores.md`, sección 1.1) describe otra cosa: el proceso queda demorado en la cola
+(`docs/monitores/index.md`, Exclusión mutua implícita) describe otra cosa: el proceso queda demorado en la cola
 de entrada hasta que el monitor se libere, sin un intervalo en el que el monitor esté libre
 y nadie entre.
 

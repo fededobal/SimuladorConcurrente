@@ -43,7 +43,7 @@ todos los caminos de salida de un monitor en `VirtualMachine`).
 - ¿Se sacó el `@Disabled` de `RegresionesVmTest` y se movió el caso en `smoke-motor.mjs`?
 
 **5. Docs** (skill `documentar-pps`)
-- Cambio de lenguaje ⇒ `referencia_lenguaje.md` + `sintaxis_especificacion.md`.
+- Cambio de lenguaje ⇒ la página de `docs/lenguaje/` que corresponda + `docs/lenguaje/especificacion.md`.
 - Decisión de arquitectura ⇒ ADR en `docs/decisiones/`.
 - ¿El README describe lo que realmente hay?
 

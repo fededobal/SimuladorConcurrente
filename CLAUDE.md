@@ -55,7 +55,7 @@ frontend/src/api.ts → useSimulation.ts → componentes
 
 ## Semántica
 
-Fuente de verdad: la teoría de la cátedra en `docs/monitores.md`. Modelo, invariantes y
+Fuente de verdad: la teoría de la cátedra en `docs/monitores/` (sitio VitePress; los `.md` de `docs/` son sus fuentes). Modelo, invariantes y
 casos canónicos: skill `semantica-concurrencia`.
 Decisiones vigentes: *signal and continue* en monitores; un instante puede avanzar varios
 procesos (`PROB_AVANCE`); no hay variables globales; al liberarse un monitor entra uno de

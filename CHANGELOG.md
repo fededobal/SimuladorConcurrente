@@ -191,6 +191,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- La documentación se reorganiza como sitio: la teoría de monitores en páginas por tema (qué es un monitor, variables condición, llamadas entre monitores, diferencia con los semáforos, ejemplos canónicos, técnicas e interbloqueo, conceptos previos); el lenguaje en una página por tema y por instrucción (estructura, palabras reservadas, tipos, colas, monitores, procesos, sentencias, if y while, for, wait y signal, push y pop, write, delay, expresiones, alcance, errores, qué no existe, ejemplo completo y especificación); una sección Simulador que explica cada panel de la pantalla; y en Referencia los nueve programas de ejemplo comentados, las notas de versión (este archivo) y las decisiones de diseño. Los archivos `referencia_lenguaje.md`, `sintaxis_especificacion.md`, `monitores.md` y `conceptos_concurrencia.md` pasan a `docs/lenguaje/` y `docs/monitores/`; se actualizan las referencias en README, CONTRIBUTING, CLAUDE.md, las skills y los ADR. (Federico Dobal, 2026-11-13)
 - Volver a versionar la documentación técnica de `docs/` (teoría, referencia, especificación y
   decisiones), que las reglas del repositorio y las skills tratan como fuente de verdad; solo
   quedan fuera los informes de revisión y de verificación. (Federico Dobal, 2026-09-23)

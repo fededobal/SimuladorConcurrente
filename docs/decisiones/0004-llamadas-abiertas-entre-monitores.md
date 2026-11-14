@@ -5,7 +5,7 @@
 
 ## Contexto
 Un procedure de un monitor A puede llamar a un procedure de otro monitor B. La teoría de la
-cátedra (`docs/monitores.md`) no trata el caso. Hasta esta decisión, el simulador
+cátedra (`docs/monitores/`) no trata el caso. Hasta esta decisión, el simulador
 implementaba la llamada cerrada: el proceso retenía A mientras ejecutaba en B, incluso si
 hacía `wait` en B. La verificación del 23/09/2026 mostró la consecuencia con un programa
 de dos monitores: P llama de A a B y espera en B, y Q necesita entrar a A para avisarle.
@@ -42,4 +42,4 @@ Una llamada desde un procedure a su propio monitor es error de compilación.
   que antes de la llamada: vale el mismo criterio que después de un `wait`.
 - Las invariantes de exclusión mutua se verificaron con 36 programas, 200 semillas y las dos
   políticas (`InvariantesTest`), incluidas las llamadas anidadas con `wait`.
-- `docs/monitores.md` y la referencia del lenguaje documentan el comportamiento.
+- `docs/monitores/llamadas-entre-monitores.md` y la referencia del lenguaje documentan el comportamiento.

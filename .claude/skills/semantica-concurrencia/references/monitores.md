@@ -1,6 +1,6 @@
 # Monitores: modelo, invariantes y casos canónicos
 
-Fuente de verdad: `docs/monitores.md` (notación y teoría de la cátedra). Si este archivo y
+Fuente de verdad: `docs/monitores/` (notación y teoría de la cátedra). Si este archivo y
 ese documento difieren, gana el documento y hay que actualizar este archivo.
 
 ## Modelo
@@ -65,7 +65,7 @@ Para cambios al scheduler, probá además con `RANDOM` en semillas 0..24 y con
 1. Reproducí con la misma semilla.
 2. Recorré el log por instantes y señalá el evento clave (`SIGNAL` a cola vacía,
    `WAIT` con `if` en lugar de `while`, dos procesos compitiendo en la cola de entrada).
-3. Relacionalo con la teoría (`docs/monitores.md` §2.1 signal and continue: por qué la
+3. Relacionalo con la teoría (`docs/monitores/variables-condicion.md`, signal and continue: por qué la
    condición se re-evalúa con `while`).
 4. Si el comportamiento contradice la teoría, es un bug del simulador: escribí el test que
    lo muestra antes de arreglarlo.

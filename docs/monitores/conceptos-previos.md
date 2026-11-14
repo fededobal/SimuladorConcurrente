@@ -1,7 +1,7 @@
 
-# Programación Concurrente: Conceptos Básicos, Locks y Barreras
+# Conceptos previos de concurrencia
 
-Este documento resume los conceptos fundamentales de concurrencia, sincronización por variables compartidas, locks y barreras, excluyendo el uso de semáforos (basado en las teorías 1 y 2).
+Resumen de los conceptos de concurrencia, sincronización por variables compartidas, *locks* y barreras que la cátedra presenta en las teorías 1 y 2, sin semáforos. Es el contexto en el que aparecen los monitores; el simulador no implementa las construcciones de esta página (`co ... oc`, `< await >`, *spin locks*, barreras), que se incluyen solo como referencia.
 
 ## 1. Introducción a la Concurrencia
 * **Concurrencia:** Capacidad de ejecutar múltiples actividades en paralelo o simultáneamente. No está restringido a una arquitectura de hardware particular ni a un número determinado de procesadores.
@@ -28,15 +28,16 @@ Este documento resume los conceptos fundamentales de concurrencia, sincronizaci�
 * **Interferencia:** Cuando un proceso realiza una acción que invalida las suposiciones de otro proceso sobre el estado de las variables.
 
 ## 3. Sentencias Concurrentes y Acción Atómica
-* **Creación de procesos:** * `co ... oc`: Las ramas internas se ejecutan concurrentemente y el flujo principal espera a que terminen todas para continuar.
+* **Creación de procesos:**
+  * `co ... oc`: Las ramas internas se ejecutan concurrentemente y el flujo principal espera a que terminen todas para continuar.
   * `process`: Instancia procesos que se ejecutan de manera independiente en background. 
   * **Arreglos de Procesos (Familias):** Como se observa en algoritmos de múltiples *workers* o en la barrera *Butterfly*, se pueden crear múltiples procesos idénticos de forma compacta utilizando cuantificadores. Las sintaxis aceptadas en la teoría son `process Nombre[id = N to M]`, `process Nombre[id: N..M]` o `process Nombre[id=N..M]`. Esto instancia un arreglo de procesos concurrentes donde cada uno recibe un identificador local único (por ejemplo, `i` o `id`).
 * **Acción Atómica:** Transformación de estado indivisible.
   * **Grano Fino:** Implementada por hardware (ej. lectura/escritura básica de variables simples).
-  * **Propiedad "A lo sumo una vez" (ASV):** Una asignación o expresión $x=e$ parece atómica si contiene a lo sumo una referencia crítica (a una variable compartida modificada por otro) y $x$ no es referenciada por otro proceso.
+  * **Propiedad "A lo sumo una vez" (ASV):** Una asignación o expresión `x = e` parece atómica si contiene a lo sumo una referencia crítica (a una variable compartida modificada por otro) y `x` no es referenciada por otro proceso.
 * **Grano Grueso (Sincronización explícita):**
-  * `< S; >`: Especifica que la sentencia $S$ debe evaluarse de forma atómica incondicional.
-  * `< await (B) S; >`: Sincronización condicional. Espera a que $B$ sea verdadera y luego ejecuta $S$ de forma atómica e indivisible.
+  * `< S; >`: Especifica que la sentencia `S` debe evaluarse de forma atómica incondicional.
+  * `< await (B) S; >`: Sincronización condicional. Espera a que `B` sea verdadera y luego ejecuta `S` de forma atómica e indivisible.
 
 ## 4. Propiedades y Fairness (Justicia)
 * **Seguridad (Safety):** "Nada malo ocurre". Ej. exclusión mutua, ausencia de interferencia. Garantizan estados consistentes.
@@ -57,14 +58,14 @@ Para proteger variables compartidas, se requieren protocolos de entrada y salida
 * **Spin Locks:** Uso de instrucciones atómicas de hardware como `Test-and-Set (TS)` o `Fetch-and-Add (FA)`.
   * *Spin Lock Simple:* `while (TS(lock)) skip;` (Causa alta contención de memoria).
   * *Test-and-Test-and-Set:* `while (lock) skip; while (TS(lock)) while (lock) skip;` (Reduce la contención leyendo desde caché hasta que lock pase a false).
-* **Algoritmo Tie-Breaker:** Solución de software puro de 2 a $N$ procesos. Utiliza un arreglo para definir en qué "etapa" del protocolo de entrada está cada proceso y una variable `ultimo` para romper los empates obligando al último en llegar a esperar.
+* **Algoritmo Tie-Breaker:** Solución de software puro de 2 a N procesos. Utiliza un arreglo para definir en qué "etapa" del protocolo de entrada está cada proceso y una variable `ultimo` para romper los empates obligando al último en llegar a esperar.
 * **Algoritmo Ticket:** Emplea un ticket (`numero` atómico incrementado con `FA`) y un visor del turno actual (`proximo`). Es justo (FCFS), pero requiere hardware especial para el `FA` o proteger la obtención del número.
 * **Algoritmo Bakery (Panadería):** Los procesos observan los turnos de los demás y se asignan a sí mismos un número mayor que el máximo actual. Descentralizado y justo, sin requerir instrucciones especiales, simulando el comportamiento de una panadería.
 
 ## 6. Sincronización Barrier (Barreras)
 Punto de sincronización donde todos los procesos de un grupo deben llegar antes de que se les permita continuar.
-* **Contador Compartido:** Usa una variable atómica incrementada con `FA`. Ineficiente por cuellos de botella de memoria si $N$ es grande.
+* **Contador Compartido:** Usa una variable atómica incrementada con `FA`. Ineficiente por cuellos de botella de memoria si N es grande.
 * **Flags y Coordinadores:** Un proceso coordinador verifica un arreglo de llegadas (`arribo[i]`) y luego levanta las barreras usando un arreglo de continuación (`continuar[i]`).
 * **Barreras Combinadas (Árbol y Simétricas / Butterfly):**
   * Para evitar cuellos de botella, se construyen árboles de sincronización.
-  * En una Barrera *Butterfly* ($N$ debe ser potencia de 2), se requieren $\log_2(N)$ etapas. En cada etapa, cada proceso sincroniza con un proceso distinto a distancia $2^{s-1}$. Al finalizar las etapas, todos pueden continuar.
+  * En una Barrera *Butterfly* (N debe ser potencia de 2), se requieren log₂(N) etapas. En cada etapa, cada proceso sincroniza con un proceso distinto a distancia 2^(s-1). Al finalizar las etapas, todos pueden continuar.

@@ -14,7 +14,7 @@ description: >
 El simulador ejecuta programas con **monitores** bajo *signal and continue* y nada más
 (ADR 0003). Acá está el modelo general de la VM; las reglas de los monitores, sus
 invariantes y los programas canónicos están en `references/monitores.md` (teoría de la
-cátedra: `docs/monitores.md`).
+cátedra: `docs/monitores/`).
 
 ## Modelo de la VM
 
@@ -57,5 +57,5 @@ cátedra: `docs/monitores.md`).
 
 1. Reproducir con la misma semilla.
 2. Recorrer el log por instantes y señalar el evento clave.
-3. Relacionarlo con la teoría (`docs/monitores.md`, sección correspondiente).
+3. Relacionarlo con la teoría (`docs/monitores/`, página correspondiente).
 4. Si contradice la teoría, es bug del simulador: primero el test que lo muestra.

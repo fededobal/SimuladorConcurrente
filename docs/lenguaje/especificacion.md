@@ -1,8 +1,9 @@
-# Especificación de Sintaxis y Semántica — Lenguaje de Monitores
+# Especificación de sintaxis y semántica
 
-Define el lenguaje que acepta el núcleo del simulador (lexer + parser + VM, implementados
-en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de **monitores**
-(memoria compartida, disciplina *signal and continue*). Ver `monitores.md` para la teoría.
+Define el lenguaje que acepta el núcleo del simulador (lexer, parser y máquina virtual,
+implementados en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de
+monitores (memoria compartida, disciplina *signal and continue*). La teoría está en
+[Monitores](/monitores/); la descripción para el alumno, en el resto de esta sección.
 
 ---
 
@@ -10,8 +11,8 @@ en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de **monit
 
 Un programa tiene dos tipos de declaraciones de nivel superior, en cualquier orden:
 
-1. **Monitores** — `monitor Nombre { ... }`.
-2. **Procesos** — `process Nombre { ... }` o `process Nombre[i: desde..hasta] { ... }`.
+1. **Monitores**: `monitor Nombre { ... }`.
+2. **Procesos**: `process Nombre { ... }` o `process Nombre[i: desde..hasta] { ... }`.
 
 Debe haber **al menos un proceso**. **No existen las variables globales**: toda variable se
 declara dentro de un monitor (permanente) o dentro de un proceso (local). El estado
@@ -29,8 +30,8 @@ compartido, por lo tanto, solo puede vivir dentro de un monitor.
 | `double` | `3.14`, `0.5` | `0.0` |
 | `bool` | `true`, `false` | `false` |
 | `text` | `"hola"` | `""` |
-| `Cola` | — (se llena con `push`) | vacía |
-| `ColaOrdenada` | — (se llena con `push`) | vacía |
+| `Cola` | (se llena con `push`) | vacía |
+| `ColaOrdenada` | (se llena con `push`) | vacía |
 
 **Tipos estáticos.** El compilador calcula el tipo de cada expresión y controla que las
 condiciones sean `bool`, que índices, tamaños y cotas sean `int`, y que lo que se guarda
@@ -62,12 +63,12 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
   `ColaOrdenada nombre(int, (text, text));`. El grupo entre paréntesis solo agrupa (separa la
   clave del resto): las dos últimas declaran la misma cola. Se admite un solo grupo, después
   de la primera componente, con tipos sueltos adentro.
-- `push(cola, elemento);` — se admite `push(cola, a, b, ...)`, que encola una tupla (un
+- `push(cola, elemento);`: se admite `push(cola, a, b, ...)`, que encola una tupla (un
   registro de varias componentes).
   - En `Cola` encola **al final**.
   - En `ColaOrdenada` **inserta ordenado por la primera componente**; a igual clave respeta
     el orden de llegada (inserción estable, FIFO entre iguales).
-- `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura la
+- `pop(cola, x);`: desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura la
   tupla: `x` recibe la primera componente (la clave de orden) e `y` la siguiente. `pop` sobre
   cola vacía es error de ejecución.
 - **Tipos controlados al compilar**: cada `push` y cada `pop` se verifica contra la
@@ -75,7 +76,7 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
   asignación: `int` en `double`, número en `text`). Las componentes se escriben sueltas, como
   tupla entre paréntesis o con la clave separada del resto: `push(c, a, b, d)`,
   `push(c, (a, b, d))`, `push(c, (a, (b, d)))`; igual `pop`. Más paréntesis es error.
-- `empty cola` o `empty(cola)` — expresión boola, `true` si la cola no tiene elementos.
+- `empty cola` o `empty(cola)`: expresión `bool`, `true` si la cola no tiene elementos.
 - La clave de una `ColaOrdenada` (su primera componente) es `int`, `double` o `text` y se
   compara como número o como texto (orden alfabético); declararla `bool` es error de
   compilación.
@@ -122,7 +123,7 @@ procedure nombre(p1, p2: modo tipo; p3: modo tipo; ...) {
   `procedure request(int id, tiempo; text nombre)`.
 - Una coma entre grupos es error de compilación.
 
-- **Modos de parámetro:** `in` (default — solo lectura), `out` (se copia al argumento del
+- **Modos de parámetro:** `in` (por defecto, solo lectura), `out` (se copia al argumento del
   llamador al retornar; el argumento debe ser una variable/elemento de arreglo, no una
   expresión).
 - Si el modo se omite: `procedure op(x: int)` equivale a `procedure op(x: in int)`.
@@ -134,15 +135,15 @@ procedure nombre(p1, p2: modo tipo; p3: modo tipo; ...) {
   local).
 - Un procedure no puede llamar a otro de su propio monitor. Puede llamar a otro monitor con
   **llamada cerrada**: conserva el suyo hasta que la llamada termina por completo
-  (ADR 0007).
+  ([ADR 0007](/decisiones/0007-llamadas-cerradas-entre-monitores)).
 
 ### 3.3 Operaciones sobre variables condición
 
 Solo válidas dentro de un procedure (con el monitor tomado):
 
-- `wait(cv);` — siempre demora; libera el monitor.
-- `signal(cv);` — despierta al primero de `cv` (no-op si está vacía); el que señaliza sigue.
-- `signal_all(cv);` — despierta a todos los de `cv`.
+- `wait(cv);`: siempre demora; libera el monitor.
+- `signal(cv);`: despierta al primero de `cv` (no-op si está vacía); el que señaliza sigue.
+- `signal_all(cv);`: despierta a todos los de `cv`.
 - Con arreglos: `wait(turno[id]); signal(turno[id]);`
 
 ---
@@ -177,7 +178,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` `Escritorio[i].procedure(arg);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
 | Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `push(c, (e1, e2));` `pop(c, x);` `pop(c, x, y);` `pop(c, (x, y));` |
-| Salida | `write(e);` `write(e1, e2, ...);` — concatena y escribe una línea |
+| Salida | `write(e);` `write(e1, e2, ...);` (concatena y escribe una línea) |
 | Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
 | Mientras | `while (cond) { ... }` |
 | For (contador) | `for (int i = 0; i < n; i++) { ... }` |
@@ -221,13 +222,13 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
   - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada.
   - Al liberarse el monitor (retorno, `wait`, llamada a otro monitor o error), un proceso de
     la cola de entrada, elegido al azar, lo toma en ese mismo instante y el resto sigue
-    esperando. No se respeta el orden de llegada (ADR 0005 y 0006).
+    esperando. No se respeta el orden de llegada ([ADR 0005](/decisiones/0005-traspaso-del-monitor-a-la-cola-de-entrada) y [ADR 0006](/decisiones/0006-entrada-al-monitor-sin-orden-de-llegada)).
   - Al retornar del procedure: se copian los `out` y se libera el monitor.
   - Llamada desde un procedure de A a un procedure de B: el proceso conserva A, entra a B
     (o espera en su cola de entrada) y, si hace `wait` en B, libera solo B. Al retornar
     libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
     llama a A) es error de ejecución.
-- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver `monitores.md`).
+- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [Variables condición](/monitores/variables-condicion)).
 - **`delay(s)`:** el proceso queda demorado `s` segundos de tiempo real y conserva los
   monitores que tenga tomados. El núcleo no lee el reloj: la interfaz le informa la hora en
   cada paso. Un proceso en `delay` no cuenta para el interbloqueo.

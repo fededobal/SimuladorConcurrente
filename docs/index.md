@@ -38,8 +38,8 @@ El lenguaje es un pseudocódigo tipado de estilo C: monitores con variables perm
 variables condición, procesos y familias de procesos, los tipos `int`, `double`, `bool` y
 `text`, arreglos, colas comunes y ordenadas declaradas con los tipos de sus componentes, y
 las instrucciones `if`, `while`, `for`, `wait`, `signal`, `signal_all`, `write` y `delay`.
-Está descripto en la [referencia del lenguaje](/referencia_lenguaje) y, con la gramática
-formal, en la [especificación](/sintaxis_especificacion).
+Está descripto en la sección [Lenguaje](/lenguaje/) y, con la gramática formal, en la
+[especificación](/lenguaje/especificacion).
 
 ::: tip Simplificaciones
 El simulador no reproduce un sistema operativo ni un lenguaje real. Un instante es un paso
@@ -52,9 +52,11 @@ monitores, están registradas en las [decisiones de diseño](/decisiones/0001-mo
 ## Cómo se usa esta documentación
 
 La sección Monitores presenta la teoría de la cátedra y aclara, punto por punto, qué
-implementa el simulador. La sección Lenguaje describe todo lo que se puede escribir. Las
-decisiones de diseño explican por qué el simulador se comporta como se comporta en los casos
-en que la teoría admite más de una lectura.
+implementa el simulador. La sección Lenguaje describe todo lo que se puede escribir, con una
+página por instrucción. La sección Simulador explica cada panel de la pantalla y cómo leerlo.
+En Referencia están los programas de ejemplo, las notas de versión y las decisiones de
+diseño, que explican por qué el simulador se comporta como se comporta en los casos en que la
+teoría admite más de una lectura.
 
 ## Créditos
 

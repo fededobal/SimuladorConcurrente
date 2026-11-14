@@ -7,7 +7,7 @@
 ## Contexto
 El ADR 0005 resolvió dos cosas a la vez: que el monitor no quede un instante libre con
 procesos esperándolo, y que al liberarse entre el primero de la cola de entrada. La segunda
-parte se justificó con la teoría (`docs/monitores.md`, sección 1.1), que no habla del orden.
+parte se justificó con la teoría (`docs/monitores/index.md`, Exclusión mutua implícita), que no habla del orden.
 
 La explicación práctica de monitores de la cátedra (Explicación 3, diapositiva 2) sí lo
 trata, y dice lo contrario: "Cuando el monitor está libre TODOS los procesos que están

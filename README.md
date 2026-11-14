@@ -61,9 +61,9 @@ process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x)
 
 ## Documentación
 
-- [Referencia del lenguaje](docs/referencia_lenguaje.md): qué se puede escribir, con ejemplos.
-- [Especificación](docs/sintaxis_especificacion.md): gramática (EBNF) y semántica.
-- [Monitores](docs/monitores.md): la teoría de la cátedra y cómo la implementa el simulador.
+- [Lenguaje](docs/lenguaje/index.md): qué se puede escribir, con una página por instrucción y ejemplos.
+- [Especificación](docs/lenguaje/especificacion.md): gramática (EBNF) y semántica.
+- [Monitores](docs/monitores/index.md): la teoría de la cátedra y cómo la implementa el simulador.
 - [Decisiones de diseño](docs/decisiones/): ADR del proyecto.
 
 ## Cómo correrlo
