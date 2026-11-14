@@ -107,6 +107,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Mensajes de nombre repetido: "Ya existe un parámetro llamado" (antes "llamada"), y al declarar una cond con el nombre de una variable permanente el error dice que la que ya existe es la variable, no que la cond está duplicada. (Federico Dobal, 2026-11-13)
 - El límite de 6 procesos de "En wait" cuenta el total de procesos dormidos; antes se aplicaba a cada variable condición y, con un arreglo de cond (una por proceso), la lista salía entera. (Federico Dobal, 2026-11-13)
 - El editor resalta delay como palabra reservada. (Federico Dobal, 2026-11-13)
 - Los mensajes de error llevan tildes ("Línea", "División por cero", "Índice", "tamaño",

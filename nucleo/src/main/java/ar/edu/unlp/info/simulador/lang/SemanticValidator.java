@@ -57,17 +57,31 @@ public final class SemanticValidator {
             if (!topLevel.add(m.name())) {
                 throw new CompilationException("Ya existe un monitor o un process llamado " + m.name(), m.line());
             }
-            Set<String> vars = new HashSet<>();
+            Map<String, VarDecl> vars = new HashMap<>();
             Map<String, Boolean> conds = new HashMap<>();
             Map<String, ProcedureDef> procs = new HashMap<>();
             for (VarDecl v : m.permanentVars()) {
-                if (!vars.add(v.name())) {
+                if (vars.put(v.name(), v) != null) {
                     throw new CompilationException("Variable permanente duplicada '" + v.name()
                             + "' en el monitor " + m.name(), v.line());
                 }
             }
             for (CondDecl c : m.conds()) {
-                if (vars.contains(c.name()) || conds.put(c.name(), c.isArray()) != null) {
+                // La variable y la cond comparten el espacio de nombres del monitor. El AST las
+                // guarda por separado: la linea dice cual se declaro primero, y el error se
+                // informa en la segunda, que es la que hay que renombrar.
+                VarDecl v = vars.get(c.name());
+                if (v != null && v.line() <= c.line()) {
+                    throw new CompilationException("Ya existe una variable permanente llamada '"
+                            + c.name() + "' en el monitor " + m.name() + ": la cond necesita otro nombre",
+                            c.line());
+                }
+                if (v != null) {
+                    throw new CompilationException("Ya existe una variable condición llamada '"
+                            + c.name() + "' en el monitor " + m.name()
+                            + ": la variable necesita otro nombre", v.line());
+                }
+                if (conds.put(c.name(), c.isArray()) != null) {
                     throw new CompilationException("Nombre de cond duplicado '" + c.name()
                             + "' en el monitor " + m.name(), c.line());
                 }

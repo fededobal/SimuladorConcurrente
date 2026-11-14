@@ -68,8 +68,11 @@ final class Scope {
     void declare(String name, Symbol sym, int line) {
         Symbol previous = lookup(name);
         if (previous != null) {
-            throw new CompilationException("Ya existe " + previous.origin() + " llamada '" + name
-                    + "': elegí otro nombre para no taparla", line);
+            // "una variable local llamada" / "un parámetro llamado": concuerda con el origen
+            boolean femenino = previous.origin().startsWith("una ");
+            throw new CompilationException("Ya existe " + previous.origin()
+                    + (femenino ? " llamada '" : " llamado '") + name
+                    + "': elegí otro nombre para no " + (femenino ? "taparla" : "taparlo"), line);
         }
         symbols.put(name, sym);
     }

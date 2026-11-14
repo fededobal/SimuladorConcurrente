@@ -122,6 +122,22 @@ class CompilerTest {
                 """));
     }
 
+    /** Los mensajes de nombre repetido concuerdan con lo que se repite. */
+    @Test
+    void mensajesDeNombreRepetidoConcuerdan() {
+        assertTrue(errorDe("""
+                monitor M { procedure f(a: in int) { int a = 0; } } process P { M.f(1); }
+                """).contains("un parámetro llamado 'a': elegí otro nombre para no taparlo"));
+        assertTrue(errorDe("process P { int x = 0; int x = 1; }")
+                .contains("una variable local llamada 'x': elegí otro nombre para no taparla"));
+        // una cond y una variable con el mismo nombre: el error nombra a la que se declaro
+        // primero y se informa en la segunda
+        assertTrue(errorDe("monitor M { int c;\n cond c; } process P { skip; }")
+                .startsWith("Línea 2: Ya existe una variable permanente llamada 'c'"));
+        assertTrue(errorDe("monitor M { cond c;\n int c; } process P { skip; }")
+                .startsWith("Línea 2: Ya existe una variable condición llamada 'c'"));
+    }
+
     /** Una cola sin tipos ya no compila, y el mensaje dice como escribirla. */
     @Test
     void rechazaColaSinTipos() {
