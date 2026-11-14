@@ -57,6 +57,7 @@ export default defineConfig({
       {
         text: 'Introducción',
         items: [
+          { text: 'Índice', link: '/indice' },
           { text: '¿Qué es el simulador?', link: '/' },
         ],
       },

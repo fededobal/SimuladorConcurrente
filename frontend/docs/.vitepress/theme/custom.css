@@ -34,19 +34,48 @@
 /* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
 .vp-doc div[class*='language-'] code { font-size: 13.5px; }
 
-/* botón para volver al simulador, en el lugar del título de la barra, con recuadro */
-.volver-simulador {
+/* controles a la izquierda de la barra: ocultar el índice y volver al simulador */
+.controles-barra { display: inline-flex; align-items: center; gap: 8px; }
+.volver-simulador, .alternar-barra {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 0 12px;
   height: 32px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
+  background: transparent;
   font-size: 13px;
   font-weight: 500;
   color: var(--vp-c-text-1);
   white-space: nowrap;
   text-decoration: none;
+  cursor: pointer;
 }
-.volver-simulador:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
+.volver-simulador { padding: 0 12px; }
+.alternar-barra { width: 32px; padding: 0; font-size: 15px; }
+.volver-simulador:hover, .alternar-barra:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
+
+/* barra lateral oculta: el contenido ocupa todo el ancho y los controles de la barra
+   conservan su lugar, con el buscador a continuación */
+.barra-oculta .VPSidebar { display: none; }
+.barra-oculta .VPContent.has-sidebar { padding-left: 0; }
+.barra-oculta .VPDoc.has-sidebar .container { margin: 0 auto; }
+.barra-oculta .VPNavBar.has-sidebar .title { width: auto; padding-right: 24px; }
+.barra-oculta .VPNavBar.has-sidebar .content { padding-left: 0; }
+.barra-oculta .VPNavBar.has-sidebar .divider { padding-left: 0; }
+@media (min-width: 960px) {
+  .barra-oculta .VPNavBar.has-sidebar .wrapper { padding: 0 32px; }
+  .barra-oculta .VPNavBar.has-sidebar .container { display: flex; align-items: center; }
+  .barra-oculta .VPNavBar.has-sidebar .title { position: static; flex-shrink: 0; }
+  .barra-oculta .VPNavBar.has-sidebar .content { flex: 1; min-width: 0; }
+}
+
+/* buscador más ancho */
+@media (min-width: 768px) {
+  .VPNavBarSearch .DocSearch-Button { width: 360px; justify-content: flex-start; }
+  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Keys { margin-left: auto; }
+}
+@media (min-width: 1280px) {
+  .VPNavBarSearch .DocSearch-Button { width: 480px; }
+}
