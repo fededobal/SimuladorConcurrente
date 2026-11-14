@@ -37,7 +37,7 @@
   /* linea de tiempo: iguales a las constantes de Timeline.tsx */
   --tl-row-h: 22px;
   --tl-ruler-h: 18px;
-  --tl-name-w: 120px;
+  --tl-name-w: 140px;
   --tl-cell-w: 16px;
 
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -217,6 +217,11 @@ button { cursor: pointer; }
 }
 .panel-head .titulo { white-space: nowrap; }
 .panel-head .titulo[title] { cursor: help; }
+
+.panel-acciones { margin-left: auto; display: flex; gap: 2px; flex-shrink: 0; }
+.panel-acciones .amp { margin-left: 0; }
+.amp:disabled { opacity: 0.35; cursor: default; }
+.amp:disabled:hover { background: transparent; border-color: transparent; color: var(--dim); }
 
 .amp {
   margin-left: auto;
@@ -729,6 +734,17 @@ button { cursor: pointer; }
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   pointer-events: none;
 }
+/* columna bajo el mouse; fijada con un clic, con los bordes marcados */
+.tl-columna {
+  position: absolute;
+  bottom: 0;
+  width: var(--tl-cell-w);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  pointer-events: none;
+}
+.tl-columna.fija { border-color: var(--accent); }
 
 .tl-fila {
   position: absolute;
@@ -736,9 +752,9 @@ button { cursor: pointer; }
   right: 0;
   height: var(--tl-row-h);
   border-bottom: 1px solid var(--line-soft);
-  /* al reordenarse, cada fila se desliza a su lugar nuevo */
-  transition: top 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* corte entre familias de procesos */
+.tl-fila.tl-corte { border-bottom: 1px solid var(--line-strong); }
 .tl-nombre {
   position: sticky;
   left: 0;
@@ -747,6 +763,7 @@ button { cursor: pointer; }
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 6px;
   padding: 0 12px;
   background: var(--panel);
   border-right: 1px solid var(--line);
@@ -757,48 +774,88 @@ button { cursor: pointer; }
   text-overflow: ellipsis;
 }
 
+/* Carril de un monitor: fondo gris, mas alto, con una etiqueta "monitor" junto al nombre y
+   un borde fuerte debajo del ultimo. Lo que se dibuja no es un estado sino quien lo tiene. */
+.tl-fila.tl-mon { background: var(--panel-soft); border-bottom: 1px solid var(--line); }
+.tl-fila.tl-mon.ultimo { border-bottom: 2px solid var(--line-strong); }
+.tl-mon .tl-nombre { background: var(--panel-soft); color: var(--text); font-weight: 600; }
+.tl-tag {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--dim);
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 0 4px;
+  line-height: 1.4;
+}
+.tl-tramo.tl-dueno { color: #fff; font-weight: 600; }
+.tl-tramo.tl-libre {
+  top: 6px;
+  bottom: 6px;
+  border: 1px dashed var(--line-strong);
+  color: var(--dimmer);
+  background: transparent;
+}
+
 .tl-tramo {
   position: absolute;
   top: 4px;
   bottom: 4px;
   border-radius: 2px;
-}
-
-/* muestras de la leyenda y tramos: mismo relleno, mas intenso que la franja del editor */
-.tl-tramo.st-running-monitor, .tl-tramo.st-running-process { background: var(--st); }
-/* en la leyenda no hay un proceso: la muestra combina colores de la paleta */
-.tl-muestra.st-running-process, .tl-muestra.st-running-monitor {
-  background: linear-gradient(90deg, #4f6d9e 0 33%, #a05f92 33% 66%, #2f6b78 66%);
-}
-
-/* "M" de cada instante ejecutado dentro de un monitor */
-.tl-tramo.st-running-monitor { display: flex; }
-.tl-m, .tl-muestra.st-running-monitor {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 5px;
   font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
-.tl-m { width: var(--tl-cell-w); flex-shrink: 0; }
-/* rayado suave: el color al 80 % y huecos casi blancos */
+
+/* ejecutando: fuera del monitor el color claro; adentro el color pleno con el nombre del
+   monitor. En la leyenda no hay un proceso: las muestras usan un color de la paleta. */
+.tl-tramo.st-running-process { background: color-mix(in srgb, var(--st) 38%, #fff); color: var(--text); }
+.tl-tramo.st-running-monitor { background: var(--st); color: #fff; font-weight: 600; }
+.tl-muestra.st-running-process { background: color-mix(in srgb, #4f6d9e 38%, #fff); }
+.tl-muestra.st-running-monitor { background: #4f6d9e; }
+
+/* esperas en un tono de fondo: lo que resalta es la ejecucion; el rotulo dice la causa */
 .tl-tramo.st-competing, .tl-muestra.st-competing,
 .tl-tramo.st-waiting, .tl-muestra.st-waiting {
   background: repeating-linear-gradient(135deg,
-    color-mix(in srgb, var(--st) 80%, transparent) 0 3px,
-    color-mix(in srgb, var(--st) 22%, transparent) 3px 6px);
+    color-mix(in srgb, var(--st) 34%, transparent) 0 3px,
+    color-mix(in srgb, var(--st) 9%, transparent) 3px 6px);
+  color: var(--dim);
 }
 /* en delay: puntos sobre un fondo tenue */
 .tl-tramo.st-delayed, .tl-muestra.st-delayed {
   background: radial-gradient(circle, var(--st) 1.5px, transparent 2px) 0 50% / 6px 6px repeat-x,
-    color-mix(in srgb, var(--st) 20%, transparent);
+    color-mix(in srgb, var(--st) 18%, transparent);
+  color: var(--dim);
 }
 /* sin turno: barra fina, se lee como "presente pero sin avanzar" */
-.tl-tramo.st-ready { top: 9px; bottom: 9px; background: var(--st); }
+.tl-tramo.st-ready { top: 9px; bottom: 9px; padding: 0; background: var(--st); }
 .tl-muestra.st-ready { height: 4px; background: var(--st); }
+
+/* tarjeta del instante: que paso, en palabras */
+.tl-tarjeta {
+  position: absolute;
+  z-index: 4;
+  width: 300px;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(31, 41, 51, 0.12);
+  font-family: var(--sans);
+  font-size: 11.5px;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.tl-tarjeta b { display: block; margin-bottom: 2px; }
+.tl-tarjeta .quien { font-family: var(--mono); font-size: 11px; }
+.tl-tarjeta .nadie { color: var(--dimmer); }
 
 /* ------------------------------------------------------------------ pantallas angostas */
 

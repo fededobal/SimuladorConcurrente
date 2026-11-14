@@ -1,8 +1,11 @@
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { ZoomIn, ZoomOut } from 'lucide-react';
 import { ExpandButton } from './ExpandButton';
+import { MAX_VISIBLES } from './MasMenos';
 import { STATE_CLASS, STATE_HINT, STATE_LABEL, type VisibleState } from '../processStates';
-import type { Timeline as TimelineData } from '../timeline';
-import type { ProcessView } from '../types';
+import { shortName } from '../monitorDiagram';
+import { familyOf, type Timeline as TimelineData, type TimelineColumn } from '../timeline';
+import type { LogEntry, ProcessView } from '../types';
 
 interface Props {
   timeline: TimelineData;
@@ -13,12 +16,19 @@ interface Props {
 }
 
 // Iguales a --tl-* de index.css: posicionan las filas y los tramos, que son absolutos.
-const CELL_W = 16;
 const ROW_H = 22;
+/** El carril de un monitor es un poco mas alto que una fila de proceso. */
+const MON_H = 26;
 const RULER_H = 18;
-const NAME_W = 120;
+const NAME_W = 140;
 /** Aire debajo de la ultima fila, para que no quede pegada al borde de la ventana. */
 const BOTTOM_PAD = 14;
+/** Anchos de columna (px) que recorre el zoom; el del medio es el de arranque. */
+const CELL_WIDTHS = [8, 12, 16, 22, 30] as const;
+const DEFAULT_CELL = 2;
+/** Ancho aproximado de un caracter del rotulo de un tramo (9.5px, tipografia sans). */
+const ANCHO_CHAR = 5.4;
+const ANCHO_TARJETA = 300;
 
 /** Cada cuantos instantes se rotula la regla. */
 const RULER_EVERY = 5;
@@ -28,42 +38,87 @@ const LEGEND: readonly VisibleState[] = [
   'RUNNING_PROCESS', 'RUNNING_MONITOR', 'COMPETING', 'WAITING', 'DELAYED', 'READY',
 ];
 
-/** Una "M" por instante: el tramo junta varios instantes, pero cada uno fue en el monitor. */
-const monitorMarks = (n: number) =>
-  Array.from({ length: n }, (_, i) => <span key={i} className="tl-m">M</span>);
-
-/** Tramo de instantes seguidos en el mismo estado: se dibuja como una sola barra. */
+/** Tramo de instantes seguidos en el mismo estado y lugar: se dibuja como una sola barra. */
 interface Segment {
   state: VisibleState;
+  where: string | null;
   from: number;
   length: number;
 }
 
-function segmentsOf(id: number, timeline: TimelineData): Segment[] {
+function segmentsOf(id: number, columns: readonly TimelineColumn[]): Segment[] {
   const out: Segment[] = [];
-  timeline.columns.forEach((col, i) => {
+  columns.forEach((col, i) => {
     const state = col.states[id];
     if (state === undefined || state === 'TERMINATED') return;
+    const where = col.where[id] ?? null;
     const prev = out[out.length - 1];
-    if (prev && prev.state === state && prev.from + prev.length === i) prev.length++;
-    else out.push({ state, from: i, length: 1 });
+    if (prev && prev.state === state && prev.where === where && prev.from + prev.length === i) {
+      prev.length++;
+    } else {
+      out.push({ state, where, from: i, length: 1 });
+    }
   });
   return out;
 }
 
+/** Tramos del carril de un monitor: quien lo tuvo en cada instante (null: libre). */
+interface OwnerSegment {
+  owner: number | null;
+  from: number;
+  length: number;
+}
+
+function ownerSegmentsOf(name: string, columns: readonly TimelineColumn[]): OwnerSegment[] {
+  const out: OwnerSegment[] = [];
+  columns.forEach((col, i) => {
+    const owner = col.owners[name] ?? null;
+    const prev = out[out.length - 1];
+    if (prev && prev.owner === owner) prev.length++;
+    else out.push({ owner, from: i, length: 1 });
+  });
+  return out;
+}
+
+/** Rotulo largo de un tramo: la causa de la espera o el monitor en el que ejecuta. */
+function labelOf(s: Segment): string {
+  switch (s.state) {
+    case 'RUNNING_MONITOR': return s.where ?? '';
+    case 'COMPETING': return s.where ? `espera entrar a ${s.where}` : 'espera entrar';
+    case 'WAITING': return s.where ? `wait(${s.where})` : 'wait';
+    case 'DELAYED': return 'delay';
+    default: return '';
+  }
+}
+
+/** El texto que entra en un tramo de ese ancho: el largo, una abreviatura o nada. */
+function fits(text: string, width: number): boolean {
+  return width >= text.length * ANCHO_CHAR + 12;
+}
+
 /**
  * Linea de tiempo: una fila por proceso y una columna por instante, con el estado en que
- * quedo cada proceso. Las filas se reordenan en cada instante (los que avanzaron suben) y
- * se deslizan a su lugar nuevo en vez de saltar, para que se pueda seguir a cada proceso.
+ * quedo cada proceso. Arriba, un carril por monitor con quien lo tuvo en cada instante. Las
+ * filas no se mueven, asi se puede seguir a un proceso de punta a punta; al pasar el mouse
+ * por una columna, una tarjeta cuenta en palabras que paso en ese instante.
  */
 export function Timeline({ timeline, processes, expanded, onToggleExpand }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { columns, order } = timeline;
+  const { columns, order, monitors } = timeline;
+  const [cellIndex, setCellIndex] = useState(DEFAULT_CELL);
+  const cell = CELL_WIDTHS[cellIndex];
+  // columna bajo el mouse y columna fijada con un clic: la tarjeta muestra la fijada si hay
+  const [hover, setHover] = useState<number | null>(null);
+  const [pinned, setPinned] = useState<number | null>(null);
 
   const byId = useMemo(() => new Map(processes.map((p) => [p.id, p])), [processes]);
   const segments = useMemo(
-    () => new Map(order.map((id) => [id, segmentsOf(id, timeline)])),
-    [order, timeline],
+    () => new Map(order.map((id) => [id, segmentsOf(id, columns)])),
+    [order, columns],
+  );
+  const ownerSegments = useMemo(
+    () => new Map(monitors.map((m) => [m, ownerSegmentsOf(m, columns)])),
+    [monitors, columns],
   );
 
   // Seguir el ultimo instante, como la salida; salvo que el alumno se haya ido hacia atras
@@ -72,14 +127,28 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
   useLayoutEffect(() => {
     const el = scrollRef.current;
     if (el && siguiendo.current) el.scrollLeft = el.scrollWidth;
-  }, [columns.length]);
+  }, [columns.length, cell]);
   const onScroll = () => {
     const el = scrollRef.current;
-    if (el) siguiendo.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - CELL_W;
+    if (el) siguiendo.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
   };
 
-  const ancho = NAME_W + Math.max(columns.length, 1) * CELL_W + CELL_W;
-  const alto = RULER_H + order.length * ROW_H + BOTTOM_PAD;
+  const columnAt = (e: React.MouseEvent<HTMLDivElement>): number | null => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const i = Math.floor((e.clientX - rect.left - NAME_W) / cell);
+    return i >= 0 && i < columns.length ? i : null;
+  };
+
+  const monitorsH = monitors.length * MON_H;
+  const ancho = NAME_W + Math.max(columns.length, 1) * cell + cell;
+  const alto = RULER_H + monitorsH + order.length * ROW_H + BOTTOM_PAD;
+  const shown = pinned ?? hover;
+  // la tarjeta va a la derecha de la columna; si no entra en lo visible, a la izquierda
+  const visibleRight = (scrollRef.current?.scrollLeft ?? 0) + (scrollRef.current?.clientWidth ?? ancho);
+  const cardLeft = shown === null ? 0
+    : NAME_W + (shown + 1) * cell + 8 + ANCHO_TARJETA > visibleRight
+      ? Math.max(NAME_W, NAME_W + shown * cell - ANCHO_TARJETA - 8)
+      : NAME_W + (shown + 1) * cell + 8;
 
   return (
     <section className="timeline tarjeta" aria-label="Línea de tiempo">
@@ -88,25 +157,41 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
         <ul className="tl-leyenda">
           {LEGEND.map((s) => (
             <li key={s} title={STATE_HINT[s]}>
-              <span className={`tl-muestra ${STATE_CLASS[s]}`}>
-                {s === 'RUNNING_MONITOR' && 'M'}
-              </span>
+              <span className={`tl-muestra ${STATE_CLASS[s]}`} />
               {STATE_LABEL[s]}
             </li>
           ))}
         </ul>
-        <ExpandButton expanded={expanded} onClick={onToggleExpand} />
+        <div className="panel-acciones">
+          <button type="button" className="amp" onClick={() => setCellIndex((i) => Math.max(0, i - 1))}
+            disabled={cellIndex === 0} aria-label="Ver más instantes" title="Ver más instantes">
+            <ZoomOut size={14} />
+          </button>
+          <button type="button" className="amp"
+            onClick={() => setCellIndex((i) => Math.min(CELL_WIDTHS.length - 1, i + 1))}
+            disabled={cellIndex === CELL_WIDTHS.length - 1} aria-label="Ver menos instantes, más grandes"
+            title="Ver menos instantes, más grandes">
+            <ZoomIn size={14} />
+          </button>
+          <ExpandButton expanded={expanded} onClick={onToggleExpand} />
+        </div>
       </header>
 
       <div className="tl-scroll" ref={scrollRef} onScroll={onScroll}>
-        <div className="tl-plano" style={{ width: ancho, height: alto }}>
+        <div
+          className="tl-plano"
+          style={{ width: ancho, height: alto, ['--tl-cell-w' as string]: `${cell}px` }}
+          onMouseMove={(e) => setHover(columnAt(e))}
+          onMouseLeave={() => setHover(null)}
+          onClick={(e) => { const i = columnAt(e); setPinned((p) => (i === null || p === i ? null : i)); }}
+        >
           <div className="tl-regla">
             <div className="tl-esquina">instante</div>
             {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || i === columns.length - 1) && (
               <span
                 key={c.instant}
                 className={i === columns.length - 1 ? 'actual' : undefined}
-                style={{ left: NAME_W + i * CELL_W }}
+                style={{ left: NAME_W + i * cell }}
               >
                 {c.instant}
               </span>
@@ -116,36 +201,113 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
           {columns.length > 0 && (
             <div
               className="tl-cursor"
-              style={{ left: NAME_W + (columns.length - 1) * CELL_W, top: RULER_H }}
+              style={{ left: NAME_W + (columns.length - 1) * cell, top: RULER_H }}
             />
           )}
+          {shown !== null && (
+            <div className={`tl-columna${pinned !== null ? ' fija' : ''}`}
+              style={{ left: NAME_W + shown * cell, top: RULER_H }} />
+          )}
+
+          {/* carriles de los monitores: quien tuvo cada uno en cada instante */}
+          {monitors.map((name, i) => (
+            <div
+              key={name}
+              className={`tl-fila tl-mon${i === monitors.length - 1 ? ' ultimo' : ''}`}
+              style={{ top: RULER_H + i * MON_H, height: MON_H }}
+              title={`${name}: quién tiene el monitor en cada instante`}
+            >
+              <div className="tl-nombre">
+                {name}
+                <span className="tl-tag">monitor</span>
+              </div>
+              {ownerSegments.get(name)?.map((s) => {
+                const owner = s.owner === null ? undefined : byId.get(s.owner);
+                const width = s.length * cell;
+                return (
+                  <div
+                    key={s.from}
+                    className={`tl-tramo ${owner ? 'tl-dueno' : 'tl-libre'}`}
+                    style={{ left: NAME_W + s.from * cell, width, background: owner?.color }}
+                    title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
+                  >
+                    {owner
+                      ? (fits(owner.name, width) ? owner.name
+                        : fits(shortName(owner.name), width) ? shortName(owner.name) : '')
+                      : (fits('libre', width) ? 'libre' : '')}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
 
           {order.map((id, fila) => {
             const p = byId.get(id);
             if (!p) return null;
+            const next = byId.get(order[fila + 1] ?? -1);
+            const corte = next !== undefined && familyOf(next.name) !== familyOf(p.name);
             const ultimo = columns[columns.length - 1]?.states[id];
             return (
               <div
                 key={id}
-                className="tl-fila"
-                style={{ top: RULER_H + fila * ROW_H, ['--st-proceso' as string]: p.color }}
+                className={`tl-fila${corte ? ' tl-corte' : ''}`}
+                style={{ top: RULER_H + monitorsH + fila * ROW_H, ['--st-proceso' as string]: p.color }}
                 title={ultimo ? `${p.name}: ${STATE_HINT[ultimo]}` : p.name}
               >
                 <div className="tl-nombre" style={{ color: p.color }}>{p.name}</div>
-                {segments.get(id)?.map((s) => (
-                  <div
-                    key={s.from}
-                    className={`tl-tramo ${STATE_CLASS[s.state]}`}
-                    style={{ left: NAME_W + s.from * CELL_W, width: s.length * CELL_W }}
-                  >
-                    {s.state === 'RUNNING_MONITOR' && monitorMarks(s.length)}
-                  </div>
-                ))}
+                {segments.get(id)?.map((s) => {
+                  const width = s.length * cell;
+                  const label = labelOf(s);
+                  const text = fits(label, width) ? label
+                    : s.state === 'RUNNING_MONITOR' && width >= 2 * cell ? 'M' : '';
+                  return (
+                    <div
+                      key={s.from}
+                      className={`tl-tramo ${STATE_CLASS[s.state]}`}
+                      style={{ left: NAME_W + s.from * cell, width }}
+                      title={label || undefined}
+                    >
+                      {text}
+                    </div>
+                  );
+                })}
               </div>
             );
           })}
+
+          {shown !== null && columns[shown] && (
+            <InstantCard column={columns[shown]} left={cardLeft} top={RULER_H + 6} />
+          )}
         </div>
       </div>
     </section>
+  );
+}
+
+/** Lo que paso en un instante, en palabras: los eventos del paso, con el proceso en su color. */
+function InstantCard({ column, left, top }: { column: TimelineColumn; left: number; top: number }) {
+  const events = column.events;
+  const visibles = events.slice(0, MAX_VISIBLES);
+  return (
+    <div className="tl-tarjeta" style={{ left, top }} role="status">
+      <b>Instante {column.instant}</b>
+      {events.length === 0 && <div className="nadie">Nadie avanzó en este instante.</div>}
+      {visibles.map((e) => <Evento key={e.id} e={e} />)}
+      {events.length > visibles.length && (
+        <div className="nadie">… y {events.length - visibles.length} más</div>
+      )}
+    </div>
+  );
+}
+
+/** Un evento del log, "Nombre: texto": el nombre con el color del proceso. */
+function Evento({ e }: { e: LogEntry }) {
+  const i = e.message.indexOf(': ');
+  if (e.processId === null || i < 0) return <div>{e.message}</div>;
+  return (
+    <div>
+      <span className="quien" style={{ color: e.processColor ?? undefined }}>{e.message.slice(0, i)}</span>
+      {' '}{e.message.slice(i + 2)}
+    </div>
   );
 }

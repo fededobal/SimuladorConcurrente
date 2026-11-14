@@ -100,7 +100,7 @@ export function useSimulation(initialCode: string) {
     try {
       const res = api.step(policyRef.current);
       setSnapshot(res.snapshot);
-      setTimeline((t) => appendInstant(t, res.snapshot));
+      setTimeline((t) => appendInstant(t, res.snapshot, res.entries));
       setWaiting(res.waiting);
       // esperar un delay no hace nada: se sigue mostrando lo ultimo que paso
       if (res.entries.length > 0) setEntries(res.entries);

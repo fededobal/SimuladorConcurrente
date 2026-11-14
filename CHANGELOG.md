@@ -16,6 +16,8 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Línea de tiempo: un carril por monitor, arriba de los procesos y con fondo gris, que muestra quién tuvo el monitor en cada instante (con su color y su nombre) y "libre" en los huecos: la exclusión mutua se ve de un vistazo. (Federico Dobal, 2026-11-13)
+- Línea de tiempo: al pasar el mouse por una columna, una tarjeta cuenta en palabras qué pasó en ese instante, con cada proceso en su color; un clic la deja fija. Dos botones de zoom cambian el ancho de las columnas. (Federico Dobal, 2026-11-13)
 - En el dibujo de cada monitor, tocar una zona (Compitiendo, En wait o En monitor) o un punto limita la lista de abajo a esa zona, completa y sin plegar, con la cantidad de procesos y un botón "ver todo" para volver; la zona elegida se marca con el borde oscuro. También con el teclado (Tab, Enter). (Federico Dobal, 2026-11-13)
 - Los paneles Salida, Línea de tiempo y Monitores se amplían con el botón de su encabezado (o con un clic sobre el dibujo de un monitor): el panel pasa a la derecha del editor a toda altura, así el alumno sigue viendo el código mientras mira el detalle, y se cierra con el mismo botón o con Escape. Todos los paneles se agrandan o achican arrastrando el borde que mira al editor, también con las flechas del teclado; al recargar la página vuelven a su tamaño y lugar iniciales. (Federico Dobal, 2026-11-13)
 - Cada monitor del panel muestra, bajo el título "Variables del monitor", sus variables permanentes dibujadas según su estructura: un escalar con su valor, un arreglo como celdas con su índice, una Cola o ColaOrdenada como casilleros con el frente a la izquierda, y un punto con el color del último proceso que escribió cada una. (Federico Dobal, 2026-11-13)
@@ -52,6 +54,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Línea de tiempo rediseñada para leerse mejor: las filas quedan fijas en el orden de declaración, con una línea entre familias, en vez de subir las que avanzaron; las esperas se dibujan en un tono de fondo y dicen su causa ("espera entrar a Corralon", "wait(esperaCli[3])"); dentro del monitor el tramo es liso, con el nombre del monitor una vez, en lugar de una "M" por instante; fuera del monitor, el mismo color más claro. (Federico Dobal, 2026-11-13)
 - Los paneles ya no recuerdan su tamaño entre recargas: al abrir la página, cada uno arranca en su tamaño y lugar iniciales. (Federico Dobal, 2026-11-13)
 - Pantalla en dos columnas: a la izquierda el editor con la línea de tiempo debajo, a la derecha el panel Monitores a toda altura. La salida deja de tener un lugar fijo: se abre con el botón "Salida" de la barra, que muestra cuántas líneas hay, y se cierra con el mismo botón o con Escape. (Federico Dobal, 2026-11-13)
 - En las listas de cada monitor, una flecha separa el rótulo (Compitiendo, En monitor, En wait) de los nombres de los procesos. (Federico Dobal, 2026-11-13)
