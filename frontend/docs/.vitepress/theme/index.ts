@@ -14,7 +14,9 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'nav-bar-title-after': () =>
+      // fuera del enlace del titulo (que el tema deja aunque no haya titulo): un enlace
+      // adentro de otro dejaba un area clicable vacia y una linea divisoria de mas
+      'nav-bar-content-before': () =>
         h('a', {
           class: 'volver-simulador',
           href: '/',

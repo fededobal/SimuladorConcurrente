@@ -34,11 +34,19 @@
 /* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
 .vp-doc div[class*='language-'] code { font-size: 13.5px; }
 
-/* botón para volver al simulador, en el lugar del título de la barra, con recuadro */
+/* sin titulo: el enlace vacio del titulo no ocupa lugar ni recibe clics */
+.VPNavBarTitle .title { display: none; }
+@media (min-width: 960px) {
+  .VPNavBar.has-sidebar .title { pointer-events: none; }
+}
+
+/* botón para volver al simulador, al inicio de la barra, con recuadro; en escritorio se
+   ubica sobre la columna de la barra lateral */
 .volver-simulador {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-right: auto;
   padding: 0 12px;
   height: 32px;
   border: 1px solid var(--vp-c-divider);
@@ -50,6 +58,28 @@
   text-decoration: none;
 }
 .volver-simulador:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
+@media (min-width: 960px) {
+  /* El area vacia del titulo no reserva ancho: el contenido de la barra arranca donde
+     arranca la barra lateral y el boton ocupa su columna, alineado con el texto de la
+     barra (32px de sangria). Las reglas valen en los dos cortes del tema (960 y 1440). */
+  .VPNavBar.has-sidebar .title { display: none; }
+  .VPNavBar.has-sidebar .content { padding-left: 0 !important; }
+  .VPNavBar.has-sidebar .content-body { justify-content: flex-start; padding-left: 32px; }
+  .VPNavBar.has-sidebar .volver-simulador {
+    width: calc(var(--vp-sidebar-width) - 64px);
+    margin-right: 32px;
+    justify-content: center;
+  }
+  .VPNavBar.has-sidebar .search { margin-left: 0; }
+}
+@media (min-width: 1440px) {
+  /* a partir de aca el tema centra la pagina: la barra lateral empieza mas a la derecha */
+  .VPNavBar.has-sidebar .content-body {
+    /* en vw: el 100% de content-body no es el ancho de la pagina */
+    padding-left: max(32px, calc((100vw - (var(--vp-layout-max-width) - 64px)) / 2));
+  }
+  .VPNavBar.has-sidebar .volver-simulador { width: calc(var(--vp-sidebar-width) - 64px); }
+}
 
 /* barra superior: fondo blanco translúcido y desenfocado, también arriba de todo */
 .VPNavBar, .VPNavBar .content-body, .VPNavBar:not(.has-sidebar):not(.home.top) {
