@@ -1,5 +1,7 @@
 import { defineComponent, h, onMounted, ref } from 'vue';
 import DefaultTheme from 'vitepress/theme';
+import type { Theme } from 'vitepress';
+import { instalarResaltadoDeBusqueda } from './resaltarBusqueda';
 import './custom.css';
 
 const CLAVE_BARRA = 'docs.barraLateralOculta';
@@ -57,4 +59,7 @@ export default {
       'nav-bar-title-after': () => h(Controles),
     });
   },
-};
+  enhanceApp({ router }) {
+    instalarResaltadoDeBusqueda(router);
+  },
+} satisfies Theme;

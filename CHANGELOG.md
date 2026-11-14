@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Documentación: al elegir una coincidencia del buscador, la palabra buscada queda resaltada en el artículo; el resaltado se quita con un clic en el texto, con Escape o al navegar. (Federico Dobal, 2026-11-14)
 - Documentación: página "Índice" al principio con todas las páginas y qué cubre cada una; botón para ocultar y mostrar la barra lateral (el navegador recuerda la elección); buscador más ancho. (Federico Dobal, 2026-11-14)
 - Botón "Documentación" en la barra del simulador, que abre el sitio de documentación. (Federico Dobal, 2026-11-13)
 - Sitio de documentación con VitePress, publicado junto con el simulador en /docs/: tema claro con el mismo acento, barra lateral, buscador (⌘K), índice "En esta página", navegación anterior/siguiente y enlace al simulador. Reúne los documentos existentes (teoría de monitores, conceptos de concurrencia, referencia del lenguaje, especificación EBNF y decisiones de diseño) y una portada nueva. Se levanta con `npm run docs:dev` en `frontend/`. (Federico Dobal, 2026-11-13)

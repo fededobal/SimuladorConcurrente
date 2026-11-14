@@ -79,3 +79,11 @@
 @media (min-width: 1280px) {
   .VPNavBarSearch .DocSearch-Button { width: 480px; }
 }
+
+/* la palabra buscada, resaltada en el artículo al llegar desde el buscador */
+mark.busqueda {
+  background: #fde68a;
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
