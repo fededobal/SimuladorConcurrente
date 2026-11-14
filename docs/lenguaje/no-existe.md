@@ -15,6 +15,3 @@ Fuera del alcance de esta versión, a propósito:
 - Arreglos o colas como parámetro de un procedure.
 - Arreglos multidimensionales.
 - Pasaje de mensajes, `send`/`receive`.
-
-La decisión de limitar el alcance a monitores está registrada en
-[ADR 0003](/decisiones/0003-alcance-solo-monitores).

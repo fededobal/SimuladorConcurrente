@@ -43,7 +43,7 @@ es: **podría firmarlo un profesional del área y defenderlo oralmente línea po
 | `docs/lenguaje/especificacion.md` | docente, desarrollador | cambia el lenguaje (EBNF y semántica) |
 | `docs/monitores/*.md` | alumno | la cátedra cambia la notación o la teoría |
 | `docs/simulador/*.md` | alumno, docente | cambia la interfaz |
-| `docs/referencia/ejemplos.md` | alumno | cambian los programas de `ejemplos/` |
+| `docs/ejemplos.md` | alumno | cambian los programas de `ejemplos/` |
 | `docs/decisiones/NNNN-*.md` | tribunal, futuros desarrolladores | cada decisión de arquitectura o alcance |
 | `CHANGELOG.md` | todos | cada commit (ver skill `commit`) |
 | `docs/pps/*` | cátedra de PPS | hitos de la PPS |

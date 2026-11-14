@@ -35,7 +35,12 @@ export default defineConfig({
   base: '/docs/',
   outDir: '../dist/docs',
   // documentos privados y material de la cátedra que no forman parte del sitio
-  srcExclude: ['informe-revision.md', 'verificacion-*.md', 'clases-materia/**', 'pps/**'],
+  // Fuera del sitio: documentos privados, material de la catedra, la teoria de monitores y
+  // las decisiones de diseño (quedan en docs/ para el nucleo y la PPS; el sitio es solo de uso)
+  srcExclude: [
+    'informe-revision.md', 'verificacion-*.md', 'clases-materia/**', 'pps/**',
+    'monitores/**', 'decisiones/**',
+  ],
   vite: {
     plugins: [resolverDesdeFrontend()],
     server: { fs: { allow: ['../..'] } },
@@ -55,15 +60,9 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Monitores',
+        text: 'Simulador',
         items: [
-          { text: 'Qué es un monitor', link: '/monitores/' },
-          { text: 'Variables condición', link: '/monitores/variables-condicion' },
-          { text: 'Llamadas entre monitores', link: '/monitores/llamadas-entre-monitores' },
-          { text: 'Diferencia con los semáforos', link: '/monitores/semaforos' },
-          { text: 'Ejemplos canónicos', link: '/monitores/ejemplos-canonicos' },
-          { text: 'Técnicas e interbloqueo', link: '/monitores/tecnicas' },
-          { text: 'Conceptos previos', link: '/monitores/conceptos-previos' },
+          { text: 'La pantalla', link: '/simulador/' },
         ],
       },
       {
@@ -97,29 +96,9 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Simulador',
+        text: 'Ejemplos',
         items: [
-          { text: 'La pantalla', link: '/simulador/' },
-        ],
-      },
-      {
-        text: 'Referencia',
-        items: [
-          { text: 'Programas de ejemplo', link: '/referencia/ejemplos' },
-          { text: 'Notas de versión', link: '/referencia/notas-de-version' },
-          {
-            text: 'Decisiones de diseño',
-            collapsed: true,
-            items: [
-              { text: '0001. Motor en el navegador', link: '/decisiones/0001-motor-en-el-navegador' },
-              { text: '0002. Núcleo extensible', link: '/decisiones/0002-nucleo-extensible-por-conceptos' },
-              { text: '0003. Alcance: solo monitores', link: '/decisiones/0003-alcance-solo-monitores' },
-              { text: '0004. Llamadas abiertas', link: '/decisiones/0004-llamadas-abiertas-entre-monitores' },
-              { text: '0005. Traspaso del monitor', link: '/decisiones/0005-traspaso-del-monitor-a-la-cola-de-entrada' },
-              { text: '0006. Entrada sin orden de llegada', link: '/decisiones/0006-entrada-al-monitor-sin-orden-de-llegada' },
-              { text: '0007. Llamadas cerradas', link: '/decisiones/0007-llamadas-cerradas-entre-monitores' },
-            ],
-          },
+          { text: 'Programas de ejemplo', link: '/ejemplos' },
         ],
       },
     ],

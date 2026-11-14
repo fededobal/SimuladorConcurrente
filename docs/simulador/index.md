@@ -18,7 +18,7 @@ tamaño inicial.
   entra al turno con una probabilidad del 80 % y al menos uno avanza; unos van más rápido
   que otros, como en la realidad. *En ronda*: avanzan todos los procesos listos, por turno.
   Se puede cambiar durante la ejecución.
-- **Ejemplos**: carga uno de los [programas de ejemplo](/referencia/ejemplos). Si el editor
+- **Ejemplos**: carga uno de los [programas de ejemplo](/ejemplos). Si el editor
   tiene un programa propio, pide confirmación antes de reemplazarlo.
 - **Salida**: abre la pantalla de salida con lo que escriben los procesos con `write`. El
   número al lado es la cantidad de líneas.

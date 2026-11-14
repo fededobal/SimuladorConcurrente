@@ -16,7 +16,12 @@ re-evalúa con `while`, no con `if`.
 Las tres son sentencias y ocupan un paso del planificador. Un `signal` sobre una cola vacía
 no deja ningún rastro: si el `signal` puede llegar antes que el `wait`, el estado que
 espera el otro proceso tiene que guardarse en una variable permanente, como hace el ejemplo
-[Guardia](/referencia/ejemplos#guardia-colaordenada-con-tuplas) con `atendido[id]`.
+[Guardia](/ejemplos#guardia-colaordenada-con-tuplas) con `atendido[id]`.
 
 Usarlas fuera de un procedure, o en el código de inicialización del monitor, es error de
-compilación. La teoría está en [Variables condición](/monitores/variables-condicion).
+compilación.
+
+Con *signal and continue*, el proceso despertado no entra de inmediato: pasa a la cola de
+entrada y compite con los demás. Entre el `signal` y su reingreso, otro proceso pudo entrar
+y cambiar el estado; por eso la condición se vuelve a evaluar en un `while`. El simulador no
+implementa *signal and wait* ni el `wait` con prioridad.

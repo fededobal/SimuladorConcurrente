@@ -2,8 +2,8 @@
 
 Define el lenguaje que acepta el núcleo del simulador (lexer, parser y máquina virtual,
 implementados en Java). Es un pseudocódigo tipado, de estilo C, para la enseñanza de
-monitores (memoria compartida, disciplina *signal and continue*). La teoría está en
-[Monitores](/monitores/); la descripción para el alumno, en el resto de esta sección.
+monitores (memoria compartida, disciplina *signal and continue*). La descripción para el
+alumno está en el resto de esta sección.
 
 ---
 
@@ -135,7 +135,7 @@ procedure nombre(p1, p2: modo tipo; p3: modo tipo; ...) {
   local).
 - Un procedure no puede llamar a otro de su propio monitor. Puede llamar a otro monitor con
   **llamada cerrada**: conserva el suyo hasta que la llamada termina por completo
-  ([ADR 0007](/decisiones/0007-llamadas-cerradas-entre-monitores)).
+  (llamada cerrada).
 
 ### 3.3 Operaciones sobre variables condición
 
@@ -222,13 +222,13 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
   - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada.
   - Al liberarse el monitor (retorno, `wait`, llamada a otro monitor o error), un proceso de
     la cola de entrada, elegido al azar, lo toma en ese mismo instante y el resto sigue
-    esperando. No se respeta el orden de llegada ([ADR 0005](/decisiones/0005-traspaso-del-monitor-a-la-cola-de-entrada) y [ADR 0006](/decisiones/0006-entrada-al-monitor-sin-orden-de-llegada)).
+    esperando. No se respeta el orden de llegada.
   - Al retornar del procedure: se copian los `out` y se libera el monitor.
   - Llamada desde un procedure de A a un procedure de B: el proceso conserva A, entra a B
     (o espera en su cola de entrada) y, si hace `wait` en B, libera solo B. Al retornar
     libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
     llama a A) es error de ejecución.
-- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [Variables condición](/monitores/variables-condicion)).
+- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [`wait`, `signal` y `signal_all`](./instrucciones/wait-signal)).
 - **`delay(s)`:** el proceso queda demorado `s` segundos de tiempo real y conserva los
   monitores que tenga tomados. El núcleo no lee el reloj: la interfaz le informa la hora en
   cada paso. Un proceso en `delay` no cuenta para el interbloqueo.

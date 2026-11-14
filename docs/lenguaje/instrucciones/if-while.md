@@ -18,4 +18,4 @@ la primera sentencia del cuerpo (o con la que sigue al `if`, si la condición es
 En un monitor, la condición de espera se escribe con `while` y no con `if`: con la
 disciplina *signal and continue*, entre el `signal` y el momento en que el proceso
 despertado vuelve a entrar, otro proceso pudo cambiar el estado. Ver
-[Variables condición](/monitores/variables-condicion).
+[`wait`, `signal` y `signal_all`](./wait-signal).

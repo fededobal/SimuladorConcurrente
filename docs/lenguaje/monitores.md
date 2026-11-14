@@ -76,4 +76,6 @@ procedure request(int id, tiempo; text nombre) { ... }  // estilo C: siempre in
 - No hay valor de retorno; los resultados salen por `out`.
 - Un procedure no puede llamar a otro de su propio monitor (error de compilación). Sí puede
   llamar a otro monitor, y conserva el suyo hasta que esa llamada termina, aunque haga
-  `wait` en el otro (ver [Llamadas entre monitores](/monitores/llamadas-entre-monitores)).
+  `wait` en el otro: mientras tanto nadie más entra al primero. Si el proceso espera en el
+  segundo algo que solo puede hacer otro proceso que necesita entrar al primero, nadie
+  avanza y el simulador informa el interbloqueo con los monitores que retiene cada uno.

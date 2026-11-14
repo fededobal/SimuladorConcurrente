@@ -90,5 +90,5 @@ pop(c, p, d);          // p=1, d="primero"
   compilación.
 - `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
-El programa de ejemplo [Guardia](/referencia/ejemplos#guardia-colaordenada-con-tuplas) usa
+El programa de ejemplo [Guardia](/ejemplos#guardia-colaordenada-con-tuplas) usa
 una `ColaOrdenada` de tuplas (gravedad, id).
