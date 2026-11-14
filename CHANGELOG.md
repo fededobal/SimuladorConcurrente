@@ -184,6 +184,7 @@ Reglas:
   siempre y un ejemplo sin ella perdía una línea de código. (Federico Dobal, 2026-09-23)
 
 ### Eliminado
+- Documentación: el botón para ocultar la barra lateral; la barra queda fija. (Federico Dobal, 2026-11-14)
 - Quitar el texto de ayuda del panel de salida cuando todavía no hay nada escrito.
   (Federico Dobal, 2026-09-21)
 - Quitar de la barra la semilla visible y el campo para fijarla, agregados en esta misma

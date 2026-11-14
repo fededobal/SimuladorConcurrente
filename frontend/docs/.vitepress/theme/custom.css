@@ -34,44 +34,22 @@
 /* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
 .vp-doc div[class*='language-'] code { font-size: 13.5px; }
 
-/* controles a la izquierda de la barra: ocultar el índice y volver al simulador */
-.controles-barra { display: inline-flex; align-items: center; gap: 8px; }
-.volver-simulador, .alternar-barra {
+/* botón para volver al simulador, en el lugar del título de la barra, con recuadro */
+.volver-simulador {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
+  padding: 0 12px;
   height: 32px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
-  background: transparent;
   font-size: 13px;
   font-weight: 500;
   color: var(--vp-c-text-1);
   white-space: nowrap;
   text-decoration: none;
-  cursor: pointer;
 }
-.volver-simulador { padding: 0 12px; }
-.alternar-barra { width: 32px; padding: 0; font-size: 15px; }
-.volver-simulador:hover, .alternar-barra:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
-
-/* Barra lateral oculta: solo se mueven la barra, que se desliza fuera de pantalla, y el
-   relleno izquierdo del contenido, que pasa a cero con transición. La barra superior no
-   lee nada de esto y queda quieta. No se usa display: none porque reacomoda la página de
-   golpe, ni se toca --vp-sidebar-width porque la barra superior también la usa. */
-@media (min-width: 960px) {
-  .VPSidebar { transition: transform 0.3s ease, opacity 0.3s ease; }
-  .VPContent.has-sidebar { transition: padding-left 0.3s ease, padding-right 0.3s ease; }
-
-  .barra-oculta .VPSidebar { transform: translateX(-100%); opacity: 0; pointer-events: none; }
-  .barra-oculta .VPContent.has-sidebar { padding-left: 0; }
-}
-@media (min-width: 1440px) {
-  .barra-oculta .VPContent.has-sidebar {
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2);
-  }
-}
+.volver-simulador:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
 
 /* barra superior: fondo blanco translúcido y desenfocado, también arriba de todo */
 .VPNavBar, .VPNavBar .content-body, .VPNavBar:not(.has-sidebar):not(.home.top) {
