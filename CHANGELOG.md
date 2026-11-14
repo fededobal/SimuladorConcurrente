@@ -58,6 +58,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Documentación: ocultar y mostrar la barra lateral se anima con una transición en vez de reacomodar la página de golpe, y la barra superior tiene fondo blanco translúcido con desenfoque. (Federico Dobal, 2026-11-14)
 - En la documentación, el título "Simulador de Monitores" de la barra se quita: a la izquierda queda solo el botón "Volver al simulador". (Federico Dobal, 2026-11-13)
 - El error por una variable fuera de un monitor o un proceso dice solo "No se permiten variables globales". (Federico Dobal, 2026-11-13)
 - Los errores de compilación que mostraban un ejemplo con valores inventados ahora describen la forma en términos generales, con el nombre que escribió el alumno: "Declarar la cola con los tipos de sus componentes: Cola c(tipo, ...)", "'a' es un arreglo: falta el índice, a[índice]", "las formas válidas son push(c, componentes), push(c, (componentes)) o push(c, (clave, (resto)))". (Federico Dobal, 2026-11-13)

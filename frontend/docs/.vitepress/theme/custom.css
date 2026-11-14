@@ -56,20 +56,39 @@
 .alternar-barra { width: 32px; padding: 0; font-size: 15px; }
 .volver-simulador:hover, .alternar-barra:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
 
-/* barra lateral oculta: el contenido ocupa todo el ancho y los controles de la barra
-   conservan su lugar, con el buscador a continuación */
-.barra-oculta .VPSidebar { display: none; }
-.barra-oculta .VPContent.has-sidebar { padding-left: 0; }
-.barra-oculta .VPDoc.has-sidebar .container { margin: 0 auto; }
-.barra-oculta .VPNavBar.has-sidebar .title { width: auto; padding-right: 24px; }
-.barra-oculta .VPNavBar.has-sidebar .content { padding-left: 0; }
-.barra-oculta .VPNavBar.has-sidebar .divider { padding-left: 0; }
+/* Barra lateral oculta: la variable de ancho pasa a cero y todo lo que la lee (el espacio
+   del título, el relleno del contenido) se desliza con transición; la barra se corre fuera
+   de pantalla. No se usa display: none porque reacomoda la página de golpe. */
 @media (min-width: 960px) {
-  .barra-oculta .VPNavBar.has-sidebar .wrapper { padding: 0 32px; }
-  .barra-oculta .VPNavBar.has-sidebar .container { display: flex; align-items: center; }
-  .barra-oculta .VPNavBar.has-sidebar .title { position: static; flex-shrink: 0; }
-  .barra-oculta .VPNavBar.has-sidebar .content { flex: 1; min-width: 0; }
+  .VPSidebar { transition: transform 0.3s ease, opacity 0.3s ease; }
+  .VPNavBar.has-sidebar .title,
+  .VPNavBar.has-sidebar .content,
+  .VPNavBar.has-sidebar .divider { transition: width 0.3s ease, padding-left 0.3s ease; }
+  .VPContent.has-sidebar { transition: padding-left 0.3s ease; }
+
+  /* Con la barra oculta, el contenido pierde el relleno de la barra pero la fila superior
+     conserva el lugar de los dos botones (--ancho-controles), que siguen a la izquierda. */
+  .barra-oculta { --vp-sidebar-width: 0px; --ancho-controles: 300px; }
+  .barra-oculta .VPSidebar { transform: translateX(-100%); opacity: 0; pointer-events: none; }
+  .barra-oculta .VPNavBar.has-sidebar .title { width: var(--ancho-controles); }
+  .barra-oculta .VPNavBar.has-sidebar .content { padding-left: var(--ancho-controles); }
 }
+@media (min-width: 1440px) {
+  .barra-oculta .VPNavBar.has-sidebar .title {
+    width: calc((100% - (var(--vp-layout-max-width) - 64px)) / 2 + var(--ancho-controles) - 32px);
+  }
+  .barra-oculta .VPNavBar.has-sidebar .content {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--ancho-controles));
+  }
+}
+
+/* barra superior: fondo blanco translúcido y desenfocado, también arriba de todo */
+.VPNavBar, .VPNavBar .content-body, .VPNavBar:not(.has-sidebar):not(.home.top) {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+}
+.VPNavBar .divider-line { background-color: var(--vp-c-divider); }
 
 /* buscador más ancho */
 @media (min-width: 768px) {
