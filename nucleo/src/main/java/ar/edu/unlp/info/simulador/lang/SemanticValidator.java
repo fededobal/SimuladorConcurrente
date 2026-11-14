@@ -308,7 +308,7 @@ public final class SemanticValidator {
         }
         if (info.family() && call.index() == null) {
             throw new CompilationException("El monitor " + call.monitor() + " es un arreglo: "
-                    + "falta el índice, por ejemplo " + call.monitor() + "[0]." + call.procedure()
+                    + "falta el índice, " + call.monitor() + "[índice]." + call.procedure()
                     + "(...)", call.line());
         }
         if (!info.family() && call.index() != null) {
@@ -402,7 +402,7 @@ public final class SemanticValidator {
         }
         if (t.isArray()) {
             throw new CompilationException("No se puede asignar el arreglo '" + name
-                    + "' completo: hay que indicar el índice, por ejemplo " + name + "[0]", line);
+                    + "' completo: hay que indicar el índice, " + name + "[índice]", line);
         }
         if (t.isQueue()) {
             throw new CompilationException("No se puede asignar la cola '" + name

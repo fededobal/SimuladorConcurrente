@@ -327,14 +327,15 @@ public final class Parser {
      * despues de la primera componente, y adentro van tipos sueltos.
      */
     private List<Type> parseQueueElementTypes(Type queue, String name) {
-        String ejemplo = queue.keyword() + " " + name + "(int, text)";
+        // la forma, con el nombre que escribio el alumno: "Cola c(tipo, (tipo, ...))"
+        String forma = queue.keyword() + " " + name + "(tipo, (tipo, ...))";
         if (!match("(")) {
-            throw error("Declarar la cola con los tipos de sus elementos, por ejemplo "
-                    + queue.keyword() + " " + name + "(int) o " + ejemplo);
+            throw error("Declarar la cola con los tipos de sus componentes: " + queue.keyword()
+                    + " " + name + "(tipo, ...)");
         }
         if (check("(")) {
-            throw error("La primera componente va sin paréntesis: " + queue.keyword() + " " + name
-                    + "(int, (text, text))");
+            throw error("La primera componente de '" + name + "' va sin paréntesis; el grupo "
+                    + "entre paréntesis va después de ella: " + forma);
         }
         List<Type> types = new ArrayList<>();
         types.add(parseElementType());
@@ -342,27 +343,27 @@ public final class Parser {
             if (match("(")) {
                 do {
                     if (check("(")) {
-                        throw error("Dentro del grupo van solo tipos, sin más paréntesis: "
-                                + queue.keyword() + " " + name + "(int, (text, text))");
+                        throw error("Dentro del grupo de '" + name + "' van solo tipos, sin más "
+                                + "paréntesis: " + forma);
                     }
                     types.add(parseElementType());
                 } while (match(","));
-                consume(")", "Se esperaba ')' al cerrar el grupo de tipos");
+                consume(")", "Se esperaba ')' al cerrar el grupo de tipos de '" + name + "'");
                 if (!check(")")) {
-                    throw error("Después del grupo entre paréntesis se cierra la declaración: "
-                            + queue.keyword() + " " + name + "(int, (text, text))");
+                    throw error("Después del grupo entre paréntesis se cierra la declaración de '"
+                            + name + "': " + forma);
                 }
             } else {
                 do {
                     if (check("(")) {
-                        throw error("El grupo entre paréntesis va justo después de la primera "
-                                + "componente: " + queue.keyword() + " " + name + "(int, (text, text))");
+                        throw error("El grupo entre paréntesis de '" + name + "' va justo después "
+                                + "de la primera componente: " + forma);
                     }
                     types.add(parseElementType());
                 } while (match(","));
             }
         }
-        consume(")", "Se esperaba ')' al cerrar los tipos de la cola");
+        consume(")", "Se esperaba ')' al cerrar los tipos de '" + name + "'");
         return types;
     }
 
@@ -433,13 +434,14 @@ public final class Parser {
     }
 
     private List<Expr> parsePushElements(String queue) {
-        String formas = "push(" + queue + ", id, dato), push(" + queue + ", (id, dato)) o push("
-                + queue + ", (id, (dato1, dato2)))";
+        String formas = "push(" + queue + ", componentes), push(" + queue + ", (componentes)) o "
+                + "push(" + queue + ", (clave, (resto)))";
         List<Expr> elems = new ArrayList<>();
         if (tupleAhead()) {
             advance();
             if (tupleAhead()) {
-                throw error("Sobran paréntesis en el push: las formas válidas son " + formas);
+                throw error("Sobran paréntesis en el push a '" + queue + "'; las formas válidas son "
+                        + formas);
             }
             elems.add(parseExpr());
             if (match(",")) {
@@ -449,20 +451,20 @@ public final class Parser {
                     do {
                         if (tupleAhead()) {
                             throw error("Dentro del grupo van las componentes sueltas, sin más "
-                                    + "paréntesis: push(" + queue + ", (id, (dato1, dato2)))");
+                                    + "paréntesis: push(" + queue + ", (clave, (resto)))");
                         }
                         elems.add(parseExpr());
                     } while (match(","));
                     consume(")", "Se esperaba ')' al cerrar el grupo de la tupla");
                     if (check(",")) {
-                        throw error("Después del grupo entre paréntesis se cierra la tupla: "
-                                + "push(" + queue + ", (id, (dato1, dato2)))");
+                        throw error("Después del grupo entre paréntesis se cierra la tupla: push("
+                                + queue + ", (clave, (resto)))");
                     }
                 } else {
                     do {
                         if (tupleAhead()) {
                             throw error("El grupo entre paréntesis va justo después de la primera "
-                                    + "componente: push(" + queue + ", (id, (dato1, dato2)))");
+                                    + "componente: push(" + queue + ", (clave, (resto)))");
                         }
                         elems.add(parseExpr());
                     } while (match(","));
@@ -473,8 +475,8 @@ public final class Parser {
         }
         do {
             if (tupleAhead()) {
-                throw error("Los paréntesis de la tupla van alrededor de todas las componentes: "
-                        + formas);
+                throw error("Los paréntesis de la tupla van alrededor de todas las componentes; "
+                        + "las formas válidas son " + formas);
             }
             elems.add(parseExpr());
         } while (match(","));
@@ -483,11 +485,13 @@ public final class Parser {
 
     private List<String> parsePopTargets(String queue) {
         String destino = "Se esperaba una variable destino para 'pop'";
+        String formas = "pop(" + queue + ", destinos), pop(" + queue + ", (destinos)) o pop("
+                + queue + ", (clave, (resto)))";
         List<String> targets = new ArrayList<>();
         if (match("(")) {
             if (check("(")) {
-                throw error("Sobran paréntesis en el pop: las formas válidas son pop(" + queue
-                        + ", x, y), pop(" + queue + ", (x, y)) o pop(" + queue + ", (x, (y, z)))");
+                throw error("Sobran paréntesis en el pop de '" + queue + "'; las formas válidas son "
+                        + formas);
             }
             targets.add(consumeIdent(destino));
             if (match(",")) {
@@ -498,13 +502,13 @@ public final class Parser {
                     consume(")", "Se esperaba ')' al cerrar el grupo de destinos");
                     if (check(",")) {
                         throw error("Después del grupo entre paréntesis se cierra la tupla: pop("
-                                + queue + ", (x, (y, z)))");
+                                + queue + ", (clave, (resto)))");
                     }
                 } else {
                     do {
                         if (check("(")) {
                             throw error("El grupo entre paréntesis va justo después del primer "
-                                    + "destino: pop(" + queue + ", (x, (y, z)))");
+                                    + "destino: pop(" + queue + ", (clave, (resto)))");
                         }
                         targets.add(consumeIdent(destino));
                     } while (match(","));
@@ -515,8 +519,8 @@ public final class Parser {
         }
         do {
             if (check("(")) {
-                throw error("Los paréntesis de la tupla van alrededor de todos los destinos: pop("
-                        + queue + ", (x, y)) o pop(" + queue + ", (x, (y, z)))");
+                throw error("Los paréntesis de la tupla van alrededor de todos los destinos; las "
+                        + "formas válidas son " + formas);
             }
             targets.add(consumeIdent(destino));
         } while (match(","));

@@ -87,8 +87,7 @@ final class ExprTyper {
     private static Type scalarOf(String name, Scope scope, int line) {
         Scope.VarType t = known(name, scope, line).type();
         if (t.isArray()) {
-            throw error("'" + name + "' es un arreglo: falta el índice, por ejemplo " + name
-                    + "[0]",
+            throw error("'" + name + "' es un arreglo: falta el índice, " + name + "[índice]",
                     line);
         }
         if (t.isQueue()) {

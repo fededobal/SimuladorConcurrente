@@ -211,7 +211,7 @@ const CANONICOS = [
       && r.vars['M.g'] === '<(2, b, B), (3, c, C)>'],
   ['una cola sin tipos es error de compilacion con ejemplo', `
     monitor M { Cola c; procedure f() { skip; } } process P { M.f(); }`,
-    (r) => !!r.compilacion?.includes('tipos de sus elementos')],
+    (r) => !!r.compilacion?.includes('tipos de sus componentes')],
   ['empty sobre una cond se rechaza como en la practica', `
     monitor M { cond cola; bool b; procedure f() { b = empty(cola); } }
     process P { M.f(); }`,

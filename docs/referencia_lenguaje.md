@@ -132,6 +132,7 @@ correr**: la cantidad de componentes y el tipo de cada una, con las conversiones
 pueda guardar su componente:
 
 ```
+Línea 3: Declarar la cola con los tipos de sus componentes: Cola p(tipo, ...)
 Línea 5: La cola 'p' guarda (int, text): este pop tiene 1 componente y se esperaban 2
 Línea 6: La componente 2 de 'p' es text y se está encolando un bool
 Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es bool
@@ -512,7 +513,7 @@ Errores de compilación (con número de línea), verificados:
 - `Ya existe una variable permanente llamada 'cant': elegí otro nombre para no taparla`
 - `La condición del if tiene que ser bool y es int` · `No se puede guardar un double en 'x', que es int`
 - `No se puede comparar un text con un int usando '=='` · `El operador '*' se aplica a números, no a un text y un int`
-- `'a' es un arreglo: falta el índice, por ejemplo a[0]` · `No se puede asignar el arreglo 'a' completo: hay que indicar el índice, por ejemplo a[0]`
+- `'a' es un arreglo: falta el índice, a[índice]` · `No se puede asignar el arreglo 'a' completo: hay que indicar el índice, a[índice]`
 - `Variable condición no declarada: c` · `La cond 'c' es un arreglo: falta el índice`
 - `wait/signal/signal_all solo pueden usarse dentro de un procedure de monitor`
 - `El código de inicialización del monitor M no puede llamar a monitores ni usar wait/signal`

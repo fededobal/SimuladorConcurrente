@@ -125,15 +125,15 @@ class CompilerTest {
     /** Una cola sin tipos ya no compila, y el mensaje dice como escribirla. */
     @Test
     void rechazaColaSinTipos() {
-        assertTrue(errorDe("process P { Cola c; }").contains("tipos de sus elementos"));
-        assertTrue(errorDe("process P { ColaOrdenada c; }").contains("ColaOrdenada c(int)"));
+        assertTrue(errorDe("process P { Cola c; }").contains("tipos de sus componentes"));
+        assertTrue(errorDe("process P { ColaOrdenada c; }").contains("ColaOrdenada c(tipo, ...)"));
     }
 
     /** Solo un grupo, despues de la primera componente, y sin mas parentesis adentro. */
     @Test
     void rechazaParentesisDeMasEnColas() {
         assertTrue(errorDe("process P { ColaOrdenada c((int, text)); }")
-                .contains("primera componente va sin paréntesis"));
+                .contains("primera componente de 'c' va sin paréntesis"));
         assertTrue(errorDe("process P { Cola c(int, (text, (text))); }")
                 .contains("sin más paréntesis"));
         assertTrue(errorDe("process P { Cola c(int, (text), text); }")
