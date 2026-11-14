@@ -19,15 +19,17 @@ bool v = empty c;         // también empty(c)
 
 ### Declaración con tipos
 
-La declaración lleva los tipos de las componentes, entre paréntesis y separados por coma:
-`Cola c(int)`, `Cola p(int, text)`, `ColaOrdenada g(int, text, text)`. Son los tipos
-escalares (`int`, `double`, `bool`, `text`); una cola no guarda colas ni arreglos.
+| Forma | Qué declara |
+|---|---|
+| `Cola c(int)` | elementos de una componente |
+| `Cola p(int, text)` | tuplas de dos componentes |
+| `ColaOrdenada g(int, text, text)` | tuplas de tres; la primera es la clave de orden |
+| `ColaOrdenada g(int, (text, text))` | **la misma cola** que la anterior: el grupo solo separa la clave del resto |
 
-Después de la primera componente se puede agrupar el resto entre paréntesis, para separar
-la clave de los datos que viajan con ella: `ColaOrdenada g(int, (text, text))` declara
-**la misma cola** que `ColaOrdenada g(int, text, text)`. Solo se admite ese grupo, justo
-después de la primera componente y con tipos sueltos adentro: `(int, (text, (text)))` y
-`((int, text))` son error.
+- Las componentes son tipos escalares: `int`, `double`, `bool`, `text`. Una cola no guarda
+  colas ni arreglos.
+- Se admite un solo grupo entre paréntesis, justo después de la primera componente, con
+  tipos sueltos adentro. `(int, (text, (text)))` y `((int, text))` son error.
 
 ### Las tres formas de `push` y `pop`
 
@@ -43,16 +45,20 @@ pop(g, (id, nombre, apellido));
 pop(g, (id, (nombre, apellido)));
 ```
 
-Más paréntesis que esos, como `push(g, ((id, (nombre, apellido))))`, es error de
-compilación. Un paréntesis con una sola expresión no es una tupla: `push(c, (a + b) * 2)`
-encola un solo número.
+- Más paréntesis que esos, como `push(g, ((id, (nombre, apellido))))`, es error de
+  compilación.
+- Un paréntesis con una sola expresión no es una tupla: `push(c, (a + b) * 2)` encola un
+  solo número.
 
 ### Qué controla el compilador
 
-Con los tipos declarados, el compilador controla cada `push` y cada `pop` antes de correr:
-la cantidad de componentes y el tipo de cada una, con las conversiones de siempre (un `int`
-donde va un `double`, un número donde va un `text`), y que cada destino del `pop` pueda
-guardar su componente:
+| Control | Antes de correr |
+|---|---|
+| cantidad de componentes | la de la declaración, en `push` y en `pop` |
+| tipo de cada componente | con las conversiones de siempre: `int` donde va `double`, número donde va `text` |
+| destinos del `pop` | cada variable tiene que poder guardar su componente |
+
+Mensajes típicos:
 
 ```
 Línea 3: Declarar la cola con los tipos de sus componentes: Cola p(tipo, ...)
@@ -61,11 +67,9 @@ Línea 6: La componente 2 de 'p' es text y se está encolando un bool
 Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es bool
 ```
 
-`pop` sobre cola vacía sí es error de ejecución. En el panel Monitores una cola se muestra
-con sus casilleros y una tupla entre paréntesis, como se escribió: `(7, Ana)`.
-
-`empty` se puede escribir con o sin paréntesis: `empty c` o `empty(c)`. Aplicado a algo que
-no es una cola es error de compilación.
+- `pop` sobre cola vacía es error de ejecución.
+- `empty c` y `empty(c)` valen igual; sobre algo que no es una cola es error de compilación.
+- En el panel Monitores una tupla se ve entre paréntesis, como se escribió: `(7, Ana)`.
 
 ## ColaOrdenada (cola de prioridad)
 

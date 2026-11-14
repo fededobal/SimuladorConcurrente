@@ -32,18 +32,14 @@ Un `/*` sin cerrar es error de compilación. Un `//` adentro de una cadena
 
 ## Cómo se ejecuta
 
-Cada sentencia (asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`,
-`skip`) es **un paso atómico** del planificador. Los bloques y la evaluación de las guardas
-de `if`, `while` y `for` no ocupan un paso propio: se resuelven junto con la sentencia que
-sigue. En un mismo instante **avanzan varios procesos a la vez**, cada uno una sentencia:
-los procesos corren en paralelo, no entrelazados de a uno.
+| Regla | Detalle |
+|---|---|
+| una sentencia, un paso | asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
+| las guardas no cuentan | la evaluación de `if`, `while` y `for` y los bloques van junto con la sentencia siguiente |
+| varios a la vez | en un instante avanzan varios procesos, una sentencia cada uno; corren en paralelo, no de a uno |
+| quién gana el monitor | el orden dentro del instante; el que pierde queda en la cola de entrada |
 
-Con turnos al azar no todos avanzan en cada instante, unos van más rápido que otros, como en
-la realidad; con turnos en ronda avanzan todos los listos. En los dos casos, el orden dentro
-del instante es el que decide **quién gana el monitor** cuando dos lo piden a la vez. El que
-pierde queda en la cola de entrada.
-
-Que corran en paralelo no rompe nada: la exclusión mutua del monitor sigue serializando
-todo lo que toca estado compartido. Por eso un contador dentro de un monitor da siempre el
-mismo total, corran los procesos como corran, que es justamente la garantía que dan los
-monitores.
+::: tip
+La exclusión mutua del monitor serializa todo lo que toca estado compartido: un contador
+dentro de un monitor da siempre el mismo total, corran los procesos como corran.
+:::

@@ -1,22 +1,23 @@
 # La pantalla
 
-El simulador ocupa una sola pantalla. Arriba está la [barra de controles](./barra). A la
-izquierda, el [editor](./editor) y, debajo, la [línea de tiempo](./linea-de-tiempo). A la
-derecha, el panel [Monitores](./monitores). La [salida](./salida) se abre con un botón de la
-barra.
+| Zona | Dónde | Qué muestra |
+|---|---|---|
+| [Barra de controles](./barra) | arriba | ejecutar, pausar, paso, detener, velocidad, turnos, ejemplos, salida, estado |
+| [Editor](./editor) | izquierda, arriba | el programa, con una franja sobre la línea de cada proceso |
+| [Línea de tiempo](./linea-de-tiempo) | izquierda, abajo | el estado de cada proceso en cada instante y quién tuvo cada monitor |
+| [Monitores](./monitores) | derecha | el dibujo de cada monitor, sus colas y sus variables |
+| [Salida](./salida) | se abre desde la barra | lo que escriben los procesos con `write` |
 
 ## Agrandar, achicar y ampliar
 
-Cada panel se agranda o se achica arrastrando el borde que mira al editor: el borde
-superior de la línea de tiempo y el borde izquierdo de Monitores. El mismo borde se mueve
-con las flechas del teclado cuando tiene el foco, y un doble clic lo devuelve a su tamaño
-automático.
+| Acción | Cómo |
+|---|---|
+| Agrandar o achicar un panel | arrastrar el borde que mira al editor; también con las flechas del teclado cuando el borde tiene el foco |
+| Volver al tamaño automático | doble clic en ese borde |
+| Ampliar un panel | botón de la esquina superior derecha del panel, o clic en el fondo del dibujo de un monitor |
+| Cerrar el panel ampliado | el mismo botón, o la tecla Escape |
 
-Los paneles que no son el editor se amplían con el botón de su esquina superior derecha. El
-panel ampliado pasa a ocupar toda la columna derecha, junto al editor, que queda siempre a
-la vista; los demás paneles se ocultan hasta cerrarlo. Se cierra con el mismo botón o con la
-tecla Escape. Al recargar la página, todo vuelve a su tamaño y lugar iniciales.
-
-## Fin, interbloqueo y errores
-
-Qué pasa cuando el programa termina, se traba o falla está en [Ejecución](./ejecucion).
+::: tip
+El panel ampliado ocupa toda la columna derecha y el editor queda siempre a la vista. Al
+recargar la página, todo vuelve a su tamaño y lugar iniciales.
+:::

@@ -1,31 +1,28 @@
 # La línea de tiempo
 
-Una fila por proceso y una columna por instante: muestra, para toda la corrida, en qué
-estado estuvo cada proceso en cada momento.
+Una fila por proceso, una columna por instante y, arriba, un carril por monitor.
 
-## El carril de cada monitor
-
-Arriba de los procesos hay un carril por monitor, con fondo gris, que muestra quién tuvo el
-monitor en cada instante: el nombre del proceso sobre su color, y "libre" en los huecos. La
-exclusión mutua se ve de un vistazo, porque nunca hay dos nombres a la vez.
-
-## Las filas de los procesos
-
-Las filas quedan fijas en el orden en que se declararon los procesos, con una línea entre
-familias, así se puede seguir a uno de punta a punta. Cada tramo se dibuja con el mismo
-aspecto que la franja del editor y, cuando hay lugar, dice su causa: "espera entrar a
-Corralon", "wait(esperaCli[3])". Dentro del monitor, el tramo lleva el nombre del monitor;
-si no entra, se recorta con puntos suspensivos o se abrevia como en el dibujo del monitor.
-La leyenda de la cabecera resume los seis estados.
+| Parte | Qué muestra |
+|---|---|
+| **Carril del monitor** (fondo gris) | quién tuvo el monitor en cada instante, con su nombre sobre su color; "libre" en los huecos. Nunca hay dos nombres a la vez: esa es la exclusión mutua |
+| **Fila de un proceso** | su estado en cada instante, con el mismo aspecto que la franja del editor. Las filas no se mueven: quedan en el orden de declaración, con una línea entre familias |
+| **Rótulo de un tramo** | la causa de la espera (`espera entrar a Corralon`, `wait(esperaCli[3])`) o el nombre del monitor en el que ejecuta; si no entra, se recorta con puntos suspensivos |
+| **Leyenda** | los seis [estados](./ejecucion#estados-de-un-proceso) |
 
 ## Qué pasó en un instante
 
-Al pasar el puntero por una columna, una tarjeta cuenta en palabras qué pasó en ese
-instante, con cada proceso en su color: quién entró a un monitor, quién hizo `wait`, a
-quién despertó un `signal`. Un clic la deja fija y otro clic la suelta.
+| Acción | Resultado |
+|---|---|
+| pasar el puntero por una columna | una tarjeta cuenta en palabras los eventos de ese instante, cada proceso en su color |
+| clic en la columna | la tarjeta queda fija; otro clic la suelta |
 
 ## Zoom y desplazamiento
 
-Los botones de la cabecera cambian el ancho de las columnas, para ver más instantes de un
-vistazo o menos con más detalle. La línea de tiempo sigue al último instante mientras no se
-la desplace hacia atrás, y conserva los últimos 1000 instantes.
+| Acción | Resultado |
+|---|---|
+| botones de la cabecera | columnas más angostas (más instantes) o más anchas (más detalle) |
+| desplazar hacia atrás | se deja de seguir al último instante hasta volver al final |
+
+::: tip
+Se conservan los últimos 1000 instantes.
+:::

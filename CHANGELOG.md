@@ -193,6 +193,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Las páginas del sitio pasan a un formato esquemático: tablas para controles, atajos, estados, zonas y reglas, recuadros para lo importante y párrafos de dos o tres renglones como máximo. (Federico Dobal, 2026-11-13)
 - La portada del sitio habla solo del simulador, con la lista de lo que ofrece enlazada a cada página, las simplificaciones y los créditos, sin detalles de implementación. La sección Simulador se divide en una página por panel: la pantalla, barra de controles, editor, línea de tiempo, monitores, salida y ejecución (instantes, estados, fin, interbloqueo y errores). (Federico Dobal, 2026-11-13)
 - El sitio de documentación queda solo con lo que hace falta para usar el simulador: la pantalla, el lenguaje y los programas de ejemplo. La teoría de monitores y las decisiones de diseño salen del sitio (los archivos siguen en `docs/` para el desarrollo y la PPS) y se quitan las notas de versión. (Federico Dobal, 2026-11-13)
 - Página "Qué avisa el compilador" completa: todos los errores de compilación agrupados por tema (escritura, estructura, procedures, llamadas, variables condición, tipos, nombres, arreglos, colas) con su significado, y los errores de ejecución, tal como se muestran en pantalla. Se verificó contra una batería de 111 programas, uno por error. (Federico Dobal, 2026-11-13)

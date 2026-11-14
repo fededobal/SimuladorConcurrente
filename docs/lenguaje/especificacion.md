@@ -188,12 +188,12 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 
 El iterador de un `for` no se puede modificar dentro del cuerpo: lo cambia solo el paso.
 
-Toda sentencia observable (asignación, `++`/`--`, llamada a monitor, `wait`/`signal`,
-`write`, `push`/`pop`, `skip`) es un **paso atómico** del scheduler. Los bloques y la
-evaluación de las guardas de `if`, `while` y `for` no consumen un instante: se resuelven
-junto con la sentencia siguiente. En cada instante avanzan varios procesos, una sentencia
-cada uno (paralelismo real, no entrelazado de a uno); el orden dentro del instante decide
-quién gana el monitor cuando varios lo piden a la vez.
+| Regla | Detalle |
+|---|---|
+| paso atómico | toda sentencia observable: asignación, `++`/`--`, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
+| sin paso propio | los bloques y las guardas de `if`, `while` y `for`: van con la sentencia siguiente |
+| por instante | avanzan varios procesos, una sentencia cada uno (paralelismo, no entrelazado de a uno) |
+| orden dentro del instante | decide quién gana el monitor cuando varios lo piden a la vez |
 
 ---
 
