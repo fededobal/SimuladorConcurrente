@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Botón "Documentación" en la barra del simulador, que abre el sitio de documentación. (Federico Dobal, 2026-11-13)
 - Sitio de documentación con VitePress, publicado junto con el simulador en /docs/: tema claro con el mismo acento, barra lateral, buscador (⌘K), índice "En esta página", navegación anterior/siguiente y enlace al simulador. Reúne los documentos existentes (teoría de monitores, conceptos de concurrencia, referencia del lenguaje, especificación EBNF y decisiones de diseño) y una portada nueva. Se levanta con `npm run docs:dev` en `frontend/`. (Federico Dobal, 2026-11-13)
 - Línea de tiempo: un carril por monitor, arriba de los procesos y con fondo gris, que muestra quién tuvo el monitor en cada instante (con su color y su nombre) y "libre" en los huecos: la exclusión mutua se ve de un vistazo. (Federico Dobal, 2026-11-13)
 - Línea de tiempo: al pasar el mouse por una columna, una tarjeta cuenta en palabras qué pasó en ese instante, con cada proceso en su color; un clic la deja fija. Dos botones de zoom cambian el ancho de las columnas. (Federico Dobal, 2026-11-13)
@@ -191,6 +192,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Página "Qué avisa el compilador" completa: todos los errores de compilación agrupados por tema (escritura, estructura, procedures, llamadas, variables condición, tipos, nombres, arreglos, colas) con su significado, y los errores de ejecución, tal como se muestran en pantalla. Se verificó contra una batería de 111 programas, uno por error. (Federico Dobal, 2026-11-13)
 - La documentación se reorganiza como sitio: la teoría de monitores en páginas por tema (qué es un monitor, variables condición, llamadas entre monitores, diferencia con los semáforos, ejemplos canónicos, técnicas e interbloqueo, conceptos previos); el lenguaje en una página por tema y por instrucción (estructura, palabras reservadas, tipos, colas, monitores, procesos, sentencias, if y while, for, wait y signal, push y pop, write, delay, expresiones, alcance, errores, qué no existe, ejemplo completo y especificación); una sección Simulador que explica cada panel de la pantalla; y en Referencia los nueve programas de ejemplo comentados, las notas de versión (este archivo) y las decisiones de diseño. Los archivos `referencia_lenguaje.md`, `sintaxis_especificacion.md`, `monitores.md` y `conceptos_concurrencia.md` pasan a `docs/lenguaje/` y `docs/monitores/`; se actualizan las referencias en README, CONTRIBUTING, CLAUDE.md, las skills y los ADR. (Federico Dobal, 2026-11-13)
 - Volver a versionar la documentación técnica de `docs/` (teoría, referencia, especificación y
   decisiones), que las reglas del repositorio y las skills tratan como fuente de verdad; solo

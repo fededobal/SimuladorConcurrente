@@ -109,6 +109,7 @@ button { cursor: pointer; }
 }
 .btn:hover:not(:disabled) { background: var(--panel-soft); border-color: var(--dimmer); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-enlace { text-decoration: none; color: var(--text); }
 .btn-main { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-main:hover:not(:disabled) { background: #1d478a; border-color: #1d478a; }
 

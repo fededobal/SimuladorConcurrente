@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Play, Pause, SkipForward, Square, Terminal, ZoomIn, ZoomOut } from 'lucide-react';
+import { BookOpen, Play, Pause, SkipForward, Square, Terminal, ZoomIn, ZoomOut } from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { Dock } from './components/Dock';
 import { OutputPanel } from './components/OutputPanel';
@@ -192,6 +192,11 @@ export function App() {
             <span className="cuenta">{snapshot?.output.length}</span>
           )}
         </button>
+
+        {/* el sitio de documentación se publica junto con la aplicación, bajo /docs/ */}
+        <a className="btn btn-enlace" href="/docs/" title="Documentación: teoría, lenguaje y uso del simulador">
+          <BookOpen size={14} /> Documentación
+        </a>
 
         <div className="meta">
           <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
