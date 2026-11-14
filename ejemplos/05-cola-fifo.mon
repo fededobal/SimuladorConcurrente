@@ -1,7 +1,7 @@
 // Cola FIFO dentro del monitor
 // espera: fin BufferN.suma=100
 monitor BufferN {
-  Cola items;
+  Cola items(int);
   int suma = 0;
   cond noVacio;
 

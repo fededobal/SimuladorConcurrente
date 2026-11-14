@@ -8,6 +8,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -49,28 +50,6 @@ public final class SemanticValidator {
     }
 
     // ---------------------------------------------------------------- recoleccion
-
-    /**
-     * Cantidad de componentes de cada cola, por sitio de declaracion. Una cola no puede ser
-     * parametro ni elemento de arreglo, asi que todos sus push/pop son visibles aca: el
-     * primer uso fija N y cualquier otro con distinta cantidad es error de compilacion.
-     */
-    private final Map<String, Integer> aridadCola = new HashMap<>();
-    private final Map<String, Integer> lineaAridad = new HashMap<>();
-
-    private void checkAridadCola(String clave, String cola, int usados, String op, int line) {
-        Integer previa = aridadCola.get(clave);
-        if (previa == null) {
-            aridadCola.put(clave, usados);
-            lineaAridad.put(clave, line);
-            return;
-        }
-        if (previa != usados) {
-            throw new CompilationException("La cola '" + cola + "' maneja " + previa
-                    + " componente(s) (fijado en la línea " + lineaAridad.get(clave) + ") y este "
-                    + op + " usa " + usados, line);
-        }
-    }
 
     private void collectTopLevel() {
         Set<String> topLevel = new HashSet<>();
@@ -130,7 +109,7 @@ public final class SemanticValidator {
                     "el índice del monitor", null), m.line());
         }
         for (VarDecl v : m.permanentVars()) {
-            checkVarDecl(v, root, PERMANENTE, m.name() + "." + v.name());
+            checkVarDecl(v, root, PERMANENTE);
         }
         for (CondDecl c : m.conds()) {
             if (c.isArray()) ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
@@ -178,8 +157,7 @@ public final class SemanticValidator {
     private void checkStmt(Stmt s, Scope scope) {
         switch (s) {
             case Stmt.Block b -> checkBlock(b, scope);
-            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL, "local:" + vd.name() + "#"
-                    + vd.line());
+            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL);
             case Stmt.Assign a -> checkAssign(a, scope);
             case Stmt.IncDec inc -> {
                 Type t = targetType(inc.target(), inc.index(), scope, inc.line());
@@ -201,33 +179,84 @@ public final class SemanticValidator {
             case Stmt.ForStmt f -> checkFor(f, scope);
             case Stmt.MonitorCall call -> checkMonitorCall(call, scope);
             case Stmt.CondOp co -> checkCondOp(co, scope);
-            case Stmt.QueuePush qp -> {
-                String clave = queueKey(qp.queue(), scope, qp.line());
-                for (Expr e : qp.elements()) ExprTyper.typeOf(e, scope);
-                checkAridadCola(clave, qp.queue(), qp.elements().size(), "push", qp.line());
-            }
+            case Stmt.QueuePush qp -> checkQueuePush(qp, scope);
             case Stmt.Write w -> {
                 for (Expr e : w.args()) ExprTyper.checkWriteArg(e, scope);
             }
-            case Stmt.QueuePop qp -> {
-                String clave = queueKey(qp.queue(), scope, qp.line());
-                for (String t : qp.targets()) targetType(t, null, scope, qp.line());
-                checkAridadCola(clave, qp.queue(), qp.targets().size(), "pop", qp.line());
-            }
+            case Stmt.QueuePop qp -> checkQueuePop(qp, scope);
             case Stmt.Delay d -> ExprTyper.expect(d.seconds(), Type.INT, scope,
                     "El tiempo del delay");
         }
     }
 
-    private void checkVarDecl(VarDecl vd, Scope scope, String origin, String queueKey) {
+    private void checkVarDecl(VarDecl vd, Scope scope, String origin) {
         if (vd.sizeExpr() != null) {
             ExprTyper.expect(vd.sizeExpr(), Type.INT, scope, "El tamaño de '" + vd.name() + "'");
         }
         if (vd.initExpr() != null) {
             ExprTyper.checkAssignable(vd.type(), vd.initExpr(), scope, vd.name(), vd.line());
         }
+        // la clave de una cola ordenada se compara: un bool no tiene orden
+        if (vd.type() == Type.COLA_ORDENADA && vd.elementTypes().get(0) == Type.BOOLEAN) {
+            throw new CompilationException("La clave de la ColaOrdenada '" + vd.name()
+                    + "' (su primera componente) tiene que ser int, double o text, no bool", vd.line());
+        }
         declare(scope, vd.name(), new Symbol(new VarType(vd.type(), vd.isArray()), false, origin,
-                vd.type().isQueue() ? queueKey : null), vd.line());
+                vd.elementTypes()), vd.line());
+    }
+
+    /**
+     * Las componentes de un push, contra la declaracion de la cola: la misma cantidad y, para
+     * cada una, un valor que se pueda guardar en ese tipo (las conversiones de siempre: un int
+     * donde va un double, un numero donde va un text).
+     */
+    private void checkQueuePush(Stmt.QueuePush qp, Scope scope) {
+        List<Type> comps = queueElementTypes(qp.queue(), scope, qp.line());
+        checkComponentCount(qp.queue(), comps, qp.elements().size(), "push", qp.line());
+        for (int i = 0; i < comps.size(); i++) {
+            Type value = ExprTyper.typeOf(qp.elements().get(i), scope);
+            if (!ExprTyper.assignable(comps.get(i), value)) {
+                throw new CompilationException("La componente " + (i + 1) + " de '" + qp.queue()
+                        + "' es " + comps.get(i).keyword() + " y se está encolando un "
+                        + value.keyword(), qp.line());
+            }
+        }
+    }
+
+    /** Los destinos de un pop: uno por componente, cada uno capaz de guardar la suya. */
+    private void checkQueuePop(Stmt.QueuePop qp, Scope scope) {
+        List<Type> comps = queueElementTypes(qp.queue(), scope, qp.line());
+        checkComponentCount(qp.queue(), comps, qp.targets().size(), "pop", qp.line());
+        for (int i = 0; i < comps.size(); i++) {
+            String target = qp.targets().get(i);
+            Type destino = targetType(target, null, scope, qp.line());
+            if (!ExprTyper.assignable(destino, comps.get(i))) {
+                throw new CompilationException("La componente " + (i + 1) + " de '" + qp.queue()
+                        + "' es " + comps.get(i).keyword() + " y no se puede guardar en '" + target
+                        + "', que es " + destino.keyword(), qp.line());
+            }
+        }
+    }
+
+    private static void checkComponentCount(String queue, List<Type> comps, int usados, String op,
+            int line) {
+        if (usados != comps.size()) {
+            throw new CompilationException("La cola '" + queue + "' guarda "
+                    + describeComponents(comps) + ": este " + op + " tiene " + usados
+                    + (usados == 1 ? " componente" : " componentes") + " y se esperaba"
+                    + (comps.size() == 1 ? " 1" : "n " + comps.size()), line);
+        }
+    }
+
+    /** "(int, text)" o, con una sola componente, "int". */
+    private static String describeComponents(List<Type> comps) {
+        if (comps.size() == 1) return comps.get(0).keyword();
+        StringBuilder sb = new StringBuilder("(");
+        for (int i = 0; i < comps.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(comps.get(i).keyword());
+        }
+        return sb.append(')').toString();
     }
 
     private void checkAssign(Stmt.Assign a, Scope scope) {
@@ -395,12 +424,12 @@ public final class SemanticValidator {
         return sym;
     }
 
-    private static String queueKey(String name, Scope scope, int line) {
+    private static List<Type> queueElementTypes(String name, Scope scope, int line) {
         Symbol sym = ExprTyper.known(name, scope, line);
-        if (sym.queueKey() == null) {
+        if (sym.elementTypes() == null) {
             throw new CompilationException("'" + name + "' no es una cola", line);
         }
-        return sym.queueKey();
+        return sym.elementTypes();
     }
 
     private boolean containsMonitorInteraction(Stmt s) {

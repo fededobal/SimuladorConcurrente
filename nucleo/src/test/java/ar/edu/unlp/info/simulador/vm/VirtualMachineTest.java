@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VirtualMachineTest {
@@ -145,7 +146,7 @@ class VirtualMachineTest {
     void colaFifoDentroDeMonitor() {
         RunResult r = TestSupport.run("""
                 monitor BufferN {
-                    Cola items;
+                    Cola items(int);
                     int suma = 0;
                     cond noVacio;
                     procedure poner(v: in int) { push(items, v); signal(noVacio); }
@@ -209,16 +210,32 @@ class VirtualMachineTest {
     }
 
     /**
-     * VI-8: ordenar una ColaOrdenada por claves de clases distintas es error. Las comparaciones
-     * del programa ({@code "10" == 10}) ya se rechazan al compilar (CompilerTest).
+     * VI-8: una ColaOrdenada no mezcla claves de clases distintas. Con la cola declarada con
+     * sus tipos, eso se rechaza al compilar: la clave es int y se quiere encolar un text.
      */
     @Test
-    void colaOrdenadaConClavesMezcladasEsError() {
-        RunResult cola = TestSupport.run("""
-                monitor M { ColaOrdenada c; procedure f() { push(c, 9); push(c, "10"); } }
+    void colaOrdenadaConClavesMezcladasEsErrorDeCompilacion() {
+        var ex = assertThrows(ar.edu.unlp.info.simulador.lang.CompilationException.class,
+                () -> ar.edu.unlp.info.simulador.lang.Compiler.compile("""
+                monitor M { ColaOrdenada c(int); procedure f() { push(c, 9); push(c, "10"); } }
                 process P { M.f(); }
-                """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
-        assertTrue(cola.vm().snapshot().processes().get(0).error().contains("No se puede comparar"));
+                """));
+        assertTrue(ex.getMessage().contains("componente 1 de 'c' es int"), ex.getMessage());
+    }
+
+    /** Cada componente se guarda con el tipo declarado: un int en un double, un numero en un text. */
+    @Test
+    void pushConvierteCadaComponenteAlTipoDeclarado() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M {
+                  Cola c(double, text); double d = 0; text t = "";
+                  push(c, 1, 2);
+                  procedure f() { skip; }
+                }
+                process P { M.f(); }
+                """, 0);
+        assertEquals(List.of("(1.0, 2)"), var(vm.snapshot().monitors().get(0), "c").elements());
+        assertEquals("Cola(double, text)", var(vm.snapshot().monitors().get(0), "c").type());
     }
 
     /** D-3: la cota del for de rango se evalua una sola vez, al entrar. */
@@ -394,7 +411,7 @@ class VirtualMachineTest {
     void snapshotTraeLosElementosDeColasYArreglos() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M {
-                  Cola c; ColaOrdenada o; int a[3]; int n = 7;
+                  Cola c(int); ColaOrdenada o(int, int); int a[3]; int n = 7;
                   push(c, 5); push(c, 9); push(o, (2, 20)); push(o, (1, 10)); a[1] = 4;
                   procedure f() { skip; }
                 }
@@ -403,7 +420,7 @@ class VirtualMachineTest {
         Snapshot.MonitorView m = vm.snapshot().monitors().get(0);
         assertEquals(List.of("5", "9"), var(m, "c").elements());
         assertEquals(2, var(m, "c").size());
-        assertEquals(List.of("[1, 10]", "[2, 20]"), var(m, "o").elements());
+        assertEquals(List.of("(1, 10)", "(2, 20)"), var(m, "o").elements());
         assertEquals(List.of("0", "4", "0"), var(m, "a").elements());
         assertEquals(3, var(m, "a").size());
         assertNull(var(m, "n").elements());
@@ -516,7 +533,7 @@ class VirtualMachineTest {
     @Test
     void tuplasConYSinParentesis() {
         RunResult r = TestSupport.run("""
-                monitor M { Cola c; int id = 0; text s = ""; int suma = 0;
+                monitor M { Cola c(int, text); int id = 0; text s = ""; int suma = 0;
                   procedure f() {
                     push(c, (7, "adn"));
                     push(c, (1 + 2) * 3, "x");
@@ -538,7 +555,7 @@ class VirtualMachineTest {
      */
     static final String BANCO = """
             Monitor Banco {
-              Cola elibres; cond esperaC; int esperando = 0, cantLibres = 0;
+              Cola elibres(int); cond esperaC; int esperando = 0, cantLibres = 0;
               Procedure llegada(idE: out int) {
                 if (cantLibres == 0) { esperando++; wait(esperaC); }
                 else cantLibres--;

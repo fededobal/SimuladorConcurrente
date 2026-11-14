@@ -1,7 +1,7 @@
 // Punto 4a) Corralón
 // espera: fin Corralon.cAtenciones=<>
 monitor Corralon {
-  Cola cAtenciones;
+  Cola cAtenciones(int);
   cond esperaEmp, esperaCli[10], esperaListas[10];
   text comprobantes[10];
   text listas;

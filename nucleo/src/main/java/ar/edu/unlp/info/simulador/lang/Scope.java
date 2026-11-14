@@ -4,6 +4,7 @@ import ar.edu.unlp.info.simulador.lang.parser.ast.Type;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,10 +23,10 @@ final class Scope {
     }
 
     /**
-     * @param origin   que es, para los mensajes ("una variable permanente", "un parametro"...)
-     * @param queueKey sitio de declaracion si es una cola (fija su cantidad de componentes)
+     * @param origin       que es, para los mensajes ("una variable permanente", "un parametro"...)
+     * @param elementTypes tipos de las componentes si es una cola; null si no lo es
      */
-    record Symbol(VarType type, boolean readOnly, String origin, String queueKey) { }
+    record Symbol(VarType type, boolean readOnly, String origin, List<Type> elementTypes) { }
 
     private final Scope parent;
     private final Map<String, Symbol> symbols = new HashMap<>();

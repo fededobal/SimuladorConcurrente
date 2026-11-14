@@ -68,7 +68,7 @@ const CANONICOS = [
     process P { M.f(); }`,
     (r) => r.compilacion && r.linea === 2],
   ['ColaOrdenada respeta prioridad', `
-    monitor M { ColaOrdenada c; int primero = 0;
+    monitor M { ColaOrdenada c(int); int primero = 0;
       procedure cargar() { push(c, 3); push(c, 1); push(c, 2); }
       procedure sacar() { pop(c, primero); } }
     process P { M.cargar(); M.sacar(); }`,
@@ -84,7 +84,7 @@ const CANONICOS = [
     monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } } process A { M.f(); }`,
     (r) => !r.excepcion && (r.compilacion || r.kinds?.has('ERROR'))],
   ['colas y arreglos llegan con sus elementos uno por uno', `
-    monitor M { Cola c; int a[2]; push(c, 3); push(c, 1); a[1] = 9; procedure f() { skip; } }
+    monitor M { Cola c(int); int a[2]; push(c, 3); push(c, 1); a[1] = 9; procedure f() { skip; } }
     process P { M.f(); }`,
     (r) => {
       const v = Object.fromEntries((r.snapshot?.monitors[0].vars ?? []).map((x) => [x.name, x]));
@@ -198,10 +198,20 @@ const CANONICOS = [
     process P { text t; M.f(1, 2, t); M.g(3, 4, t); }`,
     (r) => r.finished && r.vars['M.s'] === '3' && r.vars['M.u'] === 'ok'],
   ['tuplas con y sin parentesis en push y pop', `
-    monitor M { Cola c; int id = 0; text s = "";
+    monitor M { Cola c(int, text); int id = 0; text s = "";
       procedure f() { push(c, (7, "adn")); pop(c, (id, s)); } }
     process P { M.f(); }`,
     (r) => r.finished && r.vars['M.id'] === '7' && r.vars['M.s'] === 'adn'],
+  ['colas con tipos: tres formas de push y pop, tupla con parentesis y clave agrupada', `
+    monitor M { ColaOrdenada g(int, (text, text)); int id = 0; text n = "", a = "";
+      procedure f() { push(g, (2, ("b", "B"))); push(g, (1, "a", "A")); push(g, 3, "c", "C");
+                      pop(g, (id, (n, a))); } }
+    process P { M.f(); }`,
+    (r) => r.finished && r.vars['M.id'] === '1' && r.vars['M.n'] === 'a' && r.vars['M.a'] === 'A'
+      && r.vars['M.g'] === '<(2, b, B), (3, c, C)>'],
+  ['una cola sin tipos es error de compilacion con ejemplo', `
+    monitor M { Cola c; procedure f() { skip; } } process P { M.f(); }`,
+    (r) => !!r.compilacion?.includes('tipos de sus elementos')],
   ['empty sobre una cond se rechaza como en la practica', `
     monitor M { cond cola; bool b; procedure f() { b = empty(cola); } }
     process P { M.f(); }`,

@@ -1,7 +1,7 @@
 // ColaOrdenada
 // espera: fin Turnos.primero=1
 monitor Turnos {
-  ColaOrdenada pendientes;
+  ColaOrdenada pendientes(int);
   int primero = 0;
 
   procedure cargar() {

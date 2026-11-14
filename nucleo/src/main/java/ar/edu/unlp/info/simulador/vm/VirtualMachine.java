@@ -671,11 +671,17 @@ public final class VirtualMachine {
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {
         ExprEvaluator ev = vars.evaluator(act);
         Value.QueueVal q = vars.asQueue(act, qp.queue(), qp.line());
+        // cada componente se guarda con el tipo declarado (un int en un double, un numero en
+        // un text), como al asignar una variable
+        List<Type> tipos = q.elementTypes();
         List<Value> vals = new ArrayList<>();
-        for (Expr e : qp.elements()) vals.add(ev.eval(e));
+        for (int i = 0; i < qp.elements().size(); i++) {
+            vals.add(ev.eval(qp.elements().get(i)).assignTo(tipos.get(i),
+                    "la componente " + (i + 1) + " de " + qp.queue(), qp.line()));
+        }
         Value pushed = vals.size() == 1
                 ? vals.get(0)
-                : new Value.ArrayVal(Type.INT, vals.toArray(new Value[0]));
+                : Value.ArrayVal.tuple(vals.toArray(new Value[0]));
         q.push(pushed);
         vars.touchIfMonitorVar(p.id(), act, qp.queue());
         event(p, "PUSH", qp.queue(),

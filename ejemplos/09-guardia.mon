@@ -1,0 +1,38 @@
+// Guardia: ColaOrdenada con tuplas (gravedad, id)
+// espera: fin Guardia.atendidos=6
+monitor Guardia {
+  ColaOrdenada espera(int, int);   // (gravedad, id): 1 es lo más urgente
+  cond hayPaciente, turno[6];
+  bool atendido[6];                // uno por paciente: el signal puede llegar antes del wait
+  int atendidos = 0;
+
+  procedure llegar(id: in int; gravedad: in int) {
+    push(espera, (gravedad, id));  // se inserta ordenado por la gravedad
+    signal(hayPaciente);
+    while (not atendido[id]) wait(turno[id]);
+  }
+
+  procedure siguiente(id: out int; gravedad: out int) {
+    while (empty espera) wait(hayPaciente);
+    pop(espera, (gravedad, id));   // sale el más grave; a igual gravedad, el que llegó antes
+    atendido[id] = true;
+    atendidos++;
+    signal(turno[id]);
+  }
+}
+
+process Paciente[id: 0..5] {
+  int gravedad = (id * 7) mod 3 + 1;   // 1, 2 o 3 según el paciente
+  write("llega con gravedad ", gravedad);
+  Guardia.llegar(id, gravedad);
+  write("me atienden");
+}
+
+process Medico {
+  int id;
+  int gravedad;
+  for (int i = 0; i < 6; i++) {
+    Guardia.siguiente(id, gravedad);
+    write("atiendo al paciente ", id, " (gravedad ", gravedad, ")");
+  }
+}

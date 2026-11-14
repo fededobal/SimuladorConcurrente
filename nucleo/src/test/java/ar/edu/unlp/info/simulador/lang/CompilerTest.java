@@ -73,7 +73,7 @@ class CompilerTest {
     void aceptaColaOrdenada() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
-                  ColaOrdenada c;
+                  ColaOrdenada c(int, int);
                   procedure guardar(prio: in int; dato: in int) { push(c, prio, dato); }
                   procedure sacar(p: out int; d: out int) { pop(c, p, d); }
                 }
@@ -81,18 +81,91 @@ class CompilerTest {
                 """));
     }
 
-    /** La aridad de una cola queda fijada por su primer uso, y se verifica al compilar. */
+    /** La cantidad de componentes de un push o un pop es la de la declaracion. */
     @Test
-    void rechazaAridadInconsistenteEnUnaCola() {
+    void rechazaCantidadDeComponentesDistintaDeLaDeclarada() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M {
-                  ColaOrdenada c;
+                  ColaOrdenada c(int, int);
                   procedure guardar(x: in int) { push(c, x, 1); }
                   procedure sacar(r: out int) { pop(c, r); }
                 }
                 process P { int a = 0; M.guardar(1); M.sacar(a); }
                 """));
-        assertTrue(ex.getMessage().contains("componente"), ex.getMessage());
+        assertTrue(ex.getMessage().contains("guarda (int, int)"), ex.getMessage());
+        assertTrue(ex.getMessage().contains("1 componente"), ex.getMessage());
+    }
+
+    /** Las dos formas de declarar y las tres de encolar y desencolar significan lo mismo. */
+    @Test
+    void aceptaLasFormasDeDeclararEncolarYDesencolar() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M {
+                  ColaOrdenada g(int, (text, text));
+                  Cola h(int, text, text);
+                  Cola u(int);
+                  procedure f(id: in int; n: in text; a: in text) {
+                    push(g, (id, (n, a)));
+                    push(g, (id, n, a));
+                    push(g, id, n, a);
+                    push(h, id, (n + a) + "!", a);
+                    push(u, (id + 1) * 2);
+                  }
+                  procedure s(id: out int; n: out text; a: out text) {
+                    pop(g, (id, (n, a)));
+                    pop(g, (id, n, a));
+                    pop(g, id, n, a);
+                    pop(u, id);
+                  }
+                }
+                process P { int i = 0; text n = "", a = ""; M.f(1, "n", "a"); M.s(i, n, a); }
+                """));
+    }
+
+    /** Una cola sin tipos ya no compila, y el mensaje dice como escribirla. */
+    @Test
+    void rechazaColaSinTipos() {
+        assertTrue(errorDe("process P { Cola c; }").contains("tipos de sus elementos"));
+        assertTrue(errorDe("process P { ColaOrdenada c; }").contains("ColaOrdenada c(int)"));
+    }
+
+    /** Solo un grupo, despues de la primera componente, y sin mas parentesis adentro. */
+    @Test
+    void rechazaParentesisDeMasEnColas() {
+        assertTrue(errorDe("process P { ColaOrdenada c((int, text)); }")
+                .contains("primera componente va sin paréntesis"));
+        assertTrue(errorDe("process P { Cola c(int, (text, (text))); }")
+                .contains("sin más paréntesis"));
+        assertTrue(errorDe("process P { Cola c(int, (text), text); }")
+                .contains("se cierra la declaración"));
+        assertTrue(errorDe("process P { Cola c(int, text, (text, text)); }")
+                .contains("justo después de la primera componente"));
+        assertTrue(errorDe("process P { Cola c(int, text); push(c, ((1, (2, 3)))); }")
+                .contains("Sobran paréntesis"));
+        // (3) es una expresion agrupada, no una tupla: son tres componentes y los numeros se
+        // guardan en text, asi que compila
+        assertDoesNotThrow(() -> Compiler.compile(
+                "process P { Cola c(int, text, text); push(c, (1, (2, (3)))); }"));
+        assertTrue(errorDe("process P { Cola c(int, text, text); push(c, (1, (true, (3)))); }")
+                .contains("componente 2 de 'c' es text y se está encolando un bool"));
+        assertTrue(errorDe("process P { Cola c(int, text, text); push(c, 1, (\"a\", \"b\")); }")
+                .contains("alrededor de todas las componentes"));
+        assertTrue(errorDe("process P { Cola c(int, text); int x; text t; pop(c, ((x, t))); }")
+                .contains("Sobran paréntesis"));
+    }
+
+    /** Cada componente se controla contra el tipo declarado, en el push y en el pop. */
+    @Test
+    void rechazaTiposIncompatiblesEnPushYPop() {
+        assertTrue(errorDe("process P { Cola c(int, text); push(c, \"a\", 1); }")
+                .contains("componente 1 de 'c' es int"));
+        assertTrue(errorDe("process P { Cola c(int, text); int x; int y; pop(c, x, y); }")
+                .contains("componente 2 de 'c' es text y no se puede guardar en 'y'"));
+        assertTrue(errorDe("process P { ColaOrdenada c(bool); }")
+                .contains("tiene que ser int, double o text"));
+        // las conversiones de siempre valen: un int en un double, un numero en un text
+        assertDoesNotThrow(() -> Compiler.compile(
+                "process P { Cola c(double, text); double d; text t; push(c, 1, 2); pop(c, d, t); }"));
     }
 
     @Test
@@ -164,7 +237,7 @@ class CompilerTest {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   int a, b = 1, v[3] = ([3] 0), w[2];
-                  Cola c1, c2;
+                  Cola c1(int), c2(text, text);
                   procedure op(x: in text) { text lista, comp; lista = x; comp = lista; }
                 }
                 process P {
@@ -202,7 +275,7 @@ class CompilerTest {
     void aceptaColaOrdenadaLocal() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M { procedure op() { skip; } }
-                process P { ColaOrdenada pendientes; push(pendientes, 1); M.op(); }
+                process P { ColaOrdenada pendientes(int); push(pendientes, 1); M.op(); }
                 """));
     }
 
@@ -319,11 +392,11 @@ class CompilerTest {
         assertTrue(errorDe("process P { int a[2]; a = 5; }").contains("completo"));
         assertTrue(errorDe("process P { int a[2]; int b[2]; a = b; }").contains("completo"));
         assertTrue(errorDe("process P { int a[2]; int x = a; }").contains("falta el índice"));
-        assertTrue(errorDe("process P { Cola c; Cola d; push(c, d); }").contains("es una cola"));
+        assertTrue(errorDe("process P { Cola c(int); Cola d(int); push(c, d); }").contains("es una cola"));
         assertTrue(errorDe("process P { int x; x[0] = 1; }").contains("no es un arreglo"));
         assertTrue(errorDe("""
                 monitor M { procedure dar(r: out int) { r = 3; } }
-                process P { Cola c; M.dar(c); }
+                process P { Cola c(int); M.dar(c); }
                 """).contains("es una cola"));
         assertTrue(errorDe("""
                 monitor M { procedure dar(r: out int) { r = 3; } }
@@ -333,7 +406,7 @@ class CompilerTest {
                 monitor M { procedure ver(x: in int) { skip; } }
                 process P { int a[2]; M.ver(a); }
                 """).contains("falta el índice"));
-        assertDoesNotThrow(() -> Compiler.compile("process P { int a[2]; Cola c; write(a, c); }"));
+        assertDoesNotThrow(() -> Compiler.compile("process P { int a[2]; Cola c(int); write(a, c); }"));
     }
 
     /** D-4: un procedure no puede llamar a su propio monitor. */
@@ -350,7 +423,7 @@ class CompilerTest {
     void emptySoloSobreColasYConParentesisOpcionales() {
         assertTrue(errorDe("process P { int a[2]; bool b = empty a; }").contains("no es una cola"));
         assertDoesNotThrow(() -> Compiler.compile(
-                "process P { Cola c; bool b = empty c; bool d = empty(c) and not empty(c); }"));
+                "process P { Cola c(int); bool b = empty c; bool d = empty(c) and not empty(c); }"));
     }
 
     /** VS-8: la comparacion encadenada se rechaza con un mensaje que la explica. */

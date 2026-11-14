@@ -25,6 +25,16 @@ public enum Type {
         return this == COLA || this == COLA_ORDENADA;
     }
 
+    /** Como se escribe una cola con sus componentes: {@code Cola(int, text)}. */
+    public static String queueName(Type queue, java.util.List<Type> elementTypes) {
+        StringBuilder sb = new StringBuilder(queue.keyword()).append('(');
+        for (int i = 0; i < elementTypes.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(elementTypes.get(i).keyword());
+        }
+        return sb.append(')').toString();
+    }
+
     /** Como se escribe el tipo en el programa del alumno. */
     public String keyword() {
         return switch (this) {

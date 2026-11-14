@@ -132,7 +132,7 @@ final class ProgramLoader {
     /** Valor inicial de una variable declarada: por defecto, el inicializador o un arreglo lleno. */
     static Value initialValue(VarDecl vd, ExprEvaluator ev) {
         if (vd.type().isQueue()) {
-            return Value.defaultFor(vd.type());
+            return Value.queueFor(vd);
         }
         int size = vd.isArray() ? arraySize(ev, vd.sizeExpr(), vd.line()) : 0;
         Value single = vd.initExpr() == null

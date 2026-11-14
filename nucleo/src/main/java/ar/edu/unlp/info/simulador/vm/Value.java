@@ -1,6 +1,7 @@
 package ar.edu.unlp.info.simulador.vm;
 
 import ar.edu.unlp.info.simulador.lang.parser.ast.Type;
+import ar.edu.unlp.info.simulador.lang.parser.ast.VarDecl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,32 @@ public sealed interface Value {
 
     record TextVal(String v) implements Value { }
 
-    /** Arreglo homogeneo de escalares. */
+    /**
+     * Arreglo homogeneo de escalares. Tambien representa la tupla de un push de varias
+     * componentes ({@code push(c, 7, "x")}), que se muestra entre parentesis como la escribe
+     * el alumno.
+     */
     final class ArrayVal implements Value {
         private final Type elementType;
         private final Value[] elements;
+        private final boolean tuple;
 
         public ArrayVal(Type elementType, Value[] elements) {
+            this(elementType, elements, false);
+        }
+
+        private ArrayVal(Type elementType, Value[] elements, boolean tuple) {
             this.elementType = elementType;
             this.elements = elements;
+            this.tuple = tuple;
         }
+
+        /** La tupla que encola un push de varias componentes. */
+        public static ArrayVal tuple(Value[] elements) {
+            return new ArrayVal(Type.INT, elements, true);
+        }
+
+        public boolean isTuple() { return tuple; }
 
         public Type elementType() { return elementType; }
         public int size() { return elements.length; }
@@ -37,7 +55,7 @@ public sealed interface Value {
         public Value[] raw() { return elements; }
 
         public ArrayVal copy() {
-            return new ArrayVal(elementType, elements.clone());
+            return new ArrayVal(elementType, elements.clone(), tuple);
         }
     }
 
@@ -50,15 +68,20 @@ public sealed interface Value {
     final class QueueVal implements Value {
         private final List<Value> items;
         private final boolean ordenada;
+        /** Tipos de las componentes de cada elemento, como se declaro la cola. */
+        private final List<Type> elementTypes;
 
-        public QueueVal() { this(false); }
-        public QueueVal(boolean ordenada) { this(new ArrayList<>(), ordenada); }
-        private QueueVal(List<Value> items, boolean ordenada) {
+        public QueueVal(boolean ordenada, List<Type> elementTypes) {
+            this(new ArrayList<>(), ordenada, elementTypes);
+        }
+        private QueueVal(List<Value> items, boolean ordenada, List<Type> elementTypes) {
             this.items = items;
             this.ordenada = ordenada;
+            this.elementTypes = elementTypes;
         }
 
         public boolean isOrdenada() { return ordenada; }
+        public List<Type> elementTypes() { return elementTypes; }
 
         public void push(Value v) {
             if (!ordenada) {
@@ -77,7 +100,7 @@ public sealed interface Value {
         public List<Value> snapshot() { return new ArrayList<>(items); }
 
         public QueueVal copy() {
-            return new QueueVal(new ArrayList<>(items), ordenada);
+            return new QueueVal(new ArrayList<>(items), ordenada, elementTypes);
         }
 
         /** El criterio de orden es la primera componente: la 'x' de push(c, x, y, z). */
@@ -124,8 +147,9 @@ public sealed interface Value {
             case DoubleVal ignored -> "double";
             case BoolVal ignored -> "bool";
             case TextVal ignored -> "text";
-            case QueueVal q -> q.isOrdenada() ? "ColaOrdenada" : "Cola";
-            case ArrayVal a -> a.elementType().name().toLowerCase() + "[]";
+            case QueueVal q -> Type.queueName(q.isOrdenada() ? Type.COLA_ORDENADA : Type.COLA,
+                    q.elementTypes());
+            case ArrayVal a -> a.isTuple() ? "tupla" : a.elementType().name().toLowerCase() + "[]";
         };
     }
 
@@ -180,9 +204,14 @@ public sealed interface Value {
             case DOUBLE -> new DoubleVal(0);
             case BOOLEAN -> new BoolVal(false);
             case TEXT -> new TextVal("");
-            case COLA -> new QueueVal(false);
-            case COLA_ORDENADA -> new QueueVal(true);
+            case COLA, COLA_ORDENADA -> throw new IllegalArgumentException(
+                    "una cola se crea con queueFor: necesita los tipos de sus componentes");
         };
+    }
+
+    /** La cola vacia que declara {@code vd}, con los tipos de sus componentes. */
+    static QueueVal queueFor(VarDecl vd) {
+        return new QueueVal(vd.type() == Type.COLA_ORDENADA, vd.elementTypes());
     }
 
     /**
@@ -266,7 +295,8 @@ public sealed interface Value {
             }
             case BoolVal b -> Boolean.toString(b.v());
             case TextVal t -> t.v();
-            case ArrayVal a -> joined("[", List.of(a.raw()), "]");
+            case ArrayVal a -> a.isTuple() ? joined("(", List.of(a.raw()), ")")
+                    : joined("[", List.of(a.raw()), "]");
             case QueueVal q -> joined("<", q.snapshot(), ">");
         };
     }

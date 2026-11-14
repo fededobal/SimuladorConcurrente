@@ -57,7 +57,11 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
 
 ### Cola (FIFO) y ColaOrdenada (prioridad)
 
-- Declaración: `Cola nombre;` · `ColaOrdenada nombre;`
+- Declaración, con los tipos escalares de las componentes de cada elemento:
+  `Cola nombre(int);` · `Cola nombre(int, text);` · `ColaOrdenada nombre(int, text, text);` ·
+  `ColaOrdenada nombre(int, (text, text));`. El grupo entre paréntesis solo agrupa (separa la
+  clave del resto): las dos últimas declaran la misma cola. Se admite un solo grupo, después
+  de la primera componente, con tipos sueltos adentro.
 - `push(cola, elemento);` — se admite `push(cola, a, b, ...)`, que encola una tupla (un
   registro de varias componentes).
   - En `Cola` encola **al final**.
@@ -66,12 +70,15 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
 - `pop(cola, x);` — desencola el frente y lo asigna a `x`. `pop(cola, x, y)` desestructura la
   tupla: `x` recibe la primera componente (la clave de orden) e `y` la siguiente. `pop` sobre
   cola vacía es error de ejecución.
-- **Aridad fija**: la cantidad de componentes queda fijada por el primer `push`/`pop` de esa
-  cola. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son
-  estáticamente visibles y la inconsistencia es **error de compilación**, no de ejecución.
+- **Tipos controlados al compilar**: cada `push` y cada `pop` se verifica contra la
+  declaración, en cantidad de componentes y en tipo de cada una (con las conversiones de la
+  asignación: `int` en `double`, número en `text`). Las componentes se escriben sueltas, como
+  tupla entre paréntesis o con la clave separada del resto: `push(c, a, b, d)`,
+  `push(c, (a, b, d))`, `push(c, (a, (b, d)))`; igual `pop`. Más paréntesis es error.
 - `empty cola` o `empty(cola)` — expresión boola, `true` si la cola no tiene elementos.
-- Las claves de una `ColaOrdenada` se comparan como números o como textos (orden alfabético);
-  mezclarlas o usar `bool` es error de ejecución.
+- La clave de una `ColaOrdenada` (su primera componente) es `int`, `double` o `text` y se
+  compara como número o como texto (orden alfabético); declararla `bool` es error de
+  compilación.
 
 ---
 
@@ -271,7 +278,10 @@ sentencia     = decl_local
 
 decl_local    = decl_var ;
 decl_var      = tipo_escalar item_decl { "," item_decl } ";"
-              | tipo_cola ident { "," ident } ";" ;
+              | tipo_cola item_cola { "," item_cola } ";" ;
+item_cola     = ident "(" tipo_escalar [ "," ( tipos_escalares | "(" tipos_escalares ")" ) ] ")" ;
+                (* el grupo entre parentesis solo agrupa: (int, (text, text)) = (int, text, text) *)
+tipos_escalares = tipo_escalar { "," tipo_escalar } ;
 item_decl     = ident [ "=" expr ]                                    (* escalar *)
               | ident "[" expr "]" [ "=" "(" "[" expr "]" expr ")" ] ;  (* arreglo *)
                 (* el valor inicial es de ese nombre solo; en el arreglo, el tamaño
@@ -280,8 +290,12 @@ asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
 inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
 llamada_monitor = ident [ "[" expr "]" ] "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;
-op_cola       = "push" "(" ident "," ( exprs | "(" expr "," exprs ")" ) ")" ";"
-              | "pop"  "(" ident "," ( idents | "(" idents ")" ) ")" ";" ;
+op_cola       = "push" "(" ident "," componentes ")" ";"
+              | "pop"  "(" ident "," destinos ")" ";" ;
+componentes   = exprs
+              | "(" expr [ "," ( exprs | "(" exprs ")" ) ] ")" ;   (* un solo grupo, tras la 1ra *)
+destinos      = idents
+              | "(" ident [ "," ( idents | "(" idents ")" ) ] ")" ;
 exprs         = expr { "," expr } ;
 idents        = ident { "," ident } ;
 escritura     = "write" "(" [ expr { "," expr } ] ")" ";" ;

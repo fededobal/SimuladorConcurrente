@@ -69,7 +69,7 @@ final class ProgramasCorpus {
                 process P { M.bloquear(); }
                 """);
         p.put("canon/cola-ordenada", """
-                monitor M { ColaOrdenada c; int primero = 0;
+                monitor M { ColaOrdenada c(int); int primero = 0;
                   procedure cargar() { push(c, 3); push(c, 1); push(c, 2); }
                   procedure sacar() { pop(c, primero); } }
                 process P { M.cargar(); M.sacar(); }
@@ -96,7 +96,7 @@ final class ProgramasCorpus {
                 process Chequeo { int leido = 0; TOTAL.verificar(leido); TOTAL.verificar(leido); }
                 """);
         p.put("canon/cola-fifo", """
-                monitor BufferN { Cola items; int suma = 0; cond noVacio;
+                monitor BufferN { Cola items(int); int suma = 0; cond noVacio;
                   procedure poner(v: in int) { push(items, v); signal(noVacio); }
                   procedure sacar() { while (empty items) wait(noVacio); int x = 0; pop(items, x); suma = suma + x; } }
                 process Prod { for (int i = 1..4) { BufferN.poner(i * 10); } }

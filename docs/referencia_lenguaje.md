@@ -91,30 +91,54 @@ compilación. La excepción es `write(a)`, que muestra el arreglo entero.
 ### Cola (FIFO)
 
 ```c
-Cola c;
-push(c, 1);          // encola un elemento
-push(c, 7, 9);       // encola UNA tupla de dos componentes
-push(c, (7, 9));     // lo mismo, con la tupla entre paréntesis
-pop(c, x);           // desencola el frente
-pop(c, a, b);        // desestructura la tupla: a=7, b=9
-pop(c, (a, b));      // lo mismo, con paréntesis
-bool v = empty c;    // también empty(c)
+Cola c(int);              // cada elemento es un int
+Cola p(int, text);        // cada elemento es una tupla (id, nombre)
+push(c, 1);               // encola un elemento
+push(p, 7, "Ana");        // encola UNA tupla de dos componentes
+push(p, (7, "Ana"));      // lo mismo, con la tupla entre paréntesis
+pop(c, x);                // desencola el frente
+pop(p, a, b);             // desestructura la tupla: a=7, b="Ana"
+pop(p, (a, b));           // lo mismo, con paréntesis
+bool v = empty c;         // también empty(c)
 ```
 
-La tupla puede escribirse con paréntesis o sin ellos. Un paréntesis con una sola expresión
-no es una tupla: `push(c, (a + b) * 2)` encola un solo número.
+**La declaración lleva los tipos de las componentes**, entre paréntesis y separados por
+coma: `Cola c(int)`, `Cola p(int, text)`, `ColaOrdenada g(int, text, text)`. Son los tipos
+escalares (`int`, `double`, `bool`, `text`); una cola no guarda colas ni arreglos. Después de
+la primera componente se puede agrupar el resto entre paréntesis, para separar la clave de
+los datos que viajan con ella: `ColaOrdenada g(int, (text, text))` declara **la misma cola**
+que `ColaOrdenada g(int, text, text)`. Solo se admite ese grupo, justo después de la primera
+componente y con tipos sueltos adentro: `(int, (text, (text)))` y `((int, text))` son error.
 
-Cada cola maneja **una cantidad fija de componentes**, que queda fijada por su primer
-`push`/`pop`. Como una cola no puede ser parámetro ni elemento de arreglo, todos sus usos son
-visibles al compilar, así que la inconsistencia se detecta **antes de correr**:
+Las componentes de un `push` o un `pop` se escriben de tres formas, que significan lo
+mismo sea cual sea la forma en que se declaró la cola:
+
+```c
+push(g, id, nombre, apellido);
+push(g, (id, nombre, apellido));
+push(g, (id, (nombre, apellido)));
+pop(g, id, nombre, apellido);
+pop(g, (id, nombre, apellido));
+pop(g, (id, (nombre, apellido)));
+```
+
+Más paréntesis que esos, como `push(g, ((id, (nombre, apellido))))`, es error de compilación.
+Un paréntesis con una sola expresión no es una tupla: `push(c, (a + b) * 2)` encola un
+solo número.
+
+Con los tipos declarados, el compilador controla cada `push` y cada `pop` **antes de
+correr**: la cantidad de componentes y el tipo de cada una, con las conversiones de siempre
+(un `int` donde va un `double`, un número donde va un `text`), y que cada destino del `pop`
+pueda guardar su componente:
 
 ```
-Línea 5: La cola 'c' maneja 2 componente(s) (fijado en la línea 4) y este pop usa 1
+Línea 5: La cola 'p' guarda (int, text): este pop tiene 1 componente y se esperaban 2
+Línea 6: La componente 2 de 'p' es text y se está encolando un bool
+Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es bool
 ```
 
-`pop` sobre cola vacía sí es error de ejecución. También lo es sacar un valor que no se
-puede guardar en el destino, por ejemplo un `text` en una variable `int`: el compilador no
-sabe qué tipo tiene cada componente de la cola.
+`pop` sobre cola vacía sí es error de ejecución. En el panel Monitores una cola se muestra
+con sus casilleros y una tupla entre paréntesis, como se escribió: `(7, Ana)`.
 
 `empty` se puede escribir con o sin paréntesis: `empty c` o `empty(c)`. Aplicado a algo que
 no es una cola es error de compilación.
@@ -125,7 +149,7 @@ Mismas operaciones que `Cola` — `push`, `pop`, `empty` — pero el `push` **in
 por la primera componente** en vez de al final:
 
 ```c
-ColaOrdenada c;
+ColaOrdenada c(int, text);
 push(c, 3, "tercero");
 push(c, 1, "primero");
 push(c, 2, "segundo");
@@ -137,8 +161,9 @@ pop(c, p, d);          // p=1, d="primero"
 - A **igual clave, sale primero el que se encoló antes** (inserción estable, FIFO entre
   iguales). Encolar `(1,"a") (1,"b") (0,"cero") (1,"c")` desencola `cero a b c`.
 - Con una sola componente, ordena por el valor: `5 1 4 1 3` sale `1 1 3 4 5`.
-- Las claves se comparan como números o, si son `text`, en orden alfabético. Mezclar
-  números y textos en la misma cola, o usar claves `bool`, es error de ejecución.
+- La clave (la primera componente de la declaración) tiene que ser `int`, `double` o
+  `text`: se compara como número o en orden alfabético. Declararla `bool` es error de
+  compilación.
 - `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
 ---
@@ -289,12 +314,12 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 
 | Instrucción | Formas aceptadas |
 |---|---|
-| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c;` · `ColaOrdenada c;` · varias del mismo tipo: `text lista, comp;` · `int i = 0, j;` |
+| Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c(int);` · `ColaOrdenada g(int, text, text);` · `ColaOrdenada g(int, (text, text));` · varias del mismo tipo: `text lista, comp;` · `int i = 0, j;` |
 | Asignación | `x = expr;` · `a[i] = expr;` |
 | Incremento | `x++;` · `x--;` · `a[i]++;` · `a[i]--;` |
 | Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` · `Escritorio[i].procedure(a);` |
 | Condición | `wait(cv);` · `signal(cv);` · `signal_all(cv);` · con índice: `wait(cv[i]);` |
-| Cola | `push(c, e);` · `push(c, e1, e2);` · `pop(c, x);` · `pop(c, x, y);` |
+| Cola | `push(c, e);` · `push(c, e1, e2);` · `push(c, (e1, e2));` · `push(c, (e1, (e2, e3)));` · `pop(c, x);` · `pop(c, x, y);` · `pop(c, (x, y));` · `pop(c, (x, (y, z)));` |
 | Salida | `write(e);` · `write(e1, e2, ...);` |
 | Condicional | `if (e) S` · `if (e) S else S` · con o sin llaves |
 | Mientras | `while (e) S` · con o sin llaves |
@@ -508,7 +533,7 @@ Errores de compilación (con número de línea), verificados:
 Errores de ejecución (terminan ese proceso, que queda marcado en rojo con su línea):
 índice fuera de rango, división o módulo por cero, desborde de un `int`, resultado `double`
 no representable, tamaño de arreglo inválido, `pop` sobre cola vacía, un valor sacado de una
-cola que no se puede guardar en el destino, y claves de distinto tipo en una `ColaOrdenada`.
+cola que no se puede guardar en el destino.
 Si después de un error los demás procesos quedan bloqueados, el estado dice "deadlock tras
 un error": la causa es el error, no la sincronización.
 
