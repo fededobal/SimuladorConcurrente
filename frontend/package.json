@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vitepress build docs",
+    "docs:dev": "vitepress dev docs --port 5174",
+    "docs:build": "vitepress build docs",
     "preview": "vite preview",
     "lint": "eslint .",
     "engine": "cd ../nucleo && mvn -q -Pweb -DskipTests package && cd .. && node scripts/motor-hash.mjs --write",
@@ -29,6 +31,7 @@
     "globals": "^15.14.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "vitepress": "^1.6.4"
   }
 }

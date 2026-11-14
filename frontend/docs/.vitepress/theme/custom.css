@@ -1,0 +1,47 @@
+/*
+ * Mismo criterio que el simulador: tema claro, un solo color de acento (el azul de la barra)
+ * y la tipografía del sistema. Los nombres de las variables son los del tema por defecto.
+ */
+:root {
+  --vp-c-brand-1: #2456a4;
+  --vp-c-brand-2: #1d478a;
+  --vp-c-brand-3: #2456a4;
+  --vp-c-brand-soft: rgba(36, 86, 164, 0.12);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f5f7fa;
+  --vp-c-bg-soft: #f5f7fa;
+  --vp-c-divider: #d5dae2;
+  --vp-c-text-1: #1f2933;
+  --vp-c-text-2: #5f6b7a;
+  --vp-c-text-3: #9aa5b4;
+
+  --vp-font-family-base: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --vp-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* cuadros de aviso en la misma gama que el resto */
+  --vp-custom-block-tip-border: #b9c2cf;
+  --vp-custom-block-tip-bg: #f5f7fa;
+  --vp-custom-block-tip-text: #1f2933;
+  --vp-custom-block-warning-border: #e3c98a;
+  --vp-custom-block-warning-bg: #fbf5e6;
+  --vp-custom-block-danger-border: #efc9c3;
+  --vp-custom-block-danger-bg: #fbeeec;
+}
+
+.vp-doc h1, .vp-doc h2, .vp-doc h3 { letter-spacing: 0; }
+.vp-doc a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+/* el código del alumno se lee mejor un punto más grande que el por defecto del tema */
+.vp-doc div[class*='language-'] code { font-size: 13.5px; }
+
+/* enlace al simulador en la barra, con el estilo de los items de navegación del tema */
+.enlace-simulador {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+}
+.enlace-simulador:hover { color: var(--vp-c-brand-1); }

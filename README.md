@@ -9,6 +9,10 @@ Todo corre en el navegador.
 - El núcleo en Java se compila a JavaScript con TeaVM.
 - La interfaz está hecha en React. No hay servidor.
 
+La documentación para alumnos y docentes (teoría de monitores, referencia del lenguaje,
+decisiones de diseño) se publica junto con el simulador en `/docs/`. Las fuentes son los
+Markdown de `docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`).
+
 ## Qué permite hacer
 
 - Escribir el programa en un editor con resaltado de sintaxis, sangría automática y

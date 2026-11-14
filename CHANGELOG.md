@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Sitio de documentación con VitePress, publicado junto con el simulador en /docs/: tema claro con el mismo acento, barra lateral, buscador (⌘K), índice "En esta página", navegación anterior/siguiente y enlace al simulador. Reúne los documentos existentes (teoría de monitores, conceptos de concurrencia, referencia del lenguaje, especificación EBNF y decisiones de diseño) y una portada nueva. Se levanta con `npm run docs:dev` en `frontend/`. (Federico Dobal, 2026-11-13)
 - Línea de tiempo: un carril por monitor, arriba de los procesos y con fondo gris, que muestra quién tuvo el monitor en cada instante (con su color y su nombre) y "libre" en los huecos: la exclusión mutua se ve de un vistazo. (Federico Dobal, 2026-11-13)
 - Línea de tiempo: al pasar el mouse por una columna, una tarjeta cuenta en palabras qué pasó en ese instante, con cada proceso en su color; un clic la deja fija. Dos botones de zoom cambian el ancho de las columnas. (Federico Dobal, 2026-11-13)
 - En el dibujo de cada monitor, tocar una zona (Compitiendo, En wait o En monitor) o un punto limita la lista de abajo a esa zona, completa y sin plegar, con la cantidad de procesos y un botón "ver todo" para volver; la zona elegida se marca con el borde oscuro. También con el teclado (Tab, Enter). (Federico Dobal, 2026-11-13)

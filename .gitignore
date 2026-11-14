@@ -40,3 +40,7 @@ hs_err_pid*
 # Documentación privada: informes de revisión y de verificación (el resto de docs/ se versiona)
 /docs/informe-revision.md
 /docs/verificacion-*.md
+
+# Sitio de documentación (VitePress): caché y salida local
+frontend/docs/.vitepress/cache
+frontend/docs/.vitepress/dist
