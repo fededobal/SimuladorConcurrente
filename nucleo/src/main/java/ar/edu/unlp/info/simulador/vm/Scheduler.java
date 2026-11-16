@@ -47,18 +47,26 @@ final class Scheduler {
             }
         }
 
-        if (policy == SchedulingPolicy.ROUND_ROBIN) {
-            // Turnos parejos: se empieza por el siguiente al ultimo que arranco.
-            int n = processes.size();
-            List<Process> orden = new ArrayList<>();
-            for (int k = 1; k <= n; k++) {
-                Process cand = processes.get((rrCursor + k) % n);
-                if (cand.isReady()) orden.add(cand);
-            }
-            rrCursor = processes.indexOf(orden.get(0));
-            return orden;
-        }
+        return policy == SchedulingPolicy.ROUND_ROBIN ? roundRobinTurn() : randomTurn(listos);
+    }
 
+    /** Turnos parejos: todos los listos, empezando por el siguiente al ultimo que arranco. */
+    private List<Process> roundRobinTurn() {
+        int n = processes.size();
+        List<Process> orden = new ArrayList<>();
+        for (int k = 1; k <= n; k++) {
+            Process cand = processes.get((rrCursor + k) % n);
+            if (cand.isReady()) orden.add(cand);
+        }
+        rrCursor = processes.indexOf(orden.get(0));
+        return orden;
+    }
+
+    /**
+     * Los listos en orden al azar; cada uno entra con probabilidad {@link #PROB_AVANCE} y,
+     * si no entra ninguno, avanza el primero.
+     */
+    private List<Process> randomTurn(List<Process> listos) {
         random.mezclar(listos);
         List<Process> turno = new ArrayList<>();
         for (Process pr : listos) {
