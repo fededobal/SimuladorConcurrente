@@ -489,12 +489,16 @@ public final class SemanticValidator {
         Deque<Stmt> stack = new ArrayDeque<>();
         stack.push(s);
         while (!stack.isEmpty()) {
-            Stmt cur = stack.pop();
-            if (cur instanceof Stmt.MonitorCall || cur instanceof Stmt.CondOp
-                    || cur instanceof Stmt.Delay) {
-                return true;
-            }
-            switch (cur) {
+            switch (stack.pop()) {
+                case Stmt.MonitorCall ignored -> {
+                    return true;
+                }
+                case Stmt.CondOp ignored -> {
+                    return true;
+                }
+                case Stmt.Delay ignored -> {
+                    return true;
+                }
                 case Stmt.Block b -> b.statements().forEach(stack::push);
                 case Stmt.IfStmt iff -> {
                     stack.push(iff.thenBranch());
@@ -505,7 +509,13 @@ public final class SemanticValidator {
                     stack.push(f.body());
                     stack.push(f.step());
                 }
-                default -> { }
+                case Stmt.Assign ignored -> { }
+                case Stmt.IncDec ignored -> { }
+                case Stmt.QueuePush ignored -> { }
+                case Stmt.QueuePop ignored -> { }
+                case Stmt.Write ignored -> { }
+                case Stmt.Skip ignored -> { }
+                case VarDecl ignored -> { }
             }
         }
         return false;

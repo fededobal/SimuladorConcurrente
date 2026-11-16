@@ -248,8 +248,10 @@ public sealed interface Value {
                 }
                 yield (long) d.v();
             }
-            default -> throw new RuntimeError("Se esperaba un número y se encontró " + display(),
-                    -1);
+            case BoolVal ignored -> throw notANumber();
+            case TextVal ignored -> throw notANumber();
+            case ArrayVal ignored -> throw notANumber();
+            case QueueVal ignored -> throw notANumber();
         };
     }
 
@@ -257,8 +259,10 @@ public sealed interface Value {
         return switch (this) {
             case IntVal i -> i.v();
             case DoubleVal d -> d.v();
-            default -> throw new RuntimeError("Se esperaba un número y se encontró " + display(),
-                    -1);
+            case BoolVal ignored -> throw notANumber();
+            case TextVal ignored -> throw notANumber();
+            case ArrayVal ignored -> throw notANumber();
+            case QueueVal ignored -> throw notANumber();
         };
     }
 
@@ -273,8 +277,14 @@ public sealed interface Value {
             case IntVal i -> Long.toString(i.v());
             case DoubleVal d -> display();
             case BoolVal b -> Boolean.toString(b.v());
-            default -> display();
+            case ArrayVal ignored -> display();
+            case QueueVal ignored -> display();
         };
+    }
+
+    /** El error de usar como numero un valor que no lo es (sin linea: la pone quien llama). */
+    private RuntimeError notANumber() {
+        return new RuntimeError("Se esperaba un número y se encontró " + display(), -1);
     }
 
     default boolean isNumeric() {

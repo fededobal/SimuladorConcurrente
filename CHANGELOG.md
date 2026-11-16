@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Los `switch` sobre tipos sealed (`Stmt`, `Expr`, `Value`) del validador, el AST, el snapshot y `Value` nombran cada caso en lugar de usar `default`: si se agrega una sentencia, una expresión o un valor, el compilador marca cada lugar a completar. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `SemanticValidator`: partir la recolección de nombres (`collectMonitor`, `collectPermanentVars`, `collectConds`, `collectProcedures`, `declareTopLevel`) y sacar de `checkMonitorCall` el control de los argumentos out (`checkOutArgument`) y de `checkStmt` el de `++`/`--` (`checkIncDec`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `StatementParser` en `lang/parser/`, con el análisis de las sentencias que tenía `Parser`; `Parser` queda en 195 líneas con la estructura del programa (monitores, procedures, parámetros, procesos). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `TokenCursor`: la clasificación de tokens (`isScalarType`, `isDeclStart`) pasa del `Parser` al cursor, que la comparten el parser y la sintaxis de colas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

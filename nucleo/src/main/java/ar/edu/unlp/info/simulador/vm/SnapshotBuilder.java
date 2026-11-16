@@ -75,7 +75,10 @@ final class SnapshotBuilder {
         List<Value> items = switch (v) {
             case Value.ArrayVal a -> List.of(a.raw());
             case Value.QueueVal q -> q.snapshot();
-            default -> null;
+            case Value.IntVal ignored -> null;
+            case Value.DoubleVal ignored -> null;
+            case Value.BoolVal ignored -> null;
+            case Value.TextVal ignored -> null;
         };
         List<String> elements = null;
         if (items != null) {
