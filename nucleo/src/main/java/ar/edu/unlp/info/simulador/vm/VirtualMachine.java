@@ -23,7 +23,6 @@ public final class VirtualMachine {
     /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
     static final int TOPE_INICIALIZACION = 100_000;
 
-    private final Program program;
     private final Scheduler scheduler;
     private final MonitorProtocol monitorProtocol;
     private final StatementExecutor statements;
@@ -45,19 +44,18 @@ public final class VirtualMachine {
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {
-        this.program = program;
         Azar random = new Azar(seed);
         this.scheduler = new Scheduler(processes, random);
         this.monitorProtocol = new MonitorProtocol(monitors, random, advancedLastStep,
                 this::event);
         this.statements = new StatementExecutor(vars, monitors, monitorDefs, monitorProtocol,
                 salida, clock, this::event);
-        initialize();
+        initialize(program);
     }
 
     // ================================================================= init
 
-    private void initialize() {
+    private void initialize(Program program) {
         for (MonitorDef md : program.monitors()) {
             monitorDefs.put(md.name(), md);
             for (Monitor m : ProgramLoader.buildMonitors(md)) monitors.put(m.name(), m);
@@ -131,11 +129,10 @@ public final class VirtualMachine {
         }
         wakeDelayed();
         List<Process> turno = scheduler.nextTurn(chosenProcessId, policy);
-        if (turno.isEmpty() && isWaitingForDelay()) {
-            return events.stepEntries();
-        }
         if (turno.isEmpty()) {
-            if (!deadlockLogged) {
+            // nadie puede avanzar: o se espera un delay, o es un interbloqueo (que ocupa un
+            // instante propio, y se informa una sola vez)
+            if (!isWaitingForDelay() && !deadlockLogged) {
                 clock.tick();
                 logDeadlock();
             }
@@ -256,11 +253,17 @@ public final class VirtualMachine {
             List<Monitor> held = monitorProtocol.heldBy(p);
             if (p.state() != Process.State.BLOCKED || held.isEmpty()) continue;
             sb.append(". ").append(p.name()).append(" espera en ").append(p.blockedOn())
-                    .append(" y retiene ");
-            for (int i = 0; i < held.size(); i++) {
-                if (i > 0) sb.append(i == held.size() - 1 ? " y " : ", ");
-                sb.append(held.get(i).name());
-            }
+                    .append(" y retiene ").append(namesList(held));
+        }
+        return sb.toString();
+    }
+
+    /** Los nombres como se enumeran en castellano: "A", "A y B", "A, B y C". */
+    private static String namesList(List<Monitor> monitors) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < monitors.size(); i++) {
+            if (i > 0) sb.append(i == monitors.size() - 1 ? " y " : ", ");
+            sb.append(monitors.get(i).name());
         }
         return sb.toString();
     }
