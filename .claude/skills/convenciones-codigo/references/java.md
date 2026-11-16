@@ -41,3 +41,8 @@ cosa con `npm run engine` + `npm run smoke`.
 - Programas de prueba en text blocks o desde `ejemplos/`.
 - Helpers en `TestSupport`; no duplicar bucles de ejecución.
 - Tests de bugs pendientes: `@Disabled("Bn: descripción")`, nunca borrados.
+- Golden master: `CharacterizationTest` (la VM, por el puente) y
+  `CompileErrorsCharacterizationTest` (cada mensaje de error del compilador) comparan con
+  `src/test/resources/characterization/`. Un refactor no puede cambiarlos; si un cambio de
+  comportamiento es intencional, se regeneran con
+  `mvn test -Dcharacterization.regenerate=true` y el diff se revisa en el commit.

@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Convenciones: los nombres de los tests van en inglés (con Javadoc y mensajes en español), el núcleo ya está todo en inglés, y `nucleo/CLAUDE.md` describe los colaboradores de la VM y cuándo se regeneran los golden master. (Federico Dobal, 2026-11-16)
 - Golden master con nombres en inglés: la carpeta `characterization/`, `compile-errors.{mon,txt}`, las claves del corpus (`example/`, `canon/`, `variant/`, `extra/`) y sus archivos, las etiquetas de cada corrida y la propiedad `-Dcharacterization.regenerate=true`. (Federico Dobal, 2026-11-16)
 - Tests del núcleo con nombres en inglés: clases (`CharacterizationTest`, `InvariantsTest`, `ProgramCorpus`, `ExamplesTest`, `VmRegressionTest`), métodos `@Test` (el nombre sigue describiendo el comportamiento) y variables. Los tests son los mismos. (Federico Dobal, 2026-11-16)
 - Puente al navegador con nombres en inglés: `SimuladorJs` pasa a `SimulatorJs` y sus funciones a `create`, `restart`, `step`, `state` y `release`; `api.ts` las usa como `engine.*`, y `simulador.d.ts`, el smoke, el `pom.xml` y la documentación nombran las nuevas. El JSON que viaja no cambia. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

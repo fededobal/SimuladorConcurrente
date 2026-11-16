@@ -26,17 +26,16 @@ Leer el que corresponda antes de escribir.
   (`Cola`, `ColaOrdenada`, `signal_all`, nombres de eventos visibles).
 - Comentarios, Javadoc/TSDoc, mensajes al usuario, documentación, commits y CHANGELOG:
   **español**, con tildes correctas.
-- Hoy el código mezcla (`SimuladorJs.crear`, `aridadCola`, `execWrite`). No renombrar en
-  masa: cada archivo que se toque por otro motivo queda consistente, en commits
-  `refactor` separados.
+- El núcleo (`nucleo/`, código y tests) ya está todo en inglés, incluidas las funciones que
+  exporta al navegador (`create`, `step`, `state`...). Lo que quede mezclado en la interfaz
+  se corrige al tocar cada archivo por otro motivo, en un commit `refactor` aparte.
 
 **Diseño**
 - Una responsabilidad por clase/módulo. Si un archivo supera ~400 líneas o un método ~40,
-  es señal de que hay que partir (hoy `VirtualMachine` ~800 líneas: partirla en un
-  `refactor(vm)` aparte antes de hacerla crecer).
+  es señal de que hay que partir, en un commit `refactor` aparte antes de hacerlo crecer.
 - Datos inmutables por defecto (records en Java, `readonly` y objetos nuevos en TS).
 - Sin estado global mutable, salvo el puente `SimulatorJs` (una simulación por pestaña).
-- El núcleo es **determinista**: todo azar sale del `Random` sembrado de la VM. Nunca
+- El núcleo es **determinista**: todo azar sale del `SeededRandom` de la VM. Nunca
   `Math.random`, `System.currentTimeMillis` ni `Date.now` dentro de `lang/` o `vm/`.
 
 **Errores**
@@ -52,8 +51,8 @@ Leer el que corresponda antes de escribir.
 
 **Tests**
 - Todo comportamiento nuevo o bug arreglado lleva test que falla sin el cambio.
-- Nombre del test: comportamiento en español, `camelCase`
-  (`errorDentroDelMonitorLiberaElLock`).
+- Nombre del test: el comportamiento, en inglés y `camelCase`
+  (`errorInsideMonitorReleasesLock`). El Javadoc y los mensajes del test, en español.
 - Con azar: varias semillas. Programas de ejemplo preferentemente desde `ejemplos/`.
 
 **Dependencias**
