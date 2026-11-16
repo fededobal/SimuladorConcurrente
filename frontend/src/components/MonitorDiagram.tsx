@@ -6,6 +6,7 @@ import {
 import { MasMenos, MAX_VISIBLES } from './MasMenos';
 import { MonitorVars } from './MonitorVars';
 import { segundosRestantes } from '../useAhora';
+import { processTextColor } from '../processColor';
 import type { CondView, LogEntry, MonitorView, ProcessView, ProcRef } from '../types';
 
 interface Props {
@@ -210,7 +211,7 @@ function Nombres({ procs, sinLimite = false }: {
   return (
     <>
       {visibles.map((p, i) => (
-        <span key={p.id} style={{ color: p.color }}>
+        <span key={p.id} style={{ color: processTextColor(p.color) }}>
           {p.name}{i < visibles.length - 1 ? ', ' : ''}
         </span>
       ))}

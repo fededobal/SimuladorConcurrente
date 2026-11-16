@@ -10,6 +10,7 @@
 | **Ejemplos** | Carga un [programa de ejemplo](/ejemplos); pide confirmación si el editor tiene un programa propio |
 | **Salida** | Abre la [pantalla de salida](./salida); el número es la cantidad de líneas |
 | **Documentación** | Abre este sitio |
+| Luna / sol | Pasa al tema oscuro o al claro. La primera vez se usa el del sistema operativo; después, el navegador recuerda el elegido |
 | Estado e instante | Listo, ejecutando, en pausa, fin, deadlock o error, y el número del instante actual |
 
 ## Velocidades

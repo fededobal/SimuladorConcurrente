@@ -4,6 +4,7 @@ import { ExpandButton } from './ExpandButton';
 import { MAX_VISIBLES } from './MasMenos';
 import { STATE_CLASS, STATE_HINT, STATE_LABEL, type VisibleState } from '../processStates';
 import { shortName } from '../monitorDiagram';
+import { processTextColor } from '../processColor';
 import { familyOf, type Timeline as TimelineData, type TimelineColumn } from '../timeline';
 import type { LogEntry, ProcessView } from '../types';
 
@@ -287,7 +288,7 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
                 style={{ top: RULER_H + monitorsH + fila * ROW_H, ['--st-proceso' as string]: p.color }}
                 title={ultimo ? `${p.name}: ${STATE_HINT[ultimo]}` : p.name}
               >
-                <div className="tl-nombre" style={{ color: p.color }}>{p.name}</div>
+                <div className="tl-nombre" style={{ color: processTextColor(p.color) }}>{p.name}</div>
                 {segments.get(id)?.map((s) => {
                   const width = s.length * cell;
                   const label = labelOf(s);
@@ -339,7 +340,7 @@ function Evento({ e }: { e: LogEntry }) {
   if (e.processId === null || i < 0) return <div>{e.message}</div>;
   return (
     <div>
-      <span className="quien" style={{ color: e.processColor ?? undefined }}>{e.message.slice(0, i)}</span>
+      <span className="quien" style={{ color: e.processColor ? processTextColor(e.processColor) : undefined }}>{e.message.slice(0, i)}</span>
       {' '}{e.message.slice(i + 2)}
     </div>
   );

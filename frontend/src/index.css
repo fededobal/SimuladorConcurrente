@@ -3,6 +3,9 @@
  * proyectada: paneles blancos al ras, separados por una linea fina, un solo color de
  * acento y estados en tonos apagados. El color lo ponen los procesos, y siempre acompanado
  * de una forma (rayado, puntos, la "M") para no depender solo de el.
+ *
+ * El tema oscuro ("pizarra", mas abajo) redefine solo estos tokens. Lo elige el boton de la
+ * barra; index.html pone `data-theme` antes de pintar.
  */
 :root {
   --bg: #e9ecf0;
@@ -15,7 +18,20 @@
   --dim: #5f6b7a;
   --dimmer: #9aa5b4;
   --accent: #2456a4;
+  /* relleno del boton principal; en el oscuro el acento es un azul claro para texto */
+  --accent-fill: #2456a4;
+  --accent-hover: #1d478a;
   --accent-soft: #eef2f8;
+  /* texto sobre el acento o sobre el color pleno de un proceso */
+  --on-accent: #ffffff;
+  /* fondo detras del nombre en una franja del editor, para separarlo del rayado */
+  --halo: #ffffff;
+  /* con que se aclaran los colores de estado y de proceso al usarlos como fondo */
+  --mix-base: #ffffff;
+  /* cuanto del color de un proceso queda al escribir su nombre (ver processColor.ts) */
+  --proc-text-mix: 100%;
+  --popover-shadow: 0 6px 18px rgba(31, 41, 51, 0.12);
+  --select-arrow: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%235f6b7a' stroke-width='1.5'/></svg>");
 
   --tok-comment: #7a8290;
   --tok-decl: #2456a4;
@@ -52,6 +68,48 @@
   --asa: 9px;
 
   color-scheme: light;
+}
+
+/* Pizarra: el mismo gris frio del tema claro, oscurecido. Los colores de estado conservan
+   el matiz con mas luz, y el nombre de cada proceso se mezcla con blanco para leerse. */
+:root[data-theme="dark"] {
+  --bg: #111418;
+  --panel: #181c21;
+  --panel-soft: #1e232a;
+  --line: #2a3038;
+  --line-soft: #20252c;
+  --line-strong: #3a414b;
+  --text: #dde3ea;
+  --dim: #95a0ad;
+  --dimmer: #6b7683;
+  --accent: #7ea6e0;
+  --accent-fill: #2f5fa8;
+  --accent-hover: #3a6db9;
+  --accent-soft: #1f2a3a;
+  --on-accent: #ffffff;
+  --halo: #181c21;
+  --mix-base: #181c21;
+  --proc-text-mix: 60%;
+  --popover-shadow: none;
+  --select-arrow: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%2395a0ad' stroke-width='1.5'/></svg>");
+
+  --tok-comment: #7f8996;
+  --tok-decl: #8fb0e6;
+  --tok-sync: #8fb0e6;
+  --tok-type: #95a0ad;
+  --tok-ctrl: #dde3ea;
+  --tok-lit: #d0a066;
+
+  --danger: #e48a7d;
+  --danger-bg: #2a1a18;
+  --danger-line: #57302a;
+
+  --st-competing: #c9a560;
+  --st-waiting: #d58a80;
+  --st-delayed: #84b48c;
+  --st-ready: #5d6773;
+
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,8 +168,10 @@ button { cursor: pointer; }
 .btn:hover:not(:disabled) { background: var(--panel-soft); border-color: var(--dimmer); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn-enlace { text-decoration: none; color: var(--text); }
-.btn-main { background: var(--accent); border-color: var(--accent); color: #fff; }
-.btn-main:hover:not(:disabled) { background: #1d478a; border-color: #1d478a; }
+.btn-main { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+.btn-main:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+/* boton de solo icono (el del tema): cuadrado, del mismo alto que los demas */
+.btn-icono { width: 32px; padding: 0; justify-content: center; }
 
 .sel {
   height: 32px;
@@ -121,7 +181,7 @@ button { cursor: pointer; }
   border-radius: 6px;
   color: var(--text);
   appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%235f6b7a' stroke-width='1.5'/></svg>");
+  background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 10px center;
 }
@@ -352,7 +412,7 @@ button { cursor: pointer; }
   font-family: var(--sans);
   font-size: 6.5px;
   font-weight: 700;
-  fill: #fff;
+  fill: var(--on-accent);
   pointer-events: none;
 }
 .mon-anillo { fill: none; stroke: var(--dim); stroke-width: 1; stroke-dasharray: 2 2; }
@@ -624,11 +684,11 @@ button { cursor: pointer; }
   border-left: 3px dashed var(--st);
 }
 
-/* un halo casi blanco separa el nombre del rayado de la franja */
+/* un halo del color del panel separa el nombre del rayado de la franja */
 .stripe .who {
   padding: 0 4px;
   border-radius: 3px;
-  background: color-mix(in srgb, #fff 70%, transparent);
+  background: color-mix(in srgb, var(--halo) 70%, transparent);
   font-family: var(--sans);
   font-size: 10.5px;
   letter-spacing: 0.01em;
@@ -663,7 +723,7 @@ button { cursor: pointer; }
   border-radius: 6px;
   font-variant-numeric: tabular-nums;
   color: var(--text);
-  background: color-mix(in srgb, var(--st-delayed) 18%, #fff);
+  background: color-mix(in srgb, var(--st-delayed) 18%, var(--mix-base));
 }
 
 .tok-comment { color: var(--tok-comment); font-style: italic; }
@@ -850,7 +910,7 @@ button { cursor: pointer; }
   padding: 0 4px;
   line-height: 1.4;
 }
-.tl-tramo.tl-dueno { color: #fff; font-weight: 600; }
+.tl-tramo.tl-dueno { color: var(--on-accent); font-weight: 600; }
 .tl-tramo.tl-libre {
   top: 6px;
   bottom: 6px;
@@ -876,9 +936,9 @@ button { cursor: pointer; }
 
 /* ejecutando: fuera del monitor el color claro; adentro el color pleno con el nombre del
    monitor. En la leyenda no hay un proceso: las muestras usan un color de la paleta. */
-.tl-tramo.st-running-process { background: color-mix(in srgb, var(--st) 38%, #fff); color: var(--text); }
-.tl-tramo.st-running-monitor { background: var(--st); color: #fff; font-weight: 600; }
-.tl-muestra.st-running-process { background: color-mix(in srgb, #4f6d9e 38%, #fff); }
+.tl-tramo.st-running-process { background: color-mix(in srgb, var(--st) 38%, var(--mix-base)); color: var(--text); }
+.tl-tramo.st-running-monitor { background: var(--st); color: var(--on-accent); font-weight: 600; }
+.tl-muestra.st-running-process { background: color-mix(in srgb, #4f6d9e 38%, var(--mix-base)); }
 .tl-muestra.st-running-monitor { background: #4f6d9e; }
 
 /* esperas en un tono de fondo: lo que resalta es la ejecucion; el rotulo dice la causa */
@@ -906,9 +966,9 @@ button { cursor: pointer; }
   width: 300px;
   padding: 8px 10px;
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(31, 41, 51, 0.12);
+  box-shadow: var(--popover-shadow);
   font-family: var(--sans);
   font-size: 11.5px;
   line-height: 1.5;

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ExpandButton } from './ExpandButton';
+import { processTextColor } from '../processColor';
 import type { OutputLine } from '../types';
 
 interface Props {
@@ -35,7 +36,7 @@ export function OutputPanel({ lines, expanded, onToggleExpand }: Props) {
           lines.map((l, i) => (
             <div key={i} className="linea">
               <span className="t">{l.instant}</span>
-              <span className="quien" style={{ color: l.color }}>{l.process}</span>
+              <span className="quien" style={{ color: processTextColor(l.color) }}>{l.process}</span>
               <span className="texto">{l.text}</span>
             </div>
           ))

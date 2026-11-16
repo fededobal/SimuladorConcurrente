@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Modo oscuro: un botón con una luna o un sol, al final de la barra, pasa del tema claro al oscuro y vuelve. La primera vez se usa el tema del sistema operativo; después el navegador recuerda el elegido. El oscuro conserva el gris frío y el acento azul del claro, y los nombres de los procesos se aclaran lo justo para leerse sobre el fondo oscuro. (Federico Dobal, 2026-11-16)
 - Documentación: al elegir una coincidencia del buscador, la palabra buscada queda resaltada en el artículo; el resaltado se quita con un clic en el texto, con Escape o al navegar. (Federico Dobal, 2026-11-14)
 - Documentación: página "Índice" al principio con todas las páginas y qué cubre cada una; botón para ocultar y mostrar la barra lateral (el navegador recuerda la elección); buscador más ancho. (Federico Dobal, 2026-11-14)
 - Botón "Documentación" en la barra del simulador, que abre el sitio de documentación. (Federico Dobal, 2026-11-13)

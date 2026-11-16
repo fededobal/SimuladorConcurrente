@@ -2,6 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { segundosRestantes, useAhora } from '../useAhora';
 import { MAX_VISIBLES } from './MasMenos';
 import { STATE_CLASS, type VisibleState } from '../processStates';
+import { processTextColor } from '../processColor';
 
 /** Renglon donde esta parado un proceso: la franja toma el color del estado, el nombre el del proceso. */
 export interface ActiveLine {
@@ -479,7 +480,7 @@ export function CodeEditor({
                 <span
                   className="who"
                   style={{
-                    color: p.color,
+                    color: processTextColor(p.color),
                     opacity: NAME_ALPHA[p.state],
                     transform: `translateX(${-p.corrimiento}px)`,
                   }}

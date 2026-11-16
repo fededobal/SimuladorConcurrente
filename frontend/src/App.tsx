@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BookOpen, Play, Pause, SkipForward, Square, Terminal, ZoomIn, ZoomOut } from 'lucide-react';
+import {
+  BookOpen, Moon, Play, Pause, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
+} from 'lucide-react';
 import { CodeEditor, type ActiveLine } from './components/CodeEditor';
 import { Dock } from './components/Dock';
 import { OutputPanel } from './components/OutputPanel';
@@ -10,6 +12,8 @@ import { Timeline } from './components/Timeline';
 import { visibleState } from './processStates';
 import { useDragSize } from './useDragSize';
 import { useEditorZoom } from './useEditorZoom';
+import { useTheme } from './useTheme';
+import { processTextColor } from './processColor';
 import type { SchedulingPolicy } from './types';
 
 /** Paneles que se pueden ampliar al costado del editor (el editor siempre queda a la vista). */
@@ -41,6 +45,8 @@ export function App() {
   const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
   const { snapshot, status } = sim;
   const zoom = useEditorZoom();
+  const tema = useTheme();
+  const otroTema = tema.theme === 'dark' ? 'claro' : 'oscuro';
 
   // Cada panel se agranda o achica arrastrando el borde que mira al editor.
   const abajo = useDragSize('y', 'Cambiar el alto de la línea de tiempo');
@@ -198,6 +204,12 @@ export function App() {
           <BookOpen size={14} /> Documentación
         </a>
 
+        {/* el icono muestra el tema al que se pasa, no el actual */}
+        <button className="btn btn-icono" onClick={tema.toggle}
+          aria-label={`Pasar al tema ${otroTema}`} title={`Pasar al tema ${otroTema}`}>
+          {tema.theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
+
         <div className="meta">
           <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
           <span className="rotulo">instante</span>
@@ -238,7 +250,7 @@ export function App() {
               <div className="err" role="alert">
                 {fallidos.map((p) => (
                   <div key={p.id}>
-                    <span style={{ color: p.color }}>{p.name}</span>
+                    <span style={{ color: processTextColor(p.color) }}>{p.name}</span>
                     {p.line > 0 ? `, línea ${p.line}` : ''}: error de ejecución: {p.error}
                   </div>
                 ))}

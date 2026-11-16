@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulador de Monitores — UNLP</title>
+    <!-- Pone el tema antes de pintar, para que no destelle el claro al cargar en oscuro.
+         La clave es la misma que usa src/useTheme.ts. -->
+    <script>
+      (function () {
+        var tema = null;
+        try { tema = localStorage.getItem('simulador.tema'); } catch (e) {}
+        if (tema !== 'light' && tema !== 'dark') {
+          tema = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = tema;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
