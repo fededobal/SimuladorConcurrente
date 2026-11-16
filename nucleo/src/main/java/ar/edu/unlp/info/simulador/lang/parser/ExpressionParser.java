@@ -100,8 +100,8 @@ final class ExpressionParser {
             int line = tokens.previous().line();
             Expr right = parseAdd();
             if (tokens.checkAny(COMPARISON_OPERATORS)) {
-                throw tokens.error("Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí "
-                        + "'a < b and b < c'");
+                throw tokens.error("Las comparaciones no se encadenan: en lugar de "
+                        + "'a < b < c' escribí 'a < b and b < c'");
             }
             return new Expr.Binary(op, left, right, line);
         }

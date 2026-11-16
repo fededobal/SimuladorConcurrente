@@ -52,7 +52,8 @@ public final class Parser {
     private MonitorDef parseMonitor() {
         Token kw = tokens.consume("monitor", "Se esperaba 'monitor'");
         String name = tokens.consumeIdent("Se esperaba el nombre del monitor");
-        ProcessDef.QuantDef quant = tokens.match("[") ? parseQuant("del arreglo de monitores") : null;
+        ProcessDef.QuantDef quant =
+                tokens.match("[") ? parseQuant("del arreglo de monitores") : null;
         tokens.consume("{", "Se esperaba '{' para abrir el monitor");
 
         List<VarDecl> perm = new ArrayList<>();
@@ -131,7 +132,8 @@ public final class Parser {
             tokens.match("in");
         }
         if (tokens.peek().is("inout")) {
-            throw tokens.error("El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)");
+            throw tokens.error("El modo inout no existe: un parámetro es in (se lee) "
+                    + "u out (se devuelve)");
         }
         if (!isScalarType(tokens.peek())) {
             throw tokens.error("Se esperaba un tipo escalar (int, double, bool, text) "
@@ -168,7 +170,8 @@ public final class Parser {
     private ProcessDef parseProcess() {
         Token kw = tokens.consume("process", "Se esperaba 'process'");
         String name = tokens.consumeIdent("Se esperaba el nombre del proceso");
-        ProcessDef.QuantDef quant = tokens.match("[") ? parseQuant("de la familia de procesos") : null;
+        ProcessDef.QuantDef quant =
+                tokens.match("[") ? parseQuant("de la familia de procesos") : null;
         Stmt.Block body = parseBlock();
         return new ProcessDef(name, quant, body, kw.line());
     }
@@ -433,7 +436,7 @@ public final class Parser {
         return new Stmt.ForStmt(init, limit, cond, step, body, line);
     }
 
-    /** El resto de un for al estilo C, despues de la inicializacion: {@code ; cond; paso) cuerpo}. */
+    /** El resto de un for al estilo C, tras la inicializacion: {@code ; cond; paso) cuerpo}. */
     private Stmt parseCStyleFor(Stmt init, int line) {
         tokens.consume(";", "Se esperaba ';' en el 'for'");
         Expr cond = tokens.check(";") ? new Expr.BoolLit(true, line) : parseExpr();
