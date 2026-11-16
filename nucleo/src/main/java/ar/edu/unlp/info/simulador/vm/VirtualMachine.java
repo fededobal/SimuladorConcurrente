@@ -186,7 +186,7 @@ public final class VirtualMachine {
     /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
     private void logDeadlock() {
         deadlockLogged = true;
-        events.systemEvent(instant, "DEADLOCK", deadlockMessage());
+        events.systemEvent(instant, EventKind.DEADLOCK, deadlockMessage());
     }
 
     /**
@@ -196,9 +196,9 @@ public final class VirtualMachine {
      */
     private void failProcess(Process p, String message) {
         p.fail(message);
-        event(p, "ERROR", "", p.name() + ": error de ejecución - " + message);
+        event(p, EventKind.ERROR, "", p.name() + ": error de ejecución - " + message);
         for (Monitor m : monitorsHeldBy(p)) {
-            event(p, "RELEASE", m.name(),
+            event(p, EventKind.RELEASE, m.name(),
                     p.name() + ": libera " + m.name() + " al terminar con error");
             releaseMonitor(m);
         }
@@ -210,7 +210,7 @@ public final class VirtualMachine {
         int guard = 0;
         while (true) {
             if (++guard > STRUCTURAL_CAP) {
-                event(p, "SPIN", "", p.name() + ": espera activa (bucle sin avanzar)");
+                event(p, EventKind.SPIN, "", p.name() + ": espera activa (bucle sin avanzar)");
                 return;
             }
             Activation act = p.current();
@@ -244,7 +244,7 @@ public final class VirtualMachine {
         Monitor m = monitors.get(act.monitorName());
         if (!m.isFree()) {
             enqueueEntrant(p, m);
-            event(p, "BLOCKED", m.name(), p.name() + ": espera para "
+            event(p, EventKind.BLOCKED, m.name(), p.name() + ": espera para "
                     + (act.isEntering() ? "entrar a " : "reingresar a ") + destination(act, m));
             return;
         }
@@ -258,9 +258,9 @@ public final class VirtualMachine {
         act.setNeedsLock(false);
         if (act.isEntering()) {
             act.setEntering(false);
-            event(p, "ENTER", m.name(), p.name() + ": entra a " + destino);
+            event(p, EventKind.ENTER, m.name(), p.name() + ": entra a " + destino);
         } else {
-            event(p, "REENTER", m.name(), p.name() + ": reingresa a " + destino);
+            event(p, EventKind.REENTER, m.name(), p.name() + ": reingresa a " + destino);
         }
     }
 
@@ -283,14 +283,14 @@ public final class VirtualMachine {
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
             writeOutParameters(p, act);
-            event(p, "RETURN", m.name(),
+            event(p, EventKind.RETURN, m.name(),
                     p.name() + ": retorna de " + m.name() + "." + act.procedureName()
                             + ", libera el monitor");
             releaseMonitor(m);
         }
         if (p.callStack().isEmpty()) {
             p.setState(Process.State.TERMINATED);
-            event(p, "TERMINATED", "", p.name() + ": termina");
+            event(p, EventKind.TERMINATED, "", p.name() + ": termina");
         }
     }
 
@@ -370,7 +370,7 @@ public final class VirtualMachine {
             case Stmt.IfStmt iff -> execIf(act, iff);
             case Stmt.WhileStmt w -> execWhile(act, w);
             case Stmt.ForStmt f -> execFor(p, act, f);
-            case Stmt.Skip ignored -> event(p, "SKIP", "", p.name() + ": skip");
+            case Stmt.Skip ignored -> event(p, EventKind.SKIP, "", p.name() + ": skip");
             case Stmt.Delay d -> execDelay(p, act, d);
             case VarDecl vd -> execLocalDecl(p, act, vd);
             case Stmt.Assign a -> execAssign(p, act, a);
@@ -440,7 +440,7 @@ public final class VirtualMachine {
     private void execLocalDecl(Process p, Activation act, VarDecl vd) {
         Value v = ProgramLoader.initialValue(vd, vars.evaluator(act));
         act.locals().put(vd.name(), v);
-        event(p, "DECL", vd.name(), p.name() + ": " + vd.type().keyword()
+        event(p, EventKind.DECL, vd.name(), p.name() + ": " + vd.type().keyword()
                 + " " + vd.name() + " = " + v.display());
     }
 
@@ -448,7 +448,7 @@ public final class VirtualMachine {
         Value value = vars.evaluator(act).eval(a.value());
         if (a.index() == null) {
             vars.assignScalar(p.id(), act, a.target(), value, a.line());
-            event(p, "ASSIGN", a.target(), p.name() + ": " + a.target() + " = " + value.display());
+            event(p, EventKind.ASSIGN, a.target(), p.name() + ": " + a.target() + " = " + value.display());
             return;
         }
         VariableAccess.ArraySlot slot = vars.arraySlot(act, a.target(), a.index(), a.line());
@@ -456,7 +456,7 @@ public final class VirtualMachine {
         slot.array().set(slot.index(),
                 value.assignTo(slot.array().elementType(), element, a.line()));
         vars.touchIfMonitorVar(p.id(), act, a.target());
-        event(p, "ASSIGN", a.target(), p.name() + ": " + element + " = " + value.display());
+        event(p, EventKind.ASSIGN, a.target(), p.name() + ": " + element + " = " + value.display());
     }
 
     private void execIncDec(Process p, Activation act, Stmt.IncDec inc) {
@@ -465,7 +465,7 @@ public final class VirtualMachine {
             Value cur = vars.read(act, inc.target(), inc.line());
             Value next = stepped(cur, inc.increment(), inc.line());
             vars.assignScalar(p.id(), act, inc.target(), next, inc.line());
-            event(p, "ASSIGN", inc.target(),
+            event(p, EventKind.ASSIGN, inc.target(),
                     p.name() + ": " + inc.target() + operator + " => " + next.display());
             return;
         }
@@ -473,7 +473,7 @@ public final class VirtualMachine {
         Value next = stepped(slot.array().get(slot.index()), inc.increment(), inc.line());
         slot.array().set(slot.index(), next);
         vars.touchIfMonitorVar(p.id(), act, inc.target());
-        event(p, "ASSIGN", inc.target(), p.name() + ": " + inc.target() + "[" + slot.index()
+        event(p, EventKind.ASSIGN, inc.target(), p.name() + ": " + inc.target() + "[" + slot.index()
                 + "]" + operator + " => " + next.display());
     }
 
@@ -603,7 +603,7 @@ public final class VirtualMachine {
         cv.enqueue(p);
         p.block(Process.BlockReason.COND_WAIT, m.name() + "." + key);
         act.setNeedsLock(true);
-        event(p, "WAIT", m.name() + "." + key,
+        event(p, EventKind.WAIT, m.name() + "." + key,
                 p.name() + ": wait(" + key + ") - libera el monitor y se demora");
         releaseMonitor(m);
     }
@@ -611,13 +611,13 @@ public final class VirtualMachine {
     /** Signal and continue: el despertado pasa a competir por el monitor y el que senala sigue. */
     private void execSignal(Process p, Monitor m, ConditionVariable cv, String key) {
         if (cv.isEmpty()) {
-            event(p, "SIGNAL", m.name() + "." + key,
+            event(p, EventKind.SIGNAL, m.name() + "." + key,
                     p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
             return;
         }
         Process w = cv.dequeue();
         enqueueEntrant(w, m);
-        event(p, "SIGNAL", m.name() + "." + key,
+        event(p, EventKind.SIGNAL, m.name() + "." + key,
                 p.name() + ": signal(" + key + ") - despierta a " + w.name()
                         + " (compite por el monitor)");
     }
@@ -625,7 +625,7 @@ public final class VirtualMachine {
     private void execSignalAll(Process p, Monitor m, ConditionVariable cv, String key) {
         List<Process> all = cv.drain();
         for (Process w : all) enqueueEntrant(w, m);
-        event(p, "SIGNAL_ALL", m.name() + "." + key,
+        event(p, EventKind.SIGNAL_ALL, m.name() + "." + key,
                 p.name() + ": signal_all(" + key + ") - despierta a " + all.size()
                         + " proceso(s)");
     }
@@ -641,7 +641,7 @@ public final class VirtualMachine {
                     + " segundos y es de " + seconds, d.line());
         }
         p.delayUntil(clockMs + seconds * 1000);
-        event(p, "DELAY", "", p.name() + ": delay(" + seconds + ") - se demora " + seconds
+        event(p, EventKind.DELAY, "", p.name() + ": delay(" + seconds + ") - se demora " + seconds
                 + (seconds == 1 ? " segundo" : " segundos"));
     }
 
@@ -652,7 +652,7 @@ public final class VirtualMachine {
         for (Expr e : w.args()) sb.append(ev.eval(e).display());
         String texto = sb.toString();
         salida.add(instant, p, texto);
-        event(p, "WRITE", "", p.name() + ": write(" + texto + ")");
+        event(p, EventKind.WRITE, "", p.name() + ": write(" + texto + ")");
     }
 
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {
@@ -660,7 +660,7 @@ public final class VirtualMachine {
         Value pushed = pushedElement(act, qp, q.elementTypes());
         q.push(pushed);
         vars.touchIfMonitorVar(p.id(), act, qp.queue());
-        event(p, "PUSH", qp.queue(),
+        event(p, EventKind.PUSH, qp.queue(),
                 p.name() + ": push(" + qp.queue() + ", " + pushed.display() + ")");
     }
 
@@ -689,7 +689,7 @@ public final class VirtualMachine {
         Value v = q.pop();
         vars.touchIfMonitorVar(p.id(), act, qp.queue());
         assignPopped(p, act, qp, v);
-        event(p, "POP", qp.queue(),
+        event(p, EventKind.POP, qp.queue(),
                 p.name() + ": pop(" + qp.queue() + ") => " + v.display());
     }
 
@@ -756,7 +756,7 @@ public final class VirtualMachine {
 
     // ================================================================= logging
 
-    private void event(Process p, String kind, String resource, String message) {
+    private void event(Process p, EventKind kind, String resource, String message) {
         events.processEvent(instant, p, kind, resource, message);
     }
 }

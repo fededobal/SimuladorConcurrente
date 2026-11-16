@@ -9,7 +9,7 @@ package ar.edu.unlp.info.simulador.vm;
  * @param instant      numero de instante (paso global)
  * @param processId    proceso involucrado, o null si es un evento del sistema
  * @param processColor color del proceso, o null
- * @param kind         categoria del evento (ENTER, RETURN, ASSIGN, WAIT, SIGNAL, BLOCKED, ...)
+ * @param kind         nombre del {@link EventKind} del evento
  * @param resource     recurso afectado (monitor, cond, variable), o "" si no aplica
  * @param message      mensaje legible para el historial
  */

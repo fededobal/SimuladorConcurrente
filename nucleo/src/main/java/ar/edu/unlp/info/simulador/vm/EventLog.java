@@ -45,15 +45,15 @@ final class EventLog {
     }
 
     /** Un evento de un proceso; los del codigo de inicializacion (id negativo) van sin proceso. */
-    void processEvent(int instant, Process p, String kind, String resource, String message) {
+    void processEvent(int instant, Process p, EventKind kind, String resource, String message) {
         if (!enabled) return;
         record(new LogEntry("e" + nextEventId++, instant, p.id() < 0 ? null : p.id(),
-                p.id() < 0 ? null : p.color(), kind, resource, message));
+                p.id() < 0 ? null : p.color(), kind.name(), resource, message));
     }
 
     /** Un evento de la simulacion, sin proceso (el interbloqueo). Se registra siempre. */
-    void systemEvent(int instant, String kind, String message) {
-        record(new LogEntry("e" + nextEventId++, instant, null, null, kind, "", message));
+    void systemEvent(int instant, EventKind kind, String message) {
+        record(new LogEntry("e" + nextEventId++, instant, null, null, kind.name(), "", message));
     }
 
     private void record(LogEntry e) {
