@@ -490,6 +490,46 @@ class CompilerTest {
                 """));
     }
 
+    /** Todas las palabras reservadas aceptan cualquier combinacion de mayusculas (OR, OUT, cola). */
+    @Test
+    void everyKeywordIsCaseInsensitive() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                MONITOR M { INT x = 0; Bool b = FALSE; COND c; cola q(Int); colaOrdenada o(TEXT);
+                  Procedure dar(r: OUT int; v: In int) {
+                    IF (x == 0 OR v == 1 And NOT b) r = 7 MOD 4; ELSE SKIP;
+                    WHILE (b) Wait(c); Signal(c); SIGNAL_ALL(c);
+                    Push(q, 1); Pop(q, x); b = EMPTY q; Write(x); }
+                }
+                Process P { Bool d = TRUE == False; Double e; int y; FOR (Int i = 1..2) DELAY(0); M.dar(y, 1); }
+                """));
+    }
+
+    /** Los nombres del alumno si distinguen mayusculas: declarar P no declara p. */
+    @Test
+    void identifiersRemainCaseSensitive() {
+        assertTrue(errorOf("""
+                monitor M { int total = 0; procedure p() { Total = 1; } }
+                process P { M.p(); }
+                """).contains("Total"));
+        assertTrue(errorOf("""
+                monitor M { procedure p() { skip; } }
+                process P { m.p(); }
+                """).contains("m"));
+        assertTrue(errorOf("""
+                monitor M { procedure p() { skip; } }
+                process P { M.P(); }
+                """).contains("P"));
+    }
+
+    /** Un nombre que coincide con una palabra reservada, con otras mayusculas, ya no es un nombre. */
+    @Test
+    void keywordInOtherCaseIsNotAnIdentifier() {
+        errorOf("monitor M { cond cola; procedure p() { skip; } } process P { M.p(); }");
+        errorOf("process P { int Out = 0; }");
+        assertEquals("Línea 1: El tipo se llama bool, no Boolean",
+                errorOf("process P { Boolean listo = true; }"));
+    }
+
     /** Parametros como la catedra: ';' entre grupos y ',' entre nombres del mismo tipo. */
     @Test
     void parametersGroupedAndSeparatedBySemicolon() {
@@ -531,8 +571,8 @@ class CompilerTest {
     void emptyOnConditionIsNotAllowed() {
         String expected = "Línea 2: En la práctica no se permite preguntar si una variable "
                 + "condición está vacía";
-        assertEquals(expected, errorOf("monitor M { cond cola; bool b;\n"
-                + "procedure f() { b = empty(cola); } }\nprocess P { M.f(); }"));
+        assertEquals(expected, errorOf("monitor M { cond espera; bool b;\n"
+                + "procedure f() { b = empty(espera); } }\nprocess P { M.f(); }"));
         assertEquals(expected, errorOf("monitor M { cond turno[3]; bool b;\n"
                 + "procedure f() { b = empty(turno[1]); } }\nprocess P { M.f(); }"));
     }

@@ -7,7 +7,7 @@
 ### lexer/boolean
 {"error":"Línea 1: El tipo se llama bool, no boolean","line":1}
 ### lexer/mayusculas-en-palabra-reservada
-{"error":"Línea 2: Se esperaba '=', '++' o '--' (se encontró ';')","line":2}
+{"error":"Línea 1: Nombre no declarado en este alcance: X","line":1}
 ### lexer/comilla-tipografica
 {"error":"Línea 1: Comilla tipográfica “: las cadenas van entre comillas rectas (\")","line":1}
 ### lexer/porcentaje

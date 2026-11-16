@@ -342,9 +342,12 @@ comentario    = "//" { caracter } fin_de_linea | "/*" { caracter } "*/" ;
 
 **Palabras reservadas (31):** `monitor procedure cond process if else while for skip
 wait signal signal_all push pop empty write in out true false int double bool text Cola
-ColaOrdenada and or not mod delay`. `monitor`, `procedure` y `process` no distinguen mayúsculas
-de minúsculas. `boolean` y el símbolo `%` no existen: el compilador indica que se escriben
-`bool` y `mod`.
+ColaOrdenada and or not mod delay`. Las palabras reservadas no distinguen mayúsculas de
+minúsculas: `OR`, `Out`, `cola` y `colaOrdenada` se leen como `or`, `out`, `Cola` y
+`ColaOrdenada`. Los identificadores sí las distinguen: `P` y `p` son nombres distintos, y un
+identificador no puede coincidir con una palabra reservada en ninguna combinación de
+mayúsculas (`cond cola;` es error). `boolean` y el símbolo `%` no existen: el compilador
+indica que se escriben `bool` y `mod`.
 
 No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores
 comunes y pueden usarse como nombres.

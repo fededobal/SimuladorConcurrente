@@ -8,7 +8,7 @@ process P { write("hola
 ### lexer/boolean
 process P { boolean b = true; }
 ### lexer/mayusculas-en-palabra-reservada
-MONITOR M { int x = 0; Procedure f() { x = 1; } }
+MONITOR M { int x = 0; Procedure f() { X = 1; } }
 Process P { M.f(); SKIP; }
 ### lexer/comilla-tipografica
 process P { write(“hola”); }

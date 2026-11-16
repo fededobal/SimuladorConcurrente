@@ -3,7 +3,10 @@ package ar.edu.unlp.info.simulator.lang.lexer;
 import ar.edu.unlp.info.simulator.lang.CompilationException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -25,10 +28,18 @@ public final class Lexer {
     );
 
     /**
-     * Palabras que la catedra escribe a veces con mayuscula ({@code Monitor}, {@code Procedure},
-     * {@code Process}): se aceptan con cualquier combinacion y se normalizan a minuscula.
+     * Cada palabra reservada en minuscula, con su forma canonica. La catedra mezcla mayusculas
+     * ({@code Monitor}, {@code OR}, {@code OUT}, {@code colaOrdenada}): las palabras reservadas
+     * se aceptan con cualquier combinacion y se normalizan, para que el parser compare siempre
+     * contra una sola forma. Los identificadores del alumno, en cambio, distinguen mayusculas.
      */
-    private static final List<String> CASE_INSENSITIVE = List.of("monitor", "procedure", "process");
+    private static final Map<String, String> CANONICAL_KEYWORDS = canonicalKeywords();
+
+    private static Map<String, String> canonicalKeywords() {
+        Map<String, String> canonical = new HashMap<>();
+        for (String kw : KEYWORDS) canonical.put(kw.toLowerCase(Locale.ROOT), kw);
+        return canonical;
+    }
 
     private static final Set<String> TWO_CHAR =
             Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
@@ -152,16 +163,15 @@ public final class Lexer {
             sb.append(advance());
         }
         String word = sb.toString();
-        if (word.equals("boolean")) {
-            throw new CompilationException("El tipo se llama bool, no boolean", startLine);
+        String lower = word.toLowerCase(Locale.ROOT);
+        if (lower.equals("boolean")) {
+            throw new CompilationException("El tipo se llama bool, no " + word, startLine);
         }
-        for (String kw : CASE_INSENSITIVE) {
-            if (word.equalsIgnoreCase(kw)) {
-                return new Token(TokenType.KEYWORD, kw, startLine, startCol);
-            }
+        String keyword = CANONICAL_KEYWORDS.get(lower);
+        if (keyword != null) {
+            return new Token(TokenType.KEYWORD, keyword, startLine, startCol);
         }
-        TokenType type = KEYWORDS.contains(word) ? TokenType.KEYWORD : TokenType.IDENTIFIER;
-        return new Token(type, word, startLine, startCol);
+        return new Token(TokenType.IDENTIFIER, word, startLine, startCol);
     }
 
     private Token readSymbol() {

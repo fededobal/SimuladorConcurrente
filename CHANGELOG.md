@@ -60,6 +60,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Todas las palabras reservadas aceptan cualquier combinación de mayúsculas (`OR`, `OUT`, `While`, `cola`, `colaOrdenada`), como aparecen en el material de la cátedra; antes solo `monitor`, `procedure` y `process`. Los nombres que declara el programa siguen distinguiendo mayúsculas, y un nombre que coincide con una palabra reservada en cualquier forma (`cond cola;`, `int Out;`) pasa a ser error. El resaltado del editor sigue la misma regla. (Federico Dobal, 2026-11-16)
 - Los paneles del simulador (barra, editor, línea de tiempo y monitores) quedan al ras, sin el hueco gris entre tarjetas; una línea fina los separa. El borde de cada panel se sigue arrastrando para cambiar su tamaño. (Federico Dobal, 2026-11-16)
 - Documentación: todas las celdas de las tablas empiezan con mayúscula, salvo las que empiezan con un nombre del lenguaje en código. (Federico Dobal, 2026-11-14)
 - Documentación: ocultar y mostrar la barra lateral se anima con una transición en vez de reacomodar la página de golpe, y la barra superior tiene fondo blanco translúcido con desenfoque. (Federico Dobal, 2026-11-14)

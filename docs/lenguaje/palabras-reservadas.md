@@ -1,9 +1,12 @@
 # Palabras reservadas y símbolos
 
-Son 31. Ninguna puede usarse como nombre de variable, monitor, procedure o proceso
-(escribir `int out = 0;` es error de sintaxis). `monitor`, `procedure` y `process` se
-aceptan con cualquier combinación de mayúsculas (`Monitor`, `Procedure`, `PROCESS`), como
-las escribe la cátedra; el resto se escribe tal cual figura en la tabla.
+Son 31. Se aceptan con cualquier combinación de mayúsculas (`Monitor`, `OR`, `OUT`,
+`colaOrdenada`), como aparecen en el material de la cátedra. Ninguna puede usarse como
+nombre de variable, monitor, procedure o proceso, en ninguna combinación de mayúsculas
+(`int out = 0;` e `int Out = 0;` son errores de sintaxis).
+
+Los nombres que declara el programa sí distinguen mayúsculas: si se declara `process P`,
+`p` es otro nombre.
 
 | Grupo | Palabras |
 |---|---|

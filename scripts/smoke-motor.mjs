@@ -213,9 +213,17 @@ const CANONICOS = [
     monitor M { Cola c; procedure f() { skip; } } process P { M.f(); }`,
     (r) => !!r.compilacion?.includes('tipos de sus componentes')],
   ['empty sobre una cond se rechaza como en la practica', `
-    monitor M { cond cola; bool b; procedure f() { b = empty(cola); } }
+    monitor M { cond espera; bool b; procedure f() { b = empty(espera); } }
     process P { M.f(); }`,
     (r) => !!r.compilacion?.endsWith('En la práctica no se permite preguntar si una variable condición está vacía')],
+  ['palabras reservadas con cualquier mayuscula; los nombres del alumno, exactos', `
+    MONITOR M { INT x = 0; colaOrdenada q(Int);
+      Procedure f(v: IN int; r: OUT int) { IF (v > 0 OR FALSE) Push(q, v); Pop(q, r); x = r MOD 5; } }
+    Process P { int y; M.f(7, y); }`,
+    (r) => r.finished && r.vars['M.x'] === '2'],
+  ['un nombre con otras mayusculas no es el mismo nombre', `
+    monitor M { int x = 0; procedure f() { X = 1; } } process P { M.f(); }`,
+    (r) => !!r.compilacion?.endsWith('Nombre no declarado en este alcance: X')],
   ['arreglo de monitores: cada indice tiene su propio estado', `
     monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
     process P[k: 0..2] { E[k].f(k); }`,

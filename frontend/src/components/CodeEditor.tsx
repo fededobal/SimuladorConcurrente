@@ -55,12 +55,10 @@ const NAME_ALPHA: Record<VisibleState, number> = {
 
 // ===================================================================== pintado
 
-/** Como en el Lexer: estas se aceptan con cualquier combinacion de mayusculas. */
-const KEYWORDS_SIN_MAYUSCULAS: Record<string, string> = {
-  monitor: 'tok-decl', procedure: 'tok-decl', process: 'tok-decl',
-};
-
-/** Mismas palabras reservadas que Lexer.KEYWORDS en el nucleo. */
+/**
+ * Mismas palabras reservadas que Lexer.KEYWORDS en el nucleo, en minuscula: como en el
+ * Lexer, se aceptan con cualquier combinacion de mayusculas (OR, OUT, colaOrdenada).
+ */
 const KEYWORDS: Record<string, string> = {
   monitor: 'tok-decl', procedure: 'tok-decl', cond: 'tok-decl', process: 'tok-decl',
 
@@ -71,7 +69,7 @@ const KEYWORDS: Record<string, string> = {
   push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl', write: 'tok-ctrl', delay: 'tok-sync',
 
   int: 'tok-type', double: 'tok-type', bool: 'tok-type', text: 'tok-type',
-  Cola: 'tok-type', ColaOrdenada: 'tok-type',
+  cola: 'tok-type', colaordenada: 'tok-type',
   in: 'tok-type', out: 'tok-type',
 
   true: 'tok-lit', false: 'tok-lit',
@@ -139,7 +137,9 @@ function highlight(code: string): string {
       let j = i;
       while (j < n && IDENT.test(code[j])) j++;
       const palabra = code.slice(i, j);
-      const cls = KEYWORDS[palabra] ?? KEYWORDS_SIN_MAYUSCULAS[palabra.toLowerCase()];
+      const clave = palabra.toLowerCase();
+      // hasOwn: 'constructor' o 'toString' no son palabras reservadas aunque el objeto las herede
+      const cls = Object.hasOwn(KEYWORDS, clave) ? KEYWORDS[clave] : undefined;
       out += cls ? span(cls, palabra) : escapeHtml(palabra);
       i = j;
       continue;
