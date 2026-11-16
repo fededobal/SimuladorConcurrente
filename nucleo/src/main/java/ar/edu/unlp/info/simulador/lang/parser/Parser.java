@@ -14,8 +14,6 @@ import java.util.List;
  */
 public final class Parser {
 
-    private static final List<String> SCALAR_TYPES = List.of("int", "double", "bool", "text");
-
     private final TokenCursor tokens;
     private final ExpressionParser expressions;
     private final QueueSyntaxParser queues;
@@ -38,7 +36,7 @@ public final class Parser {
                 monitors.add(parseMonitor());
             } else if (tokens.check("process")) {
                 processes.add(parseProcess());
-            } else if (isDeclStart(tokens.peek())) {
+            } else if (TokenCursor.isDeclStart(tokens.peek())) {
                 throw tokens.error("No se permiten variables globales");
             } else {
                 throw tokens.error("Se esperaba 'monitor' o 'process'");
@@ -66,7 +64,7 @@ public final class Parser {
                 conds.addAll(parseCondDecls());
             } else if (tokens.check("procedure")) {
                 procedures.add(parseProcedure());
-            } else if (isDeclStart(tokens.peek())) {
+            } else if (TokenCursor.isDeclStart(tokens.peek())) {
                 perm.addAll(parseVarDecls());
             } else {
                 init.add(parseStatement());
@@ -113,7 +111,7 @@ public final class Parser {
         List<Param> params = new ArrayList<>();
         if (tokens.check(")")) return params;
         do {
-            params.addAll(isScalarType(tokens.peek()) ? parseCStyleGroup() : parseParamGroup());
+            params.addAll(TokenCursor.isScalarType(tokens.peek()) ? parseCStyleGroup() : parseParamGroup());
         } while (tokens.match(";"));
         return params;
     }
@@ -135,7 +133,7 @@ public final class Parser {
             throw tokens.error("El modo inout no existe: un parámetro es in (se lee) "
                     + "u out (se devuelve)");
         }
-        if (!isScalarType(tokens.peek())) {
+        if (!TokenCursor.isScalarType(tokens.peek())) {
             throw tokens.error("Se esperaba un tipo escalar (int, double, bool, text) "
                     + "para el parámetro");
         }
@@ -151,7 +149,7 @@ public final class Parser {
         Type type = Type.fromKeyword(tokens.advance().lexeme());
         List<Param> group = new ArrayList<>();
         do {
-            if (isScalarType(tokens.peek())) rejectCommaBetweenGroups();
+            if (TokenCursor.isScalarType(tokens.peek())) rejectCommaBetweenGroups();
             Token n = tokens.consumeIdentToken("Se esperaba el nombre del parámetro");
             group.add(new Param(n.lexeme(), type, ParamMode.IN, n.line()));
         } while (tokens.match(","));
@@ -159,7 +157,7 @@ public final class Parser {
     }
 
     private void rejectCommaBetweenGroups() {
-        if (tokens.check(",") || isScalarType(tokens.peek())) {
+        if (tokens.check(",") || TokenCursor.isScalarType(tokens.peek())) {
             throw tokens.error("Los parámetros de distinto grupo se separan con ';' "
                     + "(la coma separa nombres del mismo tipo)");
         }
@@ -209,7 +207,7 @@ public final class Parser {
 
     /** Una sentencia, o varias si es una declaracion con lista de nombres ({@code int a, b;}). */
     private List<Stmt> parseStatements() {
-        if (isDeclStart(tokens.peek())) {
+        if (TokenCursor.isDeclStart(tokens.peek())) {
             return new ArrayList<>(parseVarDecls());
         }
         return List.of(parseStatement());
@@ -385,7 +383,7 @@ public final class Parser {
     private Stmt parseFor() {
         int line = tokens.advance().line();
         tokens.consume("(", "Se esperaba '(' después de 'for'");
-        boolean hasIterator = isScalarType(tokens.peek())
+        boolean hasIterator = TokenCursor.isScalarType(tokens.peek())
                 || tokens.peek().is(TokenType.IDENTIFIER) && tokens.next().is("=");
         if (!hasIterator) {
             return parseAnonymousRangeFor(line);
@@ -400,7 +398,7 @@ public final class Parser {
 
     /** {@code int i = desde} declara el iterador; {@code i = desde} reutiliza uno ya declarado. */
     private Stmt parseForInit(int line) {
-        if (isScalarType(tokens.peek())) {
+        if (TokenCursor.isScalarType(tokens.peek())) {
             Type type = Type.fromKeyword(tokens.advance().lexeme());
             String id = tokens.consumeIdent("Se esperaba el nombre del iterador");
             tokens.consume("=", "Se esperaba '=' después del iterador");
@@ -520,20 +518,5 @@ public final class Parser {
 
     private Expr parseExpr() {
         return expressions.parseExpr();
-    }
-
-    // ================================================================= helpers
-
-    /** true si el token es uno de los tipos escalares: int, double, bool o text. */
-    static boolean isScalarType(Token t) {
-        return t.is(TokenType.KEYWORD) && SCALAR_TYPES.contains(t.lexeme());
-    }
-
-    private boolean isQueueType(Token t) {
-        return t.is("Cola") || t.is("ColaOrdenada");
-    }
-
-    private boolean isDeclStart(Token t) {
-        return isScalarType(t) || isQueueType(t);
     }
 }

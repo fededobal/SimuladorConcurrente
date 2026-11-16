@@ -75,7 +75,7 @@ final class QueueSyntaxParser {
 
     private Type parseElementType() {
         Token t = tokens.peek();
-        if (!Parser.isScalarType(t)) {
+        if (!TokenCursor.isScalarType(t)) {
             throw tokens.error("Las componentes de una cola son int, double, bool o text "
                     + "(se encontró '" + TokenCursor.describe(t) + "')");
         }

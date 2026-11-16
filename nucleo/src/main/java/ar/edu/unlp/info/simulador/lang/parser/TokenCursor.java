@@ -21,6 +21,8 @@ final class TokenCursor {
      */
     private static final int MAX_NESTING = 100;
 
+    private static final List<String> SCALAR_TYPES = List.of("int", "double", "bool", "text");
+
     private final List<Token> tokens;
     private int position = 0;
     private int nesting = 0;
@@ -136,6 +138,16 @@ final class TokenCursor {
     /** Un error de compilacion en la linea del token actual. */
     CompilationException error(String message) {
         return new CompilationException(message, peek().line());
+    }
+
+    /** true si el token es uno de los tipos escalares: int, double, bool o text. */
+    static boolean isScalarType(Token t) {
+        return t.is(TokenType.KEYWORD) && SCALAR_TYPES.contains(t.lexeme());
+    }
+
+    /** true si el token empieza una declaracion: un tipo escalar o un tipo de cola. */
+    static boolean isDeclStart(Token t) {
+        return isScalarType(t) || t.is("Cola") || t.is("ColaOrdenada");
     }
 
     /** Como se nombra un token en un mensaje de error. */
