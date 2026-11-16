@@ -1,0 +1,14 @@
+## RANDOM semilla=0
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## RANDOM semilla=1
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## RANDOM semilla=2
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## ROUND_ROBIN semilla=0
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## ROUND_ROBIN semilla=1
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## ROUND_ROBIN semilla=2
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}
+## paso a paso, RANDOM semilla=0
+crear {"error":"Línea 1: Nombre no declarado en este alcance: x","line":1}

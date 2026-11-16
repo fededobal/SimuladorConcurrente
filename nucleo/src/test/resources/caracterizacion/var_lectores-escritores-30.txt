@@ -1,0 +1,1368 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #4934c473f15a0a4e
+paso 1 ENTER L[10]: entra a RW.pedidoLeer | BLOCKED E[5]: espera para entrar a RW.pedidoEscribir | BLOCKED L[8]: espera para entrar a RW.pedidoLeer | BLOCKED L[17]: espera para entrar a RW.pedidoLeer | BLOCKED L[21]: espera para entrar a RW.pedidoLeer | BLOCKED L[5]: espera para entrar a RW.pedidoLeer | BLOCKED L[2]: espera para entrar a RW.pedidoLeer | BLOCKED E[6]: espera para entrar a RW.pedidoEscribir | BLOCKED E[1]: espera para entrar a RW.pedidoEscribir | BLOCKED L[22]: espera para entrar a RW.pedidoLeer | BLOCKED L[23]: espera para entrar a RW.pedidoLeer | BLOCKED L[7]: espera para entrar a RW.pedidoLeer | BLOCKED L[11]: espera para entrar a RW.pedidoLeer | BLOCKED L[15]: espera para entrar a RW.pedidoLeer | BLOCKED L[24]: espera para entrar a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.pedidoLeer | BLOCKED L[18]: espera para entrar a RW.pedidoLeer | BLOCKED E[3]: espera para entrar a RW.pedidoEscribir | BLOCKED E[4]: espera para entrar a RW.pedidoEscribir | BLOCKED L[6]: espera para entrar a RW.pedidoLeer | BLOCKED L[12]: espera para entrar a RW.pedidoLeer | BLOCKED L[4]: espera para entrar a RW.pedidoLeer | BLOCKED L[14]: espera para entrar a RW.pedidoLeer | BLOCKED L[3]: espera para entrar a RW.pedidoLeer | BLOCKED E[2]: espera para entrar a RW.pedidoEscribir | BLOCKED L[19]: espera para entrar a RW.pedidoLeer | BLOCKED L[1]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0149ea0aa908ae97
+paso 2 ASSIGN L[10]: nr++ => 1 | BLOCKED L[16]: espera para entrar a RW.pedidoLeer | BLOCKED L[13]: espera para entrar a RW.pedidoLeer | BLOCKED L[9]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #41fafe2e795058cc
+paso 3 RETURN L[10]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[9]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #94804801a5bc332b
+paso 4 SKIP L[10]: skip | ASSIGN L[9]: nr++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #80b4923ada193b39
+paso 5 RETURN L[9]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[17]: entra a RW.pedidoLeer | BLOCKED L[10]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f5e0155984576096
+paso 6 ASSIGN L[17]: nr++ => 3 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6bc59503bed0ff93
+paso 7 SKIP L[9]: skip | RETURN L[17]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[20]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #806b1375a7aae468
+paso 8 ASSIGN L[20]: nr++ => 4 | SKIP L[17]: skip | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #fb85cc5ec4d51305
+paso 9 RETURN L[20]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[5]: entra a RW.pedidoLeer | BLOCKED L[9]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #4c67876c9a50a822
+paso 10 SKIP L[20]: skip | BLOCKED L[17]: espera para entrar a RW.liberaLeer | ASSIGN L[5]: nr++ => 5 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #05c353e607b552be
+paso 11 RETURN L[5]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[11]: entra a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #eefa57d0ff71acd2
+paso 12 SKIP L[5]: skip | ASSIGN L[11]: nr++ => 6 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #398781ab12ed71d0
+paso 13 BLOCKED L[5]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #31d5ca3985b706b4
+paso 14 RETURN L[11]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[5]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #1767a5bf3b9efd77
+paso 15 SKIP L[11]: skip | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #bde6ffe8c7ee8237
+paso 16 WAIT E[5]: wait(okEscribir) - libera el monitor y se demora | ENTER L[13]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b83bd1c75924603a
+paso 17 BLOCKED L[11]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #68382a1f84ac1878
+paso 18 ASSIGN L[13]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #bc8689510ac0fe5f
+paso 19 RETURN L[13]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[5]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #66576fbe78809927
+paso 20 SKIP L[13]: skip | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ffb69cd70de3a4c9
+paso 21 ASSIGN L[5]: nr-- => 6 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #36ad6a3561cc572e
+paso 22 BLOCKED L[13]: espera para entrar a RW.liberaLeer | ASSIGN L[5]: lecturas++ => 1 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #3bc08a870298c235
+paso 23 RETURN L[5]: retorna de RW.liberaLeer, libera el monitor | ENTER L[3]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #fe4e8972cff8e55f
+paso 24 ASSIGN L[3]: nr++ => 7 | TERMINATED L[5]: termina | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #0b765eba38798b37
+paso 25 RETURN L[3]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[1]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #be5c9a1296afea8a
+paso 26 SKIP L[3]: skip | WAIT E[1]: wait(okEscribir) - libera el monitor y se demora | ENTER L[20]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #f13bf4bdf8c31ba2
+paso 27 BLOCKED L[3]: espera para entrar a RW.liberaLeer | ASSIGN L[20]: nr-- => 6 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b134b564d44720d4
+paso 28 ASSIGN L[20]: lecturas++ => 2 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #f25c3482b1720892
+paso 29 RETURN L[20]: retorna de RW.liberaLeer, libera el monitor | ENTER L[19]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #92b449ae94459c0e
+paso 30 TERMINATED L[20]: termina | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #429c992c3f566d1b
+paso 31 ASSIGN L[19]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #ef1e7d278ea9c26b
+paso 32 RETURN L[19]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[24]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #bdeb00f05d81754f
+paso 33 SKIP L[19]: skip | ASSIGN L[24]: nr++ => 8 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #6d392f5997bcbe55
+paso 34 RETURN L[24]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[11]: entra a RW.liberaLeer | BLOCKED L[19]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #c3799465a25f65cb
+paso 35 ASSIGN L[11]: nr-- => 7 | SKIP L[24]: skip | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #7521b582f73cc0a1
+paso 36 BLOCKED L[24]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #87136b41721f9ee8
+paso 37 ASSIGN L[11]: lecturas++ => 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #e7d5d53561d401a2
+paso 38 RETURN L[11]: retorna de RW.liberaLeer, libera el monitor | ENTER L[19]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #3e86f550b4f02b18
+paso 39 TERMINATED L[11]: termina | ASSIGN L[19]: nr-- => 6 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #e48bf839745cc8fe
+paso 40 ASSIGN L[19]: lecturas++ => 4 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #d62a3b9ee4f2e169
+paso 41 RETURN L[19]: retorna de RW.liberaLeer, libera el monitor | ENTER E[6]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #7e78fc070358ca81
+paso 42 TERMINATED L[19]: termina | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #cae206969f536784
+paso 43 WAIT E[6]: wait(okEscribir) - libera el monitor y se demora | ENTER L[7]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #7224f82a277cdd30
+paso 44 ASSIGN L[7]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #18955968fd917915
+paso 45 RETURN L[7]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[3]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #097e13025fa68234
+paso 46 SKIP L[7]: skip | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #6e6cb912c1dad955
+paso 47 ASSIGN L[3]: nr-- => 6 | BLOCKED L[7]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #e0d96b799868bddb
+paso 48 ASSIGN L[3]: lecturas++ => 5 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #1a88944d71bbb9ac
+paso 49 RETURN L[3]: retorna de RW.liberaLeer, libera el monitor | ENTER L[13]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #e10c01edfdd652a3
+paso 50 ASSIGN L[13]: nr-- => 5 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #521287a66181e833
+paso 51 ASSIGN L[13]: lecturas++ => 6 | TERMINATED L[3]: termina | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #43763de10f778475
+paso 52 RETURN L[13]: retorna de RW.liberaLeer, libera el monitor | ENTER L[4]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #d78e647b9dd064c5
+paso 53 TERMINATED L[13]: termina | ASSIGN L[4]: nr++ => 6 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #34fa6f7717c31da4
+paso 54 RETURN L[4]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[8]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #424dde5f1bd24e6c
+paso 55 ASSIGN L[8]: nr++ => 7 | SKIP L[4]: skip | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #599c9b8ada825be7
+paso 56 RETURN L[8]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[22]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #e7c5b67f41ddc535
+paso 57 SKIP L[8]: skip | ASSIGN L[22]: nr++ => 8 | BLOCKED L[4]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #72296c395fa79f9d
+paso 58 BLOCKED L[8]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #607b9d7ef82d32e6
+paso 59 RETURN L[22]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[2]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #ca97ed9422ff416c
+paso 60 WAIT E[2]: wait(okEscribir) - libera el monitor y se demora | ENTER L[24]: entra a RW.liberaLeer | SKIP L[22]: skip | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #6fb4a69682a635c6
+paso 61 BLOCKED L[22]: espera para entrar a RW.liberaLeer | ASSIGN L[24]: nr-- => 7 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #b72c10f95949bd68
+paso 62 ASSIGN L[24]: lecturas++ => 7 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #f81de4f27126b1f0
+paso 63 RETURN L[24]: retorna de RW.liberaLeer, libera el monitor | ENTER L[16]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #972a0b16cb553b29
+paso 64 ASSIGN L[16]: nr++ => 8 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #a4dc234d9333dcb3
+paso 65 RETURN L[16]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[18]: entra a RW.pedidoLeer | TERMINATED L[24]: termina | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #ab4484d5390bfcf0
+paso 66 SKIP L[16]: skip | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #fe5373a4a6ed0419
+paso 67 BLOCKED L[16]: espera para entrar a RW.liberaLeer | ASSIGN L[18]: nr++ => 9 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #d0715bdda5a8d2f2
+paso 68 RETURN L[18]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[4]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #5e88726a630da968
+paso 69 ASSIGN L[4]: nr-- => 8 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #632c594fbcef8d9c
+paso 70 ASSIGN L[4]: lecturas++ => 8 | SKIP L[18]: skip | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #ddedc628ca2a5601
+paso 71 BLOCKED L[18]: espera para entrar a RW.liberaLeer | RETURN L[4]: retorna de RW.liberaLeer, libera el monitor | ENTER E[3]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #dfbaaffa5e5fbbc1
+paso 72 TERMINATED L[4]: termina | WAIT E[3]: wait(okEscribir) - libera el monitor y se demora | ENTER E[4]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #ffc93566b4248940
+paso 73 WAIT E[4]: wait(okEscribir) - libera el monitor y se demora | ENTER L[22]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #a692284c3fc783a5
+paso 74 ASSIGN L[22]: nr-- => 7 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #75ff110236abd25d
+paso 75 ASSIGN L[22]: lecturas++ => 9 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #c20d6a32ae89e408
+paso 76 RETURN L[22]: retorna de RW.liberaLeer, libera el monitor | ENTER L[14]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #3372cf7983ea2c93
+paso 77 TERMINATED L[22]: termina | ASSIGN L[14]: nr++ => 8 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #56fa93036f4578f8
+paso 78 RETURN L[14]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[6]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #30d130ea1015b33d
+paso 79 SKIP L[14]: skip | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #1d25b01c1fd5b6e6
+paso 80 ASSIGN L[6]: nr++ => 9 | BLOCKED L[14]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #b12b765b2a8ba031
+paso 81 RETURN L[6]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[23]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #8b867f6f20770a7c
+paso 82 ASSIGN L[23]: nr++ => 10 | SKIP L[6]: skip | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #e6422efcf9b2b27a
+paso 83 RETURN L[23]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[12]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #ebf8fc83f6baf9f3
+paso 84 SKIP L[23]: skip | ASSIGN L[12]: nr++ => 11 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #c82d29dc139d497a
+paso 85 BLOCKED L[23]: espera para entrar a RW.liberaLeer | BLOCKED L[6]: espera para entrar a RW.liberaLeer | RETURN L[12]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[21]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #facb25fcb09d1dd5
+paso 86 ASSIGN L[21]: nr++ => 12 | SKIP L[12]: skip | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #ce8cee0b2d0221a3
+paso 87 BLOCKED L[12]: espera para entrar a RW.liberaLeer | RETURN L[21]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[7]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #7920b0f2e8d3669b
+paso 88 SKIP L[21]: skip | ASSIGN L[7]: nr-- => 11 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #fd79106080615105
+paso 89 BLOCKED L[21]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #83302f8be7ce9707
+paso 90 ASSIGN L[7]: lecturas++ => 10 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #fab9c720152fc365
+paso 91 RETURN L[7]: retorna de RW.liberaLeer, libera el monitor | ENTER L[1]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #f330978f2baa6821
+paso 92 ASSIGN L[1]: nr++ => 12 | TERMINATED L[7]: termina | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #261e19aca4157b7b
+paso 93 RETURN L[1]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[10]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #e658f81eef00dec5
+paso 94 ASSIGN L[10]: nr-- => 11 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #8f5977878f5d0db3
+paso 95 SKIP L[1]: skip | ASSIGN L[10]: lecturas++ => 11 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #8fbdef46d3848e1a
+paso 96 BLOCKED L[1]: espera para entrar a RW.liberaLeer | RETURN L[10]: retorna de RW.liberaLeer, libera el monitor | ENTER L[23]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #164cb693f76dfc74
+paso 97 ASSIGN L[23]: nr-- => 10 | TERMINATED L[10]: termina | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #7d2af14fd5e9fd94
+paso 98 ASSIGN L[23]: lecturas++ => 12 | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #d8d0235a886e28c7
+paso 99 RETURN L[23]: retorna de RW.liberaLeer, libera el monitor | ENTER L[17]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #dfa2e8e12497d45b
+paso 100 ASSIGN L[17]: nr-- => 9 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #62231f2997d9c204
+paso 101 ASSIGN L[17]: lecturas++ => 13 | TERMINATED L[23]: termina | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #cb573dc733f0a7f4
+paso 102 RETURN L[17]: retorna de RW.liberaLeer, libera el monitor | ENTER L[16]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #3456297ee3ca0c6b
+paso 103 TERMINATED L[17]: termina | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #b6193a10b1ff54a3
+paso 104 ASSIGN L[16]: nr-- => 8 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #075adc8087277490
+paso 105 ASSIGN L[16]: lecturas++ => 14 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #366d14b8686179be
+paso 106 RETURN L[16]: retorna de RW.liberaLeer, libera el monitor | ENTER L[6]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #934533744130a564
+paso 107 ASSIGN L[6]: nr-- => 7 | TERMINATED L[16]: termina | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #9d5f729633a52acd
+paso 108 ASSIGN L[6]: lecturas++ => 15 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #105c4b8d7a0f6a57
+paso 109 RETURN L[6]: retorna de RW.liberaLeer, libera el monitor | ENTER L[21]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #3b31d64d2059d9cb
+paso 110 TERMINATED L[6]: termina | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #ad5762b3d83f772c
+paso 111 ASSIGN L[21]: nr-- => 6 | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #50646bb22383fa85
+paso 112 ASSIGN L[21]: lecturas++ => 16 | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #2bd41e1de438c768
+paso 113 RETURN L[21]: retorna de RW.liberaLeer, libera el monitor | ENTER L[15]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #18560fda79450a4c
+paso 114 ASSIGN L[15]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #23373457feb58393
+paso 115 RETURN L[15]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[1]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #3543d16afcc31239
+paso 116 TERMINATED L[21]: termina | ASSIGN L[1]: nr-- => 6 | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #7986b4233c8f6267
+paso 117 SKIP L[15]: skip | ASSIGN L[1]: lecturas++ => 17 | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #c72548af1f495dcb
+paso 118 BLOCKED L[15]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #194d4e219f37d5bf
+paso 119 RETURN L[1]: retorna de RW.liberaLeer, libera el monitor | ENTER L[14]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #a526b324365bc8f5
+paso 120 ASSIGN L[14]: nr-- => 5 | TERMINATED L[1]: termina | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #192e16bf314a0c42
+paso 121 ASSIGN L[14]: lecturas++ => 18 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #b223420c9c41bdf8
+paso 122 RETURN L[14]: retorna de RW.liberaLeer, libera el monitor | ENTER L[18]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #09b736764656d8e3
+paso 123 TERMINATED L[14]: termina | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #326125b27ab1215b
+paso 124 ASSIGN L[18]: nr-- => 4 | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #d703153dd584c9f3
+paso 125 ASSIGN L[18]: lecturas++ => 19 | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #130663d97fd21927
+paso 126 RETURN L[18]: retorna de RW.liberaLeer, libera el monitor | ENTER L[9]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #563be652e3472d98
+paso 127 ASSIGN L[9]: nr-- => 3 | TERMINATED L[18]: termina | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #9db0d286f48ad462
+paso 128 ASSIGN L[9]: lecturas++ => 20 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #e23ffd64fab39f72
+paso 129 RETURN L[9]: retorna de RW.liberaLeer, libera el monitor | ENTER L[12]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #aeaf87c2250276dc
+paso 130 TERMINATED L[9]: termina | ASSIGN L[12]: nr-- => 2 | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #03856ca8c3b0e090
+paso 131 ASSIGN L[12]: lecturas++ => 21 | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #52fe8ebc88fe56f6
+paso 132 RETURN L[12]: retorna de RW.liberaLeer, libera el monitor | ENTER L[2]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #3e2f706326142e3b
+paso 133 TERMINATED L[12]: termina | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #f3e2b965ae0d0b2b
+paso 134 ASSIGN L[2]: nr++ => 3 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #7df7280678fb7c8c
+paso 135 RETURN L[2]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[15]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #3ca0012d655bf0f0
+paso 136 SKIP L[2]: skip | ASSIGN L[15]: nr-- => 2 | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #ca4c7aac3efc1ac8
+paso 137 BLOCKED L[2]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #2f20da716a0eef07
+paso 138 ASSIGN L[15]: lecturas++ => 22 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #bc08cafdec681a85
+paso 139 RETURN L[15]: retorna de RW.liberaLeer, libera el monitor | ENTER L[2]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #7d87ce37579404fd
+paso 140 ASSIGN L[2]: nr-- => 1 | TERMINATED L[15]: termina | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #ca5af9d8edb6efd9
+paso 141 ASSIGN L[2]: lecturas++ => 23 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #7ebc0b5adc7f6aff
+paso 142 RETURN L[2]: retorna de RW.liberaLeer, libera el monitor | ENTER L[8]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #d227514b21b0be7e
+paso 143 ASSIGN L[8]: nr-- => 0 | TERMINATED L[2]: termina | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #9e8428b3def36bff
+paso 144 ASSIGN L[8]: lecturas++ => 24 | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #f048def9550aab6f
+paso 145 SIGNAL L[8]: signal(okEscribir) - despierta a E[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #c2d5748bb1aeeebd
+paso 146 RETURN L[8]: retorna de RW.liberaLeer, libera el monitor | REENTER E[5]: reingresa a RW | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #ec8895f70bb86aa8
+paso 147 TERMINATED L[8]: termina | ASSIGN E[5]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #1c356ed242ae3143
+paso 148 ASSIGN E[5]: maxW = 1 | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #29ca3d4bea22bfbf
+paso 149 RETURN E[5]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #d986d00d91ff123d
+paso 150 SKIP E[5]: skip | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #ec9496bab9e41d7f
+paso 151 ENTER E[5]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #82e195391d8fbba8
+paso 152 ASSIGN E[5]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #1703d198c1b041e6
+paso 153 ASSIGN E[5]: escrituras++ => 1 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #961d8aa104776e6b
+paso 154 SIGNAL E[5]: signal(okEscribir) - despierta a E[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #e1bc3ae03d861794
+paso 155 SIGNAL_ALL E[5]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #6966c5dcd6051d6b
+paso 156 RETURN E[5]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[1]: reingresa a RW | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #1f5174540d84735c
+paso 157 TERMINATED E[5]: termina | ASSIGN E[1]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #3c9c742a83d05d91
+paso 158 RETURN E[1]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #bc5b0c9d2e10602d
+paso 159 SKIP E[1]: skip | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #22e819dc954ed49b
+paso 160 ENTER E[1]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #c8dcb9b6bec5a89d
+paso 161 ASSIGN E[1]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #daa914728bf56b28
+paso 162 ASSIGN E[1]: escrituras++ => 2 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #60d0884261474ea2
+paso 163 SIGNAL E[1]: signal(okEscribir) - despierta a E[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #74ed30facbc7b448
+paso 164 SIGNAL_ALL E[1]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #6ab6fee49c988b39
+paso 165 RETURN E[1]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[6]: reingresa a RW | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #9903e05ba78d4047
+paso 166 TERMINATED E[1]: termina | ASSIGN E[6]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #01a23c55f29de614
+paso 167 RETURN E[6]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #ec7d7fbf6e684aae
+paso 168 SKIP E[6]: skip | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #c2edcda629f7035f
+paso 169 ENTER E[6]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #7bec19465fce5a5e
+paso 170 ASSIGN E[6]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #3eaa963c322e7bf2
+paso 171 ASSIGN E[6]: escrituras++ => 3 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #ef596604cb9f53d2
+paso 172 SIGNAL E[6]: signal(okEscribir) - despierta a E[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #a33dec137cc548a3
+paso 173 SIGNAL_ALL E[6]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #222497afad12e4bc
+paso 174 RETURN E[6]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[2]: reingresa a RW | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #e1ffbf36bb4a6045
+paso 175 ASSIGN E[2]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #2c6fcfef3c4a3439
+paso 176 TERMINATED E[6]: termina | RETURN E[2]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #4d71df40745ab7c6
+paso 177 SKIP E[2]: skip | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #53de44cd9b22fab1
+paso 178 ENTER E[2]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #eca2f0cf248695be
+paso 179 ASSIGN E[2]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #3e14d1e4ece4bfc2
+paso 180 ASSIGN E[2]: escrituras++ => 4 | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #926057ea80513362
+paso 181 SIGNAL E[2]: signal(okEscribir) - despierta a E[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #84c6bbe2dec1d586
+paso 182 SIGNAL_ALL E[2]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #3bd932ee2c73e70c
+paso 183 RETURN E[2]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[3]: reingresa a RW | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #9da28bd5d423d19a
+paso 184 ASSIGN E[3]: nw++ => 1 | TERMINATED E[2]: termina | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #c0915b93ccd0378e
+paso 185 RETURN E[3]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #1741e55d2e564c3e
+paso 186 SKIP E[3]: skip | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #65be3706d846a48c
+paso 187 ENTER E[3]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #7f120e8fef7363cd
+paso 188 ASSIGN E[3]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #c706786dba0122f6
+paso 189 ASSIGN E[3]: escrituras++ => 5 | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #1203212bf3850abe
+paso 190 SIGNAL E[3]: signal(okEscribir) - despierta a E[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #5ecc141674b3453b
+paso 191 SIGNAL_ALL E[3]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #0f24bfdc7db777b2
+paso 192 RETURN E[3]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[4]: reingresa a RW | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #55f53e74c9740e30
+paso 193 TERMINATED E[3]: termina | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #a8de3b9356d52556
+paso 194 ASSIGN E[4]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #2de5d96e92ea52ec
+paso 195 RETURN E[4]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #2d579c8fa30305e8
+paso 196 SKIP E[4]: skip | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #0ee35cad76e849f8
+paso 197 ENTER E[4]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #fb7e8a43acdf0173
+paso 198 ASSIGN E[4]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #032624c140459091
+paso 199 ASSIGN E[4]: escrituras++ => 6 | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #2d8ad4b4170e6ea3
+paso 200 SIGNAL E[4]: signal(okEscribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #c20af0a2326a6c99
+estado #7efbed4078a0ba54
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #ab8709cc29f49f35
+paso 1 #8226183a97069e6e
+paso 2 #894e8b3b66378118
+paso 3 #2af53a7b34c3ceef
+paso 4 #ff7924c92ef9972f
+paso 5 #f98eea84420ca286
+paso 6 #3d804f185e622de4
+paso 7 #411e6648de08d010
+paso 8 #6cadaa4e0e32e4c6
+paso 9 #1fd7229ff41d37a7
+paso 10 #919ea7a3de57365d
+paso 11 #5d0df215b201ae5d
+paso 12 #75bb8276d58bec91
+paso 13 #c8461a1df1af3871
+paso 14 #5e2e19866832106c
+paso 15 #57652b1c9c5a527c
+paso 16 #d04a5462765b4723
+paso 17 #800ebc84c1d0f362
+paso 18 #36f6404215291c16
+paso 19 #a8df09a1cd959323
+paso 20 #0f8b82e533919177
+paso 21 #28c10f691bc785cd
+paso 22 #f5c6e06cf0d78b52
+paso 23 #e7d76d628a1626b4
+paso 24 #6e913114612f7148
+paso 25 #cf6f7183903a8b8d
+paso 26 #4f8a9c0e99d76bc5
+paso 27 #8b4fe654040a6dcd
+paso 28 #bee5bfda41b0534d
+paso 29 #c9fc4d4c124c97c5
+paso 30 #c4f37b407ecd780a
+paso 31 #6e154d4569ffbcd7
+paso 32 #04f022478226f569
+paso 33 #dd5feb7c07cfe804
+paso 34 #7d9b27dff9b3c05d
+paso 35 #69dc4c8033ac1816
+paso 36 #92063348b727ec8a
+paso 37 #df0ad94500353d10
+paso 38 #a22e81201813db04
+paso 39 #680b4ebaace80a6a
+paso 40 #067108a55121971b
+paso 41 #7b2dfc3b8765a2e2
+paso 42 #c71961a9a77c216d
+paso 43 #d12719e2e883433b
+paso 44 #edef5da13bc86d5d
+paso 45 #099e8305d9a4c448
+paso 46 #615051a5f1fe90d0
+paso 47 #d3ea23f5277d2167
+paso 48 #8ce86ae0161746ad
+paso 49 #c90657ac17ebbebc
+paso 50 #00fca2d5c834dcec
+paso 51 #bb795d37a12ada66
+paso 52 #bc222dce87799e12
+paso 53 #82cb4bb658c957d3
+paso 54 #88c4a3a022069917
+paso 55 #1158bdc88ad03d4e
+paso 56 #f588aae6c1680887
+paso 57 #aebc9c62668ee801
+paso 58 #d6d64235a437885c
+paso 59 #a7e6a2aa2ea14611
+paso 60 #6ed92f59ca6b4190
+paso 61 #c7a40b3a64e9ee5c
+paso 62 #75d16e61e44c4404
+paso 63 #30f673a4d6db0109
+paso 64 #94bb4412d800c305
+paso 65 #7516fa29555f44ba
+paso 66 #d1274015fee12928
+paso 67 #e39d5a6629cd7ce3
+paso 68 #966a0e4d9371d1cc
+paso 69 #29ee7602e3dd646d
+paso 70 #34b2ccb78ee48c38
+paso 71 #0f27b9043f3ee227
+paso 72 #26f79d60894a3411
+paso 73 #fb43059ca87e9276
+paso 74 #920d04eedc4fbaa5
+paso 75 #ee9aa3d07a1c9ff3
+paso 76 #9687b310972e819e
+paso 77 #05d3a4623b9ddf99
+paso 78 #22f73ec1101788df
+paso 79 #ba171de56bffc6f0
+paso 80 #de38968af90b777b
+paso 81 #c3cb1a89207adfa6
+paso 82 #c3e27e13ba3f4bb7
+paso 83 #1e6805e063c1062f
+paso 84 #b8c456691a70645d
+paso 85 #04a7531b40fdad8e
+paso 86 #bc94d629dc4f4de4
+paso 87 #d4c5faadbb3a4918
+paso 88 #c4062e800fd6e97e
+paso 89 #abb51db633cbc43c
+paso 90 #df3612a2d74d0259
+paso 91 #ef123edc2a45e9c7
+paso 92 #2aa25a0df4642151
+paso 93 #5569cf080837d616
+paso 94 #dc27b3fe892514e6
+paso 95 #1f0794aef3e0182b
+paso 96 #c8c0fa88ede6b483
+paso 97 #f190946750cfe429
+paso 98 #cd5756174e0936c5
+paso 99 #d7b5a27a459f6f38
+paso 100 #a0432e2e6b959214
+paso 101 #73b92abb7a50af20
+paso 102 #2859d84242754618
+paso 103 #9abedece1bf48072
+paso 104 #86567034bfd2acca
+paso 105 #1ceae5e25bb1ff92
+paso 106 #e606ca8a4a05cf20
+paso 107 #726d89e6c28eeb8e
+paso 108 #b2ba648689c917b3
+paso 109 #1c15c6e66368e655
+paso 110 #edee85c237826ac7
+paso 111 #77ce1712fd10001f
+paso 112 #31c44a2bf14f4961
+paso 113 #029ca50528f52118
+paso 114 #2f320c190f25ceda
+paso 115 #b4610cb622af5563
+paso 116 #9732df5811508d2e
+paso 117 #0b26199b6df991a1
+paso 118 #c6d5a5a4e1f57b03
+paso 119 #a4013ede82229d29
+paso 120 #8f178ba73b3849c5
+paso 121 #afe098979a7b4deb
+paso 122 #8a2e9d3e2f754c7d
+paso 123 #8cfda0d70594de3d
+paso 124 #0b1f251ec2a10ef9
+paso 125 #72e63f8bf0113d76
+paso 126 #52df6c1cad6c6719
+paso 127 #6e3277e68f28e347
+paso 128 #6d6440cc8bc602d4
+paso 129 #724469c77cd1a0d8
+paso 130 #1341142de78bd0b7
+paso 131 #25c0c18ef4fb7e09
+paso 132 #abf68504b9314f80
+paso 133 #82a517810b00db57
+paso 134 #999fdf67426dd052
+paso 135 #7fb8d7d0272e6d08
+paso 136 #301fa7727ccd8343
+paso 137 #2cea9451228e0a07
+paso 138 #34a92c8117c1c11a
+paso 139 #fd872e4240b2b10a
+paso 140 #f56523702c7e7b27
+paso 141 #876a1362c640dfe1
+paso 142 #3200b843b0ec39ef
+paso 143 #4a6a042ad3727f92
+paso 144 #e5fad5ba0cb7ba54
+paso 145 #255252afe19757ee
+paso 146 #c6f062b7be6170fd
+paso 147 #da7ea2a5abdd87a5
+paso 148 #5862e209b49192af
+paso 149 #b0f18b466da69a1e
+paso 150 #f2b06e2d8d3a58e5
+paso 151 #506467a0353f4159
+paso 152 #64034d5dd0304d37
+paso 153 #a64c8633087cd544
+paso 154 #2270b0880c2de89a
+paso 155 #f752f0dcb4116bd8
+paso 156 #36de2d581d0af116
+paso 157 #f6c81a1d9b115e78
+paso 158 #56372ed295a52e42
+paso 159 #e00fa51f1d6f00a7
+paso 160 #bca333e17ef074f7
+paso 161 #4d62303ca7eb61d7
+paso 162 #334975167eade0b6
+paso 163 #36081ec4f3246d32
+paso 164 #9e7d5361b8fd2001
+paso 165 #c8db96eb6d7db501
+paso 166 #fe1e563a808f8466
+paso 167 #18b0c508074370c4
+paso 168 #8a785582fbb4456b
+paso 169 #71db5b1c0ca941fe
+paso 170 #7d92f5f1ff56573e
+paso 171 #7f8a67be8a202181
+paso 172 #259cbcf062f904e2
+paso 173 #0d87d9ca9662859f
+paso 174 #6fe7e5014a28804f
+paso 175 #a3bfd65dac567ab0
+paso 176 #b8eab6f809abcb0c
+paso 177 #ef3b8e9ed4eb9d50
+paso 178 #bc35501ef6d73fc6
+paso 179 #c2b4ffea36e27e9f
+paso 180 #7a025584bee0495a
+paso 181 #49ca930cc66b916f
+paso 182 #5f12bd57c06ca6c6
+paso 183 #6c8633463272eae6
+paso 184 #8df562d3c38fb69f
+paso 185 #1a91d1ac050fedc2
+paso 186 #339362a49c55096d
+paso 187 #834538ede2b3c58c
+paso 188 #9625d34ba48657aa
+paso 189 #3261b56a9ddea708
+paso 190 #25d1f87032894c84
+paso 191 #e4327437275b583b
+paso 192 #1b16c173ceb62fc9
+paso 193 #79b990c5631a2417
+paso 194 #ca423ff1e58b306b
+paso 195 #976d65454800f0fe
+paso 196 #f732b3419059e1bf
+estado #ae180b1d3f080f6b
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #de27b59b35388ffd
+paso 1 #e5f8a486d6644937
+paso 2 #40a9a2b1796f39de
+paso 3 #27662a1c2fd7c112
+paso 4 #e2a8e9c51af7d2f1
+paso 5 #3167ae40fe245cda
+paso 6 #19f21ed99942ced4
+paso 7 #33c32c8cf676dcb7
+paso 8 #2cac1ed28abb193a
+paso 9 #bd9c5ce3863785ed
+paso 10 #e277c487fffdf723
+paso 11 #9844877983d2aec3
+paso 12 #5459f75bcc7175c6
+paso 13 #6e932fd3079334a6
+paso 14 #708bdb9b1eff8dbe
+paso 15 #dfeec26379eabeaf
+paso 16 #9e2f6ab166d5ee37
+paso 17 #397cdd68eded3d3b
+paso 18 #de7b10fac0371d97
+paso 19 #259a8f2ad70f06fe
+paso 20 #49e89900b40b11d2
+paso 21 #b9ee176d0445d651
+paso 22 #8d30ce1d369c26bf
+paso 23 #822d73b007ee097c
+paso 24 #db77f1e465e3f1f6
+paso 25 #512823f3298a0e68
+paso 26 #11c1b60ed6f3ef9b
+paso 27 #a18308335e4376c5
+paso 28 #a73a08c09eb6df31
+paso 29 #97b960927f608eed
+paso 30 #ad32ef4d9a19f74b
+paso 31 #20a11b8f25f6c58e
+paso 32 #cf044880ef5a04a5
+paso 33 #07464f67ee77a273
+paso 34 #6fc5034cde0743d4
+paso 35 #c0799d06c1701a5a
+paso 36 #83cf7ff5ad0a8840
+paso 37 #0c8adba31fc76756
+paso 38 #2378aa7009028503
+paso 39 #c0015783c62509c6
+paso 40 #a67bc206db901103
+paso 41 #95ce6abb5a0b590f
+paso 42 #1618b3c79635ab18
+paso 43 #c87c8713f79350ff
+paso 44 #336f91c45556f2d1
+paso 45 #d3394c3268571c82
+paso 46 #efefd8247b2508d4
+paso 47 #391beb6170d4d147
+paso 48 #15212a75440e1d97
+paso 49 #06d688b58398bf43
+paso 50 #90cde66bb7350a93
+paso 51 #ac95c2ecd3a4d0be
+paso 52 #a3fc875803aa006c
+paso 53 #ff24637257aa1988
+paso 54 #db1922a3f8210391
+paso 55 #08e4add0e37cd555
+paso 56 #63ad1b4335a5a0b5
+paso 57 #77c67b56d4ba1457
+paso 58 #7189c81546676288
+paso 59 #e0102711029039e5
+paso 60 #b69a6c1081cd6854
+paso 61 #fa9987929a208bb2
+paso 62 #04071a8b98e354ce
+paso 63 #d4641d44121f3b4b
+paso 64 #02bf19550047d00c
+paso 65 #47498ab3ecae38ba
+paso 66 #f1a250ac610a8c70
+paso 67 #53d7e98a5c217938
+paso 68 #752628a7b12d1032
+paso 69 #b41e7d9c14218d17
+paso 70 #7032d836f8e11c64
+paso 71 #db7cca8a3e810b94
+paso 72 #bd2da03285d72d89
+paso 73 #fbd67f783bf0af99
+paso 74 #3b9ce3f2852dd0fb
+paso 75 #4080147d83eaf5f0
+paso 76 #6d79cff445b821e8
+paso 77 #9ab127a66d4ff526
+paso 78 #be272ea064d9ea59
+paso 79 #bd65e42ad53be6e0
+paso 80 #8f5767a75e1e7ded
+paso 81 #84185acf9339c9a1
+paso 82 #821c8f3c7312401b
+paso 83 #04094c8cfb0fdb48
+paso 84 #37426e79012592cd
+paso 85 #1f331edab3da564c
+paso 86 #5a36ee2cdfd7ed87
+paso 87 #6c7f3c53cca27551
+paso 88 #e05bbdb957cf5db6
+paso 89 #54df039c8110aebd
+paso 90 #90ea41c8ce254e0d
+paso 91 #d11192483179d686
+paso 92 #fb18c184f5c70865
+paso 93 #fecf1287a10a16da
+paso 94 #8067ea53ced006c1
+paso 95 #2638cb4ffaf0a04d
+paso 96 #771296932872acef
+paso 97 #0fd9a229b5a6ec6e
+paso 98 #3d6f53aca580b314
+paso 99 #c0bd50a56db76776
+paso 100 #73c90ac34ca8132c
+paso 101 #18dfb7b64a976251
+paso 102 #36435c18da4c0331
+paso 103 #9651de56bb03db1f
+paso 104 #671ecca28f0d9f02
+paso 105 #7971d3551f5649c0
+paso 106 #3eb963293174f068
+paso 107 #c82f2222f9b99e30
+paso 108 #464edeab19347045
+paso 109 #0d9f88a783329017
+paso 110 #aba7997b848a4e59
+paso 111 #63f436da682f916b
+paso 112 #72086dfa56283091
+paso 113 #7c56cfc648e2ff2a
+paso 114 #42018a0c52394556
+paso 115 #da4e392575a5fe94
+paso 116 #0931183e1b683ac4
+paso 117 #63a78fc1f7f41035
+paso 118 #5838015916efd27b
+paso 119 #3398341848370e83
+paso 120 #a0ea9d66ed70c81f
+paso 121 #beb422a04436d1b9
+paso 122 #faff966b1754c26b
+paso 123 #739d7e2af8239c2c
+paso 124 #c3020afd5624e3b0
+paso 125 #61dc2a6bc487da19
+paso 126 #9d840953ceb0d879
+paso 127 #e7723e41754c59f1
+paso 128 #e5ef053585f0f0b1
+paso 129 #80df7319641d5a82
+paso 130 #c53dc7c4a5595dd9
+paso 131 #a66eca3dbab3b793
+paso 132 #af17a53e87a4c257
+paso 133 #0f2ce5e291c770da
+paso 134 #1d021dd7f8577e8c
+paso 135 #222264c5b224468c
+paso 136 #da0337d345658747
+paso 137 #69eb91b1217d8878
+paso 138 #280ffd10671cc5fd
+paso 139 #9d1cf94f4648bcfc
+paso 140 #948b9cb3475295ba
+paso 141 #fea6cc80424d9405
+paso 142 #79ac65234fa0450d
+paso 143 #8c2db2b213f7fd63
+paso 144 #8ec6c26884dd4690
+paso 145 #e7119336d414a2c8
+paso 146 #d76a0cd8009d7f3e
+paso 147 #c5f6579afc9ff10e
+paso 148 #db7e1ffb6eabe1ea
+paso 149 #8e191d779a2a4185
+paso 150 #152cb68eaf320ff2
+paso 151 #10c34a2012289f1f
+paso 152 #a6047a0e39330967
+paso 153 #757e21b2cf38056c
+paso 154 #0af888e36c776142
+paso 155 #c6a0f61433428756
+paso 156 #48ab467514d50f9f
+paso 157 #32378f4780ad45e0
+paso 158 #ec3b78463dd12355
+paso 159 #8302f92f9ef445b7
+paso 160 #28294021511d1094
+paso 161 #4060a6ba83389af4
+paso 162 #5a007c705beec267
+paso 163 #690393332880d0e4
+paso 164 #54ad5cfb39bdbcbc
+paso 165 #bc87af5cd985ad37
+paso 166 #6a624347f7b3d369
+paso 167 #5168e6fd5979eb58
+paso 168 #5c0384a9e97ab2c3
+paso 169 #ffa39db220847214
+paso 170 #9f30540ea7d02806
+paso 171 #c0a447d145dc86a9
+paso 172 #0631d84145c0b56f
+paso 173 #ba108fe1054206f1
+paso 174 #21d3f19dd734d2c2
+paso 175 #bc0a32bd60731704
+paso 176 #d1bddc24d7223093
+paso 177 #47c0fd76df13724b
+paso 178 #47d83da2af40342f
+paso 179 #28d8eb28373a56a6
+paso 180 #3805f1b590fe9fc6
+paso 181 #bf395068688e0980
+paso 182 #a0c19a48cd610b1e
+paso 183 #d6edaa564983693c
+paso 184 #e51a4948eb68be31
+paso 185 #9e7007dce1c5a952
+paso 186 #fed0ebdfc6295a25
+paso 187 #cbee52b1a83e4015
+paso 188 #d677683c926e0a42
+paso 189 #b480e3774ddda4ec
+paso 190 #86cb19103b616aee
+paso 191 #dcd9a854a28533b8
+paso 192 #93e19b077e367c9d
+paso 193 #42737351be8e38d6
+paso 194 #65d281b38fef14ca
+paso 195 #d5c09244cbc9373b
+paso 196 #7701adca2f76c2e9
+paso 197 #9e09cd90d7472767
+paso 198 #7d9738684f698cdd
+paso 199 #274bac6b77cd3045
+paso 200 #ea55717570e3209e
+estado #3c8d994734ed5979
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #4934c473f15a0a4e
+paso 1 ENTER L[1]: entra a RW.pedidoLeer | BLOCKED L[2]: espera para entrar a RW.pedidoLeer | BLOCKED L[3]: espera para entrar a RW.pedidoLeer | BLOCKED L[4]: espera para entrar a RW.pedidoLeer | BLOCKED L[5]: espera para entrar a RW.pedidoLeer | BLOCKED L[6]: espera para entrar a RW.pedidoLeer | BLOCKED L[7]: espera para entrar a RW.pedidoLeer | BLOCKED L[8]: espera para entrar a RW.pedidoLeer | BLOCKED L[9]: espera para entrar a RW.pedidoLeer | BLOCKED L[10]: espera para entrar a RW.pedidoLeer | BLOCKED L[11]: espera para entrar a RW.pedidoLeer | BLOCKED L[12]: espera para entrar a RW.pedidoLeer | BLOCKED L[13]: espera para entrar a RW.pedidoLeer | BLOCKED L[14]: espera para entrar a RW.pedidoLeer | BLOCKED L[15]: espera para entrar a RW.pedidoLeer | BLOCKED L[16]: espera para entrar a RW.pedidoLeer | BLOCKED L[17]: espera para entrar a RW.pedidoLeer | BLOCKED L[18]: espera para entrar a RW.pedidoLeer | BLOCKED L[19]: espera para entrar a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.pedidoLeer | BLOCKED L[21]: espera para entrar a RW.pedidoLeer | BLOCKED L[22]: espera para entrar a RW.pedidoLeer | BLOCKED L[23]: espera para entrar a RW.pedidoLeer | BLOCKED L[24]: espera para entrar a RW.pedidoLeer | BLOCKED E[1]: espera para entrar a RW.pedidoEscribir | BLOCKED E[2]: espera para entrar a RW.pedidoEscribir | BLOCKED E[3]: espera para entrar a RW.pedidoEscribir | BLOCKED E[4]: espera para entrar a RW.pedidoEscribir | BLOCKED E[5]: espera para entrar a RW.pedidoEscribir | BLOCKED E[6]: espera para entrar a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8f458b6c826a6ae7
+paso 2 ASSIGN L[1]: nr++ => 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #10f726ba35a123bd
+paso 3 RETURN L[1]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[14]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #cdb2d91a4e3f6f45
+paso 4 ASSIGN L[14]: nr++ => 2 | SKIP L[1]: skip | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b0e8ba14f675823a
+paso 5 BLOCKED L[1]: espera para entrar a RW.liberaLeer | RETURN L[14]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[21]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #218dbb9fe1c21a25
+paso 6 SKIP L[14]: skip | ASSIGN L[21]: nr++ => 3 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #7099cf593e107b6c
+paso 7 RETURN L[21]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[5]: entra a RW.pedidoEscribir | BLOCKED L[14]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #af84ed0d53f78819
+paso 8 WAIT E[5]: wait(okEscribir) - libera el monitor y se demora | ENTER E[3]: entra a RW.pedidoEscribir | SKIP L[21]: skip | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #40ccd92bc470dbfa
+paso 9 BLOCKED L[21]: espera para entrar a RW.liberaLeer | WAIT E[3]: wait(okEscribir) - libera el monitor y se demora | ENTER L[13]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8ff859827bd083f1
+paso 10 ASSIGN L[13]: nr++ => 4 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #904b3a8ba236f347
+paso 11 RETURN L[13]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[1]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #b3822e146b29a97b
+paso 12 WAIT E[1]: wait(okEscribir) - libera el monitor y se demora | ENTER L[9]: entra a RW.pedidoLeer | SKIP L[13]: skip | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #950da179b1c33b73
+paso 13 ASSIGN L[9]: nr++ => 5 | BLOCKED L[13]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #8ce901ff72eff41b
+paso 14 RETURN L[9]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[20]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #749f26218f620f65
+paso 15 ASSIGN L[20]: nr++ => 6 | SKIP L[9]: skip | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #ae82a84b731b12d3
+paso 16 BLOCKED L[9]: espera para entrar a RW.liberaLeer | RETURN L[20]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[5]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6ffd6a339969192b
+paso 17 SKIP L[20]: skip | ASSIGN L[5]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #62a7fff04f527067
+paso 18 RETURN L[5]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[7]: entra a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c7722064c03786e8
+paso 19 ASSIGN L[7]: nr++ => 8 | SKIP L[5]: skip | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c4c24d15d9ca1edb
+paso 20 BLOCKED L[5]: espera para entrar a RW.liberaLeer | RETURN L[7]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[6]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #db4fef86ae4b9f9c
+paso 21 ASSIGN L[6]: nr++ => 9 | SKIP L[7]: skip | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #385a5c8d49628331
+paso 22 BLOCKED L[7]: espera para entrar a RW.liberaLeer | RETURN L[6]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[20]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #79715117f7b9278d
+paso 23 ASSIGN L[20]: nr-- => 8 | SKIP L[6]: skip | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #04872f98dc3baffe
+paso 24 BLOCKED L[6]: espera para entrar a RW.liberaLeer | ASSIGN L[20]: lecturas++ => 1 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #8b454de2e023ef6b
+paso 25 RETURN L[20]: retorna de RW.liberaLeer, libera el monitor | ENTER L[13]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #080e6eb2190bba31
+paso 26 ASSIGN L[13]: nr-- => 7 | TERMINATED L[20]: termina | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #90c74ca25e017862
+paso 27 ASSIGN L[13]: lecturas++ => 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #8414ddbdee82c7e6
+paso 28 RETURN L[13]: retorna de RW.liberaLeer, libera el monitor | ENTER L[22]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #099854a7b53c8136
+paso 29 ASSIGN L[22]: nr++ => 8 | TERMINATED L[13]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d6feda2902d713f0
+paso 30 RETURN L[22]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[6]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #88b99880f822bf89
+paso 31 ASSIGN L[6]: nr-- => 7 | SKIP L[22]: skip | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #42cf83fbbdb44a67
+paso 32 BLOCKED L[22]: espera para entrar a RW.liberaLeer | ASSIGN L[6]: lecturas++ => 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #50fbfcb86236dae0
+paso 33 RETURN L[6]: retorna de RW.liberaLeer, libera el monitor | ENTER L[9]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #a0afd0670e9644a2
+paso 34 ASSIGN L[9]: nr-- => 6 | TERMINATED L[6]: termina | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #6fcab69ac4da92da
+paso 35 ASSIGN L[9]: lecturas++ => 4 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #6bd5cf4973bb1ed1
+paso 36 RETURN L[9]: retorna de RW.liberaLeer, libera el monitor | ENTER L[23]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #22a5fa6f4bf7e1e3
+paso 37 ASSIGN L[23]: nr++ => 7 | TERMINATED L[9]: termina | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #9ec954902118ac13
+paso 38 RETURN L[23]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[11]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #265e147f83611890
+paso 39 ASSIGN L[11]: nr++ => 8 | SKIP L[23]: skip | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #5d6285170cc10027
+paso 40 BLOCKED L[23]: espera para entrar a RW.liberaLeer | RETURN L[11]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[18]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #39fbee53c543a36f
+paso 41 SKIP L[11]: skip | ASSIGN L[18]: nr++ => 9 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #6f114b0640bb2f51
+paso 42 RETURN L[18]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[1]: entra a RW.liberaLeer | BLOCKED L[11]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #c31c2af077c3ebac
+paso 43 ASSIGN L[1]: nr-- => 8 | SKIP L[18]: skip | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #6f072dea3e33a6c3
+paso 44 BLOCKED L[18]: espera para entrar a RW.liberaLeer | ASSIGN L[1]: lecturas++ => 5 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #a88bcbb2aeb5f85d
+paso 45 RETURN L[1]: retorna de RW.liberaLeer, libera el monitor | ENTER L[18]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #0729435fe52537f8
+paso 46 ASSIGN L[18]: nr-- => 7 | TERMINATED L[1]: termina | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #4296ec8d8d85bd35
+paso 47 ASSIGN L[18]: lecturas++ => 6 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #00dc7bca3c772e94
+paso 48 RETURN L[18]: retorna de RW.liberaLeer, libera el monitor | ENTER L[8]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #19b253c1e50d17b8
+paso 49 ASSIGN L[8]: nr++ => 8 | TERMINATED L[18]: termina | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #a501e934318e4640
+paso 50 RETURN L[8]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[12]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #d59acb5a410cabe9
+paso 51 ASSIGN L[12]: nr++ => 9 | SKIP L[8]: skip | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #73d33005da17cde0
+paso 52 BLOCKED L[8]: espera para entrar a RW.liberaLeer | RETURN L[12]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[19]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #e5ddba378fc9bf52
+paso 53 SKIP L[12]: skip | ASSIGN L[19]: nr++ => 10 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #70af7ba4ebd0bab2
+paso 54 RETURN L[19]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[6]: entra a RW.pedidoEscribir | BLOCKED L[12]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #898b49e2cad1cb11
+paso 55 WAIT E[6]: wait(okEscribir) - libera el monitor y se demora | ENTER L[8]: entra a RW.liberaLeer | SKIP L[19]: skip | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3a81bd37ba573236
+paso 56 ASSIGN L[8]: nr-- => 9 | BLOCKED L[19]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #dcd95a26d9c16b1e
+paso 57 ASSIGN L[8]: lecturas++ => 7 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #09b270d829436b73
+paso 58 RETURN L[8]: retorna de RW.liberaLeer, libera el monitor | ENTER L[10]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #3bc684d4c60979f6
+paso 59 ASSIGN L[10]: nr++ => 10 | TERMINATED L[8]: termina | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #1f616676bfd8d748
+paso 60 RETURN L[10]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[12]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #2413d9d25afea0d9
+paso 61 ASSIGN L[12]: nr-- => 9 | SKIP L[10]: skip | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #405c3810283a9fff
+paso 62 BLOCKED L[10]: espera para entrar a RW.liberaLeer | ASSIGN L[12]: lecturas++ => 8 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #713eee3f0d03e35f
+paso 63 RETURN L[12]: retorna de RW.liberaLeer, libera el monitor | ENTER L[2]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #395a062c83f30393
+paso 64 ASSIGN L[2]: nr++ => 10 | TERMINATED L[12]: termina | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #7e5e79e068120800
+paso 65 RETURN L[2]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[17]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #2fea50439da75a09
+paso 66 ASSIGN L[17]: nr++ => 11 | SKIP L[2]: skip | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #6a915420b10beb54
+paso 67 BLOCKED L[2]: espera para entrar a RW.liberaLeer | RETURN L[17]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[7]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #364cb9cc1fd992fd
+paso 68 ASSIGN L[7]: nr-- => 10 | SKIP L[17]: skip | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #70252b13152f4833
+paso 69 BLOCKED L[17]: espera para entrar a RW.liberaLeer | ASSIGN L[7]: lecturas++ => 9 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #34b002cc7fb53282
+paso 70 RETURN L[7]: retorna de RW.liberaLeer, libera el monitor | ENTER L[11]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #c8b8608ad0c38cb1
+paso 71 ASSIGN L[11]: nr-- => 9 | TERMINATED L[7]: termina | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #64ef157d2f746cdf
+paso 72 ASSIGN L[11]: lecturas++ => 10 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #92ac5dc79373db63
+paso 73 RETURN L[11]: retorna de RW.liberaLeer, libera el monitor | ENTER L[4]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #8f3296398f9abf53
+paso 74 ASSIGN L[4]: nr++ => 10 | TERMINATED L[11]: termina | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #a75bb0211113653f
+paso 75 RETURN L[4]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[16]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #847633b39d3ae8ff
+paso 76 ASSIGN L[16]: nr++ => 11 | SKIP L[4]: skip | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #fa2e72171aa3d95a
+paso 77 BLOCKED L[4]: espera para entrar a RW.liberaLeer | RETURN L[16]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[24]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #b74582aab122c064
+paso 78 SKIP L[16]: skip | ASSIGN L[24]: nr++ => 12 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #f9930d9b4a677f1a
+paso 79 RETURN L[24]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[10]: entra a RW.liberaLeer | BLOCKED L[16]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #c593a44038ed93a7
+paso 80 ASSIGN L[10]: nr-- => 11 | SKIP L[24]: skip | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #14e46f05b1de2d1a
+paso 81 BLOCKED L[24]: espera para entrar a RW.liberaLeer | ASSIGN L[10]: lecturas++ => 11 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #d5de8be9316bc32c
+paso 82 RETURN L[10]: retorna de RW.liberaLeer, libera el monitor | ENTER L[3]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #51d1cd9514d22197
+paso 83 ASSIGN L[3]: nr++ => 12 | TERMINATED L[10]: termina | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #e3789a740d663144
+paso 84 RETURN L[3]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[23]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #11525f0852311fb4
+paso 85 ASSIGN L[23]: nr-- => 11 | SKIP L[3]: skip | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #cb63425804cab688
+paso 86 BLOCKED L[3]: espera para entrar a RW.liberaLeer | ASSIGN L[23]: lecturas++ => 12 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #8b0d141691f8e560
+paso 87 RETURN L[23]: retorna de RW.liberaLeer, libera el monitor | ENTER L[4]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #3ffe511707107e03
+paso 88 ASSIGN L[4]: nr-- => 10 | TERMINATED L[23]: termina | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #4cad046de77f6579
+paso 89 ASSIGN L[4]: lecturas++ => 13 | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #d220c109b95aedd9
+paso 90 RETURN L[4]: retorna de RW.liberaLeer, libera el monitor | ENTER E[4]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #cd220bafaa3ef254
+paso 91 WAIT E[4]: wait(okEscribir) - libera el monitor y se demora | ENTER L[17]: entra a RW.liberaLeer | TERMINATED L[4]: termina | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #4393a88d4a48fd46
+paso 92 ASSIGN L[17]: nr-- => 9 | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #5586697af817d319
+paso 93 ASSIGN L[17]: lecturas++ => 14 | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #c72a6a591ad359d5
+paso 94 RETURN L[17]: retorna de RW.liberaLeer, libera el monitor | ENTER L[15]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #c0876a290a6d7bb5
+paso 95 ASSIGN L[15]: nr++ => 10 | TERMINATED L[17]: termina | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #6c1187ad7e6cf62f
+paso 96 RETURN L[15]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[19]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #00f9e11697d38e83
+paso 97 ASSIGN L[19]: nr-- => 9 | SKIP L[15]: skip | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #747737ec2a65d055
+paso 98 BLOCKED L[15]: espera para entrar a RW.liberaLeer | ASSIGN L[19]: lecturas++ => 15 | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #cb3fd629c5bde75c
+paso 99 RETURN L[19]: retorna de RW.liberaLeer, libera el monitor | ENTER E[2]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #8ad1495f52fd6b2b
+paso 100 WAIT E[2]: wait(okEscribir) - libera el monitor y se demora | ENTER L[21]: entra a RW.liberaLeer | TERMINATED L[19]: termina | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #8b2bc00ae439f0de
+paso 101 ASSIGN L[21]: nr-- => 8 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #37634e75146a75d9
+paso 102 ASSIGN L[21]: lecturas++ => 16 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #bd1212e6330a9c53
+paso 103 RETURN L[21]: retorna de RW.liberaLeer, libera el monitor | ENTER L[15]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #d50615411ee6b8d5
+paso 104 ASSIGN L[15]: nr-- => 7 | TERMINATED L[21]: termina | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #cc2e0641bd71385c
+paso 105 ASSIGN L[15]: lecturas++ => 17 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #81b20d31adb1099f
+paso 106 RETURN L[15]: retorna de RW.liberaLeer, libera el monitor | ENTER L[24]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #0caf958f626646af
+paso 107 ASSIGN L[24]: nr-- => 6 | TERMINATED L[15]: termina | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #9fa8bdc4ed16782c
+paso 108 ASSIGN L[24]: lecturas++ => 18 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #e0761bb9237710c7
+paso 109 RETURN L[24]: retorna de RW.liberaLeer, libera el monitor | ENTER L[16]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #f4f27df42cc12be6
+paso 110 ASSIGN L[16]: nr-- => 5 | TERMINATED L[24]: termina | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #7130675cd3c1b768
+paso 111 ASSIGN L[16]: lecturas++ => 19 | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #6f38b812b527b14e
+paso 112 RETURN L[16]: retorna de RW.liberaLeer, libera el monitor | ENTER L[22]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #ac91c4de021a58c0
+paso 113 ASSIGN L[22]: nr-- => 4 | TERMINATED L[16]: termina | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #0e74007cd85e55b2
+paso 114 ASSIGN L[22]: lecturas++ => 20 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #c2f54c24f8c7276c
+paso 115 RETURN L[22]: retorna de RW.liberaLeer, libera el monitor | ENTER L[14]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #87abb0e8f6e16fed
+paso 116 ASSIGN L[14]: nr-- => 3 | TERMINATED L[22]: termina | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #05c0575e7769ec97
+paso 117 ASSIGN L[14]: lecturas++ => 21 | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #f67552757ea8127e
+paso 118 RETURN L[14]: retorna de RW.liberaLeer, libera el monitor | ENTER L[2]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #8b941e1b454dbdb9
+paso 119 ASSIGN L[2]: nr-- => 2 | TERMINATED L[14]: termina | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #5d781e21f6a4cc55
+paso 120 ASSIGN L[2]: lecturas++ => 22 | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #491898db5c9f2650
+paso 121 RETURN L[2]: retorna de RW.liberaLeer, libera el monitor | ENTER L[5]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #479152447dd5aac2
+paso 122 ASSIGN L[5]: nr-- => 1 | TERMINATED L[2]: termina | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #0b4b69e6536482db
+paso 123 ASSIGN L[5]: lecturas++ => 23 | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #9a4bdf350d88bcd7
+paso 124 RETURN L[5]: retorna de RW.liberaLeer, libera el monitor | ENTER L[3]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #d1ad8cc8641b97e6
+paso 125 ASSIGN L[3]: nr-- => 0 | TERMINATED L[5]: termina | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #84ca65d3d5b1ce21
+paso 126 ASSIGN L[3]: lecturas++ => 24 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #bdf2307e9cae6397
+paso 127 SIGNAL L[3]: signal(okEscribir) - despierta a E[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #3b9dbe787ace7ac2
+paso 128 RETURN L[3]: retorna de RW.liberaLeer, libera el monitor | REENTER E[5]: reingresa a RW | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #08fc884fe823cbf9
+paso 129 ASSIGN E[5]: nw++ => 1 | TERMINATED L[3]: termina | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #6c3176dc0253a7ca
+paso 130 ASSIGN E[5]: maxW = 1 | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #0485da839b1e50fe
+paso 131 RETURN E[5]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #4e5a6d5d2f4a1b51
+paso 132 SKIP E[5]: skip | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #cd0d8448c30806d3
+paso 133 ENTER E[5]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #24c219e1bf262524
+paso 134 ASSIGN E[5]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #7658880ee93b2c67
+paso 135 ASSIGN E[5]: escrituras++ => 1 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #c092975d6010eb41
+paso 136 SIGNAL E[5]: signal(okEscribir) - despierta a E[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #b523391ab7bdb6b8
+paso 137 SIGNAL_ALL E[5]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #56a3f3cdd6a731ac
+paso 138 RETURN E[5]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[3]: reingresa a RW | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #ebbaac32542689af
+paso 139 ASSIGN E[3]: nw++ => 1 | TERMINATED E[5]: termina | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #c7e323dabcb6007b
+paso 140 RETURN E[3]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #bf75cba68c43d27c
+paso 141 SKIP E[3]: skip | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #a64455162481cd40
+paso 142 ENTER E[3]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #67d5ed028f4e9095
+paso 143 ASSIGN E[3]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #bed3c9f20fc13954
+paso 144 ASSIGN E[3]: escrituras++ => 2 | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #c91feaf2ab64abd2
+paso 145 SIGNAL E[3]: signal(okEscribir) - despierta a E[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #cd559770f0cd2a1e
+paso 146 SIGNAL_ALL E[3]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #7667f437decd8793
+paso 147 RETURN E[3]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[1]: reingresa a RW | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #495ff09a1717bd26
+paso 148 ASSIGN E[1]: nw++ => 1 | TERMINATED E[3]: termina | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #7b1bc0ccccc18284
+paso 149 RETURN E[1]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #72a97902fc9b4dd7
+paso 150 SKIP E[1]: skip | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #270fabe097d10a9c
+paso 151 ENTER E[1]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #58ac3075835dbcc7
+paso 152 ASSIGN E[1]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #5f44f5e25063d859
+paso 153 ASSIGN E[1]: escrituras++ => 3 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #9cdc2313ae36624c
+paso 154 SIGNAL E[1]: signal(okEscribir) - despierta a E[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #34fa97e1cf1346f4
+paso 155 SIGNAL_ALL E[1]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #914386c8bc97cc48
+paso 156 RETURN E[1]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[6]: reingresa a RW | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #1cb05e2391bc68d0
+paso 157 ASSIGN E[6]: nw++ => 1 | TERMINATED E[1]: termina | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #9f546c188aba9d49
+paso 158 RETURN E[6]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #4e62acbf4d9471a1
+paso 159 SKIP E[6]: skip | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #983ce018a023db5c
+paso 160 ENTER E[6]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #436706e027974b78
+paso 161 ASSIGN E[6]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #468aefbcdeed6427
+paso 162 ASSIGN E[6]: escrituras++ => 4 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #7f814fbaa28cc431
+paso 163 SIGNAL E[6]: signal(okEscribir) - despierta a E[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #c3704c54050b51b3
+paso 164 SIGNAL_ALL E[6]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #04bbd7f7b895a3c5
+paso 165 RETURN E[6]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[4]: reingresa a RW | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #fcb4c3cbfbfa132f
+paso 166 ASSIGN E[4]: nw++ => 1 | TERMINATED E[6]: termina | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #b24eb1e8ee806804
+paso 167 RETURN E[4]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #0b4298734e151831
+paso 168 SKIP E[4]: skip | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #931aab1579815b00
+paso 169 ENTER E[4]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #6f04b95f4ee63ed0
+paso 170 ASSIGN E[4]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #af254743a89dcd3a
+paso 171 ASSIGN E[4]: escrituras++ => 5 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #d79d307ef455e5cd
+paso 172 SIGNAL E[4]: signal(okEscribir) - despierta a E[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #d250cc8f17bb5c58
+paso 173 SIGNAL_ALL E[4]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #bdc40e83723870e6
+paso 174 RETURN E[4]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[2]: reingresa a RW | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #a2afab9fbf242fdd
+paso 175 ASSIGN E[2]: nw++ => 1 | TERMINATED E[4]: termina | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #9910e19d3ae68c39
+paso 176 RETURN E[2]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #7be4d8514f6533a4
+paso 177 SKIP E[2]: skip | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #3b94610eda66d169
+paso 178 ENTER E[2]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #93841641b39e116d
+paso 179 ASSIGN E[2]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #ae7b1e4f85190bd2
+paso 180 ASSIGN E[2]: escrituras++ => 6 | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #daa4af9d0fba00f5
+paso 181 SIGNAL E[2]: signal(okEscribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #fe15dbfa7c0cd5ad
+paso 182 SIGNAL_ALL E[2]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #12fd25bc5455e19f
+paso 183 RETURN E[2]: retorna de RW.liberaEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #986354c82890cea7
+paso 184 TERMINATED E[2]: termina | {"finished":true,"deadlock":false,"instant":184,"waiting":false} #767f5fae5efea1b2
+estado #893c1a90f7ecc7b3
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #ab8709cc29f49f35
+paso 1 #8f458b6c826a6ae7
+paso 2 #10f726ba35a123bd
+paso 3 #a7175d7e5739d2fc
+paso 4 #ac039d2cd2308f69
+paso 5 #9b6facd2fd5eecc4
+paso 6 #2a103bc74db4161e
+paso 7 #5f6e6364d26d085a
+paso 8 #1422d22be7a7698d
+paso 9 #96fd9f745c0969fb
+paso 10 #be9fca47d9cf41a1
+paso 11 #6f10ae243312c113
+paso 12 #fbf0708ea5d6bd7d
+paso 13 #2bc753b128fad53f
+paso 14 #e2f967de9007f97e
+paso 15 #e39aff2d7f6eb58e
+paso 16 #e9fb2994083c6b5d
+paso 17 #683adbc53be990bf
+paso 18 #98a184f958411694
+paso 19 #8b38a14cfb101254
+paso 20 #46a3906f3630d046
+paso 21 #a8eab68174a47c91
+paso 22 #ba729b1a73ba8b7a
+paso 23 #d996c6e39c77f9ff
+paso 24 #b6cf9525432d183c
+paso 25 #58328fde2d55de25
+paso 26 #de0499bf8503319f
+paso 27 #c6c06f193dcbe275
+paso 28 #40867a7107e3b2c9
+paso 29 #82208573383b0a6a
+paso 30 #71f7a9e6236e1110
+paso 31 #70847a2635311427
+paso 32 #ea4f03117efbbfff
+paso 33 #337679176dfe46d4
+paso 34 #c889d4ddeb17e6a5
+paso 35 #6eb2e9e6ff4ee6e7
+paso 36 #66ad150db8f41575
+paso 37 #91293ff71e5dc0b8
+paso 38 #a08215812a79fb77
+paso 39 #d8cd4b5aba14c9f4
+paso 40 #129d55a9889857ea
+paso 41 #b30afd772baf1b43
+paso 42 #7b724020036efb1c
+paso 43 #3f90737ef6cfce8b
+paso 44 #38c4b962af3722c3
+paso 45 #0596ec301e83e17d
+paso 46 #5ad3dd23a4dd4b14
+paso 47 #5f4516d80b3594ee
+paso 48 #27473e16a476042d
+paso 49 #6b81f6fc1535cc26
+paso 50 #0c2904df3295ca91
+paso 51 #7e6117e1cc9f1b1a
+paso 52 #cb7949c91b22ea7a
+paso 53 #99d294667f588db1
+paso 54 #9859f88e084b87ae
+paso 55 #09c19bf2a68e25aa
+paso 56 #c07206ec3b9bdcba
+paso 57 #f1ad1e594fb26623
+paso 58 #98c1e520c430c91a
+paso 59 #322661c622acd833
+paso 60 #ac0f34d2e79154f3
+paso 61 #a1b0eb80fd1a3cc1
+paso 62 #ae0b3e487f19eca7
+paso 63 #b2cea506d5d52881
+paso 64 #cc20da11058ea951
+paso 65 #bf2bbf7a9aa9ffca
+paso 66 #aae9f09c28823420
+paso 67 #06c2b87df6287a6b
+paso 68 #69ef2b2325eb5607
+paso 69 #68ef956f240c2e7d
+paso 70 #6a0a26225db47cab
+paso 71 #3497b9611a78d0ab
+paso 72 #39869179f654fcb4
+paso 73 #3f259aa2746f0442
+paso 74 #c9378d1cba90c241
+paso 75 #667b2b1de4686b2b
+paso 76 #b099497707d99d77
+paso 77 #001a90e49bb85305
+paso 78 #812bf5b155ba6816
+paso 79 #c2c31d1594040e42
+paso 80 #381193354961b45f
+paso 81 #242efb35e709f666
+paso 82 #ee6c25f54cbaa559
+paso 83 #adbfe20e024ef9cd
+paso 84 #6f23210a333d17d5
+paso 85 #d27748011af099bc
+paso 86 #4a011d85fc95cd11
+paso 87 #6f634596caf8f1bb
+paso 88 #5c8e8928d41fc49b
+paso 89 #c455996aabc0a579
+paso 90 #a8c01af214524a20
+paso 91 #734305d1309b01ec
+paso 92 #37473a6603391444
+paso 93 #9c1444ba7dab347a
+paso 94 #461333aa38e604a6
+paso 95 #236996a54f139aab
+paso 96 #707fbaeed1b19428
+paso 97 #c0ecc341d5a1f4e1
+paso 98 #47294f64883e58d5
+paso 99 #51289e1ec66e84e9
+paso 100 #511cda4b59cfe234
+paso 101 #23adf238f6802e82
+paso 102 #d3362acd8595cc58
+paso 103 #874cdbe7ce53ace1
+paso 104 #3e1dab461dd60dae
+paso 105 #f5a222f9d9ac4004
+paso 106 #b5d2d1e5afe27183
+paso 107 #a1b963aed9a657fb
+paso 108 #cd63cf17c538fa67
+paso 109 #58d9e874dfc20f9b
+paso 110 #279321de77aa548d
+paso 111 #dee594942eb84c1d
+paso 112 #500cb15a3c655c56
+paso 113 #db30a3ae460f25ba
+paso 114 #6ceaea4136c2d380
+paso 115 #c36339bfd2fdf5b7
+paso 116 #0f47996c7eb9f870
+paso 117 #5a23175aeb9ecad7
+paso 118 #3be670bf55cb322d
+paso 119 #18836142193bc260
+paso 120 #251a86483a705adf
+paso 121 #8890b6690ab1742a
+paso 122 #ff4ac5022375d09c
+paso 123 #9e07f8b2f353d745
+paso 124 #9caf996804a41dcc
+paso 125 #0d8148d87c95017e
+paso 126 #cbb27f1751ab9502
+paso 127 #874afe89b34f01fd
+paso 128 #7d55002a0bdbfc4f
+paso 129 #4713d61eba897dc9
+paso 130 #a8677f337386a778
+paso 131 #4b90957fc9ef23c1
+paso 132 #5e21c0940b75e358
+paso 133 #3fe833f524d74b6b
+paso 134 #00960a5f440710d5
+paso 135 #5e27fca89e9e8c83
+paso 136 #2c5099ec593bacb9
+paso 137 #18c4adb955ffc0e2
+paso 138 #e8c14992ea9fcd0b
+paso 139 #43dec1e8ad45cffb
+paso 140 #9a6a5d5af0fabb3c
+paso 141 #ab4e87dd64186ba3
+paso 142 #15c5175e8b2826ef
+paso 143 #551e71e61f1f6371
+paso 144 #a6566e2bd40f6075
+paso 145 #79649e3a8cc7e50f
+paso 146 #db556683e7ed8f2a
+paso 147 #19f5217f7133ef8a
+paso 148 #00fa50e9daeddd41
+paso 149 #c3e63aafa1113057
+paso 150 #f1c92db354ec5eb3
+paso 151 #2dc508574314749c
+paso 152 #39822ed76fc357f9
+paso 153 #b0285c67128c46f6
+paso 154 #13afd953de59e05d
+paso 155 #56d227cfa65f7493
+paso 156 #299e3cd351cf4b28
+paso 157 #9edefe7598bae67e
+paso 158 #6f6cc4d83d62a4d6
+paso 159 #6b5a79a94a2f3190
+paso 160 #93ae5bb632bbc1b9
+paso 161 #0f9dc0906c208a5e
+paso 162 #5a7257af10aa13fd
+paso 163 #7b6ab4c3324e00f2
+paso 164 #e5083555aca95f2f
+paso 165 #e243d5e8c4c8e3a3
+paso 166 #52085ac61f92454a
+paso 167 #7b488c52b742fbf5
+paso 168 #8ea0af95144f932d
+paso 169 #277980f3a67d217e
+paso 170 #a0e3f298ddf38c62
+paso 171 #f81898d8e95caf77
+paso 172 #7ddb52f6b2b764e6
+paso 173 #a36d7ab9362b1770
+paso 174 #b20e689461865eb5
+paso 175 #5575748e6b4c2327
+paso 176 #41aec42004728d5f
+paso 177 #8a25270f221be0bb
+paso 178 #dc1e6a1d11b3f473
+paso 179 #c633ede0b8e03cc8
+paso 180 #c07e53441a9840d4
+paso 181 #007bbea17a3ca48d
+paso 182 #93687e1f7fe599e0
+paso 183 #048812324d386043
+paso 184 #b2129af6b448b912
+estado #c2c7bb4594daa6f5
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #de27b59b35388ffd
+paso 1 #8f458b6c826a6ae7
+paso 2 #10f726ba35a123bd
+paso 3 #9b3bbeb58a4d2aaa
+paso 4 #e211647c25d15692
+paso 5 #da5e4795baede209
+paso 6 #bf1fc773eb89f3b0
+paso 7 #ed2e102fd87fe096
+paso 8 #e74964a5d3bb13a9
+paso 9 #c4ac077bb00320fc
+paso 10 #6da988736d22d751
+paso 11 #f86707488d1ce609
+paso 12 #ce189bdd8ef27919
+paso 13 #dee25b88115e4d19
+paso 14 #1a2071b538e9ee13
+paso 15 #3cb2d49417850e04
+paso 16 #37f9c58e74afcef3
+paso 17 #4ed6e5df9d0f1e00
+paso 18 #97e7f3e5539cafcc
+paso 19 #1dfd8d971e1c5117
+paso 20 #62af40b1cb23ca61
+paso 21 #c4047ce2d162a92e
+paso 22 #8e154df7998bfac1
+paso 23 #8432ed2d7016c681
+paso 24 #69520211e893d77b
+paso 25 #6a10b2be7a5b11a4
+paso 26 #ebbc1574bf8e9f78
+paso 27 #9ac9f15c4830af3b
+paso 28 #f1385aade27a7080
+paso 29 #3e6c084411017972
+paso 30 #1b619d6bb3ec4456
+paso 31 #89bf17885cde5d92
+paso 32 #f48e0a0d3152d191
+paso 33 #e15cc567acee4dc3
+paso 34 #796b6e0e52d0be72
+paso 35 #7201759b34abd04b
+paso 36 #67f3d6480cdec038
+paso 37 #fab0553868d84f86
+paso 38 #023a6b4da6178079
+paso 39 #03cac31b982aa7e2
+paso 40 #2a627a9e710db242
+paso 41 #080f0a81cc132675
+paso 42 #309a54373ee3d10d
+paso 43 #5bad5c95092584cd
+paso 44 #aa8fd453a933bf22
+paso 45 #19a4406469d121ac
+paso 46 #e93d101d405076fd
+paso 47 #f89bd6ab512f0807
+paso 48 #aa792fce5f3cc244
+paso 49 #01ac4b9afa594238
+paso 50 #06344938ec9a6bbb
+paso 51 #9be03e4d4fcbccca
+paso 52 #16c100ccfbfc1139
+paso 53 #8d170486c50788db
+paso 54 #e3b96f4496cf9060
+paso 55 #3d2f3ab09eb3428b
+paso 56 #4e04b9d02d68064d
+paso 57 #13d181856d565998
+paso 58 #523375c0839f8ee1
+paso 59 #bd6c208122f33164
+paso 60 #05b1610803f3705e
+paso 61 #ae35f9f9b1721ab0
+paso 62 #02478f2197445cf1
+paso 63 #019431504fc4c1cf
+paso 64 #dec97105ea247522
+paso 65 #fc1768f543bd9027
+paso 66 #4d9fd28f8b06c841
+paso 67 #404edb21f07b184e
+paso 68 #edabdfb33f3638e1
+paso 69 #256abadd3ed3708c
+paso 70 #cb98d03c639bf0fb
+paso 71 #a22da16fba000f81
+paso 72 #dcba791101774ad1
+paso 73 #2767e8b83a3892ec
+paso 74 #8f25c53992e40e96
+paso 75 #0876fcbd5b376269
+paso 76 #d511929085046dfa
+paso 77 #09c97d808420877b
+paso 78 #4e57517f081cf27b
+paso 79 #e30ad81e788bb1cb
+paso 80 #e9ab53b9f4aed041
+paso 81 #792b6c0e0846c58d
+paso 82 #a25b75c86f978ba7
+paso 83 #2cda8cf9bda5971e
+paso 84 #25bc351045c93092
+paso 85 #f83b2823c2a7cb24
+paso 86 #1b8cd9aa1cc80c2c
+paso 87 #a960b7edee3a7ce2
+paso 88 #06ce94ed5beb1271
+paso 89 #b69c4cdda1ab866a
+paso 90 #7ada5e55fda961c2
+paso 91 #4793fbe2f3e46195
+paso 92 #83a7f50e80f1dd21
+paso 93 #c857ef9ff41915c5
+paso 94 #186af77b55baa04a
+paso 95 #5b368bc9bbb5c211
+paso 96 #c41d3fd01f4e57fc
+paso 97 #19f2c71d3ec2bf26
+paso 98 #4e7d7740c5a53a80
+paso 99 #501bca986a911a86
+paso 100 #be5375c929d04d3e
+paso 101 #bf1d5cf5b35d40d0
+paso 102 #a93e7187bdf43e74
+paso 103 #951a60531b26eb93
+paso 104 #823611aee2a73583
+paso 105 #0a2e99cd4b88451b
+paso 106 #00ed8640aba2eb96
+paso 107 #d969f9217ee1706d
+paso 108 #08480661cdc8535b
+paso 109 #f5770d46c37341b1
+paso 110 #a9dda8c4e489e01b
+paso 111 #b590147e50406257
+paso 112 #c837d5ddc8f08c79
+paso 113 #14a8c0a6b7000f8a
+paso 114 #59e8870c97136395
+paso 115 #4b986514c88861b6
+paso 116 #d86bbf63903459d8
+paso 117 #4ed356b0c317f14d
+paso 118 #5349cc6af1124324
+paso 119 #bfa6f1b25ac34a3e
+paso 120 #0ac363e23ff9c93f
+paso 121 #c6b1db413cc0655d
+paso 122 #31190f6e39d59f64
+paso 123 #46670d085e43d38c
+paso 124 #5de15a3d823d0a34
+paso 125 #383a3ff6fae5debf
+paso 126 #124a3f22569a4c8c
+paso 127 #23c5359a0bd87f98
+paso 128 #e7bae23d7c2af838
+paso 129 #38ede04577e948e4
+paso 130 #dc234296c8d0a580
+paso 131 #04630bc5aacc4255
+paso 132 #764115ca0d687a59
+paso 133 #4a3cc02920c52b11
+paso 134 #21d64e40545481f0
+paso 135 #506d743e2c873eb6
+paso 136 #eaa258a9762fce96
+paso 137 #5a670edb5b351310
+paso 138 #88a8e7a1327e1f4a
+paso 139 #920661c80f8beaa5
+paso 140 #c39b2e25c3aad1b0
+paso 141 #560c826773bc8294
+paso 142 #92c9fc2e2ea0289d
+paso 143 #762c09d13bcb9da1
+paso 144 #9c20de3eea19faa9
+paso 145 #25d4361325247af8
+paso 146 #6bd0031ced823a07
+paso 147 #03a75e914591faaa
+paso 148 #19bd7a88f42ab6c6
+paso 149 #d9c84664a5291f47
+paso 150 #de43fb1b66b0e79d
+paso 151 #9ac56d25e06c60d4
+paso 152 #dde2a2b3cdb1c1a9
+paso 153 #66c3bef25a4f56fc
+paso 154 #7479b07c865049f5
+paso 155 #48a7698ed63be374
+paso 156 #8491931eab11abf8
+paso 157 #53f5af7de19d3d75
+paso 158 #6ea499213bb24184
+paso 159 #ad76f1ba97947380
+paso 160 #6a1444631736908f
+paso 161 #d1bf5a4b3b16e999
+paso 162 #573e51f10060b494
+paso 163 #e5f8fa8c869e985e
+paso 164 #ad99af79147c3a73
+paso 165 #28df0d796f9f1662
+paso 166 #7c2383778d545c53
+paso 167 #0fb4aa6e820202f0
+paso 168 #cad99a5617d476bf
+paso 169 #1e8a02110e5da6d1
+paso 170 #7ad60739d13d90bb
+paso 171 #40e0a89a47862d0f
+paso 172 #cd5410e163464eb2
+paso 173 #2a6cd6a2f0f47a2b
+paso 174 #b6362232a8321ae5
+paso 175 #7940dc266eb13a87
+paso 176 #4ba70aa7234db92c
+paso 177 #db6734b8e0c601df
+paso 178 #4015771192e47fa2
+paso 179 #560b35cf00518031
+paso 180 #718f48a24e5e2d78
+paso 181 #9bfefcb534a3443f
+paso 182 #c7a6c1b85aa70e84
+paso 183 #887416c4a59ee6a3
+estado #9cd8f7df9c2df2e4
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #4934c473f15a0a4e
+paso 1 ENTER L[2]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #22f372f088759eb3
+paso 2 BLOCKED L[3]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #36df83ccb698bf34
+paso 3 BLOCKED L[4]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e8c064f6a20e264e
+paso 4 BLOCKED L[1]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #05022d097581c870
+paso 5 ASSIGN L[2]: nr++ => 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #159923d36b2c12f8
+paso 6 BLOCKED L[15]: espera para entrar a RW.pedidoLeer | BLOCKED E[2]: espera para entrar a RW.pedidoEscribir | BLOCKED L[16]: espera para entrar a RW.pedidoLeer | RETURN L[2]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[3]: entra a RW.pedidoLeer | BLOCKED L[11]: espera para entrar a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.pedidoLeer | BLOCKED L[9]: espera para entrar a RW.pedidoLeer | BLOCKED E[5]: espera para entrar a RW.pedidoEscribir | BLOCKED L[18]: espera para entrar a RW.pedidoLeer | BLOCKED L[19]: espera para entrar a RW.pedidoLeer | BLOCKED L[21]: espera para entrar a RW.pedidoLeer | BLOCKED L[12]: espera para entrar a RW.pedidoLeer | BLOCKED E[6]: espera para entrar a RW.pedidoEscribir | BLOCKED L[13]: espera para entrar a RW.pedidoLeer | BLOCKED L[24]: espera para entrar a RW.pedidoLeer | BLOCKED L[6]: espera para entrar a RW.pedidoLeer | BLOCKED L[17]: espera para entrar a RW.pedidoLeer | BLOCKED L[14]: espera para entrar a RW.pedidoLeer | BLOCKED E[3]: espera para entrar a RW.pedidoEscribir | BLOCKED L[8]: espera para entrar a RW.pedidoLeer | BLOCKED L[22]: espera para entrar a RW.pedidoLeer | BLOCKED E[4]: espera para entrar a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a5328d5abcead2d9
+paso 7 SKIP L[2]: skip | BLOCKED L[5]: espera para entrar a RW.pedidoLeer | BLOCKED L[7]: espera para entrar a RW.pedidoLeer | BLOCKED E[1]: espera para entrar a RW.pedidoEscribir | BLOCKED L[10]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #cd7d80a9d39f95ce
+paso 8 ASSIGN L[3]: nr++ => 2 | BLOCKED L[2]: espera para entrar a RW.liberaLeer | BLOCKED L[23]: espera para entrar a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #6ee765105181f963
+paso 9 RETURN L[3]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[22]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #50e079fd1488a754
+paso 10 SKIP L[3]: skip | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5f2423a586633ed1
+paso 11 ASSIGN L[22]: nr++ => 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #76dda4c91f8415c4
+paso 12 BLOCKED L[3]: espera para entrar a RW.liberaLeer | RETURN L[22]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[14]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #307208668c034c8d
+paso 13 ASSIGN L[14]: nr++ => 4 | SKIP L[22]: skip | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #004976531e0110a2
+paso 14 RETURN L[14]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[9]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #a90b6d02870575ab
+paso 15 SKIP L[14]: skip | ASSIGN L[9]: nr++ => 5 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f2e2a60ddb563a8f
+paso 16 BLOCKED L[22]: espera para entrar a RW.liberaLeer | BLOCKED L[14]: espera para entrar a RW.liberaLeer | RETURN L[9]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[20]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #aa5d6f5981bb2048
+paso 17 SKIP L[9]: skip | ASSIGN L[20]: nr++ => 6 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #2f596bdfdbe59f22
+paso 18 BLOCKED L[9]: espera para entrar a RW.liberaLeer | RETURN L[20]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[6]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #4c0d716f4d1ba1ec
+paso 19 WAIT E[6]: wait(okEscribir) - libera el monitor y se demora | ENTER E[2]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #220e581b92de9d0e
+paso 20 SKIP L[20]: skip | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6351b35aac5a58d4
+paso 21 WAIT E[2]: wait(okEscribir) - libera el monitor y se demora | ENTER L[8]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #58f29329913bd5c2
+paso 22 ASSIGN L[8]: nr++ => 7 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #48aa5b4d1bc2b87e
+paso 23 RETURN L[8]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[1]: entra a RW.pedidoLeer | BLOCKED L[20]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #2427e5e77d1e14f3
+paso 24 ASSIGN L[1]: nr++ => 8 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #070c4377f1b976c5
+paso 25 RETURN L[1]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[7]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #dd6270266f93a075
+paso 26 SKIP L[8]: skip | SKIP L[1]: skip | ASSIGN L[7]: nr++ => 9 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #cf972d38550f8624
+paso 27 BLOCKED L[1]: espera para entrar a RW.liberaLeer | RETURN L[7]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[17]: entra a RW.pedidoLeer | BLOCKED L[8]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #9ed0c5f9ffb0e7e3
+paso 28 SKIP L[7]: skip | ASSIGN L[17]: nr++ => 10 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #2ca1d80230364750
+paso 29 RETURN L[17]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[19]: entra a RW.pedidoLeer | BLOCKED L[7]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #920085b2e24e2388
+paso 30 ASSIGN L[19]: nr++ => 11 | SKIP L[17]: skip | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #0b0c829819c3c8b2
+paso 31 RETURN L[19]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[5]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #529c9184f8e5727e
+paso 32 ASSIGN L[5]: nr++ => 12 | BLOCKED L[17]: espera para entrar a RW.liberaLeer | SKIP L[19]: skip | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #618596bba6983485
+paso 33 BLOCKED L[19]: espera para entrar a RW.liberaLeer | RETURN L[5]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[22]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #aa7ab5642398b358
+paso 34 SKIP L[5]: skip | ASSIGN L[22]: nr-- => 11 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #affe406a64143275
+paso 35 ASSIGN L[22]: lecturas++ => 1 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #adc080a4c689b1ab
+paso 36 RETURN L[22]: retorna de RW.liberaLeer, libera el monitor | ENTER L[16]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #503807fc557fbe39
+paso 37 BLOCKED L[5]: espera para entrar a RW.liberaLeer | ASSIGN L[16]: nr++ => 12 | TERMINATED L[22]: termina | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #45048816125d2b43
+paso 38 RETURN L[16]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[2]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #2baa71836a1e3f42
+paso 39 SKIP L[16]: skip | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #530d3b5b71b6de0c
+paso 40 BLOCKED L[16]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #b52bac0fa782004c
+paso 41 ASSIGN L[2]: nr-- => 11 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #a837177665a1b511
+paso 42 ASSIGN L[2]: lecturas++ => 2 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #6db7ffc2bcc68774
+paso 43 RETURN L[2]: retorna de RW.liberaLeer, libera el monitor | ENTER L[12]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #82f7421669ad5cb1
+paso 44 TERMINATED L[2]: termina | ASSIGN L[12]: nr++ => 12 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #5778021a9bb0bf13
+paso 45 RETURN L[12]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[23]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #df46c140e26904de
+paso 46 ASSIGN L[23]: nr++ => 13 | SKIP L[12]: skip | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #bc1f646c2deb9c4c
+paso 47 BLOCKED L[12]: espera para entrar a RW.liberaLeer | RETURN L[23]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[5]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #c703202b6ec4b33f
+paso 48 SKIP L[23]: skip | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #778296b3fd79fd89
+paso 49 BLOCKED L[23]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #9398613a360f8342
+paso 50 WAIT E[5]: wait(okEscribir) - libera el monitor y se demora | ENTER L[1]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #dd1fd997aa66e7b0
+paso 51 ASSIGN L[1]: nr-- => 12 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #9501062c036b12db
+paso 52 ASSIGN L[1]: lecturas++ => 3 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #28cd76abbba4ec70
+paso 53 RETURN L[1]: retorna de RW.liberaLeer, libera el monitor | ENTER L[24]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #1896deb0c3ae523d
+paso 54 TERMINATED L[1]: termina | ASSIGN L[24]: nr++ => 13 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #099e1f4a4753e070
+paso 55 RETURN L[24]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[4]: entra a RW.pedidoEscribir | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #89b7a7a3945247f2
+paso 56 WAIT E[4]: wait(okEscribir) - libera el monitor y se demora | ENTER E[1]: entra a RW.pedidoEscribir | SKIP L[24]: skip | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #94dbc98afefafa62
+paso 57 BLOCKED L[24]: espera para entrar a RW.liberaLeer | WAIT E[1]: wait(okEscribir) - libera el monitor y se demora | ENTER L[11]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #0c1f5857e4ac026c
+paso 58 ASSIGN L[11]: nr++ => 14 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #f7cbcbbdcae99478
+paso 59 RETURN L[11]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[13]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #89cc86319e604e66
+paso 60 ASSIGN L[13]: nr++ => 15 | SKIP L[11]: skip | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #6d9ac710f693b6f3
+paso 61 RETURN L[13]: retorna de RW.pedidoLeer, libera el monitor | ENTER E[3]: entra a RW.pedidoEscribir | BLOCKED L[11]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #b219420210ed65ca
+paso 62 SKIP L[13]: skip | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #202bbeb927aa48ef
+paso 63 BLOCKED L[13]: espera para entrar a RW.liberaLeer | WAIT E[3]: wait(okEscribir) - libera el monitor y se demora | ENTER L[11]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f39e8a106fbf4ef6
+paso 64 ASSIGN L[11]: nr-- => 14 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #d8887a7221c5f7ff
+paso 65 ASSIGN L[11]: lecturas++ => 4 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #c9a0b6a0da2c560d
+paso 66 RETURN L[11]: retorna de RW.liberaLeer, libera el monitor | ENTER L[13]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #b7df7c504d1688de
+paso 67 TERMINATED L[11]: termina | ASSIGN L[13]: nr-- => 13 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #a17bf68fa7a17b76
+paso 68 ASSIGN L[13]: lecturas++ => 5 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #224a1782ce5d0c20
+paso 69 RETURN L[13]: retorna de RW.liberaLeer, libera el monitor | ENTER L[5]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #4ca5b30210f5dff8
+paso 70 TERMINATED L[13]: termina | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #c755dbc92522c624
+paso 71 ASSIGN L[5]: nr-- => 12 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #f518888e6469b24d
+paso 72 ASSIGN L[5]: lecturas++ => 6 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #b88aed74aa5c23b1
+paso 73 RETURN L[5]: retorna de RW.liberaLeer, libera el monitor | ENTER L[15]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #07f7d39ab8cc4663
+paso 74 ASSIGN L[15]: nr++ => 13 | TERMINATED L[5]: termina | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #0fa956d6e8eb85ec
+paso 75 RETURN L[15]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[10]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #79b9d9c6da1bdb99
+paso 76 SKIP L[15]: skip | ASSIGN L[10]: nr++ => 14 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #22f7ee5032432a31
+paso 77 RETURN L[10]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[9]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #a824a342eec29c50
+paso 78 BLOCKED L[15]: espera para entrar a RW.liberaLeer | SKIP L[10]: skip | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #e417a9fbe1cb10f2
+paso 79 ASSIGN L[9]: nr-- => 13 | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #72cdaf6a46c5fe49
+paso 80 ASSIGN L[9]: lecturas++ => 7 | BLOCKED L[10]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #3629c7222a752679
+paso 81 RETURN L[9]: retorna de RW.liberaLeer, libera el monitor | ENTER L[24]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #4ee8d9cabf6ddaf2
+paso 82 TERMINATED L[9]: termina | ASSIGN L[24]: nr-- => 12 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #caf0e1e198da1ae1
+paso 83 ASSIGN L[24]: lecturas++ => 8 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #7a82983abe00d0d9
+paso 84 RETURN L[24]: retorna de RW.liberaLeer, libera el monitor | ENTER L[18]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #011c253d175b56ee
+paso 85 TERMINATED L[24]: termina | ASSIGN L[18]: nr++ => 13 | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #2189212d521733ee
+paso 86 RETURN L[18]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[23]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #547f52a64948b963
+paso 87 SKIP L[18]: skip | ASSIGN L[23]: nr-- => 12 | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #e27b6fc20983d1ee
+paso 88 ASSIGN L[23]: lecturas++ => 9 | BLOCKED L[18]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #eccb116fa3adb6e3
+paso 89 RETURN L[23]: retorna de RW.liberaLeer, libera el monitor | ENTER L[15]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #bb337df1c28814d3
+paso 90 TERMINATED L[23]: termina | ASSIGN L[15]: nr-- => 11 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #764ab375e5d2de84
+paso 91 ASSIGN L[15]: lecturas++ => 10 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #b85d42554fd38ca0
+paso 92 RETURN L[15]: retorna de RW.liberaLeer, libera el monitor | ENTER L[12]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #0218e3ed04c23748
+paso 93 TERMINATED L[15]: termina | ASSIGN L[12]: nr-- => 10 | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #6d123df6aaf29338
+paso 94 ASSIGN L[12]: lecturas++ => 11 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #ee55c99b4aca7803
+paso 95 RETURN L[12]: retorna de RW.liberaLeer, libera el monitor | ENTER L[6]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #b66aec9f33d65576
+paso 96 TERMINATED L[12]: termina | ASSIGN L[6]: nr++ => 11 | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #40c8b45f3be7df2a
+paso 97 RETURN L[6]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[4]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #e99844d55dad0fcc
+paso 98 ASSIGN L[4]: nr++ => 12 | SKIP L[6]: skip | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #6ab3b30e83e1c468
+paso 99 RETURN L[4]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[20]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #f4598257cc3faad7
+paso 100 SKIP L[4]: skip | ASSIGN L[20]: nr-- => 11 | BLOCKED L[6]: espera para entrar a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #ac18d9f1ca266e57
+paso 101 BLOCKED L[4]: espera para entrar a RW.liberaLeer | ASSIGN L[20]: lecturas++ => 12 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #6a5bd3fd2970ee53
+paso 102 RETURN L[20]: retorna de RW.liberaLeer, libera el monitor | ENTER L[8]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #21d354e79a3d27b5
+paso 103 ASSIGN L[8]: nr-- => 10 | TERMINATED L[20]: termina | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #eb7475f4244b92d2
+paso 104 ASSIGN L[8]: lecturas++ => 13 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #aca23df169a63774
+paso 105 RETURN L[8]: retorna de RW.liberaLeer, libera el monitor | ENTER L[3]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #146fc487bb61018a
+paso 106 ASSIGN L[3]: nr-- => 9 | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #dd864c517b7bfe61
+paso 107 TERMINATED L[8]: termina | ASSIGN L[3]: lecturas++ => 14 | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #6b855877a6103a7b
+paso 108 RETURN L[3]: retorna de RW.liberaLeer, libera el monitor | ENTER L[6]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #d1435b3480aae7b6
+paso 109 ASSIGN L[6]: nr-- => 8 | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #bed78c4b61199718
+paso 110 TERMINATED L[3]: termina | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #29fb701e1b63b376
+paso 111 ASSIGN L[6]: lecturas++ => 15 | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #a0011ce8f9d768ed
+paso 112 RETURN L[6]: retorna de RW.liberaLeer, libera el monitor | ENTER L[4]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #f7782156f86594d2
+paso 113 TERMINATED L[6]: termina | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #3dbfb5d4f3e30b0b
+paso 114 ASSIGN L[4]: nr-- => 7 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #0ce593e849dc1384
+paso 115 ASSIGN L[4]: lecturas++ => 16 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #ee7035f9a6ff2fab
+paso 116 RETURN L[4]: retorna de RW.liberaLeer, libera el monitor | ENTER L[10]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #3059831506b07dc2
+paso 117 ASSIGN L[10]: nr-- => 6 | TERMINATED L[4]: termina | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #a9c36486017d8ce2
+paso 118 ASSIGN L[10]: lecturas++ => 17 | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #11aa77e517cf663a
+paso 119 RETURN L[10]: retorna de RW.liberaLeer, libera el monitor | ENTER L[17]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #54d477195abb9016
+paso 120 ASSIGN L[17]: nr-- => 5 | TERMINATED L[10]: termina | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #1fb944583f05dd20
+paso 121 ASSIGN L[17]: lecturas++ => 18 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #b84bce102d533dc6
+paso 122 RETURN L[17]: retorna de RW.liberaLeer, libera el monitor | ENTER L[19]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #cac3887295d4c468
+paso 123 TERMINATED L[17]: termina | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #e393c7fd73be04e9
+paso 124 ASSIGN L[19]: nr-- => 4 | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #d1cd7933609096b0
+paso 125 ASSIGN L[19]: lecturas++ => 19 | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #789c2fdb813f0f45
+paso 126 RETURN L[19]: retorna de RW.liberaLeer, libera el monitor | ENTER L[16]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #ad56a79580d2a756
+paso 127 TERMINATED L[19]: termina | ASSIGN L[16]: nr-- => 3 | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #3d281d8035716ad2
+paso 128 ASSIGN L[16]: lecturas++ => 20 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #58057f5ff10bbac7
+paso 129 RETURN L[16]: retorna de RW.liberaLeer, libera el monitor | ENTER L[21]: entra a RW.pedidoLeer | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #994798363e751d69
+paso 130 TERMINATED L[16]: termina | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #369cc205cf4ce480
+paso 131 ASSIGN L[21]: nr++ => 4 | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #522726ec37623b64
+paso 132 RETURN L[21]: retorna de RW.pedidoLeer, libera el monitor | ENTER L[14]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #f8e98ff806d069cb
+paso 133 ASSIGN L[14]: nr-- => 3 | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #96c3c60c413fa32d
+paso 134 ASSIGN L[14]: lecturas++ => 21 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #1332907cb2b9b7f9
+paso 135 SKIP L[21]: skip | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #2deee0880110ed5c
+paso 136 BLOCKED L[21]: espera para entrar a RW.liberaLeer | RETURN L[14]: retorna de RW.liberaLeer, libera el monitor | ENTER L[21]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #5bb5742483dd8eb2
+paso 137 ASSIGN L[21]: nr-- => 2 | TERMINATED L[14]: termina | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #5aab9296a3ac0721
+paso 138 ASSIGN L[21]: lecturas++ => 22 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #b186075b03c65eda
+paso 139 RETURN L[21]: retorna de RW.liberaLeer, libera el monitor | ENTER L[7]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #ed6e233cb8a72a89
+paso 140 ASSIGN L[7]: nr-- => 1 | TERMINATED L[21]: termina | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #2fb3310e14303901
+paso 141 ASSIGN L[7]: lecturas++ => 23 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #a2c653ee74869e41
+paso 142 RETURN L[7]: retorna de RW.liberaLeer, libera el monitor | ENTER L[18]: entra a RW.liberaLeer | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #942fec3dd47f0045
+paso 143 TERMINATED L[7]: termina | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #be4e7235a85d87a8
+paso 144 ASSIGN L[18]: nr-- => 0 | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #cd197d3202c19e36
+paso 145 ASSIGN L[18]: lecturas++ => 24 | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #261d8d5709e04420
+paso 146 SIGNAL L[18]: signal(okEscribir) - despierta a E[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #b23a1844b197f8ce
+paso 147 RETURN L[18]: retorna de RW.liberaLeer, libera el monitor | REENTER E[6]: reingresa a RW | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #191468d615a15ca9
+paso 148 ASSIGN E[6]: nw++ => 1 | TERMINATED L[18]: termina | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #1a9685941e64506e
+paso 149 ASSIGN E[6]: maxW = 1 | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #45500e944ccccc84
+paso 150 RETURN E[6]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #be7945dfe6ded721
+paso 151 SKIP E[6]: skip | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #b4a3e5cb7c7a42c1
+paso 152 ENTER E[6]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #e8d81fdfe4f7c8b5
+paso 153 ASSIGN E[6]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #dfbba9d7b5878b25
+paso 154 ASSIGN E[6]: escrituras++ => 1 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #f8fe318f31211479
+paso 155 SIGNAL E[6]: signal(okEscribir) - despierta a E[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #ada1de30ab9779ba
+paso 156 SIGNAL_ALL E[6]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #2e6d85c5c986cb1d
+paso 157 RETURN E[6]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[2]: reingresa a RW | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #63d751cf88edef03
+paso 158 TERMINATED E[6]: termina | ASSIGN E[2]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #f3dd87256437ee6a
+paso 159 RETURN E[2]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #722f376ae7e58b75
+paso 160 SKIP E[2]: skip | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #444e479ea591c641
+paso 161 ENTER E[2]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #144d1f8e6318bc75
+paso 162 ASSIGN E[2]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #8509fb76f7ef10c7
+paso 163 ASSIGN E[2]: escrituras++ => 2 | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #0cb0642d3ee3a660
+paso 164 SIGNAL E[2]: signal(okEscribir) - despierta a E[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #f7521d950c600185
+paso 165 SIGNAL_ALL E[2]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #5c2ff8ffb1d49c03
+paso 166 RETURN E[2]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[5]: reingresa a RW | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #151bddbf36f3ef82
+paso 167 TERMINATED E[2]: termina | ASSIGN E[5]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #f6a8f2f2947384ee
+paso 168 RETURN E[5]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #35ca1bb00905b5d6
+paso 169 SKIP E[5]: skip | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #8b5b32bcd0e40692
+paso 170 ENTER E[5]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #e95d6c5426f14d11
+paso 171 ASSIGN E[5]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #db5c2dd4096fc0d2
+paso 172 ASSIGN E[5]: escrituras++ => 3 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #fcbe80ec696d36a8
+paso 173 SIGNAL E[5]: signal(okEscribir) - despierta a E[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #5ea6f7e021bd4b72
+paso 174 SIGNAL_ALL E[5]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #db96001eae990e8c
+paso 175 RETURN E[5]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[4]: reingresa a RW | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #7237a1f0844891d7
+paso 176 ASSIGN E[4]: nw++ => 1 | TERMINATED E[5]: termina | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #d2bc6377a7f43618
+paso 177 RETURN E[4]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #c5dec32c727ea53c
+paso 178 SKIP E[4]: skip | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #90b6ac7f4ea285fe
+paso 179 ENTER E[4]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #e83b4635ef82a90f
+paso 180 ASSIGN E[4]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #7ca334593e0c4643
+paso 181 ASSIGN E[4]: escrituras++ => 4 | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #e9dad9c8884de04f
+paso 182 SIGNAL E[4]: signal(okEscribir) - despierta a E[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #47eaf7b299e030c4
+paso 183 SIGNAL_ALL E[4]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #728b01033ac19eb8
+paso 184 RETURN E[4]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[1]: reingresa a RW | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #5f5ae23068bd94a6
+paso 185 TERMINATED E[4]: termina | ASSIGN E[1]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #fcd504d57460e598
+paso 186 RETURN E[1]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #627120d78331ee0c
+paso 187 SKIP E[1]: skip | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #faf5b31cf0ae4b0e
+paso 188 ENTER E[1]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #93b33ee61dea68b2
+paso 189 ASSIGN E[1]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #ceba6e4f1ea59f4f
+paso 190 ASSIGN E[1]: escrituras++ => 5 | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #adcce23efc85b3e5
+paso 191 SIGNAL E[1]: signal(okEscribir) - despierta a E[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #ede5ddce838b0667
+paso 192 SIGNAL_ALL E[1]: signal_all(okLeer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #cea4778f2df23b9d
+paso 193 RETURN E[1]: retorna de RW.liberaEscribir, libera el monitor | REENTER E[3]: reingresa a RW | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #4aa6349df2d01c06
+paso 194 TERMINATED E[1]: termina | ASSIGN E[3]: nw++ => 1 | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #be8891c20877b967
+paso 195 RETURN E[3]: retorna de RW.pedidoEscribir, libera el monitor | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #a8144bdf2e4c1c69
+paso 196 SKIP E[3]: skip | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #613609ae33e9c782
+paso 197 ENTER E[3]: entra a RW.liberaEscribir | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #8316ce2cfe6681f4
+paso 198 ASSIGN E[3]: nw-- => 0 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #09f8ba3631a9c58a
+paso 199 ASSIGN E[3]: escrituras++ => 6 | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #daf5d0599886ada7
+paso 200 SIGNAL E[3]: signal(okEscribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #704b2383f21eb88d
+estado #e06e5dd918720b83

@@ -1,0 +1,1147 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #0d0148a5659314e9
+paso 1 ENTER F[4]: entra a Mesa.tomar | BLOCKED F[2]: espera para entrar a Mesa.tomar | BLOCKED F[3]: espera para entrar a Mesa.tomar | BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #2ce5716cf2f5ca62
+paso 2 BLOCKED F[1]: espera para entrar a Mesa.tomar | ASSIGN F[4]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2720b7d882d5e983
+paso 3 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #20d97af04faf2ad2
+paso 4 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fa2608eba0c39570
+paso 5 SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ee20fd6e221a6386
+paso 6 ASSIGN F[1]: ocupado[1] = true | BLOCKED F[4]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c429491cf4bbc15f
+paso 7 ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #bc914488623ff2bf
+paso 8 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #bd5177191c808e61
+paso 9 WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.tomar | SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ea53b27e82572bc2
+paso 10 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.dejar | BLOCKED F[1]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #130eb94ad2a64503
+paso 11 ASSIGN F[4]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7c831b4bda79c4d2
+paso 12 ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #76098970f44414cb
+paso 13 ASSIGN F[4]: comidas++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #bd1985e88d05790a
+paso 14 SIGNAL F[4]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #fd8bc0871ff9ba8f
+paso 15 SIGNAL F[4]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #524f42163c6057be
+paso 16 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #9eba2e32165b31cd
+paso 17 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | REENTER F[3]: reingresa a Mesa | ASSIGN F[4]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #00134eb502980272
+paso 18 ASSIGN F[3]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #3eadc47c06621d9b
+paso 19 ASSIGN F[3]: ocupado[4] = true | BLOCKED F[4]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #47a490c5ba2e83cd
+paso 20 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #10fcd0f28259f49f
+paso 21 SKIP F[3]: skip | ASSIGN F[1]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #ddb29c501206e09c
+paso 22 ASSIGN F[1]: ocupado[2] = false | BLOCKED F[3]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c7fb175a2b2050be
+paso 23 ASSIGN F[1]: comidas++ => 2 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #03daf12b47a4e0d5
+paso 24 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a71644c45f5682e8
+paso 25 SIGNAL F[1]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #cabdf01cc2c9d231
+paso 26 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #91880cdad2f3c867
+paso 27 ASSIGN F[1]: for#1++ => 2 | WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #561e8cd8f887ae20
+paso 28 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.dejar | BLOCKED F[1]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b205178a31b3c841
+paso 29 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #219d3c6cc9c3aa92
+paso 30 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #0ff9f9eea4014b6a
+paso 31 ASSIGN F[3]: comidas++ => 3 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #9edf34ea80edf33d
+paso 32 SIGNAL F[3]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #c9b5158b6caeb4bb
+paso 33 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #172aeef55870a074
+paso 34 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #645bcb3eb03b83ab
+paso 35 ASSIGN F[1]: ocupado[1] = true | ASSIGN F[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #c24c61a514fe292a
+paso 36 ASSIGN F[1]: ocupado[2] = true | BLOCKED F[3]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #943f717e6608a20e
+paso 37 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #266bbaa12beab0d7
+paso 38 SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #ed9e4d1dde1487dd
+paso 39 ASSIGN F[4]: ocupado[4] = true | BLOCKED F[1]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #0db7862a958876cd
+paso 40 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #e799ba7b27ae48f5
+paso 41 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #89241537c82632d7
+paso 42 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | REENTER F[0]: reingresa a Mesa | SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #0bafe287fdb32db9
+paso 43 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.tomar | BLOCKED F[4]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #96a25ad2d213abd0
+paso 44 WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #d3466417587a4690
+paso 45 ASSIGN F[1]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e578ef9563ad9e0e
+paso 46 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #812483e1d9fe02e9
+paso 47 ASSIGN F[1]: comidas++ => 4 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #004b78ea969ba60f
+paso 48 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #d14eff739b01c311
+paso 49 SIGNAL F[1]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #b0b7ae1e92df521f
+paso 50 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #611e7af329205529
+paso 51 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #867b8aab6721db83
+paso 52 ASSIGN F[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #18f07592408ce1f9
+paso 53 ASSIGN F[2]: ocupado[2] = true | BLOCKED F[1]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #cfe4b7f8c52abf8c
+paso 54 ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #78afb602759d20eb
+paso 55 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3105bb004e90d077
+paso 56 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #c2f9b7e4f088869b
+paso 57 ASSIGN F[4]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #675d78c19f7a2b41
+paso 58 ASSIGN F[4]: ocupado[0] = false | SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #cf6837f35fea906d
+paso 59 ASSIGN F[4]: comidas++ => 5 | BLOCKED F[2]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #6a03a3f3fdddfdeb
+paso 60 SIGNAL F[4]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #d06c8aca6eb124b4
+paso 61 SIGNAL F[4]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #0bdc4c209d9b503f
+paso 62 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #b1fb736de6a14b48
+paso 63 ASSIGN F[4]: for#1++ => 3 | ASSIGN F[2]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #05f4e9cd27770077
+paso 64 ASSIGN F[2]: ocupado[3] = false | BLOCKED F[4]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #2f997dc9d473fa5e
+paso 65 ASSIGN F[2]: comidas++ => 6 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #2f4c9bed3fb219f2
+paso 66 SIGNAL F[2]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #ed52fa82ee1ca9da
+paso 67 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #6e1f3fc27dca331d
+paso 68 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #3fcaf1d3ef1afc70
+paso 69 ASSIGN F[2]: for#1++ => 2 | ASSIGN F[1]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #7f5bd68673fbe1de
+paso 70 ASSIGN F[1]: ocupado[2] = true | BLOCKED F[2]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #4552b3a7510ec053
+paso 71 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #70ce02dbdb0a70e6
+paso 72 SKIP F[1]: skip | WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | REENTER F[3]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #7d1ec78dcbf8038d
+paso 73 BLOCKED F[1]: espera para entrar a Mesa.dejar | ASSIGN F[3]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #95cbae05d9664c22
+paso 74 ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #26f62032fd1fd489
+paso 75 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #fc231628e82bcb45
+paso 76 SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #bbcdc8ff04b2be56
+paso 77 ASSIGN F[1]: ocupado[1] = false | BLOCKED F[3]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #57fe01b7cb7d4270
+paso 78 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #8fb6e32e8c7188b4
+paso 79 ASSIGN F[1]: comidas++ => 7 | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #9c58749e04531b6d
+paso 80 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #b1a069bdf4c8b262
+paso 81 SIGNAL F[1]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #f87abeee51c7b5fa
+paso 82 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #aadd0c6a349c43c9
+paso 83 ASSIGN F[1]: for#1++ => 4 | ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #135b064ba40ad5ed
+paso 84 ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #b6334068a48d90ac
+paso 85 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[4]: entra a Mesa.tomar | TERMINATED F[1]: termina | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #76a5da49ac0ee2aa
+paso 86 SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #5cc90658c8b05fce
+paso 87 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #7ea51d178264dc68
+paso 88 BLOCKED F[0]: espera para entrar a Mesa.dejar | WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #1b754a4444324250
+paso 89 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #01c972e89cc42425
+paso 90 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #55b24625ee71aa85
+paso 91 ASSIGN F[3]: comidas++ => 8 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #5eda0fb1b5d9fe26
+paso 92 SIGNAL F[3]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #6d4220a678f82ce5
+paso 93 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #789d17b6f744d474
+paso 94 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #aa257e7da1b0c547
+paso 95 ASSIGN F[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #7f239cbbdb19cf47
+paso 96 BLOCKED F[3]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #d7de3f0dd49ce5e4
+paso 97 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #1079c31ccd580be4
+paso 98 ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #63786256e39e2d98
+paso 99 ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #aa2a20e422feaf50
+paso 100 ASSIGN F[0]: comidas++ => 9 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #282e8051e5229162
+paso 101 SIGNAL F[0]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #7893848e2934effa
+paso 102 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #b0cbf3058638953b
+paso 103 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #7bd5cf0174f246af
+paso 104 ASSIGN F[3]: ocupado[3] = true | ASSIGN F[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #cfb142ed0708489c
+paso 105 ASSIGN F[3]: ocupado[4] = true | BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #128a924512e548f9
+paso 106 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #2e993a63c99da870
+paso 107 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | REENTER F[2]: reingresa a Mesa | SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #bb8d82b0fb85513b
+paso 108 BLOCKED F[3]: espera para entrar a Mesa.dejar | WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #9079ccd900d3c385
+paso 109 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #0c71e5e38f46b882
+paso 110 ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #727695f023fc9eaf
+paso 111 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #d8227a9a1e094e95
+paso 112 SKIP F[0]: skip | ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #7d9e9bf25a5edd21
+paso 113 BLOCKED F[0]: espera para entrar a Mesa.dejar | ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #4ac54afe1ed50dd1
+paso 114 ASSIGN F[3]: comidas++ => 10 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #3218d2c36c49d691
+paso 115 SIGNAL F[3]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #d8939587e057ec73
+paso 116 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #72b2b60ede1b3193
+paso 117 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #ada3f95876f739c1
+paso 118 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #8b6b8da6df7ca756
+paso 119 ASSIGN F[3]: for#1++ => 4 | ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #d0edb29b46fa8a1d
+paso 120 ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #d09b0f21e2ea1f0f
+paso 121 ASSIGN F[0]: comidas++ => 11 | TERMINATED F[3]: termina | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #8657f0781166b2d9
+paso 122 SIGNAL F[0]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #10c5d4cb8d43a8da
+paso 123 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #c933aef4a09404f2
+paso 124 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #9c32592e8fe3c9f5
+paso 125 ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #0a0a3cdcbba3137c
+paso 126 ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #b9e22df37edeb2d1
+paso 127 ASSIGN F[0]: for#1++ => 3 | RETURN F[2]: retorna de Mesa.tomar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #b708085442f10fa7
+paso 128 ASSIGN F[4]: ocupado[4] = true | SKIP F[2]: skip | BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #18480ed13cd14654
+paso 129 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #9f7ce61c3bfa3dc6
+paso 130 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.tomar | BLOCKED F[2]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #3418eeda13c8afc3
+paso 131 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #f7ec2ec0ea166391
+paso 132 ASSIGN F[2]: ocupado[2] = false | SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #99339521c958b9a2
+paso 133 BLOCKED F[4]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #5ad2985e2692f774
+paso 134 ASSIGN F[2]: comidas++ => 12 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #583caf6507319101
+paso 135 SIGNAL F[2]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #a687f255e4a18d62
+paso 136 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #a26fd52357a111f8
+paso 137 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #9a237e5cc91e2313
+paso 138 ASSIGN F[4]: ocupado[4] = false | ASSIGN F[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #4ad5519836c7d45c
+paso 139 ASSIGN F[4]: ocupado[0] = false | BLOCKED F[2]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #e179414392c1338b
+paso 140 ASSIGN F[4]: comidas++ => 13 | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #8d48e02951ba3de6
+paso 141 SIGNAL F[4]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #2c0102b4e8c80fe1
+paso 142 SIGNAL F[4]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #16e9f5ce0f866d85
+paso 143 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #3865c96bc3d83933
+paso 144 ASSIGN F[4]: for#1++ => 4 | ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #c55b9f2441dbef8b
+paso 145 TERMINATED F[4]: termina | ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #2ee20cec5f65a553
+paso 146 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #4d2a4dd05ad2c126
+paso 147 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #49ef7d1f9d582a59
+paso 148 ASSIGN F[0]: ocupado[1] = true | SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #e6bb87a0722e0428
+paso 149 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #503c0939fa16b59a
+paso 150 ASSIGN F[2]: ocupado[2] = false | SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #7430ee09607797c2
+paso 151 BLOCKED F[0]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #18b4db8e5ee4a709
+paso 152 ASSIGN F[2]: comidas++ => 14 | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #3e5a0a2e9bded933
+paso 153 SIGNAL F[2]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #0ecaa87cffc8588d
+paso 154 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #72fb2af879a018f2
+paso 155 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #dfd22e3d315fed5c
+paso 156 ASSIGN F[2]: for#1++ => 4 | ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #db0f346fba548d2c
+paso 157 TERMINATED F[2]: termina | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #7b26453ee15b35d3
+paso 158 ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #9f50c1c739b017bf
+paso 159 ASSIGN F[0]: comidas++ => 15 | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #79dc84165065c84e
+paso 160 SIGNAL F[0]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #3bf8e5952e34a050
+paso 161 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #76fab6071517609d
+paso 162 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #26855d26f6e378fc
+paso 163 ASSIGN F[0]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #784e71be7cb4ad90
+paso 164 TERMINATED F[0]: termina | {"finished":true,"deadlock":false,"instant":164,"waiting":false} #9211a7f64544112f
+estado #0556fa03beab51f6
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #e9d1ac7619e67ed6
+paso 1 #b3c6fac650b7b62e
+paso 2 #3ebf07c2ce223fdf
+paso 3 #7c0940d3654a32dd
+paso 4 #89d8a00c5bdbdae7
+paso 5 #49faf694be825ed0
+paso 6 #0c6b957d882b260f
+paso 7 #bfcc3baa01682820
+paso 8 #98f0fb4827604823
+paso 9 #d6b960e0ad27c797
+paso 10 #91b91f1a29644460
+paso 11 #d04184903f5123fd
+paso 12 #7665b31e1783a594
+paso 13 #eebdb306b562c7a5
+paso 14 #07f93e9ad68d66ae
+paso 15 #cb449382f42c6670
+paso 16 #3b4288b6a88b83f4
+paso 17 #e9fcbb5a892d99a0
+paso 18 #e8c202825a627a65
+paso 19 #09104121437c3cbc
+paso 20 #d972c1a7b14c2cac
+paso 21 #bfdb61fdad80c9b7
+paso 22 #08a9e87ac82b5da0
+paso 23 #75752a94653ba957
+paso 24 #297aecae87ecbd27
+paso 25 #ba23c0be5222ea34
+paso 26 #110ae5520e2aac3c
+paso 27 #5f361aafd8432999
+paso 28 #9b25aade54719359
+paso 29 #3588468f0aee9c95
+paso 30 #0d1f750a6c6aa222
+paso 31 #2e75ba632afcac10
+paso 32 #56ffa7c3ac622870
+paso 33 #da022e689e69c255
+paso 34 #3569d0468fdeb9d0
+paso 35 #a719fa553289c1b7
+paso 36 #693f5637a97b9b57
+paso 37 #d260f408f472a67b
+paso 38 #a6af45e12826b7d6
+paso 39 #6bd58e0363bd8822
+paso 40 #ca3dc1575f7ad9fc
+paso 41 #0b04b20db506a45c
+paso 42 #20cf98caab4f659c
+paso 43 #ab7b26bb586ebb1d
+paso 44 #b38fc3f77840b5c4
+paso 45 #bb7b7308b33095c5
+paso 46 #7655d232605dbf3f
+paso 47 #6b5e28ccd5a76f0b
+paso 48 #84d02981fffc9018
+paso 49 #875e99e93f240e11
+paso 50 #c60da8c5a4f217de
+paso 51 #a4e6bfc27525d3db
+paso 52 #22778694a3df9227
+paso 53 #975e2059227107cc
+paso 54 #ae4b3f7a2635a7f9
+paso 55 #72400574c728c20a
+paso 56 #06805b542ac58383
+paso 57 #9d646fb1ec2fb056
+paso 58 #6631ff8926256f05
+paso 59 #f93a5838abca92f1
+paso 60 #4d9024cb2ca02387
+paso 61 #0d612308eb1316ae
+paso 62 #c103e1b95ac24b31
+paso 63 #df6b95e7fe4b1b81
+paso 64 #8e01eedb6ef7dc4c
+paso 65 #dfc4e1e1e95bb12b
+paso 66 #c2b083ce28010ac7
+paso 67 #6d33f0d70d21efc8
+paso 68 #64e8e020afc57374
+paso 69 #a7cc90c4f90f75af
+paso 70 #bce1207b3eaa26f3
+paso 71 #69196f55214d7dda
+paso 72 #b6aaf000c0910b8e
+paso 73 #95a89493bd4733a2
+paso 74 #ddf1ad087599deb5
+paso 75 #09c7f824f558bf72
+paso 76 #2077acf14f7294d2
+paso 77 #a3247a8c325d876b
+paso 78 #e47bb11c64f2fea8
+paso 79 #302de2f206907237
+paso 80 #0027d124aff64e86
+paso 81 #11a2f948b5f87566
+paso 82 #d09bf19dab8816ca
+paso 83 #2ead56e3266faab1
+paso 84 #f46492abd4e858ab
+paso 85 #813ff0619e7c2388
+paso 86 #d83d947223e0cbb6
+paso 87 #8e8fa8d264db02ea
+paso 88 #0ecc44ebaec95ae8
+paso 89 #a35a61b81206fc49
+paso 90 #4344a33cda64abea
+paso 91 #42649dffff32c167
+paso 92 #a929c73a838d93d9
+paso 93 #3d4a351dc8a2d85c
+paso 94 #340930e4ea8b1d4c
+paso 95 #e7b127f91dc1c879
+paso 96 #c16368dff7b818d5
+paso 97 #e4d6893c6835c81f
+paso 98 #8305e0470e8c859f
+paso 99 #38e2863b3297ccf2
+paso 100 #10a562ffb3754e45
+paso 101 #fe47f368360f31f0
+paso 102 #8cd50afcf09a7ada
+paso 103 #761935fc18390a53
+paso 104 #aa3a381a0f31c82f
+paso 105 #fd01ce9b13df437f
+paso 106 #a2110433b65843e1
+paso 107 #1037ad0102e68744
+paso 108 #d77a0e44e6bc3659
+paso 109 #79cafcc61e351737
+paso 110 #5fdf22280cff0a2f
+paso 111 #2b3da8805e3a705c
+paso 112 #32f8b4be9b58dc6f
+paso 113 #6d566af6a99bd8db
+paso 114 #7ef4bc9abaeb2a6a
+paso 115 #fd4019c88d5724ec
+paso 116 #20e13081c1662c2e
+paso 117 #4baa6144533bcc42
+paso 118 #ac6bf16c8bf9825d
+paso 119 #864c7cac78dd9bdf
+paso 120 #7b631bd0b2e79fae
+paso 121 #d408cf6e766049b0
+paso 122 #7af4de323a1f62b5
+paso 123 #891145798e14b7c0
+paso 124 #1e8a8475cb5a0d89
+paso 125 #678c5eced2058103
+paso 126 #ca7a1342646444ea
+paso 127 #c36803e475a98cec
+paso 128 #fbac93cadd25368f
+paso 129 #e2b8ca239fb72cf4
+paso 130 #dece0e5684f4eb65
+paso 131 #72eff9227c937b39
+paso 132 #12fea7cd40754226
+paso 133 #f1b7ba5be8173455
+paso 134 #bef8f81c219a45b1
+paso 135 #417870a66d70f165
+paso 136 #829634ef692644df
+paso 137 #b8b3eecd553af15d
+paso 138 #9f9a75e8b822169a
+paso 139 #0d8aba3ebc0757aa
+paso 140 #e3c6c97e570fe520
+paso 141 #767f4241b0e208f6
+paso 142 #f2023c3feedbf085
+paso 143 #1c72b4726e1f1ba2
+paso 144 #3f9cdbc16f8ac82c
+paso 145 #ed6737313afbe7d3
+paso 146 #1a2ca59d6d15843c
+paso 147 #aa4146577cd09937
+paso 148 #bf51ca4744c2b30e
+paso 149 #af4a7fd41eae5242
+paso 150 #487dec4d16b23461
+paso 151 #86c5f57b5a0670b9
+paso 152 #ed49ec787db1454d
+paso 153 #678fc9cac00cf941
+paso 154 #f9a8c2ee59dc53c0
+paso 155 #ce30a27aeafb0290
+paso 156 #d7eaedfe2d3f8e98
+paso 157 #3a3b5e66e9ba9ded
+paso 158 #0a4aa3d3904087fb
+paso 159 #b026c638f6041c45
+paso 160 #e9fcaa7ff7d9953d
+paso 161 #de076a6f06af5382
+paso 162 #c88fdf9f48006794
+paso 163 #eacf53f61d08386d
+paso 164 #6e91114b8af299ab
+estado #651b1e7b50473c75
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #fc06f41f8b5a1c8e
+paso 1 #112b64d44aa9c09b
+paso 2 #2ecd78dd768321c3
+paso 3 #2698fad1aff69d2c
+paso 4 #66705c1de61762b0
+paso 5 #39ca5003b7a9664c
+paso 6 #3dcea529f7774308
+paso 7 #ce1985e918ec8556
+paso 8 #a5379bc1c8cdf128
+paso 9 #dbd8368222e48f4f
+paso 10 #a6cfd54c74eded31
+paso 11 #5687181d1cd5ddc2
+paso 12 #6b9ec71c9e668ed7
+paso 13 #4b8cd7a28b841f7e
+paso 14 #b5b3dcc2b84ed5c0
+paso 15 #f7952340d560945e
+paso 16 #3f0b02c1a8b18609
+paso 17 #98c2f7b9a73d9653
+paso 18 #07686c56fd13d3ae
+paso 19 #5c6d8c115bce41ac
+paso 20 #3ac569ea903a6f83
+paso 21 #43b897cef6124a0c
+paso 22 #d4bfa4e9029749eb
+paso 23 #c04fbe7590ad7c74
+paso 24 #7efdc4fefcf2156e
+paso 25 #d45a85d953ec0693
+paso 26 #00dd8d35505aadd4
+paso 27 #57e390dab76ad97d
+paso 28 #7a84793a4e3ce030
+paso 29 #cf5c0cea4b371d35
+paso 30 #4d7d422b41dff03d
+paso 31 #428a63bc18e6a112
+paso 32 #0dfcab83b49b7c21
+paso 33 #1611362d5b20ade9
+paso 34 #f4a8af87c28c118a
+paso 35 #3153379ae1346354
+paso 36 #7dab051106fd8e28
+paso 37 #c95ba8a317891391
+paso 38 #a66aa9dafd6bcbe4
+paso 39 #1a28f78b0ad273d0
+paso 40 #3dab2f5c555194a2
+paso 41 #ad5957446cc18900
+paso 42 #b09ecaad2a7bf9cb
+paso 43 #b7e027192c844338
+paso 44 #d483f8d8f344b60f
+paso 45 #d6ab07938e7b6386
+paso 46 #1906c33ac0e90217
+paso 47 #5bfdda781df63041
+paso 48 #86dcdf5c6a96ec92
+paso 49 #bbabb4116f4e0915
+paso 50 #f2b9e6aa8bdc3cb6
+paso 51 #4c3cd766880b8905
+paso 52 #b687e1fa1cbc3487
+paso 53 #b2df4df212ab87ad
+paso 54 #32d2e9831546ffa9
+paso 55 #77d8fbe73e06f992
+paso 56 #9d49401987a2ac72
+paso 57 #aed9ece25cbf1cbd
+paso 58 #ee01ddcc7f4a44f0
+paso 59 #59600f5d635b9a74
+paso 60 #7db0c844d5916cfa
+paso 61 #6b38fdf8e23b3f5c
+paso 62 #57a7a26c4039f30f
+paso 63 #b1cb720225e03303
+paso 64 #ef2e810fee3faf88
+paso 65 #0c5a68da875418f9
+paso 66 #4b519af982814072
+paso 67 #ed6df20754e32309
+paso 68 #e0902f07151856f5
+paso 69 #057fe9073d00bfb5
+paso 70 #acb203f3580c0748
+paso 71 #0c0ade6583b7b3f9
+paso 72 #ddcc56f7b24d958a
+paso 73 #3d19b312729d02ff
+paso 74 #0acd166e8e1c93b7
+paso 75 #7c0789e2f10218ee
+paso 76 #891236e3095af49f
+paso 77 #af5f65eaac899bf4
+paso 78 #8e7d01d6a3786235
+paso 79 #7df05993f50bef42
+paso 80 #f9b3b13da5d53125
+paso 81 #969989f23633451f
+paso 82 #2744bd54d662b857
+paso 83 #a5ec09a6651dbd88
+paso 84 #67d82c1761a87a92
+paso 85 #0370d1f7a8c2b265
+paso 86 #d36c9fe9d5f26aec
+paso 87 #b25bdaac4a49002e
+paso 88 #451d6a6c0a7c30d2
+paso 89 #2a1a0e2c18b48420
+paso 90 #feea05086f6e70ec
+paso 91 #f500195db59765cc
+paso 92 #63cd63fc76deffbd
+paso 93 #f09a41aa5c7d61b7
+paso 94 #ff89fa083f7bcc17
+paso 95 #0158a7c2cb7fbcb0
+paso 96 #ab9f99d3cbfd477f
+paso 97 #b9e8b842929c0216
+paso 98 #3f856fa3e5673ea8
+paso 99 #2b009efb4db67070
+paso 100 #2bbd26fd47d94246
+paso 101 #c4e553ad446dfcd7
+paso 102 #67ee931a6860a4f1
+paso 103 #799feb4a93f168bd
+paso 104 #aa72fe293c611e01
+paso 105 #fa00d9ed1aacc32b
+paso 106 #2e400669f2bd730b
+paso 107 #1d52a17624bf0156
+paso 108 #5add28cce020bf3a
+paso 109 #dbaa31def45326d8
+paso 110 #c7c547b81bced671
+paso 111 #0b35fd2412df1684
+paso 112 #f456683ad6d8b451
+paso 113 #b5903a9d57725d0e
+paso 114 #7e22407e3eb2048e
+paso 115 #f670f37ee7407c91
+paso 116 #81d5fa5bc8d48fb6
+paso 117 #84d8cc1c38b7552d
+paso 118 #2df1e8c4fc9a9f9a
+paso 119 #11c097884f721925
+paso 120 #0adbaa7499d473c1
+paso 121 #1ed6b822f8dc9ad3
+paso 122 #ae9e3e0be9c27281
+paso 123 #00ade99d13db55fa
+paso 124 #d54718aafb1593c9
+paso 125 #9383037c673179df
+paso 126 #3282faf702e53f4b
+paso 127 #2d8499bf156775ba
+paso 128 #0ffd63a231de6a1f
+paso 129 #d515d130c213c153
+paso 130 #a7ae19385f2db6ce
+paso 131 #4d1b186ec12285b7
+paso 132 #86d0a9be14ef2912
+paso 133 #75380824d623a623
+paso 134 #6eea975852151b54
+paso 135 #de4085fa9e1f2a92
+paso 136 #f56cc5f54bc56ebf
+paso 137 #bc95a7f7e5ac3ea2
+paso 138 #db17b8c0306170cc
+paso 139 #8ef618f2376274a5
+paso 140 #5a395336b05b41a3
+paso 141 #92b62e7a55b69d42
+paso 142 #1b42e4c80209c7ac
+paso 143 #6704cb9f4e14acd7
+paso 144 #8d3f334418d99048
+paso 145 #f23a41e2f5fa63c6
+paso 146 #6a92e549c18aa543
+paso 147 #69e97152252c8657
+paso 148 #1e4cb937cff05ad1
+paso 149 #b52d4d0c1e46a489
+paso 150 #098d2aacedafe23f
+paso 151 #d7243adf65ac6d99
+paso 152 #45147e930e404408
+paso 153 #3767b73629ad54ae
+paso 154 #69e577ebe463977b
+paso 155 #096dbccc62f08b09
+paso 156 #095709d01e6e4ab6
+paso 157 #02264ea6d7438fa6
+paso 158 #703f4f79db2faf84
+paso 159 #92e6bc71a39967b6
+estado #04ef886dff245277
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #0d0148a5659314e9
+paso 1 ENTER F[0]: entra a Mesa.tomar | BLOCKED F[1]: espera para entrar a Mesa.tomar | BLOCKED F[2]: espera para entrar a Mesa.tomar | BLOCKED F[3]: espera para entrar a Mesa.tomar | BLOCKED F[4]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #16985806ade22e60
+paso 2 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #353f5306a9145b2f
+paso 3 ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #85d1d9f7a1cde404
+paso 4 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #00c60ed6ec4016c6
+paso 5 ASSIGN F[3]: ocupado[3] = true | SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c4f95d4e402a2f5e
+paso 6 BLOCKED F[0]: espera para entrar a Mesa.dejar | ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #96f7379b3ae1c5ce
+paso 7 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #fa751d5bc17306ab
+paso 8 ASSIGN F[0]: ocupado[0] = false | SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7ac05184fab2cf6a
+paso 9 BLOCKED F[3]: espera para entrar a Mesa.dejar | ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #9a37c98ced924c32
+paso 10 ASSIGN F[0]: comidas++ => 1 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #7b8b402781210dbd
+paso 11 SIGNAL F[0]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #d073742b644321e6
+paso 12 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #68dbe795d7a5713f
+paso 13 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #05300e5949fd47ee
+paso 14 ASSIGN F[1]: ocupado[1] = true | ASSIGN F[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e04347d060d4a4d2
+paso 15 BLOCKED F[0]: espera para entrar a Mesa.tomar | ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #5f18907279cf1304
+paso 16 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #043c452fd6537ab3
+paso 17 ASSIGN F[3]: ocupado[3] = false | SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #17e90fd8719f320a
+paso 18 BLOCKED F[1]: espera para entrar a Mesa.dejar | ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #a163ae5105754570
+paso 19 ASSIGN F[3]: comidas++ => 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #2341cb3bee7e773f
+paso 20 SIGNAL F[3]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6b31b65379c0c86e
+paso 21 SIGNAL F[3]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #63d446180e693de8
+paso 22 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | ENTER F[0]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #35bfe22ad60fc9ef
+paso 23 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.dejar | ASSIGN F[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #f743a1f438ce0b24
+paso 24 ASSIGN F[1]: ocupado[1] = false | BLOCKED F[3]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #7e0ede2020ef1c1d
+paso 25 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #71256b1fe8a16620
+paso 26 ASSIGN F[1]: comidas++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #6c5bc8f48b62d99c
+paso 27 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ac36a574cb47ba19
+paso 28 SIGNAL F[1]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a13aaceba0cc6c34
+paso 29 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #016d75ea05bfdbc7
+paso 30 ASSIGN F[3]: ocupado[3] = true | ASSIGN F[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #ca1b45563b1f595b
+paso 31 BLOCKED F[1]: espera para entrar a Mesa.tomar | ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a6ed21a55ca3c502
+paso 32 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #a8b0f21a1d87f713
+paso 33 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.tomar | SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #f8892148884484d0
+paso 34 BLOCKED F[3]: espera para entrar a Mesa.dejar | WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #ba5c70420b357efd
+paso 35 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #83be77cfb52c01ed
+paso 36 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #c32f9cf32009fba2
+paso 37 ASSIGN F[3]: comidas++ => 4 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #9c323c16e8988196
+paso 38 SIGNAL F[3]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #5d73e6010dde753c
+paso 39 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #d2b3a4e3567057c6
+paso 40 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #8039b5f6ed535b47
+paso 41 ASSIGN F[1]: ocupado[1] = true | ASSIGN F[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #657b13f23fba7f6c
+paso 42 BLOCKED F[3]: espera para entrar a Mesa.tomar | ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #379d94667df0a017
+paso 43 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #1261703d2ffcbf3e
+paso 44 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.tomar | SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #1f691576add59b3f
+paso 45 ASSIGN F[3]: ocupado[3] = true | BLOCKED F[1]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #615396e5ae7e6263
+paso 46 ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #60aeebe61dda4d97
+paso 47 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #0632e55197ec1e7d
+paso 48 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.dejar | SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #e3e6126b296e1808
+paso 49 ASSIGN F[1]: ocupado[1] = false | BLOCKED F[3]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #774a9e0536ce4a49
+paso 50 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #5b15e3b8f6db38b1
+paso 51 ASSIGN F[1]: comidas++ => 5 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #629f4b0d0dd11fc9
+paso 52 SIGNAL F[1]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #34d92c75c0909cfe
+paso 53 SIGNAL F[1]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #188bb807125fb439
+paso 54 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #7447c01561ffcd78
+paso 55 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.dejar | ASSIGN F[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #476c73ec92ac12b2
+paso 56 ASSIGN F[3]: ocupado[3] = false | BLOCKED F[1]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #b4fd35839d34cb46
+paso 57 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #0a53819dda7189aa
+paso 58 ASSIGN F[3]: comidas++ => 6 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #864175c692a9cfd4
+paso 59 SIGNAL F[3]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #0e5cb1ccc02afc5c
+paso 60 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #0bfe815465829020
+paso 61 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #b96e5b9ecdc41b4a
+paso 62 ASSIGN F[0]: ocupado[0] = true | ASSIGN F[3]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #375f887477ac3cf9
+paso 63 TERMINATED F[3]: termina | ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #5a381f972f1d841e
+paso 64 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #d2b53d4bb3a78743
+paso 65 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.tomar | SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #e435ed01f94a45aa
+paso 66 BLOCKED F[0]: espera para entrar a Mesa.dejar | WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #b087b259b2d85611
+paso 67 ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #9a739797094f6355
+paso 68 ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #2699abb8b0fa2acc
+paso 69 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #b7c0e15b367617e8
+paso 70 ASSIGN F[0]: ocupado[0] = false | SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #357118eaa4e479d6
+paso 71 BLOCKED F[2]: espera para entrar a Mesa.dejar | ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #88af0bfa54b3c4f6
+paso 72 ASSIGN F[0]: comidas++ => 7 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #1fc911d3bac6ac99
+paso 73 SIGNAL F[0]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #44c01c579ee8d0fe
+paso 74 SIGNAL F[0]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #c03ee72b52720781
+paso 75 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #c6c519b78f88df0f
+paso 76 ASSIGN F[2]: ocupado[2] = false | ASSIGN F[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #19d1fe29a0007b30
+paso 77 BLOCKED F[0]: espera para entrar a Mesa.tomar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #4a062072eb350e15
+paso 78 ASSIGN F[2]: comidas++ => 8 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #eb357ae4631aa23f
+paso 79 SIGNAL F[2]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #8ac91fac14c1048e
+paso 80 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #67be0babdb901e2a
+paso 81 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | ENTER F[0]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #ef33f89be4242212
+paso 82 ASSIGN F[0]: ocupado[0] = true | ASSIGN F[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #e3d9eb3f4e02ad15
+paso 83 BLOCKED F[2]: espera para entrar a Mesa.tomar | ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #af4c229e26b56384
+paso 84 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #55ed87819f05f634
+paso 85 ASSIGN F[2]: ocupado[2] = true | SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #0341908d7f3110c0
+paso 86 BLOCKED F[0]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #d8d77e00b670cc63
+paso 87 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #bf3fc353fa851c85
+paso 88 ASSIGN F[0]: ocupado[0] = false | SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #fabeffeb77b0d0b5
+paso 89 BLOCKED F[2]: espera para entrar a Mesa.dejar | ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #6b34a52831268109
+paso 90 ASSIGN F[0]: comidas++ => 9 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #5e322cf30362df62
+paso 91 SIGNAL F[0]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #586cdffb64432ff1
+paso 92 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #bda7e68f9fc83f3a
+paso 93 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #8f3c2583d28407ea
+paso 94 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | REENTER F[4]: reingresa a Mesa | ASSIGN F[0]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #78f8de1194a12157
+paso 95 ASSIGN F[4]: ocupado[4] = true | TERMINATED F[0]: termina | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #3c8287a82c28e9af
+paso 96 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #80de5991d26c6181
+paso 97 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #fb4e04b952773a6a
+paso 98 ASSIGN F[2]: ocupado[2] = false | SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #10c60303598bd69c
+paso 99 BLOCKED F[4]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #f94c86a94d80092c
+paso 100 ASSIGN F[2]: comidas++ => 10 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #98b0a3b3a33c6361
+paso 101 SIGNAL F[2]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #400bdcb5935261b2
+paso 102 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #487e7fb9518e65e0
+paso 103 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #9f9fd50ea148933f
+paso 104 ASSIGN F[4]: ocupado[4] = false | ASSIGN F[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #85dcedcbecc00bb1
+paso 105 BLOCKED F[2]: espera para entrar a Mesa.tomar | ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #a817553b7c2e0c5f
+paso 106 ASSIGN F[4]: comidas++ => 11 | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #89eb93c4e309dcf3
+paso 107 SIGNAL F[4]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #1af698cc64dbb958
+paso 108 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #3b12f30619ba2e98
+paso 109 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #6658dd5100dfb1ac
+paso 110 ASSIGN F[2]: ocupado[2] = true | ASSIGN F[4]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #53eda98784fdcb06
+paso 111 BLOCKED F[4]: espera para entrar a Mesa.tomar | ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #c8e4b3fb0d4d6fbb
+paso 112 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #150bafc5e6e11b62
+paso 113 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.tomar | SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #b3eeaa9731fabb01
+paso 114 BLOCKED F[2]: espera para entrar a Mesa.dejar | ASSIGN F[4]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #88812f27409e1bf2
+paso 115 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #52b09453ab60b928
+paso 116 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #09b71ee91c18a4e0
+paso 117 ASSIGN F[2]: ocupado[2] = false | SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #03c10453d6e99d95
+paso 118 BLOCKED F[4]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #85e246c4d6a7c2b9
+paso 119 ASSIGN F[2]: comidas++ => 12 | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #e3e89840bb575ae5
+paso 120 SIGNAL F[2]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #f3ed45aa0721addd
+paso 121 SIGNAL F[2]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #aa67333f3f9439ba
+paso 122 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #5167b955132fe40e
+paso 123 ASSIGN F[1]: ocupado[1] = true | ASSIGN F[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #269d43930b278bd4
+paso 124 TERMINATED F[2]: termina | ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #bf711dc05178b910
+paso 125 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #db3069f74a57817e
+paso 126 ASSIGN F[4]: ocupado[4] = false | SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #054ec8a2bad64fed
+paso 127 BLOCKED F[1]: espera para entrar a Mesa.dejar | ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #af162b4d2b8f527b
+paso 128 ASSIGN F[4]: comidas++ => 13 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #8577a27b34359e52
+paso 129 SIGNAL F[4]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #a2d7a9f095204d3e
+paso 130 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #0013a5100aa27a5d
+paso 131 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #c453485c78899b49
+paso 132 ASSIGN F[1]: ocupado[1] = false | ASSIGN F[4]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #2d4a66eee4b98809
+paso 133 BLOCKED F[4]: espera para entrar a Mesa.tomar | ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #8bd45e1f460c1869
+paso 134 ASSIGN F[1]: comidas++ => 14 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #47ed7db343741185
+paso 135 SIGNAL F[1]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #baade972ee594ff8
+paso 136 SIGNAL F[1]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #de728447d7f55c58
+paso 137 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #4d8c9d3b87e7088f
+paso 138 ASSIGN F[4]: ocupado[4] = true | ASSIGN F[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #5cd88c5136616a9d
+paso 139 TERMINATED F[1]: termina | ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #f8bc985d69c9a055
+paso 140 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #73f3b75236176ca3
+paso 141 SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #805384026271544a
+paso 142 ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #c21d7b4a3f976ab4
+paso 143 ASSIGN F[4]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #d555ba80872aa8c8
+paso 144 ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #a5e4a96c49ee2b5b
+paso 145 ASSIGN F[4]: comidas++ => 15 | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #e5745aa0634db466
+paso 146 SIGNAL F[4]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #a78f1b24a0b969fd
+paso 147 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #95877dd061b00d86
+paso 148 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #7a58217b74333b1d
+paso 149 ASSIGN F[4]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #94b59c16c87d98ab
+paso 150 TERMINATED F[4]: termina | {"finished":true,"deadlock":false,"instant":150,"waiting":false} #08fb8c79e5c18631
+estado #15996fc2de99b061
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #e9d1ac7619e67ed6
+paso 1 #16985806ade22e60
+paso 2 #353f5306a9145b2f
+paso 3 #85d1d9f7a1cde404
+paso 4 #00c60ed6ec4016c6
+paso 5 #c4f95d4e402a2f5e
+paso 6 #96f7379b3ae1c5ce
+paso 7 #22e87d2d9b27501b
+paso 8 #69b425a277f19341
+paso 9 #b1438c1912c02d35
+paso 10 #72980f268f341c77
+paso 11 #2be50bda8d1a3bd8
+paso 12 #8140e01309767ba9
+paso 13 #a714350754d1a08d
+paso 14 #ae885921f57c8fd5
+paso 15 #4f476d710a0c4a59
+paso 16 #55a68d85f92d4a3d
+paso 17 #6089ad2655fed00a
+paso 18 #ccdf0bb7812bfc36
+paso 19 #2f69f3e26b73737c
+paso 20 #4d95f53a2834b181
+paso 21 #a52fc1b48831e42d
+paso 22 #e043cd7fcf312cfc
+paso 23 #e914c1aad8b26df0
+paso 24 #0909764ab9705330
+paso 25 #9d8b2b9ff7e885d3
+paso 26 #08a8eeba6263aa48
+paso 27 #05838d148ae6a931
+paso 28 #3feddcedff25b588
+paso 29 #f1b23acf9b4d978d
+paso 30 #ebe685d2d18aa040
+paso 31 #f91df143ba767064
+paso 32 #b3b8c56d1c53a786
+paso 33 #d284fb30ebc8d4bb
+paso 34 #a1c5133e3243696e
+paso 35 #1e1d1e67c1ec4c01
+paso 36 #91aab7a6da0071a5
+paso 37 #a999043a40edf798
+paso 38 #f161143000efa380
+paso 39 #c293f74d7dba5333
+paso 40 #cb5bf4168536c4db
+paso 41 #813a2a46eb7142c5
+paso 42 #d88cc92bbc25b1b3
+paso 43 #28325c51fe360877
+paso 44 #1d7ee48a80c76aeb
+paso 45 #9927d7d0143acaab
+paso 46 #272544ce2a310cb4
+paso 47 #7730027920f812de
+paso 48 #701a1cde2536e02e
+paso 49 #b066f105c21d4714
+paso 50 #7ea666d7e9641d41
+paso 51 #7b3de793e538540b
+paso 52 #fe890d04da687b47
+paso 53 #2931f59e4ab2c6b5
+paso 54 #0e74ff72b3a4aa0e
+paso 55 #fb8710826ec3b782
+paso 56 #46be052afbc78c7e
+paso 57 #b0abdf852f0d8fb4
+paso 58 #d69dd87a8423ade2
+paso 59 #6e9d5241e365ceed
+paso 60 #6afee0a69fc974e6
+paso 61 #ed86e4c97696cdc9
+paso 62 #c94ae433eec8ce5d
+paso 63 #3d74f3c1d7378cb6
+paso 64 #a1b7efb07116012b
+paso 65 #38b8f017ca9746a9
+paso 66 #74545008228ce6d8
+paso 67 #83d0800aeaa1d997
+paso 68 #cf745841ca256c7b
+paso 69 #e1dc528c632e0416
+paso 70 #91dad885d8544956
+paso 71 #45f0d0840bc4fe8d
+paso 72 #5db1c7e5836087fd
+paso 73 #9e125a6ea8a8c28c
+paso 74 #3df2f6535e59f9ca
+paso 75 #96ac9f4ad1143db1
+paso 76 #0583be00905752f4
+paso 77 #f53cadf06a11274d
+paso 78 #ea27b8b70350f07c
+paso 79 #a037e059f9b45600
+paso 80 #39d50e4d89f02894
+paso 81 #831a0cc7a8b7a767
+paso 82 #ae0e6eba61003acd
+paso 83 #2a733b7b96645509
+paso 84 #d80b38c5721b3626
+paso 85 #dde57f40c5cc9f01
+paso 86 #a0d3cf59aa40027a
+paso 87 #c8c0de553ae64c3e
+paso 88 #cf775bf7580c7f50
+paso 89 #409b5b46b7868e06
+paso 90 #230685666d10500c
+paso 91 #c0edc1ddd8e1ca3f
+paso 92 #44d0f8ab0bfee73b
+paso 93 #126329b883f09395
+paso 94 #bbe85efd301d8c35
+paso 95 #20e0b868c9056188
+paso 96 #3c2c54c409b0a329
+paso 97 #96d9d926d83453b3
+paso 98 #ded6091f5e93eef9
+paso 99 #86e1ab5d426d8f78
+paso 100 #e61571fe7f1bf6ae
+paso 101 #6efd6be814172b93
+paso 102 #4091dd82305e2cbc
+paso 103 #d0274472d9d8b3be
+paso 104 #28c70753a9eff7f1
+paso 105 #3489b6043584dfb3
+paso 106 #9f8187dadcaee6fd
+paso 107 #daecfede1ca6210c
+paso 108 #d7a36ae72e2c01ef
+paso 109 #f2ae9c031a32cb4c
+paso 110 #8bf9f26d3da90218
+paso 111 #51d66327fa230ddd
+paso 112 #978fac3fbb32ae8e
+paso 113 #2c177b42d8f81164
+paso 114 #be84b49c3b1ee991
+paso 115 #87686a4b0240bf65
+paso 116 #05827aea2c2397a4
+paso 117 #10a44017d2345792
+paso 118 #1beb600c24e1c0e4
+paso 119 #7491b9214a9c0d89
+paso 120 #db2fbc4498f72de3
+paso 121 #4875275cd7d4a0c8
+paso 122 #581986041f5ac774
+paso 123 #bddbfad5b6b32e23
+paso 124 #4b9326c01b9dcfff
+paso 125 #9d3fc9a7e7ac470b
+paso 126 #e79faa6d54218fef
+paso 127 #727a3c4dc7ae2756
+paso 128 #e9c5383355d33535
+paso 129 #5e1c79b18dcc195e
+paso 130 #67d3a53d12b333c9
+paso 131 #128773fdd3f2e76f
+paso 132 #e76a8c47a4780154
+paso 133 #7a83a6fe0daf9273
+paso 134 #4929875a68bf46c8
+paso 135 #666abfe0028b7a32
+paso 136 #b0df45d852842944
+paso 137 #171e6618b6365788
+paso 138 #a0aa77313ea54c69
+paso 139 #afeb032c94e2bc2f
+paso 140 #908427748a41a7b0
+paso 141 #4fbb96f6342ccd8d
+paso 142 #bca7bace9e5f4989
+paso 143 #2ec3a3befc4a32b9
+paso 144 #bb61f40e6e698414
+paso 145 #d0851368c403e6f3
+paso 146 #0a1c9f4a4e4218a5
+paso 147 #c025cd41ff78663b
+paso 148 #cb694908814d0f65
+paso 149 #d4b9ad066647c86a
+paso 150 #565ddfbca1eebff3
+paso 151 #d03e5aae52a9e562
+estado #892286df064a136f
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #fc06f41f8b5a1c8e
+paso 1 #16985806ade22e60
+paso 2 #353f5306a9145b2f
+paso 3 #85d1d9f7a1cde404
+paso 4 #00c60ed6ec4016c6
+paso 5 #c4f95d4e402a2f5e
+paso 6 #96f7379b3ae1c5ce
+paso 7 #7d3b48461e2333e6
+paso 8 #02f74c3e47ed2230
+paso 9 #fc3e774c80ec91c2
+paso 10 #b75f1e39713564ab
+paso 11 #c09bf57ec53b48ff
+paso 12 #43bced6a60fc3f05
+paso 13 #263b13fb8168d815
+paso 14 #02a72b3efe9268a6
+paso 15 #9c6a395aed36b5d5
+paso 16 #fd145e49605ee9d1
+paso 17 #9a395d4205dce3f5
+paso 18 #3578e29353030155
+paso 19 #0a7c6a5bd2869fc4
+paso 20 #7d2659a07b76b3a6
+paso 21 #6a7d0fb3f5f85670
+paso 22 #da3a0a6dbc6e9fd5
+paso 23 #77bebe7b9e9aebb4
+paso 24 #6b279f35f1f310cc
+paso 25 #7a7dfffb67d95fa5
+paso 26 #1b093e789fdae29a
+paso 27 #5dbba3d83d40ba33
+paso 28 #1f2926288437c9bb
+paso 29 #fc579fe05271abfc
+paso 30 #12395f986b404e6b
+paso 31 #3f3b75753b9c1e0c
+paso 32 #6df45368aaf96e87
+paso 33 #0b4afae72bec3cbe
+paso 34 #3ceb92e38a252d87
+paso 35 #22cef80934e90381
+paso 36 #aea2ab031089dee3
+paso 37 #ac00bfc89991e350
+paso 38 #8bf33da40ea65cc2
+paso 39 #2e75928afceafa49
+paso 40 #aed78815ed3aff6a
+paso 41 #0a9c607a864e59b8
+paso 42 #7b077c265aec491c
+paso 43 #a30133a592d0b513
+paso 44 #4a96da8ce79cdb50
+paso 45 #b04a3f4b7d005b6d
+paso 46 #285f623c83ec82cd
+paso 47 #e50e3bab0e0fad50
+paso 48 #8239c7c81ce8d96a
+paso 49 #7ecd62dacaf29dab
+paso 50 #357ed4afc714aaff
+paso 51 #40c1b28659eb0937
+paso 52 #197cf544f1feacab
+paso 53 #fda034147549803e
+paso 54 #fae261090416bab6
+paso 55 #50866618e13b3a41
+paso 56 #44df8e73ce4c3407
+paso 57 #2f030a57e8c4ca4d
+paso 58 #b7aad150a721542c
+paso 59 #ce888b617af56aaf
+paso 60 #21c5cc45b6cc8c2a
+paso 61 #9b4b622aec492254
+paso 62 #f50c410ea25cb33e
+paso 63 #f532857e524b8b75
+paso 64 #9fdd7e963ee81c8d
+paso 65 #88f1ba997b111b5d
+paso 66 #080bc80b573db928
+paso 67 #14fbab5468ddd4ef
+paso 68 #523c64f23cba461a
+paso 69 #fdcac074167502a1
+paso 70 #7ab86fdf8cef0032
+paso 71 #fa8e32f2d7d2fd3b
+paso 72 #6bd11651fafde423
+paso 73 #4aa427e8b1b218ff
+paso 74 #fe64df5275624c4b
+paso 75 #2067ecea8c46eaae
+paso 76 #bb8929b6dcdf81cf
+paso 77 #90ddc3f475b5ea6f
+paso 78 #ef4d4a9f147a5960
+paso 79 #d0ea7cf058912c78
+paso 80 #1a6fc217d6bd817d
+paso 81 #b76f109143e0afe4
+paso 82 #281730d81b910349
+paso 83 #5fee537ca2ceb69e
+paso 84 #22ed993724927f1c
+paso 85 #3906194964bf4c3f
+paso 86 #cc347e5ddd47410d
+paso 87 #243a6bb73f151be1
+paso 88 #4eea2930640321e6
+paso 89 #e7d7e66b91ac9fea
+paso 90 #9479634166d62598
+paso 91 #fe55edd0c1792b91
+paso 92 #ddaf98e402fb618c
+paso 93 #98029fa5c56775d2
+paso 94 #b59725056ee3d18e
+paso 95 #f07f953fb5b6a772
+paso 96 #40a795258e8296c9
+paso 97 #887926c933ed6faa
+paso 98 #5f93574d46342b60
+paso 99 #a3449b2c16f205c0
+paso 100 #d3a02f3901202b3c
+paso 101 #596828a0692e9f6a
+paso 102 #33aac4436f21e9d8
+paso 103 #98735b225f544465
+paso 104 #c509b4f0675f3dfa
+paso 105 #9393a4f59ce68f5c
+paso 106 #6a49156db6200024
+paso 107 #9e5fef29bf66f06d
+paso 108 #2da10c9984fdfdb6
+paso 109 #f394e7c77dcb7af1
+paso 110 #d4cd807a1ef37313
+paso 111 #2aa295d02e627ab4
+paso 112 #9889441f7597ac5f
+paso 113 #f8455d9eab75962b
+paso 114 #512987153cf8219a
+paso 115 #b742b6bdb9a50778
+paso 116 #827c5b44c83e4a72
+paso 117 #2ef0d1b724177847
+paso 118 #5af42a187c27675f
+paso 119 #9d68d3e4ef330c1c
+paso 120 #5e456678197f54c7
+paso 121 #7abd90fc1c00b069
+paso 122 #df6e147111f43649
+paso 123 #475cba550110a24b
+paso 124 #006890a69f7e1b33
+paso 125 #a056f360500f720f
+paso 126 #b4c83f8150b7c4a2
+paso 127 #f212c9fecc5ceb73
+paso 128 #e236fb75deb1c86d
+paso 129 #a5da7589c47f900f
+paso 130 #af81364f7e04ed35
+paso 131 #b71a4eea03b32335
+paso 132 #1be31667f4c858ed
+paso 133 #850f939b41a6269e
+paso 134 #14625e40c33ea949
+paso 135 #7ed23438fef52f58
+paso 136 #c9bc0b0f2f097282
+paso 137 #ee76e77844189780
+paso 138 #a67c57e1d7e87998
+paso 139 #b70db949cc5cdb1d
+paso 140 #fd6d9fdd9a725292
+paso 141 #d1f1aee9c471350a
+paso 142 #3751242bb6a43ebf
+paso 143 #38368cf5824c5f96
+paso 144 #f168a0ebf77f7fdd
+paso 145 #a5a8f33b1b862db9
+paso 146 #90578080e73e6f93
+paso 147 #94f5e8fe00a81a6d
+paso 148 #c83cbce49335ef14
+paso 149 #a45f1a1eb9de64a1
+paso 150 #f8e0bfa038ddf946
+paso 151 #b3d51ddbb96c13f6
+paso 152 #4eb998131a48d45c
+paso 153 #c80c185024de33fd
+paso 154 #5f11aa3e71c93307
+paso 155 #91649909014e11c3
+estado #10c295a52697107b
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #0d0148a5659314e9
+paso 1 ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bcc5effb5b1dd19e
+paso 2 BLOCKED F[2]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #34d0f3ffebf9034b
+paso 3 BLOCKED F[3]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #82104fa9c5b78840
+paso 4 BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #52b6c3afc80f5e60
+paso 5 ASSIGN F[1]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7d72d202f4a05fd3
+paso 6 ASSIGN F[1]: ocupado[2] = true | BLOCKED F[4]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c28ab1242ba7033c
+paso 7 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8fedf98f98cd42fc
+paso 8 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #be1c1bf49de1a13e
+paso 9 SKIP F[1]: skip | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #fa5615d240d84c55
+paso 10 BLOCKED F[1]: espera para entrar a Mesa.dejar | ASSIGN F[4]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #54200b56c76591e1
+paso 11 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #d7131ffd47a11c72
+paso 12 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #0d3ca9156717512d
+paso 13 ASSIGN F[1]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #d31dba6006dcddc3
+paso 14 SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d4cfd1f41c3299d6
+paso 15 BLOCKED F[4]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #304639434018addd
+paso 16 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #ed8d9f16a290b3f4
+paso 17 ASSIGN F[1]: comidas++ => 1 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #9a8732550cca97ae
+paso 18 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #dc4aae3ce4b830ba
+paso 19 SIGNAL F[1]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #6265694e3c4aa72e
+paso 20 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #1cd9b8473bb5e79e
+paso 21 ASSIGN F[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #5ebaa0308a18d859
+paso 22 ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0dbe96100338c064
+paso 23 ASSIGN F[2]: ocupado[3] = true | BLOCKED F[1]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #fd6c764d272f1d1a
+paso 24 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #e944f4ebcae4874a
+paso 25 SKIP F[2]: skip | WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #d92d600ed117e8ad
+paso 26 BLOCKED F[2]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #71a1c88504226646
+paso 27 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #4564cb0b91ed2ebf
+paso 28 ASSIGN F[2]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #8d0ad69c3e663699
+paso 29 ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #cd91b6aa7186e7e9
+paso 30 ASSIGN F[2]: comidas++ => 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #717dd24a964d403f
+paso 31 SIGNAL F[2]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #00ffda6e234d3ad0
+paso 32 SIGNAL F[2]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #391360ac70eeac8a
+paso 33 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | REENTER F[3]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #2085dbead3c631e2
+paso 34 ASSIGN F[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #48b8d999e6be0e72
+paso 35 WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #d7c9e743031ba502
+paso 36 ASSIGN F[1]: ocupado[1] = true | BLOCKED F[2]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #b8d7f404b9c322ba
+paso 37 ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ba74a7300e4a7c64
+paso 38 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #9aae45d6c67c9f03
+paso 39 SKIP F[1]: skip | ASSIGN F[4]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #42e13076e01a2c77
+paso 40 ASSIGN F[4]: ocupado[0] = false | BLOCKED F[1]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #ffdec1250550cef6
+paso 41 ASSIGN F[4]: comidas++ => 3 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #99b208919ee9b58a
+paso 42 SIGNAL F[4]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #4c890435f76d0133
+paso 43 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #07559980e6b60bb2
+paso 44 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #9307fb86d4ac4ffc
+paso 45 WAIT F[0]: wait(libre[0]) - libera el monitor y se demora | REENTER F[3]: reingresa a Mesa | ASSIGN F[4]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #cebeeecf0da23332
+paso 46 BLOCKED F[4]: espera para entrar a Mesa.tomar | ASSIGN F[3]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #ae6bd208d95a8212
+paso 47 ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b73ecc728c7dc7c9
+paso 48 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #6187a26ada07ac05
+paso 49 SKIP F[3]: skip | WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #d046c7480e231f00
+paso 50 BLOCKED F[3]: espera para entrar a Mesa.dejar | ASSIGN F[1]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #872a280cb2dea595
+paso 51 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #123b25d58e2f870d
+paso 52 ASSIGN F[1]: comidas++ => 4 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #354cf7a1150072db
+paso 53 SIGNAL F[1]: signal(libre[0]) - despierta a F[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #1f6f21da3785fd39
+paso 54 SIGNAL F[1]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #8cc1a5eb11ef111a
+paso 55 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | REENTER F[0]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #af54bcb4af2a7d77
+paso 56 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #3da5b099075c3d25
+paso 57 ASSIGN F[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #781b37c65b5a753c
+paso 58 ASSIGN F[0]: ocupado[1] = true | BLOCKED F[1]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #c90fe8743b3feb08
+paso 59 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #836a15f68e5da3fb
+paso 60 SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #3ed056a99af5bc8a
+paso 61 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #54b25adf1d544f15
+paso 62 BLOCKED F[0]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #1624a7c17a41435a
+paso 63 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #72749bb2c9cb12af
+paso 64 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #e847c2b8fee2ce5f
+paso 65 ASSIGN F[3]: comidas++ => 5 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #4c690dbc737fafaf
+paso 66 SIGNAL F[3]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #44c9549a0315b2c6
+paso 67 SIGNAL F[3]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #ca4365cfe59d8104
+paso 68 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #2b875f2938f50811
+paso 69 ASSIGN F[3]: for#1++ => 2 | ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #9461001ddb3d5d30
+paso 70 ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #dacb8e54aed1844e
+paso 71 BLOCKED F[3]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #bb73422a18ad3cd1
+paso 72 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[4]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #cf7d8198be87158f
+paso 73 SKIP F[2]: skip | WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #67a00a208c0462d9
+paso 74 BLOCKED F[2]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #943a9cafc4adc59a
+paso 75 ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #62ea20c2b598092a
+paso 76 ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #2168fa07f81a879b
+paso 77 ASSIGN F[0]: comidas++ => 6 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #934639d830a256b7
+paso 78 SIGNAL F[0]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #e39330122ba34456
+paso 79 SIGNAL F[0]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #ff79175edf5d7488
+paso 80 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #1796187521d1a1a7
+paso 81 WAIT F[1]: wait(libre[1]) - libera el monitor y se demora | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #269d08df2ac223e6
+paso 82 WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #22dcf5a408bb1211
+paso 83 ASSIGN F[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #7f7ef68763941e6a
+paso 84 BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #ed17ed5c676b9fd2
+paso 85 ASSIGN F[4]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #9c8725b4f3839da8
+paso 86 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #33ae0f518a0c39ab
+paso 87 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #85d7ff4f11b5ebc9
+paso 88 SKIP F[4]: skip | ASSIGN F[2]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #59c96e9e012115fa
+paso 89 BLOCKED F[4]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #69c71deb77325ef4
+paso 90 ASSIGN F[2]: comidas++ => 7 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #d94e5ce201c77ccd
+paso 91 SIGNAL F[2]: signal(libre[1]) - despierta a F[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #d80c31fa3c589ca9
+paso 92 SIGNAL F[2]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #3a1c371f0eedad31
+paso 93 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | REENTER F[1]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #601a107dd512135d
+paso 94 ASSIGN F[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #15e2c229576b943c
+paso 95 BLOCKED F[2]: espera para entrar a Mesa.tomar | ASSIGN F[1]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #83af25143bd43bf7
+paso 96 ASSIGN F[1]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #8ac547eac4f33c2d
+paso 97 RETURN F[1]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #5637bbe3a22ee010
+paso 98 WAIT F[2]: wait(libre[2]) - libera el monitor y se demora | REENTER F[3]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #27d15b4286784f62
+paso 99 WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #202475416748918b
+paso 100 SKIP F[1]: skip | ASSIGN F[4]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #ec802ba56f53f565
+paso 101 BLOCKED F[1]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #63580bc2ab869657
+paso 102 ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #08ec37d9741d0808
+paso 103 ASSIGN F[4]: comidas++ => 8 | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #579d9fb3848c7d53
+paso 104 SIGNAL F[4]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #63d06392d4e02975
+paso 105 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #7e1fc41ebcc55c7a
+paso 106 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | REENTER F[3]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #26dd5a82691b1f96
+paso 107 ASSIGN F[3]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #c9220151a005dd03
+paso 108 ASSIGN F[4]: for#1++ => 3 | ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #f0ddc9fe32c06804
+paso 109 BLOCKED F[4]: espera para entrar a Mesa.tomar | RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[1]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #13fa6e9c8a137787
+paso 110 SKIP F[3]: skip | ASSIGN F[1]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #e3b2cb330a8d6a9c
+paso 111 BLOCKED F[3]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #58edcd8f87cb9a90
+paso 112 ASSIGN F[1]: ocupado[2] = false | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #737b226178f9ff3b
+paso 113 ASSIGN F[1]: comidas++ => 9 | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #610c9a289fa2264b
+paso 114 SIGNAL F[1]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #2fc605762fc5a06e
+paso 115 SIGNAL F[1]: signal(libre[2]) - despierta a F[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #482aa6933da4a3dc
+paso 116 RETURN F[1]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #62390e85aca2052a
+paso 117 ASSIGN F[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #2a3e2b457b1b001c
+paso 118 WAIT F[4]: wait(libre[4]) - libera el monitor y se demora | ENTER F[0]: entra a Mesa.tomar | TERMINATED F[1]: termina | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #379faac9533987b0
+paso 119 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #98c8f5ec015f8f08
+paso 120 ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #0bd33e4188897577
+paso 121 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #39e5be4ecaf21721
+paso 122 SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #4f6d87ed175d46cb
+paso 123 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #6718bad61e0161fc
+paso 124 BLOCKED F[0]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #96b27135a21df0ce
+paso 125 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #84410d35f8e09227
+paso 126 ASSIGN F[3]: comidas++ => 10 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #54a2cdaa9fbc09b9
+paso 127 SIGNAL F[3]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #0ae34134c0a4b40b
+paso 128 SIGNAL F[3]: signal(libre[4]) - despierta a F[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #6c0a988ee7de064a
+paso 129 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | REENTER F[2]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #2ae5331af7419471
+paso 130 ASSIGN F[2]: ocupado[2] = true | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #423fad254cee06ad
+paso 131 ASSIGN F[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #fef2b6699b337986
+paso 132 BLOCKED F[3]: espera para entrar a Mesa.tomar | ASSIGN F[2]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #9c41a17af600af92
+paso 133 RETURN F[2]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #37e99c10796a4507
+paso 134 SKIP F[2]: skip | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #a7d5221f51665ee4
+paso 135 BLOCKED F[2]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #34b4325a795d14bb
+paso 136 ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #f250902ff9f9be58
+paso 137 ASSIGN F[0]: ocupado[1] = false | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #116970fe9ee5dd25
+paso 138 ASSIGN F[0]: comidas++ => 11 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #a90905d8371f3a7e
+paso 139 SIGNAL F[0]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #d164d0b30d387b70
+paso 140 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #55d9bfaa104b75d5
+paso 141 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | ENTER F[3]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #48a97e385b3bf447
+paso 142 ASSIGN F[0]: for#1++ => 3 | WAIT F[3]: wait(libre[3]) - libera el monitor y se demora | REENTER F[4]: reingresa a Mesa | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #18174dca514c4167
+paso 143 BLOCKED F[0]: espera para entrar a Mesa.tomar | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #de598322947dc8e1
+paso 144 ASSIGN F[4]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #4d5f0f1ae303c9d0
+paso 145 ASSIGN F[4]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #b13b61f4307996c1
+paso 146 RETURN F[4]: retorna de Mesa.tomar, libera el monitor | ENTER F[2]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #5bdf8f73e3e01dac
+paso 147 ASSIGN F[2]: ocupado[2] = false | SKIP F[4]: skip | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #823b9177d36cf13b
+paso 148 BLOCKED F[4]: espera para entrar a Mesa.dejar | ASSIGN F[2]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #0db8234724f8cefd
+paso 149 ASSIGN F[2]: comidas++ => 12 | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #6cf5b519a868cb81
+paso 150 SIGNAL F[2]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #11cc4c02a5141ffc
+paso 151 SIGNAL F[2]: signal(libre[3]) - despierta a F[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #63d27e18e0b1b1e7
+paso 152 RETURN F[2]: retorna de Mesa.dejar, libera el monitor | ENTER F[4]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #0ebd7747b089c780
+paso 153 ASSIGN F[4]: ocupado[4] = false | ASSIGN F[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #e7109085cd7cbf33
+paso 154 TERMINATED F[2]: termina | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #7746b3441251a9fe
+paso 155 ASSIGN F[4]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #2eb418ac2642e5c8
+paso 156 ASSIGN F[4]: comidas++ => 13 | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #c629e2bcbaa8aaa3
+paso 157 SIGNAL F[4]: signal(libre[3]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #d6a9311cfc4dc3ef
+paso 158 SIGNAL F[4]: signal(libre[0]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #2e39e566d9107b96
+paso 159 RETURN F[4]: retorna de Mesa.dejar, libera el monitor | ENTER F[0]: entra a Mesa.tomar | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #33d8bece885eff00
+paso 160 ASSIGN F[0]: ocupado[0] = true | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #9ea927b275df1eb2
+paso 161 ASSIGN F[0]: ocupado[1] = true | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #24e420b7e3b29148
+paso 162 RETURN F[0]: retorna de Mesa.tomar, libera el monitor | REENTER F[3]: reingresa a Mesa | ASSIGN F[4]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #da30a4a87552c45b
+paso 163 ASSIGN F[3]: ocupado[3] = true | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #e73388d7853b6649
+paso 164 SKIP F[0]: skip | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #8d6a2d450bd7c470
+paso 165 TERMINATED F[4]: termina | BLOCKED F[0]: espera para entrar a Mesa.dejar | ASSIGN F[3]: ocupado[4] = true | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #486da244992134e0
+paso 166 RETURN F[3]: retorna de Mesa.tomar, libera el monitor | ENTER F[0]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #e73ad32350fed327
+paso 167 SKIP F[3]: skip | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #5f9deea167de836b
+paso 168 ASSIGN F[0]: ocupado[0] = false | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #be662bd7afde46df
+paso 169 ASSIGN F[0]: ocupado[1] = false | BLOCKED F[3]: espera para entrar a Mesa.dejar | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #29dd250f59e4dcdc
+paso 170 ASSIGN F[0]: comidas++ => 14 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #f74ef0cfef770a58
+paso 171 SIGNAL F[0]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #c9dcf687c6bec387
+paso 172 SIGNAL F[0]: signal(libre[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #bcb63e50e5bb881e
+paso 173 RETURN F[0]: retorna de Mesa.dejar, libera el monitor | ENTER F[3]: entra a Mesa.dejar | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #772b3b9f240ad1c8
+paso 174 ASSIGN F[0]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #f39881c147d90ab4
+paso 175 ASSIGN F[3]: ocupado[3] = false | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #94030b6ee3f18533
+paso 176 TERMINATED F[0]: termina | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #0bef0eb2dee7128e
+paso 177 ASSIGN F[3]: ocupado[4] = false | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #44bb39938dd9d404
+paso 178 ASSIGN F[3]: comidas++ => 15 | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #97a11a93a30a06f4
+paso 179 SIGNAL F[3]: signal(libre[2]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #7861fd9571e05fac
+paso 180 SIGNAL F[3]: signal(libre[4]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #5a6fdbc5e60c59f5
+paso 181 RETURN F[3]: retorna de Mesa.dejar, libera el monitor | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #40edc9c3982672fb
+paso 182 ASSIGN F[3]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #cd7119a5b2711934
+paso 183 TERMINATED F[3]: termina | {"finished":true,"deadlock":false,"instant":183,"waiting":false} #703ed0779b9604c0
+estado #94324dde83fdfec2

@@ -1,0 +1,77 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #d2880e6aeae5527a
+paso 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fcb13e440edd19c9
+paso 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #31eb163b8e1d9784
+paso 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #021ab5fa75f451d4
+paso 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c61bbca14bea3e80
+paso 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f54e2b969e504e27
+paso 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bde36931cca8f4e7
+paso 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9dc9ca86bae351a5
+paso 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #4760ee05968b726e
+estado #2b20149c279b356e
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #ba657dd1893cff11
+paso 1 #fcb13e440edd19c9
+paso 2 #31eb163b8e1d9784
+paso 3 #021ab5fa75f451d4
+paso 4 #c61bbca14bea3e80
+paso 5 #f54e2b969e504e27
+paso 6 #bde36931cca8f4e7
+paso 7 #9dc9ca86bae351a5
+paso 8 #4760ee05968b726e
+estado #2b20149c279b356e
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #f65b1bb3ed56e9bd
+paso 1 #fcb13e440edd19c9
+paso 2 #31eb163b8e1d9784
+paso 3 #021ab5fa75f451d4
+paso 4 #c61bbca14bea3e80
+paso 5 #f54e2b969e504e27
+paso 6 #bde36931cca8f4e7
+paso 7 #9dc9ca86bae351a5
+paso 8 #4760ee05968b726e
+estado #2b20149c279b356e
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #d2880e6aeae5527a
+paso 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fcb13e440edd19c9
+paso 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #31eb163b8e1d9784
+paso 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #021ab5fa75f451d4
+paso 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c61bbca14bea3e80
+paso 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f54e2b969e504e27
+paso 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bde36931cca8f4e7
+paso 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9dc9ca86bae351a5
+paso 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #4760ee05968b726e
+estado #2b20149c279b356e
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #ba657dd1893cff11
+paso 1 #fcb13e440edd19c9
+paso 2 #31eb163b8e1d9784
+paso 3 #021ab5fa75f451d4
+paso 4 #c61bbca14bea3e80
+paso 5 #f54e2b969e504e27
+paso 6 #bde36931cca8f4e7
+paso 7 #9dc9ca86bae351a5
+paso 8 #4760ee05968b726e
+estado #2b20149c279b356e
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #f65b1bb3ed56e9bd
+paso 1 #fcb13e440edd19c9
+paso 2 #31eb163b8e1d9784
+paso 3 #021ab5fa75f451d4
+paso 4 #c61bbca14bea3e80
+paso 5 #f54e2b969e504e27
+paso 6 #bde36931cca8f4e7
+paso 7 #9dc9ca86bae351a5
+paso 8 #4760ee05968b726e
+estado #2b20149c279b356e
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #d2880e6aeae5527a
+paso 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fcb13e440edd19c9
+paso 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #31eb163b8e1d9784
+paso 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #021ab5fa75f451d4
+paso 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c61bbca14bea3e80
+paso 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f54e2b969e504e27
+paso 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bde36931cca8f4e7
+paso 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9dc9ca86bae351a5
+paso 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #4760ee05968b726e
+estado #2b20149c279b356e

@@ -1,0 +1,256 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #9d107f8429923006
+paso 1 ENTER Cons[3]: entra a M.sacar | BLOCKED Prod: espera para entrar a M.poner | BLOCKED Cons[1]: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #206a1b177c1a7bfc
+paso 2 DECL Cons[3]: int k = 0 | BLOCKED Cons[2]: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5a5bf9ccb5e41a77
+paso 3 DECL Cons[3]: text s =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #d50bd78c2f8e4697
+paso 4 DECL Cons[3]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #61cbeb7da77a7d2b
+paso 5 WAIT Cons[3]: wait(hay) - libera el monitor y se demora | ENTER Cons[1]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a031e4126eda86fc
+paso 6 DECL Cons[1]: int k = 0 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #8f0ac681fd4fc9df
+paso 7 DECL Cons[1]: text s =  | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9198182fc1238827
+paso 8 DECL Cons[1]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #1f28ab2e69fd6e6c
+paso 9 WAIT Cons[1]: wait(hay) - libera el monitor y se demora | ENTER Cons[2]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8d2f8c21ba83e055
+paso 10 DECL Cons[2]: int k = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #cdc1ba1e668f7d60
+paso 11 DECL Cons[2]: text s =  | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f3f66161500901b0
+paso 12 DECL Cons[2]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #18bb6ca5836ee211
+paso 13 WAIT Cons[2]: wait(hay) - libera el monitor y se demora | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #fa3ebb156d77e57f
+paso 14 PUSH Prod: push(c, (3, c, 1.5)) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #4d8891bf4c459223
+paso 15 SIGNAL_ALL Prod: signal_all(hay) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1bb714bc651c0065
+paso 16 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[3]: reingresa a M | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6160a9d3361f74c7
+paso 17 BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #f5beef591e7d75d3
+paso 18 POP Cons[3]: pop(c) => (3, c, 1.5) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #8ae3508d4fce653d
+paso 19 WRITE Cons[3]: write(3c1.5) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #da49c41812281be3
+paso 20 RETURN Cons[3]: retorna de M.sacar, libera el monitor | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #e9bb5e4c942d2cb0
+paso 21 PUSH Prod: push(c, (1, a, 0.5)) | TERMINATED Cons[3]: termina | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #f48bd14d101baa0a
+paso 22 SIGNAL_ALL Prod: signal_all(hay) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #091371e83a7dc3f1
+paso 23 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[2]: reingresa a M | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #6947d5c687b92d16
+paso 24 BLOCKED Prod: espera para entrar a M.poner | POP Cons[2]: pop(c) => (1, a, 0.5) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #37f9824922219e30
+paso 25 WRITE Cons[2]: write(1a0.5) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f72c301bcf390dfb
+paso 26 RETURN Cons[2]: retorna de M.sacar, libera el monitor | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #e8f176b93cbe1452
+paso 27 PUSH Prod: push(c, (2, b, 1.0)) | TERMINATED Cons[2]: termina | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #05d27392868087c4
+paso 28 SIGNAL_ALL Prod: signal_all(hay) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #eb47a2e487fdd0ce
+paso 29 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[1]: reingresa a M | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #8e85592cdf327802
+paso 30 POP Cons[1]: pop(c) => (2, b, 1.0) | TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #76275ca8e7fb2818
+paso 31 WRITE Cons[1]: write(2b1.0) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #6023b02d1efb503c
+paso 32 RETURN Cons[1]: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #9e3b431e97ebcd19
+paso 33 TERMINATED Cons[1]: termina | {"finished":true,"deadlock":false,"instant":33,"waiting":false} #3f7c3bb839188197
+estado #cc7f1dbcef51c2f8
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #147ddbd14c451877
+paso 1 #70b36b4c777472a9
+paso 2 #b5a602be3a30c46b
+paso 3 #d50bd78c2f8e4697
+paso 4 #61cbeb7da77a7d2b
+paso 5 #a031e4126eda86fc
+paso 6 #8f0ac681fd4fc9df
+paso 7 #9198182fc1238827
+paso 8 #1f28ab2e69fd6e6c
+paso 9 #8d2f8c21ba83e055
+paso 10 #cdc1ba1e668f7d60
+paso 11 #f3f66161500901b0
+paso 12 #18bb6ca5836ee211
+paso 13 #fa3ebb156d77e57f
+paso 14 #4d8891bf4c459223
+paso 15 #1bb714bc651c0065
+paso 16 #afa6b94e9357b6a4
+paso 17 #4b878e53c6e537b7
+paso 18 #32e49a7a559c9aec
+paso 19 #99747fb7bceabb2d
+paso 20 #26c4579b5e3ef857
+paso 21 #8724906fc5b541a6
+paso 22 #421ac33affe5036e
+paso 23 #c26e38592244a0b1
+paso 24 #0eb5c402e89c682a
+paso 25 #68b2e0bda4d6c711
+paso 26 #74f40ca6db8ce5b1
+paso 27 #6ff33a76160cca57
+paso 28 #7d915d4ca6dc8844
+paso 29 #28b9aeacc5525d60
+paso 30 #b026529d691f8577
+paso 31 #7236b59680e81ded
+paso 32 #1a0ff92ea75085ff
+paso 33 #cecd811e91d06a65
+paso 34 #d531c769e82c2adb
+paso 35 #9392767f7fd376e1
+estado #70856b40d4810311
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #5a7fd555393a9673
+paso 1 #d426d37c865dc8f8
+paso 2 #dfcff550b7403310
+paso 3 #f00517f0c96cf996
+paso 4 #8aa88ed6e4e9f7b7
+paso 5 #526455547af21518
+paso 6 #c4109dcaea1af953
+paso 7 #b806176ae6f1de58
+paso 8 #3d815d778a00f727
+paso 9 #9ff0389cfe525e5d
+paso 10 #f9b4b541b701b736
+paso 11 #2408d91c5ee576b5
+paso 12 #ba4cc4e443a70754
+paso 13 #1ac8cbb08840f43e
+paso 14 #04c6ceb6b64ba19f
+paso 15 #8f6606e6de976327
+paso 16 #4836cda03777d901
+paso 17 #11d5ae7f3ea6ffb7
+paso 18 #8fb97dbb298ca4f4
+paso 19 #9ab2e83322fc6df2
+paso 20 #c10a25232abfe841
+paso 21 #00e734dfd6e2f7c7
+paso 22 #7f2357b29e2301de
+paso 23 #0b871637c1db1a98
+paso 24 #f235cb9ea39ae168
+paso 25 #75cee6b1d3a90704
+paso 26 #6143f1628b894a3f
+paso 27 #48b97c06bf4fd1a5
+paso 28 #ea42914b900ecc81
+paso 29 #fda479d47cf52b1f
+paso 30 #b35e0c90d80f1389
+paso 31 #436b025abdc1b656
+paso 32 #6e34da69178b2380
+paso 33 #7279bddf1adea253
+paso 34 #4d217d90a68ba67e
+paso 35 #b67b2e45ca174a78
+estado #e4128c039f608933
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #9d107f8429923006
+paso 1 ENTER Prod: entra a M.poner | BLOCKED Cons[1]: espera para entrar a M.sacar | BLOCKED Cons[2]: espera para entrar a M.sacar | BLOCKED Cons[3]: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8197421837ba95e3
+paso 2 PUSH Prod: push(c, (3, c, 1.5)) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #6183cadb21be312f
+paso 3 SIGNAL_ALL Prod: signal_all(hay) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #652acf94205d6a4f
+paso 4 RETURN Prod: retorna de M.poner, libera el monitor | ENTER Cons[1]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fec18784cef52968
+paso 5 DECL Cons[1]: int k = 0 | BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ca00ee11dd84b347
+paso 6 DECL Cons[1]: text s =  | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #adb4fc2e51f9316d
+paso 7 DECL Cons[1]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #4e34a9ebb49ff4ba
+paso 8 POP Cons[1]: pop(c) => (3, c, 1.5) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7a055c036b73be58
+paso 9 WRITE Cons[1]: write(3c1.5) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8cb030038b6bdae4
+paso 10 RETURN Cons[1]: retorna de M.sacar, libera el monitor | ENTER Cons[3]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #e457f2e90522f994
+paso 11 DECL Cons[3]: int k = 0 | TERMINATED Cons[1]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #0a831b21aa8ee72d
+paso 12 DECL Cons[3]: text s =  | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #76f8dd69f3839a9b
+paso 13 DECL Cons[3]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f2ec9ea627d4acc2
+paso 14 WAIT Cons[3]: wait(hay) - libera el monitor y se demora | ENTER Cons[2]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #ef27232271c8dc7a
+paso 15 DECL Cons[2]: int k = 0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4d971571078290f9
+paso 16 DECL Cons[2]: text s =  | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #f4e2f19d2b7beac2
+paso 17 DECL Cons[2]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #40228e4e472eccf6
+paso 18 WAIT Cons[2]: wait(hay) - libera el monitor y se demora | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #e5bade69ae2c83d7
+paso 19 PUSH Prod: push(c, (1, a, 0.5)) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ff9330a118ec5735
+paso 20 SIGNAL_ALL Prod: signal_all(hay) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ff44a12785ba0eb2
+paso 21 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[2]: reingresa a M | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #c835cdbf6f082d3f
+paso 22 POP Cons[2]: pop(c) => (1, a, 0.5) | BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b2520e411a55e044
+paso 23 WRITE Cons[2]: write(1a0.5) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #0893ef783814e73e
+paso 24 RETURN Cons[2]: retorna de M.sacar, libera el monitor | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #5e2400dea4f41fd1
+paso 25 PUSH Prod: push(c, (2, b, 1.0)) | TERMINATED Cons[2]: termina | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #eaa38b63994c18b2
+paso 26 SIGNAL_ALL Prod: signal_all(hay) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #71b09771862d0227
+paso 27 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[3]: reingresa a M | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ab0a1aa54d3368c2
+paso 28 POP Cons[3]: pop(c) => (2, b, 1.0) | TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #779ecae1ede1d751
+paso 29 WRITE Cons[3]: write(2b1.0) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #54576d38d40d326a
+paso 30 RETURN Cons[3]: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #fc4e7650d0dae259
+paso 31 TERMINATED Cons[3]: termina | {"finished":true,"deadlock":false,"instant":31,"waiting":false} #a0a6bcc1c8fc8f21
+estado #1c7c7c08c788fecb
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #147ddbd14c451877
+paso 1 #8197421837ba95e3
+paso 2 #6183cadb21be312f
+paso 3 #652acf94205d6a4f
+paso 4 #fec18784cef52968
+paso 5 #ca00ee11dd84b347
+paso 6 #adb4fc2e51f9316d
+paso 7 #4e34a9ebb49ff4ba
+paso 8 #7a055c036b73be58
+paso 9 #8cb030038b6bdae4
+paso 10 #e457f2e90522f994
+paso 11 #0a831b21aa8ee72d
+paso 12 #76f8dd69f3839a9b
+paso 13 #f2ec9ea627d4acc2
+paso 14 #ef27232271c8dc7a
+paso 15 #4d971571078290f9
+paso 16 #f4e2f19d2b7beac2
+paso 17 #40228e4e472eccf6
+paso 18 #e5bade69ae2c83d7
+paso 19 #ff9330a118ec5735
+paso 20 #ff44a12785ba0eb2
+paso 21 #b197404b378db15e
+paso 22 #929538f007d5ad94
+paso 23 #edfc5c841eb24a7e
+paso 24 #968b5be99331ca60
+paso 25 #a5ae3b2745c1c895
+paso 26 #625d75e8b072a63f
+paso 27 #625a9ac3284b2b1c
+paso 28 #6eecb310e6d8029a
+paso 29 #0dbe72da08879c68
+paso 30 #1afd39f59dbd83cf
+paso 31 #317ad5755b0d5428
+paso 32 #a3f3e70a43d9ad97
+estado #c090913e9fe14dcc
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #5a7fd555393a9673
+paso 1 #8197421837ba95e3
+paso 2 #6183cadb21be312f
+paso 3 #652acf94205d6a4f
+paso 4 #5f639f737b21cd75
+paso 5 #840b83357b32c234
+paso 6 #2bc1fda5958a436c
+paso 7 #e834aa03b87096ce
+paso 8 #d9fe230724a9dfa3
+paso 9 #456631f489934100
+paso 10 #dd83dab29b89cf4b
+paso 11 #202eed6908ebd4c3
+paso 12 #6d8143ec03ec1a14
+paso 13 #eaf4c4e28c0508f3
+paso 14 #2dc331380c441c2f
+paso 15 #6e77e18aa2fca007
+paso 16 #f04a2a5c8d550385
+paso 17 #f79e6526f1655514
+paso 18 #4c21a8732b8a1fd9
+paso 19 #04b53815a533bc1f
+paso 20 #1a0b344e4ece58c2
+paso 21 #8ca7d1f14db411e3
+paso 22 #74aa58a094de348a
+paso 23 #06fb7cef81f478ee
+paso 24 #6f7e72c3b263b5e7
+paso 25 #cdf9f5df6bf7d4f8
+paso 26 #620dcd11e50112f3
+paso 27 #bd6722dc8ffa58d4
+paso 28 #8b86f34e20ff706c
+paso 29 #1d8bddf0d7c2dd21
+paso 30 #f4dd1dbdb529f113
+paso 31 #24fddf0e21054ef1
+estado #1565ac7545dd8f6a
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #9d107f8429923006
+paso 1 ENTER Cons[1]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #15a532ecb641ef2c
+paso 2 BLOCKED Cons[2]: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a6a4f09149d865fd
+paso 3 BLOCKED Cons[3]: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #541e35e8a0b0b21a
+paso 4 BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2cf7bd3bd16df442
+paso 5 DECL Cons[1]: int k = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0b55923a955496bf
+paso 6 DECL Cons[1]: text s =  | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #7425038505d6e420
+paso 7 DECL Cons[1]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #792b81bf1c24a787
+paso 8 WAIT Cons[1]: wait(hay) - libera el monitor y se demora | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #539b7db4d2a2a52d
+paso 9 PUSH Prod: push(c, (3, c, 1.5)) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #822f3bd4113e20bc
+paso 10 SIGNAL_ALL Prod: signal_all(hay) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #6638796e50d28c7c
+paso 11 RETURN Prod: retorna de M.poner, libera el monitor | ENTER Cons[2]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7fc9d3720762041e
+paso 12 BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b845305cbf2b491a
+paso 13 DECL Cons[2]: int k = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #d1a4a1d64074be57
+paso 14 DECL Cons[2]: text s =  | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0731c6fcf4476d66
+paso 15 DECL Cons[2]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #87806dcf89714297
+paso 16 POP Cons[2]: pop(c) => (3, c, 1.5) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1cfb37b7de6a074d
+paso 17 WRITE Cons[2]: write(3c1.5) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #57b629c3bd9655f0
+paso 18 RETURN Cons[2]: retorna de M.sacar, libera el monitor | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2ae4af6009190a3c
+paso 19 TERMINATED Cons[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9da57d14a30137e8
+paso 20 PUSH Prod: push(c, (1, a, 0.5)) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #4cb217c41d244400
+paso 21 SIGNAL_ALL Prod: signal_all(hay) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e8f566e89022a807
+paso 22 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[1]: reingresa a M | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #cf759d19ae6fdcb9
+paso 23 POP Cons[1]: pop(c) => (1, a, 0.5) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #7934397f9a252b24
+paso 24 BLOCKED Prod: espera para entrar a M.poner | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #d780c9db314b7c6c
+paso 25 WRITE Cons[1]: write(1a0.5) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #3c205f757a021892
+paso 26 RETURN Cons[1]: retorna de M.sacar, libera el monitor | ENTER Cons[3]: entra a M.sacar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #7e70fefff28af770
+paso 27 DECL Cons[3]: int k = 0 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #490708ddcf2ebd13
+paso 28 DECL Cons[3]: text s =  | TERMINATED Cons[1]: termina | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b4498e2938494297
+paso 29 DECL Cons[3]: double d = 0.0 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #e37d94d65f6b46ad
+paso 30 WAIT Cons[3]: wait(hay) - libera el monitor y se demora | ENTER Prod: entra a M.poner | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #c18f8c5a4f7e7ede
+paso 31 PUSH Prod: push(c, (2, b, 1.0)) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #527d87cf7853767a
+paso 32 SIGNAL_ALL Prod: signal_all(hay) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #6fb619d04bb5f0e7
+paso 33 RETURN Prod: retorna de M.poner, libera el monitor | REENTER Cons[3]: reingresa a M | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #3844bdb4b4ad8d73
+paso 34 TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #0ba17b5b53954ea5
+paso 35 POP Cons[3]: pop(c) => (2, b, 1.0) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #c6fee24ef30e3504
+paso 36 WRITE Cons[3]: write(2b1.0) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #3928ef977056c46b
+paso 37 RETURN Cons[3]: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #1682104459ad5be9
+paso 38 TERMINATED Cons[3]: termina | {"finished":true,"deadlock":false,"instant":38,"waiting":false} #6b38c2765f71744c
+estado #4ec6e1ec566c4a3f

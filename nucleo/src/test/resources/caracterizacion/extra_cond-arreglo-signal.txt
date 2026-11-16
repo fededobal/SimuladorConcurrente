@@ -1,0 +1,163 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #6b1555982fcd6f11
+paso 1 DELAY S: delay(1) - se demora 1 segundo | ENTER W[0]: entra a M.esperar | BLOCKED W[1]: espera para entrar a M.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #3e4a253fa9a060cc
+paso 2 BLOCKED W[2]: espera para entrar a M.esperar | ASSIGN W[0]: listos++ => 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #dd3b11d6a487e09a
+paso 3 BLOCKED S: espera para entrar a M.despertar | WAIT W[0]: wait(turno[0]) - libera el monitor y se demora | ENTER W[2]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e324e36d2d98526b
+paso 4 ASSIGN W[2]: listos++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3ba469b6ca3323ab
+paso 5 WAIT W[2]: wait(turno[2]) - libera el monitor y se demora | ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #39d499d52e8850b3
+paso 6 SIGNAL S: signal(turno[0]) - despierta a W[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #5446b98f09db3ced
+paso 7 RETURN S: retorna de M.despertar, libera el monitor | ENTER W[1]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ddda0869c5049218
+paso 8 ASSIGN W[1]: listos++ => 3 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #92fd69ce20c24320
+paso 9 ASSIGN S: j++ => 1 | WAIT W[1]: wait(turno[1]) - libera el monitor y se demora | REENTER W[0]: reingresa a M | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #20a6d2389f50f0e4
+paso 10 BLOCKED S: espera para entrar a M.despertar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #6cc6b189fe5b5527
+paso 11 RETURN W[0]: retorna de M.esperar, libera el monitor | ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7f0ef952fb7cec1b
+paso 12 TERMINATED W[0]: termina | SIGNAL S: signal(turno[1]) - despierta a W[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d600123ce1cf78fa
+paso 13 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[1]: reingresa a M | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f6e88b337defe3fc
+paso 14 RETURN W[1]: retorna de M.esperar, libera el monitor | ASSIGN S: j++ => 2 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #fc645d89893a79ea
+paso 15 ENTER S: entra a M.despertar | TERMINATED W[1]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1284eca095c7cc28
+paso 16 SIGNAL S: signal(turno[2]) - despierta a W[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #9c3225875f9b98d5
+paso 17 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[2]: reingresa a M | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #909e1e251197be6d
+paso 18 ASSIGN S: j++ => 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #88fa58748568fd2e
+paso 19 RETURN W[2]: retorna de M.esperar, libera el monitor | TERMINATED S: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #6a9d0eca1b629d1c
+paso 20 TERMINATED W[2]: termina | {"finished":true,"deadlock":false,"instant":20,"waiting":false} #2758702fd6174b1b
+estado #ea5e460b9596724e
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #6b6c19da038e7e8a
+paso 1 #71f91fcee4887d0a
+paso 2 #197d9f8427086650
+paso 3 #81abdb50759d5725
+paso 4 #a23bd4cecbaf7629
+paso 5 #5ec80f34a293e240
+paso 6 #6180afd817f7270c
+paso 7 #e4090d426cfaf265
+paso 8 #4aa461e03402f207
+paso 9 #997a232906bdb6d8
+paso 10 #cb8647e47c583c25
+paso 11 #52e5d11cb1dcf15e
+paso 12 #f80c867cd2d0d7c3
+paso 13 #640213e434550a08
+paso 14 #4b0a07f7f2845152
+paso 15 #430ecf58a0632242
+paso 16 #b358a607e83d0fb0
+paso 17 #97ac20ecef2b1a22
+paso 18 #00f2924d52e47e37
+paso 19 #d098794000a6dd05
+paso 20 #e4cfc67ff332b70a
+paso 21 #24d7f307bdddee53
+estado #b670c9ad028c4d60
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #ff424e9c1ac72a88
+paso 1 #6eb13269b9a2f492
+paso 2 #96257aa3fca00121
+paso 3 #7e756428d0b45156
+paso 4 #1c556bcb4930b694
+paso 5 #d467800ce8330f74
+paso 6 #a05d7290139dafdf
+paso 7 #bbef3fb28ec9192d
+paso 8 #931dd53daabd89fb
+paso 9 #15725cc7b693f0e5
+paso 10 #64e76c4d57804e55
+paso 11 #c6c388aa265b97da
+paso 12 #549826c8b38c7d22
+paso 13 #f6e88b337defe3fc
+paso 14 #e433042cbd17e3c8
+paso 15 #366d2b857d3f7d25
+paso 16 #1c0ea5f9740f8312
+paso 17 #82cab72cc508ed9a
+paso 18 #2f44a75c7a92759e
+paso 19 #db062270a9d736b7
+paso 20 #ef58974c997c560f
+paso 21 #e31c774460cf7c68
+paso 22 #8f0a728cb2768af1
+estado #8edaee6fd8acf155
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #6b1555982fcd6f11
+paso 1 ENTER W[0]: entra a M.esperar | BLOCKED W[1]: espera para entrar a M.esperar | BLOCKED W[2]: espera para entrar a M.esperar | DELAY S: delay(1) - se demora 1 segundo | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #89d8fe82c41e319f
+paso 2 ASSIGN W[0]: listos++ => 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #197d9f8427086650
+paso 3 BLOCKED S: espera para entrar a M.despertar | WAIT W[0]: wait(turno[0]) - libera el monitor y se demora | ENTER W[1]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #64ec3c8c0917b00c
+paso 4 ASSIGN W[1]: listos++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #a23bd4cecbaf7629
+paso 5 WAIT W[1]: wait(turno[1]) - libera el monitor y se demora | ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #5ec80f34a293e240
+paso 6 SIGNAL S: signal(turno[0]) - despierta a W[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6180afd817f7270c
+paso 7 RETURN S: retorna de M.despertar, libera el monitor | ENTER W[2]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #adb4a04908c1e22b
+paso 8 ASSIGN W[2]: listos++ => 3 | ASSIGN S: j++ => 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #785b4de5eed98609
+paso 9 BLOCKED S: espera para entrar a M.despertar | WAIT W[2]: wait(turno[2]) - libera el monitor y se demora | ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #0d0c1a6823178d89
+paso 10 SIGNAL S: signal(turno[1]) - despierta a W[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #e54037c9345b2f4b
+paso 11 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[1]: reingresa a M | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #967c6adeda6ad9e2
+paso 12 RETURN W[1]: retorna de M.esperar, libera el monitor | REENTER W[0]: reingresa a M | ASSIGN S: j++ => 2 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #eea5a7dec6544033
+paso 13 BLOCKED S: espera para entrar a M.despertar | RETURN W[0]: retorna de M.esperar, libera el monitor | ENTER S: entra a M.despertar | TERMINATED W[1]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #91c201e3fc37b4eb
+paso 14 TERMINATED W[0]: termina | SIGNAL S: signal(turno[2]) - despierta a W[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b03e51cc3f0b3cac
+paso 15 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[2]: reingresa a M | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #bfb6c4b50c38dbd0
+paso 16 RETURN W[2]: retorna de M.esperar, libera el monitor | ASSIGN S: j++ => 3 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #344b57d5a929f8cb
+paso 17 TERMINATED S: termina | TERMINATED W[2]: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #63da0c62eaf30d27
+estado #0253278d50d030a2
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #6b6c19da038e7e8a
+paso 1 #89d8fe82c41e319f
+paso 2 #197d9f8427086650
+paso 3 #64ec3c8c0917b00c
+paso 4 #a23bd4cecbaf7629
+paso 5 #c9749cfcedaa64ef
+paso 6 #7e9fff4049c4f39d
+paso 7 #0c928ab5cd872d55
+paso 8 #c733b01852b7932f
+paso 9 #1e1da0f35497ba11
+paso 10 #4b352dc6eeb9d374
+paso 11 #5acbd0710aa81475
+paso 12 #65ee2fd036ba3bc7
+paso 13 #125e05954b959446
+paso 14 #f923c71bb344dba4
+paso 15 #4b4ed8b9b50affad
+paso 16 #fba81f8aa0b1f5fd
+paso 17 #ab2e7209ce346a3c
+paso 18 #890c79f23e57bbf0
+paso 19 #19f86448e9d99780
+estado #555f3efc76bc6bfe
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #ff424e9c1ac72a88
+paso 1 #89d8fe82c41e319f
+paso 2 #197d9f8427086650
+paso 3 #e324e36d2d98526b
+paso 4 #3ba469b6ca3323ab
+paso 5 #1d4a13c0b1977559
+paso 6 #0de71aa03d866567
+paso 7 #f0ab4a01eb752b61
+paso 8 #b5e761c164e96b2f
+paso 9 #26d8be185593cde6
+paso 10 #46d69a8637ad16ee
+paso 11 #4aa496ba3f4ea8fb
+paso 12 #c0e1cf68a48894ce
+paso 13 #0c062d2ce8777a81
+paso 14 #74b66d43aeebae7b
+paso 15 #df438d5b22a8e921
+paso 16 #868b78f8aa6610a6
+paso 17 #2ac45079b734b613
+paso 18 #a2497ae4cd9f5f14
+paso 19 #b1cd36f24ce7704d
+estado #cd18c5f1963eee3b
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #6b1555982fcd6f11
+paso 1 ENTER W[1]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #4cd4d0077f2c210a
+paso 2 BLOCKED W[2]: espera para entrar a M.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #47cd36b2d04a5721
+paso 3 DELAY S: delay(1) - se demora 1 segundo | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #4dfd83487b07da40
+paso 4 BLOCKED W[0]: espera para entrar a M.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #eb7fde2a1c642145
+paso 5 ASSIGN W[1]: listos++ => 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f20fec9ee09a9ed6
+paso 6 WAIT W[1]: wait(turno[1]) - libera el monitor y se demora | ENTER W[0]: entra a M.esperar | BLOCKED S: espera para entrar a M.despertar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #adf2819b9c98b936
+paso 7 ASSIGN W[0]: listos++ => 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1f1423af2295f0fc
+paso 8 WAIT W[0]: wait(turno[0]) - libera el monitor y se demora | ENTER W[2]: entra a M.esperar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #584a92b473ef4a92
+paso 9 ASSIGN W[2]: listos++ => 3 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #7298cdc3c8053083
+paso 10 WAIT W[2]: wait(turno[2]) - libera el monitor y se demora | ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #df4849d0ef572125
+paso 11 SIGNAL S: signal(turno[0]) - despierta a W[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #40381a85c9be1e67
+paso 12 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[0]: reingresa a M | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #9aec1963eeac70e0
+paso 13 RETURN W[0]: retorna de M.esperar, libera el monitor | ASSIGN S: j++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #26b1af368b33a18b
+paso 14 ENTER S: entra a M.despertar | TERMINATED W[0]: termina | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #1da303f138cdbe4b
+paso 15 SIGNAL S: signal(turno[1]) - despierta a W[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #0a18fa03a554b473
+paso 16 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[1]: reingresa a M | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #f08671d0bad45eac
+paso 17 RETURN W[1]: retorna de M.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #aab211335a14140f
+paso 18 ASSIGN S: j++ => 2 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f7e64807e9d7a2ab
+paso 19 ENTER S: entra a M.despertar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #43dc02fa7acaeff3
+paso 20 TERMINATED W[1]: termina | SIGNAL S: signal(turno[2]) - despierta a W[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #e278cb5e7e0211f5
+paso 21 RETURN S: retorna de M.despertar, libera el monitor | REENTER W[2]: reingresa a M | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #68680c4cec7cebb6
+paso 22 RETURN W[2]: retorna de M.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #8514f18208b1693c
+paso 23 ASSIGN S: j++ => 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #70adbc6ed3e1cfb8
+paso 24 TERMINATED S: termina | TERMINATED W[2]: termina | {"finished":true,"deadlock":false,"instant":24,"waiting":false} #d48f88e413d290af
+estado #9415914166478199

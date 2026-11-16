@@ -1,0 +1,1335 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #00eed093414ab686
+paso 1 DECL Cliente[1]: text lista = lista | DECL Cliente[5]: text lista = lista | DECL Cliente[2]: text lista = lista | DECL Cliente[9]: text lista = lista | DECL Cliente[4]: text lista = lista | DECL Cliente[8]: text lista = lista | DECL Cliente[3]: text lista = lista | DECL Cliente[7]: text lista = lista | DECL Empleado: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0ecf4120c8a8b1ba
+paso 2 DECL Empleado: text comp =  | DECL Cliente[9]: text comp =  | DECL Cliente[8]: text comp =  | DECL Cliente[5]: text comp =  | DECL Cliente[2]: text comp =  | DECL Cliente[1]: text comp =  | DECL Cliente[0]: text lista = lista | DECL Cliente[4]: text comp =  | DECL Cliente[3]: text comp =  | DECL Cliente[6]: text lista = lista | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9e9d25447b91b652
+paso 3 ENTER Cliente[5]: entra a Corralon.comprar | BLOCKED Cliente[2]: espera para entrar a Corralon.comprar | DECL Cliente[7]: text comp =  | BLOCKED Cliente[8]: espera para entrar a Corralon.comprar | BLOCKED Cliente[1]: espera para entrar a Corralon.comprar | BLOCKED Cliente[3]: espera para entrar a Corralon.comprar | BLOCKED Cliente[4]: espera para entrar a Corralon.comprar | DECL Cliente[6]: text comp =  | DECL Cliente[0]: text comp =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #ba48faaa198183c4
+paso 4 PUSH Cliente[5]: push(cAtenciones, 5) | BLOCKED Cliente[7]: espera para entrar a Corralon.comprar | BLOCKED Cliente[0]: espera para entrar a Corralon.comprar | BLOCKED Cliente[9]: espera para entrar a Corralon.comprar | BLOCKED Cliente[6]: espera para entrar a Corralon.comprar | DECL Empleado: int id = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #62057240ea846f40
+paso 5 SIGNAL Cliente[5]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7a348052b26d55e7
+paso 6 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | ENTER Cliente[9]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #9bcac2de14ee1f14
+paso 7 PUSH Cliente[9]: push(cAtenciones, 9) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #25d6708b1a857c6f
+paso 8 SIGNAL Cliente[9]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #a8e5af51450010c8
+paso 9 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | ENTER Cliente[2]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3bf8ffa41b5af5a9
+paso 10 PUSH Cliente[2]: push(cAtenciones, 2) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #b7d9b6d33034090b
+paso 11 SIGNAL Cliente[2]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #d61eb15485d8c6d1
+paso 12 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | ENTER Cliente[1]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e3f807a0439b5f3b
+paso 13 PUSH Cliente[1]: push(cAtenciones, 1) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #18db3bdf8f0d052f
+paso 14 SIGNAL Cliente[1]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0a47c2d5f653e0bf
+paso 15 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #8b4d11278a68d2b9
+paso 16 POP Empleado: pop(cAtenciones) => 5 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #bcae7909d439349f
+paso 17 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #609a0084cc091ca0
+paso 18 WAIT Empleado: wait(esperaListas[5]) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #82d03a0b1961ada0
+paso 19 ASSIGN Cliente[5]: listas = lista | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #87de6b2c012ea918
+paso 20 SIGNAL Cliente[5]: signal(esperaListas[5]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2f7e3411896670a0
+paso 21 WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | ENTER Cliente[3]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #646cfd62ce2e0927
+paso 22 PUSH Cliente[3]: push(cAtenciones, 3) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #d24dda512df3d40d
+paso 23 SIGNAL Cliente[3]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #bcb77750ccf17427
+paso 24 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | ENTER Cliente[0]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #e21e18a7c0259dfb
+paso 25 PUSH Cliente[0]: push(cAtenciones, 0) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #45be2bdee094f1ae
+paso 26 SIGNAL Cliente[0]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #faf1b0116bc3f31d
+paso 27 WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | ENTER Cliente[6]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2e7b3cb82ebb45a0
+paso 28 PUSH Cliente[6]: push(cAtenciones, 6) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #fe0833965b4b8ca4
+paso 29 SIGNAL Cliente[6]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #594653c6d6bf34f6
+paso 30 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d217a4f721e3b820
+paso 31 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #caae86e86ddb0068
+paso 32 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | ENTER Cliente[4]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #e882ece84afa3cc7
+paso 33 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #6e21b3a960f26428
+paso 34 PUSH Cliente[4]: push(cAtenciones, 4) | BLOCKED Empleado: espera para entrar a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #44ee4b68cb02940c
+paso 35 SIGNAL Cliente[4]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #60b9d430a38747cf
+paso 36 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | ENTER Cliente[7]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #d8f03daf9878c67b
+paso 37 PUSH Cliente[7]: push(cAtenciones, 7) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #96a20805f6fbb5ea
+paso 38 SIGNAL Cliente[7]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #e7563ae9ca4daea7
+paso 39 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | ENTER Cliente[8]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #22ec4a7b4f2b03e4
+paso 40 PUSH Cliente[8]: push(cAtenciones, 8) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #2957474cd6c4c86f
+paso 41 SIGNAL Cliente[8]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #e15bbd1e426da5d6
+paso 42 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #e8dac7d9897f3894
+paso 43 ASSIGN Empleado: comprobantes[5] = comp | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #ac336ef4ec93f506
+paso 44 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #311b8a2daceedd9b
+paso 45 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #d11ba1751f5a3d8e
+paso 46 ASSIGN Empleado: i++ => 2 | ASSIGN Cliente[5]: comp = comp | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #d0deffabedb399f9
+paso 47 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[5]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #0f29768dc0f0deaa
+paso 48 TERMINATED Cliente[5]: termina | POP Empleado: pop(cAtenciones) => 9 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #d1bbf9d4146847e8
+paso 49 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #91cb3dda75d231db
+paso 50 WAIT Empleado: wait(esperaListas[9]) - libera el monitor y se demora | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #952e55fa5d5d4bc9
+paso 51 ASSIGN Cliente[9]: listas = lista | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #69a98426abe2a175
+paso 52 SIGNAL Cliente[9]: signal(esperaListas[9]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #a5830384d1938ceb
+paso 53 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #b24656a05c958065
+paso 54 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #b9a790a73f99eefe
+paso 55 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #a1c40de7afc785b0
+paso 56 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #d782c74175a73a27
+paso 57 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #3b36f4d3a37fd196
+paso 58 ASSIGN Empleado: comprobantes[9] = comp | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #2ed578b40909f136
+paso 59 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #9c0220afeef5a84f
+paso 60 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #7928d82630b5c562
+paso 61 ASSIGN Empleado: i++ => 3 | ASSIGN Cliente[9]: comp = comp | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #9bd38d56818d81ca
+paso 62 RETURN Cliente[9]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #afb267bf9b3e0c82
+paso 63 POP Empleado: pop(cAtenciones) => 2 | TERMINATED Cliente[9]: termina | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #c95e55f0785b0a43
+paso 64 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #fa41e2e7128a3a4c
+paso 65 WAIT Empleado: wait(esperaListas[2]) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #3a22f26851235ed7
+paso 66 ASSIGN Cliente[2]: listas = lista | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #82988829e72811b4
+paso 67 SIGNAL Cliente[2]: signal(esperaListas[2]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #44160b3f5cf8e596
+paso 68 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #0904d4c9e1dda524
+paso 69 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #d1dd63b4bfe2e324
+paso 70 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #831c15b4f05e9b66
+paso 71 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #6ba1ebeddf2cc414
+paso 72 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #a804f64920e3efb4
+paso 73 ASSIGN Empleado: comprobantes[2] = comp | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #73d46cca35db3679
+paso 74 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #0647a77b40156cf2
+paso 75 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #d41f92810348efb2
+paso 76 ASSIGN Empleado: i++ => 4 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #dadeb88b2f06be1f
+paso 77 ASSIGN Cliente[2]: comp = comp | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #5086ced84afab0ac
+paso 78 RETURN Cliente[2]: retorna de Corralon.comprar, libera el monitor | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #49ac9ecac392d7af
+paso 79 ENTER Empleado: entra a Corralon.esperarCliente | TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #4b001905a10d984b
+paso 80 POP Empleado: pop(cAtenciones) => 1 | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #71243a91cfe7c98b
+paso 81 SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #4ddd9c4e458cb42f
+paso 82 WAIT Empleado: wait(esperaListas[1]) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #100f3499723e5446
+paso 83 ASSIGN Cliente[1]: listas = lista | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #b385d049ec49af24
+paso 84 SIGNAL Cliente[1]: signal(esperaListas[1]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #997c9a8160a8540f
+paso 85 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #f4228db7d1d6b1a9
+paso 86 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #5bdd01575953b854
+paso 87 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #6dc56485a05667ba
+paso 88 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #5fae2cbcfd58906a
+paso 89 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #0a4c1f2acb0bf9af
+paso 90 ASSIGN Empleado: comprobantes[1] = comp | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #7b53b20cb43b1853
+paso 91 SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #f9c3e66d74525206
+paso 92 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #010aac8484cc0e9d
+paso 93 ASSIGN Cliente[1]: comp = comp | ASSIGN Empleado: i++ => 5 | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #e4465915dbcd21a4
+paso 94 RETURN Cliente[1]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #7daeb19d8d0359a5
+paso 95 TERMINATED Cliente[1]: termina | POP Empleado: pop(cAtenciones) => 3 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #11c72b336ce46e92
+paso 96 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #ff7863b650b2245c
+paso 97 WAIT Empleado: wait(esperaListas[3]) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #ad89345e9eabad83
+paso 98 ASSIGN Cliente[3]: listas = lista | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #0a48d4f1ae6241a5
+paso 99 SIGNAL Cliente[3]: signal(esperaListas[3]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #7a03276fc383a810
+paso 100 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #b33e4f94f4382a01
+paso 101 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #6b3c8a5cd31a1e66
+paso 102 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #8f85a95bda3df960
+paso 103 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #35ca40b0d963c03d
+paso 104 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #cc26f8478788fc52
+paso 105 ASSIGN Empleado: comprobantes[3] = comp | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #ca83752498c9880e
+paso 106 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #6a6ff11ca14c05bd
+paso 107 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #19f05f999d5dcf53
+paso 108 ASSIGN Empleado: i++ => 6 | ASSIGN Cliente[3]: comp = comp | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #84952126db5df43c
+paso 109 RETURN Cliente[3]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #5049e725c425c352
+paso 110 POP Empleado: pop(cAtenciones) => 0 | TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #38333399ae025307
+paso 111 SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #dc284ebdcd7dd1fc
+paso 112 WAIT Empleado: wait(esperaListas[0]) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #131b6e3c0e76bcf3
+paso 113 ASSIGN Cliente[0]: listas = lista | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #76f60bd960f0f319
+paso 114 SIGNAL Cliente[0]: signal(esperaListas[0]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #f3baa304cbfe0378
+paso 115 WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #12a6fb2376813d8b
+paso 116 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #91d157d9a1b39382
+paso 117 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #07df02ddb51c407f
+paso 118 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #ddcaa7fb6587f0ce
+paso 119 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #9efba99c9fc1ee99
+paso 120 ASSIGN Empleado: comprobantes[0] = comp | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #225c6b248ed42b18
+paso 121 SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #db5c43239b0997e6
+paso 122 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[0]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #f0fd9693d8db239a
+paso 123 ASSIGN Empleado: i++ => 7 | ASSIGN Cliente[0]: comp = comp | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #65753782b1b8b47b
+paso 124 RETURN Cliente[0]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #eb113ae02accbe96
+paso 125 TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #6f5b1a5eed0b256b
+paso 126 POP Empleado: pop(cAtenciones) => 6 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #e6b4ab78130647c7
+paso 127 SIGNAL Empleado: signal(esperaCli[6]) - despierta a Cliente[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #9b92414893ca61b2
+paso 128 WAIT Empleado: wait(esperaListas[6]) - libera el monitor y se demora | REENTER Cliente[6]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #125f714cebb0f0b0
+paso 129 ASSIGN Cliente[6]: listas = lista | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #0951c733e60bfd24
+paso 130 SIGNAL Cliente[6]: signal(esperaListas[6]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #e6c98fb370929693
+paso 131 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #8a89980d1f2922e9
+paso 132 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #b34a5c0ec32fb22b
+paso 133 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #944851683d6db951
+paso 134 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #9b89055ed0034e62
+paso 135 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #f3669ecad1491e16
+paso 136 ASSIGN Empleado: comprobantes[6] = comp | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #83d78b7dff7f789e
+paso 137 SIGNAL Empleado: signal(esperaCli[6]) - despierta a Cliente[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #46c1bbbc139c429f
+paso 138 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[6]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #536586e5f743a886
+paso 139 ASSIGN Empleado: i++ => 8 | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #8b81d6db216268fe
+paso 140 ASSIGN Cliente[6]: comp = comp | BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #8398b8fc57d9bb59
+paso 141 RETURN Cliente[6]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #c4aeae15aeb59101
+paso 142 TERMINATED Cliente[6]: termina | POP Empleado: pop(cAtenciones) => 4 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #c4c59496ce38dda8
+paso 143 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #1d6303fd582c7f4a
+paso 144 WAIT Empleado: wait(esperaListas[4]) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #8875427581383419
+paso 145 ASSIGN Cliente[4]: listas = lista | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #3b1b0de56a451bab
+paso 146 SIGNAL Cliente[4]: signal(esperaListas[4]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #acb83f8c8848d8d2
+paso 147 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #cdfce00a056d4928
+paso 148 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #60e43c13145d8b04
+paso 149 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #7cd7c2a61336c1fb
+paso 150 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #8932adc0ce34769b
+paso 151 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #8013624a8575a1a9
+paso 152 ASSIGN Empleado: comprobantes[4] = comp | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #b737ac872af0cfb9
+paso 153 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #5c8acd0a1e7bae57
+paso 154 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #8c46056fedc19dee
+paso 155 ASSIGN Cliente[4]: comp = comp | ASSIGN Empleado: i++ => 9 | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #050a416a060f3f98
+paso 156 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #2af1a94bc7dd89be
+paso 157 RETURN Cliente[4]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #bd1a1d8513f3e8db
+paso 158 TERMINATED Cliente[4]: termina | POP Empleado: pop(cAtenciones) => 7 | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #2de16a292f077f30
+paso 159 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #2bf88a98d52df619
+paso 160 WAIT Empleado: wait(esperaListas[7]) - libera el monitor y se demora | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #20f7f4b33d1ee331
+paso 161 ASSIGN Cliente[7]: listas = lista | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #c368adbf71a87385
+paso 162 SIGNAL Cliente[7]: signal(esperaListas[7]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #63f5b36154668e85
+paso 163 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #c523ee7c55196e17
+paso 164 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #e2d9884e6b34307f
+paso 165 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #a9f93940a552907e
+paso 166 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #c6a01b700371561c
+paso 167 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #7801253990ef45e4
+paso 168 ASSIGN Empleado: comprobantes[7] = comp | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #b37a00ce22f387d1
+paso 169 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #ee09d2339f47fb5a
+paso 170 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #6193274d77a4040e
+paso 171 ASSIGN Cliente[7]: comp = comp | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #38e216ac9ce93b37
+paso 172 RETURN Cliente[7]: retorna de Corralon.comprar, libera el monitor | ASSIGN Empleado: i++ => 10 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #a5f4eec8efe625fa
+paso 173 ENTER Empleado: entra a Corralon.esperarCliente | TERMINATED Cliente[7]: termina | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #ac9b4fc44c920fad
+paso 174 POP Empleado: pop(cAtenciones) => 8 | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #aff94d2b875293e2
+paso 175 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #02d559f2749c6b7f
+paso 176 WAIT Empleado: wait(esperaListas[8]) - libera el monitor y se demora | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #314a893738913346
+paso 177 ASSIGN Cliente[8]: listas = lista | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #843355c19877066b
+paso 178 SIGNAL Cliente[8]: signal(esperaListas[8]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #184340e9a0f04994
+paso 179 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #bd9024e29ef0004b
+paso 180 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #60909733166c937c
+paso 181 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #366610df04436abb
+paso 182 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #7d5676d02269e64a
+paso 183 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #27d85abbe5d82030
+paso 184 ASSIGN Empleado: comprobantes[8] = comp | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #b236ce6d0594b934
+paso 185 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #f580012e000a5615
+paso 186 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #aeb7df92056115c1
+paso 187 ASSIGN Cliente[8]: comp = comp | ASSIGN Empleado: i++ => 11 | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #a3ea3e0d815ece52
+paso 188 TERMINATED Empleado: termina | RETURN Cliente[8]: retorna de Corralon.comprar, libera el monitor | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #9ae439c18690b095
+paso 189 TERMINATED Cliente[8]: termina | {"finished":true,"deadlock":false,"instant":189,"waiting":false} #0747e258e2a15c4c
+estado #f485b10fab726e2f
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #96e733afeefa1ea2
+paso 1 #a195cc2924269916
+paso 2 #9c1cfbe964069ca5
+paso 3 #ba1686aaaf48bf53
+paso 4 #a978c27fc537d8f2
+paso 5 #3b93da5598b7025a
+paso 6 #690ea6d377f113ec
+paso 7 #1b9e36f028815c02
+paso 8 #0d8ed4603513ab8d
+paso 9 #14ebeac58871edde
+paso 10 #77dbf3a7785d6009
+paso 11 #d1a205d8752968d6
+paso 12 #8f9472fe5ed881b3
+paso 13 #3b62daacaea5d513
+paso 14 #9fbfcee0f3faa1e5
+paso 15 #49b28c488f38d27a
+paso 16 #0a7f873093466d3f
+paso 17 #0ee904fe989d42d7
+paso 18 #d0f16c863fedcb40
+paso 19 #bf36abe60fab95ad
+paso 20 #fba39d3aac72dcb2
+paso 21 #aef4227a344b1872
+paso 22 #d4d06f80cd23163f
+paso 23 #ddb17077282ebb94
+paso 24 #6cab33f5643c8005
+paso 25 #ed27005fa0a49c9f
+paso 26 #9247a04e71932c1f
+paso 27 #7f41dd60cff458ed
+paso 28 #bfc56a6a3d7b999e
+paso 29 #0f33b64fd7674e27
+paso 30 #57db5de164ab8afb
+paso 31 #87c8c1b877adeb66
+paso 32 #b2ecbbcdea1434f7
+paso 33 #8d7dd215190a16fe
+paso 34 #b52e0fba62f9e015
+paso 35 #1e3ca2572eabb664
+paso 36 #f330e2b3d39bec76
+paso 37 #435481c2fbc52f05
+paso 38 #16083b5b7490cc04
+paso 39 #34b90847d8e449e0
+paso 40 #211360409ac9bc6e
+paso 41 #74777d535b340e29
+paso 42 #75ff9f97d0a9ebe8
+paso 43 #e6bf1281b7370c49
+paso 44 #8798db5979a80ff3
+paso 45 #7349587797332d80
+paso 46 #15503ae32ec0665f
+paso 47 #1044386d4eb8c4fa
+paso 48 #21fb6c87fe1e3863
+paso 49 #7b3f68d63be07620
+paso 50 #5016a0959c577da4
+paso 51 #f20847e8aa93e88f
+paso 52 #b38cfa878ac783ba
+paso 53 #564930869d5e316a
+paso 54 #fadfe2e2e4a83b32
+paso 55 #4c2f2d5da0dee7c0
+paso 56 #19eb1085419d6500
+paso 57 #5ed399f7dd5cb1c3
+paso 58 #f2241473ece540a6
+paso 59 #22a75496ea9c461e
+paso 60 #52c48c09936b22f1
+paso 61 #22bee46cb341be94
+paso 62 #18c4818cffc575d8
+paso 63 #6524106d4cf7a521
+paso 64 #782f0e3740bebb25
+paso 65 #e6e7e21a085daa9a
+paso 66 #a6e9da61b84cba81
+paso 67 #9181571c37e3fb1e
+paso 68 #040004c9aa9cbe9f
+paso 69 #77c91383c56e4267
+paso 70 #356e24c8379d0bb0
+paso 71 #2c7f7666780870c4
+paso 72 #e017eddbf7c41524
+paso 73 #90dd133761fac14e
+paso 74 #c425b3a01dfe8915
+paso 75 #6ebac7571b265219
+paso 76 #5e38af4f65e321ec
+paso 77 #3edc4c45876843ff
+paso 78 #a6d37ff9525956de
+paso 79 #48c142e991c8b54f
+paso 80 #667b72ea65c27d33
+paso 81 #aabfaad32f76b57b
+paso 82 #e4ac194651d454fd
+paso 83 #ea14d7990f7310dc
+paso 84 #8c9f25e6a9df482d
+paso 85 #2dc38e71b2b85d2d
+paso 86 #f1f4f18c1e6befab
+paso 87 #c8bfd11d74aa372e
+paso 88 #43e264d898c6b339
+paso 89 #67644b8372aef9a4
+paso 90 #dfca19e39475c58f
+paso 91 #170d1998c1f8cdcc
+paso 92 #a3788ca0b9f92e85
+paso 93 #637b5b0401909b22
+paso 94 #3f36a4b7927d48d2
+paso 95 #369ea29dd1da8326
+paso 96 #57d16a217de7aa9a
+paso 97 #98ff847b4c4c40a2
+paso 98 #226b85bd13a4975c
+paso 99 #bbb0887514448b5f
+paso 100 #2b282095f8627cab
+paso 101 #9f31a7933981f4bc
+paso 102 #df6ea4adc91a6404
+paso 103 #098a7a150bb834e5
+paso 104 #343ac538b4421fb5
+paso 105 #db69c573f4a3142c
+paso 106 #8483b05cc7a4a973
+paso 107 #fc5274705caff588
+paso 108 #5eb13e8d09607603
+paso 109 #95891aa036feb13c
+paso 110 #d099443bcc6220a0
+paso 111 #66e6bb0c7748265e
+paso 112 #6633aba6d58dd014
+paso 113 #393c9988e7739412
+paso 114 #13d3b6310f33c1c6
+paso 115 #e3fdc7c34e7412ce
+paso 116 #fa03e26c50db04d6
+paso 117 #0d4addf1c1841851
+paso 118 #67fdb8ec1b9a6edc
+paso 119 #19c5105afe9e70d5
+paso 120 #ede05f055ca7defa
+paso 121 #7d11b89d83492241
+paso 122 #2ac7945759d3a6d7
+paso 123 #16e93c4ba7dd2922
+paso 124 #3b7d87283ab5912f
+paso 125 #0d77c69eb0e7b0b1
+paso 126 #c06d37955b37e0b2
+paso 127 #bf84634a455bbeb3
+paso 128 #48e885ee7f68d628
+paso 129 #49051e5a639514ca
+paso 130 #308f371d36952f00
+paso 131 #d6a339b1d6b677ae
+paso 132 #809762464b5c52e0
+paso 133 #ddae383570081b6d
+paso 134 #014bb6b530322d3c
+paso 135 #f4f0e5e9fe54c946
+paso 136 #def27c7c6b11fe3d
+paso 137 #862d7569540efdfc
+paso 138 #330e49f005bb449d
+paso 139 #041a00a984812d4e
+paso 140 #44ad518c6ea227cf
+paso 141 #a7172ebd9fd1ba56
+paso 142 #31c085d87d6ba444
+paso 143 #3c26e5dc9157e9c0
+paso 144 #aa48e1e876d56d3b
+paso 145 #255c30d792a01518
+paso 146 #ae446fdaf660b8cb
+paso 147 #574122f4ec9f6ad2
+paso 148 #1b5ce796ccfec4b3
+paso 149 #756e9e898bfbd714
+paso 150 #f8c78e9b61e1ccf5
+paso 151 #0cda7950e6646101
+paso 152 #3a173ce18010b269
+paso 153 #b71d2973dc39c8f8
+paso 154 #a4b56fa896c47b32
+paso 155 #b05403e0017d6db2
+paso 156 #4c7ac8055dc10bc5
+paso 157 #75c4302b5c497882
+paso 158 #2775ead6e84b956e
+paso 159 #34caf9d1dcf2c49f
+paso 160 #857c8e1ed5df0f95
+paso 161 #838f865d85e41d01
+paso 162 #71b620ab756b51ec
+paso 163 #8da35b7f1a63be12
+paso 164 #5d87fe9ff493936b
+paso 165 #ef41296d3f042e1d
+paso 166 #0c741022c43567c2
+paso 167 #d45a870c525c9d33
+paso 168 #3dd4467c3e6e3f20
+paso 169 #b83f7584b188c05a
+paso 170 #72aecdb35b974eef
+paso 171 #6ea90b7d22a65a68
+paso 172 #66be5f05da195d12
+paso 173 #971a1fbff305abb1
+paso 174 #eb6be0a78875d719
+paso 175 #a0161b4b6994c431
+paso 176 #76b9fb7f9788c04e
+paso 177 #26886e76f105b942
+paso 178 #90eaa9512e3a6917
+paso 179 #fa7c878ebc595607
+paso 180 #27377bc8fd785903
+paso 181 #fa3b511224749510
+paso 182 #ed416f7c70ec0083
+paso 183 #b22366217f62ed45
+paso 184 #ffcdfacb26c155d6
+paso 185 #7ca79b025136e297
+paso 186 #232abe6a77533af1
+paso 187 #08262f3a63bbf02f
+paso 188 #1ef88a5293be75c9
+paso 189 #6f7cfb9b2bef18e0
+paso 190 #b60494bf8c05a9b0
+paso 191 #2ae1e09465026c3b
+paso 192 #111a476db767125e
+estado #0ed78c29419e0a2c
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #1f904dc72e4f8f0e
+paso 1 #b1cc91bbd3e70c4e
+paso 2 #99fb7d1529f72c1c
+paso 3 #39308b8a9d89d561
+paso 4 #2f496552675cf10d
+paso 5 #21bfda6ab88b8763
+paso 6 #7528148d57eb4b9e
+paso 7 #f6c000001a3abeab
+paso 8 #36e22d348ea5de78
+paso 9 #c9f1475fdd07d4db
+paso 10 #bea374ba3655ab3f
+paso 11 #e5b775f63a7bd936
+paso 12 #2ef50005c7c23117
+paso 13 #8d7942257b63cbd4
+paso 14 #70f2a7d2b06ddde6
+paso 15 #390210d70d3ddeb2
+paso 16 #351e2f3cc7b5dfc5
+paso 17 #48e9667f8be24d0b
+paso 18 #7aee3ea522d08574
+paso 19 #071bde33e8f0811a
+paso 20 #5aae540ff9a4e7cd
+paso 21 #f5d457607a44c456
+paso 22 #954b68a7466950c1
+paso 23 #01ea7a0bb571fc2a
+paso 24 #92e15e0d97ba53c8
+paso 25 #eff2df759a99881e
+paso 26 #d7c037a82228111b
+paso 27 #2fa165ff8b0dfe3f
+paso 28 #bac417e2d06a5c62
+paso 29 #045a03cb42f80a45
+paso 30 #a33bed2e5cbd4ccc
+paso 31 #2edf1e5dfde33e88
+paso 32 #2287a095b423bf63
+paso 33 #5cabae71b6a0dfc9
+paso 34 #35eebd95cb6b66a5
+paso 35 #113997580595fe98
+paso 36 #594b4236fdfffd31
+paso 37 #58a3c6bec3f72f63
+paso 38 #9571d2f0bb9e6232
+paso 39 #57f801679e209ce0
+paso 40 #503a3a513e6bb163
+paso 41 #65101c59722d440f
+paso 42 #00a94b86f255718c
+paso 43 #22ce9188eb93b8c5
+paso 44 #65b6ca58eeb48cae
+paso 45 #b1ded20c978353c7
+paso 46 #0223f1c85b9698f8
+paso 47 #8d343b78772fb328
+paso 48 #1045ea30dad10997
+paso 49 #18035cae2551d1c3
+paso 50 #8087d20e2bdebdd2
+paso 51 #adf78b9e7d86bc77
+paso 52 #c6d95def97e2a0a0
+paso 53 #a0f0ffb5d8578512
+paso 54 #5d33069944520d66
+paso 55 #f5b46b453e4a24b8
+paso 56 #ad8187a42dfeb4cd
+paso 57 #5e45bedf5ae00ef6
+paso 58 #0903bf205a2a9f6f
+paso 59 #64b383fdaea8bbb0
+paso 60 #6d4ce3d4dd1ee2dc
+paso 61 #83cab144521d38ec
+paso 62 #c7f9d841fcfbac14
+paso 63 #8fb3aa613c8ef32f
+paso 64 #65ee40b144884251
+paso 65 #6e62a570d780a767
+paso 66 #f36d25e6a7c6e2f0
+paso 67 #0f57de2a2afb324f
+paso 68 #ef4631b0a9190fa7
+paso 69 #d8dee05d43e62b33
+paso 70 #959749f11ec24ac8
+paso 71 #db8c4255fda22d0b
+paso 72 #6dc01d01ab2755bd
+paso 73 #00751f4e8a489d69
+paso 74 #34a745a12a3c4c0e
+paso 75 #c3a72141ece148ee
+paso 76 #40d6c41cb48b4c17
+paso 77 #67da83cf21c6f1f6
+paso 78 #b4b19ff25c4a23b1
+paso 79 #4baec7b4353cb469
+paso 80 #e6d1322bfdd446b5
+paso 81 #0af5468e194bf4b6
+paso 82 #8bc1601b1d6036f4
+paso 83 #937fa12da418c44f
+paso 84 #6a9f390c8399e9b9
+paso 85 #3f1f55d8d0a48be8
+paso 86 #521051a069f3c831
+paso 87 #3ae80548a157ee9d
+paso 88 #0b9a20b67429b94a
+paso 89 #56c18e0353464fbd
+paso 90 #5ec6095ee67a5f4b
+paso 91 #1811b4c41120daf6
+paso 92 #319d4bc987f50ce2
+paso 93 #fb6178fd63ec8dfa
+paso 94 #8ea5ab80fc0639df
+paso 95 #bbe8f2381ac66b2d
+paso 96 #86f4fabfe22237fb
+paso 97 #2a4ca55ade87b0f1
+paso 98 #f2c6113e81293b55
+paso 99 #4dd82712f428d98c
+paso 100 #ed77ecd50f5d5b39
+paso 101 #b61cd37b9591162f
+paso 102 #d25d8376eff0ba5f
+paso 103 #c6945176de1d9118
+paso 104 #1e4db47a0c40f3b9
+paso 105 #80839c0eb33e55e4
+paso 106 #5b92b9e92f230b96
+paso 107 #7015546d8720cd06
+paso 108 #fc0a5dbfc9cb3e9e
+paso 109 #d5d6b71aa00d7836
+paso 110 #556b4d21c2c82c13
+paso 111 #672c77249bd2e0a7
+paso 112 #a1a17db610ba6c44
+paso 113 #e1df08542624c916
+paso 114 #e62bf4903afcc2ea
+paso 115 #57689dad8c115c17
+paso 116 #9bb2649f1eb41dd8
+paso 117 #83da1cfb4241b52f
+paso 118 #39f74f48aff32bf9
+paso 119 #a6e9b517526e6b03
+paso 120 #fc134bde60ecf139
+paso 121 #d7bcc73ee8dcc8d0
+paso 122 #32418d04e84118cf
+paso 123 #b831f8b8e0f58e0f
+paso 124 #5e978fc5cb4c2b2c
+paso 125 #340e1775e076c1e2
+paso 126 #7f7dcd2d7937ab18
+paso 127 #e8f1695b317216d7
+paso 128 #910cb0e00e5d3259
+paso 129 #fe606cb7cf87c887
+paso 130 #a1057e86bbbfbe3c
+paso 131 #4604301e0dc15f7f
+paso 132 #ad3e4cb9cb8352a7
+paso 133 #d236a7a498309996
+paso 134 #d50c9193a4f58192
+paso 135 #ce52acd9f4775287
+paso 136 #9217bd82972f2c09
+paso 137 #cb23bc4ac19e69ea
+paso 138 #782d0c4900fcf2d7
+paso 139 #06b99e309c5045a7
+paso 140 #58ef53b451e86e95
+paso 141 #0eb79e8d843ee617
+paso 142 #519f6b16c11ef017
+paso 143 #912e783963d11b4d
+paso 144 #ed75c622921ad665
+paso 145 #c930a342030cfdf4
+paso 146 #baea1ae5b852e618
+paso 147 #07bad467c9c4b898
+paso 148 #97ada448325875da
+paso 149 #f349a0763571d00e
+paso 150 #5d4c7ff04af4b5fd
+paso 151 #d561b7ab7c7532f9
+paso 152 #04e8564913b3606c
+paso 153 #7af2f7f9b2948dcf
+paso 154 #ab739ec3b70f5fdb
+paso 155 #d5ee0c124583d719
+paso 156 #eaaf2954264c0a62
+paso 157 #61b890fe24f3a137
+paso 158 #c424804b4a0ef18c
+paso 159 #6dd757f33f57f751
+paso 160 #1db43db1e608fff4
+paso 161 #b8001bbd77a5d875
+paso 162 #93dc43dc9a19fdcd
+paso 163 #2fe235693dd98fc5
+paso 164 #dd56a08aaa6b2e63
+paso 165 #af02d63a791c92db
+paso 166 #b0c51603aaacb18d
+paso 167 #0ab4502d688f8748
+paso 168 #bee93e872c1e913f
+paso 169 #e52027d37e443691
+paso 170 #d9e544fbf725721d
+paso 171 #757a4ddf3b7f2b9f
+paso 172 #c7b824ba89a37a35
+paso 173 #10aca58033075a43
+paso 174 #86ab97147e0116f7
+paso 175 #76e11e7660de78aa
+paso 176 #8cb8c79fc2f66ac7
+paso 177 #44c4fb0987f18ca0
+paso 178 #8eda4071b933bf09
+paso 179 #78d20fbf596e0a14
+paso 180 #68a3ec260edfd0f2
+paso 181 #52dcc372cadf11ad
+paso 182 #7e21de05c21a892a
+paso 183 #682928896882655b
+paso 184 #b8a9ea24ca19b6c5
+paso 185 #4eceaa6ec84feb21
+paso 186 #d34e554a14bf7c6a
+paso 187 #cda0bfae6ef8c5b8
+paso 188 #ec5e0263e89782e8
+paso 189 #67289c3a17d7a7e1
+estado #3af1e79fed6d3d5b
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #00eed093414ab686
+paso 1 DECL Empleado: text lista =  | DECL Cliente[0]: text lista = lista | DECL Cliente[1]: text lista = lista | DECL Cliente[2]: text lista = lista | DECL Cliente[3]: text lista = lista | DECL Cliente[4]: text lista = lista | DECL Cliente[5]: text lista = lista | DECL Cliente[6]: text lista = lista | DECL Cliente[7]: text lista = lista | DECL Cliente[8]: text lista = lista | DECL Cliente[9]: text lista = lista | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #45ed24d0489c66b8
+paso 2 DECL Cliente[0]: text comp =  | DECL Cliente[1]: text comp =  | DECL Cliente[2]: text comp =  | DECL Cliente[3]: text comp =  | DECL Cliente[4]: text comp =  | DECL Cliente[5]: text comp =  | DECL Cliente[6]: text comp =  | DECL Cliente[7]: text comp =  | DECL Cliente[8]: text comp =  | DECL Cliente[9]: text comp =  | DECL Empleado: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ab6fa7394534e11b
+paso 3 ENTER Cliente[1]: entra a Corralon.comprar | BLOCKED Cliente[2]: espera para entrar a Corralon.comprar | BLOCKED Cliente[3]: espera para entrar a Corralon.comprar | BLOCKED Cliente[4]: espera para entrar a Corralon.comprar | BLOCKED Cliente[5]: espera para entrar a Corralon.comprar | BLOCKED Cliente[6]: espera para entrar a Corralon.comprar | BLOCKED Cliente[7]: espera para entrar a Corralon.comprar | BLOCKED Cliente[8]: espera para entrar a Corralon.comprar | BLOCKED Cliente[9]: espera para entrar a Corralon.comprar | DECL Empleado: int id = 0 | BLOCKED Cliente[0]: espera para entrar a Corralon.comprar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6ef408dab999f041
+paso 4 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | PUSH Cliente[1]: push(cAtenciones, 1) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f8aa567992305349
+paso 5 SIGNAL Cliente[1]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #49134f78927e5b1d
+paso 6 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | ENTER Cliente[2]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #31f87da42a882568
+paso 7 PUSH Cliente[2]: push(cAtenciones, 2) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #bb425913c86615e3
+paso 8 SIGNAL Cliente[2]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5ae78a67a29c7040
+paso 9 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | ENTER Cliente[0]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #013d5f1df8368d90
+paso 10 PUSH Cliente[0]: push(cAtenciones, 0) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #195239f30287cbb7
+paso 11 SIGNAL Cliente[0]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #4a2228333c85a3c3
+paso 12 WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | ENTER Cliente[4]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #2a3baee3359c2314
+paso 13 PUSH Cliente[4]: push(cAtenciones, 4) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #19eb2639fd4fd194
+paso 14 SIGNAL Cliente[4]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #9492b4e972a744f7
+paso 15 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | ENTER Cliente[6]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #e936b861b09f32dd
+paso 16 PUSH Cliente[6]: push(cAtenciones, 6) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #ea70966b7b017f24
+paso 17 SIGNAL Cliente[6]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #63d675754d85b0af
+paso 18 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #ec5212cfeafe8168
+paso 19 POP Empleado: pop(cAtenciones) => 1 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #8d795fb8393a6216
+paso 20 SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9e887f52c49bc45f
+paso 21 WAIT Empleado: wait(esperaListas[1]) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #84f089518578ac3c
+paso 22 ASSIGN Cliente[1]: listas = lista | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #6fa979abda0142e2
+paso 23 SIGNAL Cliente[1]: signal(esperaListas[1]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #265634c51400668d
+paso 24 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #e5b86b34d9224ab1
+paso 25 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #7e7df51af63314c1
+paso 26 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | ENTER Cliente[5]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #c310ecf205ce64e9
+paso 27 PUSH Cliente[5]: push(cAtenciones, 5) | ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #789bce667e3a9556
+paso 28 BLOCKED Empleado: espera para entrar a Corralon.entregarComprobante | SIGNAL Cliente[5]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #ff01d338d96cbe73
+paso 29 WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #992f02eb0902fa36
+paso 30 ASSIGN Empleado: comprobantes[1] = comp | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #3f3d630787271cc3
+paso 31 SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c9ec434cb7fb32bb
+paso 32 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #f07cb1d612a104ca
+paso 33 ASSIGN Cliente[1]: comp = comp | ASSIGN Empleado: i++ => 2 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #dec091c9edbd5418
+paso 34 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[1]: retorna de Corralon.comprar, libera el monitor | ENTER Cliente[8]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #cf8f478e7e8783bc
+paso 35 TERMINATED Cliente[1]: termina | PUSH Cliente[8]: push(cAtenciones, 8) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #b80f0b79381aa963
+paso 36 SIGNAL Cliente[8]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a95ffe6c5c59fb50
+paso 37 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | ENTER Cliente[7]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #17120e2ebf5353f2
+paso 38 PUSH Cliente[7]: push(cAtenciones, 7) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #ccba19196e217dd5
+paso 39 SIGNAL Cliente[7]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #f4f519627af9c5b4
+paso 40 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #cbac5fb584795d26
+paso 41 POP Empleado: pop(cAtenciones) => 2 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #7d4ee666a859b50f
+paso 42 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #ecb85c7203d613c7
+paso 43 WAIT Empleado: wait(esperaListas[2]) - libera el monitor y se demora | ENTER Cliente[9]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #136b64efd75126f8
+paso 44 PUSH Cliente[9]: push(cAtenciones, 9) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #9dd162e0cc23bc71
+paso 45 SIGNAL Cliente[9]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #b6d3ef89058baa4e
+paso 46 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #c9525997b8b0ca80
+paso 47 ASSIGN Cliente[2]: listas = lista | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #a5678d7f91099b17
+paso 48 SIGNAL Cliente[2]: signal(esperaListas[2]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #0c05e73774b685da
+paso 49 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #179b42f501f427e4
+paso 50 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #dfecd7d232667ca2
+paso 51 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | ENTER Cliente[3]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #036fb674a881b249
+paso 52 PUSH Cliente[3]: push(cAtenciones, 3) | ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #ac52190c75297bd3
+paso 53 BLOCKED Empleado: espera para entrar a Corralon.entregarComprobante | SIGNAL Cliente[3]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #21a9a48a1a154fcd
+paso 54 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #7dddede5982da94a
+paso 55 ASSIGN Empleado: comprobantes[2] = comp | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #d33cd008b178be2d
+paso 56 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #cd4f6c4ed816ac4d
+paso 57 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #f4e52df08bb6964e
+paso 58 ASSIGN Cliente[2]: comp = comp | ASSIGN Empleado: i++ => 3 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #f5360e2383b46a1b
+paso 59 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[2]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #c1f60cb05f24eb6a
+paso 60 TERMINATED Cliente[2]: termina | POP Empleado: pop(cAtenciones) => 0 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #94c12cc300490867
+paso 61 SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #3a9869118636ed87
+paso 62 WAIT Empleado: wait(esperaListas[0]) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #e951bab7fad3c1c7
+paso 63 ASSIGN Cliente[0]: listas = lista | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #27ba9c18a86804d6
+paso 64 SIGNAL Cliente[0]: signal(esperaListas[0]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #8196c148919fefea
+paso 65 WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #9f9632987d29a141
+paso 66 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #a955cb48fa9e1d88
+paso 67 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #eb06d54a81120db4
+paso 68 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #0bf0f1a00263f823
+paso 69 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #435afdbb7888fa91
+paso 70 ASSIGN Empleado: comprobantes[0] = comp | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #1cc0927a2c477881
+paso 71 SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #0c1120a4de1512d0
+paso 72 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[0]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #8661b0e60ca6cbc6
+paso 73 ASSIGN Cliente[0]: comp = comp | ASSIGN Empleado: i++ => 4 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #6a53fc8d23319c5b
+paso 74 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[0]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #0c684ffb5dcdbfc6
+paso 75 TERMINATED Cliente[0]: termina | POP Empleado: pop(cAtenciones) => 4 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #9421018c17173b58
+paso 76 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #8a7a10a8c2b74fdf
+paso 77 WAIT Empleado: wait(esperaListas[4]) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #520043a84b4954eb
+paso 78 ASSIGN Cliente[4]: listas = lista | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #b2f547300f6f1ed1
+paso 79 SIGNAL Cliente[4]: signal(esperaListas[4]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #c6fad6e11b6e6d96
+paso 80 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #61b88a1d80d6ec91
+paso 81 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #0a4e9d12c772e63f
+paso 82 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #d22aba84d142ec09
+paso 83 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #fc52343f3371bef3
+paso 84 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #5e4b60b5d0d6bb25
+paso 85 ASSIGN Empleado: comprobantes[4] = comp | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #02085236436c0317
+paso 86 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #0ec2b3dd2f54a7ed
+paso 87 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #67dbd14d61d1ea5d
+paso 88 ASSIGN Cliente[4]: comp = comp | ASSIGN Empleado: i++ => 5 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #59072b73872986aa
+paso 89 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[4]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #3b02866fa057437e
+paso 90 TERMINATED Cliente[4]: termina | POP Empleado: pop(cAtenciones) => 6 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #c7095aa0941babf8
+paso 91 SIGNAL Empleado: signal(esperaCli[6]) - despierta a Cliente[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #747f405ecb290ef2
+paso 92 WAIT Empleado: wait(esperaListas[6]) - libera el monitor y se demora | REENTER Cliente[6]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #52387f34e2b08e77
+paso 93 ASSIGN Cliente[6]: listas = lista | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #93bb0056ee303e39
+paso 94 SIGNAL Cliente[6]: signal(esperaListas[6]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #8f632badde10f09a
+paso 95 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #6e4375f27351b037
+paso 96 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #983f10fc9f5c1bf6
+paso 97 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #c1b9acd65163c854
+paso 98 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #b01a30c9551cd907
+paso 99 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #74066901c7868e6b
+paso 100 ASSIGN Empleado: comprobantes[6] = comp | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #8d33dd1438b65e13
+paso 101 SIGNAL Empleado: signal(esperaCli[6]) - despierta a Cliente[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #314936600a9b244a
+paso 102 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[6]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #f08ef91a2467217f
+paso 103 ASSIGN Cliente[6]: comp = comp | ASSIGN Empleado: i++ => 6 | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #84ab22eaeb0b3f6f
+paso 104 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[6]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #39f9da41880f0e9a
+paso 105 TERMINATED Cliente[6]: termina | POP Empleado: pop(cAtenciones) => 5 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #ad522604c6af37d3
+paso 106 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #b796da5dd2e6f641
+paso 107 WAIT Empleado: wait(esperaListas[5]) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #2eadc0898e65d977
+paso 108 ASSIGN Cliente[5]: listas = lista | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #7e79add93be8d923
+paso 109 SIGNAL Cliente[5]: signal(esperaListas[5]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #ce1a060fa5cf6288
+paso 110 WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #7bdc7b7eefba49bc
+paso 111 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #ee01d7955dc0f1d4
+paso 112 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #609bf1c6675eca35
+paso 113 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #79d706d83aae5492
+paso 114 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #d23e476d4cf190d6
+paso 115 ASSIGN Empleado: comprobantes[5] = comp | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #a6a446bcfed2356d
+paso 116 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #805f41c0adc3c462
+paso 117 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #9ba68939d607467e
+paso 118 ASSIGN Cliente[5]: comp = comp | ASSIGN Empleado: i++ => 7 | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #7f7785fce42de96e
+paso 119 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[5]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #bae9a6736164d90b
+paso 120 TERMINATED Cliente[5]: termina | POP Empleado: pop(cAtenciones) => 8 | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #f421b02e2109684e
+paso 121 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #467c55b81579715d
+paso 122 WAIT Empleado: wait(esperaListas[8]) - libera el monitor y se demora | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #c0bd11a4c1d2e283
+paso 123 ASSIGN Cliente[8]: listas = lista | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #2b3d53a1ee99e934
+paso 124 SIGNAL Cliente[8]: signal(esperaListas[8]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #9a1137f13830f4cd
+paso 125 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #f4cddc8bafeb204b
+paso 126 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #5eb785e6f4ccd2e8
+paso 127 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #0056e12aba25fa0c
+paso 128 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #836d700358c13aac
+paso 129 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #ea8fe290ae6d2b3f
+paso 130 ASSIGN Empleado: comprobantes[8] = comp | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #be45a00d72e13dc5
+paso 131 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #dc4549fd97f90aa8
+paso 132 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #83672c5e56c06b96
+paso 133 ASSIGN Cliente[8]: comp = comp | ASSIGN Empleado: i++ => 8 | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #9c11a433c6c9f927
+paso 134 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[8]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #489d029ce53a059e
+paso 135 TERMINATED Cliente[8]: termina | POP Empleado: pop(cAtenciones) => 7 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #8aeb80f15011ae0f
+paso 136 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #0529ad7d63b2c8a3
+paso 137 WAIT Empleado: wait(esperaListas[7]) - libera el monitor y se demora | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #2e23c8ba4e38da49
+paso 138 ASSIGN Cliente[7]: listas = lista | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #04bc31ff58adc259
+paso 139 SIGNAL Cliente[7]: signal(esperaListas[7]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #a6ca8d922019327c
+paso 140 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #eed425fce05d18eb
+paso 141 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #67112983dfcc3b38
+paso 142 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #476a8ae136744f65
+paso 143 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #e54256b00ed426fa
+paso 144 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #e4549d0fbcc6484f
+paso 145 ASSIGN Empleado: comprobantes[7] = comp | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #dafecc8feb533ee1
+paso 146 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #48d1736503470a7a
+paso 147 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #81c0227ab81deda4
+paso 148 ASSIGN Cliente[7]: comp = comp | ASSIGN Empleado: i++ => 9 | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #00982c4aeb4dca66
+paso 149 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[7]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #d2988c28a2947140
+paso 150 TERMINATED Cliente[7]: termina | POP Empleado: pop(cAtenciones) => 9 | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #ff355e85de0b49e0
+paso 151 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #5a156cd7ad4ad9e7
+paso 152 WAIT Empleado: wait(esperaListas[9]) - libera el monitor y se demora | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #9d4fee929636937b
+paso 153 ASSIGN Cliente[9]: listas = lista | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #ab540e5e9900c424
+paso 154 SIGNAL Cliente[9]: signal(esperaListas[9]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #25e74c404dbeec00
+paso 155 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #2bd881018fc7b60d
+paso 156 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #87eea177d3d06b4a
+paso 157 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #2fec144e5bb740a6
+paso 158 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #bfdc1aaff13ff52c
+paso 159 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #4c3cfa8514687788
+paso 160 ASSIGN Empleado: comprobantes[9] = comp | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #9856e93203022758
+paso 161 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #7b989b5cd198a923
+paso 162 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #880e214cb9c7f316
+paso 163 ASSIGN Cliente[9]: comp = comp | ASSIGN Empleado: i++ => 10 | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #b4c39730a5394a91
+paso 164 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[9]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #0ff77d415bdfad35
+paso 165 TERMINATED Cliente[9]: termina | POP Empleado: pop(cAtenciones) => 3 | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #3a428a087173ab13
+paso 166 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #dadbc5b5f68c6f25
+paso 167 WAIT Empleado: wait(esperaListas[3]) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #0feab25db55a751b
+paso 168 ASSIGN Cliente[3]: listas = lista | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #2925270517a8b9fe
+paso 169 SIGNAL Cliente[3]: signal(esperaListas[3]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #481b1e34205f32fd
+paso 170 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #ff4227896a6c8b53
+paso 171 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #aa122ebc4da5e738
+paso 172 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #c2845a00065f6ad2
+paso 173 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #b8c46e1ca1a972ca
+paso 174 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #0fd0c27078363f94
+paso 175 ASSIGN Empleado: comprobantes[3] = comp | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #fa510ad63c4fe130
+paso 176 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #c61169f3fa93cb08
+paso 177 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #8eba82fcd29f52b7
+paso 178 ASSIGN Cliente[3]: comp = comp | ASSIGN Empleado: i++ => 11 | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #4ca08704273046c2
+paso 179 TERMINATED Empleado: termina | RETURN Cliente[3]: retorna de Corralon.comprar, libera el monitor | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #dd14df9cee9d30c5
+paso 180 TERMINATED Cliente[3]: termina | {"finished":true,"deadlock":false,"instant":180,"waiting":false} #dcf999567065f111
+estado #631b5f006c4b5308
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #96e733afeefa1ea2
+paso 1 #45ed24d0489c66b8
+paso 2 #ab6fa7394534e11b
+paso 3 #6ef408dab999f041
+paso 4 #f8aa567992305349
+paso 5 #49134f78927e5b1d
+paso 6 #2150b945be74a1ef
+paso 7 #d1429d0627b06e47
+paso 8 #15affb3bf2452b9e
+paso 9 #a210419725c7edee
+paso 10 #b829aceaec999c02
+paso 11 #21187b9d2d1ada27
+paso 12 #ddfda4198e4f801a
+paso 13 #44de8edb4a8fe2ce
+paso 14 #e75d2bea02cf2f64
+paso 15 #2e70ac81d3249af5
+paso 16 #4f1baf3b50e83357
+paso 17 #25f54d594ce0ca83
+paso 18 #481af34b0a1c52bc
+paso 19 #267931d622139cec
+paso 20 #bae40d078f637e21
+paso 21 #1da8762667f3a955
+paso 22 #36c089500f6c0133
+paso 23 #71ff1480ee31278d
+paso 24 #0e8d52329e1545d6
+paso 25 #92ef20f50f60ab77
+paso 26 #9f59389b13bf0f39
+paso 27 #d9608ee88aae7c03
+paso 28 #68e2e7c2d561b781
+paso 29 #c4bc9683913f6122
+paso 30 #8ee01745aa62ebfa
+paso 31 #b2cc1d376614b0de
+paso 32 #950fafc5c15a0180
+paso 33 #63e44975c236525a
+paso 34 #cdad8bfa7e902e34
+paso 35 #3eefb50d0e5a80eb
+paso 36 #2829992309bda7a8
+paso 37 #ea04391fdec75241
+paso 38 #055bdad7afe91cc7
+paso 39 #1f2f6c0df53237bc
+paso 40 #008ff988f0fdbde1
+paso 41 #192993d2e5e10340
+paso 42 #2850921db40390cc
+paso 43 #fedc3a57cacb0f3d
+paso 44 #ce0611305062621e
+paso 45 #538a8367b2c54ed7
+paso 46 #b96e1b9d040ad589
+paso 47 #3e22894693bb6169
+paso 48 #767c099872bbeca6
+paso 49 #a5235fe2d6f75ba9
+paso 50 #f25043fa4788f3ef
+paso 51 #4442e11f45c08a4c
+paso 52 #8229887d643a8177
+paso 53 #fc083e5ea86c3039
+paso 54 #1f53ffd3872e05d6
+paso 55 #1cedf9a1740aa4d5
+paso 56 #e988eef2ef5b146e
+paso 57 #1c281e7c5f75df89
+paso 58 #2f26501c2cdc48cb
+paso 59 #4f48d3c158ca8410
+paso 60 #bee002eb21c82747
+paso 61 #7dcce432554f11b3
+paso 62 #821c82f062bb17c5
+paso 63 #902639a6664e6e43
+paso 64 #ac6d96dc912c5bd4
+paso 65 #ef880b93fd70a84b
+paso 66 #af4dc00f542e9bf3
+paso 67 #ce1ef90ec25520fa
+paso 68 #2a4942b5797dcbc5
+paso 69 #94e11a449032e777
+paso 70 #8f55bc8d3d04b3f0
+paso 71 #eb93b44e8f0b5368
+paso 72 #f47dc86acb3f4f7b
+paso 73 #b7cc9d2c803f8385
+paso 74 #cb61e233a5ed6870
+paso 75 #4b7a7dcfb043a201
+paso 76 #9b5873d3c42b1c6d
+paso 77 #9d9a079c71c62a37
+paso 78 #dff7f48f4f083db3
+paso 79 #74d45fe45684549c
+paso 80 #32f90472db80f203
+paso 81 #a382f1fffa0c5a8e
+paso 82 #f45a2edc87c8b65a
+paso 83 #42ded453cf5fcb78
+paso 84 #e8d104259cb5b03f
+paso 85 #6c09b319a64ae431
+paso 86 #4eb2e7cd2d8f56d6
+paso 87 #42c09aa461077015
+paso 88 #a4110a2bcf70f07d
+paso 89 #d9ed2fbf7925e9d8
+paso 90 #ee7d7d96d164a11c
+paso 91 #9bb8f6d1bd8b0b1a
+paso 92 #4f44708f736c4817
+paso 93 #ab27b5b9173c2caa
+paso 94 #9b5989cf5e1a508a
+paso 95 #526c982ebbfb4c66
+paso 96 #7510c42c68f60c24
+paso 97 #56b3ef06d8ecb7c2
+paso 98 #b7c791df212aedf8
+paso 99 #48f67e7a6d6e8a0f
+paso 100 #2e9be5f523b2daf9
+paso 101 #a8054d19e6478d05
+paso 102 #12c486929a606eec
+paso 103 #e29f552693b9444d
+paso 104 #04e792b6313fb3af
+paso 105 #a1a48ecf1eafd750
+paso 106 #849ecbf523a1806e
+paso 107 #803b67e9147624fa
+paso 108 #00390b93f605bdb5
+paso 109 #99807383291f73f7
+paso 110 #bbe29cc16ec85d99
+paso 111 #fd5e58536ca91ed6
+paso 112 #cd84331131ecf80e
+paso 113 #96c13956345dba18
+paso 114 #54001049c9419b0b
+paso 115 #b3695494c842f92d
+paso 116 #ef45138797450c6e
+paso 117 #6d43ddf163cd3ebf
+paso 118 #39b0c0c1a6583cf0
+paso 119 #9ba047c57ea0dadc
+paso 120 #3d4e5ef493f6c29f
+paso 121 #607d4c8803d07dcb
+paso 122 #4746cfe0429aa5c3
+paso 123 #52926b136c209f9a
+paso 124 #33998f72a647a103
+paso 125 #c06f4f477ddeb843
+paso 126 #10d7efa1babbfb69
+paso 127 #d456eb79635e6460
+paso 128 #4f060a33684d0d5e
+paso 129 #539a7a7f4b3abcdd
+paso 130 #855f0587f156865b
+paso 131 #cbd90503c7e65411
+paso 132 #14edf6f866bfa28d
+paso 133 #7e14c89932ebf016
+paso 134 #10f685dd0a80fd54
+paso 135 #e23d7fce9af63058
+paso 136 #02f6bef82aea6621
+paso 137 #8cfc9c385488ce8a
+paso 138 #ba675af76ad64aa3
+paso 139 #ced30593163ad282
+paso 140 #c857fa82a083d08d
+paso 141 #28948b69890fd89a
+paso 142 #9531c3a9db114624
+paso 143 #78f0d404d07a4ca4
+paso 144 #278649246cf75ee1
+paso 145 #94bfc0dc25ab0ec5
+paso 146 #2e98371247a0f051
+paso 147 #d70bc1fc44858951
+paso 148 #35ed91dfd5f49fd1
+paso 149 #436cd20d63474f43
+paso 150 #837b98b247dbdb82
+paso 151 #f5b9247bce857686
+paso 152 #42b0d467114c2d02
+paso 153 #39746974bdd6e5db
+paso 154 #629d0d4a69406d45
+paso 155 #3dce37cf634bd6e2
+paso 156 #270c9a0041886336
+paso 157 #c837fbe363f9cae9
+paso 158 #509a26db5f48dab0
+paso 159 #0b75d026e6e5fd74
+paso 160 #a75f6706397a56b2
+paso 161 #c18c32fda8e2d454
+paso 162 #dc80f7aa771c7227
+paso 163 #9a8948964dbe9e5c
+paso 164 #45d16e74c225b90d
+paso 165 #b3c11cf18e5ef05d
+paso 166 #8de87d438118561e
+paso 167 #3510cd512328b313
+paso 168 #74667d4f885b0a34
+paso 169 #46918aa04160d704
+paso 170 #7304a77b4ca03959
+paso 171 #e962f0f701ae19a1
+paso 172 #05a0a462118380ff
+paso 173 #9c1d564165a60c65
+paso 174 #cbaa67eb5b1dfa1a
+paso 175 #d4ed8bf18f852f40
+paso 176 #2b19ab9d0d43cb06
+paso 177 #07fdc65c04cc0dca
+paso 178 #52f37e568a65ee17
+paso 179 #aaab28f3231f9a46
+paso 180 #872e92163605d99f
+paso 181 #7775dae9e0fa0c80
+paso 182 #b104e0be559dee85
+estado #44582739eba20aba
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #1f904dc72e4f8f0e
+paso 1 #45ed24d0489c66b8
+paso 2 #ab6fa7394534e11b
+paso 3 #6ef408dab999f041
+paso 4 #f8aa567992305349
+paso 5 #49134f78927e5b1d
+paso 6 #2314c1c555ffcaae
+paso 7 #6b3bbe7ea811c688
+paso 8 #91027d0d0ebbdd45
+paso 9 #d19bbf5832971280
+paso 10 #81a50dbfe443fe74
+paso 11 #78c367b7a2782221
+paso 12 #e8d085638272450e
+paso 13 #e0d213082293e057
+paso 14 #b1c627f643a54c24
+paso 15 #a4caf34e1695d37e
+paso 16 #dd92706442e24649
+paso 17 #9c3e7e5858e6d704
+paso 18 #4baa9c0fd6665096
+paso 19 #3ef3a4e88d957899
+paso 20 #22d37142837f3d61
+paso 21 #d39387ea2fdd1f19
+paso 22 #ec0cb7166896cfaf
+paso 23 #8227c667d66e31c7
+paso 24 #1d795c6612adb48f
+paso 25 #4a9334a93e33228b
+paso 26 #89adff2c62360048
+paso 27 #38790844a0e826f3
+paso 28 #ba1f26a0917833b8
+paso 29 #471b5b77ce9afaf3
+paso 30 #ee00183e25c35ab9
+paso 31 #ee602f2395679428
+paso 32 #d6eb064c1e6b4e2f
+paso 33 #3b5c663311064e6e
+paso 34 #27466d8b4723d30b
+paso 35 #ee6701741cea4754
+paso 36 #0746426f32ad15e0
+paso 37 #fcb5e74b2dc29fb0
+paso 38 #b458344c19a4824e
+paso 39 #764c6a4634e15725
+paso 40 #6ec8db53da7de27c
+paso 41 #71347bc5039191dd
+paso 42 #005cc5b306b709d6
+paso 43 #2f577cd7338b9736
+paso 44 #3d6f71ab4c7b6d08
+paso 45 #e851af388b03e8b7
+paso 46 #11341bb9ec3dfc60
+paso 47 #663e442592cee7ef
+paso 48 #ef1f8db9f804f267
+paso 49 #6c8a2991eb41db3f
+paso 50 #29b242207551566b
+paso 51 #3007d813f406feba
+paso 52 #57a4c340b917a32a
+paso 53 #26360124c5bc0ecb
+paso 54 #2af2d31dcd5ca424
+paso 55 #ea3a8ebff92698cc
+paso 56 #418907c6fe567936
+paso 57 #0dd1c943b123f3c3
+paso 58 #02ba8404a5604235
+paso 59 #e2d3d2878aa4886f
+paso 60 #d972ffd9c1c38cdb
+paso 61 #590e28b65935fda0
+paso 62 #b36d3a74ed1eecb0
+paso 63 #64ea4f3d47b92e44
+paso 64 #87c0c64c9ddf1241
+paso 65 #3866b15a5accffbf
+paso 66 #2d0b27ac0f30a986
+paso 67 #66a4baad96b22074
+paso 68 #82763de70a6df72f
+paso 69 #6145939574dd34e1
+paso 70 #406aea47ca3e4a72
+paso 71 #8d9464c30e798957
+paso 72 #5ee2cb656dfd3cdd
+paso 73 #85ae2d1bae599a85
+paso 74 #021f09561fa5dfab
+paso 75 #f100a71b200ac92a
+paso 76 #41d6aee797a88069
+paso 77 #e4dd6b4f328dbda0
+paso 78 #fb5e6e54d62ce07e
+paso 79 #054b77a0a89bc29c
+paso 80 #f04968741c456b78
+paso 81 #f308868e9cd8f0b9
+paso 82 #6fa351958b41718a
+paso 83 #185813437cc8a4d5
+paso 84 #cef94726ff3906b0
+paso 85 #dfc4fe40732b3ea8
+paso 86 #0a8d82eb4e8748c3
+paso 87 #7513f0898e228a04
+paso 88 #c89309d2fbfbe130
+paso 89 #12f2e07cb399a44a
+paso 90 #8a0090622449c078
+paso 91 #298ca58ac29ffffc
+paso 92 #b92b28ee52c66de4
+paso 93 #1f363855505c7d34
+paso 94 #c6be7698a4ad4116
+paso 95 #6f0d5587f19724e6
+paso 96 #6389c3b0b3c1d81b
+paso 97 #6f48caa9e4ae6286
+paso 98 #b96c887402fd23e9
+paso 99 #5faaef9fc42687ac
+paso 100 #b197845e77281b16
+paso 101 #5d08673ef61ea147
+paso 102 #b5d0eb829e04dc03
+paso 103 #371003509a1ddea1
+paso 104 #3f6de40f96ca2074
+paso 105 #e2d293e4e618c496
+paso 106 #37c29d41c9d83ad2
+paso 107 #0984745864678dbf
+paso 108 #9d8a1a2e9ef5b1cc
+paso 109 #d1c8fb8f66afbbf8
+paso 110 #88866f1534444422
+paso 111 #9f95ded5b67327d2
+paso 112 #21a799ae52c629a2
+paso 113 #76c0093dbc93c8b5
+paso 114 #12793ee0ef8015fe
+paso 115 #f1f39660fac23e8b
+paso 116 #2d159f76bfaf5c5c
+paso 117 #15a75b72d0e0f94a
+paso 118 #cb7382e5925adb07
+paso 119 #be04c911b0e26a9f
+paso 120 #bc64ccabf7206f57
+paso 121 #d751ffc25b006f73
+paso 122 #066a9e42844efb4e
+paso 123 #9db33ce66b3aefa0
+paso 124 #786f90483d12a438
+paso 125 #7c78cef0f1520af7
+paso 126 #78d7c57fa88a3bbf
+paso 127 #fad0e9bf2c8fc0fa
+paso 128 #7b24afd1a7bcfd7a
+paso 129 #8cea0bd474e1bbdf
+paso 130 #1b97d05ac97ddf72
+paso 131 #6edbf5cc5dadd07d
+paso 132 #ee451a995299be20
+paso 133 #30a4513f88ba9642
+paso 134 #565e35e66be2453b
+paso 135 #e75b0460e650b1fc
+paso 136 #f1cab9fa9743c40a
+paso 137 #deb3f9a59e6be00c
+paso 138 #fdc2f7b0e5903452
+paso 139 #46f192628ee5c26f
+paso 140 #849da68cb3bb3421
+paso 141 #4086bb7d418be1a5
+paso 142 #93654681f015d1c6
+paso 143 #b07a2ae0cb33fdf7
+paso 144 #9eb46baf2edd0e31
+paso 145 #91a7d89fdf2e95be
+paso 146 #e230832ba5c63496
+paso 147 #9f4300728830e8ae
+paso 148 #95ee4d8078353b11
+paso 149 #645841f7bcaaa457
+paso 150 #08dad2a4af4c6b73
+paso 151 #82c3886d153cef4c
+paso 152 #a7be3bcb856e2b52
+paso 153 #b10d1a6f168a1100
+paso 154 #ab6b47a13c0c7887
+paso 155 #555eea01187ccc20
+paso 156 #af4f1796717ca0aa
+paso 157 #f391d29d3d0afc2f
+paso 158 #f1418fbcffaa9c6e
+paso 159 #0cd72892aac9c5a4
+paso 160 #9b5af165c05d7a54
+paso 161 #5e53205902ec757c
+paso 162 #aca1ba49b7543c11
+paso 163 #6c786dc196b6c4c5
+paso 164 #2a729014a0819e92
+paso 165 #36af421a1d988156
+paso 166 #a450a407a8497ad0
+paso 167 #d7eb0b907c8fa2b5
+paso 168 #5f6bb3cbb234d472
+paso 169 #61681b7eafa35043
+paso 170 #afeda3314bffe347
+paso 171 #450cd0c4216c8c9a
+paso 172 #ec06edd6db1c24c0
+paso 173 #73c11480b05801a8
+paso 174 #d253ab5437dffced
+paso 175 #1840b9ad901d30ef
+paso 176 #96ae30084e4c3210
+paso 177 #4ed3089590a8758b
+paso 178 #1668803b8a913361
+paso 179 #612e19df5092e964
+paso 180 #72493f5d54810de6
+paso 181 #c2e0eaf7b707ebdf
+paso 182 #689a4e9002cd32dd
+estado #7bab12ca972b227e
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #00eed093414ab686
+paso 1 DECL Cliente[0]: text lista = lista | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #62dda8b4b5f2784e
+paso 2 DECL Cliente[1]: text lista = lista | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #49ef464b913770e6
+paso 3 DECL Cliente[2]: text lista = lista | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #76f289b969765a8b
+paso 4 DECL Empleado: text lista =  | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #eb2823803314e83e
+paso 5 DECL Cliente[0]: text comp =  | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7aa0e0eed3f118a2
+paso 6 DECL Cliente[1]: text comp =  | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #3d89a329b1a62477
+paso 7 DECL Cliente[2]: text comp =  | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9acac6d349fe0fa6
+paso 8 DECL Empleado: text comp =  | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #cce58c62f938836a
+paso 9 ENTER Cliente[0]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a5cdbac72e9e293d
+paso 10 BLOCKED Cliente[1]: espera para entrar a Corralon.comprar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #1510c6dfb2da9e36
+paso 11 BLOCKED Cliente[2]: espera para entrar a Corralon.comprar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f8fdad8f80c6b633
+paso 12 DECL Empleado: int id = 0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #cc0e8870e25f8009
+paso 13 PUSH Cliente[0]: push(cAtenciones, 0) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #aa1afec7f3ead12a
+paso 14 DECL Cliente[4]: text lista = lista | DECL Cliente[8]: text lista = lista | DECL Cliente[3]: text lista = lista | SIGNAL Cliente[0]: signal(esperaEmp) - sin efecto (cola vacía) | BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | DECL Cliente[6]: text lista = lista | DECL Cliente[9]: text lista = lista | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #3d3d725005281258
+paso 15 DECL Cliente[6]: text comp =  | DECL Cliente[9]: text comp =  | DECL Cliente[7]: text lista = lista | DECL Cliente[4]: text comp =  | DECL Cliente[8]: text comp =  | WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #b231c72e2ab70cbd
+paso 16 POP Empleado: pop(cAtenciones) => 0 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #7f55d1cd44d3a373
+paso 17 DECL Cliente[5]: text lista = lista | DECL Cliente[7]: text comp =  | DECL Cliente[3]: text comp =  | BLOCKED Cliente[8]: espera para entrar a Corralon.comprar | BLOCKED Cliente[6]: espera para entrar a Corralon.comprar | BLOCKED Cliente[4]: espera para entrar a Corralon.comprar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a781e62cfbb0f6c7
+paso 18 BLOCKED Cliente[9]: espera para entrar a Corralon.comprar | BLOCKED Cliente[7]: espera para entrar a Corralon.comprar | BLOCKED Cliente[3]: espera para entrar a Corralon.comprar | SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | DECL Cliente[5]: text comp =  | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #898f998b38c0e36e
+paso 19 WAIT Empleado: wait(esperaListas[0]) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Corralon | BLOCKED Cliente[5]: espera para entrar a Corralon.comprar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ba270b490af6d0ae
+paso 20 ASSIGN Cliente[0]: listas = lista | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2b02beb577ce776f
+paso 21 SIGNAL Cliente[0]: signal(esperaListas[0]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #127f83f8c2a2e7ef
+paso 22 WAIT Cliente[0]: wait(esperaCli[0]) - libera el monitor y se demora | ENTER Cliente[5]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #388c101a2ab9a527
+paso 23 PUSH Cliente[5]: push(cAtenciones, 5) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #03682df27b8a3c93
+paso 24 SIGNAL Cliente[5]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #287636a01c93dd38
+paso 25 WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #d57c107ecdd14048
+paso 26 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #57a2b804d676380a
+paso 27 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | ENTER Cliente[1]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #dfe109ee318da73f
+paso 28 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #1df3ee5bca52851e
+paso 29 BLOCKED Empleado: espera para entrar a Corralon.entregarComprobante | PUSH Cliente[1]: push(cAtenciones, 1) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #e2f336fde4df2496
+paso 30 SIGNAL Cliente[1]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #b9b5de73fcc05bc1
+paso 31 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | ENTER Cliente[3]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a3beeee5b0b9f228
+paso 32 PUSH Cliente[3]: push(cAtenciones, 3) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #fd2855a70d156d78
+paso 33 SIGNAL Cliente[3]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #5848338bf1e0e03b
+paso 34 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | ENTER Cliente[4]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #5e64581b48a52a31
+paso 35 PUSH Cliente[4]: push(cAtenciones, 4) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #97a85dd899cf8e8e
+paso 36 SIGNAL Cliente[4]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #0db65be77e8b0a9a
+paso 37 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | ENTER Cliente[8]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #705e337bc5cce0dc
+paso 38 PUSH Cliente[8]: push(cAtenciones, 8) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #5ea86b589ef29984
+paso 39 SIGNAL Cliente[8]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #287ca310786574e5
+paso 40 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | ENTER Cliente[7]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #feb26999d919ed33
+paso 41 PUSH Cliente[7]: push(cAtenciones, 7) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #9c0f61dea8bd799e
+paso 42 SIGNAL Cliente[7]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #77b38e11850fc340
+paso 43 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | ENTER Cliente[2]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #28e648fec986c652
+paso 44 PUSH Cliente[2]: push(cAtenciones, 2) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4279b59d62f32f67
+paso 45 SIGNAL Cliente[2]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e69370fe04adf979
+paso 46 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | ENTER Cliente[9]: entra a Corralon.comprar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0c7dafc740665e04
+paso 47 PUSH Cliente[9]: push(cAtenciones, 9) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #a31093eeb476a6b7
+paso 48 SIGNAL Cliente[9]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #e38cb0c4d51bae61
+paso 49 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #3970b2111487c2dd
+paso 50 ASSIGN Empleado: comprobantes[0] = comp | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #6f87857694fcb8ed
+paso 51 SIGNAL Empleado: signal(esperaCli[0]) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #3a78e138a5762b54
+paso 52 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[0]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #5054f76743ac047f
+paso 53 ASSIGN Cliente[0]: comp = comp | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #f3f2a11bb314cbd3
+paso 54 RETURN Cliente[0]: retorna de Corralon.comprar, libera el monitor | ENTER Cliente[6]: entra a Corralon.comprar | ASSIGN Empleado: i++ => 2 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #c77270d0d0467d6f
+paso 55 TERMINATED Cliente[0]: termina | BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #8170031a9f43b72a
+paso 56 PUSH Cliente[6]: push(cAtenciones, 6) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #eaff6ccbf759950e
+paso 57 SIGNAL Cliente[6]: signal(esperaEmp) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #d3e238635be19ac3
+paso 58 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #d351fa0e659af735
+paso 59 POP Empleado: pop(cAtenciones) => 5 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #459ec9c405bdb99c
+paso 60 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #072e3b0d22991ffa
+paso 61 WAIT Empleado: wait(esperaListas[5]) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #b5438412f8d540c8
+paso 62 ASSIGN Cliente[5]: listas = lista | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #1e70f9f726628caa
+paso 63 SIGNAL Cliente[5]: signal(esperaListas[5]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #a7cb9de17d7590ef
+paso 64 WAIT Cliente[5]: wait(esperaCli[5]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #4f2d74304a701486
+paso 65 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #e95bb522d0942f59
+paso 66 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #c4099173ce550a81
+paso 67 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #55f1496a795aa048
+paso 68 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #8506377ea3024e94
+paso 69 ASSIGN Empleado: comprobantes[5] = comp | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #9995847f56a8545f
+paso 70 SIGNAL Empleado: signal(esperaCli[5]) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #fb9050698bc8beb7
+paso 71 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[5]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #155c6d904a9cd171
+paso 72 ASSIGN Empleado: i++ => 3 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #8a6a5b307b72fe2f
+paso 73 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #23398fd48bd60589
+paso 74 ASSIGN Cliente[5]: comp = comp | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #d3a12d171eda50f7
+paso 75 RETURN Cliente[5]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #8a1118bd38963c53
+paso 76 POP Empleado: pop(cAtenciones) => 1 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #d434c8ae594a01d0
+paso 77 TERMINATED Cliente[5]: termina | SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #b3831ecfb5339c9a
+paso 78 WAIT Empleado: wait(esperaListas[1]) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #0524729536116c81
+paso 79 ASSIGN Cliente[1]: listas = lista | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #34b16c05ff5764b4
+paso 80 SIGNAL Cliente[1]: signal(esperaListas[1]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #5fe256a10dbfacdf
+paso 81 WAIT Cliente[1]: wait(esperaCli[1]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #91f502668f855283
+paso 82 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #71c78c12dfec31bd
+paso 83 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #73782722a61c8a00
+paso 84 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #d58466f3005c832f
+paso 85 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #48b9c5f309c36ede
+paso 86 ASSIGN Empleado: comprobantes[1] = comp | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #8f701b8770e9ca42
+paso 87 SIGNAL Empleado: signal(esperaCli[1]) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #59e5e1028b04a4fe
+paso 88 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[1]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #6c9fc98debd11b49
+paso 89 ASSIGN Cliente[1]: comp = comp | ASSIGN Empleado: i++ => 4 | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #018b4c8495d02fbd
+paso 90 RETURN Cliente[1]: retorna de Corralon.comprar, libera el monitor | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #adc3d6d1e85caf6c
+paso 91 TERMINATED Cliente[1]: termina | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #c50f116e2996cfd6
+paso 92 POP Empleado: pop(cAtenciones) => 3 | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #6081b46c89e0a184
+paso 93 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #f0a635c7a84ba351
+paso 94 WAIT Empleado: wait(esperaListas[3]) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #ca4e7c5f59c193de
+paso 95 ASSIGN Cliente[3]: listas = lista | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #ee3d3a8c66f9ec92
+paso 96 SIGNAL Cliente[3]: signal(esperaListas[3]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #56ffe64e7bfb2cd2
+paso 97 WAIT Cliente[3]: wait(esperaCli[3]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #62300ffceda2f7b5
+paso 98 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #06a86a8d86c0b6ea
+paso 99 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #b83d2206583c4583
+paso 100 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #10440aaf002e1b5f
+paso 101 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #244daed113100d83
+paso 102 ASSIGN Empleado: comprobantes[3] = comp | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #7fb2cd3ea8b41b72
+paso 103 SIGNAL Empleado: signal(esperaCli[3]) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #97b7de2092dfe477
+paso 104 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[3]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #4aabbc5d00eb6f82
+paso 105 ASSIGN Cliente[3]: comp = comp | ASSIGN Empleado: i++ => 5 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #b327f713e3cd131a
+paso 106 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | RETURN Cliente[3]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #1ab11ccbf05378fe
+paso 107 TERMINATED Cliente[3]: termina | POP Empleado: pop(cAtenciones) => 4 | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #38be7ba79aac42c2
+paso 108 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #cc3d77b5242df2fe
+paso 109 WAIT Empleado: wait(esperaListas[4]) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #45d2e01cbc0a4f64
+paso 110 ASSIGN Cliente[4]: listas = lista | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #86dbe05214bde661
+paso 111 SIGNAL Cliente[4]: signal(esperaListas[4]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #01a9e1b1d48171ae
+paso 112 WAIT Cliente[4]: wait(esperaCli[4]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #b7a57be2d797217e
+paso 113 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #736cbc01ba511400
+paso 114 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #ca77bb28499abb58
+paso 115 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #88df30de22225091
+paso 116 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #856fd31d59154a7e
+paso 117 ASSIGN Empleado: comprobantes[4] = comp | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #2c325f4d6d13c42e
+paso 118 SIGNAL Empleado: signal(esperaCli[4]) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #83267b1b6d629b79
+paso 119 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[4]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #da7a396e37f05c29
+paso 120 ASSIGN Empleado: i++ => 6 | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #fcea7ce3774f5ce6
+paso 121 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #96f3d44eaf12a3a1
+paso 122 ASSIGN Cliente[4]: comp = comp | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #34876594dfd72322
+paso 123 RETURN Cliente[4]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #ca64db6718e284c6
+paso 124 POP Empleado: pop(cAtenciones) => 8 | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #71b9071edb75059d
+paso 125 TERMINATED Cliente[4]: termina | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #35f171ec8862586f
+paso 126 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #e262f370bec41598
+paso 127 WAIT Empleado: wait(esperaListas[8]) - libera el monitor y se demora | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #f64d2052bb83d0bc
+paso 128 ASSIGN Cliente[8]: listas = lista | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #9386a87399026e86
+paso 129 SIGNAL Cliente[8]: signal(esperaListas[8]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #1979d76ddd8f3550
+paso 130 WAIT Cliente[8]: wait(esperaCli[8]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #6585cba7f3229441
+paso 131 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #eaefd36da28f2e0e
+paso 132 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #ef2ca54cbff9c78c
+paso 133 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #5183cf72e34877b6
+paso 134 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #031b82b5721cfcc1
+paso 135 ASSIGN Empleado: comprobantes[8] = comp | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #ed189cd803fbf022
+paso 136 SIGNAL Empleado: signal(esperaCli[8]) - despierta a Cliente[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #f44d0e9ed5233304
+paso 137 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[8]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #26dc3168190787b9
+paso 138 ASSIGN Empleado: i++ => 7 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #5f5a403fa75c87db
+paso 139 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | ASSIGN Cliente[8]: comp = comp | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #9c3d3c54d7c647a7
+paso 140 RETURN Cliente[8]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #c53e38794ee71ae8
+paso 141 TERMINATED Cliente[8]: termina | POP Empleado: pop(cAtenciones) => 7 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #185d56d4ecd64081
+paso 142 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #df9926c44a1cc13d
+paso 143 WAIT Empleado: wait(esperaListas[7]) - libera el monitor y se demora | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #9368c276ab9941ce
+paso 144 ASSIGN Cliente[7]: listas = lista | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #20f1d51032698082
+paso 145 SIGNAL Cliente[7]: signal(esperaListas[7]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #37f043a7a01692dd
+paso 146 WAIT Cliente[7]: wait(esperaCli[7]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #051ec4278aef5d09
+paso 147 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #5d186ecf7ce6f21b
+paso 148 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #f0d53a66dc8330f9
+paso 149 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #8fe5a181eac52dde
+paso 150 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #8c8fb13ed7e65479
+paso 151 ASSIGN Empleado: comprobantes[7] = comp | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #3e19a62227ad6f00
+paso 152 SIGNAL Empleado: signal(esperaCli[7]) - despierta a Cliente[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #adf13d57a0f6cc1c
+paso 153 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[7]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #5a6f1a0163cf8f56
+paso 154 ASSIGN Cliente[7]: comp = comp | ASSIGN Empleado: i++ => 8 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #25b253ff02dfdc7e
+paso 155 RETURN Cliente[7]: retorna de Corralon.comprar, libera el monitor | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #8259a53d6605d2d5
+paso 156 ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #e598340595e732ec
+paso 157 TERMINATED Cliente[7]: termina | POP Empleado: pop(cAtenciones) => 2 | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #5c42c7c47258152c
+paso 158 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #76eac3b90496b573
+paso 159 WAIT Empleado: wait(esperaListas[2]) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #3f688047e8eb0dfd
+paso 160 ASSIGN Cliente[2]: listas = lista | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #8815984522c2b4bc
+paso 161 SIGNAL Cliente[2]: signal(esperaListas[2]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #c28052a47a14f733
+paso 162 WAIT Cliente[2]: wait(esperaCli[2]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #347b58079e8eaf2a
+paso 163 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #f7cd45abcc75843b
+paso 164 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #f694ccb27f801947
+paso 165 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #ccba62cdd2348c5a
+paso 166 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #0490a98e286ac237
+paso 167 ASSIGN Empleado: comprobantes[2] = comp | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #ffa73681a201f603
+paso 168 SIGNAL Empleado: signal(esperaCli[2]) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #26d244ebf5048ffb
+paso 169 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[2]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #3ad90248d537c217
+paso 170 ASSIGN Empleado: i++ => 9 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #609d2c58907f05b5
+paso 171 ASSIGN Cliente[2]: comp = comp | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #117c15e095b1553b
+paso 172 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #a0a6afb19225e99e
+paso 173 RETURN Cliente[2]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #7a25265d00ede584
+paso 174 TERMINATED Cliente[2]: termina | POP Empleado: pop(cAtenciones) => 9 | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #872014eae1abbb95
+paso 175 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #8cf7b479dfd9bb1c
+paso 176 WAIT Empleado: wait(esperaListas[9]) - libera el monitor y se demora | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #6397614a7b053755
+paso 177 ASSIGN Cliente[9]: listas = lista | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #59b6278ed779a42e
+paso 178 SIGNAL Cliente[9]: signal(esperaListas[9]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #d2354b6230361a0e
+paso 179 WAIT Cliente[9]: wait(esperaCli[9]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #3f25b6c2379a528f
+paso 180 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #c064306146e1e7b4
+paso 181 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #48bbfcc8200cd25b
+paso 182 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #44da2ac54f692281
+paso 183 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #6ea57c30fb7b3569
+paso 184 ASSIGN Empleado: comprobantes[9] = comp | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #113df0543b425a7d
+paso 185 SIGNAL Empleado: signal(esperaCli[9]) - despierta a Cliente[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #0caeb8e01c7833bd
+paso 186 RETURN Empleado: retorna de Corralon.entregarComprobante, libera el monitor | REENTER Cliente[9]: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #cefeec026c78baf8
+paso 187 ASSIGN Cliente[9]: comp = comp | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #a8aecead04c88e77
+paso 188 ASSIGN Empleado: i++ => 10 | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #b5ca2e966e0b423b
+paso 189 BLOCKED Empleado: espera para entrar a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #93bc23b8c9012df6
+paso 190 RETURN Cliente[9]: retorna de Corralon.comprar, libera el monitor | ENTER Empleado: entra a Corralon.esperarCliente | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #eb37b1c0693e039d
+paso 191 POP Empleado: pop(cAtenciones) => 6 | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #5d2ae0184e521cb9
+paso 192 SIGNAL Empleado: signal(esperaCli[6]) - despierta a Cliente[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #646d1e8204e81bb7
+paso 193 WAIT Empleado: wait(esperaListas[6]) - libera el monitor y se demora | REENTER Cliente[6]: reingresa a Corralon | TERMINATED Cliente[9]: termina | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #802074930088f025
+paso 194 ASSIGN Cliente[6]: listas = lista | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #833d39fead79c523
+paso 195 SIGNAL Cliente[6]: signal(esperaListas[6]) - despierta a Empleado (compite por el monitor) | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #802c1b2fd6bb1539
+paso 196 WAIT Cliente[6]: wait(esperaCli[6]) - libera el monitor y se demora | REENTER Empleado: reingresa a Corralon | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #483cb5631390883e
+paso 197 ASSIGN Empleado: lista = lista | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #d84570664d4d45d2
+paso 198 RETURN Empleado: retorna de Corralon.esperarCliente, libera el monitor | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #6d11ed088a86a845
+paso 199 ASSIGN Empleado: comp = comp | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #2291782637ef84a0
+paso 200 ENTER Empleado: entra a Corralon.entregarComprobante | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #264a358761fe5b14
+estado #fff35ead487a7d1a

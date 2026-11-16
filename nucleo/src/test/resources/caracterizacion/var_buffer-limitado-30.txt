@@ -1,0 +1,1421 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #5f7da4aac6a5fdf0
+paso 1 ENTER Prod[10]: entra a B.depositar | DECL Cons[14]: int x = 0 | BLOCKED Prod[8]: espera para entrar a B.depositar | DECL Cons[2]: int x = 0 | DECL Cons[6]: int x = 0 | BLOCKED Prod[5]: espera para entrar a B.depositar | BLOCKED Prod[2]: espera para entrar a B.depositar | DECL Cons[15]: int x = 0 | DECL Cons[10]: int x = 0 | DECL Cons[7]: int x = 0 | DECL Cons[8]: int x = 0 | BLOCKED Prod[7]: espera para entrar a B.depositar | BLOCKED Prod[11]: espera para entrar a B.depositar | BLOCKED Prod[15]: espera para entrar a B.depositar | DECL Cons[9]: int x = 0 | DECL Cons[5]: int x = 0 | DECL Cons[3]: int x = 0 | DECL Cons[12]: int x = 0 | DECL Cons[13]: int x = 0 | BLOCKED Prod[6]: espera para entrar a B.depositar | BLOCKED Prod[12]: espera para entrar a B.depositar | BLOCKED Prod[4]: espera para entrar a B.depositar | BLOCKED Prod[14]: espera para entrar a B.depositar | BLOCKED Prod[3]: espera para entrar a B.depositar | DECL Cons[11]: int x = 0 | DECL Cons[4]: int x = 0 | BLOCKED Prod[1]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #875eb8c8e6058925
+paso 2 ASSIGN Prod[10]: buf[0] = 10 | BLOCKED Cons[14]: espera para entrar a B.retirar | BLOCKED Cons[3]: espera para entrar a B.retirar | BLOCKED Cons[9]: espera para entrar a B.retirar | BLOCKED Cons[13]: espera para entrar a B.retirar | DECL Cons[1]: int x = 0 | BLOCKED Prod[13]: espera para entrar a B.depositar | BLOCKED Cons[15]: espera para entrar a B.retirar | BLOCKED Cons[12]: espera para entrar a B.retirar | BLOCKED Cons[10]: espera para entrar a B.retirar | BLOCKED Cons[7]: espera para entrar a B.retirar | BLOCKED Cons[4]: espera para entrar a B.retirar | BLOCKED Cons[8]: espera para entrar a B.retirar | BLOCKED Cons[11]: espera para entrar a B.retirar | BLOCKED Cons[5]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #cca75855ba2c085e
+paso 3 BLOCKED Cons[1]: espera para entrar a B.retirar | BLOCKED Cons[2]: espera para entrar a B.retirar | BLOCKED Prod[9]: espera para entrar a B.depositar | BLOCKED Cons[6]: espera para entrar a B.retirar | ASSIGN Prod[10]: libre = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #bcf957a5d1ccd0b5
+paso 4 ASSIGN Prod[10]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #53e209b33ce55877
+paso 5 SIGNAL Prod[10]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #e4cdb99c2893552d
+paso 6 RETURN Prod[10]: retorna de B.depositar, libera el monitor | ENTER Prod[14]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #ce5ec59d9de350ff
+paso 7 ASSIGN Prod[14]: buf[1] = 14 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d6abdb845c9eae0e
+paso 8 BLOCKED Prod[10]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #f857709db7afe711
+paso 9 ASSIGN Prod[14]: libre = 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #2168092d69dd68ee
+paso 10 ASSIGN Prod[14]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #3133a299c668de92
+paso 11 SIGNAL Prod[14]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #c84cb813c5fabd67
+paso 12 RETURN Prod[14]: retorna de B.depositar, libera el monitor | ENTER Cons[1]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #f4131c8057966d9a
+paso 13 ASSIGN Cons[1]: r = 10 | BLOCKED Prod[14]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #b90092665aa45064
+paso 14 ASSIGN Cons[1]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #4e692d77453ea055
+paso 15 ASSIGN Cons[1]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #06bed9769d64f229
+paso 16 ASSIGN Cons[1]: suma = 10 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #283b70337bcde7b1
+paso 17 ASSIGN Cons[1]: n++ => 1 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #4b0eab6e956e9eaf
+paso 18 SIGNAL Cons[1]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #5423e69c405c1647
+paso 19 RETURN Cons[1]: retorna de B.retirar, libera el monitor | ENTER Cons[4]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #183785a35825f859
+paso 20 ASSIGN Cons[4]: r = 14 | BLOCKED Cons[1]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #096fb2b252072715
+paso 21 ASSIGN Cons[4]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #46f66143e078197a
+paso 22 ASSIGN Cons[4]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b3eb65133c097da3
+paso 23 ASSIGN Cons[4]: suma = 24 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #71bb2a74f2666583
+paso 24 ASSIGN Cons[4]: n++ => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #962135876fb7fd14
+paso 25 SIGNAL Cons[4]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #2b0eb0e1a1477b5e
+paso 26 RETURN Cons[4]: retorna de B.retirar, libera el monitor | ENTER Cons[6]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #29f275ec6fd5745a
+paso 27 BLOCKED Cons[4]: espera para entrar a B.retirar | WAIT Cons[6]: wait(notVacio) - libera el monitor y se demora | ENTER Cons[9]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2a2d2a28261d1c44
+paso 28 WAIT Cons[9]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[12]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a974464be35a146d
+paso 29 ASSIGN Prod[12]: buf[2] = 12 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #2f69a55492bd43d0
+paso 30 ASSIGN Prod[12]: libre = 0 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #10e70421f73dd4ad
+paso 31 ASSIGN Prod[12]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #f097a4ed395cc972
+paso 32 SIGNAL Prod[12]: signal(notVacio) - despierta a Cons[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #175f4a1b0d68525c
+paso 33 RETURN Prod[12]: retorna de B.depositar, libera el monitor | ENTER Prod[15]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #7f97a1e354afa02e
+paso 34 ASSIGN Prod[15]: buf[0] = 15 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #9260a68c7f120622
+paso 35 ASSIGN Prod[15]: libre = 1 | BLOCKED Prod[12]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #01b39e372c270d2b
+paso 36 ASSIGN Prod[15]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #d7e6a978074b1841
+paso 37 SIGNAL Prod[15]: signal(notVacio) - despierta a Cons[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #12214e3619af40dd
+paso 38 RETURN Prod[15]: retorna de B.depositar, libera el monitor | ENTER Cons[2]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #0bb4f59e3b7d9458
+paso 39 ASSIGN Cons[2]: r = 12 | BLOCKED Prod[15]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #47a4ccc5c2f1f198
+paso 40 ASSIGN Cons[2]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #c091cc566f1e17aa
+paso 41 ASSIGN Cons[2]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #369938823073e98d
+paso 42 ASSIGN Cons[2]: suma = 36 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #1be404bdfa484f92
+paso 43 ASSIGN Cons[2]: n++ => 3 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #27251c600c87c672
+paso 44 SIGNAL Cons[2]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #b982a846edce8110
+paso 45 RETURN Cons[2]: retorna de B.retirar, libera el monitor | ENTER Prod[11]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #65294e72f99d1bfe
+paso 46 BLOCKED Cons[2]: espera para entrar a B.retirar | ASSIGN Prod[11]: buf[1] = 11 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #2dca33596a24b443
+paso 47 ASSIGN Prod[11]: libre = 2 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #0cc8afaa3b183e7f
+paso 48 ASSIGN Prod[11]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #7d737be6e5d418da
+paso 49 SIGNAL Prod[11]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #5f48cdd544fb64b0
+paso 50 RETURN Prod[11]: retorna de B.depositar, libera el monitor | ENTER Prod[5]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #59dd01bd9b6f5e80
+paso 51 BLOCKED Prod[11]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #1220e9d8b0b877fd
+paso 52 ASSIGN Prod[5]: buf[2] = 5 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #a0e3dd6ce4e83d82
+paso 53 ASSIGN Prod[5]: libre = 0 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #a51c71cb3fefc9f0
+paso 54 ASSIGN Prod[5]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #ff08293d5cf12075
+paso 55 SIGNAL Prod[5]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3ccbb5ebc69dc051
+paso 56 RETURN Prod[5]: retorna de B.depositar, libera el monitor | ENTER Prod[6]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #5e2c21c5da3aa25d
+paso 57 BLOCKED Prod[5]: espera para entrar a B.depositar | WAIT Prod[6]: wait(notLleno) - libera el monitor y se demora | ENTER Prod[12]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #ec418124a3fe10a6
+paso 58 WAIT Prod[12]: wait(notLleno) - libera el monitor y se demora | ENTER Prod[1]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #08feeea978c495b8
+paso 59 WAIT Prod[1]: wait(notLleno) - libera el monitor y se demora | ENTER Cons[13]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #dce053b981cf1104
+paso 60 ASSIGN Cons[13]: r = 15 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #f0fe7b0704ae2603
+paso 61 ASSIGN Cons[13]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #5b20bd4f6910df09
+paso 62 ASSIGN Cons[13]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #b6c5423848a188a8
+paso 63 ASSIGN Cons[13]: suma = 51 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f316eb2ace0699b0
+paso 64 ASSIGN Cons[13]: n++ => 4 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #7a8109ef74a4e742
+paso 65 SIGNAL Cons[13]: signal(notLleno) - despierta a Prod[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #8268558c3b5cdbba
+paso 66 RETURN Cons[13]: retorna de B.retirar, libera el monitor | ENTER Prod[11]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #65b5caa625a40c2c
+paso 67 ASSIGN Prod[11]: buf[0] = 11 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #6fad6ef19ed47a48
+paso 68 BLOCKED Cons[13]: espera para entrar a B.retirar | ASSIGN Prod[11]: libre = 1 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #a9211ae9db392e2c
+paso 69 ASSIGN Prod[11]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #58a28956282fd20f
+paso 70 SIGNAL Prod[11]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #34fb64b02e3045e6
+paso 71 RETURN Prod[11]: retorna de B.depositar, libera el monitor | ENTER Prod[8]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #54548d60e017f8c4
+paso 72 TERMINATED Prod[11]: termina | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #87853fa1027913a9
+paso 73 WAIT Prod[8]: wait(notLleno) - libera el monitor y se demora | ENTER Cons[11]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #e1639dd742773038
+paso 74 ASSIGN Cons[11]: r = 11 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #e395f4a2ad33ef1c
+paso 75 ASSIGN Cons[11]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #06fdb9222397ad8e
+paso 76 ASSIGN Cons[11]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #c018dee214262b20
+paso 77 ASSIGN Cons[11]: suma = 62 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #c214d75d4edd4562
+paso 78 ASSIGN Cons[11]: n++ => 5 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #68610bc3dbe4bcfe
+paso 79 SIGNAL Cons[11]: signal(notLleno) - despierta a Prod[12] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #c15af5d876b73f20
+paso 80 RETURN Cons[11]: retorna de B.retirar, libera el monitor | ENTER Cons[7]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #cebeab40a55d8934
+paso 81 BLOCKED Cons[11]: espera para entrar a B.retirar | ASSIGN Cons[7]: r = 5 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #53a9daf42be54638
+paso 82 ASSIGN Cons[7]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #71a8d5e84bee2a54
+paso 83 ASSIGN Cons[7]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #a818d780c5cd21f7
+paso 84 ASSIGN Cons[7]: suma = 67 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #c3e451ba31632074
+paso 85 ASSIGN Cons[7]: n++ => 6 | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #981342d7e0232fb9
+paso 86 SIGNAL Cons[7]: signal(notLleno) - despierta a Prod[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #c76aaffcd5881857
+paso 87 RETURN Cons[7]: retorna de B.retirar, libera el monitor | ENTER Cons[2]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #0f99c31fd63d8b0a
+paso 88 BLOCKED Cons[7]: espera para entrar a B.retirar | ASSIGN Cons[2]: r = 11 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #a058af162196f48d
+paso 89 ASSIGN Cons[2]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #642b3d20fe9147d0
+paso 90 ASSIGN Cons[2]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #0de90fde26ebb950
+paso 91 ASSIGN Cons[2]: suma = 78 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #9eb703c5e7cd3fc6
+paso 92 ASSIGN Cons[2]: n++ => 7 | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #ca5c5b8f7dde6439
+paso 93 SIGNAL Cons[2]: signal(notLleno) - despierta a Prod[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #bd21e3e2052ad108
+paso 94 RETURN Cons[2]: retorna de B.retirar, libera el monitor | REENTER Prod[12]: reingresa a B | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #b70f4bcf442b3781
+paso 95 ASSIGN Prod[12]: buf[1] = 12 | TERMINATED Cons[2]: termina | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #435ac105f44dd536
+paso 96 ASSIGN Prod[12]: libre = 2 | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #34aeeb048f52c3e3
+paso 97 ASSIGN Prod[12]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #813b8e00054f407c
+paso 98 SIGNAL Prod[12]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #55cb3bb5f32ccfa5
+paso 99 RETURN Prod[12]: retorna de B.depositar, libera el monitor | ENTER Prod[14]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #e6774ff9c88cdd28
+paso 100 ASSIGN Prod[14]: buf[2] = 14 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #4bb336057179a8a6
+paso 101 TERMINATED Prod[12]: termina | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #03366323206f4a2a
+paso 102 ASSIGN Prod[14]: libre = 0 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #276d2ce2124e2818
+paso 103 ASSIGN Prod[14]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #96e3d0a357e140ce
+paso 104 SIGNAL Prod[14]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #02f5130444935f71
+paso 105 RETURN Prod[14]: retorna de B.depositar, libera el monitor | ENTER Prod[7]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #58609a11fe0f5949
+paso 106 ASSIGN Prod[7]: buf[0] = 7 | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #b9fa61dfbe3e182c
+paso 107 ASSIGN Prod[7]: libre = 1 | TERMINATED Prod[14]: termina | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #533c0cdef16cc5b8
+paso 108 ASSIGN Prod[7]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #c440281b0292edab
+paso 109 SIGNAL Prod[7]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #bbd6a98a481aa88f
+paso 110 RETURN Prod[7]: retorna de B.depositar, libera el monitor | ENTER Cons[11]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #5d882489ad326aa9
+paso 111 BLOCKED Prod[7]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #5f3a461146ed40d6
+paso 112 ASSIGN Cons[11]: r = 12 | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #3a6cbaf9adb20a3f
+paso 113 ASSIGN Cons[11]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #386c0ce4cc30a821
+paso 114 ASSIGN Cons[11]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #fb8c78da70db17e7
+paso 115 ASSIGN Cons[11]: suma = 90 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #a5d19314ba1402dc
+paso 116 ASSIGN Cons[11]: n++ => 8 | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #0f49603d2dd4d1d7
+paso 117 SIGNAL Cons[11]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #c11622cc68ececd2
+paso 118 RETURN Cons[11]: retorna de B.retirar, libera el monitor | ENTER Prod[3]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #78c5b98071fda59d
+paso 119 TERMINATED Cons[11]: termina | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #a72be077655b4b7e
+paso 120 ASSIGN Prod[3]: buf[1] = 3 | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #525d6e83645bf277
+paso 121 ASSIGN Prod[3]: libre = 2 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #c644d0ec14821da7
+paso 122 ASSIGN Prod[3]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #5c47ccd3a8e6f366
+paso 123 SIGNAL Prod[3]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #e8fdfe222f124f5f
+paso 124 RETURN Prod[3]: retorna de B.depositar, libera el monitor | ENTER Cons[4]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #853a598327f45865
+paso 125 ASSIGN Cons[4]: r = 14 | BLOCKED Prod[3]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #30c18495ced18337
+paso 126 ASSIGN Cons[4]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #a75b0c58a4b7d4d6
+paso 127 ASSIGN Cons[4]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #82536da5e095e0e4
+paso 128 ASSIGN Cons[4]: suma = 104 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #364e1cba7b435a67
+paso 129 ASSIGN Cons[4]: n++ => 9 | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #1a58cae2469f3eac
+paso 130 SIGNAL Cons[4]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #574821e07c816905
+paso 131 RETURN Cons[4]: retorna de B.retirar, libera el monitor | ENTER Prod[3]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #27daee99eb26e387
+paso 132 TERMINATED Cons[4]: termina | ASSIGN Prod[3]: buf[2] = 3 | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #1cdef52cc82f044b
+paso 133 ASSIGN Prod[3]: libre = 0 | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #d729d0f1a1b8a066
+paso 134 ASSIGN Prod[3]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #946a0d015114e04c
+paso 135 SIGNAL Prod[3]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #08d4665dbfe14272
+paso 136 RETURN Prod[3]: retorna de B.depositar, libera el monitor | ENTER Cons[14]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #1e56e904711b6839
+paso 137 ASSIGN Cons[14]: r = 7 | TERMINATED Prod[3]: termina | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #28360ea5f2ee9fdb
+paso 138 ASSIGN Cons[14]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #a887b58ac872034d
+paso 139 ASSIGN Cons[14]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #4675efedd0d025de
+paso 140 ASSIGN Cons[14]: suma = 111 | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #92b340fb4dfdb8d2
+paso 141 ASSIGN Cons[14]: n++ => 10 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #04d32417be6df2f5
+paso 142 SIGNAL Cons[14]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #cd6cb6757b355026
+paso 143 RETURN Cons[14]: retorna de B.retirar, libera el monitor | ENTER Prod[13]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #189334f8bbac0b7d
+paso 144 BLOCKED Cons[14]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #6d52ba87ab13d483
+paso 145 ASSIGN Prod[13]: buf[0] = 13 | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #d604a782130924c5
+paso 146 ASSIGN Prod[13]: libre = 1 | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #d4d4111887a10c24
+paso 147 ASSIGN Prod[13]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #159a365b06b0b818
+paso 148 SIGNAL Prod[13]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #278a5bfe8dce82df
+paso 149 RETURN Prod[13]: retorna de B.depositar, libera el monitor | ENTER Cons[12]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #130e02fcfa8e6068
+paso 150 ASSIGN Cons[12]: r = 3 | BLOCKED Prod[13]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #afe919dbd17d2aa9
+paso 151 ASSIGN Cons[12]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #695d86242adbf015
+paso 152 ASSIGN Cons[12]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #d47c60d7b7c1fa26
+paso 153 ASSIGN Cons[12]: suma = 114 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #fdf6fb364e9d463e
+paso 154 ASSIGN Cons[12]: n++ => 11 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #0da4dbaa4fb3db2c
+paso 155 SIGNAL Cons[12]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #b710f272de4f7906
+paso 156 RETURN Cons[12]: retorna de B.retirar, libera el monitor | ENTER Cons[1]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #c3578a2048e1ed84
+paso 157 ASSIGN Cons[1]: r = 3 | BLOCKED Cons[12]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #cdc9f9e6078e50da
+paso 158 ASSIGN Cons[1]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #65e84cbee7086a75
+paso 159 ASSIGN Cons[1]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #0ab9195949a4b1e9
+paso 160 ASSIGN Cons[1]: suma = 117 | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #d59581043c7204eb
+paso 161 ASSIGN Cons[1]: n++ => 12 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #1d01f94e119855ab
+paso 162 SIGNAL Cons[1]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #222ee5e5ba889193
+paso 163 RETURN Cons[1]: retorna de B.retirar, libera el monitor | ENTER Prod[13]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #5857efd2d2a8153b
+paso 164 ASSIGN Prod[13]: buf[1] = 13 | TERMINATED Cons[1]: termina | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #bf6512599fe35b6b
+paso 165 ASSIGN Prod[13]: libre = 2 | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #07d627e4ae6e0029
+paso 166 ASSIGN Prod[13]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #0651c74fcb0ff21e
+paso 167 SIGNAL Prod[13]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #e25b0e629ec4354a
+paso 168 RETURN Prod[13]: retorna de B.depositar, libera el monitor | ENTER Prod[9]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #2116fadcbbc21f5e
+paso 169 TERMINATED Prod[13]: termina | ASSIGN Prod[9]: buf[2] = 9 | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #69fee9b38adf3e99
+paso 170 ASSIGN Prod[9]: libre = 0 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #01c51811df90a092
+paso 171 ASSIGN Prod[9]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #c757271d5253f80c
+paso 172 SIGNAL Prod[9]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #f9b25ccff96c31fc
+paso 173 RETURN Prod[9]: retorna de B.depositar, libera el monitor | ENTER Cons[13]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #0f1cc3f3b0d143d6
+paso 174 BLOCKED Prod[9]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #410fb53575c8ef22
+paso 175 ASSIGN Cons[13]: r = 13 | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #9fb2e15f44349b7b
+paso 176 ASSIGN Cons[13]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #26c8c72d815d3d04
+paso 177 ASSIGN Cons[13]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #f7d0c26736949c31
+paso 178 ASSIGN Cons[13]: suma = 130 | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #e511dd43ccebf7c3
+paso 179 ASSIGN Cons[13]: n++ => 13 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #c44a8fcd88d0327c
+paso 180 SIGNAL Cons[13]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #0280d32fe6cc1f1e
+paso 181 RETURN Cons[13]: retorna de B.retirar, libera el monitor | ENTER Cons[7]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #663dd1ea6b83d545
+paso 182 TERMINATED Cons[13]: termina | ASSIGN Cons[7]: r = 13 | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #a1bfd5e5d6c7c379
+paso 183 ASSIGN Cons[7]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #808768894b36af9a
+paso 184 ASSIGN Cons[7]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #5302142ecae9f3b9
+paso 185 ASSIGN Cons[7]: suma = 143 | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #2fc4c35adb1dcc8c
+paso 186 ASSIGN Cons[7]: n++ => 14 | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #753d45f27d881d13
+paso 187 SIGNAL Cons[7]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #a07cade24d99c9e3
+paso 188 RETURN Cons[7]: retorna de B.retirar, libera el monitor | REENTER Cons[6]: reingresa a B | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #b2d9c425facdeee0
+paso 189 ASSIGN Cons[6]: r = 9 | TERMINATED Cons[7]: termina | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #6799d98fd63eef05
+paso 190 ASSIGN Cons[6]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #98406bf2df20a9da
+paso 191 ASSIGN Cons[6]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #00614fd053ac2601
+paso 192 ASSIGN Cons[6]: suma = 152 | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #31a9af73a12d8065
+paso 193 ASSIGN Cons[6]: n++ => 15 | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #e4e10e5ee71160cf
+paso 194 SIGNAL Cons[6]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #28d8bd9df26d12aa
+paso 195 RETURN Cons[6]: retorna de B.retirar, libera el monitor | ENTER Cons[12]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #975810b7ce086f5b
+paso 196 BLOCKED Cons[6]: espera para entrar a B.retirar | WAIT Cons[12]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[4]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #39498959b742b600
+paso 197 ASSIGN Prod[4]: buf[0] = 4 | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #07f593a48f8463fc
+paso 198 ASSIGN Prod[4]: libre = 1 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #45d3569da61cc7c5
+paso 199 ASSIGN Prod[4]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #3ead615730c4efdc
+paso 200 SIGNAL Prod[4]: signal(notVacio) - despierta a Cons[12] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #6612a733623b2b16
+estado #4b133bfd144e8d92
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #bbb66d220467b2c2
+paso 1 #2bed0c4e5b597e0f
+paso 2 #e74cf723dadc3a4c
+paso 3 #9b6086dcef8e410e
+paso 4 #6b6da603e6dc5f6d
+paso 5 #f0cbdf875993fc67
+paso 6 #4c2f2116cae13cfe
+paso 7 #a23f01b54574131b
+paso 8 #9c6384642b16f37a
+paso 9 #2f9cdeb695bccad2
+paso 10 #c37c41d86dfc2673
+paso 11 #97c836a48c4f6024
+paso 12 #de77c2758faacc9b
+paso 13 #d27b373753d1f40c
+paso 14 #b8983441cf404778
+paso 15 #964b7c4277fe870c
+paso 16 #ef208cbc44f8d8c8
+paso 17 #fa315f02db9a0303
+paso 18 #c1102eefc32f4d7e
+paso 19 #ac20eba1c1e0cd65
+paso 20 #fb4360f87e2d7232
+paso 21 #ae1e4c35eaac1506
+paso 22 #e15d408d09aec003
+paso 23 #a1e1c2740e27d334
+paso 24 #9aa0724bc095e018
+paso 25 #8fc05bbd19a868bc
+paso 26 #8d0bcee6aaba0e7d
+paso 27 #25f8baa6dc8a0410
+paso 28 #aab1b9a7a94951ea
+paso 29 #e02c74115b6b614f
+paso 30 #bc480b4710ff6398
+paso 31 #7a3477a4d16712b5
+paso 32 #43b7f3fd7faea18a
+paso 33 #29956d45cf96e8e4
+paso 34 #03d49fb553f40f35
+paso 35 #fcc34c4153e58cdc
+paso 36 #566d647d7a9f3b32
+paso 37 #002a124a109aad46
+paso 38 #96111379a31427e9
+paso 39 #e89337144be87d4c
+paso 40 #721276a31b78a9e3
+paso 41 #4ddd7162376693dc
+paso 42 #62a6cfa90173a609
+paso 43 #4914985819b04c01
+paso 44 #3001bd76b9b266d1
+paso 45 #77c5bed36e6b6822
+paso 46 #88434a8b5fb346f7
+paso 47 #5d958d4ec5b6bfb1
+paso 48 #115fe0f3f3f2a9c4
+paso 49 #5f24f15764f1d697
+paso 50 #7bfea7299eba8ff0
+paso 51 #74a5671725d96c81
+paso 52 #61242ee32c5794e2
+paso 53 #c33408847a597f78
+paso 54 #ad6e11e344300e33
+paso 55 #1961cfee34c09776
+paso 56 #6a46224488479e1b
+paso 57 #556041ef4722765b
+paso 58 #08ebe92a049655f0
+paso 59 #dc1daeae14e62d18
+paso 60 #de1611e4e89e81dd
+paso 61 #e77a451f0f0ea809
+paso 62 #2763c42f8c7e1566
+paso 63 #5dff78ae77f4b3c1
+paso 64 #9fb288cc5558674c
+paso 65 #fdb523aeb440696e
+paso 66 #9740deae18dcb13c
+paso 67 #c02ceec4b559eaf9
+paso 68 #2f5c8a0edb8aadbf
+paso 69 #97d4f08935fdbb73
+paso 70 #ddcd2967a4a0f13d
+paso 71 #f6fa8da7fa47bc2a
+paso 72 #c8d41fed89916076
+paso 73 #60ff1d0ae71026ff
+paso 74 #de52718a707e7d4a
+paso 75 #8da936c45abf3d99
+paso 76 #4e11fad94844b9a7
+paso 77 #6a816aad95b36ced
+paso 78 #325bf64e8e4e41d5
+paso 79 #fa4b92abde5dc1f5
+paso 80 #a4a41b40d2176ff9
+paso 81 #d6a5f3ead8f3191d
+paso 82 #8e4801ac2967adc1
+paso 83 #6d48ac0707c563dd
+paso 84 #8d5d0daa079fea53
+paso 85 #66f1b305af57ede7
+paso 86 #b610eb3e95c0b365
+paso 87 #5dbd8ef8713eaa82
+paso 88 #ab9917f36c7e5844
+paso 89 #27dffd2c3db05cbe
+paso 90 #effcdf1baf49a9c6
+paso 91 #057be9044721be21
+paso 92 #e903315f84ed1a28
+paso 93 #d0e43984aa8b3176
+paso 94 #ae6fc54420a0a9ef
+paso 95 #69cebe7a1d2f8597
+paso 96 #b98a2d87f1c15092
+paso 97 #48206d9b6ea16e42
+paso 98 #0a3b2e63a84e1378
+paso 99 #720ce59b8410203d
+paso 100 #a0932401aa5bc5fb
+paso 101 #2a24c3089906e609
+paso 102 #7840f48596ca40ce
+paso 103 #d1b392e04a2de459
+paso 104 #5736939d2a2aa8fb
+paso 105 #031deb0be4dad15c
+paso 106 #a3ebf6c5dfc71f8a
+paso 107 #15abac40c55b04aa
+paso 108 #825e8c4c1e4878c7
+paso 109 #952dc392f844869f
+paso 110 #a5032f0e31103dcc
+paso 111 #92976a0efa9b03cd
+paso 112 #cc2481967d41241a
+paso 113 #7ece6825b5adcaa4
+paso 114 #e04d0d8a1acba0df
+paso 115 #3a2127cdf42ba72e
+paso 116 #1ff92129c7b40532
+paso 117 #c352fecfd0e11599
+paso 118 #4b69bd64fa9d698b
+paso 119 #bea6047d69396ac2
+paso 120 #58f53c9e536c2812
+paso 121 #bad8ab70a28c5e71
+paso 122 #1b9c39fbd9b5fa8e
+paso 123 #556eaba7cf23e4c7
+paso 124 #b3a41d689584d026
+paso 125 #e7f72319cce945e8
+paso 126 #f6120c499f609616
+paso 127 #dfffaee653d7f822
+paso 128 #b595ac2713fefde1
+paso 129 #32aa80f34f7c6d8c
+paso 130 #110ead0748fb5db1
+paso 131 #998322f30233ed69
+paso 132 #5b6b5f2751f21edf
+paso 133 #d66da90dd6376ba4
+paso 134 #c6fb68d4d45929d5
+paso 135 #678bb3d3dccc8629
+paso 136 #69e7d328f516c6b9
+paso 137 #51a3353cccda88ab
+paso 138 #25abbcd16e6141c9
+paso 139 #0576de427c12fcbb
+paso 140 #ba19a9b082077e96
+paso 141 #3f959e924edbbc67
+paso 142 #22acf5a39f5c0815
+paso 143 #fa6bf836ab0d6d92
+paso 144 #7aeda1ec41f9d167
+paso 145 #999aa9829cb8553a
+paso 146 #193e9edf073ddd5e
+paso 147 #13260264c646d39c
+paso 148 #754c763a691d0fc0
+paso 149 #db8b1ca31cbf30c4
+paso 150 #46f6deaa6a8a23c5
+paso 151 #1ca8b44ae55a6b18
+paso 152 #d0d4ff504d6f9faa
+paso 153 #d544171afe1302e5
+paso 154 #82a9b48c7c3307b9
+paso 155 #fee6f0bb41eb51e6
+paso 156 #a626f46c45d69c22
+paso 157 #e599f9f7fcb7fd2f
+paso 158 #787682673fc09f04
+paso 159 #f262cbc2f5869515
+paso 160 #ba46fadaa0f9b01f
+paso 161 #c0f10cd703016696
+paso 162 #ec127357b5ccf474
+paso 163 #a84089b7ab4dba8d
+paso 164 #9fb184527da6993d
+paso 165 #3c21ba8684a3d03d
+paso 166 #f9d6bf774572e360
+paso 167 #2b9d5cbbea667d97
+paso 168 #5247dfc98a016525
+paso 169 #dcde4c49aba3346e
+paso 170 #836f20deb5123780
+paso 171 #0812f528e1a42635
+paso 172 #1f18775cb9dded2a
+paso 173 #e098339c935bcb1e
+paso 174 #c78dde5d35357a4e
+paso 175 #19a2992cba061449
+paso 176 #5a356104d36e9c86
+paso 177 #34532231fa016136
+paso 178 #8f9f5f30e52db858
+paso 179 #28bc40380e98649e
+paso 180 #da4f6d1931167067
+paso 181 #7811b391d25e2e92
+paso 182 #7f4c63a6fd54b486
+paso 183 #0755b351b11f5c14
+paso 184 #7249ce1507ee116e
+paso 185 #51de1e5859401d03
+paso 186 #49146fc9824bac63
+paso 187 #e042e327d78e5ae7
+paso 188 #dc2cc54a2de721f1
+paso 189 #5d4776e0f8fdb889
+paso 190 #e9b7aa80ad118752
+paso 191 #2f83d6b1c10510bd
+paso 192 #103da33cec6077a7
+paso 193 #7f9e78d159f75c39
+paso 194 #ee23eb3d7135fb7c
+paso 195 #67c0f960d17f28c8
+paso 196 #7a78b4908c031769
+paso 197 #3d68562fcca2f86e
+paso 198 #62271f03162930ca
+paso 199 #e65071212d703204
+paso 200 #d8d1605390b6efdf
+estado #96b86adaad46c289
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #8d4e0954a1e867fb
+paso 1 #857d7938f70f8d00
+paso 2 #cdcf3344a9e04966
+paso 3 #37c6b22bc0e21f27
+paso 4 #abecef7cbcf71b2e
+paso 5 #127c659d96204543
+paso 6 #7c2aee4728ff6714
+paso 7 #fb560661f010079c
+paso 8 #3a9017e55cf18b01
+paso 9 #f9e5fee666474935
+paso 10 #993b4b1daf0d2805
+paso 11 #a79a519c44d5ba78
+paso 12 #9670610954e69d0e
+paso 13 #5687e62962901c6d
+paso 14 #a6debc2a741445d9
+paso 15 #ea57700810c507b5
+paso 16 #8b03abebb72bdb8e
+paso 17 #38b50e5108510edb
+paso 18 #d8e030e2971ba7d4
+paso 19 #a910f3123b0c193b
+paso 20 #aca8b8cdc723ebdd
+paso 21 #a4c350d06ac7e24a
+paso 22 #b0b9dfc5e1b868f8
+paso 23 #27135205b7f5b799
+paso 24 #42bb2fb8c4769f70
+paso 25 #fddd86e2bcb8ee71
+paso 26 #3cb5d2ff20ae56ce
+paso 27 #8708906a440ad646
+paso 28 #f2320068e0affd6b
+paso 29 #921bd82195aaf0e4
+paso 30 #6566accd7082f3cf
+paso 31 #385d5dbc88f1624f
+paso 32 #b1ae85a2607e6ca4
+paso 33 #8a2fb8877995e525
+paso 34 #5804f2abe868b746
+paso 35 #47c1ccfc2c35ae8c
+paso 36 #7c46b00a1725a7a2
+paso 37 #e8376388560627d4
+paso 38 #521ae9d985794a6b
+paso 39 #e01400af553fa07e
+paso 40 #ef6fb428a8cbf2cc
+paso 41 #3ffb632611afb561
+paso 42 #0d28aa148d668b8e
+paso 43 #e397a2f02b2e4ab2
+paso 44 #c290d74eca2a84e7
+paso 45 #d267ec868f0ae1cd
+paso 46 #87b8c315c59c8364
+paso 47 #fb5d0856b5ee3e15
+paso 48 #ee364789993e18fa
+paso 49 #b4fe62e909b2026f
+paso 50 #4bda7a29c5147a89
+paso 51 #ec8353a5e9443515
+paso 52 #95612fbb27f31a3a
+paso 53 #72a356184bb1d329
+paso 54 #c9f97507031075c8
+paso 55 #e26a6e395073883f
+paso 56 #df86bd8183a6bbb6
+paso 57 #0500242d3b850306
+paso 58 #f900af59601b007c
+paso 59 #21d40c760d00a9d4
+paso 60 #696753b8990b65c0
+paso 61 #c27a469acb21f970
+paso 62 #d47dde02100a5dca
+paso 63 #7dd8d3bbf2c03b75
+paso 64 #13533fd1ef300a62
+paso 65 #5be136e8ac20074b
+paso 66 #17cadeff1108caca
+paso 67 #8b18a0cc4a0953e0
+paso 68 #13fd30c351b1137c
+paso 69 #74633d0b69cd3936
+paso 70 #fdeba3a289757c2a
+paso 71 #6a6e7fccdd131d25
+paso 72 #2cf40b8d22cb4077
+paso 73 #971d19f40713df79
+paso 74 #fb3e6262b126f982
+paso 75 #0a054395e038089d
+paso 76 #174658a4e4f7afb5
+paso 77 #924e94c7d2394e44
+paso 78 #385f3e522bdd354f
+paso 79 #50d773dc95e2878d
+paso 80 #57adb5c7ea6e47f4
+paso 81 #acbd3340d0b70e4f
+paso 82 #29499bc151f8578b
+paso 83 #602762010a2030bb
+paso 84 #eb1d26f643d6417b
+paso 85 #b2f8a476128cad00
+paso 86 #899d627e5f224fa6
+paso 87 #973168b681fadc93
+paso 88 #3b43122a57a5f979
+paso 89 #973e9f26971a24d6
+paso 90 #5da306dd080681e9
+paso 91 #b0f64873d70da7e5
+paso 92 #5c1f0c51b94c33d4
+paso 93 #198bf55da2aaf08a
+paso 94 #2cb8d918a28ff4c4
+paso 95 #737f526542396910
+paso 96 #62090c502b3422b7
+paso 97 #20c31b012fd55b97
+paso 98 #d427c24c7e0d903a
+paso 99 #5b8f2402f3f00dc3
+paso 100 #5c1f3b7ded3e586c
+paso 101 #83426a4604bb6c13
+paso 102 #6c6b4349cb77b6cd
+paso 103 #4af2feadcaf3549e
+paso 104 #05d48a2345cb084a
+paso 105 #95bdce126b4b29ae
+paso 106 #ca095df3b095905c
+paso 107 #8c551013f363e872
+paso 108 #cb6f79681e9b087f
+paso 109 #1a7ea9dd1ecdc244
+paso 110 #ab96b65e43ebe010
+paso 111 #e525e6788d5b0ecb
+paso 112 #054b7eb6c7937c16
+paso 113 #65fdd69d7075aff7
+paso 114 #acd72f64d5349bb5
+paso 115 #2b931bcffea15c87
+paso 116 #448cb8628ac4ecef
+paso 117 #c3e20e7751c85250
+paso 118 #a0e05f16bdbcc0a1
+paso 119 #ac73c1562c221b54
+paso 120 #2776ad185081c8ed
+paso 121 #7a703ddca0428891
+paso 122 #c404b7b65fe66247
+paso 123 #d6808675c58af855
+paso 124 #ac900735d35a0b61
+paso 125 #aec195bf7022edf6
+paso 126 #47bb049f8598ef8a
+paso 127 #1c43e8c4bb5f1ebf
+paso 128 #66346535ccb0c012
+paso 129 #01583ce2de6546e7
+paso 130 #14ec1ff65526eab7
+paso 131 #38799486b710d7ec
+paso 132 #11590d79013d5a28
+paso 133 #a3421b34f926b577
+paso 134 #d44a2cd92baeacb8
+paso 135 #0dc005067d73aa9a
+paso 136 #4ba7c803f8b21eab
+paso 137 #972bcb065fc0806d
+paso 138 #0445738d9cf1eead
+paso 139 #99c42a776e0a6f70
+paso 140 #77d031a72e58f74a
+paso 141 #ca1d9fa1d775e503
+paso 142 #f807389d28dd4788
+paso 143 #9f3a6d517605e5ee
+paso 144 #d8ea4a4d9c275834
+paso 145 #7687316a64a6d662
+paso 146 #50152027e8bac64c
+paso 147 #53db059300a6d7de
+paso 148 #027e3c0e84c21002
+paso 149 #a484e15d4271fc86
+paso 150 #e595ae61b94faece
+paso 151 #6fd59cffbfdff4eb
+paso 152 #f469de78ba39f9f4
+paso 153 #165e07b871fc4ca3
+paso 154 #102d9aaf28012e53
+paso 155 #00dbfa294af1ab55
+paso 156 #1a505fe6843b3e17
+paso 157 #1f42c03a75dc7c9a
+paso 158 #416653fe7ad04f99
+paso 159 #a136cd64579c0f45
+paso 160 #bc4388d85fe4e161
+paso 161 #349e843769fd2d01
+paso 162 #c2d5430db50d2ebe
+paso 163 #a8504a59fd1ab01c
+paso 164 #19c5421e45d8ad80
+paso 165 #244cb1251d79a775
+paso 166 #6cd3a6dd53de2505
+paso 167 #b315aeb8aa437b1c
+paso 168 #dddd525c0a804ffd
+paso 169 #23aae2d29cc7f0ef
+paso 170 #0ee3eafc46b5bc29
+paso 171 #decd1ae3e1a99e86
+paso 172 #e394ccbecc7dbf95
+paso 173 #9b9bb0b8dca43475
+paso 174 #4e393d1ae81f17fb
+paso 175 #af39584407d4a82c
+paso 176 #68f3736caff35a0b
+paso 177 #b884dfc0be547200
+paso 178 #619abf75c23c46fa
+paso 179 #2d0f2c006bcb65da
+paso 180 #b63b3ca5c64a952e
+paso 181 #487730f1c77434e6
+paso 182 #7c6891652e429595
+paso 183 #4da8d8c838cd32d5
+paso 184 #c43f0fe8f097fe3d
+paso 185 #d23259c51ee393fd
+paso 186 #0409ae9b74812f68
+paso 187 #8e3040d5bad784c4
+paso 188 #5f1c6d5345a0084e
+paso 189 #8d2730e8f97dc7a8
+paso 190 #8053c60f6bd72639
+paso 191 #79d94faaa1868edb
+paso 192 #e80d55ff9deef151
+paso 193 #cdad47e238906cdd
+paso 194 #a343e8bd3afbea2a
+paso 195 #0add10c3fb094aec
+paso 196 #dbdfa2177d0a0a9b
+paso 197 #707e0e8479f37e80
+paso 198 #4265f522324a80c8
+paso 199 #a17c7ffbb58155cb
+paso 200 #c6fc650bbbda86cb
+estado #70fde4031df33ea7
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #5f7da4aac6a5fdf0
+paso 1 ENTER Prod[1]: entra a B.depositar | BLOCKED Prod[2]: espera para entrar a B.depositar | BLOCKED Prod[3]: espera para entrar a B.depositar | BLOCKED Prod[4]: espera para entrar a B.depositar | BLOCKED Prod[5]: espera para entrar a B.depositar | BLOCKED Prod[6]: espera para entrar a B.depositar | BLOCKED Prod[7]: espera para entrar a B.depositar | BLOCKED Prod[8]: espera para entrar a B.depositar | BLOCKED Prod[9]: espera para entrar a B.depositar | BLOCKED Prod[10]: espera para entrar a B.depositar | BLOCKED Prod[11]: espera para entrar a B.depositar | BLOCKED Prod[12]: espera para entrar a B.depositar | BLOCKED Prod[13]: espera para entrar a B.depositar | BLOCKED Prod[14]: espera para entrar a B.depositar | BLOCKED Prod[15]: espera para entrar a B.depositar | DECL Cons[1]: int x = 0 | DECL Cons[2]: int x = 0 | DECL Cons[3]: int x = 0 | DECL Cons[4]: int x = 0 | DECL Cons[5]: int x = 0 | DECL Cons[6]: int x = 0 | DECL Cons[7]: int x = 0 | DECL Cons[8]: int x = 0 | DECL Cons[9]: int x = 0 | DECL Cons[10]: int x = 0 | DECL Cons[11]: int x = 0 | DECL Cons[12]: int x = 0 | DECL Cons[13]: int x = 0 | DECL Cons[14]: int x = 0 | DECL Cons[15]: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #78ce0eafb35e8670
+paso 2 BLOCKED Cons[1]: espera para entrar a B.retirar | BLOCKED Cons[2]: espera para entrar a B.retirar | BLOCKED Cons[3]: espera para entrar a B.retirar | BLOCKED Cons[4]: espera para entrar a B.retirar | BLOCKED Cons[5]: espera para entrar a B.retirar | BLOCKED Cons[6]: espera para entrar a B.retirar | BLOCKED Cons[7]: espera para entrar a B.retirar | BLOCKED Cons[8]: espera para entrar a B.retirar | BLOCKED Cons[9]: espera para entrar a B.retirar | BLOCKED Cons[10]: espera para entrar a B.retirar | BLOCKED Cons[11]: espera para entrar a B.retirar | BLOCKED Cons[12]: espera para entrar a B.retirar | BLOCKED Cons[13]: espera para entrar a B.retirar | BLOCKED Cons[14]: espera para entrar a B.retirar | BLOCKED Cons[15]: espera para entrar a B.retirar | ASSIGN Prod[1]: buf[0] = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c79027edd1b03f50
+paso 3 ASSIGN Prod[1]: libre = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #421781bbbde919e2
+paso 4 ASSIGN Prod[1]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #aa8478c17903df00
+paso 5 SIGNAL Prod[1]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #d4efed7d6976334e
+paso 6 RETURN Prod[1]: retorna de B.depositar, libera el monitor | ENTER Prod[14]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a0aa67eb3a897213
+paso 7 ASSIGN Prod[14]: buf[1] = 14 | BLOCKED Prod[1]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #3397d36c88e3ae6b
+paso 8 ASSIGN Prod[14]: libre = 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #df1419e3ae4d0c05
+paso 9 ASSIGN Prod[14]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #d04919c4776d2145
+paso 10 SIGNAL Prod[14]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #426ce22909614861
+paso 11 RETURN Prod[14]: retorna de B.depositar, libera el monitor | ENTER Cons[6]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #cedb813ab296d2c1
+paso 12 ASSIGN Cons[6]: r = 1 | BLOCKED Prod[14]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #eb7336cac72775b0
+paso 13 ASSIGN Cons[6]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #92f149eaba38ebb7
+paso 14 ASSIGN Cons[6]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #8a0606a6643c74ba
+paso 15 ASSIGN Cons[6]: suma = 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f09fbe1dd25c8a0a
+paso 16 ASSIGN Cons[6]: n++ => 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1a5efb8100d81502
+paso 17 SIGNAL Cons[6]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #c310de8b1c144419
+paso 18 RETURN Cons[6]: retorna de B.retirar, libera el monitor | ENTER Prod[2]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #d716e2de51e4c14c
+paso 19 ASSIGN Prod[2]: buf[2] = 2 | BLOCKED Cons[6]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5546cd541935f1ea
+paso 20 ASSIGN Prod[2]: libre = 0 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f93c700f4302e4fd
+paso 21 ASSIGN Prod[2]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #822d42be833abb02
+paso 22 SIGNAL Prod[2]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b74cc8d66911e910
+paso 23 RETURN Prod[2]: retorna de B.depositar, libera el monitor | ENTER Prod[7]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #49ba8885d272d44b
+paso 24 ASSIGN Prod[7]: buf[0] = 7 | BLOCKED Prod[2]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #7e85141b31a42c96
+paso 25 ASSIGN Prod[7]: libre = 1 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #645383029c815af2
+paso 26 ASSIGN Prod[7]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #180912cbaa92fb43
+paso 27 SIGNAL Prod[7]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2aed2122560fecb4
+paso 28 RETURN Prod[7]: retorna de B.depositar, libera el monitor | ENTER Cons[5]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #c4fa05730368b8c2
+paso 29 ASSIGN Cons[5]: r = 14 | BLOCKED Prod[7]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #68af18b63900b4aa
+paso 30 ASSIGN Cons[5]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #cff31a1d84050ef5
+paso 31 ASSIGN Cons[5]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #920cd2db1fbe0f9f
+paso 32 ASSIGN Cons[5]: suma = 15 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #7a1e8ba43edd4eba
+paso 33 ASSIGN Cons[5]: n++ => 2 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #68d5e2d531fb3ed2
+paso 34 SIGNAL Cons[5]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e46cd0f6cf07352d
+paso 35 RETURN Cons[5]: retorna de B.retirar, libera el monitor | ENTER Cons[8]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #4f782469250d686f
+paso 36 ASSIGN Cons[8]: r = 2 | BLOCKED Cons[5]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #21a80ef44d939ccd
+paso 37 ASSIGN Cons[8]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #f126fd4f7278e17f
+paso 38 ASSIGN Cons[8]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #b2f20cd35fbdcfae
+paso 39 ASSIGN Cons[8]: suma = 17 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #c726ded8bbc01cca
+paso 40 ASSIGN Cons[8]: n++ => 3 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #14e36f2c96b0d70a
+paso 41 SIGNAL Cons[8]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #608da7fd165af9dd
+paso 42 RETURN Cons[8]: retorna de B.retirar, libera el monitor | ENTER Cons[13]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #63f8bf4d6d9c0d03
+paso 43 ASSIGN Cons[13]: r = 7 | BLOCKED Cons[8]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #e26e4c2e134edd84
+paso 44 ASSIGN Cons[13]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #2bd17f4c2fc90dfc
+paso 45 ASSIGN Cons[13]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #8e2a63339002e9d1
+paso 46 ASSIGN Cons[13]: suma = 24 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #b329dcc53c9969ac
+paso 47 ASSIGN Cons[13]: n++ => 4 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #c6803e3ad07cbb33
+paso 48 SIGNAL Cons[13]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #c97909f6e6baf124
+paso 49 RETURN Cons[13]: retorna de B.retirar, libera el monitor | ENTER Cons[7]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #d460c6b53e7c20b0
+paso 50 WAIT Cons[7]: wait(notVacio) - libera el monitor y se demora | ENTER Cons[8]: entra a B.retirar | BLOCKED Cons[13]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #ad07d67707a0e398
+paso 51 WAIT Cons[8]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[5]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #7c929d5860d4388a
+paso 52 ASSIGN Prod[5]: buf[1] = 5 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #5e412f61abd1bb76
+paso 53 ASSIGN Prod[5]: libre = 2 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #ebf9a22f0b4b6361
+paso 54 ASSIGN Prod[5]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #ed2f96ca943d6539
+paso 55 SIGNAL Prod[5]: signal(notVacio) - despierta a Cons[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #8debfbcc1bb6beb9
+paso 56 RETURN Prod[5]: retorna de B.depositar, libera el monitor | ENTER Prod[4]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #c2344e62bceb2c16
+paso 57 ASSIGN Prod[4]: buf[2] = 4 | BLOCKED Prod[5]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #c933e2fe115560c7
+paso 58 ASSIGN Prod[4]: libre = 0 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #7447514285674622
+paso 59 ASSIGN Prod[4]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #46a587871671b3e1
+paso 60 SIGNAL Prod[4]: signal(notVacio) - despierta a Cons[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #540b180d7f81a671
+paso 61 RETURN Prod[4]: retorna de B.depositar, libera el monitor | ENTER Prod[11]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #3a38e810770f18e1
+paso 62 ASSIGN Prod[11]: buf[0] = 11 | BLOCKED Prod[4]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #de4d59223a39ca8e
+paso 63 ASSIGN Prod[11]: libre = 1 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #adf97d576d8cf871
+paso 64 ASSIGN Prod[11]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #d5ef6deb8837814d
+paso 65 SIGNAL Prod[11]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #6cad18a6debe7ac6
+paso 66 RETURN Prod[11]: retorna de B.depositar, libera el monitor | ENTER Prod[4]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #0913dc84e6ad9e01
+paso 67 WAIT Prod[4]: wait(notLleno) - libera el monitor y se demora | ENTER Prod[8]: entra a B.depositar | BLOCKED Prod[11]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #fb6ebc0286ae636b
+paso 68 WAIT Prod[8]: wait(notLleno) - libera el monitor y se demora | ENTER Cons[9]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #e0460ff976e8ceec
+paso 69 ASSIGN Cons[9]: r = 5 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #226e628aff9cc171
+paso 70 ASSIGN Cons[9]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #e6296feaaa48db2e
+paso 71 ASSIGN Cons[9]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #0a52bdde1555b06d
+paso 72 ASSIGN Cons[9]: suma = 29 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #47b4bd2020d32e98
+paso 73 ASSIGN Cons[9]: n++ => 5 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #cda8ca5cf389bbaf
+paso 74 SIGNAL Cons[9]: signal(notLleno) - despierta a Prod[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #26d4d72285ffc4a4
+paso 75 RETURN Cons[9]: retorna de B.retirar, libera el monitor | ENTER Prod[3]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #b2943df8ae4e0e3d
+paso 76 ASSIGN Prod[3]: buf[1] = 3 | BLOCKED Cons[9]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #31eeaefe0890d173
+paso 77 ASSIGN Prod[3]: libre = 2 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #76f97f030820dbee
+paso 78 ASSIGN Prod[3]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #80edb446ed38284e
+paso 79 SIGNAL Prod[3]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #d6b0fdf0d1dec7a4
+paso 80 RETURN Prod[3]: retorna de B.depositar, libera el monitor | REENTER Cons[8]: reingresa a B | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #89f4f7723cddf992
+paso 81 ASSIGN Cons[8]: r = 4 | BLOCKED Prod[3]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #8774e17f811e04c7
+paso 82 ASSIGN Cons[8]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #79d39a5b20ea52be
+paso 83 ASSIGN Cons[8]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #bc00088e431ba152
+paso 84 ASSIGN Cons[8]: suma = 33 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #d75d9d07ce1405a6
+paso 85 ASSIGN Cons[8]: n++ => 6 | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #be607b46cafd1190
+paso 86 SIGNAL Cons[8]: signal(notLleno) - despierta a Prod[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #81f647a12f6690e0
+paso 87 RETURN Cons[8]: retorna de B.retirar, libera el monitor | ENTER Prod[10]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #e6c73735e649411b
+paso 88 ASSIGN Prod[10]: buf[2] = 10 | TERMINATED Cons[8]: termina | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #22c793c95c377a6e
+paso 89 ASSIGN Prod[10]: libre = 0 | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #a635f846b97ad42f
+paso 90 ASSIGN Prod[10]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #c00c33d76a925da1
+paso 91 SIGNAL Prod[10]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #23aaeededa6aac50
+paso 92 RETURN Prod[10]: retorna de B.depositar, libera el monitor | ENTER Cons[15]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #74233d35f1b76105
+paso 93 ASSIGN Cons[15]: r = 11 | BLOCKED Prod[10]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #71cc55b7fa54e461
+paso 94 ASSIGN Cons[15]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #84d513431d612511
+paso 95 ASSIGN Cons[15]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #92340ef01813a54a
+paso 96 ASSIGN Cons[15]: suma = 44 | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #fcfb22a257a6082a
+paso 97 ASSIGN Cons[15]: n++ => 7 | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #9f0b7a565ca39278
+paso 98 SIGNAL Cons[15]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #36cc89813c488030
+paso 99 RETURN Cons[15]: retorna de B.retirar, libera el monitor | ENTER Prod[6]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #3c4d75ed03c8025f
+paso 100 ASSIGN Prod[6]: buf[0] = 6 | BLOCKED Cons[15]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #83bef0c53700cb78
+paso 101 ASSIGN Prod[6]: libre = 1 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #5580f508ef12011f
+paso 102 ASSIGN Prod[6]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #b8e60672ade4587d
+paso 103 SIGNAL Prod[6]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #36d264dd80c86908
+paso 104 RETURN Prod[6]: retorna de B.depositar, libera el monitor | ENTER Prod[2]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #0beb625bc6496583
+paso 105 WAIT Prod[2]: wait(notLleno) - libera el monitor y se demora | REENTER Cons[7]: reingresa a B | BLOCKED Prod[6]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #1c100b361c2ecf4d
+paso 106 ASSIGN Cons[7]: r = 3 | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #18284f32f8883cf5
+paso 107 ASSIGN Cons[7]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #8f3f40ba93e9eaa9
+paso 108 ASSIGN Cons[7]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #5326bcec057dbb54
+paso 109 ASSIGN Cons[7]: suma = 47 | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #916156d4a91b544f
+paso 110 ASSIGN Cons[7]: n++ => 8 | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #9019fb2ba5380039
+paso 111 SIGNAL Cons[7]: signal(notLleno) - despierta a Prod[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #bd16f0427499227d
+paso 112 RETURN Cons[7]: retorna de B.retirar, libera el monitor | ENTER Prod[10]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #bcee211256e28032
+paso 113 ASSIGN Prod[10]: buf[1] = 10 | BLOCKED Cons[7]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #01928937cea4d511
+paso 114 ASSIGN Prod[10]: libre = 2 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #4c0ef15b3509c99f
+paso 115 ASSIGN Prod[10]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #c755eac89e8d2ec3
+paso 116 SIGNAL Prod[10]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #881cffe5dc9ad9c2
+paso 117 RETURN Prod[10]: retorna de B.depositar, libera el monitor | ENTER Cons[14]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #9bf8c6dda2ed5b2d
+paso 118 ASSIGN Cons[14]: r = 10 | TERMINATED Prod[10]: termina | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #69ca468a0e7f67b7
+paso 119 ASSIGN Cons[14]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #1c37e65b4a4e06ba
+paso 120 ASSIGN Cons[14]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #00d947de734295c1
+paso 121 ASSIGN Cons[14]: suma = 57 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #96520ffb7cf89284
+paso 122 ASSIGN Cons[14]: n++ => 9 | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #34684da0d3c984a9
+paso 123 SIGNAL Cons[14]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #9c5c60bb75daa4ca
+paso 124 RETURN Cons[14]: retorna de B.retirar, libera el monitor | ENTER Cons[10]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #d13af2cf04723f4c
+paso 125 ASSIGN Cons[10]: r = 6 | BLOCKED Cons[14]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #e553c2bfa0d5e25e
+paso 126 ASSIGN Cons[10]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #04178e9dca64833a
+paso 127 ASSIGN Cons[10]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #d9852ec0283b7305
+paso 128 ASSIGN Cons[10]: suma = 63 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #ea495b3429454638
+paso 129 ASSIGN Cons[10]: n++ => 10 | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #87a42fde38732421
+paso 130 SIGNAL Cons[10]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #c22f058faa3ff9da
+paso 131 RETURN Cons[10]: retorna de B.retirar, libera el monitor | ENTER Cons[9]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #87823091e63d4c15
+paso 132 ASSIGN Cons[9]: r = 10 | BLOCKED Cons[10]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #cc696a5e7fc9f0f1
+paso 133 ASSIGN Cons[9]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #668314353d4518c0
+paso 134 ASSIGN Cons[9]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #d8f38388dd8f742a
+paso 135 ASSIGN Cons[9]: suma = 73 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #deddfa7a70d27c47
+paso 136 ASSIGN Cons[9]: n++ => 11 | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #0caff57dc060fe34
+paso 137 SIGNAL Cons[9]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #72769efc9755f5d6
+paso 138 RETURN Cons[9]: retorna de B.retirar, libera el monitor | ENTER Cons[7]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #318422c877c60ff5
+paso 139 WAIT Cons[7]: wait(notVacio) - libera el monitor y se demora | ENTER Cons[14]: entra a B.retirar | TERMINATED Cons[9]: termina | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #69b500c7dd22db94
+paso 140 WAIT Cons[14]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[11]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #b647cea8613d19bd
+paso 141 ASSIGN Prod[11]: buf[2] = 11 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #31a4542774cdc5b0
+paso 142 ASSIGN Prod[11]: libre = 0 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #2e135aa182cff068
+paso 143 ASSIGN Prod[11]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #eb3550b2e9f2c387
+paso 144 SIGNAL Prod[11]: signal(notVacio) - despierta a Cons[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #7b282775f863cde2
+paso 145 RETURN Prod[11]: retorna de B.depositar, libera el monitor | ENTER Cons[10]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #cb04c47728791db1
+paso 146 ASSIGN Cons[10]: r = 11 | TERMINATED Prod[11]: termina | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #772a4c00a4eb14f0
+paso 147 ASSIGN Cons[10]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #b14831f83ec48487
+paso 148 ASSIGN Cons[10]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #81b6b2f2a3c9d1b6
+paso 149 ASSIGN Cons[10]: suma = 84 | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #7afb0e912e3d49c0
+paso 150 ASSIGN Cons[10]: n++ => 12 | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #55362e056e4afba1
+paso 151 SIGNAL Cons[10]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #958410c678de179f
+paso 152 RETURN Cons[10]: retorna de B.retirar, libera el monitor | REENTER Prod[4]: reingresa a B | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #2c4e7dc7b9972b15
+paso 153 ASSIGN Prod[4]: buf[0] = 4 | TERMINATED Cons[10]: termina | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #30247e57d89bb955
+paso 154 ASSIGN Prod[4]: libre = 1 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #df7c5cc0e30ed2ec
+paso 155 ASSIGN Prod[4]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #866f0e760969bde8
+paso 156 SIGNAL Prod[4]: signal(notVacio) - despierta a Cons[14] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #7a52f1f49fbd945e
+paso 157 RETURN Prod[4]: retorna de B.depositar, libera el monitor | ENTER Cons[2]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #6b15ebff26dd6f91
+paso 158 ASSIGN Cons[2]: r = 4 | TERMINATED Prod[4]: termina | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #71634894c8cb3e16
+paso 159 ASSIGN Cons[2]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #5797c848f9289e35
+paso 160 ASSIGN Cons[2]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #20c5bc9814c00144
+paso 161 ASSIGN Cons[2]: suma = 88 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #4159a966284f978a
+paso 162 ASSIGN Cons[2]: n++ => 13 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #9cf8f1d41412389e
+paso 163 SIGNAL Cons[2]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #f74758ce489e2a64
+paso 164 RETURN Cons[2]: retorna de B.retirar, libera el monitor | ENTER Prod[7]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #c099fbe4e021673c
+paso 165 ASSIGN Prod[7]: buf[1] = 7 | BLOCKED Cons[2]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #19f0a5c1bb7973f5
+paso 166 ASSIGN Prod[7]: libre = 2 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #adb9a28f9f21baa0
+paso 167 ASSIGN Prod[7]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #952c21ff2a139516
+paso 168 SIGNAL Prod[7]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #3462a842f89a0836
+paso 169 RETURN Prod[7]: retorna de B.depositar, libera el monitor | ENTER Prod[15]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #7856acde1a83b3cf
+paso 170 ASSIGN Prod[15]: buf[2] = 15 | TERMINATED Prod[7]: termina | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #34339237fe016692
+paso 171 ASSIGN Prod[15]: libre = 0 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #c72dea5eec534a7e
+paso 172 ASSIGN Prod[15]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #1eb2a542aecf52c8
+paso 173 SIGNAL Prod[15]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #27bb14cc04b23578
+paso 174 RETURN Prod[15]: retorna de B.depositar, libera el monitor | ENTER Cons[13]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #e3d2ea475abc5699
+paso 175 ASSIGN Cons[13]: r = 7 | BLOCKED Prod[15]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #6a82ebb0d822ab37
+paso 176 ASSIGN Cons[13]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #7c4fa618c29f9822
+paso 177 ASSIGN Cons[13]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #a686f1fd4602c661
+paso 178 ASSIGN Cons[13]: suma = 95 | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #7b1871a1da3f263d
+paso 179 ASSIGN Cons[13]: n++ => 14 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #7e06ef925ab20bcf
+paso 180 SIGNAL Cons[13]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #d536f91b00c71a48
+paso 181 RETURN Cons[13]: retorna de B.retirar, libera el monitor | ENTER Prod[6]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #2bfded9033ffaaa2
+paso 182 ASSIGN Prod[6]: buf[0] = 6 | TERMINATED Cons[13]: termina | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #6680065161bdaa1a
+paso 183 ASSIGN Prod[6]: libre = 1 | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #f535ec73926b81bf
+paso 184 ASSIGN Prod[6]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #7e205bfc66aae6e9
+paso 185 SIGNAL Prod[6]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #82308151ad0f462c
+paso 186 RETURN Prod[6]: retorna de B.depositar, libera el monitor | ENTER Cons[1]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #0ea146ba783ebd6b
+paso 187 ASSIGN Cons[1]: r = 15 | TERMINATED Prod[6]: termina | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #3b17f175432918d6
+paso 188 ASSIGN Cons[1]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #46a65c33eedde17d
+paso 189 ASSIGN Cons[1]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #24eb20487f54c543
+paso 190 ASSIGN Cons[1]: suma = 110 | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #b12715847091f4cd
+paso 191 ASSIGN Cons[1]: n++ => 15 | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #1b73690b90162ff0
+paso 192 SIGNAL Cons[1]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #25fc150e5b5eb500
+paso 193 RETURN Cons[1]: retorna de B.retirar, libera el monitor | REENTER Prod[8]: reingresa a B | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #a58104fc90f13cd1
+paso 194 ASSIGN Prod[8]: buf[1] = 8 | BLOCKED Cons[1]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #6c7b8010946f83d2
+paso 195 ASSIGN Prod[8]: libre = 2 | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #d09dc677299b95dd
+paso 196 ASSIGN Prod[8]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #bd8c35fdb90d72aa
+paso 197 SIGNAL Prod[8]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #2854fa635cb848db
+paso 198 RETURN Prod[8]: retorna de B.depositar, libera el monitor | ENTER Prod[15]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #11f54bb40d5598af
+paso 199 ASSIGN Prod[15]: buf[2] = 15 | BLOCKED Prod[8]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #616f52472e0be5ae
+paso 200 ASSIGN Prod[15]: libre = 0 | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #bcbe9927ef805c3b
+estado #75fd3b51025234df
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #bbb66d220467b2c2
+paso 1 #78ce0eafb35e8670
+paso 2 #c79027edd1b03f50
+paso 3 #421781bbbde919e2
+paso 4 #aa8478c17903df00
+paso 5 #d4efed7d6976334e
+paso 6 #3889df4e14cf63c6
+paso 7 #52016b5b7237d74b
+paso 8 #d572dd1f230965e3
+paso 9 #29dc2a799ad2facd
+paso 10 #23bff8ab33ba87cd
+paso 11 #02f707a03ee4852b
+paso 12 #c13783fbd01befb9
+paso 13 #b9a5eeb31d57ac5b
+paso 14 #74f90c0b36662356
+paso 15 #70d1611c953dffa0
+paso 16 #6d3c0d4c44dc82c1
+paso 17 #361a823ba13ca3f9
+paso 18 #f02dcb77a5b60180
+paso 19 #8fc4daf9fa477d1d
+paso 20 #c627a4849fec328b
+paso 21 #445fa4e22e834f6c
+paso 22 #3680935d790615a8
+paso 23 #7654086c63051bbb
+paso 24 #ff606f4df4efee31
+paso 25 #99b0417eb9d3b056
+paso 26 #c4cee8b2cc78bc5b
+paso 27 #c1180fcae3560b6e
+paso 28 #cbc7fc2c466b4491
+paso 29 #44a6b58ad7f952f7
+paso 30 #b405776bcc52b03a
+paso 31 #e3ae11de914e7add
+paso 32 #fc39cb40727c2236
+paso 33 #7d21c7e60e9e4cf5
+paso 34 #e283ee4ef3ffff25
+paso 35 #721554c12119c3f1
+paso 36 #d75cc99d04fbf923
+paso 37 #4551fcc86d1e2265
+paso 38 #bc7434e322d96594
+paso 39 #358913e8392810bb
+paso 40 #3c1d0ac6381d5a9e
+paso 41 #235815e2bf91e8f7
+paso 42 #94a5eb217919f6e8
+paso 43 #be3bfdce469b6772
+paso 44 #374aeffed3cf841b
+paso 45 #93674c0a23441d46
+paso 46 #bc2ce65f50f1b32d
+paso 47 #79332b13c2355d8b
+paso 48 #33b3f25fd2bb810f
+paso 49 #5409ec67d7b27695
+paso 50 #ea138ad6a1ec3420
+paso 51 #7c073b92bdf1e117
+paso 52 #bb49e1bb5dd61bcb
+paso 53 #de0ef1f7a50f4f06
+paso 54 #29839433028a0a24
+paso 55 #146e5b9a36d54dbf
+paso 56 #eda5b9e1caafdbde
+paso 57 #e8f453865ca12705
+paso 58 #8bc13562e04b33a2
+paso 59 #661344abccc080b3
+paso 60 #236aeb5216b46ae3
+paso 61 #be2b85a94228539b
+paso 62 #6a8329bdb1dc2970
+paso 63 #363f3916a17f3672
+paso 64 #7e84e87f40674fec
+paso 65 #0ee6bc499afe992d
+paso 66 #ab2aa229b2da0ffb
+paso 67 #fb94625cbb2fcf7e
+paso 68 #8c0dd5916db72eee
+paso 69 #3cacfb042473d4a0
+paso 70 #df8f83c4de13638c
+paso 71 #689deb78cb1c1cf4
+paso 72 #f633353c3b8a1913
+paso 73 #958cdcab5bf44283
+paso 74 #aeb1dbee26f107a6
+paso 75 #15e3285dd2693d4f
+paso 76 #4a460f72bdadc397
+paso 77 #32573c6c966c37e2
+paso 78 #c2349d86ed7002cb
+paso 79 #3707ace2e488e4d4
+paso 80 #be4f49cc885f7ac8
+paso 81 #d3da407cbdac3ea8
+paso 82 #bca81497eefe9cd4
+paso 83 #aa1a92077272139b
+paso 84 #6f6a8f5026d5ba9d
+paso 85 #07f7d074b6c5aa10
+paso 86 #aa710bb3ed574efb
+paso 87 #8824927e9834538e
+paso 88 #e5e3cfdebcc79729
+paso 89 #ca7110ee54b4368a
+paso 90 #eca2f3e8f7f38721
+paso 91 #cb5f2a56d5519e47
+paso 92 #8a3fdfd6c7fa6707
+paso 93 #2c2ee4a177ed0eb7
+paso 94 #a7cd266bb5d4d4fc
+paso 95 #7a859579528bc045
+paso 96 #b67d841232342d1c
+paso 97 #a647e8c7c438a983
+paso 98 #074904d2a387eed5
+paso 99 #70468931c9761817
+paso 100 #a44a84a252c6b172
+paso 101 #459ceb13fa382cf0
+paso 102 #eff247b1d970ce81
+paso 103 #2eb9e3ce65b32570
+paso 104 #7b89560d0c474872
+paso 105 #d758b9a243500961
+paso 106 #825476cbbfbb8282
+paso 107 #703b70d9600dfe03
+paso 108 #cfa82c21c7ecb5e7
+paso 109 #afc89e20d149fb7b
+paso 110 #b024f7eb2437ee0a
+paso 111 #c29979d10cfd2de4
+paso 112 #3cb260404138eb39
+paso 113 #f4deb1f147b15746
+paso 114 #102b249c041ec427
+paso 115 #6fbf7ece217f8f04
+paso 116 #395982bf2bab3d16
+paso 117 #99c653e3a6a83fa7
+paso 118 #8cacb5cdeac49d79
+paso 119 #c57dda209bae5aba
+paso 120 #c331ad16cbb8ebe9
+paso 121 #59b935ffd6817cb0
+paso 122 #51e664cd9c585360
+paso 123 #d2416c5e2c869d98
+paso 124 #20f6154c2d360be8
+paso 125 #63a93d18c0477b32
+paso 126 #bbf0f7ef964d4340
+paso 127 #047cb6b8ea6f15eb
+paso 128 #e274b2c18141c00f
+paso 129 #b0267be09bbdacb6
+paso 130 #752f3dda8db7496f
+paso 131 #09888f04362d3460
+paso 132 #1536fb15f2eea7eb
+paso 133 #73a3c517132b2583
+paso 134 #73e12fca34c9b6c7
+paso 135 #e4a6ce6fbf708c2d
+paso 136 #5d143bf222091ec8
+paso 137 #c28b1deef21c1f49
+paso 138 #b8a304a65a91eac2
+paso 139 #bc789943b83e3af0
+paso 140 #7e029575b0371c8b
+paso 141 #65e1c666e24cf442
+paso 142 #430b4121cb58f3ab
+paso 143 #92d58a451478b533
+paso 144 #ca5a70bb85221370
+paso 145 #c34dca3ecba323ca
+paso 146 #4481a3729db5e095
+paso 147 #cf83c7205bb176ce
+paso 148 #e199624aaa988d61
+paso 149 #5b15ad77b50894a2
+paso 150 #86fda602b81c68c2
+paso 151 #1f0538540ac702c1
+paso 152 #b05347b09f2d597e
+paso 153 #6dfb5c5fcc006aff
+paso 154 #eb2f83c722128d0e
+paso 155 #e67cdfeb9d0a8806
+paso 156 #e172c4439ee3c802
+paso 157 #26647157d8b29332
+paso 158 #5487de1cf7476f01
+paso 159 #e36cd228261c5593
+paso 160 #72c4bbb849008159
+paso 161 #0f3552197bb39b3b
+paso 162 #ec580004476a832f
+paso 163 #25ebc91aa043538c
+paso 164 #0a769dda20747674
+paso 165 #dab8eda2a6074fa3
+paso 166 #a76d52b3685453ff
+paso 167 #cc0c191d6cc989d4
+paso 168 #3d6eff0f1d8d5045
+paso 169 #9f52597db73f725b
+paso 170 #997ce5247ea0f26a
+paso 171 #f4ed11f09616b7df
+paso 172 #bae643f86002cfd7
+paso 173 #9c1dc5eb31a6f854
+paso 174 #33f18e0d2293d5b2
+paso 175 #8067c9ee8e744c8d
+paso 176 #e2a26152e04ed40d
+paso 177 #54830dd2ca96c28f
+paso 178 #333bd07b28778a4e
+paso 179 #ac46aa3d8882c3df
+paso 180 #19fea89ee9afd0a4
+paso 181 #b6b90db372897f9e
+paso 182 #cd0a217f6d18e755
+paso 183 #8987ed5408a18436
+paso 184 #8808245036610772
+paso 185 #c6cf9b278744d41b
+paso 186 #cdbbaafa90b1385c
+paso 187 #bcb5f5118f6ac6fb
+paso 188 #6bc7cab44cb985f1
+paso 189 #499c7a7a636e3992
+paso 190 #e94d40fd96191791
+paso 191 #8db3551c5a604915
+paso 192 #993e4144d7c5587d
+paso 193 #7b77c2235a63d5fb
+paso 194 #db009791f679a2d9
+paso 195 #ba331fdb4d3dfe69
+paso 196 #0cafc4aae6f87272
+paso 197 #f29c2cfc8210e8ef
+paso 198 #4b09b98fc2fc162c
+paso 199 #ecdb95baa36722af
+paso 200 #66a367d8dd49ac85
+estado #4ec69f78e01d41e2
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #8d4e0954a1e867fb
+paso 1 #78ce0eafb35e8670
+paso 2 #c79027edd1b03f50
+paso 3 #421781bbbde919e2
+paso 4 #aa8478c17903df00
+paso 5 #d4efed7d6976334e
+paso 6 #d35462f54feace4b
+paso 7 #6b9949f7f3b65325
+paso 8 #28e93ca3d377cb97
+paso 9 #e428d9b8073520ca
+paso 10 #1abd383d72d3c127
+paso 11 #54475b7e01e37a21
+paso 12 #1f2fda6ee04fe508
+paso 13 #0d144769c98cc416
+paso 14 #d027f498710e64a4
+paso 15 #701d3082b45c4678
+paso 16 #f50004e4ad263b83
+paso 17 #aca4c370aefa74f4
+paso 18 #a02d84ce812d48a9
+paso 19 #20cdbdc7ae0a34e3
+paso 20 #250f9c6fd3a0ffda
+paso 21 #19c07b6edf2ffa5c
+paso 22 #ea50d8403f8c9a9d
+paso 23 #60da7f6e381fcff4
+paso 24 #2ad52d8f50e6c6a5
+paso 25 #a9d3f2e261a2698e
+paso 26 #aff0d78914981b84
+paso 27 #1180d1d46c985eb2
+paso 28 #3cd228156825a740
+paso 29 #c14f98729c83dcca
+paso 30 #f76872f808fe949a
+paso 31 #a1428e9e45e19cef
+paso 32 #e2d6580b14fe9149
+paso 33 #d36f048dbea46407
+paso 34 #d94331448128fa5f
+paso 35 #5b485fa4e7ff4b43
+paso 36 #2ddad2188d9ff194
+paso 37 #91082052d2ba8211
+paso 38 #be2e6d041df3a1f5
+paso 39 #9e150a10e5f38620
+paso 40 #a6eb1ea7a7bfef7b
+paso 41 #dec2f4ff295932fe
+paso 42 #2c771cbf98056f1c
+paso 43 #90c57d27fa2cd24b
+paso 44 #c61e39a581ad1ee0
+paso 45 #7d441bfb20276f16
+paso 46 #04014a99b3692f1d
+paso 47 #72b41a1f6081075c
+paso 48 #ca5a1ef0e5175fdd
+paso 49 #1666e7de18ddcdaf
+paso 50 #6300ddff24aa9de5
+paso 51 #6f74a1d570ac3db1
+paso 52 #8e5e614e6e150c7b
+paso 53 #59e2eefba5bbfd16
+paso 54 #5d82a79142205f6d
+paso 55 #c061717683367267
+paso 56 #fc0c2e4fe1464351
+paso 57 #0651de61b7643142
+paso 58 #02e63a64c7b0e0ba
+paso 59 #a1b6e24080f00e00
+paso 60 #d7e27d42c70b5e3e
+paso 61 #b526b3cb338e3bf0
+paso 62 #d4049fbd6db6648b
+paso 63 #630f87f2c5730393
+paso 64 #adad8ade30e73a09
+paso 65 #ac3b524db42030fe
+paso 66 #f9e1a84037bde08e
+paso 67 #cae45eef4413a30b
+paso 68 #33137a281aa3d805
+paso 69 #b97acae4f23d82b9
+paso 70 #450dab80e2ed464c
+paso 71 #218ad21ba4c4d598
+paso 72 #aa9a88db152b1359
+paso 73 #da8b4e0df15abb52
+paso 74 #67237fbb8e71040a
+paso 75 #c02d75428e48bf07
+paso 76 #5c4113d5f2fcdaed
+paso 77 #b323f87c1cc05d4e
+paso 78 #215904f92ff47e20
+paso 79 #86ebe3f9ef96965e
+paso 80 #baa4a5f40bd76f7f
+paso 81 #8a3c9e41ea2568ec
+paso 82 #be832df0c74800a2
+paso 83 #57660cdde7d67358
+paso 84 #d2c674bdf8f5313f
+paso 85 #7c3bd0ca9553d76c
+paso 86 #0f710e6daa6d7e28
+paso 87 #a1163675303cd404
+paso 88 #50ecd25d1d45f9fe
+paso 89 #1152224f8c8e2081
+paso 90 #ec6e800c9d60cac5
+paso 91 #9b34126788f38e1b
+paso 92 #4b7a5f31947a7e93
+paso 93 #941c038e55067cb6
+paso 94 #4e93a14091e4b616
+paso 95 #013c8e418db1d74b
+paso 96 #0927c8f3736833c1
+paso 97 #41c7d756f35d2fb3
+paso 98 #78bdffea8c9ff3dd
+paso 99 #feb2753fb9ce28c4
+paso 100 #4901f03a511f55ce
+paso 101 #3cb7d8f0e2df25d6
+paso 102 #dabc411b56de6f2f
+paso 103 #f7dc314e02716ce0
+paso 104 #b7fc8b5fc118724a
+paso 105 #c2d7f4d80e23e6f0
+paso 106 #8feb451dbbf9bff9
+paso 107 #32a1dfdb9ab147f4
+paso 108 #64cdf4b3ea6bcb81
+paso 109 #7645bec23d15aa9a
+paso 110 #95bc33c97b7b26fc
+paso 111 #545a5411e48380b2
+paso 112 #270800c458a1e41b
+paso 113 #f8c57048e2f91f11
+paso 114 #0410480df733b5bd
+paso 115 #844a8931a611b6b1
+paso 116 #7d03856ad6a27562
+paso 117 #b47f7053c9920c20
+paso 118 #37a27e81abf13f18
+paso 119 #494dcf5debf99883
+paso 120 #31872ec937debe0e
+paso 121 #aae108132681d63f
+paso 122 #776f496acfd25bf9
+paso 123 #a03f5fe9377b4529
+paso 124 #1cb9e414734bd72b
+paso 125 #fa4883388436fd8c
+paso 126 #8d41e9824a2cdba1
+paso 127 #bba4ed283b66b7c7
+paso 128 #5a92c7019eba0158
+paso 129 #7b73b4a6f3b21858
+paso 130 #a61c5a2eb22d5f0e
+paso 131 #e438622a95061344
+paso 132 #3e6873154dc954ec
+paso 133 #362004e2d1ee666e
+paso 134 #fce4dc215a9bd92e
+paso 135 #28299285da840ea9
+paso 136 #991a6cded0111281
+paso 137 #3f383e4771bf3fc1
+paso 138 #03e98837b4acccdd
+paso 139 #47e323645f4bc1eb
+paso 140 #a71feee8d36d425b
+paso 141 #aa685829a1b14eda
+paso 142 #5bc9ea6537eebf87
+paso 143 #d0e1109062bc95a3
+paso 144 #f8031a8424c00f29
+paso 145 #a48944dc1cb77b52
+paso 146 #5407b58d12b5ca46
+paso 147 #a602cff59ddda186
+paso 148 #cdc6c31deaee6493
+paso 149 #b75e4c15ba7bd303
+paso 150 #25188e96739d3334
+paso 151 #7cc21335028045eb
+paso 152 #b6cd522bb563b65f
+paso 153 #bdcc631e8821e720
+paso 154 #30373b2d428ac047
+paso 155 #932da6248b572ffd
+paso 156 #eb573f5fa2b4fd51
+paso 157 #464ea247134469a5
+paso 158 #113552a856535aa4
+paso 159 #3adf0f97f47cb606
+paso 160 #991742e4be193891
+paso 161 #7169946a0fcff784
+paso 162 #8880736a2c463476
+paso 163 #f07881f9eac8e8b6
+paso 164 #e698b00c62e2f39e
+paso 165 #fba28670c81a7d27
+paso 166 #37da9e49a4d525c1
+paso 167 #2fb3e0a48d646146
+paso 168 #89ea7561c368768c
+paso 169 #435996b9e69c0e6f
+paso 170 #2fdf2d91e2f8d7a2
+paso 171 #b11117e2459302cd
+paso 172 #b4a52a5434422e8e
+paso 173 #fb98a5ab80075c16
+paso 174 #abcc8061c9d0b476
+paso 175 #19157c51b6a1a194
+paso 176 #4dc6132299fa66a2
+paso 177 #2d8dcfee0219c791
+paso 178 #bc076751cc2913d7
+paso 179 #8a55e75ddd4fb7a0
+paso 180 #7d1552c7695a15dd
+paso 181 #9d3a9569f4accd54
+paso 182 #a06ccd378c00b39b
+paso 183 #add1f05cc6d6122f
+paso 184 #87c77810882a2286
+paso 185 #2089b555a08af483
+paso 186 #e34fcfa8f98bc0eb
+paso 187 #e63ef4c156c53c94
+paso 188 #510b53fbec457e16
+paso 189 #afc319ec1be57331
+paso 190 #0f69143bcb810c04
+paso 191 #fad54aec211fdc9e
+paso 192 #2b56c019682831fb
+paso 193 #c8294314284dc6f3
+paso 194 #0dd8408851de7374
+paso 195 #a48d3a3aaa855791
+paso 196 #dbee1fb204e4cff2
+paso 197 #f64994e85b24a420
+paso 198 #1dc5222aaec8c10a
+paso 199 #e9891ae973109775
+paso 200 #46ef1d2ef30fba06
+estado #10f4f4c061cf369a
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #5f7da4aac6a5fdf0
+paso 1 ENTER Prod[2]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e319fab257cd9785
+paso 2 BLOCKED Prod[3]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #aba4e734c1c13ee2
+paso 3 BLOCKED Prod[4]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #90ec5efdfd60f278
+paso 4 BLOCKED Prod[1]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f16a889b0182575c
+paso 5 ASSIGN Prod[2]: buf[0] = 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #74fa82d22b94f294
+paso 6 BLOCKED Prod[15]: espera para entrar a B.depositar | DECL Cons[11]: int x = 0 | DECL Cons[1]: int x = 0 | ASSIGN Prod[2]: libre = 1 | BLOCKED Prod[11]: espera para entrar a B.depositar | DECL Cons[5]: int x = 0 | BLOCKED Prod[9]: espera para entrar a B.depositar | DECL Cons[14]: int x = 0 | DECL Cons[3]: int x = 0 | DECL Cons[4]: int x = 0 | DECL Cons[6]: int x = 0 | BLOCKED Prod[12]: espera para entrar a B.depositar | DECL Cons[15]: int x = 0 | BLOCKED Prod[13]: espera para entrar a B.depositar | DECL Cons[9]: int x = 0 | BLOCKED Prod[6]: espera para entrar a B.depositar | DECL Cons[2]: int x = 0 | BLOCKED Prod[14]: espera para entrar a B.depositar | DECL Cons[12]: int x = 0 | BLOCKED Prod[8]: espera para entrar a B.depositar | DECL Cons[7]: int x = 0 | DECL Cons[13]: int x = 0 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #750addf62090599b
+paso 7 BLOCKED Cons[1]: espera para entrar a B.retirar | BLOCKED Cons[11]: espera para entrar a B.retirar | BLOCKED Cons[15]: espera para entrar a B.retirar | BLOCKED Cons[4]: espera para entrar a B.retirar | BLOCKED Cons[5]: espera para entrar a B.retirar | BLOCKED Cons[9]: espera para entrar a B.retirar | BLOCKED Cons[7]: espera para entrar a B.retirar | BLOCKED Cons[2]: espera para entrar a B.retirar | BLOCKED Cons[3]: espera para entrar a B.retirar | BLOCKED Cons[13]: espera para entrar a B.retirar | DECL Cons[10]: int x = 0 | BLOCKED Cons[6]: espera para entrar a B.retirar | BLOCKED Cons[14]: espera para entrar a B.retirar | DECL Cons[8]: int x = 0 | BLOCKED Cons[12]: espera para entrar a B.retirar | ASSIGN Prod[2]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #05845e00c28d6255
+paso 8 BLOCKED Prod[7]: espera para entrar a B.depositar | BLOCKED Prod[5]: espera para entrar a B.depositar | BLOCKED Cons[10]: espera para entrar a B.retirar | BLOCKED Cons[8]: espera para entrar a B.retirar | SIGNAL Prod[2]: signal(notVacio) - sin efecto (cola vacía) | BLOCKED Prod[10]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #60f8b022c6f4edb6
+paso 9 RETURN Prod[2]: retorna de B.depositar, libera el monitor | ENTER Prod[5]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3c7f01521f542fea
+paso 10 BLOCKED Prod[2]: espera para entrar a B.depositar | ASSIGN Prod[5]: buf[1] = 5 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #e3aafa9af2133edb
+paso 11 ASSIGN Prod[5]: libre = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #5f6b52897a02978e
+paso 12 ASSIGN Prod[5]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d9ed98595aac7139
+paso 13 SIGNAL Prod[5]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #70ed97f6a185c460
+paso 14 RETURN Prod[5]: retorna de B.depositar, libera el monitor | ENTER Prod[3]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cb76264a9a4cd5f2
+paso 15 ASSIGN Prod[3]: buf[2] = 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #fff3becc152f9c58
+paso 16 BLOCKED Prod[5]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #a526be430c1557ef
+paso 17 ASSIGN Prod[3]: libre = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #2c43c32561930991
+paso 18 ASSIGN Prod[3]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #0ca27c4138beae59
+paso 19 SIGNAL Prod[3]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9469439cbbf056ff
+paso 20 RETURN Prod[3]: retorna de B.depositar, libera el monitor | ENTER Prod[5]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #4fd99d61e4cbfa6a
+paso 21 BLOCKED Prod[3]: espera para entrar a B.depositar | WAIT Prod[5]: wait(notLleno) - libera el monitor y se demora | ENTER Cons[11]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #b096915c9fafae42
+paso 22 ASSIGN Cons[11]: r = 2 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0d3a5a07283a7e65
+paso 23 ASSIGN Cons[11]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #e0cce931498066c2
+paso 24 ASSIGN Cons[11]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #68f0c60d42e2235b
+paso 25 ASSIGN Cons[11]: suma = 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #a41f1f00f28df5cb
+paso 26 ASSIGN Cons[11]: n++ => 1 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #4d67bd0f3ff15e9c
+paso 27 SIGNAL Cons[11]: signal(notLleno) - despierta a Prod[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #4d39c55d77df91ee
+paso 28 RETURN Cons[11]: retorna de B.retirar, libera el monitor | ENTER Cons[9]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #0deb2ac5011f1ade
+paso 29 ASSIGN Cons[9]: r = 5 | BLOCKED Cons[11]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #43e345732ea1f0a5
+paso 30 ASSIGN Cons[9]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d6962a8df22890b3
+paso 31 ASSIGN Cons[9]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #d0ab1f9b98ffb523
+paso 32 ASSIGN Cons[9]: suma = 7 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #5c9eaefef14bcbaf
+paso 33 ASSIGN Cons[9]: n++ => 2 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #097247cf3d980d4f
+paso 34 SIGNAL Cons[9]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #19183d468e8f2f73
+paso 35 RETURN Cons[9]: retorna de B.retirar, libera el monitor | ENTER Cons[5]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #cabc30cd99a53c9a
+paso 36 BLOCKED Cons[9]: espera para entrar a B.retirar | ASSIGN Cons[5]: r = 3 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #d639c9d440904fd5
+paso 37 ASSIGN Cons[5]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ac80e6b38b40137d
+paso 38 ASSIGN Cons[5]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #0465a2c9026eb8b7
+paso 39 ASSIGN Cons[5]: suma = 10 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #103c402bceec7140
+paso 40 ASSIGN Cons[5]: n++ => 3 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #829a791d5b6c46fd
+paso 41 SIGNAL Cons[5]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #53f219e7ca3f3ba3
+paso 42 RETURN Cons[5]: retorna de B.retirar, libera el monitor | ENTER Prod[4]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #bd634e6c41deb398
+paso 43 ASSIGN Prod[4]: buf[0] = 4 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #5349584b0416d5e6
+paso 44 ASSIGN Prod[4]: libre = 1 | BLOCKED Cons[5]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #91308a25c0bfd14a
+paso 45 ASSIGN Prod[4]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e3384acb4c0aee50
+paso 46 SIGNAL Prod[4]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #a6ad5ec9fe47e1de
+paso 47 RETURN Prod[4]: retorna de B.depositar, libera el monitor | ENTER Cons[8]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #fcf651d22031ff55
+paso 48 ASSIGN Cons[8]: r = 4 | BLOCKED Prod[4]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #ff1b922573974dfb
+paso 49 ASSIGN Cons[8]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #461f71d0f75db3ca
+paso 50 ASSIGN Cons[8]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #c766900b38e7ce67
+paso 51 ASSIGN Cons[8]: suma = 14 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #0b57f254a9e7ef1b
+paso 52 ASSIGN Cons[8]: n++ => 4 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #f121f6c8cca525a1
+paso 53 SIGNAL Cons[8]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #ee55189ceb3e54be
+paso 54 RETURN Cons[8]: retorna de B.retirar, libera el monitor | ENTER Prod[6]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #a9f1dc50907f5aaf
+paso 55 BLOCKED Cons[8]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c114ca74b0aad5ff
+paso 56 ASSIGN Prod[6]: buf[1] = 6 | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #b191f58ba2d1f791
+paso 57 ASSIGN Prod[6]: libre = 2 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #73db2972685e8d56
+paso 58 ASSIGN Prod[6]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #a2819d6c643c96a4
+paso 59 SIGNAL Prod[6]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #2ce39db0a71263cd
+paso 60 RETURN Prod[6]: retorna de B.depositar, libera el monitor | ENTER Prod[13]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #f8da205380968bc7
+paso 61 BLOCKED Prod[6]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #6fa28061368cb578
+paso 62 ASSIGN Prod[13]: buf[2] = 13 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #03d15f0c05aa0bbd
+paso 63 ASSIGN Prod[13]: libre = 0 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #09ed8a1b5ff1497b
+paso 64 ASSIGN Prod[13]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #afcd1ed4e4649147
+paso 65 SIGNAL Prod[13]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #f044ff8797992050
+paso 66 RETURN Prod[13]: retorna de B.depositar, libera el monitor | ENTER Cons[12]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #29a549c34dee4893
+paso 67 BLOCKED Prod[13]: espera para entrar a B.depositar | ASSIGN Cons[12]: r = 6 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #1aaf2811f3642e84
+paso 68 ASSIGN Cons[12]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #e2ed7b71568d3d0f
+paso 69 ASSIGN Cons[12]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #661df17cf81c4b20
+paso 70 ASSIGN Cons[12]: suma = 20 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #ce77f313df9bb222
+paso 71 ASSIGN Cons[12]: n++ => 5 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #f4e9211500a7730f
+paso 72 SIGNAL Cons[12]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #502dcf804bcbb4c2
+paso 73 RETURN Cons[12]: retorna de B.retirar, libera el monitor | ENTER Cons[1]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #54272be55c390716
+paso 74 ASSIGN Cons[1]: r = 13 | BLOCKED Cons[12]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #cdbb37bc1c3a16c3
+paso 75 ASSIGN Cons[1]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #1886862ffc6765b4
+paso 76 ASSIGN Cons[1]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #70fa8ca58f73bdf0
+paso 77 ASSIGN Cons[1]: suma = 33 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #0d661bba4f219ff9
+paso 78 ASSIGN Cons[1]: n++ => 6 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #3b3315b294d12640
+paso 79 SIGNAL Cons[1]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #1a5d8ac69c8d6882
+paso 80 RETURN Cons[1]: retorna de B.retirar, libera el monitor | ENTER Prod[1]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #0f7594cd1a0b44f6
+paso 81 BLOCKED Cons[1]: espera para entrar a B.retirar | ASSIGN Prod[1]: buf[0] = 1 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #d8bc9dad149ab18a
+paso 82 ASSIGN Prod[1]: libre = 1 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #8d82f551098757cd
+paso 83 ASSIGN Prod[1]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #fe6d13df833aab50
+paso 84 SIGNAL Prod[1]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #e705d8f64ec59597
+paso 85 RETURN Prod[1]: retorna de B.depositar, libera el monitor | ENTER Cons[10]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #5b76266324be4e0a
+paso 86 ASSIGN Cons[10]: r = 1 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #ecb4aa7740310c83
+paso 87 ASSIGN Cons[10]: ocupado = 1 | BLOCKED Prod[1]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #5f94f22c6adac62c
+paso 88 ASSIGN Cons[10]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #eabe9a302eec81ec
+paso 89 ASSIGN Cons[10]: suma = 34 | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #e2737c4ef0913ee6
+paso 90 ASSIGN Cons[10]: n++ => 7 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #43d8cdc77f3b7f6d
+paso 91 SIGNAL Cons[10]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #55fc49d3fbd867cc
+paso 92 RETURN Cons[10]: retorna de B.retirar, libera el monitor | ENTER Prod[12]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #d210b47946690566
+paso 93 ASSIGN Prod[12]: buf[1] = 12 | BLOCKED Cons[10]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #58c274472eba3aba
+paso 94 ASSIGN Prod[12]: libre = 2 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #6759c3267689c781
+paso 95 ASSIGN Prod[12]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #932338a5c06286ea
+paso 96 SIGNAL Prod[12]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #245d28ce0b877ee1
+paso 97 RETURN Prod[12]: retorna de B.depositar, libera el monitor | ENTER Cons[4]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #8a42cea94fec9772
+paso 98 ASSIGN Cons[4]: r = 12 | BLOCKED Prod[12]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #aaf52e9b36ba1fb6
+paso 99 ASSIGN Cons[4]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #f209b5018dd7358b
+paso 100 ASSIGN Cons[4]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #99f4b782963fd3f9
+paso 101 ASSIGN Cons[4]: suma = 46 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #14624697840cb82d
+paso 102 ASSIGN Cons[4]: n++ => 8 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #82a6e3b279def510
+paso 103 SIGNAL Cons[4]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #b09673a502ad7e4f
+paso 104 RETURN Cons[4]: retorna de B.retirar, libera el monitor | ENTER Cons[7]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #91daca89c3f3d0aa
+paso 105 BLOCKED Cons[4]: espera para entrar a B.retirar | WAIT Cons[7]: wait(notVacio) - libera el monitor y se demora | ENTER Cons[6]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #f0ae4346afeda3cc
+paso 106 WAIT Cons[6]: wait(notVacio) - libera el monitor y se demora | ENTER Cons[2]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #e07963321654653f
+paso 107 WAIT Cons[2]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[11]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #93f95a410d503fa6
+paso 108 ASSIGN Prod[11]: buf[2] = 11 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #fdcbe6d9ce91f996
+paso 109 ASSIGN Prod[11]: libre = 0 | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #2100a4e2304519ab
+paso 110 ASSIGN Prod[11]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #d6bbbf88975bea9f
+paso 111 SIGNAL Prod[11]: signal(notVacio) - despierta a Cons[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #e2f8739829296534
+paso 112 RETURN Prod[11]: retorna de B.depositar, libera el monitor | ENTER Cons[11]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #6850292f1d12061f
+paso 113 BLOCKED Prod[11]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #e441d4a0f6b3f95a
+paso 114 ASSIGN Cons[11]: r = 11 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #599f859533837cbe
+paso 115 ASSIGN Cons[11]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #14cef61085fa9b34
+paso 116 ASSIGN Cons[11]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #592c84f19e24cadd
+paso 117 ASSIGN Cons[11]: suma = 57 | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #ddedf310b8c5aca8
+paso 118 ASSIGN Cons[11]: n++ => 9 | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #7b01e05235a0ae25
+paso 119 SIGNAL Cons[11]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #c585752a43b52b3a
+paso 120 RETURN Cons[11]: retorna de B.retirar, libera el monitor | ENTER Prod[8]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #1d0a91971d2cbe70
+paso 121 ASSIGN Prod[8]: buf[0] = 8 | TERMINATED Cons[11]: termina | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #3bcb6637c37faef1
+paso 122 ASSIGN Prod[8]: libre = 1 | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #f77e216e7b12756d
+paso 123 ASSIGN Prod[8]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #2f304e0b4afa6e0b
+paso 124 SIGNAL Prod[8]: signal(notVacio) - despierta a Cons[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #290ebd898b0a1f80
+paso 125 RETURN Prod[8]: retorna de B.depositar, libera el monitor | ENTER Cons[13]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #69946c0f6994fb21
+paso 126 ASSIGN Cons[13]: r = 8 | BLOCKED Prod[8]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #f9db2448d5940f41
+paso 127 ASSIGN Cons[13]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #bda687d3a1d1fc80
+paso 128 ASSIGN Cons[13]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #2ea384997b97528e
+paso 129 ASSIGN Cons[13]: suma = 65 | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #a6552642a503c6b1
+paso 130 ASSIGN Cons[13]: n++ => 10 | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #fe3f618c6d9a9f37
+paso 131 SIGNAL Cons[13]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #08b1f328c3b0daa7
+paso 132 RETURN Cons[13]: retorna de B.retirar, libera el monitor | ENTER Cons[3]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #b4471a73687ee38b
+paso 133 BLOCKED Cons[13]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #99975ce4115f2d28
+paso 134 WAIT Cons[3]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[13]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #40b260d5d7fe16ce
+paso 135 ASSIGN Prod[13]: buf[1] = 13 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #073b123e562b4b76
+paso 136 ASSIGN Prod[13]: libre = 2 | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #e27a221666987aa8
+paso 137 ASSIGN Prod[13]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #caf4e502f3c0e32e
+paso 138 SIGNAL Prod[13]: signal(notVacio) - despierta a Cons[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #2ca85228ead119a8
+paso 139 RETURN Prod[13]: retorna de B.depositar, libera el monitor | REENTER Prod[5]: reingresa a B | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #4cf119ef61073afb
+paso 140 TERMINATED Prod[13]: termina | ASSIGN Prod[5]: buf[2] = 5 | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #bcdea7a4d8c78b15
+paso 141 ASSIGN Prod[5]: libre = 0 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #415775a9334edbac
+paso 142 ASSIGN Prod[5]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #4bbebb787905b0a9
+paso 143 SIGNAL Prod[5]: signal(notVacio) - despierta a Cons[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #2632f0e3950e7ab6
+paso 144 RETURN Prod[5]: retorna de B.depositar, libera el monitor | REENTER Cons[7]: reingresa a B | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #dc6a3d82665a38a8
+paso 145 ASSIGN Cons[7]: r = 13 | TERMINATED Prod[5]: termina | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #0e447df76ffa6359
+paso 146 ASSIGN Cons[7]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #9952a7e22a74c4cb
+paso 147 ASSIGN Cons[7]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #7e31b3bef9d7b244
+paso 148 ASSIGN Cons[7]: suma = 78 | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #cc4b4b2784a429cb
+paso 149 ASSIGN Cons[7]: n++ => 11 | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #ae926112b50f7096
+paso 150 SIGNAL Cons[7]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #e8c98522d52fb18f
+paso 151 RETURN Cons[7]: retorna de B.retirar, libera el monitor | ENTER Cons[15]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #63de1a8f016f439b
+paso 152 ASSIGN Cons[15]: r = 5 | BLOCKED Cons[7]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #cd634b2f038fea9c
+paso 153 ASSIGN Cons[15]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #5e5c7bf395fb58ef
+paso 154 ASSIGN Cons[15]: cantidad-- => 0 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #fe28dadcd8b1926c
+paso 155 ASSIGN Cons[15]: suma = 83 | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #545c0688e5786baf
+paso 156 ASSIGN Cons[15]: n++ => 12 | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #aa877026dd981b65
+paso 157 SIGNAL Cons[15]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #a3fa3abded96d393
+paso 158 RETURN Cons[15]: retorna de B.retirar, libera el monitor | ENTER Cons[4]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #d876ae2cbdff477f
+paso 159 WAIT Cons[4]: wait(notVacio) - libera el monitor y se demora | ENTER Prod[4]: entra a B.depositar | BLOCKED Cons[15]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #17fad115cb25b383
+paso 160 ASSIGN Prod[4]: buf[0] = 4 | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #4cad7ca4422acc2c
+paso 161 ASSIGN Prod[4]: libre = 1 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #7974c07afc6b514b
+paso 162 ASSIGN Prod[4]: cantidad++ => 1 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #bcdfa99f84aa0527
+paso 163 SIGNAL Prod[4]: signal(notVacio) - despierta a Cons[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #ae7801d5c9460c22
+paso 164 RETURN Prod[4]: retorna de B.depositar, libera el monitor | ENTER Prod[1]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #b625222d8d1be9a0
+paso 165 ASSIGN Prod[1]: buf[1] = 1 | TERMINATED Prod[4]: termina | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #59793074f144ce54
+paso 166 ASSIGN Prod[1]: libre = 2 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #7c5df437a7b1a82e
+paso 167 ASSIGN Prod[1]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #4fe1952a6b796f8d
+paso 168 SIGNAL Prod[1]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #3b3d1476f768e8e2
+paso 169 RETURN Prod[1]: retorna de B.depositar, libera el monitor | ENTER Prod[8]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #e927f6111baed86f
+paso 170 ASSIGN Prod[8]: buf[2] = 8 | TERMINATED Prod[1]: termina | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #155d81c8c3e7073d
+paso 171 ASSIGN Prod[8]: libre = 0 | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #463860d54fdebd16
+paso 172 ASSIGN Prod[8]: cantidad++ => 3 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #a7d1b30729397727
+paso 173 SIGNAL Prod[8]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #99e9507531b6499a
+paso 174 RETURN Prod[8]: retorna de B.depositar, libera el monitor | ENTER Prod[2]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #b7b785c9000e5013
+paso 175 WAIT Prod[2]: wait(notLleno) - libera el monitor y se demora | REENTER Cons[4]: reingresa a B | TERMINATED Prod[8]: termina | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #2277d5b8c146366c
+paso 176 ASSIGN Cons[4]: r = 4 | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #25e81eab2ce80a60
+paso 177 ASSIGN Cons[4]: ocupado = 1 | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #05db6f28e5f41234
+paso 178 ASSIGN Cons[4]: cantidad-- => 2 | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #f867fd59baf0ee38
+paso 179 ASSIGN Cons[4]: suma = 87 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #08fe202a1d6eadde
+paso 180 ASSIGN Cons[4]: n++ => 13 | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #057e9ce8183e9512
+paso 181 SIGNAL Cons[4]: signal(notLleno) - despierta a Prod[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #a400699e0c10ac21
+paso 182 RETURN Cons[4]: retorna de B.retirar, libera el monitor | REENTER Cons[2]: reingresa a B | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #4802d1cf20123859
+paso 183 ASSIGN Cons[2]: r = 1 | TERMINATED Cons[4]: termina | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #e1071ac5dd9928c1
+paso 184 ASSIGN Cons[2]: ocupado = 2 | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #0b00c3ddb09ab7ec
+paso 185 ASSIGN Cons[2]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #acf0f1774e6514c6
+paso 186 ASSIGN Cons[2]: suma = 88 | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #4015fe102ec9ebf5
+paso 187 ASSIGN Cons[2]: n++ => 14 | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #65f120e32fe205f6
+paso 188 SIGNAL Cons[2]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #7cd9b923469d3d7c
+paso 189 RETURN Cons[2]: retorna de B.retirar, libera el monitor | ENTER Prod[14]: entra a B.depositar | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #ea392f034518e863
+paso 190 ASSIGN Prod[14]: buf[0] = 14 | BLOCKED Cons[2]: espera para entrar a B.retirar | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #d6aa7d6c0dff80f1
+paso 191 ASSIGN Prod[14]: libre = 1 | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #d96d22c92b8e8e55
+paso 192 ASSIGN Prod[14]: cantidad++ => 2 | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #7eeaf620c86e9145
+paso 193 SIGNAL Prod[14]: signal(notVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #413a435991e57255
+paso 194 RETURN Prod[14]: retorna de B.depositar, libera el monitor | ENTER Cons[14]: entra a B.retirar | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #0f3ce1cca7094aeb
+paso 195 ASSIGN Cons[14]: r = 8 | BLOCKED Prod[14]: espera para entrar a B.depositar | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #f1c66eb6bf822d58
+paso 196 ASSIGN Cons[14]: ocupado = 0 | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #bf684dab29af4e2a
+paso 197 ASSIGN Cons[14]: cantidad-- => 1 | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #89faf866912b7758
+paso 198 ASSIGN Cons[14]: suma = 96 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #8cc57bba339938f3
+paso 199 ASSIGN Cons[14]: n++ => 15 | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #d38cbdf6f2a491c2
+paso 200 SIGNAL Cons[14]: signal(notLleno) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #c2620dcf6e934bd3
+estado #a2e787fbd1b8e755

@@ -1,0 +1,1421 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #4a90cd510cf7896d
+paso 1 WRITE P[3]: write(linea 3) | WRITE P[2]: write(linea 2) | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f45e046e35f38eb0
+paso 2 ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #865112eceb3504aa
+paso 3 ASSIGN P[1]: x++ => 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #018f13748ad6cde3
+paso 4 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fb690e238af16f60
+paso 5 ASSIGN P[2]: x++ => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ac3f807915be82f0
+paso 6 ASSIGN P[1]: for#1++ => 2 | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #84011e2882b14b8f
+paso 7 WRITE P[1]: write(linea 1) | ASSIGN P[3]: x++ => 3 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #0e3a55a09891b096
+paso 8 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #9c66c2fbb29ba08a
+paso 9 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | ASSIGN P[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #9308e1ee53e256d9
+paso 10 WRITE P[2]: write(linea 2) | ASSIGN P[1]: x++ => 4 | ASSIGN P[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #37fd61a53e4e3c02
+paso 11 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f8ee9370ec4309eb
+paso 12 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #eaf2db2f09850445
+paso 13 ASSIGN P[1]: for#1++ => 3 | ASSIGN P[2]: x++ => 5 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #24ccea32f8194e39
+paso 14 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e17b1c15cc73c56d
+paso 15 ASSIGN P[3]: x++ => 6 | ASSIGN P[2]: for#1++ => 3 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #fa73c3a6442665ba
+paso 16 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1c2bdfbd7397c0d3
+paso 17 ASSIGN P[1]: x++ => 7 | ASSIGN P[3]: for#1++ => 3 | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #c2b83735428077f8
+paso 18 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f7f9f21e66e7a0c6
+paso 19 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #dc4b67811cb3ed0a
+paso 20 ASSIGN P[2]: x++ => 8 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2801fd8f9161f73e
+paso 21 BLOCKED P[1]: espera para entrar a M.f | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #1e0bb39ff2a4260e
+paso 22 ASSIGN P[1]: x++ => 9 | ASSIGN P[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #4b3790a197f0e4ec
+paso 23 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #230350a661938e91
+paso 24 ASSIGN P[3]: x++ => 10 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #dc80cd875b7ca0cb
+paso 25 ASSIGN P[1]: for#1++ => 5 | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #be5e76e6795b9e17
+paso 26 ASSIGN P[3]: for#1++ => 4 | ASSIGN P[2]: x++ => 11 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #18ab1789f1bf99c5
+paso 27 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #43bd6401642ed835
+paso 28 ASSIGN P[2]: for#1++ => 5 | BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: x++ => 12 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b983299256ce7aab
+paso 29 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #cddb4fe763bec049
+paso 30 ASSIGN P[1]: for#1++ => 6 | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d70b260319e6c25e
+paso 31 BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[3]: x++ => 13 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #11b3d64c03ad3b32
+paso 32 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #6a69f09a38c5c6ba
+paso 33 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #cfdf153edad0a3b2
+paso 34 ASSIGN P[3]: for#1++ => 5 | ASSIGN P[2]: x++ => 14 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #aa1538e2c9455dbb
+paso 35 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #0cdce2cbc327e4bd
+paso 36 ASSIGN P[1]: x++ => 15 | ASSIGN P[2]: for#1++ => 6 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #be4913f7c7b63fe2
+paso 37 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #6b17abd5282715fa
+paso 38 ASSIGN P[3]: x++ => 16 | ASSIGN P[1]: for#1++ => 7 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #463ed005a06d7b97
+paso 39 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #cf54cefb6f41b49d
+paso 40 WRITE P[1]: write(linea 1) | ASSIGN P[2]: x++ => 17 | ASSIGN P[3]: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #c5ad538b6f29ffb6
+paso 41 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #cb90f9a78d961836
+paso 42 ASSIGN P[2]: for#1++ => 7 | ASSIGN P[1]: x++ => 18 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #763cf9f7668d72b9
+paso 43 WRITE P[2]: write(linea 2) | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #8a2cdb6932c17239
+paso 44 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #d31ab43e087b716e
+paso 45 ASSIGN P[1]: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #43078926f4539508
+paso 46 ASSIGN P[3]: x++ => 19 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #2351569c356b89e8
+paso 47 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #f279d613c0d33902
+paso 48 WRITE P[1]: write(linea 1) | ASSIGN P[2]: x++ => 20 | ASSIGN P[3]: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #31e80f6735df47a0
+paso 49 WRITE P[3]: write(linea 3) | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #a1b7cd0b5f94b5ac
+paso 50 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #4202c5a716fd0019
+paso 51 ASSIGN P[2]: for#1++ => 8 | ASSIGN P[1]: x++ => 21 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #0c934ef6daddcc1d
+paso 52 WRITE P[2]: write(linea 2) | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #ff66696e21a0bcbc
+paso 53 BLOCKED P[2]: espera para entrar a M.f | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #9b47fd5588e2a82d
+paso 54 ASSIGN P[1]: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #fd161426e6b7ae21
+paso 55 ASSIGN P[2]: x++ => 22 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #ff00441824b72b3a
+paso 56 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #b6a2d0cede030d66
+paso 57 ASSIGN P[2]: for#1++ => 9 | BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[3]: x++ => 23 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #d1bf708fe931291d
+paso 58 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #723f370dd245dbd4
+paso 59 BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[1]: x++ => 24 | ASSIGN P[3]: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #b6b39425b561fa81
+paso 60 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #c2ac9fb5cd0f9fbc
+paso 61 ASSIGN P[2]: x++ => 25 | WRITE P[3]: write(linea 3) | ASSIGN P[1]: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #29d488b5fccb7806
+paso 62 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #5ed195cbd0176aba
+paso 63 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[3]: x++ => 26 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f8e5397e856441c9
+paso 64 ASSIGN P[2]: for#1++ => 10 | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #9a145702aa6a4c79
+paso 65 ASSIGN P[1]: x++ => 27 | ASSIGN P[3]: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #9df73cda9205becd
+paso 66 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #00431e12e17554a9
+paso 67 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #148c5d9c9c1f6b2a
+paso 68 ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #63b299d403a0f081
+paso 69 ASSIGN P[1]: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #a641aeea6dfed541
+paso 70 WRITE P[1]: write(linea 1) | ASSIGN P[3]: x++ => 28 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #e7f28a7260d177c4
+paso 71 BLOCKED P[1]: espera para entrar a M.f | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #0d416a06d86efc3f
+paso 72 ASSIGN P[3]: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #7f735dd53650c3bb
+paso 73 WRITE P[3]: write(linea 3) | ASSIGN P[1]: x++ => 29 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #9e051bb9ec98cff4
+paso 74 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #d69f5ad98ea53d0e
+paso 75 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: for#1++ => 12 | ASSIGN P[2]: x++ => 30 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #f99ee5cf5185be6a
+paso 76 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #6ac1751bc602721a
+paso 77 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[2]: for#1++ => 11 | ASSIGN P[3]: x++ => 31 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #8620dd21db363acd
+paso 78 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #89a7d08adc9bef1b
+paso 79 ASSIGN P[3]: for#1++ => 11 | ASSIGN P[1]: x++ => 32 | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #ff1594da04d4cf54
+paso 80 WRITE P[3]: write(linea 3) | BLOCKED P[2]: espera para entrar a M.f | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #4433861fa486e6b6
+paso 81 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #8c94239309cc69b1
+paso 82 ASSIGN P[1]: for#1++ => 13 | ASSIGN P[2]: x++ => 33 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #147c9ebc02bcf09f
+paso 83 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #ce864c4414e72523
+paso 84 ASSIGN P[2]: for#1++ => 12 | ASSIGN P[3]: x++ => 34 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #b185863591992708
+paso 85 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #b05efef513b85b44
+paso 86 ASSIGN P[3]: for#1++ => 12 | BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[1]: x++ => 35 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #1b6e9eb900322aeb
+paso 87 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #88ca403947af1ab9
+paso 88 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #50f075c90fb1d1bb
+paso 89 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #e0e23d523f04a93b
+paso 90 ASSIGN P[1]: for#1++ => 14 | ASSIGN P[2]: x++ => 36 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #e828d938149a9b8f
+paso 91 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #c2acf9c8586c3ab2
+paso 92 ASSIGN P[2]: for#1++ => 13 | ASSIGN P[3]: x++ => 37 | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #3f47d9c336f00a1e
+paso 93 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #f098f1d3b6c9cafc
+paso 94 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #de69959a5c0ad5f8
+paso 95 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #2d98ed8dd5f604ce
+paso 96 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #f01878194dee757c
+paso 97 ASSIGN P[3]: for#1++ => 13 | ASSIGN P[2]: x++ => 38 | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #077a3da05bcae917
+paso 98 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #364da3f334033b71
+paso 99 ASSIGN P[2]: for#1++ => 14 | WRITE P[3]: write(linea 3) | ASSIGN P[1]: x++ => 39 | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #ca2d1115d5c08a84
+paso 100 RETURN P[1]: retorna de M.f, libera el monitor | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #ece0e402185df0ab
+paso 101 ENTER P[2]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #b48bcd0a162d037f
+paso 102 ASSIGN P[1]: for#1++ => 15 | ASSIGN P[2]: x++ => 40 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #644cb884fd3b624a
+paso 103 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #684e9cab47f0201f
+paso 104 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #54117853342357d9
+paso 105 ASSIGN P[2]: for#1++ => 15 | ASSIGN P[3]: x++ => 41 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #43deb347927b5b4e
+paso 106 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #555468021db70a2a
+paso 107 BLOCKED P[2]: espera para entrar a M.f | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #fbe787ae8086d26e
+paso 108 ASSIGN P[3]: for#1++ => 14 | ASSIGN P[1]: x++ => 42 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #8c9be750b594513b
+paso 109 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #11ade8dad151d84a
+paso 110 ASSIGN P[1]: for#1++ => 16 | BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[2]: x++ => 43 | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #8cfeb581e68de226
+paso 111 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #c11e35a98defd718
+paso 112 ASSIGN P[3]: x++ => 44 | BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[2]: for#1++ => 16 | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #7d5a17227ae64e44
+paso 113 WRITE P[2]: write(linea 2) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #7e05aad05ab4ae8c
+paso 114 ASSIGN P[1]: x++ => 45 | ASSIGN P[3]: for#1++ => 15 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #5543937df55e87a9
+paso 115 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #f563aeb8042c575a
+paso 116 ASSIGN P[1]: for#1++ => 17 | ASSIGN P[2]: x++ => 46 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #ce76945e9fea790f
+paso 117 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #182401f1a24179be
+paso 118 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[3]: x++ => 47 | ASSIGN P[2]: for#1++ => 17 | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #96d9e555e9acc8ad
+paso 119 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #4dc7239ee29955b7
+paso 120 BLOCKED P[2]: espera para entrar a M.f | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #b43860577641618a
+paso 121 ASSIGN P[3]: for#1++ => 16 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #7ba46a6b48bebbc2
+paso 122 ASSIGN P[1]: x++ => 48 | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #fe649577638256e7
+paso 123 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #8f6f805dd78d9ee7
+paso 124 ASSIGN P[2]: x++ => 49 | ASSIGN P[1]: for#1++ => 18 | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #f611552f0b9ac4f0
+paso 125 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #f8f6d6e26c409e8c
+paso 126 ASSIGN P[2]: for#1++ => 18 | ASSIGN P[3]: x++ => 50 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #c1910268c81f2802
+paso 127 WRITE P[2]: write(linea 2) | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #ec9c62eca6f1bedd
+paso 128 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #eac2ddb29c707fde
+paso 129 ASSIGN P[3]: for#1++ => 17 | ASSIGN P[1]: x++ => 51 | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #14669bb8ef4f8461
+paso 130 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #8328fb7f363500f7
+paso 131 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #11b92c9a0334e879
+paso 132 ASSIGN P[1]: for#1++ => 19 | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #a2aae12c11730f55
+paso 133 WRITE P[1]: write(linea 1) | ASSIGN P[2]: x++ => 52 | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #b6c48f6fdf416ec6
+paso 134 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #941d50a2db208f61
+paso 135 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #d0de1b525f5e020b
+paso 136 ASSIGN P[2]: for#1++ => 19 | ASSIGN P[3]: x++ => 53 | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #fb9cc494b0e8978f
+paso 137 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #cb9b8ec339774397
+paso 138 ASSIGN P[3]: for#1++ => 18 | BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[1]: x++ => 54 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #52b5c2ea89591b79
+paso 139 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #16e592d352b49ed5
+paso 140 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[2]: x++ => 55 | ASSIGN P[1]: for#1++ => 20 | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #1dc67ce96bd7e4a0
+paso 141 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #18035c14fa1ef231
+paso 142 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[3]: x++ => 56 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #82849ac2251f0222
+paso 143 ASSIGN P[2]: for#1++ => 20 | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #4c6aaf65c94bcd30
+paso 144 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #b5e63cd098b024be
+paso 145 ASSIGN P[1]: x++ => 57 | ASSIGN P[3]: for#1++ => 19 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #96060386895fe9f7
+paso 146 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #bc587ed19f68ba96
+paso 147 ASSIGN P[2]: x++ => 58 | BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: for#1++ => 21 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #ece855282767ea55
+paso 148 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #76b70aec6b0e3ac9
+paso 149 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #e9af70e4fcb926cf
+paso 150 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #776259682457d253
+paso 151 ASSIGN P[3]: x++ => 59 | ASSIGN P[2]: for#1++ => 21 | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #6c0ef077a1bc4369
+paso 152 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #75b62e01cfe2700b
+paso 153 ASSIGN P[3]: for#1++ => 20 | BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[1]: x++ => 60 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #82dcc9c98afd6a2b
+paso 154 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #887ffcb738f01e37
+paso 155 WRITE P[3]: write(linea 3) | ASSIGN P[2]: x++ => 61 | ASSIGN P[1]: for#1++ => 22 | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #314f4d7cf2b590a1
+paso 156 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #f15f4d0957d89ba1
+paso 157 ASSIGN P[3]: x++ => 62 | ASSIGN P[2]: for#1++ => 22 | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #6a6d1015cd21d701
+paso 158 BLOCKED P[1]: espera para entrar a M.f | WRITE P[2]: write(linea 2) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #f91efb4c0c222cef
+paso 159 ASSIGN P[3]: for#1++ => 21 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #463c861016be0e8c
+paso 160 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #90ddc30c54bdd856
+paso 161 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: x++ => 63 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #714756bc84bbe498
+paso 162 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #d196cc4eae56954f
+paso 163 ASSIGN P[2]: x++ => 64 | ASSIGN P[1]: for#1++ => 23 | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #954edac427fa68f3
+paso 164 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #7b542d603dfc8b67
+paso 165 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #185351ec70604387
+paso 166 ASSIGN P[3]: x++ => 65 | ASSIGN P[2]: for#1++ => 23 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #ad5367e16f52b88f
+paso 167 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #b2acaf7539999f83
+paso 168 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #b1c915328025f542
+paso 169 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #35132891f228c631
+paso 170 ASSIGN P[3]: for#1++ => 22 | ASSIGN P[2]: x++ => 66 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #88c5eb925d68fa79
+paso 171 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #b20a7392fdd4cc04
+paso 172 ASSIGN P[2]: for#1++ => 24 | ASSIGN P[1]: x++ => 67 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #2227b030855bedb0
+paso 173 RETURN P[1]: retorna de M.f, libera el monitor | WRITE P[2]: write(linea 2) | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #13e2b87fa8f7423e
+paso 174 ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #c580ac78182c590f
+paso 175 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: for#1++ => 24 | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #df69f41db9d5044a
+paso 176 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #caa2f120ea13089c
+paso 177 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[2]: x++ => 68 | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #12ad45c5013b5399
+paso 178 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #c45b22987e8a9742
+paso 179 ASSIGN P[3]: x++ => 69 | ASSIGN P[2]: for#1++ => 25 | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #a8d63588fba8b216
+paso 180 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #a205bd20d3f29b72
+paso 181 ASSIGN P[3]: for#1++ => 23 | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #a4d4f7ab468f483d
+paso 182 BLOCKED P[2]: espera para entrar a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #b0ae99e4b53bbac7
+paso 183 BLOCKED P[3]: espera para entrar a M.f | ASSIGN P[1]: x++ => 70 | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #af96e32889a4bcdc
+paso 184 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #097d85b45b06bd5b
+paso 185 ASSIGN P[1]: for#1++ => 25 | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #6d3b5160021e0efd
+paso 186 ASSIGN P[2]: x++ => 71 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #65ad1b7921190a30
+paso 187 BLOCKED P[1]: espera para entrar a M.f | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #fc3539dd654e8843
+paso 188 ASSIGN P[3]: x++ => 72 | ASSIGN P[2]: for#1++ => 26 | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #79962aacb4ea1aa3
+paso 189 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #0b05b21b5a9e3fc9
+paso 190 ASSIGN P[1]: x++ => 73 | BLOCKED P[2]: espera para entrar a M.f | ASSIGN P[3]: for#1++ => 24 | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #2905c0eb89ca4396
+paso 191 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #425e30bd70b334a7
+paso 192 BLOCKED P[3]: espera para entrar a M.f | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #44e3aa0eaf7c68d3
+paso 193 ASSIGN P[2]: x++ => 74 | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #c0a8eb945f77f993
+paso 194 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #4249e23d2b0e2952
+paso 195 ASSIGN P[1]: for#1++ => 26 | ASSIGN P[2]: for#1++ => 27 | ASSIGN P[3]: x++ => 75 | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #95f07f92dfb1688a
+paso 196 WRITE P[2]: write(linea 2) | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #083de8b6c13c2c88
+paso 197 BLOCKED P[2]: espera para entrar a M.f | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #b1d92e6dee220bf7
+paso 198 ASSIGN P[2]: x++ => 76 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #8ba1a6b4fbe397ae
+paso 199 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | ASSIGN P[3]: for#1++ => 25 | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #b2f92a3148a250bd
+paso 200 ASSIGN P[1]: x++ => 77 | ASSIGN P[2]: for#1++ => 28 | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #82ddcd74a0a696b2
+estado #adf1a48db8baecef
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #c70dfb37aa06a458
+paso 1 #c7e8166f2b74bf3b
+paso 2 #ecb248bd15900187
+paso 3 #78e4b14a04bb2b5b
+paso 4 #78d9a8bf9d291624
+paso 5 #f8f55069ed2513b6
+paso 6 #8bfe73be9cb29084
+paso 7 #70ad5da0c55f3839
+paso 8 #de0554097bd42309
+paso 9 #d322465c8c2a1af2
+paso 10 #db7e12d6d1ca3a03
+paso 11 #9f6fb8641015ab22
+paso 12 #ff1b0d2527b50749
+paso 13 #2afba42be0fb2306
+paso 14 #f9b21eba5d29cfa9
+paso 15 #b91b25a7bf2555d7
+paso 16 #84e3340550cf7753
+paso 17 #b10e3f6ad3f3d21e
+paso 18 #b8784316d60dfab9
+paso 19 #b24244fc6baf8c3b
+paso 20 #458a855e597ee18e
+paso 21 #efe4346d62e6e6d9
+paso 22 #c841cdbb797a185a
+paso 23 #34825b1e961be7aa
+paso 24 #fc7e1188acc5b7d3
+paso 25 #ec7bffa2d8d31872
+paso 26 #6114c5fa1601f4a2
+paso 27 #31f1b11811166f0e
+paso 28 #d42d5ffa06380f7d
+paso 29 #e8f2b75f2fcf299f
+paso 30 #390faf5f81462d49
+paso 31 #84699244f3120968
+paso 32 #695158c7acb9ab3e
+paso 33 #a36ef9c334304280
+paso 34 #4f1545fde54ca508
+paso 35 #8822c4230683de68
+paso 36 #c6915c844caeefdf
+paso 37 #2bd77df7053cd123
+paso 38 #f7edb801aa996509
+paso 39 #4a7aa3c07212268c
+paso 40 #36caa42131eb8888
+paso 41 #4558a337c642d913
+paso 42 #798ec68a5d99e4da
+paso 43 #d56688acc2f21de0
+paso 44 #00147aacfb118011
+paso 45 #cf04eba1721583b4
+paso 46 #d1d76be865718b45
+paso 47 #46d7f986af4ece2e
+paso 48 #be53de62d4ff2c1c
+paso 49 #952a8fc300b6f88d
+paso 50 #2d4aaca2dcaaff55
+paso 51 #d7d00b82bf4d8ee1
+paso 52 #804ad435ac61acd6
+paso 53 #8476be2584804637
+paso 54 #fc8027282d431523
+paso 55 #8994004282dbb7c0
+paso 56 #70a55390677cfe48
+paso 57 #fc947c2dcbd93c2c
+paso 58 #633a6839ab949ccf
+paso 59 #a1ff20fa785607e3
+paso 60 #0f6ef7c380522411
+paso 61 #1ccfa01d8d133b3c
+paso 62 #a15497fd537670a8
+paso 63 #903b58d5b99ef531
+paso 64 #38c8f0df704a30a5
+paso 65 #1695f2794ec3f6f8
+paso 66 #a46ee04bfcfe1fbb
+paso 67 #665d7c03a0f25aab
+paso 68 #5a73e10f14b00f9e
+paso 69 #2b7324a301c3a041
+paso 70 #087b8171ae194cc2
+paso 71 #bb61b8e8cce192c3
+paso 72 #934a23d765681b22
+paso 73 #1765982c40388179
+paso 74 #1c4516f177ac8e01
+paso 75 #7c5f64497dc1a588
+paso 76 #be0f7dd2f64d7213
+paso 77 #446581c994e80333
+paso 78 #da1f281e8c36f311
+paso 79 #97445e9726d6cf50
+paso 80 #75925047a6c6c738
+paso 81 #2d15fc97945980eb
+paso 82 #59cadc5482cca6fd
+paso 83 #a4687e0e58977915
+paso 84 #f2384bfc20c17f6c
+paso 85 #94820f2e4c8cab6b
+paso 86 #0f54a6fc6a11a02b
+paso 87 #4e6b3bdb61252337
+paso 88 #c4408690d12c8211
+paso 89 #f89fa51e41277544
+paso 90 #ffad07e4fd2cf619
+paso 91 #e747b6483077d232
+paso 92 #0444e2a4553edc7d
+paso 93 #bbd7f30debf691bd
+paso 94 #b2a356f82a2c50f4
+paso 95 #9a3d05157368ce67
+paso 96 #1540ac7f6a9b7076
+paso 97 #2a95a298a382a5b8
+paso 98 #29a47ffc1800c059
+paso 99 #f73936e0405a6af6
+paso 100 #7b83212548b6fa92
+paso 101 #0ef977ad460da202
+paso 102 #02f8901763553759
+paso 103 #7baa29e79ce42ed1
+paso 104 #4867a96f04a6ccf1
+paso 105 #f2ff5db62af30f69
+paso 106 #c4adc1c0ab0a9b18
+paso 107 #b603ee128792da3a
+paso 108 #3b659cb3d7c3693e
+paso 109 #0406345ffa52680d
+paso 110 #4540a57334065204
+paso 111 #9cad7a136ff68b2e
+paso 112 #1df7bdd7c2900e1b
+paso 113 #b4c846cb6bd5aaaa
+paso 114 #6ea2c7fdb3156a13
+paso 115 #e239b19caa4fbf3d
+paso 116 #fe1d4ea09754023d
+paso 117 #1b8a3a155015babb
+paso 118 #9fabe0bc1e8ffdf5
+paso 119 #6322851462abbc00
+paso 120 #e0d4633b566f0c1d
+paso 121 #166fd85e8d68765b
+paso 122 #125ae86e72c009ec
+paso 123 #01f3e4e5bc34a6bc
+paso 124 #d8bfd4705c5f876c
+paso 125 #3e1eeff9f2625571
+paso 126 #4db096dc723ebfe8
+paso 127 #c3b7190b27963004
+paso 128 #c2ac7a6443f1bdaf
+paso 129 #1a58cd2555311a7a
+paso 130 #203a4b5bdb0a496a
+paso 131 #7d0f58f14a8f3061
+paso 132 #49bc378a13c4942a
+paso 133 #8e7bb90ec45a8596
+paso 134 #0397e64567da21cf
+paso 135 #4912bd779291b35a
+paso 136 #cb32fbd0b8453f3e
+paso 137 #2e94de1d4609f01d
+paso 138 #e28829d2a4664fa1
+paso 139 #45725fa2be140d05
+paso 140 #8263585d2430c7ca
+paso 141 #7ef91c4540389cf6
+paso 142 #689fd26dc69c694d
+paso 143 #90be1afda58ec855
+paso 144 #2c980faa405c2db9
+paso 145 #564f544a6c2bbd24
+paso 146 #38949f1cd5b234e8
+paso 147 #e9bf4bd47d06e60c
+paso 148 #d644d825ca29e088
+paso 149 #60bc8057e8c516a9
+paso 150 #3069e0d306aeabe7
+paso 151 #a213ce86468c1038
+paso 152 #3d811f80455c3f53
+paso 153 #220407dec08937e3
+paso 154 #601b2f9a60a92c54
+paso 155 #46d881f631587005
+paso 156 #809d0ba541cfb202
+paso 157 #d3ee94b71f7076b8
+paso 158 #bb6734a6c16f2efd
+paso 159 #d6d68d2cc45b6801
+paso 160 #b60594eb0342d7b0
+paso 161 #4585103293cea053
+paso 162 #cd78969d0acf6623
+paso 163 #b3cf37b5992d663a
+paso 164 #cfa44752cebdf253
+paso 165 #abff861b81e0dc7d
+paso 166 #3bf91ef9026abfa7
+paso 167 #b5f5fff19cf297f0
+paso 168 #4622da938f31f859
+paso 169 #d3fede31ebfde480
+paso 170 #406033dd13d7ce3a
+paso 171 #96d124e7db718ce5
+paso 172 #4d58b4e657bebbeb
+paso 173 #87cb0ef9bc690c99
+paso 174 #88f57bb1d101fab5
+paso 175 #032ac9df09f0ef58
+paso 176 #19cd6fc2a434a43d
+paso 177 #522e26f2212d48fb
+paso 178 #d3645485ff5c93e5
+paso 179 #925b4f4a87770d15
+paso 180 #572713508262823f
+paso 181 #3b74db5e454477ed
+paso 182 #4befef1fd7f1336b
+paso 183 #672b67782b964965
+paso 184 #73b950d4151f8441
+paso 185 #f3cfaa3094baa018
+paso 186 #fbdef34a82ff5ed1
+paso 187 #99ee416ccafc000f
+paso 188 #6b51f61a0ae51209
+paso 189 #26fdb4616cdb0442
+paso 190 #2ecb08a42140bfe0
+paso 191 #49014441d8cc8715
+paso 192 #8b10ac48818a9e7f
+paso 193 #fea273026b202068
+paso 194 #e9c6a19f85fbcda0
+paso 195 #2395f574ed913a5f
+paso 196 #b2bfa445f0fc2716
+paso 197 #9b390f17b547b49a
+paso 198 #eb5837be1ade338b
+paso 199 #abfb0f4a6d3bdf44
+paso 200 #8cbabcbc53ff24d4
+estado #cc05a665aa6e0cb7
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #cd1cc3f5b5efa609
+paso 1 #951223da6bf0a8d3
+paso 2 #a6c22ce64f5a5cfd
+paso 3 #dbd101c3592cef0b
+paso 4 #12bfa42c254bbf93
+paso 5 #6d1c22f2ff09521a
+paso 6 #6a0478dbb8100fd0
+paso 7 #1cebde0ae252c46b
+paso 8 #9e4f4110fda078f1
+paso 9 #ad322c5e3cf55384
+paso 10 #0bf1ab31a84bf728
+paso 11 #ab4dda59ace49cf2
+paso 12 #d4cbfd799ebc9a4e
+paso 13 #e3b3b7e2bab86a30
+paso 14 #66809b20d5dbaeab
+paso 15 #c908402d1b182f30
+paso 16 #366ba94a56cc6022
+paso 17 #e1d7da267487cf00
+paso 18 #d71ea6d98ab18b7a
+paso 19 #2c5f39842271e227
+paso 20 #5e64bc302d72b8c0
+paso 21 #ae5db176fd0ba6ee
+paso 22 #41e22b9985d9b196
+paso 23 #14a6f65ab537e8dc
+paso 24 #e6d5ce04806b23dd
+paso 25 #0c28d55cf5e970ac
+paso 26 #7cd9bc96fe5d951f
+paso 27 #1f57640fce14159b
+paso 28 #c7aaae07bb2e4e45
+paso 29 #9640395a947d6b5b
+paso 30 #3a27527d893761d5
+paso 31 #d644954f59a58fc6
+paso 32 #473c3a32942a41b9
+paso 33 #7038a9507774ec95
+paso 34 #b4e744cfe5179ebb
+paso 35 #edc0c04045c5bbfb
+paso 36 #de80ad198de468d1
+paso 37 #474891d9ecf2cb3c
+paso 38 #dc6e6f3f978c5549
+paso 39 #6ffb3dd719c6e93d
+paso 40 #32ea25ee75d8e2de
+paso 41 #d47da026d5e2d275
+paso 42 #7bd6d4657c825eb7
+paso 43 #0ebb209b0e565ec6
+paso 44 #365035917c89f8dd
+paso 45 #a3ced2e6e7ef8dd6
+paso 46 #7a0bfdd4397ab2ad
+paso 47 #ecaa914d6147c4fe
+paso 48 #b065397b3a668c5f
+paso 49 #f2e4c70a3fca2830
+paso 50 #70d39085f7c77c90
+paso 51 #8183593fd8bbec6e
+paso 52 #06ba36853e2a0e83
+paso 53 #8ec50319f8860b14
+paso 54 #2ac91ed2edd4c449
+paso 55 #4b882a2a40dabcef
+paso 56 #7314a6800e337fcd
+paso 57 #b9126930fceb2530
+paso 58 #fc3a8897d9a807dc
+paso 59 #04692237d8978e63
+paso 60 #fb9d9139639112ed
+paso 61 #8de61186ed56cbe5
+paso 62 #d4977c27ceddc6bd
+paso 63 #0194df5385293df8
+paso 64 #b98384f01418f656
+paso 65 #8c4649ce6d25dbef
+paso 66 #69509802c54aec62
+paso 67 #519917171396bfc5
+paso 68 #df8416fd71a0cbfb
+paso 69 #ef0c622a9e801170
+paso 70 #cb53b249be317c10
+paso 71 #b8e78d1b5d93dc82
+paso 72 #aa6a771b38e2e3ad
+paso 73 #f1d17ca50ea0721d
+paso 74 #58df8c57bfa32032
+paso 75 #373b12f7c9502508
+paso 76 #072088d52010fd4f
+paso 77 #5cf51f0162f8b89a
+paso 78 #0ccf5d06f2b30c9c
+paso 79 #3d8a9b1f03f1c594
+paso 80 #5171cbdff680fad9
+paso 81 #8c110b2ad7643a2c
+paso 82 #ae018f147be2eb4d
+paso 83 #f08cb7e98fcf9e41
+paso 84 #59828ae25896a8a3
+paso 85 #552ae9db9dc4d21b
+paso 86 #3bce876c793606e1
+paso 87 #02a2d8e2657cd89b
+paso 88 #989a03ba43072cdf
+paso 89 #22d8babd8d77885d
+paso 90 #c6b724670a57fb24
+paso 91 #9546adacc798b031
+paso 92 #f5e81a8ef278131b
+paso 93 #b971cbb9c58b77e2
+paso 94 #b01398fc5a2f95b9
+paso 95 #72285ce35a131f61
+paso 96 #f12c291efddcdc4f
+paso 97 #db6beff01919c7b2
+paso 98 #1e1a53707207ba40
+paso 99 #1babe0e1654bec4c
+paso 100 #ca23e8d665ab4707
+paso 101 #e03dbc3287b293ca
+paso 102 #4d305c35561d4ca0
+paso 103 #5f258f634bd2a96c
+paso 104 #9b8448108672d02f
+paso 105 #3e32b16f469d2921
+paso 106 #36653fecbfac6927
+paso 107 #c3c1e5019629e21b
+paso 108 #5420287614b3bad6
+paso 109 #295f9fc3432e79ee
+paso 110 #20d4888c8fa64848
+paso 111 #deb5c05bc6a9a95b
+paso 112 #4334ac583b60357f
+paso 113 #000fb06da9fe1281
+paso 114 #aafcf7166d8503ac
+paso 115 #5e02e367ee5d0828
+paso 116 #af678e51b99ddb7d
+paso 117 #4d85f8427a2e2ea0
+paso 118 #bf51f0857874482c
+paso 119 #2859fdfef939644b
+paso 120 #b4e1b4d3470e5fee
+paso 121 #109ca509bedaac5d
+paso 122 #2371f4072db724de
+paso 123 #d77dff4a0d6462b8
+paso 124 #7a0d7982ca3fba16
+paso 125 #1e4b4ec4af4214ea
+paso 126 #388fdb29bc7589cc
+paso 127 #c508617299ed0bd8
+paso 128 #033d766ab82afac9
+paso 129 #9872628175b71af5
+paso 130 #94bd581641ceee11
+paso 131 #eb98ca6c30fa3257
+paso 132 #a0f986c7de667e67
+paso 133 #ca9ab517f94df2d8
+paso 134 #10b8818a20ec80aa
+paso 135 #c0ceabd1b70db883
+paso 136 #d040c3898b42ffef
+paso 137 #5fb61f0ab1c2161d
+paso 138 #d4e9e63a8d96afdd
+paso 139 #3b91e0a40349f2d8
+paso 140 #c34a59dee58d09b8
+paso 141 #1ac4c635ccee67bc
+paso 142 #8b66146edd021e7f
+paso 143 #7909ade050870b9f
+paso 144 #5243d2f217005375
+paso 145 #584723dfe6b97dcb
+paso 146 #bfe1efaa867e8f05
+paso 147 #91370b2bee51c940
+paso 148 #8f6584a8c07cfee9
+paso 149 #398513cffd67c810
+paso 150 #2d3a31a4e68ba6ca
+paso 151 #2bd47dfbd6174f06
+paso 152 #f9f9a620c3673f2a
+paso 153 #eb4b5dc20f508255
+paso 154 #7aac07cb0f784acc
+paso 155 #f478d509a22bf71d
+paso 156 #6dc6851271f56cb5
+paso 157 #d582c7fd916bdc44
+paso 158 #aeab6a1afb4a368f
+paso 159 #dff2dae41287abf6
+paso 160 #3abe80ca28fd78b1
+paso 161 #94052bf90afb664d
+paso 162 #d80bb5fadc7046c8
+paso 163 #de9021a28fe06e93
+paso 164 #0a537eda356cd93b
+paso 165 #a7b7437a7c6a0f94
+paso 166 #4bf656c0bf46a74b
+paso 167 #2e70ace25861edbb
+paso 168 #9e081887c009c2c0
+paso 169 #0b7dfb79a9a8a51b
+paso 170 #ee4e87aec6b5ba4b
+paso 171 #5b499e146b6dd222
+paso 172 #284ddf392490ca74
+paso 173 #d0ea282f57e148f4
+paso 174 #fbfd821dc902b055
+paso 175 #6003d4df85bb9635
+paso 176 #ec1b2260d47c2997
+paso 177 #4e5ac097357b4108
+paso 178 #016cf5955b06a6f5
+paso 179 #a28f4e62a67f3b51
+paso 180 #9f7dc9c40a9bff6f
+paso 181 #a2bc825d429489cb
+paso 182 #45f1f497a15763aa
+paso 183 #185ae105f9df2da5
+paso 184 #b1cee4c8b8844a14
+paso 185 #15dd45cd58a3c76e
+paso 186 #6216dbb7fa9f286a
+paso 187 #17b4b9973337429d
+paso 188 #6c288e88226158ff
+paso 189 #e4316df10f5cee56
+paso 190 #e73ac9aef71fdc0d
+paso 191 #cde816f0d6a292fb
+paso 192 #f7e9380a56bb8b4f
+paso 193 #ce4f9912f89cbaa1
+paso 194 #f7cafea6fff1f751
+paso 195 #e0a753a0c8e3414b
+paso 196 #f25ab5f2855688a3
+paso 197 #f5071f2d2024f683
+paso 198 #e2415ecd375592d0
+paso 199 #76de64122add984a
+paso 200 #634867a48bb844fa
+estado #b050e6dda42806af
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #4a90cd510cf7896d
+paso 1 WRITE P[1]: write(linea 1) | WRITE P[2]: write(linea 2) | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d5a4b1452fee4546
+paso 2 ENTER P[2]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ef24f0a208819959
+paso 3 ASSIGN P[2]: x++ => 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7d04a6d6f085354e
+paso 4 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b3842ef52b846bb1
+paso 5 ASSIGN P[1]: x++ => 2 | ASSIGN P[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ba6b39510a315cde
+paso 6 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2e6b3a278b05ea4d
+paso 7 ASSIGN P[3]: x++ => 3 | ASSIGN P[1]: for#1++ => 2 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #af37a50e5e6f3145
+paso 8 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7c5025c13a0eb28d
+paso 9 ASSIGN P[2]: x++ => 4 | ASSIGN P[3]: for#1++ => 2 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f29843393a786782
+paso 10 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #3bc89ee2a3f6bda6
+paso 11 ASSIGN P[1]: x++ => 5 | ASSIGN P[2]: for#1++ => 3 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e401ba57ca0e4812
+paso 12 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a9912117144b23fc
+paso 13 ASSIGN P[3]: x++ => 6 | ASSIGN P[1]: for#1++ => 3 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #362449b14295224c
+paso 14 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #21717e9d5b318303
+paso 15 ASSIGN P[2]: x++ => 7 | ASSIGN P[3]: for#1++ => 3 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #b3143b9e1b30cdb4
+paso 16 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #cad310531137bcd5
+paso 17 ASSIGN P[1]: x++ => 8 | ASSIGN P[2]: for#1++ => 4 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #bc084fe179f59feb
+paso 18 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #545ace8f7f8c2dbc
+paso 19 ASSIGN P[3]: x++ => 9 | ASSIGN P[1]: for#1++ => 4 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d4e61128facb6f9f
+paso 20 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #258ed47488163e67
+paso 21 ASSIGN P[2]: x++ => 10 | ASSIGN P[3]: for#1++ => 4 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e7573d5fed4c40b1
+paso 22 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #00ed3f95163c102b
+paso 23 ASSIGN P[1]: x++ => 11 | ASSIGN P[2]: for#1++ => 5 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #ba81ff141808fa81
+paso 24 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #ac2a89cef758aff1
+paso 25 ASSIGN P[3]: x++ => 12 | ASSIGN P[1]: for#1++ => 5 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #e06e47fd993f5f7a
+paso 26 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #3a750d88048c615b
+paso 27 ASSIGN P[2]: x++ => 13 | ASSIGN P[3]: for#1++ => 5 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #4535add7dd876dc2
+paso 28 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #28e40d600c2ee2b7
+paso 29 ASSIGN P[1]: x++ => 14 | ASSIGN P[2]: for#1++ => 6 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #842edd7016afa49f
+paso 30 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #40a0fdccd6e2412a
+paso 31 ASSIGN P[3]: x++ => 15 | ASSIGN P[1]: for#1++ => 6 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #7aaf696faaf68c12
+paso 32 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #1f28e6aad7e7d49c
+paso 33 ASSIGN P[2]: x++ => 16 | ASSIGN P[3]: for#1++ => 6 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e2fb9f1885e52bc0
+paso 34 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #4d7a92d3ba0bf37e
+paso 35 ASSIGN P[1]: x++ => 17 | ASSIGN P[2]: for#1++ => 7 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #158bb9622ddcd057
+paso 36 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #095a567efd0264d6
+paso 37 ASSIGN P[3]: x++ => 18 | ASSIGN P[1]: for#1++ => 7 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #d1284bfa93ba0975
+paso 38 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #cddf81cb7c4501e4
+paso 39 ASSIGN P[2]: x++ => 19 | ASSIGN P[3]: for#1++ => 7 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #167ebc34dce9476f
+paso 40 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #6955347aeeb68ea4
+paso 41 ASSIGN P[1]: x++ => 20 | ASSIGN P[2]: for#1++ => 8 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #569943fe29a307d4
+paso 42 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #f7d9b1708a57f480
+paso 43 ASSIGN P[3]: x++ => 21 | ASSIGN P[1]: for#1++ => 8 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #fcd14d5e5a06728b
+paso 44 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #75d2211e78ef8db3
+paso 45 ASSIGN P[2]: x++ => 22 | ASSIGN P[3]: for#1++ => 8 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #92586218c2ac1a64
+paso 46 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #162c0df714713e45
+paso 47 ASSIGN P[1]: x++ => 23 | ASSIGN P[2]: for#1++ => 9 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #4f0f1f3f41a38b47
+paso 48 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #f15754d63d74f4ce
+paso 49 ASSIGN P[3]: x++ => 24 | ASSIGN P[1]: for#1++ => 9 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #78f267adb1330f29
+paso 50 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #c0e2f201cc5c076d
+paso 51 ASSIGN P[2]: x++ => 25 | ASSIGN P[3]: for#1++ => 9 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #c725e1dc40d86eee
+paso 52 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #53b093ddafd61308
+paso 53 ASSIGN P[1]: x++ => 26 | ASSIGN P[2]: for#1++ => 10 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #154755a91e546cf8
+paso 54 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #7c295da6226d626f
+paso 55 ASSIGN P[3]: x++ => 27 | ASSIGN P[1]: for#1++ => 10 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #5a66b76f880fb7a3
+paso 56 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #930cac765ff3ad5f
+paso 57 ASSIGN P[2]: x++ => 28 | ASSIGN P[3]: for#1++ => 10 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #19ce9f70de5e79a2
+paso 58 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #7aed37b5d7622ef3
+paso 59 ASSIGN P[1]: x++ => 29 | ASSIGN P[2]: for#1++ => 11 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #98ab286957d62a87
+paso 60 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #8b287edcdaa9293f
+paso 61 ASSIGN P[3]: x++ => 30 | ASSIGN P[1]: for#1++ => 11 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #6a35654b1532c595
+paso 62 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #afa094a8abe89416
+paso 63 ASSIGN P[2]: x++ => 31 | ASSIGN P[3]: for#1++ => 11 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #5f2a32aac82f52e6
+paso 64 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #39e6b51e443c286d
+paso 65 ASSIGN P[1]: x++ => 32 | ASSIGN P[2]: for#1++ => 12 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #82b068b664d74439
+paso 66 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #2d8b60cb3f21e035
+paso 67 ASSIGN P[3]: x++ => 33 | ASSIGN P[1]: for#1++ => 12 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #406725d235146123
+paso 68 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #7a529a7a2bff0932
+paso 69 ASSIGN P[2]: x++ => 34 | ASSIGN P[3]: for#1++ => 12 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #94f2ee36c577693d
+paso 70 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #796eee4cf22d4fc5
+paso 71 ASSIGN P[1]: x++ => 35 | ASSIGN P[2]: for#1++ => 13 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #ac62e3973dd5481b
+paso 72 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #0e023ac61940dbe9
+paso 73 ASSIGN P[3]: x++ => 36 | ASSIGN P[1]: for#1++ => 13 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #530ef91e44b36c7a
+paso 74 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #84ce6ffe3401e6e8
+paso 75 ASSIGN P[2]: x++ => 37 | ASSIGN P[3]: for#1++ => 13 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #d982c8f52476eac6
+paso 76 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #040b0265c840042b
+paso 77 ASSIGN P[1]: x++ => 38 | ASSIGN P[2]: for#1++ => 14 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #5ddbe7f2e94fbf43
+paso 78 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #f8b69769c90ebf63
+paso 79 ASSIGN P[3]: x++ => 39 | ASSIGN P[1]: for#1++ => 14 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #a9755d44546965a0
+paso 80 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #d07a8d857bba5751
+paso 81 ASSIGN P[2]: x++ => 40 | ASSIGN P[3]: for#1++ => 14 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #4af610395427e463
+paso 82 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #a7111e8cb0759c6c
+paso 83 ASSIGN P[1]: x++ => 41 | ASSIGN P[2]: for#1++ => 15 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #79985756adbb27a8
+paso 84 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #5d89e955d404fe79
+paso 85 ASSIGN P[3]: x++ => 42 | ASSIGN P[1]: for#1++ => 15 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #151fc33906c2e501
+paso 86 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #3c117048b30fbebb
+paso 87 ASSIGN P[2]: x++ => 43 | ASSIGN P[3]: for#1++ => 15 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #887eb0b622d81c62
+paso 88 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #b13282f930d384f0
+paso 89 ASSIGN P[1]: x++ => 44 | ASSIGN P[2]: for#1++ => 16 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #9524990d8dd5a3af
+paso 90 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #9844b9c405b0ddc6
+paso 91 ASSIGN P[3]: x++ => 45 | ASSIGN P[1]: for#1++ => 16 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #a5a2a5acd240c890
+paso 92 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #ef9425880739ad91
+paso 93 ASSIGN P[2]: x++ => 46 | ASSIGN P[3]: for#1++ => 16 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #14d93766605d02cc
+paso 94 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #3c9a3a62b3cb051c
+paso 95 ASSIGN P[1]: x++ => 47 | ASSIGN P[2]: for#1++ => 17 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #3bf4156bae0f50b1
+paso 96 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #339d93265644e825
+paso 97 ASSIGN P[3]: x++ => 48 | ASSIGN P[1]: for#1++ => 17 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #a84ea9e0fd21f47f
+paso 98 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #23cf87cc1980247f
+paso 99 ASSIGN P[2]: x++ => 49 | ASSIGN P[3]: for#1++ => 17 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #c5559defdf2b0260
+paso 100 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #a424738f91b8cf4d
+paso 101 ASSIGN P[1]: x++ => 50 | ASSIGN P[2]: for#1++ => 18 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #3c78ceeaba368d6c
+paso 102 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #c9ab9bdff363c6a9
+paso 103 ASSIGN P[3]: x++ => 51 | ASSIGN P[1]: for#1++ => 18 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #1d997556635cceb1
+paso 104 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #2ba3a8b51a98b5f3
+paso 105 ASSIGN P[2]: x++ => 52 | ASSIGN P[3]: for#1++ => 18 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #a0b6cd29c79263ba
+paso 106 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #b82beac5d983bc0d
+paso 107 ASSIGN P[1]: x++ => 53 | ASSIGN P[2]: for#1++ => 19 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #3bd81bafdc0cd3b9
+paso 108 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #5fa9982e67d9463c
+paso 109 ASSIGN P[3]: x++ => 54 | ASSIGN P[1]: for#1++ => 19 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #f601ae276fc129d2
+paso 110 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #e1c45ecddd60b576
+paso 111 ASSIGN P[2]: x++ => 55 | ASSIGN P[3]: for#1++ => 19 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #204ba25097e63bb6
+paso 112 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #984019dfa5fa581d
+paso 113 ASSIGN P[1]: x++ => 56 | ASSIGN P[2]: for#1++ => 20 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #a6300182093dd6e3
+paso 114 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #d0f55576d9f6e6f4
+paso 115 ASSIGN P[3]: x++ => 57 | ASSIGN P[1]: for#1++ => 20 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #f6a02d3adf37f3e1
+paso 116 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #7ce3384b351624be
+paso 117 ASSIGN P[2]: x++ => 58 | ASSIGN P[3]: for#1++ => 20 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #4c8545a49361336c
+paso 118 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #d3e317ed9790b77b
+paso 119 ASSIGN P[1]: x++ => 59 | ASSIGN P[2]: for#1++ => 21 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #3fcc218e765d5648
+paso 120 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #742578b6a2577853
+paso 121 ASSIGN P[3]: x++ => 60 | ASSIGN P[1]: for#1++ => 21 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #94400053af843b23
+paso 122 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #2d9d7c2d6caa6d59
+paso 123 ASSIGN P[2]: x++ => 61 | ASSIGN P[3]: for#1++ => 21 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #54568058caa9b0e9
+paso 124 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #3b335b2862308e7b
+paso 125 ASSIGN P[1]: x++ => 62 | ASSIGN P[2]: for#1++ => 22 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #0befc883884d55eb
+paso 126 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #074c9ff89e660a99
+paso 127 ASSIGN P[3]: x++ => 63 | ASSIGN P[1]: for#1++ => 22 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #ce6ff559206fd0c8
+paso 128 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #0e8e661c4d80e0b1
+paso 129 ASSIGN P[2]: x++ => 64 | ASSIGN P[3]: for#1++ => 22 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #b6c254356451764f
+paso 130 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #2934d81644bcbeb5
+paso 131 ASSIGN P[1]: x++ => 65 | ASSIGN P[2]: for#1++ => 23 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #30b2d30d6ca527a2
+paso 132 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #7410ebd5cada846f
+paso 133 ASSIGN P[3]: x++ => 66 | ASSIGN P[1]: for#1++ => 23 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #6e73c08aa97cb7e8
+paso 134 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #74f0edfaf18fd68c
+paso 135 ASSIGN P[2]: x++ => 67 | ASSIGN P[3]: for#1++ => 23 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #a337c7bec681fd17
+paso 136 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #4a4497b99a332957
+paso 137 ASSIGN P[1]: x++ => 68 | ASSIGN P[2]: for#1++ => 24 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #da3ab55cabe33475
+paso 138 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #fff148ea409f160d
+paso 139 ASSIGN P[3]: x++ => 69 | ASSIGN P[1]: for#1++ => 24 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #95112657d27ae1ac
+paso 140 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #186a797c01cc8ef3
+paso 141 ASSIGN P[2]: x++ => 70 | ASSIGN P[3]: for#1++ => 24 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #2b4fe757ec53b732
+paso 142 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #2a58f90ab1a52186
+paso 143 ASSIGN P[1]: x++ => 71 | ASSIGN P[2]: for#1++ => 25 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #a60ca739059cfaf6
+paso 144 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #e3c81bf7e04e8777
+paso 145 ASSIGN P[3]: x++ => 72 | ASSIGN P[1]: for#1++ => 25 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #358cec18a9a74126
+paso 146 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #39836fa94e713552
+paso 147 ASSIGN P[2]: x++ => 73 | ASSIGN P[3]: for#1++ => 25 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #450d846141a004bb
+paso 148 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #34c5456780f82be7
+paso 149 ASSIGN P[1]: x++ => 74 | ASSIGN P[2]: for#1++ => 26 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #75ee82df6fe09c63
+paso 150 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #70e2b9f2094d884b
+paso 151 ASSIGN P[3]: x++ => 75 | ASSIGN P[1]: for#1++ => 26 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #4d77bf2c8b64f803
+paso 152 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #c654956758e71d28
+paso 153 ASSIGN P[2]: x++ => 76 | ASSIGN P[3]: for#1++ => 26 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #cad6d5336b50e1b1
+paso 154 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #b73e8b46ab48e8f6
+paso 155 ASSIGN P[1]: x++ => 77 | ASSIGN P[2]: for#1++ => 27 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #3c0d04ee83de4461
+paso 156 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #deaaefb9237a73ce
+paso 157 ASSIGN P[3]: x++ => 78 | ASSIGN P[1]: for#1++ => 27 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #7965526c196cef97
+paso 158 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #4506aaf7666cee5e
+paso 159 ASSIGN P[2]: x++ => 79 | ASSIGN P[3]: for#1++ => 27 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #7fe228f4ca675ea6
+paso 160 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #87fd2c9485e2bc7a
+paso 161 ASSIGN P[1]: x++ => 80 | ASSIGN P[2]: for#1++ => 28 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #1a1482ce207a5d38
+paso 162 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #b3b042b4254af5a1
+paso 163 ASSIGN P[3]: x++ => 81 | ASSIGN P[1]: for#1++ => 28 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #fe8b86bad0e1879f
+paso 164 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #2277ffe2316d854f
+paso 165 ASSIGN P[2]: x++ => 82 | ASSIGN P[3]: for#1++ => 28 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #2711bf258b01a576
+paso 166 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #0b8cbd468ec0daa7
+paso 167 ASSIGN P[1]: x++ => 83 | ASSIGN P[2]: for#1++ => 29 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #e1cac17bd028826c
+paso 168 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #f4aab3906e7229a2
+paso 169 ASSIGN P[3]: x++ => 84 | ASSIGN P[1]: for#1++ => 29 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #93d5e05d7c500c59
+paso 170 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #e388b0170371110c
+paso 171 ASSIGN P[2]: x++ => 85 | ASSIGN P[3]: for#1++ => 29 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #762e4d3b308d765c
+paso 172 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #34ba31da41a1ae39
+paso 173 ASSIGN P[1]: x++ => 86 | ASSIGN P[2]: for#1++ => 30 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #763ddf034178eb3f
+paso 174 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #5a17a08039e3888d
+paso 175 ASSIGN P[3]: x++ => 87 | ASSIGN P[1]: for#1++ => 30 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #0f81858065a7bfd7
+paso 176 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #18bddb61591820aa
+paso 177 ASSIGN P[2]: x++ => 88 | ASSIGN P[3]: for#1++ => 30 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #6e1b9749dc2092a5
+paso 178 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #af8ba469d0b5c4b4
+paso 179 ASSIGN P[1]: x++ => 89 | ASSIGN P[2]: for#1++ => 31 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #d7fd84e4c47fb579
+paso 180 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #b579a59ce1f10d80
+paso 181 ASSIGN P[3]: x++ => 90 | ASSIGN P[1]: for#1++ => 31 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #a590881ce140b800
+paso 182 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #5bf1771a08f9535b
+paso 183 ASSIGN P[2]: x++ => 91 | ASSIGN P[3]: for#1++ => 31 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #66debe83af83bc48
+paso 184 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #2829170befa35abb
+paso 185 ASSIGN P[1]: x++ => 92 | ASSIGN P[2]: for#1++ => 32 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #0f43b02afd47e2b0
+paso 186 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #9f3c232ee6948c63
+paso 187 ASSIGN P[3]: x++ => 93 | ASSIGN P[1]: for#1++ => 32 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #266bee7249b8b22f
+paso 188 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #2147ffa723fa77df
+paso 189 ASSIGN P[2]: x++ => 94 | ASSIGN P[3]: for#1++ => 32 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #022139a269718f59
+paso 190 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #4780e7212cc4eea1
+paso 191 ASSIGN P[1]: x++ => 95 | ASSIGN P[2]: for#1++ => 33 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #a82849dc16fd164a
+paso 192 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #5fade9e91f6e688d
+paso 193 ASSIGN P[3]: x++ => 96 | ASSIGN P[1]: for#1++ => 33 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #d5658b71ced88c7d
+paso 194 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #db10e5ebf0d7b6a0
+paso 195 ASSIGN P[2]: x++ => 97 | ASSIGN P[3]: for#1++ => 33 | BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #da93fb3469856efc
+paso 196 WRITE P[3]: write(linea 3) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #e8dc08383c394ad2
+paso 197 ASSIGN P[1]: x++ => 98 | ASSIGN P[2]: for#1++ => 34 | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #f58d52c45a9e3521
+paso 198 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #76902ac17c2b85cd
+paso 199 ASSIGN P[3]: x++ => 99 | ASSIGN P[1]: for#1++ => 34 | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #ff4cfe333f0f486f
+paso 200 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #8649d4cadcf947e3
+estado #15ab54175a50265b
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #c70dfb37aa06a458
+paso 1 #d5a4b1452fee4546
+paso 2 #ef24f0a208819959
+paso 3 #7d04a6d6f085354e
+paso 4 #b3842ef52b846bb1
+paso 5 #ba6b39510a315cde
+paso 6 #2e6b3a278b05ea4d
+paso 7 #af37a50e5e6f3145
+paso 8 #7c5025c13a0eb28d
+paso 9 #f29843393a786782
+paso 10 #3bc89ee2a3f6bda6
+paso 11 #e401ba57ca0e4812
+paso 12 #a9912117144b23fc
+paso 13 #362449b14295224c
+paso 14 #21717e9d5b318303
+paso 15 #b3143b9e1b30cdb4
+paso 16 #cad310531137bcd5
+paso 17 #bc084fe179f59feb
+paso 18 #545ace8f7f8c2dbc
+paso 19 #d4e61128facb6f9f
+paso 20 #258ed47488163e67
+paso 21 #e7573d5fed4c40b1
+paso 22 #00ed3f95163c102b
+paso 23 #ba81ff141808fa81
+paso 24 #ac2a89cef758aff1
+paso 25 #e06e47fd993f5f7a
+paso 26 #3a750d88048c615b
+paso 27 #4535add7dd876dc2
+paso 28 #28e40d600c2ee2b7
+paso 29 #842edd7016afa49f
+paso 30 #40a0fdccd6e2412a
+paso 31 #7aaf696faaf68c12
+paso 32 #1f28e6aad7e7d49c
+paso 33 #e2fb9f1885e52bc0
+paso 34 #4d7a92d3ba0bf37e
+paso 35 #158bb9622ddcd057
+paso 36 #095a567efd0264d6
+paso 37 #d1284bfa93ba0975
+paso 38 #cddf81cb7c4501e4
+paso 39 #167ebc34dce9476f
+paso 40 #6955347aeeb68ea4
+paso 41 #569943fe29a307d4
+paso 42 #f7d9b1708a57f480
+paso 43 #fcd14d5e5a06728b
+paso 44 #75d2211e78ef8db3
+paso 45 #92586218c2ac1a64
+paso 46 #162c0df714713e45
+paso 47 #4f0f1f3f41a38b47
+paso 48 #f15754d63d74f4ce
+paso 49 #78f267adb1330f29
+paso 50 #c0e2f201cc5c076d
+paso 51 #c725e1dc40d86eee
+paso 52 #53b093ddafd61308
+paso 53 #154755a91e546cf8
+paso 54 #7c295da6226d626f
+paso 55 #5a66b76f880fb7a3
+paso 56 #930cac765ff3ad5f
+paso 57 #19ce9f70de5e79a2
+paso 58 #7aed37b5d7622ef3
+paso 59 #98ab286957d62a87
+paso 60 #8b287edcdaa9293f
+paso 61 #6a35654b1532c595
+paso 62 #afa094a8abe89416
+paso 63 #5f2a32aac82f52e6
+paso 64 #39e6b51e443c286d
+paso 65 #82b068b664d74439
+paso 66 #2d8b60cb3f21e035
+paso 67 #406725d235146123
+paso 68 #7a529a7a2bff0932
+paso 69 #94f2ee36c577693d
+paso 70 #796eee4cf22d4fc5
+paso 71 #ac62e3973dd5481b
+paso 72 #0e023ac61940dbe9
+paso 73 #530ef91e44b36c7a
+paso 74 #84ce6ffe3401e6e8
+paso 75 #d982c8f52476eac6
+paso 76 #040b0265c840042b
+paso 77 #5ddbe7f2e94fbf43
+paso 78 #f8b69769c90ebf63
+paso 79 #a9755d44546965a0
+paso 80 #d07a8d857bba5751
+paso 81 #4af610395427e463
+paso 82 #a7111e8cb0759c6c
+paso 83 #79985756adbb27a8
+paso 84 #5d89e955d404fe79
+paso 85 #151fc33906c2e501
+paso 86 #3c117048b30fbebb
+paso 87 #887eb0b622d81c62
+paso 88 #b13282f930d384f0
+paso 89 #9524990d8dd5a3af
+paso 90 #9844b9c405b0ddc6
+paso 91 #a5a2a5acd240c890
+paso 92 #ef9425880739ad91
+paso 93 #14d93766605d02cc
+paso 94 #3c9a3a62b3cb051c
+paso 95 #3bf4156bae0f50b1
+paso 96 #339d93265644e825
+paso 97 #a84ea9e0fd21f47f
+paso 98 #23cf87cc1980247f
+paso 99 #c5559defdf2b0260
+paso 100 #a424738f91b8cf4d
+paso 101 #3c78ceeaba368d6c
+paso 102 #c9ab9bdff363c6a9
+paso 103 #1d997556635cceb1
+paso 104 #2ba3a8b51a98b5f3
+paso 105 #a0b6cd29c79263ba
+paso 106 #b82beac5d983bc0d
+paso 107 #3bd81bafdc0cd3b9
+paso 108 #5fa9982e67d9463c
+paso 109 #f601ae276fc129d2
+paso 110 #e1c45ecddd60b576
+paso 111 #204ba25097e63bb6
+paso 112 #984019dfa5fa581d
+paso 113 #a6300182093dd6e3
+paso 114 #d0f55576d9f6e6f4
+paso 115 #f6a02d3adf37f3e1
+paso 116 #7ce3384b351624be
+paso 117 #4c8545a49361336c
+paso 118 #d3e317ed9790b77b
+paso 119 #3fcc218e765d5648
+paso 120 #742578b6a2577853
+paso 121 #94400053af843b23
+paso 122 #2d9d7c2d6caa6d59
+paso 123 #54568058caa9b0e9
+paso 124 #3b335b2862308e7b
+paso 125 #0befc883884d55eb
+paso 126 #074c9ff89e660a99
+paso 127 #ce6ff559206fd0c8
+paso 128 #0e8e661c4d80e0b1
+paso 129 #b6c254356451764f
+paso 130 #2934d81644bcbeb5
+paso 131 #30b2d30d6ca527a2
+paso 132 #7410ebd5cada846f
+paso 133 #6e73c08aa97cb7e8
+paso 134 #74f0edfaf18fd68c
+paso 135 #a337c7bec681fd17
+paso 136 #4a4497b99a332957
+paso 137 #da3ab55cabe33475
+paso 138 #fff148ea409f160d
+paso 139 #95112657d27ae1ac
+paso 140 #186a797c01cc8ef3
+paso 141 #2b4fe757ec53b732
+paso 142 #2a58f90ab1a52186
+paso 143 #a60ca739059cfaf6
+paso 144 #e3c81bf7e04e8777
+paso 145 #358cec18a9a74126
+paso 146 #39836fa94e713552
+paso 147 #450d846141a004bb
+paso 148 #34c5456780f82be7
+paso 149 #75ee82df6fe09c63
+paso 150 #70e2b9f2094d884b
+paso 151 #4d77bf2c8b64f803
+paso 152 #c654956758e71d28
+paso 153 #cad6d5336b50e1b1
+paso 154 #b73e8b46ab48e8f6
+paso 155 #3c0d04ee83de4461
+paso 156 #deaaefb9237a73ce
+paso 157 #7965526c196cef97
+paso 158 #4506aaf7666cee5e
+paso 159 #7fe228f4ca675ea6
+paso 160 #87fd2c9485e2bc7a
+paso 161 #1a1482ce207a5d38
+paso 162 #b3b042b4254af5a1
+paso 163 #fe8b86bad0e1879f
+paso 164 #2277ffe2316d854f
+paso 165 #2711bf258b01a576
+paso 166 #0b8cbd468ec0daa7
+paso 167 #e1cac17bd028826c
+paso 168 #f4aab3906e7229a2
+paso 169 #93d5e05d7c500c59
+paso 170 #e388b0170371110c
+paso 171 #762e4d3b308d765c
+paso 172 #34ba31da41a1ae39
+paso 173 #763ddf034178eb3f
+paso 174 #5a17a08039e3888d
+paso 175 #0f81858065a7bfd7
+paso 176 #18bddb61591820aa
+paso 177 #6e1b9749dc2092a5
+paso 178 #af8ba469d0b5c4b4
+paso 179 #d7fd84e4c47fb579
+paso 180 #b579a59ce1f10d80
+paso 181 #a590881ce140b800
+paso 182 #5bf1771a08f9535b
+paso 183 #66debe83af83bc48
+paso 184 #2829170befa35abb
+paso 185 #0f43b02afd47e2b0
+paso 186 #9f3c232ee6948c63
+paso 187 #266bee7249b8b22f
+paso 188 #2147ffa723fa77df
+paso 189 #022139a269718f59
+paso 190 #4780e7212cc4eea1
+paso 191 #a82849dc16fd164a
+paso 192 #5fade9e91f6e688d
+paso 193 #d5658b71ced88c7d
+paso 194 #db10e5ebf0d7b6a0
+paso 195 #da93fb3469856efc
+paso 196 #e8dc08383c394ad2
+paso 197 #f58d52c45a9e3521
+paso 198 #76902ac17c2b85cd
+paso 199 #ff4cfe333f0f486f
+paso 200 #8649d4cadcf947e3
+estado #15ab54175a50265b
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #cd1cc3f5b5efa609
+paso 1 #d5a4b1452fee4546
+paso 2 #ef24f0a208819959
+paso 3 #7d04a6d6f085354e
+paso 4 #b3842ef52b846bb1
+paso 5 #ba6b39510a315cde
+paso 6 #2e6b3a278b05ea4d
+paso 7 #af37a50e5e6f3145
+paso 8 #7c5025c13a0eb28d
+paso 9 #f29843393a786782
+paso 10 #3bc89ee2a3f6bda6
+paso 11 #e401ba57ca0e4812
+paso 12 #a9912117144b23fc
+paso 13 #362449b14295224c
+paso 14 #21717e9d5b318303
+paso 15 #b3143b9e1b30cdb4
+paso 16 #cad310531137bcd5
+paso 17 #bc084fe179f59feb
+paso 18 #545ace8f7f8c2dbc
+paso 19 #d4e61128facb6f9f
+paso 20 #258ed47488163e67
+paso 21 #e7573d5fed4c40b1
+paso 22 #00ed3f95163c102b
+paso 23 #ba81ff141808fa81
+paso 24 #ac2a89cef758aff1
+paso 25 #e06e47fd993f5f7a
+paso 26 #3a750d88048c615b
+paso 27 #4535add7dd876dc2
+paso 28 #28e40d600c2ee2b7
+paso 29 #842edd7016afa49f
+paso 30 #40a0fdccd6e2412a
+paso 31 #7aaf696faaf68c12
+paso 32 #1f28e6aad7e7d49c
+paso 33 #e2fb9f1885e52bc0
+paso 34 #4d7a92d3ba0bf37e
+paso 35 #158bb9622ddcd057
+paso 36 #095a567efd0264d6
+paso 37 #d1284bfa93ba0975
+paso 38 #cddf81cb7c4501e4
+paso 39 #167ebc34dce9476f
+paso 40 #6955347aeeb68ea4
+paso 41 #569943fe29a307d4
+paso 42 #f7d9b1708a57f480
+paso 43 #fcd14d5e5a06728b
+paso 44 #75d2211e78ef8db3
+paso 45 #92586218c2ac1a64
+paso 46 #162c0df714713e45
+paso 47 #4f0f1f3f41a38b47
+paso 48 #f15754d63d74f4ce
+paso 49 #78f267adb1330f29
+paso 50 #c0e2f201cc5c076d
+paso 51 #c725e1dc40d86eee
+paso 52 #53b093ddafd61308
+paso 53 #154755a91e546cf8
+paso 54 #7c295da6226d626f
+paso 55 #5a66b76f880fb7a3
+paso 56 #930cac765ff3ad5f
+paso 57 #19ce9f70de5e79a2
+paso 58 #7aed37b5d7622ef3
+paso 59 #98ab286957d62a87
+paso 60 #8b287edcdaa9293f
+paso 61 #6a35654b1532c595
+paso 62 #afa094a8abe89416
+paso 63 #5f2a32aac82f52e6
+paso 64 #39e6b51e443c286d
+paso 65 #82b068b664d74439
+paso 66 #2d8b60cb3f21e035
+paso 67 #406725d235146123
+paso 68 #7a529a7a2bff0932
+paso 69 #94f2ee36c577693d
+paso 70 #796eee4cf22d4fc5
+paso 71 #ac62e3973dd5481b
+paso 72 #0e023ac61940dbe9
+paso 73 #530ef91e44b36c7a
+paso 74 #84ce6ffe3401e6e8
+paso 75 #d982c8f52476eac6
+paso 76 #040b0265c840042b
+paso 77 #5ddbe7f2e94fbf43
+paso 78 #f8b69769c90ebf63
+paso 79 #a9755d44546965a0
+paso 80 #d07a8d857bba5751
+paso 81 #4af610395427e463
+paso 82 #a7111e8cb0759c6c
+paso 83 #79985756adbb27a8
+paso 84 #5d89e955d404fe79
+paso 85 #151fc33906c2e501
+paso 86 #3c117048b30fbebb
+paso 87 #887eb0b622d81c62
+paso 88 #b13282f930d384f0
+paso 89 #9524990d8dd5a3af
+paso 90 #9844b9c405b0ddc6
+paso 91 #a5a2a5acd240c890
+paso 92 #ef9425880739ad91
+paso 93 #14d93766605d02cc
+paso 94 #3c9a3a62b3cb051c
+paso 95 #3bf4156bae0f50b1
+paso 96 #339d93265644e825
+paso 97 #a84ea9e0fd21f47f
+paso 98 #23cf87cc1980247f
+paso 99 #c5559defdf2b0260
+paso 100 #a424738f91b8cf4d
+paso 101 #3c78ceeaba368d6c
+paso 102 #c9ab9bdff363c6a9
+paso 103 #1d997556635cceb1
+paso 104 #2ba3a8b51a98b5f3
+paso 105 #a0b6cd29c79263ba
+paso 106 #b82beac5d983bc0d
+paso 107 #3bd81bafdc0cd3b9
+paso 108 #5fa9982e67d9463c
+paso 109 #f601ae276fc129d2
+paso 110 #e1c45ecddd60b576
+paso 111 #204ba25097e63bb6
+paso 112 #984019dfa5fa581d
+paso 113 #a6300182093dd6e3
+paso 114 #d0f55576d9f6e6f4
+paso 115 #f6a02d3adf37f3e1
+paso 116 #7ce3384b351624be
+paso 117 #4c8545a49361336c
+paso 118 #d3e317ed9790b77b
+paso 119 #3fcc218e765d5648
+paso 120 #742578b6a2577853
+paso 121 #94400053af843b23
+paso 122 #2d9d7c2d6caa6d59
+paso 123 #54568058caa9b0e9
+paso 124 #3b335b2862308e7b
+paso 125 #0befc883884d55eb
+paso 126 #074c9ff89e660a99
+paso 127 #ce6ff559206fd0c8
+paso 128 #0e8e661c4d80e0b1
+paso 129 #b6c254356451764f
+paso 130 #2934d81644bcbeb5
+paso 131 #30b2d30d6ca527a2
+paso 132 #7410ebd5cada846f
+paso 133 #6e73c08aa97cb7e8
+paso 134 #74f0edfaf18fd68c
+paso 135 #a337c7bec681fd17
+paso 136 #4a4497b99a332957
+paso 137 #da3ab55cabe33475
+paso 138 #fff148ea409f160d
+paso 139 #95112657d27ae1ac
+paso 140 #186a797c01cc8ef3
+paso 141 #2b4fe757ec53b732
+paso 142 #2a58f90ab1a52186
+paso 143 #a60ca739059cfaf6
+paso 144 #e3c81bf7e04e8777
+paso 145 #358cec18a9a74126
+paso 146 #39836fa94e713552
+paso 147 #450d846141a004bb
+paso 148 #34c5456780f82be7
+paso 149 #75ee82df6fe09c63
+paso 150 #70e2b9f2094d884b
+paso 151 #4d77bf2c8b64f803
+paso 152 #c654956758e71d28
+paso 153 #cad6d5336b50e1b1
+paso 154 #b73e8b46ab48e8f6
+paso 155 #3c0d04ee83de4461
+paso 156 #deaaefb9237a73ce
+paso 157 #7965526c196cef97
+paso 158 #4506aaf7666cee5e
+paso 159 #7fe228f4ca675ea6
+paso 160 #87fd2c9485e2bc7a
+paso 161 #1a1482ce207a5d38
+paso 162 #b3b042b4254af5a1
+paso 163 #fe8b86bad0e1879f
+paso 164 #2277ffe2316d854f
+paso 165 #2711bf258b01a576
+paso 166 #0b8cbd468ec0daa7
+paso 167 #e1cac17bd028826c
+paso 168 #f4aab3906e7229a2
+paso 169 #93d5e05d7c500c59
+paso 170 #e388b0170371110c
+paso 171 #762e4d3b308d765c
+paso 172 #34ba31da41a1ae39
+paso 173 #763ddf034178eb3f
+paso 174 #5a17a08039e3888d
+paso 175 #0f81858065a7bfd7
+paso 176 #18bddb61591820aa
+paso 177 #6e1b9749dc2092a5
+paso 178 #af8ba469d0b5c4b4
+paso 179 #d7fd84e4c47fb579
+paso 180 #b579a59ce1f10d80
+paso 181 #a590881ce140b800
+paso 182 #5bf1771a08f9535b
+paso 183 #66debe83af83bc48
+paso 184 #2829170befa35abb
+paso 185 #0f43b02afd47e2b0
+paso 186 #9f3c232ee6948c63
+paso 187 #266bee7249b8b22f
+paso 188 #2147ffa723fa77df
+paso 189 #022139a269718f59
+paso 190 #4780e7212cc4eea1
+paso 191 #a82849dc16fd164a
+paso 192 #5fade9e91f6e688d
+paso 193 #d5658b71ced88c7d
+paso 194 #db10e5ebf0d7b6a0
+paso 195 #da93fb3469856efc
+paso 196 #e8dc08383c394ad2
+paso 197 #f58d52c45a9e3521
+paso 198 #76902ac17c2b85cd
+paso 199 #ff4cfe333f0f486f
+paso 200 #8649d4cadcf947e3
+estado #15ab54175a50265b
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #4a90cd510cf7896d
+paso 1 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b84371e37607193b
+paso 2 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4a6caea63cc69403
+paso 3 ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9cd4abeff22651f6
+paso 4 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #66b54b2730c81aec
+paso 5 ASSIGN P[3]: x++ => 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b8dc75533c91889f
+paso 6 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #f241510d551228d6
+paso 7 ASSIGN P[3]: for#1++ => 2 | ASSIGN P[1]: x++ => 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #19ea44543ef862dd
+paso 8 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #013c32ea6bb9dfba
+paso 9 ASSIGN P[2]: x++ => 3 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #c8d255b16f4252e2
+paso 10 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d915ce950c2f248d
+paso 11 RETURN P[2]: retorna de M.f, libera el monitor | ASSIGN P[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #772aae65914cd00c
+paso 12 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #cf4a9318ec1b0f57
+paso 13 ASSIGN P[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #719a764c2c7cb537
+paso 14 ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #155f77b62ff481f9
+paso 15 BLOCKED P[1]: espera para entrar a M.f | WRITE P[2]: write(linea 2) | ASSIGN P[3]: x++ => 4 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #e1e09521c9df64fc
+paso 16 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1f98f44b2a2f8bd3
+paso 17 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #58941d36129e38de
+paso 18 ASSIGN P[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #3b2d9219eeec0ddb
+paso 19 ASSIGN P[1]: x++ => 5 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #b69942f6c1af77bb
+paso 20 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ebf9f0c37ed8bf51
+paso 21 ASSIGN P[2]: x++ => 6 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #89a62c1c6b15d978
+paso 22 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #8aa3954dae39226f
+paso 23 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | ASSIGN P[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #836e21cbf636b6dd
+paso 24 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a6fc28ea0a629d80
+paso 25 ASSIGN P[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #324cdfb45fd5fa08
+paso 26 ASSIGN P[3]: x++ => 7 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #dc25936e01a82d63
+paso 27 BLOCKED P[1]: espera para entrar a M.f | WRITE P[2]: write(linea 2) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #feb8fd5d8be70626
+paso 28 ASSIGN P[1]: x++ => 8 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #629f3637f5152a5b
+paso 29 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d9178ba8d5efa951
+paso 30 ASSIGN P[3]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #cf3c2053a1a233c1
+paso 31 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #cf2462867c5f462c
+paso 32 ASSIGN P[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #8729f78f7b8a88bc
+paso 33 ASSIGN P[2]: x++ => 9 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #8580047907eb35d2
+paso 34 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #a8c55c88ea06839f
+paso 35 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #fa8c376c6c1cea5a
+paso 36 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #693c7219199c7fde
+paso 37 ASSIGN P[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #6dd54cca141612d6
+paso 38 ASSIGN P[3]: x++ => 10 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #465dfd914ec770b0
+paso 39 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #07012385aa7df52c
+paso 40 ASSIGN P[1]: x++ => 11 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #7e2c15bcb59e8aee
+paso 41 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #60078fd774620ab9
+paso 42 ASSIGN P[3]: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #27208ddd74a12fdc
+paso 43 RETURN P[1]: retorna de M.f, libera el monitor | WRITE P[3]: write(linea 3) | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #4027bcc13a887f53
+paso 44 ASSIGN P[1]: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #a79f5e680118a25c
+paso 45 ASSIGN P[2]: x++ => 12 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #31b361a4a853c518
+paso 46 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #c7bb085bd2f35fab
+paso 47 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #5e7bb4a27777e11d
+paso 48 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #7bbac61020cf7353
+paso 49 ASSIGN P[2]: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #bad73ad64f074d1c
+paso 50 ASSIGN P[3]: x++ => 13 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #7a7d0934967ed4c3
+paso 51 WRITE P[2]: write(linea 2) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #08a518ceb3122215
+paso 52 ASSIGN P[1]: x++ => 14 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #d77325a26a498086
+paso 53 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #1d07ccc559ca64af
+paso 54 ASSIGN P[3]: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #7f43c1b8afe26043
+paso 55 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #85df5631dd241a65
+paso 56 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #433efe5e0d499316
+paso 57 ASSIGN P[2]: x++ => 15 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #40f43b14ac5e37fd
+paso 58 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #d534314986b332ed
+paso 59 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | ASSIGN P[1]: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #74bc1487f2b7fe4d
+paso 60 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #b9610b5330cad193
+paso 61 ASSIGN P[2]: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #bf36becdb57bed2e
+paso 62 ASSIGN P[3]: x++ => 16 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #7fc08512ccc566d4
+paso 63 WRITE P[2]: write(linea 2) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f7e23f242d2b873a
+paso 64 ASSIGN P[1]: x++ => 17 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #7941087baff908a0
+paso 65 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #4ee3c6c048188d33
+paso 66 ASSIGN P[3]: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #7755207862088c77
+paso 67 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #888c455763f2e24f
+paso 68 ASSIGN P[1]: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #4319d572e1bb05d5
+paso 69 ASSIGN P[2]: x++ => 18 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #32aadfa21f09d0c1
+paso 70 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #eb42b6c6c1f671e7
+paso 71 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #79c8bec1837585f1
+paso 72 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #09f320cdde828633
+paso 73 ASSIGN P[2]: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #9feb1d7891c91ced
+paso 74 ASSIGN P[3]: x++ => 19 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #9b662a5ef0fd99df
+paso 75 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #fda4db20a005c1d1
+paso 76 ASSIGN P[1]: x++ => 20 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #8d2423d2445c4169
+paso 77 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #d99c8c501427473c
+paso 78 ASSIGN P[3]: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #9a074086baf76934
+paso 79 RETURN P[1]: retorna de M.f, libera el monitor | WRITE P[3]: write(linea 3) | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #28d1bee36614293a
+paso 80 ASSIGN P[1]: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #23402ff376a1f62c
+paso 81 ASSIGN P[2]: x++ => 21 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #b928c2d227458116
+paso 82 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #7280b5db8e0a6bbd
+paso 83 WRITE P[1]: write(linea 1) | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #6688f38e08370c74
+paso 84 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #8680e86e61d086d9
+paso 85 ASSIGN P[2]: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #0134fc1fcf49cd0c
+paso 86 ASSIGN P[3]: x++ => 22 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #8062fe0d7518e9fe
+paso 87 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #886d0ea3bc17ed43
+paso 88 ASSIGN P[1]: x++ => 23 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #3443a65d2d65b409
+paso 89 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #9663c2fe9509b497
+paso 90 ASSIGN P[3]: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #dd9ede82cd7d8ba0
+paso 91 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #9c56128f3fe405b3
+paso 92 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #6df863b964eca827
+paso 93 ASSIGN P[2]: x++ => 24 | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #09d29878e5b5ab7d
+paso 94 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #a0d87ff81bde1de1
+paso 95 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | ASSIGN P[1]: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #e1c96ef833cbabad
+paso 96 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #bae14850e02b2ee9
+paso 97 ASSIGN P[2]: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #196afaf3d0f94256
+paso 98 ASSIGN P[3]: x++ => 25 | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #bd2dc95eb86d4ec7
+paso 99 BLOCKED P[1]: espera para entrar a M.f | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #1bbf00d4f7075a14
+paso 100 ASSIGN P[1]: x++ => 26 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #72ead144fa3f7d76
+paso 101 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #9f1a4ede05ee63bf
+paso 102 ASSIGN P[3]: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #b229b89678fb234b
+paso 103 WRITE P[3]: write(linea 3) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #b97701e1ff21e4d0
+paso 104 ASSIGN P[1]: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #6c4a636486aad405
+paso 105 ASSIGN P[2]: x++ => 27 | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #3a2bafedcd65d3dc
+paso 106 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #8439f2f688957d0b
+paso 107 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #6c3bde2d35cc9f0b
+paso 108 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #b64f196217c2c4b3
+paso 109 ASSIGN P[2]: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #5badd199dd9e554f
+paso 110 ASSIGN P[3]: x++ => 28 | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #b6d60647a83256cb
+paso 111 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #fde8f8cf0a16b8d2
+paso 112 ASSIGN P[1]: x++ => 29 | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #08d5250a3ffc9615
+paso 113 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #5d8cf20a5a5b2b23
+paso 114 ASSIGN P[3]: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #1dc592e000396be4
+paso 115 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #275a6d0ca7f7f8f4
+paso 116 ASSIGN P[1]: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #61524755e0e0214d
+paso 117 ASSIGN P[2]: x++ => 30 | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #e3715810a8d45594
+paso 118 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #66a05cb00be0bab3
+paso 119 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #b64f00b0240e80b3
+paso 120 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #4233f9c246c043ff
+paso 121 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #2e87b90b07b9c54b
+paso 122 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #186d6ccd8d01e964
+paso 123 ASSIGN P[2]: for#1++ => 11 | ASSIGN P[1]: x++ => 31 | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #61867210960734d1
+paso 124 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #56dabf2f17ba0c7e
+paso 125 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #85fa5e00051ca3c7
+paso 126 ASSIGN P[3]: x++ => 32 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #e7774a475127f7e4
+paso 127 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #d5105ced87035014
+paso 128 ASSIGN P[1]: for#1++ => 12 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #d09bbd81b16ade97
+paso 129 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #564926523715f23f
+paso 130 ASSIGN P[3]: for#1++ => 12 | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #8c7eebb5d7c64715
+paso 131 ASSIGN P[2]: x++ => 33 | WRITE P[3]: write(linea 3) | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #87444c4d9d8c9bc7
+paso 132 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #8140f2f3c2f15163
+paso 133 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #9edb1819f16949fe
+paso 134 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #ca95c1072155b246
+paso 135 ASSIGN P[1]: x++ => 34 | ASSIGN P[2]: for#1++ => 12 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #bb2a724d34080bbd
+paso 136 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #4ac4cfe89558720d
+paso 137 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #52f866915f446239
+paso 138 ASSIGN P[3]: x++ => 35 | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #12d2cf1649f32446
+paso 139 ASSIGN P[1]: for#1++ => 13 | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #237097edfe5d8283
+paso 140 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #7fb0f3f49192711c
+paso 141 ASSIGN P[2]: x++ => 36 | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #c164869320c1e136
+paso 142 ASSIGN P[3]: for#1++ => 13 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #3b28d366285194a0
+paso 143 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #9c48207be365e6e2
+paso 144 ASSIGN P[1]: x++ => 37 | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #021a661e4318a461
+paso 145 ASSIGN P[2]: for#1++ => 13 | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #65f3ef37c79b610d
+paso 146 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #def50c8b552afc6d
+paso 147 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #905dd28a9d65fb48
+paso 148 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #e7934daadb0b8ea7
+paso 149 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #7879015e403507dd
+paso 150 ASSIGN P[3]: x++ => 38 | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #d733fed6a648c5df
+paso 151 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | ASSIGN P[1]: for#1++ => 14 | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #425f5e4d1859c376
+paso 152 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #0278034c8ec2c5f7
+paso 153 ASSIGN P[2]: x++ => 39 | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #f0643a2fcf0d4b4c
+paso 154 ASSIGN P[3]: for#1++ => 14 | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #bf8caebcc65944fc
+paso 155 BLOCKED P[1]: espera para entrar a M.f | RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #b9841cb18c269527
+paso 156 ASSIGN P[1]: x++ => 40 | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #63f25d2f9db39ed1
+paso 157 ASSIGN P[2]: for#1++ => 14 | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #421788838648e0e3
+paso 158 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #29d0fc2a10a6678c
+paso 159 WRITE P[2]: write(linea 2) | RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #b1806b03ff7ea45e
+paso 160 ASSIGN P[1]: for#1++ => 15 | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #3e0af232684c47fd
+paso 161 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #5a3c19d5d409c6da
+paso 162 ASSIGN P[3]: x++ => 41 | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #36055eb692fdc91c
+paso 163 WRITE P[1]: write(linea 1) | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #cf3e5e7ebf7b0cc9
+paso 164 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #a2e3fd51afe9b447
+paso 165 ASSIGN P[2]: x++ => 42 | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #63c3e2896e79fb4d
+paso 166 ASSIGN P[3]: for#1++ => 15 | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #013b60658329910e
+paso 167 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #ef95b208ea5c87e4
+paso 168 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #7a7b6c8502c70d8d
+paso 169 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #2607f1b50756e4f0
+paso 170 ASSIGN P[3]: x++ => 43 | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #3ddcbbc2de84688d
+paso 171 ASSIGN P[2]: for#1++ => 15 | RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #c5a223d7215bc9b4
+paso 172 ASSIGN P[1]: x++ => 44 | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #679e151e2872b9d9
+paso 173 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #396be9ceab0f8b2c
+paso 174 ASSIGN P[3]: for#1++ => 16 | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #6c447171e1175b8a
+paso 175 RETURN P[1]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #21a247cee786f4a7
+paso 176 ASSIGN P[1]: for#1++ => 16 | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #e9e5768287c94701
+paso 177 ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #f9f544a5f8753718
+paso 178 WRITE P[3]: write(linea 3) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #981a5fefe7e18150
+paso 179 ASSIGN P[2]: x++ => 45 | WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #d3e9f51311d3f320
+paso 180 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #7db54687898eaf1b
+paso 181 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #d67b9fd00cc8faa6
+paso 182 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #2124497a39a1d1bb
+paso 183 ASSIGN P[2]: for#1++ => 16 | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #74c3716c9da80771
+paso 184 ASSIGN P[1]: x++ => 46 | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #5af3c9a536598e9f
+paso 185 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #88f52e0a32beb648
+paso 186 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #0f701b8391f41bca
+paso 187 ASSIGN P[1]: for#1++ => 17 | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #d7ecdf147b48014c
+paso 188 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #0b68c9c0ddaf0c5a
+paso 189 ASSIGN P[3]: x++ => 47 | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #66bdbc712c87aecc
+paso 190 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #d80cb86c959dd937
+paso 191 BLOCKED P[1]: espera para entrar a M.f | ASSIGN P[3]: for#1++ => 17 | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #af8fa1d3986b8dbc
+paso 192 WRITE P[3]: write(linea 3) | ASSIGN P[2]: x++ => 48 | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #758b799ff05fad0a
+paso 193 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #852cf46997687e34
+paso 194 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #ec92ec34ed5d1b78
+paso 195 ASSIGN P[2]: for#1++ => 17 | ASSIGN P[1]: x++ => 49 | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #fa7f3b97195283d3
+paso 196 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #f3d0a2b454d17e80
+paso 197 WRITE P[2]: write(linea 2) | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #27547a32440cd3b2
+paso 198 ASSIGN P[3]: x++ => 50 | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #9ebdcd815cda193b
+paso 199 ASSIGN P[1]: for#1++ => 18 | RETURN P[3]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #f8fe7e48420fec00
+paso 200 WRITE P[1]: write(linea 1) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #c9475e9b3d8521cc
+estado #c6cf9e9659ff4092

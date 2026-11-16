@@ -1,0 +1,91 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #6c52c9a246f2c444
+paso 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8ca9dc794dc7b58e
+paso 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f0deccd04bd59e83
+paso 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #15ddb5bfd147c2cd
+paso 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c16353afa144bf46
+paso 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #89a0c5dc367966af
+paso 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #d596413ed740d03c
+paso 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #aba3853ed74296c4
+paso 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c3e2a7f59954e4ea
+paso 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #319fcaf456d33087
+paso 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #40b46a7c89af76a9
+paso 1 #8ca9dc794dc7b58e
+paso 2 #f0deccd04bd59e83
+paso 3 #15ddb5bfd147c2cd
+paso 4 #c16353afa144bf46
+paso 5 #89a0c5dc367966af
+paso 6 #d596413ed740d03c
+paso 7 #aba3853ed74296c4
+paso 8 #c3e2a7f59954e4ea
+paso 9 #319fcaf456d33087
+paso 10 #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #1fa9b361587c901e
+paso 1 #8ca9dc794dc7b58e
+paso 2 #f0deccd04bd59e83
+paso 3 #15ddb5bfd147c2cd
+paso 4 #c16353afa144bf46
+paso 5 #89a0c5dc367966af
+paso 6 #d596413ed740d03c
+paso 7 #aba3853ed74296c4
+paso 8 #c3e2a7f59954e4ea
+paso 9 #319fcaf456d33087
+paso 10 #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #6c52c9a246f2c444
+paso 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8ca9dc794dc7b58e
+paso 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f0deccd04bd59e83
+paso 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #15ddb5bfd147c2cd
+paso 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c16353afa144bf46
+paso 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #89a0c5dc367966af
+paso 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #d596413ed740d03c
+paso 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #aba3853ed74296c4
+paso 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c3e2a7f59954e4ea
+paso 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #319fcaf456d33087
+paso 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #40b46a7c89af76a9
+paso 1 #8ca9dc794dc7b58e
+paso 2 #f0deccd04bd59e83
+paso 3 #15ddb5bfd147c2cd
+paso 4 #c16353afa144bf46
+paso 5 #89a0c5dc367966af
+paso 6 #d596413ed740d03c
+paso 7 #aba3853ed74296c4
+paso 8 #c3e2a7f59954e4ea
+paso 9 #319fcaf456d33087
+paso 10 #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #1fa9b361587c901e
+paso 1 #8ca9dc794dc7b58e
+paso 2 #f0deccd04bd59e83
+paso 3 #15ddb5bfd147c2cd
+paso 4 #c16353afa144bf46
+paso 5 #89a0c5dc367966af
+paso 6 #d596413ed740d03c
+paso 7 #aba3853ed74296c4
+paso 8 #c3e2a7f59954e4ea
+paso 9 #319fcaf456d33087
+paso 10 #903b549a14901bc4
+estado #e4e0f10b5aae5fcc
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #6c52c9a246f2c444
+paso 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8ca9dc794dc7b58e
+paso 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f0deccd04bd59e83
+paso 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #15ddb5bfd147c2cd
+paso 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c16353afa144bf46
+paso 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #89a0c5dc367966af
+paso 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #d596413ed740d03c
+paso 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #aba3853ed74296c4
+paso 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c3e2a7f59954e4ea
+paso 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #319fcaf456d33087
+paso 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #903b549a14901bc4
+estado #e4e0f10b5aae5fcc

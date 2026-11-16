@@ -1,0 +1,35 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #2c87b5d34cdbe296
+paso 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f8b724edc3c37654
+paso 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #bd40f7c31ee73511
+paso 1 #f8b724edc3c37654
+paso 2 #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #c9aafc117f36d6d0
+paso 1 #f8b724edc3c37654
+paso 2 #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #2c87b5d34cdbe296
+paso 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f8b724edc3c37654
+paso 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #bd40f7c31ee73511
+paso 1 #f8b724edc3c37654
+paso 2 #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #c9aafc117f36d6d0
+paso 1 #f8b724edc3c37654
+paso 2 #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #2c87b5d34cdbe296
+paso 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f8b724edc3c37654
+paso 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #e5856b72d8ea46b4
+estado #8b14baabca95a4ca
