@@ -13,6 +13,11 @@ export default tseslint.config(
       ecmaVersion: 2022,
       globals: globals.browser,
     },
+  },
+  {
+    // solo la aplicacion es React; el tema de la documentacion (docs/.vitepress) es Vue y
+    // sus composables (useData) no siguen las reglas de los hooks de React
+    files: ['src/**/*.{ts,tsx}'],
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
