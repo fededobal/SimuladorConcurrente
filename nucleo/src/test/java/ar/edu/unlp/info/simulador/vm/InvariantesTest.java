@@ -24,7 +24,7 @@ class InvariantesTest {
     /** En la verificacion del 23/09 se corrieron 200 semillas sin violaciones. */
     static final int SEMILLAS = 25;
     static final int MAX_PASOS = 4000;
-    static final int TOPE_LOG = VirtualMachine.TOPE_LOG;
+    static final int TOPE_LOG = EventLog.TOPE_LOG;
     /** La salida admite ademas una linea de aviso. */
     static final int TOPE_SALIDA = OutputBuffer.TOPE_SALIDA;
 

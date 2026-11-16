@@ -2,9 +2,7 @@ package ar.edu.unlp.info.simulador.vm;
 
 import ar.edu.unlp.info.simulador.lang.parser.ast.*;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +27,6 @@ public final class VirtualMachine {
     /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
     static final int TOPE_INICIALIZACION = 100_000;
 
-    /**
-     * Tope de eventos guardados en el log. Los eventos no llevan el estado completo (se pide
-     * aparte con {@link #snapshot()}), pero igual un programa que no termina los acumularia
-     * sin fin: se conservan solo los ultimos.
-     */
-    static final int TOPE_LOG = 2000;
-
     private final Program program;
     private final Azar random;
 
@@ -45,10 +36,7 @@ public final class VirtualMachine {
     private final VariableAccess vars = new VariableAccess(monitors);
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
-    private final Deque<LogEntry> log = new ArrayDeque<>();
-    /** Eventos del instante en curso: lo que devuelve {@link #step}. */
-    private List<LogEntry> stepEntries = new ArrayList<>();
-    private int nextEventId = 0;
+    private final EventLog events = new EventLog();
 
     private int instant = 0;
     /**
@@ -62,7 +50,6 @@ public final class VirtualMachine {
      * quien llama a {@link #step(Integer, SchedulingPolicy, long)}, y solo lo usa delay.
      */
     private long clockMs = 0;
-    private boolean logging = true;
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {
@@ -84,7 +71,7 @@ public final class VirtualMachine {
 
     /** Corre el codigo de inicializacion de cada monitor, sin registrar eventos. */
     private void runInitCode() {
-        logging = false;
+        events.setEnabled(false);
         for (Monitor m : monitors.values()) {
             MonitorDef md = monitorDefs.get(m.definition());
             if (md.initStmts().isEmpty()) continue;
@@ -104,7 +91,7 @@ public final class VirtualMachine {
             }
             m.setLockOwner(null);
         }
-        logging = true;
+        events.setEnabled(true);
     }
 
     // ================================================================= scheduling
@@ -132,7 +119,7 @@ public final class VirtualMachine {
      * Si nadie puede avanzar pero hay procesos demorados, no pasa el instante: se espera.
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy, long nowMs) {
-        stepEntries = new ArrayList<>();
+        events.startStep();
         clockMs = Math.max(clockMs, nowMs);
 
         if (isFinished()) {
@@ -141,21 +128,21 @@ public final class VirtualMachine {
         wakeDelayed();
         List<Process> turno = elegirTurno(chosenProcessId, policy);
         if (turno.isEmpty() && isWaitingForDelay()) {
-            return stepEntries;
+            return events.stepEntries();
         }
         if (turno.isEmpty()) {
             if (!deadlockLogged) {
                 instant++;
                 logDeadlock();
             }
-            return stepEntries;
+            return events.stepEntries();
         }
 
         runTurn(turno);
         if (isDeadlocked() && !deadlockLogged) {
             logDeadlock();
         }
-        return stepEntries;
+        return events.stepEntries();
     }
 
     /** Un instante nuevo en el que avanzan, en orden, los procesos del turno. */
@@ -194,7 +181,7 @@ public final class VirtualMachine {
     /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
     private void logDeadlock() {
         deadlockLogged = true;
-        systemLog("DEADLOCK", deadlockMessage());
+        events.systemEvent(instant, "DEADLOCK", deadlockMessage());
     }
 
     /**
@@ -798,9 +785,12 @@ public final class VirtualMachine {
         return instant;
     }
 
-    /** Los ultimos eventos de la ejecucion (a lo sumo {@link #TOPE_LOG}), del mas viejo al mas nuevo. */
+    /**
+     * Los ultimos eventos de la ejecucion (a lo sumo {@link EventLog#TOPE_LOG}), del mas viejo
+     * al mas nuevo.
+     */
     public List<LogEntry> allLogs() {
-        return List.copyOf(log);
+        return events.all();
     }
 
     public Snapshot snapshot() {
@@ -811,18 +801,6 @@ public final class VirtualMachine {
     // ================================================================= logging
 
     private void event(Process p, String kind, String resource, String message) {
-        if (!logging) return;
-        record(new LogEntry("e" + nextEventId++, instant, p.id() < 0 ? null : p.id(),
-                p.id() < 0 ? null : p.color(), kind, resource, message));
-    }
-
-    private void systemLog(String kind, String message) {
-        record(new LogEntry("e" + nextEventId++, instant, null, null, kind, "", message));
-    }
-
-    private void record(LogEntry e) {
-        log.addLast(e);
-        if (log.size() > TOPE_LOG) log.removeFirst();
-        stepEntries.add(e);
+        events.processEvent(instant, p, kind, resource, message);
     }
 }
