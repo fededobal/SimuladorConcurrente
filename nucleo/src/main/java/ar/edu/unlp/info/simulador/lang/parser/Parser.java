@@ -18,6 +18,8 @@ public final class Parser {
 
     private static final List<String> SCALAR_TYPES = List.of("int", "double", "bool", "text");
 
+    private static final String[] COMPARISON_OPERATORS = {"==", "!=", "<", "<=", ">", ">="};
+
     /**
      * Topes de anidamiento. El parser, el validador y el evaluador son recursivos, y la pila
      * del navegador es mas chica que la de la JVM: sin tope, un programa que en los tests
@@ -398,12 +400,7 @@ public final class Parser {
     private Stmt parseWrite() {
         Token kw = advance();
         consume("(", "Se esperaba '(' después de 'write'");
-        List<Expr> args = new ArrayList<>();
-        if (!check(")")) {
-            do {
-                args.add(parseExpr());
-            } while (match(","));
-        }
+        List<Expr> args = parseArguments();
         consume(")", "Se esperaba ')' al cerrar el write");
         consume(";", "Se esperaba ';' al final del write");
         return new Stmt.Write(args, kw.line());
@@ -672,15 +669,21 @@ public final class Parser {
         consume(".", "Se esperaba '.'");
         String proc = consumeIdent("Se esperaba el nombre del procedure");
         consume("(", "Se esperaba '(' en la llamada al monitor");
+        List<Expr> args = parseArguments();
+        consume(")", "Se esperaba ')' en la llamada al monitor");
+        consume(";", "Se esperaba ';' al final de la llamada al monitor");
+        return new Stmt.MonitorCall(monTok.lexeme(), index, proc, args, monTok.line());
+    }
+
+    /** {@code [expr {, expr}]}: los argumentos hasta el ')', que no se consume. */
+    private List<Expr> parseArguments() {
         List<Expr> args = new ArrayList<>();
         if (!check(")")) {
             do {
                 args.add(parseExpr());
             } while (match(","));
         }
-        consume(")", "Se esperaba ')' en la llamada al monitor");
-        consume(";", "Se esperaba ';' al final de la llamada al monitor");
-        return new Stmt.MonitorCall(monTok.lexeme(), index, proc, args, monTok.line());
+        return args;
     }
 
     private Stmt parseAssignOrIncDec() {
@@ -777,12 +780,11 @@ public final class Parser {
 
     private Expr parseComparison() {
         Expr left = parseAdd();
-        if (matchAny("==", "!=", "<", "<=", ">", ">=")) {
+        if (matchAny(COMPARISON_OPERATORS)) {
             String op = previous().lexeme();
             int line = previous().line();
             Expr right = parseAdd();
-            if (check("==") || check("!=") || check("<") || check("<=") || check(">")
-                    || check(">=")) {
+            if (checkAny(COMPARISON_OPERATORS)) {
                 throw error("Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí "
                         + "'a < b and b < c'");
             }
@@ -941,6 +943,13 @@ public final class Parser {
         if (check(lexeme)) {
             advance();
             return true;
+        }
+        return false;
+    }
+
+    private boolean checkAny(String... lexemes) {
+        for (String l : lexemes) {
+            if (check(l)) return true;
         }
         return false;
     }
