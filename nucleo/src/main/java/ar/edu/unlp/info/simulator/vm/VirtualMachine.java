@@ -237,8 +237,8 @@ public final class VirtualMachine {
      * de otro monitor, lo sigue teniendo tomado (llamada cerrada, ADR 0007): se escriben ya.
      */
     private void writeOutParameters(Process p, Activation act) {
-        for (Map.Entry<String, LValue> e : act.outBindings().entrySet()) {
-            vars.writeLValue(p.id(), e.getValue(), act.locals().get(e.getKey()));
+        for (Map.Entry<String, Place> e : act.outBindings().entrySet()) {
+            e.getValue().write(p, act.locals().get(e.getKey()));
         }
     }
 

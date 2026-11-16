@@ -57,17 +57,58 @@ final class VariableAccess {
         throw new RuntimeError("Variable no definida: " + name, line);
     }
 
-    /** Escribe el valor de un parametro {@code out} en el lugar del llamador. */
-    void writeLValue(int writerId, LValue lv, Value value) {
-        Activation act = lv.callerActivation();
-        int line = act.currentLine();   // la de la llamada, que sigue siendo la sentencia actual
-        if (lv.index() == null) {
-            assignScalar(writerId, act, lv.name(), value, line);
-        } else {
-            Value.ArrayVal arr = asArray(act, lv.name(), line);
-            checkIndex(arr, lv.index(), lv.name(), line);
-            arr.set(lv.index(), value.assignTo(arr.elementType(), lv.name(), line));
-            touchIfMonitorVar(writerId, act, lv.name());
+    /**
+     * La variable {@code name} o, si hay indice, el elemento {@code name[index]}. El indice se
+     * evalua y se controla ahora; leer y escribir el lugar despues ya no lo vuelve a evaluar.
+     */
+    Place place(Activation act, String name, Expr index, int line) {
+        if (index == null) return new VariablePlace(act, name, line);
+        return new ElementPlace(act, name, arraySlot(act, name, index, line), line);
+    }
+
+    /** Una variable simple: local del marco o permanente del monitor. */
+    private final class VariablePlace implements Place {
+        private final Activation act;
+        private final String name;
+        private final int line;
+
+        VariablePlace(Activation act, String name, int line) {
+            this.act = act;
+            this.name = name;
+            this.line = line;
+        }
+
+        @Override public String label() { return name; }
+
+        @Override public Value read() { return VariableAccess.this.read(act, name, line); }
+
+        @Override public void write(Process writer, Value value) {
+            assignScalar(writer.id(), act, name, value, line);
+        }
+    }
+
+    /** Un elemento de arreglo, con el indice ya controlado. */
+    private final class ElementPlace implements Place {
+        private final Activation act;
+        private final String name;
+        private final ArraySlot slot;
+        private final int line;
+
+        ElementPlace(Activation act, String name, ArraySlot slot, int line) {
+            this.act = act;
+            this.name = name;
+            this.slot = slot;
+            this.line = line;
+        }
+
+        @Override public String label() { return name + "[" + slot.index() + "]"; }
+
+        @Override public Value read() { return slot.array().get(slot.index()); }
+
+        @Override public void write(Process writer, Value value) {
+            slot.array().set(slot.index(),
+                    value.assignTo(slot.array().elementType(), label(), line));
+            touchIfMonitorVar(writer.id(), act, name);
         }
     }
 

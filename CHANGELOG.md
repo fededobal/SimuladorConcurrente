@@ -237,6 +237,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Unificar en un solo lugar (`Place`, creado por `VariableAccess.place`) la lectura y escritura de una variable o de un elemento de arreglo, que estaba repetida en la asignación, `++`/`--`, el intercambio `:=:` y los parámetros `out`; se elimina `LValue`. Sin cambios de comportamiento: los tests de caracterización pasan sin regenerarse. (Federico Dobal, 2026-11-16)
 - Clase `QueueChecks` en `lang/`, con los controles de push y pop contra la declaración de la cola que tenía `SemanticValidator`, que queda en 375 líneas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `NameCollector` en `lang/`, con la primera pasada del validador (nombres repetidos de monitores, procesos, permanentes, cond, procedures y parámetros), y record `MonitorInfo` en su propio archivo. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - El paquete Java del núcleo pasa de `ar.edu.unlp.info.simulador` a `ar.edu.unlp.info.simulator`; se actualizan el `pom.xml`, el cálculo de la huella del motor, el hook de pre-commit, CLAUDE.md y las skills que nombran la ruta. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

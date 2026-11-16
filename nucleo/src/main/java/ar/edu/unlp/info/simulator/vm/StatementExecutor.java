@@ -124,20 +124,13 @@ final class StatementExecutor {
                 + " " + vd.name() + " = " + v.display());
     }
 
+    /** Evalua el valor antes que el indice del destino: ese orden decide que error sale primero. */
     private void execAssign(Process p, Activation act, Stmt.Assign a) {
         Value value = vars.evaluator(act).eval(a.value());
-        if (a.index() == null) {
-            vars.assignScalar(p.id(), act, a.target(), value, a.line());
-            event(p, EventKind.ASSIGN, a.target(),
-                    p.name() + ": " + a.target() + " = " + value.display());
-            return;
-        }
-        VariableAccess.ArraySlot slot = vars.arraySlot(act, a.target(), a.index(), a.line());
-        String element = a.target() + "[" + slot.index() + "]";
-        slot.array().set(slot.index(),
-                value.assignTo(slot.array().elementType(), element, a.line()));
-        vars.touchIfMonitorVar(p.id(), act, a.target());
-        event(p, EventKind.ASSIGN, a.target(), p.name() + ": " + element + " = " + value.display());
+        Place target = vars.place(act, a.target(), a.index(), a.line());
+        target.write(p, value);
+        event(p, EventKind.ASSIGN, a.target(),
+                p.name() + ": " + target.label() + " = " + value.display());
     }
 
     /**
@@ -145,8 +138,8 @@ final class StatementExecutor {
      * paso: ningun otro proceso ve el estado intermedio.
      */
     private void execSwap(Process p, Activation act, Stmt.Swap sw) {
-        Place left = place(act, sw.left(), sw.leftIndex(), sw.line());
-        Place right = place(act, sw.right(), sw.rightIndex(), sw.line());
+        Place left = vars.place(act, sw.left(), sw.leftIndex(), sw.line());
+        Place right = vars.place(act, sw.right(), sw.rightIndex(), sw.line());
         Value leftValue = left.read();
         Value rightValue = right.read();
         left.write(p, rightValue);
@@ -156,52 +149,12 @@ final class StatementExecutor {
                 + right.label() + " = " + leftValue.display());
     }
 
-    /** Una variable o un elemento de arreglo, ya resuelto, que se puede leer y escribir. */
-    private interface Place {
-        String label();
-        Value read();
-        void write(Process writer, Value value);
-    }
-
-    private Place place(Activation act, String name, Expr index, int line) {
-        if (index == null) {
-            return new Place() {
-                public String label() { return name; }
-                public Value read() { return vars.read(act, name, line); }
-                public void write(Process writer, Value value) {
-                    vars.assignScalar(writer.id(), act, name, value, line);
-                }
-            };
-        }
-        VariableAccess.ArraySlot slot = vars.arraySlot(act, name, index, line);
-        String element = name + "[" + slot.index() + "]";
-        return new Place() {
-            public String label() { return element; }
-            public Value read() { return slot.array().get(slot.index()); }
-            public void write(Process writer, Value value) {
-                slot.array().set(slot.index(),
-                        value.assignTo(slot.array().elementType(), element, line));
-                vars.touchIfMonitorVar(writer.id(), act, name);
-            }
-        };
-    }
-
     private void execIncDec(Process p, Activation act, Stmt.IncDec inc) {
-        String operator = inc.increment() ? "++" : "--";
-        if (inc.index() == null) {
-            Value cur = vars.read(act, inc.target(), inc.line());
-            Value next = stepped(cur, inc.increment(), inc.line());
-            vars.assignScalar(p.id(), act, inc.target(), next, inc.line());
-            event(p, EventKind.ASSIGN, inc.target(),
-                    p.name() + ": " + inc.target() + operator + " => " + next.display());
-            return;
-        }
-        VariableAccess.ArraySlot slot = vars.arraySlot(act, inc.target(), inc.index(), inc.line());
-        Value next = stepped(slot.array().get(slot.index()), inc.increment(), inc.line());
-        slot.array().set(slot.index(), next);
-        vars.touchIfMonitorVar(p.id(), act, inc.target());
-        event(p, EventKind.ASSIGN, inc.target(), p.name() + ": " + inc.target() + "[" + slot.index()
-                + "]" + operator + " => " + next.display());
+        Place target = vars.place(act, inc.target(), inc.index(), inc.line());
+        Value next = stepped(target.read(), inc.increment(), inc.line());
+        target.write(p, next);
+        event(p, EventKind.ASSIGN, inc.target(), p.name() + ": " + target.label()
+                + (inc.increment() ? "++" : "--") + " => " + next.display());
     }
 
     /**
@@ -267,7 +220,7 @@ final class StatementExecutor {
             }
             if (param.isOutput()) {
                 newAct.outBindings().put(param.name(),
-                        outTarget(callerAct, call.args().get(i), ev));
+                        outPlace(callerAct, call.args().get(i), call.line()));
             }
         }
         newAct.pushFront(pd.body().statements());
@@ -276,15 +229,16 @@ final class StatementExecutor {
 
     /**
      * El lugar del llamador donde se copia un parametro {@code out} al retornar: una variable
-     * o un elemento de arreglo (el compilador no admite otra cosa).
+     * o un elemento de arreglo (el compilador no admite otra cosa). El indice ya se evaluo y
+     * controlo como argumento; resolverlo ahora fija el elemento aunque el indice cambie
+     * mientras corre el procedure.
      */
-    private static LValue outTarget(Activation callerAct, Expr argExpr, ExprEvaluator ev) {
+    private Place outPlace(Activation callerAct, Expr argExpr, int line) {
         if (argExpr instanceof Expr.VarRef vr) {
-            return new LValue(callerAct, vr.name(), null);
+            return vars.place(callerAct, vr.name(), null, line);
         }
         Expr.ArrayAccess aa = (Expr.ArrayAccess) argExpr;
-        // ya se evaluo (y controlo el rango) como argumento: entra en un int
-        return new LValue(callerAct, aa.name(), (int) ev.evalLong(aa.index()));
+        return vars.place(callerAct, aa.name(), aa.index(), line);
     }
 
     /** El monitor al que va la llamada: en un arreglo de monitores, el del indice evaluado. */

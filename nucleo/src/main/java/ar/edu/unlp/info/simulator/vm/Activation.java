@@ -25,7 +25,7 @@ public final class Activation {
     private final Deque<Stmt> pending = new ArrayDeque<>();
 
     /** Parametros out: nombre del parametro -> lugar del llamador donde copiar al retornar. */
-    private final Map<String, LValue> outBindings = new LinkedHashMap<>();
+    private final Map<String, Place> outBindings = new LinkedHashMap<>();
 
     /**
      * true si el proceso tiene que tomar el monitor de esta activacion antes de seguir: al
@@ -53,7 +53,7 @@ public final class Activation {
 
     public Map<String, Value> locals() { return locals; }
     public Deque<Stmt> pending() { return pending; }
-    public Map<String, LValue> outBindings() { return outBindings; }
+    Map<String, Place> outBindings() { return outBindings; }
 
     public void pushFront(List<Stmt> stmts) {
         for (int i = stmts.size() - 1; i >= 0; i--) {
