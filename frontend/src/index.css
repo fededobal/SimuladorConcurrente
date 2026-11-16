@@ -1,8 +1,8 @@
 /*
  * Tema claro y sobrio, pensado para un alumno que mira la pantalla un rato largo o la ve
- * proyectada: fondo gris frio, cada panel como una tarjeta blanca con aire alrededor, un
- * solo color de acento y estados en tonos apagados. El color lo ponen los procesos, y
- * siempre acompanado de una forma (rayado, puntos, la "M") para no depender solo de el.
+ * proyectada: paneles blancos al ras, separados por una linea fina, un solo color de
+ * acento y estados en tonos apagados. El color lo ponen los procesos, y siempre acompanado
+ * de una forma (rayado, puntos, la "M") para no depender solo de el.
  */
 :root {
   --bg: #e9ecf0;
@@ -46,9 +46,10 @@
   --pad-top: 14px;
   --line-h: 22px;
 
-  /* aire entre tarjetas; las asas de arrastre viven en ese hueco */
-  --gap: 10px;
-  --radius: 8px;
+  /* linea entre paneles: es el fondo de .app que asoma entre ellos */
+  --gap: 1px;
+  /* ancho del asa de arrastre, que cubre esa linea */
+  --asa: 9px;
 
   color-scheme: light;
 }
@@ -76,14 +77,13 @@ button { cursor: pointer; }
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-  padding: var(--gap);
+  background: var(--line);
 }
 
-/* toda tarjeta: la barra, el editor y cada panel */
+/* toda tarjeta: la barra, el editor y cada panel. Van al ras; la linea entre ellas es el
+   fondo de .app que asoma por el --gap. */
 .tarjeta {
   background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
 }
 
 /* ------------------------------------------------------------------ bar */
@@ -213,7 +213,9 @@ button { cursor: pointer; }
 /* ------------------------------------------------------------------ paneles */
 
 /* Un panel que se agranda o achica arrastrando el borde que mira al editor (arriba o a la
-   izquierda). El asa ocupa el hueco entre tarjetas, asi no tapa contenido. */
+   izquierda). El asa cubre la linea entre paneles y unos pixeles de cada lado, para que no
+   haya que apuntarle a una linea de 1 px: 2 px del lado del editor (no tapa su barra de
+   desplazamiento) y el resto sobre el margen interno del panel. */
 .dock {
   position: relative;
   flex-shrink: 0;
@@ -228,8 +230,8 @@ button { cursor: pointer; }
   z-index: 5;
   touch-action: none;
 }
-.asa-y { top: calc(-1 * var(--gap)); left: 0; right: 0; height: var(--gap); cursor: row-resize; }
-.asa-x { left: calc(-1 * var(--gap)); top: 0; bottom: 0; width: var(--gap); cursor: col-resize; }
+.asa-y { top: calc(-1 * var(--gap) - 2px); left: 0; right: 0; height: var(--asa); cursor: row-resize; }
+.asa-x { left: calc(-1 * var(--gap) - 2px); top: 0; bottom: 0; width: var(--asa); cursor: col-resize; }
 .asa::after {
   content: '';
   position: absolute;
@@ -237,8 +239,9 @@ button { cursor: pointer; }
   background: transparent;
   transition: background 0.12s;
 }
-.asa-y::after { left: 0; right: 0; top: 4px; height: 2px; }
-.asa-x::after { top: 0; bottom: 0; left: 4px; width: 2px; }
+/* la marca al pasar el mouse cae sobre la linea, no en el medio del asa */
+.asa-y::after { left: 0; right: 0; top: 1px; height: 2px; }
+.asa-x::after { top: 0; bottom: 0; left: 1px; width: 2px; }
 .asa:hover::after, .asa:focus-visible::after, .asa:active::after { background: var(--accent); }
 .asa:focus-visible { outline: none; }
 
