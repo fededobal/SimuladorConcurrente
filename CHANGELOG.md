@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `SimulatorJs`: el snapshot y el estado final que comparten las respuestas de `create`, `step` y `state` se arman en `appendState`; se corrigen dos `@param` que habían quedado con los nombres viejos. El JSON es el mismo. (Federico Dobal, 2026-11-16)
 - Los `switch` sobre tipos sealed (`Stmt`, `Expr`, `Value`) del validador, el AST, el snapshot y `Value` nombran cada caso en lugar de usar `default`: si se agrega una sentencia, una expresión o un valor, el compilador marca cada lugar a completar. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `SemanticValidator`: partir la recolección de nombres (`collectMonitor`, `collectPermanentVars`, `collectConds`, `collectProcedures`, `declareTopLevel`) y sacar de `checkMonitorCall` el control de los argumentos out (`checkOutArgument`) y de `checkStmt` el de `++`/`--` (`checkIncDec`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `StatementParser` en `lang/parser/`, con el análisis de las sentencias que tenía `Parser`; `Parser` queda en 195 líneas con la estructura del programa (monitores, procedures, parámetros, procesos). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

@@ -71,9 +71,10 @@ public final class SimulatorJs {
      * Avanza un instante.
      *
      * @param policy  {@code RANDOM} o {@code ROUND_ROBIN}
-     * @param elegido id del proceso a ejecutar, o negativo para que decida la politica
-     * @param ahoraMs hora actual en ms (la de {@code Date.now()}): la usa delay, que demora en
-     *                tiempo real; el nucleo no lee el reloj para seguir siendo determinista
+     * @param chosenProcessId id del proceso a ejecutar, o negativo para que decida la politica
+     * @param nowMs           hora actual en ms (la de {@code Date.now()}): la usa delay, que
+     *                        demora en tiempo real; el nucleo no lee el reloj para seguir
+     *                        siendo determinista
      * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final
      */
     @JSExport
@@ -84,11 +85,8 @@ public final class SimulatorJs {
             List<LogEntry> entries = vm.step(chosen, policyOf(policy), (long) nowMs);
             StringBuilder sb = new StringBuilder("{\"entries\":");
             Json.list(sb, entries, Json::logEntry);
-            sb.append(",\"snapshot\":");
-            Json.snapshot(sb, vm.snapshot());
-            sb.append(",\"finished\":").append(vm.isFinished())
-              .append(",\"deadlock\":").append(vm.isDeadlocked())
-              .append(",\"instant\":").append(vm.instant())
+            appendState(sb);
+            sb.append(",\"instant\":").append(vm.instant())
               .append(",\"waiting\":").append(vm.isWaitingForDelay())
               .append('}');
             return sb.toString();
@@ -104,12 +102,8 @@ public final class SimulatorJs {
         try {
             StringBuilder sb = new StringBuilder("{\"log\":");
             Json.list(sb, vm.allLogs(), Json::logEntry);
-            sb.append(",\"snapshot\":");
-            Json.snapshot(sb, vm.snapshot());
-            sb.append(",\"finished\":").append(vm.isFinished())
-              .append(",\"deadlock\":").append(vm.isDeadlocked())
-              .append(",\"instant\":").append(vm.instant())
-              .append('}');
+            appendState(sb);
+            sb.append(",\"instant\":").append(vm.instant()).append('}');
             return sb.toString();
         } catch (Throwable t) {
             return discard();
@@ -125,14 +119,22 @@ public final class SimulatorJs {
 
     // ------------------------------------------------------------------ internos
 
-    private static String created() {
-        StringBuilder sb = new StringBuilder("{\"id\":\"local\",\"seed\":");
-        sb.append(currentSeed).append(",\"snapshot\":");
+    /**
+     * {@code ,"snapshot":{...},"finished":b,"deadlock":b}: lo que comparten las respuestas de
+     * create, step y state.
+     */
+    private static void appendState(StringBuilder sb) {
+        sb.append(",\"snapshot\":");
         Json.snapshot(sb, vm.snapshot());
         sb.append(",\"finished\":").append(vm.isFinished())
-          .append(",\"deadlock\":").append(vm.isDeadlocked())
-          .append('}');
-        return sb.toString();
+          .append(",\"deadlock\":").append(vm.isDeadlocked());
+    }
+
+    private static String created() {
+        StringBuilder sb = new StringBuilder("{\"id\":\"local\",\"seed\":");
+        sb.append(currentSeed);
+        appendState(sb);
+        return sb.append('}').toString();
     }
 
     private static SchedulingPolicy policyOf(String policy) {

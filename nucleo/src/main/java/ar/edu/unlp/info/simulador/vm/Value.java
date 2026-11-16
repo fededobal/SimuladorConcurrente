@@ -219,7 +219,7 @@ public sealed interface Value {
      * reglas que el compilador: el mismo tipo, un int en un double y un numero en un text.
      * Llega a fallar en ejecucion solo con lo que el compilador no puede saber (un pop).
      *
-     * @param destino nombre de la variable, para el mensaje de error
+     * @param targetName nombre de la variable, para el mensaje de error
      */
     default Value assignTo(Type target, String targetName, int line) {
         Value v = switch (target) {
