@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * la verificacion del 23/09/2026 (docs/verificacion-2026-09-23.md, identificadores VB y VI).
  * Cada test describe el comportamiento CORRECTO.
  */
-class RegresionesVmTest {
+class VmRegressionTest {
 
     @Test
-    void elLogNoCreceSinTopeEnUnaEjecucionLarga() {
+    void logDoesNotGrowUnboundedInLongRun() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M { int x = 0; procedure f() { x = x + 1; } }
                 process P[i: 1..20] { while (true) { M.f(); } }
@@ -33,7 +33,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void errorDentroDelMonitorLiberaElLock() {
+    void errorInsideMonitorReleasesLock() {
         RunResult r = TestSupport.run("""
                 monitor M {
                     int x = 0;
@@ -50,7 +50,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void incrementoDeDoubleNoTrunca() {
+    void doubleIncrementDoesNotTruncate() {
         RunResult r = TestSupport.run("""
                 monitor M { double d = 1.5; procedure f() { d++; } }
                 process A { M.f(); }
@@ -59,7 +59,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void decrementoDeElementoDoubleNoTrunca() {
+    void doubleElementDecrementDoesNotTruncate() {
         RunResult r = TestSupport.run("""
                 monitor M { double a[2] = ([2] 1.5); double d = 0; procedure f() { a[0]--; d = a[0]; } }
                 process A { M.f(); }
@@ -68,7 +68,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void overflowEsErrorDeEjecucion() {
+    void overflowIsRuntimeError() {
         RunResult r = assertDoesNotThrow(() -> TestSupport.run("""
                 monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } }
                 process A { M.f(); }
@@ -77,7 +77,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void literalFueraDeRangoEsErrorDeCompilacion() {
+    void outOfRangeLiteralIsCompileError() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { int x = 99999999999999999999; procedure f() { x = 1; } }
                 process A { M.f(); }
@@ -87,7 +87,7 @@ class RegresionesVmTest {
 
     /** VI-3: un tamano negativo es error del alumno con su linea, no un "Error interno". */
     @Test
-    void tamanoNegativoEsErrorDeEjecucionConLinea() {
+    void negativeSizeIsRuntimeErrorWithLine() {
         RunResult local = TestSupport.run("""
                 process P {
                   int a[-1];
@@ -116,15 +116,15 @@ class RegresionesVmTest {
 
     /** VI-4: un indice mayor que un int no se trunca (a[4294967296] no es a[0]). */
     @Test
-    void indiceMayorQueIntEsFueraDeRango() {
-        for (String acceso : new String[] {"r = a[4294967296];", "a[4294967297] = 1;",
+    void indexBeyondIntIsOutOfRange() {
+        for (String access : new String[] {"r = a[4294967296];", "a[4294967297] = 1;",
                                            "a[-4294967295]++;", "M.dar(a[4294967297]);"}) {
             RunResult r = TestSupport.run("""
                     monitor M { procedure dar(x: out int) { x = 1; } }
                     process P { int a[3]; int r; %s }
-                    """.formatted(acceso), SchedulingPolicy.ROUND_ROBIN, 0, 100);
+                    """.formatted(access), SchedulingPolicy.ROUND_ROBIN, 0, 100);
             String error = r.vm().snapshot().processes().get(0).error();
-            assertTrue(error != null && error.contains("fuera de rango"), acceso + " -> " + error);
+            assertTrue(error != null && error.contains("fuera de rango"), access + " -> " + error);
         }
         RunResult cond = TestSupport.run("""
                 monitor M { cond c[2]; procedure f() { wait(c[4294967296]); } }
@@ -135,7 +135,7 @@ class RegresionesVmTest {
     }
 
     @Test
-    void familiaConCotasGrandesNoSeTrunca() {
+    void familyWithLargeBoundsIsNotTruncated() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 process P[i: 4294967296..4294967297] { skip; }
                 """, 0);
@@ -144,32 +144,32 @@ class RegresionesVmTest {
 
     /** VI-11: topes de tamano con error claro en lugar de colgar la pestana. */
     @Test
-    void arreglosYFamiliasDemasiadoGrandesSonError() {
-        RuntimeError arreglo = assertThrows(RuntimeError.class, () -> TestSupport.compileAndBuild("""
+    void tooLargeArraysAndFamiliesAreErrors() {
+        RuntimeError array = assertThrows(RuntimeError.class, () -> TestSupport.compileAndBuild("""
                 monitor M { int a[2000000000]; procedure f() { skip; } }
                 process P { M.f(); }
                 """, 0));
-        assertTrue(arreglo.getMessage().contains("100000"), arreglo.getMessage());
-        RuntimeError familia = assertThrows(RuntimeError.class,
+        assertTrue(array.getMessage().contains("100000"), array.getMessage());
+        RuntimeError family = assertThrows(RuntimeError.class,
                 () -> TestSupport.compileAndBuild("process P[i: 0..100000] { skip; }", 0));
-        assertTrue(familia.getMessage().contains("Demasiados procesos"), familia.getMessage());
+        assertTrue(family.getMessage().contains("Demasiados procesos"), family.getMessage());
         assertDoesNotThrow(() -> TestSupport.compileAndBuild("process P[i: 1..5000] { skip; }", 0));
     }
 
     @Test
-    void arregloLargoSeAbreviaAlMostrarlo() {
+    void longArrayIsAbbreviatedWhenShown() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M { int a[1000]; procedure f() { skip; } }
                 process P { M.f(); }
                 """, 0);
-        String valor = TestSupport.varValue(TestSupport.monitor(vm.snapshot(), "M"), "a");
-        assertTrue(valor.endsWith("… (1000 elementos)]"), valor);
-        assertTrue(valor.length() < 300, valor);
+        String value = TestSupport.varValue(TestSupport.monitor(vm.snapshot(), "M"), "a");
+        assertTrue(value.endsWith("… (1000 elementos)]"), value);
+        assertTrue(value.length() < 300, value);
     }
 
     /** VI-9: la inicializacion de un monitor que no termina es un error, no un corte silencioso. */
     @Test
-    void inicializacionSinFinEsError() {
+    void endlessInitializationIsError() {
         RuntimeError ex = assertThrows(RuntimeError.class, () -> TestSupport.compileAndBuild("""
                 monitor M {
                   int x = 0;
@@ -184,7 +184,7 @@ class RegresionesVmTest {
 
     /** VB-2: Infinity y NaN son error de ejecucion; el motor del navegador no los soporta. */
     @Test
-    void doubleNoFinitoEsErrorDeEjecucion() {
+    void nonFiniteDoubleIsRuntimeError() {
         RunResult r = TestSupport.run("""
                 process P {
                   double d = 10000000000.0;
@@ -198,7 +198,7 @@ class RegresionesVmTest {
 
     /** Sin saturar a Long.MAX_VALUE ni depender de Math.rint (distintos en TeaVM). */
     @Test
-    void doublesGrandesSeMuestranIgualQueEnElNavegador() {
+    void largeDoublesShowTheSameAsInTheBrowser() {
         RunResult r = TestSupport.run("""
                 process P { write(100000000000000000000.0, " ", 3.0, " ", 0.1 + 0.2); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
@@ -208,7 +208,7 @@ class RegresionesVmTest {
 
     /** VB-1/VB-2: los double grandes y los literales largos no dependen de Double.toString/parseDouble. */
     @Test
-    void doublesGrandesYLiteralesLargosSeFormateanSinLaBiblioteca() {
+    void largeDoublesAndLongLiteralsFormatWithoutTheLibrary() {
         RunResult r = TestSupport.run("""
                 process P {
                   double m = 9223372036854775807.0 * 4.0;
@@ -216,11 +216,11 @@ class RegresionesVmTest {
                         " ", 4503599627370497.5, " ", 123456789.125);
                 }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
-        assertEquals(FORMATO_DOUBLES,
+        assertEquals(DOUBLE_FORMAT,
                 r.vm().snapshot().output().get(0).text());
     }
 
     /** Mismo texto que espera scripts/smoke-motor.mjs en el navegador. */
-    static final String FORMATO_DOUBLES =
+    static final String DOUBLE_FORMAT =
             "3.68934881474191E19 -1.0E23 0.1 1.25 4503599627370498.0 1.23456789125E8";
 }

@@ -25,47 +25,47 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * </pre>
  * Asi un ejemplo que se muestra en clase es, por construccion, un ejemplo probado.
  */
-class EjemplosTest {
+class ExamplesTest {
 
     private static final Path DIR = Path.of("..", "ejemplos");
-    private static final int SEMILLAS = 25;
+    private static final int SEEDS = 25;
 
     @TestFactory
-    Stream<DynamicTest> cadaEjemploCumpleLoQueEspera() throws IOException {
-        List<Path> archivos;
+    Stream<DynamicTest> eachExampleMeetsItsExpectation() throws IOException {
+        List<Path> fileNames;
         try (Stream<Path> s = Files.list(DIR)) {
-            archivos = s.filter(p -> p.toString().endsWith(".mon")).sorted().toList();
+            fileNames = s.filter(p -> p.toString().endsWith(".mon")).sorted().toList();
         }
-        assertFalse(archivos.isEmpty(), "No hay ejemplos en " + DIR.toAbsolutePath());
-        return archivos.stream().map(p -> DynamicTest.dynamicTest(
-                p.getFileName().toString(), () -> verificar(Files.readString(p))));
+        assertFalse(fileNames.isEmpty(), "No hay ejemplos en " + DIR.toAbsolutePath());
+        return fileNames.stream().map(p -> DynamicTest.dynamicTest(
+                p.getFileName().toString(), () -> verify(Files.readString(p))));
     }
 
-    private static void verificar(String codigo) {
-        String[] espera = codigo.lines().skip(1).findFirst().orElse("")
+    private static void verify(String code) {
+        String[] waiting = code.lines().skip(1).findFirst().orElse("")
                 .replaceFirst("^//\\s*espera:\\s*", "").trim().split("\\s+");
         List<RunResult> corridas = new ArrayList<>();
-        for (int seed = 0; seed < SEMILLAS; seed++) {
-            corridas.add(TestSupport.run(codigo, SchedulingPolicy.RANDOM, seed, 20000));
+        for (int seed = 0; seed < SEEDS; seed++) {
+            corridas.add(TestSupport.run(code, SchedulingPolicy.RANDOM, seed, 20000));
         }
-        corridas.add(TestSupport.run(codigo, SchedulingPolicy.ROUND_ROBIN, 0, 20000));
+        corridas.add(TestSupport.run(code, SchedulingPolicy.ROUND_ROBIN, 0, 20000));
 
         for (RunResult r : corridas) {
-            switch (espera[0]) {
+            switch (waiting[0]) {
                 case "deadlock" -> assertTrue(r.deadlock(), "se esperaba deadlock");
                 case "fin" -> {
                     assertTrue(r.finished(), "se esperaba que termine");
                     assertFalse(r.logs().stream().anyMatch(l -> l.kind().equals("ERROR")),
                             "hubo un error de ejecucion");
-                    for (int i = 1; i < espera.length; i++) {
+                    for (int i = 1; i < waiting.length; i++) {
                         // Monitor.var=valor: se parte en el primer '.' y el primer '=', asi el
                         // valor puede tener puntos (M.d=2.5)
-                        int punto = espera[i].indexOf('.');
-                        int igual = espera[i].indexOf('=');
-                        String monitor = espera[i].substring(0, punto);
-                        String var = espera[i].substring(punto + 1, igual);
-                        assertEquals(espera[i].substring(igual + 1),
-                                TestSupport.finalVar(r, monitor, var), espera[i]);
+                        int punto = waiting[i].indexOf('.');
+                        int igual = waiting[i].indexOf('=');
+                        String monitor = waiting[i].substring(0, punto);
+                        String var = waiting[i].substring(punto + 1, igual);
+                        assertEquals(waiting[i].substring(igual + 1),
+                                TestSupport.finalVar(r, monitor, var), waiting[i]);
                     }
                 }
                 default -> throw new AssertionError(

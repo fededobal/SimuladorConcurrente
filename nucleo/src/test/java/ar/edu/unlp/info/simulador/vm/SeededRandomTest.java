@@ -17,44 +17,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SeededRandomTest {
 
     @Test
-    void nextIntCoincideConJavaUtilRandom() {
-        for (long semilla : new long[] {0, 1, 7, 42, 123456789L, -5, 1695480000000L}) {
-            SeededRandom azar = new SeededRandom(semilla);
-            Random random = new Random(semilla);
+    void nextIntMatchesJavaUtilRandom() {
+        for (long seed : new long[] {0, 1, 7, 42, 123456789L, -5, 1695480000000L}) {
+            SeededRandom rng = new SeededRandom(seed);
+            Random random = new Random(seed);
             for (int i = 0; i < 2000; i++) {
-                int cota = 1 + (i % 150);
-                assertEquals(random.nextInt(cota), azar.nextInt(cota), "semilla " + semilla);
+                int bound = 1 + (i % 150);
+                assertEquals(random.nextInt(bound), rng.nextInt(bound), "semilla " + seed);
             }
         }
     }
 
     @Test
-    void mezclarCoincideConCollectionsShuffle() {
-        for (long semilla = 0; semilla < 50; semilla++) {
+    void shuffleMatchesCollectionsShuffle() {
+        for (long seed = 0; seed < 50; seed++) {
             List<Integer> a = new ArrayList<>();
-            for (int i = 0; i < 1 + semilla % 30; i++) a.add(i);
+            for (int i = 0; i < 1 + seed % 30; i++) a.add(i);
             List<Integer> b = new ArrayList<>(a);
-            new SeededRandom(semilla).shuffle(a);
-            Collections.shuffle(b, new Random(semilla));
-            assertEquals(b, a, "semilla " + semilla);
+            new SeededRandom(seed).shuffle(a);
+            Collections.shuffle(b, new Random(seed));
+            assertEquals(b, a, "semilla " + seed);
         }
     }
 
     /** Misma traza que scripts/smoke-motor.mjs: si cambia aca, cambia en el navegador. */
     @Test
-    void trazaDelEjemploDeExclusionConSemillaFija() throws Exception {
-        String codigo = java.nio.file.Files.readString(java.nio.file.Path.of("..", "ejemplos",
+    void exclusionExampleTraceWithFixedSeed() throws Exception {
+        String code = java.nio.file.Files.readString(java.nio.file.Path.of("..", "ejemplos",
                 "02-exclusion-mutua.mon"));
-        VirtualMachine vm = ar.edu.unlp.info.simulador.TestSupport.compileAndBuild(codigo, 0);
-        StringBuilder traza = new StringBuilder();
+        VirtualMachine vm = ar.edu.unlp.info.simulador.TestSupport.compileAndBuild(code, 0);
+        StringBuilder trace = new StringBuilder();
         for (int i = 0; i < 6; i++) {
             for (LogEntry e : vm.step(null, SchedulingPolicy.RANDOM)) {
-                traza.append(e.processId()).append(e.kind().charAt(0)).append(' ');
+                trace.append(e.processId()).append(e.kind().charAt(0)).append(' ');
             }
-            traza.append("| ");
+            trace.append("| ");
         }
-        assertEquals(TRAZA_02_SEMILLA_0, traza.toString().trim());
+        assertEquals(TRACE_02_SEED_0, trace.toString().trim());
     }
 
-    static final String TRAZA_02_SEMILLA_0 = "4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 3E |";
+    static final String TRACE_02_SEED_0 = "4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 3E |";
 }

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Golden master (Feathers, <em>characterization test</em>): fija lo que el motor responde
- * hoy, no lo que deberia responder. Corre cada programa de {@link ProgramasCorpus} y de
+ * hoy, no lo que deberia responder. Corre cada programa de {@link ProgramCorpus} y de
  * {@link #extras()} por el puente {@link SimulatorJs}, con las dos politicas, varias
  * semillas y el modo paso a paso, y compara cada respuesta con la guardada en
  * {@code src/test/resources/caracterizacion/}.
@@ -35,56 +35,56 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * {@code mvn test -Dcaracterizacion.regenerar=true} y el diff se revisa en el commit. Cuando
  * no coincide, la salida actual queda en {@code target/caracterizacion/} para compararla.
  */
-class CaracterizacionTest {
+class CharacterizationTest {
 
-    private static final Path GUARDADOS = Path.of("src", "test", "resources", "caracterizacion");
-    private static final Path ACTUALES = Path.of("target", "caracterizacion");
-    private static final boolean REGENERAR = Boolean.getBoolean("caracterizacion.regenerar");
+    private static final Path EXPECTED_DIR = Path.of("src", "test", "resources", "caracterizacion");
+    private static final Path ACTUAL_DIR = Path.of("target", "caracterizacion");
+    private static final boolean REGENERATE = Boolean.getBoolean("caracterizacion.regenerar");
 
-    private static final long[] SEMILLAS = {0, 1, 2};
-    private static final String[] POLITICAS = {"RANDOM", "ROUND_ROBIN"};
-    /** Llamadas a paso por corrida; cada una adelanta el reloj {@link #MS_POR_PASO}. */
-    private static final int MAX_PASOS = 200;
-    private static final long MS_POR_PASO = 500;
+    private static final long[] SEEDS = {0, 1, 2};
+    private static final String[] POLICIES = {"RANDOM", "ROUND_ROBIN"};
+    /** Llamadas a paso por corrida; cada una adelanta el reloj {@link #MS_PER_STEP}. */
+    private static final int MAX_STEPS = 200;
+    private static final long MS_PER_STEP = 500;
 
     @Test
-    void elMotorRespondeIgualQueCuandoSeGraboLaReferencia() throws IOException {
-        Map<String, String> programas = new LinkedHashMap<>(ProgramasCorpus.todos());
-        programas.putAll(extras());
-        List<String> distintos = new ArrayList<>();
-        for (Map.Entry<String, String> prog : programas.entrySet()) {
-            String archivo = prog.getKey().replace('/', '_') + ".txt";
-            String actual = caracterizar(prog.getValue());
-            if (REGENERAR) {
-                Files.createDirectories(GUARDADOS);
-                Files.writeString(GUARDADOS.resolve(archivo), actual, StandardCharsets.UTF_8);
+    void engineAnswersTheSameAsWhenTheReferenceWasRecorded() throws IOException {
+        Map<String, String> programs = new LinkedHashMap<>(ProgramCorpus.allPrograms());
+        programs.putAll(extras());
+        List<String> mismatches = new ArrayList<>();
+        for (Map.Entry<String, String> prog : programs.entrySet()) {
+            String fileName = prog.getKey().replace('/', '_') + ".txt";
+            String actual = characterize(prog.getValue());
+            if (REGENERATE) {
+                Files.createDirectories(EXPECTED_DIR);
+                Files.writeString(EXPECTED_DIR.resolve(fileName), actual, StandardCharsets.UTF_8);
                 continue;
             }
-            Path guardado = GUARDADOS.resolve(archivo);
-            String esperado = Files.exists(guardado)
-                    ? Files.readString(guardado, StandardCharsets.UTF_8) : "";
-            if (!esperado.equals(actual)) {
-                Files.createDirectories(ACTUALES);
-                Files.writeString(ACTUALES.resolve(archivo), actual, StandardCharsets.UTF_8);
-                distintos.add(archivo + primeraDiferencia(esperado, actual));
+            Path saved = EXPECTED_DIR.resolve(fileName);
+            String expected = Files.exists(saved)
+                    ? Files.readString(saved, StandardCharsets.UTF_8) : "";
+            if (!expected.equals(actual)) {
+                Files.createDirectories(ACTUAL_DIR);
+                Files.writeString(ACTUAL_DIR.resolve(fileName), actual, StandardCharsets.UTF_8);
+                mismatches.add(fileName + firstDifference(expected, actual));
             }
         }
-        assertTrue(distintos.isEmpty(), "El motor responde distinto que la referencia en:\n  "
-                + String.join("\n  ", distintos)
-                + "\nComparar con: diff -r " + GUARDADOS + " " + ACTUALES);
+        assertTrue(mismatches.isEmpty(), "El motor responde distinto que la referencia en:\n  "
+                + String.join("\n  ", mismatches)
+                + "\nComparar con: diff -r " + EXPECTED_DIR + " " + ACTUAL_DIR);
     }
 
     /** Todas las corridas de un programa, una seccion por politica, semilla y modo. */
-    private static String caracterizar(String codigo) {
+    private static String characterize(String code) {
         StringBuilder sb = new StringBuilder();
-        for (String politica : POLITICAS) {
-            for (long semilla : SEMILLAS) {
-                sb.append("## ").append(politica).append(" semilla=").append(semilla).append('\n');
-                correr(sb, codigo, politica, semilla, false, semilla == 0);
+        for (String policy : POLICIES) {
+            for (long seed : SEEDS) {
+                sb.append("## ").append(policy).append(" semilla=").append(seed).append('\n');
+                runOnce(sb, code, policy, seed, false, seed == 0);
             }
         }
         sb.append("## paso a paso, RANDOM semilla=0\n");
-        correr(sb, codigo, "RANDOM", 0, true, true);
+        runOnce(sb, code, "RANDOM", 0, true, true);
         return sb.toString();
     }
 
@@ -94,26 +94,26 @@ class CaracterizacionTest {
      * la politica, y ese camino tambien queda fijado. Sin {@code legible} se guarda solo la
      * huella de cada respuesta, para que la referencia no pese megas.
      */
-    private static void correr(StringBuilder sb, String codigo, String politica, long semilla,
-            boolean pasoAPaso, boolean legible) {
-        String creada = SimulatorJs.create(codigo, semilla);
-        sb.append("crear ").append(resumen(creada)).append('\n');
-        if (creada.startsWith("{\"error\"")) return;
-        for (int i = 1; i <= MAX_PASOS; i++) {
-            int elegido = pasoAPaso ? (i % 4) + 1 : -1;
-            String step = SimulatorJs.step(politica, elegido, i * MS_POR_PASO);
+    private static void runOnce(StringBuilder sb, String code, String policy, long seed,
+            boolean stepByStep, boolean readable) {
+        String createdJson = SimulatorJs.create(code, seed);
+        sb.append("crear ").append(summary(createdJson)).append('\n');
+        if (createdJson.startsWith("{\"error\"")) return;
+        for (int i = 1; i <= MAX_STEPS; i++) {
+            int chosen = stepByStep ? (i % 4) + 1 : -1;
+            String step = SimulatorJs.step(policy, chosen, i * MS_PER_STEP);
             sb.append("paso ").append(i).append(' ')
-                    .append(legible ? resumen(step) : "#" + huella(step)).append('\n');
+                    .append(readable ? summary(step) : "#" + fingerprint(step)).append('\n');
             if (step.startsWith("{\"error\"") || step.contains("\"finished\":true")
                     || step.contains("\"deadlock\":true")) {
                 break;
             }
         }
-        sb.append("estado #").append(huella(SimulatorJs.state())).append('\n');
+        sb.append("estado #").append(fingerprint(SimulatorJs.state())).append('\n');
     }
 
     /** Tipo y mensaje de cada evento, en el orden en que {@code Json.logEntry} los escribe. */
-    private static final Pattern EVENTO = Pattern.compile(
+    private static final Pattern EVENT = Pattern.compile(
             "\"kind\":\"([A-Z_]+)\",\"resource\":\"(?:[^\"\\\\]|\\\\.)*\","
                     + "\"message\":\"((?:[^\"\\\\]|\\\\.)*)\"");
 
@@ -122,17 +122,17 @@ class CaracterizacionTest {
      * para ubicar una diferencia, y la huella de la respuesta entera (ids, colores, instante,
      * snapshot), que es lo que detecta cualquier cambio. Un error se guarda entero.
      */
-    private static String resumen(String json) {
-        int fin = json.lastIndexOf(",\"finished\":");
-        if (fin < 0) return json;
+    private static String summary(String json) {
+        int end = json.lastIndexOf(",\"finished\":");
+        if (end < 0) return json;
         StringBuilder sb = new StringBuilder();
-        Matcher m = EVENTO.matcher(json.substring(0, Math.max(0, json.indexOf(",\"snapshot\":"))));
+        Matcher m = EVENT.matcher(json.substring(0, Math.max(0, json.indexOf(",\"snapshot\":"))));
         while (m.find()) sb.append(m.group(1)).append(' ').append(m.group(2)).append(" | ");
-        return sb.append('{').append(json.substring(fin + 1)).append(" #").append(huella(json))
+        return sb.append('{').append(json.substring(end + 1)).append(" #").append(fingerprint(json))
                 .toString();
     }
 
-    private static String huella(String s) {
+    private static String fingerprint(String s) {
         try {
             byte[] h = MessageDigest.getInstance("SHA-256")
                     .digest(s.getBytes(StandardCharsets.UTF_8));
@@ -144,8 +144,8 @@ class CaracterizacionTest {
         }
     }
 
-    private static String primeraDiferencia(String esperado, String actual) {
-        String[] e = esperado.split("\n", -1);
+    private static String firstDifference(String expected, String actual) {
+        String[] e = expected.split("\n", -1);
         String[] a = actual.split("\n", -1);
         for (int i = 0; i < Math.max(e.length, a.length); i++) {
             String le = i < e.length ? e[i] : "(fin)";

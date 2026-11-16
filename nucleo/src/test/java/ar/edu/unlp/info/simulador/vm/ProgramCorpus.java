@@ -9,21 +9,21 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * Programas sobre los que {@link InvariantesTest} controla las invariantes de la VM: los
+ * Programas sobre los que {@link InvariantsTest} controla las invariantes de la VM: los
  * ejemplos de ejemplos/, los canonicos del smoke y de VirtualMachineTest, y variantes con
  * mas procesos, varios monitores, arreglos de cond, signal_all, out, llamadas anidadas y
  * errores de ejecucion. Salen de la verificacion del 23/09/2026.
  */
-final class ProgramasCorpus {
+final class ProgramCorpus {
 
-    private ProgramasCorpus() { }
+    private ProgramCorpus() { }
 
-    static final Path EJEMPLOS = Path.of("..", "ejemplos");
+    static final Path EXAMPLES = Path.of("..", "ejemplos");
 
     /** Ejemplos de la interfaz, por nombre de archivo. */
-    static Map<String, String> ejemplos() {
+    static Map<String, String> examples() {
         Map<String, String> out = new LinkedHashMap<>();
-        try (Stream<Path> s = Files.list(EJEMPLOS)) {
+        try (Stream<Path> s = Files.list(EXAMPLES)) {
             for (Path p : s.filter(x -> x.toString().endsWith(".mon")).sorted().toList()) {
                 out.put("ejemplo/" + p.getFileName(), Files.readString(p));
             }
@@ -34,7 +34,7 @@ final class ProgramasCorpus {
     }
 
     /** Canonicos (smoke + VirtualMachineTest) y variantes. */
-    static Map<String, String> sinteticos() {
+    static Map<String, String> synthetic() {
         Map<String, String> p = new LinkedHashMap<>();
 
         // ---- canonicos del smoke y de VirtualMachineTest
@@ -220,7 +220,7 @@ final class ProgramasCorpus {
                 monitor M { int x = 0; procedure f() { x++; } }
                 process P[i: 1..3] { for (1..300) { write("linea ", i); M.f(); } }
                 """);
-        p.put("var/arreglo-de-monitores", VirtualMachineTest.BANCO);
+        p.put("var/arreglo-de-monitores", VirtualMachineTest.BANK);
         p.put("var/llamada-cerrada-con-wait", """
                 monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
@@ -231,9 +231,9 @@ final class ProgramasCorpus {
         return p;
     }
 
-    static Map<String, String> todos() {
-        Map<String, String> all = new LinkedHashMap<>(ejemplos());
-        all.putAll(sinteticos());
+    static Map<String, String> allPrograms() {
+        Map<String, String> all = new LinkedHashMap<>(examples());
+        all.putAll(synthetic());
         return all;
     }
 }

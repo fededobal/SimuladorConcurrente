@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CompilerTest {
 
     @Test
-    void compilaElContadorDeLaTeoria() {
+    void compilesTheTheoryCounter() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor TOTAL {
                     int cant = 0;
@@ -29,7 +29,7 @@ class CompilerTest {
     }
 
     @Test
-    void compilaBufferConVariablesCondicion() {
+    void compilesBufferWithConditionVariables() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor Buffer {
                     int dato = 0;
@@ -52,7 +52,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaVariablesGlobales() {
+    void rejectsGlobalVariables() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 int N = 5;
                 monitor M { procedure op() { skip; } }
@@ -62,7 +62,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaParametroInout() {
+    void rejectsInoutParameter() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { procedure op(a: inout int) { a = 1; } }
                 process P { int x = 0; M.op(x); }
@@ -70,7 +70,7 @@ class CompilerTest {
     }
 
     @Test
-    void aceptaColaOrdenada() {
+    void acceptsSortedQueue() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   ColaOrdenada c(int, int);
@@ -83,7 +83,7 @@ class CompilerTest {
 
     /** La cantidad de componentes de un push o un pop es la de la declaracion. */
     @Test
-    void rechazaCantidadDeComponentesDistintaDeLaDeclarada() {
+    void rejectsComponentCountDifferentFromDeclared() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M {
                   ColaOrdenada c(int, int);
@@ -98,7 +98,7 @@ class CompilerTest {
 
     /** Las dos formas de declarar y las tres de encolar y desencolar significan lo mismo. */
     @Test
-    void aceptaLasFormasDeDeclararEncolarYDesencolar() {
+    void acceptsAllFormsToDeclarePushAndPop() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   ColaOrdenada g(int, (text, text));
@@ -124,60 +124,60 @@ class CompilerTest {
 
     /** Los mensajes de nombre repetido concuerdan con lo que se repite. */
     @Test
-    void mensajesDeNombreRepetidoConcuerdan() {
-        assertTrue(errorDe("""
+    void duplicateNameMessagesAgreeInGender() {
+        assertTrue(errorOf("""
                 monitor M { procedure f(a: in int) { int a = 0; } } process P { M.f(1); }
                 """).contains("un parámetro llamado 'a': elegí otro nombre para no taparlo"));
-        assertTrue(errorDe("process P { int x = 0; int x = 1; }")
+        assertTrue(errorOf("process P { int x = 0; int x = 1; }")
                 .contains("una variable local llamada 'x': elegí otro nombre para no taparla"));
         // una cond y una variable con el mismo nombre: el error nombra a la que se declaro
         // primero y se informa en la segunda
-        assertTrue(errorDe("monitor M { int c;\n cond c; } process P { skip; }")
+        assertTrue(errorOf("monitor M { int c;\n cond c; } process P { skip; }")
                 .startsWith("Línea 2: Ya existe una variable permanente llamada 'c'"));
-        assertTrue(errorDe("monitor M { cond c;\n int c; } process P { skip; }")
+        assertTrue(errorOf("monitor M { cond c;\n int c; } process P { skip; }")
                 .startsWith("Línea 2: Ya existe una variable condición llamada 'c'"));
     }
 
     /** Una cola sin tipos ya no compila, y el mensaje dice como escribirla. */
     @Test
-    void rechazaColaSinTipos() {
-        assertTrue(errorDe("process P { Cola c; }").contains("tipos de sus componentes"));
-        assertTrue(errorDe("process P { ColaOrdenada c; }").contains("ColaOrdenada c(tipo, ...)"));
+    void rejectsQueueWithoutTypes() {
+        assertTrue(errorOf("process P { Cola c; }").contains("tipos de sus componentes"));
+        assertTrue(errorOf("process P { ColaOrdenada c; }").contains("ColaOrdenada c(tipo, ...)"));
     }
 
     /** Solo un grupo, despues de la primera componente, y sin mas parentesis adentro. */
     @Test
-    void rechazaParentesisDeMasEnColas() {
-        assertTrue(errorDe("process P { ColaOrdenada c((int, text)); }")
+    void rejectsExtraParenthesesInQueues() {
+        assertTrue(errorOf("process P { ColaOrdenada c((int, text)); }")
                 .contains("primera componente de 'c' va sin paréntesis"));
-        assertTrue(errorDe("process P { Cola c(int, (text, (text))); }")
+        assertTrue(errorOf("process P { Cola c(int, (text, (text))); }")
                 .contains("sin más paréntesis"));
-        assertTrue(errorDe("process P { Cola c(int, (text), text); }")
+        assertTrue(errorOf("process P { Cola c(int, (text), text); }")
                 .contains("se cierra la declaración"));
-        assertTrue(errorDe("process P { Cola c(int, text, (text, text)); }")
+        assertTrue(errorOf("process P { Cola c(int, text, (text, text)); }")
                 .contains("justo después de la primera componente"));
-        assertTrue(errorDe("process P { Cola c(int, text); push(c, ((1, (2, 3)))); }")
+        assertTrue(errorOf("process P { Cola c(int, text); push(c, ((1, (2, 3)))); }")
                 .contains("Sobran paréntesis"));
         // (3) es una expresion agrupada, no una tupla: son tres componentes y los numeros se
         // guardan en text, asi que compila
         assertDoesNotThrow(() -> Compiler.compile(
                 "process P { Cola c(int, text, text); push(c, (1, (2, (3)))); }"));
-        assertTrue(errorDe("process P { Cola c(int, text, text); push(c, (1, (true, (3)))); }")
+        assertTrue(errorOf("process P { Cola c(int, text, text); push(c, (1, (true, (3)))); }")
                 .contains("componente 2 de 'c' es text y se está encolando un bool"));
-        assertTrue(errorDe("process P { Cola c(int, text, text); push(c, 1, (\"a\", \"b\")); }")
+        assertTrue(errorOf("process P { Cola c(int, text, text); push(c, 1, (\"a\", \"b\")); }")
                 .contains("alrededor de todas las componentes"));
-        assertTrue(errorDe("process P { Cola c(int, text); int x; text t; pop(c, ((x, t))); }")
+        assertTrue(errorOf("process P { Cola c(int, text); int x; text t; pop(c, ((x, t))); }")
                 .contains("Sobran paréntesis"));
     }
 
     /** Cada componente se controla contra el tipo declarado, en el push y en el pop. */
     @Test
-    void rechazaTiposIncompatiblesEnPushYPop() {
-        assertTrue(errorDe("process P { Cola c(int, text); push(c, \"a\", 1); }")
+    void rejectsIncompatibleTypesInPushAndPop() {
+        assertTrue(errorOf("process P { Cola c(int, text); push(c, \"a\", 1); }")
                 .contains("componente 1 de 'c' es int"));
-        assertTrue(errorDe("process P { Cola c(int, text); int x; int y; pop(c, x, y); }")
+        assertTrue(errorOf("process P { Cola c(int, text); int x; int y; pop(c, x, y); }")
                 .contains("componente 2 de 'c' es text y no se puede guardar en 'y'"));
-        assertTrue(errorDe("process P { ColaOrdenada c(bool); }")
+        assertTrue(errorOf("process P { ColaOrdenada c(bool); }")
                 .contains("tiene que ser int, double o text"));
         // las conversiones de siempre valen: un int en un double, un numero en un text
         assertDoesNotThrow(() -> Compiler.compile(
@@ -185,14 +185,14 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaMonitorInexistente() {
+    void rejectsUndeclaredMonitor() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 process P { NoExiste.op(); }
                 """));
     }
 
     @Test
-    void rechazaWaitFueraDeProcedure() {
+    void rejectsWaitOutsideProcedure() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { cond c; procedure op() { signal(c); } }
                 process P { wait(c); }
@@ -200,7 +200,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaAridadIncorrecta() {
+    void rejectsWrongArity() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { procedure op(a: in int) { a = a; } }
                 process P { M.op(1, 2); }
@@ -208,7 +208,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaOutConArgumentoNoAsignable() {
+    void rejectsOutWithNonAssignableArgument() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { procedure op(r: out int) { r = 1; } }
                 process P { M.op(1 + 2); }
@@ -217,7 +217,7 @@ class CompilerTest {
 
     /** Los semaforos no existen: 'sem', 'await', 'p' y 'v' son identificadores comunes. */
     @Test
-    void semaforosNoSonPalabrasReservadas() {
+    void semaphoresAreNotKeywords() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   int sem = 0;
@@ -228,7 +228,7 @@ class CompilerTest {
     }
 
     @Test
-    void aceptaLasTresFormasDelFor() {
+    void acceptsTheThreeForForms() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M { int n = 0; procedure op() { n++; } }
                 process P {
@@ -242,14 +242,14 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaProgramaSinProcesos() {
+    void rejectsProgramWithoutProcesses() {
         assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { int x = 0; }
                 """));
     }
 
     @Test
-    void aceptaVariasVariablesEnUnaDeclaracion() {
+    void acceptsSeveralVariablesInOneDeclaration() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M {
                   int a, b = 1, v[3] = ([3] 0), w[2];
@@ -266,7 +266,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaComaSinNombreEnLaDeclaracion() {
+    void rejectsCommaWithoutNameInDeclaration() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { procedure op() { skip; } }
                 process P {
@@ -279,7 +279,7 @@ class CompilerTest {
     }
 
     @Test
-    void rechazaVariablePermanenteRepetidaEnLaLista() {
+    void rejectsRepeatedPermanentVariableInList() {
         CompilationException ex = assertThrows(CompilationException.class, () -> Compiler.compile("""
                 monitor M { int a, a; procedure op() { skip; } }
                 process P { M.op(); }
@@ -288,7 +288,7 @@ class CompilerTest {
     }
 
     @Test
-    void aceptaColaOrdenadaLocal() {
+    void acceptsLocalSortedQueue() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor M { procedure op() { skip; } }
                 process P { ColaOrdenada pendientes(int); push(pendientes, 1); M.op(); }
@@ -297,64 +297,64 @@ class CompilerTest {
 
     /** La gramatica define digitos ASCII; un digito arabe da el mismo error en JVM y navegador. */
     @Test
-    void digitosNoAsciiNoSonNumeros() {
+    void nonAsciiDigitsAreNotNumbers() {
         CompilationException ex = assertThrows(CompilationException.class,
                 () -> Compiler.compile("process P { int x = \u0663; }"));
         assertTrue(ex.getMessage().contains("inesperado"), ex.getMessage());
     }
 
     @Test
-    void anidamientoExcesivoEsErrorDeCompilacion() {
-        String hondo = "(".repeat(150) + "1" + ")".repeat(150);
+    void excessiveNestingIsCompileError() {
+        String deep = "(".repeat(150) + "1" + ")".repeat(150);
         CompilationException ex = assertThrows(CompilationException.class,
-                () -> Compiler.compile("process P { int x = " + hondo + "; }"));
+                () -> Compiler.compile("process P { int x = " + deep + "; }"));
         assertTrue(ex.getMessage().contains("anidamiento"), ex.getMessage());
 
-        String bloques = "{".repeat(150) + "skip;" + "}".repeat(150);
+        String blocks = "{".repeat(150) + "skip;" + "}".repeat(150);
         assertThrows(CompilationException.class,
-                () -> Compiler.compile("process P { " + bloques + " }"));
+                () -> Compiler.compile("process P { " + blocks + " }"));
 
-        String razonable = "(".repeat(40) + "1" + ")".repeat(40);
-        assertDoesNotThrow(() -> Compiler.compile("process P { int x = " + razonable + "; }"));
+        String reasonable = "(".repeat(40) + "1" + ")".repeat(40);
+        assertDoesNotThrow(() -> Compiler.compile("process P { int x = " + reasonable + "; }"));
     }
 
     /** 1 + 1 + ... no anida parentesis pero arma un arbol igual de hondo. */
     @Test
-    void expresionDemasiadoLargaEsErrorDeCompilacion() {
-        String suma = "1" + " + 1".repeat(300);
+    void tooLongExpressionIsCompileError() {
+        String sum = "1" + " + 1".repeat(300);
         CompilationException ex = assertThrows(CompilationException.class,
-                () -> Compiler.compile("process P { int x = " + suma + "; }"));
+                () -> Compiler.compile("process P { int x = " + sum + "; }"));
         assertTrue(ex.getMessage().contains("demasiado larga"), ex.getMessage());
         assertEquals(1, ex.getLine());
     }
 
     @Test
-    void literalDecimalInfinitoEsErrorDeCompilacion() {
+    void infiniteDecimalLiteralIsCompileError() {
         CompilationException ex = assertThrows(CompilationException.class,
                 () -> Compiler.compile("process P { double d = 1" + "0".repeat(400) + ".0; }"));
         assertTrue(ex.getMessage().contains("fuera de rango"), ex.getMessage());
     }
 
-    private static String errorDe(String programa) {
-        return assertThrows(CompilationException.class, () -> Compiler.compile(programa)).getMessage();
+    private static String errorOf(String program) {
+        return assertThrows(CompilationException.class, () -> Compiler.compile(program)).getMessage();
     }
 
     /** D-1: los errores de tipos se informan al compilar. */
     @Test
-    void chequeaTiposAlCompilar() {
-        assertTrue(errorDe("process P { int x = 1; if (x) skip; }").contains("tiene que ser bool"));
-        assertTrue(errorDe("process P { int x = \"a\" * 2; }").contains("se aplica a números"));
-        assertTrue(errorDe("process P { int x = \"hola\"; }").contains("No se puede guardar un text"));
-        assertTrue(errorDe("process P { int x = 2.9; }").contains("No se puede guardar un double"));
-        assertTrue(errorDe("process P { bool b = \"10\" == 10; }").contains("No se puede comparar"));
-        assertTrue(errorDe("process P { int x = true; }").contains("No se puede guardar un bool"));
-        assertTrue(errorDe("process P { text t = true; }").contains("No se puede guardar un bool"));
-        assertTrue(errorDe("process P { int a[2]; a[1.5] = 1; }").contains("tiene que ser int"));
-        assertTrue(errorDe("""
+    void checksTypesAtCompileTime() {
+        assertTrue(errorOf("process P { int x = 1; if (x) skip; }").contains("tiene que ser bool"));
+        assertTrue(errorOf("process P { int x = \"a\" * 2; }").contains("se aplica a números"));
+        assertTrue(errorOf("process P { int x = \"hola\"; }").contains("No se puede guardar un text"));
+        assertTrue(errorOf("process P { int x = 2.9; }").contains("No se puede guardar un double"));
+        assertTrue(errorOf("process P { bool b = \"10\" == 10; }").contains("No se puede comparar"));
+        assertTrue(errorOf("process P { int x = true; }").contains("No se puede guardar un bool"));
+        assertTrue(errorOf("process P { text t = true; }").contains("No se puede guardar un bool"));
+        assertTrue(errorOf("process P { int a[2]; a[1.5] = 1; }").contains("tiene que ser int"));
+        assertTrue(errorOf("""
                 monitor M { procedure f(x: in int) { skip; } }
                 process P { M.f(2.5); }
                 """).contains("No se puede guardar un double"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { procedure f(r: out text) { r = "a"; } }
                 process P { int n; M.f(n); }
                 """).contains("no se puede guardar en 'n'"));
@@ -367,23 +367,23 @@ class CompilerTest {
 
     /** VI-6: un nombre no puede tapar a otro que ya se ve (la VM guarda las locales juntas). */
     @Test
-    void noSePermiteTaparNombres() {
-        assertTrue(errorDe("process P[i: 0..1] { for (int i = 0..5) { skip; } }")
+    void shadowingNamesIsNotAllowed() {
+        assertTrue(errorOf("process P[i: 0..1] { for (int i = 0..5) { skip; } }")
                 .contains("el iterador de la familia"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { int cant = 0; procedure f() { if (true) { int cant = 5; } } }
                 process P { M.f(); }
                 """).contains("una variable permanente llamada 'cant'"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { int x = 0; procedure f(x: in int) { skip; } }
                 process P { M.f(1); }
                 """).contains("una variable permanente"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { procedure f(x: in int) { int x = 1; } }
                 process P { M.f(1); }
                 """).contains("un parámetro"));
-        assertTrue(errorDe("process P { int x = 1; int x = 2; }").contains("Ya existe"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("process P { int x = 1; int x = 2; }").contains("Ya existe"));
+        assertTrue(errorOf("""
                 monitor M { cond libre; procedure f() { int libre = 1; } }
                 process P { M.f(); }
                 """).contains("variable condición"));
@@ -395,30 +395,30 @@ class CompilerTest {
 
     /** D-3: el iterador de un for solo lo cambia el paso del for. */
     @Test
-    void iteradorDelForNoSeModificaEnElCuerpo() {
-        assertTrue(errorDe("process P { for (int i = 1..3) { i = 5; } }").contains("iterador 'i'"));
-        assertTrue(errorDe("process P { int i; for (i = 0; i < 3; i++) { i++; } }").contains("iterador 'i'"));
-        assertTrue(errorDe("process P { for (double d = 1..3) { skip; } }").contains("tiene que ser int"));
+    void forIteratorCannotBeModifiedInBody() {
+        assertTrue(errorOf("process P { for (int i = 1..3) { i = 5; } }").contains("iterador 'i'"));
+        assertTrue(errorOf("process P { int i; for (i = 0; i < 3; i++) { i++; } }").contains("iterador 'i'"));
+        assertTrue(errorOf("process P { for (double d = 1..3) { skip; } }").contains("tiene que ser int"));
         assertDoesNotThrow(() -> Compiler.compile("process P { int i; for (i = 0; i < 3; i++) { skip; } i = 7; }"));
     }
 
     /** VI-5: un arreglo o una cola no se asignan, pasan ni encolan enteros. */
     @Test
-    void arregloOColaCompletosNoSeUsanComoValor() {
-        assertTrue(errorDe("process P { int a[2]; a = 5; }").contains("completo"));
-        assertTrue(errorDe("process P { int a[2]; int b[2]; a = b; }").contains("completo"));
-        assertTrue(errorDe("process P { int a[2]; int x = a; }").contains("falta el índice"));
-        assertTrue(errorDe("process P { Cola c(int); Cola d(int); push(c, d); }").contains("es una cola"));
-        assertTrue(errorDe("process P { int x; x[0] = 1; }").contains("no es un arreglo"));
-        assertTrue(errorDe("""
+    void wholeArrayOrQueueIsNotAValue() {
+        assertTrue(errorOf("process P { int a[2]; a = 5; }").contains("completo"));
+        assertTrue(errorOf("process P { int a[2]; int b[2]; a = b; }").contains("completo"));
+        assertTrue(errorOf("process P { int a[2]; int x = a; }").contains("falta el índice"));
+        assertTrue(errorOf("process P { Cola c(int); Cola d(int); push(c, d); }").contains("es una cola"));
+        assertTrue(errorOf("process P { int x; x[0] = 1; }").contains("no es un arreglo"));
+        assertTrue(errorOf("""
                 monitor M { procedure dar(r: out int) { r = 3; } }
                 process P { Cola c(int); M.dar(c); }
                 """).contains("es una cola"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { procedure dar(r: out int) { r = 3; } }
                 process P { int a[2]; M.dar(a); }
                 """).contains("falta el índice"));
-        assertTrue(errorDe("""
+        assertTrue(errorOf("""
                 monitor M { procedure ver(x: in int) { skip; } }
                 process P { int a[2]; M.ver(a); }
                 """).contains("falta el índice"));
@@ -427,8 +427,8 @@ class CompilerTest {
 
     /** D-4: un procedure no puede llamar a su propio monitor. */
     @Test
-    void llamarAlMismoMonitorDesdeAdentroEsError() {
-        assertTrue(errorDe("""
+    void callingSameMonitorFromInsideIsError() {
+        assertTrue(errorOf("""
                 monitor A { procedure f() { A.g(); } procedure g() { skip; } }
                 process P { A.f(); }
                 """).contains("ya está dentro del monitor"));
@@ -436,28 +436,28 @@ class CompilerTest {
 
     /** VS-4: empty solo sobre colas, con o sin parentesis. */
     @Test
-    void emptySoloSobreColasYConParentesisOpcionales() {
-        assertTrue(errorDe("process P { int a[2]; bool b = empty a; }").contains("no es una cola"));
+    void emptyOnlyOnQueuesWithOptionalParentheses() {
+        assertTrue(errorOf("process P { int a[2]; bool b = empty a; }").contains("no es una cola"));
         assertDoesNotThrow(() -> Compiler.compile(
                 "process P { Cola c(int); bool b = empty c; bool d = empty(c) and not empty(c); }"));
     }
 
     /** VS-8: la comparacion encadenada se rechaza con un mensaje que la explica. */
     @Test
-    void comparacionEncadenadaExplicaElError() {
-        assertTrue(errorDe("process P { bool b = 1 < 2 < 3; }").contains("no se encadenan"));
+    void chainedComparisonExplainsTheError() {
+        assertTrue(errorOf("process P { bool b = 1 < 2 < 3; }").contains("no se encadenan"));
     }
 
     /** VS-9: caracteres que llegan al copiar de un PDF o un procesador de texto. */
     @Test
-    void espaciosInvisiblesYComillasTipograficas() {
+    void invisibleSpacesAndTypographicQuotes() {
         assertDoesNotThrow(() -> Compiler.compile("\uFEFFprocess P {\u00A0skip; }"));
-        assertTrue(errorDe("process P { write(\u201Chola\u201D); }").contains("comillas rectas"));
+        assertTrue(errorOf("process P { write(\u201Chola\u201D); }").contains("comillas rectas"));
     }
 
     /** VS-1: los mensajes llevan tildes. */
     @Test
-    void mensajesConTildes() {
+    void messagesHaveAccents() {
         CompilationException ex = assertThrows(CompilationException.class,
                 () -> Compiler.compile("process P {\n int x = ; }"));
         assertTrue(ex.getMessage().startsWith("Línea 2: Se esperaba una expresión"), ex.getMessage());
@@ -465,24 +465,24 @@ class CompilerTest {
 
     /** Notacion de la catedra: el tipo logico es bool; boolean se rechaza con un mensaje que lo dice. */
     @Test
-    void elTipoLogicoSeLlamaBool() {
+    void booleanTypeIsCalledBool() {
         assertDoesNotThrow(() -> Compiler.compile("process P { bool listo = true; }"));
         assertEquals("Línea 1: El tipo se llama bool, no boolean",
-                errorDe("process P { boolean listo = true; }"));
+                errorOf("process P { boolean listo = true; }"));
     }
 
     /** Notacion de la catedra: el resto de la division es mod; % se rechaza. */
     @Test
-    void elRestoSeEscribeMod() {
+    void remainderIsWrittenMod() {
         assertDoesNotThrow(() -> Compiler.compile("process P { int x = 7 mod 3; }"));
         assertEquals("Línea 1: El resto de la división se escribe mod, no %",
-                errorDe("process P { int x = 7 % 3; }"));
-        assertTrue(errorDe("process P { int x = 7 mod true; }").contains("'mod' se aplica a números"));
+                errorOf("process P { int x = 7 % 3; }"));
+        assertTrue(errorOf("process P { int x = 7 mod true; }").contains("'mod' se aplica a números"));
     }
 
     /** La catedra escribe Monitor, Procedure y Process con mayuscula: se aceptan en cualquier forma. */
     @Test
-    void monitorProcedureYProcessSinDistinguirMayusculas() {
+    void monitorProcedureAndProcessAreCaseInsensitive() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 Monitor M { int x = 0; Procedure p() { x = 1; } }
                 PROCESS P { M.p(); }
@@ -492,7 +492,7 @@ class CompilerTest {
 
     /** Parametros como la catedra: ';' entre grupos y ',' entre nombres del mismo tipo. */
     @Test
-    void parametrosAgrupadosYSeparadosConPuntoYComa() {
+    void parametersGroupedAndSeparatedBySemicolon() {
         Program p = Compiler.compile("""
                 monitor M { int s = 0; text u = "";
                   procedure f(a, b: in int; r: out text) { s = a + b; r = "ok"; } }
@@ -506,7 +506,7 @@ class CompilerTest {
 
     /** Parametros al estilo C: tipo adelante, de entrada. */
     @Test
-    void parametrosEstiloC() {
+    void cStyleParameters() {
         Program p = Compiler.compile("""
                 monitor M { int s = 0; procedure f(int a, b; text t) { s = a + b; } }
                 process P { M.f(1, 2, "x"); }
@@ -518,49 +518,49 @@ class CompilerTest {
 
     /** La coma no separa grupos de parametros: el mensaje dice que va ';'. */
     @Test
-    void comaEntreGruposDeParametrosEsError() {
-        String esperado = "Los parámetros de distinto grupo se separan con ';'";
-        assertTrue(errorDe("monitor M { procedure f(a: in int, b: in int) { skip; } }\n"
-                + "process P { M.f(1, 2); }").contains(esperado));
-        assertTrue(errorDe("monitor M { procedure f(int a, int b) { skip; } }\n"
-                + "process P { M.f(1, 2); }").contains(esperado));
+    void commaBetweenParameterGroupsIsError() {
+        String expected = "Los parámetros de distinto grupo se separan con ';'";
+        assertTrue(errorOf("monitor M { procedure f(a: in int, b: in int) { skip; } }\n"
+                + "process P { M.f(1, 2); }").contains(expected));
+        assertTrue(errorOf("monitor M { procedure f(int a, int b) { skip; } }\n"
+                + "process P { M.f(1, 2); }").contains(expected));
     }
 
     /** La catedra no usa empty sobre una variable condicion: el mensaje lo dice. */
     @Test
-    void emptySobreUnaCondNoSePermite() {
-        String esperado = "Línea 2: En la práctica no se permite preguntar si una variable "
+    void emptyOnConditionIsNotAllowed() {
+        String expected = "Línea 2: En la práctica no se permite preguntar si una variable "
                 + "condición está vacía";
-        assertEquals(esperado, errorDe("monitor M { cond cola; bool b;\n"
+        assertEquals(expected, errorOf("monitor M { cond cola; bool b;\n"
                 + "procedure f() { b = empty(cola); } }\nprocess P { M.f(); }"));
-        assertEquals(esperado, errorDe("monitor M { cond turno[3]; bool b;\n"
+        assertEquals(expected, errorOf("monitor M { cond turno[3]; bool b;\n"
                 + "procedure f() { b = empty(turno[1]); } }\nprocess P { M.f(); }"));
     }
 
     /** Arreglo de monitores: el indice es obligatorio, int y de solo lectura adentro. */
     @Test
-    void arregloDeMonitores() {
+    void monitorArray() {
         assertDoesNotThrow(() -> Compiler.compile("""
                 monitor Escritorio[id: 0..2] { int n = id * 10; procedure f(x: in int) { n = id + x; } }
                 process P { int k = 1; int a[2]; Escritorio[k].f(1); a[0] = 2; Escritorio[a[0]].f(2); }
                 """));
-        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E.f(); }")
+        assertTrue(errorOf("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E.f(); }")
                 .contains("El monitor E es un arreglo: falta el índice"));
-        assertTrue(errorDe("monitor E { procedure f() { skip; } }\nprocess P { E[0].f(); }")
+        assertTrue(errorOf("monitor E { procedure f() { skip; } }\nprocess P { E[0].f(); }")
                 .contains("El monitor E no es un arreglo"));
-        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E[true].f(); }")
+        assertTrue(errorOf("monitor E[id: 0..2] { procedure f() { skip; } }\nprocess P { E[true].f(); }")
                 .contains("El índice del monitor tiene que ser int"));
-        assertTrue(errorDe("monitor E[id: 0..2] { procedure f() { id = 3; } }\nprocess P { E[0].f(); }")
+        assertTrue(errorOf("monitor E[id: 0..2] { procedure f() { id = 3; } }\nprocess P { E[0].f(); }")
                 .contains("No se puede asignar a 'id'"));
     }
 
     /** delay recibe segundos enteros y no se usa en la inicializacion de un monitor. */
     @Test
-    void delayEnSegundosEnteros() {
+    void delayInWholeSeconds() {
         assertDoesNotThrow(() -> Compiler.compile(
                 "monitor M { procedure f() { delay(1); } }\nprocess P { delay(2); M.f(); }"));
-        assertTrue(errorDe("process P { delay(true); }").contains("El tiempo del delay tiene que ser int"));
-        assertTrue(errorDe("monitor M { int x = 0; delay(1); }\nprocess P { skip; }")
+        assertTrue(errorOf("process P { delay(true); }").contains("El tiempo del delay tiene que ser int"));
+        assertTrue(errorOf("monitor M { int x = 0; delay(1); }\nprocess P { skip; }")
                 .contains("no puede llamar a monitores ni usar wait, signal o delay"));
     }
 }

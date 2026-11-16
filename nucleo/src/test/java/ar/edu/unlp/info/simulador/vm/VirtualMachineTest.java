@@ -31,7 +31,7 @@ class VirtualMachineTest {
             """;
 
     @Test
-    void exclusionMutuaImplicita_random() {
+    void implicitMutualExclusionRandom() {
         for (int seed = 0; seed < 25; seed++) {
             RunResult r = TestSupport.run(EXCLUSION, SchedulingPolicy.RANDOM, seed, 5000);
             assertTrue(r.finished(), "seed " + seed + " no termino");
@@ -41,7 +41,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void exclusionMutuaImplicita_roundRobin() {
+    void implicitMutualExclusionRoundRobin() {
         RunResult r = TestSupport.run(EXCLUSION, SchedulingPolicy.ROUND_ROBIN, 1, 5000);
         assertTrue(r.finished());
         assertEquals("4", TestSupport.finalVar(r, "Cuenta", "x"));
@@ -76,7 +76,7 @@ class VirtualMachineTest {
             """;
 
     @Test
-    void bufferUnDato_signalAndContinue() {
+    void singleSlotBufferSignalAndContinue() {
         for (int seed = 0; seed < 25; seed++) {
             RunResult r = TestSupport.run(BUFFER, SchedulingPolicy.RANDOM, seed, 20000);
             assertTrue(r.finished(), "seed " + seed + " no termino");
@@ -105,7 +105,7 @@ class VirtualMachineTest {
             """;
 
     @Test
-    void broadcastSignalDespiertaATodos() {
+    void signalAllWakesEveryone() {
         for (int seed = 0; seed < 25; seed++) {
             RunResult r = TestSupport.run(BROADCAST, SchedulingPolicy.RANDOM, seed, 20000);
             assertTrue(r.finished(), "seed " + seed + " no termino");
@@ -114,7 +114,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void detectaDeadlock() {
+    void detectsDeadlock() {
         RunResult r = TestSupport.run("""
                 monitor M { cond c; procedure bloquear() { wait(c); } }
                 process P { M.bloquear(); }
@@ -124,7 +124,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void parametroOutDevuelveValor() {
+    void outParameterReturnsValue() {
         RunResult r = TestSupport.run("""
                 monitor TOTAL {
                     int cant = 0;
@@ -143,7 +143,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void colaFifoDentroDeMonitor() {
+    void fifoQueueInsideMonitor() {
         RunResult r = TestSupport.run("""
                 monitor BufferN {
                     Cola items(int);
@@ -165,7 +165,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void familiaDeProcesosSeExpande() {
+    void processFamilyExpands() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M { int x = 0; procedure inc() { x = x + 1; } }
                 process W[k: 1..6] { M.inc(); }
@@ -175,7 +175,7 @@ class VirtualMachineTest {
 
     /** En {@code int a, b = 5;} el valor inicial es solo de {@code b}; {@code a} queda en 0. */
     @Test
-    void declaracionConListaInicializaCadaNombreAparte() {
+    void listDeclarationInitializesEachNameSeparately() {
         RunResult r = TestSupport.run("""
                 monitor M {
                     int a, b = 5;
@@ -192,7 +192,7 @@ class VirtualMachineTest {
 
     /** VI-7: con double, mod es el resto real y no trunca los operandos. */
     @Test
-    void moduloConDouble() {
+    void moduloWithDouble() {
         RunResult r = TestSupport.run("""
                 process P { write(5.5 mod 2, " ", 7.5 mod 2.5, " ", 5 mod 0.5, " ", -7 mod 2); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 100);
@@ -201,7 +201,7 @@ class VirtualMachineTest {
 
     /** VI-8: dos int se comparan exactos, aun por encima de 2^53. */
     @Test
-    void comparacionDeEnterosGrandesEsExacta() {
+    void largeIntegerComparisonIsExact() {
         RunResult r = TestSupport.run("""
                 process P { int a = 9007199254740993; int b = 9007199254740992;
                             write(a == b, " ", a > b, " ", 1 == 1.0, " ", "b" > "a"); }
@@ -214,7 +214,7 @@ class VirtualMachineTest {
      * sus tipos, eso se rechaza al compilar: la clave es int y se quiere encolar un text.
      */
     @Test
-    void colaOrdenadaConClavesMezcladasEsErrorDeCompilacion() {
+    void sortedQueueWithMixedKeysIsCompileError() {
         var ex = assertThrows(ar.edu.unlp.info.simulador.lang.CompilationException.class,
                 () -> ar.edu.unlp.info.simulador.lang.Compiler.compile("""
                 monitor M { ColaOrdenada c(int); procedure f() { push(c, 9); push(c, "10"); } }
@@ -225,7 +225,7 @@ class VirtualMachineTest {
 
     /** Cada componente se guarda con el tipo declarado: un int en un double, un numero en un text. */
     @Test
-    void pushConvierteCadaComponenteAlTipoDeclarado() {
+    void pushConvertsEachComponentToDeclaredType() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M {
                   Cola c(double, text); double d = 0; text t = "";
@@ -240,7 +240,7 @@ class VirtualMachineTest {
 
     /** D-3: la cota del for de rango se evalua una sola vez, al entrar. */
     @Test
-    void cotaDelForDeRangoSeEvaluaUnaVez() {
+    void rangeForBoundIsEvaluatedOnce() {
         RunResult r = TestSupport.run("""
                 monitor M { int n = 3; int vueltas = 0; procedure f() { for (int i = 1..n) { n = 6; vueltas++; } } }
                 process P { M.f(); }
@@ -250,7 +250,7 @@ class VirtualMachineTest {
 
     /** VI-10: la salida conserva las ultimas lineas y avisa cuantas descarto. */
     @Test
-    void salidaConservaLasUltimasLineas() {
+    void outputKeepsTheLastLines() {
         RunResult r = TestSupport.run("process P { for (int i = 1..600) { write(\"linea \", i); } }",
                 SchedulingPolicy.ROUND_ROBIN, 0, 5000);
         java.util.List<Snapshot.OutputLine> out = r.vm().snapshot().output();
@@ -266,8 +266,8 @@ class VirtualMachineTest {
      * advierte la catedra, y el mensaje dice quien retiene que.
      */
     @Test
-    void llamadaCerradaRetieneElMonitorDelLlamador() {
-        String programa = """
+    void closedCallKeepsCallerMonitor() {
+        String program = """
                 monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure abrir() { listo = true; signal(c); } }
@@ -277,23 +277,23 @@ class VirtualMachineTest {
                 process P { A.f(); }
                 process Q { skip; skip; A.g(); }
                 """;
-        int interbloqueos = 0;
+        int deadlocks = 0;
         for (int seed = 0; seed < 25; seed++) {
-            RunResult r = TestSupport.run(programa, SchedulingPolicy.RANDOM, seed, 5000);
+            RunResult r = TestSupport.run(program, SchedulingPolicy.RANDOM, seed, 5000);
             // si Q llega a A antes que P, abre B primero y el programa termina
             if (!r.deadlock()) continue;
-            interbloqueos++;
-            String mensaje = r.logs().get(r.logs().size() - 1).message();
-            assertTrue(mensaje.contains("P espera en B.c y retiene A"), mensaje);
+            deadlocks++;
+            String lastMessage = r.logs().get(r.logs().size() - 1).message();
+            assertTrue(lastMessage.contains("P espera en B.c y retiene A"), lastMessage);
             assertEquals(java.util.List.of("A"), r.vm().snapshot().processes().get(0).holding());
         }
-        assertTrue(interbloqueos >= 20, "interbloqueos: " + interbloqueos);
-        assertTrue(TestSupport.run(programa, SchedulingPolicy.ROUND_ROBIN, 0, 5000).deadlock());
+        assertTrue(deadlocks >= 20, "interbloqueos: " + deadlocks);
+        assertTrue(TestSupport.run(program, SchedulingPolicy.ROUND_ROBIN, 0, 5000).deadlock());
     }
 
     /** ADR 0007: mientras dura la llamada a B, A sigue tomado y nadie mas entra. */
     @Test
-    void llamadaCerradaNoSueltaElMonitorDelLlamador() {
+    void closedCallDoesNotReleaseCallerMonitor() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor B { int n = 0; procedure f() { n++; n++; } }
                 monitor A { procedure f() { B.f(); } procedure g() { skip; } }
@@ -312,7 +312,7 @@ class VirtualMachineTest {
 
     /** ADR 0007: un out hacia una permanente del llamador se escribe al retornar, sin soltar A. */
     @Test
-    void outDeUnaLlamadaCerradaLlegaAlLlamador() {
+    void outOfClosedCallReachesCaller() {
         RunResult r = TestSupport.run("""
                 monitor B { int n = 0; procedure dar(r: out int) { n++; r = 100 + n; } }
                 monitor A { int guardado = 0; int copia = 0;
@@ -327,7 +327,7 @@ class VirtualMachineTest {
 
     /** Un ciclo entre monitores (A llama a B, que llama a A) es error del proceso, no un cuelgue. */
     @Test
-    void cicloEntreMonitoresEsErrorDeEjecucion() {
+    void cycleBetweenMonitorsIsRuntimeError() {
         RunResult r = TestSupport.run("""
                 monitor A { procedure f() { B.g(); } procedure h() { skip; } }
                 monitor B { procedure g() { A.h(); } }
@@ -340,7 +340,7 @@ class VirtualMachineTest {
 
     /** VS-11: el snapshot marca que procesos avanzaron en el ultimo instante. */
     @Test
-    void snapshotMarcaLosProcesosQueAvanzaron() {
+    void snapshotMarksAdvancedProcesses() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M { cond c; procedure f() { wait(c); } }
                 process A { M.f(); }
@@ -357,21 +357,21 @@ class VirtualMachineTest {
      * huecos (0, 1, ...) a los que avanzaron y deja -1 a los demas.
      */
     @Test
-    void snapshotNumeraElTurnoDeLosQueAvanzaron() {
+    void snapshotNumbersTheTurnOfAdvancedProcesses() {
         for (long seed = 0; seed < 20; seed++) {
             VirtualMachine vm = TestSupport.compileAndBuild(
                     "process P[i: 0..4] { skip; skip; skip; }", seed);
             vm.step(null, SchedulingPolicy.RANDOM);
-            java.util.List<Integer> turnos = new java.util.ArrayList<>();
+            java.util.List<Integer> turns = new java.util.ArrayList<>();
             for (Snapshot.ProcessView p : vm.snapshot().processes()) {
                 assertEquals(p.advanced(), p.advanceOrder() >= 0);
-                if (p.advanced()) turnos.add(p.advanceOrder());
+                if (p.advanced()) turns.add(p.advanceOrder());
             }
-            java.util.Collections.sort(turnos);
-            for (int k = 0; k < turnos.size(); k++) {
-                assertEquals(k, turnos.get(k));
+            java.util.Collections.sort(turns);
+            for (int k = 0; k < turns.size(); k++) {
+                assertEquals(k, turns.get(k));
             }
-            assertTrue(!turnos.isEmpty());
+            assertTrue(!turns.isEmpty());
         }
     }
 
@@ -380,11 +380,11 @@ class VirtualMachineTest {
      * Se controla el tono (HSL) de los colores de doce procesos, uno por color de la paleta.
      */
     @Test
-    void coloresDeProcesoNoUsanLosDeLosEstados() {
+    void processColorsAvoidStateColors() {
         VirtualMachine vm = TestSupport.compileAndBuild("process P[i: 0..11] { skip; }", 0);
         for (Snapshot.ProcessView p : vm.snapshot().processes()) {
-            double tono = tono(p.color());
-            assertTrue(tono >= 180 && tono <= 335, p.name() + " tiene el color " + p.color());
+            double hue = hue(p.color());
+            assertTrue(hue >= 180 && hue <= 335, p.name() + " tiene el color " + p.color());
         }
     }
 
@@ -394,12 +394,12 @@ class VirtualMachineTest {
      * para texto comun. Un color claro de proceso no se leeria.
      */
     @Test
-    void coloresDeProcesoSeLeenSobreFondoBlanco() {
+    void processColorsAreReadableOnWhite() {
         VirtualMachine vm = TestSupport.compileAndBuild("process P[i: 0..11] { skip; }", 0);
         for (Snapshot.ProcessView p : vm.snapshot().processes()) {
-            double contraste = 1.05 / (luminancia(p.color()) + 0.05);
-            assertTrue(contraste >= 4.5,
-                    p.name() + " tiene el color " + p.color() + " con contraste " + contraste);
+            double contrast = 1.05 / (luminance(p.color()) + 0.05);
+            assertTrue(contrast >= 4.5,
+                    p.name() + " tiene el color " + p.color() + " con contraste " + contrast);
         }
     }
 
@@ -408,7 +408,7 @@ class VirtualMachineTest {
      * uno ademas del texto. Un escalar no trae elementos.
      */
     @Test
-    void snapshotTraeLosElementosDeColasYArreglos() {
+    void snapshotIncludesQueueAndArrayElements() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M {
                   Cola c(int); ColaOrdenada o(int, int); int a[3]; int n = 7;
@@ -432,7 +432,7 @@ class VirtualMachineTest {
     }
 
     /** Luminancia relativa (WCAG) de un color #rrggbb, entre 0 (negro) y 1 (blanco). */
-    private static double luminancia(String hex) {
+    private static double luminance(String hex) {
         double[] rgb = new double[3];
         for (int i = 0; i < 3; i++) {
             double c = Integer.parseInt(hex.substring(1 + 2 * i, 3 + 2 * i), 16) / 255.0;
@@ -442,7 +442,7 @@ class VirtualMachineTest {
     }
 
     /** Tono en grados (0 rojo, 60 amarillo, 120 verde, 240 azul) de un color #rrggbb. */
-    private static double tono(String hex) {
+    private static double hue(String hex) {
         double r = Integer.parseInt(hex.substring(1, 3), 16) / 255.0;
         double g = Integer.parseInt(hex.substring(3, 5), 16) / 255.0;
         double b = Integer.parseInt(hex.substring(5, 7), 16) / 255.0;
@@ -456,7 +456,7 @@ class VirtualMachineTest {
     }
 
     // A entra primero; B y C quedan en la cola de entrada, en ese orden (ronda: A, B, C).
-    private static final String COLA_DE_ENTRADA = """
+    private static final String ENTRY_QUEUE = """
             monitor M { int x = 0; procedure f() { x = x + 1; } }
             process A { M.f(); }
             process B { M.f(); }
@@ -465,25 +465,25 @@ class VirtualMachineTest {
 
     /** ADR 0005: uno de los que esperan en la cola de entrada entra en el mismo instante. */
     @Test
-    void alSalirDelMonitorEntraUnoDeLaColaEnElMismoInstante() {
-        VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, 0);
+    void onExitOneEntrantEntersInTheSameInstant() {
+        VirtualMachine vm = TestSupport.compileAndBuild(ENTRY_QUEUE, 0);
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A entra, B y C a la cola
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // A: x = x + 1
         java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN);
 
         Snapshot s = vm.snapshot();
-        int dueno = s.monitors().get(0).lockOwner().id();
-        assertTrue(dueno == 2 || dueno == 3, "entro " + dueno);
+        int owner = s.monitors().get(0).lockOwner().id();
+        assertTrue(owner == 2 || owner == 3, "entro " + owner);
         java.util.List<String> kinds = ev.stream().map(e -> e.kind() + ":" + e.processId()).toList();
-        int retorno = kinds.indexOf("RETURN:1");
-        int entrada = kinds.indexOf("ENTER:" + dueno);
-        assertTrue(retorno >= 0 && entrada > retorno, "eventos del instante: " + kinds);
+        int returned = kinds.indexOf("RETURN:1");
+        int entry = kinds.indexOf("ENTER:" + owner);
+        assertTrue(returned >= 0 && entry > returned, "eventos del instante: " + kinds);
 
-        Snapshot.ProcessView entro = s.processes().get(dueno - 1);
-        assertEquals("READY", entro.state());
-        assertTrue(entro.advanced(), "la entrada por traspaso es su accion en este instante");
-        int otro = dueno == 2 ? 3 : 2;
-        assertEquals(java.util.List.of(otro),
+        Snapshot.ProcessView enteredProcess = s.processes().get(owner - 1);
+        assertEquals("READY", enteredProcess.state());
+        assertTrue(enteredProcess.advanced(), "la entrada por traspaso es su accion en este instante");
+        int other = owner == 2 ? 3 : 2;
+        assertEquals(java.util.List.of(other),
                 s.monitors().get(0).entryQueue().stream().map(Snapshot.ProcRef::id).toList());
     }
 
@@ -495,20 +495,20 @@ class VirtualMachineTest {
      * primer valor para semillas chicas consecutivas.
      */
     @Test
-    void laEntradaAlMonitorNoRespetaElOrdenDeLlegada() {
-        java.util.Set<Integer> entraron = new java.util.HashSet<>();
+    void monitorEntryIgnoresArrivalOrder() {
+        java.util.Set<Integer> enteredIds = new java.util.HashSet<>();
         for (int k = 0; k < 25; k++) {
             long seed = 1_763_000_000_000L + k * 7_919L;
-            VirtualMachine vm = TestSupport.compileAndBuild(COLA_DE_ENTRADA, seed);
+            VirtualMachine vm = TestSupport.compileAndBuild(ENTRY_QUEUE, seed);
             for (int i = 0; i < 3; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
-            entraron.add(vm.snapshot().monitors().get(0).lockOwner().id());
+            enteredIds.add(vm.snapshot().monitors().get(0).lockOwner().id());
         }
-        assertEquals(java.util.Set.of(2, 3), entraron);
+        assertEquals(java.util.Set.of(2, 3), enteredIds);
     }
 
     /** VI-1: un proceso que falla queda con su error y la linea donde ocurrio. */
     @Test
-    void errorDeEjecucionQuedaConSuLinea() {
+    void runtimeErrorKeepsItsLine() {
         RunResult r = TestSupport.run("""
                 monitor M { int x = 0;
                   procedure f() {
@@ -523,7 +523,7 @@ class VirtualMachineTest {
 
     /** VS-6: los nombres internos (for (1..n), cota del rango) no aparecen en el snapshot. */
     @Test
-    void variablesInternasNoSeMuestran() {
+    void internalVariablesAreNotShown() {
         VirtualMachine vm = TestSupport.compileAndBuild("process P { for (1..3) { skip; } }", 0);
         vm.step(null, SchedulingPolicy.ROUND_ROBIN);
         assertTrue(vm.snapshot().processes().get(0).locals().isEmpty());
@@ -531,7 +531,7 @@ class VirtualMachineTest {
 
     /** Como en la catedra, push y pop aceptan la tupla entre parentesis o sin ellos. */
     @Test
-    void tuplasConYSinParentesis() {
+    void tuplesWithAndWithoutParentheses() {
         RunResult r = TestSupport.run("""
                 monitor M { Cola c(int, text); int id = 0; text s = ""; int suma = 0;
                   procedure f() {
@@ -553,7 +553,7 @@ class VirtualMachineTest {
      * Ejercicio 4 de la explicacion practica (banco con tres escritorios), con la notacion de
      * la catedra: arreglo de monitores, parametros con ';', bool y Monitor con mayuscula.
      */
-    static final String BANCO = """
+    static final String BANK = """
             Monitor Banco {
               Cola elibres(int); cond esperaC; int esperando = 0, cantLibres = 0;
               Procedure llegada(idE: out int) {
@@ -595,9 +595,9 @@ class VirtualMachineTest {
             """;
 
     @Test
-    void arregloDeMonitoresConElEjercicioDelBanco() {
+    void monitorArrayWithTheBankExercise() {
         for (int seed = 0; seed < 25; seed++) {
-            RunResult r = TestSupport.run(BANCO, SchedulingPolicy.RANDOM, seed, 20000);
+            RunResult r = TestSupport.run(BANK, SchedulingPolicy.RANDOM, seed, 20000);
             assertTrue(r.finished(), "seed " + seed);
             int total = 0;
             for (int i = 0; i < 3; i++) {
@@ -611,7 +611,7 @@ class VirtualMachineTest {
 
     /** Un indice fuera del arreglo de monitores es error de ejecucion del proceso que llama. */
     @Test
-    void indiceFueraDelArregloDeMonitores() {
+    void indexOutsideMonitorArray() {
         RunResult r = TestSupport.run("""
                 monitor M[i: 1..2] { int x = 0; procedure f() { x = i; } }
                 process P { M[3].f(); }
@@ -622,7 +622,7 @@ class VirtualMachineTest {
 
     /** delay demora en tiempo real: el reloj lo informa quien llama a step. */
     @Test
-    void delayDemoraEnTiempoReal() {
+    void delayWaitsInRealTime() {
         VirtualMachine vm = TestSupport.compileAndBuild("process P { delay(2); write(\"listo\"); }", 0);
         vm.step(null, SchedulingPolicy.ROUND_ROBIN, 10_000);   // ejecuta el delay
         Snapshot s = vm.snapshot();
@@ -641,7 +641,7 @@ class VirtualMachineTest {
 
     /** Un delay dentro del monitor no lo suelta: el otro proceso espera en la cola de entrada. */
     @Test
-    void delayDentroDelMonitorLoRetiene() {
+    void delayInsideMonitorKeepsIt() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
                 monitor M { int n = 0; procedure f() { delay(1); n++; } }
                 process P { M.f(); }
@@ -663,7 +663,7 @@ class VirtualMachineTest {
     }
 
     @Test
-    void delayFueraDeRangoEsErrorDeEjecucion() {
+    void delayOutOfRangeIsRuntimeError() {
         RunResult r = TestSupport.run("process P { int s = -1; delay(s); }",
                 SchedulingPolicy.ROUND_ROBIN, 0, 10);
         assertEquals("El delay tiene que ser de 0 a 3600 segundos y es de -1",
