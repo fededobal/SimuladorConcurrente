@@ -204,6 +204,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Material de la cátedra en `docs/clases-materia/`: la teoría 4, la presentación de la clase 4 y las dos versiones de la explicación 3 (monitores), en PDF. Queda como referencia de la semántica y fuera del sitio de documentación. (Federico Dobal, 2026-11-16)
 - Salen del sitio las páginas "Qué avisa el compilador", "Qué no existe", "Ejemplo completo" y la especificación EBNF (esta última sigue en `docs/lenguaje/especificacion.md` como documento de desarrollo). (Federico Dobal, 2026-11-13)
 - Las páginas del sitio pasan a un formato esquemático: tablas para controles, atajos, estados, zonas y reglas, recuadros para lo importante y párrafos de dos o tres renglones como máximo. (Federico Dobal, 2026-11-13)
 - La portada del sitio habla solo del simulador, con la lista de lo que ofrece enlazada a cada página, las simplificaciones y los créditos, sin detalles de implementación. La sección Simulador se divide en una página por panel: la pantalla, barra de controles, editor, línea de tiempo, monitores, salida y ejecución (instantes, estados, fin, interbloqueo y errores). (Federico Dobal, 2026-11-13)
