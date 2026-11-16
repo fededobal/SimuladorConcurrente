@@ -233,3 +233,24 @@ mark.busqueda {
   .vp-doc .g-termino > p:first-child { position: absolute; top: 16px; right: 18px; margin: 0; }
   .vp-doc .g-termino h3 { padding-right: 140px; }
 }
+
+/*
+ * Capturas del simulador (docs/public/capturas). Se sacan en tema claro: el borde las
+ * separa del fondo en los dos temas y el epígrafe va debajo, en el color secundario.
+ */
+.vp-doc figure {
+  margin: 20px 0;
+}
+.vp-doc figure img {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+}
+.vp-doc figure p {
+  margin: 0;
+}
+.vp-doc figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+}

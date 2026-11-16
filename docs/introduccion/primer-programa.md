@@ -56,6 +56,14 @@ process Consumidor {
    nombre. El color y el rayado de la franja indican el [estado](/ejecucion/estados).
 5. Observar el panel **Monitores**, a la derecha: el dibujo de `Buffer` muestra qué proceso
    está adentro, cuál compite por entrar y cuál espera en `libre` u `ocupado`.
+
+   <figure>
+
+   ![Simulador con Productor/Consumidor en pausa en el instante 7: en el editor, la franja del Consumidor en la línea 16 y la del Productor en la línea 26; en el panel de monitores, el Consumidor dentro de Buffer, con dato en 1 y hayDato en true](/capturas/primer-programa.png)
+
+   <figcaption>Instante 7: el Consumidor está dentro de <code>Buffer</code> retirando el primer dato y el Productor ya salió del monitor y ejecuta el <code>write</code>.</figcaption>
+   </figure>
+
 6. Presionar **Ejecutar**. La simulación avanza sola hasta terminar o hasta que se presione
    **Pausar**.
 7. Al terminar, la barra indica **fin**. Abrir **Salida** para leer las líneas que
@@ -68,6 +76,13 @@ muestran los números del 1 al 5 en orden, sin repetir ni saltear ninguno: el mo
 que el productor deposite sobre un dato no retirado y que el consumidor retire de un buffer
 vacío. El intercalado de las líneas de uno y otro proceso cambia entre corridas, porque
 `write` se ejecuta fuera del monitor y los turnos se asignan al azar.
+
+<figure>
+
+![Panel de salida con diez líneas alternadas: deposite 1, retire 1, deposite 2, retire 2, y así hasta retire 5, cada una con su instante y el nombre del proceso en su color](/capturas/salida.png)
+
+<figcaption>Una salida posible. El número de la izquierda es el instante en que se ejecutó cada <code>write</code>.</figcaption>
+</figure>
 
 Presionar **Paso** o **Ejecutar** después del fin vuelve a compilar el programa y lo ejecuta
 desde el principio.

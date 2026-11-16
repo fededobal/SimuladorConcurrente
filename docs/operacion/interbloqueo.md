@@ -17,6 +17,13 @@ nadie puede dárselo.
    Interbloqueo: ningún proceso puede avanzar. P espera en B.c y retiene A
    ```
 
+   <figure>
+
+   ![Simulador en deadlock en el instante 3: en el editor, P espera en wait(c) del monitor B y Q compite por entrar a A; en el panel, A tiene a P adentro con un anillo y a Q compitiendo, y B está libre con P en wait(c); la tarjeta del instante 3 muestra el mensaje de interbloqueo](/capturas/deadlock.png)
+
+   <figcaption>P llamó a <code>B.esperar()</code> desde <code>A.usar()</code>, de modo que espera en <code>B.c</code> sin soltar <code>A</code>. Q, que haría el <code>signal</code>, no puede entrar a <code>A</code>. El anillo del punto de P en el dibujo de <code>A</code> indica que el dueño no está ejecutando.</figcaption>
+   </figure>
+
 3. En el panel de monitores, revisar cada monitor. Anotar qué procesos están en
    **Compitiendo** y cuáles en **En wait**, y en qué variable condición.
 4. Para cada proceso en **En wait**, identificar en el código qué `signal` o `signal_all`

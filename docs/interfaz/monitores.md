@@ -4,6 +4,13 @@ El panel muestra un bloque por monitor con su nombre, su estado (libre o el proc
 dentro), el dibujo, las colas y las variables permanentes. El significado de cada zona del
 dibujo se explica en [Variables condición](/ejecucion/variables-condicion).
 
+<figure>
+
+![Panel de monitores ampliado con el monitor Corralon: Cliente[4] en la zona En monitor, siete clientes en Compitiendo y tres en En wait; debajo, las colas por zona y las variables cAtenciones (cola con 1, 6, 9 y 4), comprobantes (arreglo) y listas](/capturas/monitores.png)
+
+<figcaption>Monitor <code>Corralon</code> en el instante 14, con el panel ampliado: las tres zonas del dibujo, las colas de cada zona y las variables permanentes.</figcaption>
+</figure>
+
 ## Dibujo
 
 Las tres zonas de la cátedra:

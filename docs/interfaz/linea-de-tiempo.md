@@ -3,6 +3,13 @@
 La línea de tiempo tiene una fila por proceso, una columna por instante y, arriba, un carril
 por monitor.
 
+<figure>
+
+![Línea de tiempo del ejemplo Corralón: carril del monitor con Cliente[1], Cliente[6], Cliente[9] y Cliente[4] en sucesión; filas de procesos con tramos de espera y de ejecución; tarjeta fija del instante 10 que dice "Cliente[9] push(cAtenciones, 9)"](/capturas/linea-de-tiempo.png)
+
+<figcaption>Ejemplo Corralón con turnos en ronda. El carril muestra que el monitor pasa de un cliente a otro sin superposiciones; la tarjeta fija describe el instante 10.</figcaption>
+</figure>
+
 | Parte | Qué muestra |
 |---|---|
 | Carril del monitor (fondo gris) | Quién tuvo el monitor en cada instante, con su nombre sobre su color; "libre" en los huecos. Nunca hay dos nombres a la vez: esa es la exclusión mutua |

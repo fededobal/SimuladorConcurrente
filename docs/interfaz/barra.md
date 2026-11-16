@@ -2,6 +2,13 @@
 
 La barra superior reúne los controles de la ejecución y el estado de la simulación.
 
+<figure>
+
+![Barra de controles: botones Ejecutar, Paso y Detener; selectores de velocidad, turnos y ejemplos; botones Salida y Documentación, cambio de tema, estado "en pausa" e instante 14](/capturas/barra.png)
+
+<figcaption>Barra de controles con la simulación en pausa en el instante 14.</figcaption>
+</figure>
+
 | Control | Qué hace |
 |---|---|
 | **Ejecutar** / **Pausar** | La simulación avanza sola, un instante por vez, hasta pausarla o hasta que termina o se traba |

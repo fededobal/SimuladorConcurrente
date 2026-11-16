@@ -4,6 +4,13 @@ Un error de compilación impide que el programa arranque. El mensaje aparece deb
 editor, con el número de línea, y esa línea se marca en rojo. Se corrige el programa y se
 vuelve a presionar **Paso** o **Ejecutar**.
 
+<figure>
+
+![Error de compilación: la línea 9 aparece marcada en rojo y debajo del editor se lee "línea 9: Se esperaba ';' (se encontró 'hayDato')"](/capturas/editor-error.png)
+
+<figcaption>Falta el <code>;</code> al final de la línea 8. El error se informa en la línea 9 porque es ahí donde el compilador encuentra algo que no esperaba; conviene revisar también la línea anterior.</figcaption>
+</figure>
+
 Las tablas reúnen los mensajes más frecuentes. Los nombres entre comillas simples (`'x'`,
 `M`) corresponden al programa que produjo el error.
 
