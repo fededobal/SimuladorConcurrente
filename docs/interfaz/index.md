@@ -1,4 +1,6 @@
-# La pantalla
+# Disposición de la pantalla
+
+La pantalla del simulador se divide en cinco zonas.
 
 | Zona | Dónde | Qué muestra |
 |---|---|---|
@@ -8,7 +10,7 @@
 | [Monitores](./monitores) | Derecha | El dibujo de cada monitor, sus colas y sus variables |
 | [Salida](./salida) | Se abre desde la barra | Lo que escriben los procesos con `write` |
 
-## Agrandar, achicar y ampliar
+## Tamaño de los paneles
 
 | Acción | Cómo |
 |---|---|

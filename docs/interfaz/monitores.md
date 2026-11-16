@@ -1,9 +1,10 @@
-# El panel Monitores
+# Panel de monitores
 
-Un bloque por monitor: nombre, estado (libre o quién está adentro), el dibujo, las colas
-y las variables.
+El panel muestra un bloque por monitor con su nombre, su estado (libre o el proceso que está
+dentro), el dibujo, las colas y las variables permanentes. El significado de cada zona del
+dibujo se explica en [Variables condición](/ejecucion/variables-condicion).
 
-## El dibujo
+## Dibujo
 
 Las tres zonas de la cátedra:
 
@@ -15,7 +16,7 @@ Las tres zonas de la cátedra:
 
 | Elemento | Qué significa |
 |---|---|
-| Punto de color con abreviatura (C3, Em) | Un proceso; con más de cinco en una zona, se indica cuántos faltan |
+| Punto de color con abreviatura | Un proceso: la inicial y el índice en una familia (`Cliente[3]` es C3), dos letras en un proceso suelto (`Productor` es Pr). Con más de seis procesos en una zona se dibujan cinco y un rótulo +n con el resto |
 | Flecha resaltada (Call, entra, wait, signal, Return) | Algún proceso la recorrió en el último instante |
 | Punto con anillo en En monitor | El dueño no está ejecutando: está en `delay` o esperando en otro monitor |
 
@@ -25,7 +26,7 @@ Las tres zonas de la cátedra:
 | Tab y Enter | Lo mismo, con el teclado |
 | Clic en el fondo del dibujo | Amplía el panel |
 
-## Las colas
+## Colas
 
 | Fila | Qué lista |
 |---|---|
@@ -36,7 +37,7 @@ Las tres zonas de la cátedra:
 Solo aparecen las filas con procesos. Plegadas muestran hasta cinco y un botón despliega el
 resto.
 
-## Las variables del monitor
+## Variables del monitor
 
 | Tipo | Cómo se dibuja |
 |---|---|

@@ -1,22 +1,29 @@
 # Estructura del programa
 
-Esta sección describe todo lo que acepta el núcleo del simulador: palabras reservadas,
-tipos, monitores, procesos, instrucciones y expresiones. Los ejemplos compilan y se
-comportan como se describe; los programas de ejemplo del menú se ejecutan en los tests del
-núcleo.
+Esta sección describe todo lo que acepta el simulador. Los ejemplos de cada página compilan
+y se comportan como se describe.
 
-Un programa tiene dos clases de declaraciones de nivel superior, en cualquier orden, y **al
-menos un proceso**:
+Un programa tiene dos clases de declaraciones, en cualquier orden, y al menos un proceso:
 
 ```c
-monitor Recurso { ... }       // 1. monitores
+monitor Recurso { ... }       // monitores: el estado compartido y sus operaciones
 
-process Cliente[i: 1..5] { }  // 2. procesos
+process Cliente[i: 1..5] { }  // procesos: el código que se ejecuta concurrentemente
 ```
 
-**No hay variables globales**, de ningún tipo: toda variable vive dentro de un monitor
-(permanente, compartida) o dentro de un proceso (local, privada). Es la regla central del
-modelo: el estado compartido solo se toca con la exclusión mutua del monitor.
+No hay variables globales. Toda variable vive dentro de un monitor (permanente y
+compartida) o dentro de un proceso o un procedure (local y privada). Es la regla central del
+modelo: el estado compartido solo se modifica dentro de un monitor, con exclusión mutua.
+
+| Construcción | Página |
+|---|---|
+| Monitores, variables condición, procedures y parámetros | [Monitores](./monitores) |
+| Procesos y familias de procesos | [Procesos](./procesos) |
+| `int`, `double`, `bool`, `text` y arreglos | [Tipos y arreglos](./tipos) |
+| `Cola` y `ColaOrdenada` | [Colas](./colas) |
+| Operadores y precedencia | [Expresiones](./expresiones) |
+| Qué nombres se ven desde cada lugar | [Alcance de los nombres](./alcance) |
+| Sentencias | [Instrucciones](./instrucciones/) |
 
 ## Comentarios
 
@@ -24,22 +31,19 @@ modelo: el estado compartido solo se toca con la exclusión mutua del monitor.
 // de línea
 /* de bloque,
    puede ocupar varias líneas */
-int /* también entre tokens */ x = 1;
+int /* también entre símbolos */ x = 1;
 ```
 
-Un `/*` sin cerrar es error de compilación. Un `//` adentro de una cadena
-(`text s = "http://x";`) no abre un comentario.
+Un `/*` sin cerrar es un error de compilación. Un `//` dentro de una cadena
+(`text s = "http://x";`) no inicia un comentario.
 
-## Cómo se ejecuta
+## Mayúsculas
 
-| Regla | Detalle |
-|---|---|
-| Una sentencia, un paso | Asignación, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
-| Las guardas no cuentan | La evaluación de `if`, `while` y `for` y los bloques van junto con la sentencia siguiente |
-| Varios a la vez | En un instante avanzan varios procesos, una sentencia cada uno; corren en paralelo, no de a uno |
-| Quién gana el monitor | El orden dentro del instante; el que pierde queda en la cola de entrada |
+Las palabras reservadas aceptan cualquier combinación de mayúsculas: `Monitor`, `OR` y
+`colaOrdenada` equivalen a `monitor`, `or` y `ColaOrdenada`. Los nombres que declara el
+programa, en cambio, distinguen mayúsculas: si se declara `process P`, `p` es otro nombre.
 
-::: tip
-La exclusión mutua del monitor serializa todo lo que toca estado compartido: un contador
-dentro de un monitor da siempre el mismo total, corran los procesos como corran.
-:::
+## Ejecución
+
+Cada sentencia ocupa un paso del proceso que la ejecuta, y en cada instante avanzan varios
+procesos a la vez. El detalle está en [Instantes y turnos](/ejecucion/instantes-y-turnos).

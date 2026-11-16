@@ -1,4 +1,6 @@
-# La barra de controles
+# Barra de controles
+
+La barra superior reúne los controles de la ejecución y el estado de la simulación.
 
 | Control | Qué hace |
 |---|---|
@@ -7,11 +9,11 @@
 | **Detener** | Vuelve al principio del programa y vacía la línea de tiempo y la salida |
 | **Velocidad** | Cuánto dura cada instante en pantalla (tabla siguiente) |
 | **Turnos** | La política de planificación (tabla siguiente); se puede cambiar durante la ejecución |
-| **Ejemplos** | Carga un [programa de ejemplo](/ejemplos); pide confirmación si el editor tiene un programa propio |
+| **Ejemplos** | Carga un [programa de ejemplo](/referencia/ejemplos); pide confirmación si el editor tiene un programa propio |
 | **Salida** | Abre la [pantalla de salida](./salida); el número es la cantidad de líneas |
 | **Documentación** | Abre este sitio |
 | Luna / sol | Pasa al tema oscuro o al claro. La primera vez se usa el del sistema operativo; después, el navegador recuerda el elegido. La documentación usa el mismo tema y tiene su propio botón |
-| Estado e instante | Listo, ejecutando, en pausa, fin, deadlock o error, y el número del instante actual |
+| Estado e instante | El estado de la simulación ([Finalización](/ejecucion/finalizacion)) y el número del instante actual |
 
 ## Velocidades
 
@@ -24,12 +26,15 @@
 
 ## Turnos
 
-| Política | Quién avanza en cada instante | Para qué sirve |
-|---|---|---|
-| **Al azar** | Cada proceso listo entra al turno con una probabilidad del 80 %; al menos uno avanza | Ver que el resultado depende del entrelazado: dos corridas pueden diferir |
-| **En ronda** | Todos los procesos listos, por turno | Seguir el programa con calma y de forma repetible |
+| Política | Quién avanza en cada instante |
+|---|---|
+| Al azar | Cada proceso que puede avanzar, con una probabilidad del 80 %; al menos uno avanza |
+| En ronda | Todos los procesos que pueden avanzar, por turno |
+
+El detalle de cada política está en [Instantes y turnos](/ejecucion/instantes-y-turnos).
 
 ::: tip
-En las dos políticas, el orden dentro del instante decide quién gana el monitor cuando
-varios lo piden a la vez. Mientras la simulación está detenida se puede editar el programa.
+El programa se puede editar en pausa o con la simulación detenida. Modificarlo descarta la
+ejecución en curso: la próxima vez que se presione **Paso** o **Ejecutar**, se compila de
+nuevo y empieza desde el principio.
 :::

@@ -234,7 +234,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
     (o espera en su cola de entrada) y, si hace `wait` en B, libera solo B. Al retornar
     libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
     llama a A) es error de ejecución.
-- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [`wait`, `signal` y `signal_all`](./instrucciones/wait-signal)).
+- **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [`wait`, `signal` y `signal_all`](./instrucciones/wait)).
 - **`delay(s)`:** el proceso queda demorado `s` segundos de tiempo real y conserva los
   monitores que tenga tomados. El núcleo no lee el reloj: la interfaz le informa la hora en
   cada paso. Un proceso en `delay` no cuenta para el interbloqueo.

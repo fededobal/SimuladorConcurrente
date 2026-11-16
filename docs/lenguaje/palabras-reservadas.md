@@ -21,7 +21,7 @@ Los nombres que declara el programa sí distinguen mayúsculas: si se declara `p
 | Operadores | `and` `or` `not` `mod` |
 | Literales | `true` `false` |
 
-No hay rastro de semáforos: `sem`, `await`, `p` y `v` no son palabras reservadas, son
+No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son
 identificadores comunes y se pueden usar como nombre de variable.
 
 `boolean` y el símbolo `%` no existen: el compilador indica que se escriben `bool` y `mod`.

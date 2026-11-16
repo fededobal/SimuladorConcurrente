@@ -1,7 +1,7 @@
-# El editor
+# Editor
 
-Código con resaltado de sintaxis para el [lenguaje](/lenguaje/) de la cátedra. Mientras la
-simulación corre, es de solo lectura.
+El editor muestra el programa con resaltado de sintaxis. Mientras la simulación se ejecuta,
+es de solo lectura; en pausa se puede modificar ([Barra de controles](./barra)).
 
 ## Atajos
 
@@ -14,10 +14,10 @@ simulación corre, es de solo lectura.
 | `(` `[` `{` `"` | Se cierran solos |
 | Botones flotantes arriba a la derecha | Agrandan o achican la letra (se recuerda entre visitas) |
 
-## La franja de cada proceso
+## Franja de cada proceso
 
 Sobre el renglón en el que está cada proceso aparece una franja con su nombre, con el
-aspecto de su [estado](./ejecucion#estados-de-un-proceso):
+aspecto de su [estado](/ejecucion/estados):
 
 | Aspecto | Estado |
 |---|---|

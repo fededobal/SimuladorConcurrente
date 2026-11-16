@@ -1,17 +1,17 @@
 # Alcance de los nombres
 
-| Dónde estás | Qué ves |
+| Lugar | Nombres visibles |
 |---|---|
 | Cuerpo de un `process` | Sus locales y el iterador de la familia |
 | Cuerpo de un `procedure` | Sus parámetros, sus locales, las permanentes y `cond` del monitor |
 | Inicialización del monitor | Las permanentes del monitor |
 
-Lo importante: **las variables locales de un proceso no se ven adentro de un monitor**. Si
-un procedure necesita un dato del proceso, entra por parámetro; si tiene que devolver algo,
-sale por un `out`.
+Las variables locales de un proceso no se ven dentro de un monitor. Si un procedure
+necesita un dato del proceso, lo recibe por parámetro; si tiene que devolver un resultado,
+lo entrega por un parámetro `out`.
 
-No se puede asignar a: un parámetro `in`, el iterador de una familia ni el iterador de un
-`for` dentro de su cuerpo.
+No se puede asignar un valor a un parámetro `in`, al iterador de una familia ni al iterador
+de un `for` dentro de su cuerpo.
 
 Ningún nombre puede tapar a otro que ya se ve: una local no puede llamarse como una
 permanente, un parámetro, un iterador, una `cond` u otra local visible. Dos bloques

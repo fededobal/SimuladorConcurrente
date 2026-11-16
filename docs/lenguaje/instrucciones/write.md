@@ -1,22 +1,31 @@
 # `write`
 
-Escribe una línea en la pantalla de salida, que se abre con el botón Salida de la barra:
+Escribe una línea en la pantalla de salida.
+
+## Sintaxis
 
 ```c
-write("deposite ", i);          // -> deposite 3
-write("total: ", a + b, " u");  // -> total: 7 u
+write(e);
+write(e1, e2, ...);
 ```
 
-| Regla | Detalle |
-|---|---|
-| Concatena sin separador | Si hace falta un espacio, va en el texto |
-| Una línea, un paso | Como cualquier sentencia |
-| Acepta cualquier tipo | Incluso un arreglo o una cola enteros: `write(a)` muestra `[0, 0, 0]` |
-| Dónde | En un proceso o dentro de un procedure |
-| Capacidad | Las últimas 500 líneas; si hay más, un aviso dice cuántas se descartaron |
+## Funcionamiento
 
-::: tip
-Cada línea lleva el color del proceso que la escribió. Como los procesos corren en paralelo,
-el orden de la salida cambia entre corridas: verlo es la forma más directa de entender el
-entrelazado.
-:::
+Los valores se concatenan sin separador y forman una línea; si hace falta un espacio, se
+incluye en el texto. Acepta valores de cualquier tipo, incluidos un arreglo o una cola
+completos (`write(a)` muestra `[0, 0, 0]`). Ocupa un paso.
+
+La línea se ve en el panel [Salida](/interfaz/salida), con el instante y el nombre del
+proceso en su color. Se conservan las últimas 500 líneas.
+
+## Errores
+
+`write` no tiene errores propios; los de sus expresiones son los de
+[Expresiones](/lenguaje/expresiones).
+
+## Ejemplo
+
+```c
+write("deposite ", i);          // deposite 3
+write("total: ", a + b, " u");  // total: 7 u
+```

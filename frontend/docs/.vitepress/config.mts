@@ -34,9 +34,9 @@ export default defineConfig({
   srcDir: '../../docs',
   base: '/docs/',
   outDir: '../dist/docs',
-  // documentos privados y material de la cátedra que no forman parte del sitio
   // Fuera del sitio: documentos privados, material de la catedra, la teoria de monitores y
-  // las decisiones de diseño (quedan en docs/ para el nucleo y la PPS; el sitio es solo de uso)
+  // las decisiones de diseño (quedan en docs/ para el nucleo y la PPS). El sitio es una guia
+  // de referencia y operacion: explica los conceptos desde lo que muestra el simulador.
   srcExclude: [
     'informe-revision.md', 'verificacion-*.md', 'clases-materia/**', 'pps/**',
     'monitores/**', 'decisiones/**', 'lenguaje/especificacion.md',
@@ -59,52 +59,92 @@ export default defineConfig({
       {
         text: 'Introducción',
         items: [
-          { text: 'Índice', link: '/indice' },
-          { text: '¿Qué es el simulador?', link: '/' },
-        ],
-      },
-      {
-        text: 'Simulador',
-        items: [
-          { text: 'La pantalla', link: '/simulador/' },
-          { text: 'Barra de controles', link: '/simulador/barra' },
-          { text: 'Editor', link: '/simulador/editor' },
-          { text: 'Línea de tiempo', link: '/simulador/linea-de-tiempo' },
-          { text: 'Monitores', link: '/simulador/monitores' },
-          { text: 'Salida', link: '/simulador/salida' },
-          { text: 'Ejecución', link: '/simulador/ejecucion' },
+          { text: 'Presentación', link: '/' },
+          { text: 'Primer programa', link: '/introduccion/primer-programa' },
+          { text: 'Notación de la cátedra', link: '/introduccion/notacion-de-la-catedra' },
         ],
       },
       {
         text: 'Lenguaje',
         items: [
           { text: 'Estructura del programa', link: '/lenguaje/' },
-          { text: 'Palabras reservadas', link: '/lenguaje/palabras-reservadas' },
           { text: 'Tipos y arreglos', link: '/lenguaje/tipos' },
           { text: 'Colas', link: '/lenguaje/colas' },
           { text: 'Monitores', link: '/lenguaje/monitores' },
           { text: 'Procesos', link: '/lenguaje/procesos' },
-          { text: 'Sentencias', link: '/lenguaje/sentencias' },
+          { text: 'Expresiones', link: '/lenguaje/expresiones' },
+          { text: 'Alcance de los nombres', link: '/lenguaje/alcance' },
+          { text: 'Palabras reservadas', link: '/lenguaje/palabras-reservadas' },
           {
             text: 'Instrucciones',
+            link: '/lenguaje/instrucciones/',
             collapsed: true,
             items: [
-              { text: 'if y while', link: '/lenguaje/instrucciones/if-while' },
+              { text: 'Asignación', link: '/lenguaje/instrucciones/asignacion' },
+              { text: 'Intercambio :=:', link: '/lenguaje/instrucciones/intercambio' },
+              { text: 'Llamada a monitor', link: '/lenguaje/instrucciones/llamada' },
+              { text: 'if', link: '/lenguaje/instrucciones/if' },
+              { text: 'while', link: '/lenguaje/instrucciones/while' },
               { text: 'for', link: '/lenguaje/instrucciones/for' },
-              { text: 'wait, signal y signal_all', link: '/lenguaje/instrucciones/wait-signal' },
-              { text: 'push, pop y empty', link: '/lenguaje/instrucciones/push-pop' },
+              { text: 'skip', link: '/lenguaje/instrucciones/skip' },
+              { text: 'wait', link: '/lenguaje/instrucciones/wait' },
+              { text: 'signal', link: '/lenguaje/instrucciones/signal' },
+              { text: 'signal_all', link: '/lenguaje/instrucciones/signal-all' },
+              { text: 'push', link: '/lenguaje/instrucciones/push' },
+              { text: 'pop', link: '/lenguaje/instrucciones/pop' },
+              { text: 'empty', link: '/lenguaje/instrucciones/empty' },
               { text: 'write', link: '/lenguaje/instrucciones/write' },
               { text: 'delay', link: '/lenguaje/instrucciones/delay' },
             ],
           },
-          { text: 'Expresiones', link: '/lenguaje/expresiones' },
-          { text: 'Alcance de los nombres', link: '/lenguaje/alcance' },
         ],
       },
       {
-        text: 'Ejemplos',
+        text: 'Ejecución',
         items: [
-          { text: 'Programas de ejemplo', link: '/ejemplos' },
+          { text: 'Instantes y turnos', link: '/ejecucion/instantes-y-turnos' },
+          { text: 'Estados de un proceso', link: '/ejecucion/estados' },
+          { text: 'Acceso al monitor', link: '/ejecucion/acceso-al-monitor' },
+          { text: 'Variables condición', link: '/ejecucion/variables-condicion' },
+          { text: 'Finalización', link: '/ejecucion/finalizacion' },
+        ],
+      },
+      {
+        text: 'Interfaz',
+        items: [
+          { text: 'Disposición de la pantalla', link: '/interfaz/' },
+          { text: 'Barra de controles', link: '/interfaz/barra' },
+          { text: 'Editor', link: '/interfaz/editor' },
+          { text: 'Panel de monitores', link: '/interfaz/monitores' },
+          { text: 'Línea de tiempo', link: '/interfaz/linea-de-tiempo' },
+          { text: 'Salida', link: '/interfaz/salida' },
+        ],
+      },
+      {
+        text: 'Operación',
+        items: [
+          { text: 'Ejecución paso a paso', link: '/operacion/paso-a-paso' },
+          { text: 'Comparación de ejecuciones', link: '/operacion/comparar-ejecuciones' },
+          { text: 'Diagnóstico de un interbloqueo', link: '/operacion/interbloqueo' },
+          { text: 'Inspección de un monitor', link: '/operacion/inspeccion-de-monitores' },
+        ],
+      },
+      {
+        text: 'Solución de problemas',
+        items: [
+          { text: 'Errores de compilación', link: '/problemas/errores-de-compilacion' },
+          { text: 'Errores en tiempo de ejecución', link: '/problemas/errores-en-tiempo-de-ejecucion' },
+          { text: 'El programa se detiene', link: '/problemas/el-programa-se-detiene' },
+          { text: 'Resultados que varían', link: '/problemas/resultados-que-varian' },
+        ],
+      },
+      {
+        text: 'Referencia',
+        items: [
+          { text: 'Límites', link: '/referencia/limites' },
+          { text: 'Atajos de teclado', link: '/referencia/atajos' },
+          { text: 'Glosario', link: '/referencia/glosario' },
+          { text: 'Programas de ejemplo', link: '/referencia/ejemplos' },
         ],
       },
     ],

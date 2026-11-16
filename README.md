@@ -9,9 +9,12 @@ Todo corre en el navegador.
 - El núcleo en Java se compila a JavaScript con TeaVM.
 - La interfaz está hecha en React. No hay servidor.
 
-La documentación para alumnos y docentes (teoría de monitores, referencia del lenguaje,
-decisiones de diseño) se publica junto con el simulador en `/docs/`. Las fuentes son los
-Markdown de `docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`).
+La documentación para alumnos y docentes es una guía de referencia y operación que se
+publica junto con el simulador en `/docs/`: lenguaje, modelo de ejecución, interfaz,
+procedimientos paso a paso y solución de problemas. Las fuentes son los Markdown de
+`docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`). La teoría de
+monitores (`docs/monitores/`), la especificación y las decisiones de diseño quedan en el
+repositorio y no se publican.
 
 ## Qué permite hacer
 
@@ -62,7 +65,9 @@ process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x)
 
 ## Documentación
 
+- [Presentación](docs/index.md): portada del sitio y organización de la guía.
 - [Lenguaje](docs/lenguaje/index.md): qué se puede escribir, con una página por instrucción y ejemplos.
+- [Solución de problemas](docs/problemas/errores-de-compilacion.md): mensajes de error y qué hacer con cada uno.
 - [Especificación](docs/lenguaje/especificacion.md): gramática (EBNF) y semántica.
 - [Monitores](docs/monitores/index.md): la teoría de la cátedra y cómo la implementa el simulador.
 - [Decisiones de diseño](docs/decisiones/): ADR del proyecto.

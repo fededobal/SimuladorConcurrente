@@ -1,12 +1,15 @@
 # Programas de ejemplo
 
-Son los programas que ofrece el menú Ejemplos del simulador. Los nueve se ejecutan en los tests del núcleo con 25 semillas distintas y en ronda, y tienen que terminar como indica su segunda línea (`// espera: ...`): el resultado esperado de cada corrida forma parte de la verificación del simulador.
+Son los programas del menú **Ejemplos** de la barra. Cada uno muestra un concepto o una
+técnica de las clases. Todos forman parte de las pruebas del simulador: se ejecutan con turnos al
+azar y 25 semillas distintas, y una vez con turnos en ronda, y en todos los casos terminan
+con el resultado indicado.
 
 ## Productor y consumidor
 
 Un buffer de un dato con dos variables condición. El productor espera en `libre` mientras hay un dato sin retirar y el consumidor en `ocupado` mientras no lo hay. Termina con `dato` en 5 y `hayDato` en falso.
 
-Resultado esperado: `fin Buffer.dato=5 Buffer.hayDato=false`.
+Resultado esperado: al terminar, `Buffer.dato` vale 5 y `Buffer.hayDato` vale `false`.
 
 ```c
 monitor Buffer {
@@ -53,7 +56,7 @@ process Consumidor {
 
 Cuatro procesos suman uno al mismo contador. `dentro` cuenta cuántos procesos están ejecutando el procedure a la vez y `maxDentro` guarda el máximo: siempre termina en 1, corran los procesos como corran.
 
-Resultado esperado: `fin Cuenta.x=4 Cuenta.maxDentro=1`.
+Resultado esperado: al terminar, `Cuenta.x` vale 4 y `Cuenta.maxDentro` vale 1.
 
 ```c
 monitor Cuenta {
@@ -78,7 +81,7 @@ process P[i: 0..3] {
 
 Cinco trabajadores esperan en `puerta` hasta que el portero la abre con un solo `signal_all`. Los cinco se despiertan y pasan a competir por el monitor.
 
-Resultado esperado: `fin Barrera.pasaron=5`.
+Resultado esperado: al terminar, `Barrera.pasaron` vale 5.
 
 ```c
 monitor Barrera {
@@ -110,7 +113,7 @@ process Portero {
 
 El procedure `verificar` devuelve el valor del contador por un parámetro `out`. Según el entrelazado, el proceso `Chequeo` lee valores distintos en cada corrida.
 
-Resultado esperado: `fin TOTAL.cant=3`.
+Resultado esperado: al terminar, `TOTAL.cant` vale 3.
 
 ```c
 monitor TOTAL {
@@ -144,7 +147,7 @@ process Chequeo {
 
 Una `Cola(int)` como buffer sin límite. El consumidor espera en `noVacio` mientras la cola está vacía; `empty` es la guarda del `while`.
 
-Resultado esperado: `fin BufferN.suma=100`.
+Resultado esperado: al terminar, `BufferN.suma` vale 100.
 
 ```c
 monitor BufferN {
@@ -182,7 +185,7 @@ process Consumidor {
 
 Se encolan 3, 1 y 2; el primer `pop` devuelve 1 porque la `ColaOrdenada` inserta ordenado por el valor.
 
-Resultado esperado: `fin Turnos.primero=1`.
+Resultado esperado: al terminar, `Turnos.primero` vale 1.
 
 ```c
 monitor Turnos {
@@ -210,7 +213,7 @@ process Recepcion {
 
 Un proceso hace `wait` en una condición que nadie va a señalar. El simulador informa el interbloqueo.
 
-Resultado esperado: `deadlock`.
+Resultado esperado: el programa termina en interbloqueo.
 
 ```c
 monitor M {
@@ -230,7 +233,7 @@ process P {
 
 Diez clientes y un empleado. El cliente encola su pedido y se duerme en su propia variable condición, `esperaCli[id]`; el empleado lo atiende, espera la lista y entrega el comprobante. Usa una cola de enteros, arreglos de `cond` y parámetros `in` y `out`.
 
-Resultado esperado: `fin Corralon.cAtenciones=<>`.
+Resultado esperado: al terminar, `Corralon.cAtenciones` queda vacía.
 
 ```c
 monitor Corralon {
@@ -288,7 +291,7 @@ process Cliente[id: 0..9] {
 
 Los pacientes se encolan como tuplas (gravedad, id) en una `ColaOrdenada` y el médico atiende siempre al más grave; a igual gravedad, al que llegó antes. Como el `signal` puede llegar antes que el `wait`, cada paciente espera sobre un `bool` propio.
 
-Resultado esperado: `fin Guardia.atendidos=6`.
+Resultado esperado: al terminar, `Guardia.atendidos` vale 6.
 
 ```c
 monitor Guardia {

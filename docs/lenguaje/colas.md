@@ -24,7 +24,7 @@ bool v = empty c;         // también empty(c)
 | `Cola c(int)` | Elementos de una componente |
 | `Cola p(int, text)` | Tuplas de dos componentes |
 | `ColaOrdenada g(int, text, text)` | Tuplas de tres; la primera es la clave de orden |
-| `ColaOrdenada g(int, (text, text))` | **La misma cola** que la anterior: el grupo solo separa la clave del resto |
+| `ColaOrdenada g(int, (text, text))` | La misma cola que la anterior: el grupo solo separa la clave del resto |
 
 - Las componentes son tipos escalares: `int`, `double`, `bool`, `text`. Una cola no guarda
   colas ni arreglos.
@@ -73,8 +73,8 @@ Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es boo
 
 ## ColaOrdenada (cola de prioridad)
 
-Mismas operaciones que `Cola`, pero el `push` **inserta ordenado por la primera
-componente** en vez de al final:
+Mismas operaciones que `Cola`, pero el `push` inserta ordenado por la primera
+componente en vez de al final:
 
 ```c
 ColaOrdenada c(int, text);
@@ -94,5 +94,5 @@ pop(c, p, d);          // p=1, d="primero"
   compilación.
 - `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
-El programa de ejemplo [Guardia](/ejemplos#guardia-colaordenada-con-tuplas) usa
+El programa de ejemplo [Guardia](/referencia/ejemplos#guardia-colaordenada-con-tuplas) usa
 una `ColaOrdenada` de tuplas (gravedad, id).

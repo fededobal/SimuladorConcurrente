@@ -50,7 +50,7 @@ cond turno[3];         // arreglo de condiciones (condiciones privadas)
 
 Si la `cond` es un arreglo hay que indexarla siempre: `wait(turno[i])`, `signal(turno[i])`.
 Las operaciones `wait`, `signal` y `signal_all` se describen en
-[su página](./instrucciones/wait-signal).
+sus páginas: [`wait`](./instrucciones/wait), [`signal`](./instrucciones/signal) y [`signal_all`](./instrucciones/signal-all).
 
 ## Procedures
 
