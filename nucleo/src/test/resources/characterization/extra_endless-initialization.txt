@@ -1,0 +1,14 @@
+## RANDOM seed=0
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## RANDOM seed=1
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## RANDOM seed=2
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## ROUND_ROBIN seed=0
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## ROUND_ROBIN seed=1
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## ROUND_ROBIN seed=2
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}
+## step by step, RANDOM seed=0
+create {"error":"Error al inicializar: La inicialización del monitor M no terminó después de 100000 pasos: revisá si tiene un ciclo infinito","line":1}

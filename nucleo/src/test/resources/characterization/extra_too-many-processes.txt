@@ -1,0 +1,14 @@
+## RANDOM seed=0
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## RANDOM seed=1
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## RANDOM seed=2
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## ROUND_ROBIN seed=0
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## ROUND_ROBIN seed=1
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## ROUND_ROBIN seed=2
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}
+## step by step, RANDOM seed=0
+create {"error":"Error al inicializar: Demasiados procesos: el simulador admite hasta 5000 en total","line":1}

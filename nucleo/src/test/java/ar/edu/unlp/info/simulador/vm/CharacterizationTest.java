@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * hoy, no lo que deberia responder. Corre cada programa de {@link ProgramCorpus} y de
  * {@link #extras()} por el puente {@link SimulatorJs}, con las dos politicas, varias
  * semillas y el modo paso a paso, y compara cada respuesta con la guardada en
- * {@code src/test/resources/caracterizacion/}.
+ * {@code src/test/resources/characterization/}.
  *
  * <p>Sirve de red para refactorizar el nucleo: un cambio de estructura no puede mover ni un
  * evento, ni un mensaje, ni el orden en que se consume el azar. Por cada paso se guarda una
@@ -32,14 +32,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * de cada evento, para ubicar a simple vista dónde empieza una diferencia.
  *
  * <p>Si un cambio de comportamiento es intencional, se regeneran los archivos con
- * {@code mvn test -Dcaracterizacion.regenerar=true} y el diff se revisa en el commit. Cuando
- * no coincide, la salida actual queda en {@code target/caracterizacion/} para compararla.
+ * {@code mvn test -Dcharacterization.regenerate=true} y el diff se revisa en el commit. Cuando
+ * no coincide, la salida actual queda en {@code target/characterization/} para compararla.
  */
 class CharacterizationTest {
 
-    private static final Path EXPECTED_DIR = Path.of("src", "test", "resources", "caracterizacion");
-    private static final Path ACTUAL_DIR = Path.of("target", "caracterizacion");
-    private static final boolean REGENERATE = Boolean.getBoolean("caracterizacion.regenerar");
+    private static final Path EXPECTED_DIR = Path.of("src", "test", "resources", "characterization");
+    private static final Path ACTUAL_DIR = Path.of("target", "characterization");
+    private static final boolean REGENERATE = Boolean.getBoolean("characterization.regenerate");
 
     private static final long[] SEEDS = {0, 1, 2};
     private static final String[] POLICIES = {"RANDOM", "ROUND_ROBIN"};
@@ -79,11 +79,11 @@ class CharacterizationTest {
         StringBuilder sb = new StringBuilder();
         for (String policy : POLICIES) {
             for (long seed : SEEDS) {
-                sb.append("## ").append(policy).append(" semilla=").append(seed).append('\n');
+                sb.append("## ").append(policy).append(" seed=").append(seed).append('\n');
                 runOnce(sb, code, policy, seed, false, seed == 0);
             }
         }
-        sb.append("## paso a paso, RANDOM semilla=0\n");
+        sb.append("## step by step, RANDOM seed=0\n");
         runOnce(sb, code, "RANDOM", 0, true, true);
         return sb.toString();
     }
@@ -97,19 +97,19 @@ class CharacterizationTest {
     private static void runOnce(StringBuilder sb, String code, String policy, long seed,
             boolean stepByStep, boolean readable) {
         String createdJson = SimulatorJs.create(code, seed);
-        sb.append("crear ").append(summary(createdJson)).append('\n');
+        sb.append("create ").append(summary(createdJson)).append('\n');
         if (createdJson.startsWith("{\"error\"")) return;
         for (int i = 1; i <= MAX_STEPS; i++) {
             int chosen = stepByStep ? (i % 4) + 1 : -1;
             String step = SimulatorJs.step(policy, chosen, i * MS_PER_STEP);
-            sb.append("paso ").append(i).append(' ')
+            sb.append("step ").append(i).append(' ')
                     .append(readable ? summary(step) : "#" + fingerprint(step)).append('\n');
             if (step.startsWith("{\"error\"") || step.contains("\"finished\":true")
                     || step.contains("\"deadlock\":true")) {
                 break;
             }
         }
-        sb.append("estado #").append(fingerprint(SimulatorJs.state())).append('\n');
+        sb.append("state #").append(fingerprint(SimulatorJs.state())).append('\n');
     }
 
     /** Tipo y mensaje de cada evento, en el orden en que {@code Json.logEntry} los escribe. */
@@ -168,35 +168,35 @@ class CharacterizationTest {
                 process P[i: 1..2] { delay(1); M.f(); delay(0); write("listo ", i); }
                 process Q { M.f(); }
                 """);
-        p.put("extra/error-indice-en-monitor", """
+        p.put("extra/index-error-in-monitor", """
                 monitor M { int a[3]; procedure f(i: in int) { a[i] = 1; } }
                 process P[i: 1..4] { M.f(i); }
                 """);
-        p.put("extra/error-pop-vacia", """
+        p.put("extra/pop-on-empty-queue", """
                 monitor M { Cola c(int); procedure sacar() { int x; pop(c, x); } }
                 process P { M.sacar(); } process Q { M.sacar(); }
                 """);
-        p.put("extra/error-division-fuera-de-monitor", """
+        p.put("extra/division-error-outside-monitor", """
                 process P { int a = 4; int b = 0; while (a > 0) { a--; b = 10 / a; } }
                 """);
-        p.put("extra/error-indice-monitor-y-cond", """
+        p.put("extra/monitor-and-cond-index-errors", """
                 monitor B[k: 0..1] { int v = 0; procedure f() { v = k; } }
                 monitor C { cond c[2]; procedure g(i: in int) { signal(c[i]); } }
                 process P { B[1].f(); B[2].f(); } process Q { C.g(1); C.g(5); }
                 """);
-        p.put("extra/ciclo-entre-monitores", """
+        p.put("extra/cycle-between-monitors", """
                 monitor A { procedure f() { B.g(); } procedure h() { skip; } }
                 monitor B { procedure g() { A.h(); } }
                 process P { A.f(); } process Q { A.h(); }
                 """);
-        p.put("extra/error-al-inicializar", """
+        p.put("extra/init-error", """
                 monitor M { int n = 0 - 1; int a[n]; }
                 process P { skip; }
                 """);
-        p.put("extra/no-compila", """
+        p.put("extra/does-not-compile", """
                 process P { x = 1; }
                 """);
-        p.put("extra/for-if-arreglos", """
+        p.put("extra/for-if-arrays", """
                 monitor M { int a[5]; double d = 0;
                   for (int i = 0; i < 5; i = i + 2) { a[i] = i * i; }
                   procedure f(k: in int; r: out double) {
@@ -204,7 +204,7 @@ class CharacterizationTest {
                     r = d; } }
                 process P[i: 0..4] { double r; M.f(i, r); write(i, ": ", r); }
                 """);
-        p.put("extra/cola-ordenada-tuplas", """
+        p.put("extra/sorted-queue-tuples", """
                 monitor M { ColaOrdenada c(int, (text, double)); cond hay;
                   procedure poner(k: in int; s: in text) { push(c, (k, (s, k / 2.0))); signal_all(hay); }
                   procedure sacar() { int k; text s; double d;
@@ -212,25 +212,25 @@ class CharacterizationTest {
                 process Prod { M.poner(3, "c"); M.poner(1, "a"); M.poner(2, "b"); }
                 process Cons[i: 1..3] { M.sacar(); }
                 """);
-        p.put("extra/cond-arreglo-signal", """
+        p.put("extra/cond-array-signal", """
                 monitor M { cond turno[3]; int listos = 0;
                   procedure esperar(i: in int) { listos++; wait(turno[i]); }
                   procedure despertar(i: in int) { signal(turno[i]); } }
                 process W[i: 0..2] { M.esperar(i); }
                 process S { delay(1); for (int j = 0..2) { M.despertar(j); } }
                 """);
-        p.put("extra/espera-activa-y-bloques", """
+        p.put("extra/busy-wait-and-blocks", """
                 monitor M { bool listo = false; procedure abrir() { listo = true; }
                   procedure ver(r: out bool) { r = listo; } }
                 process P { bool ok = false; { { int n = 0; } } while (not ok) { M.ver(ok); } }
                 process Q { while (true) { } }
                 process R { skip; skip; M.abrir(); }
                 """);
-        p.put("extra/delay-fuera-de-rango", """
+        p.put("extra/delay-out-of-range", """
                 process P { delay(3601); } process Q { int s = 0 - 1; delay(s); }
                 process R { delay(3600); }
                 """);
-        p.put("extra/desbordes-y-aritmetica", """
+        p.put("extra/overflows-and-arithmetic", """
                 monitor M { int max = 9223372036854775807; int min = 0 - 9223372036854775807 - 1;
                   procedure inc() { max++; }
                   procedure neg(r: out int) { r = -min; }
@@ -243,14 +243,14 @@ class CharacterizationTest {
                 process E { double d = -2.5; int i = -(3); bool b = false and 1 / 0 == 1;
                   bool c = true or 1 / 0 == 1; double m = 5.5 mod 2; write(d, i, b, c, m); }
                 """);
-        p.put("extra/inicializacion-sin-fin", """
+        p.put("extra/endless-initialization", """
                 monitor M { int x = 0; while (true) { x++; } }
                 process P { skip; }
                 """);
-        p.put("extra/demasiados-procesos", """
+        p.put("extra/too-many-processes", """
                 process P[i: 1..5001] { skip; }
                 """);
-        p.put("extra/demasiados-monitores", """
+        p.put("extra/too-many-monitors", """
                 monitor M[i: 1..1001] { int x = 0; }
                 process P { skip; }
                 """);

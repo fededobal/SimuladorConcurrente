@@ -1,0 +1,50 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #a3826c9d00fabc08
+step 1 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e9f7c8b28b06b8cd
+step 2 WAIT A: wait(c) - libera el monitor y se demora | SKIP B: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2f4522e936911a24
+step 3 ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c4e0e496f6bb448e
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #6180485fbe2a8c8b
+state #bc257ea875a322a8
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #7062f77857c122e3
+step 1 #276859efb8077063
+step 2 #27b2ace08faf7259
+step 3 #561d25f7290e7db2
+step 4 #d942e04032562973
+state #aafb1a3594d77e66
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #afa6d75eda01d9ae
+step 1 #e9f7c8b28b06b8cd
+step 2 #c0600d997b00d362
+step 3 #2bf5183ed4fc3b1a
+step 4 #4b3f967759ae5bb4
+step 5 #8916584713fd8018
+state #5238580bc9d6f34c
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #a3826c9d00fabc08
+step 1 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e9f7c8b28b06b8cd
+step 2 SKIP B: skip | WAIT A: wait(c) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #176f20807fc68764
+step 3 ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c4e0e496f6bb448e
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #6180485fbe2a8c8b
+state #e2dd6a5bbee09fa3
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #7062f77857c122e3
+step 1 #e9f7c8b28b06b8cd
+step 2 #176f20807fc68764
+step 3 #c4e0e496f6bb448e
+step 4 #6180485fbe2a8c8b
+state #e2dd6a5bbee09fa3
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #afa6d75eda01d9ae
+step 1 #e9f7c8b28b06b8cd
+step 2 #176f20807fc68764
+step 3 #c4e0e496f6bb448e
+step 4 #6180485fbe2a8c8b
+state #e2dd6a5bbee09fa3
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #a3826c9d00fabc08
+step 1 SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #276859efb8077063
+step 2 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4ecb58ec258189ba
+step 3 WAIT A: wait(c) - libera el monitor y se demora | ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #4dffba51fbc6ae70
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #6180485fbe2a8c8b
+state #c7f3fd6509d3bb94

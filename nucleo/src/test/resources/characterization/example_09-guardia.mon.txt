@@ -1,0 +1,520 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #5e5eada76b1ddc7e
+step 1 DECL Paciente[0]: int gravedad = 1 | DECL Paciente[3]: int gravedad = 1 | DECL Paciente[2]: int gravedad = 3 | DECL Medico: int id = 0 | DECL Paciente[4]: int gravedad = 2 | DECL Paciente[5]: int gravedad = 3 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #6a657d42e91a213e
+step 2 DECL Medico: int gravedad = 0 | DECL Paciente[1]: int gravedad = 2 | WRITE Paciente[3]: write(llega con gravedad 1) | WRITE Paciente[4]: write(llega con gravedad 2) | WRITE Paciente[5]: write(llega con gravedad 3) | WRITE Paciente[2]: write(llega con gravedad 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d5f3b7b6ebecff7f
+step 3 ENTER Paciente[3]: entra a Guardia.llegar | BLOCKED Paciente[5]: espera para entrar a Guardia.llegar | WRITE Paciente[0]: write(llega con gravedad 1) | BLOCKED Paciente[2]: espera para entrar a Guardia.llegar | BLOCKED Paciente[4]: espera para entrar a Guardia.llegar | BLOCKED Medico: espera para entrar a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f159641b3165ae4d
+step 4 PUSH Paciente[3]: push(espera, (1, 3)) | WRITE Paciente[1]: write(llega con gravedad 2) | BLOCKED Paciente[0]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e65bdc4c03fcd806
+step 5 SIGNAL Paciente[3]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b637cde649eca6ce
+step 6 BLOCKED Paciente[1]: espera para entrar a Guardia.llegar | WAIT Paciente[3]: wait(turno[3]) - libera el monitor y se demora | ENTER Paciente[2]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6b25313c202c1c14
+step 7 PUSH Paciente[2]: push(espera, (3, 2)) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9ff419738b569323
+step 8 SIGNAL Paciente[2]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b6c044c4a9a82ffe
+step 9 WAIT Paciente[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ebf4882e30c885e8
+step 10 POP Medico: pop(espera) => (1, 3) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4dd51fdd54da8044
+step 11 ASSIGN Medico: atendido[3] = true | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #bf937ec469047e09
+step 12 ASSIGN Medico: atendidos++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #f8b377fc58eb0758
+step 13 SIGNAL Medico: signal(turno[3]) - despierta a Paciente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #ef16ee0123af4719
+step 14 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | ENTER Paciente[0]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #4686778c16f904f4
+step 15 WRITE Medico: write(atiendo al paciente 3 (gravedad 1)) | PUSH Paciente[0]: push(espera, (1, 0)) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #8ad7bbb798ae485f
+step 16 SIGNAL Paciente[0]: signal(hayPaciente) - sin efecto (cola vacía) | ASSIGN Medico: i++ => 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #bea9199a1faad030
+step 17 BLOCKED Medico: espera para entrar a Guardia.siguiente | WAIT Paciente[0]: wait(turno[0]) - libera el monitor y se demora | REENTER Paciente[3]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #ab1739621fb8253f
+step 18 RETURN Paciente[3]: retorna de Guardia.llegar, libera el monitor | ENTER Paciente[5]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #a6a4afe4825f42a5
+step 19 WRITE Paciente[3]: write(me atienden) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #40b6f37d789ece25
+step 20 PUSH Paciente[5]: push(espera, (3, 5)) | TERMINATED Paciente[3]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #13948c78e4a6c86b
+step 21 SIGNAL Paciente[5]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #08faee5ec900d441
+step 22 WAIT Paciente[5]: wait(turno[5]) - libera el monitor y se demora | ENTER Paciente[4]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #f969a7552dec6299
+step 23 PUSH Paciente[4]: push(espera, (2, 4)) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #fe92ca872bea75fe
+step 24 SIGNAL Paciente[4]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a71ce44c30223e34
+step 25 WAIT Paciente[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Paciente[1]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #3155b64abed895a8
+step 26 PUSH Paciente[1]: push(espera, (2, 1)) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #71b0a92d8db010ef
+step 27 SIGNAL Paciente[1]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #09adaa9a0e2243e8
+step 28 WAIT Paciente[1]: wait(turno[1]) - libera el monitor y se demora | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a650b1d761616dc2
+step 29 POP Medico: pop(espera) => (1, 0) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #f060be063c62caad
+step 30 ASSIGN Medico: atendido[0] = true | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #08b7acdaa9bb758d
+step 31 ASSIGN Medico: atendidos++ => 2 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #658a19c2ed8fc6f6
+step 32 SIGNAL Medico: signal(turno[0]) - despierta a Paciente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #e94de4de5d536687
+step 33 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[0]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #7a6bf842d5b61d72
+step 34 RETURN Paciente[0]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 0 (gravedad 1)) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #fc93fc825a8c4043
+step 35 WRITE Paciente[0]: write(me atienden) | ASSIGN Medico: i++ => 2 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #7843a5093f3ea79e
+step 36 ENTER Medico: entra a Guardia.siguiente | TERMINATED Paciente[0]: termina | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a2086fac50d978f6
+step 37 POP Medico: pop(espera) => (2, 4) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ae655d90ab263cd0
+step 38 ASSIGN Medico: atendido[4] = true | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #eb984ddb0ab071cf
+step 39 ASSIGN Medico: atendidos++ => 3 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #4e5141890c025875
+step 40 SIGNAL Medico: signal(turno[4]) - despierta a Paciente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #032c91caeeeee4a6
+step 41 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[4]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #3a7b149e42879dac
+step 42 WRITE Medico: write(atiendo al paciente 4 (gravedad 2)) | RETURN Paciente[4]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #11c1454a0e039fb0
+step 43 WRITE Paciente[4]: write(me atienden) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #f570a37eeee480b9
+step 44 TERMINATED Paciente[4]: termina | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4f2cf01af0afc61e
+step 45 ASSIGN Medico: i++ => 3 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #2ccba5e6b558652b
+step 46 ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #7ba2b7883eec0bd0
+step 47 POP Medico: pop(espera) => (2, 1) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #7c7062c7d1c9e4a5
+step 48 ASSIGN Medico: atendido[1] = true | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #56f41138e7543bbd
+step 49 ASSIGN Medico: atendidos++ => 4 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #70b4f35147445746
+step 50 SIGNAL Medico: signal(turno[1]) - despierta a Paciente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #ce35a05e2a7cc8df
+step 51 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[1]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #51d402abc7369275
+step 52 RETURN Paciente[1]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #e4f2a77dc9df6802
+step 53 WRITE Medico: write(atiendo al paciente 1 (gravedad 2)) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #c68c3c4a15632c9e
+step 54 ASSIGN Medico: i++ => 4 | WRITE Paciente[1]: write(me atienden) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #5ebc9e466ff0ae20
+step 55 ENTER Medico: entra a Guardia.siguiente | TERMINATED Paciente[1]: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #9c08c88d8aaab43d
+step 56 POP Medico: pop(espera) => (3, 2) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #ee3a78f2d09bc0ba
+step 57 ASSIGN Medico: atendido[2] = true | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #6f4c3c65eff17d4a
+step 58 ASSIGN Medico: atendidos++ => 5 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #4c4fd6c555cfa1c4
+step 59 SIGNAL Medico: signal(turno[2]) - despierta a Paciente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #5ee45ccda4c3a781
+step 60 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[2]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #48c4d6a017b0c655
+step 61 WRITE Medico: write(atiendo al paciente 2 (gravedad 3)) | RETURN Paciente[2]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #b27d12231d51b474
+step 62 ASSIGN Medico: i++ => 5 | WRITE Paciente[2]: write(me atienden) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #766e8441fc986a4e
+step 63 ENTER Medico: entra a Guardia.siguiente | TERMINATED Paciente[2]: termina | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #4fa0c0b4ffda69e4
+step 64 POP Medico: pop(espera) => (3, 5) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #273659afcc0c9bed
+step 65 ASSIGN Medico: atendido[5] = true | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #e006793c9fe04bd6
+step 66 ASSIGN Medico: atendidos++ => 6 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #c5a2d910f87e7144
+step 67 SIGNAL Medico: signal(turno[5]) - despierta a Paciente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #6da124bea80ed81e
+step 68 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[5]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #fb54e0d3b59bf521
+step 69 RETURN Paciente[5]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 5 (gravedad 3)) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #710c432c91a5aa42
+step 70 ASSIGN Medico: i++ => 6 | WRITE Paciente[5]: write(me atienden) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #f53676b4ac417579
+step 71 TERMINATED Paciente[5]: termina | TERMINATED Medico: termina | {"finished":true,"deadlock":false,"instant":71,"waiting":false} #9b09f7b84a345d34
+state #9769824ee33726c0
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #0d6b9065e082742f
+step 1 #b3a22c6d5e836133
+step 2 #d5fec2b8972d1d76
+step 3 #e91f54889c040c53
+step 4 #54640a38af097e4a
+step 5 #8541c70b6a3f2647
+step 6 #2b2535a2f8cb5ce8
+step 7 #1d7b720205e8727b
+step 8 #ef761ac85be89f90
+step 9 #62d4c4085e56eccf
+step 10 #d9708b7b4a00611f
+step 11 #54d8550c035f71cc
+step 12 #430aecc371a31c3e
+step 13 #476cf7e4a4ced9f2
+step 14 #b6781b6d3247b6ad
+step 15 #e1a0769ebad416c2
+step 16 #c33c7f216d2a2fdc
+step 17 #6ab6f7f0aa19f99f
+step 18 #2c45e9a2eb8b2900
+step 19 #95329357c224165d
+step 20 #52a430383883e876
+step 21 #7e0f5b465eb4be6d
+step 22 #6a7b36b0f5cb07d0
+step 23 #388ef6c28e98d264
+step 24 #d4d6f6c5399124fd
+step 25 #2e63a24ddc5d9b9f
+step 26 #09146fc9458fa9c4
+step 27 #5afa8c63c3059d70
+step 28 #f4272317b1b4e1a2
+step 29 #71e042c9b0a75601
+step 30 #8e11e8d9b4991843
+step 31 #c5c7ca3da702bd37
+step 32 #e8d0619f6391d5c0
+step 33 #93ac8d6a097c909d
+step 34 #eec59506c988421e
+step 35 #39ff9144b5a260b3
+step 36 #ddd99666ddf3c564
+step 37 #25a25f5698bbb536
+step 38 #0234ccff59a7e1f2
+step 39 #6eac7c5ad20d6e50
+step 40 #2794916f477935ae
+step 41 #99c5680e62372d4e
+step 42 #0a71006063d41112
+step 43 #3cd8213b2e40addb
+step 44 #5f9cbbbd11244c8b
+step 45 #c88f6ec57c518b77
+step 46 #1e497b197192a0e9
+step 47 #d2600c4f4e7b3ce7
+step 48 #070233d2b45cf43e
+step 49 #4a424bd2dce7872a
+step 50 #329309cd0bfa77f1
+step 51 #558e5b0ac1ee9b15
+step 52 #8827514fb5a47cc4
+step 53 #0793ce4549cbee70
+step 54 #56711443a1849afe
+step 55 #f15913042af6856e
+step 56 #0e382c3642b80633
+step 57 #94a9895c99ce4420
+step 58 #86392f42a223d997
+step 59 #a915ef34370ba482
+step 60 #4c79215aa3f72337
+step 61 #420e2f22c25bc7df
+step 62 #15425344105a6cb1
+step 63 #36c1acb85426e928
+step 64 #2e0748f21ea3a904
+step 65 #4bd06381ecde8a81
+step 66 #6032b6f362628892
+step 67 #77e95145be1c1ce3
+step 68 #e0ab2a4f774918fc
+step 69 #274053d336f1f80f
+step 70 #5f544315f6abf537
+step 71 #3f91b84923c1026f
+step 72 #828dc621ff2f7123
+step 73 #e1e78206935b8ef8
+state #d87cfb36f34abde0
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #78b6931187e4e3d7
+step 1 #b7a0b5ec173b9af7
+step 2 #843646add398e32e
+step 3 #cace5f4bcc734944
+step 4 #dfb50f4c9734cf8f
+step 5 #daee56d8e5419ab5
+step 6 #e9035cba5cb966fe
+step 7 #2b93b6f80d52051b
+step 8 #ac2d24e478cf0871
+step 9 #4a11843ef2c97358
+step 10 #a507332f15f24f09
+step 11 #2e315cffc4943816
+step 12 #a3a97c9e439b0c76
+step 13 #392bc8f13fba9a2e
+step 14 #7ed8ecaafcf77397
+step 15 #67903c8e8d264994
+step 16 #7fb5840558f414aa
+step 17 #b0bd9c1d8c530c38
+step 18 #4992210c9fe202f5
+step 19 #57be5206ab9d7712
+step 20 #8953305dbf8590ba
+step 21 #50c81a4c408ae3e0
+step 22 #fe0654ba5c3ab809
+step 23 #f530ff6df62fa639
+step 24 #677d16e8b48e02d3
+step 25 #50a968ee9b03e008
+step 26 #a61a465703c35cd8
+step 27 #dcb0b2fbb8ae4c32
+step 28 #c7e07622e2c95c4f
+step 29 #36ef0da4bd96fa1b
+step 30 #d3f5d7ae6e64b3d0
+step 31 #4d5788ab029efcb1
+step 32 #f799477bef89f3da
+step 33 #55715b7e7d351735
+step 34 #3b94eb07326aedeb
+step 35 #31d3081178020348
+step 36 #c1db41fc7aae8331
+step 37 #6ce621091a1aeb0b
+step 38 #a03bf551133a3d3c
+step 39 #3a84093008c2737f
+step 40 #5eabcb568c9e054a
+step 41 #2f50ad92ae598f2c
+step 42 #1fcc9d0d26fae0c3
+step 43 #91aef578e63974d2
+step 44 #0f1c0985ebc4bca7
+step 45 #150db0e272e3fb9a
+step 46 #e4ac0c0bf347775e
+step 47 #d862417859478c68
+step 48 #445bf3e516af521d
+step 49 #991d4d83a010ecae
+step 50 #230c251c4ee44fb9
+step 51 #8737eded4ebb11f9
+step 52 #a0ae2d2146350942
+step 53 #9112bbe55ab043d7
+step 54 #087ce8f78952e1c9
+step 55 #e22414f984e7c930
+step 56 #fc8e6407439e34ed
+step 57 #92f8222cc47bea27
+step 58 #d9da3875599f9f95
+step 59 #c51693f98cac7ab6
+step 60 #3431e8537181a253
+step 61 #04277204fd2e2e19
+step 62 #1d4181531d43426d
+step 63 #47c56d08ca51650e
+step 64 #e96c5cea1c8c1253
+step 65 #71695f30595da946
+step 66 #897ca3e1250b0c8f
+step 67 #6bfa39e8cf3378b0
+step 68 #e0205972fd9ff7ea
+step 69 #fc54c24ad6a500e0
+state #45fc55559048a97b
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #5e5eada76b1ddc7e
+step 1 DECL Paciente[0]: int gravedad = 1 | DECL Paciente[1]: int gravedad = 2 | DECL Paciente[2]: int gravedad = 3 | DECL Paciente[3]: int gravedad = 1 | DECL Paciente[4]: int gravedad = 2 | DECL Paciente[5]: int gravedad = 3 | DECL Medico: int id = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #30cc88a415394191
+step 2 WRITE Paciente[1]: write(llega con gravedad 2) | WRITE Paciente[2]: write(llega con gravedad 3) | WRITE Paciente[3]: write(llega con gravedad 1) | WRITE Paciente[4]: write(llega con gravedad 2) | WRITE Paciente[5]: write(llega con gravedad 3) | DECL Medico: int gravedad = 0 | WRITE Paciente[0]: write(llega con gravedad 1) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #6fb3af573e3cb3b1
+step 3 ENTER Paciente[2]: entra a Guardia.llegar | BLOCKED Paciente[3]: espera para entrar a Guardia.llegar | BLOCKED Paciente[4]: espera para entrar a Guardia.llegar | BLOCKED Paciente[5]: espera para entrar a Guardia.llegar | BLOCKED Medico: espera para entrar a Guardia.siguiente | BLOCKED Paciente[0]: espera para entrar a Guardia.llegar | BLOCKED Paciente[1]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5a3674e3a10dcac7
+step 4 PUSH Paciente[2]: push(espera, (3, 2)) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1ebc01a13072a30a
+step 5 SIGNAL Paciente[2]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f98f7ad3e183e35f
+step 6 WAIT Paciente[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Paciente[3]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #979370acb2f47d32
+step 7 PUSH Paciente[3]: push(espera, (1, 3)) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ae39cd25ce75eabb
+step 8 SIGNAL Paciente[3]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2aea3c9aff04aeb4
+step 9 WAIT Paciente[3]: wait(turno[3]) - libera el monitor y se demora | ENTER Paciente[0]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #9712cac372462d50
+step 10 PUSH Paciente[0]: push(espera, (1, 0)) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #9870a4194e04e899
+step 11 SIGNAL Paciente[0]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7d4115ad56209159
+step 12 WAIT Paciente[0]: wait(turno[0]) - libera el monitor y se demora | ENTER Paciente[4]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ee1d8283b6cef366
+step 13 PUSH Paciente[4]: push(espera, (2, 4)) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0239829bd50ec40c
+step 14 SIGNAL Paciente[4]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #45a978878ba5f1b1
+step 15 WAIT Paciente[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Paciente[1]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #44a7b4dccf8ad6f0
+step 16 PUSH Paciente[1]: push(espera, (2, 1)) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #228aae478afd3d35
+step 17 SIGNAL Paciente[1]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #98b482749e7f7396
+step 18 WAIT Paciente[1]: wait(turno[1]) - libera el monitor y se demora | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #a6f3730b3e81b14d
+step 19 POP Medico: pop(espera) => (1, 3) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c8b3780a1fbdca36
+step 20 ASSIGN Medico: atendido[3] = true | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6f09b533d00ed8b4
+step 21 ASSIGN Medico: atendidos++ => 1 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #fab29703b4cb5976
+step 22 SIGNAL Medico: signal(turno[3]) - despierta a Paciente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c235b997743c26e4
+step 23 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | ENTER Paciente[5]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #6eb331b1f5c4daaa
+step 24 PUSH Paciente[5]: push(espera, (3, 5)) | WRITE Medico: write(atiendo al paciente 3 (gravedad 1)) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #8c56c6f7ed394221
+step 25 ASSIGN Medico: i++ => 1 | SIGNAL Paciente[5]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #fdb7787f9ebb46a0
+step 26 WAIT Paciente[5]: wait(turno[5]) - libera el monitor y se demora | REENTER Paciente[3]: reingresa a Guardia | BLOCKED Medico: espera para entrar a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #eacd6d0c0693f66c
+step 27 RETURN Paciente[3]: retorna de Guardia.llegar, libera el monitor | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #41559d175033b856
+step 28 POP Medico: pop(espera) => (1, 0) | WRITE Paciente[3]: write(me atienden) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #470a0247431e51e2
+step 29 TERMINATED Paciente[3]: termina | ASSIGN Medico: atendido[0] = true | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #e7355c3dd09592d2
+step 30 ASSIGN Medico: atendidos++ => 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d88941214f68148b
+step 31 SIGNAL Medico: signal(turno[0]) - despierta a Paciente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #48f82293b9dfdd5a
+step 32 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[0]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #633e229b7a00dafd
+step 33 RETURN Paciente[0]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 0 (gravedad 1)) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #d70c67a6f010b94a
+step 34 ASSIGN Medico: i++ => 2 | WRITE Paciente[0]: write(me atienden) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #dcfcc167f527c3bb
+step 35 TERMINATED Paciente[0]: termina | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #c9c5d24342254efd
+step 36 POP Medico: pop(espera) => (2, 4) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #af9dcc01f5a07037
+step 37 ASSIGN Medico: atendido[4] = true | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #285201b4b606e106
+step 38 ASSIGN Medico: atendidos++ => 3 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #ce5c17ba3d85a7bd
+step 39 SIGNAL Medico: signal(turno[4]) - despierta a Paciente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #1dfb73872bd76e86
+step 40 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[4]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #be3a49ee00f45bdd
+step 41 RETURN Paciente[4]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 4 (gravedad 2)) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #34c4b6bfb76a7803
+step 42 ASSIGN Medico: i++ => 3 | WRITE Paciente[4]: write(me atienden) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #df3befbaa3eaa1bf
+step 43 TERMINATED Paciente[4]: termina | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #61358977addd610d
+step 44 POP Medico: pop(espera) => (2, 1) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #96abdff08ac23f5e
+step 45 ASSIGN Medico: atendido[1] = true | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #8ff7b752fdd89408
+step 46 ASSIGN Medico: atendidos++ => 4 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0344fa2d97c55f7f
+step 47 SIGNAL Medico: signal(turno[1]) - despierta a Paciente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #581066584e7dec45
+step 48 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[1]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #e8203d90d6b81443
+step 49 RETURN Paciente[1]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 1 (gravedad 2)) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #c9acbf3296e6b780
+step 50 ASSIGN Medico: i++ => 4 | WRITE Paciente[1]: write(me atienden) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #639ce546750bd944
+step 51 TERMINATED Paciente[1]: termina | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #ed345b565faabf0d
+step 52 POP Medico: pop(espera) => (3, 2) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #e4fab88676d4913c
+step 53 ASSIGN Medico: atendido[2] = true | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #55ba32f1918d7d80
+step 54 ASSIGN Medico: atendidos++ => 5 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #39b3af5c4a1a38b3
+step 55 SIGNAL Medico: signal(turno[2]) - despierta a Paciente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #e9e7374f31914656
+step 56 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[2]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #b4fa0fec023b5dcd
+step 57 RETURN Paciente[2]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 2 (gravedad 3)) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #a27f0995ed5d2c54
+step 58 ASSIGN Medico: i++ => 5 | WRITE Paciente[2]: write(me atienden) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #a2261105ba4501ac
+step 59 TERMINATED Paciente[2]: termina | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #0edd7888be94a6af
+step 60 POP Medico: pop(espera) => (3, 5) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #b73f71f0d1043d46
+step 61 ASSIGN Medico: atendido[5] = true | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #9b66a6f9716867c4
+step 62 ASSIGN Medico: atendidos++ => 6 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #b0b7fa14d7b30b67
+step 63 SIGNAL Medico: signal(turno[5]) - despierta a Paciente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #397989e2c06620e4
+step 64 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[5]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #a658fe2d5153c2bf
+step 65 RETURN Paciente[5]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 5 (gravedad 3)) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #6f849c3b3cd31fb8
+step 66 ASSIGN Medico: i++ => 6 | WRITE Paciente[5]: write(me atienden) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #cdd7e9c030ad5d75
+step 67 TERMINATED Paciente[5]: termina | TERMINATED Medico: termina | {"finished":true,"deadlock":false,"instant":67,"waiting":false} #1a5b94e1e0e8d7a0
+state #776676718ac69f1f
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #0d6b9065e082742f
+step 1 #30cc88a415394191
+step 2 #6fb3af573e3cb3b1
+step 3 #5a3674e3a10dcac7
+step 4 #1ebc01a13072a30a
+step 5 #f98f7ad3e183e35f
+step 6 #03c37c9bdb493d14
+step 7 #53a8ec0d11124ff1
+step 8 #73e60e5d97d05b77
+step 9 #7eceaa17318a6c7b
+step 10 #f38503e7d2244349
+step 11 #875d5e6ada0ddb5d
+step 12 #f9fd69271411ccd5
+step 13 #417ec34ca0c756ff
+step 14 #cbdbf88e22421d66
+step 15 #28df52e8694cd232
+step 16 #630d141fa70c0d3b
+step 17 #47e3681ba5233f9e
+step 18 #cf87eddcc1aa4eea
+step 19 #763c644c64002d20
+step 20 #25153e697b0bc5dd
+step 21 #9fb6766b4b4d255d
+step 22 #2be3941cc23d9e8e
+step 23 #d518d7329d671f36
+step 24 #2385825ee95d0b61
+step 25 #60c408af7814794f
+step 26 #9ad6ca679ce07968
+step 27 #8a53048a0d1c3f38
+step 28 #e6d3f52d2db5116a
+step 29 #8af8b3f428f616b7
+step 30 #1d827d5d7140a1d1
+step 31 #7606e832a9a64a98
+step 32 #e613ce4bcb790c0f
+step 33 #97d15ee345c0e48e
+step 34 #3c10fcc64ed92ca7
+step 35 #569221f46199d7a8
+step 36 #727469513c3e08ee
+step 37 #850d4093309b46dc
+step 38 #6a8006e0822ed301
+step 39 #581517c0f9f4a647
+step 40 #0558860e3bdd1986
+step 41 #4b37143362b48279
+step 42 #3851c4b7af4c28ba
+step 43 #ae4c69b4b7c1a5ee
+step 44 #f837c05aedc63256
+step 45 #7eb2253a2886151b
+step 46 #e91f4654e42757ea
+step 47 #bdaca1243c3d6978
+step 48 #bcb185eb3776c0f6
+step 49 #ee179fc3e6ccd20d
+step 50 #6e0be482cf06cca1
+step 51 #cdce389becde9d58
+step 52 #099ab29fae711b41
+step 53 #de8599e5d2016b99
+step 54 #94f00711a70de482
+step 55 #23e4513d65c461d6
+step 56 #fa84f390d58774a6
+step 57 #cd31afc4a2f3d685
+step 58 #bf2085695c815b8b
+step 59 #efe1c180616b7705
+step 60 #04150000d0f5a58d
+step 61 #90be0298a74ec901
+step 62 #3b4893c760b90c6d
+step 63 #64ebca6747e689eb
+step 64 #44337f9321bbc80f
+step 65 #8478478afad3a662
+step 66 #7234aa234b65fef6
+step 67 #9d9bd83833946501
+state #41253227822ec3c1
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #78b6931187e4e3d7
+step 1 #30cc88a415394191
+step 2 #6fb3af573e3cb3b1
+step 3 #5a3674e3a10dcac7
+step 4 #1ebc01a13072a30a
+step 5 #f98f7ad3e183e35f
+step 6 #0d324ebf66485c41
+step 7 #3081e82fcfff11e5
+step 8 #8d815e31f4b799a2
+step 9 #e9c683a8d5047baa
+step 10 #9c7275659981684b
+step 11 #ebdc884bca84dc08
+step 12 #277d6c2a71431116
+step 13 #0cbfbb1c5ead9550
+step 14 #33c6f651ca5235e8
+step 15 #56bdbd2d0cfe0ec8
+step 16 #5f8737b3766c8b44
+step 17 #b3ace285736ccd78
+step 18 #801e6e0398f3d3c7
+step 19 #fd1a80fc9cb275b2
+step 20 #0b750523df691a4a
+step 21 #c145ea23a8006f66
+step 22 #76f4d70e9cb068ff
+step 23 #3118e51a0924bee4
+step 24 #3536d7a2d8de1851
+step 25 #b9792b7b64400e10
+step 26 #3b62cfab16afefaf
+step 27 #542954761dccfc84
+step 28 #5a286c361e0041bd
+step 29 #2b1246a506a07915
+step 30 #95bd4e8af0c2d99d
+step 31 #3487d0669793476c
+step 32 #345cb963f40e5868
+step 33 #850a063995d18081
+step 34 #13331432c1dfdab9
+step 35 #77077f0de0faf16c
+step 36 #dda7ab6d2e2ae218
+step 37 #db88f1ebe7721ff5
+step 38 #89c39f1c18ad8899
+step 39 #2904523ff79bd159
+step 40 #09e498ff82e52db7
+step 41 #3f80285306267f49
+step 42 #ee4ce2859c3cc498
+step 43 #39dc71c6440c9156
+step 44 #4f8c34ed18b876d8
+step 45 #4275a0aecfe07908
+step 46 #8c97ce86e4e67061
+step 47 #56024d0483f9a2a4
+step 48 #83982450c3c0d357
+step 49 #f78e336ba1af0eb8
+step 50 #f2c03a9773e79c83
+step 51 #863e8154f4be6181
+step 52 #898ca5b434d689b1
+step 53 #45bc3b775fae2090
+step 54 #37720ad90a306617
+step 55 #7da748561563c3af
+step 56 #0913c9200c1da650
+step 57 #6fead3507db2f6e0
+step 58 #d4f8b512b92917ad
+step 59 #b3e9f64165ee2e9d
+step 60 #86ac671544991e26
+step 61 #e37fc351b81f8ecd
+step 62 #21237c2e7ff1988c
+step 63 #e1c8167a84099cea
+step 64 #58d01239a6e3bb06
+step 65 #4177144be5384841
+step 66 #4fa18b0646a62ade
+step 67 #976c6dce0b78267a
+step 68 #3bbd10572a66c33b
+step 69 #6a67c7098f61ae70
+state #670be7f0a42451ec
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #5e5eada76b1ddc7e
+step 1 DECL Paciente[1]: int gravedad = 2 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bf49011c7793be8b
+step 2 DECL Paciente[2]: int gravedad = 3 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #41821017139826c2
+step 3 DECL Paciente[3]: int gravedad = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #43f7bccd2092d810
+step 4 DECL Paciente[0]: int gravedad = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #908429d82f2fff1a
+step 5 WRITE Paciente[1]: write(llega con gravedad 2) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #e1da85866c79158c
+step 6 WRITE Paciente[2]: write(llega con gravedad 3) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #85c8c295ab5d4030
+step 7 WRITE Paciente[3]: write(llega con gravedad 1) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8175f6175d91b76e
+step 8 WRITE Paciente[0]: write(llega con gravedad 1) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e4e1193a681c1f6f
+step 9 ENTER Paciente[1]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a49ce5152287a7ac
+step 10 BLOCKED Paciente[2]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #611c6a04fbb9e870
+step 11 BLOCKED Paciente[3]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #5c83e1a7fbabd5a1
+step 12 BLOCKED Paciente[0]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e51eff3dddf4baed
+step 13 PUSH Paciente[1]: push(espera, (2, 1)) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #9830a66e40130b1f
+step 14 DECL Medico: int id = 0 | SIGNAL Paciente[1]: signal(hayPaciente) - sin efecto (cola vacía) | DECL Paciente[4]: int gravedad = 2 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #829eb2a996da526c
+step 15 DECL Paciente[5]: int gravedad = 3 | WRITE Paciente[4]: write(llega con gravedad 2) | DECL Medico: int gravedad = 0 | WAIT Paciente[1]: wait(turno[1]) - libera el monitor y se demora | ENTER Paciente[0]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #8699b6199e1dfb8e
+step 16 PUSH Paciente[0]: push(espera, (1, 0)) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #406722048ac4c044
+step 17 WRITE Paciente[5]: write(llega con gravedad 3) | SIGNAL Paciente[0]: signal(hayPaciente) - sin efecto (cola vacía) | BLOCKED Paciente[4]: espera para entrar a Guardia.llegar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #daa07b52de94cb49
+step 18 BLOCKED Paciente[5]: espera para entrar a Guardia.llegar | WAIT Paciente[0]: wait(turno[0]) - libera el monitor y se demora | ENTER Paciente[2]: entra a Guardia.llegar | BLOCKED Medico: espera para entrar a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #6023256da5dbef87
+step 19 PUSH Paciente[2]: push(espera, (3, 2)) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #6b97c576b53c8838
+step 20 SIGNAL Paciente[2]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ce0d99e738f245b3
+step 21 WAIT Paciente[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Paciente[5]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #77c13bd92714bf98
+step 22 PUSH Paciente[5]: push(espera, (3, 5)) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #319765256b5ddaea
+step 23 SIGNAL Paciente[5]: signal(hayPaciente) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #03ad070a7aea557c
+step 24 WAIT Paciente[5]: wait(turno[5]) - libera el monitor y se demora | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #620c10ff44fbfaf0
+step 25 POP Medico: pop(espera) => (1, 0) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #040d581b21c4b081
+step 26 ASSIGN Medico: atendido[0] = true | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #ca63b796d0e58d65
+step 27 ASSIGN Medico: atendidos++ => 1 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #f0422c3b04ea9cbf
+step 28 SIGNAL Medico: signal(turno[0]) - despierta a Paciente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #cfec2d43b175a8e8
+step 29 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | ENTER Paciente[4]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #e8e5f6807628c28f
+step 30 WRITE Medico: write(atiendo al paciente 0 (gravedad 1)) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #93588ba972d3afdd
+step 31 PUSH Paciente[4]: push(espera, (2, 4)) | ASSIGN Medico: i++ => 1 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #bb304be9b12a6fa7
+step 32 SIGNAL Paciente[4]: signal(hayPaciente) - sin efecto (cola vacía) | BLOCKED Medico: espera para entrar a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #c62353e3d5ed5f43
+step 33 WAIT Paciente[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #3d1c3598c5f4648e
+step 34 POP Medico: pop(espera) => (2, 1) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #6045b64bc38e5807
+step 35 ASSIGN Medico: atendido[1] = true | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #cff0dd5599c8bd69
+step 36 ASSIGN Medico: atendidos++ => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a70d3f8e061cf023
+step 37 SIGNAL Medico: signal(turno[1]) - despierta a Paciente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ac8cb58b70206adb
+step 38 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | ENTER Paciente[3]: entra a Guardia.llegar | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #cef5745af99b3e8c
+step 39 PUSH Paciente[3]: push(espera, (1, 3)) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #40d9cb11689a69da
+step 40 WRITE Medico: write(atiendo al paciente 1 (gravedad 2)) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #ed715a5a7ec7642d
+step 41 SIGNAL Paciente[3]: signal(hayPaciente) - sin efecto (cola vacía) | ASSIGN Medico: i++ => 2 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #059bd2f898d95cc8
+step 42 BLOCKED Medico: espera para entrar a Guardia.siguiente | WAIT Paciente[3]: wait(turno[3]) - libera el monitor y se demora | REENTER Paciente[1]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #86578859c6a19d3a
+step 43 RETURN Paciente[1]: retorna de Guardia.llegar, libera el monitor | REENTER Paciente[0]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a32be5d84b66ad7e
+step 44 RETURN Paciente[0]: retorna de Guardia.llegar, libera el monitor | ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #c659071fc6f9d99d
+step 45 WRITE Paciente[1]: write(me atienden) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #3e42f515a82c6f5e
+step 46 POP Medico: pop(espera) => (1, 3) | WRITE Paciente[0]: write(me atienden) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #85ef465cf5a5d058
+step 47 TERMINATED Paciente[0]: termina | TERMINATED Paciente[1]: termina | ASSIGN Medico: atendido[3] = true | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #19deca79f0ba750e
+step 48 ASSIGN Medico: atendidos++ => 3 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #a22b1b92996ece97
+step 49 SIGNAL Medico: signal(turno[3]) - despierta a Paciente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #57e47570a4d988f0
+step 50 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[3]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #da6505e9e843e51d
+step 51 RETURN Paciente[3]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #e81100862412e1f1
+step 52 WRITE Paciente[3]: write(me atienden) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #bf81486d0f0144e0
+step 53 WRITE Medico: write(atiendo al paciente 3 (gravedad 1)) | TERMINATED Paciente[3]: termina | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #79e2ae6d2d925b87
+step 54 ASSIGN Medico: i++ => 3 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #f5508811020f3c0e
+step 55 ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #1de17eee39024aa1
+step 56 POP Medico: pop(espera) => (2, 4) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #e160c8996e3b8d24
+step 57 ASSIGN Medico: atendido[4] = true | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #a127dff800be1cc4
+step 58 ASSIGN Medico: atendidos++ => 4 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #c102591961232d5d
+step 59 SIGNAL Medico: signal(turno[4]) - despierta a Paciente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #b09a63f9a2ec06d0
+step 60 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[4]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #1f37d282ba8ae897
+step 61 RETURN Paciente[4]: retorna de Guardia.llegar, libera el monitor | WRITE Medico: write(atiendo al paciente 4 (gravedad 2)) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #1331517bddfdcf27
+step 62 ASSIGN Medico: i++ => 4 | WRITE Paciente[4]: write(me atienden) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #45d13fcc76a2e1ae
+step 63 ENTER Medico: entra a Guardia.siguiente | TERMINATED Paciente[4]: termina | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #b418ea2ed4bdc4ef
+step 64 POP Medico: pop(espera) => (3, 2) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #9ea966bd3e57d164
+step 65 ASSIGN Medico: atendido[2] = true | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #84cdfb0af315526a
+step 66 ASSIGN Medico: atendidos++ => 5 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #affd18297d6c1a73
+step 67 SIGNAL Medico: signal(turno[2]) - despierta a Paciente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #c6c4bb906467cd90
+step 68 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[2]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #88fe428f7df30c2d
+step 69 RETURN Paciente[2]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #e5954911378a3992
+step 70 WRITE Paciente[2]: write(me atienden) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #cf8b3a46954a433a
+step 71 TERMINATED Paciente[2]: termina | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #285f8d031f0611a7
+step 72 WRITE Medico: write(atiendo al paciente 2 (gravedad 3)) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #34efab96b031f4c7
+step 73 ASSIGN Medico: i++ => 5 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #71426e283ee29602
+step 74 ENTER Medico: entra a Guardia.siguiente | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #806a6d3df57bcd2c
+step 75 POP Medico: pop(espera) => (3, 5) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #c2c4ce9b852bd4a8
+step 76 ASSIGN Medico: atendido[5] = true | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #f29a90bdc4236009
+step 77 ASSIGN Medico: atendidos++ => 6 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #5ee79a6c55acc5d2
+step 78 SIGNAL Medico: signal(turno[5]) - despierta a Paciente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #ead1fecc92a6076e
+step 79 RETURN Medico: retorna de Guardia.siguiente, libera el monitor | REENTER Paciente[5]: reingresa a Guardia | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #6aa17032fd21c8ca
+step 80 RETURN Paciente[5]: retorna de Guardia.llegar, libera el monitor | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #f5319141f1aca303
+step 81 WRITE Medico: write(atiendo al paciente 5 (gravedad 3)) | WRITE Paciente[5]: write(me atienden) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #5e38e6fa71b7f824
+step 82 ASSIGN Medico: i++ => 6 | TERMINATED Paciente[5]: termina | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #cabea0caec4c24b0
+step 83 TERMINATED Medico: termina | {"finished":true,"deadlock":false,"instant":83,"waiting":false} #65ddf8a5a6730f77
+state #f591babcc5be61ec

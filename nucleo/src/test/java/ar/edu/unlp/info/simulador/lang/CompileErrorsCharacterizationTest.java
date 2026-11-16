@@ -21,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * respuesta entera, con el snapshot inicial (y con el, el valor de los literales).
  *
  * <p>Si un cambio de mensajes es intencional, se regenera con
- * {@code mvn test -Dcaracterizacion.regenerar=true} y el diff se revisa en el commit.
+ * {@code mvn test -Dcharacterization.regenerate=true} y el diff se revisa en el commit.
  */
 class CompileErrorsCharacterizationTest {
 
-    private static final Path DIR = Path.of("src", "test", "resources", "caracterizacion");
-    private static final Path PROGRAMS = DIR.resolve("errores-de-compilacion.mon");
-    private static final Path EXPECTED = DIR.resolve("errores-de-compilacion.txt");
-    private static final boolean REGENERATE = Boolean.getBoolean("caracterizacion.regenerar");
+    private static final Path DIR = Path.of("src", "test", "resources", "characterization");
+    private static final Path PROGRAMS = DIR.resolve("compile-errors.mon");
+    private static final Path EXPECTED = DIR.resolve("compile-errors.txt");
+    private static final boolean REGENERATE = Boolean.getBoolean("characterization.regenerate");
 
     @Test
     void compilerAnswersTheSameAsWhenTheReferenceWasRecorded() throws IOException {

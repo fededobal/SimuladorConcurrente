@@ -1,0 +1,14 @@
+## RANDOM seed=0
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## RANDOM seed=1
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## RANDOM seed=2
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## ROUND_ROBIN seed=0
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## ROUND_ROBIN seed=1
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## ROUND_ROBIN seed=2
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}
+## step by step, RANDOM seed=0
+create {"error":"Error al inicializar: Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)","line":1}

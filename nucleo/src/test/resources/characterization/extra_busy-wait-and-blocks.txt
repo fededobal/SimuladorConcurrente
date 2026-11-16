@@ -1,0 +1,1421 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #2e98d2c462a7894a
+step 1 SKIP R: skip | SPIN Q: espera activa (bucle sin avanzar) | DECL P: bool ok = false | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bbc7b42ac0a82c6c
+step 2 DECL P: int n = 0 | SPIN Q: espera activa (bucle sin avanzar) | SKIP R: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b61f14853c4b3b78
+step 3 SPIN Q: espera activa (bucle sin avanzar) | ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0e5315147411fe15
+step 4 ASSIGN P: r = false | SPIN Q: espera activa (bucle sin avanzar) | BLOCKED R: espera para entrar a M.abrir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #bc511615f5057aea
+step 5 RETURN P: retorna de M.ver, libera el monitor | ENTER R: entra a M.abrir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c9639f4877a80fa6
+step 6 SPIN Q: espera activa (bucle sin avanzar) | BLOCKED P: espera para entrar a M.ver | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #ca3810b910ad6a54
+step 7 SPIN Q: espera activa (bucle sin avanzar) | ASSIGN R: listo = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d289a1488e427957
+step 8 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #067e4b45a89cae2f
+step 9 SPIN Q: espera activa (bucle sin avanzar) | RETURN R: retorna de M.abrir, libera el monitor | ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3246c9f1f739a4db
+step 10 ASSIGN P: r = true | SPIN Q: espera activa (bucle sin avanzar) | TERMINATED R: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ba131705a0c69be2
+step 11 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ba59920d5c603be1
+step 12 RETURN P: retorna de M.ver, libera el monitor | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #3e190df35a668516
+step 13 TERMINATED P: termina | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #6e4d1e208a76bdc1
+step 14 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e952e060987227c0
+step 15 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #9dcfb2a018d7b9ec
+step 16 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #20163c875c223e28
+step 17 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #73580e43d4a1aa29
+step 18 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #fc0c958c0ae0dc4b
+step 19 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #fd05913006854fb2
+step 20 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #395a9e55e192c721
+step 21 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #296598a0c72029bd
+step 22 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #de6bcc78e48f8f16
+step 23 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #d153e3c663e65d62
+step 24 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #74675493e5421cf5
+step 25 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c4ab137248936b8b
+step 26 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #eff7db9e871fa5dc
+step 27 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2a7fedda21aa6f90
+step 28 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #8f4e29d12a280bbb
+step 29 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #5894a61e427aa4b3
+step 30 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #38e29daebd6d3ddf
+step 31 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #143a8627961fee69
+step 32 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #987e7da04922ce5e
+step 33 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #b25277614e5f0ddd
+step 34 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #2d696c858fe6215b
+step 35 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #36a155fb07348d21
+step 36 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #0e31bcdee63867bc
+step 37 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #5dfbf4a0dcf37a7f
+step 38 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #433b0aff00afe686
+step 39 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #bc1aa96625680a83
+step 40 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #cf62db4c1fa25b95
+step 41 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #0c82eee42db14a2c
+step 42 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #3f87ba023862500d
+step 43 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #0e11d05cd9428324
+step 44 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #f2ef3f3fc6f2e317
+step 45 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #fc6bfb166c29b69a
+step 46 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #97f15bdc811ee0f3
+step 47 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #4c6e4c85823a370b
+step 48 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #3056ad5b4f884c30
+step 49 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #770cea7f05c486cb
+step 50 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #d761611b71d73c75
+step 51 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #e06392c2eedd8d50
+step 52 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #f68835533a8b4283
+step 53 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #29b1d96722bb2340
+step 54 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #52b3cf4c43496a97
+step 55 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #bd1fd651a1c099ee
+step 56 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #9d3e8ed81c900032
+step 57 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #e3f5fe44dd6cce3b
+step 58 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #3ebbf0e96b3f06c4
+step 59 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #31f46bdfbc9dc2d1
+step 60 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #bb7de3ba16c4b315
+step 61 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #2fe960a70e2b91c6
+step 62 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #ce1fa1fa107d1d00
+step 63 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #d0c80e19ea50ad8b
+step 64 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #efc056189cb0bde2
+step 65 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #a294074ce0eb41d6
+step 66 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #2fdb10f51b12618d
+step 67 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #2fdcded3b299d65b
+step 68 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #65884d8ff25168b8
+step 69 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #5b821b1e5f019223
+step 70 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #12a25067c146ffda
+step 71 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #349aa13af02bb27b
+step 72 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #0f2d31ab3ab9b36a
+step 73 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #e32242a04ea3a28e
+step 74 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #6e658c7edecbb248
+step 75 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #13c2467e9a7eb8f6
+step 76 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #4e9ea42dde3d2063
+step 77 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #543d4bc76cc5a7c0
+step 78 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #912ec541836a046d
+step 79 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #b6f6cfaba2037c05
+step 80 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #ce1913ccb022c7cd
+step 81 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #13c1b79c4ad77528
+step 82 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #eafecf527e178c2d
+step 83 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #bc49202342e4facc
+step 84 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #1c0c2bc7ce69d137
+step 85 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #01c0ef4d14f5fc05
+step 86 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #ee7dcc3601ac6a4c
+step 87 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #3575ff61517ae8d3
+step 88 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #b185ae8628fca7a1
+step 89 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #157c71def9010b00
+step 90 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #82ff1acb1f2934a4
+step 91 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #6396c1324e172ad4
+step 92 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #7c3c8806015265ef
+step 93 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #28c85251056e71d7
+step 94 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #8a09f3da49c1df3d
+step 95 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #83718f776a0e342e
+step 96 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #c72dfca7477e69e1
+step 97 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #90bc0fc9b52756da
+step 98 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #55fdc6591475a153
+step 99 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #1abbed92afd7ffef
+step 100 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #5570d0f9c95aa74b
+step 101 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #c3f4c46128cc7480
+step 102 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #df5023bf0741ee1a
+step 103 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #56239717978c2e65
+step 104 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #b0d3497e7876bdba
+step 105 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #1b2100c3979696f3
+step 106 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #54866f9c07703d0c
+step 107 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #6a7a1ea7afb4857f
+step 108 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #39b5263fc6e1a056
+step 109 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #b59250c161dc8ad6
+step 110 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #6705484629916376
+step 111 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #4906511217853e93
+step 112 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #2ce3b06b5cb2d35d
+step 113 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #18a15bd7bb64a3ac
+step 114 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #d711372751c080e5
+step 115 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #fc123c7e769f9fb5
+step 116 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #14d8b81b4e67027e
+step 117 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #1cb1f57eee96a279
+step 118 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #fab3df26a7bf33ac
+step 119 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #acdc7ed037c5aa91
+step 120 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #4687b43d364ec370
+step 121 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #309d299a4593ec17
+step 122 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #947e133765524278
+step 123 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #b7939a3bd9eed7e4
+step 124 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #453291b8a86f95aa
+step 125 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #1c665f4d81a9ad95
+step 126 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #d2339e1703aef93a
+step 127 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #612ba130b41a020e
+step 128 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #0bde0d18856e42c4
+step 129 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #da18039e308f7868
+step 130 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #9de9bd431cc999ee
+step 131 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #f4713b20442ce802
+step 132 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #ca2a1d1223a0dcb8
+step 133 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #8e1fc3ac922a743f
+step 134 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #d456f9c698d3a9f6
+step 135 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #44cbce4963239d63
+step 136 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #8d2ab1fed38e15b4
+step 137 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #77c0681f03b559dc
+step 138 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #9cbefb8820358051
+step 139 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #4508455d9ee0b9c2
+step 140 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #2d333621b0cccf65
+step 141 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #8cc2a0717406e856
+step 142 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #da800090e645e6a9
+step 143 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #8fbcb2909f61745f
+step 144 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #0ee4fc0d3faf8b1a
+step 145 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #92617d6a8c0c4353
+step 146 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #4a86aee777b37347
+step 147 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #85982cc9d353ebc7
+step 148 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #cace8038414d9b79
+step 149 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #4f64c78741188ec0
+step 150 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #dd675e127db2ebcc
+step 151 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #51b5a17c7d78f32a
+step 152 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #23672ec829fa5907
+step 153 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #85da1848ade4aa86
+step 154 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #8d3974cebc30a0e5
+step 155 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #c6b59f80991e83fa
+step 156 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #465c735fb732bcce
+step 157 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #5936494c2ca6965d
+step 158 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #ea5c0a7dd5429be1
+step 159 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #071f14f48831dd44
+step 160 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #61d86aee06c0b573
+step 161 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #0fb46e517cabdefe
+step 162 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #d971e01b44e6853b
+step 163 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #e97b07a353d93125
+step 164 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #76842bf4bf2bf37f
+step 165 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #8f5dc4774625f929
+step 166 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #34094d3e4abeaca7
+step 167 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #078964543c343efc
+step 168 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #803aef0721fe5412
+step 169 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #ea7e827866397985
+step 170 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #9fc50ba98180cdd1
+step 171 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #37a1ecdbeab57bb0
+step 172 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #c7343719a5a8e26d
+step 173 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #59b2633a44dc64a4
+step 174 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #7e2f046566bd5e87
+step 175 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #46cc47291d5fb4c1
+step 176 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #32a2e52acd139f63
+step 177 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #a8d59b6a6b705ca8
+step 178 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #49ff8429e5e1fed1
+step 179 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #794efe8e2cdd1917
+step 180 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #bba521d6fdf0cdb1
+step 181 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #2c336df40c1c026e
+step 182 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #36fbd9713e06db71
+step 183 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #a63defc6aa43ddd6
+step 184 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #975530f1ebabc4cf
+step 185 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #3b50df02efafe859
+step 186 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #3f8b3e5c0789eeb4
+step 187 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #b3300bf9bc565b07
+step 188 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #6aedf37f7aee2d9b
+step 189 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #ec56aaa5b4a33287
+step 190 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #4e80b85c1612846b
+step 191 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #f493dd86e8636493
+step 192 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #4bd1605251d3f63b
+step 193 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #8d984357223f6467
+step 194 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #d2a942662d200484
+step 195 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #447f637dd619ef19
+step 196 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #d9904a236fa8fd0f
+step 197 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #edb5c3fda54f2698
+step 198 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #fca6eadfaac03683
+step 199 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #a3cea1622ad3923d
+step 200 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #e87cbe743e28d647
+state #91c9bd0fc1880f32
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #c8259d57397bcb94
+step 1 #c456cc4473bc5a64
+step 2 #3ad99e19bb3e9dd7
+step 3 #c0b4517b67083a66
+step 4 #3a983a4e610d58ef
+step 5 #343edd5125327f72
+step 6 #a4a7943e636bf70a
+step 7 #bc82e94d3afd4be6
+step 8 #6d331a025417d0f3
+step 9 #6cc71511035d025d
+step 10 #449f72509a406126
+step 11 #b9f9278955daf4ac
+step 12 #a9554a1660507f90
+step 13 #ab57a036811072f5
+step 14 #1a8f9888880f604a
+step 15 #c568261788ed3148
+step 16 #e86e08f378ddaf95
+step 17 #e18c6d1123d149f4
+step 18 #55c035e62eafd7b1
+step 19 #da19674237985e4e
+step 20 #f013c8555676803d
+step 21 #006f449add9c51af
+step 22 #1acb8acecb4edab3
+step 23 #290731fb48bfdd8c
+step 24 #d3d059dedb6ef9f6
+step 25 #f098144d473be520
+step 26 #016913c542c440d8
+step 27 #791777a77b6d2427
+step 28 #8a9fc99fe8885f7e
+step 29 #822a3dd0b71d6f52
+step 30 #803223e495e169cb
+step 31 #5e83b179a34a6380
+step 32 #d49259f0d349526b
+step 33 #a40f6ffbcf24800c
+step 34 #d7453d85840c12c9
+step 35 #444b750cf877e678
+step 36 #a9ad1ff31e74d9b4
+step 37 #0018457c56503bd0
+step 38 #e390f0c6d16957be
+step 39 #818b47c32f364a78
+step 40 #4658460ecdb189d1
+step 41 #4a2e30a2829713a1
+step 42 #d6da3a016989834b
+step 43 #d6b374899d23e1fb
+step 44 #6e4477c933ef9d60
+step 45 #bff8aafca2de5450
+step 46 #6d4fa105d218c5f5
+step 47 #219c6b3cf15a5d6e
+step 48 #8ea2446e3fccec00
+step 49 #254df0143dd06b89
+step 50 #8267a16ca920a0cb
+step 51 #92dbaa187e8249c4
+step 52 #4c6d10117e457c69
+step 53 #f492a4aa1b9b5494
+step 54 #90b8178bdb6803d6
+step 55 #c253d43c461e2835
+step 56 #b377fb41296e469d
+step 57 #7b013031ab81ae8b
+step 58 #9d4f6fcdb05b6cc6
+step 59 #f79619a855df59bd
+step 60 #bc97ed2471afbf1b
+step 61 #ca40c3805040c62c
+step 62 #568fcee12191df3f
+step 63 #79b4d78c87ceac92
+step 64 #e4193a80973814aa
+step 65 #248458997a20a410
+step 66 #67afd0859b16f2b4
+step 67 #507b786877618b40
+step 68 #e1c31b45415016c8
+step 69 #6808852eef96db2d
+step 70 #15f3907d7265ee84
+step 71 #fdb41912acd603b3
+step 72 #710ec6ca641ef82d
+step 73 #6e7bad2240bc1890
+step 74 #f5c6b71b4565c499
+step 75 #78ee3e2c6e460acd
+step 76 #44f702424cdd8c9e
+step 77 #b86d47cc5b3e430e
+step 78 #9a3a7a70653b16f0
+step 79 #51ed775b423edf0a
+step 80 #c0e5f4c56b062e3d
+step 81 #0cce769891356038
+step 82 #ba9c5551ac53f4bf
+step 83 #4e7c37a81910521a
+step 84 #4e1e31c3b8058306
+step 85 #4f647a5b902c8ed7
+step 86 #4d8135645f8f6e67
+step 87 #d6ea41837bd7c7a8
+step 88 #c87bee367575904d
+step 89 #8e0f85d90ff5582d
+step 90 #d3c61ce072255b30
+step 91 #15974540aad15dbf
+step 92 #d5aa8c9b9181b638
+step 93 #dd3fc9f9ecd3ebd8
+step 94 #3dd879f54a9bbf9d
+step 95 #0a9cc0ac9993e052
+step 96 #35f95575b0287ce2
+step 97 #624493b69d2377f5
+step 98 #b3d321d25ec57a7e
+step 99 #663333fd7acc7be9
+step 100 #8bd874ca2260f0e9
+step 101 #1e90090c29a39320
+step 102 #fd461c3aa04ff687
+step 103 #27d792a710bcc72b
+step 104 #088a38983ff3fabd
+step 105 #6abc4064f10b5498
+step 106 #b219aaec4713414c
+step 107 #0aa26ea1af093241
+step 108 #c61ea7d8c76cb202
+step 109 #96b87432f803d719
+step 110 #bd613f3eac30a1f7
+step 111 #565e11de3923ba56
+step 112 #ae10dae5f2d3f943
+step 113 #fc7e6c3bfa0ac15a
+step 114 #86ba4bb792b66aa7
+step 115 #dbda6297a1df6da7
+step 116 #a62e4267b6631110
+step 117 #ed98fd106c383f04
+step 118 #b926f6a5e47912c6
+step 119 #10d6ea642aa77c67
+step 120 #325d9b2a5408c616
+step 121 #2a246151c6d823de
+step 122 #519b4b9e5db26eb1
+step 123 #b8869ee870e06c5f
+step 124 #a9fd0012c80e9399
+step 125 #03c06a42e06b3bb8
+step 126 #70cc3db308751e14
+step 127 #b6bb2137bf92203d
+step 128 #2fb50679c663c3e1
+step 129 #e529ba004cd17c1f
+step 130 #a897095db8507fef
+step 131 #95d89121fa5c6e9b
+step 132 #c5b46d6ac48f12c2
+step 133 #8a678151298e26be
+step 134 #d647272a5f4f000f
+step 135 #602cc5160abb8251
+step 136 #169a892562ab9bec
+step 137 #66bdee2302bc01a0
+step 138 #b122a38c41979b23
+step 139 #684472dcb8e7e124
+step 140 #94c13e808e7a511a
+step 141 #99a6af23d9b65c6d
+step 142 #015aff0a0f047003
+step 143 #48dc057978a8552d
+step 144 #744460ca6d3e0706
+step 145 #a7645a6b7db01c16
+step 146 #bb40e04f089e575e
+step 147 #7c59fd6e4cd17f7a
+step 148 #073d1f4185be430d
+step 149 #24d1e8c963fe8ecd
+step 150 #1a7b0b1514838ebd
+step 151 #532d81f208e79bea
+step 152 #74b7037f0701d328
+step 153 #982a1c85da8345ff
+step 154 #a87a8b94456263e0
+step 155 #1300200574c6b64e
+step 156 #5c6234fd6dfde8b6
+step 157 #6976700ba9836872
+step 158 #c25cf90672c8cddf
+step 159 #6a916c1049729b90
+step 160 #ddc8080661b6933a
+step 161 #9e603d5af838c508
+step 162 #00831a178fbfe1ed
+step 163 #53cb4e9f5a9a0947
+step 164 #4c8e2ca276ba1eec
+step 165 #100b3ebe78f821e0
+step 166 #5f9c98f5b707b8a1
+step 167 #952a8dc817252ae1
+step 168 #5c5100d175c97078
+step 169 #c84785e7fe9a4dfd
+step 170 #98b3f99d94545f21
+step 171 #0cf4b43df357e58d
+step 172 #a07908c2e3dd9751
+step 173 #a61cf19f267a9b81
+step 174 #fe387a841d8038ef
+step 175 #f8df38f1724980f2
+step 176 #66048a5834049c20
+step 177 #c5c1b5eb218c3fca
+step 178 #1ee05395fa9770cb
+step 179 #d4a29a302acadff8
+step 180 #eb3e12cd6d4af524
+step 181 #5153019224d7312d
+step 182 #4343d584a2a294bc
+step 183 #899e4ab23fb51df6
+step 184 #45657f4f50711a19
+step 185 #824b2b04e618c2d2
+step 186 #32c29e96b862d382
+step 187 #99c91e6d139c6946
+step 188 #fcc6f957445f0a17
+step 189 #e88d9fac277a0a6f
+step 190 #ab431903a5f2cf30
+step 191 #18b15020c1257b18
+step 192 #d5287ec1cbb0acc5
+step 193 #47495a16507e9382
+step 194 #a38cfb18b0bbb080
+step 195 #ca68a0971dfe7439
+step 196 #6ad6008871a1571e
+step 197 #d63e4a6fa66f9fc0
+step 198 #37fcc1192718edd8
+step 199 #3e80d943514a8820
+step 200 #a2a3404193fd725d
+state #1a2f50aa9acce6c3
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #714d1baebfed2e86
+step 1 #389a668e05a3ece6
+step 2 #9c70d05d36761ea1
+step 3 #dff5c4e18c00941c
+step 4 #c64a4cfe6ecc7172
+step 5 #6c521f487e0232d8
+step 6 #40e599a5e0e348be
+step 7 #0148398e17bc8029
+step 8 #2f2cfbaec14e7238
+step 9 #f7d403646265ca33
+step 10 #b78fb62a907e03b9
+step 11 #0906015a7f95e627
+step 12 #a77a7c5c96bc102b
+step 13 #8f2c3610829bf579
+step 14 #61e5c8c140785f7d
+step 15 #e4b0a694b6d436f2
+step 16 #b8730b22c5178be0
+step 17 #e9427e47b3577a93
+step 18 #649441d5fb0e1ca5
+step 19 #f799f256437d3c8d
+step 20 #3f30ab9daf202b97
+step 21 #dfe789f1fda8007f
+step 22 #db5588fadec1ca1f
+step 23 #38d3d94b6a050043
+step 24 #0f979fab4e0e8439
+step 25 #8cbe67841af1c59c
+step 26 #30808f8162614692
+step 27 #2baaa5c2410011cc
+step 28 #b417f0b733327b05
+step 29 #d3bfbf0c6975fb6e
+step 30 #63460506d547bfb8
+step 31 #e8a78f0333f488a4
+step 32 #05e8d0f26d6401c4
+step 33 #2ae2fc751888b6c5
+step 34 #458962fd8aaef211
+step 35 #e49fa86e3ccaad88
+step 36 #eaf539c73bb5cdc3
+step 37 #de50dfe1b7cfbf29
+step 38 #cb8a26e2064dada4
+step 39 #cf765f3728e00fb3
+step 40 #fdd19507c9e01a62
+step 41 #817cc7b245d0b9e6
+step 42 #6d4276e7487462b6
+step 43 #518edfb09cbb934d
+step 44 #3c4f45571403b834
+step 45 #17feffe63838f25a
+step 46 #7ab524c7aeaf28df
+step 47 #e6ef0df9702429ff
+step 48 #9ad314d975e21585
+step 49 #1f40d354a5229879
+step 50 #b57afbdf6444b5dc
+step 51 #05a657d059b4c654
+step 52 #5621ff12fed55d5c
+step 53 #5fff725624a29430
+step 54 #28ac3a0b2b8e6300
+step 55 #dafc3b5739df7104
+step 56 #b97e5300b99e94c1
+step 57 #0c689664cae20d6f
+step 58 #5eac6946391821c1
+step 59 #760bd996df51360b
+step 60 #5d1a13b18bc6a78a
+step 61 #6b4c1b63887480d2
+step 62 #c24fb784bc87585f
+step 63 #66a5b6ac2f1f1675
+step 64 #1a3588ebe17a8978
+step 65 #1164eea68e07c52e
+step 66 #16d79106dd562e33
+step 67 #aa7e1032b203332b
+step 68 #86be2685dbab94af
+step 69 #8ff851201f70757c
+step 70 #97518cac4841618a
+step 71 #92d729e3675d3144
+step 72 #8ffdd09c100812ce
+step 73 #e15d45c5ed3184fe
+step 74 #48690755006bf568
+step 75 #398d857291dcaa0f
+step 76 #c42d7092c795d08d
+step 77 #0de7564cbafcfde7
+step 78 #e305e0e31b9fd304
+step 79 #b854c2da9b7be85c
+step 80 #6771d17891212230
+step 81 #886ae30421d3833a
+step 82 #36cfd71c351d5eb6
+step 83 #176d24ba6217a8e7
+step 84 #d40d1e820e8550a3
+step 85 #83a738035768e98f
+step 86 #565731df5565bb66
+step 87 #9630303db82da7a5
+step 88 #b4943e3e53e6f535
+step 89 #6cf59661f041645e
+step 90 #21de8daf738d94ce
+step 91 #dcab1b8d9f0cb7d2
+step 92 #6d7f1b671419a788
+step 93 #0913dbbe3deece64
+step 94 #6b076768c3683b1e
+step 95 #2a65dcc9cbf8b07f
+step 96 #e63f4ba1542a7b23
+step 97 #df7e4ac1d16efff6
+step 98 #e50fca340f2262f4
+step 99 #f851ce748c0441de
+step 100 #2491eb4460afb910
+step 101 #9548cac316b203a6
+step 102 #11f7cac624c6d7c9
+step 103 #7adbbfb70862bd13
+step 104 #9359fe18a2c4b4cd
+step 105 #040a6deaf4802a8c
+step 106 #3c7314db8e6c5271
+step 107 #a9117136909a5e4c
+step 108 #caeeba5d1a88cccd
+step 109 #e9581ddf7e9421d4
+step 110 #5588d5a9f7dcd7da
+step 111 #675ef91990bea679
+step 112 #d1ec95f65ed2972a
+step 113 #ae164b939fda71c4
+step 114 #7b0069a7fe18af00
+step 115 #3ddece766620f7ca
+step 116 #16e37ba4bebf7270
+step 117 #4b7b0483ddebbcb0
+step 118 #ef93935897151148
+step 119 #d8ef61164aa86e85
+step 120 #fba88e016e3af630
+step 121 #9c2a9cf0d99167d3
+step 122 #6a251b4ec0706f04
+step 123 #eb86fd3a324b55c1
+step 124 #8104b972a3675da6
+step 125 #826469ccebda3d2c
+step 126 #ee8c688049ddaa23
+step 127 #a5109e5cb989bb10
+step 128 #67f1410665c95290
+step 129 #7f92ad0d42f363bb
+step 130 #4423ef73f5330c3e
+step 131 #ec67798f7a53972e
+step 132 #38f1c8acccc10977
+step 133 #8f944b4ba55c0a35
+step 134 #9ea80c6499ce698b
+step 135 #54067ab5431edecd
+step 136 #63d17ce6059be7a7
+step 137 #23ec629fc793be3a
+step 138 #2a6a454d6780285f
+step 139 #578767aaeabc0809
+step 140 #48ae18ce97dd5f78
+step 141 #0beed769c458043a
+step 142 #6db0429b29a946e8
+step 143 #ac71616ba3fea2ff
+step 144 #9135f01bcda820a8
+step 145 #faf7348925ba497c
+step 146 #c33ac46846673b8d
+step 147 #3966be24bb3fff94
+step 148 #8c314994b90b94bd
+step 149 #a0d777ff72129258
+step 150 #42b34c694d00cf76
+step 151 #78bbce82737b5ea0
+step 152 #63aabfe86090e0ab
+step 153 #5d54dfed6432a722
+step 154 #19f3034688970282
+step 155 #cb162263c299e83e
+step 156 #648ffb11cc29e6e3
+step 157 #118426d8a156e3f3
+step 158 #afea86d03d0a1533
+step 159 #0bacbd8588ccc6eb
+step 160 #a15fbe3085ee6ab2
+step 161 #56f649f889ab19d9
+step 162 #60037606e885161b
+step 163 #864ba7bf649fb619
+step 164 #9ebf70982cee1b3b
+step 165 #e00587f7530c6ada
+step 166 #398b13d2a44134e2
+step 167 #e483505fb831696a
+step 168 #ca081411e9dce36a
+step 169 #6ff5fe9b9721ad91
+step 170 #c0f779c8fc86eb8f
+step 171 #fbc679bb11e2b89e
+step 172 #63b5c6e42e3c841c
+step 173 #d1e3006092bd264b
+step 174 #0ff75ff7bf2bb014
+step 175 #5e42f716345bfe20
+step 176 #b807aa5cb1950204
+step 177 #35918eed86d591b6
+step 178 #919150e378d2f847
+step 179 #b358ed3635d32ce3
+step 180 #b7a3610f28cb37ee
+step 181 #d07e2274fe280836
+step 182 #c5053e0ffeab087b
+step 183 #dd740708eb81aa96
+step 184 #5e8033c5397bbc45
+step 185 #310a50b76024fc3c
+step 186 #64b8c73582ef1d4d
+step 187 #0ff6e804fd2954f9
+step 188 #faf5f10fe7730b62
+step 189 #962938b6e68fbe72
+step 190 #48c99ae1bf95e929
+step 191 #5d2d0af96883b4f9
+step 192 #ac37d854a99d2f58
+step 193 #0814cf6379ecba3c
+step 194 #500133d1ecb21cc1
+step 195 #97b2a60ae37e2566
+step 196 #cdd2a95fa6a32957
+step 197 #959bd71ca4e82808
+step 198 #cd17d90037a14e19
+step 199 #b1303864f308c38d
+step 200 #111a78eb69e91363
+state #a3c6fc4c14c0c7b6
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #2e98d2c462a7894a
+step 1 DECL P: bool ok = false | SPIN Q: espera activa (bucle sin avanzar) | SKIP R: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #647e3a2654857f31
+step 2 SPIN Q: espera activa (bucle sin avanzar) | SKIP R: skip | DECL P: int n = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #bdd9f7990173abd4
+step 3 ENTER R: entra a M.abrir | BLOCKED P: espera para entrar a M.ver | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c0b4517b67083a66
+step 4 SPIN Q: espera activa (bucle sin avanzar) | ASSIGN R: listo = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2c1a62b4a401e1e9
+step 5 RETURN R: retorna de M.abrir, libera el monitor | ENTER P: entra a M.ver | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #99e87c8e641b6d97
+step 6 ASSIGN P: r = true | SPIN Q: espera activa (bucle sin avanzar) | TERMINATED R: termina | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #47bf736727a1d43b
+step 7 SPIN Q: espera activa (bucle sin avanzar) | RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #4b10e5bee70b213a
+step 8 TERMINATED P: termina | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c5fb17c4e1991626
+step 9 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ec3961e674080c0c
+step 10 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #b7f5f2fc66799b53
+step 11 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #0906015a7f95e627
+step 12 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a77a7c5c96bc102b
+step 13 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #8f2c3610829bf579
+step 14 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #61e5c8c140785f7d
+step 15 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #e4b0a694b6d436f2
+step 16 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b8730b22c5178be0
+step 17 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #e9427e47b3577a93
+step 18 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #649441d5fb0e1ca5
+step 19 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #f799f256437d3c8d
+step 20 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #3f30ab9daf202b97
+step 21 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #dfe789f1fda8007f
+step 22 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #db5588fadec1ca1f
+step 23 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #38d3d94b6a050043
+step 24 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #0f979fab4e0e8439
+step 25 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #8cbe67841af1c59c
+step 26 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #30808f8162614692
+step 27 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2baaa5c2410011cc
+step 28 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b417f0b733327b05
+step 29 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d3bfbf0c6975fb6e
+step 30 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #63460506d547bfb8
+step 31 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #e8a78f0333f488a4
+step 32 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #05e8d0f26d6401c4
+step 33 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #2ae2fc751888b6c5
+step 34 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #458962fd8aaef211
+step 35 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #e49fa86e3ccaad88
+step 36 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #eaf539c73bb5cdc3
+step 37 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #de50dfe1b7cfbf29
+step 38 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #cb8a26e2064dada4
+step 39 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #cf765f3728e00fb3
+step 40 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #fdd19507c9e01a62
+step 41 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #817cc7b245d0b9e6
+step 42 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #6d4276e7487462b6
+step 43 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #518edfb09cbb934d
+step 44 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #3c4f45571403b834
+step 45 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #17feffe63838f25a
+step 46 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #7ab524c7aeaf28df
+step 47 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #e6ef0df9702429ff
+step 48 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #9ad314d975e21585
+step 49 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #1f40d354a5229879
+step 50 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #b57afbdf6444b5dc
+step 51 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #05a657d059b4c654
+step 52 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #5621ff12fed55d5c
+step 53 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #5fff725624a29430
+step 54 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #28ac3a0b2b8e6300
+step 55 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #dafc3b5739df7104
+step 56 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #b97e5300b99e94c1
+step 57 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #0c689664cae20d6f
+step 58 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #5eac6946391821c1
+step 59 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #760bd996df51360b
+step 60 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #5d1a13b18bc6a78a
+step 61 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #6b4c1b63887480d2
+step 62 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #c24fb784bc87585f
+step 63 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #66a5b6ac2f1f1675
+step 64 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #1a3588ebe17a8978
+step 65 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #1164eea68e07c52e
+step 66 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #16d79106dd562e33
+step 67 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #aa7e1032b203332b
+step 68 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #86be2685dbab94af
+step 69 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #8ff851201f70757c
+step 70 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #97518cac4841618a
+step 71 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #92d729e3675d3144
+step 72 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #8ffdd09c100812ce
+step 73 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #e15d45c5ed3184fe
+step 74 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #48690755006bf568
+step 75 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #398d857291dcaa0f
+step 76 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #c42d7092c795d08d
+step 77 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #0de7564cbafcfde7
+step 78 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #e305e0e31b9fd304
+step 79 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #b854c2da9b7be85c
+step 80 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #6771d17891212230
+step 81 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #886ae30421d3833a
+step 82 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #36cfd71c351d5eb6
+step 83 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #176d24ba6217a8e7
+step 84 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #d40d1e820e8550a3
+step 85 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #83a738035768e98f
+step 86 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #565731df5565bb66
+step 87 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #9630303db82da7a5
+step 88 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #b4943e3e53e6f535
+step 89 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #6cf59661f041645e
+step 90 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #21de8daf738d94ce
+step 91 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #dcab1b8d9f0cb7d2
+step 92 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #6d7f1b671419a788
+step 93 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #0913dbbe3deece64
+step 94 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #6b076768c3683b1e
+step 95 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #2a65dcc9cbf8b07f
+step 96 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #e63f4ba1542a7b23
+step 97 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #df7e4ac1d16efff6
+step 98 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #e50fca340f2262f4
+step 99 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #f851ce748c0441de
+step 100 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #2491eb4460afb910
+step 101 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #9548cac316b203a6
+step 102 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #11f7cac624c6d7c9
+step 103 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #7adbbfb70862bd13
+step 104 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #9359fe18a2c4b4cd
+step 105 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #040a6deaf4802a8c
+step 106 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #3c7314db8e6c5271
+step 107 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #a9117136909a5e4c
+step 108 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #caeeba5d1a88cccd
+step 109 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #e9581ddf7e9421d4
+step 110 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #5588d5a9f7dcd7da
+step 111 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #675ef91990bea679
+step 112 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #d1ec95f65ed2972a
+step 113 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #ae164b939fda71c4
+step 114 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #7b0069a7fe18af00
+step 115 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #3ddece766620f7ca
+step 116 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #16e37ba4bebf7270
+step 117 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #4b7b0483ddebbcb0
+step 118 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #ef93935897151148
+step 119 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #d8ef61164aa86e85
+step 120 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #fba88e016e3af630
+step 121 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #9c2a9cf0d99167d3
+step 122 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #6a251b4ec0706f04
+step 123 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #eb86fd3a324b55c1
+step 124 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #8104b972a3675da6
+step 125 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #826469ccebda3d2c
+step 126 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #ee8c688049ddaa23
+step 127 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #a5109e5cb989bb10
+step 128 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #67f1410665c95290
+step 129 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #7f92ad0d42f363bb
+step 130 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #4423ef73f5330c3e
+step 131 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #ec67798f7a53972e
+step 132 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #38f1c8acccc10977
+step 133 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #8f944b4ba55c0a35
+step 134 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #9ea80c6499ce698b
+step 135 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #54067ab5431edecd
+step 136 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #63d17ce6059be7a7
+step 137 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #23ec629fc793be3a
+step 138 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #2a6a454d6780285f
+step 139 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #578767aaeabc0809
+step 140 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #48ae18ce97dd5f78
+step 141 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #0beed769c458043a
+step 142 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #6db0429b29a946e8
+step 143 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #ac71616ba3fea2ff
+step 144 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #9135f01bcda820a8
+step 145 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #faf7348925ba497c
+step 146 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #c33ac46846673b8d
+step 147 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #3966be24bb3fff94
+step 148 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #8c314994b90b94bd
+step 149 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #a0d777ff72129258
+step 150 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #42b34c694d00cf76
+step 151 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #78bbce82737b5ea0
+step 152 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #63aabfe86090e0ab
+step 153 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #5d54dfed6432a722
+step 154 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #19f3034688970282
+step 155 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #cb162263c299e83e
+step 156 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #648ffb11cc29e6e3
+step 157 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #118426d8a156e3f3
+step 158 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #afea86d03d0a1533
+step 159 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #0bacbd8588ccc6eb
+step 160 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #a15fbe3085ee6ab2
+step 161 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #56f649f889ab19d9
+step 162 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #60037606e885161b
+step 163 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #864ba7bf649fb619
+step 164 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #9ebf70982cee1b3b
+step 165 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #e00587f7530c6ada
+step 166 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #398b13d2a44134e2
+step 167 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #e483505fb831696a
+step 168 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #ca081411e9dce36a
+step 169 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #6ff5fe9b9721ad91
+step 170 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #c0f779c8fc86eb8f
+step 171 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #fbc679bb11e2b89e
+step 172 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #63b5c6e42e3c841c
+step 173 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #d1e3006092bd264b
+step 174 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #0ff75ff7bf2bb014
+step 175 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #5e42f716345bfe20
+step 176 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #b807aa5cb1950204
+step 177 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #35918eed86d591b6
+step 178 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #919150e378d2f847
+step 179 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #b358ed3635d32ce3
+step 180 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #b7a3610f28cb37ee
+step 181 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #d07e2274fe280836
+step 182 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #c5053e0ffeab087b
+step 183 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #dd740708eb81aa96
+step 184 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #5e8033c5397bbc45
+step 185 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #310a50b76024fc3c
+step 186 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #64b8c73582ef1d4d
+step 187 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #0ff6e804fd2954f9
+step 188 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #faf5f10fe7730b62
+step 189 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #962938b6e68fbe72
+step 190 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #48c99ae1bf95e929
+step 191 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #5d2d0af96883b4f9
+step 192 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #ac37d854a99d2f58
+step 193 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #0814cf6379ecba3c
+step 194 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #500133d1ecb21cc1
+step 195 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #97b2a60ae37e2566
+step 196 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #cdd2a95fa6a32957
+step 197 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #959bd71ca4e82808
+step 198 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #cd17d90037a14e19
+step 199 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #b1303864f308c38d
+step 200 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #111a78eb69e91363
+state #f53b635e1dc0ca07
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #c8259d57397bcb94
+step 1 #647e3a2654857f31
+step 2 #bdd9f7990173abd4
+step 3 #c0b4517b67083a66
+step 4 #2c1a62b4a401e1e9
+step 5 #99e87c8e641b6d97
+step 6 #47bf736727a1d43b
+step 7 #4b10e5bee70b213a
+step 8 #c5fb17c4e1991626
+step 9 #ec3961e674080c0c
+step 10 #b7f5f2fc66799b53
+step 11 #0906015a7f95e627
+step 12 #a77a7c5c96bc102b
+step 13 #8f2c3610829bf579
+step 14 #61e5c8c140785f7d
+step 15 #e4b0a694b6d436f2
+step 16 #b8730b22c5178be0
+step 17 #e9427e47b3577a93
+step 18 #649441d5fb0e1ca5
+step 19 #f799f256437d3c8d
+step 20 #3f30ab9daf202b97
+step 21 #dfe789f1fda8007f
+step 22 #db5588fadec1ca1f
+step 23 #38d3d94b6a050043
+step 24 #0f979fab4e0e8439
+step 25 #8cbe67841af1c59c
+step 26 #30808f8162614692
+step 27 #2baaa5c2410011cc
+step 28 #b417f0b733327b05
+step 29 #d3bfbf0c6975fb6e
+step 30 #63460506d547bfb8
+step 31 #e8a78f0333f488a4
+step 32 #05e8d0f26d6401c4
+step 33 #2ae2fc751888b6c5
+step 34 #458962fd8aaef211
+step 35 #e49fa86e3ccaad88
+step 36 #eaf539c73bb5cdc3
+step 37 #de50dfe1b7cfbf29
+step 38 #cb8a26e2064dada4
+step 39 #cf765f3728e00fb3
+step 40 #fdd19507c9e01a62
+step 41 #817cc7b245d0b9e6
+step 42 #6d4276e7487462b6
+step 43 #518edfb09cbb934d
+step 44 #3c4f45571403b834
+step 45 #17feffe63838f25a
+step 46 #7ab524c7aeaf28df
+step 47 #e6ef0df9702429ff
+step 48 #9ad314d975e21585
+step 49 #1f40d354a5229879
+step 50 #b57afbdf6444b5dc
+step 51 #05a657d059b4c654
+step 52 #5621ff12fed55d5c
+step 53 #5fff725624a29430
+step 54 #28ac3a0b2b8e6300
+step 55 #dafc3b5739df7104
+step 56 #b97e5300b99e94c1
+step 57 #0c689664cae20d6f
+step 58 #5eac6946391821c1
+step 59 #760bd996df51360b
+step 60 #5d1a13b18bc6a78a
+step 61 #6b4c1b63887480d2
+step 62 #c24fb784bc87585f
+step 63 #66a5b6ac2f1f1675
+step 64 #1a3588ebe17a8978
+step 65 #1164eea68e07c52e
+step 66 #16d79106dd562e33
+step 67 #aa7e1032b203332b
+step 68 #86be2685dbab94af
+step 69 #8ff851201f70757c
+step 70 #97518cac4841618a
+step 71 #92d729e3675d3144
+step 72 #8ffdd09c100812ce
+step 73 #e15d45c5ed3184fe
+step 74 #48690755006bf568
+step 75 #398d857291dcaa0f
+step 76 #c42d7092c795d08d
+step 77 #0de7564cbafcfde7
+step 78 #e305e0e31b9fd304
+step 79 #b854c2da9b7be85c
+step 80 #6771d17891212230
+step 81 #886ae30421d3833a
+step 82 #36cfd71c351d5eb6
+step 83 #176d24ba6217a8e7
+step 84 #d40d1e820e8550a3
+step 85 #83a738035768e98f
+step 86 #565731df5565bb66
+step 87 #9630303db82da7a5
+step 88 #b4943e3e53e6f535
+step 89 #6cf59661f041645e
+step 90 #21de8daf738d94ce
+step 91 #dcab1b8d9f0cb7d2
+step 92 #6d7f1b671419a788
+step 93 #0913dbbe3deece64
+step 94 #6b076768c3683b1e
+step 95 #2a65dcc9cbf8b07f
+step 96 #e63f4ba1542a7b23
+step 97 #df7e4ac1d16efff6
+step 98 #e50fca340f2262f4
+step 99 #f851ce748c0441de
+step 100 #2491eb4460afb910
+step 101 #9548cac316b203a6
+step 102 #11f7cac624c6d7c9
+step 103 #7adbbfb70862bd13
+step 104 #9359fe18a2c4b4cd
+step 105 #040a6deaf4802a8c
+step 106 #3c7314db8e6c5271
+step 107 #a9117136909a5e4c
+step 108 #caeeba5d1a88cccd
+step 109 #e9581ddf7e9421d4
+step 110 #5588d5a9f7dcd7da
+step 111 #675ef91990bea679
+step 112 #d1ec95f65ed2972a
+step 113 #ae164b939fda71c4
+step 114 #7b0069a7fe18af00
+step 115 #3ddece766620f7ca
+step 116 #16e37ba4bebf7270
+step 117 #4b7b0483ddebbcb0
+step 118 #ef93935897151148
+step 119 #d8ef61164aa86e85
+step 120 #fba88e016e3af630
+step 121 #9c2a9cf0d99167d3
+step 122 #6a251b4ec0706f04
+step 123 #eb86fd3a324b55c1
+step 124 #8104b972a3675da6
+step 125 #826469ccebda3d2c
+step 126 #ee8c688049ddaa23
+step 127 #a5109e5cb989bb10
+step 128 #67f1410665c95290
+step 129 #7f92ad0d42f363bb
+step 130 #4423ef73f5330c3e
+step 131 #ec67798f7a53972e
+step 132 #38f1c8acccc10977
+step 133 #8f944b4ba55c0a35
+step 134 #9ea80c6499ce698b
+step 135 #54067ab5431edecd
+step 136 #63d17ce6059be7a7
+step 137 #23ec629fc793be3a
+step 138 #2a6a454d6780285f
+step 139 #578767aaeabc0809
+step 140 #48ae18ce97dd5f78
+step 141 #0beed769c458043a
+step 142 #6db0429b29a946e8
+step 143 #ac71616ba3fea2ff
+step 144 #9135f01bcda820a8
+step 145 #faf7348925ba497c
+step 146 #c33ac46846673b8d
+step 147 #3966be24bb3fff94
+step 148 #8c314994b90b94bd
+step 149 #a0d777ff72129258
+step 150 #42b34c694d00cf76
+step 151 #78bbce82737b5ea0
+step 152 #63aabfe86090e0ab
+step 153 #5d54dfed6432a722
+step 154 #19f3034688970282
+step 155 #cb162263c299e83e
+step 156 #648ffb11cc29e6e3
+step 157 #118426d8a156e3f3
+step 158 #afea86d03d0a1533
+step 159 #0bacbd8588ccc6eb
+step 160 #a15fbe3085ee6ab2
+step 161 #56f649f889ab19d9
+step 162 #60037606e885161b
+step 163 #864ba7bf649fb619
+step 164 #9ebf70982cee1b3b
+step 165 #e00587f7530c6ada
+step 166 #398b13d2a44134e2
+step 167 #e483505fb831696a
+step 168 #ca081411e9dce36a
+step 169 #6ff5fe9b9721ad91
+step 170 #c0f779c8fc86eb8f
+step 171 #fbc679bb11e2b89e
+step 172 #63b5c6e42e3c841c
+step 173 #d1e3006092bd264b
+step 174 #0ff75ff7bf2bb014
+step 175 #5e42f716345bfe20
+step 176 #b807aa5cb1950204
+step 177 #35918eed86d591b6
+step 178 #919150e378d2f847
+step 179 #b358ed3635d32ce3
+step 180 #b7a3610f28cb37ee
+step 181 #d07e2274fe280836
+step 182 #c5053e0ffeab087b
+step 183 #dd740708eb81aa96
+step 184 #5e8033c5397bbc45
+step 185 #310a50b76024fc3c
+step 186 #64b8c73582ef1d4d
+step 187 #0ff6e804fd2954f9
+step 188 #faf5f10fe7730b62
+step 189 #962938b6e68fbe72
+step 190 #48c99ae1bf95e929
+step 191 #5d2d0af96883b4f9
+step 192 #ac37d854a99d2f58
+step 193 #0814cf6379ecba3c
+step 194 #500133d1ecb21cc1
+step 195 #97b2a60ae37e2566
+step 196 #cdd2a95fa6a32957
+step 197 #959bd71ca4e82808
+step 198 #cd17d90037a14e19
+step 199 #b1303864f308c38d
+step 200 #111a78eb69e91363
+state #f53b635e1dc0ca07
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #714d1baebfed2e86
+step 1 #647e3a2654857f31
+step 2 #bdd9f7990173abd4
+step 3 #c0b4517b67083a66
+step 4 #2c1a62b4a401e1e9
+step 5 #99e87c8e641b6d97
+step 6 #47bf736727a1d43b
+step 7 #4b10e5bee70b213a
+step 8 #c5fb17c4e1991626
+step 9 #ec3961e674080c0c
+step 10 #b7f5f2fc66799b53
+step 11 #0906015a7f95e627
+step 12 #a77a7c5c96bc102b
+step 13 #8f2c3610829bf579
+step 14 #61e5c8c140785f7d
+step 15 #e4b0a694b6d436f2
+step 16 #b8730b22c5178be0
+step 17 #e9427e47b3577a93
+step 18 #649441d5fb0e1ca5
+step 19 #f799f256437d3c8d
+step 20 #3f30ab9daf202b97
+step 21 #dfe789f1fda8007f
+step 22 #db5588fadec1ca1f
+step 23 #38d3d94b6a050043
+step 24 #0f979fab4e0e8439
+step 25 #8cbe67841af1c59c
+step 26 #30808f8162614692
+step 27 #2baaa5c2410011cc
+step 28 #b417f0b733327b05
+step 29 #d3bfbf0c6975fb6e
+step 30 #63460506d547bfb8
+step 31 #e8a78f0333f488a4
+step 32 #05e8d0f26d6401c4
+step 33 #2ae2fc751888b6c5
+step 34 #458962fd8aaef211
+step 35 #e49fa86e3ccaad88
+step 36 #eaf539c73bb5cdc3
+step 37 #de50dfe1b7cfbf29
+step 38 #cb8a26e2064dada4
+step 39 #cf765f3728e00fb3
+step 40 #fdd19507c9e01a62
+step 41 #817cc7b245d0b9e6
+step 42 #6d4276e7487462b6
+step 43 #518edfb09cbb934d
+step 44 #3c4f45571403b834
+step 45 #17feffe63838f25a
+step 46 #7ab524c7aeaf28df
+step 47 #e6ef0df9702429ff
+step 48 #9ad314d975e21585
+step 49 #1f40d354a5229879
+step 50 #b57afbdf6444b5dc
+step 51 #05a657d059b4c654
+step 52 #5621ff12fed55d5c
+step 53 #5fff725624a29430
+step 54 #28ac3a0b2b8e6300
+step 55 #dafc3b5739df7104
+step 56 #b97e5300b99e94c1
+step 57 #0c689664cae20d6f
+step 58 #5eac6946391821c1
+step 59 #760bd996df51360b
+step 60 #5d1a13b18bc6a78a
+step 61 #6b4c1b63887480d2
+step 62 #c24fb784bc87585f
+step 63 #66a5b6ac2f1f1675
+step 64 #1a3588ebe17a8978
+step 65 #1164eea68e07c52e
+step 66 #16d79106dd562e33
+step 67 #aa7e1032b203332b
+step 68 #86be2685dbab94af
+step 69 #8ff851201f70757c
+step 70 #97518cac4841618a
+step 71 #92d729e3675d3144
+step 72 #8ffdd09c100812ce
+step 73 #e15d45c5ed3184fe
+step 74 #48690755006bf568
+step 75 #398d857291dcaa0f
+step 76 #c42d7092c795d08d
+step 77 #0de7564cbafcfde7
+step 78 #e305e0e31b9fd304
+step 79 #b854c2da9b7be85c
+step 80 #6771d17891212230
+step 81 #886ae30421d3833a
+step 82 #36cfd71c351d5eb6
+step 83 #176d24ba6217a8e7
+step 84 #d40d1e820e8550a3
+step 85 #83a738035768e98f
+step 86 #565731df5565bb66
+step 87 #9630303db82da7a5
+step 88 #b4943e3e53e6f535
+step 89 #6cf59661f041645e
+step 90 #21de8daf738d94ce
+step 91 #dcab1b8d9f0cb7d2
+step 92 #6d7f1b671419a788
+step 93 #0913dbbe3deece64
+step 94 #6b076768c3683b1e
+step 95 #2a65dcc9cbf8b07f
+step 96 #e63f4ba1542a7b23
+step 97 #df7e4ac1d16efff6
+step 98 #e50fca340f2262f4
+step 99 #f851ce748c0441de
+step 100 #2491eb4460afb910
+step 101 #9548cac316b203a6
+step 102 #11f7cac624c6d7c9
+step 103 #7adbbfb70862bd13
+step 104 #9359fe18a2c4b4cd
+step 105 #040a6deaf4802a8c
+step 106 #3c7314db8e6c5271
+step 107 #a9117136909a5e4c
+step 108 #caeeba5d1a88cccd
+step 109 #e9581ddf7e9421d4
+step 110 #5588d5a9f7dcd7da
+step 111 #675ef91990bea679
+step 112 #d1ec95f65ed2972a
+step 113 #ae164b939fda71c4
+step 114 #7b0069a7fe18af00
+step 115 #3ddece766620f7ca
+step 116 #16e37ba4bebf7270
+step 117 #4b7b0483ddebbcb0
+step 118 #ef93935897151148
+step 119 #d8ef61164aa86e85
+step 120 #fba88e016e3af630
+step 121 #9c2a9cf0d99167d3
+step 122 #6a251b4ec0706f04
+step 123 #eb86fd3a324b55c1
+step 124 #8104b972a3675da6
+step 125 #826469ccebda3d2c
+step 126 #ee8c688049ddaa23
+step 127 #a5109e5cb989bb10
+step 128 #67f1410665c95290
+step 129 #7f92ad0d42f363bb
+step 130 #4423ef73f5330c3e
+step 131 #ec67798f7a53972e
+step 132 #38f1c8acccc10977
+step 133 #8f944b4ba55c0a35
+step 134 #9ea80c6499ce698b
+step 135 #54067ab5431edecd
+step 136 #63d17ce6059be7a7
+step 137 #23ec629fc793be3a
+step 138 #2a6a454d6780285f
+step 139 #578767aaeabc0809
+step 140 #48ae18ce97dd5f78
+step 141 #0beed769c458043a
+step 142 #6db0429b29a946e8
+step 143 #ac71616ba3fea2ff
+step 144 #9135f01bcda820a8
+step 145 #faf7348925ba497c
+step 146 #c33ac46846673b8d
+step 147 #3966be24bb3fff94
+step 148 #8c314994b90b94bd
+step 149 #a0d777ff72129258
+step 150 #42b34c694d00cf76
+step 151 #78bbce82737b5ea0
+step 152 #63aabfe86090e0ab
+step 153 #5d54dfed6432a722
+step 154 #19f3034688970282
+step 155 #cb162263c299e83e
+step 156 #648ffb11cc29e6e3
+step 157 #118426d8a156e3f3
+step 158 #afea86d03d0a1533
+step 159 #0bacbd8588ccc6eb
+step 160 #a15fbe3085ee6ab2
+step 161 #56f649f889ab19d9
+step 162 #60037606e885161b
+step 163 #864ba7bf649fb619
+step 164 #9ebf70982cee1b3b
+step 165 #e00587f7530c6ada
+step 166 #398b13d2a44134e2
+step 167 #e483505fb831696a
+step 168 #ca081411e9dce36a
+step 169 #6ff5fe9b9721ad91
+step 170 #c0f779c8fc86eb8f
+step 171 #fbc679bb11e2b89e
+step 172 #63b5c6e42e3c841c
+step 173 #d1e3006092bd264b
+step 174 #0ff75ff7bf2bb014
+step 175 #5e42f716345bfe20
+step 176 #b807aa5cb1950204
+step 177 #35918eed86d591b6
+step 178 #919150e378d2f847
+step 179 #b358ed3635d32ce3
+step 180 #b7a3610f28cb37ee
+step 181 #d07e2274fe280836
+step 182 #c5053e0ffeab087b
+step 183 #dd740708eb81aa96
+step 184 #5e8033c5397bbc45
+step 185 #310a50b76024fc3c
+step 186 #64b8c73582ef1d4d
+step 187 #0ff6e804fd2954f9
+step 188 #faf5f10fe7730b62
+step 189 #962938b6e68fbe72
+step 190 #48c99ae1bf95e929
+step 191 #5d2d0af96883b4f9
+step 192 #ac37d854a99d2f58
+step 193 #0814cf6379ecba3c
+step 194 #500133d1ecb21cc1
+step 195 #97b2a60ae37e2566
+step 196 #cdd2a95fa6a32957
+step 197 #959bd71ca4e82808
+step 198 #cd17d90037a14e19
+step 199 #b1303864f308c38d
+step 200 #111a78eb69e91363
+state #f53b635e1dc0ca07
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #2e98d2c462a7894a
+step 1 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e3ddb58c363e609c
+step 2 SKIP R: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d18d3ce2bc50ba19
+step 3 SKIP R: skip | SPIN Q: espera activa (bucle sin avanzar) | DECL P: bool ok = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f0f39a04441410f5
+step 4 DECL P: int n = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #173f0742479ee874
+step 5 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f8591633395606fc
+step 6 ENTER R: entra a M.abrir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #5cec67dc9d7b6b2b
+step 7 BLOCKED P: espera para entrar a M.ver | SPIN Q: espera activa (bucle sin avanzar) | ASSIGN R: listo = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d8fabb31c0025f22
+step 8 RETURN R: retorna de M.abrir, libera el monitor | ENTER P: entra a M.ver | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #334590c3c44cc554
+step 9 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #34e2d9f170935402
+step 10 TERMINATED R: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #087fc6de8564109c
+step 11 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ca75a616687b9e6b
+step 12 ASSIGN P: r = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #0c5feef35ba8f2ab
+step 13 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #60cf761f75cdb13e
+step 14 RETURN P: retorna de M.ver, libera el monitor | SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #4d915143d38c1088
+step 15 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #718ae771a095a349
+step 16 TERMINATED P: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c9d3883f01afaf56
+step 17 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #edee864a93649987
+step 18 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #df1a148b31a9aeb9
+step 19 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #fbd021922ca1a0c1
+step 20 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2e65bf097df4c70e
+step 21 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #317537d39ee09c8d
+step 22 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #19a753432bed5e3a
+step 23 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #77649afdf29471e6
+step 24 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #f11b41ad3f0fea29
+step 25 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c0ba5f5486f24eca
+step 26 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #9633ba523f82963f
+step 27 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #005b6d7b9e955717
+step 28 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #159854ab5d1ea327
+step 29 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d32e205b616d4f5d
+step 30 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #1734de72a22bc8ac
+step 31 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a0dfbf60515e171a
+step 32 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #0d3a83111ada25c4
+step 33 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #1789b091e57e3a5b
+step 34 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #7053843cf45b60ea
+step 35 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #24fe5fe1a0e6ae80
+step 36 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #c6264a1f6cdabc70
+step 37 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #64ee29b02a05fc32
+step 38 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #d1d29c04dbb948b7
+step 39 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #80c68a6e27ac0798
+step 40 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #29ded393ef58aad5
+step 41 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #60eb0404b9c6efb9
+step 42 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #82d5f4de95d22d56
+step 43 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #19780495609a3011
+step 44 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #d61b23d078833b35
+step 45 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #a16b47fd7ddce87f
+step 46 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #a76dde3511103e33
+step 47 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #ec5b3450dee4601e
+step 48 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #c55d6d0d6f803945
+step 49 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #a51f7dffb3ba0c3a
+step 50 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #165419799e31b36d
+step 51 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #7a5c3880de020670
+step 52 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #513d81d5a5b6f437
+step 53 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #01563adde9dec1ff
+step 54 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #d8f57f5f1893c01b
+step 55 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #7d8bb75e9c904915
+step 56 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #9b714d0bcaffa88f
+step 57 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #065c8725efa6df24
+step 58 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #7e7264fb321b3126
+step 59 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #fd2bf7e138997868
+step 60 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #e638f9063dc8fd3d
+step 61 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #4ae12fbe59fe2801
+step 62 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #30f3bba5aaa69cd1
+step 63 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #1e0d05e8f369471e
+step 64 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #f979b350c6af2c28
+step 65 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #1688eea36c8020e0
+step 66 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #496038e0075ac8db
+step 67 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #4b03832b1a17da42
+step 68 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #67829c7472cf9e82
+step 69 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #4c25a642677ceee0
+step 70 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #7d46e91a8ef3e503
+step 71 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #bb8be6c3875c77e6
+step 72 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #137ff62238f7f6ec
+step 73 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #5487c7fde65c44f3
+step 74 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #1f86bc66ed91bd3e
+step 75 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #f9b99c4724d0a237
+step 76 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #390dc0cdf35e6404
+step 77 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #8117fe6691e21c5a
+step 78 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #77761c63eb97b0ff
+step 79 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #5e8e71c8ed2776d0
+step 80 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #4742c8b15ab8c74e
+step 81 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #c86856b3fe00b971
+step 82 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #22fd45bd3c40324a
+step 83 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #1ce566f5a8e67261
+step 84 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #e200956fb3c6677d
+step 85 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #45d558bec964b73c
+step 86 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #83e67f8152e60646
+step 87 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #138c5bce684bbc32
+step 88 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #6bdaa4475f67aaab
+step 89 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #c449b0f0990d5aa3
+step 90 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #e0774bc300845b86
+step 91 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #364bc9e14f02e412
+step 92 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #b03350be21fa346a
+step 93 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #e2ec02495780c32d
+step 94 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #cfd9fcf407995edc
+step 95 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #f181dced09728ce3
+step 96 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #aab47fb0cb72b2fe
+step 97 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #d5a3940831351e96
+step 98 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #6f8c4c4ceccc1173
+step 99 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #3b353924b521bfdf
+step 100 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #681599e0480c276f
+step 101 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #e4ea69f6ef5db30a
+step 102 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #cdbb4558489b23b3
+step 103 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #7f814ec857ab8ae8
+step 104 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #5044081d8d237562
+step 105 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #79414dd8efb91062
+step 106 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #8c383b6209e78fc2
+step 107 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #397bb7502df0231a
+step 108 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #77cdd24b1ee058a2
+step 109 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #9c0420938f9f078b
+step 110 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #2035e47d8b04466c
+step 111 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #7c60c96c6b947b8d
+step 112 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #4f10b9f3249d89ad
+step 113 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #be15c03fa7e30370
+step 114 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #61224985f256acec
+step 115 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #d439362452b04c93
+step 116 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #953323b6aef52d5c
+step 117 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #ecc5935fd7836116
+step 118 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #8b5513d08facda94
+step 119 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #380d7417404902bd
+step 120 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #ed7d71183ad43157
+step 121 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #f139bee5d4283c56
+step 122 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #ffebd8aed911d3f9
+step 123 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #bfb7d2b9f1630bc6
+step 124 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #fbe0498e07dcfac1
+step 125 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #7ee367247f907b01
+step 126 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #1644b1bbf3b08bfe
+step 127 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #e32cdcedd912c6f4
+step 128 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #13323df06609ca5e
+step 129 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #9d93c90d894c8125
+step 130 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #6c79d86824a923bc
+step 131 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #441a369719442851
+step 132 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #2a496d8df8106a03
+step 133 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #77cdcc75e9ea3c49
+step 134 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #3f3a8b427880818d
+step 135 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #3e8e5fd097870720
+step 136 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #527df33d77843a4c
+step 137 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #75d6e35901a53a28
+step 138 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #7301d9366c7a535f
+step 139 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #39306f09c127597c
+step 140 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #8a6fd085c8ceddd3
+step 141 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #d786a341f667de72
+step 142 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #87f49688da2870db
+step 143 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #d59dd185745217a0
+step 144 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #3114e842e60fcf04
+step 145 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #2be5a63042bba9ce
+step 146 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #854bd0ba4e7f4847
+step 147 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #9fc7e24e52a5c5ee
+step 148 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #747a4313ad76f073
+step 149 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #135226729620f5e6
+step 150 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #ce87467993cf7dc5
+step 151 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #a230c87a684f455f
+step 152 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #4a2c7327c83f36c6
+step 153 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #66a86b00841a31d1
+step 154 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #95f40685856c6fe7
+step 155 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #673f8595549e77e2
+step 156 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #f05a35315efb8c97
+step 157 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #256330b83c8e5e1a
+step 158 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #14290dfb7992cbf8
+step 159 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #f225bfbd5ba40dc9
+step 160 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #657e96133647cc40
+step 161 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #312c6c672a311d4d
+step 162 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":162,"waiting":false} #78f4f8f2b544b048
+step 163 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":163,"waiting":false} #0ef69e2c95f5520e
+step 164 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":164,"waiting":false} #1bd945cbf49781d5
+step 165 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":165,"waiting":false} #d2db2a944cb25e02
+step 166 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":166,"waiting":false} #503777b150ddbd49
+step 167 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":167,"waiting":false} #c7fad874af7c861c
+step 168 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":168,"waiting":false} #e645cc48055dd120
+step 169 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":169,"waiting":false} #5068bc3ba3d61511
+step 170 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":170,"waiting":false} #e19a253285c481d9
+step 171 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":171,"waiting":false} #357353fdedabc82d
+step 172 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":172,"waiting":false} #525e8f51059d354a
+step 173 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":173,"waiting":false} #bd62978c78682c26
+step 174 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":174,"waiting":false} #5ed7e3fa873d2bde
+step 175 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":175,"waiting":false} #281973d2dd681586
+step 176 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":176,"waiting":false} #36d7b183361fcc96
+step 177 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":177,"waiting":false} #ccbca6ad8813e045
+step 178 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":178,"waiting":false} #4ff54c44992565f9
+step 179 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":179,"waiting":false} #0afc2ecaf8a8cf01
+step 180 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":180,"waiting":false} #9ed5d64fca59887f
+step 181 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":181,"waiting":false} #525002a76b70e4d5
+step 182 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":182,"waiting":false} #e6e4c9651d30e242
+step 183 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":183,"waiting":false} #7f273e0ed627532f
+step 184 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":184,"waiting":false} #6941368ac4409224
+step 185 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":185,"waiting":false} #3c5e26d1b118e451
+step 186 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":186,"waiting":false} #7076bdcf903a673d
+step 187 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":187,"waiting":false} #2cff616a9f93490a
+step 188 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":188,"waiting":false} #acac499b4d949abd
+step 189 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":189,"waiting":false} #61d4676643e5bd38
+step 190 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":190,"waiting":false} #d7da6ff059c589a4
+step 191 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":191,"waiting":false} #48796dd51727e5ec
+step 192 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":192,"waiting":false} #4718c1ef32c4558e
+step 193 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":193,"waiting":false} #e41ca4dbdc815457
+step 194 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":194,"waiting":false} #c59e4788ed3ac5fa
+step 195 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":195,"waiting":false} #16471297afb00310
+step 196 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":196,"waiting":false} #8516906d2cef9095
+step 197 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":197,"waiting":false} #6e9a2ef9b36b1355
+step 198 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":198,"waiting":false} #67bd9da6427de701
+step 199 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":199,"waiting":false} #d658c84caf43250b
+step 200 SPIN Q: espera activa (bucle sin avanzar) | {"finished":false,"deadlock":false,"instant":200,"waiting":false} #167067111762910b
+state #ce176e047a7320fb

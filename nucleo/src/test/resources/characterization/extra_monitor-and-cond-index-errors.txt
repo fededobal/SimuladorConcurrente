@@ -1,0 +1,59 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #ccdb59a3e49f0fac
+step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #af45dff3905ba781
+step 2 ASSIGN P: v = 1 | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d003b9cf35ad09cb
+step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a919413874dcc8dc
+step 4 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #6a74aac7b23b288a
+step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #5712c2cf2b2795fd
+state #23282b23637044f8
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #b97ba6ca5191b28e
+step 1 #e125ddd41cae4da8
+step 2 #78d0e9c69ede8e49
+step 3 #a2531ae5280b5f00
+step 4 #e5ac0bc4f889646a
+step 5 #4ca2cea29983fdcd
+state #97590ad52539f324
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #1b7787f1130d3b57
+step 1 #af45dff3905ba781
+step 2 #59e9a80bdaf9e5e7
+step 3 #c13a9f8c1560a2be
+step 4 #6b1130418c7bc528
+step 5 #ac42afa17657d41f
+step 6 #ae4da4c4941df51b
+step 7 #a821b740f8b55ac0
+state #738c5b27752cfb21
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #ccdb59a3e49f0fac
+step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #af45dff3905ba781
+step 2 SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | ASSIGN P: v = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #cbee34fc15c4c059
+step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a919413874dcc8dc
+step 4 ENTER Q: entra a C.g | ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #51854ad75f957689
+step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #5712c2cf2b2795fd
+state #d10f9cef3b858c58
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #b97ba6ca5191b28e
+step 1 #af45dff3905ba781
+step 2 #cbee34fc15c4c059
+step 3 #a919413874dcc8dc
+step 4 #51854ad75f957689
+step 5 #5712c2cf2b2795fd
+state #d10f9cef3b858c58
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #1b7787f1130d3b57
+step 1 #af45dff3905ba781
+step 2 #cbee34fc15c4c059
+step 3 #a919413874dcc8dc
+step 4 #51854ad75f957689
+step 5 #5712c2cf2b2795fd
+state #d10f9cef3b858c58
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #ccdb59a3e49f0fac
+step 1 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e125ddd41cae4da8
+step 2 ENTER P: entra a B[1].f | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f5c45ebf15354e06
+step 3 ASSIGN P: v = 1 | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #8e4e7374cd02b80c
+step 4 RETURN P: retorna de B[1].f, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #729bf087c01b7d98
+step 5 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0c5245ef04a2815b
+step 6 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #bb900f94dd7a65dd
+state #54c991af0b3c10e4

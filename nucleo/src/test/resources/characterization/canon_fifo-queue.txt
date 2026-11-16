@@ -1,0 +1,255 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #e68bcf86f25284c8
+step 1 ENTER Prod: entra a BufferN.poner | BLOCKED Cons: espera para entrar a BufferN.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cf2a1f95ff38fab4
+step 2 PUSH Prod: push(items, 10) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #67e2f26ff08c78ee
+step 3 SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1651ea36d3606c81
+step 4 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #48112860980c06a4
+step 5 ASSIGN Prod: i++ => 2 | DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a4c8144922ce3d24
+step 6 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 10 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #734e210654354eb9
+step 7 ASSIGN Cons: suma = 10 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9587c956c37132ad
+step 8 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d1e8a703acbaae91
+step 9 PUSH Prod: push(items, 20) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1cc0c84936c2b21f
+step 10 ASSIGN Cons: i++ => 2 | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #a61cac5bd6607d13
+step 11 RETURN Prod: retorna de BufferN.poner, libera el monitor | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #144622c2eff5d8eb
+step 12 ENTER Cons: entra a BufferN.sacar | ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #692fc69680c173be
+step 13 DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #dd071a9e0f81bab7
+step 14 POP Cons: pop(items) => 20 | BLOCKED Prod: espera para entrar a BufferN.poner | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #bd5a96e2ef49e92f
+step 15 ASSIGN Cons: suma = 30 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #fcd4a610ab5591f3
+step 16 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b0c725a907a35a7e
+step 17 PUSH Prod: push(items, 30) | ASSIGN Cons: i++ => 3 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a60e9fa5abd1b572
+step 18 BLOCKED Cons: espera para entrar a BufferN.sacar | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c1c44a47214c3071
+step 19 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #2ee643676d79a9e4
+step 20 ASSIGN Prod: i++ => 4 | DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #e827c9adea8c4811
+step 21 POP Cons: pop(items) => 30 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #108439ba59c5b868
+step 22 BLOCKED Prod: espera para entrar a BufferN.poner | ASSIGN Cons: suma = 60 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #67154f64f17e2434
+step 23 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #be5f708e82b82941
+step 24 ASSIGN Cons: i++ => 4 | PUSH Prod: push(items, 40) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #dcad53447e3f763f
+step 25 SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | BLOCKED Cons: espera para entrar a BufferN.sacar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #fff8d4745cba5421
+step 26 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #7a361b596b3e0a23
+step 27 DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #9baff699c0703662
+step 28 POP Cons: pop(items) => 40 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #01c964f07e554222
+step 29 TERMINATED Prod: termina | ASSIGN Cons: suma = 100 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #18948d6bbeffe852
+step 30 RETURN Cons: retorna de BufferN.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #01be5d8c1b75d666
+step 31 ASSIGN Cons: i++ => 5 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #72600da0086012df
+step 32 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":32,"waiting":false} #c3149ad1f4d4f9ea
+state #17c9109d5cc4092c
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #d889f0dad5d4c662
+step 1 #6ffb15c09a8ffc2f
+step 2 #f930b14e365d5c45
+step 3 #270488994fdfd28a
+step 4 #847306a428973061
+step 5 #6e35190fe5da35ad
+step 6 #c75097730641c681
+step 7 #ead4c5d645d5ffa7
+step 8 #465a99f6f032d238
+step 9 #a30c83cf128c4bfa
+step 10 #706b25b1d66a4f91
+step 11 #a74bbc928e83c7ca
+step 12 #53477b45f793406a
+step 13 #f34101785914fcf2
+step 14 #b7d252c80af7daa5
+step 15 #640cd59e97dc0050
+step 16 #6f51ee2409dab01b
+step 17 #f083139bf6626066
+step 18 #c41402b669cc6aa8
+step 19 #325c10eeb551f867
+step 20 #500868a93be16e84
+step 21 #6f22a8bb1bca025e
+step 22 #9c331b455226cfcf
+step 23 #a6489883a85bda54
+step 24 #5708980a193fdba3
+step 25 #093aa1edfbbe1811
+step 26 #3641514cdd5a3cd5
+step 27 #fbf485e341dfe908
+step 28 #ef6762e83a438055
+step 29 #5dd51908471619a3
+step 30 #d783a36846fbf964
+step 31 #2cce0a4a06e2f5fe
+step 32 #61bd16ed82c0d411
+step 33 #c70fb8763240c980
+step 34 #8e04ce38c6c10ac3
+step 35 #b9e4da956e88325c
+step 36 #ef844d3afb86839e
+state #fce1cadbc8334d9f
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #52bdec7f9e7c56f0
+step 1 #cf2a1f95ff38fab4
+step 2 #67e2f26ff08c78ee
+step 3 #1651ea36d3606c81
+step 4 #48112860980c06a4
+step 5 #a4c8144922ce3d24
+step 6 #9bcb01599889e191
+step 7 #3030965929c769e6
+step 8 #1e47d18e1364b807
+step 9 #f3e8e86c48a9fa15
+step 10 #a878a29f48dd9153
+step 11 #0c67c9c1d67ac17b
+step 12 #9b89346b117408ef
+step 13 #db66b71b0945f460
+step 14 #fb9c4064566e47be
+step 15 #0f1d1c50a8228d0d
+step 16 #3486056ded573251
+step 17 #2381a0c4182e2be0
+step 18 #efb2b998cf4fef60
+step 19 #094db3271b4e7af0
+step 20 #96d6c33c097e0954
+step 21 #8720452b80f080bf
+step 22 #0cc457a17d6a6a88
+step 23 #d3c98a4a451e4c5a
+step 24 #d4bb9e64c6cc2663
+step 25 #de19ceb5c980eb7a
+step 26 #0ecb23b96f869711
+step 27 #746bc6ab9c8f8eaf
+step 28 #e61d3e6199ba0cc2
+step 29 #c82b9f3fba55bea1
+step 30 #2bf65e32da9240e5
+step 31 #95d2a087a9e49249
+step 32 #88e8b584eaa26702
+step 33 #570060345376a5dc
+step 34 #6866ee395ca987b2
+state #146fb50977349a88
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #e68bcf86f25284c8
+step 1 ENTER Prod: entra a BufferN.poner | BLOCKED Cons: espera para entrar a BufferN.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cf2a1f95ff38fab4
+step 2 PUSH Prod: push(items, 10) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #67e2f26ff08c78ee
+step 3 SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1651ea36d3606c81
+step 4 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #48112860980c06a4
+step 5 DECL Cons: int x = 0 | ASSIGN Prod: i++ => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3f3e12368fb90619
+step 6 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 10 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #734e210654354eb9
+step 7 ASSIGN Cons: suma = 10 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9587c956c37132ad
+step 8 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d1e8a703acbaae91
+step 9 PUSH Prod: push(items, 20) | ASSIGN Cons: i++ => 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #187ca3d811bed563
+step 10 BLOCKED Cons: espera para entrar a BufferN.sacar | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5d07bd7ec777047c
+step 11 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #abb065252a637fce
+step 12 DECL Cons: int x = 0 | ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #147734fe7883afd5
+step 13 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 20 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #561ea1d34f4f60fa
+step 14 ASSIGN Cons: suma = 30 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #6c8ca4f2269495aa
+step 15 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #c8879b47919454c8
+step 16 PUSH Prod: push(items, 30) | ASSIGN Cons: i++ => 3 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b87347d56340d163
+step 17 BLOCKED Cons: espera para entrar a BufferN.sacar | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #147f9c09cfb6514c
+step 18 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #49e864e49d309ef5
+step 19 DECL Cons: int x = 0 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #cdaf6f2e326252a2
+step 20 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 30 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #4726675860f65109
+step 21 ASSIGN Cons: suma = 60 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #be643b8a78d5a48b
+step 22 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #426d1fc5497b8a5a
+step 23 PUSH Prod: push(items, 40) | ASSIGN Cons: i++ => 4 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #6335297cb7c304bc
+step 24 BLOCKED Cons: espera para entrar a BufferN.sacar | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #f34de9c1070e8edf
+step 25 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #bf5b33a62c13ef69
+step 26 DECL Cons: int x = 0 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #9acc3a26a55fb50c
+step 27 TERMINATED Prod: termina | POP Cons: pop(items) => 40 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #a513aba33dd376e1
+step 28 ASSIGN Cons: suma = 100 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a50def2fbdba3ded
+step 29 RETURN Cons: retorna de BufferN.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #277514c15f887cbc
+step 30 ASSIGN Cons: i++ => 5 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #bcb4068a593aacb1
+step 31 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":31,"waiting":false} #3bffee40e426c0f2
+state #9dffe96fc2d52cff
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #d889f0dad5d4c662
+step 1 #cf2a1f95ff38fab4
+step 2 #67e2f26ff08c78ee
+step 3 #1651ea36d3606c81
+step 4 #48112860980c06a4
+step 5 #3f3e12368fb90619
+step 6 #734e210654354eb9
+step 7 #9587c956c37132ad
+step 8 #d1e8a703acbaae91
+step 9 #187ca3d811bed563
+step 10 #5d07bd7ec777047c
+step 11 #abb065252a637fce
+step 12 #147734fe7883afd5
+step 13 #561ea1d34f4f60fa
+step 14 #6c8ca4f2269495aa
+step 15 #c8879b47919454c8
+step 16 #b87347d56340d163
+step 17 #147f9c09cfb6514c
+step 18 #49e864e49d309ef5
+step 19 #cdaf6f2e326252a2
+step 20 #4726675860f65109
+step 21 #be643b8a78d5a48b
+step 22 #426d1fc5497b8a5a
+step 23 #6335297cb7c304bc
+step 24 #f34de9c1070e8edf
+step 25 #bf5b33a62c13ef69
+step 26 #9acc3a26a55fb50c
+step 27 #a513aba33dd376e1
+step 28 #a50def2fbdba3ded
+step 29 #277514c15f887cbc
+step 30 #bcb4068a593aacb1
+step 31 #3bffee40e426c0f2
+state #9dffe96fc2d52cff
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #52bdec7f9e7c56f0
+step 1 #cf2a1f95ff38fab4
+step 2 #67e2f26ff08c78ee
+step 3 #1651ea36d3606c81
+step 4 #48112860980c06a4
+step 5 #3f3e12368fb90619
+step 6 #734e210654354eb9
+step 7 #9587c956c37132ad
+step 8 #d1e8a703acbaae91
+step 9 #187ca3d811bed563
+step 10 #5d07bd7ec777047c
+step 11 #abb065252a637fce
+step 12 #147734fe7883afd5
+step 13 #561ea1d34f4f60fa
+step 14 #6c8ca4f2269495aa
+step 15 #c8879b47919454c8
+step 16 #b87347d56340d163
+step 17 #147f9c09cfb6514c
+step 18 #49e864e49d309ef5
+step 19 #cdaf6f2e326252a2
+step 20 #4726675860f65109
+step 21 #be643b8a78d5a48b
+step 22 #426d1fc5497b8a5a
+step 23 #6335297cb7c304bc
+step 24 #f34de9c1070e8edf
+step 25 #bf5b33a62c13ef69
+step 26 #9acc3a26a55fb50c
+step 27 #a513aba33dd376e1
+step 28 #a50def2fbdba3ded
+step 29 #277514c15f887cbc
+step 30 #bcb4068a593aacb1
+step 31 #3bffee40e426c0f2
+state #9dffe96fc2d52cff
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #e68bcf86f25284c8
+step 1 ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #6ffb15c09a8ffc2f
+step 2 BLOCKED Prod: espera para entrar a BufferN.poner | WAIT Cons: wait(noVacio) - libera el monitor y se demora | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5cfafc69fc91d2f6
+step 3 PUSH Prod: push(items, 10) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #bc022ad4260c3080
+step 4 SIGNAL Prod: signal(noVacio) - despierta a Cons (compite por el monitor) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ec52a7912ccb7428
+step 5 RETURN Prod: retorna de BufferN.poner, libera el monitor | REENTER Cons: reingresa a BufferN | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #97af56f0e5751712
+step 6 ASSIGN Prod: i++ => 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #694cf8a8575cd60b
+step 7 BLOCKED Prod: espera para entrar a BufferN.poner | DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #507f409da8a0de86
+step 8 POP Cons: pop(items) => 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #1e4eaa92fbca4d36
+step 9 ASSIGN Cons: suma = 10 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8b9166a1d52be463
+step 10 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #3c4a2ffd6e8c3626
+step 11 ASSIGN Cons: i++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #6b977512e9f58c12
+step 12 PUSH Prod: push(items, 20) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #7907f62baf35b68e
+step 13 BLOCKED Cons: espera para entrar a BufferN.sacar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f84574c8a9e1e37d
+step 14 SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d5df28b3993fa989
+step 15 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #c6e46206aaae87c4
+step 16 ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6cbde4cc0012712f
+step 17 DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #b824dbd0481a4cce
+step 18 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 20 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #1bd2666b0dd031af
+step 19 ASSIGN Cons: suma = 30 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5df04a4e76a4e8f8
+step 20 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #eed458637eb48c49
+step 21 ASSIGN Cons: i++ => 3 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #018241311bb27ba0
+step 22 BLOCKED Cons: espera para entrar a BufferN.sacar | PUSH Prod: push(items, 30) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #94429e34bc322cc0
+step 23 SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #19a8b18f6133b8bd
+step 24 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #da69f43569aea72c
+step 25 DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #98c8467ff3c3ae2f
+step 26 ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #a31162f8c2f12abf
+step 27 BLOCKED Prod: espera para entrar a BufferN.poner | POP Cons: pop(items) => 30 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #d4ceb7a5a2e44d86
+step 28 ASSIGN Cons: suma = 60 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #97eaa77b3131d471
+step 29 RETURN Cons: retorna de BufferN.sacar, libera el monitor | ENTER Prod: entra a BufferN.poner | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #0b283c647af4dcef
+step 30 PUSH Prod: push(items, 40) | ASSIGN Cons: i++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d53ea6c0198e0f48
+step 31 BLOCKED Cons: espera para entrar a BufferN.sacar | SIGNAL Prod: signal(noVacio) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #81c4f7c15b553624
+step 32 RETURN Prod: retorna de BufferN.poner, libera el monitor | ENTER Cons: entra a BufferN.sacar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #a1ee33d3769836d4
+step 33 DECL Cons: int x = 0 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #6b9c01f7161e6f9b
+step 34 ASSIGN Prod: i++ => 5 | POP Cons: pop(items) => 40 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #367e236fab2bc454
+step 35 TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #814a9e17bf09c4cf
+step 36 ASSIGN Cons: suma = 100 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #89ebfa3b4b39e29d
+step 37 RETURN Cons: retorna de BufferN.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #9462c363f865fa17
+step 38 ASSIGN Cons: i++ => 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #17fa33c19b4dfd2c
+step 39 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":39,"waiting":false} #9c509fcfa6f1c1c4
+state #100ee4c402ff994b

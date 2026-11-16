@@ -25,7 +25,7 @@ final class ProgramCorpus {
         Map<String, String> out = new LinkedHashMap<>();
         try (Stream<Path> s = Files.list(EXAMPLES)) {
             for (Path p : s.filter(x -> x.toString().endsWith(".mon")).sorted().toList()) {
-                out.put("ejemplo/" + p.getFileName(), Files.readString(p));
+                out.put("example/" + p.getFileName(), Files.readString(p));
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -59,7 +59,7 @@ final class ProgramCorpus {
                 process W[i: 0..4] { Gate.esperar(); }
                 process Opener { Gate.abrir(); }
                 """);
-        p.put("canon/lista-decl", """
+        p.put("canon/list-declaration", """
                 monitor M { int a, b = 5; int recibido = 0;
                   procedure guardar(v: in int) { recibido = v; } }
                 process P { text lista, comp; int x, y = 7; M.guardar(x + y); }
@@ -68,13 +68,13 @@ final class ProgramCorpus {
                 monitor M { cond c; procedure bloquear() { wait(c); } }
                 process P { M.bloquear(); }
                 """);
-        p.put("canon/cola-ordenada", """
+        p.put("canon/sorted-queue", """
                 monitor M { ColaOrdenada c(int); int primero = 0;
                   procedure cargar() { push(c, 3); push(c, 1); push(c, 2); }
                   procedure sacar() { pop(c, primero); } }
                 process P { M.cargar(); M.sacar(); }
                 """);
-        p.put("canon/b1-error-libera", """
+        p.put("canon/b1-error-releases", """
                 monitor M { int x = 0; procedure f() { x = 10 / x; } procedure g() { x = x + 1; } }
                 process A { M.f(); } process B { M.g(); }
                 """);
@@ -84,7 +84,7 @@ final class ProgramCorpus {
         p.put("canon/b2-double", """
                 monitor M { double d = 1.5; procedure f() { d++; } } process A { M.f(); }
                 """);
-        p.put("canon/b6-sin-fin", """
+        p.put("canon/b6-endless", """
                 monitor M { int x = 0; procedure f() { x = x + 1; } }
                 process P[i: 1..4] { while (true) { M.f(); } }
                 """);
@@ -95,7 +95,7 @@ final class ProgramCorpus {
                 process Suma { for (int i = 1..3) { TOTAL.incrementar(); } }
                 process Chequeo { int leido = 0; TOTAL.verificar(leido); TOTAL.verificar(leido); }
                 """);
-        p.put("canon/cola-fifo", """
+        p.put("canon/fifo-queue", """
                 monitor BufferN { Cola items(int); int suma = 0; cond noVacio;
                   procedure poner(v: in int) { push(items, v); signal(noVacio); }
                   procedure sacar() { while (empty items) wait(noVacio); int x = 0; pop(items, x); suma = suma + x; } }
@@ -104,13 +104,13 @@ final class ProgramCorpus {
                 """);
 
         // ---- variantes
-        p.put("var/contador-10", """
+        p.put("variant/counter-10", """
                 monitor C { int x = 0; int dentro = 0; int maxDentro = 0;
                   procedure inc() { dentro++; if (dentro > maxDentro) maxDentro = dentro; x = x + 1; dentro--; }
                   procedure ver(r: out int) { r = x; } }
                 process P[i: 1..10] { int v; for (1..5) { C.inc(); } C.ver(v); write("P", i, " vio ", v); }
                 """);
-        p.put("var/buffer-limitado-30", """
+        p.put("variant/bounded-buffer-30", """
                 monitor B { int buf[3]; int ocupado = 0, libre = 0, cantidad = 0; int suma = 0; int n = 0;
                   cond notLleno, notVacio;
                   procedure depositar(d: in int) { while (cantidad == 3) wait(notLleno);
@@ -120,20 +120,20 @@ final class ProgramCorpus {
                 process Prod[i: 1..15] { B.depositar(i); B.depositar(i); }
                 process Cons[j: 1..15] { int x; B.retirar(x); B.retirar(x); }
                 """);
-        p.put("var/dos-monitores", """
+        p.put("variant/two-monitors", """
                 monitor A { int a = 0; procedure inc() { a = a + 1; } }
                 monitor B { int b = 0; cond c; procedure inc() { b = b + 1; signal(c); }
                   procedure esperar(n: in int) { while (b < n) wait(c); } }
                 process P[i: 1..6] { A.inc(); B.inc(); A.inc(); }
                 process Q { B.esperar(6); A.inc(); }
                 """);
-        p.put("var/cond-arreglo-turnos", """
+        p.put("variant/cond-array-turns", """
                 monitor T { int turno = 0; cond c[10]; int orden[10]; int k = 0;
                   procedure pedir(id: in int) { while (turno != id) wait(c[id]); orden[k] = id; k++; }
                   procedure liberar(id: in int) { turno = turno + 1; if (turno < 10) signal(c[turno]); } }
                 process P[i: 0..9] { T.pedir(i); T.liberar(i); }
                 """);
-        p.put("var/filosofos-5", """
+        p.put("variant/philosophers-5", """
                 monitor Mesa { bool ocupado[5]; cond libre[5]; int comidas = 0;
                   procedure tomar(i: in int) {
                     while (ocupado[i] or ocupado[(i + 1) mod 5]) wait(libre[i]);
@@ -143,7 +143,7 @@ final class ProgramCorpus {
                     signal(libre[(i + 4) mod 5]); signal(libre[(i + 1) mod 5]); } }
                 process F[i: 0..4] { for (1..3) { Mesa.tomar(i); skip; Mesa.dejar(i); } }
                 """);
-        p.put("var/lectores-escritores-30", """
+        p.put("variant/readers-writers-30", """
                 monitor RW { int nr = 0, nw = 0; int lecturas = 0, escrituras = 0; int maxW = 0;
                   cond okLeer, okEscribir;
                   procedure pedidoLeer() { while (nw > 0) wait(okLeer); nr++; }
@@ -154,18 +154,18 @@ final class ProgramCorpus {
                 process L[i: 1..24] { RW.pedidoLeer(); skip; RW.liberaLeer(); }
                 process E[i: 1..6] { RW.pedidoEscribir(); skip; RW.liberaEscribir(); }
                 """);
-        p.put("var/out-elemento-arreglo", """
+        p.put("variant/out-array-element", """
                 monitor M { int n = 0; procedure dar(r: out int; s: out text) { n++; r = n * 10; s = "v"; } }
                 process P[i: 0..3] { int a[3]; text t[2]; for (int k = 0..2) { M.dar(a[k], t[k mod 2]); }
                   write(a[0], " ", a[1], " ", a[2], t[0], t[1]); }
                 """);
-        p.put("var/anidada-simple", """
+        p.put("variant/nested-simple", """
                 monitor B { int b = 0; procedure inc() { b = b + 1; } }
                 monitor A { int a = 0; procedure f() { a = a + 1; B.inc(); a = a + 1; } }
                 process P[i: 1..5] { A.f(); }
                 process Q[i: 1..3] { B.inc(); }
                 """);
-        p.put("var/anidada-wait-en-B", """
+        p.put("variant/nested-wait-in-B", """
                 monitor B { bool listo = false; cond c; int pasaron = 0;
                   procedure esperar() { while (not listo) wait(c); pasaron++; }
                   procedure abrir() { listo = true; signal_all(c); } }
@@ -174,7 +174,7 @@ final class ProgramCorpus {
                 process Q { skip; skip; B.abrir(); }
                 process R { A.f(); }
                 """);
-        p.put("var/anidada-lockout", """
+        p.put("variant/nested-lockout", """
                 monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure abrir() { listo = true; signal(c); } }
@@ -182,46 +182,46 @@ final class ProgramCorpus {
                 process P { A.f(); }
                 process Q { skip; skip; A.g(); }
                 """);
-        p.put("var/error-con-cola-de-entrada", """
+        p.put("variant/error-with-entry-queue", """
                 monitor M { int x = 0; cond c;
                   procedure f() { skip; skip; x = 1 / 0; }
                   procedure g() { x = x + 1; } }
                 process A { M.f(); }
                 process B[i: 1..8] { M.g(); }
                 """);
-        p.put("var/error-anidado-libera-ambos", """
+        p.put("variant/nested-error-releases-both", """
                 monitor B { int b = 0; procedure f() { b = 1 / b; } procedure g() { b++; } }
                 monitor A { int a = 0; procedure f() { a++; B.f(); } procedure g() { a++; } }
                 process P { A.f(); }
                 process Q[i: 1..4] { A.g(); B.g(); }
                 """);
-        p.put("var/error-y-espera-eterna", """
+        p.put("variant/error-and-endless-wait", """
                 monitor M { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure avisar() { int x = 1 / 0; listo = true; signal(c); } }
                 process A { M.esperar(); }
                 process B { skip; skip; M.avisar(); }
                 """);
-        p.put("var/init-con-for", """
+        p.put("variant/init-with-for", """
                 monitor M { int a[5]; int suma = 0;
                   for (int i = 0..4) { a[i] = i * i; }
                   for (int i = 0..4) { suma = suma + a[i]; }
                   procedure ver(r: out int) { r = suma; } }
                 process P { int s; M.ver(s); write("suma ", s); }
                 """);
-        p.put("var/wait-reentra-y-signal-vacio", """
+        p.put("variant/wait-reenters-and-empty-signal", """
                 monitor M { int turno = 0; cond c; int senales = 0;
                   procedure avanzar() { signal(c); senales++; turno++; signal_all(c); }
                   procedure esperar(t: in int) { while (turno < t) wait(c); } }
                 process W[i: 1..10] { M.esperar(i mod 4); }
                 process S { for (1..4) { M.avanzar(); } }
                 """);
-        p.put("var/write-mucho", """
+        p.put("variant/lots-of-writes", """
                 monitor M { int x = 0; procedure f() { x++; } }
                 process P[i: 1..3] { for (1..300) { write("linea ", i); M.f(); } }
                 """);
-        p.put("var/arreglo-de-monitores", VirtualMachineTest.BANK);
-        p.put("var/llamada-cerrada-con-wait", """
+        p.put("variant/monitor-array", VirtualMachineTest.BANK);
+        p.put("variant/closed-call-with-wait", """
                 monitor B { bool listo = false; cond c;
                   procedure esperar() { while (not listo) wait(c); }
                   procedure abrir() { listo = true; signal(c); } }

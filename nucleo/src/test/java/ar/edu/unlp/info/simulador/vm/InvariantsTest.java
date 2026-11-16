@@ -272,7 +272,7 @@ class InvariantsTest {
     /** 7. los ejemplos cumplen su "// espera:" en todas las semillas. */
     private void checkExpected(String programName, String src, String testCase, VirtualMachine vm,
                                   Snapshot end, boolean hadError) {
-        if (!programName.startsWith("ejemplo/")) return;
+        if (!programName.startsWith("example/")) return;
         String[] waiting = src.lines().skip(1).findFirst().orElse("")
                 .replaceFirst("^//\\s*espera:\\s*", "").trim().split("\\s+");
         if (waiting[0].equals("deadlock")) {
