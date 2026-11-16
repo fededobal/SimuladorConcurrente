@@ -72,24 +72,31 @@ public final class VirtualMachine {
         events.setEnabled(false);
         for (Monitor m : monitors.values()) {
             MonitorDef md = monitorDefs.get(m.definition());
-            if (md.initStmts().isEmpty()) continue;
-            Process sys = new Process(-1, "«init " + m.name() + "»", "#888888");
-            Activation act = new Activation(m.name(), "«init»");
-            act.pushFront(md.initStmts());
-            sys.push(act);
-            m.setLockOwner(sys);
-            int guard = 0;
-            while (!sys.isFinished()) {
-                if (guard++ >= TOPE_INICIALIZACION) {
-                    throw new RuntimeError("La inicialización del monitor " + m.name()
-                            + " no terminó después de " + TOPE_INICIALIZACION
-                            + " pasos: revisá si tiene un ciclo infinito", sys.currentLine());
-                }
-                advance(sys);
-            }
-            m.setLockOwner(null);
+            if (!md.initStmts().isEmpty()) runMonitorInit(m, md.initStmts());
         }
         events.setEnabled(true);
+    }
+
+    /**
+     * El codigo de inicializacion lo corre un proceso de sistema (id negativo, sin eventos)
+     * que tiene el monitor tomado hasta terminar. Un ciclo sin fin es error del alumno.
+     */
+    private void runMonitorInit(Monitor m, List<Stmt> initStmts) {
+        Process sys = new Process(-1, "«init " + m.name() + "»", "#888888");
+        Activation act = new Activation(m.name(), "«init»");
+        act.pushFront(initStmts);
+        sys.push(act);
+        m.setLockOwner(sys);
+        int guard = 0;
+        while (!sys.isFinished()) {
+            if (guard++ >= TOPE_INICIALIZACION) {
+                throw new RuntimeError("La inicialización del monitor " + m.name()
+                        + " no terminó después de " + TOPE_INICIALIZACION
+                        + " pasos: revisá si tiene un ciclo infinito", sys.currentLine());
+            }
+            advance(sys);
+        }
+        m.setLockOwner(null);
     }
 
     // ================================================================= scheduling
@@ -275,11 +282,7 @@ public final class VirtualMachine {
         p.pop();
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
-            // Si el llamador es un procedure de otro monitor, lo sigue teniendo tomado
-            // (llamada cerrada, ADR 0007): los out se escriben ya.
-            for (Map.Entry<String, LValue> e : act.outBindings().entrySet()) {
-                vars.writeLValue(p.id(), e.getValue(), act.locals().get(e.getKey()));
-            }
+            writeOutParameters(p, act);
             event(p, "RETURN", m.name(),
                     p.name() + ": retorna de " + m.name() + "." + act.procedureName()
                             + ", libera el monitor");
@@ -288,6 +291,16 @@ public final class VirtualMachine {
         if (p.callStack().isEmpty()) {
             p.setState(Process.State.TERMINATED);
             event(p, "TERMINATED", "", p.name() + ": termina");
+        }
+    }
+
+    /**
+     * Copia cada parametro {@code out} al lugar del llamador. Si el llamador es un procedure
+     * de otro monitor, lo sigue teniendo tomado (llamada cerrada, ADR 0007): se escriben ya.
+     */
+    private void writeOutParameters(Process p, Activation act) {
+        for (Map.Entry<String, LValue> e : act.outBindings().entrySet()) {
+            vars.writeLValue(p.id(), e.getValue(), act.locals().get(e.getKey()));
         }
     }
 
@@ -496,6 +509,20 @@ public final class VirtualMachine {
                     + " y no puede volver a llamarlo desde otro monitor", call.line());
         }
 
+        Activation newAct = procedureActivation(m, pd, call, callerAct);
+        p.push(newAct);
+        newAct.setNeedsLock(true);
+        newAct.setEntering(true);
+        reacquireMonitor(p, newAct);
+    }
+
+    /**
+     * La activacion del procedure llamado, con los argumentos ya evaluados (todos, antes de
+     * ligar ninguno): los de entrada se copian con el tipo del parametro; los {@code out}
+     * arrancan en su valor por defecto y quedan ligados al lugar del llamador.
+     */
+    private Activation procedureActivation(Monitor m, ProcedureDef pd, Stmt.MonitorCall call,
+            Activation callerAct) {
         ExprEvaluator ev = vars.evaluator(callerAct);
         List<Value> argValues = new ArrayList<>();
         for (Expr arg : call.args()) argValues.add(ev.eval(arg));
@@ -515,10 +542,7 @@ public final class VirtualMachine {
             }
         }
         newAct.pushFront(pd.body().statements());
-        p.push(newAct);
-        newAct.setNeedsLock(true);
-        newAct.setEntering(true);
-        reacquireMonitor(p, newAct);
+        return newAct;
     }
 
     /**
@@ -632,23 +656,29 @@ public final class VirtualMachine {
     }
 
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {
-        ExprEvaluator ev = vars.evaluator(act);
         Value.QueueVal q = vars.asQueue(act, qp.queue(), qp.line());
-        // cada componente se guarda con el tipo declarado (un int en un double, un numero en
-        // un text), como al asignar una variable
-        List<Type> tipos = q.elementTypes();
-        List<Value> vals = new ArrayList<>();
-        for (int i = 0; i < qp.elements().size(); i++) {
-            vals.add(ev.eval(qp.elements().get(i)).assignTo(tipos.get(i),
-                    "la componente " + (i + 1) + " de " + qp.queue(), qp.line()));
-        }
-        Value pushed = vals.size() == 1
-                ? vals.get(0)
-                : Value.ArrayVal.tuple(vals.toArray(new Value[0]));
+        Value pushed = pushedElement(act, qp, q.elementTypes());
         q.push(pushed);
         vars.touchIfMonitorVar(p.id(), act, qp.queue());
         event(p, "PUSH", qp.queue(),
                 p.name() + ": push(" + qp.queue() + ", " + pushed.display() + ")");
+    }
+
+    /**
+     * El elemento a encolar: una componente sola, o la tupla de todas. Cada componente se
+     * guarda con el tipo declarado (un int en un double, un numero en un text), como al
+     * asignar una variable.
+     */
+    private Value pushedElement(Activation act, Stmt.QueuePush qp, List<Type> types) {
+        ExprEvaluator ev = vars.evaluator(act);
+        List<Value> values = new ArrayList<>();
+        for (int i = 0; i < qp.elements().size(); i++) {
+            values.add(ev.eval(qp.elements().get(i)).assignTo(types.get(i),
+                    "la componente " + (i + 1) + " de " + qp.queue(), qp.line()));
+        }
+        return values.size() == 1
+                ? values.get(0)
+                : Value.ArrayVal.tuple(values.toArray(new Value[0]));
     }
 
     private void execQueuePop(Process p, Activation act, Stmt.QueuePop qp) {
@@ -658,19 +688,24 @@ public final class VirtualMachine {
         }
         Value v = q.pop();
         vars.touchIfMonitorVar(p.id(), act, qp.queue());
-        if (qp.targets().size() == 1) {
-            vars.assignScalar(p.id(), act, qp.targets().get(0), v, qp.line());
-        } else {
-            if (!(v instanceof Value.ArrayVal tuple) || tuple.size() < qp.targets().size()) {
-                throw new RuntimeError("El elemento desencolado no tiene suficientes componentes "
-                        + "para el pop múltiple", qp.line());
-            }
-            for (int i = 0; i < qp.targets().size(); i++) {
-                vars.assignScalar(p.id(), act, qp.targets().get(i), tuple.get(i), qp.line());
-            }
-        }
+        assignPopped(p, act, qp, v);
         event(p, "POP", qp.queue(),
                 p.name() + ": pop(" + qp.queue() + ") => " + v.display());
+    }
+
+    /** Reparte el elemento desencolado en los destinos: uno solo, o una componente a cada uno. */
+    private void assignPopped(Process p, Activation act, Stmt.QueuePop qp, Value popped) {
+        if (qp.targets().size() == 1) {
+            vars.assignScalar(p.id(), act, qp.targets().get(0), popped, qp.line());
+            return;
+        }
+        if (!(popped instanceof Value.ArrayVal tuple) || tuple.size() < qp.targets().size()) {
+            throw new RuntimeError("El elemento desencolado no tiene suficientes componentes "
+                    + "para el pop múltiple", qp.line());
+        }
+        for (int i = 0; i < qp.targets().size(); i++) {
+            vars.assignScalar(p.id(), act, qp.targets().get(i), tuple.get(i), qp.line());
+        }
     }
 
     // ================================================================= estado / snapshots
