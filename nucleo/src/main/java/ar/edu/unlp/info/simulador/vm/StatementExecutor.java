@@ -15,7 +15,7 @@ import java.util.Map;
 final class StatementExecutor {
 
     /** Segundos maximos de un delay: una hora alcanza para cualquier ejercicio. */
-    static final int TOPE_DELAY = 3600;
+    static final int MAX_DELAY_SECONDS = 3600;
 
     private final VariableAccess vars;
     private final Map<String, Monitor> monitors;
@@ -283,8 +283,8 @@ final class StatementExecutor {
      */
     private void execDelay(Process p, Activation act, Stmt.Delay d) {
         long seconds = vars.evaluator(act).evalLong(d.seconds());
-        if (seconds < 0 || seconds > TOPE_DELAY) {
-            throw new RuntimeError("El delay tiene que ser de 0 a " + TOPE_DELAY
+        if (seconds < 0 || seconds > MAX_DELAY_SECONDS) {
+            throw new RuntimeError("El delay tiene que ser de 0 a " + MAX_DELAY_SECONDS
                     + " segundos y es de " + seconds, d.line());
         }
         p.delayUntil(clock.nowMs() + seconds * 1000);
@@ -297,9 +297,9 @@ final class StatementExecutor {
         ExprEvaluator ev = vars.evaluator(act);
         StringBuilder sb = new StringBuilder();
         for (Expr e : w.args()) sb.append(ev.eval(e).display());
-        String texto = sb.toString();
-        output.add(clock.instant(), p, texto);
-        event(p, EventKind.WRITE, "", p.name() + ": write(" + texto + ")");
+        String text = sb.toString();
+        output.add(clock.instant(), p, text);
+        event(p, EventKind.WRITE, "", p.name() + ": write(" + text + ")");
     }
 
     private void execQueuePush(Process p, Activation act, Stmt.QueuePush qp) {

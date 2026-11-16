@@ -10,16 +10,16 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link Azar} tiene que dar exactamente lo mismo que java.util.Random en la JVM: asi las
+ * {@link SeededRandom} tiene que dar exactamente lo mismo que java.util.Random en la JVM: asi las
  * semillas de los tests no cambian y el navegador, que compila este mismo codigo, coincide.
  * La coincidencia con el navegador la controla el smoke (traza fija del ejemplo 02).
  */
-class AzarTest {
+class SeededRandomTest {
 
     @Test
     void nextIntCoincideConJavaUtilRandom() {
         for (long semilla : new long[] {0, 1, 7, 42, 123456789L, -5, 1695480000000L}) {
-            Azar azar = new Azar(semilla);
+            SeededRandom azar = new SeededRandom(semilla);
             Random random = new Random(semilla);
             for (int i = 0; i < 2000; i++) {
                 int cota = 1 + (i % 150);
@@ -34,7 +34,7 @@ class AzarTest {
             List<Integer> a = new ArrayList<>();
             for (int i = 0; i < 1 + semilla % 30; i++) a.add(i);
             List<Integer> b = new ArrayList<>(a);
-            new Azar(semilla).mezclar(a);
+            new SeededRandom(semilla).shuffle(a);
             Collections.shuffle(b, new Random(semilla));
             assertEquals(b, a, "semilla " + semilla);
         }

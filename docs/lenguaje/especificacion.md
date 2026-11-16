@@ -213,7 +213,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 ## 7. Semántica de ejecución (resumen)
 
 - **Un instante = un turno del scheduler.** Con la política `random`, cada proceso listo
-  entra al turno con probabilidad `PROB_AVANCE` (80 %) y al menos uno avanza; con
+  entra al turno con probabilidad `ADVANCE_PROBABILITY` (80 %) y al menos uno avanza; con
   `round-robin`, avanzan todos los listos, por turno. Cada proceso del turno ejecuta una
   sentencia observable. El núcleo permite además avanzar un único proceso elegido, que la
   interfaz todavía no ofrece.

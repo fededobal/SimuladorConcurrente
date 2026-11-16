@@ -6,21 +6,21 @@ import java.util.stream.Collectors;
 
 /**
  * Decide que procesos avanzan en cada instante y en que orden, segun la politica elegida.
- * Usa el mismo {@link Azar} que la maquina virtual: el orden en que se consume el azar es
+ * Usa el mismo {@link SeededRandom} que la maquina virtual: el orden en que se consume el azar es
  * parte del resultado de una semilla.
  */
 final class Scheduler {
 
     /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
-    private static final int PROB_AVANCE = 80;
+    private static final int ADVANCE_PROBABILITY = 80;
 
     /** Todos los procesos, en orden de id; la maquina virtual es la duena de la lista. */
     private final List<Process> processes;
-    private final Azar random;
+    private final SeededRandom random;
     /** Posicion del ultimo proceso que arranco un turno de round robin. */
     private int rrCursor = -1;
 
-    Scheduler(List<Process> processes, Azar random) {
+    Scheduler(List<Process> processes, SeededRandom random) {
         this.processes = processes;
         this.random = random;
     }
@@ -34,47 +34,47 @@ final class Scheduler {
      * unos avancen mas rapido que otros es lo que hace aparecer los casos raros.
      */
     List<Process> nextTurn(Integer chosenProcessId, SchedulingPolicy policy) {
-        List<Process> listos = processes.stream()
+        List<Process> ready = processes.stream()
                 .filter(Process::isReady)
                 .collect(Collectors.toCollection(ArrayList::new));
-        if (listos.isEmpty()) {
+        if (ready.isEmpty()) {
             return List.of();
         }
         // Paso a paso: el usuario eligio un proceso y quiere ver solo ese.
         if (chosenProcessId != null) {
-            for (Process pr : listos) {
+            for (Process pr : ready) {
                 if (pr.id() == chosenProcessId) return List.of(pr);
             }
         }
 
-        return policy == SchedulingPolicy.ROUND_ROBIN ? roundRobinTurn() : randomTurn(listos);
+        return policy == SchedulingPolicy.ROUND_ROBIN ? roundRobinTurn() : randomTurn(ready);
     }
 
     /** Turnos parejos: todos los listos, empezando por el siguiente al ultimo que arranco. */
     private List<Process> roundRobinTurn() {
         int n = processes.size();
-        List<Process> orden = new ArrayList<>();
+        List<Process> order = new ArrayList<>();
         for (int k = 1; k <= n; k++) {
-            Process cand = processes.get((rrCursor + k) % n);
-            if (cand.isReady()) orden.add(cand);
+            Process candidate = processes.get((rrCursor + k) % n);
+            if (candidate.isReady()) order.add(candidate);
         }
-        rrCursor = processes.indexOf(orden.get(0));
-        return orden;
+        rrCursor = processes.indexOf(order.get(0));
+        return order;
     }
 
     /**
-     * Los listos en orden al azar; cada uno entra con probabilidad {@link #PROB_AVANCE} y,
+     * Los listos en orden al azar; cada uno entra con probabilidad {@link #ADVANCE_PROBABILITY} y,
      * si no entra ninguno, avanza el primero.
      */
-    private List<Process> randomTurn(List<Process> listos) {
-        random.mezclar(listos);
-        List<Process> turno = new ArrayList<>();
-        for (Process pr : listos) {
-            if (random.nextInt(100) < PROB_AVANCE) turno.add(pr);
+    private List<Process> randomTurn(List<Process> ready) {
+        random.shuffle(ready);
+        List<Process> turn = new ArrayList<>();
+        for (Process pr : ready) {
+            if (random.nextInt(100) < ADVANCE_PROBABILITY) turn.add(pr);
         }
-        if (turno.isEmpty()) {
-            turno.add(listos.get(0));   // el shuffle ya lo eligio al azar
+        if (turn.isEmpty()) {
+            turn.add(ready.get(0));   // el shuffle ya lo eligio al azar
         }
-        return turno;
+        return turn;
     }
 }

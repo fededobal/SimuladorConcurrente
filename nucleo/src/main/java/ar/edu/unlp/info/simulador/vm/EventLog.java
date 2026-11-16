@@ -17,7 +17,7 @@ final class EventLog {
      * {@link VirtualMachine#snapshot()}), pero igual un programa que no termina los acumularia
      * sin fin: se conservan solo los ultimos.
      */
-    static final int TOPE_LOG = 2000;
+    static final int MAX_ENTRIES = 2000;
 
     private final Deque<LogEntry> log = new ArrayDeque<>();
     /** Eventos del instante en curso. */
@@ -35,7 +35,7 @@ final class EventLog {
         return stepEntries;
     }
 
-    /** Los ultimos eventos (a lo sumo {@link #TOPE_LOG}), del mas viejo al mas nuevo. */
+    /** Los ultimos eventos (a lo sumo {@link #MAX_ENTRIES}), del mas viejo al mas nuevo. */
     List<LogEntry> all() {
         return List.copyOf(log);
     }
@@ -58,7 +58,7 @@ final class EventLog {
 
     private void record(LogEntry e) {
         log.addLast(e);
-        if (log.size() > TOPE_LOG) log.removeFirst();
+        if (log.size() > MAX_ENTRIES) log.removeFirst();
         stepEntries.add(e);
     }
 }

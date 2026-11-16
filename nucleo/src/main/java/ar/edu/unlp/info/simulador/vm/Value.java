@@ -67,30 +67,30 @@ public sealed interface Value {
      */
     final class QueueVal implements Value {
         private final List<Value> items;
-        private final boolean ordenada;
+        private final boolean sorted;
         /** Tipos de las componentes de cada elemento, como se declaro la cola. */
         private final List<Type> elementTypes;
 
-        public QueueVal(boolean ordenada, List<Type> elementTypes) {
-            this(new ArrayList<>(), ordenada, elementTypes);
+        public QueueVal(boolean sorted, List<Type> elementTypes) {
+            this(new ArrayList<>(), sorted, elementTypes);
         }
-        private QueueVal(List<Value> items, boolean ordenada, List<Type> elementTypes) {
+        private QueueVal(List<Value> items, boolean sorted, List<Type> elementTypes) {
             this.items = items;
-            this.ordenada = ordenada;
+            this.sorted = sorted;
             this.elementTypes = elementTypes;
         }
 
-        public boolean isOrdenada() { return ordenada; }
+        public boolean isSorted() { return sorted; }
         public List<Type> elementTypes() { return elementTypes; }
 
         public void push(Value v) {
-            if (!ordenada) {
+            if (!sorted) {
                 items.add(v);
                 return;
             }
-            Value clave = claveDe(v);
+            Value key = keyOf(v);
             int i = 0;
-            while (i < items.size() && compare(claveDe(items.get(i)), clave, -1) <= 0) i++;
+            while (i < items.size() && compare(keyOf(items.get(i)), key, -1) <= 0) i++;
             items.add(i, v);
         }
 
@@ -100,12 +100,12 @@ public sealed interface Value {
         public List<Value> snapshot() { return new ArrayList<>(items); }
 
         public QueueVal copy() {
-            return new QueueVal(new ArrayList<>(items), ordenada, elementTypes);
+            return new QueueVal(new ArrayList<>(items), sorted, elementTypes);
         }
 
         /** El criterio de orden es la primera componente: la 'x' de push(c, x, y, z). */
-        private static Value claveDe(Value v) {
-            return v instanceof ArrayVal tupla && tupla.size() > 0 ? tupla.get(0) : v;
+        private static Value keyOf(Value v) {
+            return v instanceof ArrayVal tupleVal && tupleVal.size() > 0 ? tupleVal.get(0) : v;
         }
     }
 
@@ -147,7 +147,7 @@ public sealed interface Value {
             case DoubleVal ignored -> "double";
             case BoolVal ignored -> "bool";
             case TextVal ignored -> "text";
-            case QueueVal q -> Type.queueName(q.isOrdenada() ? Type.COLA_ORDENADA : Type.COLA,
+            case QueueVal q -> Type.queueName(q.isSorted() ? Type.COLA_ORDENADA : Type.COLA,
                     q.elementTypes());
             case ArrayVal a -> a.isTuple() ? "tupla" : a.elementType().name().toLowerCase() + "[]";
         };
@@ -179,7 +179,7 @@ public sealed interface Value {
     }
 
     /** Elementos que se muestran de un arreglo o una cola; el resto se resume. */
-    int MOSTRAR_ELEMENTOS = 50;
+    int SHOWN_ELEMENTS = 50;
 
     /**
      * Lista de valores entre delimitadores. Un arreglo grande se abrevia: el snapshot se
@@ -187,7 +187,7 @@ public sealed interface Value {
      */
     private static String joined(String open, List<Value> items, String close) {
         StringBuilder sb = new StringBuilder(open);
-        int shown = Math.min(items.size(), MOSTRAR_ELEMENTOS);
+        int shown = Math.min(items.size(), SHOWN_ELEMENTS);
         for (int i = 0; i < shown; i++) {
             if (i > 0) sb.append(", ");
             sb.append(items.get(i).display());
@@ -221,7 +221,7 @@ public sealed interface Value {
      *
      * @param destino nombre de la variable, para el mensaje de error
      */
-    default Value assignTo(Type target, String destino, int line) {
+    default Value assignTo(Type target, String targetName, int line) {
         Value v = switch (target) {
             case INT -> this instanceof IntVal ? this : null;
             case DOUBLE -> this instanceof DoubleVal ? this
@@ -233,7 +233,7 @@ public sealed interface Value {
         };
         if (v == null) {
             throw new RuntimeError("No se puede guardar un " + typeName() + " (" + display()
-                    + ") en '" + destino + "', que es " + target.keyword(), line);
+                    + ") en '" + targetName + "', que es " + target.keyword(), line);
         }
         return v;
     }

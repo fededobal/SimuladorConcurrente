@@ -19,7 +19,7 @@ public record Snapshot(int instant,
 
     /**
      * Variable con su valor renderizado y quien la escribio por ultima vez. Un arreglo o una
-     * cola trae ademas sus elementos uno por uno (los primeros {@link Value#MOSTRAR_ELEMENTOS};
+     * cola trae ademas sus elementos uno por uno (los primeros {@link Value#SHOWN_ELEMENTS};
      * {@code size} es el total), para que la interfaz los dibuje como celdas; en un escalar
      * {@code elements} es null y {@code size} 0.
      */

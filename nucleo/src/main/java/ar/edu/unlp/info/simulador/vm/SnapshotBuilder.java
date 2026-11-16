@@ -80,7 +80,7 @@ final class SnapshotBuilder {
         List<String> elements = null;
         if (items != null) {
             elements = new ArrayList<>();
-            for (int i = 0; i < Math.min(items.size(), Value.MOSTRAR_ELEMENTOS); i++) {
+            for (int i = 0; i < Math.min(items.size(), Value.SHOWN_ELEMENTS); i++) {
                 elements.add(items.get(i).display());
             }
         }

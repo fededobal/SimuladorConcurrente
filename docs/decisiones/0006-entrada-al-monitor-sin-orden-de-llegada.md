@@ -29,7 +29,7 @@ concluir que sus procesos entran en el orden en que llamaron.
 ## Decisión
 Se adopta la alternativa 3. Cuando un proceso libera un monitor, entra en ese mismo
 instante uno de los procesos de la cola de entrada, elegido al azar con el generador de la
-máquina virtual (`vm/Azar`). Si la cola tiene un solo proceso no se sortea, para no
+máquina virtual (`vm/SeededRandom`). Si la cola tiene un solo proceso no se sortea, para no
 consumir azar. El sorteo se hace con las dos políticas de planificación, porque la política
 decide qué procesos avanzan en cada instante y no quién gana el monitor.
 

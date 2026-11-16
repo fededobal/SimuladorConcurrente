@@ -58,9 +58,9 @@ frontend/src/api.ts → useSimulation.ts → componentes
 Fuente de verdad: la teoría de la cátedra en `docs/monitores/` (sitio VitePress; los `.md` de `docs/` son sus fuentes). Modelo, invariantes y
 casos canónicos: skill `semantica-concurrencia`.
 Decisiones vigentes: *signal and continue* en monitores; un instante puede avanzar varios
-procesos (`PROB_AVANCE`); no hay variables globales; al liberarse un monitor entra uno de
+procesos (`ADVANCE_PROBABILITY`); no hay variables globales; al liberarse un monitor entra uno de
 la cola al azar (ADR 0006); llamadas cerradas entre monitores (ADR 0007); tipos controlados al compilar (solo `int`→`double` y número→`text`); el azar
-sale de `vm/Azar` para que la JVM y el navegador coincidan.
+sale de `vm/SeededRandom` para que la JVM y el navegador coincidan.
 
 ## Skills (`.claude/skills/`)
 

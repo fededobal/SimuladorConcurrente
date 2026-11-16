@@ -21,14 +21,14 @@ public final class VirtualMachine {
     private static final int STRUCTURAL_CAP = 4000;
 
     /** Pasos que puede dar el codigo de inicializacion de un monitor antes de darlo por colgado. */
-    static final int TOPE_INICIALIZACION = 100_000;
+    static final int MAX_INIT_STEPS = 100_000;
 
     private final Scheduler scheduler;
     private final MonitorProtocol monitorProtocol;
     private final StatementExecutor statements;
 
     private final List<Process> processes = new ArrayList<>();
-    private final OutputBuffer salida = new OutputBuffer();
+    private final OutputBuffer output = new OutputBuffer();
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
     private final VariableAccess vars = new VariableAccess(monitors);
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
@@ -44,12 +44,12 @@ public final class VirtualMachine {
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {
-        Azar random = new Azar(seed);
+        SeededRandom random = new SeededRandom(seed);
         this.scheduler = new Scheduler(processes, random);
         this.monitorProtocol = new MonitorProtocol(monitors, random, advancedLastStep,
                 this::event);
         this.statements = new StatementExecutor(vars, monitors, monitorDefs, monitorProtocol,
-                salida, clock, this::event);
+                output, clock, this::event);
         initialize(program);
     }
 
@@ -86,9 +86,9 @@ public final class VirtualMachine {
         m.setLockOwner(sys);
         int guard = 0;
         while (!sys.isFinished()) {
-            if (guard++ >= TOPE_INICIALIZACION) {
+            if (guard++ >= MAX_INIT_STEPS) {
                 throw new RuntimeError("La inicialización del monitor " + m.name()
-                        + " no terminó después de " + TOPE_INICIALIZACION
+                        + " no terminó después de " + MAX_INIT_STEPS
                         + " pasos: revisá si tiene un ciclo infinito", sys.currentLine());
             }
             advance(sys);
@@ -128,8 +128,8 @@ public final class VirtualMachine {
             return List.of();
         }
         wakeDelayed();
-        List<Process> turno = scheduler.nextTurn(chosenProcessId, policy);
-        if (turno.isEmpty()) {
+        List<Process> turn = scheduler.nextTurn(chosenProcessId, policy);
+        if (turn.isEmpty()) {
             // nadie puede avanzar: o se espera un delay, o es un interbloqueo (que ocupa un
             // instante propio, y se informa una sola vez)
             if (!isWaitingForDelay() && !deadlockLogged) {
@@ -139,7 +139,7 @@ public final class VirtualMachine {
             return events.stepEntries();
         }
 
-        runTurn(turno);
+        runTurn(turn);
         if (isDeadlocked() && !deadlockLogged) {
             logDeadlock();
         }
@@ -147,10 +147,10 @@ public final class VirtualMachine {
     }
 
     /** Un instante nuevo en el que avanzan, en orden, los procesos del turno. */
-    private void runTurn(List<Process> turno) {
+    private void runTurn(List<Process> turn) {
         clock.tick();
         advancedLastStep.clear();
-        for (Process p : turno) {
+        for (Process p : turn) {
             // Solo avanza si sigue listo, y una vez por instante: el que recibio un monitor
             // por traspaso ya hizo su accion del instante, que fue entrar.
             if (!p.isReady() || advancedLastStep.contains(p.id())) {
@@ -301,7 +301,7 @@ public final class VirtualMachine {
     }
 
     /**
-     * Los ultimos eventos de la ejecucion (a lo sumo {@link EventLog#TOPE_LOG}), del mas viejo
+     * Los ultimos eventos de la ejecucion (a lo sumo {@link EventLog#MAX_ENTRIES}), del mas viejo
      * al mas nuevo.
      */
     public List<LogEntry> allLogs() {
@@ -310,7 +310,7 @@ public final class VirtualMachine {
 
     public Snapshot snapshot() {
         return SnapshotBuilder.build(clock.instant(), processes, monitors.values(), advancedLastStep,
-                salida.view());
+                output.view());
     }
 
     // ================================================================= logging

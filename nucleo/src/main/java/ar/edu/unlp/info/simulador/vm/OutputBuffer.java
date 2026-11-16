@@ -12,7 +12,7 @@ import java.util.List;
 final class OutputBuffer {
 
     /** Tope de lineas guardadas. */
-    static final int TOPE_SALIDA = 500;
+    static final int MAX_LINES = 500;
 
     private final Deque<Snapshot.OutputLine> lines = new ArrayDeque<>();
     /** Lineas descartadas por el tope: se avisa al principio de la salida. */
@@ -20,7 +20,7 @@ final class OutputBuffer {
 
     void add(int instant, Process p, String text) {
         lines.addLast(new Snapshot.OutputLine(instant, p.name(), p.color(), text));
-        if (lines.size() > TOPE_SALIDA) {
+        if (lines.size() > MAX_LINES) {
             lines.removeFirst();
             discarded++;
         }
@@ -32,7 +32,7 @@ final class OutputBuffer {
         if (discarded > 0) {
             out.add(new Snapshot.OutputLine(lines.peekFirst().instant(), "", "#888888",
                     "… se descartaron " + discarded
-                            + " líneas anteriores (se muestran las últimas " + TOPE_SALIDA + ")"));
+                            + " líneas anteriores (se muestran las últimas " + MAX_LINES + ")"));
         }
         out.addAll(lines);
         return out;

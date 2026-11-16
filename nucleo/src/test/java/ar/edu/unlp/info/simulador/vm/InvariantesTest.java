@@ -24,9 +24,9 @@ class InvariantesTest {
     /** En la verificacion del 23/09 se corrieron 200 semillas sin violaciones. */
     static final int SEMILLAS = 25;
     static final int MAX_PASOS = 4000;
-    static final int TOPE_LOG = EventLog.TOPE_LOG;
+    static final int MAX_ENTRIES = EventLog.MAX_ENTRIES;
     /** La salida admite ademas una linea de aviso. */
-    static final int TOPE_SALIDA = OutputBuffer.TOPE_SALIDA;
+    static final int MAX_LINES = OutputBuffer.MAX_LINES;
 
     private static final Set<String> EN_MONITOR = Set.of(
             "ASSIGN", "DECL", "SKIP", "WRITE", "PUSH", "POP", "SIGNAL", "SIGNAL_ALL");
@@ -140,10 +140,10 @@ class InvariantesTest {
                 }
             }
             // 6. topes
-            if (vm.allLogs().size() > TOPE_LOG) {
+            if (vm.allLogs().size() > MAX_ENTRIES) {
                 violacion(nombre, "6-tope-log", c, "log=" + vm.allLogs().size());
             }
-            if (s.output().size() > TOPE_SALIDA + 1) {
+            if (s.output().size() > MAX_LINES + 1) {
                 violacion(nombre, "6-tope-salida", c, "salida=" + s.output().size());
             }
             if (estabaEnDeadlock) break; // ya se forzo el evento DEADLOCK

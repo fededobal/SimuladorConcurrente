@@ -66,10 +66,10 @@ public final class ExprEvaluator {
 
     private Value evalEmpty(Expr.EmptyQueue q) {
         Value base = resolve(q.queue(), q.line());
-        if (!(base instanceof Value.QueueVal cola)) {
+        if (!(base instanceof Value.QueueVal queueVal)) {
             throw new RuntimeError("'" + q.queue() + "' no es una cola", q.line());
         }
-        return new Value.BoolVal(cola.isEmpty());
+        return new Value.BoolVal(queueVal.isEmpty());
     }
 
     private Value evalUnary(Expr.Unary u) {

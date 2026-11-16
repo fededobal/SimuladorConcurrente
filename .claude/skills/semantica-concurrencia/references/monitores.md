@@ -10,7 +10,7 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 - **Proceso**: pila de `Activation` (cuerpo del proceso y procedures anidados). Estados
   `READY`, `RUNNING`, `BLOCKED(MONITOR_ENTRY | COND_WAIT)`, `TERMINATED`.
 - **Instante**: el scheduler arma un turno (varios procesos listos, orden según política,
-  cada uno con `PROB_AVANCE`% de chance, al menos uno). Cada proceso del turno ejecuta hasta
+  cada uno con `ADVANCE_PROBABILITY`% de chance, al menos uno). Cada proceso del turno ejecuta hasta
   una sentencia *observable* (las estructurales — bloques, evaluar guardas de `if/while/for` —
   no consumen instante). Con proceso elegido, avanza solo ese.
 - **Liberar el monitor** (ADR 0005 y 0006): se registra el evento de salida y el lock pasa
@@ -45,7 +45,7 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
    ejecución usa una nueva y la reproducción se hace desde el núcleo.
 5. `DEADLOCK` significa interbloqueo del programa del alumno, nunca un error interno del
    simulador. Un error de ejecución se informa como `ERROR` con línea.
-6. El log y la salida no crecen sin tope en ejecuciones largas (`TOPE_LOG`, `TOPE_SALIDA`);
+6. El log y la salida no crecen sin tope en ejecuciones largas (`MAX_ENTRIES`, `MAX_LINES`);
    los eventos no guardan el estado completo.
 
 ## Programas canónicos (deben andar siempre)

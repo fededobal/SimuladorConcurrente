@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Nombres en inglés en `vm/`: `Azar` pasa a `SeededRandom` (con `shuffle`), los topes `TOPE_*` a `MAX_*`, `PROB_AVANCE` a `ADVANCE_PROBABILITY` y las variables locales en castellano a su equivalente; CLAUDE.md, la skill de semántica, la especificación y el ADR 0006 nombran las clases y constantes nuevas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Scheduler`: separar el turno de round robin (`roundRobinTurn`) y el aleatorio (`randomTurn`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: un solo condicional para el turno vacío en `step`, el programa como parámetro de `initialize` en lugar de campo, y `namesList` para enumerar los monitores del mensaje de interbloqueo. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Process`: `isReady`, `isSystem` y la fábrica `Process.system` reemplazan las comparaciones con `State.READY`, los `id < 0` y el `-1`/`#888888` sueltos de la VM, el scheduler, el log y el snapshot. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

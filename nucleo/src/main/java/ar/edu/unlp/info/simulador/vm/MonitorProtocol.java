@@ -20,7 +20,7 @@ final class MonitorProtocol {
 
     private final Map<String, Monitor> monitors;
     /** El mismo azar que el scheduler: el orden en que se consume es parte de la semilla. */
-    private final Azar random;
+    private final SeededRandom random;
     /**
      * Los procesos que avanzaron en el instante (la lista es de la VM): el que recibe el
      * monitor por traspaso cuenta como que avanzo.
@@ -28,7 +28,7 @@ final class MonitorProtocol {
     private final List<Integer> advancedLastStep;
     private final EventSink events;
 
-    MonitorProtocol(Map<String, Monitor> monitors, Azar random, List<Integer> advancedLastStep,
+    MonitorProtocol(Map<String, Monitor> monitors, SeededRandom random, List<Integer> advancedLastStep,
             EventSink events) {
         this.monitors = monitors;
         this.random = random;

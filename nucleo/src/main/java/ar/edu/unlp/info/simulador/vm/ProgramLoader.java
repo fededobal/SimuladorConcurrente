@@ -20,9 +20,9 @@ final class ProgramLoader {
      * Topes de tamano. Sin ellos, {@code int a[2000000000]} o una familia de cien mil procesos
      * congelan o cierran la pestana: el motor corre en el hilo principal del navegador.
      */
-    static final int TOPE_ELEMENTOS = 100_000;
-    static final int TOPE_PROCESOS = 5_000;
-    static final int TOPE_MONITORES = 1_000;
+    static final int MAX_ELEMENTS = 100_000;
+    static final int MAX_PROCESSES = 5_000;
+    static final int MAX_MONITORS = 1_000;
 
     // Tonos apagados entre el azul y el magenta, lo bastante oscuros para leerse como texto
     // sobre el fondo claro de la interfaz (contraste de 4,5:1 o mas contra blanco). Sin
@@ -66,9 +66,9 @@ final class ProgramLoader {
         }
         FamilyBounds bounds = familyBounds(md.quant());
         long count = bounds.count();
-        if (count < 0 || count > TOPE_MONITORES) {
+        if (count < 0 || count > MAX_MONITORS) {
             throw new RuntimeError("Demasiados monitores en " + md.name()
-                    + ": el simulador admite hasta " + TOPE_MONITORES + " por arreglo", md.line());
+                    + ": el simulador admite hasta " + MAX_MONITORS + " por arreglo", md.line());
         }
         List<Monitor> family = new ArrayList<>();
         for (long k = 0; k < count; k++) {
@@ -109,13 +109,13 @@ final class ProgramLoader {
         List<Process> processes = new ArrayList<>();
         for (ProcessDef pd : defs) {
             if (!pd.isFamily()) {
-                if (processes.size() >= TOPE_PROCESOS) throw tooManyProcesses(pd.line());
+                if (processes.size() >= MAX_PROCESSES) throw tooManyProcesses(pd.line());
                 processes.add(newProcess(processes, pd.name(), pd, null, 0));
                 continue;
             }
             FamilyBounds bounds = familyBounds(pd.quant());
             long count = bounds.count();
-            if (count < 0 || count > TOPE_PROCESOS - processes.size()) {
+            if (count < 0 || count > MAX_PROCESSES - processes.size()) {
                 throw tooManyProcesses(pd.line());
             }
             for (long k = 0; k < count; k++) {
@@ -140,7 +140,7 @@ final class ProgramLoader {
 
     private static RuntimeError tooManyProcesses(int line) {
         return new RuntimeError("Demasiados procesos: el simulador admite hasta "
-                + TOPE_PROCESOS + " en total", line);
+                + MAX_PROCESSES + " en total", line);
     }
 
     /** Valor inicial de una variable declarada: por defecto, el inicializador o un arreglo lleno. */
@@ -160,12 +160,12 @@ final class ProgramLoader {
         return new Value.ArrayVal(vd.type(), elems);
     }
 
-    /** Tamano de un arreglo de variables o de cond: entre 0 y {@link #TOPE_ELEMENTOS}. */
+    /** Tamano de un arreglo de variables o de cond: entre 0 y {@link #MAX_ELEMENTS}. */
     static int arraySize(ExprEvaluator ev, Expr sizeExpr, int line) {
         long size = ev.evalLong(sizeExpr);
-        if (size < 0 || size > TOPE_ELEMENTOS) {
+        if (size < 0 || size > MAX_ELEMENTS) {
             throw new RuntimeError("Tamaño de arreglo inválido: " + size
-                    + " (tiene que estar entre 0 y " + TOPE_ELEMENTOS + ")", line);
+                    + " (tiene que estar entre 0 y " + MAX_ELEMENTS + ")", line);
         }
         return (int) size;
     }

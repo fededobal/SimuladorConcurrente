@@ -11,44 +11,44 @@ import java.util.List;
  * otro entrelazado que la JVM, y los tests probaban corridas que ningun alumno veia. Este
  * codigo se compila igual en los dos lados.
  */
-final class Azar {
+final class SeededRandom {
 
-    private static final long MULTIPLICADOR = 0x5DEECE66DL;
-    private static final long INCREMENTO = 0xBL;
-    private static final long MASCARA = (1L << 48) - 1;
+    private static final long MULTIPLIER = 0x5DEECE66DL;
+    private static final long INCREMENT = 0xBL;
+    private static final long MASK = (1L << 48) - 1;
 
-    private long estado;
+    private long state;
 
-    Azar(long semilla) {
-        this.estado = (semilla ^ MULTIPLICADOR) & MASCARA;
+    SeededRandom(long seed) {
+        this.state = (seed ^ MULTIPLIER) & MASK;
     }
 
-    private int siguiente(int bits) {
-        estado = (estado * MULTIPLICADOR + INCREMENTO) & MASCARA;
-        return (int) (estado >>> (48 - bits));
+    private int next(int bits) {
+        state = (state * MULTIPLIER + INCREMENT) & MASK;
+        return (int) (state >>> (48 - bits));
     }
 
     /** Entero uniforme en [0, cota), con el mismo algoritmo que {@code Random.nextInt(int)}. */
-    int nextInt(int cota) {
-        int r = siguiente(31);
-        int m = cota - 1;
-        if ((cota & m) == 0) {
-            return (int) ((cota * (long) r) >> 31);
+    int nextInt(int bound) {
+        int r = next(31);
+        int m = bound - 1;
+        if ((bound & m) == 0) {
+            return (int) ((bound * (long) r) >> 31);
         }
         int u = r;
-        while (u - (r = u % cota) + m < 0) {
-            u = siguiente(31);
+        while (u - (r = u % bound) + m < 0) {
+            u = next(31);
         }
         return r;
     }
 
     /** Mezcla la lista en el lugar, como {@code Collections.shuffle(lista, random)}. */
-    <T> void mezclar(List<T> lista) {
-        for (int i = lista.size(); i > 1; i--) {
+    <T> void shuffle(List<T> list) {
+        for (int i = list.size(); i > 1; i--) {
             int j = nextInt(i);
-            T tmp = lista.get(i - 1);
-            lista.set(i - 1, lista.get(j));
-            lista.set(j, tmp);
+            T tmp = list.get(i - 1);
+            list.set(i - 1, list.get(j));
+            list.set(j, tmp);
         }
     }
 }

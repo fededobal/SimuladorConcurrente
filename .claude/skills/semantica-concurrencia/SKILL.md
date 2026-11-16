@@ -22,7 +22,7 @@ cátedra: `docs/monitores/`).
   `TERMINATED`. Todo bloqueo tiene un motivo y un recurso nombrado: eso es lo que la UI
   le muestra al alumno.
 - **Instante**: el scheduler arma un turno de procesos listos (política `RANDOM` o
-  `ROUND_ROBIN`, `PROB_AVANCE`); cada uno ejecuta hasta una sentencia observable. Las
+  `ROUND_ROBIN`, `ADVANCE_PROBABILITY`); cada uno ejecuta hasta una sentencia observable. Las
   estructurales (bloques, evaluar guardas) no consumen instante. Con proceso elegido,
   avanza solo ese.
 - **Deadlock**: no terminó, ningún proceso está `READY` y ninguno está en `delay`.
@@ -39,11 +39,11 @@ cátedra: `docs/monitores/`).
    devuelve el lock y se lo pasa a uno de la cola de entrada, al azar (ADR 0005 y 0006).
 4. Misma semilla + misma política (+ mismas horas informadas a `step`, si hay `delay`) =
    misma ejecución, en la JVM y en el navegador (el azar
-   sale de `vm/Azar`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
+   sale de `vm/SeededRandom`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
    ejecución y no permite repetir una corrida: la reproducción es desde el núcleo (tests).
 5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.
 6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Los eventos no
-   llevan el estado; el log guarda los últimos `TOPE_LOG` y la salida los últimos `TOPE_SALIDA`.
+   llevan el estado; el log guarda los últimos `MAX_ENTRIES` y la salida los últimos `MAX_LINES`.
 7. La semántica implementada coincide con la de la cátedra. Si hay que apartarse (por
    ejemplo, para visualizar mejor), se documenta en un ADR.
 
