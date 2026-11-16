@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Clase `DecimalLiteral` en `lang/parser/`, con la conversión de los literales decimales que tenía `Parser`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Parser`: partir `parseFor` en una función por forma del for y sacar de `parseStatement` y `parsePrimary` el skip, el delay, los literales numéricos y `empty`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Parser`: extraer `parseArguments`, que se repetía en write y en la llamada a un monitor, y juntar los operadores de comparación en una constante. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Golden master de la compilación (`CompileErrorsCharacterizationTest`): unos 200 programas, uno por mensaje de error del lexer, el parser, el validador y el tipado, más casos válidos y generados (anidamientos, literales largos), con el mensaje y la línea exactos que ve el alumno. El golden de la VM suma espera activa, delay fuera de rango, desbordes, inicialización sin fin y topes de tamaño. (Federico Dobal, 2026-11-16)
