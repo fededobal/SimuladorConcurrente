@@ -54,60 +54,83 @@ public final class SemanticValidator {
     private void collectTopLevel() {
         Set<String> topLevel = new HashSet<>();
         for (MonitorDef m : program.monitors()) {
-            if (!topLevel.add(m.name())) {
-                throw new CompilationException("Ya existe un monitor o un process llamado "
-                        + m.name(), m.line());
-            }
-            Map<String, VarDecl> vars = new HashMap<>();
-            Map<String, Boolean> conds = new HashMap<>();
-            Map<String, ProcedureDef> procs = new HashMap<>();
-            for (VarDecl v : m.permanentVars()) {
-                if (vars.put(v.name(), v) != null) {
-                    throw new CompilationException("Variable permanente duplicada '" + v.name()
-                            + "' en el monitor " + m.name(), v.line());
-                }
-            }
-            for (CondDecl c : m.conds()) {
-                // La variable y la cond comparten el espacio de nombres del monitor. El AST las
-                // guarda por separado: la linea dice cual se declaro primero, y el error se
-                // informa en la segunda, que es la que hay que renombrar.
-                VarDecl v = vars.get(c.name());
-                if (v != null && v.line() <= c.line()) {
-                    throw new CompilationException("Ya existe una variable permanente llamada '"
-                            + c.name() + "' en el monitor " + m.name()
-                            + ": la cond necesita otro nombre", c.line());
-                }
-                if (v != null) {
-                    throw new CompilationException("Ya existe una variable condición llamada '"
-                            + c.name() + "' en el monitor " + m.name()
-                            + ": la variable necesita otro nombre", v.line());
-                }
-                if (conds.put(c.name(), c.isArray()) != null) {
-                    throw new CompilationException("Nombre de cond duplicado '" + c.name()
-                            + "' en el monitor " + m.name(), c.line());
-                }
-            }
-            for (ProcedureDef pr : m.procedures()) {
-                if (procs.put(pr.name(), pr) != null) {
-                    throw new CompilationException("Procedure duplicado '" + pr.name()
-                            + "' en el monitor " + m.name(), pr.line());
-                }
-                Set<String> pnames = new HashSet<>();
-                for (Param param : pr.params()) {
-                    if (!pnames.add(param.name())) {
-                        throw new CompilationException("Parámetro duplicado '" + param.name()
-                                + "' en " + m.name() + "." + pr.name(), param.line());
-                    }
-                }
-            }
-            monitors.put(m.name(), new MonitorInfo(conds, procs, m.isFamily()));
+            declareTopLevel(topLevel, m.name(), m.line());
+            monitors.put(m.name(), collectMonitor(m));
         }
         for (ProcessDef p : program.processes()) {
-            if (!topLevel.add(p.name())) {
-                throw new CompilationException("Ya existe un monitor o un process llamado "
-                        + p.name(), p.line());
+            declareTopLevel(topLevel, p.name(), p.line());
+        }
+    }
+
+    /** Monitores y procesos comparten un solo espacio de nombres. */
+    private static void declareTopLevel(Set<String> topLevel, String name, int line) {
+        if (!topLevel.add(name)) {
+            throw new CompilationException("Ya existe un monitor o un process llamado " + name,
+                    line);
+        }
+    }
+
+    /** Lo que se sabe de un monitor antes de validar su codigo, sin nombres repetidos. */
+    private static MonitorInfo collectMonitor(MonitorDef m) {
+        Map<String, VarDecl> vars = collectPermanentVars(m);
+        Map<String, Boolean> conds = collectConds(m, vars);
+        Map<String, ProcedureDef> procs = collectProcedures(m);
+        return new MonitorInfo(conds, procs, m.isFamily());
+    }
+
+    private static Map<String, VarDecl> collectPermanentVars(MonitorDef m) {
+        Map<String, VarDecl> vars = new HashMap<>();
+        for (VarDecl v : m.permanentVars()) {
+            if (vars.put(v.name(), v) != null) {
+                throw new CompilationException("Variable permanente duplicada '" + v.name()
+                        + "' en el monitor " + m.name(), v.line());
             }
         }
+        return vars;
+    }
+
+    /** Las cond del monitor: nombre -> si es un arreglo. */
+    private static Map<String, Boolean> collectConds(MonitorDef m, Map<String, VarDecl> vars) {
+        Map<String, Boolean> conds = new HashMap<>();
+        for (CondDecl c : m.conds()) {
+            // La variable y la cond comparten el espacio de nombres del monitor. El AST las
+            // guarda por separado: la linea dice cual se declaro primero, y el error se
+            // informa en la segunda, que es la que hay que renombrar.
+            VarDecl v = vars.get(c.name());
+            if (v != null && v.line() <= c.line()) {
+                throw new CompilationException("Ya existe una variable permanente llamada '"
+                        + c.name() + "' en el monitor " + m.name()
+                        + ": la cond necesita otro nombre", c.line());
+            }
+            if (v != null) {
+                throw new CompilationException("Ya existe una variable condición llamada '"
+                        + c.name() + "' en el monitor " + m.name()
+                        + ": la variable necesita otro nombre", v.line());
+            }
+            if (conds.put(c.name(), c.isArray()) != null) {
+                throw new CompilationException("Nombre de cond duplicado '" + c.name()
+                        + "' en el monitor " + m.name(), c.line());
+            }
+        }
+        return conds;
+    }
+
+    private static Map<String, ProcedureDef> collectProcedures(MonitorDef m) {
+        Map<String, ProcedureDef> procs = new HashMap<>();
+        for (ProcedureDef pr : m.procedures()) {
+            if (procs.put(pr.name(), pr) != null) {
+                throw new CompilationException("Procedure duplicado '" + pr.name()
+                        + "' en el monitor " + m.name(), pr.line());
+            }
+            Set<String> pnames = new HashSet<>();
+            for (Param param : pr.params()) {
+                if (!pnames.add(param.name())) {
+                    throw new CompilationException("Parámetro duplicado '" + param.name()
+                            + "' en " + m.name() + "." + pr.name(), param.line());
+                }
+            }
+        }
+        return procs;
     }
 
     // ---------------------------------------------------------------- monitor y proceso
@@ -179,13 +202,7 @@ public final class SemanticValidator {
             case Stmt.Block b -> checkBlock(b, scope);
             case VarDecl vd -> checkVarDecl(vd, scope, LOCAL_ORIGIN);
             case Stmt.Assign a -> checkAssign(a, scope);
-            case Stmt.IncDec inc -> {
-                Type t = targetType(inc.target(), inc.index(), scope, inc.line());
-                if (t != Type.INT && t != Type.DOUBLE) {
-                    throw new CompilationException("'" + inc.target() + "' es " + t.keyword()
-                            + ": ++ y -- se aplican a números", inc.line());
-                }
-            }
+            case Stmt.IncDec inc -> checkIncDec(inc, scope);
             case Stmt.Skip ignored -> { }
             case Stmt.IfStmt iff -> {
                 ExprTyper.expect(iff.condition(), Type.BOOLEAN, scope, "La condición del if");
@@ -280,6 +297,14 @@ public final class SemanticValidator {
         return sb.append(')').toString();
     }
 
+    private void checkIncDec(Stmt.IncDec inc, Scope scope) {
+        Type t = targetType(inc.target(), inc.index(), scope, inc.line());
+        if (t != Type.INT && t != Type.DOUBLE) {
+            throw new CompilationException("'" + inc.target() + "' es " + t.keyword()
+                    + ": ++ y -- se aplican a números", inc.line());
+        }
+    }
+
     private void checkAssign(Stmt.Assign a, Scope scope) {
         Type t = targetType(a.target(), a.index(), scope, a.line());
         String destination = a.index() == null ? a.target() : a.target() + "[...]";
@@ -341,10 +366,8 @@ public final class SemanticValidator {
         }
         if (scope.inProcedure && call.monitor().equals(scope.monitor)) {
             throw new CompilationException("Un procedure de " + call.monitor()
-                    + " no puede llamar a "
-                    + call.monitor() + "." + call.procedure()
-                            + ": el proceso ya está dentro del monitor",
-                    call.line());
+                    + " no puede llamar a " + call.monitor() + "." + call.procedure()
+                    + ": el proceso ya está dentro del monitor", call.line());
         }
         ProcedureDef pd = info.procedures().get(call.procedure());
         if (pd == null) {
@@ -359,22 +382,30 @@ public final class SemanticValidator {
         for (int i = 0; i < pd.params().size(); i++) {
             Param param = pd.params().get(i);
             Expr arg = call.args().get(i);
-            if (!param.isOutput()) {
+            if (param.isOutput()) {
+                checkOutArgument(param, arg, scope, call.line());
+            } else {
                 ExprTyper.checkAssignable(param.type(), arg, scope, param.name(), call.line());
-                continue;
             }
-            if (!(arg instanceof Expr.VarRef) && !(arg instanceof Expr.ArrayAccess)) {
-                throw new CompilationException("El argumento para el parámetro '" + param.name()
-                        + "' (out) debe ser una variable o un elemento de arreglo", call.line());
-            }
-            Type argType = ExprTyper.typeOf(arg, scope);
-            String name = arg instanceof Expr.VarRef v ? v.name() : ((Expr.ArrayAccess) arg).name();
-            checkWritable(name, scope, call.line());
-            if (!ExprTyper.assignable(argType, param.type())) {
-                throw new CompilationException("El parámetro out '" + param.name() + "' es "
-                        + param.type().keyword() + " y no se puede guardar en '" + name
-                        + "', que es " + argType.keyword(), call.line());
-            }
+        }
+    }
+
+    /**
+     * El argumento de un parametro {@code out}: una variable o un elemento de arreglo que se
+     * pueda escribir y que pueda guardar el tipo del parametro.
+     */
+    private void checkOutArgument(Param param, Expr arg, Scope scope, int line) {
+        if (!(arg instanceof Expr.VarRef) && !(arg instanceof Expr.ArrayAccess)) {
+            throw new CompilationException("El argumento para el parámetro '" + param.name()
+                    + "' (out) debe ser una variable o un elemento de arreglo", line);
+        }
+        Type argType = ExprTyper.typeOf(arg, scope);
+        String name = arg instanceof Expr.VarRef v ? v.name() : ((Expr.ArrayAccess) arg).name();
+        checkWritable(name, scope, line);
+        if (!ExprTyper.assignable(argType, param.type())) {
+            throw new CompilationException("El parámetro out '" + param.name() + "' es "
+                    + param.type().keyword() + " y no se puede guardar en '" + name
+                    + "', que es " + argType.keyword(), line);
         }
     }
 
