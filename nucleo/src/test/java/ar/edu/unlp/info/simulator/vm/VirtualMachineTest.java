@@ -669,4 +669,48 @@ class VirtualMachineTest {
         assertEquals("El delay tiene que ser de 0 a 3600 segundos y es de -1",
                 r.vm().snapshot().processes().get(0).error());
     }
+
+    /** {@code :=:} intercambia escalares, elementos de arreglo y locales con permanentes. */
+    @Test
+    void swapExchangesValuesInOneStep() {
+        String src = """
+                monitor Disco {
+                  int actual = 0, proxima = 1; int a[3]; int x = 0, y = 0; text s = "uno";
+                  a[0] = 10; a[2] = 30;
+                  actual :=: proxima;
+                  procedure f(v: in int) {
+                    text t = "dos"; int k = 2;
+                    a[0] :=: a[k]; x = a[0]; y = a[2];
+                    s :=: t;
+                  }
+                }
+                process P { Disco.f(1); }
+                """;
+        RunResult r = TestSupport.run(src, SchedulingPolicy.ROUND_ROBIN, 1, 100);
+        assertTrue(r.finished());
+        assertEquals("1", TestSupport.finalVar(r, "Disco", "actual"));
+        assertEquals("0", TestSupport.finalVar(r, "Disco", "proxima"));
+        assertEquals("30", TestSupport.finalVar(r, "Disco", "x"));
+        assertEquals("10", TestSupport.finalVar(r, "Disco", "y"));
+        assertEquals("dos", TestSupport.finalVar(r, "Disco", "s"));
+    }
+
+    /** Un intercambio es una sola sentencia: ocupa un instante, igual que una asignacion. */
+    @Test
+    void swapTakesOneInstant() {
+        RunResult swap = TestSupport.run("process P { int a = 1, b = 2; a :=: b; }",
+                SchedulingPolicy.ROUND_ROBIN, 1, 100);
+        RunResult assign = TestSupport.run("process P { int a = 1, b = 2; a = b; }",
+                SchedulingPolicy.ROUND_ROBIN, 1, 100);
+        assertEquals(assign.vm().snapshot().instant(), swap.vm().snapshot().instant());
+    }
+
+    /** Un indice fuera de rango en cualquier lado es error de ejecucion, sin cambiar nada. */
+    @Test
+    void swapWithIndexOutOfRangeIsRuntimeError() {
+        RunResult r = TestSupport.run("process P { int a[2]; int x = 5; x :=: a[4]; }",
+                SchedulingPolicy.ROUND_ROBIN, 1, 100);
+        assertEquals("Índice 4 fuera de rango para 'a' (tamaño 2)",
+                r.vm().snapshot().processes().get(0).error());
+    }
 }

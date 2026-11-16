@@ -33,7 +33,7 @@ Markdown de `docs/`; el sitio se genera con VitePress (`cd frontend && npm run d
 
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y
-`signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, los tipos `int`,
+`signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, el intercambio `x :=: y`, los tipos `int`,
 `double`, `bool` y `text`, arreglos, `Cola` y `ColaOrdenada` declaradas con los tipos de sus
 componentes (`Cola c(int, text)`). No hay variables globales. Las palabras reservadas no
 distinguen mayúsculas (`OR`, `OUT`, `colaOrdenada`); los nombres del programa sí.

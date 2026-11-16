@@ -41,6 +41,9 @@ public final class Lexer {
         return canonical;
     }
 
+    /** Intercambio de la catedra ({@code v_actual :=: v_proxima}): el unico simbolo de tres caracteres. */
+    public static final String SWAP = ":=:";
+
     private static final Set<String> TWO_CHAR =
             Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
     private static final String SINGLE_CHAR = "+-*/=<>(){}[];,:.!";
@@ -181,6 +184,12 @@ public final class Lexer {
             // frecuentes al copiar el enunciado de un PDF o de un procesador de texto
             throw new CompilationException("Comilla tipográfica " + c + ": las cadenas van entre "
                     + "comillas rectas (\")", startLine);
+        }
+        if (c == ':' && peekNext() == '=' && pos + 2 < src.length() && src.charAt(pos + 2) == ':') {
+            advance();
+            advance();
+            advance();
+            return new Token(TokenType.SYMBOL, SWAP, startLine, startCol);
         }
         char n = peekNext();
         String two = "" + c + n;

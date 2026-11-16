@@ -254,6 +254,10 @@ process P { int a = 0; a-- }
 process P { int a = 0; a 1; }
 ### asignacion/sin-punto-y-coma
 process P { int a = 0; a = 1 }
+### intercambio/tipos-distintos
+process P { int a = 1; text t = "x"; a :=: t; }
+### intercambio/sin-variable
+process P { int a = 1; a :=: 2; }
 ### expresion/comparacion-encadenada
 process P { bool b = 1 < 2 < 3; }
 ### expresion/int-fuera-de-rango

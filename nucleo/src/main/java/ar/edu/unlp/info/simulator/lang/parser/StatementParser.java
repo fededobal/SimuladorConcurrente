@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.simulator.lang.parser;
 
+import ar.edu.unlp.info.simulator.lang.lexer.Lexer;
 import ar.edu.unlp.info.simulator.lang.lexer.Token;
 import ar.edu.unlp.info.simulator.lang.lexer.TokenType;
 import ar.edu.unlp.info.simulator.lang.parser.ast.*;
@@ -347,10 +348,27 @@ final class StatementParser {
             tokens.consume(";", "Se esperaba ';'");
             return new Stmt.IncDec(nameTok.lexeme(), index, false, nameTok.line());
         }
+        if (tokens.match(Lexer.SWAP)) {
+            return parseSwapRest(nameTok, index);
+        }
         tokens.consume("=", "Se esperaba '=', '++' o '--'");
         Expr value = parseExpr();
         tokens.consume(";", "Se esperaba ';'");
         return new Stmt.Assign(nameTok.lexeme(), index, value, nameTok.line());
+    }
+
+    /** El lado derecho de {@code x :=: y;}: una variable o un elemento de arreglo. */
+    private Stmt parseSwapRest(Token leftTok, Expr leftIndex) {
+        Token rightTok = tokens.consumeIdentToken(
+                "Se esperaba una variable después de ':=:'");
+        Expr rightIndex = null;
+        if (tokens.match("[")) {
+            rightIndex = parseExpr();
+            tokens.consume("]", "Se esperaba ']' en el índice");
+        }
+        tokens.consume(";", "Se esperaba ';'");
+        return new Stmt.Swap(leftTok.lexeme(), leftIndex, rightTok.lexeme(), rightIndex,
+                leftTok.line());
     }
 
     private Expr parseExpr() {

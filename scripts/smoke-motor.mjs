@@ -224,6 +224,14 @@ const CANONICOS = [
   ['un nombre con otras mayusculas no es el mismo nombre', `
     monitor M { int x = 0; procedure f() { X = 1; } } process P { M.f(); }`,
     (r) => !!r.compilacion?.endsWith('Nombre no declarado en este alcance: X')],
+  ['intercambio :=: de escalares y elementos de arreglo', `
+    monitor D { int actual = 0, proxima = 1; int a[3]; int x = 0;
+      procedure f() { a[2] = 9; actual :=: proxima; a[0] :=: a[2]; x = a[0]; } }
+    process P { D.f(); }`,
+    (r) => r.finished && r.vars['D.actual'] === '1' && r.vars['D.proxima'] === '0' && r.vars['D.x'] === '9'],
+  ['intercambio entre tipos distintos se rechaza', `
+    process P { int a = 1; double d = 2; a :=: d; }`,
+    (r) => !!r.compilacion?.endsWith("':=:' necesita dos valores del mismo tipo")],
   ['arreglo de monitores: cada indice tiene su propio estado', `
     monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
     process P[k: 0..2] { E[k].f(k); }`,

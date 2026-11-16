@@ -115,6 +115,7 @@ public final class SemanticValidator {
             case Stmt.Block b -> checkBlock(b, scope);
             case VarDecl vd -> checkVarDecl(vd, scope, LOCAL_ORIGIN);
             case Stmt.Assign a -> checkAssign(a, scope);
+            case Stmt.Swap sw -> checkSwap(sw, scope);
             case Stmt.IncDec inc -> checkIncDec(inc, scope);
             case Stmt.Skip ignored -> { }
             case Stmt.IfStmt iff -> {
@@ -162,6 +163,21 @@ public final class SemanticValidator {
         if (t != Type.INT && t != Type.DOUBLE) {
             throw new CompilationException("'" + inc.target() + "' es " + t.keyword()
                     + ": ++ y -- se aplican a números", inc.line());
+        }
+    }
+
+    /**
+     * Los dos lados se escriben, y cada uno recibe el valor del otro: tienen que ser del mismo
+     * tipo, porque las conversiones automaticas (int a double, numero a text) van en un solo
+     * sentido.
+     */
+    private void checkSwap(Stmt.Swap sw, Scope scope) {
+        Type left = targetType(sw.left(), sw.leftIndex(), scope, sw.line());
+        Type right = targetType(sw.right(), sw.rightIndex(), scope, sw.line());
+        if (left != right) {
+            throw new CompilationException("No se puede intercambiar '" + sw.left() + "' ("
+                    + left.keyword() + ") con '" + sw.right() + "' (" + right.keyword()
+                    + "): ':=:' necesita dos valores del mismo tipo", sw.line());
         }
     }
 
@@ -362,6 +378,7 @@ public final class SemanticValidator {
                     stack.push(f.step());
                 }
                 case Stmt.Assign ignored -> { }
+                case Stmt.Swap ignored -> { }
                 case Stmt.IncDec ignored -> { }
                 case Stmt.QueuePush ignored -> { }
                 case Stmt.QueuePop ignored -> { }

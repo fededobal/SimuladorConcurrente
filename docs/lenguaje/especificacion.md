@@ -174,6 +174,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 |---|---|
 | Declaración local | `int x = 0;` `bool b;` `int a[3] = ([3] 0);` |
 | Asignación | `x = expr;` `a[i] = expr;` |
+| Intercambio | `x :=: y;` `a[i] :=: a[j];` (los dos lados del mismo tipo) |
 | Incremento / decremento | `x++;` `x--;` |
 | Llamada a monitor | `Monitor.procedure(arg1, arg2);` `Escritorio[i].procedure(arg);` |
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
@@ -188,9 +189,14 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 
 El iterador de un `for` no se puede modificar dentro del cuerpo: lo cambia solo el paso.
 
+`x :=: y` lee los dos lados y escribe en cada uno el valor del otro, en un solo paso. Cada
+lado se controla como el destino de una asignación (no puede ser un parámetro `in`, un
+iterador, un arreglo completo ni una cola), y los dos tienen que ser del mismo tipo: las
+conversiones automáticas van en un solo sentido.
+
 | Regla | Detalle |
 |---|---|
-| Paso atómico | Toda sentencia observable: asignación, `++`/`--`, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
+| Paso atómico | Toda sentencia observable: asignación, intercambio `:=:`, `++`/`--`, llamada a monitor, `wait`/`signal`, `write`, `push`/`pop`, `skip` |
 | Sin paso propio | Los bloques y las guardas de `if`, `while` y `for`: van con la sentencia siguiente |
 | Por instante | Avanzan varios procesos, una sentencia cada uno (paralelismo, no entrelazado de a uno) |
 | Orden dentro del instante | Decide quién gana el monitor cuando varios lo piden a la vez |
@@ -265,6 +271,7 @@ proceso       = "process" ident [ "[" ident ":" expr ".." expr "]" ] bloque ;
 bloque        = "{" { sentencia } "}" ;
 sentencia     = decl_local
               | asignacion
+              | intercambio
               | inc_dec
               | llamada_monitor
               | op_cond
@@ -288,6 +295,8 @@ item_decl     = ident [ "=" expr ]                                    (* escalar
                 (* el valor inicial es de ese nombre solo; en el arreglo, el tamaño
                    interno de ([n] v) no se controla: vale el de la declaracion *)
 asignacion    = ident [ "[" expr "]" ] "=" expr ";" ;
+intercambio   = destino ":=:" destino ";" ;              (* mismo tipo; un solo paso *)
+destino       = ident [ "[" expr "]" ] ;
 inc_dec       = ident [ "[" expr "]" ] ( "++" | "--" ) ";" ;
 llamada_monitor = ident [ "[" expr "]" ] "." ident "(" [ args ] ")" ";" ;
 op_cond       = ( "wait" | "signal" | "signal_all" ) "(" ident [ "[" expr "]" ] ")" ";" ;

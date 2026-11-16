@@ -222,6 +222,10 @@
 {"error":"Línea 1: Se esperaba '=', '++' o '--' (se encontró '1')","line":1}
 ### asignacion/sin-punto-y-coma
 {"error":"Línea 1: Se esperaba ';' (se encontró '}')","line":1}
+### intercambio/tipos-distintos
+{"error":"Línea 1: No se puede intercambiar 'a' (int) con 't' (text): ':=:' necesita dos valores del mismo tipo","line":1}
+### intercambio/sin-variable
+{"error":"Línea 1: Se esperaba una variable después de ':=:' (se encontró '2')","line":1}
 ### expresion/comparacion-encadenada
 {"error":"Línea 1: Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí 'a < b and b < c'","line":1}
 ### expresion/int-fuera-de-rango

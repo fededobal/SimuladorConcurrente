@@ -603,4 +603,30 @@ class CompilerTest {
         assertTrue(errorOf("monitor M { int x = 0; delay(1); }\nprocess P { skip; }")
                 .contains("no puede llamar a monitores ni usar wait, signal o delay"));
     }
+
+    /** Notacion de la catedra: {@code x :=: y} intercambia dos variables del mismo tipo. */
+    @Test
+    void swapAcceptsVariablesAndArrayElements() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M { int v_actual = 0, v_proxima = 1; double d[2]; cond scan[2];
+                  procedure f() { v_actual :=: v_proxima; d[0] :=: d[v_actual]; } }
+                process P { text a = "x", b = "y"; a:=:b; M.f(); }
+                """));
+    }
+
+    /** Los dos lados de :=: tienen que ser del mismo tipo y poder escribirse. */
+    @Test
+    void swapRejectsMismatchedOrReadOnlySides() {
+        assertEquals("Línea 1: No se puede intercambiar 'a' (int) con 'd' (double): ':=:' "
+                        + "necesita dos valores del mismo tipo",
+                errorOf("process P { int a = 1; double d = 2; a :=: d; }"));
+        assertTrue(errorOf("monitor M { int x; procedure f(v: in int) { x :=: v; } } "
+                + "process P { M.f(1); }").contains("parámetro in"));
+        assertTrue(errorOf("process P[i: 0..1] { int x; x :=: i; }").contains("'i'"));
+        assertTrue(errorOf("process P { int a[2], b[2]; a :=: b; }").contains("arreglo 'a' completo"));
+        assertTrue(errorOf("process P { Cola c(int); Cola d(int); c :=: d; }").contains("cola 'c'"));
+        assertTrue(errorOf("process P { int x; x :=: 3; }")
+                .contains("Se esperaba una variable después de ':=:'"));
+        assertTrue(errorOf("process P { int x, y; x :=: y }").contains("Se esperaba ';'"));
+    }
 }

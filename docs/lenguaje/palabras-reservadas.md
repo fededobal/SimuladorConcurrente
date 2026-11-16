@@ -33,7 +33,7 @@ identificadores comunes y se pueden usar como nombre de variable.
 | Aritméticos | `+` `-` `*` `/` (el resto es la palabra `mod`) |
 | Comparación | `==` `!=` `<` `<=` `>` `>=` |
 | Lógicos (alias) | `&&` `\|\|` `!` |
-| Asignación | `=` `++` `--` |
+| Asignación | `=` `++` `--` `:=:` (intercambio) |
 | Agrupación | `(` `)` `{` `}` `[` `]` |
 | Separadores | `;` `,` `:` `.` |
 | Rango | `..` |

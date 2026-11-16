@@ -4,6 +4,7 @@
 |---|---|
 | Declaración | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c(int);` · `ColaOrdenada g(int, text, text);` · `ColaOrdenada g(int, (text, text));` · varias del mismo tipo: `text lista, comp;` · `int i = 0, j;` |
 | Asignación | `x = expr;` · `a[i] = expr;` |
+| Intercambio | `x :=: y;` · `a[i] :=: a[j];` · los dos lados del mismo tipo |
 | Incremento | `x++;` · `x--;` · `a[i]++;` · `a[i]--;` |
 | Llamada a monitor | `Monitor.procedure();` · `Monitor.procedure(a, b);` · `Escritorio[i].procedure(a);` |
 | Condición | `wait(cv);` · `signal(cv);` · `signal_all(cv);` · con índice: `wait(cv[i]);` |

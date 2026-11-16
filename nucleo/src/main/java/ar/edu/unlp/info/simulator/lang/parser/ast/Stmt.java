@@ -8,7 +8,7 @@ import java.util.List;
  * los bloques y las guardas de if, while y for se resuelven junto con la siguiente.
  */
 public sealed interface Stmt
-        permits Stmt.Block, Stmt.Assign, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,
+        permits Stmt.Block, Stmt.Assign, Stmt.Swap, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,
                 Stmt.QueuePush, Stmt.QueuePop, Stmt.Write, Stmt.IfStmt, Stmt.WhileStmt,
                 Stmt.ForStmt, Stmt.Skip, Stmt.Delay, VarDecl {
 
@@ -18,6 +18,13 @@ public sealed interface Stmt
 
     /** {@code target = value;} o {@code target[index] = value;} */
     record Assign(String target, Expr index, Expr value, int line) implements Stmt { }
+
+    /**
+     * {@code left :=: right;}: intercambia los valores de dos variables o elementos de arreglo
+     * en un solo paso ({@code leftIndex} y {@code rightIndex} son null si no hay indice).
+     */
+    record Swap(String left, Expr leftIndex, String right, Expr rightIndex, int line)
+            implements Stmt { }
 
     /** {@code target++;} / {@code target--;} (opcionalmente indexado). */
     record IncDec(String target, Expr index, boolean increment, int line) implements Stmt { }

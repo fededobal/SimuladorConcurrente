@@ -53,6 +53,7 @@ final class StatementExecutor {
             case Stmt.Delay d -> execDelay(p, act, d);
             case VarDecl vd -> execLocalDecl(p, act, vd);
             case Stmt.Assign a -> execAssign(p, act, a);
+            case Stmt.Swap sw -> execSwap(p, act, sw);
             case Stmt.IncDec inc -> execIncDec(p, act, inc);
             case Stmt.MonitorCall call -> execMonitorCall(p, act, call);
             case Stmt.CondOp co -> execCondOp(p, act, co);
@@ -137,6 +138,52 @@ final class StatementExecutor {
                 value.assignTo(slot.array().elementType(), element, a.line()));
         vars.touchIfMonitorVar(p.id(), act, a.target());
         event(p, EventKind.ASSIGN, a.target(), p.name() + ": " + element + " = " + value.display());
+    }
+
+    /**
+     * Lee los dos lados y despues escribe cada uno con el valor del otro, todo en el mismo
+     * paso: ningun otro proceso ve el estado intermedio.
+     */
+    private void execSwap(Process p, Activation act, Stmt.Swap sw) {
+        Place left = place(act, sw.left(), sw.leftIndex(), sw.line());
+        Place right = place(act, sw.right(), sw.rightIndex(), sw.line());
+        Value leftValue = left.read();
+        Value rightValue = right.read();
+        left.write(p, rightValue);
+        right.write(p, leftValue);
+        event(p, EventKind.ASSIGN, sw.left(), p.name() + ": " + left.label() + " :=: "
+                + right.label() + " => " + left.label() + " = " + rightValue.display() + ", "
+                + right.label() + " = " + leftValue.display());
+    }
+
+    /** Una variable o un elemento de arreglo, ya resuelto, que se puede leer y escribir. */
+    private interface Place {
+        String label();
+        Value read();
+        void write(Process writer, Value value);
+    }
+
+    private Place place(Activation act, String name, Expr index, int line) {
+        if (index == null) {
+            return new Place() {
+                public String label() { return name; }
+                public Value read() { return vars.read(act, name, line); }
+                public void write(Process writer, Value value) {
+                    vars.assignScalar(writer.id(), act, name, value, line);
+                }
+            };
+        }
+        VariableAccess.ArraySlot slot = vars.arraySlot(act, name, index, line);
+        String element = name + "[" + slot.index() + "]";
+        return new Place() {
+            public String label() { return element; }
+            public Value read() { return slot.array().get(slot.index()); }
+            public void write(Process writer, Value value) {
+                slot.array().set(slot.index(),
+                        value.assignTo(slot.array().elementType(), element, line));
+                vars.touchIfMonitorVar(writer.id(), act, name);
+            }
+        };
     }
 
     private void execIncDec(Process p, Activation act, Stmt.IncDec inc) {
