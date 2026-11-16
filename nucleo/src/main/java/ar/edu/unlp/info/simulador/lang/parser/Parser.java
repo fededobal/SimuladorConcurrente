@@ -233,9 +233,7 @@ public final class Parser {
         Token t = peek();
 
         if (t.isKeyword("skip")) {
-            advance();
-            consume(";", "Se esperaba ';' después de 'skip'");
-            return new Stmt.Skip(t.line());
+            return parseSkip();
         }
         if (t.isKeyword("wait") || t.isKeyword("signal") || t.isKeyword("signal_all")) {
             return parseCondOp();
@@ -247,12 +245,7 @@ public final class Parser {
             return parseWrite();
         }
         if (t.isKeyword("delay")) {
-            advance();
-            consume("(", "Se esperaba '(' después de 'delay'");
-            Expr seconds = parseExpr();
-            consume(")", "Se esperaba ')' al cerrar el delay");
-            consume(";", "Se esperaba ';' al final del delay");
-            return new Stmt.Delay(seconds, t.line());
+            return parseDelay();
         }
         if (t.isKeyword("if")) {
             return parseIf();
@@ -274,6 +267,21 @@ public final class Parser {
             return parseAssignOrIncDec();
         }
         throw error("Sentencia no válida");
+    }
+
+    private Stmt parseSkip() {
+        Token kw = advance();
+        consume(";", "Se esperaba ';' después de 'skip'");
+        return new Stmt.Skip(kw.line());
+    }
+
+    private Stmt parseDelay() {
+        Token kw = advance();
+        consume("(", "Se esperaba '(' después de 'delay'");
+        Expr seconds = parseExpr();
+        consume(")", "Se esperaba ')' al cerrar el delay");
+        consume(";", "Se esperaba ';' al final del delay");
+        return new Stmt.Delay(seconds, kw.line());
     }
 
     /**
@@ -577,55 +585,68 @@ public final class Parser {
      * </pre>
      */
     private Stmt parseFor() {
-        Token kw = advance();
+        int line = advance().line();
         consume("(", "Se esperaba '(' después de 'for'");
+        boolean hasIterator = isScalarType(peek())
+                || peek().is(TokenType.IDENTIFIER) && next().is("=");
+        if (!hasIterator) {
+            return parseAnonymousRangeFor(line);
+        }
+        Stmt init = parseForInit(line);
+        String iterator = init instanceof VarDecl vd ? vd.name() : ((Stmt.Assign) init).target();
+        if (match("..")) {
+            return parseRangeFor(init, iterator, line);
+        }
+        return parseCStyleFor(init, line);
+    }
 
-        String id;
-        Stmt init;
-        boolean rangoAnonimo = false;
+    /** {@code int i = desde} declara el iterador; {@code i = desde} reutiliza uno ya declarado. */
+    private Stmt parseForInit(int line) {
         if (isScalarType(peek())) {
-            Type it = Type.fromKeyword(advance().lexeme());
-            id = consumeIdent("Se esperaba el nombre del iterador");
+            Type type = Type.fromKeyword(advance().lexeme());
+            String id = consumeIdent("Se esperaba el nombre del iterador");
             consume("=", "Se esperaba '=' después del iterador");
-            Expr from = parseExpr();
-            init = VarDecl.scalar(id, it, from, kw.line());
-        } else if (peek().is(TokenType.IDENTIFIER) && next().is("=")) {
-            id = advance().lexeme();
-            consume("=", "Se esperaba '=' después del iterador");
-            Expr from = parseExpr();
-            init = new Stmt.Assign(id, null, from, kw.line());
-        } else {
-            // for (1..n): el iterador existe igual, pero con un nombre que el codigo fuente
-            // no puede escribir (lleva '#'), asi que no colisiona ni es visible.
-            rangoAnonimo = true;
-            id = "for#" + (++anonimos);
-            Expr from = parseExpr();
-            init = VarDecl.scalar(id, Type.INT, from, kw.line());
+            return VarDecl.scalar(id, type, parseExpr(), line);
         }
+        String id = advance().lexeme();
+        consume("=", "Se esperaba '=' después del iterador");
+        return new Stmt.Assign(id, null, parseExpr(), line);
+    }
 
-        if (rangoAnonimo) {
-            consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
-                    + "p. ej. for (int i = 0; i < n; i++) o for (1..n)");
-        }
-        if (rangoAnonimo || match("..")) {
-            Expr to = parseExpr();
-            consume(")", "Se esperaba ')' en el 'for' de rango");
-            Stmt.Block body = parseBlockOrStatement();
-            // la cota se evalua una vez, en una variable que el codigo fuente no puede nombrar
-            VarDecl limit = VarDecl.scalar("hasta#" + (++anonimos), Type.INT, to, kw.line());
-            Expr cond = new Expr.Binary("<=", new Expr.VarRef(id, kw.line()),
-                    new Expr.VarRef(limit.name(), kw.line()), kw.line());
-            Stmt step = new Stmt.IncDec(id, null, true, kw.line());
-            return new Stmt.ForStmt(init, limit, cond, step, body, kw.line());
-        }
+    /**
+     * {@code for (1..n)}: el iterador existe igual, pero con un nombre que el codigo fuente no
+     * puede escribir (lleva '#'), asi que no colisiona ni es visible.
+     */
+    private Stmt parseAnonymousRangeFor(int line) {
+        String iterator = "for#" + (++anonimos);
+        Stmt init = VarDecl.scalar(iterator, Type.INT, parseExpr(), line);
+        consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
+                + "p. ej. for (int i = 0; i < n; i++) o for (1..n)");
+        return parseRangeFor(init, iterator, line);
+    }
 
+    /** El resto de un for de rango, despues del '..': {@code hasta) cuerpo}. */
+    private Stmt parseRangeFor(Stmt init, String iterator, int line) {
+        Expr to = parseExpr();
+        consume(")", "Se esperaba ')' en el 'for' de rango");
+        Stmt.Block body = parseBlockOrStatement();
+        // la cota se evalua una vez, en una variable que el codigo fuente no puede nombrar
+        VarDecl limit = VarDecl.scalar("hasta#" + (++anonimos), Type.INT, to, line);
+        Expr cond = new Expr.Binary("<=", new Expr.VarRef(iterator, line),
+                new Expr.VarRef(limit.name(), line), line);
+        Stmt step = new Stmt.IncDec(iterator, null, true, line);
+        return new Stmt.ForStmt(init, limit, cond, step, body, line);
+    }
+
+    /** El resto de un for al estilo C, despues de la inicializacion: {@code ; cond; paso) cuerpo}. */
+    private Stmt parseCStyleFor(Stmt init, int line) {
         consume(";", "Se esperaba ';' en el 'for'");
-        Expr cond = check(";") ? new Expr.BoolLit(true, kw.line()) : parseExpr();
+        Expr cond = check(";") ? new Expr.BoolLit(true, line) : parseExpr();
         consume(";", "Se esperaba ';' en el 'for'");
-        Stmt step = parseForStep(kw.line());
+        Stmt step = parseForStep(line);
         consume(")", "Se esperaba ')' en el 'for'");
         Stmt.Block body = parseBlockOrStatement();
-        return new Stmt.ForStmt(init, null, cond, step, body, kw.line());
+        return new Stmt.ForStmt(init, null, cond, step, body, line);
     }
 
     private Stmt parseForStep(int line) {
@@ -830,21 +851,7 @@ public final class Parser {
         Token t = peek();
 
         if (t.is(TokenType.NUMBER)) {
-            advance();
-            if (t.lexeme().contains(".")) {
-                double d = decimal(t.lexeme());
-                if (Double.isInfinite(d)) {
-                    throw new CompilationException("Número fuera de rango: el literal "
-                            + "decimal es demasiado grande", t.line());
-                }
-                return new Expr.DoubleLit(d, t.line());
-            }
-            try {
-                return new Expr.IntLit(Long.parseLong(t.lexeme()), t.line());
-            } catch (NumberFormatException e) {
-                throw new CompilationException("Número fuera de rango: " + t.lexeme()
-                        + " no entra en un int (máximo 9223372036854775807)", t.line());
-            }
+            return parseNumber();
         }
         if (t.is(TokenType.STRING)) {
             advance();
@@ -855,18 +862,7 @@ public final class Parser {
             return new Expr.BoolLit(t.is("true"), t.line());
         }
         if (t.isKeyword("empty")) {
-            advance();
-            // se acepta con y sin parentesis: empty c y empty(c)
-            boolean parentesis = match("(");
-            String queue = consumeIdent("Se esperaba el nombre de la cola después de 'empty'");
-            if (match("[")) {
-                // empty(turno[i]): solo puede ser una cond (no hay arreglos de colas); el
-                // validador lo informa con el nombre
-                parseExpr();
-                consume("]", "Se esperaba ']' en el índice");
-            }
-            if (parentesis) consume(")", "Se esperaba ')' después del nombre de la cola");
-            return new Expr.EmptyQueue(queue, t.line());
+            return parseEmpty();
         }
         if (t.is("(")) {
             advance();
@@ -884,6 +880,40 @@ public final class Parser {
             return new Expr.VarRef(t.lexeme(), t.line());
         }
         throw error("Se esperaba una expresión");
+    }
+
+    /** Un literal entero o, si tiene punto, decimal; los que no entran son error de compilacion. */
+    private Expr parseNumber() {
+        Token t = advance();
+        if (t.lexeme().contains(".")) {
+            double d = decimal(t.lexeme());
+            if (Double.isInfinite(d)) {
+                throw new CompilationException("Número fuera de rango: el literal "
+                        + "decimal es demasiado grande", t.line());
+            }
+            return new Expr.DoubleLit(d, t.line());
+        }
+        try {
+            return new Expr.IntLit(Long.parseLong(t.lexeme()), t.line());
+        } catch (NumberFormatException e) {
+            throw new CompilationException("Número fuera de rango: " + t.lexeme()
+                    + " no entra en un int (máximo 9223372036854775807)", t.line());
+        }
+    }
+
+    /** {@code empty c} o {@code empty(c)}: se acepta con y sin parentesis. */
+    private Expr parseEmpty() {
+        Token kw = advance();
+        boolean parentesis = match("(");
+        String queue = consumeIdent("Se esperaba el nombre de la cola después de 'empty'");
+        if (match("[")) {
+            // empty(turno[i]): solo puede ser una cond (no hay arreglos de colas); el
+            // validador lo informa con el nombre
+            parseExpr();
+            consume("]", "Se esperaba ']' en el índice");
+        }
+        if (parentesis) consume(")", "Se esperaba ')' después del nombre de la cola");
+        return new Expr.EmptyQueue(queue, kw.line());
     }
 
     // ================================================================= helpers
