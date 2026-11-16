@@ -18,11 +18,13 @@ public final class Parser {
 
     private final TokenCursor tokens;
     private final ExpressionParser expressions;
+    private final QueueSyntaxParser queues;
     private int anonimos = 0;
 
     public Parser(List<Token> tokens) {
         this.tokens = new TokenCursor(tokens);
         this.expressions = new ExpressionParser(this.tokens);
+        this.queues = new QueueSyntaxParser(this.tokens, expressions);
     }
 
     // ================================================================= programa
@@ -227,7 +229,7 @@ public final class Parser {
             return parseCondOp();
         }
         if (t.isKeyword("push") || t.isKeyword("pop")) {
-            return parseQueueOp();
+            return queues.parseQueueOp();
         }
         if (t.isKeyword("write")) {
             return parseWrite();
@@ -293,7 +295,7 @@ public final class Parser {
         String name = tokens.consumeIdent("Se esperaba el nombre de la variable");
 
         if (type.isQueue()) {
-            return VarDecl.queue(name, type, parseQueueElementTypes(type, name), line);
+            return VarDecl.queue(name, type, queues.parseElementTypes(type, name), line);
         }
 
         boolean isArray = false;
@@ -315,63 +317,6 @@ public final class Parser {
             init = parseExpr();
         }
         return new VarDecl(name, type, null, isArray, size, init, line);
-    }
-
-    /**
-     * Los tipos de las componentes de una cola: {@code (int)}, {@code (int, text, text)} o,
-     * con la clave separada del resto, {@code (int, (text, text))}. El grupo entre parentesis
-     * solo agrupa: las dos ultimas formas declaran la misma cola. Solo se admite un grupo,
-     * despues de la primera componente, y adentro van tipos sueltos.
-     */
-    private List<Type> parseQueueElementTypes(Type queue, String name) {
-        // la forma, con el nombre que escribio el alumno: "Cola c(tipo, (tipo, ...))"
-        String forma = queue.keyword() + " " + name + "(tipo, (tipo, ...))";
-        if (!tokens.match("(")) {
-            throw tokens.error("Declarar la cola con los tipos de sus componentes: " + queue.keyword()
-                    + " " + name + "(tipo, ...)");
-        }
-        if (tokens.check("(")) {
-            throw tokens.error("La primera componente de '" + name + "' va sin paréntesis; el grupo "
-                    + "entre paréntesis va después de ella: " + forma);
-        }
-        List<Type> types = new ArrayList<>();
-        types.add(parseElementType());
-        if (tokens.match(",")) {
-            if (tokens.match("(")) {
-                do {
-                    if (tokens.check("(")) {
-                        throw tokens.error("Dentro del grupo de '" + name + "' van solo tipos, sin más "
-                                + "paréntesis: " + forma);
-                    }
-                    types.add(parseElementType());
-                } while (tokens.match(","));
-                tokens.consume(")", "Se esperaba ')' al cerrar el grupo de tipos de '" + name + "'");
-                if (!tokens.check(")")) {
-                    throw tokens.error("Después del grupo entre paréntesis se cierra la declaración de '"
-                            + name + "': " + forma);
-                }
-            } else {
-                do {
-                    if (tokens.check("(")) {
-                        throw tokens.error("El grupo entre paréntesis de '" + name + "' va justo después "
-                                + "de la primera componente: " + forma);
-                    }
-                    types.add(parseElementType());
-                } while (tokens.match(","));
-            }
-        }
-        tokens.consume(")", "Se esperaba ')' al cerrar los tipos de '" + name + "'");
-        return types;
-    }
-
-    private Type parseElementType() {
-        Token t = tokens.peek();
-        if (!isScalarType(t)) {
-            throw tokens.error("Las componentes de una cola son int, double, bool o text (se encontró '"
-                    + TokenCursor.describe(t) + "')");
-        }
-        tokens.advance();
-        return Type.fromKeyword(t.lexeme());
     }
 
     private Stmt parseCondOp() {
@@ -400,144 +345,6 @@ public final class Parser {
         tokens.consume(")", "Se esperaba ')' al cerrar el write");
         tokens.consume(";", "Se esperaba ';' al final del write");
         return new Stmt.Write(args, kw.line());
-    }
-
-    /**
-     * {@code push(c, ...)} y {@code pop(c, ...)}. Las componentes se escriben de tres formas,
-     * que significan lo mismo: sueltas, {@code push(c, id, nombre, apellido)}; como tupla,
-     * {@code push(c, (id, nombre, apellido))}; o con la clave separada del resto,
-     * {@code push(c, (id, (nombre, apellido)))}. Igual para {@code pop}. Mas parentesis que
-     * esos es error.
-     */
-    private Stmt parseQueueOp() {
-        Token kw = tokens.advance();
-        tokens.consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
-        String queue = tokens.consumeIdent("Se esperaba el nombre de la cola");
-        tokens.consume(",", "Se esperaba ',' después del nombre de la cola");
-        Stmt op;
-        if (kw.is("push")) {
-            op = new Stmt.QueuePush(queue, parsePushElements(queue), kw.line());
-        } else {
-            op = new Stmt.QueuePop(queue, parsePopTargets(queue), kw.line());
-        }
-        tokens.consume(")", "Se esperaba ')'");
-        tokens.consume(";", "Se esperaba ';'");
-        return op;
-    }
-
-    private List<Expr> parsePushElements(String queue) {
-        String formas = "push(" + queue + ", componentes), push(" + queue + ", (componentes)) o "
-                + "push(" + queue + ", (clave, (resto)))";
-        List<Expr> elems = new ArrayList<>();
-        if (tupleAhead()) {
-            tokens.advance();
-            if (tupleAhead()) {
-                throw tokens.error("Sobran paréntesis en el push a '" + queue + "'; las formas válidas son "
-                        + formas);
-            }
-            elems.add(parseExpr());
-            if (tokens.match(",")) {
-                if (tupleAhead()) {
-                    // la clave y, entre parentesis, el resto de las componentes
-                    tokens.advance();
-                    do {
-                        if (tupleAhead()) {
-                            throw tokens.error("Dentro del grupo van las componentes sueltas, sin más "
-                                    + "paréntesis: push(" + queue + ", (clave, (resto)))");
-                        }
-                        elems.add(parseExpr());
-                    } while (tokens.match(","));
-                    tokens.consume(")", "Se esperaba ')' al cerrar el grupo de la tupla");
-                    if (tokens.check(",")) {
-                        throw tokens.error("Después del grupo entre paréntesis se cierra la tupla: push("
-                                + queue + ", (clave, (resto)))");
-                    }
-                } else {
-                    do {
-                        if (tupleAhead()) {
-                            throw tokens.error("El grupo entre paréntesis va justo después de la primera "
-                                    + "componente: push(" + queue + ", (clave, (resto)))");
-                        }
-                        elems.add(parseExpr());
-                    } while (tokens.match(","));
-                }
-            }
-            tokens.consume(")", "Se esperaba ')' al cerrar la tupla");
-            return elems;
-        }
-        do {
-            if (tupleAhead()) {
-                throw tokens.error("Los paréntesis de la tupla van alrededor de todas las componentes; "
-                        + "las formas válidas son " + formas);
-            }
-            elems.add(parseExpr());
-        } while (tokens.match(","));
-        return elems;
-    }
-
-    private List<String> parsePopTargets(String queue) {
-        String destino = "Se esperaba una variable destino para 'pop'";
-        String formas = "pop(" + queue + ", destinos), pop(" + queue + ", (destinos)) o pop("
-                + queue + ", (clave, (resto)))";
-        List<String> targets = new ArrayList<>();
-        if (tokens.match("(")) {
-            if (tokens.check("(")) {
-                throw tokens.error("Sobran paréntesis en el pop de '" + queue + "'; las formas válidas son "
-                        + formas);
-            }
-            targets.add(tokens.consumeIdent(destino));
-            if (tokens.match(",")) {
-                if (tokens.match("(")) {
-                    do {
-                        targets.add(tokens.consumeIdent(destino));
-                    } while (tokens.match(","));
-                    tokens.consume(")", "Se esperaba ')' al cerrar el grupo de destinos");
-                    if (tokens.check(",")) {
-                        throw tokens.error("Después del grupo entre paréntesis se cierra la tupla: pop("
-                                + queue + ", (clave, (resto)))");
-                    }
-                } else {
-                    do {
-                        if (tokens.check("(")) {
-                            throw tokens.error("El grupo entre paréntesis va justo después del primer "
-                                    + "destino: pop(" + queue + ", (clave, (resto)))");
-                        }
-                        targets.add(tokens.consumeIdent(destino));
-                    } while (tokens.match(","));
-                }
-            }
-            tokens.consume(")", "Se esperaba ')' al cerrar la tupla");
-            return targets;
-        }
-        do {
-            if (tokens.check("(")) {
-                throw tokens.error("Los paréntesis de la tupla van alrededor de todos los destinos; las "
-                        + "formas válidas son " + formas);
-            }
-            targets.add(tokens.consumeIdent(destino));
-        } while (tokens.match(","));
-        return targets;
-    }
-
-    /**
-     * true si lo que sigue es una tupla {@code (e1, e2, ...)}. Un parentesis con una sola
-     * expresion no lo es: es una expresion agrupada, como {@code push(c, (a + b) * 2)}. Mira
-     * hacia adelante sin consumir nada.
-     */
-    private boolean tupleAhead() {
-        if (!tokens.check("(")) return false;
-        int start = tokens.mark();
-        try {
-            tokens.advance();
-            // "((" con una tupla adentro tambien cuenta: quien llama avisa que sobran parentesis
-            if (tokens.check("(") && tupleAhead()) return true;
-            parseExpr();
-            return tokens.check(",");
-        } catch (CompilationException e) {
-            return false;
-        } finally {
-            tokens.reset(start);
-        }
     }
 
     private Stmt parseIf() {
@@ -714,7 +521,8 @@ public final class Parser {
 
     // ================================================================= helpers
 
-    private boolean isScalarType(Token t) {
+    /** true si el token es uno de los tipos escalares: int, double, bool o text. */
+    static boolean isScalarType(Token t) {
         return t.is(TokenType.KEYWORD) && SCALAR_TYPES.contains(t.lexeme());
     }
 
