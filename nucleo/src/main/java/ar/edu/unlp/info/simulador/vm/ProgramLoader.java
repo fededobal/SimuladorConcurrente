@@ -37,6 +37,25 @@ final class ProgramLoader {
 
     private ProgramLoader() { }
 
+    /** Las cotas de un cuantificador {@code [i: desde..hasta]}, ya evaluadas. */
+    record FamilyBounds(long from, long to) {
+        /**
+         * Cuantos indices abarca; 0 si {@code hasta < desde}. Con cotas enormes la resta
+         * desborda y da negativa: quien la usa lo trata como "demasiados".
+         */
+        long count() {
+            return to < from ? 0 : to - from + 1;
+        }
+    }
+
+    /** Evalua las cotas (primero desde, despues hasta); son constantes, no ven variables. */
+    static FamilyBounds familyBounds(ProcessDef.QuantDef quant) {
+        ExprEvaluator bounds = new ExprEvaluator(name -> null);
+        long from = bounds.evalLong(quant.from());
+        long to = bounds.evalLong(quant.to());
+        return new FamilyBounds(from, to);
+    }
+
     /**
      * Los monitores de una definicion: uno, o uno por indice si es un arreglo de monitores
      * ({@code Escritorio[0]}, {@code Escritorio[1]}...), cada uno con su propio estado.
@@ -45,17 +64,15 @@ final class ProgramLoader {
         if (!md.isFamily()) {
             return List.of(buildMonitor(md, md.name(), null, 0));
         }
-        ExprEvaluator bounds = new ExprEvaluator(name -> null);
-        long from = bounds.evalLong(md.quant().from());
-        long to = bounds.evalLong(md.quant().to());
-        long count = to < from ? 0 : to - from + 1;
+        FamilyBounds bounds = familyBounds(md.quant());
+        long count = bounds.count();
         if (count < 0 || count > TOPE_MONITORES) {
             throw new RuntimeError("Demasiados monitores en " + md.name()
                     + ": el simulador admite hasta " + TOPE_MONITORES + " por arreglo", md.line());
         }
         List<Monitor> family = new ArrayList<>();
         for (long k = 0; k < count; k++) {
-            long i = from + k;
+            long i = bounds.from() + k;
             family.add(buildMonitor(md, md.name() + "[" + i + "]", md.quant().iterator(), i));
         }
         return family;
@@ -96,16 +113,13 @@ final class ProgramLoader {
                 processes.add(newProcess(processes, pd.name(), pd, null, 0));
                 continue;
             }
-            ExprEvaluator ev = new ExprEvaluator(name -> null);
-            long from = ev.evalLong(pd.quant().from());
-            long to = ev.evalLong(pd.quant().to());
-            // con cotas enormes to - from desborda: un conteo negativo tambien es "demasiados"
-            long count = to < from ? 0 : to - from + 1;
+            FamilyBounds bounds = familyBounds(pd.quant());
+            long count = bounds.count();
             if (count < 0 || count > TOPE_PROCESOS - processes.size()) {
                 throw tooManyProcesses(pd.line());
             }
             for (long k = 0; k < count; k++) {
-                long i = from + k;
+                long i = bounds.from() + k;
                 processes.add(newProcess(processes, pd.name() + "[" + i + "]", pd,
                         pd.quant().iterator(), i));
             }

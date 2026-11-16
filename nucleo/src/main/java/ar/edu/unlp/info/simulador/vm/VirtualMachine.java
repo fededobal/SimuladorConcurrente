@@ -572,10 +572,10 @@ public final class VirtualMachine {
         long index = vars.evaluator(callerAct).evalLong(call.index());
         String name = call.monitor() + "[" + index + "]";
         if (!monitors.containsKey(name)) {
-            ExprEvaluator bounds = new ExprEvaluator(n -> null);
+            ProgramLoader.FamilyBounds bounds = ProgramLoader.familyBounds(md.quant());
             throw new RuntimeError("Índice " + index + " fuera de rango para el monitor '"
-                    + call.monitor() + "' (va de " + bounds.evalLong(md.quant().from()) + " a "
-                    + bounds.evalLong(md.quant().to()) + ")", call.line());
+                    + call.monitor() + "' (va de " + bounds.from() + " a " + bounds.to() + ")",
+                    call.line());
         }
         return name;
     }
