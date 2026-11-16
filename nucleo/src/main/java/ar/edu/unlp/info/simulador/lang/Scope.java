@@ -69,10 +69,10 @@ final class Scope {
         Symbol previous = lookup(name);
         if (previous != null) {
             // "una variable local llamada" / "un parámetro llamado": concuerda con el origen
-            boolean femenino = previous.origin().startsWith("una ");
+            boolean feminine = previous.origin().startsWith("una ");
             throw new CompilationException("Ya existe " + previous.origin()
-                    + (femenino ? " llamada '" : " llamado '") + name
-                    + "': elegí otro nombre para no " + (femenino ? "taparla" : "taparlo"), line);
+                    + (feminine ? " llamada '" : " llamado '") + name
+                    + "': elegí otro nombre para no " + (feminine ? "taparla" : "taparlo"), line);
         }
         symbols.put(name, sym);
     }

@@ -62,10 +62,10 @@ final class ExprTyper {
     }
 
     /** Controla que el valor de la expresion se pueda guardar en un destino del tipo dado. */
-    static void checkAssignable(Type target, Expr value, Scope scope, String destino, int line) {
+    static void checkAssignable(Type target, Expr value, Scope scope, String destination, int line) {
         Type v = typeOf(value, scope);
         if (!assignable(target, v)) {
-            throw error("No se puede guardar un " + v.keyword() + " en '" + destino + "', que es "
+            throw error("No se puede guardar un " + v.keyword() + " en '" + destination + "', que es "
                     + target.keyword(), line);
         }
     }

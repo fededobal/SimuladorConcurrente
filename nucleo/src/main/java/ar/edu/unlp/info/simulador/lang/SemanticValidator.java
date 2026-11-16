@@ -21,10 +21,10 @@ import java.util.Set;
  */
 public final class SemanticValidator {
 
-    private static final String PERMANENTE = "una variable permanente";
-    private static final String LOCAL = "una variable local";
-    private static final String PARAMETRO = "un parámetro";
-    private static final String ITERADOR = "un iterador";
+    private static final String PERMANENT_ORIGIN = "una variable permanente";
+    private static final String LOCAL_ORIGIN = "una variable local";
+    private static final String PARAMETER_ORIGIN = "un parámetro";
+    private static final String ITERATOR_ORIGIN = "un iterador";
 
     private final Program program;
     private final Map<String, MonitorInfo> monitors = new HashMap<>();
@@ -123,7 +123,7 @@ public final class SemanticValidator {
                     "el índice del monitor", null), m.line());
         }
         for (VarDecl v : m.permanentVars()) {
-            checkVarDecl(v, root, PERMANENTE);
+            checkVarDecl(v, root, PERMANENT_ORIGIN);
         }
         for (CondDecl c : m.conds()) {
             if (c.isArray()) ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
@@ -142,7 +142,7 @@ public final class SemanticValidator {
             Scope scope = new Scope(root, m.name(), true, condNames);
             for (Param param : pr.params()) {
                 declare(scope, param.name(), new Symbol(new VarType(param.type(), false),
-                        !param.isOutput(), PARAMETRO, null), param.line());
+                        !param.isOutput(), PARAMETER_ORIGIN, null), param.line());
             }
             checkBlock(pr.body(), scope);
         }
@@ -171,7 +171,7 @@ public final class SemanticValidator {
     private void checkStmt(Stmt s, Scope scope) {
         switch (s) {
             case Stmt.Block b -> checkBlock(b, scope);
-            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL);
+            case VarDecl vd -> checkVarDecl(vd, scope, LOCAL_ORIGIN);
             case Stmt.Assign a -> checkAssign(a, scope);
             case Stmt.IncDec inc -> {
                 Type t = targetType(inc.target(), inc.index(), scope, inc.line());
@@ -243,21 +243,21 @@ public final class SemanticValidator {
         checkComponentCount(qp.queue(), comps, qp.targets().size(), "pop", qp.line());
         for (int i = 0; i < comps.size(); i++) {
             String target = qp.targets().get(i);
-            Type destino = targetType(target, null, scope, qp.line());
-            if (!ExprTyper.assignable(destino, comps.get(i))) {
+            Type destination = targetType(target, null, scope, qp.line());
+            if (!ExprTyper.assignable(destination, comps.get(i))) {
                 throw new CompilationException("La componente " + (i + 1) + " de '" + qp.queue()
                         + "' es " + comps.get(i).keyword() + " y no se puede guardar en '" + target
-                        + "', que es " + destino.keyword(), qp.line());
+                        + "', que es " + destination.keyword(), qp.line());
             }
         }
     }
 
-    private static void checkComponentCount(String queue, List<Type> comps, int usados, String op,
+    private static void checkComponentCount(String queue, List<Type> comps, int used, String op,
             int line) {
-        if (usados != comps.size()) {
+        if (used != comps.size()) {
             throw new CompilationException("La cola '" + queue + "' guarda "
-                    + describeComponents(comps) + ": este " + op + " tiene " + usados
-                    + (usados == 1 ? " componente" : " componentes") + " y se esperaba"
+                    + describeComponents(comps) + ": este " + op + " tiene " + used
+                    + (used == 1 ? " componente" : " componentes") + " y se esperaba"
                     + (comps.size() == 1 ? " 1" : "n " + comps.size()), line);
         }
     }
@@ -275,8 +275,8 @@ public final class SemanticValidator {
 
     private void checkAssign(Stmt.Assign a, Scope scope) {
         Type t = targetType(a.target(), a.index(), scope, a.line());
-        String destino = a.index() == null ? a.target() : a.target() + "[...]";
-        ExprTyper.checkAssignable(t, a.value(), scope, destino, a.line());
+        String destination = a.index() == null ? a.target() : a.target() + "[...]";
+        ExprTyper.checkAssignable(t, a.value(), scope, destination, a.line());
     }
 
     /**
@@ -291,7 +291,7 @@ public final class SemanticValidator {
             if (vd.initExpr() != null) {
                 ExprTyper.checkAssignable(vd.type(), vd.initExpr(), inner, vd.name(), vd.line());
             }
-            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERADOR,
+            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERATOR_ORIGIN,
                     null),
                     vd.line());
             iterator = vd.name();
@@ -306,7 +306,7 @@ public final class SemanticValidator {
             }
             ExprTyper.expect(f.limit().initExpr(), Type.INT, inner, "La cota del for");
             inner.declare(f.limit().name(), new Symbol(new VarType(Type.INT, false), true,
-                    ITERADOR, null), f.line());
+                    ITERATOR_ORIGIN, null), f.line());
         }
         ExprTyper.expect(f.condition(), Type.BOOLEAN, inner, "La condición del for");
         checkStmt(f.step(), inner);
