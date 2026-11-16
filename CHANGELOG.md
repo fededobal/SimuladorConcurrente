@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Clase `StatementExecutor` en `vm/`, con la ejecución de cada sentencia que tenía `VirtualMachine`; la VM queda en 320 líneas y coordina al scheduler, al ejecutor, al protocolo de monitores y al log. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `SimulationClock` en `vm/`, con el instante y la hora en ms que tenía `VirtualMachine` como campos sueltos. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `MonitorProtocol` en `vm/`, con el protocolo de los monitores que tenía `VirtualMachine`: entrar, liberar con traspaso, wait/signal/signal_all y terminar con error soltando los monitores. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `EventKind` en `vm/`: los tipos de evento del log pasan de textos sueltos a un enum. El JSON que recibe el navegador no cambia. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
