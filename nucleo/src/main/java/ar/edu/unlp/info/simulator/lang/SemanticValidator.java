@@ -129,11 +129,12 @@ public final class SemanticValidator {
             case Stmt.ForStmt f -> checkFor(f, scope);
             case Stmt.MonitorCall call -> checkMonitorCall(call, scope);
             case Stmt.CondOp co -> checkCondOp(co, scope);
-            case Stmt.QueuePush qp -> checkQueuePush(qp, scope);
+            case Stmt.QueuePush qp -> QueueChecks.checkPush(qp, scope);
             case Stmt.Write w -> {
                 for (Expr e : w.args()) ExprTyper.checkWriteArg(e, scope);
             }
-            case Stmt.QueuePop qp -> checkQueuePop(qp, scope);
+            case Stmt.QueuePop qp -> QueueChecks.checkPop(qp, scope,
+                    target -> targetType(target, null, scope, qp.line()));
             case Stmt.Delay d -> ExprTyper.expect(d.seconds(), Type.INT, scope,
                     "El tiempo del delay");
         }
@@ -154,60 +155,6 @@ public final class SemanticValidator {
         }
         declare(scope, vd.name(), new Symbol(new VarType(vd.type(), vd.isArray()), false, origin,
                 vd.elementTypes()), vd.line());
-    }
-
-    /**
-     * Las componentes de un push, contra la declaracion de la cola: la misma cantidad y, para
-     * cada una, un valor que se pueda guardar en ese tipo (las conversiones de siempre: un int
-     * donde va un double, un numero donde va un text).
-     */
-    private void checkQueuePush(Stmt.QueuePush qp, Scope scope) {
-        List<Type> comps = queueElementTypes(qp.queue(), scope, qp.line());
-        checkComponentCount(qp.queue(), comps, qp.elements().size(), "push", qp.line());
-        for (int i = 0; i < comps.size(); i++) {
-            Type value = ExprTyper.typeOf(qp.elements().get(i), scope);
-            if (!ExprTyper.assignable(comps.get(i), value)) {
-                throw new CompilationException("La componente " + (i + 1) + " de '" + qp.queue()
-                        + "' es " + comps.get(i).keyword() + " y se está encolando un "
-                        + value.keyword(), qp.line());
-            }
-        }
-    }
-
-    /** Los destinos de un pop: uno por componente, cada uno capaz de guardar la suya. */
-    private void checkQueuePop(Stmt.QueuePop qp, Scope scope) {
-        List<Type> comps = queueElementTypes(qp.queue(), scope, qp.line());
-        checkComponentCount(qp.queue(), comps, qp.targets().size(), "pop", qp.line());
-        for (int i = 0; i < comps.size(); i++) {
-            String target = qp.targets().get(i);
-            Type destination = targetType(target, null, scope, qp.line());
-            if (!ExprTyper.assignable(destination, comps.get(i))) {
-                throw new CompilationException("La componente " + (i + 1) + " de '" + qp.queue()
-                        + "' es " + comps.get(i).keyword() + " y no se puede guardar en '" + target
-                        + "', que es " + destination.keyword(), qp.line());
-            }
-        }
-    }
-
-    private static void checkComponentCount(String queue, List<Type> comps, int used, String op,
-            int line) {
-        if (used != comps.size()) {
-            throw new CompilationException("La cola '" + queue + "' guarda "
-                    + describeComponents(comps) + ": este " + op + " tiene " + used
-                    + (used == 1 ? " componente" : " componentes") + " y se esperaba"
-                    + (comps.size() == 1 ? " 1" : "n " + comps.size()), line);
-        }
-    }
-
-    /** "(int, text)" o, con una sola componente, "int". */
-    private static String describeComponents(List<Type> comps) {
-        if (comps.size() == 1) return comps.get(0).keyword();
-        StringBuilder sb = new StringBuilder("(");
-        for (int i = 0; i < comps.size(); i++) {
-            if (i > 0) sb.append(", ");
-            sb.append(comps.get(i).keyword());
-        }
-        return sb.append(')').toString();
     }
 
     private void checkIncDec(Stmt.IncDec inc, Scope scope) {
@@ -388,14 +335,6 @@ public final class SemanticValidator {
                     + "' dentro del for: lo cambia solo el paso del for", line);
         }
         return sym;
-    }
-
-    private static List<Type> queueElementTypes(String name, Scope scope, int line) {
-        Symbol sym = ExprTyper.known(name, scope, line);
-        if (sym.elementTypes() == null) {
-            throw new CompilationException("'" + name + "' no es una cola", line);
-        }
-        return sym.elementTypes();
     }
 
     private boolean containsMonitorInteraction(Stmt s) {
