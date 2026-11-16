@@ -156,9 +156,10 @@ class CaracterizacionTest {
     }
 
     /**
-     * Caminos de la VM que el corpus de invariantes no recorre: delay, errores de ejecucion
-     * dentro y fuera de monitores, ciclo entre monitores, errores al inicializar, for con
-     * paso propio, colas ordenadas con tuplas y arreglos de cond.
+     * Caminos de la VM que el corpus de invariantes no recorre: delay (y fuera de rango),
+     * errores de ejecucion dentro y fuera de monitores, ciclo entre monitores, errores al
+     * inicializar, for con paso propio, colas ordenadas con tuplas, arreglos de cond, espera
+     * activa, bloques anidados, desbordes y aritmetica limite, y los topes de tamano.
      */
     private static Map<String, String> extras() {
         Map<String, String> p = new LinkedHashMap<>();
@@ -217,6 +218,41 @@ class CaracterizacionTest {
                   procedure despertar(i: in int) { signal(turno[i]); } }
                 process W[i: 0..2] { M.esperar(i); }
                 process S { delay(1); for (int j = 0..2) { M.despertar(j); } }
+                """);
+        p.put("extra/espera-activa-y-bloques", """
+                monitor M { bool listo = false; procedure abrir() { listo = true; }
+                  procedure ver(r: out bool) { r = listo; } }
+                process P { bool ok = false; { { int n = 0; } } while (not ok) { M.ver(ok); } }
+                process Q { while (true) { } }
+                process R { skip; skip; M.abrir(); }
+                """);
+        p.put("extra/delay-fuera-de-rango", """
+                process P { delay(3601); } process Q { int s = 0 - 1; delay(s); }
+                process R { delay(3600); }
+                """);
+        p.put("extra/desbordes-y-aritmetica", """
+                monitor M { int max = 9223372036854775807; int min = 0 - 9223372036854775807 - 1;
+                  procedure inc() { max++; }
+                  procedure neg(r: out int) { r = -min; }
+                  procedure div(r: out int) { r = min / (0 - 1); }
+                  procedure modd(r: out double) { r = 5.5 mod 0.0; } }
+                process A { M.inc(); }
+                process B { int r; M.neg(r); }
+                process C { int r; M.div(r); }
+                process D { double r; M.modd(r); }
+                process E { double d = -2.5; int i = -(3); bool b = false and 1 / 0 == 1;
+                  bool c = true or 1 / 0 == 1; double m = 5.5 mod 2; write(d, i, b, c, m); }
+                """);
+        p.put("extra/inicializacion-sin-fin", """
+                monitor M { int x = 0; while (true) { x++; } }
+                process P { skip; }
+                """);
+        p.put("extra/demasiados-procesos", """
+                process P[i: 1..5001] { skip; }
+                """);
+        p.put("extra/demasiados-monitores", """
+                monitor M[i: 1..1001] { int x = 0; }
+                process P { skip; }
                 """);
         return p;
     }

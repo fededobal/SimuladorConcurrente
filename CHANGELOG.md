@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Golden master de la compilación (`CompileErrorsCharacterizationTest`): unos 200 programas, uno por mensaje de error del lexer, el parser, el validador y el tipado, más casos válidos y generados (anidamientos, literales largos), con el mensaje y la línea exactos que ve el alumno. El golden de la VM suma espera activa, delay fuera de rango, desbordes, inicialización sin fin y topes de tamaño. (Federico Dobal, 2026-11-16)
 - `ProgramLoader.familyBounds`: las cotas de un arreglo de monitores o de una familia de procesos se evalúan y se cuentan en un solo lugar, que usan la carga de monitores, la de procesos y el error de índice fuera de rango de la VM. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `Scheduler` en `vm/`, con la elección del turno de cada instante que tenía `VirtualMachine` (`PROB_AVANCE`, el cursor de round robin y el paso a paso). Usa el mismo `Azar` que la VM, así una semilla da el mismo resultado que antes. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `EventLog` en `vm/`, con el registro de eventos que tenía `VirtualMachine` (eventos del instante, últimos 2000 de la ejecución, numeración y silencio durante la inicialización). El tope pasa a ser `EventLog.TOPE_LOG`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

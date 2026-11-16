@@ -1,0 +1,495 @@
+### lexer/comentario-sin-cerrar
+process P { skip; } /* sin cerrar
+### lexer/cadena-sin-cerrar-en-la-linea
+process P { write("hola);
+}
+### lexer/cadena-sin-cerrar-al-final
+process P { write("hola
+### lexer/boolean
+process P { boolean b = true; }
+### lexer/mayusculas-en-palabra-reservada
+MONITOR M { int x = 0; Procedure f() { x = 1; } }
+Process P { M.f(); SKIP; }
+### lexer/comilla-tipografica
+process P { write(“hola”); }
+### lexer/porcentaje
+process P { int a = 5 % 2; }
+### lexer/caracter-inesperado
+process P { int a = 1 @ 2; }
+### programa/variable-global
+int x;
+process P { skip; }
+### programa/basura
+foo
+### programa/sin-procesos
+monitor M { int x = 0; }
+### monitor/sin-nombre
+monitor { }
+process P { skip; }
+### monitor/cuantificador-sin-iterador
+monitor M[: 1..2] { }
+process P { skip; }
+### monitor/cuantificador-sin-dos-puntos
+monitor M[i 1..2] { }
+process P { skip; }
+### monitor/cuantificador-sin-rango
+monitor M[i: 1 2] { }
+process P { skip; }
+### monitor/cuantificador-sin-cerrar
+monitor M[i: 1..2 { }
+process P { skip; }
+### monitor/sin-llave
+monitor M skip;
+### monitor/sin-cerrar
+monitor M { int x = 0;
+### cond/sin-nombre
+monitor M { cond ; }
+process P { skip; }
+### cond/arreglo-sin-cerrar
+monitor M { cond c[2; }
+process P { skip; }
+### cond/sin-punto-y-coma
+monitor M { cond c }
+process P { skip; }
+### procedure/sin-nombre
+monitor M { procedure () { } }
+process P { skip; }
+### procedure/sin-parentesis
+monitor M { procedure f { } }
+process P { skip; }
+### procedure/sin-cerrar-parametros
+monitor M { procedure f(a: int { } }
+process P { skip; }
+### parametro/sin-nombre
+monitor M { procedure f(: int) { } }
+process P { skip; }
+### parametro/sin-dos-puntos
+monitor M { procedure f(a int) { } }
+process P { skip; }
+### parametro/inout
+monitor M { procedure f(a: inout int) { } }
+process P { skip; }
+### parametro/tipo-no-escalar
+monitor M { procedure f(a: in Cola) { } }
+process P { skip; }
+### parametro/coma-entre-grupos
+monitor M { procedure f(a: int, b: int) { } }
+process P { skip; }
+### parametro/coma-entre-grupos-estilo-c
+monitor M { procedure f(int a, int b) { } }
+process P { skip; }
+### parametro/estilo-c-sin-nombre
+monitor M { procedure f(int a; int) { } }
+process P { skip; }
+### proceso/sin-nombre
+process { skip; }
+### proceso/cuantificador-sin-iterador
+process P[: 1..2] { skip; }
+### proceso/sin-llave
+process P skip;
+### proceso/sin-cerrar
+process P { skip;
+### sentencia/skip-sin-punto-y-coma
+process P { skip }
+### sentencia/delay-sin-parentesis
+process P { delay 1; }
+### sentencia/delay-sin-cerrar
+process P { delay(1; }
+### sentencia/delay-sin-punto-y-coma
+process P { delay(1) }
+### sentencia/no-valida
+process P { 123; }
+### declaracion/sin-nombre
+process P { int ; }
+### declaracion/arreglo-sin-cerrar
+process P { int a[3; }
+### declaracion/arreglo-init-sin-parentesis
+process P { int a[3] = 5; }
+### declaracion/arreglo-init-sin-corchete
+process P { int a[3] = (3] 1); }
+### declaracion/arreglo-init-sin-cerrar-corchete
+process P { int a[3] = ([3 1); }
+### declaracion/arreglo-init-sin-cerrar
+process P { int a[3] = ([3] 1; }
+### declaracion/sin-punto-y-coma
+process P { int a }
+### declaracion/cola-sin-punto-y-coma
+process P { Cola c(int) }
+### cola/sin-tipos
+process P { Cola c; }
+### cola/ordenada-sin-tipos
+process P { ColaOrdenada c; }
+### cola/primera-entre-parentesis
+process P { Cola c((int)); }
+### cola/grupo-anidado
+process P { Cola c(int, (text, (int))); }
+### cola/algo-despues-del-grupo
+process P { Cola c(int, (text), int); }
+### cola/grupo-no-va-despues-de-la-primera
+process P { Cola c(int, text, (int)); }
+### cola/grupo-sin-cerrar
+process P { Cola c(int, (text, int; }
+### cola/despues-del-grupo-falta-cerrar
+process P { Cola c(int, (text, int); }
+### cola/tipos-sin-cerrar
+process P { Cola c(int, text; }
+### cola/componente-no-escalar
+process P { Cola c(Cola); }
+### cond-op/sin-parentesis
+monitor M { cond c; procedure f() { wait c; } }
+process P { M.f(); }
+### cond-op/sin-nombre
+monitor M { cond c; procedure f() { wait(); } }
+process P { M.f(); }
+### cond-op/indice-sin-cerrar
+monitor M { cond c[2]; procedure f() { signal(c[1); } }
+process P { M.f(); }
+### cond-op/sin-cerrar
+monitor M { cond c; procedure f() { signal_all(c; } }
+process P { M.f(); }
+### cond-op/sin-punto-y-coma
+monitor M { cond c; procedure f() { signal(c) } }
+process P { M.f(); }
+### write/sin-parentesis
+process P { write "a"; }
+### write/sin-cerrar
+process P { write("a"; }
+### write/sin-punto-y-coma
+process P { write("a") }
+### cola-op/sin-parentesis
+process P { Cola c(int); push c, 1); }
+### cola-op/sin-nombre
+process P { Cola c(int); push(, 1); }
+### cola-op/sin-coma
+process P { Cola c(int); push(c 1); }
+### cola-op/sin-cerrar
+process P { Cola c(int); push(c, 1; }
+### cola-op/sin-punto-y-coma
+process P { Cola c(int); push(c, 1) }
+### push/sobran-parentesis
+process P { Cola c(int, int); push(c, ((1, 2))); }
+### push/grupo-anidado
+process P { Cola c(int, int, int, int); push(c, (1, (2, (3, 4)))); }
+### push/algo-despues-del-grupo
+process P { Cola c(int, int, int, int); push(c, (1, (2, 3), 4)); }
+### push/grupo-no-va-despues-de-la-primera
+process P { Cola c(int, int, int, int); push(c, (1, 2, (3, 4))); }
+### push/grupo-sin-cerrar
+process P { Cola c(int, int, int); push(c, (1, (2, 3; }
+### push/tupla-sin-cerrar
+process P { Cola c(int, int, int); push(c, (1, (2, 3); }
+### push/parentesis-solo-en-parte
+process P { Cola c(int, int, int); push(c, 1, (2, 3)); }
+### push/expresion-agrupada-valida
+process P { Cola c(int); int a = 1; push(c, (a + 1) * 2); push(c, a); }
+### pop/sobran-parentesis
+process P { Cola c(int, int); int a; int b; pop(c, ((a, b))); }
+### pop/algo-despues-del-grupo
+process P { Cola c(int, int, int, int); int a; int b; int d; int e; pop(c, (a, (b, d), e)); }
+### pop/grupo-no-va-despues-del-primero
+process P { Cola c(int, int, int, int); int a; int b; int d; int e; pop(c, (a, b, (d, e))); }
+### pop/tupla-sin-cerrar
+process P { Cola c(int, int, int); int a; int b; int d; pop(c, (a, (b, d); }
+### pop/grupo-sin-cerrar
+process P { Cola c(int, int, int); int a; int b; int d; pop(c, (a, (b, d; }
+### pop/parentesis-solo-en-parte
+process P { Cola c(int, int); int a; int b; pop(c, a, (b)); }
+### pop/destino-no-variable
+process P { Cola c(int); pop(c, 1); }
+### if/sin-parentesis
+process P { bool x = true; if x) skip; }
+### if/sin-cerrar
+process P { bool x = true; if (x skip; }
+### while/sin-parentesis
+process P { bool x = true; while x) skip; }
+### while/sin-cerrar
+process P { bool x = true; while (x skip; }
+### for/sin-parentesis
+process P { for int i = 0..2) skip; }
+### for/sin-iterador
+process P { for (int = 0..2) skip; }
+### for/sin-igual
+process P { for (int i 0..2) skip; }
+### for/rango-sin-puntos
+process P { int i = 0; for (i) skip; }
+### for/rango-sin-cerrar
+process P { for (int i = 0..2 skip; }
+### for/sin-primer-punto-y-coma
+process P { for (int i = 0 i < 2; i++) skip; }
+### for/sin-segundo-punto-y-coma
+process P { for (int i = 0; i < 2 i++) skip; }
+### for/sin-paso
+process P { for (int i = 0; i < 2; ) skip; }
+### for/paso-invalido
+process P { for (int i = 0; i < 2; i * 2) skip; }
+### for/sin-cerrar
+process P { for (int i = 0; i < 2; i++ skip; }
+### for/condicion-vacia-y-paso-asignacion
+process P { int n = 0; for (int i = 0; ; i = i + 1) { n++; if (n > 2) skip; } }
+### llamada/sin-procedure
+monitor M { procedure f() { } }
+process P { M.(); }
+### llamada/sin-parentesis
+monitor M { procedure f() { } }
+process P { M.f; }
+### llamada/sin-cerrar
+monitor M { procedure f(a: int) { } }
+process P { M.f(1; }
+### llamada/sin-punto-y-coma
+monitor M { procedure f(a: int) { } }
+process P { M.f(1) }
+### llamada/indice-sin-cerrar
+monitor M[k: 0..2] { procedure f() { } }
+process P { M[1 2].f(); }
+### llamada/indice-sin-punto
+monitor M[k: 0..2] { procedure f() { } }
+process P { M[1] f(); }
+### asignacion/indice-sin-cerrar
+process P { int a[2]; a[1 = 2; }
+### asignacion/incremento-sin-punto-y-coma
+process P { int a = 0; a++ }
+### asignacion/decremento-sin-punto-y-coma
+process P { int a = 0; a-- }
+### asignacion/sin-operador
+process P { int a = 0; a 1; }
+### asignacion/sin-punto-y-coma
+process P { int a = 0; a = 1 }
+### expresion/comparacion-encadenada
+process P { bool b = 1 < 2 < 3; }
+### expresion/int-fuera-de-rango
+process P { int a = 99999999999999999999; }
+### expresion/empty-sin-nombre
+process P { bool b = empty; }
+### expresion/empty-sin-cerrar
+process P { Cola c(int); bool b = empty(c; }
+### expresion/empty-indice-sin-cerrar
+process P { Cola c(int); bool b = empty(c[1); }
+### expresion/parentesis-sin-cerrar
+process P { int a = (1; }
+### expresion/indice-sin-cerrar
+process P { int b[2]; int a = b[1; }
+### expresion/vacia
+process P { int a = ; }
+### expresion/operadores-validos
+process P { int a = -(2 + 3) * 4 / 2 mod 3 - 1; bool b = not (a > 1) || !true && a != 2; double d = 10.25 / 4; text t = "a" + 1 + d; }
+### semantica/monitor-repetido
+monitor M { int x = 0; }
+monitor M { int y = 0; }
+process P { skip; }
+### semantica/proceso-con-nombre-de-monitor
+monitor M { int x = 0; }
+process M { skip; }
+### semantica/permanente-repetida
+monitor M { int x = 0; int x = 1; }
+process P { skip; }
+### semantica/cond-con-nombre-de-variable-anterior
+monitor M { int c = 0; cond c; }
+process P { skip; }
+### semantica/variable-con-nombre-de-cond-anterior
+monitor M { cond c;
+  int c = 0; }
+process P { skip; }
+### semantica/cond-repetida
+monitor M { cond c; cond c; }
+process P { skip; }
+### semantica/procedure-repetido
+monitor M { procedure f() { } procedure f() { } }
+process P { skip; }
+### semantica/parametro-repetido
+monitor M { procedure f(a: int; a: int) { } }
+process P { skip; }
+### semantica/cota-de-monitores-no-entera
+monitor M[i: 1..true] { int x = 0; }
+process P { skip; }
+### semantica/tamano-de-cond-no-entero
+monitor M { cond c[2.5]; }
+process P { skip; }
+### semantica/inicializacion-con-delay
+monitor M { int x = 0; delay(1); }
+process P { skip; }
+### semantica/inicializacion-con-llamada
+monitor A { procedure f() { } }
+monitor M { int x = 0; if (x == 0) { A.f(); } }
+process P { skip; }
+### semantica/inicializacion-con-wait-en-un-for
+monitor M { cond c; int x = 0; for (int i = 0; i < 2; i++) { wait(c); } }
+process P { skip; }
+### semantica/cota-de-familia-no-entera
+process P[i: 1..2.5] { skip; }
+### semantica/incremento-de-bool
+process P { bool b = true; b++; }
+### semantica/condicion-del-if-no-bool
+process P { int x = 1; if (x) skip; else skip; }
+### semantica/condicion-del-while-no-bool
+process P { int x = 1; while (x) skip; }
+### semantica/delay-con-double
+process P { delay(1.5); }
+### semantica/write-de-arreglo-y-cola-valido
+process P { int a[2]; Cola c(int); write(a, c, 1); }
+### semantica/clave-bool-en-cola-ordenada
+process P { ColaOrdenada c(bool, int); }
+### semantica/tamano-no-entero
+process P { int a[1.5]; }
+### semantica/init-de-tipo-incompatible
+process P { int a = "x"; }
+### semantica/push-cantidad
+process P { Cola c(int, int); push(c, 1); }
+### semantica/push-cantidad-una
+process P { Cola c(int); push(c, 1, 2); }
+### semantica/push-tipo
+process P { Cola c(int, text); push(c, 1, true); }
+### semantica/pop-cantidad
+process P { Cola c(int, int); int a; pop(c, a); }
+### semantica/pop-tipo
+process P { Cola c(int, text); int a; int b; pop(c, a, b); }
+### semantica/push-a-no-cola
+process P { int c = 0; push(c, 1); }
+### semantica/asignar-indice-a-escalar
+process P { int a = 0; a[1] = 2; }
+### semantica/asignar-arreglo-entero
+process P { int a[2]; a = 2; }
+### semantica/asignar-cola
+process P { Cola c(int); c = 2; }
+### semantica/asignar-parametro-in
+monitor M { procedure f(a: in int) { a = 2; } }
+process P { M.f(1); }
+### semantica/asignar-indice-de-familia
+process P[i: 1..2] { i = 3; }
+### semantica/modificar-iterador-del-for
+process P { for (int i = 0; i < 3; i++) { i = 5; } }
+### semantica/modificar-iterador-ya-declarado
+process P { int i = 0; for (i = 1..3) { i++; } }
+### semantica/iterador-de-rango-no-entero
+process P { for (double d = 1..3) skip; }
+### semantica/iterador-ya-declarado-no-entero
+process P { double d = 0; for (d = 1..3) skip; }
+### semantica/cota-del-for-no-entera
+process P { for (int i = 1..2.5) skip; }
+### semantica/condicion-del-for-no-bool
+process P { for (int i = 0; i + 1; i++) skip; }
+### semantica/for-anonimo-valido
+process P { int n = 0; for (1..3) { n++; } }
+### semantica/monitor-no-declarado
+process P { X.f(); }
+### semantica/arreglo-de-monitores-sin-indice
+monitor M[k: 0..1] { procedure f() { } }
+process P { M.f(); }
+### semantica/monitor-con-indice-sin-ser-arreglo
+monitor M { procedure f() { } }
+process P { M[0].f(); }
+### semantica/indice-de-monitor-no-entero
+monitor M[k: 0..1] { procedure f() { } }
+process P { M[true].f(); }
+### semantica/llamada-al-mismo-monitor
+monitor M { procedure f() { } procedure g() { M.f(); } }
+process P { M.g(); }
+### semantica/procedure-inexistente
+monitor M { procedure f() { } }
+process P { M.g(); }
+### semantica/cantidad-de-argumentos
+monitor M { procedure f(a: int) { } }
+process P { M.f(1, 2); }
+### semantica/argumento-in-incompatible
+monitor M { procedure f(a: int) { } }
+process P { M.f("x"); }
+### semantica/out-con-expresion
+monitor M { procedure f(r: out int) { r = 1; } }
+process P { M.f(1 + 2); }
+### semantica/out-a-iterador
+monitor M { procedure f(r: out int) { r = 1; } }
+process P[i: 1..2] { M.f(i); }
+### semantica/out-de-tipo-incompatible
+monitor M { procedure f(r: out double) { r = 1.5; } }
+process P { int x = 0; M.f(x); }
+### semantica/out-a-elemento-valido
+monitor M { procedure f(r: out double) { r = 1.5; } }
+process P { double x[2]; M.f(x[1]); }
+### semantica/wait-fuera-de-procedure
+monitor M { cond c; }
+process P { wait(c); }
+### semantica/cond-no-declarada
+monitor M { cond c; procedure f() { signal(d); } }
+process P { M.f(); }
+### semantica/cond-arreglo-sin-indice
+monitor M { cond c[2]; procedure f() { signal(c); } }
+process P { M.f(); }
+### semantica/cond-con-indice-sin-ser-arreglo
+monitor M { cond c; procedure f() { signal(c[0]); } }
+process P { M.f(); }
+### semantica/indice-de-cond-no-entero
+monitor M { cond c[2]; procedure f() { signal(c[true]); } }
+process P { M.f(); }
+### semantica/local-con-nombre-de-cond
+monitor M { cond c; procedure f() { int c = 0; } }
+process P { M.f(); }
+### semantica/parametro-con-nombre-de-cond
+monitor M { cond c; procedure f(c: int) { } }
+process P { M.f(1); }
+### alcance/local-tapa-parametro
+monitor M { procedure f(a: int) { int a = 0; } }
+process P { M.f(1); }
+### alcance/local-tapa-local
+process P { int x = 0; { int x = 1; } }
+### alcance/local-tapa-permanente
+monitor M { int x = 0; procedure f() { int x = 1; } }
+process P { M.f(); }
+### alcance/local-del-proceso-no-se-ve-en-el-monitor
+monitor M { procedure f() { y = 1; } }
+process P { int y = 0; M.f(); }
+### tipos/nombre-no-declarado
+process P { int a = b; }
+### tipos/indice-sobre-escalar
+process P { int a = 0; int b = a[1]; }
+### tipos/indice-no-entero
+process P { int a[2]; int b = a[true]; }
+### tipos/empty-de-cond
+monitor M { cond c; procedure f() { if (empty(c)) skip; } }
+process P { M.f(); }
+### tipos/empty-de-no-cola
+process P { int c = 0; bool b = empty c; }
+### tipos/not-de-int
+process P { bool b = not 1; }
+### tipos/menos-de-bool
+process P { int a = -true; }
+### tipos/and-con-int
+process P { bool b = true and 1; }
+### tipos/aritmetica-con-text
+process P { int a = "a" * 2; }
+### tipos/igualdad-text-int
+process P { bool b = "a" == 1; }
+### tipos/orden-entre-bools
+process P { bool b = true < false; }
+### tipos/arreglo-sin-indice
+process P { int a[2]; int b = a + 1; }
+### tipos/cola-como-escalar
+process P { Cola c(int); int b = c; }
+### tipos/asignacion-incompatible
+process P { int a = 0; a = 1.5; }
+### tipos/asignacion-a-elemento-incompatible
+process P { int a[2]; a[0] = true; }
+### validos/comentarios
+// comentario de linea
+process P { /* bloque
+  de dos lineas */ skip; } // al final
+### validos/tuplas-en-push-y-pop
+monitor M { Cola c(int, (text, double)); ColaOrdenada o(int, text, double); int k; text s; double d;
+  procedure f() { push(c, 1, "a", 2.5); push(c, (2, "b", 3.5)); push(c, (3, ("c", 4.5)));
+    pop(c, k, s, d); pop(c, (k, s, d)); pop(c, (k, (s, d)));
+    push(o, (k, s, d)); pop(o, k, s, d); if (empty o and not empty(c)) skip; } }
+process P { M.f(); }
+### validos/decrementos-y-llamada-indexada
+monitor M[k: 0..1] { cond c[2]; int a[2]; int n = 0;
+  for (int i = 1; i >= 0; i--) { a[i]--; }
+  while (n < 2) { n++; }
+  procedure f(x: int; r: out int) { a[x]--; n--; r = n; signal(c[x]); if (n == 2.0) skip; } }
+process P { int r; M[1].f(0, r); M[0].f(1, r); }
+### validos/estilo-c-y-grupos-de-parametros
+monitor M { procedure f(int a, b; c, d: in double; e: out bool) { e = a + b < c + d; } }
+process P { bool e; M.f(1, 2, 3, 4.5, e); }
+### expresion/tupla-con-expresion-invalida
+process P { Cola c(int); push(c, (1 +)); }
+### expresion/empty-de-cond-con-indice
+monitor M { cond c[2]; procedure f() { if (empty(c[1])) skip; } }
+process P { M.f(); }
+### asignacion/indice-al-final
+process P { int a[2]; a[1

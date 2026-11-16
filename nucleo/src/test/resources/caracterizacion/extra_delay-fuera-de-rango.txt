@@ -1,0 +1,1421 @@
+## RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #27c99349ec7228ff
+paso 1 DELAY R: delay(3600) - se demora 3600 segundos | DECL Q: int s = -1 | ERROR P: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de 3601 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #70677f7f81f764c3
+paso 2 ERROR Q: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de -1 | {"finished":false,"deadlock":false,"instant":2,"waiting":true} #b17f9420cc8f63e6
+paso 3 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 4 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 5 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 6 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 7 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 8 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 9 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 10 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 11 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 12 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 13 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 14 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 15 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 16 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 17 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 18 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 19 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 20 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 21 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 22 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 23 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 24 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 25 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 26 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 27 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 28 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 29 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 30 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 31 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 32 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 33 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 34 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 35 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 36 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 37 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 38 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 39 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 40 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 41 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 42 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 43 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 44 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 45 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 46 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 47 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 48 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 49 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 50 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 51 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 52 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 53 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 54 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 55 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 56 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 57 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 58 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 59 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 60 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 61 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 62 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 63 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 64 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 65 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 66 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 67 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 68 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 69 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 70 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 71 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 72 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 73 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 74 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 75 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 76 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 77 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 78 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 79 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 80 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 81 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 82 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 83 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 84 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 85 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 86 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 87 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 88 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 89 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 90 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 91 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 92 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 93 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 94 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 95 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 96 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 97 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 98 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 99 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 100 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 101 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 102 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 103 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 104 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 105 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 106 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 107 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 108 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 109 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 110 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 111 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 112 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 113 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 114 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 115 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 116 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 117 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 118 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 119 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 120 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 121 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 122 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 123 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 124 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 125 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 126 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 127 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 128 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 129 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 130 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 131 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 132 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 133 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 134 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 135 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 136 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 137 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 138 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 139 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 140 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 141 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 142 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 143 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 144 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 145 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 146 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 147 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 148 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 149 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 150 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 151 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 152 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 153 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 154 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 155 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 156 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 157 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 158 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 159 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 160 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 161 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 162 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 163 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 164 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 165 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 166 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 167 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 168 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 169 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 170 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 171 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 172 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 173 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 174 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 175 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 176 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 177 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 178 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 179 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 180 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 181 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 182 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 183 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 184 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 185 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 186 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 187 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 188 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 189 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 190 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 191 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 192 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 193 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 194 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 195 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 196 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 197 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 198 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 199 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 200 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+estado #7cee577ed8812e5a
+## RANDOM semilla=1
+crear {"finished":false,"deadlock":false} #6f4cb660c47072ae
+paso 1 #7f6c4d8ea9520a46
+paso 2 #b17f9420cc8f63e6
+paso 3 #5c4a0fe484f4b660
+paso 4 #5c4a0fe484f4b660
+paso 5 #5c4a0fe484f4b660
+paso 6 #5c4a0fe484f4b660
+paso 7 #5c4a0fe484f4b660
+paso 8 #5c4a0fe484f4b660
+paso 9 #5c4a0fe484f4b660
+paso 10 #5c4a0fe484f4b660
+paso 11 #5c4a0fe484f4b660
+paso 12 #5c4a0fe484f4b660
+paso 13 #5c4a0fe484f4b660
+paso 14 #5c4a0fe484f4b660
+paso 15 #5c4a0fe484f4b660
+paso 16 #5c4a0fe484f4b660
+paso 17 #5c4a0fe484f4b660
+paso 18 #5c4a0fe484f4b660
+paso 19 #5c4a0fe484f4b660
+paso 20 #5c4a0fe484f4b660
+paso 21 #5c4a0fe484f4b660
+paso 22 #5c4a0fe484f4b660
+paso 23 #5c4a0fe484f4b660
+paso 24 #5c4a0fe484f4b660
+paso 25 #5c4a0fe484f4b660
+paso 26 #5c4a0fe484f4b660
+paso 27 #5c4a0fe484f4b660
+paso 28 #5c4a0fe484f4b660
+paso 29 #5c4a0fe484f4b660
+paso 30 #5c4a0fe484f4b660
+paso 31 #5c4a0fe484f4b660
+paso 32 #5c4a0fe484f4b660
+paso 33 #5c4a0fe484f4b660
+paso 34 #5c4a0fe484f4b660
+paso 35 #5c4a0fe484f4b660
+paso 36 #5c4a0fe484f4b660
+paso 37 #5c4a0fe484f4b660
+paso 38 #5c4a0fe484f4b660
+paso 39 #5c4a0fe484f4b660
+paso 40 #5c4a0fe484f4b660
+paso 41 #5c4a0fe484f4b660
+paso 42 #5c4a0fe484f4b660
+paso 43 #5c4a0fe484f4b660
+paso 44 #5c4a0fe484f4b660
+paso 45 #5c4a0fe484f4b660
+paso 46 #5c4a0fe484f4b660
+paso 47 #5c4a0fe484f4b660
+paso 48 #5c4a0fe484f4b660
+paso 49 #5c4a0fe484f4b660
+paso 50 #5c4a0fe484f4b660
+paso 51 #5c4a0fe484f4b660
+paso 52 #5c4a0fe484f4b660
+paso 53 #5c4a0fe484f4b660
+paso 54 #5c4a0fe484f4b660
+paso 55 #5c4a0fe484f4b660
+paso 56 #5c4a0fe484f4b660
+paso 57 #5c4a0fe484f4b660
+paso 58 #5c4a0fe484f4b660
+paso 59 #5c4a0fe484f4b660
+paso 60 #5c4a0fe484f4b660
+paso 61 #5c4a0fe484f4b660
+paso 62 #5c4a0fe484f4b660
+paso 63 #5c4a0fe484f4b660
+paso 64 #5c4a0fe484f4b660
+paso 65 #5c4a0fe484f4b660
+paso 66 #5c4a0fe484f4b660
+paso 67 #5c4a0fe484f4b660
+paso 68 #5c4a0fe484f4b660
+paso 69 #5c4a0fe484f4b660
+paso 70 #5c4a0fe484f4b660
+paso 71 #5c4a0fe484f4b660
+paso 72 #5c4a0fe484f4b660
+paso 73 #5c4a0fe484f4b660
+paso 74 #5c4a0fe484f4b660
+paso 75 #5c4a0fe484f4b660
+paso 76 #5c4a0fe484f4b660
+paso 77 #5c4a0fe484f4b660
+paso 78 #5c4a0fe484f4b660
+paso 79 #5c4a0fe484f4b660
+paso 80 #5c4a0fe484f4b660
+paso 81 #5c4a0fe484f4b660
+paso 82 #5c4a0fe484f4b660
+paso 83 #5c4a0fe484f4b660
+paso 84 #5c4a0fe484f4b660
+paso 85 #5c4a0fe484f4b660
+paso 86 #5c4a0fe484f4b660
+paso 87 #5c4a0fe484f4b660
+paso 88 #5c4a0fe484f4b660
+paso 89 #5c4a0fe484f4b660
+paso 90 #5c4a0fe484f4b660
+paso 91 #5c4a0fe484f4b660
+paso 92 #5c4a0fe484f4b660
+paso 93 #5c4a0fe484f4b660
+paso 94 #5c4a0fe484f4b660
+paso 95 #5c4a0fe484f4b660
+paso 96 #5c4a0fe484f4b660
+paso 97 #5c4a0fe484f4b660
+paso 98 #5c4a0fe484f4b660
+paso 99 #5c4a0fe484f4b660
+paso 100 #5c4a0fe484f4b660
+paso 101 #5c4a0fe484f4b660
+paso 102 #5c4a0fe484f4b660
+paso 103 #5c4a0fe484f4b660
+paso 104 #5c4a0fe484f4b660
+paso 105 #5c4a0fe484f4b660
+paso 106 #5c4a0fe484f4b660
+paso 107 #5c4a0fe484f4b660
+paso 108 #5c4a0fe484f4b660
+paso 109 #5c4a0fe484f4b660
+paso 110 #5c4a0fe484f4b660
+paso 111 #5c4a0fe484f4b660
+paso 112 #5c4a0fe484f4b660
+paso 113 #5c4a0fe484f4b660
+paso 114 #5c4a0fe484f4b660
+paso 115 #5c4a0fe484f4b660
+paso 116 #5c4a0fe484f4b660
+paso 117 #5c4a0fe484f4b660
+paso 118 #5c4a0fe484f4b660
+paso 119 #5c4a0fe484f4b660
+paso 120 #5c4a0fe484f4b660
+paso 121 #5c4a0fe484f4b660
+paso 122 #5c4a0fe484f4b660
+paso 123 #5c4a0fe484f4b660
+paso 124 #5c4a0fe484f4b660
+paso 125 #5c4a0fe484f4b660
+paso 126 #5c4a0fe484f4b660
+paso 127 #5c4a0fe484f4b660
+paso 128 #5c4a0fe484f4b660
+paso 129 #5c4a0fe484f4b660
+paso 130 #5c4a0fe484f4b660
+paso 131 #5c4a0fe484f4b660
+paso 132 #5c4a0fe484f4b660
+paso 133 #5c4a0fe484f4b660
+paso 134 #5c4a0fe484f4b660
+paso 135 #5c4a0fe484f4b660
+paso 136 #5c4a0fe484f4b660
+paso 137 #5c4a0fe484f4b660
+paso 138 #5c4a0fe484f4b660
+paso 139 #5c4a0fe484f4b660
+paso 140 #5c4a0fe484f4b660
+paso 141 #5c4a0fe484f4b660
+paso 142 #5c4a0fe484f4b660
+paso 143 #5c4a0fe484f4b660
+paso 144 #5c4a0fe484f4b660
+paso 145 #5c4a0fe484f4b660
+paso 146 #5c4a0fe484f4b660
+paso 147 #5c4a0fe484f4b660
+paso 148 #5c4a0fe484f4b660
+paso 149 #5c4a0fe484f4b660
+paso 150 #5c4a0fe484f4b660
+paso 151 #5c4a0fe484f4b660
+paso 152 #5c4a0fe484f4b660
+paso 153 #5c4a0fe484f4b660
+paso 154 #5c4a0fe484f4b660
+paso 155 #5c4a0fe484f4b660
+paso 156 #5c4a0fe484f4b660
+paso 157 #5c4a0fe484f4b660
+paso 158 #5c4a0fe484f4b660
+paso 159 #5c4a0fe484f4b660
+paso 160 #5c4a0fe484f4b660
+paso 161 #5c4a0fe484f4b660
+paso 162 #5c4a0fe484f4b660
+paso 163 #5c4a0fe484f4b660
+paso 164 #5c4a0fe484f4b660
+paso 165 #5c4a0fe484f4b660
+paso 166 #5c4a0fe484f4b660
+paso 167 #5c4a0fe484f4b660
+paso 168 #5c4a0fe484f4b660
+paso 169 #5c4a0fe484f4b660
+paso 170 #5c4a0fe484f4b660
+paso 171 #5c4a0fe484f4b660
+paso 172 #5c4a0fe484f4b660
+paso 173 #5c4a0fe484f4b660
+paso 174 #5c4a0fe484f4b660
+paso 175 #5c4a0fe484f4b660
+paso 176 #5c4a0fe484f4b660
+paso 177 #5c4a0fe484f4b660
+paso 178 #5c4a0fe484f4b660
+paso 179 #5c4a0fe484f4b660
+paso 180 #5c4a0fe484f4b660
+paso 181 #5c4a0fe484f4b660
+paso 182 #5c4a0fe484f4b660
+paso 183 #5c4a0fe484f4b660
+paso 184 #5c4a0fe484f4b660
+paso 185 #5c4a0fe484f4b660
+paso 186 #5c4a0fe484f4b660
+paso 187 #5c4a0fe484f4b660
+paso 188 #5c4a0fe484f4b660
+paso 189 #5c4a0fe484f4b660
+paso 190 #5c4a0fe484f4b660
+paso 191 #5c4a0fe484f4b660
+paso 192 #5c4a0fe484f4b660
+paso 193 #5c4a0fe484f4b660
+paso 194 #5c4a0fe484f4b660
+paso 195 #5c4a0fe484f4b660
+paso 196 #5c4a0fe484f4b660
+paso 197 #5c4a0fe484f4b660
+paso 198 #5c4a0fe484f4b660
+paso 199 #5c4a0fe484f4b660
+paso 200 #5c4a0fe484f4b660
+estado #f56f0f43e2327480
+## RANDOM semilla=2
+crear {"finished":false,"deadlock":false} #025fd7af505c2271
+paso 1 #fccabb2f4ab49a80
+paso 2 #1e92acc3f934e3f9
+paso 3 #ab15e4d412ab3705
+paso 4 #ca02c7117fbe0720
+paso 5 #ca02c7117fbe0720
+paso 6 #ca02c7117fbe0720
+paso 7 #ca02c7117fbe0720
+paso 8 #ca02c7117fbe0720
+paso 9 #ca02c7117fbe0720
+paso 10 #ca02c7117fbe0720
+paso 11 #ca02c7117fbe0720
+paso 12 #ca02c7117fbe0720
+paso 13 #ca02c7117fbe0720
+paso 14 #ca02c7117fbe0720
+paso 15 #ca02c7117fbe0720
+paso 16 #ca02c7117fbe0720
+paso 17 #ca02c7117fbe0720
+paso 18 #ca02c7117fbe0720
+paso 19 #ca02c7117fbe0720
+paso 20 #ca02c7117fbe0720
+paso 21 #ca02c7117fbe0720
+paso 22 #ca02c7117fbe0720
+paso 23 #ca02c7117fbe0720
+paso 24 #ca02c7117fbe0720
+paso 25 #ca02c7117fbe0720
+paso 26 #ca02c7117fbe0720
+paso 27 #ca02c7117fbe0720
+paso 28 #ca02c7117fbe0720
+paso 29 #ca02c7117fbe0720
+paso 30 #ca02c7117fbe0720
+paso 31 #ca02c7117fbe0720
+paso 32 #ca02c7117fbe0720
+paso 33 #ca02c7117fbe0720
+paso 34 #ca02c7117fbe0720
+paso 35 #ca02c7117fbe0720
+paso 36 #ca02c7117fbe0720
+paso 37 #ca02c7117fbe0720
+paso 38 #ca02c7117fbe0720
+paso 39 #ca02c7117fbe0720
+paso 40 #ca02c7117fbe0720
+paso 41 #ca02c7117fbe0720
+paso 42 #ca02c7117fbe0720
+paso 43 #ca02c7117fbe0720
+paso 44 #ca02c7117fbe0720
+paso 45 #ca02c7117fbe0720
+paso 46 #ca02c7117fbe0720
+paso 47 #ca02c7117fbe0720
+paso 48 #ca02c7117fbe0720
+paso 49 #ca02c7117fbe0720
+paso 50 #ca02c7117fbe0720
+paso 51 #ca02c7117fbe0720
+paso 52 #ca02c7117fbe0720
+paso 53 #ca02c7117fbe0720
+paso 54 #ca02c7117fbe0720
+paso 55 #ca02c7117fbe0720
+paso 56 #ca02c7117fbe0720
+paso 57 #ca02c7117fbe0720
+paso 58 #ca02c7117fbe0720
+paso 59 #ca02c7117fbe0720
+paso 60 #ca02c7117fbe0720
+paso 61 #ca02c7117fbe0720
+paso 62 #ca02c7117fbe0720
+paso 63 #ca02c7117fbe0720
+paso 64 #ca02c7117fbe0720
+paso 65 #ca02c7117fbe0720
+paso 66 #ca02c7117fbe0720
+paso 67 #ca02c7117fbe0720
+paso 68 #ca02c7117fbe0720
+paso 69 #ca02c7117fbe0720
+paso 70 #ca02c7117fbe0720
+paso 71 #ca02c7117fbe0720
+paso 72 #ca02c7117fbe0720
+paso 73 #ca02c7117fbe0720
+paso 74 #ca02c7117fbe0720
+paso 75 #ca02c7117fbe0720
+paso 76 #ca02c7117fbe0720
+paso 77 #ca02c7117fbe0720
+paso 78 #ca02c7117fbe0720
+paso 79 #ca02c7117fbe0720
+paso 80 #ca02c7117fbe0720
+paso 81 #ca02c7117fbe0720
+paso 82 #ca02c7117fbe0720
+paso 83 #ca02c7117fbe0720
+paso 84 #ca02c7117fbe0720
+paso 85 #ca02c7117fbe0720
+paso 86 #ca02c7117fbe0720
+paso 87 #ca02c7117fbe0720
+paso 88 #ca02c7117fbe0720
+paso 89 #ca02c7117fbe0720
+paso 90 #ca02c7117fbe0720
+paso 91 #ca02c7117fbe0720
+paso 92 #ca02c7117fbe0720
+paso 93 #ca02c7117fbe0720
+paso 94 #ca02c7117fbe0720
+paso 95 #ca02c7117fbe0720
+paso 96 #ca02c7117fbe0720
+paso 97 #ca02c7117fbe0720
+paso 98 #ca02c7117fbe0720
+paso 99 #ca02c7117fbe0720
+paso 100 #ca02c7117fbe0720
+paso 101 #ca02c7117fbe0720
+paso 102 #ca02c7117fbe0720
+paso 103 #ca02c7117fbe0720
+paso 104 #ca02c7117fbe0720
+paso 105 #ca02c7117fbe0720
+paso 106 #ca02c7117fbe0720
+paso 107 #ca02c7117fbe0720
+paso 108 #ca02c7117fbe0720
+paso 109 #ca02c7117fbe0720
+paso 110 #ca02c7117fbe0720
+paso 111 #ca02c7117fbe0720
+paso 112 #ca02c7117fbe0720
+paso 113 #ca02c7117fbe0720
+paso 114 #ca02c7117fbe0720
+paso 115 #ca02c7117fbe0720
+paso 116 #ca02c7117fbe0720
+paso 117 #ca02c7117fbe0720
+paso 118 #ca02c7117fbe0720
+paso 119 #ca02c7117fbe0720
+paso 120 #ca02c7117fbe0720
+paso 121 #ca02c7117fbe0720
+paso 122 #ca02c7117fbe0720
+paso 123 #ca02c7117fbe0720
+paso 124 #ca02c7117fbe0720
+paso 125 #ca02c7117fbe0720
+paso 126 #ca02c7117fbe0720
+paso 127 #ca02c7117fbe0720
+paso 128 #ca02c7117fbe0720
+paso 129 #ca02c7117fbe0720
+paso 130 #ca02c7117fbe0720
+paso 131 #ca02c7117fbe0720
+paso 132 #ca02c7117fbe0720
+paso 133 #ca02c7117fbe0720
+paso 134 #ca02c7117fbe0720
+paso 135 #ca02c7117fbe0720
+paso 136 #ca02c7117fbe0720
+paso 137 #ca02c7117fbe0720
+paso 138 #ca02c7117fbe0720
+paso 139 #ca02c7117fbe0720
+paso 140 #ca02c7117fbe0720
+paso 141 #ca02c7117fbe0720
+paso 142 #ca02c7117fbe0720
+paso 143 #ca02c7117fbe0720
+paso 144 #ca02c7117fbe0720
+paso 145 #ca02c7117fbe0720
+paso 146 #ca02c7117fbe0720
+paso 147 #ca02c7117fbe0720
+paso 148 #ca02c7117fbe0720
+paso 149 #ca02c7117fbe0720
+paso 150 #ca02c7117fbe0720
+paso 151 #ca02c7117fbe0720
+paso 152 #ca02c7117fbe0720
+paso 153 #ca02c7117fbe0720
+paso 154 #ca02c7117fbe0720
+paso 155 #ca02c7117fbe0720
+paso 156 #ca02c7117fbe0720
+paso 157 #ca02c7117fbe0720
+paso 158 #ca02c7117fbe0720
+paso 159 #ca02c7117fbe0720
+paso 160 #ca02c7117fbe0720
+paso 161 #ca02c7117fbe0720
+paso 162 #ca02c7117fbe0720
+paso 163 #ca02c7117fbe0720
+paso 164 #ca02c7117fbe0720
+paso 165 #ca02c7117fbe0720
+paso 166 #ca02c7117fbe0720
+paso 167 #ca02c7117fbe0720
+paso 168 #ca02c7117fbe0720
+paso 169 #ca02c7117fbe0720
+paso 170 #ca02c7117fbe0720
+paso 171 #ca02c7117fbe0720
+paso 172 #ca02c7117fbe0720
+paso 173 #ca02c7117fbe0720
+paso 174 #ca02c7117fbe0720
+paso 175 #ca02c7117fbe0720
+paso 176 #ca02c7117fbe0720
+paso 177 #ca02c7117fbe0720
+paso 178 #ca02c7117fbe0720
+paso 179 #ca02c7117fbe0720
+paso 180 #ca02c7117fbe0720
+paso 181 #ca02c7117fbe0720
+paso 182 #ca02c7117fbe0720
+paso 183 #ca02c7117fbe0720
+paso 184 #ca02c7117fbe0720
+paso 185 #ca02c7117fbe0720
+paso 186 #ca02c7117fbe0720
+paso 187 #ca02c7117fbe0720
+paso 188 #ca02c7117fbe0720
+paso 189 #ca02c7117fbe0720
+paso 190 #ca02c7117fbe0720
+paso 191 #ca02c7117fbe0720
+paso 192 #ca02c7117fbe0720
+paso 193 #ca02c7117fbe0720
+paso 194 #ca02c7117fbe0720
+paso 195 #ca02c7117fbe0720
+paso 196 #ca02c7117fbe0720
+paso 197 #ca02c7117fbe0720
+paso 198 #ca02c7117fbe0720
+paso 199 #ca02c7117fbe0720
+paso 200 #ca02c7117fbe0720
+estado #cf99433bd3de6a67
+## ROUND_ROBIN semilla=0
+crear {"finished":false,"deadlock":false} #27c99349ec7228ff
+paso 1 ERROR P: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de 3601 | DECL Q: int s = -1 | DELAY R: delay(3600) - se demora 3600 segundos | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d607c33a6816663a
+paso 2 ERROR Q: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de -1 | {"finished":false,"deadlock":false,"instant":2,"waiting":true} #b17f9420cc8f63e6
+paso 3 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 4 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 5 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 6 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 7 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 8 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 9 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 10 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 11 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 12 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 13 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 14 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 15 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 16 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 17 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 18 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 19 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 20 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 21 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 22 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 23 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 24 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 25 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 26 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 27 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 28 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 29 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 30 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 31 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 32 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 33 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 34 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 35 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 36 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 37 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 38 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 39 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 40 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 41 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 42 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 43 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 44 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 45 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 46 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 47 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 48 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 49 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 50 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 51 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 52 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 53 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 54 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 55 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 56 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 57 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 58 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 59 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 60 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 61 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 62 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 63 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 64 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 65 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 66 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 67 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 68 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 69 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 70 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 71 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 72 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 73 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 74 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 75 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 76 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 77 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 78 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 79 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 80 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 81 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 82 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 83 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 84 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 85 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 86 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 87 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 88 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 89 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 90 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 91 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 92 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 93 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 94 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 95 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 96 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 97 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 98 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 99 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 100 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 101 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 102 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 103 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 104 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 105 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 106 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 107 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 108 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 109 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 110 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 111 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 112 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 113 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 114 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 115 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 116 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 117 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 118 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 119 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 120 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 121 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 122 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 123 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 124 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 125 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 126 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 127 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 128 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 129 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 130 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 131 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 132 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 133 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 134 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 135 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 136 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 137 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 138 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 139 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 140 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 141 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 142 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 143 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 144 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 145 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 146 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 147 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 148 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 149 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 150 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 151 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 152 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 153 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 154 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 155 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 156 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 157 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 158 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 159 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 160 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 161 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 162 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 163 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 164 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 165 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 166 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 167 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 168 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 169 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 170 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 171 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 172 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 173 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 174 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 175 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 176 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 177 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 178 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 179 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 180 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 181 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 182 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 183 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 184 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 185 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 186 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 187 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 188 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 189 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 190 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 191 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 192 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 193 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 194 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 195 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 196 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 197 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 198 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 199 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+paso 200 {"finished":false,"deadlock":false,"instant":2,"waiting":true} #5c4a0fe484f4b660
+estado #9db3111421f41487
+## ROUND_ROBIN semilla=1
+crear {"finished":false,"deadlock":false} #6f4cb660c47072ae
+paso 1 #d607c33a6816663a
+paso 2 #b17f9420cc8f63e6
+paso 3 #5c4a0fe484f4b660
+paso 4 #5c4a0fe484f4b660
+paso 5 #5c4a0fe484f4b660
+paso 6 #5c4a0fe484f4b660
+paso 7 #5c4a0fe484f4b660
+paso 8 #5c4a0fe484f4b660
+paso 9 #5c4a0fe484f4b660
+paso 10 #5c4a0fe484f4b660
+paso 11 #5c4a0fe484f4b660
+paso 12 #5c4a0fe484f4b660
+paso 13 #5c4a0fe484f4b660
+paso 14 #5c4a0fe484f4b660
+paso 15 #5c4a0fe484f4b660
+paso 16 #5c4a0fe484f4b660
+paso 17 #5c4a0fe484f4b660
+paso 18 #5c4a0fe484f4b660
+paso 19 #5c4a0fe484f4b660
+paso 20 #5c4a0fe484f4b660
+paso 21 #5c4a0fe484f4b660
+paso 22 #5c4a0fe484f4b660
+paso 23 #5c4a0fe484f4b660
+paso 24 #5c4a0fe484f4b660
+paso 25 #5c4a0fe484f4b660
+paso 26 #5c4a0fe484f4b660
+paso 27 #5c4a0fe484f4b660
+paso 28 #5c4a0fe484f4b660
+paso 29 #5c4a0fe484f4b660
+paso 30 #5c4a0fe484f4b660
+paso 31 #5c4a0fe484f4b660
+paso 32 #5c4a0fe484f4b660
+paso 33 #5c4a0fe484f4b660
+paso 34 #5c4a0fe484f4b660
+paso 35 #5c4a0fe484f4b660
+paso 36 #5c4a0fe484f4b660
+paso 37 #5c4a0fe484f4b660
+paso 38 #5c4a0fe484f4b660
+paso 39 #5c4a0fe484f4b660
+paso 40 #5c4a0fe484f4b660
+paso 41 #5c4a0fe484f4b660
+paso 42 #5c4a0fe484f4b660
+paso 43 #5c4a0fe484f4b660
+paso 44 #5c4a0fe484f4b660
+paso 45 #5c4a0fe484f4b660
+paso 46 #5c4a0fe484f4b660
+paso 47 #5c4a0fe484f4b660
+paso 48 #5c4a0fe484f4b660
+paso 49 #5c4a0fe484f4b660
+paso 50 #5c4a0fe484f4b660
+paso 51 #5c4a0fe484f4b660
+paso 52 #5c4a0fe484f4b660
+paso 53 #5c4a0fe484f4b660
+paso 54 #5c4a0fe484f4b660
+paso 55 #5c4a0fe484f4b660
+paso 56 #5c4a0fe484f4b660
+paso 57 #5c4a0fe484f4b660
+paso 58 #5c4a0fe484f4b660
+paso 59 #5c4a0fe484f4b660
+paso 60 #5c4a0fe484f4b660
+paso 61 #5c4a0fe484f4b660
+paso 62 #5c4a0fe484f4b660
+paso 63 #5c4a0fe484f4b660
+paso 64 #5c4a0fe484f4b660
+paso 65 #5c4a0fe484f4b660
+paso 66 #5c4a0fe484f4b660
+paso 67 #5c4a0fe484f4b660
+paso 68 #5c4a0fe484f4b660
+paso 69 #5c4a0fe484f4b660
+paso 70 #5c4a0fe484f4b660
+paso 71 #5c4a0fe484f4b660
+paso 72 #5c4a0fe484f4b660
+paso 73 #5c4a0fe484f4b660
+paso 74 #5c4a0fe484f4b660
+paso 75 #5c4a0fe484f4b660
+paso 76 #5c4a0fe484f4b660
+paso 77 #5c4a0fe484f4b660
+paso 78 #5c4a0fe484f4b660
+paso 79 #5c4a0fe484f4b660
+paso 80 #5c4a0fe484f4b660
+paso 81 #5c4a0fe484f4b660
+paso 82 #5c4a0fe484f4b660
+paso 83 #5c4a0fe484f4b660
+paso 84 #5c4a0fe484f4b660
+paso 85 #5c4a0fe484f4b660
+paso 86 #5c4a0fe484f4b660
+paso 87 #5c4a0fe484f4b660
+paso 88 #5c4a0fe484f4b660
+paso 89 #5c4a0fe484f4b660
+paso 90 #5c4a0fe484f4b660
+paso 91 #5c4a0fe484f4b660
+paso 92 #5c4a0fe484f4b660
+paso 93 #5c4a0fe484f4b660
+paso 94 #5c4a0fe484f4b660
+paso 95 #5c4a0fe484f4b660
+paso 96 #5c4a0fe484f4b660
+paso 97 #5c4a0fe484f4b660
+paso 98 #5c4a0fe484f4b660
+paso 99 #5c4a0fe484f4b660
+paso 100 #5c4a0fe484f4b660
+paso 101 #5c4a0fe484f4b660
+paso 102 #5c4a0fe484f4b660
+paso 103 #5c4a0fe484f4b660
+paso 104 #5c4a0fe484f4b660
+paso 105 #5c4a0fe484f4b660
+paso 106 #5c4a0fe484f4b660
+paso 107 #5c4a0fe484f4b660
+paso 108 #5c4a0fe484f4b660
+paso 109 #5c4a0fe484f4b660
+paso 110 #5c4a0fe484f4b660
+paso 111 #5c4a0fe484f4b660
+paso 112 #5c4a0fe484f4b660
+paso 113 #5c4a0fe484f4b660
+paso 114 #5c4a0fe484f4b660
+paso 115 #5c4a0fe484f4b660
+paso 116 #5c4a0fe484f4b660
+paso 117 #5c4a0fe484f4b660
+paso 118 #5c4a0fe484f4b660
+paso 119 #5c4a0fe484f4b660
+paso 120 #5c4a0fe484f4b660
+paso 121 #5c4a0fe484f4b660
+paso 122 #5c4a0fe484f4b660
+paso 123 #5c4a0fe484f4b660
+paso 124 #5c4a0fe484f4b660
+paso 125 #5c4a0fe484f4b660
+paso 126 #5c4a0fe484f4b660
+paso 127 #5c4a0fe484f4b660
+paso 128 #5c4a0fe484f4b660
+paso 129 #5c4a0fe484f4b660
+paso 130 #5c4a0fe484f4b660
+paso 131 #5c4a0fe484f4b660
+paso 132 #5c4a0fe484f4b660
+paso 133 #5c4a0fe484f4b660
+paso 134 #5c4a0fe484f4b660
+paso 135 #5c4a0fe484f4b660
+paso 136 #5c4a0fe484f4b660
+paso 137 #5c4a0fe484f4b660
+paso 138 #5c4a0fe484f4b660
+paso 139 #5c4a0fe484f4b660
+paso 140 #5c4a0fe484f4b660
+paso 141 #5c4a0fe484f4b660
+paso 142 #5c4a0fe484f4b660
+paso 143 #5c4a0fe484f4b660
+paso 144 #5c4a0fe484f4b660
+paso 145 #5c4a0fe484f4b660
+paso 146 #5c4a0fe484f4b660
+paso 147 #5c4a0fe484f4b660
+paso 148 #5c4a0fe484f4b660
+paso 149 #5c4a0fe484f4b660
+paso 150 #5c4a0fe484f4b660
+paso 151 #5c4a0fe484f4b660
+paso 152 #5c4a0fe484f4b660
+paso 153 #5c4a0fe484f4b660
+paso 154 #5c4a0fe484f4b660
+paso 155 #5c4a0fe484f4b660
+paso 156 #5c4a0fe484f4b660
+paso 157 #5c4a0fe484f4b660
+paso 158 #5c4a0fe484f4b660
+paso 159 #5c4a0fe484f4b660
+paso 160 #5c4a0fe484f4b660
+paso 161 #5c4a0fe484f4b660
+paso 162 #5c4a0fe484f4b660
+paso 163 #5c4a0fe484f4b660
+paso 164 #5c4a0fe484f4b660
+paso 165 #5c4a0fe484f4b660
+paso 166 #5c4a0fe484f4b660
+paso 167 #5c4a0fe484f4b660
+paso 168 #5c4a0fe484f4b660
+paso 169 #5c4a0fe484f4b660
+paso 170 #5c4a0fe484f4b660
+paso 171 #5c4a0fe484f4b660
+paso 172 #5c4a0fe484f4b660
+paso 173 #5c4a0fe484f4b660
+paso 174 #5c4a0fe484f4b660
+paso 175 #5c4a0fe484f4b660
+paso 176 #5c4a0fe484f4b660
+paso 177 #5c4a0fe484f4b660
+paso 178 #5c4a0fe484f4b660
+paso 179 #5c4a0fe484f4b660
+paso 180 #5c4a0fe484f4b660
+paso 181 #5c4a0fe484f4b660
+paso 182 #5c4a0fe484f4b660
+paso 183 #5c4a0fe484f4b660
+paso 184 #5c4a0fe484f4b660
+paso 185 #5c4a0fe484f4b660
+paso 186 #5c4a0fe484f4b660
+paso 187 #5c4a0fe484f4b660
+paso 188 #5c4a0fe484f4b660
+paso 189 #5c4a0fe484f4b660
+paso 190 #5c4a0fe484f4b660
+paso 191 #5c4a0fe484f4b660
+paso 192 #5c4a0fe484f4b660
+paso 193 #5c4a0fe484f4b660
+paso 194 #5c4a0fe484f4b660
+paso 195 #5c4a0fe484f4b660
+paso 196 #5c4a0fe484f4b660
+paso 197 #5c4a0fe484f4b660
+paso 198 #5c4a0fe484f4b660
+paso 199 #5c4a0fe484f4b660
+paso 200 #5c4a0fe484f4b660
+estado #9db3111421f41487
+## ROUND_ROBIN semilla=2
+crear {"finished":false,"deadlock":false} #025fd7af505c2271
+paso 1 #d607c33a6816663a
+paso 2 #b17f9420cc8f63e6
+paso 3 #5c4a0fe484f4b660
+paso 4 #5c4a0fe484f4b660
+paso 5 #5c4a0fe484f4b660
+paso 6 #5c4a0fe484f4b660
+paso 7 #5c4a0fe484f4b660
+paso 8 #5c4a0fe484f4b660
+paso 9 #5c4a0fe484f4b660
+paso 10 #5c4a0fe484f4b660
+paso 11 #5c4a0fe484f4b660
+paso 12 #5c4a0fe484f4b660
+paso 13 #5c4a0fe484f4b660
+paso 14 #5c4a0fe484f4b660
+paso 15 #5c4a0fe484f4b660
+paso 16 #5c4a0fe484f4b660
+paso 17 #5c4a0fe484f4b660
+paso 18 #5c4a0fe484f4b660
+paso 19 #5c4a0fe484f4b660
+paso 20 #5c4a0fe484f4b660
+paso 21 #5c4a0fe484f4b660
+paso 22 #5c4a0fe484f4b660
+paso 23 #5c4a0fe484f4b660
+paso 24 #5c4a0fe484f4b660
+paso 25 #5c4a0fe484f4b660
+paso 26 #5c4a0fe484f4b660
+paso 27 #5c4a0fe484f4b660
+paso 28 #5c4a0fe484f4b660
+paso 29 #5c4a0fe484f4b660
+paso 30 #5c4a0fe484f4b660
+paso 31 #5c4a0fe484f4b660
+paso 32 #5c4a0fe484f4b660
+paso 33 #5c4a0fe484f4b660
+paso 34 #5c4a0fe484f4b660
+paso 35 #5c4a0fe484f4b660
+paso 36 #5c4a0fe484f4b660
+paso 37 #5c4a0fe484f4b660
+paso 38 #5c4a0fe484f4b660
+paso 39 #5c4a0fe484f4b660
+paso 40 #5c4a0fe484f4b660
+paso 41 #5c4a0fe484f4b660
+paso 42 #5c4a0fe484f4b660
+paso 43 #5c4a0fe484f4b660
+paso 44 #5c4a0fe484f4b660
+paso 45 #5c4a0fe484f4b660
+paso 46 #5c4a0fe484f4b660
+paso 47 #5c4a0fe484f4b660
+paso 48 #5c4a0fe484f4b660
+paso 49 #5c4a0fe484f4b660
+paso 50 #5c4a0fe484f4b660
+paso 51 #5c4a0fe484f4b660
+paso 52 #5c4a0fe484f4b660
+paso 53 #5c4a0fe484f4b660
+paso 54 #5c4a0fe484f4b660
+paso 55 #5c4a0fe484f4b660
+paso 56 #5c4a0fe484f4b660
+paso 57 #5c4a0fe484f4b660
+paso 58 #5c4a0fe484f4b660
+paso 59 #5c4a0fe484f4b660
+paso 60 #5c4a0fe484f4b660
+paso 61 #5c4a0fe484f4b660
+paso 62 #5c4a0fe484f4b660
+paso 63 #5c4a0fe484f4b660
+paso 64 #5c4a0fe484f4b660
+paso 65 #5c4a0fe484f4b660
+paso 66 #5c4a0fe484f4b660
+paso 67 #5c4a0fe484f4b660
+paso 68 #5c4a0fe484f4b660
+paso 69 #5c4a0fe484f4b660
+paso 70 #5c4a0fe484f4b660
+paso 71 #5c4a0fe484f4b660
+paso 72 #5c4a0fe484f4b660
+paso 73 #5c4a0fe484f4b660
+paso 74 #5c4a0fe484f4b660
+paso 75 #5c4a0fe484f4b660
+paso 76 #5c4a0fe484f4b660
+paso 77 #5c4a0fe484f4b660
+paso 78 #5c4a0fe484f4b660
+paso 79 #5c4a0fe484f4b660
+paso 80 #5c4a0fe484f4b660
+paso 81 #5c4a0fe484f4b660
+paso 82 #5c4a0fe484f4b660
+paso 83 #5c4a0fe484f4b660
+paso 84 #5c4a0fe484f4b660
+paso 85 #5c4a0fe484f4b660
+paso 86 #5c4a0fe484f4b660
+paso 87 #5c4a0fe484f4b660
+paso 88 #5c4a0fe484f4b660
+paso 89 #5c4a0fe484f4b660
+paso 90 #5c4a0fe484f4b660
+paso 91 #5c4a0fe484f4b660
+paso 92 #5c4a0fe484f4b660
+paso 93 #5c4a0fe484f4b660
+paso 94 #5c4a0fe484f4b660
+paso 95 #5c4a0fe484f4b660
+paso 96 #5c4a0fe484f4b660
+paso 97 #5c4a0fe484f4b660
+paso 98 #5c4a0fe484f4b660
+paso 99 #5c4a0fe484f4b660
+paso 100 #5c4a0fe484f4b660
+paso 101 #5c4a0fe484f4b660
+paso 102 #5c4a0fe484f4b660
+paso 103 #5c4a0fe484f4b660
+paso 104 #5c4a0fe484f4b660
+paso 105 #5c4a0fe484f4b660
+paso 106 #5c4a0fe484f4b660
+paso 107 #5c4a0fe484f4b660
+paso 108 #5c4a0fe484f4b660
+paso 109 #5c4a0fe484f4b660
+paso 110 #5c4a0fe484f4b660
+paso 111 #5c4a0fe484f4b660
+paso 112 #5c4a0fe484f4b660
+paso 113 #5c4a0fe484f4b660
+paso 114 #5c4a0fe484f4b660
+paso 115 #5c4a0fe484f4b660
+paso 116 #5c4a0fe484f4b660
+paso 117 #5c4a0fe484f4b660
+paso 118 #5c4a0fe484f4b660
+paso 119 #5c4a0fe484f4b660
+paso 120 #5c4a0fe484f4b660
+paso 121 #5c4a0fe484f4b660
+paso 122 #5c4a0fe484f4b660
+paso 123 #5c4a0fe484f4b660
+paso 124 #5c4a0fe484f4b660
+paso 125 #5c4a0fe484f4b660
+paso 126 #5c4a0fe484f4b660
+paso 127 #5c4a0fe484f4b660
+paso 128 #5c4a0fe484f4b660
+paso 129 #5c4a0fe484f4b660
+paso 130 #5c4a0fe484f4b660
+paso 131 #5c4a0fe484f4b660
+paso 132 #5c4a0fe484f4b660
+paso 133 #5c4a0fe484f4b660
+paso 134 #5c4a0fe484f4b660
+paso 135 #5c4a0fe484f4b660
+paso 136 #5c4a0fe484f4b660
+paso 137 #5c4a0fe484f4b660
+paso 138 #5c4a0fe484f4b660
+paso 139 #5c4a0fe484f4b660
+paso 140 #5c4a0fe484f4b660
+paso 141 #5c4a0fe484f4b660
+paso 142 #5c4a0fe484f4b660
+paso 143 #5c4a0fe484f4b660
+paso 144 #5c4a0fe484f4b660
+paso 145 #5c4a0fe484f4b660
+paso 146 #5c4a0fe484f4b660
+paso 147 #5c4a0fe484f4b660
+paso 148 #5c4a0fe484f4b660
+paso 149 #5c4a0fe484f4b660
+paso 150 #5c4a0fe484f4b660
+paso 151 #5c4a0fe484f4b660
+paso 152 #5c4a0fe484f4b660
+paso 153 #5c4a0fe484f4b660
+paso 154 #5c4a0fe484f4b660
+paso 155 #5c4a0fe484f4b660
+paso 156 #5c4a0fe484f4b660
+paso 157 #5c4a0fe484f4b660
+paso 158 #5c4a0fe484f4b660
+paso 159 #5c4a0fe484f4b660
+paso 160 #5c4a0fe484f4b660
+paso 161 #5c4a0fe484f4b660
+paso 162 #5c4a0fe484f4b660
+paso 163 #5c4a0fe484f4b660
+paso 164 #5c4a0fe484f4b660
+paso 165 #5c4a0fe484f4b660
+paso 166 #5c4a0fe484f4b660
+paso 167 #5c4a0fe484f4b660
+paso 168 #5c4a0fe484f4b660
+paso 169 #5c4a0fe484f4b660
+paso 170 #5c4a0fe484f4b660
+paso 171 #5c4a0fe484f4b660
+paso 172 #5c4a0fe484f4b660
+paso 173 #5c4a0fe484f4b660
+paso 174 #5c4a0fe484f4b660
+paso 175 #5c4a0fe484f4b660
+paso 176 #5c4a0fe484f4b660
+paso 177 #5c4a0fe484f4b660
+paso 178 #5c4a0fe484f4b660
+paso 179 #5c4a0fe484f4b660
+paso 180 #5c4a0fe484f4b660
+paso 181 #5c4a0fe484f4b660
+paso 182 #5c4a0fe484f4b660
+paso 183 #5c4a0fe484f4b660
+paso 184 #5c4a0fe484f4b660
+paso 185 #5c4a0fe484f4b660
+paso 186 #5c4a0fe484f4b660
+paso 187 #5c4a0fe484f4b660
+paso 188 #5c4a0fe484f4b660
+paso 189 #5c4a0fe484f4b660
+paso 190 #5c4a0fe484f4b660
+paso 191 #5c4a0fe484f4b660
+paso 192 #5c4a0fe484f4b660
+paso 193 #5c4a0fe484f4b660
+paso 194 #5c4a0fe484f4b660
+paso 195 #5c4a0fe484f4b660
+paso 196 #5c4a0fe484f4b660
+paso 197 #5c4a0fe484f4b660
+paso 198 #5c4a0fe484f4b660
+paso 199 #5c4a0fe484f4b660
+paso 200 #5c4a0fe484f4b660
+estado #9db3111421f41487
+## paso a paso, RANDOM semilla=0
+crear {"finished":false,"deadlock":false} #27c99349ec7228ff
+paso 1 DECL Q: int s = -1 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #4ac4610601d61578
+paso 2 DELAY R: delay(3600) - se demora 3600 segundos | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b1de322778447efe
+paso 3 ERROR P: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de 3601 | ERROR Q: error de ejecución - El delay tiene que ser de 0 a 3600 segundos y es de -1 | {"finished":false,"deadlock":false,"instant":3,"waiting":true} #320c2a4ac931eab1
+paso 4 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 5 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 6 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 7 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 8 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 9 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 10 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 11 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 12 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 13 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 14 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 15 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 16 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 17 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 18 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 19 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 20 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 21 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 22 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 23 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 24 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 25 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 26 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 27 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 28 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 29 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 30 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 31 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 32 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 33 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 34 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 35 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 36 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 37 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 38 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 39 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 40 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 41 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 42 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 43 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 44 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 45 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 46 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 47 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 48 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 49 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 50 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 51 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 52 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 53 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 54 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 55 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 56 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 57 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 58 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 59 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 60 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 61 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 62 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 63 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 64 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 65 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 66 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 67 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 68 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 69 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 70 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 71 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 72 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 73 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 74 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 75 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 76 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 77 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 78 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 79 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 80 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 81 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 82 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 83 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 84 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 85 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 86 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 87 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 88 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 89 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 90 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 91 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 92 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 93 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 94 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 95 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 96 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 97 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 98 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 99 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 100 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 101 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 102 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 103 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 104 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 105 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 106 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 107 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 108 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 109 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 110 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 111 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 112 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 113 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 114 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 115 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 116 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 117 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 118 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 119 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 120 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 121 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 122 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 123 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 124 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 125 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 126 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 127 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 128 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 129 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 130 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 131 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 132 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 133 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 134 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 135 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 136 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 137 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 138 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 139 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 140 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 141 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 142 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 143 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 144 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 145 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 146 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 147 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 148 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 149 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 150 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 151 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 152 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 153 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 154 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 155 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 156 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 157 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 158 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 159 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 160 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 161 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 162 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 163 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 164 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 165 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 166 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 167 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 168 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 169 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 170 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 171 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 172 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 173 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 174 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 175 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 176 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 177 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 178 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 179 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 180 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 181 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 182 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 183 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 184 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 185 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 186 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 187 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 188 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 189 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 190 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 191 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 192 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 193 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 194 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 195 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 196 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 197 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 198 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 199 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+paso 200 {"finished":false,"deadlock":false,"instant":3,"waiting":true} #1e6f1d54310aff75
+estado #5e6c7d96a6a8f8c0
