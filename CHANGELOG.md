@@ -119,6 +119,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- En pantallas angostas (un teléfono), la barra de controles baja de línea en lugar de estirar la página: antes velocidad, turnos, Ejemplos, Salida y Documentación quedaban fuera de la pantalla. (Federico Dobal, 2026-11-16)
 - Documentación: debajo del botón "Volver al simulador" aparecía una segunda línea divisoria y, al lado, un área vacía con cursor de enlace; eran restos del enlace del título que el tema deja aunque no haya título. El botón pasa fuera de ese enlace, alineado con el texto de la barra lateral. (Federico Dobal, 2026-11-14)
 - Documentación: al plegar o desplegar la barra lateral ya no se mueve la barra superior; solo se deslizan la barra lateral y el contenido. (Federico Dobal, 2026-11-14)
 - En la documentación, el enlace al simulador caía en una página 404 porque el enrutador del sitio lo tomaba como una página propia. Lo reemplaza un botón "Volver al simulador", arriba a la izquierda, que navega de verdad a la raíz. (Federico Dobal, 2026-11-13)
