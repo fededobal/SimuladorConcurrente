@@ -15,9 +15,6 @@ import java.util.Map;
  */
 public final class VirtualMachine {
 
-    /** Probabilidad (en %) de que un proceso listo avance en un instante dado. */
-    private static final int PROB_AVANCE = 80;
-
     /** Tope de iteraciones estructurales (bloques anidados) por instante, corta busy-waits. */
     private static final int STRUCTURAL_CAP = 4000;
 
@@ -29,6 +26,7 @@ public final class VirtualMachine {
 
     private final Program program;
     private final Azar random;
+    private final Scheduler scheduler;
 
     private final List<Process> processes = new ArrayList<>();
     private final OutputBuffer salida = new OutputBuffer();
@@ -44,7 +42,6 @@ public final class VirtualMachine {
      * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo.
      */
     private final List<Integer> advancedLastStep = new ArrayList<>();
-    private int rrCursor = -1;
     /**
      * Reloj de la simulacion, en ms. No lo lee la VM (el nucleo es determinista): lo informa
      * quien llama a {@link #step(Integer, SchedulingPolicy, long)}, y solo lo usa delay.
@@ -55,6 +52,7 @@ public final class VirtualMachine {
     public VirtualMachine(Program program, long seed) {
         this.program = program;
         this.random = new Azar(seed);
+        this.scheduler = new Scheduler(processes, random);
         initialize();
     }
 
@@ -126,7 +124,7 @@ public final class VirtualMachine {
             return List.of();
         }
         wakeDelayed();
-        List<Process> turno = elegirTurno(chosenProcessId, policy);
+        List<Process> turno = scheduler.nextTurn(chosenProcessId, policy);
         if (turno.isEmpty() && isWaitingForDelay()) {
             return events.stepEntries();
         }
@@ -197,51 +195,6 @@ public final class VirtualMachine {
                     p.name() + ": libera " + m.name() + " al terminar con error");
             releaseMonitor(m);
         }
-    }
-
-    /**
-     * Los procesos que avanzan en este instante, en el orden en que lo hacen.
-     *
-     * <p>No avanzan siempre todos: cada proceso listo entra al turno con probabilidad alta
-     * pero no segura, y siempre entra al menos uno. Si avanzaran todos en cada instante el
-     * programa correria en lockstep y los alumnos verian siempre el mismo entrelazado; que
-     * unos avancen mas rapido que otros es lo que hace aparecer los casos raros.
-     */
-    private List<Process> elegirTurno(Integer chosenProcessId, SchedulingPolicy policy) {
-        List<Process> listos = processes.stream()
-                .filter(pr -> pr.state() == Process.State.READY)
-                .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
-        if (listos.isEmpty()) {
-            return List.of();
-        }
-        // Paso a paso: el usuario eligio un proceso y quiere ver solo ese.
-        if (chosenProcessId != null) {
-            for (Process pr : listos) {
-                if (pr.id() == chosenProcessId) return List.of(pr);
-            }
-        }
-
-        if (policy == SchedulingPolicy.ROUND_ROBIN) {
-            // Turnos parejos: se empieza por el siguiente al ultimo que arranco.
-            int n = processes.size();
-            List<Process> orden = new ArrayList<>();
-            for (int k = 1; k <= n; k++) {
-                Process cand = processes.get((rrCursor + k) % n);
-                if (cand.state() == Process.State.READY) orden.add(cand);
-            }
-            rrCursor = processes.indexOf(orden.get(0));
-            return orden;
-        }
-
-        random.mezclar(listos);
-        List<Process> turno = new ArrayList<>();
-        for (Process pr : listos) {
-            if (random.nextInt(100) < PROB_AVANCE) turno.add(pr);
-        }
-        if (turno.isEmpty()) {
-            turno.add(listos.get(0));   // el shuffle ya lo eligio al azar
-        }
-        return turno;
     }
 
     // ================================================================= ejecucion de un proceso
