@@ -346,63 +346,38 @@ public final class VirtualMachine {
         }
     }
 
-    /** @return true si la sentencia consumio el instante (accion observable); false si es estructural. */
+    /**
+     * Ejecuta la sentencia.
+     *
+     * @return true si consumio el instante (accion observable); false si es estructural
+     */
     private boolean executeStmt(Process p, Activation act, Stmt s) {
-        return switch (s) {
-            case Stmt.Block b -> {
-                act.pushFront(b.statements());
-                yield false;
-            }
-            case Stmt.IfStmt iff -> {
-                execIf(act, iff);
-                yield false;
-            }
-            case Stmt.WhileStmt w -> {
-                execWhile(act, w);
-                yield false;
-            }
-            case Stmt.ForStmt f -> {
-                execFor(p, act, f);
-                yield false;
-            }
-            case Stmt.Skip ignored -> {
-                event(p, "SKIP", "", p.name() + ": skip");
-                yield true;
-            }
-            case Stmt.Delay d -> {
-                execDelay(p, act, d);
-                yield true;
-            }
-            case VarDecl vd -> {
-                execLocalDecl(p, act, vd);
-                yield true;
-            }
-            case Stmt.Assign a -> {
-                execAssign(p, act, a);
-                yield true;
-            }
-            case Stmt.IncDec inc -> {
-                execIncDec(p, act, inc);
-                yield true;
-            }
+        switch (s) {
+            case Stmt.Block b -> act.pushFront(b.statements());
+            case Stmt.IfStmt iff -> execIf(act, iff);
+            case Stmt.WhileStmt w -> execWhile(act, w);
+            case Stmt.ForStmt f -> execFor(p, act, f);
+            case Stmt.Skip ignored -> event(p, "SKIP", "", p.name() + ": skip");
+            case Stmt.Delay d -> execDelay(p, act, d);
+            case VarDecl vd -> execLocalDecl(p, act, vd);
+            case Stmt.Assign a -> execAssign(p, act, a);
+            case Stmt.IncDec inc -> execIncDec(p, act, inc);
             case Stmt.MonitorCall call -> execMonitorCall(p, act, call);
-            case Stmt.CondOp co -> {
-                execCondOp(p, act, co);
-                yield true;
-            }
-            case Stmt.Write w -> {
-                execWrite(p, act, w);
-                yield true;
-            }
-            case Stmt.QueuePush qp -> {
-                execQueuePush(p, act, qp);
-                yield true;
-            }
-            case Stmt.QueuePop qp -> {
-                execQueuePop(p, act, qp);
-                yield true;
-            }
-        };
+            case Stmt.CondOp co -> execCondOp(p, act, co);
+            case Stmt.Write w -> execWrite(p, act, w);
+            case Stmt.QueuePush qp -> execQueuePush(p, act, qp);
+            case Stmt.QueuePop qp -> execQueuePop(p, act, qp);
+        }
+        return !isStructural(s);
+    }
+
+    /**
+     * Las sentencias que solo reorganizan lo pendiente (bloques, if, while, for) no son una
+     * accion del alumno: el proceso sigue hasta la siguiente sentencia observable.
+     */
+    private static boolean isStructural(Stmt s) {
+        return s instanceof Stmt.Block || s instanceof Stmt.IfStmt
+                || s instanceof Stmt.WhileStmt || s instanceof Stmt.ForStmt;
     }
 
     // ---------------------------------------------------------------- sentencias estructurales
@@ -508,7 +483,7 @@ public final class VirtualMachine {
      * otro monitor, lo sigue teniendo tomado hasta que la llamada termina por completo,
      * aunque haga wait en el monitor llamado (llamada cerrada, ADR 0007).
      */
-    private boolean execMonitorCall(Process p, Activation callerAct, Stmt.MonitorCall call) {
+    private void execMonitorCall(Process p, Activation callerAct, Stmt.MonitorCall call) {
         MonitorDef md = monitorDefs.get(call.monitor());
         Monitor m = monitors.get(instanceName(callerAct, call, md));
         ProcedureDef pd = md.procedure(call.procedure());
@@ -544,7 +519,6 @@ public final class VirtualMachine {
         newAct.setNeedsLock(true);
         newAct.setEntering(true);
         reacquireMonitor(p, newAct);
-        return true;
     }
 
     /**

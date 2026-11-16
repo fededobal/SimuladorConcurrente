@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `VirtualMachine.executeStmt`: un despacho por tipo de sentencia y `isStructural` aparte, en lugar de un `yield` por caso. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VariableAccess.arraySlot`: el acceso a un elemento de arreglo (índice, arreglo y control de rango) que repetían la asignación y el `++`/`--` de la VM. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Parser`: nombres en inglés para el contador de nombres ocultos, el parámetro de `parseQuant` y `parseStatementUnchecked`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `QueueSyntaxParser` en `lang/parser/`, con la sintaxis de las colas que tenía `Parser` (tipos de las componentes, push y pop). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
