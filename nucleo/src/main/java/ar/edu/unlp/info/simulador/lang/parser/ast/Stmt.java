@@ -9,8 +9,8 @@ import java.util.List;
  */
 public sealed interface Stmt
         permits Stmt.Block, Stmt.Assign, Stmt.IncDec, Stmt.MonitorCall, Stmt.CondOp,
-                Stmt.QueuePush, Stmt.QueuePop, Stmt.Write, Stmt.IfStmt, Stmt.WhileStmt, Stmt.ForStmt,
-                Stmt.Skip, Stmt.Delay, VarDecl {
+                Stmt.QueuePush, Stmt.QueuePop, Stmt.Write, Stmt.IfStmt, Stmt.WhileStmt,
+                Stmt.ForStmt, Stmt.Skip, Stmt.Delay, VarDecl {
 
     int line();
 
@@ -31,7 +31,7 @@ public sealed interface Stmt
 
     enum CondOpKind { WAIT, SIGNAL, SIGNAL_ALL }
 
-    /** {@code wait(cv);} / {@code signal(cv);} / {@code signal_all(cv);} (cv opcionalmente indexada). */
+    /** {@code wait(cv);}, {@code signal(cv);} o {@code signal_all(cv);}, con cv indexada o no. */
     record CondOp(CondOpKind kind, String cond, Expr index, int line) implements Stmt { }
 
     /** {@code push(cola, e1, e2, ...);} */

@@ -309,8 +309,8 @@ public final class VirtualMachine {
     }
 
     public Snapshot snapshot() {
-        return SnapshotBuilder.build(clock.instant(), processes, monitors.values(), advancedLastStep,
-                output.view());
+        return SnapshotBuilder.build(clock.instant(), processes, monitors.values(),
+                advancedLastStep, output.view());
     }
 
     // ================================================================= logging

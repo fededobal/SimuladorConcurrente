@@ -167,7 +167,9 @@ final class Json {
         sb.append(']');
     }
 
-    /** Error de compilacion o de ejecucion: {@code {error, line}} ({@code ApiError} en types.ts). */
+    /**
+     * Error de compilacion o de ejecucion: {@code {error, line}} ({@code ApiError} en types.ts).
+     */
     static String error(String message, int line) {
         StringBuilder sb = new StringBuilder("{");
         field(sb, "error"); quoted(sb, message); sb.append(',');

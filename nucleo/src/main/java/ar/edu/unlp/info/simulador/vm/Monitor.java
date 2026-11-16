@@ -12,7 +12,9 @@ import java.util.Map;
 public final class Monitor {
 
     private final String name;
-    /** Nombre del monitor en el programa: el mismo que {@code name}, o la familia si es un arreglo. */
+    /**
+     * Nombre del monitor en el programa: el mismo que {@code name}, o la familia si es un arreglo.
+     */
     private final String definition;
     private final Map<String, Value> vars = new LinkedHashMap<>();
     private final Map<String, ConditionVariable> conds = new LinkedHashMap<>();

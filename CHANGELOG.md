@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Líneas del núcleo dentro de las 100 columnas del `.editorconfig`: cortes de línea, Javadoc en varias líneas y tres variables extraídas donde el corte quedaba ilegible. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Convenciones: los nombres de los tests van en inglés (con Javadoc y mensajes en español), el núcleo ya está todo en inglés, y `nucleo/CLAUDE.md` describe los colaboradores de la VM y cuándo se regeneran los golden master. (Federico Dobal, 2026-11-16)
 - Golden master con nombres en inglés: la carpeta `characterization/`, `compile-errors.{mon,txt}`, las claves del corpus (`example/`, `canon/`, `variant/`, `extra/`) y sus archivos, las etiquetas de cada corrida y la propiedad `-Dcharacterization.regenerate=true`. (Federico Dobal, 2026-11-16)
 - Tests del núcleo con nombres en inglés: clases (`CharacterizationTest`, `InvariantsTest`, `ProgramCorpus`, `ExamplesTest`, `VmRegressionTest`), métodos `@Test` (el nombre sigue describiendo el comportamiento) y variables. Los tests son los mismos. (Federico Dobal, 2026-11-16)

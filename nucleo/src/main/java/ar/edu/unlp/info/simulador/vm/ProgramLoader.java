@@ -143,7 +143,9 @@ final class ProgramLoader {
                 + MAX_PROCESSES + " en total", line);
     }
 
-    /** Valor inicial de una variable declarada: por defecto, el inicializador o un arreglo lleno. */
+    /**
+     * Valor inicial de una variable declarada: por defecto, el inicializador o un arreglo lleno.
+     */
     static Value initialValue(VarDecl vd, ExprEvaluator ev) {
         if (vd.type().isQueue()) {
             return Value.queueFor(vd);

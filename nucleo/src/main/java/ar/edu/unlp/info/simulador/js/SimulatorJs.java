@@ -80,8 +80,8 @@ public final class SimulatorJs {
     public static String step(String policy, int chosenProcessId, double nowMs) {
         if (vm == null) return noSimulation();
         try {
-            List<LogEntry> entries = vm.step(chosenProcessId < 0 ? null : chosenProcessId, policyOf(policy),
-                    (long) nowMs);
+            Integer chosen = chosenProcessId < 0 ? null : chosenProcessId;
+            List<LogEntry> entries = vm.step(chosen, policyOf(policy), (long) nowMs);
             StringBuilder sb = new StringBuilder("{\"entries\":");
             Json.list(sb, entries, Json::logEntry);
             sb.append(",\"snapshot\":");

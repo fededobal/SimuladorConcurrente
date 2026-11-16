@@ -23,8 +23,8 @@ public record Snapshot(int instant,
      * {@code size} es el total), para que la interfaz los dibuje como celdas; en un escalar
      * {@code elements} es null y {@code size} 0.
      */
-    public record VarView(String name, String type, String value, boolean isArray, Integer lastWriterId,
-                          List<String> elements, int size) { }
+    public record VarView(String name, String type, String value, boolean isArray,
+                          Integer lastWriterId, List<String> elements, int size) { }
 
     public record CondView(String name, List<ProcRef> queue) { }
 

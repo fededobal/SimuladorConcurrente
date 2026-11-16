@@ -127,7 +127,8 @@ final class StatementExecutor {
         Value value = vars.evaluator(act).eval(a.value());
         if (a.index() == null) {
             vars.assignScalar(p.id(), act, a.target(), value, a.line());
-            event(p, EventKind.ASSIGN, a.target(), p.name() + ": " + a.target() + " = " + value.display());
+            event(p, EventKind.ASSIGN, a.target(),
+                    p.name() + ": " + a.target() + " = " + value.display());
             return;
         }
         VariableAccess.ArraySlot slot = vars.arraySlot(act, a.target(), a.index(), a.line());
@@ -156,7 +157,9 @@ final class StatementExecutor {
                 + "]" + operator + " => " + next.display());
     }
 
-    /** {@code ++}/{@code --} conservan el tipo: un double suma 1.0 y un int no desborda en silencio. */
+    /**
+     * {@code ++}/{@code --} conservan el tipo: un double suma 1.0 y un int no desborda en silencio.
+     */
     private static Value stepped(Value cur, boolean increment, int line) {
         int delta = increment ? 1 : -1;
         if (cur instanceof Value.DoubleVal) {
@@ -265,7 +268,9 @@ final class StatementExecutor {
         }
     }
 
-    /** El nombre de la cond en el monitor: {@code c}, o {@code c[i]} con el indice ya controlado. */
+    /**
+     * El nombre de la cond en el monitor: {@code c}, o {@code c[i]} con el indice ya controlado.
+     */
     private String condKey(Activation act, Monitor m, Stmt.CondOp co) {
         if (co.index() == null) return co.cond();
         long index = vars.evaluator(act).evalLong(co.index());

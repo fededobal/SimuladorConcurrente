@@ -30,8 +30,8 @@ final class ExprTyper {
             }
             case Expr.EmptyQueue q -> {
                 if (scope.isCond(q.queue())) {
-                    throw error("En la práctica no se permite preguntar si una variable condición "
-                            + "está vacía", q.line());
+                    throw error("En la práctica no se permite preguntar si una variable "
+                            + "condición está vacía", q.line());
                 }
                 if (!known(q.queue(), scope, q.line()).type().isQueue()) {
                     throw error("'" + q.queue() + "' no es una cola: empty se usa con una Cola o "
@@ -62,11 +62,12 @@ final class ExprTyper {
     }
 
     /** Controla que el valor de la expresion se pueda guardar en un destino del tipo dado. */
-    static void checkAssignable(Type target, Expr value, Scope scope, String destination, int line) {
+    static void checkAssignable(Type target, Expr value, Scope scope, String destination,
+            int line) {
         Type v = typeOf(value, scope);
         if (!assignable(target, v)) {
-            throw error("No se puede guardar un " + v.keyword() + " en '" + destination + "', que es "
-                    + target.keyword(), line);
+            throw error("No se puede guardar un " + v.keyword() + " en '" + destination
+                    + "', que es " + target.keyword(), line);
         }
     }
 

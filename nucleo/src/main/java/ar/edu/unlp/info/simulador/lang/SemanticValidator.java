@@ -55,7 +55,8 @@ public final class SemanticValidator {
         Set<String> topLevel = new HashSet<>();
         for (MonitorDef m : program.monitors()) {
             if (!topLevel.add(m.name())) {
-                throw new CompilationException("Ya existe un monitor o un process llamado " + m.name(), m.line());
+                throw new CompilationException("Ya existe un monitor o un process llamado "
+                        + m.name(), m.line());
             }
             Map<String, VarDecl> vars = new HashMap<>();
             Map<String, Boolean> conds = new HashMap<>();
@@ -73,8 +74,8 @@ public final class SemanticValidator {
                 VarDecl v = vars.get(c.name());
                 if (v != null && v.line() <= c.line()) {
                     throw new CompilationException("Ya existe una variable permanente llamada '"
-                            + c.name() + "' en el monitor " + m.name() + ": la cond necesita otro nombre",
-                            c.line());
+                            + c.name() + "' en el monitor " + m.name()
+                            + ": la cond necesita otro nombre", c.line());
                 }
                 if (v != null) {
                     throw new CompilationException("Ya existe una variable condición llamada '"
@@ -103,7 +104,8 @@ public final class SemanticValidator {
         }
         for (ProcessDef p : program.processes()) {
             if (!topLevel.add(p.name())) {
-                throw new CompilationException("Ya existe un monitor o un process llamado " + p.name(), p.line());
+                throw new CompilationException("Ya existe un monitor o un process llamado "
+                        + p.name(), p.line());
             }
         }
     }
@@ -117,8 +119,9 @@ public final class SemanticValidator {
         Scope root = new Scope(null, m.name(), false, condNames);
         if (m.isFamily()) {
             Scope bounds = new Scope(null, null, false, Set.of());
-            ExprTyper.expect(m.quant().from(), Type.INT, bounds, "La cota del arreglo de monitores");
-            ExprTyper.expect(m.quant().to(), Type.INT, bounds, "La cota del arreglo de monitores");
+            String boundLabel = "La cota del arreglo de monitores";
+            ExprTyper.expect(m.quant().from(), Type.INT, bounds, boundLabel);
+            ExprTyper.expect(m.quant().to(), Type.INT, bounds, boundLabel);
             root.declare(m.quant().iterator(), new Symbol(new VarType(Type.INT, false), true,
                     "el índice del monitor", null), m.line());
         }
@@ -126,14 +129,17 @@ public final class SemanticValidator {
             checkVarDecl(v, root, PERMANENT_ORIGIN);
         }
         for (CondDecl c : m.conds()) {
-            if (c.isArray()) ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
+            if (c.isArray()) {
+                ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
+            }
         }
 
         Scope init = root.child();
         for (Stmt s : m.initStmts()) {
             if (containsMonitorInteraction(s)) {
-                throw new CompilationException("El código de inicialización del monitor " + m.name()
-                        + " no puede llamar a monitores ni usar wait, signal o delay", s.line());
+                throw new CompilationException("El código de inicialización del monitor "
+                        + m.name() + " no puede llamar a monitores ni usar wait, signal o delay",
+                        s.line());
             }
             checkStmt(s, init);
         }
@@ -213,7 +219,8 @@ public final class SemanticValidator {
         // la clave de una cola ordenada se compara: un bool no tiene orden
         if (vd.type() == Type.COLA_ORDENADA && vd.elementTypes().get(0) == Type.BOOLEAN) {
             throw new CompilationException("La clave de la ColaOrdenada '" + vd.name()
-                    + "' (su primera componente) tiene que ser int, double o text, no bool", vd.line());
+                    + "' (su primera componente) tiene que ser int, double o text, no bool",
+                    vd.line());
         }
         declare(scope, vd.name(), new Symbol(new VarType(vd.type(), vd.isArray()), false, origin,
                 vd.elementTypes()), vd.line());
@@ -291,9 +298,9 @@ public final class SemanticValidator {
             if (vd.initExpr() != null) {
                 ExprTyper.checkAssignable(vd.type(), vd.initExpr(), inner, vd.name(), vd.line());
             }
-            declare(inner, vd.name(), new Symbol(new VarType(vd.type(), false), false, ITERATOR_ORIGIN,
-                    null),
-                    vd.line());
+            Symbol iteratorSymbol =
+                    new Symbol(new VarType(vd.type(), false), false, ITERATOR_ORIGIN, null);
+            declare(inner, vd.name(), iteratorSymbol, vd.line());
             iterator = vd.name();
         } else {
             checkAssign((Stmt.Assign) f.init(), inner);
@@ -387,7 +394,8 @@ public final class SemanticValidator {
                     co.line());
         }
         if (!isArray && co.index() != null) {
-            throw new CompilationException("La cond '" + co.cond() + "' no es un arreglo", co.line());
+            throw new CompilationException("La cond '" + co.cond() + "' no es un arreglo",
+                    co.line());
         }
         if (co.index() != null) ExprTyper.expect(co.index(), Type.INT, scope,
                 "El índice de la cond");

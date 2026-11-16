@@ -30,7 +30,8 @@ public final class Lexer {
      */
     private static final List<String> CASE_INSENSITIVE = List.of("monitor", "procedure", "process");
 
-    private static final Set<String> TWO_CHAR = Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
+    private static final Set<String> TWO_CHAR =
+            Set.of("==", "!=", "<=", ">=", "&&", "||", "++", "--", "..");
     private static final String SINGLE_CHAR = "+-*/=<>(){}[];,:.!";
 
     private final String src;
@@ -155,7 +156,9 @@ public final class Lexer {
             throw new CompilationException("El tipo se llama bool, no boolean", startLine);
         }
         for (String kw : CASE_INSENSITIVE) {
-            if (word.equalsIgnoreCase(kw)) return new Token(TokenType.KEYWORD, kw, startLine, startCol);
+            if (word.equalsIgnoreCase(kw)) {
+                return new Token(TokenType.KEYWORD, kw, startLine, startCol);
+            }
         }
         TokenType type = KEYWORDS.contains(word) ? TokenType.KEYWORD : TokenType.IDENTIFIER;
         return new Token(type, word, startLine, startCol);
@@ -177,7 +180,8 @@ public final class Lexer {
             return new Token(TokenType.SYMBOL, two, startLine, startCol);
         }
         if (c == '%') {
-            throw new CompilationException("El resto de la división se escribe mod, no %", startLine);
+            throw new CompilationException("El resto de la división se escribe mod, no %",
+                    startLine);
         }
         if (SINGLE_CHAR.indexOf(c) >= 0) {
             advance();

@@ -11,11 +11,11 @@ import java.util.List;
  *                     ({@code Cola c(int, text)}); null si no lo es
  * @param isArray      true si es un arreglo
  * @param sizeExpr     expresion de tamano (constante) si es arreglo, si no null
- * @param initExpr     expresion de inicializacion; para arreglos es el valor de relleno; puede ser null
+ * @param initExpr     expresion de inicializacion (para arreglos, el valor de relleno), o null
  * @param line         linea
  */
-public record VarDecl(String name, Type type, List<Type> elementTypes, boolean isArray, Expr sizeExpr,
-                      Expr initExpr, int line)
+public record VarDecl(String name, Type type, List<Type> elementTypes, boolean isArray,
+                      Expr sizeExpr, Expr initExpr, int line)
         implements Stmt {
 
     public static VarDecl scalar(String name, Type type, Expr initExpr, int line) {

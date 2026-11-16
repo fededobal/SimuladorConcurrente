@@ -28,8 +28,8 @@ final class MonitorProtocol {
     private final List<Integer> advancedLastStep;
     private final EventSink events;
 
-    MonitorProtocol(Map<String, Monitor> monitors, SeededRandom random, List<Integer> advancedLastStep,
-            EventSink events) {
+    MonitorProtocol(Map<String, Monitor> monitors, SeededRandom random,
+            List<Integer> advancedLastStep, EventSink events) {
         this.monitors = monitors;
         this.random = random;
         this.advancedLastStep = advancedLastStep;

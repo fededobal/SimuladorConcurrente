@@ -137,7 +137,9 @@ public final class ExprEvaluator {
     private interface DoubleOp { double apply(double a, double b); }
     private interface LongOp { long apply(long a, long b); }
 
-    /** Las operaciones enteras usan las variantes exactas de Math: un desborde es error del alumno. */
+    /**
+     * Las operaciones enteras usan las variantes exactas de Math: un desborde es error del alumno.
+     */
     private static Value arith(Value l, Value r, DoubleOp dOp, LongOp lOp, int line) {
         if (bothInt(l, r)) {
             try {
