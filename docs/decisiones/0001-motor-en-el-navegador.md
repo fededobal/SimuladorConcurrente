@@ -21,7 +21,7 @@ pueda dar: no hay datos compartidos entre usuarios ni persistencia.
 
 ## Decisión
 Opción 3. El núcleo sigue en Java (solo `java.util`, sin Spring), se agrega un puente
-(`js/SimuladorJs` + `js/Json`) que TeaVM compila a `frontend/src/engine/simulador.js`, y el
+(`js/SimulatorJs` + `js/Json`) que TeaVM compila a `frontend/src/engine/simulador.js`, y el
 frontend lo invoca de forma sincrónica. El sitio se publica como estático (Vercel).
 
 ## Consecuencias
@@ -32,7 +32,7 @@ frontend lo invoca de forma sincrónica. El sitio se publica como estático (Ver
 - Hay dos lugares donde el mismo código puede comportarse distinto (JVM y TeaVM): se agrega
   `scripts/smoke-motor.mjs`, que prueba el motor compilado.
 - La serialización a JSON es manual (TeaVM no soporta Jackson): el contrato con
-  `frontend/src/types.ts` se mantiene a mano y se prueba en `SimuladorJsTest`.
+  `frontend/src/types.ts` se mantiene a mano y se prueba en `SimulatorJsTest`.
 - La API REST de Spring quedó sin uso por el frontend y se eliminó el 2026-09-18 junto con
   la dependencia de Spring Boot. Si en el futuro hiciera falta un servidor (por ejemplo, para
   entregas), el código está en el historial de git.

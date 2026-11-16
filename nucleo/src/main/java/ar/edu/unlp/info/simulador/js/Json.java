@@ -10,7 +10,7 @@ import java.util.List;
  * hay que escribirlo a mano.
  *
  * <p>Las formas producidas son exactamente las que declara {@code frontend/src/types.ts};
- * el contrato se prueba en {@code SimuladorJsTest}.
+ * el contrato se prueba en {@code SimulatorJsTest}.
  */
 final class Json {
 
@@ -18,7 +18,7 @@ final class Json {
 
     // ------------------------------------------------------------------ primitivas
 
-    static void str(StringBuilder sb, String s) {
+    static void quoted(StringBuilder sb, String s) {
         if (s == null) {
             sb.append("null");
             return;
@@ -51,8 +51,8 @@ final class Json {
         sb.append(n == null ? "null" : n.toString());
     }
 
-    private static void campo(StringBuilder sb, String nombre) {
-        str(sb, nombre);
+    private static void field(StringBuilder sb, String name) {
+        quoted(sb, name);
         sb.append(':');
     }
 
@@ -64,114 +64,114 @@ final class Json {
             return;
         }
         sb.append("{");
-        campo(sb, "id");    sb.append(p.id()).append(',');
-        campo(sb, "name");  str(sb, p.name()); sb.append(',');
-        campo(sb, "color"); str(sb, p.color());
+        field(sb, "id");    sb.append(p.id()).append(',');
+        field(sb, "name");  quoted(sb, p.name()); sb.append(',');
+        field(sb, "color"); quoted(sb, p.color());
         sb.append("}");
     }
 
     private static void varView(StringBuilder sb, Snapshot.VarView v) {
         sb.append("{");
-        campo(sb, "name");         str(sb, v.name()); sb.append(',');
-        campo(sb, "type");         str(sb, v.type()); sb.append(',');
-        campo(sb, "value");        str(sb, v.value()); sb.append(',');
-        campo(sb, "isArray");      sb.append(v.isArray()).append(',');
-        campo(sb, "lastWriterId"); num(sb, v.lastWriterId()); sb.append(',');
-        campo(sb, "elements");
+        field(sb, "name");         quoted(sb, v.name()); sb.append(',');
+        field(sb, "type");         quoted(sb, v.type()); sb.append(',');
+        field(sb, "value");        quoted(sb, v.value()); sb.append(',');
+        field(sb, "isArray");      sb.append(v.isArray()).append(',');
+        field(sb, "lastWriterId"); num(sb, v.lastWriterId()); sb.append(',');
+        field(sb, "elements");
         if (v.elements() == null) sb.append("null");
-        else lista(sb, v.elements(), Json::str);
+        else list(sb, v.elements(), Json::quoted);
         sb.append(',');
-        campo(sb, "size");         sb.append(v.size());
+        field(sb, "size");         sb.append(v.size());
         sb.append("}");
     }
 
     private static void condView(StringBuilder sb, Snapshot.CondView c) {
         sb.append("{");
-        campo(sb, "name");  str(sb, c.name()); sb.append(',');
-        campo(sb, "queue"); lista(sb, c.queue(), Json::procRef);
+        field(sb, "name");  quoted(sb, c.name()); sb.append(',');
+        field(sb, "queue"); list(sb, c.queue(), Json::procRef);
         sb.append("}");
     }
 
     private static void monitorView(StringBuilder sb, Snapshot.MonitorView m) {
         sb.append("{");
-        campo(sb, "name");       str(sb, m.name()); sb.append(',');
-        campo(sb, "vars");       lista(sb, m.vars(), Json::varView); sb.append(',');
-        campo(sb, "conds");      lista(sb, m.conds(), Json::condView); sb.append(',');
-        campo(sb, "lockOwner");  procRef(sb, m.lockOwner()); sb.append(',');
-        campo(sb, "entryQueue"); lista(sb, m.entryQueue(), Json::procRef);
+        field(sb, "name");       quoted(sb, m.name()); sb.append(',');
+        field(sb, "vars");       list(sb, m.vars(), Json::varView); sb.append(',');
+        field(sb, "conds");      list(sb, m.conds(), Json::condView); sb.append(',');
+        field(sb, "lockOwner");  procRef(sb, m.lockOwner()); sb.append(',');
+        field(sb, "entryQueue"); list(sb, m.entryQueue(), Json::procRef);
         sb.append("}");
     }
 
     private static void processView(StringBuilder sb, Snapshot.ProcessView p) {
         sb.append("{");
-        campo(sb, "id");          sb.append(p.id()).append(',');
-        campo(sb, "name");        str(sb, p.name()); sb.append(',');
-        campo(sb, "color");       str(sb, p.color()); sb.append(',');
-        campo(sb, "state");       str(sb, p.state()); sb.append(',');
-        campo(sb, "blockReason"); str(sb, p.blockReason()); sb.append(',');
-        campo(sb, "blockedOn");   str(sb, p.blockedOn()); sb.append(',');
-        campo(sb, "location");    str(sb, p.location()); sb.append(',');
-        campo(sb, "line");        sb.append(p.line()).append(',');
-        campo(sb, "locals");      lista(sb, p.locals(), Json::varView); sb.append(',');
-        campo(sb, "error");       str(sb, p.error()); sb.append(',');
-        campo(sb, "advanced");    sb.append(p.advanced()).append(',');
-        campo(sb, "advanceOrder"); sb.append(p.advanceOrder()).append(',');
-        campo(sb, "holding");     lista(sb, p.holding(), Json::str); sb.append(',');
-        campo(sb, "delayEndsAt"); sb.append(p.delayEndsAt() == null ? "null" : p.delayEndsAt());
+        field(sb, "id");          sb.append(p.id()).append(',');
+        field(sb, "name");        quoted(sb, p.name()); sb.append(',');
+        field(sb, "color");       quoted(sb, p.color()); sb.append(',');
+        field(sb, "state");       quoted(sb, p.state()); sb.append(',');
+        field(sb, "blockReason"); quoted(sb, p.blockReason()); sb.append(',');
+        field(sb, "blockedOn");   quoted(sb, p.blockedOn()); sb.append(',');
+        field(sb, "location");    quoted(sb, p.location()); sb.append(',');
+        field(sb, "line");        sb.append(p.line()).append(',');
+        field(sb, "locals");      list(sb, p.locals(), Json::varView); sb.append(',');
+        field(sb, "error");       quoted(sb, p.error()); sb.append(',');
+        field(sb, "advanced");    sb.append(p.advanced()).append(',');
+        field(sb, "advanceOrder"); sb.append(p.advanceOrder()).append(',');
+        field(sb, "holding");     list(sb, p.holding(), Json::quoted); sb.append(',');
+        field(sb, "delayEndsAt"); sb.append(p.delayEndsAt() == null ? "null" : p.delayEndsAt());
         sb.append("}");
     }
 
     private static void outputLine(StringBuilder sb, Snapshot.OutputLine o) {
         sb.append("{");
-        campo(sb, "instant"); sb.append(o.instant()).append(',');
-        campo(sb, "process"); str(sb, o.process()); sb.append(',');
-        campo(sb, "color");   str(sb, o.color()); sb.append(',');
-        campo(sb, "text");    str(sb, o.text());
+        field(sb, "instant"); sb.append(o.instant()).append(',');
+        field(sb, "process"); quoted(sb, o.process()); sb.append(',');
+        field(sb, "color");   quoted(sb, o.color()); sb.append(',');
+        field(sb, "text");    quoted(sb, o.text());
         sb.append("}");
     }
 
     static void snapshot(StringBuilder sb, Snapshot s) {
         sb.append("{");
-        campo(sb, "instant");   sb.append(s.instant()).append(',');
-        campo(sb, "processes"); lista(sb, s.processes(), Json::processView); sb.append(',');
-        campo(sb, "monitors");  lista(sb, s.monitors(), Json::monitorView); sb.append(',');
-        campo(sb, "output");    lista(sb, s.output(), Json::outputLine);
+        field(sb, "instant");   sb.append(s.instant()).append(',');
+        field(sb, "processes"); list(sb, s.processes(), Json::processView); sb.append(',');
+        field(sb, "monitors");  list(sb, s.monitors(), Json::monitorView); sb.append(',');
+        field(sb, "output");    list(sb, s.output(), Json::outputLine);
         sb.append("}");
     }
 
     static void logEntry(StringBuilder sb, LogEntry e) {
         sb.append("{");
-        campo(sb, "id");           str(sb, e.id()); sb.append(',');
-        campo(sb, "instant");      sb.append(e.instant()).append(',');
-        campo(sb, "processId");    num(sb, e.processId()); sb.append(',');
-        campo(sb, "processColor"); str(sb, e.processColor()); sb.append(',');
-        campo(sb, "kind");         str(sb, e.kind()); sb.append(',');
-        campo(sb, "resource");     str(sb, e.resource()); sb.append(',');
-        campo(sb, "message");      str(sb, e.message());
+        field(sb, "id");           quoted(sb, e.id()); sb.append(',');
+        field(sb, "instant");      sb.append(e.instant()).append(',');
+        field(sb, "processId");    num(sb, e.processId()); sb.append(',');
+        field(sb, "processColor"); quoted(sb, e.processColor()); sb.append(',');
+        field(sb, "kind");         quoted(sb, e.kind()); sb.append(',');
+        field(sb, "resource");     quoted(sb, e.resource()); sb.append(',');
+        field(sb, "message");      quoted(sb, e.message());
         sb.append("}");
     }
 
     // ------------------------------------------------------------------ utilidades
 
     /** Escritor de un elemento: evita repetir el bucle de cada lista. */
-    interface Escritor<T> {
-        void escribir(StringBuilder sb, T item);
+    interface Writer<T> {
+        void write(StringBuilder sb, T item);
     }
 
-    static <T> void lista(StringBuilder sb, List<T> items, Escritor<T> escritor) {
+    static <T> void list(StringBuilder sb, List<T> items, Writer<T> writer) {
         sb.append('[');
         for (int i = 0; i < items.size(); i++) {
             if (i > 0) sb.append(',');
-            escritor.escribir(sb, items.get(i));
+            writer.write(sb, items.get(i));
         }
         sb.append(']');
     }
 
     /** Error de compilacion o de ejecucion: {@code {error, line}} ({@code ApiError} en types.ts). */
-    static String error(String mensaje, int linea) {
+    static String error(String message, int line) {
         StringBuilder sb = new StringBuilder("{");
-        campo(sb, "error"); str(sb, mensaje); sb.append(',');
-        campo(sb, "line");  sb.append(linea > 0 ? Integer.toString(linea) : "null");
+        field(sb, "error"); quoted(sb, message); sb.append(',');
+        field(sb, "line");  sb.append(line > 0 ? Integer.toString(line) : "null");
         return sb.append("}").toString();
     }
 }

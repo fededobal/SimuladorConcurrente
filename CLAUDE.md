@@ -20,7 +20,7 @@ sirve estáticos). No proponer cambiar de lenguajes ni de stack.
 nucleo/src/main/java/ar/edu/unlp/info/simulador/
   lang/   lexer → parser → AST → SemanticValidator (+ ExprTyper, Scope)  (Java puro)
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
-  js/     SimuladorJs (@JSExport) + Json (a mano)        ← puente al navegador
+  js/     SimulatorJs (@JSExport) + Json (a mano)        ← puente al navegador
         └─ TeaVM (mvn -Pweb) ─→ frontend/src/engine/simulador.js  ← GENERADO, commiteado
 frontend/src/api.ts → useSimulation.ts → componentes
 ```
@@ -47,7 +47,7 @@ frontend/src/api.ts → useSimulation.ts → componentes
    si el alumno lo ve).
 5. Todo cambio del lenguaje actualiza la referencia y la especificación (EBNF).
 6. Errores que ve el alumno: español, con línea, sin nombres de clases Java. Ninguna
-   función de `SimuladorJs` lanza excepción.
+   función de `SimulatorJs` lanza excepción.
 7. Código según la skill `convenciones-codigo` (identificadores en inglés, comentarios,
    textos y docs en español, núcleo determinista, sin dependencias nuevas sin preguntar).
 8. Documentos para la PPS: formales, verificados y sin rasgos de texto de IA. Skill

@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Puente al navegador con nombres en inglés: `SimuladorJs` pasa a `SimulatorJs` y sus funciones a `create`, `restart`, `step`, `state` y `release`; `api.ts` las usa como `engine.*`, y `simulador.d.ts`, el smoke, el `pom.xml` y la documentación nombran las nuevas. El JSON que viaja no cambia. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Nombres en inglés en `lang/`: los orígenes de un símbolo del validador (`PERMANENT_ORIGIN`, `LOCAL_ORIGIN`, `PARAMETER_ORIGIN`, `ITERATOR_ORIGIN`) y las variables locales que quedaban en castellano. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Nombres en inglés en `vm/`: `Azar` pasa a `SeededRandom` (con `shuffle`), los topes `TOPE_*` a `MAX_*`, `PROB_AVANCE` a `ADVANCE_PROBABILITY` y las variables locales en castellano a su equivalente; CLAUDE.md, la skill de semántica, la especificación y el ADR 0006 nombran las clases y constantes nuevas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Scheduler`: separar el turno de round robin (`roundRobinTurn`) y el aleatorio (`randomTurn`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

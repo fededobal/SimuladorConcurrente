@@ -1,4 +1,4 @@
-import { crear, liberar, paso, reiniciar } from './engine/simulador.js';
+import * as engine from './engine/simulador.js';
 import type {
   ApiError,
   SchedulingPolicy,
@@ -30,18 +30,18 @@ function parse<T>(json: string): T {
 
 export const api = {
   create(code: string, seed?: number): SimulationCreated {
-    return parse<SimulationCreated>(crear(code, seed ?? -1));
+    return parse<SimulationCreated>(engine.create(code, seed ?? -1));
   },
 
   reset(): SimulationCreated {
-    return parse<SimulationCreated>(reiniciar());
+    return parse<SimulationCreated>(engine.restart());
   },
 
   step(policy: SchedulingPolicy, chosenProcessId?: number): StepResponse {
-    return parse<StepResponse>(paso(policy, chosenProcessId ?? -1, Date.now()));
+    return parse<StepResponse>(engine.step(policy, chosenProcessId ?? -1, Date.now()));
   },
 
   remove(): void {
-    liberar();
+    engine.release();
   },
 };

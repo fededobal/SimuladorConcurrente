@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Regla del puente: NINGUNA funcion exportada lanza. Todo error vuelve como
  * {"error": "...", "line": n|null}, que es lo que api.ts sabe mostrar.
  */
-class SimuladorJsTest {
+class SimulatorJsTest {
 
     private static final String BUFFER = """
             monitor B { int x = 0; procedure f() { x = x + 1; write("x=", x); } }
@@ -22,7 +22,7 @@ class SimuladorJsTest {
 
     @Test
     void crearDevuelveLaFormaDeSimulationCreated() {
-        String json = SimuladorJs.crear(BUFFER, 1);
+        String json = SimulatorJs.create(BUFFER, 1);
         assertTrue(json.startsWith("{\"id\":\"local\""), json);
         assertTrue(json.contains("\"seed\":1,"), json);
         assertTrue(json.contains("\"snapshot\":{\"instant\":0,"), json);
@@ -30,8 +30,8 @@ class SimuladorJsTest {
 
     @Test
     void pasoDevuelveLaFormaDeStepResponse() {
-        SimuladorJs.crear(BUFFER, 1);
-        String json = SimuladorJs.paso("ROUND_ROBIN", -1, 0);
+        SimulatorJs.create(BUFFER, 1);
+        String json = SimulatorJs.step("ROUND_ROBIN", -1, 0);
         assertTrue(json.startsWith("{\"entries\":["), json);
         assertTrue(json.contains("\"snapshot\":{"), json);
         assertTrue(json.contains("\"finished\":"), json);
@@ -41,14 +41,14 @@ class SimuladorJsTest {
 
     @Test
     void errorDeCompilacionVuelveConLinea() {
-        String json = SimuladorJs.crear("monitor M {\n procedure f() { y = 1; } }\nprocess P { M.f(); }", 1);
+        String json = SimulatorJs.create("monitor M {\n procedure f() { y = 1; } }\nprocess P { M.f(); }", 1);
         assertTrue(json.startsWith("{\"error\":"), json);
         assertTrue(json.contains("\"line\":2"), json);
     }
 
     @Test
     void errorEnLaInicializacionDelMonitorVuelveComoError() {
-        String json = assertDoesNotThrow(() -> SimuladorJs.crear("""
+        String json = assertDoesNotThrow(() -> SimulatorJs.create("""
                 monitor M { int x = 0; x = 5 / x; procedure f() { x = 1; } }
                 process A { M.f(); }
                 """, 1));
@@ -57,12 +57,12 @@ class SimuladorJsTest {
 
     @Test
     void pasoNuncaLanza() {
-        SimuladorJs.crear("""
+        SimulatorJs.create("""
                 monitor M { int x = 9223372036854775807; procedure f() { x = x + 1; } }
                 process A { M.f(); }
                 """, 1);
         assertDoesNotThrow(() -> {
-            for (int i = 0; i < 20; i++) SimuladorJs.paso("ROUND_ROBIN", -1, 0);
+            for (int i = 0; i < 20; i++) SimulatorJs.step("ROUND_ROBIN", -1, 0);
         });
     }
 
@@ -76,11 +76,11 @@ class SimuladorJsTest {
             "monitor M { int x = 0; while (true) { } procedure f() { skip; } } process P { M.f(); }",
         };
         for (String codigo : programas) {
-            String creado = assertDoesNotThrow(() -> SimuladorJs.crear(codigo, 1));
+            String creado = assertDoesNotThrow(() -> SimulatorJs.create(codigo, 1));
             if (creado.startsWith("{\"error\"")) continue;
             assertDoesNotThrow(() -> {
-                for (int i = 0; i < 5; i++) SimuladorJs.paso("RANDOM", -1, 0);
-                SimuladorJs.estado();
+                for (int i = 0; i < 5; i++) SimulatorJs.step("RANDOM", -1, 0);
+                SimulatorJs.state();
             });
         }
     }

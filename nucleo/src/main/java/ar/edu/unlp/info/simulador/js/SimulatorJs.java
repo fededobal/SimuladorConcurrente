@@ -18,15 +18,15 @@ import java.util.List;
  * sesiones ni ids; el intercambio es por strings JSON, el tipo mas simple de cruzar la
  * frontera Java/JS.
  */
-public final class SimuladorJs {
+public final class SimulatorJs {
 
-    private SimuladorJs() { }
+    private SimulatorJs() { }
 
-    private static String codigo;
-    private static long semilla;
+    private static String currentCode;
+    private static long currentSeed;
     private static VirtualMachine vm;
 
-    /** El plugin de TeaVM exige un punto de entrada; el estado lo crea {@link #crear}. */
+    /** El plugin de TeaVM exige un punto de entrada; el estado lo crea {@link #create}. */
     public static void main(String[] args) {
     }
 
@@ -38,13 +38,13 @@ public final class SimuladorJs {
      * @return JSON con forma {@code SimulationCreated}, o {@code ApiError} si no compila
      */
     @JSExport
-    public static String crear(String code, double seed) {
+    public static String create(String code, double seed) {
         try {
-            long resuelta = seed < 0 ? System.currentTimeMillis() : (long) seed;
-            vm = new VirtualMachine(Compiler.compile(code), resuelta);
-            codigo = code;
-            semilla = resuelta;
-            return creada();
+            long resolvedSeed = seed < 0 ? System.currentTimeMillis() : (long) seed;
+            vm = new VirtualMachine(Compiler.compile(code), resolvedSeed);
+            currentCode = code;
+            currentSeed = resolvedSeed;
+            return created();
         } catch (CompilationException e) {
             vm = null;
             return Json.error(e.getMessage(), e.getLine());
@@ -56,15 +56,15 @@ public final class SimuladorJs {
             // Throwable y no RuntimeException: un StackOverflowError o un OutOfMemoryError
             // tambien tienen que volver como JSON, nunca cruzar a JS como excepcion.
             vm = null;
-            return errorInterno();
+            return internalError();
         }
     }
 
     /** Reinicia al instante 0 con el mismo codigo y la misma semilla. */
     @JSExport
-    public static String reiniciar() {
-        if (vm == null) return sinSimulacion();
-        return crear(codigo, semilla);
+    public static String restart() {
+        if (vm == null) return noSimulation();
+        return create(currentCode, currentSeed);
     }
 
     /**
@@ -77,13 +77,13 @@ public final class SimuladorJs {
      * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final
      */
     @JSExport
-    public static String paso(String policy, int elegido, double ahoraMs) {
-        if (vm == null) return sinSimulacion();
+    public static String step(String policy, int chosenProcessId, double nowMs) {
+        if (vm == null) return noSimulation();
         try {
-            List<LogEntry> entries = vm.step(elegido < 0 ? null : elegido, politica(policy),
-                    (long) ahoraMs);
+            List<LogEntry> entries = vm.step(chosenProcessId < 0 ? null : chosenProcessId, policyOf(policy),
+                    (long) nowMs);
             StringBuilder sb = new StringBuilder("{\"entries\":");
-            Json.lista(sb, entries, Json::logEntry);
+            Json.list(sb, entries, Json::logEntry);
             sb.append(",\"snapshot\":");
             Json.snapshot(sb, vm.snapshot());
             sb.append(",\"finished\":").append(vm.isFinished())
@@ -93,17 +93,17 @@ public final class SimuladorJs {
               .append('}');
             return sb.toString();
         } catch (Throwable t) {
-            return descartar();
+            return discard();
         }
     }
 
     /** Estado actual y los ultimos eventos del log (para el historial). */
     @JSExport
-    public static String estado() {
-        if (vm == null) return sinSimulacion();
+    public static String state() {
+        if (vm == null) return noSimulation();
         try {
             StringBuilder sb = new StringBuilder("{\"log\":");
-            Json.lista(sb, vm.allLogs(), Json::logEntry);
+            Json.list(sb, vm.allLogs(), Json::logEntry);
             sb.append(",\"snapshot\":");
             Json.snapshot(sb, vm.snapshot());
             sb.append(",\"finished\":").append(vm.isFinished())
@@ -112,22 +112,22 @@ public final class SimuladorJs {
               .append('}');
             return sb.toString();
         } catch (Throwable t) {
-            return descartar();
+            return discard();
         }
     }
 
     /** Libera la simulacion en curso. */
     @JSExport
-    public static void liberar() {
+    public static void release() {
         vm = null;
-        codigo = null;
+        currentCode = null;
     }
 
     // ------------------------------------------------------------------ internos
 
-    private static String creada() {
+    private static String created() {
         StringBuilder sb = new StringBuilder("{\"id\":\"local\",\"seed\":");
-        sb.append(semilla).append(",\"snapshot\":");
+        sb.append(currentSeed).append(",\"snapshot\":");
         Json.snapshot(sb, vm.snapshot());
         sb.append(",\"finished\":").append(vm.isFinished())
           .append(",\"deadlock\":").append(vm.isDeadlocked())
@@ -135,7 +135,7 @@ public final class SimuladorJs {
         return sb.toString();
     }
 
-    private static SchedulingPolicy politica(String policy) {
+    private static SchedulingPolicy policyOf(String policy) {
         if (policy == null) return SchedulingPolicy.RANDOM;
         return switch (policy.trim().toUpperCase()) {
             case "ROUND_ROBIN", "ROUNDROBIN", "RR" -> SchedulingPolicy.ROUND_ROBIN;
@@ -147,7 +147,7 @@ public final class SimuladorJs {
      * Ultima red: una excepcion que no es del alumno es un bug del simulador. Se devuelve
      * como error para que no cruce a JS como {@code Error: null}.
      */
-    private static String errorInterno() {
+    private static String internalError() {
         return Json.error("Error interno del simulador. Reportalo con el programa que lo produjo.",
                 -1);
     }
@@ -156,12 +156,12 @@ public final class SimuladorJs {
      * Tras un error interno el estado de la VM no es confiable: se descarta, y el siguiente
      * paso pide volver a crear la simulacion en lugar de seguir con datos rotos.
      */
-    private static String descartar() {
+    private static String discard() {
         vm = null;
-        return errorInterno();
+        return internalError();
     }
 
-    private static String sinSimulacion() {
+    private static String noSimulation() {
         return Json.error("No hay una simulación activa", -1);
     }
 }

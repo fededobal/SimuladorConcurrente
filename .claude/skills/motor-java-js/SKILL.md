@@ -4,7 +4,7 @@ description: >
   Flujo obligatorio para cualquier cambio en el núcleo Java del simulador
   (nucleo/.../lang, vm, js o pom.xml) que termina compilado a JavaScript con TeaVM en
   frontend/src/engine/simulador.js. Cubre qué APIs de Java se pueden usar, cómo mantener
-  el puente SimuladorJs/Json alineado con types.ts, y la secuencia tests → regenerar →
+  el puente SimulatorJs/Json alineado con types.ts, y la secuencia tests → regenerar →
   smoke. Usala siempre que se modifique el lexer, parser, validador, la VirtualMachine,
   Value, Snapshot, el puente js/, o cuando algo "anda en los tests pero no en el
   navegador", o aparezca un error raro de TeaVM.
@@ -40,7 +40,7 @@ Reglas prácticas:
 
 ## Puente al navegador (js/)
 
-- `SimuladorJs` exporta funciones con `@JSExport` que reciben/devuelven tipos simples y
+- `SimulatorJs` exporta funciones con `@JSExport` que reciben/devuelven tipos simples y
   `String` con JSON. Mantenerlo así: cruzar objetos Java a JS es frágil.
 - **Ninguna función exportada puede lanzar.** Envolvé el cuerpo en
   `try { ... } catch (CompilationException e) {...} catch (RuntimeError e) {...}
@@ -50,7 +50,7 @@ Reglas prácticas:
   1. `vm/Snapshot.java` o `vm/LogEntry.java`
   2. `js/Json.java` (serialización a mano; el orden de campos no importa, los nombres sí)
   3. `frontend/src/types.ts`
-  4. `SimuladorJsTest` (contrato) y, si es visible, un chequeo en `scripts/smoke-motor.mjs`
+  4. `SimulatorJsTest` (contrato) y, si es visible, un chequeo en `scripts/smoke-motor.mjs`
   5. `frontend/src/engine/simulador.d.ts` solo si cambia la firma de una función exportada
 
 ## Commit
@@ -63,7 +63,7 @@ skill `commit`. Nunca edites `simulador.js` a mano ni lo formatees.
 | Síntoma | Causa probable |
 |---|---|
 | Tests JUnit verdes, smoke rojo | API no soportada/distinta en TeaVM, o `simulador.js` viejo |
-| `Error: null` o texto en inglés en la UI | excepción no atrapada en `SimuladorJs` |
+| `Error: null` o texto en inglés en la UI | excepción no atrapada en `SimulatorJs` |
 | El front no ve un campo nuevo | faltó `Json.java` o `types.ts` |
 | CI: "el núcleo cambió pero simulador.js no se regeneró" | faltó `npm run engine` antes del commit |
 | `simulador.js` cambió sin tocar Java | cambió la versión de TeaVM en el `pom.xml`: commit `build(motor)` aparte |

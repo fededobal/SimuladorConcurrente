@@ -1,6 +1,6 @@
 package ar.edu.unlp.info.simulador.lang;
 
-import ar.edu.unlp.info.simulador.js.SimuladorJs;
+import ar.edu.unlp.info.simulador.js.SimulatorJs;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ class CompileErrorsCharacterizationTest {
         StringBuilder actual = new StringBuilder();
         for (Map.Entry<String, String> program : programs().entrySet()) {
             actual.append("### ").append(program.getKey()).append('\n')
-                  .append(SimuladorJs.crear(program.getValue(), 0)).append('\n');
+                  .append(SimulatorJs.create(program.getValue(), 0)).append('\n');
         }
         if (REGENERATE) {
             Files.writeString(EXPECTED, actual, StandardCharsets.UTF_8);

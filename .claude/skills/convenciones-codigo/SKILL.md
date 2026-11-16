@@ -35,7 +35,7 @@ Leer el que corresponda antes de escribir.
   es señal de que hay que partir (hoy `VirtualMachine` ~800 líneas: partirla en un
   `refactor(vm)` aparte antes de hacerla crecer).
 - Datos inmutables por defecto (records en Java, `readonly` y objetos nuevos en TS).
-- Sin estado global mutable, salvo el puente `SimuladorJs` (una simulación por pestaña).
+- Sin estado global mutable, salvo el puente `SimulatorJs` (una simulación por pestaña).
 - El núcleo es **determinista**: todo azar sale del `Random` sembrado de la VM. Nunca
   `Math.random`, `System.currentTimeMillis` ni `Date.now` dentro de `lang/` o `vm/`.
 

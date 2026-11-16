@@ -8,7 +8,7 @@ Es el **motor** del simulador (por eso `nucleo/` y no `backend/`). Casi todo cor
 
 - `lang/` y `vm/`: Java 21 puro. Nada de Spring, reflexión, `Class.forName`, serialización
   automática, hilos ni I/O. TeaVM compila estático: lo que no alcanza desde
-  `js/SimuladorJs` no existe en el navegador.
+  `js/SimulatorJs` no existe en el navegador.
 - Records + `sealed interface` + `switch` con pattern matching es el estilo del AST y de
   `Value`. Mantenerlo: al agregar un caso nuevo, el compilador te marca cada `switch` que
   falta completar — es la checklist gratis.

@@ -1,6 +1,6 @@
 package ar.edu.unlp.info.simulador.vm;
 
-import ar.edu.unlp.info.simulador.js.SimuladorJs;
+import ar.edu.unlp.info.simulador.js.SimulatorJs;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Golden master (Feathers, <em>characterization test</em>): fija lo que el motor responde
  * hoy, no lo que deberia responder. Corre cada programa de {@link ProgramasCorpus} y de
- * {@link #extras()} por el puente {@link SimuladorJs}, con las dos politicas, varias
+ * {@link #extras()} por el puente {@link SimulatorJs}, con las dos politicas, varias
  * semillas y el modo paso a paso, y compara cada respuesta con la guardada en
  * {@code src/test/resources/caracterizacion/}.
  *
@@ -96,20 +96,20 @@ class CaracterizacionTest {
      */
     private static void correr(StringBuilder sb, String codigo, String politica, long semilla,
             boolean pasoAPaso, boolean legible) {
-        String creada = SimuladorJs.crear(codigo, semilla);
+        String creada = SimulatorJs.create(codigo, semilla);
         sb.append("crear ").append(resumen(creada)).append('\n');
         if (creada.startsWith("{\"error\"")) return;
         for (int i = 1; i <= MAX_PASOS; i++) {
             int elegido = pasoAPaso ? (i % 4) + 1 : -1;
-            String paso = SimuladorJs.paso(politica, elegido, i * MS_POR_PASO);
+            String step = SimulatorJs.step(politica, elegido, i * MS_POR_PASO);
             sb.append("paso ").append(i).append(' ')
-                    .append(legible ? resumen(paso) : "#" + huella(paso)).append('\n');
-            if (paso.startsWith("{\"error\"") || paso.contains("\"finished\":true")
-                    || paso.contains("\"deadlock\":true")) {
+                    .append(legible ? resumen(step) : "#" + huella(step)).append('\n');
+            if (step.startsWith("{\"error\"") || step.contains("\"finished\":true")
+                    || step.contains("\"deadlock\":true")) {
                 break;
             }
         }
-        sb.append("estado #").append(huella(SimuladorJs.estado())).append('\n');
+        sb.append("estado #").append(huella(SimulatorJs.state())).append('\n');
     }
 
     /** Tipo y mensaje de cada evento, en el orden en que {@code Json.logEntry} los escribe. */

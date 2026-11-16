@@ -18,16 +18,16 @@ const estricto = process.argv.includes('--estricto');
 /** Corre hasta terminar/deadlock. Nunca lanza: las excepciones del motor se devuelven. */
 function correr(code, { seed = 7, pasos = 5000, policy = 'RANDOM' } = {}) {
   let creado;
-  try { creado = JSON.parse(motor.crear(code, seed)); }
-  catch (e) { return { excepcion: `crear: ${e?.message ?? e}` }; }
+  try { creado = JSON.parse(motor.create(code, seed)); }
+  catch (e) { return { excepcion: `create: ${e?.message ?? e}` }; }
   if (creado.error) return { compilacion: creado.error, linea: creado.line };
   let r = { finished: creado.finished, deadlock: creado.deadlock, snapshot: creado.snapshot };
   for (let i = 0; i < pasos && !r.finished && !r.deadlock; i++) {
-    try { r = JSON.parse(motor.paso(policy, -1, i * 100)); }
+    try { r = JSON.parse(motor.step(policy, -1, i * 100)); }
     catch (e) { return { excepcion: `paso: ${e?.message ?? e}` }; }
   }
   const s = r.snapshot;
-  const kinds = new Set(JSON.parse(motor.estado()).log.map((l) => l.kind));
+  const kinds = new Set(JSON.parse(motor.state()).log.map((l) => l.kind));
   const vars = {};
   for (const m of s.monitors) for (const v of m.vars) vars[`${m.name}.${v.name}`] = v.value;
   return { finished: r.finished, deadlock: r.deadlock, vars, kinds, snapshot: s };
@@ -100,7 +100,7 @@ const CANONICOS = [
   ['el log tiene tope en una ejecucion larga (B6)', `
     monitor M { int x = 0; procedure f() { x = x + 1; } }
     process P[i: 1..4] { while (true) { M.f(); } }`,
-    (r) => !r.finished && JSON.parse(motor.estado()).log.length <= 2000],
+    (r) => !r.finished && JSON.parse(motor.state()).log.length <= 2000],
   // Verificacion del 23/09/2026 (docs/verificacion-2026-09-23.md)
   ['double infinito es error de ejecucion y no rompe el puente (VB-2)', `
     process P { for (double x = 1${'0'.repeat(300)}.0 * 10000000000.0; x < 0.0; x++) { skip; } skip; }`,
@@ -147,8 +147,8 @@ const CANONICOS = [
   ['el snapshot numera el turno de los que avanzaron', `
     process P[i: 0..4] { skip; skip; skip; }`,
     () => {
-      JSON.parse(motor.crear('process P[i: 0..4] { skip; skip; skip; }', 3));
-      const ps = JSON.parse(motor.paso('RANDOM', -1, 0)).snapshot.processes;
+      JSON.parse(motor.create('process P[i: 0..4] { skip; skip; skip; }', 3));
+      const ps = JSON.parse(motor.step('RANDOM', -1, 0)).snapshot.processes;
       const turnos = ps.filter((p) => p.advanced).map((p) => p.advanceOrder).sort((x, y) => x - y);
       return turnos.length > 0 && turnos.every((t, k) => t === k)
         && ps.every((p) => p.advanced === (p.advanceOrder >= 0));
@@ -157,11 +157,11 @@ const CANONICOS = [
     monitor M { int x = 0; procedure f() { x = x + 1; } }
     process A { M.f(); } process B { M.f(); } process C { M.f(); }`,
     () => {
-      JSON.parse(motor.crear(`monitor M { int x = 0; procedure f() { x = x + 1; } }
+      JSON.parse(motor.create(`monitor M { int x = 0; procedure f() { x = x + 1; } }
         process A { M.f(); } process B { M.f(); } process C { M.f(); }`, 0));
-      motor.paso('ROUND_ROBIN', -1, 0);
-      motor.paso('ROUND_ROBIN', -1, 0);
-      const r = JSON.parse(motor.paso('ROUND_ROBIN', -1, 0));
+      motor.step('ROUND_ROBIN', -1, 0);
+      motor.step('ROUND_ROBIN', -1, 0);
+      const r = JSON.parse(motor.step('ROUND_ROBIN', -1, 0));
       const kinds = r.entries.map((e) => `${e.kind}:${e.processId}`);
       const m = r.snapshot.monitors[0];
       const dueno = m.lockOwner?.id;
@@ -176,11 +176,11 @@ const CANONICOS = [
     () => {
       const entraron = new Set();
       for (let k = 0; k < 25; k++) {
-        JSON.parse(motor.crear(`monitor M { int x = 0; procedure f() { x = x + 1; } }
+        JSON.parse(motor.create(`monitor M { int x = 0; procedure f() { x = x + 1; } }
           process A { M.f(); } process B { M.f(); } process C { M.f(); }`, 1763000000000 + k * 7919));
-        motor.paso('ROUND_ROBIN', -1, 0);
-        motor.paso('ROUND_ROBIN', -1, 0);
-        entraron.add(JSON.parse(motor.paso('ROUND_ROBIN', -1, 0)).snapshot.monitors[0].lockOwner?.id);
+        motor.step('ROUND_ROBIN', -1, 0);
+        motor.step('ROUND_ROBIN', -1, 0);
+        entraron.add(JSON.parse(motor.step('ROUND_ROBIN', -1, 0)).snapshot.monitors[0].lockOwner?.id);
       }
       return entraron.has(2) && entraron.has(3);
     }],
@@ -263,10 +263,10 @@ for (const archivo of readdirSync(DIR_EJEMPLOS).filter((f) => f.endsWith('.mon')
 console.log('Paridad con la JVM');
 {
   const TRAZA = '4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 3E |';
-  motor.crear(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
+  motor.create(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
   let traza = '';
   for (let i = 0; i < 6; i++) {
-    for (const e of JSON.parse(motor.paso('RANDOM', -1, 0)).entries) traza += `${e.processId}${e.kind[0]} `;
+    for (const e of JSON.parse(motor.step('RANDOM', -1, 0)).entries) traza += `${e.processId}${e.kind[0]} `;
     traza += '| ';
   }
   const bien = traza.trim() === TRAZA;
