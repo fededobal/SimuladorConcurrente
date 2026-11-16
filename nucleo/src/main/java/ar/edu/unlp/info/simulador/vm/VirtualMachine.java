@@ -404,38 +404,15 @@ public final class VirtualMachine {
                 yield false;
             }
             case Stmt.IfStmt iff -> {
-                boolean cond = vars.evaluator(act).evalBool(iff.condition());
-                act.pushFront((cond ? iff.thenBranch() : iff.elseBranch() == null
-                        ? new Stmt.Block(List.of(), s.line()) : iff.elseBranch()).statements());
+                execIf(act, iff);
                 yield false;
             }
             case Stmt.WhileStmt w -> {
-                if (vars.evaluator(act).evalBool(w.condition())) {
-                    act.pushFront(w);
-                    act.pushFront(w.body().statements());
-                }
+                execWhile(act, w);
                 yield false;
             }
             case Stmt.ForStmt f -> {
-                if (f.init() instanceof VarDecl vd) {
-                    Value v = vd.initExpr() == null
-                            ? Value.defaultFor(vd.type())
-                            : vars.evaluator(act).eval(vd.initExpr())
-                                    .assignTo(vd.type(), vd.name(), vd.line());
-                    act.locals().put(vd.name(), v);
-                } else {
-                    Stmt.Assign asg = (Stmt.Assign) f.init();
-                    vars.assignScalar(p.id(), act, asg.target(),
-                            vars.evaluator(act).eval(asg.value()), asg.line());
-                }
-                if (f.limit() != null) {
-                    // la cota del rango se fija al entrar: cambiarla adentro no cambia las vueltas
-                    act.locals().put(f.limit().name(), vars.evaluator(act).eval(f.limit().initExpr()));
-                }
-                List<Stmt> loopBody = new ArrayList<>(f.body().statements());
-                loopBody.add(f.step());
-                act.pushFront(new Stmt.WhileStmt(f.condition(),
-                        new Stmt.Block(loopBody, f.line()), f.line()));
+                execFor(p, act, f);
                 yield false;
             }
             case Stmt.Skip ignored -> {
@@ -476,6 +453,48 @@ public final class VirtualMachine {
                 yield true;
             }
         };
+    }
+
+    // ---------------------------------------------------------------- sentencias estructurales
+
+    /** Apila la rama elegida; con la condicion falsa y sin else no apila nada. */
+    private void execIf(Activation act, Stmt.IfStmt iff) {
+        if (vars.evaluator(act).evalBool(iff.condition())) {
+            act.pushFront(iff.thenBranch().statements());
+        } else if (iff.elseBranch() != null) {
+            act.pushFront(iff.elseBranch().statements());
+        }
+    }
+
+    /** Si la condicion vale, apila el cuerpo y, detras, el mismo while para la vuelta siguiente. */
+    private void execWhile(Activation act, Stmt.WhileStmt w) {
+        if (vars.evaluator(act).evalBool(w.condition())) {
+            act.pushFront(w);
+            act.pushFront(w.body().statements());
+        }
+    }
+
+    /** Inicializa el iterador (y la cota, en la forma de rango) y lo reescribe como un while. */
+    private void execFor(Process p, Activation act, Stmt.ForStmt f) {
+        if (f.init() instanceof VarDecl vd) {
+            Value v = vd.initExpr() == null
+                    ? Value.defaultFor(vd.type())
+                    : vars.evaluator(act).eval(vd.initExpr())
+                            .assignTo(vd.type(), vd.name(), vd.line());
+            act.locals().put(vd.name(), v);
+        } else {
+            Stmt.Assign asg = (Stmt.Assign) f.init();
+            vars.assignScalar(p.id(), act, asg.target(),
+                    vars.evaluator(act).eval(asg.value()), asg.line());
+        }
+        if (f.limit() != null) {
+            // la cota del rango se fija al entrar: cambiarla adentro no cambia las vueltas
+            act.locals().put(f.limit().name(), vars.evaluator(act).eval(f.limit().initExpr()));
+        }
+        List<Stmt> loopBody = new ArrayList<>(f.body().statements());
+        loopBody.add(f.step());
+        act.pushFront(new Stmt.WhileStmt(f.condition(),
+                new Stmt.Block(loopBody, f.line()), f.line()));
     }
 
     // ---------------------------------------------------------------- sentencias leaf
@@ -565,7 +584,6 @@ public final class VirtualMachine {
         Activation newAct = new Activation(m.name(), pd.name());
         for (int i = 0; i < pd.params().size(); i++) {
             Param param = pd.params().get(i);
-            Expr argExpr = call.args().get(i);
             if (param.isInput()) {
                 newAct.locals().put(param.name(),
                         argValues.get(i).assignTo(param.type(), param.name(), call.line()));
@@ -573,17 +591,8 @@ public final class VirtualMachine {
                 newAct.locals().put(param.name(), Value.defaultFor(param.type()));
             }
             if (param.isOutput()) {
-                String targetName;
-                Integer idx = null;
-                if (argExpr instanceof Expr.VarRef vr) {
-                    targetName = vr.name();
-                } else {
-                    Expr.ArrayAccess aa = (Expr.ArrayAccess) argExpr;
-                    targetName = aa.name();
-                    // ya se evaluo (y controlo el rango) como argumento: entra en un int
-                    idx = (int) ev.evalLong(aa.index());
-                }
-                newAct.outBindings().put(param.name(), new LValue(callerAct, targetName, idx));
+                newAct.outBindings().put(param.name(),
+                        outTarget(callerAct, call.args().get(i), ev));
             }
         }
         newAct.pushFront(pd.body().statements());
@@ -592,6 +601,19 @@ public final class VirtualMachine {
         newAct.setEntering(true);
         reacquireMonitor(p, newAct);
         return true;
+    }
+
+    /**
+     * El lugar del llamador donde se copia un parametro {@code out} al retornar: una variable
+     * o un elemento de arreglo (el compilador no admite otra cosa).
+     */
+    private static LValue outTarget(Activation callerAct, Expr argExpr, ExprEvaluator ev) {
+        if (argExpr instanceof Expr.VarRef vr) {
+            return new LValue(callerAct, vr.name(), null);
+        }
+        Expr.ArrayAccess aa = (Expr.ArrayAccess) argExpr;
+        // ya se evaluo (y controlo el rango) como argumento: entra en un int
+        return new LValue(callerAct, aa.name(), (int) ev.evalLong(aa.index()));
     }
 
     /** El monitor al que va la llamada: en un arreglo de monitores, el del indice evaluado. */

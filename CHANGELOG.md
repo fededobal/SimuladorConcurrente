@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `VirtualMachine`: sacar de `executeStmt` el if, el while y el for (`execIf`, `execWhile`, `execFor`) y de `execMonitorCall` el armado del destino de un parámetro out (`outTarget`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: partir `execCondOp` en `condKey`, `execWait`, `execSignal` y `execSignalAll`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: extraer `logDeadlock`, `destination` y `enqueueEntrant`, que estaban repetidos en el paso, en la entrada al monitor y en signal/signal_all. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Test de caracterización del núcleo (golden master): corre cada programa del corpus de invariantes y otros once (delay, errores de ejecución, ciclo entre monitores, errores al inicializar, colas ordenadas con tuplas) por el puente `SimuladorJs`, con las dos políticas, tres semillas y el modo paso a paso, y compara cada respuesta con la guardada en `nucleo/src/test/resources/caracterizacion/`. Es la red para refactorizar sin cambiar lo que ve el alumno; se regenera con `mvn test -Dcaracterizacion.regenerar=true`. (Federico Dobal, 2026-11-16)
