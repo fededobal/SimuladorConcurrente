@@ -140,3 +140,96 @@ mark.busqueda {
   border-radius: 2px;
   padding: 0 1px;
 }
+
+/* ------------------------------------------------------------------ glosario */
+
+/* categorías: un color suave del tema por cada una, igual en claro y en oscuro */
+.g-modelo { --g-color: var(--vp-c-brand-1); --g-soft: var(--vp-c-brand-soft); }
+.g-sincronizacion { --g-color: var(--vp-c-warning-1); --g-soft: var(--vp-c-warning-soft); }
+.g-ejecucion { --g-color: var(--vp-c-green-1); --g-soft: var(--vp-c-green-soft); }
+
+.vp-doc .g-cat {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: var(--g-soft);
+  color: var(--g-color);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.vp-doc .g-leyenda {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  align-items: center;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+.vp-doc .g-leyenda .g-cat { justify-self: start; }
+
+/* índice alfabético: las letras con términos son enlaces; el resto queda atenuado */
+.vp-doc .g-letras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px 0 8px;
+}
+.vp-doc .g-letras > * {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.vp-doc .g-letras > span { color: var(--vp-c-text-3); opacity: 0.55; }
+.vp-doc .g-letras > a {
+  border: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: background 0.12s, border-color 0.12s;
+}
+.vp-doc .g-letras > a:hover { background: var(--vp-c-brand-soft); border-color: var(--vp-c-brand-1); }
+
+/* cada letra: grande y con una línea que la separa de las tarjetas */
+.vp-doc h2:has(+ .g-termino) {
+  font-size: 28px;
+  color: var(--vp-c-brand-1);
+  margin-top: 40px;
+}
+
+/* tarjeta de un término, con el borde izquierdo del color de su categoría */
+.vp-doc .g-termino {
+  position: relative;
+  margin: 14px 0;
+  padding: 16px 20px 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 4px solid var(--g-color);
+  border-radius: 10px;
+  background: var(--vp-c-bg-soft);
+}
+.vp-doc .g-termino > p:first-child { margin: 0 0 4px; }
+.vp-doc .g-termino h3 { margin: 0 0 8px; padding-top: 0; border-top: none; font-size: 19px; }
+.vp-doc .g-termino p { margin: 8px 0; line-height: 1.65; }
+
+/* dónde se ve en el simulador: un recuadro tenue dentro de la tarjeta */
+.vp-doc .g-termino .g-sim {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--g-soft);
+  font-size: 14px;
+}
+.vp-doc .g-termino .g-sim strong { color: var(--g-color); }
+
+.vp-doc .g-termino .g-vease { margin-bottom: 0; font-size: 14px; color: var(--vp-c-text-2); }
+
+@media (min-width: 640px) {
+  /* la categoría pasa a la esquina superior derecha de la tarjeta */
+  .vp-doc .g-termino > p:first-child { position: absolute; top: 16px; right: 18px; margin: 0; }
+  .vp-doc .g-termino h3 { padding-right: 140px; }
+}
