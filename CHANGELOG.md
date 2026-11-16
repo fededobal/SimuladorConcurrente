@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Clase `TokenCursor` en `lang/parser/`, con el recorrido de los tokens y el tope de anidamiento que tenía `Parser`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `DecimalLiteral` en `lang/parser/`, con la conversión de los literales decimales que tenía `Parser`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Parser`: partir `parseFor` en una función por forma del for y sacar de `parseStatement` y `parsePrimary` el skip, el delay, los literales numéricos y `empty`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `Parser`: extraer `parseArguments`, que se repetía en write y en la llamada a un monitor, y juntar los operadores de comparación en una constante. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

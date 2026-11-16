@@ -21,20 +21,17 @@ public final class Parser {
     private static final String[] COMPARISON_OPERATORS = {"==", "!=", "<", "<=", ">", ">="};
 
     /**
-     * Topes de anidamiento. El parser, el validador y el evaluador son recursivos, y la pila
-     * del navegador es mas chica que la de la JVM: sin tope, un programa que en los tests
-     * anda termina en "Error interno" para el alumno.
+     * Tope de operaciones encadenadas en una expresion. Por la misma razon que el tope de
+     * anidamiento de {@link TokenCursor}: el validador y el evaluador recorren el arbol
+     * recursivamente, y la pila del navegador es mas chica que la de la JVM.
      */
-    private static final int MAX_ANIDAMIENTO = 100;
     private static final int MAX_PROFUNDIDAD_EXPR = 200;
 
-    private final List<Token> tokens;
-    private int current = 0;
+    private final TokenCursor tokens;
     private int anonimos = 0;
-    private int nivel = 0;
 
     public Parser(List<Token> tokens) {
-        this.tokens = tokens;
+        this.tokens = new TokenCursor(tokens);
     }
 
     // ================================================================= programa
@@ -43,15 +40,15 @@ public final class Parser {
         List<MonitorDef> monitors = new ArrayList<>();
         List<ProcessDef> processes = new ArrayList<>();
 
-        while (!atEnd()) {
-            if (check("monitor")) {
+        while (!tokens.atEnd()) {
+            if (tokens.check("monitor")) {
                 monitors.add(parseMonitor());
-            } else if (check("process")) {
+            } else if (tokens.check("process")) {
                 processes.add(parseProcess());
-            } else if (isDeclStart(peek())) {
-                throw error("No se permiten variables globales");
+            } else if (isDeclStart(tokens.peek())) {
+                throw tokens.error("No se permiten variables globales");
             } else {
-                throw error("Se esperaba 'monitor' o 'process'");
+                throw tokens.error("Se esperaba 'monitor' o 'process'");
             }
         }
         return new Program(monitors, processes);
@@ -60,55 +57,55 @@ public final class Parser {
     // ================================================================= monitor
 
     private MonitorDef parseMonitor() {
-        Token kw = consume("monitor", "Se esperaba 'monitor'");
-        String name = consumeIdent("Se esperaba el nombre del monitor");
-        ProcessDef.QuantDef quant = match("[") ? parseQuant("del arreglo de monitores") : null;
-        consume("{", "Se esperaba '{' para abrir el monitor");
+        Token kw = tokens.consume("monitor", "Se esperaba 'monitor'");
+        String name = tokens.consumeIdent("Se esperaba el nombre del monitor");
+        ProcessDef.QuantDef quant = tokens.match("[") ? parseQuant("del arreglo de monitores") : null;
+        tokens.consume("{", "Se esperaba '{' para abrir el monitor");
 
         List<VarDecl> perm = new ArrayList<>();
         List<CondDecl> conds = new ArrayList<>();
         List<Stmt> init = new ArrayList<>();
         List<ProcedureDef> procedures = new ArrayList<>();
 
-        while (!check("}") && !atEnd()) {
-            if (check("cond")) {
+        while (!tokens.check("}") && !tokens.atEnd()) {
+            if (tokens.check("cond")) {
                 conds.addAll(parseCondDecls());
-            } else if (check("procedure")) {
+            } else if (tokens.check("procedure")) {
                 procedures.add(parseProcedure());
-            } else if (isDeclStart(peek())) {
+            } else if (isDeclStart(tokens.peek())) {
                 perm.addAll(parseVarDecls());
             } else {
                 init.add(parseStatement());
             }
         }
-        consume("}", "Se esperaba '}' para cerrar el monitor");
+        tokens.consume("}", "Se esperaba '}' para cerrar el monitor");
         return new MonitorDef(name, quant, perm, conds, init, procedures, kw.line());
     }
 
     private List<CondDecl> parseCondDecls() {
-        Token kw = consume("cond", "Se esperaba 'cond'");
+        Token kw = tokens.consume("cond", "Se esperaba 'cond'");
         List<CondDecl> result = new ArrayList<>();
         do {
-            String name = consumeIdent("Se esperaba el nombre de la variable condición");
+            String name = tokens.consumeIdent("Se esperaba el nombre de la variable condición");
             boolean isArray = false;
             Expr size = null;
-            if (match("[")) {
+            if (tokens.match("[")) {
                 isArray = true;
                 size = parseExpr();
-                consume("]", "Se esperaba ']' en la declaración de 'cond'");
+                tokens.consume("]", "Se esperaba ']' en la declaración de 'cond'");
             }
             result.add(new CondDecl(name, isArray, size, kw.line()));
-        } while (match(","));
-        consume(";", "Se esperaba ';' al final de la declaración de 'cond'");
+        } while (tokens.match(","));
+        tokens.consume(";", "Se esperaba ';' al final de la declaración de 'cond'");
         return result;
     }
 
     private ProcedureDef parseProcedure() {
-        Token kw = consume("procedure", "Se esperaba 'procedure'");
-        String name = consumeIdent("Se esperaba el nombre del procedure");
-        consume("(", "Se esperaba '(' después del nombre del procedure");
+        Token kw = tokens.consume("procedure", "Se esperaba 'procedure'");
+        String name = tokens.consumeIdent("Se esperaba el nombre del procedure");
+        tokens.consume("(", "Se esperaba '(' después del nombre del procedure");
         List<Param> params = parseParams();
-        consume(")", "Se esperaba ')' al cerrar los parámetros");
+        tokens.consume(")", "Se esperaba ')' al cerrar los parámetros");
         Stmt.Block body = parseBlock();
         return new ProcedureDef(name, params, body, kw.line());
     }
@@ -120,10 +117,10 @@ public final class Parser {
      */
     private List<Param> parseParams() {
         List<Param> params = new ArrayList<>();
-        if (check(")")) return params;
+        if (tokens.check(")")) return params;
         do {
-            params.addAll(isScalarType(peek()) ? parseCStyleGroup() : parseParamGroup());
-        } while (match(";"));
+            params.addAll(isScalarType(tokens.peek()) ? parseCStyleGroup() : parseParamGroup());
+        } while (tokens.match(";"));
         return params;
     }
 
@@ -131,23 +128,23 @@ public final class Parser {
     private List<Param> parseParamGroup() {
         List<Token> names = new ArrayList<>();
         do {
-            names.add(consumeIdentToken("Se esperaba el nombre del parámetro"));
-        } while (match(","));
-        consume(":", "Se esperaba ':' después del nombre del parámetro");
+            names.add(tokens.consumeIdentToken("Se esperaba el nombre del parámetro"));
+        } while (tokens.match(","));
+        tokens.consume(":", "Se esperaba ':' después del nombre del parámetro");
         ParamMode mode = ParamMode.IN;
-        if (match("out")) {
+        if (tokens.match("out")) {
             mode = ParamMode.OUT;
         } else {
-            match("in");
+            tokens.match("in");
         }
-        if (peek().is("inout")) {
-            throw error("El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)");
+        if (tokens.peek().is("inout")) {
+            throw tokens.error("El modo inout no existe: un parámetro es in (se lee) u out (se devuelve)");
         }
-        if (!isScalarType(peek())) {
-            throw error("Se esperaba un tipo escalar (int, double, bool, text) "
+        if (!isScalarType(tokens.peek())) {
+            throw tokens.error("Se esperaba un tipo escalar (int, double, bool, text) "
                     + "para el parámetro");
         }
-        Type type = Type.fromKeyword(advance().lexeme());
+        Type type = Type.fromKeyword(tokens.advance().lexeme());
         rejectCommaBetweenGroups();
         List<Param> group = new ArrayList<>();
         for (Token n : names) group.add(new Param(n.lexeme(), type, mode, n.line()));
@@ -156,19 +153,19 @@ public final class Parser {
 
     /** {@code tipo nombre {, nombre}}, al estilo C: parametros de entrada. */
     private List<Param> parseCStyleGroup() {
-        Type type = Type.fromKeyword(advance().lexeme());
+        Type type = Type.fromKeyword(tokens.advance().lexeme());
         List<Param> group = new ArrayList<>();
         do {
-            if (isScalarType(peek())) rejectCommaBetweenGroups();
-            Token n = consumeIdentToken("Se esperaba el nombre del parámetro");
+            if (isScalarType(tokens.peek())) rejectCommaBetweenGroups();
+            Token n = tokens.consumeIdentToken("Se esperaba el nombre del parámetro");
             group.add(new Param(n.lexeme(), type, ParamMode.IN, n.line()));
-        } while (match(","));
+        } while (tokens.match(","));
         return group;
     }
 
     private void rejectCommaBetweenGroups() {
-        if (check(",") || isScalarType(peek())) {
-            throw error("Los parámetros de distinto grupo se separan con ';' "
+        if (tokens.check(",") || isScalarType(tokens.peek())) {
+            throw tokens.error("Los parámetros de distinto grupo se separan con ';' "
                     + "(la coma separa nombres del mismo tipo)");
         }
     }
@@ -176,38 +173,38 @@ public final class Parser {
     // ================================================================= proceso
 
     private ProcessDef parseProcess() {
-        Token kw = consume("process", "Se esperaba 'process'");
-        String name = consumeIdent("Se esperaba el nombre del proceso");
-        ProcessDef.QuantDef quant = match("[") ? parseQuant("de la familia de procesos") : null;
+        Token kw = tokens.consume("process", "Se esperaba 'process'");
+        String name = tokens.consumeIdent("Se esperaba el nombre del proceso");
+        ProcessDef.QuantDef quant = tokens.match("[") ? parseQuant("de la familia de procesos") : null;
         Stmt.Block body = parseBlock();
         return new ProcessDef(name, quant, body, kw.line());
     }
 
     /** {@code [iterador: desde..hasta]}, ya consumido el '['. */
     private ProcessDef.QuantDef parseQuant(String deQue) {
-        String iterator = consumeIdent("Se esperaba el iterador " + deQue);
-        consume(":", "Se esperaba ':' en el cuantificador");
+        String iterator = tokens.consumeIdent("Se esperaba el iterador " + deQue);
+        tokens.consume(":", "Se esperaba ':' en el cuantificador");
         Expr from = parseExpr();
-        consume("..", "Se esperaba '..' en el cuantificador");
+        tokens.consume("..", "Se esperaba '..' en el cuantificador");
         Expr to = parseExpr();
-        consume("]", "Se esperaba ']' al cerrar el cuantificador");
+        tokens.consume("]", "Se esperaba ']' al cerrar el cuantificador");
         return new ProcessDef.QuantDef(iterator, from, to);
     }
 
     // ================================================================= sentencias
 
     private Stmt.Block parseBlock() {
-        Token open = consume("{", "Se esperaba '{'");
+        Token open = tokens.consume("{", "Se esperaba '{'");
         List<Stmt> statements = new ArrayList<>();
-        while (!check("}") && !atEnd()) {
+        while (!tokens.check("}") && !tokens.atEnd()) {
             statements.addAll(parseStatements());
         }
-        consume("}", "Se esperaba '}'");
+        tokens.consume("}", "Se esperaba '}'");
         return new Stmt.Block(statements, open.line());
     }
 
     private Stmt.Block parseBlockOrStatement() {
-        if (check("{")) {
+        if (tokens.check("{")) {
             return parseBlock();
         }
         List<Stmt> statements = parseStatements();
@@ -216,21 +213,21 @@ public final class Parser {
 
     /** Una sentencia, o varias si es una declaracion con lista de nombres ({@code int a, b;}). */
     private List<Stmt> parseStatements() {
-        if (isDeclStart(peek())) {
+        if (isDeclStart(tokens.peek())) {
             return new ArrayList<>(parseVarDecls());
         }
         return List.of(parseStatement());
     }
 
     private Stmt parseStatement() {
-        entrar();
+        tokens.enterNesting();
         Stmt s = parseStatementSinTope();
-        nivel--;
+        tokens.exitNesting();
         return s;
     }
 
     private Stmt parseStatementSinTope() {
-        Token t = peek();
+        Token t = tokens.peek();
 
         if (t.isKeyword("skip")) {
             return parseSkip();
@@ -261,26 +258,26 @@ public final class Parser {
         }
         if (t.is(TokenType.IDENTIFIER)) {
             // llamada a monitor:  Ident ['[' expr ']'] '.' Ident '(' ... ')' ';'
-            if (next().is(".") || isIndexedMonitorCall()) {
+            if (tokens.next().is(".") || isIndexedMonitorCall()) {
                 return parseMonitorCall();
             }
             return parseAssignOrIncDec();
         }
-        throw error("Sentencia no válida");
+        throw tokens.error("Sentencia no válida");
     }
 
     private Stmt parseSkip() {
-        Token kw = advance();
-        consume(";", "Se esperaba ';' después de 'skip'");
+        Token kw = tokens.advance();
+        tokens.consume(";", "Se esperaba ';' después de 'skip'");
         return new Stmt.Skip(kw.line());
     }
 
     private Stmt parseDelay() {
-        Token kw = advance();
-        consume("(", "Se esperaba '(' después de 'delay'");
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de 'delay'");
         Expr seconds = parseExpr();
-        consume(")", "Se esperaba ')' al cerrar el delay");
-        consume(";", "Se esperaba ';' al final del delay");
+        tokens.consume(")", "Se esperaba ')' al cerrar el delay");
+        tokens.consume(";", "Se esperaba ';' al final del delay");
         return new Stmt.Delay(seconds, kw.line());
     }
 
@@ -289,20 +286,20 @@ public final class Parser {
      * propio valor inicial: en {@code int a, b = 0;} solo {@code b} arranca en 0.
      */
     private List<VarDecl> parseVarDecls() {
-        Token typeTok = advance();
+        Token typeTok = tokens.advance();
         Type type = Type.fromKeyword(typeTok.lexeme());
         List<VarDecl> result = new ArrayList<>();
         do {
             result.add(parseVarDeclItem(type, typeTok.line()));
-        } while (match(","));
-        consume(";", type.isQueue()
+        } while (tokens.match(","));
+        tokens.consume(";", type.isQueue()
                 ? "Se esperaba ';' al final de la declaración de la cola"
                 : "Se esperaba ';' al final de la declaración");
         return result;
     }
 
     private VarDecl parseVarDeclItem(Type type, int line) {
-        String name = consumeIdent("Se esperaba el nombre de la variable");
+        String name = tokens.consumeIdent("Se esperaba el nombre de la variable");
 
         if (type.isQueue()) {
             return VarDecl.queue(name, type, parseQueueElementTypes(type, name), line);
@@ -311,19 +308,19 @@ public final class Parser {
         boolean isArray = false;
         Expr size = null;
         Expr init = null;
-        if (match("[")) {
+        if (tokens.match("[")) {
             isArray = true;
             size = parseExpr();
-            consume("]", "Se esperaba ']' en la declaración del arreglo");
-            if (match("=")) {
-                consume("(", "Se esperaba '(' para inicializar el arreglo");
-                consume("[", "Se esperaba '[' en la inicialización del arreglo");
+            tokens.consume("]", "Se esperaba ']' en la declaración del arreglo");
+            if (tokens.match("=")) {
+                tokens.consume("(", "Se esperaba '(' para inicializar el arreglo");
+                tokens.consume("[", "Se esperaba '[' en la inicialización del arreglo");
                 parseExpr(); // tamano interno, se ignora (redundante)
-                consume("]", "Se esperaba ']' en la inicialización del arreglo");
+                tokens.consume("]", "Se esperaba ']' en la inicialización del arreglo");
                 init = parseExpr();
-                consume(")", "Se esperaba ')' para cerrar la inicialización del arreglo");
+                tokens.consume(")", "Se esperaba ')' para cerrar la inicialización del arreglo");
             }
-        } else if (match("=")) {
+        } else if (tokens.match("=")) {
             init = parseExpr();
         }
         return new VarDecl(name, type, null, isArray, size, init, line);
@@ -338,79 +335,79 @@ public final class Parser {
     private List<Type> parseQueueElementTypes(Type queue, String name) {
         // la forma, con el nombre que escribio el alumno: "Cola c(tipo, (tipo, ...))"
         String forma = queue.keyword() + " " + name + "(tipo, (tipo, ...))";
-        if (!match("(")) {
-            throw error("Declarar la cola con los tipos de sus componentes: " + queue.keyword()
+        if (!tokens.match("(")) {
+            throw tokens.error("Declarar la cola con los tipos de sus componentes: " + queue.keyword()
                     + " " + name + "(tipo, ...)");
         }
-        if (check("(")) {
-            throw error("La primera componente de '" + name + "' va sin paréntesis; el grupo "
+        if (tokens.check("(")) {
+            throw tokens.error("La primera componente de '" + name + "' va sin paréntesis; el grupo "
                     + "entre paréntesis va después de ella: " + forma);
         }
         List<Type> types = new ArrayList<>();
         types.add(parseElementType());
-        if (match(",")) {
-            if (match("(")) {
+        if (tokens.match(",")) {
+            if (tokens.match("(")) {
                 do {
-                    if (check("(")) {
-                        throw error("Dentro del grupo de '" + name + "' van solo tipos, sin más "
+                    if (tokens.check("(")) {
+                        throw tokens.error("Dentro del grupo de '" + name + "' van solo tipos, sin más "
                                 + "paréntesis: " + forma);
                     }
                     types.add(parseElementType());
-                } while (match(","));
-                consume(")", "Se esperaba ')' al cerrar el grupo de tipos de '" + name + "'");
-                if (!check(")")) {
-                    throw error("Después del grupo entre paréntesis se cierra la declaración de '"
+                } while (tokens.match(","));
+                tokens.consume(")", "Se esperaba ')' al cerrar el grupo de tipos de '" + name + "'");
+                if (!tokens.check(")")) {
+                    throw tokens.error("Después del grupo entre paréntesis se cierra la declaración de '"
                             + name + "': " + forma);
                 }
             } else {
                 do {
-                    if (check("(")) {
-                        throw error("El grupo entre paréntesis de '" + name + "' va justo después "
+                    if (tokens.check("(")) {
+                        throw tokens.error("El grupo entre paréntesis de '" + name + "' va justo después "
                                 + "de la primera componente: " + forma);
                     }
                     types.add(parseElementType());
-                } while (match(","));
+                } while (tokens.match(","));
             }
         }
-        consume(")", "Se esperaba ')' al cerrar los tipos de '" + name + "'");
+        tokens.consume(")", "Se esperaba ')' al cerrar los tipos de '" + name + "'");
         return types;
     }
 
     private Type parseElementType() {
-        Token t = peek();
+        Token t = tokens.peek();
         if (!isScalarType(t)) {
-            throw error("Las componentes de una cola son int, double, bool o text (se encontró '"
-                    + describe(t) + "')");
+            throw tokens.error("Las componentes de una cola son int, double, bool o text (se encontró '"
+                    + TokenCursor.describe(t) + "')");
         }
-        advance();
+        tokens.advance();
         return Type.fromKeyword(t.lexeme());
     }
 
     private Stmt parseCondOp() {
-        Token kw = advance();
+        Token kw = tokens.advance();
         Stmt.CondOpKind kind = switch (kw.lexeme()) {
             case "wait" -> Stmt.CondOpKind.WAIT;
             case "signal" -> Stmt.CondOpKind.SIGNAL;
             default -> Stmt.CondOpKind.SIGNAL_ALL;
         };
-        consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
-        String name = consumeIdent("Se esperaba el nombre de la variable condición");
+        tokens.consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
+        String name = tokens.consumeIdent("Se esperaba el nombre de la variable condición");
         Expr index = null;
-        if (match("[")) {
+        if (tokens.match("[")) {
             index = parseExpr();
-            consume("]", "Se esperaba ']' en el índice de la variable condición");
+            tokens.consume("]", "Se esperaba ']' en el índice de la variable condición");
         }
-        consume(")", "Se esperaba ')'");
-        consume(";", "Se esperaba ';'");
+        tokens.consume(")", "Se esperaba ')'");
+        tokens.consume(";", "Se esperaba ';'");
         return new Stmt.CondOp(kind, name, index, kw.line());
     }
 
     private Stmt parseWrite() {
-        Token kw = advance();
-        consume("(", "Se esperaba '(' después de 'write'");
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de 'write'");
         List<Expr> args = parseArguments();
-        consume(")", "Se esperaba ')' al cerrar el write");
-        consume(";", "Se esperaba ';' al final del write");
+        tokens.consume(")", "Se esperaba ')' al cerrar el write");
+        tokens.consume(";", "Se esperaba ';' al final del write");
         return new Stmt.Write(args, kw.line());
     }
 
@@ -422,18 +419,18 @@ public final class Parser {
      * esos es error.
      */
     private Stmt parseQueueOp() {
-        Token kw = advance();
-        consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
-        String queue = consumeIdent("Se esperaba el nombre de la cola");
-        consume(",", "Se esperaba ',' después del nombre de la cola");
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de '" + kw.lexeme() + "'");
+        String queue = tokens.consumeIdent("Se esperaba el nombre de la cola");
+        tokens.consume(",", "Se esperaba ',' después del nombre de la cola");
         Stmt op;
         if (kw.is("push")) {
             op = new Stmt.QueuePush(queue, parsePushElements(queue), kw.line());
         } else {
             op = new Stmt.QueuePop(queue, parsePopTargets(queue), kw.line());
         }
-        consume(")", "Se esperaba ')'");
-        consume(";", "Se esperaba ';'");
+        tokens.consume(")", "Se esperaba ')'");
+        tokens.consume(";", "Se esperaba ';'");
         return op;
     }
 
@@ -442,48 +439,48 @@ public final class Parser {
                 + "push(" + queue + ", (clave, (resto)))";
         List<Expr> elems = new ArrayList<>();
         if (tupleAhead()) {
-            advance();
+            tokens.advance();
             if (tupleAhead()) {
-                throw error("Sobran paréntesis en el push a '" + queue + "'; las formas válidas son "
+                throw tokens.error("Sobran paréntesis en el push a '" + queue + "'; las formas válidas son "
                         + formas);
             }
             elems.add(parseExpr());
-            if (match(",")) {
+            if (tokens.match(",")) {
                 if (tupleAhead()) {
                     // la clave y, entre parentesis, el resto de las componentes
-                    advance();
+                    tokens.advance();
                     do {
                         if (tupleAhead()) {
-                            throw error("Dentro del grupo van las componentes sueltas, sin más "
+                            throw tokens.error("Dentro del grupo van las componentes sueltas, sin más "
                                     + "paréntesis: push(" + queue + ", (clave, (resto)))");
                         }
                         elems.add(parseExpr());
-                    } while (match(","));
-                    consume(")", "Se esperaba ')' al cerrar el grupo de la tupla");
-                    if (check(",")) {
-                        throw error("Después del grupo entre paréntesis se cierra la tupla: push("
+                    } while (tokens.match(","));
+                    tokens.consume(")", "Se esperaba ')' al cerrar el grupo de la tupla");
+                    if (tokens.check(",")) {
+                        throw tokens.error("Después del grupo entre paréntesis se cierra la tupla: push("
                                 + queue + ", (clave, (resto)))");
                     }
                 } else {
                     do {
                         if (tupleAhead()) {
-                            throw error("El grupo entre paréntesis va justo después de la primera "
+                            throw tokens.error("El grupo entre paréntesis va justo después de la primera "
                                     + "componente: push(" + queue + ", (clave, (resto)))");
                         }
                         elems.add(parseExpr());
-                    } while (match(","));
+                    } while (tokens.match(","));
                 }
             }
-            consume(")", "Se esperaba ')' al cerrar la tupla");
+            tokens.consume(")", "Se esperaba ')' al cerrar la tupla");
             return elems;
         }
         do {
             if (tupleAhead()) {
-                throw error("Los paréntesis de la tupla van alrededor de todas las componentes; "
+                throw tokens.error("Los paréntesis de la tupla van alrededor de todas las componentes; "
                         + "las formas válidas son " + formas);
             }
             elems.add(parseExpr());
-        } while (match(","));
+        } while (tokens.match(","));
         return elems;
     }
 
@@ -492,42 +489,42 @@ public final class Parser {
         String formas = "pop(" + queue + ", destinos), pop(" + queue + ", (destinos)) o pop("
                 + queue + ", (clave, (resto)))";
         List<String> targets = new ArrayList<>();
-        if (match("(")) {
-            if (check("(")) {
-                throw error("Sobran paréntesis en el pop de '" + queue + "'; las formas válidas son "
+        if (tokens.match("(")) {
+            if (tokens.check("(")) {
+                throw tokens.error("Sobran paréntesis en el pop de '" + queue + "'; las formas válidas son "
                         + formas);
             }
-            targets.add(consumeIdent(destino));
-            if (match(",")) {
-                if (match("(")) {
+            targets.add(tokens.consumeIdent(destino));
+            if (tokens.match(",")) {
+                if (tokens.match("(")) {
                     do {
-                        targets.add(consumeIdent(destino));
-                    } while (match(","));
-                    consume(")", "Se esperaba ')' al cerrar el grupo de destinos");
-                    if (check(",")) {
-                        throw error("Después del grupo entre paréntesis se cierra la tupla: pop("
+                        targets.add(tokens.consumeIdent(destino));
+                    } while (tokens.match(","));
+                    tokens.consume(")", "Se esperaba ')' al cerrar el grupo de destinos");
+                    if (tokens.check(",")) {
+                        throw tokens.error("Después del grupo entre paréntesis se cierra la tupla: pop("
                                 + queue + ", (clave, (resto)))");
                     }
                 } else {
                     do {
-                        if (check("(")) {
-                            throw error("El grupo entre paréntesis va justo después del primer "
+                        if (tokens.check("(")) {
+                            throw tokens.error("El grupo entre paréntesis va justo después del primer "
                                     + "destino: pop(" + queue + ", (clave, (resto)))");
                         }
-                        targets.add(consumeIdent(destino));
-                    } while (match(","));
+                        targets.add(tokens.consumeIdent(destino));
+                    } while (tokens.match(","));
                 }
             }
-            consume(")", "Se esperaba ')' al cerrar la tupla");
+            tokens.consume(")", "Se esperaba ')' al cerrar la tupla");
             return targets;
         }
         do {
-            if (check("(")) {
-                throw error("Los paréntesis de la tupla van alrededor de todos los destinos; las "
+            if (tokens.check("(")) {
+                throw tokens.error("Los paréntesis de la tupla van alrededor de todos los destinos; las "
                         + "formas válidas son " + formas);
             }
-            targets.add(consumeIdent(destino));
-        } while (match(","));
+            targets.add(tokens.consumeIdent(destino));
+        } while (tokens.match(","));
         return targets;
     }
 
@@ -537,39 +534,39 @@ public final class Parser {
      * hacia adelante sin consumir nada.
      */
     private boolean tupleAhead() {
-        if (!check("(")) return false;
-        int start = current;
+        if (!tokens.check("(")) return false;
+        int start = tokens.mark();
         try {
-            advance();
+            tokens.advance();
             // "((" con una tupla adentro tambien cuenta: quien llama avisa que sobran parentesis
-            if (check("(") && tupleAhead()) return true;
+            if (tokens.check("(") && tupleAhead()) return true;
             parseExpr();
-            return check(",");
+            return tokens.check(",");
         } catch (CompilationException e) {
             return false;
         } finally {
-            current = start;
+            tokens.reset(start);
         }
     }
 
     private Stmt parseIf() {
-        Token kw = advance();
-        consume("(", "Se esperaba '(' después de 'if'");
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de 'if'");
         Expr cond = parseExpr();
-        consume(")", "Se esperaba ')' después de la condición del 'if'");
+        tokens.consume(")", "Se esperaba ')' después de la condición del 'if'");
         Stmt.Block thenB = parseBlockOrStatement();
         Stmt.Block elseB = null;
-        if (match("else")) {
+        if (tokens.match("else")) {
             elseB = parseBlockOrStatement();
         }
         return new Stmt.IfStmt(cond, thenB, elseB, kw.line());
     }
 
     private Stmt parseWhile() {
-        Token kw = advance();
-        consume("(", "Se esperaba '(' después de 'while'");
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de 'while'");
         Expr cond = parseExpr();
-        consume(")", "Se esperaba ')' después de la condición del 'while'");
+        tokens.consume(")", "Se esperaba ')' después de la condición del 'while'");
         Stmt.Block body = parseBlockOrStatement();
         return new Stmt.WhileStmt(cond, body, kw.line());
     }
@@ -585,16 +582,16 @@ public final class Parser {
      * </pre>
      */
     private Stmt parseFor() {
-        int line = advance().line();
-        consume("(", "Se esperaba '(' después de 'for'");
-        boolean hasIterator = isScalarType(peek())
-                || peek().is(TokenType.IDENTIFIER) && next().is("=");
+        int line = tokens.advance().line();
+        tokens.consume("(", "Se esperaba '(' después de 'for'");
+        boolean hasIterator = isScalarType(tokens.peek())
+                || tokens.peek().is(TokenType.IDENTIFIER) && tokens.next().is("=");
         if (!hasIterator) {
             return parseAnonymousRangeFor(line);
         }
         Stmt init = parseForInit(line);
         String iterator = init instanceof VarDecl vd ? vd.name() : ((Stmt.Assign) init).target();
-        if (match("..")) {
+        if (tokens.match("..")) {
             return parseRangeFor(init, iterator, line);
         }
         return parseCStyleFor(init, line);
@@ -602,14 +599,14 @@ public final class Parser {
 
     /** {@code int i = desde} declara el iterador; {@code i = desde} reutiliza uno ya declarado. */
     private Stmt parseForInit(int line) {
-        if (isScalarType(peek())) {
-            Type type = Type.fromKeyword(advance().lexeme());
-            String id = consumeIdent("Se esperaba el nombre del iterador");
-            consume("=", "Se esperaba '=' después del iterador");
+        if (isScalarType(tokens.peek())) {
+            Type type = Type.fromKeyword(tokens.advance().lexeme());
+            String id = tokens.consumeIdent("Se esperaba el nombre del iterador");
+            tokens.consume("=", "Se esperaba '=' después del iterador");
             return VarDecl.scalar(id, type, parseExpr(), line);
         }
-        String id = advance().lexeme();
-        consume("=", "Se esperaba '=' después del iterador");
+        String id = tokens.advance().lexeme();
+        tokens.consume("=", "Se esperaba '=' después del iterador");
         return new Stmt.Assign(id, null, parseExpr(), line);
     }
 
@@ -620,7 +617,7 @@ public final class Parser {
     private Stmt parseAnonymousRangeFor(int line) {
         String iterator = "for#" + (++anonimos);
         Stmt init = VarDecl.scalar(iterator, Type.INT, parseExpr(), line);
-        consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
+        tokens.consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
                 + "p. ej. for (int i = 0; i < n; i++) o for (1..n)");
         return parseRangeFor(init, iterator, line);
     }
@@ -628,7 +625,7 @@ public final class Parser {
     /** El resto de un for de rango, despues del '..': {@code hasta) cuerpo}. */
     private Stmt parseRangeFor(Stmt init, String iterator, int line) {
         Expr to = parseExpr();
-        consume(")", "Se esperaba ')' en el 'for' de rango");
+        tokens.consume(")", "Se esperaba ')' en el 'for' de rango");
         Stmt.Block body = parseBlockOrStatement();
         // la cota se evalua una vez, en una variable que el codigo fuente no puede nombrar
         VarDecl limit = VarDecl.scalar("hasta#" + (++anonimos), Type.INT, to, line);
@@ -640,24 +637,24 @@ public final class Parser {
 
     /** El resto de un for al estilo C, despues de la inicializacion: {@code ; cond; paso) cuerpo}. */
     private Stmt parseCStyleFor(Stmt init, int line) {
-        consume(";", "Se esperaba ';' en el 'for'");
-        Expr cond = check(";") ? new Expr.BoolLit(true, line) : parseExpr();
-        consume(";", "Se esperaba ';' en el 'for'");
+        tokens.consume(";", "Se esperaba ';' en el 'for'");
+        Expr cond = tokens.check(";") ? new Expr.BoolLit(true, line) : parseExpr();
+        tokens.consume(";", "Se esperaba ';' en el 'for'");
         Stmt step = parseForStep(line);
-        consume(")", "Se esperaba ')' en el 'for'");
+        tokens.consume(")", "Se esperaba ')' en el 'for'");
         Stmt.Block body = parseBlockOrStatement();
         return new Stmt.ForStmt(init, null, cond, step, body, line);
     }
 
     private Stmt parseForStep(int line) {
-        String target = consumeIdent("Se esperaba el paso del 'for'");
-        if (match("++")) {
+        String target = tokens.consumeIdent("Se esperaba el paso del 'for'");
+        if (tokens.match("++")) {
             return new Stmt.IncDec(target, null, true, line);
         }
-        if (match("--")) {
+        if (tokens.match("--")) {
             return new Stmt.IncDec(target, null, false, line);
         }
-        consume("=", "Se esperaba '++', '--' o '=' en el paso del 'for'");
+        tokens.consume("=", "Se esperaba '++', '--' o '=' en el paso del 'for'");
         Expr value = parseExpr();
         return new Stmt.Assign(target, null, value, line);
     }
@@ -667,82 +664,65 @@ public final class Parser {
      * una asignacion a un elemento de arreglo ({@code a[i] = ...}).
      */
     private boolean isIndexedMonitorCall() {
-        if (!next().is("[")) return false;
-        int depth = 0;
-        for (int i = current + 1; i < tokens.size(); i++) {
-            Token t = tokens.get(i);
-            if (t.is(TokenType.EOF)) return false;
-            if (t.is("[")) depth++;
-            if (t.is("]") && --depth == 0) {
-                return i + 1 < tokens.size() && tokens.get(i + 1).is(".");
-            }
-        }
-        return false;
+        return tokens.bracketsAheadFollowedBy(".");
     }
 
     private Stmt parseMonitorCall() {
-        Token monTok = advance();
+        Token monTok = tokens.advance();
         Expr index = null;
-        if (match("[")) {
+        if (tokens.match("[")) {
             index = parseExpr();
-            consume("]", "Se esperaba ']' en el índice del monitor");
+            tokens.consume("]", "Se esperaba ']' en el índice del monitor");
         }
-        consume(".", "Se esperaba '.'");
-        String proc = consumeIdent("Se esperaba el nombre del procedure");
-        consume("(", "Se esperaba '(' en la llamada al monitor");
+        tokens.consume(".", "Se esperaba '.'");
+        String proc = tokens.consumeIdent("Se esperaba el nombre del procedure");
+        tokens.consume("(", "Se esperaba '(' en la llamada al monitor");
         List<Expr> args = parseArguments();
-        consume(")", "Se esperaba ')' en la llamada al monitor");
-        consume(";", "Se esperaba ';' al final de la llamada al monitor");
+        tokens.consume(")", "Se esperaba ')' en la llamada al monitor");
+        tokens.consume(";", "Se esperaba ';' al final de la llamada al monitor");
         return new Stmt.MonitorCall(monTok.lexeme(), index, proc, args, monTok.line());
     }
 
     /** {@code [expr {, expr}]}: los argumentos hasta el ')', que no se consume. */
     private List<Expr> parseArguments() {
         List<Expr> args = new ArrayList<>();
-        if (!check(")")) {
+        if (!tokens.check(")")) {
             do {
                 args.add(parseExpr());
-            } while (match(","));
+            } while (tokens.match(","));
         }
         return args;
     }
 
     private Stmt parseAssignOrIncDec() {
-        Token nameTok = advance();
+        Token nameTok = tokens.advance();
         Expr index = null;
-        if (match("[")) {
+        if (tokens.match("[")) {
             index = parseExpr();
-            consume("]", "Se esperaba ']' en el índice");
+            tokens.consume("]", "Se esperaba ']' en el índice");
         }
-        if (match("++")) {
-            consume(";", "Se esperaba ';'");
+        if (tokens.match("++")) {
+            tokens.consume(";", "Se esperaba ';'");
             return new Stmt.IncDec(nameTok.lexeme(), index, true, nameTok.line());
         }
-        if (match("--")) {
-            consume(";", "Se esperaba ';'");
+        if (tokens.match("--")) {
+            tokens.consume(";", "Se esperaba ';'");
             return new Stmt.IncDec(nameTok.lexeme(), index, false, nameTok.line());
         }
-        consume("=", "Se esperaba '=', '++' o '--'");
+        tokens.consume("=", "Se esperaba '=', '++' o '--'");
         Expr value = parseExpr();
-        consume(";", "Se esperaba ';'");
+        tokens.consume(";", "Se esperaba ';'");
         return new Stmt.Assign(nameTok.lexeme(), index, value, nameTok.line());
     }
 
     // ================================================================= expresiones
 
     private Expr parseExpr() {
-        entrar();
+        tokens.enterNesting();
         Expr e = parseOr();
-        nivel--;
+        tokens.exitNesting();
         controlarProfundidad(e);
         return e;
-    }
-
-    private void entrar() {
-        if (++nivel > MAX_ANIDAMIENTO) {
-            throw error("El programa tiene demasiados niveles de anidamiento (máximo "
-                    + MAX_ANIDAMIENTO + ")");
-        }
     }
 
     /**
@@ -770,8 +750,8 @@ public final class Parser {
 
     private Expr parseOr() {
         Expr left = parseAnd();
-        while (match("or") || match("||")) {
-            int line = previous().line();
+        while (tokens.match("or") || tokens.match("||")) {
+            int line = tokens.previous().line();
             Expr right = parseAnd();
             left = new Expr.Binary("or", left, right, line);
         }
@@ -780,8 +760,8 @@ public final class Parser {
 
     private Expr parseAnd() {
         Expr left = parseNot();
-        while (match("and") || match("&&")) {
-            int line = previous().line();
+        while (tokens.match("and") || tokens.match("&&")) {
+            int line = tokens.previous().line();
             Expr right = parseNot();
             left = new Expr.Binary("and", left, right, line);
         }
@@ -789,11 +769,11 @@ public final class Parser {
     }
 
     private Expr parseNot() {
-        if (match("not") || match("!")) {
-            int line = previous().line();
-            entrar();
+        if (tokens.match("not") || tokens.match("!")) {
+            int line = tokens.previous().line();
+            tokens.enterNesting();
             Expr operand = parseNot();
-            nivel--;
+            tokens.exitNesting();
             return new Expr.Unary("not", operand, line);
         }
         return parseComparison();
@@ -801,12 +781,12 @@ public final class Parser {
 
     private Expr parseComparison() {
         Expr left = parseAdd();
-        if (matchAny(COMPARISON_OPERATORS)) {
-            String op = previous().lexeme();
-            int line = previous().line();
+        if (tokens.matchAny(COMPARISON_OPERATORS)) {
+            String op = tokens.previous().lexeme();
+            int line = tokens.previous().line();
             Expr right = parseAdd();
-            if (checkAny(COMPARISON_OPERATORS)) {
-                throw error("Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí "
+            if (tokens.checkAny(COMPARISON_OPERATORS)) {
+                throw tokens.error("Las comparaciones no se encadenan: en lugar de 'a < b < c' escribí "
                         + "'a < b and b < c'");
             }
             return new Expr.Binary(op, left, right, line);
@@ -816,9 +796,9 @@ public final class Parser {
 
     private Expr parseAdd() {
         Expr left = parseMul();
-        while (matchAny("+", "-")) {
-            String op = previous().lexeme();
-            int line = previous().line();
+        while (tokens.matchAny("+", "-")) {
+            String op = tokens.previous().lexeme();
+            int line = tokens.previous().line();
             Expr right = parseMul();
             left = new Expr.Binary(op, left, right, line);
         }
@@ -827,9 +807,9 @@ public final class Parser {
 
     private Expr parseMul() {
         Expr left = parseUnary();
-        while (matchAny("*", "/", "mod")) {
-            String op = previous().lexeme();
-            int line = previous().line();
+        while (tokens.matchAny("*", "/", "mod")) {
+            String op = tokens.previous().lexeme();
+            int line = tokens.previous().line();
             Expr right = parseUnary();
             left = new Expr.Binary(op, left, right, line);
         }
@@ -837,54 +817,54 @@ public final class Parser {
     }
 
     private Expr parseUnary() {
-        if (match("-")) {
-            int line = previous().line();
-            entrar();
+        if (tokens.match("-")) {
+            int line = tokens.previous().line();
+            tokens.enterNesting();
             Expr operand = parseUnary();
-            nivel--;
+            tokens.exitNesting();
             return new Expr.Unary("-", operand, line);
         }
         return parsePrimary();
     }
 
     private Expr parsePrimary() {
-        Token t = peek();
+        Token t = tokens.peek();
 
         if (t.is(TokenType.NUMBER)) {
             return parseNumber();
         }
         if (t.is(TokenType.STRING)) {
-            advance();
+            tokens.advance();
             return new Expr.TextLit(t.lexeme(), t.line());
         }
         if (t.isKeyword("true") || t.isKeyword("false")) {
-            advance();
+            tokens.advance();
             return new Expr.BoolLit(t.is("true"), t.line());
         }
         if (t.isKeyword("empty")) {
             return parseEmpty();
         }
         if (t.is("(")) {
-            advance();
+            tokens.advance();
             Expr inner = parseExpr();
-            consume(")", "Se esperaba ')'");
+            tokens.consume(")", "Se esperaba ')'");
             return inner;
         }
         if (t.is(TokenType.IDENTIFIER)) {
-            advance();
-            if (match("[")) {
+            tokens.advance();
+            if (tokens.match("[")) {
                 Expr index = parseExpr();
-                consume("]", "Se esperaba ']' en el índice");
+                tokens.consume("]", "Se esperaba ']' en el índice");
                 return new Expr.ArrayAccess(t.lexeme(), index, t.line());
             }
             return new Expr.VarRef(t.lexeme(), t.line());
         }
-        throw error("Se esperaba una expresión");
+        throw tokens.error("Se esperaba una expresión");
     }
 
     /** Un literal entero o, si tiene punto, decimal; los que no entran son error de compilacion. */
     private Expr parseNumber() {
-        Token t = advance();
+        Token t = tokens.advance();
         if (t.lexeme().contains(".")) {
             double d = DecimalLiteral.valueOf(t.lexeme());
             if (Double.isInfinite(d)) {
@@ -903,85 +883,20 @@ public final class Parser {
 
     /** {@code empty c} o {@code empty(c)}: se acepta con y sin parentesis. */
     private Expr parseEmpty() {
-        Token kw = advance();
-        boolean parentesis = match("(");
-        String queue = consumeIdent("Se esperaba el nombre de la cola después de 'empty'");
-        if (match("[")) {
+        Token kw = tokens.advance();
+        boolean parentesis = tokens.match("(");
+        String queue = tokens.consumeIdent("Se esperaba el nombre de la cola después de 'empty'");
+        if (tokens.match("[")) {
             // empty(turno[i]): solo puede ser una cond (no hay arreglos de colas); el
             // validador lo informa con el nombre
             parseExpr();
-            consume("]", "Se esperaba ']' en el índice");
+            tokens.consume("]", "Se esperaba ']' en el índice");
         }
-        if (parentesis) consume(")", "Se esperaba ')' después del nombre de la cola");
+        if (parentesis) tokens.consume(")", "Se esperaba ')' después del nombre de la cola");
         return new Expr.EmptyQueue(queue, kw.line());
     }
 
     // ================================================================= helpers
-
-    private Token peek() {
-        return tokens.get(current);
-    }
-
-    /** Token siguiente al actual, para decidir con un simbolo de anticipacion. */
-    private Token next() {
-        return tokens.get(Math.min(current + 1, tokens.size() - 1));
-    }
-
-    private Token previous() {
-        return tokens.get(current - 1);
-    }
-
-    private boolean atEnd() {
-        return peek().is(TokenType.EOF);
-    }
-
-    private Token advance() {
-        if (!atEnd()) current++;
-        return previous();
-    }
-
-    private boolean check(String lexeme) {
-        return !atEnd() && peek().is(lexeme);
-    }
-
-    private boolean match(String lexeme) {
-        if (check(lexeme)) {
-            advance();
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkAny(String... lexemes) {
-        for (String l : lexemes) {
-            if (check(l)) return true;
-        }
-        return false;
-    }
-
-    private boolean matchAny(String... lexemes) {
-        for (String l : lexemes) {
-            if (check(l)) {
-                advance();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Token consume(String lexeme, String message) {
-        if (check(lexeme)) return advance();
-        throw error(message + " (se encontró '" + describe(peek()) + "')");
-    }
-
-    private String consumeIdent(String message) {
-        return consumeIdentToken(message).lexeme();
-    }
-
-    private Token consumeIdentToken(String message) {
-        if (peek().is(TokenType.IDENTIFIER)) return advance();
-        throw error(message + " (se encontró '" + describe(peek()) + "')");
-    }
 
     private boolean isScalarType(Token t) {
         return t.is(TokenType.KEYWORD) && SCALAR_TYPES.contains(t.lexeme());
@@ -993,13 +908,5 @@ public final class Parser {
 
     private boolean isDeclStart(Token t) {
         return isScalarType(t) || isQueueType(t);
-    }
-
-    private static String describe(Token t) {
-        return t.is(TokenType.EOF) ? "fin del archivo" : t.lexeme();
-    }
-
-    private CompilationException error(String message) {
-        return new CompilationException(message, peek().line());
     }
 }
