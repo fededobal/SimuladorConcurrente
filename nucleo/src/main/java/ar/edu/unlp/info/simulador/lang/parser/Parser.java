@@ -19,7 +19,7 @@ public final class Parser {
     private final TokenCursor tokens;
     private final ExpressionParser expressions;
     private final QueueSyntaxParser queues;
-    private int anonimos = 0;
+    private int anonymousCount = 0;
 
     public Parser(List<Token> tokens) {
         this.tokens = new TokenCursor(tokens);
@@ -174,8 +174,8 @@ public final class Parser {
     }
 
     /** {@code [iterador: desde..hasta]}, ya consumido el '['. */
-    private ProcessDef.QuantDef parseQuant(String deQue) {
-        String iterator = tokens.consumeIdent("Se esperaba el iterador " + deQue);
+    private ProcessDef.QuantDef parseQuant(String ofWhat) {
+        String iterator = tokens.consumeIdent("Se esperaba el iterador " + ofWhat);
         tokens.consume(":", "Se esperaba ':' en el cuantificador");
         Expr from = parseExpr();
         tokens.consume("..", "Se esperaba '..' en el cuantificador");
@@ -214,12 +214,12 @@ public final class Parser {
 
     private Stmt parseStatement() {
         tokens.enterNesting();
-        Stmt s = parseStatementSinTope();
+        Stmt s = parseStatementUnchecked();
         tokens.exitNesting();
         return s;
     }
 
-    private Stmt parseStatementSinTope() {
+    private Stmt parseStatementUnchecked() {
         Token t = tokens.peek();
 
         if (t.isKeyword("skip")) {
@@ -413,7 +413,7 @@ public final class Parser {
      * puede escribir (lleva '#'), asi que no colisiona ni es visible.
      */
     private Stmt parseAnonymousRangeFor(int line) {
-        String iterator = "for#" + (++anonimos);
+        String iterator = "for#" + (++anonymousCount);
         Stmt init = VarDecl.scalar(iterator, Type.INT, parseExpr(), line);
         tokens.consume("..", "El 'for' debe inicializar un iterador o ser un rango, "
                 + "p. ej. for (int i = 0; i < n; i++) o for (1..n)");
@@ -426,7 +426,7 @@ public final class Parser {
         tokens.consume(")", "Se esperaba ')' en el 'for' de rango");
         Stmt.Block body = parseBlockOrStatement();
         // la cota se evalua una vez, en una variable que el codigo fuente no puede nombrar
-        VarDecl limit = VarDecl.scalar("hasta#" + (++anonimos), Type.INT, to, line);
+        VarDecl limit = VarDecl.scalar("hasta#" + (++anonymousCount), Type.INT, to, line);
         Expr cond = new Expr.Binary("<=", new Expr.VarRef(iterator, line),
                 new Expr.VarRef(limit.name(), line), line);
         Stmt step = new Stmt.IncDec(iterator, null, true, line);

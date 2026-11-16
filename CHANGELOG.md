@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `Parser`: nombres en inglés para el contador de nombres ocultos, el parámetro de `parseQuant` y `parseStatementUnchecked`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `QueueSyntaxParser` en `lang/parser/`, con la sintaxis de las colas que tenía `Parser` (tipos de las componentes, push y pop). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `ExpressionParser` en `lang/parser/`, con la gramática de las expresiones que tenía `Parser`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `TokenCursor` en `lang/parser/`, con el recorrido de los tokens y el tope de anidamiento que tenía `Parser`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
