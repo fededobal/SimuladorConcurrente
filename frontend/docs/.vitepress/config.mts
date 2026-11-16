@@ -47,8 +47,10 @@ export default defineConfig({
   },
   cleanUrls: true,
   lastUpdated: true,
-  // el simulador es solo claro; la documentación también
-  appearance: false,
+  // claro u oscuro, como el simulador. VitePress guarda la elección en localStorage, con la
+  // clave vitepress-theme-appearance, que el simulador también lee (src/useTheme.ts): elegir
+  // el tema en uno lo cambia en el otro.
+  appearance: true,
   head: [['link', { rel: 'icon', href: '/docs/favicon.svg' }]],
   themeConfig: {
     // sin titulo en la barra: a la izquierda va solo el boton "Volver al simulador"
@@ -112,6 +114,8 @@ export default defineConfig({
     returnToTopLabel: 'Volver arriba',
     sidebarMenuLabel: 'Menú',
     darkModeSwitchLabel: 'Apariencia',
+    lightModeSwitchTitle: 'Pasar al tema claro',
+    darkModeSwitchTitle: 'Pasar al tema oscuro',
     search: {
       provider: 'local',
       options: {

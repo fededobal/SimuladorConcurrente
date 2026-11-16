@@ -1,6 +1,7 @@
 /*
- * Mismo criterio que el simulador: tema claro, un solo color de acento (el azul de la barra)
- * y la tipografía del sistema. Los nombres de las variables son los del tema por defecto.
+ * Mismo criterio que el simulador: un solo color de acento (el azul de la barra) y la
+ * tipografía del sistema, en claro y en oscuro ("pizarra", con los mismos valores que
+ * frontend/src/index.css). Los nombres de las variables son los del tema por defecto.
  */
 :root {
   --vp-c-brand-1: #2456a4;
@@ -27,6 +28,37 @@
   --vp-custom-block-warning-bg: #fbf5e6;
   --vp-custom-block-danger-border: #efc9c3;
   --vp-custom-block-danger-bg: #fbeeec;
+
+  /* barra superior translúcida y fondo de la palabra buscada */
+  --doc-navbar-bg: rgba(255, 255, 255, 0.82);
+  --doc-mark-bg: #fde68a;
+}
+
+/* VitePress marca el oscuro con la clase .dark en <html> */
+.dark {
+  --vp-c-brand-1: #7ea6e0;
+  --vp-c-brand-2: #8fb0e6;
+  --vp-c-brand-3: #2f5fa8;
+  --vp-c-brand-soft: rgba(126, 166, 224, 0.16);
+
+  --vp-c-bg: #181c21;
+  --vp-c-bg-alt: #111418;
+  --vp-c-bg-soft: #1e232a;
+  --vp-c-divider: #2a3038;
+  --vp-c-text-1: #dde3ea;
+  --vp-c-text-2: #95a0ad;
+  --vp-c-text-3: #6b7683;
+
+  --vp-custom-block-tip-border: #3a414b;
+  --vp-custom-block-tip-bg: #1e232a;
+  --vp-custom-block-tip-text: #dde3ea;
+  --vp-custom-block-warning-border: #6b5a33;
+  --vp-custom-block-warning-bg: #262118;
+  --vp-custom-block-danger-border: #57302a;
+  --vp-custom-block-danger-bg: #2a1a18;
+
+  --doc-navbar-bg: rgba(24, 28, 33, 0.82);
+  --doc-mark-bg: #5c4a1a;
 }
 
 .vp-doc h1, .vp-doc h2, .vp-doc h3 { letter-spacing: 0; }
@@ -83,7 +115,7 @@
 
 /* barra superior: fondo blanco translúcido y desenfocado, también arriba de todo */
 .VPNavBar, .VPNavBar .content-body, .VPNavBar:not(.has-sidebar):not(.home.top) {
-  background-color: rgba(255, 255, 255, 0.82) !important;
+  background-color: var(--doc-navbar-bg) !important;
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
 }
@@ -103,7 +135,7 @@
 
 /* la palabra buscada, resaltada en el artículo al llegar desde el buscador */
 mark.busqueda {
-  background: #fde68a;
+  background: var(--doc-mark-bg);
   color: inherit;
   border-radius: 2px;
   padding: 0 1px;

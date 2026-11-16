@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Modo oscuro en la documentación, con los mismos colores que el simulador y el botón de VitePress arriba a la derecha. El simulador y la documentación comparten el tema: elegirlo en uno lo cambia en el otro, y el elegido se mantiene al recargar aunque cambie el tema del sistema. (Federico Dobal, 2026-11-16)
 - Modo oscuro: un botón con una luna o un sol, al final de la barra, pasa del tema claro al oscuro y vuelve. La primera vez se usa el tema del sistema operativo; después el navegador recuerda el elegido. El oscuro conserva el gris frío y el acento azul del claro, y los nombres de los procesos se aclaran lo justo para leerse sobre el fondo oscuro. (Federico Dobal, 2026-11-16)
 - Documentación: al elegir una coincidencia del buscador, la palabra buscada queda resaltada en el artículo; el resaltado se quita con un clic en el texto, con Escape o al navegar. (Federico Dobal, 2026-11-14)
 - Documentación: página "Índice" al principio con todas las páginas y qué cubre cada una; botón para ocultar y mostrar la barra lateral (el navegador recuerda la elección); buscador más ancho. (Federico Dobal, 2026-11-14)
