@@ -46,7 +46,6 @@ export default defineConfig({
     server: { fs: { allow: ['../..'] } },
   },
   cleanUrls: true,
-  lastUpdated: true,
   // claro u oscuro, como el simulador. VitePress guarda la elección en localStorage, con la
   // clave vitepress-theme-appearance, que el simulador también lee (src/useTheme.ts): elegir
   // el tema en uno lo cambia en el otro.
@@ -150,7 +149,6 @@ export default defineConfig({
     ],
     outline: { label: 'En esta página', level: [2, 3] },
     docFooter: { prev: 'Anterior', next: 'Siguiente' },
-    lastUpdatedText: 'Última actualización',
     returnToTopLabel: 'Volver arriba',
     sidebarMenuLabel: 'Menú',
     darkModeSwitchLabel: 'Apariencia',
