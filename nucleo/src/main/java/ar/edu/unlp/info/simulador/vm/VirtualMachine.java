@@ -36,17 +36,12 @@ public final class VirtualMachine {
 
     private final EventLog events = new EventLog();
 
-    private int instant = 0;
+    private final SimulationClock clock = new SimulationClock();
     /**
      * Ids de los procesos que avanzaron en el ultimo instante, en el orden en que les toco el
      * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo.
      */
     private final List<Integer> advancedLastStep = new ArrayList<>();
-    /**
-     * Reloj de la simulacion, en ms. No lo lee la VM (el nucleo es determinista): lo informa
-     * quien llama a {@link #step(Integer, SchedulingPolicy, long)}, y solo lo usa delay.
-     */
-    private long clockMs = 0;
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {
@@ -117,7 +112,7 @@ public final class VirtualMachine {
      * @return los eventos generados por este instante
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy) {
-        return step(chosenProcessId, policy, clockMs);
+        return step(chosenProcessId, policy, clock.nowMs());
     }
 
     /**
@@ -127,7 +122,7 @@ public final class VirtualMachine {
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy, long nowMs) {
         events.startStep();
-        clockMs = Math.max(clockMs, nowMs);
+        clock.advanceTo(nowMs);
 
         if (isFinished()) {
             return List.of();
@@ -139,7 +134,7 @@ public final class VirtualMachine {
         }
         if (turno.isEmpty()) {
             if (!deadlockLogged) {
-                instant++;
+                clock.tick();
                 logDeadlock();
             }
             return events.stepEntries();
@@ -154,7 +149,7 @@ public final class VirtualMachine {
 
     /** Un instante nuevo en el que avanzan, en orden, los procesos del turno. */
     private void runTurn(List<Process> turno) {
-        instant++;
+        clock.tick();
         advancedLastStep.clear();
         for (Process p : turno) {
             // Solo avanza si sigue listo, y una vez por instante: el que recibio un monitor
@@ -188,7 +183,7 @@ public final class VirtualMachine {
     /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
     private void logDeadlock() {
         deadlockLogged = true;
-        events.systemEvent(instant, EventKind.DEADLOCK, deadlockMessage());
+        events.systemEvent(clock.instant(), EventKind.DEADLOCK, deadlockMessage());
     }
 
     // ================================================================= ejecucion de un proceso
@@ -517,7 +512,7 @@ public final class VirtualMachine {
             throw new RuntimeError("El delay tiene que ser de 0 a " + TOPE_DELAY
                     + " segundos y es de " + seconds, d.line());
         }
-        p.delayUntil(clockMs + seconds * 1000);
+        p.delayUntil(clock.nowMs() + seconds * 1000);
         event(p, EventKind.DELAY, "", p.name() + ": delay(" + seconds + ") - se demora " + seconds
                 + (seconds == 1 ? " segundo" : " segundos"));
     }
@@ -528,7 +523,7 @@ public final class VirtualMachine {
         StringBuilder sb = new StringBuilder();
         for (Expr e : w.args()) sb.append(ev.eval(e).display());
         String texto = sb.toString();
-        salida.add(instant, p, texto);
+        salida.add(clock.instant(), p, texto);
         event(p, EventKind.WRITE, "", p.name() + ": write(" + texto + ")");
     }
 
@@ -605,17 +600,17 @@ public final class VirtualMachine {
 
     /** Hora del reloj de la simulacion, en ms: la ultima informada a {@link #step}. */
     public long clockMs() {
-        return clockMs;
+        return clock.nowMs();
     }
 
     private void wakeDelayed() {
         for (Process p : processes) {
-            if (p.isDelayed() && p.delayEndsAt() <= clockMs) p.unblock();
+            if (p.isDelayed() && p.delayEndsAt() <= clock.nowMs()) p.unblock();
         }
     }
 
     public int instant() {
-        return instant;
+        return clock.instant();
     }
 
     /**
@@ -627,13 +622,13 @@ public final class VirtualMachine {
     }
 
     public Snapshot snapshot() {
-        return SnapshotBuilder.build(instant, processes, monitors.values(), advancedLastStep,
+        return SnapshotBuilder.build(clock.instant(), processes, monitors.values(), advancedLastStep,
                 salida.view());
     }
 
     // ================================================================= logging
 
     private void event(Process p, EventKind kind, String resource, String message) {
-        events.processEvent(instant, p, kind, resource, message);
+        events.processEvent(clock.instant(), p, kind, resource, message);
     }
 }

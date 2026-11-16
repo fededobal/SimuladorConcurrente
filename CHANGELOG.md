@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Clase `SimulationClock` en `vm/`, con el instante y la hora en ms que tenía `VirtualMachine` como campos sueltos. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `MonitorProtocol` en `vm/`, con el protocolo de los monitores que tenía `VirtualMachine`: entrar, liberar con traspaso, wait/signal/signal_all y terminar con error soltando los monitores. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `EventKind` en `vm/`: los tipos de evento del log pasan de textos sueltos a un enum. El JSON que recibe el navegador no cambia. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: extraer `runMonitorInit`, `procedureActivation`, `writeOutParameters`, `pushedElement` y `assignPopped` de los métodos que hacían dos cosas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
