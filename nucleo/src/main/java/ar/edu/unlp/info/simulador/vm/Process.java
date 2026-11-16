@@ -19,6 +19,11 @@ public final class Process {
         DELAY
     }
 
+    /** Id de los procesos de sistema, que no son del alumno y no figuran en los eventos. */
+    private static final int SYSTEM_ID = -1;
+    /** Gris neutro: un proceso de sistema no compite por los colores de los del alumno. */
+    private static final String SYSTEM_COLOR = "#888888";
+
     private final int id;
     private final String name;
     private final String color;
@@ -41,11 +46,20 @@ public final class Process {
         this.color = color;
     }
 
+    /** Un proceso de sistema, como el que corre el codigo de inicializacion de un monitor. */
+    public static Process system(String name) {
+        return new Process(SYSTEM_ID, name, SYSTEM_COLOR);
+    }
+
+    /** true si no es un proceso del alumno: no aparece en los eventos ni en el snapshot. */
+    public boolean isSystem() { return id < 0; }
+
     public int id() { return id; }
     public String name() { return name; }
     public String color() { return color; }
 
     public State state() { return state; }
+    public boolean isReady() { return state == State.READY; }
     public void setState(State s) { this.state = s; }
 
     public BlockReason blockReason() { return blockReason; }

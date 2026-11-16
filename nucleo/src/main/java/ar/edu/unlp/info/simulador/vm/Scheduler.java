@@ -35,7 +35,7 @@ final class Scheduler {
      */
     List<Process> nextTurn(Integer chosenProcessId, SchedulingPolicy policy) {
         List<Process> listos = processes.stream()
-                .filter(pr -> pr.state() == Process.State.READY)
+                .filter(Process::isReady)
                 .collect(Collectors.toCollection(ArrayList::new));
         if (listos.isEmpty()) {
             return List.of();
@@ -53,7 +53,7 @@ final class Scheduler {
             List<Process> orden = new ArrayList<>();
             for (int k = 1; k <= n; k++) {
                 Process cand = processes.get((rrCursor + k) % n);
-                if (cand.state() == Process.State.READY) orden.add(cand);
+                if (cand.isReady()) orden.add(cand);
             }
             rrCursor = processes.indexOf(orden.get(0));
             return orden;

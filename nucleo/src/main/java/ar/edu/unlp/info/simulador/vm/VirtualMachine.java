@@ -81,7 +81,7 @@ public final class VirtualMachine {
      * que tiene el monitor tomado hasta terminar. Un ciclo sin fin es error del alumno.
      */
     private void runMonitorInit(Monitor m, List<Stmt> initStmts) {
-        Process sys = new Process(-1, "«init " + m.name() + "»", "#888888");
+        Process sys = Process.system("«init " + m.name() + "»");
         Activation act = new Activation(m.name(), "«init»");
         act.pushFront(initStmts);
         sys.push(act);
@@ -156,7 +156,7 @@ public final class VirtualMachine {
         for (Process p : turno) {
             // Solo avanza si sigue listo, y una vez por instante: el que recibio un monitor
             // por traspaso ya hizo su accion del instante, que fue entrar.
-            if (p.state() != Process.State.READY || advancedLastStep.contains(p.id())) {
+            if (!p.isReady() || advancedLastStep.contains(p.id())) {
                 continue;
             }
             runProcess(p);
@@ -273,13 +273,12 @@ public final class VirtualMachine {
 
     public boolean isDeadlocked() {
         return !isFinished()
-                && processes.stream().noneMatch(pr -> pr.state() == Process.State.READY
-                        || pr.isDelayed());
+                && processes.stream().noneMatch(pr -> pr.isReady() || pr.isDelayed());
     }
 
     /** true si ningun proceso esta listo pero alguno espera que termine su delay. */
     public boolean isWaitingForDelay() {
-        return processes.stream().noneMatch(pr -> pr.state() == Process.State.READY)
+        return processes.stream().noneMatch(Process::isReady)
                 && processes.stream().anyMatch(Process::isDelayed);
     }
 

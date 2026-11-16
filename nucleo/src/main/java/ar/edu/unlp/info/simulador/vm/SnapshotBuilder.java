@@ -67,7 +67,7 @@ final class SnapshotBuilder {
         }
         return new Snapshot.MonitorView(
                 m.name(), vars, conds,
-                m.lockOwner() == null || m.lockOwner().id() < 0 ? null : ref(m.lockOwner()),
+                m.lockOwner() == null || m.lockOwner().isSystem() ? null : ref(m.lockOwner()),
                 refs(m.entryQueueSnapshot()));
     }
 
