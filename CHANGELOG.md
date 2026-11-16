@@ -231,6 +231,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `VirtualMachine`: sacar de `step` el avance del turno (`runTurn`) y el de cada proceso con su manejo de errores (`runProcess`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: sacar de `executeStmt` el if, el while y el for (`execIf`, `execWhile`, `execFor`) y de `execMonitorCall` el armado del destino de un parámetro out (`outTarget`). Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: partir `execCondOp` en `condKey`, `execWait`, `execSignal` y `execSignalAll`. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - `VirtualMachine`: extraer `logDeadlock`, `destination` y `enqueueEntrant`, que estaban repetidos en el paso, en la entrada al monitor y en signal/signal_all. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)

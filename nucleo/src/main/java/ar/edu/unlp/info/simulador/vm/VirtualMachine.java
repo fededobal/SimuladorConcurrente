@@ -151,6 +151,15 @@ public final class VirtualMachine {
             return stepEntries;
         }
 
+        runTurn(turno);
+        if (isDeadlocked() && !deadlockLogged) {
+            logDeadlock();
+        }
+        return stepEntries;
+    }
+
+    /** Un instante nuevo en el que avanzan, en orden, los procesos del turno. */
+    private void runTurn(List<Process> turno) {
         instant++;
         advancedLastStep.clear();
         for (Process p : turno) {
@@ -159,26 +168,27 @@ public final class VirtualMachine {
             if (p.state() != Process.State.READY || advancedLastStep.contains(p.id())) {
                 continue;
             }
-            p.setState(Process.State.RUNNING);
-            advancedLastStep.add(p.id());
-            try {
-                advance(p);
-            } catch (RuntimeError re) {
-                failProcess(p, re.getMessage());
-            } catch (Throwable t) {
-                // Un error que no es del alumno (un bug del simulador, o memoria/pila agotada)
-                // igual termina solo ese proceso: si quedara RUNNING, el instante siguiente lo
-                // tomaria por un interbloqueo que el programa no tiene.
-                failProcess(p, "error interno del simulador");
-            }
-            if (p.state() == Process.State.RUNNING) {
-                p.setState(Process.State.READY);
-            }
+            runProcess(p);
         }
-        if (isDeadlocked() && !deadlockLogged) {
-            logDeadlock();
+    }
+
+    /** Avanza un proceso una accion; si falla, termina solo ese proceso. */
+    private void runProcess(Process p) {
+        p.setState(Process.State.RUNNING);
+        advancedLastStep.add(p.id());
+        try {
+            advance(p);
+        } catch (RuntimeError re) {
+            failProcess(p, re.getMessage());
+        } catch (Throwable t) {
+            // Un error que no es del alumno (un bug del simulador, o memoria/pila agotada)
+            // igual termina solo ese proceso: si quedara RUNNING, el instante siguiente lo
+            // tomaria por un interbloqueo que el programa no tiene.
+            failProcess(p, "error interno del simulador");
         }
-        return stepEntries;
+        if (p.state() == Process.State.RUNNING) {
+            p.setState(Process.State.READY);
+        }
     }
 
     /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
