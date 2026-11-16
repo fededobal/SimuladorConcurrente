@@ -610,49 +610,60 @@ public final class VirtualMachine {
 
     private void execCondOp(Process p, Activation act, Stmt.CondOp co) {
         Monitor m = monitors.get(act.monitorName());
-        String key = co.cond();
-        if (co.index() != null) {
-            long index = vars.evaluator(act).evalLong(co.index());
-            int size = m.condArraySizes().getOrDefault(co.cond(), 0);
-            if (index < 0 || index >= size) {
-                throw new RuntimeError("Índice " + index + " fuera de rango para la cond '"
-                        + co.cond() + "' (tamaño " + size + ")", co.line());
-            }
-            key = co.cond() + "[" + index + "]";
-        }
+        String key = condKey(act, m, co);
         ConditionVariable cv = m.conds().get(key);
         if (cv == null) {
             throw new RuntimeError("Variable condición no declarada: " + key, co.line());
         }
         switch (co.kind()) {
-            case WAIT -> {
-                cv.enqueue(p);
-                p.block(Process.BlockReason.COND_WAIT, m.name() + "." + key);
-                act.setNeedsLock(true);
-                event(p, "WAIT", m.name() + "." + key,
-                        p.name() + ": wait(" + key + ") - libera el monitor y se demora");
-                releaseMonitor(m);
-            }
-            case SIGNAL -> {
-                if (cv.isEmpty()) {
-                    event(p, "SIGNAL", m.name() + "." + key,
-                            p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
-                } else {
-                    Process w = cv.dequeue();
-                    enqueueEntrant(w, m);
-                    event(p, "SIGNAL", m.name() + "." + key,
-                            p.name() + ": signal(" + key + ") - despierta a " + w.name()
-                                    + " (compite por el monitor)");
-                }
-            }
-            case SIGNAL_ALL -> {
-                List<Process> all = cv.drain();
-                for (Process w : all) enqueueEntrant(w, m);
-                event(p, "SIGNAL_ALL", m.name() + "." + key,
-                        p.name() + ": signal_all(" + key + ") - despierta a " + all.size()
-                                + " proceso(s)");
-            }
+            case WAIT -> execWait(p, act, m, cv, key);
+            case SIGNAL -> execSignal(p, m, cv, key);
+            case SIGNAL_ALL -> execSignalAll(p, m, cv, key);
         }
+    }
+
+    /** El nombre de la cond en el monitor: {@code c}, o {@code c[i]} con el indice ya controlado. */
+    private String condKey(Activation act, Monitor m, Stmt.CondOp co) {
+        if (co.index() == null) return co.cond();
+        long index = vars.evaluator(act).evalLong(co.index());
+        int size = m.condArraySizes().getOrDefault(co.cond(), 0);
+        if (index < 0 || index >= size) {
+            throw new RuntimeError("Índice " + index + " fuera de rango para la cond '"
+                    + co.cond() + "' (tamaño " + size + ")", co.line());
+        }
+        return co.cond() + "[" + index + "]";
+    }
+
+    /** El proceso se demora en la cond y suelta el monitor; al despertar tendra que retomarlo. */
+    private void execWait(Process p, Activation act, Monitor m, ConditionVariable cv, String key) {
+        cv.enqueue(p);
+        p.block(Process.BlockReason.COND_WAIT, m.name() + "." + key);
+        act.setNeedsLock(true);
+        event(p, "WAIT", m.name() + "." + key,
+                p.name() + ": wait(" + key + ") - libera el monitor y se demora");
+        releaseMonitor(m);
+    }
+
+    /** Signal and continue: el despertado pasa a competir por el monitor y el que senala sigue. */
+    private void execSignal(Process p, Monitor m, ConditionVariable cv, String key) {
+        if (cv.isEmpty()) {
+            event(p, "SIGNAL", m.name() + "." + key,
+                    p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
+            return;
+        }
+        Process w = cv.dequeue();
+        enqueueEntrant(w, m);
+        event(p, "SIGNAL", m.name() + "." + key,
+                p.name() + ": signal(" + key + ") - despierta a " + w.name()
+                        + " (compite por el monitor)");
+    }
+
+    private void execSignalAll(Process p, Monitor m, ConditionVariable cv, String key) {
+        List<Process> all = cv.drain();
+        for (Process w : all) enqueueEntrant(w, m);
+        event(p, "SIGNAL_ALL", m.name() + "." + key,
+                p.name() + ": signal_all(" + key + ") - despierta a " + all.size()
+                        + " proceso(s)");
     }
 
     /**
