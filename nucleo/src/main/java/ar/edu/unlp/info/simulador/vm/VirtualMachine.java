@@ -457,42 +457,36 @@ public final class VirtualMachine {
     }
 
     private void execAssign(Process p, Activation act, Stmt.Assign a) {
-        ExprEvaluator ev = vars.evaluator(act);
-        Value value = ev.eval(a.value());
+        Value value = vars.evaluator(act).eval(a.value());
         if (a.index() == null) {
             vars.assignScalar(p.id(), act, a.target(), value, a.line());
             event(p, "ASSIGN", a.target(), p.name() + ": " + a.target() + " = " + value.display());
-        } else {
-            long index = ev.evalLong(a.index());
-            Value.ArrayVal arr = vars.asArray(act, a.target(), a.line());
-            int idx = VariableAccess.checkIndex(arr, index, a.target(), a.line());
-            arr.set(idx, value.assignTo(arr.elementType(), a.target() + "[" + idx + "]", a.line()));
-            vars.touchIfMonitorVar(p.id(), act, a.target());
-            event(p, "ASSIGN", a.target(),
-                    p.name() + ": " + a.target() + "[" + idx + "] = " + value.display());
+            return;
         }
+        VariableAccess.ArraySlot slot = vars.arraySlot(act, a.target(), a.index(), a.line());
+        String element = a.target() + "[" + slot.index() + "]";
+        slot.array().set(slot.index(),
+                value.assignTo(slot.array().elementType(), element, a.line()));
+        vars.touchIfMonitorVar(p.id(), act, a.target());
+        event(p, "ASSIGN", a.target(), p.name() + ": " + element + " = " + value.display());
     }
 
     private void execIncDec(Process p, Activation act, Stmt.IncDec inc) {
-        ExprEvaluator ev = vars.evaluator(act);
+        String operator = inc.increment() ? "++" : "--";
         if (inc.index() == null) {
             Value cur = vars.read(act, inc.target(), inc.line());
             Value next = stepped(cur, inc.increment(), inc.line());
             vars.assignScalar(p.id(), act, inc.target(), next, inc.line());
             event(p, "ASSIGN", inc.target(),
-                    p.name() + ": " + inc.target() + (inc.increment() ? "++" : "--")
-                            + " => " + next.display());
-        } else {
-            long index = ev.evalLong(inc.index());
-            Value.ArrayVal arr = vars.asArray(act, inc.target(), inc.line());
-            int idx = VariableAccess.checkIndex(arr, index, inc.target(), inc.line());
-            Value next = stepped(arr.get(idx), inc.increment(), inc.line());
-            arr.set(idx, next);
-            vars.touchIfMonitorVar(p.id(), act, inc.target());
-            event(p, "ASSIGN", inc.target(),
-                    p.name() + ": " + inc.target() + "[" + idx + "]"
-                            + (inc.increment() ? "++" : "--") + " => " + next.display());
+                    p.name() + ": " + inc.target() + operator + " => " + next.display());
+            return;
         }
+        VariableAccess.ArraySlot slot = vars.arraySlot(act, inc.target(), inc.index(), inc.line());
+        Value next = stepped(slot.array().get(slot.index()), inc.increment(), inc.line());
+        slot.array().set(slot.index(), next);
+        vars.touchIfMonitorVar(p.id(), act, inc.target());
+        event(p, "ASSIGN", inc.target(), p.name() + ": " + inc.target() + "[" + slot.index()
+                + "]" + operator + " => " + next.display());
     }
 
     /** {@code ++}/{@code --} conservan el tipo: un double suma 1.0 y un int no desborda en silencio. */

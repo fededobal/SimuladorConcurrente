@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.simulador.vm;
 
+import ar.edu.unlp.info.simulador.lang.parser.ast.Expr;
 import ar.edu.unlp.info.simulador.lang.parser.ast.Type;
 
 import java.util.Map;
@@ -68,6 +69,19 @@ final class VariableAccess {
             arr.set(lv.index(), value.assignTo(arr.elementType(), lv.name(), line));
             touchIfMonitorVar(writerId, act, lv.name());
         }
+    }
+
+    /** Un elemento de un arreglo, con el indice ya controlado. */
+    record ArraySlot(Value.ArrayVal array, int index) { }
+
+    /**
+     * El elemento {@code name[indexExpr]}: evalua el indice, busca el arreglo y controla el
+     * rango, en ese orden.
+     */
+    ArraySlot arraySlot(Activation act, String name, Expr indexExpr, int line) {
+        long index = evaluator(act).evalLong(indexExpr);
+        Value.ArrayVal arr = asArray(act, name, line);
+        return new ArraySlot(arr, checkIndex(arr, index, name, line));
     }
 
     Value.ArrayVal asArray(Activation act, String name, int line) {
