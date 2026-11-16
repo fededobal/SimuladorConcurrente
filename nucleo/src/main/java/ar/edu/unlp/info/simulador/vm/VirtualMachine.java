@@ -145,9 +145,8 @@ public final class VirtualMachine {
         }
         if (turno.isEmpty()) {
             if (!deadlockLogged) {
-                deadlockLogged = true;
                 instant++;
-                systemLog("DEADLOCK", deadlockMessage());
+                logDeadlock();
             }
             return stepEntries;
         }
@@ -177,10 +176,15 @@ public final class VirtualMachine {
             }
         }
         if (isDeadlocked() && !deadlockLogged) {
-            deadlockLogged = true;
-            systemLog("DEADLOCK", deadlockMessage());
+            logDeadlock();
         }
         return stepEntries;
+    }
+
+    /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
+    private void logDeadlock() {
+        deadlockLogged = true;
+        systemLog("DEADLOCK", deadlockMessage());
     }
 
     /**
@@ -282,11 +286,9 @@ public final class VirtualMachine {
     private void reacquireMonitor(Process p, Activation act) {
         Monitor m = monitors.get(act.monitorName());
         if (!m.isFree()) {
-            String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
-            m.addEntrant(p);
-            p.block(Process.BlockReason.MONITOR_ENTRY, m.name());
+            enqueueEntrant(p, m);
             event(p, "BLOCKED", m.name(), p.name() + ": espera para "
-                    + (act.isEntering() ? "entrar a " : "reingresar a ") + destino);
+                    + (act.isEntering() ? "entrar a " : "reingresar a ") + destination(act, m));
             return;
         }
         takeMonitor(p, act, m);
@@ -294,7 +296,7 @@ public final class VirtualMachine {
 
     /** El proceso toma el monitor libre para la activacion que lo necesitaba. */
     private void takeMonitor(Process p, Activation act, Monitor m) {
-        String destino = act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
+        String destino = destination(act, m);
         m.setLockOwner(p);
         act.setNeedsLock(false);
         if (act.isEntering()) {
@@ -303,6 +305,20 @@ public final class VirtualMachine {
         } else {
             event(p, "REENTER", m.name(), p.name() + ": reingresa a " + destino);
         }
+    }
+
+    /**
+     * Como lo nombran los eventos: {@code Monitor.procedure} al entrar a un procedure, y solo
+     * el monitor al volver de un wait.
+     */
+    private static String destination(Activation act, Monitor m) {
+        return act.isEntering() ? m.name() + "." + act.procedureName() : m.name();
+    }
+
+    /** El proceso pasa a competir por el monitor desde su cola de entrada. */
+    private static void enqueueEntrant(Process p, Monitor m) {
+        m.addEntrant(p);
+        p.block(Process.BlockReason.MONITOR_ENTRY, m.name());
     }
 
     private void finalizeActivation(Process p, Activation act) {
@@ -623,8 +639,7 @@ public final class VirtualMachine {
                             p.name() + ": signal(" + key + ") - sin efecto (cola vacía)");
                 } else {
                     Process w = cv.dequeue();
-                    m.addEntrant(w);
-                    w.block(Process.BlockReason.MONITOR_ENTRY, m.name());
+                    enqueueEntrant(w, m);
                     event(p, "SIGNAL", m.name() + "." + key,
                             p.name() + ": signal(" + key + ") - despierta a " + w.name()
                                     + " (compite por el monitor)");
@@ -632,10 +647,7 @@ public final class VirtualMachine {
             }
             case SIGNAL_ALL -> {
                 List<Process> all = cv.drain();
-                for (Process w : all) {
-                    m.addEntrant(w);
-                    w.block(Process.BlockReason.MONITOR_ENTRY, m.name());
-                }
+                for (Process w : all) enqueueEntrant(w, m);
                 event(p, "SIGNAL_ALL", m.name() + "." + key,
                         p.name() + ": signal_all(" + key + ") - despierta a " + all.size()
                                 + " proceso(s)");
