@@ -85,7 +85,7 @@
                                 </goals>
                                 <phase>process-classes</phase>
                                 <configuration>
-                                    <mainClass>ar.edu.unlp.info.simulador.js.SimulatorJs</mainClass>
+                                    <mainClass>ar.edu.unlp.info.simulator.js.SimulatorJs</mainClass>
                                     <targetDirectory>${project.basedir}/../frontend/src/engine</targetDirectory>
                                     <targetFileName>simulador.js</targetFileName>
                                     <targetType>JAVASCRIPT</targetType>

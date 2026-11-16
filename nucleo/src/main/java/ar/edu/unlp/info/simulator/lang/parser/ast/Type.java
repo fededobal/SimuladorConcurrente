@@ -1,0 +1,49 @@
+package ar.edu.unlp.info.simulator.lang.parser.ast;
+
+/** Tipos de datos del lenguaje. */
+public enum Type {
+    INT, DOUBLE, BOOLEAN, TEXT, COLA, COLA_ORDENADA;
+
+    public static Type fromKeyword(String kw) {
+        return switch (kw) {
+            case "int" -> INT;
+            case "double" -> DOUBLE;
+            case "bool" -> BOOLEAN;
+            case "text" -> TEXT;
+            case "Cola" -> COLA;
+            case "ColaOrdenada" -> COLA_ORDENADA;
+            default -> throw new IllegalArgumentException("Tipo desconocido: " + kw);
+        };
+    }
+
+    public boolean isScalar() {
+        return !isQueue();
+    }
+
+    /** Cola FIFO o cola ordenada: mismas operaciones, distinto criterio de insercion. */
+    public boolean isQueue() {
+        return this == COLA || this == COLA_ORDENADA;
+    }
+
+    /** Como se escribe una cola con sus componentes: {@code Cola(int, text)}. */
+    public static String queueName(Type queue, java.util.List<Type> elementTypes) {
+        StringBuilder sb = new StringBuilder(queue.keyword()).append('(');
+        for (int i = 0; i < elementTypes.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(elementTypes.get(i).keyword());
+        }
+        return sb.append(')').toString();
+    }
+
+    /** Como se escribe el tipo en el programa del alumno. */
+    public String keyword() {
+        return switch (this) {
+            case INT -> "int";
+            case DOUBLE -> "double";
+            case BOOLEAN -> "bool";
+            case TEXT -> "text";
+            case COLA -> "Cola";
+            case COLA_ORDENADA -> "ColaOrdenada";
+        };
+    }
+}

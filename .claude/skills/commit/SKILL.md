@@ -42,7 +42,7 @@ El hook avisa si falta.
    de seguir: es el nombre que queda en el CHANGELOG.
 
 2. **Motor.** Si el diff toca `nucleo/pom.xml` o
-   `nucleo/src/main/java/ar/edu/unlp/info/simulador/{lang,vm,js}/`:
+   `nucleo/src/main/java/ar/edu/unlp/info/simulator/{lang,vm,js}/`:
    `node scripts/motor-hash.mjs --check`. Si falla, primero
    `cd frontend && npm run engine && npm run smoke`; `simulador.js` y `simulador.hash` van
    en el mismo commit que el Java.

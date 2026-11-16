@@ -12,7 +12,7 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RAIZ = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const BASE = join(RAIZ, 'nucleo', 'src', 'main', 'java', 'ar', 'edu', 'unlp', 'info', 'simulador');
+const BASE = join(RAIZ, 'nucleo', 'src', 'main', 'java', 'ar', 'edu', 'unlp', 'info', 'simulator');
 // Lo que alcanza TeaVM desde el puente js/.
 const FUENTES = ['lang', 'vm', 'js'].map((d) => join(BASE, d));
 const EXTRA = [join(RAIZ, 'nucleo', 'pom.xml')];

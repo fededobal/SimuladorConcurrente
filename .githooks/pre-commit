@@ -11,7 +11,7 @@ if printf '%s\n' "$staged" | grep -Eq '(__MACOSX/|\.DS_Store$|/target/|/dist/|no
   exit 1
 fi
 
-if printf '%s\n' "$staged" | grep -Eq '^nucleo/(pom\.xml|src/main/java/ar/edu/unlp/info/simulador/(lang|vm|js)/)'; then
+if printf '%s\n' "$staged" | grep -Eq '^nucleo/(pom\.xml|src/main/java/ar/edu/unlp/info/simulator/(lang|vm|js)/)'; then
   if ! node scripts/motor-hash.mjs --check; then
     exit 1
   fi

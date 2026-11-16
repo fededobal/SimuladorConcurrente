@@ -22,7 +22,7 @@ Si contradice `docs/monitores/`, frená y preguntá: la notación la define la c
 
 ## Lugares a tocar, en orden
 
-Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulador/` salvo indicación.
+Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulator/` salvo indicación.
 
 | # | Dónde | Qué |
 |---|---|---|

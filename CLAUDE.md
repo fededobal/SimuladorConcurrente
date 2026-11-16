@@ -17,7 +17,7 @@ TypeScript + Vite**. Todo corre en el navegador; no hay servidor en producción 
 sirve estáticos). No proponer cambiar de lenguajes ni de stack.
 
 ```
-nucleo/src/main/java/ar/edu/unlp/info/simulador/
+nucleo/src/main/java/ar/edu/unlp/info/simulator/
   lang/   lexer → parser → AST → SemanticValidator (+ ExprTyper, Scope)  (Java puro)
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
   js/     SimulatorJs (@JSExport) + Json (a mano)        ← puente al navegador
