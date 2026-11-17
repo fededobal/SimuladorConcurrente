@@ -5,29 +5,39 @@ orden de la tabla, con el ejemplo Corralón pausado en el instante 14.
 
 <figure>
 
-![Pantalla del simulador con el ejemplo Corralón en pausa: barra arriba, editor a la izquierda, línea de tiempo abajo y panel de monitores a la derecha, con las zonas numeradas del 1 al 5](/capturas/pantalla.png)
+![Pantalla del simulador con el ejemplo Corralón en pausa: barra arriba, editor a la izquierda, inspector a la derecha, línea de tiempo abajo a todo el ancho y barra de estado al pie, con las zonas numeradas del 1 al 5](/capturas/pantalla.png)
 
-<figcaption>Zonas de la pantalla: 1, barra de controles; 2, editor; 3, línea de tiempo; 4, monitores; 5, botón que abre la salida.</figcaption>
+<figcaption>Zonas de la pantalla: 1, barra de controles; 2, editor; 3, inspector; 4, línea de tiempo; 5, barra de estado.</figcaption>
 </figure>
 
 | N.º | Zona | Dónde | Qué muestra |
 |---|---|---|---|
-| 1 | [Barra de controles](./barra) | Arriba | Ejecutar, pausar, paso, detener, velocidad, turnos, ejemplos, salida, estado |
-| 2 | [Editor](./editor) | Izquierda, arriba | El programa, con una franja sobre la línea de cada proceso |
-| 3 | [Línea de tiempo](./linea-de-tiempo) | Izquierda, abajo | El estado de cada proceso en cada instante y quién tuvo cada monitor |
-| 4 | [Monitores](./monitores) | Derecha | El dibujo de cada monitor, sus colas y sus variables |
-| 5 | [Salida](./salida) | Se abre desde la barra | Lo que escriben los procesos con `write` |
+| 1 | [Barra de controles](./barra) | Arriba | El programa abierto, Ejecutar, Paso, Detener, Repetir, velocidad, turnos, estado e instante |
+| 2 | [Editor](./editor) | Izquierda | El programa, con la marca de cada proceso en su línea |
+| 3 | Inspector | Derecha | Tres pestañas: [Monitores](./monitores), [Procesos y Salida](./salida) |
+| 4 | [Línea de tiempo](./linea-de-tiempo) | Abajo, a todo el ancho | El estado de cada proceso en cada instante y quién tuvo cada monitor |
+| 5 | Barra de estado | Al pie | Posición del cursor, cantidad de procesos y monitores, turnos, semilla, guardado y atajos |
+
+## Barra de estado
+
+| Dato | Qué indica |
+|---|---|
+| Ln, Col | Línea y columna del cursor en el código |
+| Procesos y monitores | Cuántos tiene el programa en ejecución |
+| Turnos y semilla | La política de turnos y la semilla de la ejecución ([Barra de controles](./barra)) |
+| Guardado | Si el programa ya se guardó en el navegador ([Programas y archivos](./programas)) |
+| Atajos | F5, F10 y Shift + F5; **Todos los atajos** abre la lista completa ([Atajos de teclado](/referencia/atajos)) |
 
 ## Tamaño de los paneles
 
 | Acción | Cómo |
 |---|---|
-| Agrandar o achicar un panel | Arrastrar el borde que mira al editor; también con las flechas del teclado cuando el borde tiene el foco |
+| Agrandar o achicar el inspector o la línea de tiempo | Arrastrar el borde que mira al editor; también con las flechas del teclado cuando el borde tiene el foco |
 | Volver al tamaño automático | Doble clic en ese borde |
-| Ampliar un panel | Botón de la esquina superior derecha del panel, o clic en el fondo del dibujo de un monitor |
-| Cerrar el panel ampliado | El mismo botón, o la tecla Escape |
+| Ensanchar el inspector | Botón de la esquina superior derecha del inspector; el mismo botón lo devuelve a su ancho |
 
-::: tip
-El panel ampliado ocupa toda la columna derecha y el editor queda siempre a la vista. Al
-recargar la página, todo vuelve a su tamaño y lugar iniciales.
+::: tip Nota
+La línea de tiempo toma el alto de sus filas, hasta algo menos de la mitad de la pantalla.
+Al recargar la página, los paneles vuelven a su tamaño inicial; el programa del editor se
+conserva.
 :::

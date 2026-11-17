@@ -231,6 +231,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Guía actualizada a la pantalla nueva: se reescriben las páginas de la interfaz (disposición, barra, editor, monitores, procesos y salida, línea de tiempo) y se agrega «Programas y archivos»; los procedimientos de operación usan el cartel de interbloqueo, la tabla «Por qué nadie avanza», Repetir y el avance de un proceso elegido; la referencia de atajos suma F5, F10 y Shift+F5. Las doce capturas se regeneraron. (Federico Dobal, 2026-11-17)
 - ADR 0008 (delay medido en instantes); referencia de `delay`, especificación (semántica y EBNF) y páginas de ejecución, límites y solución de problemas actualizadas. (Federico Dobal, 2026-11-17)
 - La portada aclara, en la sección «Origen del simulador», que el simulador es un trabajo de la PPS y no una herramienta de la materia Programación Concurrente ni de su cátedra, y que de esa materia toma la notación, el modelo de monitores y los problemas de los ejemplos. Se reescriben las frases de la portada, de Primer programa, de Notación de la cátedra, del README y de la descripción del sitio que daban a entender lo contrario. (Federico Dobal, 2026-11-16)
 - Capturas del simulador en la documentación: la pantalla con sus cinco zonas numeradas, la barra, el editor con los seis estados de las franjas y con un error de compilación y otro de ejecución, la línea de tiempo con una tarjeta fija, el panel de monitores, la salida y un interbloqueo entre dos monitores. Están en las páginas de Interfaz, en Primer programa, en Diagnóstico de un interbloqueo y en Errores de compilación, con texto alternativo y epígrafe. (Federico Dobal, 2026-11-16)
@@ -264,6 +265,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- `scripts/capturas.mjs` regenera las capturas de la guía con el simulador real: abre cada programa por enlace, con semilla fija, de modo que las imágenes salen iguales cada vez. (Federico Dobal, 2026-11-17)
 - Estilos por componente con CSS Modules (`Componente.module.css`); `index.css` conserva los tokens de color, los botones, los menús y los colores de estado, que son compartidos. `App.tsx` se parte en `TopBar`, `EditorPane`, `Inspector`, `Timeline` y `StatusBar`; los cálculos de la línea de tiempo pasan a `timelineLayout.ts`, con tests. (Federico Dobal, 2026-11-17)
 - Interfaz: el estado de cada paso reutiliza del anterior los objetos que no cambiaron (`reuse.ts`), de modo que los componentes memorizados de los monitores y procesos que no se movieron no se vuelven a dibujar. El motor sigue entregando el estado completo: medido, generarlo y leerlo cuesta 3 ms con 1000 procesos, así que la diferencia se calcula del lado de la interfaz, que es donde estaba el costo. (Federico Dobal, 2026-11-17)
 - El estado que entrega el núcleo incluye, para cada variable permanente, el instante de su última escritura (`lastWriteInstant`), además de quién la escribió. Lo usa la tabla de variables del panel de monitores. (Federico Dobal, 2026-11-17)

@@ -22,7 +22,8 @@ nucleo/src/main/java/ar/edu/unlp/info/simulator/
   vm/     VirtualMachine y primitivas                    (Java puro, solo java.util)
   js/     SimulatorJs (@JSExport) + Json (a mano)        ← puente al navegador
         └─ TeaVM (mvn -Pweb) ─→ frontend/src/engine/simulador.js  ← GENERADO, commiteado
-frontend/src/api.ts → useSimulation.ts → componentes
+frontend/src/api.ts → useSimulation.ts → componentes (cada uno con su `.module.css`)
+frontend/docs/.vitepress/  guía: guia.ts (capítulos), markdown.ts, tema y componentes Vue
 ```
 
 ## Comandos
@@ -33,7 +34,9 @@ frontend/src/api.ts → useSimulation.ts → componentes
 | Tests del núcleo | `nucleo/` | `mvn -q test` (con JDK 21: si `java` es otra versión, fijar `JAVA_HOME`) |
 | Regenerar motor | `frontend/` | `npm run engine` |
 | Probar motor compilado | `frontend/` | `npm run smoke` |
+| Tests de la interfaz (Vitest) | `frontend/` | `npm run test` |
 | Chequeo completo del front | `frontend/` | `npm run check` |
+| Regenerar las capturas de la guía | raíz | `node scripts/capturas.mjs` (con el simulador levantado) |
 | Estilo de un documento formal | raíz | `node scripts/revisar-estilo.mjs <archivo>` |
 
 ## Reglas que no se negocian

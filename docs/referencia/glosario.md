@@ -42,8 +42,8 @@ Cola de los procesos que llamaron a un monitor ocupado, o que fueron despertados
 no reingresaron. Cuando el monitor se libera entra uno de ellos, elegido al azar, sin
 respetar el orden de llegada.
 
-**En el simulador.** Zona Compitiendo del dibujo del monitor; franja con rayado ocre en el
-editor. {.g-sim}
+**En el simulador.** Zona «1 · Compiten» del dibujo del monitor y fila Entrada de sus colas;
+etiqueta ámbar en el editor. {.g-sim}
 
 Véase [Acceso al monitor](/ejecucion/acceso-al-monitor). {.g-vease}
 
@@ -125,8 +125,8 @@ Véase [Instantes y turnos](/ejecucion/instantes-y-turnos). {.g-vease}
 Situación de un proceso en un instante: ejecutando en el proceso o en el monitor,
 compitiendo, esperando, en `delay` o sin turno.
 
-**En el simulador.** El color y el rayado de la franja del editor y de la fila de la línea
-de tiempo. {.g-sim}
+**En el simulador.** El color y el ícono de la etiqueta del editor y el aspecto de cada
+tramo de la línea de tiempo. {.g-sim}
 
 Véase [Estados de un proceso](/ejecucion/estados). {.g-vease}
 
@@ -193,8 +193,8 @@ Véase [Instantes y turnos](/ejecucion/instantes-y-turnos). {.g-vease}
 Situación en la que ningún proceso puede avanzar y no todos terminaron: cada uno espera en
 una cola de entrada o en una variable condición.
 
-**En el simulador.** La barra indica deadlock y la tarjeta del último instante dice dónde
-espera cada proceso y qué monitores retiene. {.g-sim}
+**En el simulador.** La barra indica «Interbloqueo» y un cartel sobre el editor dice dónde
+espera cada proceso, qué monitores retiene y por qué nadie puede despertarlo. {.g-sim}
 
 Véase [Diagnóstico de un interbloqueo](/operacion/interbloqueo). {.g-vease}
 
@@ -211,8 +211,8 @@ Véase [Diagnóstico de un interbloqueo](/operacion/interbloqueo). {.g-vease}
 Llamada desde un procedure a otro monitor durante la cual el proceso conserva el primer
 monitor, aunque haga `wait` en el segundo.
 
-**En el simulador.** El punto del proceso en la zona En monitor del primer monitor aparece
-con un anillo. {.g-sim}
+**En el simulador.** La tarjeta del primer monitor indica que el proceso que lo ocupa está
+esperando en el otro. {.g-sim}
 
 Véase [Acceso al monitor](/ejecucion/acceso-al-monitor#llamadas-a-otro-monitor). {.g-vease}
 
@@ -281,8 +281,8 @@ Véase [Variables condición](/ejecucion/variables-condicion#tecnicas-habituales
 Operación de un monitor. Es el único medio que tienen los procesos para leer o modificar
 las variables permanentes.
 
-**En el simulador.** Mientras un proceso ejecuta un procedure, su franja se pinta en el
-tono pleno de su color. {.g-sim}
+**En el simulador.** Mientras un proceso ejecuta un procedure, su etiqueta y su tramo de la
+línea de tiempo se pintan en el tono pleno de su color. {.g-sim}
 
 Véase [Llamada a monitor](/lenguaje/instrucciones/llamada). {.g-vease}
 
@@ -297,8 +297,8 @@ Véase [Llamada a monitor](/lenguaje/instrucciones/llamada). {.g-vease}
 Código que se ejecuta concurrentemente con los demás. Los procesos son activos: son los
 que avanzan, llaman a los monitores y esperan.
 
-**En el simulador.** Una franja con su nombre en el editor y una fila en la línea de
-tiempo, en un color propio. {.g-sim}
+**En el simulador.** Una etiqueta con su nombre en el editor, una fila en la línea de tiempo
+y otra en la pestaña Procesos, en un color propio. {.g-sim}
 
 Véase [Procesos](/lenguaje/procesos). {.g-vease}
 
@@ -316,8 +316,8 @@ Disciplina de señalización de la cátedra: quien ejecuta `signal` sigue dentro
 y el despertado pasa a competir por volver a entrar. Por eso la espera se escribe con
 `while`.
 
-**En el simulador.** Tras un `signal`, el despertado pasa de la zona En wait a la zona
-Compitiendo, y el que señalizó sigue en En monitor. {.g-sim}
+**En el simulador.** Tras un `signal`, el despertado pasa de la zona «2 · En wait» a la zona
+«1 · Compiten», y el que señalizó sigue en «3 · Adentro». {.g-sim}
 
 Véase [Variables condición](/ejecucion/variables-condicion#signal-and-continue). {.g-vease}
 
@@ -351,8 +351,8 @@ Véase [Instantes y turnos](/ejecucion/instantes-y-turnos#politicas-de-turnos). 
 Cola de procesos demorados dentro de un monitor, declarada con `cond`. No tiene valor
 propio; se opera con `wait`, `signal` y `signal_all`.
 
-**En el simulador.** Zona En wait del dibujo, con una fila por variable con procesos;
-franja con rayado ladrillo en el editor. {.g-sim}
+**En el simulador.** Zona «2 · En wait» del dibujo, con una fila por variable condición;
+etiqueta violeta en el editor. {.g-sim}
 
 Véase [Variables condición](/ejecucion/variables-condicion). {.g-vease}
 

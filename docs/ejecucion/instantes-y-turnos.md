@@ -33,7 +33,8 @@ mismo instante: entra el primero y los demás quedan en la cola de entrada.
 
 ## Azar y repetición
 
-Cada ejecución toma una semilla distinta del reloj. Con turnos al azar, dos ejecuciones del
+Cada ejecución usa una semilla nueva, que la barra de estado muestra; el botón **Repetir**
+vuelve a ejecutar con la misma. Con turnos al azar, dos ejecuciones del
 mismo programa casi nunca coinciden. Con turnos en ronda el orden de avance es fijo, pero
 quién entra a un monitor que se libera con varios procesos esperando se sigue sorteando
 ([Acceso al monitor](./acceso-al-monitor)). `delay` no agrega otra fuente de variación: se

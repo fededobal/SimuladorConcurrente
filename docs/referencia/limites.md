@@ -20,4 +20,4 @@
 |---|---|
 | Probabilidad de avance de cada proceso con turnos al azar | 80 % |
 | Duración de un instante | Lento 1,2 s · Normal 0,6 s · Rápido 0,3 s · Muy rápido 0,12 s |
-| Semilla del azar | Se toma del reloj al compilar |
+| Semilla del azar | Un número de cinco cifras, nuevo en cada ejecución; **Repetir** reutiliza el de la última |

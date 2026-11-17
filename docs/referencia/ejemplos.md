@@ -1,6 +1,6 @@
 # Programas de ejemplo
 
-Son los programas del menú **Ejemplos** de la barra. Cada uno muestra un concepto o una
+Son los programas de la lista **Ejemplos** del menú del programa, en la barra. Cada uno muestra un concepto o una
 técnica de las clases. Todos forman parte de las pruebas del simulador: se ejecutan con turnos al
 azar y 25 semillas distintas, y una vez con turnos en ronda, y en todos los casos terminan
 con el resultado indicado.

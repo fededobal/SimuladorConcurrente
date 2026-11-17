@@ -47,27 +47,28 @@ process Consumidor {
 
 ## Procedimiento
 
-1. Abrir el simulador. Si el editor tiene otro programa, elegir **Productor/Consumidor** en
-   el menú **Ejemplos** de la barra.
+1. Abrir el simulador. Si el editor tiene otro programa, abrir el menú del programa, en la
+   barra, y elegir **Productor/Consumidor** en la lista **Ejemplos**.
 2. Elegir la velocidad **Lento** para seguir cada instante con calma.
 3. Presionar **Paso** una vez. El programa se compila; si tiene errores, el mensaje aparece
    debajo del editor y la simulación no arranca. Si compila, avanza el primer instante.
-4. Observar el editor: sobre la línea en la que está cada proceso aparece una franja con su
-   nombre. El color y el rayado de la franja indican el [estado](/ejecucion/estados).
-5. Observar el panel **Monitores**, a la derecha: el dibujo de `Buffer` muestra qué proceso
+4. Observar el editor: la línea en la que está cada proceso lleva un chip con su inicial en
+   el margen y, al final del código, una etiqueta con su nombre y lo que está haciendo. El
+   color y el ícono de la etiqueta indican el [estado](/ejecucion/estados).
+5. Observar la pestaña **Monitores**, a la derecha: el dibujo de `Buffer` muestra qué proceso
    está adentro, cuál compite por entrar y cuál espera en `libre` u `ocupado`.
 
    <figure>
 
-   ![Simulador con Productor/Consumidor en pausa en el instante 7: en el editor, la franja del Consumidor en la línea 16 y la del Productor en la línea 26; en el panel de monitores, el Consumidor dentro de Buffer, con dato en 1 y hayDato en true](/capturas/primer-programa.png)
+   ![Simulador con Productor/Consumidor en pausa en el instante 7: el editor marca la línea de cada proceso, la pestaña Monitores muestra el monitor Buffer con sus zonas, colas y variables, y la línea de tiempo tiene siete columnas](/capturas/primer-programa.png)
 
-   <figcaption>Instante 7: el Consumidor está dentro de <code>Buffer</code> retirando el primer dato y el Productor ya salió del monitor y ejecuta el <code>write</code>.</figcaption>
+   <figcaption>Instante 7 de una ejecución. El editor marca dónde está cada proceso, el dibujo de <code>Buffer</code> muestra quién está adentro y quién espera, y la línea de tiempo resume los siete instantes.</figcaption>
    </figure>
 
 6. Presionar **Ejecutar**. La simulación avanza sola hasta terminar o hasta que se presione
    **Pausar**.
-7. Al terminar, la barra indica **fin**. Abrir **Salida** para leer las líneas que
-   escribieron los procesos con `write`.
+7. Al terminar, la barra indica **Terminó**. Abrir la pestaña **Salida** para leer las
+   líneas que escribieron los procesos con `write`.
 
 ## Resultado esperado
 
@@ -79,13 +80,14 @@ vacío. El intercalado de las líneas de uno y otro proceso cambia entre corrida
 
 <figure>
 
-![Panel de salida con diez líneas alternadas: deposite 1, retire 1, deposite 2, retire 2, y así hasta retire 5, cada una con su instante y el nombre del proceso en su color](/capturas/salida.png)
+![Pestaña Salida con diez líneas alternadas: deposite 1, retire 1, deposite 2, retire 2, y así hasta retire 5, cada una con su instante y el nombre del proceso en su color](/capturas/salida.png)
 
 <figcaption>Una salida posible. El número de la izquierda es el instante en que se ejecutó cada <code>write</code>.</figcaption>
 </figure>
 
 Presionar **Paso** o **Ejecutar** después del fin vuelve a compilar el programa y lo ejecuta
-desde el principio.
+desde el principio con otra semilla. El botón **Repetir** lo ejecuta de nuevo con la misma,
+para volver a ver la ejecución que acaba de terminar.
 
 ## Siguientes pasos
 

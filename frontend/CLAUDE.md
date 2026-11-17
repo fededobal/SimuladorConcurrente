@@ -11,5 +11,9 @@ el snapshot que llega por `useSimulation`; no llaman al motor.
   serialización de `js/Json.java`. Cambiar uno implica cambiar los tres.
 - El motor es sincrónico y corre en el hilo principal: nada de bucles largos de `step()` sin
   ceder al navegador (ver informe, opción "Web Worker").
+- Estilos: un `Componente.module.css` por componente; `index.css` tiene solo los tokens y
+  las piezas compartidas (botones, menús, colores de estado `st-*`).
+- La lógica sin DOM va en módulos `.ts` con su `.test.ts` (Vitest): `programs`, `shareLink`,
+  `deadlock`, `timelineLayout`, `editor/lineMarks`, `reuse`.
 - Textos de la UI en español rioplatense neutro, pensados para un alumno que está aprendiendo.
 - Antes de commitear: `npm run check`.

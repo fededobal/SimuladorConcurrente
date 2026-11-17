@@ -6,7 +6,8 @@ orden del código. Son correctos y corresponden al modelo de la cátedra.
 ## El resultado cambia en cada ejecución
 
 Con turnos **Al azar**, en cada instante avanza un subconjunto distinto de procesos, y cada
-ejecución usa una semilla distinta. El orden de la salida, el orden de entrada a los
+ejecución usa una semilla distinta, que se muestra en la barra de estado. Para volver a ver
+una ejecución tal cual, el botón **Repetir** usa la misma semilla. El orden de la salida, el orden de entrada a los
 monitores y el instante en que termina cada proceso pueden cambiar. Lo que garantiza la
 sincronización no cambia ([Comparación de ejecuciones](/operacion/comparar-ejecuciones)).
 

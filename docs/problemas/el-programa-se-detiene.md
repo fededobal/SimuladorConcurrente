@@ -1,8 +1,7 @@
 # El programa se detiene
 
 Un programa se detiene antes de terminar cuando ningún proceso puede avanzar. La barra
-indica **deadlock** y la tarjeta del último instante de la línea de tiempo dice dónde
-espera cada proceso. Esta página reúne las causas habituales; el procedimiento para
+indica **Interbloqueo** y un cartel sobre el editor dice dónde espera cada proceso. Esta página reúne las causas habituales; el procedimiento para
 identificarlas está en [Diagnóstico de un interbloqueo](/operacion/interbloqueo).
 
 ## El aviso llegó antes que la espera
@@ -60,6 +59,6 @@ procesos pueda avanzar sin esperar.
 
 | Situación | Qué indica la barra | Qué ocurre |
 |---|---|---|
-| Algún proceso está en `delay` | esperando que termine un delay | Los instantes pasan sin que avance nadie hasta que termina la demora |
-| Un proceso terminó por un error | deadlock tras un error | La causa es el error ([Errores en tiempo de ejecución](./errores-en-tiempo-de-ejecucion)) |
-| Un proceso ejecuta un ciclo infinito (`while (true)`) | ejecutando | El programa no termina, pero los procesos avanzan |
+| Algún proceso está en `delay` | Esperando un delay | Los instantes pasan sin que avance nadie hasta que termina la demora |
+| Un proceso terminó por un error | Interbloqueo tras un error | La causa es el error ([Errores en tiempo de ejecución](./errores-en-tiempo-de-ejecucion)) |
+| Un proceso ejecuta un ciclo infinito (`while (true)`) | Ejecutando | El programa no termina, pero los procesos avanzan |

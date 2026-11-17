@@ -11,12 +11,13 @@ y cuáles garantiza la sincronización.
    `Cuenta.sumar()`, que incrementa `x` y registra en `maxDentro` cuántos procesos llegaron
    a estar dentro del monitor a la vez.
 2. Elegir **Al azar** en **Turnos** y presionar **Ejecutar**.
-3. Al terminar, anotar los valores de `x` y `maxDentro` en el panel de monitores, y el orden
+3. Al terminar, anotar los valores de `x` y `maxDentro` en la pestaña **Monitores**, y el orden
    en que cada proceso tuvo el monitor según el carril de la línea de tiempo.
 4. Presionar **Ejecutar** otra vez. El programa se ejecuta desde el principio con otra
-   semilla.
+   semilla, que la barra de estado muestra. Para revisar de nuevo la ejecución anterior,
+   **Repetir** usa la misma semilla.
 5. Repetir los pasos 3 y 4 varias veces y comparar.
-6. Para un programa con `write`, comparar además el orden de las líneas en **Salida**.
+6. Para un programa con `write`, comparar además el orden de las líneas en la pestaña **Salida**.
 
 ## Resultado esperado
 

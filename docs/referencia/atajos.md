@@ -1,5 +1,19 @@
 # Atajos de teclado
 
+En el simulador, la tecla **?** (con el cursor fuera del código) o **Todos los atajos**, en
+la barra de estado, abren esta lista.
+
+## Simulación
+
+| Tecla | Acción |
+|---|---|
+| F5 | Ejecuta la simulación o, si está corriendo, la pausa |
+| F10 | Avanza un instante (Paso) |
+| Shift + F5 | Detiene y vuelve al principio |
+
+Funcionan también con el cursor en el código. F5 no recarga la página; para eso sigue
+valiendo Cmd + R (macOS) o Ctrl + R.
+
 ## Editor
 
 | Tecla | Acción |
@@ -11,17 +25,17 @@
 | Retroceso | Dentro de la sangría, borra un nivel; entre un par recién abierto, borra los dos caracteres |
 | `(` `[` `{` `"` | Insertan también el cierre |
 
-## Paneles
+## Pantalla
 
 | Tecla | Acción |
 |---|---|
-| Escape | Cierra el panel ampliado |
+| ? | Abre la lista de atajos |
+| Escape | Cierra un menú o la lista de atajos |
 | Flechas, con el borde de un panel seleccionado | Agrandan o achican el panel |
-| Tab y Enter en el dibujo de un monitor | Seleccionan una zona y filtran la lista de procesos |
 
-## Documentación
+## Guía
 
 | Tecla | Acción |
 |---|---|
-| Cmd + K (macOS) o Ctrl + K | Abre el buscador |
+| / , Cmd + K (macOS) o Ctrl + K | Abre el buscador |
 | Escape | Quita el resaltado de la búsqueda |

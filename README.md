@@ -19,20 +19,27 @@ repositorio y no se publican.
 ## Qué permite hacer
 
 - Escribir el programa en un editor con resaltado de sintaxis, sangría automática y
-  comentado de líneas con Cmd/Ctrl + /.
+  comentado de líneas con Cmd/Ctrl + /. El programa se guarda solo en el navegador; se puede
+  guardar en «Mis programas», abrir y descargar como archivo `.mon` y compartir con un enlace.
 - Ejecutarlo de corrido o de a un instante (Ejecutar, Pausar, Paso, Detener), con cuatro
-  velocidades.
-- Seguir cada proceso en el código: una franja de color marca la línea en la que está y
-  cambia de aspecto si el proceso avanzó en el último instante, está listo o está bloqueado
-  (en la entrada de un monitor o en una variable condición).
+  velocidades y atajos de teclado (F5, F10, Shift + F5). Repetir una ejecución con la misma
+  semilla y avanzar un instante con un proceso elegido.
+- Seguir cada proceso en el código: un chip en el margen y una etiqueta junto a la línea
+  dicen quién está ahí y qué hace (ejecuta, compite por un monitor, duerme en un `wait`,
+  está en `delay` o no tuvo turno).
 - Elegir la política de turnos: al azar, donde en cada instante avanza un subconjunto de los
   procesos listos, o en ronda. Se puede cambiar durante la ejecución.
-- Ver en una pantalla de salida lo que escriben los procesos con `write(...)`.
-- Detectar el interbloqueo (*deadlock*) cuando ningún proceso puede avanzar.
+- Ver cada monitor con el dibujo de sus tres zonas, sus colas y sus variables, con el
+  proceso que escribió cada una y en qué instante; ver cada proceso con sus variables
+  locales, y lo que escriben con `write(...)`.
+- Recorrer la ejecución en una línea de tiempo, con una fila por proceso y un carril por
+  monitor.
+- Entender un interbloqueo (*deadlock*): un cartel dice qué espera cada proceso y por qué
+  nadie puede despertarlo.
 - Leer los errores de compilación y de ejecución en español, con la línea donde ocurrieron
   (marcada en rojo). El compilador también controla los tipos y el alcance de los nombres.
-- Cargar programas de ejemplo desde el menú Ejemplos (buffer, exclusión mutua,
-  `signal_all`, colas, interbloqueo, entre otros).
+- Abrir programas de ejemplo (buffer, exclusión mutua, `signal_all`, colas, interbloqueo,
+  entre otros), también desde la guía.
 
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y
@@ -92,8 +99,11 @@ código Java:
 ```bash
 cd nucleo && mvn test            # tests del núcleo
 cd ../frontend && npm run engine # regenera src/engine/simulador.js
-npm run check                    # lint, tipos, build y prueba del motor compilado
+npm run check                    # lint, tests, tipos, build y prueba del motor compilado
 ```
+
+Las capturas de la guía (`docs/public/capturas`) se regeneran con
+`node scripts/capturas.mjs`, con el simulador levantado.
 
 En un clon nuevo, `sh scripts/instalar-hooks.sh` activa los hooks de git que verifican el
 formato de los commits, el CHANGELOG y el motor regenerado. Las reglas están en

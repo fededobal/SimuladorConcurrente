@@ -10,7 +10,7 @@ Cuando un proceso llama a un procedure:
 
 1. Si el monitor está libre, entra en ese mismo paso y empieza a ejecutar el procedure.
 2. Si está ocupado, queda en la cola de entrada del monitor. En el dibujo aparece en la zona
-   **Compitiendo** y en el editor con rayado ocre.
+   **1 · Compiten** y en el editor con una etiqueta ámbar que dice por qué monitor compite.
 
 Si varios procesos llaman al mismo monitor libre en el mismo instante, entra el primero
 según el orden del instante y los demás pasan a la cola de entrada.
@@ -30,8 +30,8 @@ con los identificadores y una variable condición por proceso, por ejemplo.
 
 Un procedure puede llamar a un procedure de otro monitor. Mientras esa llamada dura, el
 proceso conserva el primer monitor, aunque haga `wait` en el segundo: nadie más puede entrar
-al primero. En el dibujo, el punto del proceso en la zona **En monitor** del primer monitor
-aparece con un anillo.
+al primero. En la tarjeta del primer monitor, el encabezado aclara que el proceso que lo
+ocupa está esperando en el otro.
 
 Esta regla puede producir un interbloqueo: si el proceso espera en el segundo monitor algo
 que solo puede hacer otro proceso que necesita entrar al primero, ninguno avanza. El

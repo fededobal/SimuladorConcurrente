@@ -6,9 +6,9 @@ vuelve a presionar **Paso** o **Ejecutar**.
 
 <figure>
 
-![Error de compilación: la línea 9 aparece marcada en rojo y debajo del editor se lee "línea 9: Se esperaba ';' (se encontró 'hayDato')"](/capturas/editor-error.png)
+![Error de compilación: la línea 10 aparece marcada en rojo y debajo del editor se lee "línea 10: Se esperaba ';' (se encontró 'hayDato')"](/capturas/editor-error.png)
 
-<figcaption>Falta el <code>;</code> al final de la línea 8. El error se informa en la línea 9 porque es ahí donde el compilador encuentra algo que no esperaba; conviene revisar también la línea anterior.</figcaption>
+<figcaption>Falta el <code>;</code> al final de la línea 9. El error se informa en la línea 10 porque es ahí donde el compilador encuentra algo que no esperaba; conviene revisar también la línea anterior.</figcaption>
 </figure>
 
 Las tablas reúnen los mensajes más frecuentes. Los nombres entre comillas simples (`'x'`,
