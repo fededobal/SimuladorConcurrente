@@ -155,7 +155,7 @@
 ### push/parentesis-solo-en-parte
 {"error":"Línea 1: Los paréntesis de la tupla van alrededor de todas las componentes; las formas válidas son push(c, componentes), push(c, (componentes)) o push(c, (clave, (resto)))","line":1}
 ### push/expresion-agrupada-valida
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### pop/sobran-parentesis
 {"error":"Línea 1: Sobran paréntesis en el pop de 'c'; las formas válidas son pop(c, destinos), pop(c, (destinos)) o pop(c, (clave, (resto)))","line":1}
 ### pop/algo-despues-del-grupo
@@ -199,7 +199,7 @@
 ### for/sin-cerrar
 {"error":"Línea 1: Se esperaba ')' en el 'for' (se encontró 'skip')","line":1}
 ### for/condicion-vacia-y-paso-asignacion
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### llamada/sin-procedure
 {"error":"Línea 2: Se esperaba el nombre del procedure (se encontró '(')","line":2}
 ### llamada/sin-parentesis
@@ -243,7 +243,7 @@
 ### expresion/vacia
 {"error":"Línea 1: Se esperaba una expresión","line":1}
 ### expresion/operadores-validos
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### semantica/monitor-repetido
 {"error":"Línea 2: Ya existe un monitor o un process llamado M","line":2}
 ### semantica/proceso-con-nombre-de-monitor
@@ -281,7 +281,7 @@
 ### semantica/delay-con-double
 {"error":"Línea 1: El tiempo del delay tiene que ser int y es double","line":1}
 ### semantica/write-de-arreglo-y-cola-valido
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### semantica/clave-bool-en-cola-ordenada
 {"error":"Línea 1: La clave de la ColaOrdenada 'c' (su primera componente) tiene que ser int, double o text, no bool","line":1}
 ### semantica/tamano-no-entero
@@ -323,7 +323,7 @@
 ### semantica/condicion-del-for-no-bool
 {"error":"Línea 1: La condición del for tiene que ser bool y es int","line":1}
 ### semantica/for-anonimo-valido
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### semantica/monitor-no-declarado
 {"error":"Línea 1: Monitor no declarado: X","line":1}
 ### semantica/arreglo-de-monitores-sin-indice
@@ -347,7 +347,7 @@
 ### semantica/out-de-tipo-incompatible
 {"error":"Línea 2: El parámetro out 'r' es double y no se puede guardar en 'x', que es int","line":2}
 ### semantica/out-a-elemento-valido
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":2,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[{"name":"M","vars":[],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":2,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
 ### semantica/wait-fuera-de-procedure
 {"error":"Línea 2: wait/signal/signal_all solo pueden usarse dentro de un procedure de monitor","line":2}
 ### semantica/cond-no-declarada
@@ -401,13 +401,13 @@
 ### tipos/asignacion-a-elemento-incompatible
 {"error":"Línea 1: No se puede guardar un bool en 'a[...]', que es int","line":1}
 ### validos/comentarios
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":3,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":3,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### validos/tuplas-en-push-y-pop
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":5,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[{"name":"M","vars":[{"name":"c","type":"Cola(int, text, double)","value":"<>","isArray":false,"lastWriterId":null,"elements":[],"size":0},{"name":"o","type":"ColaOrdenada(int, text, double)","value":"<>","isArray":false,"lastWriterId":null,"elements":[],"size":0},{"name":"k","type":"int","value":"0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"s","type":"text","value":"","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"d","type":"double","value":"0.0","isArray":false,"lastWriterId":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":5,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[{"name":"c","type":"Cola(int, text, double)","value":"<>","isArray":false,"lastWriterId":null,"elements":[],"size":0},{"name":"o","type":"ColaOrdenada(int, text, double)","value":"<>","isArray":false,"lastWriterId":null,"elements":[],"size":0},{"name":"k","type":"int","value":"0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"s","type":"text","value":"","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"d","type":"double","value":"0.0","isArray":false,"lastWriterId":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
 ### validos/decrementos-y-llamada-indexada
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":5,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[{"name":"M[0]","vars":[{"name":"k","type":"int","value":"0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"a","type":"int[]","value":"[-1, -1]","isArray":true,"lastWriterId":-1,"elements":["-1","-1"],"size":2},{"name":"n","type":"int","value":"2","isArray":false,"lastWriterId":-1,"elements":null,"size":0}],"conds":[{"name":"c[0]","queue":[]},{"name":"c[1]","queue":[]}],"lockOwner":null,"entryQueue":[]},{"name":"M[1]","vars":[{"name":"k","type":"int","value":"1","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"a","type":"int[]","value":"[-1, -1]","isArray":true,"lastWriterId":-1,"elements":["-1","-1"],"size":2},{"name":"n","type":"int","value":"2","isArray":false,"lastWriterId":-1,"elements":null,"size":0}],"conds":[{"name":"c[0]","queue":[]},{"name":"c[1]","queue":[]}],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":5,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M[0]","vars":[{"name":"k","type":"int","value":"0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"a","type":"int[]","value":"[-1, -1]","isArray":true,"lastWriterId":-1,"elements":["-1","-1"],"size":2},{"name":"n","type":"int","value":"2","isArray":false,"lastWriterId":-1,"elements":null,"size":0}],"conds":[{"name":"c[0]","queue":[]},{"name":"c[1]","queue":[]}],"lockOwner":null,"entryQueue":[]},{"name":"M[1]","vars":[{"name":"k","type":"int","value":"1","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"a","type":"int[]","value":"[-1, -1]","isArray":true,"lastWriterId":-1,"elements":["-1","-1"],"size":2},{"name":"n","type":"int","value":"2","isArray":false,"lastWriterId":-1,"elements":null,"size":0}],"conds":[{"name":"c[0]","queue":[]},{"name":"c[1]","queue":[]}],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
 ### validos/estilo-c-y-grupos-de-parametros
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":2,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[{"name":"M","vars":[],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":2,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
 ### expresion/tupla-con-expresion-invalida
 {"error":"Línea 1: Se esperaba una expresión","line":1}
 ### expresion/empty-de-cond-con-indice
@@ -417,7 +417,7 @@
 ### generado/bloques-anidados-de-mas
 {"error":"Línea 1: El programa tiene demasiados niveles de anidamiento (máximo 100)","line":1}
 ### generado/bloques-anidados-al-limite
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### generado/parentesis-anidados-de-mas
 {"error":"Línea 1: El programa tiene demasiados niveles de anidamiento (máximo 100)","line":1}
 ### generado/not-anidados-de-mas
@@ -427,8 +427,8 @@
 ### generado/suma-demasiado-larga
 {"error":"Línea 1: Expresión demasiado larga o anidada (máximo 200 operaciones encadenadas)","line":1}
 ### generado/suma-al-limite
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":1,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[],"output":[]},"finished":false,"deadlock":false}
 ### generado/decimal-infinito
 {"error":"Línea 1: Número fuera de rango: el literal decimal es demasiado grande","line":1}
 ### generado/literales-decimales
-{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":7,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayEndsAt":null}],"monitors":[{"name":"M","vars":[{"name":"a","type":"double","value":"0.1","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"b","type":"double","value":"2.5","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"c","type":"double","value":"1.23E-25","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"d","type":"double","value":"1.23456789012346E23","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"e","type":"double","value":"3.141592653589793","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"f","type":"double","value":"7.5","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"g","type":"double","value":"0.0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"h","type":"double","value":"1.0E300","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"i","type":"int","value":"9223372036854775807","isArray":false,"lastWriterId":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#4f6d9e","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":7,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[{"name":"a","type":"double","value":"0.1","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"b","type":"double","value":"2.5","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"c","type":"double","value":"1.23E-25","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"d","type":"double","value":"1.23456789012346E23","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"e","type":"double","value":"3.141592653589793","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"f","type":"double","value":"7.5","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"g","type":"double","value":"0.0","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"h","type":"double","value":"1.0E300","isArray":false,"lastWriterId":null,"elements":null,"size":0},{"name":"i","type":"int","value":"9223372036854775807","isArray":false,"lastWriterId":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}

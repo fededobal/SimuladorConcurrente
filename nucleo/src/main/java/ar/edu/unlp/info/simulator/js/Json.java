@@ -117,7 +117,7 @@ final class Json {
         field(sb, "advanced");    sb.append(p.advanced()).append(',');
         field(sb, "advanceOrder"); sb.append(p.advanceOrder()).append(',');
         field(sb, "holding");     list(sb, p.holding(), Json::quoted); sb.append(',');
-        field(sb, "delayEndsAt"); sb.append(p.delayEndsAt() == null ? "null" : p.delayEndsAt());
+        field(sb, "delayRemaining"); sb.append(p.delayRemaining() == null ? "null" : p.delayRemaining());
         sb.append("}");
     }
 

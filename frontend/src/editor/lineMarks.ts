@@ -9,8 +9,8 @@ export interface ActiveLine {
   readonly name: string;
   /** Monitor o variable condicion donde esta (ver `whereOf`), o null. */
   readonly where: string | null;
-  /** Hora (ms, como Date.now()) en que termina su delay, o null si no esta demorado. */
-  readonly delayEndsAt: number | null;
+  /** Instantes que le quedan demorado por un delay, o null si no esta demorado. */
+  readonly delayRemaining: number | null;
 }
 
 /**
@@ -28,8 +28,8 @@ export interface LineTag {
   /** "en Buffer", "dormidos en wait(c)"...; vacio si no hace falta aclarar. */
   readonly detail: string;
   readonly names: readonly string[];
-  /** Fin del delay del unico proceso de la etiqueta, o null. */
-  readonly delayEndsAt: number | null;
+  /** Instantes de delay que le quedan al unico proceso de la etiqueta, o null. */
+  readonly delayRemaining: number | null;
 }
 
 /** Todo lo que se dibuja sobre un renglon con procesos. */
@@ -108,7 +108,7 @@ export function lineMarksOf(active: readonly ActiveLine[]): LineMark[] {
         title: titleOf(group),
         detail: stateDetail(group[0].state, where, group.length > 1),
         names: group.map((p) => p.name),
-        delayEndsAt: group.length === 1 ? group[0].delayEndsAt : null,
+        delayRemaining: group.length === 1 ? group[0].delayRemaining : null,
       };
     });
     marks.push({

@@ -111,7 +111,7 @@ export function App() {
         const state = visibleState(p);
         return {
           line: p.line, color: p.color, state, name: p.name, where: whereOf(p, state),
-          delayEndsAt: p.delayEndsAt,
+          delayRemaining: p.delayRemaining,
         };
       });
   }, [snapshot]);

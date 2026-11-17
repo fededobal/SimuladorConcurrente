@@ -37,10 +37,10 @@ cátedra: `docs/monitores/`).
    recurso y en ninguna otra.
 3. Todo camino que saca a un proceso de una sección protegida (retorno, espera, error)
    devuelve el lock y se lo pasa a uno de la cola de entrada, al azar (ADR 0005 y 0006).
-4. Misma semilla + misma política (+ mismas horas informadas a `step`, si hay `delay`) =
-   misma ejecución, en la JVM y en el navegador (el azar
-   sale de `vm/SeededRandom`, no de `java.util.Random`). La interfaz usa una semilla nueva en cada
-   ejecución y no permite repetir una corrida: la reproducción es desde el núcleo (tests).
+4. Misma semilla + misma política (+ mismos procesos elegidos, si los hubo) = misma
+   ejecución, en la JVM y en el navegador (el azar sale de `vm/SeededRandom`, no de
+   `java.util.Random`; `delay` se mide en instantes, ADR 0008). La interfaz usa una semilla
+   nueva en cada ejecución, la muestra, y permite repetirla con el botón Repetir.
 5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.
 6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Los eventos no
    llevan el estado; el log guarda los últimos `MAX_ENTRIES` y la salida los últimos `MAX_LINES`.

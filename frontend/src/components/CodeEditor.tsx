@@ -6,8 +6,7 @@ import {
   gutterChipsOf, isRunning, lineMarksOf, type ActiveLine, type LineTag,
 } from '../editor/lineMarks';
 import { useLineMetrics } from '../editor/useLineMetrics';
-import { segundosRestantes, useAhora } from '../useAhora';
-import { STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
+import { delayLeft, STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 
 interface Props {
   readonly code: string;
@@ -63,7 +62,6 @@ export function CodeEditor({
 
   const marks = useMemo(() => lineMarksOf(activeLines), [activeLines]);
   const chips = useMemo(() => gutterChipsOf(activeLines), [activeLines]);
-  const now = useAhora(activeLines.some((a) => a.delayEndsAt !== null));
 
   const gutterWidth = GUTTER_PAD_LEFT + GUTTER_PAD_RIGHT
     + String(lines.length).length * metrics.charWidth;
@@ -125,7 +123,7 @@ export function CodeEditor({
                 style={{ flexBasis: TEXT_PAD + (lines[m.line - 1]?.length ?? 0) * metrics.charWidth + TAG_GAP }}
               />
               <span className="line-tags-list">
-                {m.tags.map((t) => <Tag key={t.key} tag={t} now={now} />)}
+                {m.tags.map((t) => <Tag key={t.key} tag={t} />)}
                 {m.hiddenNames.length > 0 && (
                   <span className="line-tag st-ready varios"
                     title={`También en este renglón: ${listNames(m.hiddenNames)}`}>
@@ -157,7 +155,7 @@ function listNames(names: readonly string[]): string {
 }
 
 /** Etiqueta al final de un renglon: quien esta ahi y que esta haciendo. */
-function Tag({ tag, now }: { tag: LineTag; now: number }) {
+function Tag({ tag }: { tag: LineTag }) {
   const Icon = STATE_ICON[tag.state];
   const several = tag.names.length > 1;
   const hint = `${several ? listNames(tag.names) : tag.title}: ${STATE_HINT[tag.state]}`;
@@ -171,9 +169,7 @@ function Tag({ tag, now }: { tag: LineTag; now: number }) {
       {!isRunning(tag.state) && !several && <i className="line-tag-dot" />}
       <b>{tag.title}</b>
       {tag.detail && <span>· {tag.detail}</span>}
-      {tag.delayEndsAt !== null && (
-        <span className="delay-count">{segundosRestantes(tag.delayEndsAt, now)} s</span>
-      )}
+      {tag.delayRemaining !== null && <span className="delay-count">· {delayLeft(tag.delayRemaining)}</span>}
     </span>
   );
 }

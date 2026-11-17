@@ -1,84 +1,84 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #193f842c3fa05321
-step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a93ea875526512d7
-step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #331edf3ee41a7155
-step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #24c4b808bfe22a7f
-step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c23c4e625f19542b
-step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0b49e5e9542d8efd
-step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4553fcb007f09ea1
-step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e6452d0dbc3baad
-step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5f12c20779128cfc
-step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #72ed33f7fad53966
+step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c124e151a770b7c8
+step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ee78feb1b296a6be
+step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e1f3816e6d9de44f
+step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c90aa025e4812581
+step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4b0ba682b919df2d
+step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0b0b021d2e2eb8ce
+step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #6ac58f345b46174c
+step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3d6be5d60465aad3
+step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #ba75136fab74883d
+state #5453f5285122c9b2
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #d9a7f871b7c6e55a
-step 1 #a93ea875526512d7
-step 2 #331edf3ee41a7155
-step 3 #24c4b808bfe22a7f
-step 4 #c23c4e625f19542b
-step 5 #0b49e5e9542d8efd
-step 6 #4553fcb007f09ea1
-step 7 #2e6452d0dbc3baad
-step 8 #5f12c20779128cfc
-step 9 #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #459dbd0c67923382
+step 1 #c124e151a770b7c8
+step 2 #ee78feb1b296a6be
+step 3 #e1f3816e6d9de44f
+step 4 #c90aa025e4812581
+step 5 #4b0ba682b919df2d
+step 6 #0b0b021d2e2eb8ce
+step 7 #6ac58f345b46174c
+step 8 #3d6be5d60465aad3
+step 9 #ba75136fab74883d
+state #5453f5285122c9b2
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #7899aa5784572af0
-step 1 #a93ea875526512d7
-step 2 #331edf3ee41a7155
-step 3 #24c4b808bfe22a7f
-step 4 #c23c4e625f19542b
-step 5 #0b49e5e9542d8efd
-step 6 #4553fcb007f09ea1
-step 7 #2e6452d0dbc3baad
-step 8 #5f12c20779128cfc
-step 9 #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #49f72dd541e0b5b1
+step 1 #c124e151a770b7c8
+step 2 #ee78feb1b296a6be
+step 3 #e1f3816e6d9de44f
+step 4 #c90aa025e4812581
+step 5 #4b0ba682b919df2d
+step 6 #0b0b021d2e2eb8ce
+step 7 #6ac58f345b46174c
+step 8 #3d6be5d60465aad3
+step 9 #ba75136fab74883d
+state #5453f5285122c9b2
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #193f842c3fa05321
-step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a93ea875526512d7
-step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #331edf3ee41a7155
-step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #24c4b808bfe22a7f
-step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c23c4e625f19542b
-step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0b49e5e9542d8efd
-step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4553fcb007f09ea1
-step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e6452d0dbc3baad
-step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5f12c20779128cfc
-step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #72ed33f7fad53966
+step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c124e151a770b7c8
+step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ee78feb1b296a6be
+step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e1f3816e6d9de44f
+step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c90aa025e4812581
+step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4b0ba682b919df2d
+step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0b0b021d2e2eb8ce
+step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #6ac58f345b46174c
+step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3d6be5d60465aad3
+step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #ba75136fab74883d
+state #5453f5285122c9b2
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #d9a7f871b7c6e55a
-step 1 #a93ea875526512d7
-step 2 #331edf3ee41a7155
-step 3 #24c4b808bfe22a7f
-step 4 #c23c4e625f19542b
-step 5 #0b49e5e9542d8efd
-step 6 #4553fcb007f09ea1
-step 7 #2e6452d0dbc3baad
-step 8 #5f12c20779128cfc
-step 9 #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #459dbd0c67923382
+step 1 #c124e151a770b7c8
+step 2 #ee78feb1b296a6be
+step 3 #e1f3816e6d9de44f
+step 4 #c90aa025e4812581
+step 5 #4b0ba682b919df2d
+step 6 #0b0b021d2e2eb8ce
+step 7 #6ac58f345b46174c
+step 8 #3d6be5d60465aad3
+step 9 #ba75136fab74883d
+state #5453f5285122c9b2
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #7899aa5784572af0
-step 1 #a93ea875526512d7
-step 2 #331edf3ee41a7155
-step 3 #24c4b808bfe22a7f
-step 4 #c23c4e625f19542b
-step 5 #0b49e5e9542d8efd
-step 6 #4553fcb007f09ea1
-step 7 #2e6452d0dbc3baad
-step 8 #5f12c20779128cfc
-step 9 #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #49f72dd541e0b5b1
+step 1 #c124e151a770b7c8
+step 2 #ee78feb1b296a6be
+step 3 #e1f3816e6d9de44f
+step 4 #c90aa025e4812581
+step 5 #4b0ba682b919df2d
+step 6 #0b0b021d2e2eb8ce
+step 7 #6ac58f345b46174c
+step 8 #3d6be5d60465aad3
+step 9 #ba75136fab74883d
+state #5453f5285122c9b2
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #193f842c3fa05321
-step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a93ea875526512d7
-step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #331edf3ee41a7155
-step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #24c4b808bfe22a7f
-step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c23c4e625f19542b
-step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0b49e5e9542d8efd
-step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4553fcb007f09ea1
-step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e6452d0dbc3baad
-step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5f12c20779128cfc
-step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #5de66d289f07b9d6
-state #0d73c3e31da8148d
+create {"finished":false,"deadlock":false} #72ed33f7fad53966
+step 1 ENTER Recepcion: entra a Turnos.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c124e151a770b7c8
+step 2 PUSH Recepcion: push(pendientes, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ee78feb1b296a6be
+step 3 PUSH Recepcion: push(pendientes, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e1f3816e6d9de44f
+step 4 PUSH Recepcion: push(pendientes, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c90aa025e4812581
+step 5 RETURN Recepcion: retorna de Turnos.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4b0ba682b919df2d
+step 6 ENTER Recepcion: entra a Turnos.atender | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0b0b021d2e2eb8ce
+step 7 POP Recepcion: pop(pendientes) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #6ac58f345b46174c
+step 8 RETURN Recepcion: retorna de Turnos.atender, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3d6be5d60465aad3
+step 9 TERMINATED Recepcion: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #ba75136fab74883d
+state #5453f5285122c9b2

@@ -1,62 +1,62 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #548242055c29a801
-step 1 ENTER P: entra a A.f | BLOCKED Q: espera para entrar a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d8e8dc9587804659
-step 2 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a61b7bd792e87ea9
-step 3 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | ENTER Q: entra a A.h | RELEASE P: libera B al terminar con error | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c2eafb61efc5f9dc
-step 4 SKIP Q: skip | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e846c08079ebb881
-step 5 RETURN Q: retorna de A.h, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f70f8ac227adc909
-step 6 TERMINATED Q: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #08a0074dc4db0ff0
-state #38916acbdf49f304
+create {"finished":false,"deadlock":false} #6bad2533ff829925
+step 1 ENTER P: entra a A.f | BLOCKED Q: espera para entrar a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #840ba9abbf898dd4
+step 2 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #67cd4372b17d5d6b
+step 3 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | ENTER Q: entra a A.h | RELEASE P: libera B al terminar con error | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9ce7ad74b2cf4527
+step 4 SKIP Q: skip | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b1949dd2e2751b58
+step 5 RETURN Q: retorna de A.h, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #528fb347bb8bea3b
+step 6 TERMINATED Q: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #6faf8892278e11eb
+state #2d0e3f806a3f12c3
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #dcb1f97db6b183cd
-step 1 #b15c8f639f77db6f
-step 2 #1d783cf5c602af58
-step 3 #ae5b9c30feccc4bd
-step 4 #a2f5d270e70e0348
-step 5 #667081ce323f4bc0
-state #19c0bdb95c605c59
+create {"finished":false,"deadlock":false} #07347c276bdc8ed0
+step 1 #c1ff38feafce300d
+step 2 #59cea1293b182226
+step 3 #368e8741df957ec1
+step 4 #434cada6f9085159
+step 5 #bfc0c7cec9ee2719
+state #76200809c7ea3318
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #f89d0dcd63099c61
-step 1 #d8e8dc9587804659
-step 2 #a61b7bd792e87ea9
-step 3 #c2eafb61efc5f9dc
-step 4 #e846c08079ebb881
-step 5 #f70f8ac227adc909
-step 6 #08a0074dc4db0ff0
-state #38916acbdf49f304
+create {"finished":false,"deadlock":false} #e84aebe235d439ac
+step 1 #840ba9abbf898dd4
+step 2 #67cd4372b17d5d6b
+step 3 #9ce7ad74b2cf4527
+step 4 #b1949dd2e2751b58
+step 5 #528fb347bb8bea3b
+step 6 #6faf8892278e11eb
+state #2d0e3f806a3f12c3
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #548242055c29a801
-step 1 ENTER P: entra a A.f | BLOCKED Q: espera para entrar a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d8e8dc9587804659
-step 2 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a61b7bd792e87ea9
-step 3 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | ENTER Q: entra a A.h | RELEASE P: libera B al terminar con error | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c2eafb61efc5f9dc
-step 4 SKIP Q: skip | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e846c08079ebb881
-step 5 RETURN Q: retorna de A.h, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f70f8ac227adc909
-step 6 TERMINATED Q: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #08a0074dc4db0ff0
-state #38916acbdf49f304
+create {"finished":false,"deadlock":false} #6bad2533ff829925
+step 1 ENTER P: entra a A.f | BLOCKED Q: espera para entrar a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #840ba9abbf898dd4
+step 2 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #67cd4372b17d5d6b
+step 3 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | ENTER Q: entra a A.h | RELEASE P: libera B al terminar con error | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9ce7ad74b2cf4527
+step 4 SKIP Q: skip | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b1949dd2e2751b58
+step 5 RETURN Q: retorna de A.h, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #528fb347bb8bea3b
+step 6 TERMINATED Q: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #6faf8892278e11eb
+state #2d0e3f806a3f12c3
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #dcb1f97db6b183cd
-step 1 #d8e8dc9587804659
-step 2 #a61b7bd792e87ea9
-step 3 #c2eafb61efc5f9dc
-step 4 #e846c08079ebb881
-step 5 #f70f8ac227adc909
-step 6 #08a0074dc4db0ff0
-state #38916acbdf49f304
+create {"finished":false,"deadlock":false} #07347c276bdc8ed0
+step 1 #840ba9abbf898dd4
+step 2 #67cd4372b17d5d6b
+step 3 #9ce7ad74b2cf4527
+step 4 #b1949dd2e2751b58
+step 5 #528fb347bb8bea3b
+step 6 #6faf8892278e11eb
+state #2d0e3f806a3f12c3
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #f89d0dcd63099c61
-step 1 #d8e8dc9587804659
-step 2 #a61b7bd792e87ea9
-step 3 #c2eafb61efc5f9dc
-step 4 #e846c08079ebb881
-step 5 #f70f8ac227adc909
-step 6 #08a0074dc4db0ff0
-state #38916acbdf49f304
+create {"finished":false,"deadlock":false} #e84aebe235d439ac
+step 1 #840ba9abbf898dd4
+step 2 #67cd4372b17d5d6b
+step 3 #9ce7ad74b2cf4527
+step 4 #b1949dd2e2751b58
+step 5 #528fb347bb8bea3b
+step 6 #6faf8892278e11eb
+state #2d0e3f806a3f12c3
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #548242055c29a801
-step 1 ENTER Q: entra a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b15c8f639f77db6f
-step 2 BLOCKED P: espera para entrar a A.f | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b18376eccda5926b
-step 3 RETURN Q: retorna de A.h, libera el monitor | ENTER P: entra a A.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #ae5b9c30feccc4bd
-step 4 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b51ca44a373724de
-step 5 TERMINATED Q: termina | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #76852289d6c770c2
-step 6 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | RELEASE P: libera B al terminar con error | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #8f044f6bcb594cd6
-state #51ea36e624686b8b
+create {"finished":false,"deadlock":false} #6bad2533ff829925
+step 1 ENTER Q: entra a A.h | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c1ff38feafce300d
+step 2 BLOCKED P: espera para entrar a A.f | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8ba225317b521593
+step 3 RETURN Q: retorna de A.h, libera el monitor | ENTER P: entra a A.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #368e8741df957ec1
+step 4 ENTER P: entra a B.g | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #de5baa7acba421bb
+step 5 TERMINATED Q: termina | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #dd3ac16d13ad2199
+step 6 ERROR P: error de ejecución - P ya está dentro de A y no puede volver a llamarlo desde otro monitor | RELEASE P: libera A al terminar con error | RELEASE P: libera B al terminar con error | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #4c0612d051a2f89f
+state #84969bb827ae0275

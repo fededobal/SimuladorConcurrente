@@ -1,159 +1,159 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #aa510fe0c76dafa3
-step 1 ENTER P[3]: entra a Cuenta.sumar | BLOCKED P[0]: espera para entrar a Cuenta.sumar | BLOCKED P[1]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #853c73c49c2a8ed2
-step 2 ASSIGN P[3]: dentro = 1 | BLOCKED P[2]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #3ce2d93cc8cc6c24
-step 3 ASSIGN P[3]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a5a42fd7c8f34332
-step 4 ASSIGN P[3]: x = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ea40124a8265485d
-step 5 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #577cdef7ded14039
-step 6 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #48d351d97e9b44a7
-step 7 TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ce6a2db16a9fe347
-step 8 ASSIGN P[2]: dentro = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2201a9c434729724
-step 9 ASSIGN P[2]: x = 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ce1700ae5915b140
-step 10 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #f311ec871abfce25
-step 11 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | ENTER P[0]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #8d8efe5fc94a7382
-step 12 TERMINATED P[2]: termina | ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a2b44b84e093fb08
-step 13 ASSIGN P[0]: x = 3 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #58228802618b5cb2
-step 14 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #919049d885b1322f
-step 15 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #018d0f4ec100de50
-step 16 ASSIGN P[1]: dentro = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8c8eec3f363e064d
-step 17 ASSIGN P[1]: x = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #1ef177239c92d766
-step 18 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #dc36cf32a19d6a55
-step 19 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #caeb825c3b3b333b
-step 20 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":20,"waiting":false} #2656167e21d772a4
-state #7dbb52f214d54e98
+create {"finished":false,"deadlock":false} #be3ce25a7dc8fee2
+step 1 ENTER P[3]: entra a Cuenta.sumar | BLOCKED P[0]: espera para entrar a Cuenta.sumar | BLOCKED P[1]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #61b0c9bcc1adf201
+step 2 ASSIGN P[3]: dentro = 1 | BLOCKED P[2]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #65269db8ec6eea0a
+step 3 ASSIGN P[3]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0c6841c594490405
+step 4 ASSIGN P[3]: x = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b14e50acefb5d023
+step 5 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7836b00fbab45fe5
+step 6 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #03c107bb22e9b7f5
+step 7 TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9f9d987c5caf5fb5
+step 8 ASSIGN P[2]: dentro = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #14e7461fc64f1a87
+step 9 ASSIGN P[2]: x = 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #bd3ea8f4142aeeb4
+step 10 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #f3bdff75eaf40939
+step 11 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | ENTER P[0]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #9121535e1797015b
+step 12 TERMINATED P[2]: termina | ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #0fef5975f6d89f42
+step 13 ASSIGN P[0]: x = 3 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #74aa15f6a96eb125
+step 14 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #df9dd48295bc0b66
+step 15 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #0aa88f3ea0291efd
+step 16 ASSIGN P[1]: dentro = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c1fede52bdb50821
+step 17 ASSIGN P[1]: x = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #596c2da4847585cf
+step 18 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #98a5f7d3feeda70a
+step 19 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #dd9f7debe76b7a13
+step 20 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":20,"waiting":false} #b87676e66db9ce26
+state #363c4ce98fce1571
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #9bff84851808214d
-step 1 #a2ce6d1856d30fd8
-step 2 #e54d09fa00d84d60
-step 3 #a5a42fd7c8f34332
-step 4 #ea40124a8265485d
-step 5 #577cdef7ded14039
-step 6 #41c3a7ce939a7be5
-step 7 #d9b596da788fd478
-step 8 #a3f22638a1a76457
-step 9 #00de97eec7311106
-step 10 #016b2ceff69e650e
-step 11 #c1ce602b58b0ef09
-step 12 #476ba01a392b00f2
-step 13 #0ff57a915536a214
-step 14 #f4ef887a0ab22bbc
-step 15 #164c7ccec4a2abfb
-step 16 #cb4478c701a98965
-step 17 #45711c5135360b37
-step 18 #26d28856bb656955
-step 19 #d1968f72741635c0
-state #4afcc5c2af3f171b
+create {"finished":false,"deadlock":false} #52f6d455280d6bf9
+step 1 #8003c84e0869aee3
+step 2 #ab0d3d1ac93d584c
+step 3 #0c6841c594490405
+step 4 #b14e50acefb5d023
+step 5 #7836b00fbab45fe5
+step 6 #600b5cd789ed13d6
+step 7 #005227d0d84e6f8a
+step 8 #9d60f340da205a70
+step 9 #da3bb312bb18a819
+step 10 #ebaaf61fe0ffbdae
+step 11 #dccaa16d450abd89
+step 12 #ec2409967ee76643
+step 13 #11e32d63e244f72e
+step 14 #dba7d5fb2230306f
+step 15 #9e161b2affc3d84d
+step 16 #10d1538214e096b9
+step 17 #c07ac32a7076e2f4
+step 18 #ff0ce73f5a0d88f5
+step 19 #d2cfca0379bb7c4e
+state #4504b9d596b2881f
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #4b0d4838e8e6b4c8
-step 1 #627790ce2e8709c7
-step 2 #1f7c047d97b315ba
-step 3 #74eba67186e0a5c0
-step 4 #39703d742dc45bb2
-step 5 #1475b180546338a6
-step 6 #41c3a7ce939a7be5
-step 7 #7b90cf858d590053
-step 8 #5a5a4b5e23273996
-step 9 #00de97eec7311106
-step 10 #202031a9c1a7781e
-step 11 #0e8125757f26d611
-step 12 #e6b06b6d6ceb034f
-step 13 #b80c2523556c373c
-step 14 #3b4a80ef9558a600
-step 15 #11ab4e2ff1073b3f
-step 16 #63b4cf98893efa41
-step 17 #d3fffe994c00014a
-step 18 #ebedfeb1c9abe877
-step 19 #26056dfbada044f5
-state #2988392087899969
+create {"finished":false,"deadlock":false} #16eb17f27775b258
+step 1 #ab51bb86457bea05
+step 2 #fe71def7e29cde90
+step 3 #623e20725e60ffd4
+step 4 #ecd64ede7a81b654
+step 5 #980caf8e9075610a
+step 6 #600b5cd789ed13d6
+step 7 #3445b4741c414537
+step 8 #e79025e6c8e13cd5
+step 9 #da3bb312bb18a819
+step 10 #a9fa708a0a7011e3
+step 11 #25cf25de6be11236
+step 12 #9c0ab9ec8f30a811
+step 13 #70eee0fe936c8d07
+step 14 #33dd839aa38f7a91
+step 15 #c3cb1d718d9088f8
+step 16 #f521c0109db4f774
+step 17 #880ec8fd2221bd8f
+step 18 #2ab878a863eed17e
+step 19 #3dfe28c45e6062c7
+state #5e8b80290636515c
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #aa510fe0c76dafa3
-step 1 ENTER P[0]: entra a Cuenta.sumar | BLOCKED P[1]: espera para entrar a Cuenta.sumar | BLOCKED P[2]: espera para entrar a Cuenta.sumar | BLOCKED P[3]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cdd923ce92a43421
-step 2 ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #33ee652c8a053dbc
-step 3 ASSIGN P[0]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #994b638ba34709ba
-step 4 ASSIGN P[0]: x = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b79f1019e174b225
-step 5 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ed5a10ea495534ff
-step 6 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #ad655ab23d2d91f9
-step 7 ASSIGN P[1]: dentro = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #136b30554ab76454
-step 8 ASSIGN P[1]: x = 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #773ac2bca7399782
-step 9 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #5297e9c0cea55d01
-step 10 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | ENTER P[3]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #6f6f8637a8479082
-step 11 ASSIGN P[3]: dentro = 1 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #cabb156ca65584e1
-step 12 ASSIGN P[3]: x = 3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #1d67634c7f656ecb
-step 13 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #48aa86d3ce2c33bc
-step 14 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #304e0eb504f74862
-step 15 ASSIGN P[2]: dentro = 1 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #745b11244b959aa1
-step 16 ASSIGN P[2]: x = 4 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #15e25e524ba17ccc
-step 17 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a1182ea328e0dcea
-step 18 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #3db62897fd1690c8
-step 19 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":19,"waiting":false} #3f0b6a489835fd93
-state #e2598f2506b3a64b
+create {"finished":false,"deadlock":false} #be3ce25a7dc8fee2
+step 1 ENTER P[0]: entra a Cuenta.sumar | BLOCKED P[1]: espera para entrar a Cuenta.sumar | BLOCKED P[2]: espera para entrar a Cuenta.sumar | BLOCKED P[3]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d9c1d2fbd82258d1
+step 2 ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d023314b52c34c9a
+step 3 ASSIGN P[0]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7db11747be144782
+step 4 ASSIGN P[0]: x = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d22a78f323e6e5c3
+step 5 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #9525d89af4cea291
+step 6 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #ca6bd4ab2286f8e4
+step 7 ASSIGN P[1]: dentro = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #037edb4953644389
+step 8 ASSIGN P[1]: x = 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #9d8068b6ee9cc814
+step 9 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #37479dfed8435e01
+step 10 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | ENTER P[3]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #0ffe55ebce42bb6d
+step 11 ASSIGN P[3]: dentro = 1 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #fd37cdb13dce8425
+step 12 ASSIGN P[3]: x = 3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #f11957348ebb25e1
+step 13 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #dc33bd0265b848af
+step 14 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #5608c3090c188404
+step 15 ASSIGN P[2]: dentro = 1 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #3c741f6828618933
+step 16 ASSIGN P[2]: x = 4 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #84740cd018abf0a8
+step 17 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #e66fca75f046702d
+step 18 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #6ad9e5aee321f011
+step 19 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":19,"waiting":false} #b24e64d51f8f5a90
+state #4735f42817d2e923
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #9bff84851808214d
-step 1 #cdd923ce92a43421
-step 2 #33ee652c8a053dbc
-step 3 #994b638ba34709ba
-step 4 #b79f1019e174b225
-step 5 #ed5a10ea495534ff
-step 6 #ad655ab23d2d91f9
-step 7 #136b30554ab76454
-step 8 #773ac2bca7399782
-step 9 #5297e9c0cea55d01
-step 10 #61b40fdf9b6a4493
-step 11 #87b112f7f4c55761
-step 12 #1546449cbafd8c20
-step 13 #07b543e2c0970f59
-step 14 #420770e8700a29f8
-step 15 #a5332929049d4596
-step 16 #8d5391b93c064143
-step 17 #1f953cf340256c37
-step 18 #e4255122f87b66c1
-step 19 #ede837eebff620e3
-state #faca67ab9e890ca2
+create {"finished":false,"deadlock":false} #52f6d455280d6bf9
+step 1 #d9c1d2fbd82258d1
+step 2 #d023314b52c34c9a
+step 3 #7db11747be144782
+step 4 #d22a78f323e6e5c3
+step 5 #9525d89af4cea291
+step 6 #ca6bd4ab2286f8e4
+step 7 #037edb4953644389
+step 8 #9d8068b6ee9cc814
+step 9 #37479dfed8435e01
+step 10 #1a3804df42fe5a05
+step 11 #87ebf41bc9b70ffe
+step 12 #b74d14c551901380
+step 13 #51b64d83a14a7924
+step 14 #6d3b86790dbdf01c
+step 15 #75e57f8a1d8d2ac0
+step 16 #e5a8e7618459ea48
+step 17 #76e8a5ad17a4ace3
+step 18 #6b4f15cf355eeabc
+step 19 #b0e940010124718c
+state #733be58bd0803275
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #4b0d4838e8e6b4c8
-step 1 #cdd923ce92a43421
-step 2 #33ee652c8a053dbc
-step 3 #994b638ba34709ba
-step 4 #b79f1019e174b225
-step 5 #ed5a10ea495534ff
-step 6 #8f9a43aa59f83ca8
-step 7 #30edaaf9e604e8d3
-step 8 #f099c4dc1c949dbe
-step 9 #9f9f551bcd73b987
-step 10 #9c0cb4b454f896cb
-step 11 #c5f78cc2b678ca37
-step 12 #debf33b1456ea714
-step 13 #77d9f5f5ccd68b72
-step 14 #407a57ca8dcb86ef
-step 15 #e64bd13385fb1dbf
-step 16 #8d5391b93c064143
-step 17 #1f953cf340256c37
-step 18 #e4255122f87b66c1
-step 19 #ede837eebff620e3
-state #d73b37a68660f864
+create {"finished":false,"deadlock":false} #16eb17f27775b258
+step 1 #d9c1d2fbd82258d1
+step 2 #d023314b52c34c9a
+step 3 #7db11747be144782
+step 4 #d22a78f323e6e5c3
+step 5 #9525d89af4cea291
+step 6 #c6b55d5bccc0d13c
+step 7 #f8a9e7daad8cb483
+step 8 #c6f729cecb33ba63
+step 9 #e2be42a3c04be6c7
+step 10 #277c98469f941f45
+step 11 #a582eb169305975e
+step 12 #de87bc7f8a95911a
+step 13 #1cc9e41677d16a15
+step 14 #a083a0aa6fd6084d
+step 15 #099b2a8a5e503235
+step 16 #e5a8e7618459ea48
+step 17 #76e8a5ad17a4ace3
+step 18 #6b4f15cf355eeabc
+step 19 #b0e940010124718c
+state #9bbea57fc75af1c1
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #aa510fe0c76dafa3
-step 1 ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a3f00df2b7feac38
-step 2 BLOCKED P[2]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c87fa0d2f553d016
-step 3 BLOCKED P[3]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #aae2286cb3e23d87
-step 4 BLOCKED P[0]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3fe535e6fb59310d
-step 5 ASSIGN P[1]: dentro = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #21d9957721cb7cb9
-step 6 ASSIGN P[1]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a97a9ce98a7fe146
-step 7 ASSIGN P[1]: x = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ad31cf862bd03e99
-step 8 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #ee37e99f2e18128c
-step 9 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | ENTER P[0]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e6693dd1446279e2
-step 10 ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #fbf7c4a9c943d38f
-step 11 TERMINATED P[1]: termina | ASSIGN P[0]: x = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #269fd08a6711a8e7
-step 12 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b0402248aa47d21c
-step 13 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #cd2cbb9c920f4ffc
-step 14 ASSIGN P[2]: dentro = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b9732b1fbc8d711e
-step 15 ASSIGN P[2]: x = 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #13fc8416337d74da
-step 16 TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8500e291a01d4dcf
-step 17 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #2792f5237ee3dee8
-step 18 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | ENTER P[3]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #11fc593905fd44b1
-step 19 ASSIGN P[3]: dentro = 1 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #4bd6bd65d460c8f0
-step 20 TERMINATED P[2]: termina | ASSIGN P[3]: x = 4 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #65c60c017138696f
-step 21 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #f9e9b43f4fdbc31f
-step 22 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #5472e2d4cb605be1
-step 23 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":23,"waiting":false} #54b020d49178b45f
-state #695a84df8eccb5c2
+create {"finished":false,"deadlock":false} #be3ce25a7dc8fee2
+step 1 ENTER P[1]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #627b7c2d40700a9f
+step 2 BLOCKED P[2]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #cc17fb0b1a66fdd2
+step 3 BLOCKED P[3]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6dea92acdee9a5ca
+step 4 BLOCKED P[0]: espera para entrar a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #a940c6118b2a1882
+step 5 ASSIGN P[1]: dentro = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4813c9423fe56dee
+step 6 ASSIGN P[1]: maxDentro = 1 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #dff384ce6c17b734
+step 7 ASSIGN P[1]: x = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #e6be0a40beb613c1
+step 8 ASSIGN P[1]: dentro = 0 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #da9cdeb92e6db05a
+step 9 RETURN P[1]: retorna de Cuenta.sumar, libera el monitor | ENTER P[0]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #90fc512fea393de4
+step 10 ASSIGN P[0]: dentro = 1 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ee07f7335f7135c2
+step 11 TERMINATED P[1]: termina | ASSIGN P[0]: x = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #b38d96cfc786a95e
+step 12 ASSIGN P[0]: dentro = 0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c826b2d5afbb3dae
+step 13 RETURN P[0]: retorna de Cuenta.sumar, libera el monitor | ENTER P[2]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #82bad5569414402f
+step 14 ASSIGN P[2]: dentro = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #7bf041c97dedf567
+step 15 ASSIGN P[2]: x = 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #0bbaa51340b59450
+step 16 TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c7517638f2f5062d
+step 17 ASSIGN P[2]: dentro = 0 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #3b71428f935ff9f8
+step 18 RETURN P[2]: retorna de Cuenta.sumar, libera el monitor | ENTER P[3]: entra a Cuenta.sumar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #9babe4ea0a792aca
+step 19 ASSIGN P[3]: dentro = 1 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9d4d13f3907cf937
+step 20 TERMINATED P[2]: termina | ASSIGN P[3]: x = 4 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #d59121b4b1d971e5
+step 21 ASSIGN P[3]: dentro = 0 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #40d4f6bbf6299a25
+step 22 RETURN P[3]: retorna de Cuenta.sumar, libera el monitor | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #3d0a6de28d6caf9a
+step 23 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":23,"waiting":false} #de101c3b3f9b38c4
+state #a41d5b3cfec1a73e

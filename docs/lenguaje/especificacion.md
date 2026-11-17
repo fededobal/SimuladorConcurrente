@@ -235,9 +235,10 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
     libera B, escribe los `out` y sigue en A. Un ciclo entre monitores (A llama a B, que
     llama a A) es error de ejecución.
 - **`wait` / `signal` / `signal_all`:** disciplina *signal and continue* (ver [`wait`, `signal` y `signal_all`](./instrucciones/wait)).
-- **`delay(s)`:** el proceso queda demorado `s` segundos de tiempo real y conserva los
-  monitores que tenga tomados. El núcleo no lee el reloj: la interfaz le informa la hora en
-  cada paso. Un proceso en `delay` no cuenta para el interbloqueo.
+- **`delay(n)`:** ejecutarlo ocupa un instante; después el proceso queda demorado durante
+  los `n` instantes siguientes y conserva los monitores que tenga tomados. Si ningún proceso
+  está listo pero alguno está demorado, el instante pasa sin eventos. Un proceso en `delay`
+  no cuenta para el interbloqueo (ADR 0008).
 - **Deadlock:** ningún proceso listo y no todos terminados → se informa, junto con los
   monitores que retiene cada proceso bloqueado.
 - **Errores de ejecución:** terminan el proceso que los provoca y liberan su monitor.
@@ -281,7 +282,7 @@ sentencia     = decl_local
               | mientras
               | para
               | "skip" ";"
-              | "delay" "(" expr ")" ";"           (* expr int: segundos, de 0 a 3600 *)
+              | "delay" "(" expr ")" ";"           (* expr int: instantes, de 0 a 3600 *)
               | bloque ;
 
 decl_local    = decl_var ;

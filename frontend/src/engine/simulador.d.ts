@@ -9,11 +9,8 @@ export function create(code: string, seed: number): string;
 /** Reinicia al instante 0 con el mismo codigo y semilla. */
 export function restart(): string;
 
-/**
- * Avanza un instante. chosenProcessId negativo = decide la politica. nowMs es la hora actual
- * (Date.now()): la usa delay, que demora en tiempo real.
- */
-export function step(policy: string, chosenProcessId: number, nowMs: number): string;
+/** Avanza un instante. chosenProcessId negativo = decide la politica. */
+export function step(policy: string, chosenProcessId: number): string;
 
 /** Estado actual y los ultimos eventos del log. */
 export function state(): string;

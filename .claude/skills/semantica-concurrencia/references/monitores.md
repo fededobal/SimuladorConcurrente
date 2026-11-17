@@ -27,10 +27,10 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
   conserva A y entra a B o espera en su cola. Un `wait` en B libera solo B. Al retornar
   libera B, escribe los `out` y sigue en A. Un proceso puede tener varios monitores tomados
   (`holding` en el snapshot). Un ciclo A → B → A es error de ejecución.
-- **delay(s)**: el proceso queda `BLOCKED(DELAY)` hasta `reloj + s·1000` ms, sin soltar sus
-  monitores y sin estar en ninguna cola. El reloj lo informa la interfaz en cada `step`; al
-  principio del paso se despiertan los que vencieron. Si nadie está listo pero alguno está en
-  delay, el paso no hace nada (no hay instante ni deadlock).
+- **delay(n)** (ADR 0008): el proceso queda `BLOCKED(DELAY)` durante los `n` instantes
+  siguientes al del `delay`, sin soltar sus monitores y sin estar en ninguna cola. Al
+  principio de cada paso se despiertan los que ya cumplieron. Si nadie está listo pero alguno
+  está en delay, el instante pasa sin eventos (no hay deadlock).
 - **Deadlock**: no terminó, ningún proceso está `READY` y ninguno está en delay.
 
 ## Invariantes (todo cambio a la VM tiene que conservarlas)

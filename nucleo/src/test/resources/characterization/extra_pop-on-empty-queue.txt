@@ -1,56 +1,56 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #16e37a43b8564083
-step 1 ENTER P: entra a M.sacar | BLOCKED Q: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #57902e4b43b2ba1b
-step 2 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #381e85d907e7b17c
-step 3 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #885fac4524547e64
-step 4 DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cd8c168e29c936c0
-step 5 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #c5e8c4decd948a74
-state #61540d7dd3ebbc94
+create {"finished":false,"deadlock":false} #0ceda3300552f129
+step 1 ENTER P: entra a M.sacar | BLOCKED Q: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #57b6f99ec0657b87
+step 2 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #78f8b924d781df82
+step 3 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #ea1ad6e022349acb
+step 4 DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #639f35a659909c8e
+step 5 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #c0fb4bc306c5ec0c
+state #015bff9259d8c2a4
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #a7e55b73a3a5104d
-step 1 #16ff8c387348a944
-step 2 #77940a84d3ce333f
-step 3 #fa1c1990e74dc71c
-step 4 #d96d6e9514dcfc55
-step 5 #56c040d26df5cc08
-state #daba49cd7df1962a
+create {"finished":false,"deadlock":false} #7ef364dcd3bb6377
+step 1 #044cd511ece73e07
+step 2 #1c9404c3d4cbe005
+step 3 #79626c90d7949dbd
+step 4 #330861d208716051
+step 5 #e094092de6c3032f
+state #0c3971033e3caa16
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #30b516edf04b8fad
-step 1 #57902e4b43b2ba1b
-step 2 #381e85d907e7b17c
-step 3 #885fac4524547e64
-step 4 #cd8c168e29c936c0
-step 5 #c5e8c4decd948a74
-state #61540d7dd3ebbc94
+create {"finished":false,"deadlock":false} #60ce30f94f4257f1
+step 1 #57b6f99ec0657b87
+step 2 #78f8b924d781df82
+step 3 #ea1ad6e022349acb
+step 4 #639f35a659909c8e
+step 5 #c0fb4bc306c5ec0c
+state #015bff9259d8c2a4
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #16e37a43b8564083
-step 1 ENTER P: entra a M.sacar | BLOCKED Q: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #57902e4b43b2ba1b
-step 2 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #381e85d907e7b17c
-step 3 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #885fac4524547e64
-step 4 DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cd8c168e29c936c0
-step 5 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #c5e8c4decd948a74
-state #61540d7dd3ebbc94
+create {"finished":false,"deadlock":false} #0ceda3300552f129
+step 1 ENTER P: entra a M.sacar | BLOCKED Q: espera para entrar a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #57b6f99ec0657b87
+step 2 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #78f8b924d781df82
+step 3 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #ea1ad6e022349acb
+step 4 DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #639f35a659909c8e
+step 5 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #c0fb4bc306c5ec0c
+state #015bff9259d8c2a4
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #a7e55b73a3a5104d
-step 1 #57902e4b43b2ba1b
-step 2 #381e85d907e7b17c
-step 3 #885fac4524547e64
-step 4 #cd8c168e29c936c0
-step 5 #c5e8c4decd948a74
-state #61540d7dd3ebbc94
+create {"finished":false,"deadlock":false} #7ef364dcd3bb6377
+step 1 #57b6f99ec0657b87
+step 2 #78f8b924d781df82
+step 3 #ea1ad6e022349acb
+step 4 #639f35a659909c8e
+step 5 #c0fb4bc306c5ec0c
+state #015bff9259d8c2a4
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #30b516edf04b8fad
-step 1 #57902e4b43b2ba1b
-step 2 #381e85d907e7b17c
-step 3 #885fac4524547e64
-step 4 #cd8c168e29c936c0
-step 5 #c5e8c4decd948a74
-state #61540d7dd3ebbc94
+create {"finished":false,"deadlock":false} #60ce30f94f4257f1
+step 1 #57b6f99ec0657b87
+step 2 #78f8b924d781df82
+step 3 #ea1ad6e022349acb
+step 4 #639f35a659909c8e
+step 5 #c0fb4bc306c5ec0c
+state #015bff9259d8c2a4
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #16e37a43b8564083
-step 1 ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #16ff8c387348a944
-step 2 BLOCKED P: espera para entrar a M.sacar | DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #18b1fc2ef9504ddf
-step 3 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fa1c1990e74dc71c
-step 4 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d96d6e9514dcfc55
-step 5 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #56c040d26df5cc08
-state #a3b607f4bf1ea743
+create {"finished":false,"deadlock":false} #0ceda3300552f129
+step 1 ENTER Q: entra a M.sacar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #044cd511ece73e07
+step 2 BLOCKED P: espera para entrar a M.sacar | DECL Q: int x = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4e69fcdabd8b6f09
+step 3 ERROR Q: error de ejecución - pop sobre la cola vacía 'c' | RELEASE Q: libera M al terminar con error | ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #79626c90d7949dbd
+step 4 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #330861d208716051
+step 5 ERROR P: error de ejecución - pop sobre la cola vacía 'c' | RELEASE P: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #e094092de6c3032f
+state #80b2906d0c1631c5

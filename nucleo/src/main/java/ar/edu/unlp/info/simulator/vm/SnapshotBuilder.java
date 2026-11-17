@@ -17,7 +17,7 @@ final class SnapshotBuilder {
                           List<Integer> advanced, List<Snapshot.OutputLine> output) {
         List<Snapshot.ProcessView> pv = new ArrayList<>();
         for (Process p : processes) {
-            pv.add(processView(p, advanced, monitors));
+            pv.add(processView(p, instant, advanced, monitors));
         }
         List<Snapshot.MonitorView> mv = new ArrayList<>();
         for (Monitor m : monitors) {
@@ -26,7 +26,7 @@ final class SnapshotBuilder {
         return new Snapshot(instant, pv, mv, output);
     }
 
-    private static Snapshot.ProcessView processView(Process p, List<Integer> advanced,
+    private static Snapshot.ProcessView processView(Process p, int instant, List<Integer> advanced,
                                                     Collection<Monitor> monitors) {
         List<String> holding = new ArrayList<>();
         for (Monitor m : monitors) {
@@ -53,7 +53,7 @@ final class SnapshotBuilder {
                 advanced.contains(p.id()),
                 advanced.indexOf(p.id()),
                 holding,
-                p.isDelayed() ? p.delayEndsAt() : null);
+                p.isDelayed() ? Math.max(0, p.delayEndsAt() - instant) : null);
     }
 
     private static Snapshot.MonitorView monitorView(Monitor m) {

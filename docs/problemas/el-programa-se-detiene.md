@@ -60,6 +60,6 @@ procesos pueda avanzar sin esperar.
 
 | Situación | Qué indica la barra | Qué ocurre |
 |---|---|---|
-| Algún proceso está en `delay` | esperando que termine un delay | La ejecución continúa al terminar la demora |
+| Algún proceso está en `delay` | esperando que termine un delay | Los instantes pasan sin que avance nadie hasta que termina la demora |
 | Un proceso terminó por un error | deadlock tras un error | La causa es el error ([Errores en tiempo de ejecución](./errores-en-tiempo-de-ejecucion)) |
 | Un proceso ejecuta un ciclo infinito (`while (true)`) | ejecutando | El programa no termina, pero los procesos avanzan |

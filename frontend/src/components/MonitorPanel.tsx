@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { DeadlockTable } from './DeadlockTable';
 import { ExpandButton } from './ExpandButton';
 import { MonitorDiagram } from './MonitorDiagram';
-import { useAhora } from '../useAhora';
 import type { BlockedProcess } from '../deadlock';
 import type { LogEntry, ProcessView, Snapshot } from '../types';
 
@@ -24,7 +23,6 @@ export function MonitorPanel({ snapshot, entries, blocked, expanded, onToggleExp
     for (const p of snapshot?.processes ?? []) m.set(p.id, p);
     return m;
   }, [snapshot]);
-  const ahora = useAhora(snapshot?.processes.some((p) => p.delayEndsAt !== null) ?? false);
 
   return (
     <aside className={`monitores tarjeta${expanded ? ' extendido' : ''}`} aria-label="Monitores">
@@ -48,7 +46,7 @@ export function MonitorPanel({ snapshot, entries, blocked, expanded, onToggleExp
         )}
         {snapshot?.monitors.map((m) => (
           <MonitorDiagram key={m.name} monitor={m} processes={processes} entries={entries}
-            ahora={ahora} onExpand={expanded ? undefined : onToggleExpand} />
+            onExpand={expanded ? undefined : onToggleExpand} />
         ))}
         <DeadlockTable blocked={blocked} />
       </div>

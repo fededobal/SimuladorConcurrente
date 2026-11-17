@@ -46,7 +46,7 @@ quien lo escribe.
 ::: tip Simplificaciones
 El simulador no reproduce un sistema operativo ni un lenguaje real: muestra cómo se
 comportan los monitores. Un instante es un paso en el que cada proceso con turno ejecuta
-una sentencia; no hay tiempo real salvo en `delay`. Cuando un monitor se libera, entra uno
+una sentencia; no hay tiempo real, y `delay` también se mide en instantes. Cuando un monitor se libera, entra uno
 de los procesos que esperaban, elegido al azar, sin respetar el orden de llegada. Un
 procedure que llama a otro monitor conserva el suyo hasta que esa llamada termina. No hay
 semáforos, pasaje de mensajes ni otras disciplinas de señalización.

@@ -9,7 +9,7 @@
 | Niveles de anidamiento de bloques y paréntesis | 100 | Error de compilación |
 | Operaciones encadenadas en una expresión | 200 | Error de compilación |
 | Valores `int` | De −9 223 372 036 854 775 808 a 9 223 372 036 854 775 807 (64 bits) | Error de ejecución: `Desborde de entero` |
-| Segundos de un `delay` | De 0 a 3600 | Error de ejecución |
+| Instantes de un `delay` | De 0 a 3600 | Error de ejecución |
 | Líneas del panel de salida | Las últimas 500 | Las anteriores se descartan, con un aviso |
 | Instantes de la línea de tiempo | Los últimos 1000 | Los anteriores dejan de mostrarse |
 | Iteraciones sin sentencias observables en un instante | 4000 | El proceso registra una espera activa y pierde el turno |

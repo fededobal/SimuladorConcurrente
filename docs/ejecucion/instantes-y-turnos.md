@@ -36,5 +36,5 @@ mismo instante: entra el primero y los demás quedan en la cola de entrada.
 Cada ejecución toma una semilla distinta del reloj. Con turnos al azar, dos ejecuciones del
 mismo programa casi nunca coinciden. Con turnos en ronda el orden de avance es fijo, pero
 quién entra a un monitor que se libera con varios procesos esperando se sigue sorteando
-([Acceso al monitor](./acceso-al-monitor)). Un programa con `delay` tampoco se repite,
-porque depende del tiempo real.
+([Acceso al monitor](./acceso-al-monitor)). `delay` no agrega otra fuente de variación: se
+mide en instantes y no depende del tiempo real.

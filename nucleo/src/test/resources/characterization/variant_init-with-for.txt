@@ -1,63 +1,63 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #d4fdfe020ba873b0
-step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d86e85d7d5ebbfa6
-step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1493ab0b8fdb10e7
-step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9d3452f046b18860
-step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #469f0b9f189baa68
-step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4fca90c137ddad29
-step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #e01f4accb474df9d
+step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #86d49d6ca0131441
+step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b8ce3417bda48145
+step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #591f2786d7451adf
+step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fa224f4a9a321f40
+step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #37198e2eca2256f0
+step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #80036de5561d1ca8
+state #e067720be208a356
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #ea1f4bcab2242253
-step 1 #d86e85d7d5ebbfa6
-step 2 #1493ab0b8fdb10e7
-step 3 #9d3452f046b18860
-step 4 #469f0b9f189baa68
-step 5 #4fca90c137ddad29
-step 6 #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #a9fbf1181ca2628d
+step 1 #86d49d6ca0131441
+step 2 #b8ce3417bda48145
+step 3 #591f2786d7451adf
+step 4 #fa224f4a9a321f40
+step 5 #37198e2eca2256f0
+step 6 #80036de5561d1ca8
+state #e067720be208a356
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #21dc47ac9a5d8365
-step 1 #d86e85d7d5ebbfa6
-step 2 #1493ab0b8fdb10e7
-step 3 #9d3452f046b18860
-step 4 #469f0b9f189baa68
-step 5 #4fca90c137ddad29
-step 6 #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #40781b03734bd9d5
+step 1 #86d49d6ca0131441
+step 2 #b8ce3417bda48145
+step 3 #591f2786d7451adf
+step 4 #fa224f4a9a321f40
+step 5 #37198e2eca2256f0
+step 6 #80036de5561d1ca8
+state #e067720be208a356
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #d4fdfe020ba873b0
-step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d86e85d7d5ebbfa6
-step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1493ab0b8fdb10e7
-step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9d3452f046b18860
-step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #469f0b9f189baa68
-step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4fca90c137ddad29
-step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #e01f4accb474df9d
+step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #86d49d6ca0131441
+step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b8ce3417bda48145
+step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #591f2786d7451adf
+step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fa224f4a9a321f40
+step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #37198e2eca2256f0
+step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #80036de5561d1ca8
+state #e067720be208a356
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #ea1f4bcab2242253
-step 1 #d86e85d7d5ebbfa6
-step 2 #1493ab0b8fdb10e7
-step 3 #9d3452f046b18860
-step 4 #469f0b9f189baa68
-step 5 #4fca90c137ddad29
-step 6 #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #a9fbf1181ca2628d
+step 1 #86d49d6ca0131441
+step 2 #b8ce3417bda48145
+step 3 #591f2786d7451adf
+step 4 #fa224f4a9a321f40
+step 5 #37198e2eca2256f0
+step 6 #80036de5561d1ca8
+state #e067720be208a356
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #21dc47ac9a5d8365
-step 1 #d86e85d7d5ebbfa6
-step 2 #1493ab0b8fdb10e7
-step 3 #9d3452f046b18860
-step 4 #469f0b9f189baa68
-step 5 #4fca90c137ddad29
-step 6 #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #40781b03734bd9d5
+step 1 #86d49d6ca0131441
+step 2 #b8ce3417bda48145
+step 3 #591f2786d7451adf
+step 4 #fa224f4a9a321f40
+step 5 #37198e2eca2256f0
+step 6 #80036de5561d1ca8
+state #e067720be208a356
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #d4fdfe020ba873b0
-step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d86e85d7d5ebbfa6
-step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1493ab0b8fdb10e7
-step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9d3452f046b18860
-step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #469f0b9f189baa68
-step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4fca90c137ddad29
-step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #774bd05c05330828
-state #870b2adb4f96eae6
+create {"finished":false,"deadlock":false} #e01f4accb474df9d
+step 1 DECL P: int s = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #86d49d6ca0131441
+step 2 ENTER P: entra a M.ver | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b8ce3417bda48145
+step 3 ASSIGN P: r = 30 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #591f2786d7451adf
+step 4 RETURN P: retorna de M.ver, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fa224f4a9a321f40
+step 5 WRITE P: write(suma 30) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #37198e2eca2256f0
+step 6 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #80036de5561d1ca8
+state #e067720be208a356

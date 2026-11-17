@@ -23,7 +23,7 @@ function correr(code, { seed = 7, pasos = 5000, policy = 'RANDOM' } = {}) {
   if (creado.error) return { compilacion: creado.error, linea: creado.line };
   let r = { finished: creado.finished, deadlock: creado.deadlock, snapshot: creado.snapshot };
   for (let i = 0; i < pasos && !r.finished && !r.deadlock; i++) {
-    try { r = JSON.parse(motor.step(policy, -1, i * 100)); }
+    try { r = JSON.parse(motor.step(policy, -1)); }
     catch (e) { return { excepcion: `paso: ${e?.message ?? e}` }; }
   }
   const s = r.snapshot;
@@ -148,7 +148,7 @@ const CANONICOS = [
     process P[i: 0..4] { skip; skip; skip; }`,
     () => {
       JSON.parse(motor.create('process P[i: 0..4] { skip; skip; skip; }', 3));
-      const ps = JSON.parse(motor.step('RANDOM', -1, 0)).snapshot.processes;
+      const ps = JSON.parse(motor.step('RANDOM', -1)).snapshot.processes;
       const turnos = ps.filter((p) => p.advanced).map((p) => p.advanceOrder).sort((x, y) => x - y);
       return turnos.length > 0 && turnos.every((t, k) => t === k)
         && ps.every((p) => p.advanced === (p.advanceOrder >= 0));
@@ -162,7 +162,7 @@ const CANONICOS = [
       const traza = () => {
         let t = '';
         for (let i = 0; i < 12; i++) {
-          for (const e of JSON.parse(motor.step('RANDOM', -1, 0)).entries) t += `${e.processId}${e.kind} `;
+          for (const e of JSON.parse(motor.step('RANDOM', -1)).entries) t += `${e.processId}${e.kind} `;
         }
         return t;
       };
@@ -178,7 +178,7 @@ const CANONICOS = [
       JSON.parse(motor.create('process A { skip; skip; skip; } process B { skip; skip; skip; } process C { skip; skip; skip; }', 5));
       // cualquiera sea la politica, con un proceso elegido el resto no se mueve
       return ['RANDOM', 'ROUND_ROBIN'].every((politica) => [2, 3, 1].every((id) => {
-        const r = JSON.parse(motor.step(politica, id, 0));
+        const r = JSON.parse(motor.step(politica, id));
         const avanzaron = r.snapshot.processes.filter((p) => p.advanced).map((p) => p.id);
         return avanzaron.length === 1 && avanzaron[0] === id
           && r.entries.every((e) => e.processId === id);
@@ -190,9 +190,9 @@ const CANONICOS = [
     () => {
       JSON.parse(motor.create(`monitor M { int x = 0; procedure f() { x = x + 1; } }
         process A { M.f(); } process B { M.f(); } process C { M.f(); }`, 0));
-      motor.step('ROUND_ROBIN', -1, 0);
-      motor.step('ROUND_ROBIN', -1, 0);
-      const r = JSON.parse(motor.step('ROUND_ROBIN', -1, 0));
+      motor.step('ROUND_ROBIN', -1);
+      motor.step('ROUND_ROBIN', -1);
+      const r = JSON.parse(motor.step('ROUND_ROBIN', -1));
       const kinds = r.entries.map((e) => `${e.kind}:${e.processId}`);
       const m = r.snapshot.monitors[0];
       const dueno = m.lockOwner?.id;
@@ -209,9 +209,9 @@ const CANONICOS = [
       for (let k = 0; k < 25; k++) {
         JSON.parse(motor.create(`monitor M { int x = 0; procedure f() { x = x + 1; } }
           process A { M.f(); } process B { M.f(); } process C { M.f(); }`, 1763000000000 + k * 7919));
-        motor.step('ROUND_ROBIN', -1, 0);
-        motor.step('ROUND_ROBIN', -1, 0);
-        entraron.add(JSON.parse(motor.step('ROUND_ROBIN', -1, 0)).snapshot.monitors[0].lockOwner?.id);
+        motor.step('ROUND_ROBIN', -1);
+        motor.step('ROUND_ROBIN', -1);
+        entraron.add(JSON.parse(motor.step('ROUND_ROBIN', -1)).snapshot.monitors[0].lockOwner?.id);
       }
       return entraron.has(2) && entraron.has(3);
     }],
@@ -267,10 +267,21 @@ const CANONICOS = [
     monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
     process P[k: 0..2] { E[k].f(k); }`,
     (r) => r.finished && r.vars['E[0].n'] === '0' && r.vars['E[1].n'] === '11' && r.vars['E[2].n'] === '22'],
-  ['delay demora en tiempo real y no es deadlock', `
+  ['delay se mide en instantes y no es deadlock (ADR 0008)', `
     monitor M { int n = 0; procedure f() { delay(1); n++; } }
     process P { M.f(); } process Q { skip; M.f(); }`,
     (r) => r.finished && r.vars['M.n'] === '2' && r.kinds.has('DELAY')],
+  ['delay(3): el instante pasa aunque nadie avance, y delayRemaining baja de a uno', `
+    process P { delay(3); write("listo"); }`,
+    () => {
+      JSON.parse(motor.create('process P { delay(3); write("listo"); }', 1));
+      const pasos = [];
+      for (let i = 0; i < 5; i++) pasos.push(JSON.parse(motor.step('RANDOM', -1)));
+      const resto = pasos.map((r) => r.snapshot.processes[0].delayRemaining);
+      return pasos.map((r) => r.instant).join() === '1,2,3,4,5'
+        && resto.join() === '3,2,1,0,' && pasos[1].entries.length === 0 && pasos[1].waiting
+        && pasos[4].snapshot.output[0]?.text === 'listo';
+    }],
   ['indice mayor que un int no se trunca (VI-4)', `
     process P { int a[3]; int r; r = a[4294967296]; }`,
     (r) => r.finished && r.kinds.has('ERROR')],
@@ -313,7 +324,7 @@ console.log('Paridad con la JVM');
   motor.create(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
   let traza = '';
   for (let i = 0; i < 6; i++) {
-    for (const e of JSON.parse(motor.step('RANDOM', -1, 0)).entries) traza += `${e.processId}${e.kind[0]} `;
+    for (const e of JSON.parse(motor.step('RANDOM', -1)).entries) traza += `${e.processId}${e.kind[0]} `;
     traza += '| ';
   }
   const bien = traza.trim() === TRAZA;

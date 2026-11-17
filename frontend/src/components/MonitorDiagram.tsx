@@ -5,8 +5,8 @@ import {
 } from '../monitorDiagram';
 import { MasMenos, MAX_VISIBLES } from './MasMenos';
 import { MonitorVars } from './MonitorVars';
-import { segundosRestantes } from '../useAhora';
 import { processTextColor } from '../processColor';
+import { delayLeft } from '../processStates';
 import type { CondView, LogEntry, MonitorView, ProcessView, ProcRef } from '../types';
 
 interface Props {
@@ -15,7 +15,6 @@ interface Props {
   readonly processes: ReadonlyMap<number, ProcessView>;
   /** Eventos del ultimo paso: resaltan las flechas que se recorrieron. */
   readonly entries: readonly LogEntry[];
-  readonly ahora: number;
   /** Si se puede ampliar, un clic sobre el dibujo lo hace. */
   readonly onExpand?: () => void;
 }
@@ -49,7 +48,7 @@ const ESQUINA = 6;
  * orden, y las variables del monitor con su estructura. En el panel ampliado el dibujo es
  * mas grande (lo da el CSS); no cambia de forma.
  */
-export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }: Props) {
+export function MonitorDiagram({ monitor, processes, entries, onExpand }: Props) {
   const id = useId();
   const punta = `${id}-punta`;
   // zona tocada en el dibujo: la lista de abajo se limita a ella, entera y sin plegar
@@ -60,7 +59,7 @@ export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }:
 
   const dueno = monitor.lockOwner ? processes.get(monitor.lockOwner.id) : undefined;
   const estado = !monitor.lockOwner ? 'libre'
-    : `${monitor.lockOwner.name} adentro${notaDelDueno(dueno, ahora)}`;
+    : `${monitor.lockOwner.name} adentro${notaDelDueno(dueno)}`;
 
   // posicion de cada punto dentro de su zona; los que no entran se cuentan con "+n"
   const total: Record<Zone, number> = { 1: 0, 2: 0, 3: 0 };
@@ -188,9 +187,9 @@ export function MonitorDiagram({ monitor, processes, entries, ahora, onExpand }:
 }
 
 /** Aclaracion sobre el dueno cuando no esta ejecutando: en delay, o esperando en otro monitor. */
-function notaDelDueno(p: ProcessView | undefined, ahora: number): string {
+function notaDelDueno(p: ProcessView | undefined): string {
   if (!p || p.state !== 'BLOCKED') return '';
-  if (p.delayEndsAt !== null) return `, en delay (${segundosRestantes(p.delayEndsAt, ahora)} s)`;
+  if (p.delayRemaining !== null) return `, en delay (${delayLeft(p.delayRemaining)})`;
   return `, esperando en ${p.blockedOn ?? 'otro monitor'}`;
 }
 

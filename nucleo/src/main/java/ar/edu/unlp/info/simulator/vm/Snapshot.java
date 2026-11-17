@@ -38,8 +38,8 @@ public record Snapshot(int instant,
      * Estado de un proceso. {@code advanceOrder} es su posicion en el turno del ultimo
      * instante (0 el primero que avanzo) o -1 si no avanzo. {@code holding} son los monitores
      * que tiene tomados: con llamadas cerradas puede retener uno mientras espera en otro.
-     * {@code delayEndsAt} es la hora (ms del reloj que informa la interfaz) en que termina su
-     * delay, o null si no esta demorado.
+     * {@code delayRemaining} son los instantes que le quedan demorado por un delay (0: vuelve
+     * a estar listo en el proximo), o null si no esta demorado.
      */
     public record ProcessView(int id,
                               String name,
@@ -54,5 +54,5 @@ public record Snapshot(int instant,
                               boolean advanced,
                               int advanceOrder,
                               List<String> holding,
-                              Long delayEndsAt) { }
+                              Integer delayRemaining) { }
 }

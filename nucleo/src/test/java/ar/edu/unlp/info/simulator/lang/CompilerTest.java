@@ -594,9 +594,9 @@ class CompilerTest {
                 .contains("No se puede asignar a 'id'"));
     }
 
-    /** delay recibe segundos enteros y no se usa en la inicializacion de un monitor. */
+    /** delay recibe una cantidad entera de instantes y no se usa en la inicializacion de un monitor. */
     @Test
-    void delayInWholeSeconds() {
+    void delayTakesWholeInstants() {
         assertDoesNotThrow(() -> Compiler.compile(
                 "monitor M { procedure f() { delay(1); } }\nprocess P { delay(2); M.f(); }"));
         assertTrue(errorOf("process P { delay(true); }").contains("El tiempo del delay tiene que ser int"));

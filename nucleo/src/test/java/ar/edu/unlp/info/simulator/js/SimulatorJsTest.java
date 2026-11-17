@@ -31,7 +31,7 @@ class SimulatorJsTest {
     @Test
     void stepReturnsStepResponseShape() {
         SimulatorJs.create(BUFFER, 1);
-        String json = SimulatorJs.step("ROUND_ROBIN", -1, 0);
+        String json = SimulatorJs.step("ROUND_ROBIN", -1);
         assertTrue(json.startsWith("{\"entries\":["), json);
         assertTrue(json.contains("\"snapshot\":{"), json);
         assertTrue(json.contains("\"finished\":"), json);
@@ -62,7 +62,7 @@ class SimulatorJsTest {
                 process A { M.f(); }
                 """, 1);
         assertDoesNotThrow(() -> {
-            for (int i = 0; i < 20; i++) SimulatorJs.step("ROUND_ROBIN", -1, 0);
+            for (int i = 0; i < 20; i++) SimulatorJs.step("ROUND_ROBIN", -1);
         });
     }
 
@@ -79,7 +79,7 @@ class SimulatorJsTest {
             String createdJson = assertDoesNotThrow(() -> SimulatorJs.create(code, 1));
             if (createdJson.startsWith("{\"error\"")) continue;
             assertDoesNotThrow(() -> {
-                for (int i = 0; i < 5; i++) SimulatorJs.step("RANDOM", -1, 0);
+                for (int i = 0; i < 5; i++) SimulatorJs.step("RANDOM", -1);
                 SimulatorJs.state();
             });
         }

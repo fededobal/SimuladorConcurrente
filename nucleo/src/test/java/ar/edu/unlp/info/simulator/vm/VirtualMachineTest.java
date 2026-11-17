@@ -620,43 +620,93 @@ class VirtualMachineTest {
                 r.vm().snapshot().processes().get(0).error());
     }
 
-    /** delay demora en tiempo real: el reloj lo informa quien llama a step. */
+    /** delay(n) ocupa un instante y despues el proceso no avanza durante los n siguientes (ADR 0008). */
     @Test
-    void delayWaitsInRealTime() {
+    void delayLastsTheGivenInstants() {
         VirtualMachine vm = TestSupport.compileAndBuild("process P { delay(2); write(\"listo\"); }", 0);
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 10_000);   // ejecuta el delay
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // instante 1: ejecuta el delay
         Snapshot s = vm.snapshot();
         assertEquals("DELAY", s.processes().get(0).blockReason());
-        assertEquals(12_000L, s.processes().get(0).delayEndsAt());
+        assertEquals(2, s.processes().get(0).delayRemaining());
 
-        java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN, 11_000);
+        // instantes 2 y 3: nadie avanza, pero el tiempo pasa
+        java.util.List<LogEntry> ev = vm.step(null, SchedulingPolicy.ROUND_ROBIN);
         assertTrue(ev.isEmpty());
         assertTrue(vm.isWaitingForDelay());
         assertTrue(!vm.isDeadlocked());
-        assertEquals(1, vm.instant(), "esperar no hace pasar el instante");
+        assertEquals(2, vm.instant(), "el instante pasa aunque nadie avance");
+        assertEquals(1, vm.snapshot().processes().get(0).delayRemaining());
+        assertTrue(!vm.snapshot().processes().get(0).advanced(), "demorado no es haber avanzado");
 
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 12_000);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        assertEquals(0, vm.snapshot().processes().get(0).delayRemaining());
+        assertTrue(vm.snapshot().output().isEmpty(), "todavia demorado en el instante 3");
+
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);   // instante 4: sigue
+        assertEquals(4, vm.instant());
         assertEquals("listo", vm.snapshot().output().get(0).text());
+        assertEquals(null, vm.snapshot().processes().get(0).delayRemaining());
+    }
+
+    /** delay(0) no demora: el proceso sigue en el instante siguiente, como con skip. */
+    @Test
+    void delayZeroIsLikeSkip() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process P { delay(0); write(\"listo\"); }", 0);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        assertEquals(2, vm.instant());
+        assertEquals("listo", vm.snapshot().output().get(0).text());
+    }
+
+    /** Mientras un proceso esta demorado, los demas siguen avanzando en esos instantes. */
+    @Test
+    void othersAdvanceDuringADelay() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                process Lento { delay(3); write("lento"); }
+                process Rapido { write("a"); write("b"); write("c"); }
+                """, 0);
+        for (int i = 0; i < 4; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        // Rapido escribio en los instantes 1 a 3; Lento recien puede seguir en el 5
+        assertEquals(java.util.List.of("a", "b", "c"),
+                vm.snapshot().output().stream().map(Snapshot.OutputLine::text).toList());
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        assertEquals("lento", vm.snapshot().output().get(3).text());
+    }
+
+    /** Con delay el tiempo ya no depende del reloj: una semilla repite la ejecucion entera. */
+    @Test
+    void delayIsDeterministic() {
+        String code = """
+                monitor M { int n = 0; procedure f() { n++; delay(2); } }
+                process P[i: 1..4] { delay(i); M.f(); write("fin ", i); }
+                """;
+        for (long seed = 0; seed < 5; seed++) {
+            RunResult a = TestSupport.run(code, SchedulingPolicy.RANDOM, seed, 400);
+            RunResult b = TestSupport.run(code, SchedulingPolicy.RANDOM, seed, 400);
+            assertTrue(a.vm().isFinished(), "semilla " + seed);
+            assertEquals(a.vm().instant(), b.vm().instant(), "semilla " + seed);
+            assertEquals(a.vm().snapshot().output(), b.vm().snapshot().output(), "semilla " + seed);
+        }
     }
 
     /** Un delay dentro del monitor no lo suelta: el otro proceso espera en la cola de entrada. */
     @Test
     void delayInsideMonitorKeepsIt() {
         VirtualMachine vm = TestSupport.compileAndBuild("""
-                monitor M { int n = 0; procedure f() { delay(1); n++; } }
+                monitor M { int n = 0; procedure f() { delay(3); n++; } }
                 process P { M.f(); }
                 process Q { skip; M.f(); }
                 """, 0);
-        vm.step(1, SchedulingPolicy.ROUND_ROBIN, 0);   // P entra
-        vm.step(1, SchedulingPolicy.ROUND_ROBIN, 0);   // P: delay(1)
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 100);
-        vm.step(null, SchedulingPolicy.ROUND_ROBIN, 200);
+        vm.step(1, SchedulingPolicy.ROUND_ROBIN);   // P entra
+        vm.step(1, SchedulingPolicy.ROUND_ROBIN);   // P: delay(3)
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        vm.step(null, SchedulingPolicy.ROUND_ROBIN);
         Snapshot s = vm.snapshot();
         assertEquals(1, s.monitors().get(0).lockOwner().id());
         assertEquals("MONITOR_ENTRY", s.processes().get(1).blockReason());
         assertTrue(vm.isWaitingForDelay());
-        for (int t = 1000; !vm.isFinished() && t < 5000; t += 100) {
-            vm.step(null, SchedulingPolicy.ROUND_ROBIN, t);
+        for (int i = 0; !vm.isFinished() && i < 50; i++) {
+            vm.step(null, SchedulingPolicy.ROUND_ROBIN);
         }
         assertTrue(vm.isFinished());
         assertEquals("2", TestSupport.varValue(vm.snapshot().monitors().get(0), "n"));
@@ -666,7 +716,7 @@ class VirtualMachineTest {
     void delayOutOfRangeIsRuntimeError() {
         RunResult r = TestSupport.run("process P { int s = -1; delay(s); }",
                 SchedulingPolicy.ROUND_ROBIN, 0, 10);
-        assertEquals("El delay tiene que ser de 0 a 3600 segundos y es de -1",
+        assertEquals("El delay tiene que ser de 0 a 3600 instantes y es de -1",
                 r.vm().snapshot().processes().get(0).error());
     }
 

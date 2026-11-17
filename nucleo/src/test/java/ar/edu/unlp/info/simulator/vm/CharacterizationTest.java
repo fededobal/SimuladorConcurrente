@@ -43,9 +43,8 @@ class CharacterizationTest {
 
     private static final long[] SEEDS = {0, 1, 2};
     private static final String[] POLICIES = {"RANDOM", "ROUND_ROBIN"};
-    /** Llamadas a paso por corrida; cada una adelanta el reloj {@link #MS_PER_STEP}. */
+    /** Llamadas a paso por corrida. */
     private static final int MAX_STEPS = 200;
-    private static final long MS_PER_STEP = 500;
 
     @Test
     void engineAnswersTheSameAsWhenTheReferenceWasRecorded() throws IOException {
@@ -101,7 +100,7 @@ class CharacterizationTest {
         if (createdJson.startsWith("{\"error\"")) return;
         for (int i = 1; i <= MAX_STEPS; i++) {
             int chosen = stepByStep ? (i % 4) + 1 : -1;
-            String step = SimulatorJs.step(policy, chosen, i * MS_PER_STEP);
+            String step = SimulatorJs.step(policy, chosen);
             sb.append("step ").append(i).append(' ')
                     .append(readable ? summary(step) : "#" + fingerprint(step)).append('\n');
             if (step.startsWith("{\"error\"") || step.contains("\"finished\":true")

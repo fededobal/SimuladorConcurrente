@@ -28,7 +28,7 @@ export const STATE_HINT: Record<VisibleState, string> = {
   RUNNING_MONITOR: 'ejecutando dentro de un monitor, con el monitor tomado',
   COMPETING: 'compitiendo por entrar al monitor',
   WAITING: 'esperando, dormido en una variable condición',
-  DELAYED: 'demorado por un delay hasta que pase el tiempo; si está en un monitor, lo sigue teniendo tomado',
+  DELAYED: 'demorado por un delay hasta que pasen los instantes indicados; si está en un monitor, lo sigue teniendo tomado',
   READY: 'sin turno: podía avanzar, pero no le tocó en este instante',
   TERMINATED: 'terminado',
 };
@@ -94,4 +94,10 @@ export function stateDetail(state: VisibleState, where: string | null, plural = 
     case 'TERMINATED': return plural ? 'terminados' : 'terminado';
     case 'RUNNING_PROCESS': return '';
   }
+}
+
+/** Cuanto le falta a un delay, en palabras: "faltan 3 instantes", "sigue en el próximo". */
+export function delayLeft(remaining: number): string {
+  if (remaining <= 0) return 'sigue en el próximo';
+  return remaining === 1 ? 'falta 1 instante' : `faltan ${remaining} instantes`;
 }

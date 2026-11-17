@@ -21,7 +21,7 @@ Cada sentencia ocupa un paso del proceso que la ejecuta. Las guardas de `if`, `w
 | [`pop`](./pop) | `pop(c, x);` · `pop(c, x, y);` · `pop(c, (x, y));` | Todas |
 | [`empty`](./empty) | `empty c` · `empty(c)` (expresión) | Todas |
 | [`write`](./write) | `write(e);` · `write(e1, e2, ...);` | Todas |
-| [`delay`](./delay) | `delay(segundos);` | Procedure, proceso |
+| [`delay`](./delay) | `delay(instantes);` | Procedure, proceso |
 | Bloque | `{ ... }` | Todas |
 
 En la tabla, «Todas» comprende el código de inicialización del monitor, los procedures y

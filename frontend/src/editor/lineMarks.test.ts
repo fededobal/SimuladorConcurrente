@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { gutterChipsOf, lineMarksOf, MAX_TAGS, type ActiveLine } from './lineMarks';
 
 function active(name: string, line: number, extra: Partial<ActiveLine> = {}): ActiveLine {
-  return { name, line, color: '#000', state: 'READY', where: null, delayEndsAt: null, ...extra };
+  return { name, line, color: '#000', state: 'READY', where: null, delayRemaining: null, ...extra };
 }
 
 describe('lineMarksOf', () => {

@@ -32,7 +32,7 @@ se escriben igual que en ese material.
 | `text res[N];` | `text res[5];` | Ídem |
 | `UsarCajero();` | `delay(2);` o `skip;` | No existen funciones: el uso de un recurso se representa con una demora o con un paso vacío |
 | `R = AnalizarSec(S);` | `R = S + " analizada";` | Ídem; se reemplaza por una expresión |
-| `delay(90minutos);` | `delay(90);` | `delay` recibe segundos, de 0 a 3600 |
+| `delay(90minutos);` | `delay(90);` | `delay` recibe una cantidad de instantes, de 0 a 3600, sin unidad |
 | `--genera el valor` | `// genera el valor` | Los comentarios empiezan con `//` o van entre `/*` y `*/` |
 | `....` o `……` | Se omite | No hay sentencia de relleno; `skip;` ocupa un paso sin hacer nada |
 | `boolean listo = false;` | `bool listo = false;` | El tipo se llama `bool` |

@@ -6,7 +6,7 @@ function proc(id: number, name: string, extra: Partial<ProcessView>): ProcessVie
   return {
     id, name, color: '#000', state: 'BLOCKED', blockReason: null, blockedOn: null, location: null,
     line: 1, locals: [], error: null, advanced: false, advanceOrder: -1, holding: [],
-    delayEndsAt: null, ...extra,
+    delayRemaining: null, ...extra,
   };
 }
 

@@ -15,7 +15,7 @@ public final class Process {
         MONITOR_ENTRY,
         /** Demorado en la cola de una variable condicion tras hacer wait. */
         COND_WAIT,
-        /** Demorado por un delay, hasta que pase el tiempo indicado. */
+        /** Demorado por un delay, hasta que pasen los instantes indicados. */
         DELAY
     }
 
@@ -37,8 +37,8 @@ public final class Process {
 
     private String errorMessage;
 
-    /** Hora (en ms del reloj de la simulacion) en que termina su delay; -1 si no esta demorado. */
-    private long delayEndsAt = -1;
+    /** Ultimo instante que pasa demorado por un delay; -1 si no esta demorado. */
+    private int delayEndsAt = -1;
 
     public Process(int id, String name, String color) {
         this.id = id;
@@ -78,13 +78,13 @@ public final class Process {
         this.delayEndsAt = -1;
     }
 
-    /** Demora el proceso hasta {@code endsAt} (ms del reloj de la simulacion). */
-    public void delayUntil(long endsAt) {
+    /** Demora el proceso hasta el instante {@code endsAt} inclusive: vuelve a estar listo despues. */
+    public void delayUntil(int endsAt) {
         block(BlockReason.DELAY, null);
         this.delayEndsAt = endsAt;
     }
 
-    public long delayEndsAt() { return delayEndsAt; }
+    public int delayEndsAt() { return delayEndsAt; }
 
     public boolean isDelayed() {
         return state == State.BLOCKED && blockReason == BlockReason.DELAY;

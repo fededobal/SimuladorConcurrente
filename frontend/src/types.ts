@@ -50,8 +50,8 @@ export interface ProcessView {
   advanceOrder: number;
   /** Monitores que tiene tomados (con llamadas cerradas, puede retener uno mientras espera en otro). */
   holding: string[];
-  /** Hora (ms, mismo reloj que Date.now()) en que termina su delay, o null si no esta demorado. */
-  delayEndsAt: number | null;
+  /** Instantes que le quedan demorado por un delay (0: sigue en el proximo), o null si no lo esta. */
+  delayRemaining: number | null;
 }
 
 export interface OutputLine {

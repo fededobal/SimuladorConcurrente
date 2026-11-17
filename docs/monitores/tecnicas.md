@@ -21,7 +21,7 @@ y no todos terminaron, porque todos están demorados en colas de entrada o de va
 condición, se informa el interbloqueo junto con los monitores que retiene cada proceso
 bloqueado.
 
-Un proceso demorado por `delay` no cuenta como bloqueado: mientras haya alguno, el simulador
-espera a que termine su demora. Si el interbloqueo aparece después de que un proceso terminó
+Un proceso demorado por `delay` no cuenta como bloqueado: mientras haya alguno, los
+instantes siguen pasando hasta que termina su demora. Si el interbloqueo aparece después de que un proceso terminó
 con un error de ejecución, el estado dice "deadlock tras un error": la causa es el error, no
 la sincronización.

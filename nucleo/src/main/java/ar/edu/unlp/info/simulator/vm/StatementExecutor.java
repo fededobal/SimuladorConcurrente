@@ -14,8 +14,8 @@ import java.util.Map;
  */
 final class StatementExecutor {
 
-    /** Segundos maximos de un delay: una hora alcanza para cualquier ejercicio. */
-    static final int MAX_DELAY_SECONDS = 3600;
+    /** Instantes maximos de un delay: alcanza para cualquier ejercicio. */
+    static final int MAX_DELAY_INSTANTS = 3600;
 
     private final VariableAccess vars;
     private final Map<String, Monitor> monitors;
@@ -284,18 +284,19 @@ final class StatementExecutor {
     }
 
     /**
-     * Demora al proceso la cantidad de segundos indicada, en tiempo real. Si esta dentro de
-     * un monitor, lo sigue teniendo tomado mientras tanto.
+     * Demora al proceso la cantidad de instantes indicada (ADR 0008): ejecutar el delay le
+     * ocupa este instante y despues no avanza durante los {@code n} siguientes. Si esta dentro
+     * de un monitor, lo sigue teniendo tomado mientras tanto.
      */
     private void execDelay(Process p, Activation act, Stmt.Delay d) {
-        long seconds = vars.evaluator(act).evalLong(d.seconds());
-        if (seconds < 0 || seconds > MAX_DELAY_SECONDS) {
-            throw new RuntimeError("El delay tiene que ser de 0 a " + MAX_DELAY_SECONDS
-                    + " segundos y es de " + seconds, d.line());
+        long instants = vars.evaluator(act).evalLong(d.seconds());
+        if (instants < 0 || instants > MAX_DELAY_INSTANTS) {
+            throw new RuntimeError("El delay tiene que ser de 0 a " + MAX_DELAY_INSTANTS
+                    + " instantes y es de " + instants, d.line());
         }
-        p.delayUntil(clock.nowMs() + seconds * 1000);
-        event(p, EventKind.DELAY, "", p.name() + ": delay(" + seconds + ") - se demora " + seconds
-                + (seconds == 1 ? " segundo" : " segundos"));
+        p.delayUntil(clock.instant() + (int) instants);
+        event(p, EventKind.DELAY, "", p.name() + ": delay(" + instants + ") - se demora " + instants
+                + (instants == 1 ? " instante" : " instantes"));
     }
 
     /** Concatena los argumentos y deja una linea en la pantalla de salida. */

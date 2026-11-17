@@ -1,159 +1,159 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #a19bd5a3ea57e6cc
-step 1 ENTER W[4]: entra a Gate.esperar | BLOCKED W[2]: espera para entrar a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | BLOCKED W[3]: espera para entrar a Gate.esperar | BLOCKED W[0]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #01527432f12fe9d8
-step 2 WAIT W[4]: wait(g) - libera el monitor y se demora | ENTER W[0]: entra a Gate.esperar | BLOCKED W[1]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #482973c2b3fcad27
-step 3 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #974d17577bc61653
-step 4 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER W[3]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #67607c34c2d899bb
-step 5 WAIT W[3]: wait(g) - libera el monitor y se demora | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #9573dcdb9df8b33e
-step 6 WAIT W[2]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a036455315fe3e41
-step 7 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #5fe136bb7ebf62ad
-step 8 SIGNAL_ALL Opener: signal_all(g) - despierta a 5 proceso(s) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5c7c490ee1b61b96
-step 9 RETURN Opener: retorna de Gate.abrir, libera el monitor | REENTER W[4]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e122e0d9476c82fb
-step 10 TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ea3d5cedff93d57f
-step 11 ASSIGN W[4]: through = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #72e297872ae0ae79
-step 12 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[3]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #f61709e3ebcdeca0
-step 13 ASSIGN W[3]: through = 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #c8a1a6ef24511ebe
-step 14 TERMINATED W[4]: termina | RETURN W[3]: retorna de Gate.esperar, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #c9923ead617e3e0a
-step 15 ASSIGN W[1]: through = 3 | TERMINATED W[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1ca1755854d465cb
-step 16 RETURN W[1]: retorna de Gate.esperar, libera el monitor | REENTER W[2]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6579f01ae51f6724
-step 17 ASSIGN W[2]: through = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #0e4376d56cce8ec3
-step 18 TERMINATED W[1]: termina | RETURN W[2]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #06f47ff53a0ec3da
-step 19 ASSIGN W[0]: through = 5 | TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #38829897405a0b03
-step 20 RETURN W[0]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #3e708c25d73ed2cd
-step 21 TERMINATED W[0]: termina | {"finished":true,"deadlock":false,"instant":21,"waiting":false} #637a8afbc38d82fb
-state #19334d3e5d28d9a3
+create {"finished":false,"deadlock":false} #dbf1a27f58ce3198
+step 1 ENTER W[4]: entra a Gate.esperar | BLOCKED W[2]: espera para entrar a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | BLOCKED W[3]: espera para entrar a Gate.esperar | BLOCKED W[0]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #93024be498a1f946
+step 2 WAIT W[4]: wait(g) - libera el monitor y se demora | ENTER W[0]: entra a Gate.esperar | BLOCKED W[1]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #dd981e232c011396
+step 3 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #d942462a47e9c31c
+step 4 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER W[3]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b8c05c1add87e9d6
+step 5 WAIT W[3]: wait(g) - libera el monitor y se demora | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0779ae668fc490ee
+step 6 WAIT W[2]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #33b0586af97202e5
+step 7 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #3d62b6e4f317b528
+step 8 SIGNAL_ALL Opener: signal_all(g) - despierta a 5 proceso(s) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #a8d2e3370150a021
+step 9 RETURN Opener: retorna de Gate.abrir, libera el monitor | REENTER W[4]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #6dd7ecaf184f7b1b
+step 10 TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #dd054c9812011053
+step 11 ASSIGN W[4]: through = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #4932ca4f20b32fa3
+step 12 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[3]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ed86b2a140ed8feb
+step 13 ASSIGN W[3]: through = 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #ea75d1d2a5c56475
+step 14 TERMINATED W[4]: termina | RETURN W[3]: retorna de Gate.esperar, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cafa1ba30d706f38
+step 15 ASSIGN W[1]: through = 3 | TERMINATED W[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #dc542f3a392108cd
+step 16 RETURN W[1]: retorna de Gate.esperar, libera el monitor | REENTER W[2]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #2a9cd7cf1e59fb0e
+step 17 ASSIGN W[2]: through = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #5df6f51090616d94
+step 18 TERMINATED W[1]: termina | RETURN W[2]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #5483e6edc4462103
+step 19 ASSIGN W[0]: through = 5 | TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #bb980ae6cfd85bb1
+step 20 RETURN W[0]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #29dbef53553645ec
+step 21 TERMINATED W[0]: termina | {"finished":true,"deadlock":false,"instant":21,"waiting":false} #273ae50dbdd6728f
+state #8c7c0e0ff4145bb8
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #7c442713ae4aa892
-step 1 #90716edffd47b8a3
-step 2 #95ef49181ecc1ca6
-step 3 #2c2ce2546d5927a5
-step 4 #050b67fa5b21f4ce
-step 5 #a584a16344577460
-step 6 #8df989c5c57c5b90
-step 7 #3e30ed69defc3cb2
-step 8 #f7d77544f853a76d
-step 9 #80d4fc5903f7cf63
-step 10 #d9c62cb21842593f
-step 11 #f1b41f82a1e0dfd8
-step 12 #956fffe7e84332e3
-step 13 #9c7cc6b5a206f13e
-step 14 #7f1d1c1dfabe10a8
-step 15 #f624a120ecd6ad62
-step 16 #d87b21e9148648d0
-step 17 #3eb00114f3310b9b
-step 18 #5e1f40a6421ef4ce
-step 19 #c470523054165bcf
-step 20 #d527488bb25589de
-step 21 #6cf63375d09e342f
-state #9dea922732bd427b
+create {"finished":false,"deadlock":false} #9e3cef6acf9bdc82
+step 1 #ba3668aab8de7bb8
+step 2 #697ce3957eafb912
+step 3 #84c1afc8781c019d
+step 4 #36cafe01e6670b2e
+step 5 #e8637369a4139e5f
+step 6 #9226c7eb0bcbe5ff
+step 7 #b96fbd1296383d75
+step 8 #79434a7af9040100
+step 9 #b670cc015e8c2797
+step 10 #4ffeb3ec5cbf163e
+step 11 #a9d07b8c7c1382a7
+step 12 #be61cde300cbe5fb
+step 13 #cbd11ffd7d22ffd5
+step 14 #f9fcdd8956466003
+step 15 #924e276569da40da
+step 16 #4df7662446bc3a44
+step 17 #912271e775aa2f05
+step 18 #ef5f889d669bb635
+step 19 #75fd6f0f69111619
+step 20 #df324bdda343955f
+step 21 #5a9eeaac9e24524e
+state #0acb7faba0f854b8
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #6c3e011939e108b1
-step 1 #13fdca96c1238d64
-step 2 #095bca7565012c1f
-step 3 #b584a7eeb876aab7
-step 4 #bbee3f36eeebdca1
-step 5 #b08264b6881a6548
-step 6 #5f85a551d6f79504
-step 7 #0c0ce171757b96b2
-step 8 #54cb87ccd7438358
-step 9 #b50d56dc933df6aa
-step 10 #3e723d668f322c0b
-step 11 #d30fd6c26fba574e
-step 12 #727832314159293f
-step 13 #d73dd37779431a83
-step 14 #663691d75ca1c0c5
-step 15 #3828d9bf9aa22077
-state #1c30fa1533d84834
+create {"finished":false,"deadlock":false} #9263ba9a712877d4
+step 1 #49f7fb9232cfbd5e
+step 2 #226446daf284808d
+step 3 #09e0c210c48403b9
+step 4 #0c1a5f6f43c1bd1a
+step 5 #2fa7ae9a849576c5
+step 6 #28e9996bf7370e63
+step 7 #de02a5a144b6d2cd
+step 8 #5aacc8dd0662de9e
+step 9 #3c6ed49d383cb74c
+step 10 #2b1abb5c7c7713c6
+step 11 #f51ee7e4a9f511ca
+step 12 #49329608eee1b03f
+step 13 #a1f5be654e79823d
+step 14 #61701af183f26c4a
+step 15 #446d7e94d11544c0
+state #00fef3f654608d51
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #a19bd5a3ea57e6cc
-step 1 ENTER W[0]: entra a Gate.esperar | BLOCKED W[1]: espera para entrar a Gate.esperar | BLOCKED W[2]: espera para entrar a Gate.esperar | BLOCKED W[3]: espera para entrar a Gate.esperar | BLOCKED W[4]: espera para entrar a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fe0d5481fdb2c06e
-step 2 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d4df583fda47cd37
-step 3 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #4b3eaacb28dd8ffc
-step 4 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fc595bec08c2fd91
-step 5 SIGNAL_ALL Opener: signal_all(g) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #95557ab83ecd8cb5
-step 6 RETURN Opener: retorna de Gate.abrir, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #20b5d4f1cfdff958
-step 7 ASSIGN W[1]: through = 1 | TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #cbe4fca461d75a1e
-step 8 RETURN W[1]: retorna de Gate.esperar, libera el monitor | ENTER W[4]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #ccbd9dc69c8b73bd
-step 9 ASSIGN W[4]: through = 2 | TERMINATED W[1]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8967e8bf3b8242a0
-step 10 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #52ebf18a08200e4d
-step 11 ASSIGN W[0]: through = 3 | TERMINATED W[4]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #789ef9031c762282
-step 12 RETURN W[0]: retorna de Gate.esperar, libera el monitor | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c6f982dd7511c67c
-step 13 ASSIGN W[2]: through = 4 | TERMINATED W[0]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #a4282dc950a3ce2c
-step 14 RETURN W[2]: retorna de Gate.esperar, libera el monitor | ENTER W[3]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #61e1ea58cabdf1b2
-step 15 ASSIGN W[3]: through = 5 | TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #34c181f8c940bce6
-step 16 RETURN W[3]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #3674edf629ea05e9
-step 17 TERMINATED W[3]: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #787fce854a385666
-state #3a8e643aae2efea6
+create {"finished":false,"deadlock":false} #dbf1a27f58ce3198
+step 1 ENTER W[0]: entra a Gate.esperar | BLOCKED W[1]: espera para entrar a Gate.esperar | BLOCKED W[2]: espera para entrar a Gate.esperar | BLOCKED W[3]: espera para entrar a Gate.esperar | BLOCKED W[4]: espera para entrar a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #4b31952e892fc44f
+step 2 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #616ad6d9b3298f41
+step 3 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #760e22679dddf6f6
+step 4 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #978f762170d708a0
+step 5 SIGNAL_ALL Opener: signal_all(g) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ad1e60fe5a94802a
+step 6 RETURN Opener: retorna de Gate.abrir, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e9aca2bd851e5281
+step 7 ASSIGN W[1]: through = 1 | TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c4f41592c0795289
+step 8 RETURN W[1]: retorna de Gate.esperar, libera el monitor | ENTER W[4]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d86aaece9310657b
+step 9 ASSIGN W[4]: through = 2 | TERMINATED W[1]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e4abce0ff56dee42
+step 10 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #20b6e0161ff4ca7d
+step 11 ASSIGN W[0]: through = 3 | TERMINATED W[4]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #5b0e96d2d9926aed
+step 12 RETURN W[0]: retorna de Gate.esperar, libera el monitor | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #3d532359eb13e602
+step 13 ASSIGN W[2]: through = 4 | TERMINATED W[0]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #187d865af74cfb99
+step 14 RETURN W[2]: retorna de Gate.esperar, libera el monitor | ENTER W[3]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #28e8725bcb3f8ac5
+step 15 ASSIGN W[3]: through = 5 | TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4e0b03d75ce63cb7
+step 16 RETURN W[3]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1c8e13a31c8c1a09
+step 17 TERMINATED W[3]: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #ed3bd0dcd4432bfc
+state #335365bb84055d69
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #7c442713ae4aa892
-step 1 #fe0d5481fdb2c06e
-step 2 #d4df583fda47cd37
-step 3 #4dbd68ab78845aa1
-step 4 #1ef734fd03033a19
-step 5 #cb50470e516d0f43
-step 6 #41988c0f9dd0af67
-step 7 #9fbbac5a8e21c25d
-step 8 #b654f36b742bcb79
-step 9 #92c944464a6c8c03
-step 10 #44a38d61aa56ff54
-step 11 #c5340927512eb5a7
-step 12 #8a388a9c2d8abe9a
-step 13 #4c3ee0d1f40f4f90
-step 14 #07278e32aa578eb9
-step 15 #c9b423cbf105062c
-step 16 #5e768495a4e706a0
-step 17 #c4d1405125967ea2
-step 18 #cb6be705491e13a9
-step 19 #3b5a8c852f44dd99
-step 20 #dad8a4c17b4a3693
-state #4e77e278c30573cb
+create {"finished":false,"deadlock":false} #9e3cef6acf9bdc82
+step 1 #4b31952e892fc44f
+step 2 #616ad6d9b3298f41
+step 3 #a5c70bf82b53c2e2
+step 4 #1992dcd72ec1cbfc
+step 5 #41879c360392d404
+step 6 #f1d6a83d22c057bc
+step 7 #a87d5b04ecbea4f6
+step 8 #1c4f776159507f60
+step 9 #ca76960c794b3e0e
+step 10 #845e1ea1c9e3b6f5
+step 11 #74b92ca9d1df0330
+step 12 #c35519556ebea758
+step 13 #736e9d2ca188c105
+step 14 #cd584d9b5e5ccae6
+step 15 #a738308ef2a44c46
+step 16 #5960c45c52c01bcb
+step 17 #1e4fc00caab79c0f
+step 18 #d4f1297df6a8639e
+step 19 #fc919866ca0cc4a6
+step 20 #acbbed3ae58eb48f
+state #f5b49cc266a185a7
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #6c3e011939e108b1
-step 1 #fe0d5481fdb2c06e
-step 2 #6a7baf8528c9f9e3
-step 3 #8fb0df638b8e4f93
-step 4 #5fdc3d92ca485144
-step 5 #e1f36daa8ac3bb1b
-step 6 #f880f2ac606fc9fb
-step 7 #f305ebf22681a3eb
-step 8 #499bb443a28d9169
-step 9 #08528d106e6953cb
-step 10 #cff1c41b102c42e5
-step 11 #ffa5157a65915cc1
-step 12 #e1cac86de54d2457
-step 13 #451b75c5dada1953
-step 14 #da02a9d59aa36493
-step 15 #28d6f398a0bda0b2
-step 16 #dadfcb39d4736f91
-step 17 #ec532a7ba5a719fc
-step 18 #f287b262fb4dc561
-state #e9f2994eb6da405d
+create {"finished":false,"deadlock":false} #9263ba9a712877d4
+step 1 #4b31952e892fc44f
+step 2 #cd1d71714d848acf
+step 3 #c8296caf7a59aea9
+step 4 #0c20995ba4181ad5
+step 5 #db760ac477b48708
+step 6 #52974a02371c9959
+step 7 #ab93fa2e434f4262
+step 8 #c466482744756b38
+step 9 #ed8d263f7e333e46
+step 10 #7f1ddcf7e42b7a63
+step 11 #b9205590cd903c34
+step 12 #0f6c4e1ad8bbe660
+step 13 #f4f7ef88c0514d70
+step 14 #a9ef5203f90d8f28
+step 15 #170d5cea72ae9d75
+step 16 #c80abc2784d70281
+step 17 #0c811a03e77fe39c
+step 18 #45eab6ea1e74ec6d
+state #e5a814e885d6edfa
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #a19bd5a3ea57e6cc
-step 1 ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #87a80417e2d85d76
-step 2 BLOCKED W[2]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #04d9a735cfc40216
-step 3 BLOCKED W[3]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1bbbd22b8405f1f1
-step 4 BLOCKED W[0]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #abd1c033cef2d03c
-step 5 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1fc4b751620bb426
-step 6 WAIT W[2]: wait(g) - libera el monitor y se demora | ENTER W[0]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a716b99f58eef125
-step 7 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[3]: entra a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #b9bcd5a3d76247c1
-step 8 BLOCKED W[4]: espera para entrar a Gate.esperar | WAIT W[3]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #4a29463b65310852
-step 9 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #6c4f885f6e540033
-step 10 SIGNAL_ALL Opener: signal_all(g) - despierta a 4 proceso(s) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #40d546d43c77f7e6
-step 11 RETURN Opener: retorna de Gate.abrir, libera el monitor | ENTER W[4]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #dd1999757357dd2e
-step 12 TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #10496df3d3954755
-step 13 ASSIGN W[4]: through = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #2b946521a56bc966
-step 14 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[2]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #2af8dd57cbdc7cdb
-step 15 TERMINATED W[4]: termina | ASSIGN W[2]: through = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4f304d62991b8302
-step 16 RETURN W[2]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8692aa7dffc6f9fa
-step 17 TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #399f9b74e3ec670f
-step 18 ASSIGN W[0]: through = 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #8db3ddcc5895336d
-step 19 RETURN W[0]: retorna de Gate.esperar, libera el monitor | REENTER W[3]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c5a84123cf2ea4f2
-step 20 TERMINATED W[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #8f1b63b55cb62b26
-step 21 ASSIGN W[3]: through = 4 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6b898c0707c29b02
-step 22 RETURN W[3]: retorna de Gate.esperar, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #914cd2e60c31b191
-step 23 TERMINATED W[3]: termina | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #24d8d8e7839952f3
-step 24 ASSIGN W[1]: through = 5 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #f5729df7e495584f
-step 25 RETURN W[1]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f4991b1dd1083bd1
-step 26 TERMINATED W[1]: termina | {"finished":true,"deadlock":false,"instant":26,"waiting":false} #f5bddfd4af51b185
-state #cd0a0ba99edad9c3
+create {"finished":false,"deadlock":false} #dbf1a27f58ce3198
+step 1 ENTER W[1]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8cf1da046cd8f8ec
+step 2 BLOCKED W[2]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #32f8f01159ae4728
+step 3 BLOCKED W[3]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7d9d6775d9b749c6
+step 4 BLOCKED W[0]: espera para entrar a Gate.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2c61132a2d0d90fc
+step 5 WAIT W[1]: wait(g) - libera el monitor y se demora | ENTER W[2]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f12b21d2144a4dd9
+step 6 WAIT W[2]: wait(g) - libera el monitor y se demora | ENTER W[0]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c5256e02275105cd
+step 7 WAIT W[0]: wait(g) - libera el monitor y se demora | ENTER W[3]: entra a Gate.esperar | BLOCKED Opener: espera para entrar a Gate.abrir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #a9c92cc06bf7986c
+step 8 BLOCKED W[4]: espera para entrar a Gate.esperar | WAIT W[3]: wait(g) - libera el monitor y se demora | ENTER Opener: entra a Gate.abrir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #6cb6dca8f01eb746
+step 9 ASSIGN Opener: open = true | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #aaaef32a6fc5172e
+step 10 SIGNAL_ALL Opener: signal_all(g) - despierta a 4 proceso(s) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #9b7d00fd0c20b1b4
+step 11 RETURN Opener: retorna de Gate.abrir, libera el monitor | ENTER W[4]: entra a Gate.esperar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #d7beaa95abb521ca
+step 12 TERMINATED Opener: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #189981e7b7abbe92
+step 13 ASSIGN W[4]: through = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #216ab26b90ebb563
+step 14 RETURN W[4]: retorna de Gate.esperar, libera el monitor | REENTER W[2]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cbb134a341a904b4
+step 15 TERMINATED W[4]: termina | ASSIGN W[2]: through = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #b301e199ef03023a
+step 16 RETURN W[2]: retorna de Gate.esperar, libera el monitor | REENTER W[0]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c49269672a4c12d6
+step 17 TERMINATED W[2]: termina | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #62156738cfbfda7d
+step 18 ASSIGN W[0]: through = 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #0efcac0713246f4b
+step 19 RETURN W[0]: retorna de Gate.esperar, libera el monitor | REENTER W[3]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #88737a9fa6150c10
+step 20 TERMINATED W[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #97995a8540f5e1e5
+step 21 ASSIGN W[3]: through = 4 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #77ec8259ad9bc420
+step 22 RETURN W[3]: retorna de Gate.esperar, libera el monitor | REENTER W[1]: reingresa a Gate | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #7d5b4208599ce6e8
+step 23 TERMINATED W[3]: termina | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #77837b53df92e08f
+step 24 ASSIGN W[1]: through = 5 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #ca015af09dd88a26
+step 25 RETURN W[1]: retorna de Gate.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #caf62cf6e1466430
+step 26 TERMINATED W[1]: termina | {"finished":true,"deadlock":false,"instant":26,"waiting":false} #bef9ce24a930050a
+state #6b7b6066c33526eb

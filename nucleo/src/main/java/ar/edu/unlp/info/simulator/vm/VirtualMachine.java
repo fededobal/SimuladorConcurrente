@@ -109,20 +109,14 @@ public final class VirtualMachine {
      * <p>Si se pide un proceso puntual ({@code chosenProcessId}), avanza solo ese: es el
      * modo paso a paso, para seguir a un proceso sin que el resto se mueva.
      *
+     * <p>Antes de elegir el turno, los procesos cuyo delay ya paso vuelven a estar listos. Si
+     * nadie puede avanzar pero hay procesos demorados, el instante pasa igual, sin eventos:
+     * el tiempo de un delay se mide en instantes (ADR 0008).
+     *
      * @return los eventos generados por este instante
      */
     public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy) {
-        return step(chosenProcessId, policy, clock.nowMs());
-    }
-
-    /**
-     * Igual que {@link #step(Integer, SchedulingPolicy)}, informando la hora actual en ms.
-     * Antes de elegir el turno, los procesos cuyo delay ya termino vuelven a estar listos.
-     * Si nadie puede avanzar pero hay procesos demorados, no pasa el instante: se espera.
-     */
-    public List<LogEntry> step(Integer chosenProcessId, SchedulingPolicy policy, long nowMs) {
         events.startStep();
-        clock.advanceTo(nowMs);
 
         if (isFinished()) {
             return List.of();
@@ -130,9 +124,12 @@ public final class VirtualMachine {
         wakeDelayed();
         List<Process> turn = scheduler.nextTurn(chosenProcessId, policy);
         if (turn.isEmpty()) {
-            // nadie puede avanzar: o se espera un delay, o es un interbloqueo (que ocupa un
-            // instante propio, y se informa una sola vez)
-            if (!isWaitingForDelay() && !deadlockLogged) {
+            if (isWaitingForDelay()) {
+                // todos los que quedan estan demorados o bloqueados: pasa un instante vacio
+                clock.tick();
+                advancedLastStep.clear();
+            } else if (!deadlockLogged) {
+                // interbloqueo: ocupa un instante propio y se informa una sola vez
                 clock.tick();
                 logDeadlock();
             }
@@ -279,20 +276,22 @@ public final class VirtualMachine {
                 && processes.stream().noneMatch(pr -> pr.isReady() || pr.isDelayed());
     }
 
-    /** true si ningun proceso esta listo pero alguno espera que termine su delay. */
+    /**
+     * true si ningun proceso esta listo pero alguno espera que termine su delay: el proximo
+     * instante pasa sin que avance nadie.
+     */
     public boolean isWaitingForDelay() {
         return processes.stream().noneMatch(Process::isReady)
                 && processes.stream().anyMatch(Process::isDelayed);
     }
 
-    /** Hora del reloj de la simulacion, en ms: la ultima informada a {@link #step}. */
-    public long clockMs() {
-        return clock.nowMs();
-    }
-
+    /**
+     * Al empezar un instante, vuelven a estar listos los procesos que ya pasaron demorados
+     * todos los instantes de su delay.
+     */
     private void wakeDelayed() {
         for (Process p : processes) {
-            if (p.isDelayed() && p.delayEndsAt() <= clock.nowMs()) p.unblock();
+            if (p.isDelayed() && p.delayEndsAt() <= clock.instant()) p.unblock();
         }
     }
 

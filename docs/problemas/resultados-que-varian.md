@@ -36,5 +36,4 @@ un `while`.
 ## Con turnos en ronda también hay diferencias
 
 En ronda, el orden de avance de los procesos es fijo, pero quién entra a un monitor que se
-libera con varios procesos esperando se sigue sorteando. Un programa con `delay` tampoco se
-repite, porque depende del tiempo real.
+libera con varios procesos esperando se sigue sorteando.

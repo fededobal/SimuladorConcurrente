@@ -72,17 +72,15 @@ public final class SimulatorJs {
      *
      * @param policy  {@code RANDOM} o {@code ROUND_ROBIN}
      * @param chosenProcessId id del proceso a ejecutar, o negativo para que decida la politica
-     * @param nowMs           hora actual en ms (la de {@code Date.now()}): la usa delay, que
-     *                        demora en tiempo real; el nucleo no lee el reloj para seguir
-     *                        siendo determinista
-     * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final
+     * @return JSON con forma {@code StepResponse}: los eventos del instante y el estado final;
+     *         {@code waiting} indica que nadie pudo avanzar y solo corrieron los delay
      */
     @JSExport
-    public static String step(String policy, int chosenProcessId, double nowMs) {
+    public static String step(String policy, int chosenProcessId) {
         if (vm == null) return noSimulation();
         try {
             Integer chosen = chosenProcessId < 0 ? null : chosenProcessId;
-            List<LogEntry> entries = vm.step(chosen, policyOf(policy), (long) nowMs);
+            List<LogEntry> entries = vm.step(chosen, policyOf(policy));
             StringBuilder sb = new StringBuilder("{\"entries\":");
             Json.list(sb, entries, Json::logEntry);
             appendState(sb);
