@@ -17,7 +17,7 @@ Ningún nombre puede tapar a otro que ya se ve: una local no puede llamarse como
 permanente, un parámetro, un iterador, una `cond` u otra local visible. Dos bloques
 hermanos sí pueden usar el mismo nombre, porque uno no ve al otro:
 
-```c
+```monitores
 process P[i: 0..1] {
   for (int i = 0..5) { skip; }   // error: ya existe el iterador de la familia 'i'
   { int x = 1; }

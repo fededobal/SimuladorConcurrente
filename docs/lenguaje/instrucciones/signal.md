@@ -4,7 +4,7 @@ Despierta al primer proceso que espera en una variable condición.
 
 ## Sintaxis
 
-```c
+```monitores
 signal(cv);
 signal(turno[i]);
 ```
@@ -26,7 +26,7 @@ Los mismos que [`wait`](./wait#errores).
 
 ## Ejemplo
 
-```c
+```monitores
 procedure Salir() {
   if (esperando > 0) {
     esperando--;

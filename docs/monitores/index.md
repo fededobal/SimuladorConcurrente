@@ -45,7 +45,7 @@ recurso, usa [variables condición](./variables-condicion).
 
 ## Notación del simulador
 
-```c
+```monitores
 monitor NombreMonitor {
     // variables permanentes
     int cant = 0;

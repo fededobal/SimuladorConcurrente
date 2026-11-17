@@ -4,7 +4,7 @@ Guarda un valor en una variable o en un elemento de arreglo.
 
 ## Sintaxis
 
-```c
+```monitores
 x = expr;
 a[i] = expr;
 x++;        // suma 1
@@ -35,7 +35,7 @@ El valor tiene que ser del tipo del destino. Las únicas conversiones automátic
 
 ## Ejemplo
 
-```c
+```monitores
 monitor Contador {
   int total = 0;
   double promedio = 0;

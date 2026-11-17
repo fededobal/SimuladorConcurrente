@@ -4,7 +4,7 @@ Este recorrido ejecuta el ejemplo Productor/Consumidor, que el editor muestra al
 simulador. Un productor deposita cinco números en un buffer de un lugar y un consumidor los
 retira; el monitor `Buffer` hace que ninguno avance cuando no corresponde.
 
-```c
+```monitores
 monitor Buffer {
   int dato = 0;
   bool hayDato = false;

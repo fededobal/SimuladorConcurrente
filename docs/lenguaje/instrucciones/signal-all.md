@@ -4,7 +4,7 @@ Despierta a todos los procesos que esperan en una variable condición.
 
 ## Sintaxis
 
-```c
+```monitores
 signal_all(cv);
 signal_all(turno[i]);
 ```
@@ -23,7 +23,7 @@ Los mismos que [`wait`](./wait#errores).
 
 ## Ejemplo
 
-```c
+```monitores
 monitor Barrera {
   bool abierta = false;
   cond puerta;

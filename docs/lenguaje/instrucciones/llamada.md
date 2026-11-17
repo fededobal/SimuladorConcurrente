@@ -4,7 +4,7 @@ Ejecuta un procedure de un monitor con exclusión mutua.
 
 ## Sintaxis
 
-```c
+```monitores
 Monitor.procedure();
 Monitor.procedure(a, b);
 Escritorio[i].procedure(a);   // arreglo de monitores: el índice es obligatorio
@@ -40,7 +40,7 @@ proceso conserva el primer monitor hasta que la llamada al segundo termina.
 
 ## Ejemplo
 
-```c
+```monitores
 monitor Banco {
   int atendidos = 0;
   procedure atender(id: in int; turno: out int) {

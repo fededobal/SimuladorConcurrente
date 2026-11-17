@@ -4,7 +4,7 @@ Ejecuta una sentencia o un bloque según una condición.
 
 ## Sintaxis
 
-```c
+```monitores
 if (cond) sentencia
 if (cond) sentencia else sentencia
 if (cond) { ... } else { ... }
@@ -34,7 +34,7 @@ técnica de pasaje de la condición ([Variables condición](/ejecucion/variables
 
 ## Ejemplo
 
-```c
+```monitores
 procedure Pasar() {
   if (not libre) {
     esperando++;

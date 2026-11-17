@@ -4,7 +4,7 @@ Repite una sentencia o un bloque mientras se cumple una condición.
 
 ## Sintaxis
 
-```c
+```monitores
 while (cond) sentencia
 while (cond) { ... }
 while (not hayDato) wait(ocupado);
@@ -27,7 +27,7 @@ nuevo ([Variables condición](/ejecucion/variables-condicion)).
 
 ## Ejemplo
 
-```c
+```monitores
 procedure retirar(r: out int) {
   while (not hayDato) wait(ocupado);
   r = dato;

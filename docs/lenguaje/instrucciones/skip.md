@@ -4,7 +4,7 @@ Sentencia que no hace nada.
 
 ## Sintaxis
 
-```c
+```monitores
 skip;
 ```
 
@@ -22,7 +22,7 @@ representar una acción que la consigna no detalla.
 
 ## Ejemplo
 
-```c
+```monitores
 process Cliente {
   skip;            // llega un instante después
   Banco.atender();

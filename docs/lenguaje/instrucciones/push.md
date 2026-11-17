@@ -4,7 +4,7 @@ Agrega un elemento a una `Cola` o a una `ColaOrdenada`.
 
 ## Sintaxis
 
-```c
+```monitores
 push(c, e);               // un elemento
 push(c, e1, e2);          // una tupla
 push(c, (e1, e2));        // la misma tupla, entre paréntesis
@@ -28,7 +28,7 @@ cola ([Colas](/lenguaje/colas)). Ocupa un paso.
 
 ## Ejemplo
 
-```c
+```monitores
 monitor Admin {
   Cola pedidos(int, text);
   procedure Pedido(idC: in int; S: in text) {

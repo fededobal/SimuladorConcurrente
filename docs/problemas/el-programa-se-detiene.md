@@ -14,7 +14,7 @@ antes que el empleado.
 
 Corrección: guardar el aviso en una variable permanente y dormir solo si todavía no llegó.
 
-```c
+```monitores
 procedure Atencion(D: in text; R: out text) {
   datos = D;
   listo = true;              // queda registrado aunque el empleado no haya llegado

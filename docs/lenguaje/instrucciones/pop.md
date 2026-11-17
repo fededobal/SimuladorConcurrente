@@ -4,7 +4,7 @@ Quita el primer elemento de una `Cola` o de una `ColaOrdenada` y lo guarda en va
 
 ## Sintaxis
 
-```c
+```monitores
 pop(c, x);           // un elemento
 pop(c, x, y);        // una tupla, una variable por componente
 pop(c, (x, y));      // lo mismo, entre paréntesis
@@ -32,7 +32,7 @@ Sobre una cola vacía es un error de ejecución. Antes de desencolar conviene co
 
 ## Ejemplo
 
-```c
+```monitores
 procedure Sig(idC: out int; S: out text) {
   while (empty(pedidos)) wait(hayPedido);
   pop(pedidos, idC, S);

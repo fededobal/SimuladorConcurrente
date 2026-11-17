@@ -4,7 +4,7 @@ Demora al proceso una cantidad de segundos reales.
 
 ## Sintaxis
 
-```c
+```monitores
 delay(5);
 delay(t * 2);    // cualquier expresión int, de 0 a 3600
 ```
@@ -31,7 +31,7 @@ Como depende del reloj, un programa con `delay` no se repite igual en dos ejecuc
 
 ## Ejemplo
 
-```c
+```monitores
 process Partido {
   Cancha.Iniciar();
   delay(90);          // se juega el partido

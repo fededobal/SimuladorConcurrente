@@ -1,10 +1,15 @@
 // Coloreado del lenguaje de monitores para el editor.
 
+/** Clases de color de un token; el CSS de cada una esta en index.css (`.tok-*`). */
+export type TokenClass = 'tok-decl' | 'tok-sync' | 'tok-ctrl' | 'tok-type' | 'tok-lit' | 'tok-comment';
+
 /**
  * Mismas palabras reservadas que Lexer.KEYWORDS en el nucleo, en minuscula: como en el
- * Lexer, se aceptan con cualquier combinacion de mayusculas (OR, OUT, colaOrdenada).
+ * Lexer, se aceptan con cualquier combinacion de mayusculas (OR, OUT, colaOrdenada). De esta
+ * tabla sale tambien la gramatica con que la documentacion colorea los ejemplos
+ * (docs/.vitepress/monitoresLanguage.ts): una palabra nueva se agrega solo aca.
  */
-const KEYWORDS: Record<string, string> = {
+export const KEYWORDS: Readonly<Record<string, TokenClass>> = {
   monitor: 'tok-decl', procedure: 'tok-decl', cond: 'tok-decl', process: 'tok-decl',
 
   wait: 'tok-sync', signal: 'tok-sync', signal_all: 'tok-sync',
@@ -24,7 +29,7 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function span(cls: string, s: string): string {
+function span(cls: TokenClass, s: string): string {
   return `<span class="${cls}">${escapeHtml(s)}</span>`;
 }
 

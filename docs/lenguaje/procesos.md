@@ -1,6 +1,6 @@
 # Procesos
 
-```c
+```monitores
 process Productor {
     ...
 }
@@ -18,7 +18,7 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 
 ## Llamadas a monitores
 
-```c
+```monitores
 Monitor.procedure();
 Monitor.procedure(a, b);
 Escritorio[i].procedure(a);   // arreglo de monitores: el índice es obligatorio

@@ -4,7 +4,7 @@ Demora al proceso en una variable condición y libera el monitor.
 
 ## Sintaxis
 
-```c
+```monitores
 wait(cv);
 wait(turno[i]);   // con un arreglo de cond, el índice es obligatorio
 ```
@@ -33,7 +33,7 @@ Solo se usa dentro de un procedure. El dibujo del monitor muestra al proceso en 
 
 ## Ejemplo
 
-```c
+```monitores
 procedure depositar(d: in int) {
   while (hayDato) wait(libre);
   dato = d;

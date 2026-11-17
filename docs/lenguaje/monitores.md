@@ -1,6 +1,6 @@
 # Monitores
 
-```c
+```monitores
 monitor Nombre {
     <variables permanentes>
     <variables condición>
@@ -18,7 +18,7 @@ monitor Nombre {
 
 ## Arreglos de monitores
 
-```c
+```monitores
 monitor Escritorio[id: 0..2] {
     cond vcCliente;
     text datos;
@@ -42,7 +42,7 @@ process Cliente[c: 0..5] {
 
 ## Variables condición
 
-```c
+```monitores
 cond libre;
 cond libre, ocupado;   // varias en una línea
 cond turno[3];         // arreglo de condiciones (condiciones privadas)
@@ -54,7 +54,7 @@ sus páginas: [`wait`](./instrucciones/wait), [`signal`](./instrucciones/signal)
 
 ## Procedures
 
-```c
+```monitores
 procedure depositar(d: in int) { ... }
 procedure retirar(r: out int) { ... }
 procedure mirar(x: int) { ... }                      // sin modo = in

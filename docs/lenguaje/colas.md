@@ -5,7 +5,7 @@ prioridad. Las dos se usan con `push`, `pop` y `empty`.
 
 ## Cola (FIFO)
 
-```c
+```monitores
 Cola c(int);              // cada elemento es un int
 Cola p(int, text);        // cada elemento es una tupla (id, nombre)
 push(c, 1);               // encola un elemento
@@ -36,7 +36,7 @@ bool v = empty c;         // también empty(c)
 Las componentes de un `push` o un `pop` se escriben de tres formas, que significan lo
 mismo sea cual sea la forma en que se declaró la cola:
 
-```c
+```monitores
 push(g, id, nombre, apellido);
 push(g, (id, nombre, apellido));
 push(g, (id, (nombre, apellido)));
@@ -76,7 +76,7 @@ Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es boo
 Mismas operaciones que `Cola`, pero el `push` inserta ordenado por la primera
 componente en vez de al final:
 
-```c
+```monitores
 ColaOrdenada c(int, text);
 push(c, 3, "tercero");
 push(c, 1, "primero");

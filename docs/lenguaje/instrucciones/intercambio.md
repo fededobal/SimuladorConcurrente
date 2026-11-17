@@ -4,7 +4,7 @@ Intercambia los valores de dos variables o elementos de arreglo.
 
 ## Sintaxis
 
-```c
+```monitores
 x :=: y;
 a[i] :=: a[j];
 v_actual :=: v_proxima;
@@ -32,7 +32,7 @@ tienen que ser del mismo tipo: las conversiones automáticas valen en un solo se
 
 El planificador de disco de la teoría alterna dos variables condición con un intercambio:
 
-```c
+```monitores
 monitor Scheduler {
   int v_actual = 0, v_proxima = 1;
   procedure cambiarSentido() {

@@ -37,7 +37,7 @@ La cátedra usa la disciplina *signal and continue*, y el simulador la implement
 Entre los pasos 2 y 3 otro proceso puede entrar antes y volver a cambiar el estado. Por eso
 la espera se escribe con `while`: al reingresar, el proceso vuelve a evaluar la condición.
 
-```c
+```monitores
 while (cantidad == 0) wait(noVacio);   // correcto: se vuelve a comprobar
 if (cantidad == 0) wait(noVacio);      // incorrecto si otro puede adelantarse
 ```

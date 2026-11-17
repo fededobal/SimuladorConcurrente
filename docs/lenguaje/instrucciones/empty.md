@@ -4,7 +4,7 @@ Indica si una cola no tiene elementos.
 
 ## Sintaxis
 
-```c
+```monitores
 empty c
 empty(c)
 ```
@@ -27,7 +27,7 @@ contador ([Notación de la cátedra](/introduccion/notacion-de-la-catedra)).
 
 ## Ejemplo
 
-```c
+```monitores
 procedure Sig(S: out text) {
   while (empty(C)) wait(hayPedido);
   pop(C, S);

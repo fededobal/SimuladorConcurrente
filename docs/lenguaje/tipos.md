@@ -30,7 +30,7 @@ desde 9 007 199 254 740 992 en adelante, en notación científica (`1.0E20`).
 
 ## Declaraciones
 
-```c
+```monitores
 int x;                    // vale 0
 int x = 0;
 text lista, comp;         // varias del mismo tipo
@@ -42,7 +42,7 @@ En una declaración con varios nombres, el valor inicial es solo del nombre que 
 
 ## Arreglos
 
-```c
+```monitores
 int a[3];                 // los 3 en 0
 int b[3] = ([3] 0);       // forma explícita de la cátedra
 int c[n];                 // el tamaño es una expresión int

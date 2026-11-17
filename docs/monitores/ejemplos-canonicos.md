@@ -5,7 +5,7 @@ del núcleo con varias semillas.
 
 ## Contador compartido
 
-```c
+```monitores
 monitor TOTAL {
     int cant = 0;
     procedure incrementar() { cant = cant + 1; }
@@ -25,7 +25,7 @@ Muestra la **exclusión mutua implícita**: nunca hay dos procesos dentro de `TO
 
 ## Buffer de un dato
 
-```c
+```monitores
 monitor Buffer {
     int dato;
     bool hayDato = false;
@@ -45,7 +45,7 @@ monitor Buffer {
 
 ## Buffer limitado (condición en `while`)
 
-```c
+```monitores
 monitor BufferLimitado {
     int N = 5;
     int buf[5];
@@ -66,7 +66,7 @@ monitor BufferLimitado {
 
 ## Lectores y escritores (*broadcast*)
 
-```c
+```monitores
 monitor ControladorRW {
     int nr = 0, nw = 0;
     cond okLeer, okEscribir;

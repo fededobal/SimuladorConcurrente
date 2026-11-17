@@ -4,7 +4,7 @@ Escribe una línea en la pantalla de salida.
 
 ## Sintaxis
 
-```c
+```monitores
 write(e);
 write(e1, e2, ...);
 ```
@@ -25,7 +25,7 @@ proceso en su color. Se conservan las últimas 500 líneas.
 
 ## Ejemplo
 
-```c
+```monitores
 write("deposite ", i);          // deposite 3
 write("total: ", a + b, " u");  // total: 7 u
 ```

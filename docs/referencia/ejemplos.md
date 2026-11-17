@@ -11,7 +11,7 @@ Un buffer de un dato con dos variables condición. El productor espera en `libre
 
 Resultado esperado: al terminar, `Buffer.dato` vale 5 y `Buffer.hayDato` vale `false`.
 
-```c
+```monitores
 monitor Buffer {
   int dato = 0;
   bool hayDato = false;
@@ -58,7 +58,7 @@ Cuatro procesos suman uno al mismo contador. `dentro` cuenta cuántos procesos e
 
 Resultado esperado: al terminar, `Cuenta.x` vale 4 y `Cuenta.maxDentro` vale 1.
 
-```c
+```monitores
 monitor Cuenta {
   int x = 0;
   int dentro = 0;
@@ -83,7 +83,7 @@ Cinco trabajadores esperan en `puerta` hasta que el portero la abre con un solo 
 
 Resultado esperado: al terminar, `Barrera.pasaron` vale 5.
 
-```c
+```monitores
 monitor Barrera {
   bool abierta = false;
   int pasaron = 0;
@@ -115,7 +115,7 @@ El procedure `verificar` devuelve el valor del contador por un parámetro `out`.
 
 Resultado esperado: al terminar, `TOTAL.cant` vale 3.
 
-```c
+```monitores
 monitor TOTAL {
   int cant = 0;
 
@@ -149,7 +149,7 @@ Una `Cola(int)` como buffer sin límite. El consumidor espera en `noVacio` mient
 
 Resultado esperado: al terminar, `BufferN.suma` vale 100.
 
-```c
+```monitores
 monitor BufferN {
   Cola items(int);
   int suma = 0;
@@ -187,7 +187,7 @@ Se encolan 3, 1 y 2; el primer `pop` devuelve 1 porque la `ColaOrdenada` inserta
 
 Resultado esperado: al terminar, `Turnos.primero` vale 1.
 
-```c
+```monitores
 monitor Turnos {
   ColaOrdenada pendientes(int);
   int primero = 0;
@@ -215,7 +215,7 @@ Un proceso hace `wait` en una condición que nadie va a señalar. El simulador i
 
 Resultado esperado: el programa termina en interbloqueo.
 
-```c
+```monitores
 monitor M {
   cond c;
 
@@ -235,7 +235,7 @@ Diez clientes y un empleado. El cliente encola su pedido y se duerme en su propi
 
 Resultado esperado: al terminar, `Corralon.cAtenciones` queda vacía.
 
-```c
+```monitores
 monitor Corralon {
   Cola cAtenciones(int);
   cond esperaEmp, esperaCli[10], esperaListas[10];
@@ -293,7 +293,7 @@ Los pacientes se encolan como tuplas (gravedad, id) en una `ColaOrdenada` y el m
 
 Resultado esperado: al terminar, `Guardia.atendidos` vale 6.
 
-```c
+```monitores
 monitor Guardia {
   ColaOrdenada espera(int, int);   // (gravedad, id): 1 es lo más urgente
   cond hayPaciente, turno[6];

@@ -33,7 +33,7 @@ Rutas relativas a `nucleo/src/main/java/ar/edu/unlp/info/simulator/` salvo indic
 | 5 | `vm/VirtualMachine.java` → `executeStmt` | ejecución; `yield true` si consume instante; `event(...)` con mensaje legible |
 | 6 | `vm/ExprEvaluator.java` / `vm/Value.java` | si es expresión o tipo |
 | 7 | `vm/Snapshot.java` + `js/Json.java` + `frontend/src/types.ts` | solo si el alumno tiene que *ver* algo nuevo |
-| 8 | `frontend/src/components/CodeEditor.tsx` → `KEYWORDS` | resaltado; misma lista que el Lexer |
+| 8 | `frontend/src/editor/highlight.ts` → `KEYWORDS` | resaltado del editor y de la documentación (la gramática `monitores` de Shiki sale de esta tabla); misma lista que el Lexer |
 | 9 | `docs/lenguaje/` (la página del tema o de la instrucción; `sentencias.md` si cambia la tabla) | explicación para el alumno + ejemplo |
 | 10 | `docs/lenguaje/especificacion.md` | regla EBNF y semántica formal |
 | 11 | `README.md` (lista de "El lenguaje") | una línea |

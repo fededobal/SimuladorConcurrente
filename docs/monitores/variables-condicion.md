@@ -1,6 +1,6 @@
 # Variables condición
 
-```c
+```monitores
 cond cv;
 ```
 
@@ -28,7 +28,7 @@ Consecuencia práctica: entre el `signal` y el momento en que el proceso despert
 realmente reanuda, otros procesos pudieron entrar al monitor y cambiar el estado. Por eso
 la condición **debe re-evaluarse en un `while`**, no en un `if`:
 
-```c
+```monitores
 procedure retirar(...) {
     while (cantidad == 0) wait(not_vacio);   // while, no if
     ...

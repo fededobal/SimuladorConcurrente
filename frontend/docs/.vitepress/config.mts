@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitepress';
 import type { Plugin } from 'vite';
+import { monitoresDark, monitoresLanguage, monitoresLight } from './monitoresLanguage';
 
 const FRONTEND = fileURLToPath(new URL('../../', import.meta.url));
 const DOCS = fileURLToPath(new URL('../../../docs/', import.meta.url));
@@ -48,6 +49,9 @@ export default defineConfig({
   cleanUrls: true,
   // rotulos de los cuadros de aviso (::: tip, ::: warning...), que por defecto salen en inglés
   markdown: {
+    // los ejemplos se colorean con la gramatica del lenguaje y los colores del editor
+    languages: [monitoresLanguage],
+    theme: { light: monitoresLight, dark: monitoresDark },
     container: {
       tipLabel: 'Nota',
       warningLabel: 'Atención',

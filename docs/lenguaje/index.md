@@ -5,7 +5,7 @@ y se comportan como se describe.
 
 Un programa tiene dos clases de declaraciones, en cualquier orden, y al menos un proceso:
 
-```c
+```monitores
 monitor Recurso { ... }       // monitores: el estado compartido y sus operaciones
 
 process Cliente[i: 1..5] { }  // procesos: el código que se ejecuta concurrentemente
@@ -27,7 +27,7 @@ modelo: el estado compartido solo se modifica dentro de un monitor, con exclusi�
 
 ## Comentarios
 
-```c
+```monitores
 // de línea
 /* de bloque,
    puede ocupar varias líneas */

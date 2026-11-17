@@ -127,6 +127,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Documentación: los 64 ejemplos de código se resaltaban como si fueran C, de modo que `wait`, `cond` o `process` no se veían como palabras reservadas y los nombres seguidos de paréntesis se pintaban como funciones. Ahora usan una gramática propia del lenguaje, con las mismas palabras y los mismos colores que el editor del simulador, en claro y en oscuro. (Federico Dobal, 2026-11-17)
 - Con muchos procesos, Ejecutar dejaba la interfaz sin responder: cada paso tardaba más que el intervalo entre pasos y se encolaban uno detrás de otro. Ahora cada paso programa el siguiente al terminar, así el navegador siempre llega a dibujar y a atender Pausar. (Federico Dobal, 2026-11-17)
 - La aplicación no tenía ícono (el navegador pedía un `favicon.ico` que no existe). Ahora el simulador y la documentación comparten el ícono nuevo, y los cuadros de aviso de la documentación dicen «Nota» y «Atención» en lugar de «TIP» y «WARNING». (Federico Dobal, 2026-11-17)
 - Accesibilidad: el estado de la simulación se anuncia a los lectores de pantalla cuando cambia (`aria-live`) y el error de compilación se anuncia como alerta, igual que los de ejecución; el área de código tiene nombre accesible. (Federico Dobal, 2026-11-17)
