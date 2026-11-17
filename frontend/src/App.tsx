@@ -4,12 +4,14 @@ import {
 } from 'lucide-react';
 import { CodeEditor } from './components/CodeEditor';
 import type { ActiveLine } from './editor/lineMarks';
+import { DeadlockBanner } from './components/DeadlockBanner';
 import { Dock } from './components/Dock';
 import { ProgramMenu } from './components/ProgramMenu';
 import { StepMenu } from './components/StepMenu';
 import { OutputPanel } from './components/OutputPanel';
 import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
+import { blockedProcesses } from './deadlock';
 import { EJEMPLOS } from './ejemplos';
 import { downloadText, readTextFile } from './files';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
@@ -44,7 +46,7 @@ const STATUS_LABEL: Record<SimStatus, string> = {
   running: 'ejecutando',
   paused: 'en pausa',
   finished: 'fin',
-  deadlock: 'deadlock',
+  deadlock: 'interbloqueo',
   error: 'error',
 };
 
@@ -123,13 +125,26 @@ export function App() {
     return fallidos.filter((p) => p.line > 0).map((p) => p.line);
   }, [status, sim.error, fallidos]);
 
+  // Interbloqueo: que espera cada proceso bloqueado, para el cartel y la tabla del panel.
+  const blocked = useMemo(
+    () => (status === 'deadlock' && snapshot ? blockedProcesses(snapshot) : []),
+    [status, snapshot],
+  );
+  // pedido a la linea de tiempo de mostrar un instante (el del interbloqueo)
+  const [timelineFocus, setTimelineFocus] = useState<{ instant: number; nonce: number } | null>(null);
+  const showInstant = (instant: number) => {
+    // la linea de tiempo no se ve mientras hay otro panel ampliado
+    setExpanded((actual) => (actual === 'timeline' ? actual : null));
+    setTimelineFocus((prev) => ({ instant, nonce: (prev?.nonce ?? 0) + 1 }));
+  };
+
   const running = status === 'running';
   // solo se puede detener una simulacion que todavia puede avanzar
   const active = status === 'ready' || status === 'running' || status === 'paused';
   // un interbloqueo despues de un error no es un problema de sincronizacion del programa
   const etiqueta = sim.waiting && active ? 'esperando que termine un delay'
     : fallidos.length === 0 ? STATUS_LABEL[status]
-    : status === 'deadlock' ? 'deadlock tras un error'
+    : status === 'deadlock' ? 'interbloqueo tras un error'
       : status === 'finished' ? 'fin con errores' : STATUS_LABEL[status];
   const mal = status === 'deadlock' || status === 'error' || fallidos.length > 0;
 
@@ -216,8 +231,12 @@ export function App() {
     switch (id) {
       case 'output': return <OutputPanel lines={snapshot?.output ?? []} {...props} />;
       case 'timeline':
-        return <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []} {...props} />;
-      case 'monitors': return <MonitorPanel snapshot={snapshot} entries={sim.entries} {...props} />;
+        return (
+          <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []}
+            deadlockInstant={sim.deadlock?.instant ?? null} focus={timelineFocus} {...props} />
+        );
+      case 'monitors':
+        return <MonitorPanel snapshot={snapshot} entries={sim.entries} blocked={blocked} {...props} />;
     }
   };
 
@@ -349,6 +368,17 @@ export function App() {
       <div className="cuerpo">
         <div className="columna">
           <div className="stage tarjeta">
+            {sim.deadlock && (
+              <DeadlockBanner
+                instant={sim.deadlock.instant}
+                blocked={blocked}
+                engineMessage={sim.deadlock.message}
+                afterError={fallidos.length > 0}
+                onShowInstant={() => showInstant(sim.deadlock?.instant ?? 0)}
+                onReplay={sim.replay}
+              />
+            )}
+            <div className="editor-marco">
             {/* el zoom va sobre el editor, que es lo que agranda; en la barra quedaba lejos */}
             <div className="editor-zoom" role="group" aria-label="Tamaño de letra del código">
               <button className="amp" onClick={zoom.zoomOut} disabled={!zoom.canZoomOut}
@@ -369,6 +399,7 @@ export function App() {
               pasoMs={sim.speed}
               fontSize={zoom.fontSize}
             />
+            </div>
             {status === 'error' && sim.error && (
               <div className="err" role="alert">
                 {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}

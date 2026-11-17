@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ZoomIn, ZoomOut } from 'lucide-react';
 import { ExpandButton } from './ExpandButton';
 import { MAX_VISIBLES } from './MasMenos';
@@ -12,6 +12,13 @@ interface Props {
   timeline: TimelineData;
   /** Procesos del snapshot actual: de aca salen el nombre y el color de cada fila. */
   processes: readonly ProcessView[];
+  /** Instante del interbloqueo, para marcarlo; null si no hubo. */
+  deadlockInstant: number | null;
+  /**
+   * Pedido de mostrar un instante: la linea de tiempo se desplaza hasta el y deja fija su
+   * tarjeta. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
+   */
+  focus: { instant: number; nonce: number } | null;
   expanded: boolean;
   onToggleExpand: () => void;
 }
@@ -136,7 +143,9 @@ function nameThatFits(name: string, width: number, bold: boolean): string {
  * filas no se mueven, asi se puede seguir a un proceso de punta a punta; al pasar el mouse
  * por una columna, una tarjeta cuenta en palabras que paso en ese instante.
  */
-export function Timeline({ timeline, processes, expanded, onToggleExpand }: Props) {
+export function Timeline({
+  timeline, processes, deadlockInstant, focus, expanded, onToggleExpand,
+}: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order, monitors } = timeline;
   const [cellIndex, setCellIndex] = useState(DEFAULT_CELL);
@@ -166,6 +175,22 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
     const el = scrollRef.current;
     if (el) siguiendo.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
   };
+
+  // Pedido de afuera ("ver el instante del interbloqueo"): fijar su tarjeta y traerlo a la vista.
+  useEffect(() => {
+    if (!focus) return;
+    const i = columns.findIndex((c) => c.instant === focus.instant);
+    if (i < 0) return;
+    setPinned(i);
+    siguiendo.current = false;
+    const el = scrollRef.current;
+    if (el) el.scrollLeft = Math.max(0, NAME_W + (i + 1) * cell - el.clientWidth + cell * 3);
+    // solo ante un pedido nuevo: no debe volver a ese instante cada vez que se agrega una columna
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus]);
+
+  const deadlockColumn = deadlockInstant === null ? -1
+    : columns.findIndex((c) => c.instant === deadlockInstant);
 
   const columnAt = (e: React.MouseEvent<HTMLDivElement>): number | null => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -240,6 +265,11 @@ export function Timeline({ timeline, processes, expanded, onToggleExpand }: Prop
               className="tl-cursor"
               style={{ left: NAME_W + (columns.length - 1) * cell, top: RULER_H }}
             />
+          )}
+          {deadlockColumn >= 0 && (
+            <div className="tl-interbloqueo" style={{ left: NAME_W + (deadlockColumn + 1) * cell }}>
+              <span>Interbloqueo: nadie puede avanzar</span>
+            </div>
           )}
           {shown !== null && (
             <div className={`tl-columna${pinned !== null ? ' fija' : ''}`}

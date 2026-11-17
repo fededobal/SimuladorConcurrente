@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Aviso de interbloqueo: cuando ningún proceso puede avanzar, un cartel sobre el editor dice en qué instante pasó, qué espera cada proceso bloqueado (en qué `wait`, a qué monitor quiere entrar, qué monitores retiene) y por qué nadie puede despertarlo, con el detalle que informa el motor. Desde el cartel se puede ir al instante en la línea de tiempo, repetir la ejecución con la misma semilla o abrir la ayuda. El panel de monitores suma la tabla «Por qué nadie avanza» y la línea de tiempo marca el instante con una raya roja. (Federico Dobal, 2026-11-17)
 - Enlace para compartir: un botón de la barra copia una dirección que abre el programa en el simulador de quien la reciba, con su nombre y, si ya se ejecutó, con la semilla y la política de turnos para repetir la misma ejecución. El código viaja en la propia dirección: no se sube a ningún servidor. (Federico Dobal, 2026-11-17)
 - El trabajo se guarda: el programa del editor se guarda solo en el navegador y sigue ahí al recargar la pestaña. El botón con el nombre del programa abre un menú para ponerle nombre, empezar uno nuevo, abrir y descargar archivos `.mon`, guardarlo en «Mis programas» (desde ahí sus cambios se guardan en esa copia) y abrir cualquiera de los propios o de los ejemplos, que antes estaban en un menú aparte. (Federico Dobal, 2026-11-17)
 - Avanzar un proceso elegido: el botón Paso tiene al lado un menú con los procesos del programa; al elegir uno, en ese instante avanza solo ese (los demás no se mueven). Sirve para armar a mano un entrelazado puntual. Solo se pueden elegir los procesos que están listos; de los demás se indica el estado. (Federico Dobal, 2026-11-17)
@@ -65,6 +66,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- El estado de la barra dice «interbloqueo» en lugar de «deadlock», como el resto de los textos y la documentación. (Federico Dobal, 2026-11-17)
 - Editor: cada renglón con procesos lleva una sola franja lisa, un chip con la inicial del proceso en el margen y, al final del código, una etiqueta que dice quién está ahí y qué hace ("Productor · en Buffer", "Cliente ×8 · dormidos en wait(esperaCli[…])"), con un ícono por estado. Los procesos en el mismo estado y lugar comparten etiqueta. Los estados usan colores más separados: ámbar para el que compite, violeta para el que espera y verde azulado para el delay. (Federico Dobal, 2026-11-17)
 - Todas las palabras reservadas aceptan cualquier combinación de mayúsculas (`OR`, `OUT`, `While`, `cola`, `colaOrdenada`), como aparecen en el material de la cátedra; antes solo `monitor`, `procedure` y `process`. Los nombres que declara el programa siguen distinguiendo mayúsculas, y un nombre que coincide con una palabra reservada en cualquier forma (`cond cola;`, `int Out;`) pasa a ser error. El resaltado del editor sigue la misma regla. (Federico Dobal, 2026-11-16)
 - Los paneles del simulador (barra, editor, línea de tiempo y monitores) quedan al ras, sin el hueco gris entre tarjetas; una línea fina los separa. El borde de cada panel se sigue arrastrando para cambiar su tamaño. (Federico Dobal, 2026-11-16)

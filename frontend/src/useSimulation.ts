@@ -11,6 +11,13 @@ export interface SimError {
   line: number | null;
 }
 
+/** Lo que informa el motor cuando detecta un interbloqueo. */
+export interface DeadlockInfo {
+  readonly instant: number;
+  /** Mensaje del evento DEADLOCK; null si el programa ya arranca interbloqueado. */
+  readonly message: string | null;
+}
+
 export const SPEEDS = [1200, 600, 300, 120] as const;
 
 /**
@@ -37,6 +44,7 @@ export function useSimulation(code: string) {
   const [waiting, setWaiting] = useState(false);
   // eventos del ultimo paso que hizo algo: el dibujo de los monitores resalta sus flechas
   const [entries, setEntries] = useState<readonly LogEntry[]>([]);
+  const [deadlock, setDeadlock] = useState<DeadlockInfo | null>(null);
   // semilla de la ejecucion en curso o de la ultima: con la misma, el azar se repite igual
   const [seed, setSeed] = useState<number | null>(null);
   const [speed, setSpeed] = useState<number>(600);
@@ -81,6 +89,7 @@ export function useSimulation(code: string) {
     setError(null);
     setWaiting(false);
     setEntries([]);
+    setDeadlock(null);
     setStat('idle');
   }, []);
 
@@ -120,6 +129,7 @@ export function useSimulation(code: string) {
       setTimeline(startTimeline(created.snapshot));
       setWaiting(false);
       setEntries([]);
+      setDeadlock(created.deadlock ? { instant: created.snapshot.instant, message: null } : null);
       setStat(created.deadlock ? 'deadlock' : created.finished ? 'finished' : 'ready');
       return true;
     } catch (e) {
@@ -143,7 +153,13 @@ export function useSimulation(code: string) {
       setWaiting(res.waiting);
       // esperar un delay no hace nada: se sigue mostrando lo ultimo que paso
       if (res.entries.length > 0) setEntries(res.entries);
-      if (res.deadlock) { setStat('deadlock'); clearTimer(); return false; }
+      if (res.deadlock) {
+        const event = res.entries.find((e) => e.kind === 'DEADLOCK');
+        setDeadlock({ instant: res.instant, message: event?.message ?? null });
+        setStat('deadlock');
+        clearTimer();
+        return false;
+      }
       if (res.finished) { setStat('finished'); clearTimer(); return false; }
       return true;
     } catch (e) {
@@ -212,7 +228,7 @@ export function useSimulation(code: string) {
 
   return {
     invalidate, reset,
-    snapshot, timeline, status, error, waiting, entries, seed,
+    snapshot, timeline, status, error, waiting, entries, seed, deadlock,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
     play, pause, step, stop, replay, prepare,
