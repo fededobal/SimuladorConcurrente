@@ -1,0 +1,38 @@
+/* Barra de estado, al pie: posicion del cursor, resumen de la ejecucion, guardado y atajos. */
+
+.bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 26px;
+  padding: 0 12px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.item { display: inline-flex; align-items: center; gap: 5px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.saved svg { color: var(--ok); }
+.unsaved { color: var(--danger); }
+.spacer { flex: 1; min-width: 0; }
+.shortcut { display: inline-flex; align-items: center; gap: 6px; }
+.help {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+.help:hover { color: var(--text); }
+
+/* con poco ancho quedan el estado del guardado y la ayuda */
+@media (max-width: 1100px) {
+  .optional { display: none; }
+}

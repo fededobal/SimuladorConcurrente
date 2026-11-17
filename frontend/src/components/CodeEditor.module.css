@@ -1,0 +1,215 @@
+/* Editor de codigo: un textarea transparente sobre el texto coloreado, y encima las marcas
+   de los procesos (franja por renglon, chip en el margen, etiqueta al final del codigo). */
+
+.wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.editor {
+  --pad-top: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: var(--line-h, 22px);
+}
+
+/*
+ * El unico que scrollea es .editor. .doc se dimensiona por su contenido (width/min-height),
+ * asi el textarea transparente cubre exactamente el mismo rectangulo que la capa pintada y
+ * nunca scrollea por su cuenta: si el textarea fuera mas chico que el texto, moveria su
+ * contenido sin mover lo pintado y el cursor terminaria dibujado en otro renglon.
+ */
+.doc {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.gutter {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  /* a la izquierda del numero va el chip del proceso que esta en ese renglon */
+  padding: var(--pad-top) 12px var(--pad-top) 34px;
+  text-align: right;
+  color: var(--dimmer);
+  background: var(--panel);
+  user-select: none;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+.area {
+  position: relative;
+  flex: 1 0 auto;
+}
+
+.layer, .area textarea {
+  margin: 0;
+  /* el margen derecho deja lugar a la etiqueta del renglon mas largo */
+  padding: var(--pad-top) 220px var(--pad-top) 8px;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre;
+  tab-size: 2;
+}
+.layer {
+  color: var(--text);
+  pointer-events: none;
+}
+.area textarea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--text);
+  resize: none;
+  outline: none;
+  overflow: hidden;
+}
+
+/* Una franja lisa por renglon, del color del proceso mas activo que esta ahi. Sin rayado:
+   con varios procesos en la misma linea, las franjas rayadas se sumaban y tapaban el codigo. */
+.lineBand {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--st) 10%, transparent);
+  border-left: 3px solid var(--st);
+  animation: band-in 0.18s ease-out;
+}
+.lineBand:global(.st-ready) { background: color-mix(in srgb, var(--st) 8%, transparent); }
+.lineError {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  border-left-color: var(--danger);
+}
+@keyframes band-in { from { opacity: 0; } }
+
+/* Chip del margen: la inicial del proceso con su color, al lado del numero de linea. */
+.gutterChip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  /* --desliz lo fija el editor segun la velocidad: llega rapido y se asienta */
+  transition: top var(--desliz, 150ms) cubic-bezier(0.22, 1, 0.36, 1), left var(--desliz, 150ms) ease-out,
+              opacity 0.12s linear;
+}
+.gutterChip i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--panel);
+  background: var(--st-proceso);
+  color: var(--on-accent);
+  font: 700 12px/1 var(--sans);
+}
+/* el que no esta ejecutando va apagado: mismo color, menos presencia */
+.gutterChip:not(.activo) i { opacity: 0.55; }
+
+/* Etiquetas al final del codigo. La fila ocupa todo el ancho del texto; el hueco mide lo que
+   el codigo del renglon y se achica si no hay lugar, y la lista se pega al borde visible
+   (sticky) para que en un renglon largo la etiqueta no quede fuera de la pantalla. */
+.lineTags {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.lineTagsGap { flex: 0 1 auto; min-width: 0; }
+.lineTagsList {
+  position: sticky;
+  left: calc(var(--gutter-w, 48px) + 8px);
+  right: 12px;
+  flex-shrink: 0;
+  display: flex;
+  gap: 5px;
+}
+.lineTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: calc(var(--line-h, 22px) - 4px);
+  padding: 0 8px;
+  border: 1px solid var(--st);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--st) 12%, var(--panel));
+  color: color-mix(in oklab, var(--st) 55%, var(--text));
+  font: 500 12px/1 var(--sans);
+  white-space: nowrap;
+}
+.lineTag b { font-weight: 600; }
+.lineTag:global(.st-running-process), .lineTag:global(.st-running-monitor) {
+  background: var(--st);
+  color: var(--on-accent);
+}
+.lineTag:global(.st-competing) { border-style: dashed; }
+.lineTag:global(.st-ready) { border-color: var(--line-strong); background: var(--panel); color: var(--dim); }
+/* varias con el mismo estado: el texto emergente dice quienes son */
+.varios { pointer-events: auto; cursor: help; }
+.lineTagDot { width: 7px; height: 7px; border-radius: 50%; background: var(--st-proceso); }
+.delayCount { font-variant-numeric: tabular-nums; }
+
+/* Avisos de los procesos que estan en un renglon fuera de la vista: arriba o abajo, a la
+   derecha. Un clic lleva a su linea. */
+.notices {
+  position: absolute;
+  right: 18px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  pointer-events: none;
+}
+.noticesAbove { top: 8px; }
+.noticesBelow { bottom: 10px; }
+.notice {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px 0 5px;
+  border: 1px solid var(--st);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--st) 12%, var(--panel));
+  color: color-mix(in oklab, var(--st) 55%, var(--text));
+  font: 500 12px/1 var(--sans);
+  white-space: nowrap;
+  box-shadow: var(--popover-shadow);
+}
+.notice:global(.st-competing) { border-style: dashed; }
+.notice:global(.st-ready) { border-color: var(--line-strong); background: var(--panel); color: var(--dim); }
+.notice b { font-weight: 600; }
+.noticeChip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--st-proceso);
+  color: var(--on-accent);
+  font: 700 12px/1 var(--sans);
+  font-style: normal;
+}

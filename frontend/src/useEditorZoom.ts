@@ -14,8 +14,17 @@ function readStored(): number {
   }
 }
 
+/** Lo que devuelve {@link useEditorZoom}: el tamano de letra y como cambiarlo. */
+export interface EditorZoom {
+  readonly fontSize: number;
+  readonly zoomIn: () => void;
+  readonly zoomOut: () => void;
+  readonly canZoomIn: boolean;
+  readonly canZoomOut: boolean;
+}
+
 /** Zoom del editor de codigo: agranda o achica solo la letra del programa, no el resto. */
-export function useEditorZoom() {
+export function useEditorZoom(): EditorZoom {
   const [index, setIndex] = useState(readStored);
   const move = useCallback((delta: number) => {
     setIndex((i) => {

@@ -1,0 +1,31 @@
+/* Un panel que se agranda o achica arrastrando el borde que mira al editor (arriba o a la
+   izquierda). El asa cubre la linea entre paneles y unos pixeles de cada lado, para que no
+   haya que apuntarle a una linea de 1 px. */
+.dock {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.asa {
+  --grosor: 9px;
+  position: absolute;
+  z-index: 6;
+  touch-action: none;
+}
+.asaY { top: -4px; left: 0; right: 0; height: var(--grosor); cursor: row-resize; }
+.asaX { left: -4px; top: 0; bottom: 0; width: var(--grosor); cursor: col-resize; }
+.asa::after {
+  content: '';
+  position: absolute;
+  border-radius: 2px;
+  background: transparent;
+  transition: background 0.12s;
+}
+/* la marca al pasar el mouse cae sobre la linea, no en el medio del asa */
+.asaY::after { left: 0; right: 0; top: 3px; height: 2px; }
+.asaX::after { top: 0; bottom: 0; left: 3px; width: 2px; }
+.asa:hover::after, .asa:focus-visible::after, .asa:active::after { background: var(--accent); }
+.asa:focus-visible { outline: none; }

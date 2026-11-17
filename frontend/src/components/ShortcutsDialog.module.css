@@ -1,0 +1,31 @@
+/* Dialogo con todos los atajos de teclado. */
+
+.dialog {
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--popover-shadow);
+}
+.dialog::backdrop { background: rgba(15, 18, 22, 0.45); }
+.head { display: flex; align-items: center; padding: 14px 16px 10px; }
+.head h2 { font-size: 15px; font-weight: 700; }
+.head button { margin-left: auto; }
+.body { padding: 0 16px 16px; overflow-y: auto; }
+.body h3 {
+  margin: 12px 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+.list { display: grid; grid-template-columns: auto 1fr; gap: 7px 16px; align-items: baseline; font-size: 13px; }
+.list dt { white-space: nowrap; }
+.list dd { color: var(--dim); }
+.more { margin-top: 14px; font-size: 12.5px; color: var(--dim); }
+.more a { color: var(--accent); font-weight: 600; }

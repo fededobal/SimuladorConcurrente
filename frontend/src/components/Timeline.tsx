@@ -1,151 +1,80 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ZoomIn, ZoomOut } from 'lucide-react';
-import { ExpandButton } from './ExpandButton';
-import { MAX_VISIBLES } from './MasMenos';
-import { STATE_CLASS, STATE_HINT, STATE_LABEL, type VisibleState } from '../processStates';
-import { shortName } from '../monitorDiagram';
+import { STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 import { processTextColor } from '../processColor';
 import { familyOf, type Timeline as TimelineData, type TimelineColumn } from '../timeline';
+import {
+  BOTTOM_PAD, labelsOf, ownerSegmentsOf, ROW_H, RULER_H, segmentsOf, visibleRows,
+} from '../timelineLayout';
 import type { LogEntry, ProcessView } from '../types';
+import s from './Timeline.module.css';
 
 interface Props {
-  timeline: TimelineData;
+  readonly timeline: TimelineData;
   /** Procesos del snapshot actual: de aca salen el nombre y el color de cada fila. */
-  processes: readonly ProcessView[];
+  readonly processes: readonly ProcessView[];
   /** Instante del interbloqueo, para marcarlo; null si no hubo. */
-  deadlockInstant: number | null;
+  readonly deadlockInstant: number | null;
   /**
    * Pedido de mostrar un instante: la linea de tiempo se desplaza hasta el y deja fija su
    * tarjeta. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
    */
-  focus: { instant: number; nonce: number } | null;
-  expanded: boolean;
-  onToggleExpand: () => void;
+  readonly focus: { readonly instant: number; readonly nonce: number } | null;
 }
 
-// Iguales a --tl-* de index.css: posicionan las filas y los tramos, que son absolutos.
-const ROW_H = 24;
-/** El carril de un monitor es un poco mas alto que una fila de proceso. */
-const MON_H = 28;
-const RULER_H = 20;
-const NAME_W = 140;
-/** Aire debajo de la ultima fila, para que no quede pegada al borde de la ventana. */
-const BOTTOM_PAD = 14;
-/** Anchos de columna (px) que recorre el zoom; el del medio es el de arranque. */
-const CELL_WIDTHS = [10, 14, 20, 28, 38] as const;
+// Medidas de la grilla, en px. Posicionan filas y tramos (que son absolutos) y viajan al CSS
+// como variables, asi no hay dos copias que se puedan desalinear.
+const NAME_W = 156;
+/** Anchos de columna que recorre el zoom; el del medio es el de arranque. */
+const CELL_WIDTHS = [12, 18, 26, 36, 50] as const;
 const DEFAULT_CELL = 2;
-/** Tipografia de los rotulos de los tramos; igual a .tl-tramo en index.css. */
-const FUENTE_ROTULO = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
-/** Margen interno de un tramo a cada lado del rotulo; igual al padding de .tl-tramo. */
-const MARGEN_ROTULO = 4;
+/** Tipografia de los rotulos de los tramos; igual a .seg en el modulo CSS. */
+const LABEL_FONT = "600 12px 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif";
+/** Margen interno de un tramo a cada lado del rotulo, con su borde. */
+const LABEL_PAD = 7;
 /** Ancho aproximado de un caracter, por si no hay canvas para medir. */
-const ANCHO_CHAR = 6.6;
-const ANCHO_TARJETA = 300;
-
+const CHAR_W = 6.8;
+const CARD_W = 320;
 /** Cada cuantos instantes se rotula la regla. */
 const RULER_EVERY = 5;
+const MAX_EVENTS = 6;
 
-/** Estados que aparecen en la leyenda (el terminado es la ausencia de barra). */
-const LEGEND: readonly VisibleState[] = [
-  'RUNNING_PROCESS', 'RUNNING_MONITOR', 'COMPETING', 'WAITING', 'DELAYED', 'READY',
+/** Estados de la leyenda (el terminado es la ausencia de barra), con su nombre corto. */
+const LEGEND: readonly [VisibleState, string][] = [
+  ['RUNNING_PROCESS', 'en el proceso'],
+  ['RUNNING_MONITOR', 'en el monitor'],
+  ['COMPETING', 'compite'],
+  ['WAITING', 'en wait'],
+  ['DELAYED', 'en delay'],
+  ['READY', 'sin turno'],
 ];
 
-/** Tramo de instantes seguidos en el mismo estado y lugar: se dibuja como una sola barra. */
-interface Segment {
-  state: VisibleState;
-  where: string | null;
-  from: number;
-  length: number;
-}
-
-function segmentsOf(id: number, columns: readonly TimelineColumn[]): Segment[] {
-  const out: Segment[] = [];
-  columns.forEach((col, i) => {
-    const state = col.states[id];
-    if (state === undefined || state === 'TERMINATED') return;
-    const where = col.where[id] ?? null;
-    const prev = out[out.length - 1];
-    if (prev && prev.state === state && prev.where === where && prev.from + prev.length === i) {
-      prev.length++;
-    } else {
-      out.push({ state, where, from: i, length: 1 });
-    }
-  });
-  return out;
-}
-
-/** Tramos del carril de un monitor: quien lo tuvo en cada instante (null: libre). */
-interface OwnerSegment {
-  owner: number | null;
-  from: number;
-  length: number;
-}
-
-function ownerSegmentsOf(name: string, columns: readonly TimelineColumn[]): OwnerSegment[] {
-  const out: OwnerSegment[] = [];
-  columns.forEach((col, i) => {
-    const owner = col.owners[name] ?? null;
-    const prev = out[out.length - 1];
-    if (prev && prev.owner === owner) prev.length++;
-    else out.push({ owner, from: i, length: 1 });
-  });
-  return out;
-}
-
-/** Rotulo largo de un tramo: la causa de la espera o el monitor en el que ejecuta. */
-function labelOf(s: Segment): string {
-  switch (s.state) {
-    case 'RUNNING_MONITOR': return s.where ?? '';
-    case 'COMPETING': return s.where ? `espera entrar a ${s.where}` : 'espera entrar';
-    case 'WAITING': return s.where ? `wait(${s.where})` : 'wait';
-    case 'DELAYED': return 'delay';
-    default: return '';
-  }
-}
-
 // Se mide el texto de verdad en vez de estimarlo: una estimacion con margen descartaba
-// nombres que entraban, y el tramo mostraba la abreviatura sin necesidad.
-let medidor: CanvasRenderingContext2D | null | undefined;
-function textWidth(text: string, bold: boolean): number {
-  if (medidor === undefined) medidor = document.createElement('canvas').getContext('2d');
-  if (!medidor) return text.length * ANCHO_CHAR;
-  medidor.font = (bold ? '600 ' : '') + FUENTE_ROTULO;
-  return medidor.measureText(text).width;
+// rotulos que entraban.
+let ruler: CanvasRenderingContext2D | null | undefined;
+function textWidth(text: string): number {
+  if (ruler === undefined) ruler = document.createElement('canvas').getContext('2d');
+  if (!ruler) return text.length * CHAR_W;
+  ruler.font = LABEL_FONT;
+  return ruler.measureText(text).width;
 }
 
-/** true si el rotulo entra en un tramo de ese ancho con su margen. */
-function fits(text: string, width: number, bold = false): boolean {
-  return text !== '' && width >= textWidth(text, bold) + 2 * MARGEN_ROTULO;
+/** El primer rotulo que entra en un tramo de ese ancho, o vacio si no entra ninguno. */
+function labelThatFits(labels: readonly string[], width: number): string {
+  return labels.find((l) => width >= textWidth(l) + 2 * LABEL_PAD) ?? '';
 }
 
-/**
- * El nombre entero si entra; si no, todos los caracteres que entren seguidos de puntos
- * suspensivos. En una familia se conserva el indice ("Clien…[3]"), que es lo que distingue
- * a un proceso de otro; si ni asi entra, la abreviatura del punto del dibujo ("C3"); si no,
- * nada.
- */
-function nameThatFits(name: string, width: number, bold: boolean): string {
-  if (fits(name, width, bold)) return name;
-  const fam = /^(.*?)(\[.*\])$/.exec(name);
-  const base = fam ? fam[1] : name;
-  const indice = fam ? fam[2] : '';
-  for (let n = base.length - 1; n >= 2; n--) {
-    const recortado = base.slice(0, n) + '…' + indice;
-    if (fits(recortado, width, bold)) return recortado;
-  }
-  const corto = shortName(name);
-  return fits(corto, width, bold) ? corto : '';
-}
+/** Una fila de la grilla: el carril de un monitor o un proceso. */
+type Row = { readonly kind: 'monitor'; readonly name: string } | { readonly kind: 'process'; readonly id: number };
 
 /**
  * Linea de tiempo: una fila por proceso y una columna por instante, con el estado en que
  * quedo cada proceso. Arriba, un carril por monitor con quien lo tuvo en cada instante. Las
  * filas no se mueven, asi se puede seguir a un proceso de punta a punta; al pasar el mouse
- * por una columna, una tarjeta cuenta en palabras que paso en ese instante.
+ * por una columna, una tarjeta cuenta en palabras que paso en ese instante, y un clic la
+ * deja fija. Solo se dibujan las filas que se ven: con mil procesos son las mismas veinte.
  */
-export function Timeline({
-  timeline, processes, deadlockInstant, focus, expanded, onToggleExpand,
-}: Props) {
+export function Timeline({ timeline, processes, deadlockInstant, focus }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order, monitors } = timeline;
   const [cellIndex, setCellIndex] = useState(DEFAULT_CELL);
@@ -155,26 +84,56 @@ export function Timeline({
   const [pinned, setPinned] = useState<number | null>(null);
 
   const byId = useMemo(() => new Map(processes.map((p) => [p.id, p])), [processes]);
-  const segments = useMemo(
-    () => new Map(order.map((id) => [id, segmentsOf(id, columns)])),
-    [order, columns],
-  );
-  const ownerSegments = useMemo(
-    () => new Map(monitors.map((m) => [m, ownerSegmentsOf(m, columns)])),
-    [monitors, columns],
-  );
+  const rows = useMemo<Row[]>(() => [
+    ...monitors.map((name): Row => ({ kind: 'monitor', name })),
+    ...order.map((id): Row => ({ kind: 'process', id })),
+  ], [monitors, order]);
+
+  // Desplazamiento vertical, para dibujar solo las filas visibles. Se lee a lo sumo una vez
+  // por cuadro.
+  const [view, setView] = useState({ top: 0, height: 0 });
+  const frame = useRef<number | null>(null);
+  const readView = useCallback(() => {
+    if (frame.current !== null) return;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = null;
+      const el = scrollRef.current;
+      if (!el) return;
+      setView((prev) => (prev.top === el.scrollTop && prev.height === el.clientHeight
+        ? prev : { top: el.scrollTop, height: el.clientHeight }));
+    });
+  }, []);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    readView();
+    const observer = new ResizeObserver(readView);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (frame.current !== null) cancelAnimationFrame(frame.current);
+      frame.current = null;
+    };
+  }, [readView]);
+  const range = visibleRows(Math.max(0, view.top - RULER_H), view.height, ROW_H, rows.length);
 
   // Seguir el ultimo instante, como la salida; salvo que el alumno se haya ido hacia atras
   // para mirar un instante viejo.
-  const siguiendo = useRef(true);
+  const following = useRef(true);
   useLayoutEffect(() => {
     const el = scrollRef.current;
-    if (el && siguiendo.current) el.scrollLeft = el.scrollWidth;
+    if (el && following.current) el.scrollLeft = el.scrollWidth;
   }, [columns.length, cell]);
   const onScroll = () => {
     const el = scrollRef.current;
-    if (el) siguiendo.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
+    if (el) following.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
+    readView();
   };
+
+  // Una simulacion nueva empieza sin columna fijada.
+  useEffect(() => {
+    if (columns.length === 0) setPinned(null);
+  }, [columns.length]);
 
   // Pedido de afuera ("ver el instante del interbloqueo"): fijar su tarjeta y traerlo a la vista.
   useEffect(() => {
@@ -182,7 +141,7 @@ export function Timeline({
     const i = columns.findIndex((c) => c.instant === focus.instant);
     if (i < 0) return;
     setPinned(i);
-    siguiendo.current = false;
+    following.current = false;
     const el = scrollRef.current;
     if (el) el.scrollLeft = Math.max(0, NAME_W + (i + 1) * cell - el.clientWidth + cell * 3);
     // solo ante un pedido nuevo: no debe volver a ese instante cada vez que se agrega una columna
@@ -198,149 +157,101 @@ export function Timeline({
     return i >= 0 && i < columns.length ? i : null;
   };
 
-  const monitorsH = monitors.length * MON_H;
-  const ancho = NAME_W + Math.max(columns.length, 1) * cell + cell;
-  const alto = RULER_H + monitorsH + order.length * ROW_H + BOTTOM_PAD;
+  const width = NAME_W + Math.max(columns.length, 1) * cell + cell * 2;
+  const height = RULER_H + rows.length * ROW_H + BOTTOM_PAD;
   const shown = pinned ?? hover;
   // la tarjeta va a la derecha de la columna; si no entra en lo visible, a la izquierda
-  const visibleRight = (scrollRef.current?.scrollLeft ?? 0) + (scrollRef.current?.clientWidth ?? ancho);
+  const visibleRight = (scrollRef.current?.scrollLeft ?? 0) + (scrollRef.current?.clientWidth ?? width);
   const cardLeft = shown === null ? 0
-    : NAME_W + (shown + 1) * cell + 8 + ANCHO_TARJETA > visibleRight
-      ? Math.max(NAME_W, NAME_W + shown * cell - ANCHO_TARJETA - 8)
+    : NAME_W + (shown + 1) * cell + 8 + CARD_W > visibleRight
+      ? Math.max(NAME_W, NAME_W + shown * cell - CARD_W - 8)
       : NAME_W + (shown + 1) * cell + 8;
+  const last = columns.length - 1;
 
   return (
-    <section className="timeline tarjeta" aria-label="Línea de tiempo">
-      <header className="panel-head">
-        <span className="titulo">Línea de tiempo</span>
-        <ul className="tl-leyenda">
-          {LEGEND.map((s) => (
-            <li key={s} title={STATE_HINT[s]}>
-              <span className={`tl-muestra ${STATE_CLASS[s]}`} />
-              {STATE_LABEL[s]}
+    <section className={s.timeline} aria-label="Línea de tiempo">
+      <header className={s.head}>
+        <span className={s.title}>Línea de tiempo</span>
+        <ul className={s.legend}>
+          {LEGEND.map(([state, label]) => (
+            <li key={state} title={STATE_HINT[state]}>
+              <span className={`${s.sample} ${STATE_CLASS[state]}`} />
+              {label}
             </li>
           ))}
         </ul>
-        <div className="panel-acciones">
-          <button type="button" className="amp" onClick={() => setCellIndex((i) => Math.max(0, i - 1))}
-            disabled={cellIndex === 0} aria-label="Ver más instantes" title="Ver más instantes">
+        <div className={s.end}>
+          <span className={s.hint}>Clic en un instante para ver qué pasó</span>
+          <button type="button" className="btn btn-icono btn-plano btn-chico"
+            onClick={() => setCellIndex((i) => Math.max(0, i - 1))} disabled={cellIndex === 0}
+            aria-label="Ver más instantes" title="Ver más instantes">
             <ZoomOut size={14} />
           </button>
-          <button type="button" className="amp"
+          <button type="button" className="btn btn-icono btn-plano btn-chico"
             onClick={() => setCellIndex((i) => Math.min(CELL_WIDTHS.length - 1, i + 1))}
-            disabled={cellIndex === CELL_WIDTHS.length - 1} aria-label="Ver menos instantes, más grandes"
-            title="Ver menos instantes, más grandes">
+            disabled={cellIndex === CELL_WIDTHS.length - 1}
+            aria-label="Ver menos instantes, más grandes" title="Ver menos instantes, más grandes">
             <ZoomIn size={14} />
           </button>
-          <ExpandButton expanded={expanded} onClick={onToggleExpand} />
         </div>
       </header>
 
-      <div className="tl-scroll" ref={scrollRef} onScroll={onScroll}>
+      <div className={s.scroll} ref={scrollRef} onScroll={onScroll}>
         {columns.length === 0 && (
-          <p className="tl-vacio">Con Ejecutar o Paso, acá se dibuja cómo avanza cada proceso instante a instante.</p>
+          <p className={s.emptyText}>Con Ejecutar o Paso, acá se dibuja cómo avanza cada proceso instante a instante.</p>
         )}
         <div
-          className="tl-plano"
-          style={{ width: ancho, height: alto, ['--tl-cell-w' as string]: `${cell}px` }}
+          className={s.plane}
+          style={{
+            width, height,
+            ['--cell' as string]: `${cell}px`, ['--row-h' as string]: `${ROW_H}px`,
+            ['--ruler-h' as string]: `${RULER_H}px`, ['--name-w' as string]: `${NAME_W}px`,
+          }}
           onMouseMove={(e) => setHover(columnAt(e))}
           onMouseLeave={() => setHover(null)}
           onClick={(e) => { const i = columnAt(e); setPinned((p) => (i === null || p === i ? null : i)); }}
         >
-          <div className="tl-regla">
-            <div className="tl-esquina">instante</div>
-            {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || i === columns.length - 1) && (
-              <span
-                key={c.instant}
-                className={i === columns.length - 1 ? 'actual' : undefined}
-                style={{ left: NAME_W + i * cell }}
-              >
-                {c.instant}
+          <div className={s.ruler}>
+            <div className={s.corner}>Instante</div>
+            {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || c.instant === 1 || i === last) && (
+              <span key={c.instant} className={`${s.tick}${i === last ? ` ${s.now}` : ''}`}
+                style={{ left: NAME_W + i * cell }}>
+                <span>{c.instant}</span>
               </span>
             ))}
           </div>
 
-          {columns.length > 0 && (
-            <div
-              className="tl-cursor"
-              style={{ left: NAME_W + (columns.length - 1) * cell, top: RULER_H }}
-            />
-          )}
+          {last >= 0 && <div className={s.cursor} style={{ left: NAME_W + last * cell, top: RULER_H }} />}
           {deadlockColumn >= 0 && (
-            <div className="tl-interbloqueo" style={{ left: NAME_W + (deadlockColumn + 1) * cell }}>
+            <div className={s.deadlock} style={{ left: NAME_W + (deadlockColumn + 1) * cell }}>
               <span>Interbloqueo: nadie puede avanzar</span>
             </div>
           )}
           {shown !== null && (
-            <div className={`tl-columna${pinned !== null ? ' fija' : ''}`}
+            <div className={`${s.column}${pinned !== null ? ` ${s.pinned}` : ''}`}
               style={{ left: NAME_W + shown * cell, top: RULER_H }} />
           )}
 
-          {/* carriles de los monitores: quien tuvo cada uno en cada instante */}
-          {monitors.map((name, i) => (
-            <div
-              key={name}
-              className={`tl-fila tl-mon${i === monitors.length - 1 ? ' ultimo' : ''}`}
-              style={{ top: RULER_H + i * MON_H, height: MON_H }}
-              title={`${name}: quién tiene el monitor en cada instante`}
-            >
-              <div className="tl-nombre">
-                {name}
-                <span className="tl-tag">monitor</span>
-              </div>
-              {ownerSegments.get(name)?.map((s) => {
-                const owner = s.owner === null ? undefined : byId.get(s.owner);
-                const width = s.length * cell;
-                return (
-                  <div
-                    key={s.from}
-                    className={`tl-tramo ${owner ? 'tl-dueno' : 'tl-libre'}`}
-                    style={{ left: NAME_W + s.from * cell, width, background: owner?.color }}
-                    title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
-                  >
-                    {owner ? nameThatFits(owner.name, width, true) : (fits('libre', width) ? 'libre' : '')}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-
-          {order.map((id, fila) => {
-            const p = byId.get(id);
+          {rows.slice(range.first, range.end).map((row, k) => {
+            const index = range.first + k;
+            const top = RULER_H + index * ROW_H;
+            if (row.kind === 'monitor') {
+              return (
+                <MonitorLane key={`m-${row.name}`} name={row.name} top={top} cell={cell}
+                  columns={columns} byId={byId} last={index === monitors.length - 1} />
+              );
+            }
+            const p = byId.get(row.id);
             if (!p) return null;
-            const next = byId.get(order[fila + 1] ?? -1);
-            const corte = next !== undefined && familyOf(next.name) !== familyOf(p.name);
-            const ultimo = columns[columns.length - 1]?.states[id];
-            return (
-              <div
-                key={id}
-                className={`tl-fila${corte ? ' tl-corte' : ''}`}
-                style={{ top: RULER_H + monitorsH + fila * ROW_H, ['--st-proceso' as string]: p.color }}
-                title={ultimo ? `${p.name}: ${STATE_HINT[ultimo]}` : p.name}
-              >
-                <div className="tl-nombre" style={{ color: processTextColor(p.color) }}>{p.name}</div>
-                {segments.get(id)?.map((s) => {
-                  const width = s.length * cell;
-                  const label = labelOf(s);
-                  const text = s.state === 'RUNNING_MONITOR' ? nameThatFits(label, width, true)
-                    : fits(label, width) ? label : '';
-                  return (
-                    <div
-                      key={s.from}
-                      className={`tl-tramo ${STATE_CLASS[s.state]}`}
-                      style={{ left: NAME_W + s.from * cell, width }}
-                      title={label || undefined}
-                    >
-                      {text}
-                    </div>
-                  );
-                })}
-              </div>
-            );
+            const next = rows[index + 1];
+            const nextProc = next?.kind === 'process' ? byId.get(next.id) : undefined;
+            const cut = nextProc !== undefined && familyOf(nextProc.name) !== familyOf(p.name);
+            return <ProcessRow key={row.id} process={p} top={top} cell={cell} columns={columns} cut={cut} />;
           })}
 
           {shown !== null && columns[shown] && (
-            <InstantCard column={columns[shown]} left={cardLeft} top={RULER_H + 6} />
+            <InstantCard column={columns[shown]} left={cardLeft}
+              top={RULER_H + 6 + Math.max(0, view.top - RULER_H)} />
           )}
         </div>
       </div>
@@ -348,29 +259,106 @@ export function Timeline({
   );
 }
 
+interface LaneProps {
+  readonly name: string;
+  readonly top: number;
+  readonly cell: number;
+  readonly columns: readonly TimelineColumn[];
+  readonly byId: ReadonlyMap<number, ProcessView>;
+  /** true si es el ultimo carril: lleva el borde que lo separa de los procesos. */
+  readonly last: boolean;
+}
+
+/** Carril de un monitor: quien lo tuvo en cada instante, o "libre". */
+function MonitorLane({ name, top, cell, columns, byId, last }: LaneProps) {
+  return (
+    <div className={`${s.row} ${s.lane}${last ? ` ${s.laneLast}` : ''}`} style={{ top }}
+      title={`${name}: quién tiene el monitor en cada instante`}>
+      <div className={s.name}>
+        <span className={s.nameText}>{name}</span>
+        <span className={s.tag}>monitor</span>
+      </div>
+      {ownerSegmentsOf(name, columns).map((seg) => {
+        const owner = seg.owner === null ? undefined : byId.get(seg.owner);
+        const width = seg.length * cell - 2;
+        return (
+          <div
+            key={seg.from}
+            className={`${s.seg} ${owner ? s.owner : s.free}`}
+            style={{ left: NAME_W + seg.from * cell + 1, width, background: owner?.color }}
+            title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
+          >
+            {labelThatFits(owner ? [owner.name] : ['libre'], width)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+interface RowProps {
+  readonly process: ProcessView;
+  readonly top: number;
+  readonly cell: number;
+  readonly columns: readonly TimelineColumn[];
+  /** true si la fila siguiente es de otra familia de procesos. */
+  readonly cut: boolean;
+}
+
+/** Fila de un proceso: un tramo por cada racha de instantes en el mismo estado y lugar. */
+function ProcessRow({ process: p, top, cell, columns, cut }: RowProps) {
+  const state = columns[columns.length - 1]?.states[p.id];
+  return (
+    <div className={`${s.row}${cut ? ` ${s.cut}` : ''}`}
+      style={{ top, ['--st-proceso' as string]: p.color }}
+      title={state ? `${p.name}: ${STATE_HINT[state]}` : p.name}>
+      <div className={s.name} style={{ color: processTextColor(p.color) }}>
+        <i className="punto" style={{ background: p.color }} />
+        <span className={s.nameText}>{p.name}</span>
+      </div>
+      {segmentsOf(p.id, columns).map((seg) => {
+        const width = seg.length * cell - 2;
+        const labels = labelsOf(seg);
+        return (
+          <div
+            key={seg.from}
+            className={`${s.seg} ${STATE_CLASS[seg.state]}`}
+            style={{ left: NAME_W + seg.from * cell + 1, width }}
+            title={labels[0]}
+          >
+            {labelThatFits(labels, width)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Lo que paso en un instante, en palabras: los eventos del paso, con el proceso en su color. */
 function InstantCard({ column, left, top }: { column: TimelineColumn; left: number; top: number }) {
   const events = column.events;
-  const visibles = events.slice(0, MAX_VISIBLES);
+  const shown = events.slice(0, MAX_EVENTS);
   return (
-    <div className="tl-tarjeta" style={{ left, top }} role="status">
+    <div className={s.card} style={{ left, top }} role="status">
       <b>Instante {column.instant}</b>
-      {events.length === 0 && <div className="nadie">Nadie avanzó en este instante.</div>}
-      {visibles.map((e) => <Evento key={e.id} e={e} />)}
-      {events.length > visibles.length && (
-        <div className="nadie">… y {events.length - visibles.length} más</div>
+      {events.length === 0 && <div className={s.nobody}>Nadie avanzó en este instante.</div>}
+      {shown.map((e) => <EventLine key={e.id} e={e} />)}
+      {events.length > shown.length && (
+        <div className={s.nobody}>… y {events.length - shown.length} más</div>
       )}
     </div>
   );
 }
 
 /** Un evento del log, "Nombre: texto": el nombre con el color del proceso. */
-function Evento({ e }: { e: LogEntry }) {
+function EventLine({ e }: { e: LogEntry }) {
   const i = e.message.indexOf(': ');
   if (e.processId === null || i < 0) return <div>{e.message}</div>;
   return (
     <div>
-      <span className="quien" style={{ color: e.processColor ? processTextColor(e.processColor) : undefined }}>{e.message.slice(0, i)}</span>
+      <span className={s.who} style={{ color: e.processColor ? processTextColor(e.processColor) : undefined }}>
+        {e.message.slice(0, i)}
+      </span>
       {' '}{e.message.slice(i + 2)}
     </div>
   );

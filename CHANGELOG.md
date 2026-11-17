@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Pestaña Procesos: cada proceso con lo que está haciendo, su línea, sus variables locales y un botón para avanzar un instante solo con él. Aviso en el editor cuando el renglón de un proceso queda fuera de la vista, que lleva hasta esa línea con un clic. Leyenda de los procesos en el encabezado del editor. Diálogo con todos los atajos (tecla «?»). (Federico Dobal, 2026-11-17)
 - Atajos de teclado para la simulación, los de un depurador: F5 ejecuta o pausa, F10 da un paso y Shift+F5 detiene. Funcionan también con el cursor en el código. F5 deja de recargar la pestaña (Ctrl/Cmd+R sigue haciéndolo); «?» abre la lista de atajos. (Federico Dobal, 2026-11-17)
 - Aviso de interbloqueo: cuando ningún proceso puede avanzar, un cartel sobre el editor dice en qué instante pasó, qué espera cada proceso bloqueado (en qué `wait`, a qué monitor quiere entrar, qué monitores retiene) y por qué nadie puede despertarlo, con el detalle que informa el motor. Desde el cartel se puede ir al instante en la línea de tiempo, repetir la ejecución con la misma semilla o abrir la ayuda. El panel de monitores suma la tabla «Por qué nadie avanza» y la línea de tiempo marca el instante con una raya roja. (Federico Dobal, 2026-11-17)
 - Enlace para compartir: un botón de la barra copia una dirección que abre el programa en el simulador de quien la reciba, con su nombre y, si ya se ejecutó, con la semilla y la política de turnos para repetir la misma ejecución. El código viaja en la propia dirección: no se sube a ningún servidor. (Federico Dobal, 2026-11-17)
@@ -67,6 +68,8 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Panel de monitores nuevo: el dibujo tiene zonas grandes con el nombre completo de cada proceso (antes un punto con dos letras) y resalta la flecha recorrida; debajo cuenta en palabras qué pasó en el último instante, lista las colas completas (plegando las variables condición vacías cuando son muchas) y muestra las variables en una tabla con su tipo, su valor y qué proceso las escribió y en qué instante. (Federico Dobal, 2026-11-17)
+- Pantalla nueva. La barra agrupa Ejecutar, Paso, Detener y Repetir, muestra la velocidad y los turnos como menús compactos con el valor actual, y deja el estado y el instante grandes y siempre a la vista. A la derecha, un inspector con pestañas (Monitores, Procesos y Salida): la salida ya no tapa a los monitores. La línea de tiempo ocupa todo el ancho, con el instante actual destacado y un rótulo en cada tramo. Abajo, una barra de estado con la posición del cursor, la cantidad de procesos y monitores, los turnos, la semilla, el estado del guardado y los atajos. (Federico Dobal, 2026-11-17)
 - Colores de los procesos más vivos y más distintos entre sí: en un programa de dos procesos, uno es azul y el otro rosa fuerte. Siguen fuera de la paleta el rojo, el ámbar, el verde y, ahora, el violeta, que identifican el error y los estados. (Federico Dobal, 2026-11-17)
 - `delay(n)` se mide en instantes y no en segundos: ejecutarlo ocupa un instante y el proceso no avanza durante los `n` siguientes (ADR 0008). Si nadie puede avanzar pero alguno está demorado, los instantes pasan igual, así la demora se ve con su duración en la línea de tiempo y se puede recorrer paso a paso. Un programa con `delay` ahora se repite igual con la misma semilla. La etiqueta del proceso dice cuántos instantes le faltan. Los programas que usaban `delay` como segundos conservan el valor, que pasa a contarse en instantes. (Federico Dobal, 2026-11-17)
 - El estado de la barra dice «interbloqueo» en lugar de «deadlock», como el resto de los textos y la documentación. (Federico Dobal, 2026-11-17)
@@ -129,6 +132,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Con muchos procesos la interfaz ya llega a la velocidad «muy rápido»: la línea de tiempo dibuja solo las filas visibles y el editor solo los chips que se ven. Con 1000 procesos, cada paso pasó de 46 ms y 5500 nodos en pantalla a 16 ms y 500. (Federico Dobal, 2026-11-17)
 - Documentación: los 64 ejemplos de código se resaltaban como si fueran C, de modo que `wait`, `cond` o `process` no se veían como palabras reservadas y los nombres seguidos de paréntesis se pintaban como funciones. Ahora usan una gramática propia del lenguaje, con las mismas palabras y los mismos colores que el editor del simulador, en claro y en oscuro. (Federico Dobal, 2026-11-17)
 - Con muchos procesos, Ejecutar dejaba la interfaz sin responder: cada paso tardaba más que el intervalo entre pasos y se encolaban uno detrás de otro. Ahora cada paso programa el siguiente al terminar, así el navegador siempre llega a dibujar y a atender Pausar. (Federico Dobal, 2026-11-17)
 - La aplicación no tenía ícono (el navegador pedía un `favicon.ico` que no existe). Ahora el simulador y la documentación comparten el ícono nuevo, y los cuadros de aviso de la documentación dicen «Nota» y «Atención» en lugar de «TIP» y «WARNING». (Federico Dobal, 2026-11-17)
@@ -257,6 +261,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Estilos por componente con CSS Modules (`Componente.module.css`); `index.css` conserva los tokens de color, los botones, los menús y los colores de estado, que son compartidos. `App.tsx` se parte en `TopBar`, `EditorPane`, `Inspector`, `Timeline` y `StatusBar`; los cálculos de la línea de tiempo pasan a `timelineLayout.ts`, con tests. (Federico Dobal, 2026-11-17)
 - Interfaz: el estado de cada paso reutiliza del anterior los objetos que no cambiaron (`reuse.ts`), de modo que los componentes memorizados de los monitores y procesos que no se movieron no se vuelven a dibujar. El motor sigue entregando el estado completo: medido, generarlo y leerlo cuesta 3 ms con 1000 procesos, así que la diferencia se calcula del lado de la interfaz, que es donde estaba el costo. (Federico Dobal, 2026-11-17)
 - El estado que entrega el núcleo incluye, para cada variable permanente, el instante de su última escritura (`lastWriteInstant`), además de quién la escribió. Lo usa la tabla de variables del panel de monitores. (Federico Dobal, 2026-11-17)
 - Núcleo: los procesos que avanzaron en el instante se guardan en un conjunto ordenado en lugar de una lista, y el estado arma una sola vez la posición de cada uno en el turno. Con miles de procesos avanzando a la vez, un paso del motor pasa de 152 ms a 23 ms (5000 procesos) y de 9 ms a 4 ms (1000). (Federico Dobal, 2026-11-17)

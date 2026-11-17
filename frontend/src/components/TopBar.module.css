@@ -1,0 +1,82 @@
+/* Barra superior: marca, programa, controles de ejecucion agrupados, opciones y estado. */
+
+.bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  row-gap: 6px;
+  min-height: 46px;
+  padding: 7px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 4px;
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Ejecutar, Paso, Detener y Repetir en un solo grupo, con el borde compartido. */
+.run {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.run :global(.btn) { height: 28px; border: 0; border-radius: 0; background: transparent; }
+.run :global(.btn):hover:not(:disabled) { background: var(--accent-soft); }
+.run > :first-child { margin: -1px 0 -1px -1px; height: 30px; border-radius: 8px 0 0 8px; }
+.run > :first-child:global(.btn-main) { background: var(--accent-fill); }
+.run > :first-child:global(.btn-main):hover:not(:disabled) { background: var(--accent-hover); }
+.run > :last-child, .run > :last-child :global(.btn) { border-radius: 0 7px 7px 0; }
+/* el menu de "avanzar un proceso" va pegado a Paso */
+.caret { padding: 0 5px !important; margin-left: -4px; }
+.sep { width: 1px; margin: 6px 0; background: var(--line); }
+
+.spacer { flex: 1; }
+
+/* Estado e instante: lo mas importante de la barra, siempre a la vista. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
+  white-space: nowrap;
+}
+.statusDot { width: 8px; height: 8px; border-radius: 50%; background: var(--dimmer); }
+.statusText { font-weight: 600; }
+.statusLabel { font-size: 12px; color: var(--dim); }
+.instant { font: 700 15px/1 var(--mono); font-variant-numeric: tabular-nums; }
+
+.run-tone { border-color: var(--accent-line); background: var(--accent-soft); }
+.run-tone .statusDot { background: var(--accent); animation: pulso 1s ease-in-out infinite; }
+.run-tone .statusText { color: var(--accent); }
+.pause-tone { border-color: var(--warn-line); background: var(--warn-bg); }
+.pause-tone .statusDot { background: var(--warn); }
+.pause-tone .statusText { color: var(--warn); }
+.ok-tone .statusDot { background: var(--ok); }
+.ok-tone .statusText { color: var(--ok); }
+.bad-tone { border-color: var(--danger-line); background: var(--danger-bg); }
+.bad-tone .statusDot { background: var(--danger); }
+.bad-tone .statusText { color: var(--danger); }
+@keyframes pulso { 50% { opacity: 0.35; } }
+
+/* con poco ancho se va lo que no hace falta para operar */
+@media (max-width: 1340px) {
+  .brandName { display: none; }
+}
+@media (max-width: 760px) {
+  .spacer { display: none; }
+}

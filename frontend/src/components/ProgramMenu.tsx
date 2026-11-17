@@ -3,6 +3,7 @@ import { Check, ChevronDown, Download, FilePlus, FileText, FolderOpen, Save, Tra
 import { Popover } from './Popover';
 import type { Ejemplo } from '../ejemplos';
 import type { Program, SavedProgram } from '../programs';
+import s from './ProgramMenu.module.css';
 
 interface Props {
   readonly program: Program;
@@ -34,14 +35,14 @@ export function ProgramMenu({
   return (
     <>
       <Popover
-        className="btn btn-programa"
-        label={<><FileText size={14} /><span className="btn-programa-nombre">{program.name}</span><ChevronDown size={13} /></>}
+        className={`btn ${s.programa}`}
+        label={<><FileText size={14} /><span className={s.nombre}>{program.name}</span><ChevronDown size={13} /></>}
         title="Programa abierto: nombre, archivos, Mis programas y ejemplos"
         ariaLabel={`Programa: ${program.name}`}
         disabled={disabled}
       >
         {(close) => (
-          <div className="menu menu-programa">
+          <div className={`menu ${s.menu}`}>
             <label className="menu-campo">
               <span>Nombre</span>
               <input
@@ -73,7 +74,7 @@ export function ProgramMenu({
               )}
             </div>
 
-            <p className="menu-titulo">Mis programas</p>
+            <p className="menu-titulo menu-seccion">Mis programas</p>
             {library.length === 0 && (
               <p className="menu-vacio">
                 Todavía no guardaste ninguno. Quedan en este navegador, no en una cuenta.
@@ -87,7 +88,7 @@ export function ProgramMenu({
                     onClick={() => { close(); onOpen({ id: p.id, name: p.name, code: p.code }); }}>
                     {p.name}
                   </button>
-                  <button type="button" className="amp" onClick={() => onRemove(p)}
+                  <button type="button" className="btn btn-icono btn-plano btn-chico" onClick={() => onRemove(p)}
                     aria-label={`Borrar ${p.name} de Mis programas`} title="Borrar de Mis programas">
                     <Trash2 size={13} />
                   </button>
@@ -95,7 +96,7 @@ export function ProgramMenu({
               ))}
             </div>
 
-            <p className="menu-titulo">Ejemplos</p>
+            <p className="menu-titulo menu-seccion">Ejemplos</p>
             <div role="menu" aria-label="Ejemplos">
               {examples.map((e) => (
                 <button key={e.id} type="button" role="menuitem" className="menu-item"

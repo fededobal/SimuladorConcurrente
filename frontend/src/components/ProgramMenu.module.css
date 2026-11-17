@@ -1,0 +1,8 @@
+/* Boton del programa abierto: el nombre se recorta para que un titulo largo no empuje al
+   resto de la barra. */
+.programa { max-width: 250px; font-weight: 600; }
+.programa svg { color: var(--dim); }
+.nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.menu { width: 300px; }
+.menu :global(.menu-item) { white-space: normal; }

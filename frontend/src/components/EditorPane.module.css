@@ -1,0 +1,89 @@
+/* Columna del editor: encabezado con el archivo y los procesos, cartel de interbloqueo,
+   el codigo y, al pie, el error si lo hay. */
+
+.pane {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+}
+
+.head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  height: 36px;
+  padding: 0 8px 0 0;
+  border-bottom: 1px solid var(--line);
+}
+/* el programa abierto, como la pestana de un archivo */
+.file {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 45%;
+  padding: 0 14px;
+  border-bottom: 2px solid var(--accent);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.fileName { overflow: hidden; text-overflow: ellipsis; }
+.fileDot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.fileDot.saving { background: var(--warn); }
+
+.end { margin-left: auto; display: flex; align-items: center; gap: 4px; min-width: 0; }
+/* leyenda de los procesos: la inicial que aparece en el margen y su nombre */
+.legend { display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: 8px; overflow: hidden; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--dim); white-space: nowrap; }
+.initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  color: var(--on-accent);
+  font: 700 12px/1 var(--sans);
+}
+
+.err {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border-top: 1px solid var(--danger-line);
+  background: var(--danger-bg);
+  color: var(--danger);
+  font: 500 12.5px/1.5 var(--mono);
+}
+
+/* --- cartel de interbloqueo --- */
+
+.deadlock {
+  flex-shrink: 0;
+  display: flex;
+  gap: 12px;
+  margin: 10px 14px 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--danger-line);
+  border-radius: var(--radius);
+  background: var(--danger-bg);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.deadlockIcon { flex-shrink: 0; margin-top: 2px; color: var(--danger); }
+.deadlockBody { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.deadlock h2 { font-size: 14px; font-weight: 700; color: var(--danger); }
+.deadlock code {
+  padding: 1px 5px;
+  border: 1px solid var(--danger-line);
+  border-radius: 4px;
+  background: var(--panel);
+  font: 500 12px var(--mono);
+}
+.engine { font: 400 12px var(--mono); color: var(--dim); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 2px; }
+.actions :global(.btn) { height: 28px; padding: 0 10px; border-color: var(--danger-line); color: var(--danger); font-size: 12.5px; }
+.help { display: inline-flex; align-items: center; gap: 4px; margin-left: 4px; color: var(--danger); font-weight: 600; font-size: 12.5px; }

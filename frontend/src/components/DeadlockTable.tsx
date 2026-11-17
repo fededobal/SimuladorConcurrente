@@ -1,5 +1,6 @@
 import { placeOf, wakeOf, type BlockedProcess } from '../deadlock';
 import { processTextColor } from '../processColor';
+import s from './Inspector.module.css';
 
 interface Props {
   readonly blocked: readonly BlockedProcess[];
@@ -12,7 +13,7 @@ interface Props {
 export function DeadlockTable({ blocked }: Props) {
   if (blocked.length === 0) return null;
   return (
-    <section className="porque" aria-label="Por qué nadie avanza">
+    <section className={s.why} aria-label="Por qué nadie avanza">
       <h3>Por qué nadie avanza</h3>
       <table>
         <thead>

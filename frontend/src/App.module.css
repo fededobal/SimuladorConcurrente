@@ -1,0 +1,51 @@
+/* Disposicion de la pantalla: barra, editor e inspector, linea de tiempo a todo el ancho y
+   barra de estado. Las lineas entre paneles son bordes de 1 px. */
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* editor a la izquierda, inspector a la derecha */
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.inspectorDock { width: 404px; border-left: 1px solid var(--line); }
+.inspectorWide { width: 56%; }
+
+/* La linea de tiempo toma el alto de sus filas (baja al abrir, crece con los procesos) hasta
+   algo menos de la mitad de la pantalla; arrastrando el asa manda el alto elegido. */
+.timelineDock {
+  min-height: 120px;
+  max-height: 44vh;
+  border-top: 1px solid var(--line);
+}
+
+/* aviso corto, abajo a la derecha, sobre la barra de estado; vacio no ocupa lugar */
+.notice {
+  position: fixed;
+  right: 16px;
+  bottom: 40px;
+  z-index: 50;
+  max-width: 380px;
+  padding: 9px 14px;
+  border-radius: var(--radius);
+  background: var(--text);
+  color: var(--panel);
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: var(--popover-shadow);
+}
+.notice:empty { display: none; }
+
+/* en una pantalla angosta los paneles se apilan y cada uno ocupa el ancho */
+@media (max-width: 760px) {
+  .main { flex-direction: column; }
+  .inspectorDock, .inspectorWide { width: auto; height: 42%; border-left: 0; border-top: 1px solid var(--line); }
+  .inspectorDock > :first-child { display: none; }
+}

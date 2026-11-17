@@ -1,6 +1,7 @@
 import { ExternalLink, RotateCcw, TriangleAlert } from 'lucide-react';
 import type { BlockedProcess } from '../deadlock';
 import { processTextColor } from '../processColor';
+import s from './EditorPane.module.css';
 
 interface Props {
   readonly instant: number;
@@ -32,9 +33,9 @@ export function DeadlockBanner({
   const detail = engineMessage?.replace(GENERIC_MESSAGE, '').trim() ?? '';
   const sleeping = blocked.filter((b) => b.kind === 'cond');
   return (
-    <section className="interbloqueo" role="alert" aria-label="Interbloqueo">
-      <TriangleAlert size={18} className="interbloqueo-icono" aria-hidden="true" />
-      <div className="interbloqueo-cuerpo">
+    <section className={s.deadlock} role="alert" aria-label="Interbloqueo">
+      <TriangleAlert size={18} className={s.deadlockIcon} aria-hidden="true" />
+      <div className={s.deadlockBody}>
         <h2>Interbloqueo en el instante {instant}</h2>
         <p>
           Ningún proceso puede avanzar.{' '}
@@ -51,15 +52,15 @@ export function DeadlockBanner({
         {afterError && (
           <p>Antes hubo un error de ejecución (marcado en rojo): conviene resolverlo primero, porque el proceso que falló pudo ser el que tenía que despertar a los demás.</p>
         )}
-        {detail && <p className="interbloqueo-motor">{detail}</p>}
-        <div className="interbloqueo-acciones">
+        {detail && <p className={s.engine}>{detail}</p>}
+        <div className={s.actions}>
           <button type="button" className="btn" onClick={onShowInstant}>
             Ver el instante {instant} en la línea de tiempo
           </button>
           <button type="button" className="btn" onClick={onReplay}>
             <RotateCcw size={13} /> Repetir con la misma semilla
           </button>
-          <a className="interbloqueo-ayuda" href="/docs/operacion/interbloqueo" target="_blank" rel="noreferrer">
+          <a className={s.help} href="/docs/operacion/interbloqueo" target="_blank" rel="noreferrer">
             Qué es un interbloqueo <ExternalLink size={12} />
           </a>
         </div>

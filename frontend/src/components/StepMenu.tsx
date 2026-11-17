@@ -8,6 +8,8 @@ interface Props {
   /** Procesos del snapshot actual; vacio si todavia no hay simulacion. */
   readonly processes: readonly ProcessView[];
   readonly disabled: boolean;
+  /** Clases del boton que abre el menu. */
+  readonly className?: string;
   /** Compila el programa si todavia no hay simulacion, para tener procesos que listar. */
   readonly onOpen: () => void;
   /** Avanza un instante en el que solo se mueve el proceso elegido. */
@@ -24,10 +26,10 @@ function canAdvance(p: ProcessView): boolean {
  * dejarlo al azar o a la ronda. Sirve para armar a mano un entrelazado puntual ("que primero
  * entre el Consumidor"). Solo se pueden elegir los procesos que estan listos.
  */
-export function StepMenu({ processes, disabled, onOpen, onStep }: Props) {
+export function StepMenu({ processes, disabled, className = 'btn', onOpen, onStep }: Props) {
   return (
     <Popover
-      className="btn btn-pegado"
+      className={className}
       label={<ChevronDown size={14} />}
       ariaLabel="Avanzar un proceso elegido"
       title="Elegir qué proceso avanza en el próximo instante"
