@@ -17,22 +17,22 @@ interface Props {
 }
 
 // Iguales a --tl-* de index.css: posicionan las filas y los tramos, que son absolutos.
-const ROW_H = 22;
+const ROW_H = 24;
 /** El carril de un monitor es un poco mas alto que una fila de proceso. */
-const MON_H = 26;
-const RULER_H = 18;
+const MON_H = 28;
+const RULER_H = 20;
 const NAME_W = 140;
 /** Aire debajo de la ultima fila, para que no quede pegada al borde de la ventana. */
 const BOTTOM_PAD = 14;
 /** Anchos de columna (px) que recorre el zoom; el del medio es el de arranque. */
-const CELL_WIDTHS = [8, 12, 16, 22, 30] as const;
+const CELL_WIDTHS = [10, 14, 20, 28, 38] as const;
 const DEFAULT_CELL = 2;
 /** Tipografia de los rotulos de los tramos; igual a .tl-tramo en index.css. */
-const FUENTE_ROTULO = "9.5px system-ui, -apple-system, 'Segoe UI', sans-serif";
+const FUENTE_ROTULO = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
 /** Margen interno de un tramo a cada lado del rotulo; igual al padding de .tl-tramo. */
 const MARGEN_ROTULO = 4;
 /** Ancho aproximado de un caracter, por si no hay canvas para medir. */
-const ANCHO_CHAR = 5.4;
+const ANCHO_CHAR = 6.6;
 const ANCHO_TARJETA = 300;
 
 /** Cada cuantos instantes se rotula la regla. */
