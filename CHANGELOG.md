@@ -120,6 +120,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Con muchos procesos, Ejecutar dejaba la interfaz sin responder: cada paso tardaba más que el intervalo entre pasos y se encolaban uno detrás de otro. Ahora cada paso programa el siguiente al terminar, así el navegador siempre llega a dibujar y a atender Pausar. (Federico Dobal, 2026-11-17)
 - La aplicación no tenía ícono (el navegador pedía un `favicon.ico` que no existe). Ahora el simulador y la documentación comparten el ícono nuevo, y los cuadros de aviso de la documentación dicen «Nota» y «Atención» en lugar de «TIP» y «WARNING». (Federico Dobal, 2026-11-17)
 - Accesibilidad: el estado de la simulación se anuncia a los lectores de pantalla cuando cambia (`aria-live`) y el error de compilación se anuncia como alerta, igual que los de ejecución; el área de código tiene nombre accesible. (Federico Dobal, 2026-11-17)
 - Legibilidad: el gris de los textos secundarios pasa de un contraste de 2,5:1 a más de 4,5:1, y ningún texto de la interfaz mide menos de 12 px (rótulos de la línea de tiempo, tipos de las variables, notas de las colas, leyendas). El dibujo del monitor ocupa el ancho del panel para que sus rótulos se lean en un proyector. (Federico Dobal, 2026-11-17)

@@ -29,16 +29,18 @@ export function useSimulation(initialCode: string) {
   const activaRef = useRef(false);
   const statusRef = useRef<SimStatus>('idle');
   const timerRef = useRef<number | null>(null);
-  // el intervalo lee la politica en cada paso: cambiarla no reinicia la simulacion
+  // el bucle lee la politica y la velocidad en cada paso: cambiarlas no reinicia la simulacion
   const policyRef = useRef<SchedulingPolicy>('RANDOM');
+  const speedRef = useRef<number>(speed);
   statusRef.current = status;
+  speedRef.current = speed;
 
   const setPolicy = useCallback((p: SchedulingPolicy) => {
     policyRef.current = p;
     setPolicyState(p);
   }, []);
 
-  // statusRef se actualiza en el acto: el intervalo lo lee antes de re-renderizar
+  // statusRef se actualiza en el acto: el bucle lo lee antes de re-renderizar
   const setStat = (s: SimStatus) => {
     statusRef.current = s;
     setStatus(s);
@@ -46,7 +48,7 @@ export function useSimulation(initialCode: string) {
 
   const clearTimer = () => {
     if (timerRef.current !== null) {
-      clearInterval(timerRef.current);
+      clearTimeout(timerRef.current);
       timerRef.current = null;
     }
   };
@@ -141,27 +143,22 @@ export function useSimulation(initialCode: string) {
     }
     setStat('running');
     clearTimer();
-    timerRef.current = window.setInterval(() => {
-      if (statusRef.current !== 'running') return;
-      if (!doStep()) clearTimer();
-    }, speed);
-  }, [compile, doStep, speed]);
+    // Cada paso programa el siguiente al terminar (setTimeout encadenado), en vez de un
+    // setInterval. Con muchos procesos un paso tarda mas que el intervalo: los disparos se
+    // encolaban uno detras de otro y el navegador no llegaba a pintar ni a atender el boton
+    // Pausar. Asi siempre queda la pausa completa entre un paso y el siguiente.
+    const tick = () => {
+      timerRef.current = null;
+      if (statusRef.current !== 'running' || !doStep()) return;
+      timerRef.current = window.setTimeout(tick, speedRef.current);
+    };
+    timerRef.current = window.setTimeout(tick, speedRef.current);
+  }, [compile, doStep]);
 
   const pause = useCallback(() => {
     clearTimer();
     if (statusRef.current === 'running') setStat('paused');
   }, []);
-
-  // reajusta el intervalo si cambia la velocidad mientras corre
-  useEffect(() => {
-    if (statusRef.current !== 'running') return;
-    clearTimer();
-    timerRef.current = window.setInterval(() => {
-      if (statusRef.current !== 'running') return;
-      if (!doStep()) clearTimer();
-    }, speed);
-    return clearTimer;
-  }, [speed, doStep]);
 
   useEffect(() => () => clearTimer(), []);
 
