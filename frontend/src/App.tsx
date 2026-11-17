@@ -214,8 +214,9 @@ export function App() {
           {tema.theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
         </button>
 
+        {/* aria-live: un lector de pantalla anuncia el cambio de estado (pausa, fin, interbloqueo) */}
         <div className="meta">
-          <span className={`st${mal ? ' bad' : ''}`}>{etiqueta}</span>
+          <span className={`st${mal ? ' bad' : ''}`} role="status" aria-live="polite">{etiqueta}</span>
           <span className="rotulo">instante</span>
           <span className="n">{snapshot?.instant ?? 0}</span>
         </div>
@@ -245,7 +246,7 @@ export function App() {
               fontSize={zoom.fontSize}
             />
             {status === 'error' && sim.error && (
-              <div className="err">
+              <div className="err" role="alert">
                 {sim.error.line != null ? `línea ${sim.error.line}: ` : ''}
                 {sim.error.message.replace(/^L[ií]nea \d+:\s*/, '')}
               </div>

@@ -120,6 +120,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Accesibilidad: el estado de la simulación se anuncia a los lectores de pantalla cuando cambia (`aria-live`) y el error de compilación se anuncia como alerta, igual que los de ejecución; el área de código tiene nombre accesible. (Federico Dobal, 2026-11-17)
 - Legibilidad: el gris de los textos secundarios pasa de un contraste de 2,5:1 a más de 4,5:1, y ningún texto de la interfaz mide menos de 12 px (rótulos de la línea de tiempo, tipos de las variables, notas de las colas, leyendas). El dibujo del monitor ocupa el ancho del panel para que sus rótulos se lean en un proyector. (Federico Dobal, 2026-11-17)
 - Editor: las franjas rayadas de varios procesos en un mismo renglón se sumaban hasta tapar el código, y en un renglón largo el nombre del proceso quedaba fuera de la vista. La etiqueta ahora se ancla al borde visible del editor y los botones de zoom quedan por encima. (Federico Dobal, 2026-11-17)
 - Barra de controles: a 1280 px de ancho (la resolución de muchos proyectores) el estado, el instante y el botón de tema quedaban fuera de la pantalla. Ahora los controles bajan a un segundo renglón, el menú de ejemplos tiene un ancho máximo y la píldora de estado ya no se parte en dos líneas. (Federico Dobal, 2026-11-17)
