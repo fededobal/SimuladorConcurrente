@@ -282,7 +282,7 @@ function Notices({ marks, direction, onGo }: NoticesProps) {
       })}
       {near.length > MAX_NOTICES && (
         <button type="button" className={`${s.notice} st-ready`} onClick={() => onGo(near[MAX_NOTICES].line)}>
-          +{near.length - MAX_NOTICES} renglones más con procesos
+          {near.length - MAX_NOTICES === 1 ? '1 renglón más' : `${near.length - MAX_NOTICES} renglones más`} con procesos
           <Arrow size={12} aria-hidden="true" />
         </button>
       )}

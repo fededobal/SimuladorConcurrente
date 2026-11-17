@@ -134,6 +134,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Editor: el aviso que resume los renglones con procesos fuera de la vista decía «+1 renglones más»; ahora concuerda en singular. (Federico Dobal, 2026-11-17)
 - Con muchos procesos la interfaz ya llega a la velocidad «muy rápido»: la línea de tiempo dibuja solo las filas visibles y el editor solo los chips que se ven. Con 1000 procesos, cada paso pasó de 46 ms y 5500 nodos en pantalla a 16 ms y 500. (Federico Dobal, 2026-11-17)
 - Documentación: los 64 ejemplos de código se resaltaban como si fueran C, de modo que `wait`, `cond` o `process` no se veían como palabras reservadas y los nombres seguidos de paréntesis se pintaban como funciones. Ahora usan una gramática propia del lenguaje, con las mismas palabras y los mismos colores que el editor del simulador, en claro y en oscuro. (Federico Dobal, 2026-11-17)
 - Con muchos procesos, Ejecutar dejaba la interfaz sin responder: cada paso tardaba más que el intervalo entre pasos y se encolaban uno detrás de otro. Ahora cada paso programa el siguiente al terminar, así el navegador siempre llega a dibujar y a atender Pausar. (Federico Dobal, 2026-11-17)
