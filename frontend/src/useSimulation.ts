@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiRequestError } from './api';
+import { reuseUnchanged } from './reuse';
 import { appendInstant, EMPTY_TIMELINE, startTimeline, type Timeline } from './timeline';
 import type { LogEntry, SchedulingPolicy, Snapshot } from './types';
 
@@ -148,7 +149,9 @@ export function useSimulation(code: string) {
     if (!activaRef.current) return false;
     try {
       const res = api.step(policyRef.current, chosenProcessId);
-      setSnapshot(res.snapshot);
+      // el estado nuevo comparte con el anterior todo lo que no cambio: los componentes
+      // memorizados de lo que no se movio no se vuelven a dibujar
+      setSnapshot((prev) => (prev ? reuseUnchanged(prev, res.snapshot) : res.snapshot));
       setTimeline((t) => appendInstant(t, res.snapshot, res.entries));
       setWaiting(res.waiting);
       // esperar un delay no hace nada: se sigue mostrando lo ultimo que paso

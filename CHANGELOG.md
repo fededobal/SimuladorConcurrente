@@ -257,6 +257,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Interfaz: el estado de cada paso reutiliza del anterior los objetos que no cambiaron (`reuse.ts`), de modo que los componentes memorizados de los monitores y procesos que no se movieron no se vuelven a dibujar. El motor sigue entregando el estado completo: medido, generarlo y leerlo cuesta 3 ms con 1000 procesos, así que la diferencia se calcula del lado de la interfaz, que es donde estaba el costo. (Federico Dobal, 2026-11-17)
 - El estado que entrega el núcleo incluye, para cada variable permanente, el instante de su última escritura (`lastWriteInstant`), además de quién la escribió. Lo usa la tabla de variables del panel de monitores. (Federico Dobal, 2026-11-17)
 - Núcleo: los procesos que avanzaron en el instante se guardan en un conjunto ordenado en lugar de una lista, y el estado arma una sola vez la posición de cada uno en el turno. Con miles de procesos avanzando a la vez, un paso del motor pasa de 152 ms a 23 ms (5000 procesos) y de 9 ms a 4 ms (1000). (Federico Dobal, 2026-11-17)
 - ESLint deja de revisar la caché de VitePress (`npm run lint` terminaba con tres avisos ajenos al proyecto) y se quita la dependencia `react-resizable-panels`, que no se usaba. (Federico Dobal, 2026-11-17)
