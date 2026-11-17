@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  BookOpen, Moon, Play, Pause, RotateCcw, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
+  BookOpen, Link2, Moon, Play, Pause, RotateCcw, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
 } from 'lucide-react';
 import { CodeEditor } from './components/CodeEditor';
 import type { ActiveLine } from './editor/lineMarks';
@@ -13,6 +13,7 @@ import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import { downloadText, readTextFile } from './files';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
+import { decodeShare, encodeShare } from './shareLink';
 import { useProgram } from './useProgram';
 import { Timeline } from './components/Timeline';
 import { visibleState, whereOf } from './processStates';
@@ -62,6 +63,12 @@ export function App() {
   const { program } = store;
   const sim = useSimulation(program.code);
   const { snapshot, status } = sim;
+
+  // lo ultimo de cada hook, para los manejadores que se registran una sola vez
+  const storeRef = useRef(store);
+  const simRef = useRef(sim);
+  storeRef.current = store;
+  simRef.current = sim;
 
   // aviso corto abajo a la derecha (archivo que no se pudo abrir, enlace copiado)
   const [notice, setNotice] = useState<string | null>(null);
@@ -152,6 +159,51 @@ export function App() {
       setNotice(e instanceof Error ? e.message : 'No se pudo abrir el archivo.');
     }
   };
+
+  /** Copia al portapapeles un enlace que abre este programa (y repite la ultima ejecucion). */
+  const copyShareLink = async () => {
+    const fragment = encodeShare({
+      name: program.name, code: program.code, seed: sim.seed,
+      policy: sim.seed === null ? null : sim.policy,
+    });
+    const url = `${window.location.origin}${window.location.pathname}#${fragment}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setNotice('Enlace copiado. Quien lo abra ve este programa en su simulador.');
+    } catch {
+      // sin permiso para el portapapeles: se muestra el enlace para copiarlo a mano
+      window.prompt('Copiá este enlace para compartir el programa:', url);
+    }
+  };
+
+  // Un enlace compartido trae el programa en el fragmento. Se abre y se limpia la direccion,
+  // para que recargar la pestana no vuelva a pisar lo que se escriba despues.
+  useEffect(() => {
+    const openShared = (askFirst: boolean) => {
+      const shared = decodeShare(window.location.hash);
+      if (!shared) return;
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      const current = storeRef.current.program;
+      const ownWork = current.id === null && current.code.trim() !== ''
+        && current.code !== shared.code && !EJEMPLOS.some((e) => e.codigo === current.code);
+      if (ownWork) {
+        // al cargar la pagina no se puede preguntar antes de mostrar nada: lo que habia sin
+        // guardar pasa a "Mis programas" en lugar de perderse
+        if (askFirst && !window.confirm(
+          `Se abre "${shared.name}" desde el enlace. "${current.name}" pasa a Mis programas. ¿Seguir?`,
+        )) return;
+        storeRef.current.keepCopy(current);
+      }
+      storeRef.current.open({ id: null, name: shared.name, code: shared.code });
+      simRef.current.reset(shared.seed);
+      if (shared.policy) simRef.current.setPolicy(shared.policy);
+      setNotice(`Se abrió "${shared.name}" desde un enlace.`);
+    };
+    openShared(false);
+    const onHashChange = () => openShared(true);
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
 
   const removeSaved = (p: SavedProgram) => {
     if (window.confirm(`¿Borrar "${p.name}" de Mis programas? No se puede deshacer.`)) {
@@ -261,6 +313,12 @@ export function App() {
           {(snapshot?.output.length ?? 0) > 0 && (
             <span className="cuenta">{snapshot?.output.length}</span>
           )}
+        </button>
+
+        <button className="btn btn-icono" onClick={copyShareLink}
+          aria-label="Copiar un enlace para compartir este programa"
+          title="Copiar un enlace que abre este programa (con la semilla de la última ejecución)">
+          <Link2 size={14} />
         </button>
 
         {/* el sitio de documentación se publica junto con la aplicación, bajo /docs/ */}

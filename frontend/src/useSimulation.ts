@@ -49,6 +49,8 @@ export function useSimulation(code: string) {
   const policyRef = useRef<SchedulingPolicy>('RANDOM');
   const speedRef = useRef<number>(speed);
   const seedRef = useRef<number | null>(null);
+  // semilla pedida para la proxima ejecucion (la de un enlace compartido); se usa una vez
+  const nextSeedRef = useRef<number | null>(null);
   statusRef.current = status;
   speedRef.current = speed;
 
@@ -90,10 +92,14 @@ export function useSimulation(code: string) {
     if (activaRef.current || statusRef.current !== 'idle') drop();
   }, [drop]);
 
-  /** Al abrir otro programa: descarta la simulacion y tambien la semilla de la anterior. */
-  const reset = useCallback(() => {
+  /**
+   * Al abrir otro programa: descarta la simulacion y la semilla de la anterior. Con
+   * `nextSeed`, la primera ejecucion del programa nuevo usa esa semilla.
+   */
+  const reset = useCallback((nextSeed: number | null = null) => {
     drop();
     seedRef.current = null;
+    nextSeedRef.current = nextSeed;
     setSeed(null);
   }, [drop]);
 
@@ -105,7 +111,8 @@ export function useSimulation(code: string) {
       // con la simulacion viva y la misma semilla alcanza con reiniciarla en el nucleo
       const created = withSeed !== undefined && activaRef.current && withSeed === seedRef.current
         ? api.reset()
-        : api.create(code, withSeed ?? newSeed());
+        : api.create(code, withSeed ?? nextSeedRef.current ?? newSeed());
+      nextSeedRef.current = null;
       seedRef.current = created.seed;
       setSeed(created.seed);
       activaRef.current = true;
