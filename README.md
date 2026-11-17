@@ -1,15 +1,15 @@
 # Simulador de Monitores (UNLP)
 
 Herramienta didáctica para la Práctica Profesional Supervisada (PPS) de la Facultad de
-Informática (UNLP). El alumno escribe pseudocódigo con la notación de la cátedra y lo ve
-ejecutarse paso a paso, bajo la disciplina *signal and continue*. El alcance es solo
-monitores.
+Informática (UNLP). Quien lo usa escribe pseudocódigo con la notación de la materia
+Programación Concurrente, en cuyo material se basa, y lo ve ejecutarse paso a paso, bajo
+la disciplina *signal and continue*. El alcance es solo monitores.
 
 Todo corre en el navegador.
 - El núcleo en Java se compila a JavaScript con TeaVM.
 - La interfaz está hecha en React. No hay servidor.
 
-La documentación para alumnos y docentes es una guía de referencia y operación que se
+La documentación es una guía de referencia y operación que se
 publica junto con el simulador en `/docs/`: lenguaje, modelo de ejecución, interfaz,
 procedimientos paso a paso y solución de problemas. Las fuentes son los Markdown de
 `docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`). La teoría de

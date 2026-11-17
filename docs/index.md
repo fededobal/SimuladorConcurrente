@@ -1,11 +1,12 @@
 # Presentación
 
-El Simulador de Monitores es una herramienta para la enseñanza de la sincronización con
-monitores en Programación Concurrente. Reúne un editor, en el que se escriben programas con
-la notación de la cátedra, y un simulador que los ejecuta instante a instante y muestra qué
-hace cada proceso y en qué estado queda cada monitor.
+El Simulador de Monitores es una herramienta didáctica para estudiar la sincronización con
+monitores. Reúne un editor, en el que se escriben programas con la notación de la materia
+Programación Concurrente, y un simulador que los ejecuta instante a instante y muestra qué
+hace cada proceso y en qué estado queda cada monitor
+([Origen del simulador](#origen-del-simulador)).
 
-Los monitores siguen la disciplina *signal and continue*, la que se usa en la materia. El
+Los monitores siguen la disciplina *signal and continue*, la que presenta esa materia. El
 simulador cuenta con:
 
 - monitores con variables permanentes, variables condición, código de inicialización y
@@ -24,7 +25,7 @@ simulador cuenta con:
   ([Línea de tiempo](/interfaz/linea-de-tiempo));
 - dos políticas de turnos, al azar y en ronda, y la detección del interbloqueo
   ([Ejecución](/ejecucion/instantes-y-turnos));
-- programas de ejemplo con los casos que se ven en clase
+- programas de ejemplo con casos tomados del material de la materia
   ([Programas de ejemplo](/referencia/ejemplos)).
 
 Todo se ejecuta en el navegador, sin instalación: el programa no sale de la computadora de
@@ -51,9 +52,14 @@ procedure que llama a otro monitor conserva el suyo hasta que esa llamada termin
 semáforos, pasaje de mensajes ni otras disciplinas de señalización.
 :::
 
-## Créditos
+## Origen del simulador
 
-Este simulador fue desarrollado por Federico Dobal como Práctica Profesional Supervisada de
-la carrera Analista en Tecnologías de la Información y la Comunicación, para la cátedra de
-Programación Concurrente de la [Facultad de Informática](https://www.info.unlp.edu.ar/) de
-la [Universidad Nacional de La Plata](https://unlp.edu.ar/).
+El simulador fue desarrollado por Federico Dobal como Práctica Profesional Supervisada
+(PPS) de la carrera Analista en Tecnologías de la Información y la Comunicación, en la
+[Facultad de Informática](https://www.info.unlp.edu.ar/) de la
+[Universidad Nacional de La Plata](https://unlp.edu.ar/). Es un trabajo de esa PPS y no una
+herramienta de la materia Programación Concurrente ni de su cátedra. Lo que sí toma de esa
+materia es el contenido: la notación de los programas, el modelo de monitores con
+*signal and continue* y los problemas en que se basan los ejemplos salen de su material de
+teoría y de práctica. Cuando esta guía menciona «la cátedra» o «las clases», se refiere a
+ese material como fuente.

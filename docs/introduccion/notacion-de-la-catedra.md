@@ -1,9 +1,10 @@
 # Notación de la cátedra
 
-Los programas de las clases de teoría y de práctica están pensados para leerse, no para
-ejecutarse: usan funciones sin definir, constantes como `N` y algunas abreviaturas. Esta
-página indica cómo se escribe cada una de esas formas para que el simulador las acepte. Las
-que no figuran acá se escriben igual que en las clases.
+Los programas del material de teoría y de práctica de Programación Concurrente, la materia
+en la que se basa el simulador, están pensados para leerse, no para ejecutarse: usan
+funciones sin definir, constantes como `N` y algunas abreviaturas. Esta página indica cómo
+se escribe cada una de esas formas para que el simulador las acepte. Las que no figuran acá
+se escriben igual que en ese material.
 
 ## Formas aceptadas tal cual
 

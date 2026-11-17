@@ -93,5 +93,5 @@ desde el principio.
 |---|---|
 | Entender por qué la espera se escribe con `while` | [Variables condición](/ejecucion/variables-condicion) |
 | Seguir un programa instante a instante | [Ejecución paso a paso](/operacion/paso-a-paso) |
-| Escribir un ejercicio de la práctica | [Notación de la cátedra](/introduccion/notacion-de-la-catedra) |
+| Pasar al simulador un programa escrito con la notación de la materia | [Notación de la cátedra](/introduccion/notacion-de-la-catedra) |
 | Conocer cada zona de la pantalla | [Interfaz](/interfaz/) |

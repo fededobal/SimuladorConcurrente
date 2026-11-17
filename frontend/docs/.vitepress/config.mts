@@ -30,7 +30,7 @@ function resolverDesdeFrontend(): Plugin {
 export default defineConfig({
   lang: 'es-AR',
   title: 'Simulador de Monitores',
-  description: 'Documentación del simulador de monitores de Programación Concurrente (UNLP).',
+  description: 'Documentación del simulador de monitores, desarrollado como PPS en la Facultad de Informática (UNLP).',
   srcDir: '../../docs',
   base: '/docs/',
   outDir: '../dist/docs',
