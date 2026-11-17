@@ -24,8 +24,6 @@
   --accent-soft: #eef2f8;
   /* texto sobre el acento o sobre el color pleno de un proceso */
   --on-accent: #ffffff;
-  /* fondo detras del nombre en una franja del editor, para separarlo del rayado */
-  --halo: #ffffff;
   /* con que se aclaran los colores de estado y de proceso al usarlos como fondo */
   --mix-base: #ffffff;
   /* cuanto del color de un proceso queda al escribir su nombre (ver processColor.ts) */
@@ -45,9 +43,9 @@
   --danger-line: #efc9c3;
 
   /* estados de proceso: los comparten las franjas del editor y la linea de tiempo */
-  --st-competing: #b48f4a;
-  --st-waiting: #b5665c;
-  --st-delayed: #6b9a72;
+  --st-competing: #c2851a;
+  --st-waiting: #7b5bd6;
+  --st-delayed: #1f9a8a;
   --st-ready: #a7afb9;
 
   /* linea de tiempo: iguales a las constantes de Timeline.tsx */
@@ -87,7 +85,6 @@
   --accent-hover: #3a6db9;
   --accent-soft: #1f2a3a;
   --on-accent: #ffffff;
-  --halo: #181c21;
   --mix-base: #181c21;
   --proc-text-mix: 60%;
   --popover-shadow: none;
@@ -104,9 +101,9 @@
   --danger-bg: #2a1a18;
   --danger-line: #57302a;
 
-  --st-competing: #c9a560;
-  --st-waiting: #d58a80;
-  --st-delayed: #84b48c;
+  --st-competing: #d9a441;
+  --st-waiting: #a58bf0;
+  --st-delayed: #4cc0b0;
   --st-ready: #5d6773;
 
   color-scheme: dark;
@@ -262,7 +259,7 @@ button { cursor: pointer; }
   flex-direction: column;
   overflow: hidden;
 }
-/* zoom de la letra: flota arriba a la derecha del editor, discreto hasta que se lo busca */
+/* zoom de la letra: flota arriba a la derecha del editor */
 .editor-zoom {
   position: absolute;
   top: 8px;
@@ -271,13 +268,11 @@ button { cursor: pointer; }
   display: flex;
   gap: 2px;
   padding: 2px;
-  background: color-mix(in srgb, var(--panel) 85%, transparent);
+  /* opaco: queda por encima de las etiquetas de los procesos, que pueden pasarle por debajo */
+  background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 7px;
-  opacity: 0.75;
-  transition: opacity 0.12s;
 }
-.editor-zoom:hover, .editor-zoom:focus-within { opacity: 1; }
 .editor-zoom .amp { margin-left: 0; width: 24px; height: 24px; }
 
 /* ------------------------------------------------------------------ paneles */
@@ -610,7 +605,8 @@ button { cursor: pointer; }
   position: sticky;
   left: 0;
   z-index: 2;
-  padding: var(--pad-top) 12px;
+  /* a la izquierda del numero va el chip del proceso que esta en ese renglon */
+  padding: var(--pad-top) 12px var(--pad-top) 34px;
   text-align: right;
   color: var(--dimmer);
   background: var(--panel-soft);
@@ -627,7 +623,8 @@ button { cursor: pointer; }
 
 .layer, .area textarea {
   margin: 0;
-  padding: var(--pad-top) 16px;
+  /* el margen derecho deja lugar a la etiqueta del renglon mas largo */
+  padding: var(--pad-top) 220px var(--pad-top) 16px;
   border: 0;
   font-family: inherit;
   font-size: inherit;
@@ -652,89 +649,104 @@ button { cursor: pointer; }
   overflow: hidden;
 }
 
-/* franjas de proceso */
+/* marcas de los procesos */
 
-.stripe {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--line-h);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  padding-right: 18px;
-  pointer-events: none;
-  overflow: hidden;
-  /* --desliz lo fija el editor segun la velocidad de la simulacion */
-  /* llega rapido y se asienta: el tramo final es casi imperceptible */
-  transition: top var(--desliz, 150ms) cubic-bezier(0.22, 1, 0.36, 1),
-              background var(--desliz, 150ms) linear,
-              border-color var(--desliz, 150ms) linear;
-}
-/* color por estado; el rayado distingue a los bloqueados sin depender solo del color */
-/* --st-proceso lo fija cada franja y cada fila con el color de su proceso */
+/* color por estado; el icono y el texto de la etiqueta distinguen los estados sin depender
+   solo del color. --st-proceso lo fija cada marca y cada fila con el color de su proceso. */
 .st-running-process, .st-running-monitor { --st: var(--st-proceso, var(--text)); }
 .st-competing { --st: var(--st-competing); }
 .st-waiting   { --st: var(--st-waiting); }
 .st-delayed   { --st: var(--st-delayed); }
 .st-ready     { --st: var(--st-ready); }
 
-.stripe.st-running-monitor, .stripe.st-running-process {
-  background: color-mix(in srgb, var(--st) 9%, transparent);
-  border-left: 3px solid var(--st);
-}
-.stripe.st-ready {
+/* Una franja lisa por renglon, del color del proceso mas activo que esta ahi. Sin rayado:
+   con varios procesos en la misma linea, las franjas rayadas se sumaban y tapaban el codigo. */
+.line-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
   background: color-mix(in srgb, var(--st) 10%, transparent);
-  border-left: 3px solid color-mix(in srgb, var(--st) 70%, transparent);
+  border-left: 3px solid var(--st);
+  animation: band-in 0.18s ease-out;
 }
-.stripe.st-competing, .stripe.st-waiting {
-  background: repeating-linear-gradient(135deg,
-    color-mix(in srgb, var(--st) 14%, transparent) 0 5px, transparent 5px 10px);
-  border-left: 3px dashed var(--st);
+.line-band.st-ready { background: color-mix(in srgb, var(--st) 7%, transparent); }
+.line-band.line-error {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  border-left-color: var(--danger);
 }
+@keyframes band-in { from { opacity: 0; } }
 
-/* un halo del color del panel separa el nombre del rayado de la franja */
-.stripe .who {
-  padding: 0 4px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--halo) 70%, transparent);
-  font-family: var(--sans);
-  font-size: 10.5px;
-  letter-spacing: 0.01em;
+/* Chip del margen: la inicial del proceso con su color, al lado del numero de linea. */
+.gutter-chip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  /* --desliz lo fija el editor segun la velocidad: llega rapido y se asienta */
+  transition: top var(--desliz, 150ms) cubic-bezier(0.22, 1, 0.36, 1), left var(--desliz, 150ms) ease-out,
+              opacity 0.12s linear;
+}
+.gutter-chip i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--panel-soft);
+  background: var(--st-proceso);
+  color: var(--on-accent);
+  font: 700 12px/1 var(--sans);
+}
+/* el que no esta ejecutando va apagado: mismo color, menos presencia */
+.gutter-chip:not(.activo) i { opacity: 0.55; }
+
+/* Etiquetas al final del codigo. La fila ocupa todo el ancho del texto; el hueco mide lo que
+   el codigo del renglon y se achica si no hay lugar, y la lista se pega al borde visible
+   (sticky) para que en un renglon largo la etiqueta no quede fuera de la pantalla. */
+.line-tags {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.line-tags-gap { flex: 0 1 auto; min-width: 0; }
+.line-tags-list {
+  position: sticky;
+  left: calc(var(--gutter-w, 48px) + 8px);
+  right: 12px;
+  flex-shrink: 0;
+  display: flex;
+  gap: 5px;
+}
+.line-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: calc(var(--line-h) - 4px);
+  padding: 0 8px;
+  border: 1px solid var(--st);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--st) 12%, var(--panel));
+  color: color-mix(in oklab, var(--st) 55%, var(--text));
+  font: 500 12px/1 var(--sans);
   white-space: nowrap;
 }
-
-/* "+n": procesos de mas en el renglon; es lo unico de la franja que recibe clics */
-.who-mas {
-  pointer-events: auto;
-  margin-right: 5px;
-  padding: 0 5px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--dim);
-  font: inherit;
-  font-size: 10px;
-  line-height: 1.4;
-  cursor: pointer;
+.line-tag b { font-weight: 600; }
+.line-tag.st-running-process, .line-tag.st-running-monitor {
+  background: var(--st);
+  color: var(--on-accent);
 }
-.who-mas:hover { color: var(--text); border-color: var(--dimmer); }
-
-/* demorado por un delay: franja punteada y un contador con los segundos que faltan */
-.stripe.st-delayed {
-  background: color-mix(in srgb, var(--st) 9%, transparent);
-  border-left: 3px dotted var(--st);
-}
-.delay-count {
-  margin-left: 5px;
-  padding: 0 5px;
-  border: 1px solid var(--st-delayed);
-  border-radius: 6px;
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-  background: color-mix(in srgb, var(--st-delayed) 18%, var(--mix-base));
-}
+.line-tag.st-competing { border-style: dashed; }
+.line-tag.st-ready { border-color: var(--line-strong); background: var(--panel); color: var(--dim); }
+/* varias con el mismo estado: el texto emergente dice quienes son */
+.line-tag.varios { pointer-events: auto; cursor: help; }
+.line-tag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st-proceso); }
+.delay-count { font-variant-numeric: tabular-nums; font-weight: 600; }
 
 .tok-comment { color: var(--tok-comment); font-style: italic; }
 .tok-decl    { color: var(--tok-decl); font-weight: 600; }

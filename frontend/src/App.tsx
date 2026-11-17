@@ -2,14 +2,15 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   BookOpen, Moon, Play, Pause, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
 } from 'lucide-react';
-import { CodeEditor, type ActiveLine } from './components/CodeEditor';
+import { CodeEditor } from './components/CodeEditor';
+import type { ActiveLine } from './editor/lineMarks';
 import { Dock } from './components/Dock';
 import { OutputPanel } from './components/OutputPanel';
 import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
 import { Timeline } from './components/Timeline';
-import { visibleState } from './processStates';
+import { visibleState, whereOf } from './processStates';
 import { useDragSize } from './useDragSize';
 import { useEditorZoom } from './useEditorZoom';
 import { useTheme } from './useTheme';
@@ -70,10 +71,13 @@ export function App() {
     if (!snapshot) return [];
     return snapshot.processes
       .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
-      .map((p) => ({
-        line: p.line, color: p.color, state: visibleState(p), name: p.name,
-        delayEndsAt: p.delayEndsAt,
-      }));
+      .map((p) => {
+        const state = visibleState(p);
+        return {
+          line: p.line, color: p.color, state, name: p.name, where: whereOf(p, state),
+          delayEndsAt: p.delayEndsAt,
+        };
+      });
   }, [snapshot]);
 
   // Procesos que terminaron por un error de ejecucion: se muestran con su linea.

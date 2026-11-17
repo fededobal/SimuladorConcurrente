@@ -1,5 +1,5 @@
-import { visibleState, type VisibleState } from './processStates';
-import type { LogEntry, ProcessView, Snapshot } from './types';
+import { visibleState, whereOf, type VisibleState } from './processStates';
+import type { LogEntry, Snapshot } from './types';
 
 /** Una columna de la linea de tiempo: el estado de cada proceso al final de un instante. */
 export interface TimelineColumn {
@@ -46,22 +46,6 @@ export function startTimeline(s: Snapshot): Timeline {
 /** Familia de un proceso: "Cliente" para "Cliente[3]"; el nombre entero si es uno suelto. */
 export function familyOf(name: string): string {
   return name.replace(/\[.*$/, '');
-}
-
-/**
- * Donde esta parado el proceso, para rotular su tramo. El motor nombra la cond como
- * "Monitor.cond"; aca queda solo "cond", que es como la escribio el alumno.
- */
-function whereOf(p: ProcessView, state: VisibleState): string | null {
-  switch (state) {
-    case 'WAITING': {
-      const on = p.blockedOn ?? '';
-      return on.slice(on.indexOf('.') + 1) || null;
-    }
-    case 'COMPETING': return p.blockedOn;
-    case 'RUNNING_MONITOR': return p.holding[p.holding.length - 1] ?? null;
-    default: return null;
-  }
 }
 
 /**

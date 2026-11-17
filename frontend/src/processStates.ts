@@ -61,3 +61,37 @@ export function visibleState(p: ProcessView): VisibleState {
   // llama a otro monitor conserva el anterior, asi que puede tener varios.
   return p.holding.length > 0 ? 'RUNNING_MONITOR' : 'RUNNING_PROCESS';
 }
+
+/**
+ * Donde esta parado el proceso: la variable condicion en la que duerme, el monitor por el
+ * que compite o el que tiene tomado; null en los demas estados. El motor nombra la cond como
+ * "Monitor.cond"; aca queda solo "cond", que es como la escribio el alumno.
+ */
+export function whereOf(p: ProcessView, state: VisibleState): string | null {
+  switch (state) {
+    case 'WAITING': {
+      const on = p.blockedOn ?? '';
+      return on.slice(on.indexOf('.') + 1) || null;
+    }
+    case 'COMPETING': return p.blockedOn;
+    case 'RUNNING_MONITOR': return p.holding[p.holding.length - 1] ?? null;
+    default: return null;
+  }
+}
+
+/**
+ * Lo que esta haciendo un proceso (o varios en el mismo estado y lugar), en pocas palabras:
+ * "en Buffer", "compite por Buffer", "dormido en wait(libre)". Vacio si ejecuta su propio
+ * codigo, que no necesita aclaracion.
+ */
+export function stateDetail(state: VisibleState, where: string | null, plural = false): string {
+  switch (state) {
+    case 'RUNNING_MONITOR': return where ? `en ${where}` : 'en el monitor';
+    case 'COMPETING': return `${plural ? 'compiten' : 'compite'} por ${where ?? 'el monitor'}`;
+    case 'WAITING': return `${plural ? 'dormidos' : 'dormido'} en wait(${where ?? ''})`;
+    case 'DELAYED': return 'en delay';
+    case 'READY': return 'sin turno';
+    case 'TERMINATED': return plural ? 'terminados' : 'terminado';
+    case 'RUNNING_PROCESS': return '';
+  }
+}

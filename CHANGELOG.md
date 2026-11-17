@@ -61,6 +61,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Editor: cada renglón con procesos lleva una sola franja lisa, un chip con la inicial del proceso en el margen y, al final del código, una etiqueta que dice quién está ahí y qué hace ("Productor · en Buffer", "Cliente ×8 · dormidos en wait(esperaCli[…])"), con un ícono por estado. Los procesos en el mismo estado y lugar comparten etiqueta. Los estados usan colores más separados: ámbar para el que compite, violeta para el que espera y verde azulado para el delay. (Federico Dobal, 2026-11-17)
 - Todas las palabras reservadas aceptan cualquier combinación de mayúsculas (`OR`, `OUT`, `While`, `cola`, `colaOrdenada`), como aparecen en el material de la cátedra; antes solo `monitor`, `procedure` y `process`. Los nombres que declara el programa siguen distinguiendo mayúsculas, y un nombre que coincide con una palabra reservada en cualquier forma (`cond cola;`, `int Out;`) pasa a ser error. El resaltado del editor sigue la misma regla. (Federico Dobal, 2026-11-16)
 - Los paneles del simulador (barra, editor, línea de tiempo y monitores) quedan al ras, sin el hueco gris entre tarjetas; una línea fina los separa. El borde de cada panel se sigue arrastrando para cambiar su tamaño. (Federico Dobal, 2026-11-16)
 - Documentación: todas las celdas de las tablas empiezan con mayúscula, salvo las que empiezan con un nombre del lenguaje en código. (Federico Dobal, 2026-11-14)
@@ -119,6 +120,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Editor: las franjas rayadas de varios procesos en un mismo renglón se sumaban hasta tapar el código, y en un renglón largo el nombre del proceso quedaba fuera de la vista. La etiqueta ahora se ancla al borde visible del editor y los botones de zoom quedan por encima. (Federico Dobal, 2026-11-17)
 - Barra de controles: a 1280 px de ancho (la resolución de muchos proyectores) el estado, el instante y el botón de tema quedaban fuera de la pantalla. Ahora los controles bajan a un segundo renglón, el menú de ejemplos tiene un ancho máximo y la píldora de estado ya no se parte en dos líneas. (Federico Dobal, 2026-11-17)
 - En pantallas angostas (un teléfono), la barra de controles baja de línea en lugar de estirar la página: antes velocidad, turnos, Ejemplos, Salida y Documentación quedaban fuera de la pantalla. (Federico Dobal, 2026-11-16)
 - Documentación: debajo del botón "Volver al simulador" aparecía una segunda línea divisoria y, al lado, un área vacía con cursor de enlace; eran restos del enlace del título que el tema deja aunque no haya título. El botón pasa fuera de ese enlace, alineado con el texto de la barra lateral. (Federico Dobal, 2026-11-14)
