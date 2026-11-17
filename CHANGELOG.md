@@ -240,6 +240,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Partir el editor de código en módulos: el coloreado (`editor/highlight.ts`), las ayudas de edición (`editor/editing.ts`) y la medición de los renglones (`editor/useLineMetrics.ts`) salen de `CodeEditor.tsx`, que queda con el componente y las marcas de los procesos. (Federico Dobal, 2026-11-17)
 - Unificar en un solo lugar (`Place`, creado por `VariableAccess.place`) la lectura y escritura de una variable o de un elemento de arreglo, que estaba repetida en la asignación, `++`/`--`, el intercambio `:=:` y los parámetros `out`; se elimina `LValue`. Sin cambios de comportamiento: los tests de caracterización pasan sin regenerarse. (Federico Dobal, 2026-11-16)
 - Clase `QueueChecks` en `lang/`, con los controles de push y pop contra la declaración de la cola que tenía `SemanticValidator`, que queda en 375 líneas. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
 - Clase `NameCollector` en `lang/`, con la primera pasada del validador (nombres repetidos de monitores, procesos, permanentes, cond, procedures y parámetros), y record `MonitorInfo` en su propio archivo. Sin cambios de comportamiento. (Federico Dobal, 2026-11-16)
