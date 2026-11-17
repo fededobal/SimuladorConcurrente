@@ -13,6 +13,15 @@ export interface SimError {
 
 export const SPEEDS = [1200, 600, 300, 120] as const;
 
+/**
+ * Semilla nueva para una ejecucion. La elige la interfaz (el nucleo no usa azar propio) y es
+ * corta a proposito: cinco cifras se pueden leer en voz alta o anotar en el pizarron para
+ * que otro repita la misma ejecucion.
+ */
+function newSeed(): number {
+  return 10000 + Math.floor(Math.random() * 90000);
+}
+
 export function useSimulation(initialCode: string) {
   const [code, setCodeState] = useState(initialCode);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
@@ -23,6 +32,8 @@ export function useSimulation(initialCode: string) {
   const [waiting, setWaiting] = useState(false);
   // eventos del ultimo paso que hizo algo: el dibujo de los monitores resalta sus flechas
   const [entries, setEntries] = useState<readonly LogEntry[]>([]);
+  // semilla de la ejecucion en curso o de la ultima: con la misma, el azar se repite igual
+  const [seed, setSeed] = useState<number | null>(null);
   const [speed, setSpeed] = useState<number>(600);
   const [policy, setPolicyState] = useState<SchedulingPolicy>('RANDOM');
 
@@ -32,6 +43,7 @@ export function useSimulation(initialCode: string) {
   // el bucle lee la politica y la velocidad en cada paso: cambiarlas no reinicia la simulacion
   const policyRef = useRef<SchedulingPolicy>('RANDOM');
   const speedRef = useRef<number>(speed);
+  const seedRef = useRef<number | null>(null);
   statusRef.current = status;
   speedRef.current = speed;
 
@@ -74,11 +86,17 @@ export function useSimulation(initialCode: string) {
     if (activaRef.current || statusRef.current !== 'idle') drop();
   }, [drop]);
 
-  const compile = useCallback((): boolean => {
+  /** Compila y arranca en el instante 0; con `withSeed` repite el azar de esa ejecucion. */
+  const compile = useCallback((withSeed?: number): boolean => {
     clearTimer();
     setError(null);
     try {
-      const created = api.create(code);
+      // con la simulacion viva y la misma semilla alcanza con reiniciarla en el nucleo
+      const created = withSeed !== undefined && activaRef.current && withSeed === seedRef.current
+        ? api.reset()
+        : api.create(code, withSeed ?? newSeed());
+      seedRef.current = created.seed;
+      setSeed(created.seed);
       activaRef.current = true;
       setSnapshot(created.snapshot);
       setTimeline(startTimeline(created.snapshot));
@@ -160,13 +178,25 @@ export function useSimulation(initialCode: string) {
     if (statusRef.current === 'running') setStat('paused');
   }, []);
 
+  /**
+   * Vuelve al instante 0 con la misma semilla: el azar toma las mismas decisiones, asi que
+   * (con la misma politica de turnos) la ejecucion se repite igual. Queda en pausa para
+   * recorrerla paso a paso; si estaba corriendo, sigue corriendo.
+   */
+  const replay = useCallback(() => {
+    if (seedRef.current === null) return;
+    const wasRunning = statusRef.current === 'running';
+    if (!compile(seedRef.current)) return;
+    if (wasRunning && statusRef.current === 'ready') play();
+  }, [compile, play]);
+
   useEffect(() => () => clearTimer(), []);
 
   return {
     code, setCode,
-    snapshot, timeline, status, error, waiting, entries,
+    snapshot, timeline, status, error, waiting, entries, seed,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
-    play, pause, step, stop,
+    play, pause, step, stop, replay,
   };
 }

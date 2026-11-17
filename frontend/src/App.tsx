@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  BookOpen, Moon, Play, Pause, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
+  BookOpen, Moon, Play, Pause, RotateCcw, SkipForward, Square, Sun, Terminal, ZoomIn, ZoomOut,
 } from 'lucide-react';
 import { CodeEditor } from './components/CodeEditor';
 import type { ActiveLine } from './editor/lineMarks';
@@ -145,6 +145,13 @@ export function App() {
           <Square size={14} /> Detener
         </button>
 
+        <button className="btn btn-icono" onClick={sim.replay} disabled={sim.seed === null}
+          aria-label="Repetir la ejecución con la misma semilla"
+          title={sim.seed === null ? 'Repetir: todavía no hay una ejecución para repetir'
+            : `Repetir la misma ejecución desde el instante 0 (semilla ${sim.seed})`}>
+          <RotateCcw size={14} />
+        </button>
+
         <span className="bar-sep" aria-hidden="true" />
 
         <label className="campo" title="Cuánto dura cada instante en pantalla">
@@ -219,6 +226,12 @@ export function App() {
           <span className={`st${mal ? ' bad' : ''}`} role="status" aria-live="polite">{etiqueta}</span>
           <span className="rotulo">instante</span>
           <span className="n">{snapshot?.instant ?? 0}</span>
+          {sim.seed !== null && (
+            <span className="semilla"
+              title="Semilla del azar de esta ejecución: con la misma semilla y la misma política de turnos, la ejecución se repite igual">
+              <span className="rotulo">semilla</span> {sim.seed}
+            </span>
+          )}
         </div>
       </div>
 

@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Botón Repetir: vuelve al instante 0 con la misma semilla, así la ejecución se repite igual (con la misma política de turnos) y se puede volver a mirar un entrelazado o un interbloqueo paso a paso. La semilla de la ejecución se muestra junto al instante y ahora tiene cinco cifras, para poder anotarla o dictarla. (Federico Dobal, 2026-11-17)
 - Intercambio `x :=: y`, la notación de la cátedra para intercambiar dos variables (`v_actual :=: v_proxima`): vale con variables y elementos de arreglo del mismo tipo, ocupa un solo paso y se controla como una asignación (no se puede usar con un parámetro `in`, un iterador, un arreglo completo ni una cola). (Federico Dobal, 2026-11-16)
 - Modo oscuro en la documentación, con los mismos colores que el simulador y el botón de VitePress arriba a la derecha. El simulador y la documentación comparten el tema: elegirlo en uno lo cambia en el otro, y el elegido se mantiene al recargar aunque cambie el tema del sistema. (Federico Dobal, 2026-11-16)
 - Modo oscuro: un botón con una luna o un sol, al final de la barra, pasa del tema claro al oscuro y vuelve. La primera vez se usa el tema del sistema operativo; después el navegador recuerda el elegido. El oscuro conserva el gris frío y el acento azul del claro, y los nombres de los procesos se aclaran lo justo para leerse sobre el fondo oscuro. (Federico Dobal, 2026-11-16)

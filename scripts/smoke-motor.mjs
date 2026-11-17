@@ -153,6 +153,25 @@ const CANONICOS = [
       return turnos.length > 0 && turnos.every((t, k) => t === k)
         && ps.every((p) => p.advanced === (p.advanceOrder >= 0));
     }],
+  ['restart repite la ejecucion: misma semilla, mismos eventos (boton Repetir)', `
+    monitor M { int x = 0; procedure f() { x = x + 1; } }
+    process P[i: 0..5] { M.f(); M.f(); }`,
+    () => {
+      const code = `monitor M { int x = 0; procedure f() { x = x + 1; } }
+        process P[i: 0..5] { M.f(); M.f(); }`;
+      const traza = () => {
+        let t = '';
+        for (let i = 0; i < 12; i++) {
+          for (const e of JSON.parse(motor.step('RANDOM', -1, 0)).entries) t += `${e.processId}${e.kind} `;
+        }
+        return t;
+      };
+      const creada = JSON.parse(motor.create(code, 48213));
+      const primera = traza();
+      const reiniciada = JSON.parse(motor.restart());
+      return creada.seed === 48213 && reiniciada.seed === 48213
+        && reiniciada.snapshot.instant === 0 && primera.length > 0 && traza() === primera;
+    }],
   ['al salir del monitor entra uno de la cola en el mismo instante (ADR 0005)', `
     monitor M { int x = 0; procedure f() { x = x + 1; } }
     process A { M.f(); } process B { M.f(); } process C { M.f(); }`,
