@@ -5,6 +5,7 @@ import {
 import { CodeEditor } from './components/CodeEditor';
 import type { ActiveLine } from './editor/lineMarks';
 import { Dock } from './components/Dock';
+import { StepMenu } from './components/StepMenu';
 import { OutputPanel } from './components/OutputPanel';
 import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
@@ -135,10 +136,14 @@ export function App() {
           </button>
         )}
 
-        <button className="btn" onClick={sim.step} disabled={running}
-          title="Avanzar un solo instante">
-          <SkipForward size={14} /> Paso
-        </button>
+        <div className="grupo">
+          <button className="btn" onClick={() => sim.step()} disabled={running}
+            title="Avanzar un solo instante">
+            <SkipForward size={14} /> Paso
+          </button>
+          <StepMenu processes={snapshot?.processes ?? []} disabled={running}
+            onOpen={sim.prepare} onStep={sim.step} />
+        </div>
 
         <button className="btn" onClick={sim.stop} disabled={!active}
           title="Detener y volver al principio del programa">

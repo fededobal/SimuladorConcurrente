@@ -172,6 +172,18 @@ const CANONICOS = [
       return creada.seed === 48213 && reiniciada.seed === 48213
         && reiniciada.snapshot.instant === 0 && primera.length > 0 && traza() === primera;
     }],
+  ['paso con proceso elegido: en ese instante avanza solo ese', `
+    process A { skip; skip; skip; } process B { skip; skip; skip; } process C { skip; skip; skip; }`,
+    () => {
+      JSON.parse(motor.create('process A { skip; skip; skip; } process B { skip; skip; skip; } process C { skip; skip; skip; }', 5));
+      // cualquiera sea la politica, con un proceso elegido el resto no se mueve
+      return ['RANDOM', 'ROUND_ROBIN'].every((politica) => [2, 3, 1].every((id) => {
+        const r = JSON.parse(motor.step(politica, id, 0));
+        const avanzaron = r.snapshot.processes.filter((p) => p.advanced).map((p) => p.id);
+        return avanzaron.length === 1 && avanzaron[0] === id
+          && r.entries.every((e) => e.processId === id);
+      }));
+    }],
   ['al salir del monitor entra uno de la cola en el mismo instante (ADR 0005)', `
     monitor M { int x = 0; procedure f() { x = x + 1; } }
     process A { M.f(); } process B { M.f(); } process C { M.f(); }`,

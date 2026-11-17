@@ -115,10 +115,11 @@ export function useSimulation(initialCode: string) {
     }
   }, [code]);
 
-  const doStep = useCallback((): boolean => {
+  /** Da un paso; con `chosenProcessId`, en ese instante avanza solo ese proceso. */
+  const doStep = useCallback((chosenProcessId?: number): boolean => {
     if (!activaRef.current) return false;
     try {
-      const res = api.step(policyRef.current);
+      const res = api.step(policyRef.current, chosenProcessId);
       setSnapshot(res.snapshot);
       setTimeline((t) => appendInstant(t, res.snapshot, res.entries));
       setWaiting(res.waiting);
@@ -136,29 +137,28 @@ export function useSimulation(initialCode: string) {
     }
   }, []);
 
-  const step = useCallback(() => {
-    if (
-      statusRef.current === 'idle' ||
-      statusRef.current === 'error' ||
-      statusRef.current === 'finished' ||
-      statusRef.current === 'deadlock'
-    ) {
-      if (!compile()) return;
-    }
+  /** true si no hay una simulacion que pueda avanzar: hay que compilar antes del proximo paso. */
+  const needsCompile = () => statusRef.current === 'idle' || statusRef.current === 'error'
+    || statusRef.current === 'finished' || statusRef.current === 'deadlock';
+
+  /**
+   * Deja la simulacion compilada en el instante 0 si todavia no hay ninguna, sin avanzar:
+   * asi se conocen los procesos antes del primer paso (para elegir cual avanza).
+   */
+  const prepare = useCallback(() => {
+    if (statusRef.current === 'idle' || statusRef.current === 'error') compile();
+  }, [compile]);
+
+  /** Avanza un instante; con `chosenProcessId`, solo se mueve ese proceso (si esta listo). */
+  const step = useCallback((chosenProcessId?: number) => {
+    if (needsCompile() && !compile()) return;
     clearTimer();
     setStat('paused');
-    doStep();
+    doStep(chosenProcessId);
   }, [compile, doStep]);
 
   const play = useCallback(() => {
-    if (
-      statusRef.current === 'idle' ||
-      statusRef.current === 'error' ||
-      statusRef.current === 'finished' ||
-      statusRef.current === 'deadlock'
-    ) {
-      if (!compile()) return;
-    }
+    if (needsCompile() && !compile()) return;
     setStat('running');
     clearTimer();
     // Cada paso programa el siguiente al terminar (setTimeout encadenado), en vez de un
@@ -197,6 +197,6 @@ export function useSimulation(initialCode: string) {
     snapshot, timeline, status, error, waiting, entries, seed,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,
-    play, pause, step, stop, replay,
+    play, pause, step, stop, replay, prepare,
   };
 }
