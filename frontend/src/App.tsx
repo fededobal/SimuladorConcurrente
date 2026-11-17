@@ -17,6 +17,7 @@ import { downloadText, readTextFile } from './files';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
 import { decodeShare, encodeShare } from './shareLink';
 import { useProgram } from './useProgram';
+import { useShortcuts } from './useShortcuts';
 import { Timeline } from './components/Timeline';
 import { visibleState, whereOf } from './processStates';
 import { useDragSize } from './useDragSize';
@@ -220,6 +221,24 @@ export function App() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
+  useShortcuts((action) => {
+    switch (action) {
+      case 'toggle-run':
+        if (running) sim.pause();
+        else sim.play();
+        break;
+      case 'step':
+        if (!running) sim.step();
+        break;
+      case 'stop':
+        if (active) sim.stop();
+        break;
+      case 'help':
+        window.open('/docs/referencia/atajos', '_blank', 'noreferrer');
+        break;
+    }
+  });
+
   const removeSaved = (p: SavedProgram) => {
     if (window.confirm(`¿Borrar "${p.name}" de Mis programas? No se puede deshacer.`)) {
       store.removeFromLibrary(p.id);
@@ -244,19 +263,19 @@ export function App() {
     <div className="app">
       <div className="bar tarjeta">
         {running ? (
-          <button className="btn btn-main" onClick={sim.pause} title="Pausar la simulación">
+          <button className="btn btn-main" onClick={sim.pause} title="Pausar la simulación (F5)">
             <Pause size={14} /> Pausar
           </button>
         ) : (
           <button className="btn btn-main" onClick={sim.play}
-            title="Ejecutar la simulación: avanza sola, un instante por vez">
+            title="Ejecutar la simulación: avanza sola, un instante por vez (F5)">
             <Play size={14} /> Ejecutar
           </button>
         )}
 
         <div className="grupo">
           <button className="btn" onClick={() => sim.step()} disabled={running}
-            title="Avanzar un solo instante">
+            title="Avanzar un solo instante (F10)">
             <SkipForward size={14} /> Paso
           </button>
           <StepMenu processes={snapshot?.processes ?? []} disabled={running}
@@ -264,7 +283,7 @@ export function App() {
         </div>
 
         <button className="btn" onClick={sim.stop} disabled={!active}
-          title="Detener y volver al principio del programa">
+          title="Detener y volver al principio del programa (Shift+F5)">
           <Square size={14} /> Detener
         </button>
 
