@@ -45,6 +45,7 @@ nadie puede avanzar».
 |---|---|
 | Botones de la cabecera | Columnas más angostas (más instantes) o más anchas (más detalle) |
 | Desplazar hacia atrás | Se deja de seguir al último instante hasta volver al final |
+| Botón de ampliar, a la derecha de la cabecera | La línea de tiempo pasa al costado del editor, a toda altura, y el inspector se oculta. El mismo botón o Escape la devuelven a su lugar |
 
 ::: tip Nota
 Se conservan los últimos 1000 instantes.

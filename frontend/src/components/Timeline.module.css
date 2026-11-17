@@ -1,7 +1,10 @@
-/* Linea de tiempo: a todo el ancho de la pantalla, debajo del editor y del inspector. Una
-   fila por proceso y una columna por instante; arriba, un carril por monitor. */
+/* Linea de tiempo: a todo el ancho de la pantalla, debajo del editor y del inspector, o
+   ampliada al costado del editor. Una fila por proceso y una columna por instante; arriba,
+   un carril por monitor. */
 
 .timeline {
+  /* la cabecera se acomoda al ancho del panel, no al de la ventana: ampliada es mas angosta */
+  container-type: inline-size;
   flex: 1;
   min-width: 0;
   min-height: 0;
@@ -233,6 +236,9 @@
 .who { font-family: var(--mono); font-size: 12px; font-weight: 600; }
 .nobody { color: var(--dimmer); }
 
-@media (max-width: 900px) {
-  .legend, .hint { display: none; }
+@container (max-width: 980px) {
+  .hint { display: none; }
+}
+@container (max-width: 780px) {
+  .legend { display: none; }
 }

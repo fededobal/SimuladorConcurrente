@@ -76,6 +76,20 @@ export function App() {
   const inspectorSize = useDragSize('x', 'Cambiar el ancho del inspector');
   const [inspectorWide, setInspectorWide] = useState(false);
 
+  // La linea de tiempo ampliada ocupa la derecha del editor a toda altura y el inspector se
+  // oculta hasta volverla a su lugar, con el mismo boton o con Escape.
+  const expandedSize = useDragSize('x', 'Cambiar el ancho de la línea de tiempo ampliada');
+  const [timelineExpanded, setTimelineExpanded] = useState(false);
+  useEffect(() => {
+    if (!timelineExpanded) return;
+    const onKey = (e: KeyboardEvent) => {
+      // con la lista de atajos abierta, Escape cierra la lista
+      if (e.key === 'Escape' && !shortcutsOpen) setTimelineExpanded(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [timelineExpanded, shortcutsOpen]);
+
   const activeLines: ActiveLine[] = useMemo(() => {
     if (!snapshot) return [];
     return snapshot.processes
@@ -253,44 +267,49 @@ export function App() {
         onToggleTheme={theme.toggle}
       />
 
-      <div className={s.main}>
-        <EditorPane
-          programName={program.name}
-          saving={store.saveState === 'saving'}
-          code={program.code}
-          onChange={changeCode}
-          readOnly={running}
-          activeLines={activeLines}
-          errorLines={errorLines}
-          pasoMs={sim.speed}
-          zoom={zoom}
-          onCursor={setCursor}
-          processes={snapshot?.processes ?? []}
-          compileError={status === 'error' ? sim.error : null}
-          failed={failed}
-          deadlock={sim.deadlock}
-          blocked={blocked}
-          onShowInstant={showInstant}
-          onReplay={sim.replay}
-        />
-        <Dock drag={inspectorSize} className={`${s.inspectorDock}${inspectorWide ? ` ${s.inspectorWide}` : ''}`}>
-          <Inspector
-            snapshot={snapshot}
-            entries={sim.entries}
+      <div className={`${s.body}${timelineExpanded ? ` ${s.bodyExpanded}` : ''}`}>
+        <div className={s.main}>
+          <EditorPane
+            programName={program.name}
+            saving={store.saveState === 'saving'}
+            code={program.code}
+            onChange={changeCode}
+            readOnly={running}
+            activeLines={activeLines}
+            errorLines={errorLines}
+            pasoMs={sim.speed}
+            zoom={zoom}
+            onCursor={setCursor}
+            processes={snapshot?.processes ?? []}
+            compileError={status === 'error' ? sim.error : null}
+            failed={failed}
+            deadlock={sim.deadlock}
             blocked={blocked}
-            running={running}
-            wide={inspectorWide}
-            onToggleWide={() => setInspectorWide((w) => !w)}
-            onStepProcess={sim.step}
+            onShowInstant={showInstant}
+            onReplay={sim.replay}
           />
+          <Dock drag={inspectorSize} className={`${s.inspectorDock}${inspectorWide ? ` ${s.inspectorWide}` : ''}`}>
+            <Inspector
+              snapshot={snapshot}
+              entries={sim.entries}
+              blocked={blocked}
+              running={running}
+              wide={inspectorWide}
+              onToggleWide={() => setInspectorWide((w) => !w)}
+              onStepProcess={sim.step}
+            />
+          </Dock>
+        </div>
+
+        <Dock drag={timelineExpanded ? expandedSize : timelineSize}
+          className={timelineExpanded ? s.timelineExpanded : s.timelineDock}
+          autoSize={timelineExpanded ? undefined
+            : timelineHeight(sim.timeline.monitors.length + sim.timeline.order.length)}>
+          <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []}
+            deadlockInstant={sim.deadlock?.instant ?? null} focus={timelineFocus}
+            expanded={timelineExpanded} onToggleExpand={() => setTimelineExpanded((e) => !e)} />
         </Dock>
       </div>
-
-      <Dock drag={timelineSize} className={s.timelineDock}
-        autoSize={timelineHeight(sim.timeline.monitors.length + sim.timeline.order.length)}>
-        <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []}
-          deadlockInstant={sim.deadlock?.instant ?? null} focus={timelineFocus} />
-      </Dock>
 
       <StatusBar
         cursor={cursor}

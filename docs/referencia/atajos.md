@@ -30,7 +30,7 @@ valiendo Cmd + R (macOS) o Ctrl + R.
 | Tecla | Acción |
 |---|---|
 | ? | Abre la lista de atajos |
-| Escape | Cierra un menú o la lista de atajos |
+| Escape | Cierra un menú o la lista de atajos; devuelve a su lugar la línea de tiempo ampliada |
 | Flechas, con el borde de un panel seleccionado | Agrandan o achican el panel |
 
 ## Guía

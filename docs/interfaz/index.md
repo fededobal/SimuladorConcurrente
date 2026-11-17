@@ -34,6 +34,7 @@ orden de la tabla, con el ejemplo Corralón pausado en el instante 14.
 |---|---|
 | Agrandar o achicar el inspector o la línea de tiempo | Arrastrar el borde que mira al editor; también con las flechas del teclado cuando el borde tiene el foco |
 | Volver al tamaño automático | Doble clic en ese borde |
+| Ampliar la línea de tiempo | Botón de la esquina superior derecha de la línea de tiempo: pasa al costado del editor, a toda altura, y el inspector se oculta. El mismo botón o Escape la devuelven a su lugar |
 | Ensanchar el inspector | Botón de la esquina superior derecha del inspector; el mismo botón lo devuelve a su ancho |
 
 ::: tip Nota

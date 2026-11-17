@@ -31,6 +31,7 @@ const GROUPS: readonly { title: string; items: readonly [string[], string][] }[]
     items: [
       [['?'], 'Abrir esta lista (con el cursor fuera del código)'],
       [['Esc'], 'Cerrar un menú o esta lista'],
+      [['Esc'], 'Volver la línea de tiempo ampliada a su lugar'],
       [['← →', '↑ ↓'], 'Con el borde de un panel seleccionado, cambiar su tamaño'],
     ],
   },

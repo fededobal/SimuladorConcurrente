@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ZoomIn, ZoomOut } from 'lucide-react';
+import { Maximize2, Minimize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 import { processTextColor } from '../processColor';
 import { familyOf, type Timeline as TimelineData, type TimelineColumn } from '../timeline';
@@ -20,6 +20,9 @@ interface Props {
    * tarjeta. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
    */
   readonly focus: { readonly instant: number; readonly nonce: number } | null;
+  /** true si esta ampliada: al costado del editor y a toda altura. */
+  readonly expanded: boolean;
+  readonly onToggleExpand: () => void;
 }
 
 // Medidas de la grilla, en px. Posicionan filas y tramos (que son absolutos) y viajan al CSS
@@ -73,8 +76,11 @@ type Row = { readonly kind: 'monitor'; readonly name: string } | { readonly kind
  * filas no se mueven, asi se puede seguir a un proceso de punta a punta; al pasar el mouse
  * por una columna, una tarjeta cuenta en palabras que paso en ese instante, y un clic la
  * deja fija. Solo se dibujan las filas que se ven: con mil procesos son las mismas veinte.
+ * El boton de la cabecera la amplia: pasa al costado del editor, a toda altura.
  */
-export function Timeline({ timeline, processes, deadlockInstant, focus }: Props) {
+export function Timeline({
+  timeline, processes, deadlockInstant, focus, expanded, onToggleExpand,
+}: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order, monitors } = timeline;
   const [cellIndex, setCellIndex] = useState(DEFAULT_CELL);
@@ -192,6 +198,12 @@ export function Timeline({ timeline, processes, deadlockInstant, focus }: Props)
             disabled={cellIndex === CELL_WIDTHS.length - 1}
             aria-label="Ver menos instantes, más grandes" title="Ver menos instantes, más grandes">
             <ZoomIn size={14} />
+          </button>
+          <button type="button" className="btn btn-icono btn-plano btn-chico" onClick={onToggleExpand}
+            aria-pressed={expanded}
+            aria-label={expanded ? 'Volver la línea de tiempo a su lugar' : 'Ampliar la línea de tiempo'}
+            title={expanded ? 'Volver la línea de tiempo a su lugar (Esc)' : 'Ampliar la línea de tiempo'}>
+            {expanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
           </button>
         </div>
       </header>
