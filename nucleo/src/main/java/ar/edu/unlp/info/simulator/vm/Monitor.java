@@ -25,6 +25,8 @@ public final class Monitor {
     private final Map<String, Integer> condArraySizes = new LinkedHashMap<>();
     /** Ultimo proceso que escribio cada variable permanente (para el color-coding de la UI). */
     private final Map<String, Integer> lastWriter = new LinkedHashMap<>();
+    /** Instante de esa ultima escritura (0 si fue en la inicializacion del monitor). */
+    private final Map<String, Integer> lastWriteInstant = new LinkedHashMap<>();
 
     /** Proceso que tiene el acceso exclusivo, o null si el monitor esta libre. */
     private Process lockOwner;
@@ -50,14 +52,19 @@ public final class Monitor {
 
     public Value getVar(String n) { return vars.get(n); }
 
-    public void setVar(String n, Value v, int writerId) {
+    /** Guarda el valor y anota quien lo escribio y en que instante. */
+    public void setVar(String n, Value v, int writerId, int instant) {
         vars.put(n, v);
         lastWriter.put(n, writerId);
+        lastWriteInstant.put(n, instant);
     }
 
     public boolean hasVar(String n) { return vars.containsKey(n); }
 
     public Integer lastWriter(String n) { return lastWriter.get(n); }
+
+    /** Instante de la ultima escritura de la variable, o null si nunca se escribio. */
+    public Integer lastWriteInstant(String n) { return lastWriteInstant.get(n); }
 
     public ConditionVariable cond(String n) { return conds.get(n); }
 

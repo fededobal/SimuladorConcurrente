@@ -257,6 +257,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- El estado que entrega el núcleo incluye, para cada variable permanente, el instante de su última escritura (`lastWriteInstant`), además de quién la escribió. Lo usa la tabla de variables del panel de monitores. (Federico Dobal, 2026-11-17)
 - Núcleo: los procesos que avanzaron en el instante se guardan en un conjunto ordenado en lugar de una lista, y el estado arma una sola vez la posición de cada uno en el turno. Con miles de procesos avanzando a la vez, un paso del motor pasa de 152 ms a 23 ms (5000 procesos) y de 9 ms a 4 ms (1000). (Federico Dobal, 2026-11-17)
 - ESLint deja de revisar la caché de VitePress (`npm run lint` terminaba con tres avisos ajenos al proyecto) y se quita la dependencia `react-resizable-panels`, que no se usaba. (Federico Dobal, 2026-11-17)
 - Tests de la interfaz con Vitest (`npm run test` en `frontend/`, incluido en `npm run check` y en el CI): prueban la lógica pura, sin navegador. Los primeros cubren el coloreado del editor y el armado de las marcas de los procesos. (Federico Dobal, 2026-11-17)

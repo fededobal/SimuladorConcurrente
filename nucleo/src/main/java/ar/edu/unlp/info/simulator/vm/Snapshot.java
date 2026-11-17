@@ -18,13 +18,15 @@ public record Snapshot(int instant,
     public record ProcRef(int id, String name, String color) { }
 
     /**
-     * Variable con su valor renderizado y quien la escribio por ultima vez. Un arreglo o una
+     * Variable con su valor renderizado, quien la escribio por ultima vez y en que instante
+     * ({@code lastWriteInstant}; null si nunca se escribio o si es una local). Un arreglo o una
      * cola trae ademas sus elementos uno por uno (los primeros {@link Value#SHOWN_ELEMENTS};
      * {@code size} es el total), para que la interfaz los dibuje como celdas; en un escalar
      * {@code elements} es null y {@code size} 0.
      */
     public record VarView(String name, String type, String value, boolean isArray,
-                          Integer lastWriterId, List<String> elements, int size) { }
+                          Integer lastWriterId, Integer lastWriteInstant,
+                          List<String> elements, int size) { }
 
     public record CondView(String name, List<ProcRef> queue) { }
 

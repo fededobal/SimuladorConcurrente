@@ -15,9 +15,12 @@ import java.util.function.Function;
 final class VariableAccess {
 
     private final Map<String, Monitor> monitors;
+    /** Para anotar en que instante se escribe cada variable permanente. */
+    private final SimulationClock clock;
 
-    VariableAccess(Map<String, Monitor> monitors) {
+    VariableAccess(Map<String, Monitor> monitors, SimulationClock clock) {
         this.monitors = monitors;
+        this.clock = clock;
     }
 
     ExprEvaluator evaluator(Activation act) {
@@ -50,7 +53,8 @@ final class VariableAccess {
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
             if (m.hasVar(name)) {
-                m.setVar(name, coerceLike(m.getVar(name), value, name, line), writerId);
+                m.setVar(name, coerceLike(m.getVar(name), value, name, line), writerId,
+                        clock.instant());
                 return;
             }
         }
@@ -153,7 +157,7 @@ final class VariableAccess {
         if (act.isProcedure()) {
             Monitor m = monitors.get(act.monitorName());
             if (m.hasVar(name)) {
-                m.setVar(name, m.getVar(name), writerId);
+                m.setVar(name, m.getVar(name), writerId, clock.instant());
             }
         }
     }

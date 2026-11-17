@@ -1,443 +1,443 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #4f2dfbd2da655ec8
-step 1 DECL P[3]: int a = [0, 0, 0] | DECL P[0]: int a = [0, 0, 0] | DECL P[1]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #ee4003d2057b54d4
-step 2 DECL P[2]: int a = [0, 0, 0] | DECL P[1]: text t = [, ] | DECL P[3]: text t = [, ] | DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #13c5bd8f0551c787
-step 3 ENTER P[0]: entra a M.dar | BLOCKED P[1]: espera para entrar a M.dar | DECL P[2]: text t = [, ] | BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7663b70f9dc51e97
-step 4 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[0]: n++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b6685ea9ed349d75
-step 5 ASSIGN P[0]: r = 10 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c2e1c7de3d799028
-step 6 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #dd8a19943107946f
-step 7 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d8fdc4abb74d1a95
-step 8 ASSIGN P[0]: k++ => 1 | ASSIGN P[3]: n++ => 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #98b95784b1a9ad7a
-step 9 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #02c0f016d8ade3aa
-step 10 ASSIGN P[3]: r = 20 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #937261ce3ad77c74
-step 11 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #917b67e2dbf77d67
-step 12 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #5c0ac7c8eb08791b
-step 13 ASSIGN P[0]: n++ => 3 | ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #2ff8b23c4219ceff
-step 14 ASSIGN P[0]: r = 30 | BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0410e8d0c4239ce0
-step 15 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f6583ac8add2e8f6
-step 16 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #d557fda553b5cd33
-step 17 ASSIGN P[0]: k++ => 2 | ASSIGN P[2]: n++ => 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #7c7c37e9e91dc7f0
-step 18 BLOCKED P[0]: espera para entrar a M.dar | ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #4383c063a18cf773
-step 19 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #0d7c5e41dfa8efa8
-step 20 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #e7e9055d26ca0ac2
-step 21 ASSIGN P[3]: n++ => 5 | ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #3293b5b019a03a9c
-step 22 ASSIGN P[3]: r = 50 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #fa7578d31d527b6e
-step 23 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #1d2bebbf70a27b24
-step 24 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #5aef5f444a552030
-step 25 ASSIGN P[3]: k++ => 2 | ASSIGN P[0]: n++ => 6 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f8a634785626b479
-step 26 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[0]: r = 60 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #8e24a18bffda77df
-step 27 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ad8684236d5f9653
-step 28 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a45f8fd2977f5be0
-step 29 ASSIGN P[1]: n++ => 7 | ASSIGN P[0]: k++ => 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #1f138ca97c97f7df
-step 30 WRITE P[0]: write(10 30 60vv) | ASSIGN P[1]: r = 70 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #8484100d8be38c64
-step 31 TERMINATED P[0]: termina | ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c1b1356af61709f4
-step 32 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #701a4573878b981f
-step 33 ASSIGN P[2]: n++ => 8 | ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #78b6f3fc6d52db4f
-step 34 ASSIGN P[2]: r = 80 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #9e47508f0d006177
-step 35 ASSIGN P[2]: s = v | BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #ddf004b5935d3e30
-step 36 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #421e127d9c50d441
-step 37 ASSIGN P[1]: n++ => 9 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ba4bf576e0f3a8d3
-step 38 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[1]: r = 90 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #b7f6fbf884be5514
-step 39 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #8427342582ec23d7
-step 40 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #103e2b0071892e96
-step 41 ASSIGN P[3]: n++ => 10 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #759d5a41a86434bc
-step 42 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #8e69b367731f75d8
-step 43 ASSIGN P[3]: r = 100 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #7b75d0965f6a720d
-step 44 BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #054dd1f62ea4d10c
-step 45 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #58a0ef95ac3f83e1
-step 46 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #fc7f290c272d84f9
-step 47 ASSIGN P[2]: n++ => 11 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #837b7efcc467c9b8
-step 48 ASSIGN P[2]: r = 110 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #b7112f1c8a1f6f16
-step 49 ASSIGN P[3]: k++ => 3 | ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #012ebec3c47ac957
-step 50 WRITE P[3]: write(20 50 100vv) | RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #7da9dbd32774735f
-step 51 ASSIGN P[1]: n++ => 12 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #ffa2d0b21bb3b33f
-step 52 ASSIGN P[1]: r = 120 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #d5ed0150d9a20924
-step 53 WRITE P[2]: write(40 80 110vv) | ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #2c736eaa12aa1cc3
-step 54 TERMINATED P[2]: termina | RETURN P[1]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #690b2656ca0ae938
-step 55 ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c67e3159e41f1ba6
-step 56 WRITE P[1]: write(70 90 120vv) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #bd1bca21a07c4595
-step 57 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":57,"waiting":false} #4a2cf650c2a0f235
-state #ff786218f567f697
+create {"finished":false,"deadlock":false} #a06f8b98c43f91a2
+step 1 DECL P[3]: int a = [0, 0, 0] | DECL P[0]: int a = [0, 0, 0] | DECL P[1]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #55f739984354f42b
+step 2 DECL P[2]: int a = [0, 0, 0] | DECL P[1]: text t = [, ] | DECL P[3]: text t = [, ] | DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #681bb9b5d9b73a6a
+step 3 ENTER P[0]: entra a M.dar | BLOCKED P[1]: espera para entrar a M.dar | DECL P[2]: text t = [, ] | BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0edf74a01e4037d1
+step 4 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[0]: n++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #194954baebc1b0b8
+step 5 ASSIGN P[0]: r = 10 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #11e95be1817f30ef
+step 6 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #9f73efd9a9271878
+step 7 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #52d75b6baeca1ee0
+step 8 ASSIGN P[0]: k++ => 1 | ASSIGN P[3]: n++ => 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #27afabbdc5b5a274
+step 9 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #cf7a41bce6c0e223
+step 10 ASSIGN P[3]: r = 20 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #32004352e095033d
+step 11 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #1deb72315c852b87
+step 12 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #55af951ac6f32695
+step 13 ASSIGN P[0]: n++ => 3 | ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #7b6c7a123e33ff53
+step 14 ASSIGN P[0]: r = 30 | BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #c1a8926d3d7e211a
+step 15 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f1c0e5a51048d8b0
+step 16 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #2bf5e24d369aebc6
+step 17 ASSIGN P[0]: k++ => 2 | ASSIGN P[2]: n++ => 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #fe48ed494c72f1c0
+step 18 BLOCKED P[0]: espera para entrar a M.dar | ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #0dc7fe0a0d588aaa
+step 19 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #470d62c011eff5a4
+step 20 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #c25c803f1b097b45
+step 21 ASSIGN P[3]: n++ => 5 | ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #053dae9ed30640c0
+step 22 ASSIGN P[3]: r = 50 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c6e202001a34878f
+step 23 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #c4ec928580709eae
+step 24 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #279b2f865796ad9d
+step 25 ASSIGN P[3]: k++ => 2 | ASSIGN P[0]: n++ => 6 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #05b1565d58f239fe
+step 26 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[0]: r = 60 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #a9676187495542af
+step 27 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #efab6e75d845a304
+step 28 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #4163652199bc495d
+step 29 ASSIGN P[1]: n++ => 7 | ASSIGN P[0]: k++ => 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #c394abeb1d7f38fe
+step 30 WRITE P[0]: write(10 30 60vv) | ASSIGN P[1]: r = 70 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #de3c3ae6d77db7c3
+step 31 TERMINATED P[0]: termina | ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #9390b67eb9e4162e
+step 32 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #5829afd9d445e549
+step 33 ASSIGN P[2]: n++ => 8 | ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #56675d2116494fdd
+step 34 ASSIGN P[2]: r = 80 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #2f13c99baefa462e
+step 35 ASSIGN P[2]: s = v | BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #9d457ac8b906729b
+step 36 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #4409117e951c196f
+step 37 ASSIGN P[1]: n++ => 9 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #c5fa0e82a1c74383
+step 38 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[1]: r = 90 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #efa4252c3414a6bf
+step 39 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #3aecc5c5567bef76
+step 40 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #91529c8eae2a1667
+step 41 ASSIGN P[3]: n++ => 10 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #f87539e0442c15ee
+step 42 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #fabab06e5d103b58
+step 43 ASSIGN P[3]: r = 100 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a72c750220bc790d
+step 44 BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #964192c4319e352a
+step 45 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #7e2b2af937ac82a1
+step 46 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #478a43eaebba8406
+step 47 ASSIGN P[2]: n++ => 11 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #414339660b783012
+step 48 ASSIGN P[2]: r = 110 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #5daf4e0ae6961835
+step 49 ASSIGN P[3]: k++ => 3 | ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #635204bc13e7ec04
+step 50 WRITE P[3]: write(20 50 100vv) | RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #ddb484eb42504357
+step 51 ASSIGN P[1]: n++ => 12 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #e1350aac8dc3ffa2
+step 52 ASSIGN P[1]: r = 120 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #dad77aec287f57bd
+step 53 WRITE P[2]: write(40 80 110vv) | ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #1862f3f82ffe612e
+step 54 TERMINATED P[2]: termina | RETURN P[1]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #1d707526a2eeb64d
+step 55 ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #089aef444cbad11a
+step 56 WRITE P[1]: write(70 90 120vv) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #53decf204a9c2684
+step 57 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":57,"waiting":false} #3a810a9eccf7e8b2
+state #886f8680c8b1f7aa
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #411b62a33bb558ef
-step 1 #c1c19ea2ccaa4ad2
-step 2 #e8544388700e91f1
-step 3 #849173fe8ff783e4
-step 4 #d3a5a54de0284f62
-step 5 #fcde5615f38c9d09
-step 6 #729dda91b07c03b9
-step 7 #7074d6e420157598
-step 8 #f2e4f50c688e4888
-step 9 #5a33ece74649c797
-step 10 #922b9cc39d547b27
-step 11 #e9d91f964564c769
-step 12 #84e5141921145d7e
-step 13 #852dfdbcd8444bb1
-step 14 #d0df12d2d4c66b25
-step 15 #4248f1159e137442
-step 16 #bada95dfa8419ad0
-step 17 #8776c96b9ff877f6
-step 18 #78b2d616a2e3e99e
-step 19 #d9d4f2d0c3663c0d
-step 20 #d7628ccb033ac78d
-step 21 #b1821a54e09f73a4
-step 22 #28d583628dca4da8
-step 23 #50be4f05882a8547
-step 24 #06172d5642a0bfea
-step 25 #57e35ef64301174d
-step 26 #46a904b9f2fb852a
-step 27 #5a80b6b06ccfdb78
-step 28 #e43bc9d5e6a4c670
-step 29 #677129fdbe4b5cf3
-step 30 #2fa3598354bb0b50
-step 31 #c9c0a2ba687a39aa
-step 32 #aebd0f85a33a0104
-step 33 #d64c33b46cc047a6
-step 34 #afbf1ffb62f38cd5
-step 35 #92ad50e1113e6a29
-step 36 #b569925a655e7361
-step 37 #8006676e4aa02374
-step 38 #5c9910ffebae602e
-step 39 #011a85090f20c48d
-step 40 #a5c82f7abee11fe3
-step 41 #7d880abd2866e1b3
-step 42 #2b97a45dd7a90617
-step 43 #03e564651d65d7d5
-step 44 #57d468b616d2f2fb
-step 45 #b211b6da68f006ae
-step 46 #a9b9ba286037b8dc
-step 47 #9ea0429c581a40ad
-step 48 #b4e5ed550e25cac3
-step 49 #74eeb780b7b24c81
-step 50 #906708358bd2a545
-step 51 #04517587fdfc6140
-step 52 #7becc31f04bb6083
-step 53 #a9e728ecd76450ef
-step 54 #ce84cde1be849211
-step 55 #684746dc4079c1a5
-step 56 #afc50a98e0bece9d
-step 57 #ec1dfe43449b4208
-step 58 #713a6a957e82ba17
-step 59 #2e6bcf0a60ec0e28
-step 60 #c69fae31826e1d49
-step 61 #b6820225056f4472
-state #c4bb1c0606977141
+create {"finished":false,"deadlock":false} #1288d341d57f6dd9
+step 1 #76e471d1adbff581
+step 2 #3016d6913df9a130
+step 3 #a799b9f5fc4f2689
+step 4 #9e116ac797ad8dd3
+step 5 #f3cf1ab403742d86
+step 6 #7e2db3320fb0be79
+step 7 #ce3395ee16bf54c9
+step 8 #c9364ce327c33a8d
+step 9 #db0729293099a0ff
+step 10 #17bd8743f6d1dca9
+step 11 #41d2b97bfa2dd4b9
+step 12 #0ab7cbeedcc9c98e
+step 13 #d2509c3d87605522
+step 14 #fbd0f605479a5696
+step 15 #69c887083b58d874
+step 16 #7fba347e94f78307
+step 17 #afb8df2b34a3df86
+step 18 #7557918c27d8bd19
+step 19 #a6ea3b6981b8070d
+step 20 #0b51cea306d505e1
+step 21 #6305da0e1f9cf975
+step 22 #0a8ff546dd0a78ba
+step 23 #efd72ec73800a063
+step 24 #c00364aa01ab5964
+step 25 #7e74651fe8db43e6
+step 26 #1aef88e1549b4ca8
+step 27 #110ac5bdcffea538
+step 28 #5750b3ea0b04d81a
+step 29 #c1ad600a404e1542
+step 30 #1e39586a2e295205
+step 31 #44d84881e0c369be
+step 32 #7d88f894ab602c32
+step 33 #1de8185cf56186d5
+step 34 #02ef1b41f259977c
+step 35 #ca48706ca1a68cf8
+step 36 #a9a147a956649bf6
+step 37 #56f3c70f742665c0
+step 38 #475affaab02e72d2
+step 39 #5be7be91fc281587
+step 40 #b430ef5a654cefb2
+step 41 #83e1c9581d608738
+step 42 #7419854dc9a3fcab
+step 43 #c4604a12fe3611e3
+step 44 #29e223319176e1ba
+step 45 #1c16842b2f1bc906
+step 46 #a43f84a47d1b20fa
+step 47 #fe7466a7dbbb2dc4
+step 48 #90d7b8f08019877c
+step 49 #9956728b58abc506
+step 50 #5031cb0a4cf3c90c
+step 51 #ee885e20cefc43d9
+step 52 #31b2291ec514239a
+step 53 #7fae2760c3a9a1ce
+step 54 #42e0c971e9bad25b
+step 55 #e77c056cb53c0821
+step 56 #9ac0072418d77d9c
+step 57 #aaedbdc4f9b5dc87
+step 58 #a15ddb301b56e03c
+step 59 #d1ce3c08c65c3de2
+step 60 #6f3f83f295f80055
+step 61 #16b636861fd9483f
+state #d333b3882f6b3e59
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #23d920b577c9a645
-step 1 #1600538ae8d30cb8
-step 2 #1a4dc8f55f1446d1
-step 3 #88697b6fee70756d
-step 4 #8d70e09ec0d218cc
-step 5 #e21fe36389f2c1bf
-step 6 #e53edaa06941742b
-step 7 #d8fdc4abb74d1a95
-step 8 #fd2f2dba9dfac02c
-step 9 #ee9d066462da30bb
-step 10 #17ae02a2b68dc9fb
-step 11 #9c888fe72a946eb7
-step 12 #5ca2528db938b77f
-step 13 #3292ed21d3215bbb
-step 14 #42f326a7b3a78c34
-step 15 #9d0403092f7e8c24
-step 16 #872c17d52554daa1
-step 17 #7899382f0efbdbca
-step 18 #b462e033399a2600
-step 19 #dcabcb77ca351042
-step 20 #7951b1b5b569aed3
-step 21 #cf9cbdbb9fc1b487
-step 22 #58d3afa5064a2612
-step 23 #1ea3d56b7141ac50
-step 24 #9f81a1b5f241a282
-step 25 #567f05cdaa16a568
-step 26 #1ae00cece844fc47
-step 27 #de5d65b5efdc5423
-step 28 #1c61685358f21d30
-step 29 #86181768a1fb3f38
-step 30 #125741e0fdb9745f
-step 31 #1a40b1d3d1888ec1
-step 32 #7906bd82c5e86329
-step 33 #2e15bb68b054a952
-step 34 #a8442603874070bc
-step 35 #e7673183fb41de5b
-step 36 #72d82cb26f12dff4
-step 37 #e1b6a5aa44c26a60
-step 38 #54e2606c683e3983
-step 39 #3e30fb7c2a53377d
-step 40 #459ba8bb8fa1c61d
-step 41 #aed37ee02184985d
-step 42 #20b32b126e8dffc7
-step 43 #2350bcb78f507a16
-step 44 #e0a5530872841253
-step 45 #43e0682309535bc2
-step 46 #c8627bb7366889cf
-step 47 #b613ace32474ba1c
-step 48 #65ba64fe4fc1ae61
-step 49 #595d06e715ffcacc
-step 50 #46afd2e936a02a60
-step 51 #08da65f6cfda2125
-step 52 #2ca8716d4a79ebb7
-step 53 #7360fe02318d7cab
-step 54 #5d6a8bc1c6a11880
-step 55 #b27e276be0baebf2
-step 56 #53da1c46e74fc79f
-step 57 #6d29c43ab6bf5a09
-step 58 #941be247d980c42d
-step 59 #ad147b458f950011
-step 60 #728f7156258b8caa
-state #404e44b811c2be9c
+create {"finished":false,"deadlock":false} #c2f42fe961167bda
+step 1 #a9f079ca2ffc0c35
+step 2 #063b73ce5c2b0ac6
+step 3 #308f4e68b1461039
+step 4 #8904f7d1cb61f904
+step 5 #d90652b6999dd111
+step 6 #cf149028fa81aa62
+step 7 #52d75b6baeca1ee0
+step 8 #dc784d8abda4f964
+step 9 #af322eb970a2b051
+step 10 #ad87beea758b846a
+step 11 #776f1800c83ea09c
+step 12 #27ca25b08d69579f
+step 13 #1ead2356da6340c4
+step 14 #f6314dc4a478d95d
+step 15 #1ccdf444b839dbc3
+step 16 #160304e8dc9d5b6c
+step 17 #a2727603988ebe5e
+step 18 #063f8ef5433b2b30
+step 19 #2ae27b31830a56b0
+step 20 #d9670681493ecc5e
+step 21 #8ffc755d8ee16a97
+step 22 #cd1473b99822bc5c
+step 23 #438e1691b8005b8d
+step 24 #125117792674eea4
+step 25 #7b053fb1bc1e4a11
+step 26 #8fadf60d18652782
+step 27 #5c78961d75022355
+step 28 #5f7d150721add6bd
+step 29 #207c7454041d2666
+step 30 #2cb2281be45c8bdc
+step 31 #add74f72c91f9590
+step 32 #88eb9be07f18aa4a
+step 33 #528ccb996a696887
+step 34 #3346d98fb1676b6c
+step 35 #a9669894f859d7de
+step 36 #d257016ba35bc0b3
+step 37 #97bad424446d581d
+step 38 #a7584cc8e61abb8d
+step 39 #e7ec42518a41bfe8
+step 40 #5882eb78c48f434f
+step 41 #65791de4b9116b78
+step 42 #ace268fe5d814afc
+step 43 #a23ec85174b6f1f6
+step 44 #4eb7ab85374b074f
+step 45 #67e0a21622c777a3
+step 46 #828bbb89b0adcb26
+step 47 #a705c0c76e383625
+step 48 #b5edb686113c6bc9
+step 49 #0a937252daf1cb82
+step 50 #75b504dbf84e0271
+step 51 #93491913e4e74dfc
+step 52 #6bd4759d50424fa5
+step 53 #93db1e728c3ad2f2
+step 54 #feac8e8306ffc3bb
+step 55 #6ceaaf850a6565ef
+step 56 #047b5a1cd2de758a
+step 57 #f7366764c4e2a46e
+step 58 #378cba0bcbb74d36
+step 59 #8df0b6473d10de1a
+step 60 #509ab0e2877ba370
+state #9c367b559e276c9d
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #4f2dfbd2da655ec8
-step 1 DECL P[0]: int a = [0, 0, 0] | DECL P[1]: int a = [0, 0, 0] | DECL P[2]: int a = [0, 0, 0] | DECL P[3]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d596d7f3910feff0
-step 2 DECL P[1]: text t = [, ] | DECL P[2]: text t = [, ] | DECL P[3]: text t = [, ] | DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #39e776ccc77389f3
-step 3 ENTER P[2]: entra a M.dar | BLOCKED P[3]: espera para entrar a M.dar | BLOCKED P[0]: espera para entrar a M.dar | BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0c64a946f2df28f2
-step 4 ASSIGN P[2]: n++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #dde83587df544e8b
-step 5 ASSIGN P[2]: r = 10 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3d62fd3902848ba1
-step 6 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e818fb40dcaf2af4
-step 7 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #924ed75539b6dba5
-step 8 ASSIGN P[3]: n++ => 2 | ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #9c748a4f68dba123
-step 9 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[3]: r = 20 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #34d301f5b42d83cf
-step 10 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4aaffedb013afd9a
-step 11 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #9ac716e23dc28bd0
-step 12 ASSIGN P[1]: n++ => 3 | ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #056a99aa04638f48
-step 13 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[1]: r = 30 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #42ad6d7076bc382e
-step 14 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #a6381b0239f51824
-step 15 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #9ac96da6843c42f4
-step 16 ASSIGN P[2]: n++ => 4 | ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #698e264e2e993292
-step 17 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #d218084909291a6e
-step 18 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c5103af6bc467d22
-step 19 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9fe7be97081fc371
-step 20 ASSIGN P[1]: n++ => 5 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f9a3fae73106a122
-step 21 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[1]: r = 50 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #5fbcb0f78b38e268
-step 22 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #e4196d27ffc0dfe0
-step 23 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #fd6d81ba45385778
-step 24 ASSIGN P[2]: n++ => 6 | ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #8e2514813bd39ecc
-step 25 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[2]: r = 60 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #d53653cf03ea6548
-step 26 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b05c1ae611dbfc0f
-step 27 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #1c2b25042f71ad4f
-step 28 ASSIGN P[1]: n++ => 7 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #5df9cc6e33708842
-step 29 WRITE P[2]: write(10 40 60vv) | ASSIGN P[1]: r = 70 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #dd7ab3142b82f8e1
-step 30 ASSIGN P[1]: s = v | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #a67910be468fb145
-step 31 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a0e3e4b06203dc58
-step 32 ASSIGN P[3]: n++ => 8 | ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #b2c42ebcbb4b3e1d
-step 33 WRITE P[1]: write(30 50 70vv) | ASSIGN P[3]: r = 80 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #961faa95b7e7d282
-step 34 ASSIGN P[3]: s = v | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #c1a2a4425d904924
-step 35 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #d4e4857abbc413e1
-step 36 ASSIGN P[0]: n++ => 9 | ASSIGN P[3]: k++ => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #ac66372a93a16c07
-step 37 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[0]: r = 90 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #921c42a9dd2527a0
-step 38 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #f5dde7cc222c02c8
-step 39 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #75e77a73eef3ee2a
-step 40 ASSIGN P[3]: n++ => 10 | ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #f437c5e0e9351ae2
-step 41 BLOCKED P[0]: espera para entrar a M.dar | ASSIGN P[3]: r = 100 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #44a1eb739303596c
-step 42 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #fbe18dd68ef2ef25
-step 43 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #b52d84228ad51990
-step 44 ASSIGN P[0]: n++ => 11 | ASSIGN P[3]: k++ => 3 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #e495261b02d5186f
-step 45 WRITE P[3]: write(20 80 100vv) | ASSIGN P[0]: r = 110 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #ba85cd4f3c698ba1
-step 46 ASSIGN P[0]: s = v | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #e37bf734a6fb5d00
-step 47 RETURN P[0]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #7be05ebbb6160387
-step 48 ASSIGN P[0]: k++ => 2 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #f27334da308c2de2
-step 49 ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #3d5a59726f41626f
-step 50 ASSIGN P[0]: n++ => 12 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #9aad0e5693b311a4
-step 51 ASSIGN P[0]: r = 120 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #39e684e28428af84
-step 52 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #8b76e156397c127a
-step 53 RETURN P[0]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #6ca573eb9b5e9f37
-step 54 ASSIGN P[0]: k++ => 3 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #d2673a5bc45ab458
-step 55 WRITE P[0]: write(90 110 120vv) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #6246e8ca4807f882
-step 56 TERMINATED P[0]: termina | {"finished":true,"deadlock":false,"instant":56,"waiting":false} #56368b51d7e78ee9
-state #06c877f4a211ba0e
+create {"finished":false,"deadlock":false} #a06f8b98c43f91a2
+step 1 DECL P[0]: int a = [0, 0, 0] | DECL P[1]: int a = [0, 0, 0] | DECL P[2]: int a = [0, 0, 0] | DECL P[3]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #adacb0e42143554c
+step 2 DECL P[1]: text t = [, ] | DECL P[2]: text t = [, ] | DECL P[3]: text t = [, ] | DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9fd85f6f66e9cee1
+step 3 ENTER P[2]: entra a M.dar | BLOCKED P[3]: espera para entrar a M.dar | BLOCKED P[0]: espera para entrar a M.dar | BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7fde16e7568a4367
+step 4 ASSIGN P[2]: n++ => 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b8ac68d307091a4f
+step 5 ASSIGN P[2]: r = 10 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #546169caf91919c1
+step 6 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2c070085b22e8807
+step 7 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d9b4b02c13c7037f
+step 8 ASSIGN P[3]: n++ => 2 | ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d9d0140d5267c4e6
+step 9 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[3]: r = 20 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3b5197e606267898
+step 10 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #dd3b57d6b9df6177
+step 11 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f08d5328f1cb7b77
+step 12 ASSIGN P[1]: n++ => 3 | ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #73495a456ee2422f
+step 13 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[1]: r = 30 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0f3ffd70561a1719
+step 14 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #a60954104b1f607d
+step 15 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #596995495ebcffbb
+step 16 ASSIGN P[2]: n++ => 4 | ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #83ef1bd704f77b1a
+step 17 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #1680ddee0265498e
+step 18 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #91a40e1edf21814d
+step 19 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #25a74bc124b6f49a
+step 20 ASSIGN P[1]: n++ => 5 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #e88abf39c6679386
+step 21 BLOCKED P[2]: espera para entrar a M.dar | ASSIGN P[1]: r = 50 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #5a621f948743c4af
+step 22 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #7a67cb9e651c02b6
+step 23 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #5e11d5480e70f5cf
+step 24 ASSIGN P[2]: n++ => 6 | ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #5b6ce871b23b700b
+step 25 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[2]: r = 60 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #213d582bc3fecb3a
+step 26 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #446b9d105858bb24
+step 27 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #0c9dc5dae5bebb40
+step 28 ASSIGN P[1]: n++ => 7 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #3d49c3db780a99a7
+step 29 WRITE P[2]: write(10 40 60vv) | ASSIGN P[1]: r = 70 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d2daa7c97c411bd8
+step 30 ASSIGN P[1]: s = v | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #950a7042c90c979f
+step 31 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #56c9fb8b93c63871
+step 32 ASSIGN P[3]: n++ => 8 | ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #71a439ceadca3bbd
+step 33 WRITE P[1]: write(30 50 70vv) | ASSIGN P[3]: r = 80 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #ffecdea2b077bd24
+step 34 ASSIGN P[3]: s = v | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e127c54c1a38cb66
+step 35 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #79f385f35ffd136f
+step 36 ASSIGN P[0]: n++ => 9 | ASSIGN P[3]: k++ => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #8ccf7d470f900809
+step 37 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[0]: r = 90 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #d6959d37f9a1b6c0
+step 38 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #8872ffae619b3a5a
+step 39 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #07f05dd041b87a1b
+step 40 ASSIGN P[3]: n++ => 10 | ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #4bd0043ec47ce97f
+step 41 BLOCKED P[0]: espera para entrar a M.dar | ASSIGN P[3]: r = 100 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #1c93127341e59ffb
+step 42 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #35b64f176e16496a
+step 43 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #2374f44709ac294a
+step 44 ASSIGN P[0]: n++ => 11 | ASSIGN P[3]: k++ => 3 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #d4042202d3a87a75
+step 45 WRITE P[3]: write(20 80 100vv) | ASSIGN P[0]: r = 110 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #4272dbdf3d0f05fa
+step 46 ASSIGN P[0]: s = v | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #d68f0c44b1b263be
+step 47 RETURN P[0]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #6ffdaa14280b1323
+step 48 ASSIGN P[0]: k++ => 2 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #fb9f73b24dcc261e
+step 49 ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #b845402d42bf0d8c
+step 50 ASSIGN P[0]: n++ => 12 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #4b75c952f1112215
+step 51 ASSIGN P[0]: r = 120 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #452c31b51aab9649
+step 52 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #dd4bf35c47f80b93
+step 53 RETURN P[0]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #8c2297bf2a90e6e3
+step 54 ASSIGN P[0]: k++ => 3 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #19f8eed7a000222e
+step 55 WRITE P[0]: write(90 110 120vv) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #5ff2ba9121900942
+step 56 TERMINATED P[0]: termina | {"finished":true,"deadlock":false,"instant":56,"waiting":false} #1d08530cbec8f55c
+state #ffe7f31d86ccbd5b
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #411b62a33bb558ef
-step 1 #d596d7f3910feff0
-step 2 #39e776ccc77389f3
-step 3 #0c64a946f2df28f2
-step 4 #dde83587df544e8b
-step 5 #3d62fd3902848ba1
-step 6 #e818fb40dcaf2af4
-step 7 #924ed75539b6dba5
-step 8 #9c748a4f68dba123
-step 9 #34d301f5b42d83cf
-step 10 #4aaffedb013afd9a
-step 11 #9ac716e23dc28bd0
-step 12 #056a99aa04638f48
-step 13 #42ad6d7076bc382e
-step 14 #a6381b0239f51824
-step 15 #9ac96da6843c42f4
-step 16 #698e264e2e993292
-step 17 #d218084909291a6e
-step 18 #c5103af6bc467d22
-step 19 #e23df2dae82975db
-step 20 #9ea6f16f993fb0f6
-step 21 #07091f0f227b4f80
-step 22 #b657323827b035d6
-step 23 #b1110ded94ed9277
-step 24 #9dcc79b68c08767b
-step 25 #5f508ad02fd59460
-step 26 #0305492a814df440
-step 27 #a9b5ee9fc238304e
-step 28 #216fac18c75fb08b
-step 29 #2d8f37b5d627b1c8
-step 30 #1539f6c6d39e421d
-step 31 #9829818839c7b4ef
-step 32 #eef0988a23cb64d8
-step 33 #29d223b122eb5946
-step 34 #63e3d4f6cfa9c575
-step 35 #13c58f6c96c17caf
-step 36 #2a770a0cb221468c
-step 37 #966eaa063845d08e
-step 38 #628bd7f719ab4ebe
-step 39 #f5eefd0d2e2115f2
-step 40 #94d9111a6981d472
-step 41 #30ab24334d099284
-step 42 #f7a43393de513503
-step 43 #86403d4573d1fc03
-step 44 #1867be82739c69fe
-step 45 #d0e06f3eb99ec662
-step 46 #4bd8d9ddc4233e5a
-step 47 #f4c7981943d6c0fe
-step 48 #34abe4bbc81662c6
-step 49 #61d3ded8be45a912
-step 50 #7555f3234b6b29a8
-step 51 #179f875176a24e3d
-step 52 #fc0b48288e19edb7
-step 53 #db88bae291317d36
-step 54 #655342287003e467
-step 55 #37f37e77cc42616f
-step 56 #789879ed09a2306b
-state #d057cabb33dea4ef
+create {"finished":false,"deadlock":false} #1288d341d57f6dd9
+step 1 #adacb0e42143554c
+step 2 #9fd85f6f66e9cee1
+step 3 #7fde16e7568a4367
+step 4 #b8ac68d307091a4f
+step 5 #546169caf91919c1
+step 6 #2c070085b22e8807
+step 7 #d9b4b02c13c7037f
+step 8 #d9d0140d5267c4e6
+step 9 #3b5197e606267898
+step 10 #dd3b57d6b9df6177
+step 11 #f08d5328f1cb7b77
+step 12 #73495a456ee2422f
+step 13 #0f3ffd70561a1719
+step 14 #a60954104b1f607d
+step 15 #596995495ebcffbb
+step 16 #83ef1bd704f77b1a
+step 17 #1680ddee0265498e
+step 18 #91a40e1edf21814d
+step 19 #1bab1bf63ca24c5d
+step 20 #d3bac8f5026791e1
+step 21 #ce6baff248d4b10b
+step 22 #0e2cc9fc75e210f5
+step 23 #0e30394e7450b950
+step 24 #2a9362e33578c26d
+step 25 #54285fbad525896b
+step 26 #f5d4e92424d91067
+step 27 #2f59549f3578faab
+step 28 #cf12254a6a713807
+step 29 #ec01f67f7a0a9e5a
+step 30 #cb1d4d4d7a363100
+step 31 #dc0d836edbb5f181
+step 32 #b364107bdc2292db
+step 33 #3843566e3b25a9bc
+step 34 #30a331466c9d1f0c
+step 35 #40d214b1dd371874
+step 36 #7d368bd543c177b7
+step 37 #70c79b9ed48b21a2
+step 38 #87af9494a3c036c8
+step 39 #582b1c37d231bafb
+step 40 #3937fb3e0e8aaa87
+step 41 #3136fd1f128736c8
+step 42 #0b32ca30aec415ae
+step 43 #1d7d9e5f5f1f013e
+step 44 #5fb81589506bb531
+step 45 #8fac699a5281b830
+step 46 #721151bb7e2b826d
+step 47 #6e5d83df278b1696
+step 48 #638f2e53e23f1fbd
+step 49 #67f37aee0ceaa002
+step 50 #48cdfcac7a8333f1
+step 51 #5235e9502b01c7e4
+step 52 #ae41f170b87e0809
+step 53 #a14ab77c2f3129b9
+step 54 #bb34e84974453aaa
+step 55 #f40bedea16b67667
+step 56 #863b6801a1972d17
+state #86e05b79e4788cb7
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #23d920b577c9a645
-step 1 #d596d7f3910feff0
-step 2 #39e776ccc77389f3
-step 3 #0c64a946f2df28f2
-step 4 #dde83587df544e8b
-step 5 #3d62fd3902848ba1
-step 6 #e818fb40dcaf2af4
-step 7 #89d4dd4f16a07e32
-step 8 #9579979d1b0cadec
-step 9 #e844cb4994f8455e
-step 10 #f277783379160293
-step 11 #a0bfe1433a7a83be
-step 12 #51ac0a5d6914c53b
-step 13 #daa275500768b06d
-step 14 #92991727c889abcd
-step 15 #1f6363d110c93d07
-step 16 #514e1c7a4866bffe
-step 17 #12b261a482749307
-step 18 #9653596e93654ce8
-step 19 #cbf889707063ac0b
-step 20 #031405d55e8d1fd3
-step 21 #63c0d8e36b0fc320
-step 22 #f23850a10394c6d4
-step 23 #1be8649d51a461b7
-step 24 #e3bbd17cd5073775
-step 25 #0e64eeb9b2903929
-step 26 #d96908a570cea9a1
-step 27 #af79f24652f0a12e
-step 28 #e8428ff6d160a90e
-step 29 #627240e56bba4637
-step 30 #865f369f2ee63299
-step 31 #fe73e96663827792
-step 32 #6ecb8bca0135cc39
-step 33 #1cb2beedaf24a38b
-step 34 #c4c5ca02db555628
-step 35 #478d2f37c65802f8
-step 36 #e9ea49b820e5cb4a
-step 37 #9349ffcc3aed4d2b
-step 38 #3cf34e18fc3bb198
-step 39 #6a296e950baad490
-step 40 #f74a3a99bd8b835d
-step 41 #0b3b5046f831480c
-step 42 #a5dd92f1fe48f4b7
-step 43 #d9bc1023af4536f5
-step 44 #e19e17add36d9ad8
-step 45 #2946ef343f745631
-step 46 #3fb4addaa8651c2c
-step 47 #e6e03909095e307a
-step 48 #b0b6b6d015bdf942
-step 49 #74c16c4de8051746
-step 50 #1b5500ece6ef7ed5
-step 51 #8d89ad006c9a306f
-step 52 #aed6661e9477da26
-step 53 #7dd3e4508973860a
-step 54 #a9dc04654bdef2f4
-step 55 #fe7e7ef804d07bf5
-step 56 #74dbf5716794c607
-state #e0243a5af0c26a12
+create {"finished":false,"deadlock":false} #c2f42fe961167bda
+step 1 #adacb0e42143554c
+step 2 #9fd85f6f66e9cee1
+step 3 #7fde16e7568a4367
+step 4 #b8ac68d307091a4f
+step 5 #546169caf91919c1
+step 6 #2c070085b22e8807
+step 7 #523177d3a81d0bcb
+step 8 #ab9c3083c0f7c380
+step 9 #f4b9011715cc5a4a
+step 10 #510749aea9cff3f7
+step 11 #45d4b05420f02bfe
+step 12 #9962e35ad667b047
+step 13 #c46c20ee8e23537c
+step 14 #c8f7211f9b488f95
+step 15 #b62baeca7777d324
+step 16 #0a191aa5a02ceff4
+step 17 #a8a613e63b2ae738
+step 18 #3cca628c0fa0e37f
+step 19 #a3815da12cac6913
+step 20 #11bc49ad24b56d6e
+step 21 #c10965a6f4901bd8
+step 22 #e3bfc8ef5697fcfc
+step 23 #acaac065b769c898
+step 24 #4973aaf38d24349f
+step 25 #38b395fffc8bc64d
+step 26 #e7bc81b52eb4c641
+step 27 #1ace247d2379176e
+step 28 #1e30bb4b19769ddb
+step 29 #d8fc7cec5965ebf4
+step 30 #317f0866be7a9b87
+step 31 #f9669fee8b361445
+step 32 #af93ce3a3e788547
+step 33 #bc9237c9997e06c4
+step 34 #950420b6cf014c30
+step 35 #8df50a1471fb6d13
+step 36 #f7f702eb891bc710
+step 37 #6f46e3286ca9eff1
+step 38 #95c2a9ad8acb431a
+step 39 #7abe7ce04026b4c7
+step 40 #9ba393ca2d896509
+step 41 #824adcb83ae9a6f3
+step 42 #bc7b30fd39ee22f9
+step 43 #a4cc4bfd57b8091e
+step 44 #ce774829fc51dae2
+step 45 #2a84755309961255
+step 46 #fac310e547eeb9fe
+step 47 #c45548f4102a377b
+step 48 #be5676c269490138
+step 49 #64cea3bec9f0b3ac
+step 50 #1c4ee2fdee9adf40
+step 51 #aaaed9c6a276098d
+step 52 #9da6630027de1ab2
+step 53 #d295ea9e6563925a
+step 54 #fa771b240039f31e
+step 55 #c882c11f68981e3b
+step 56 #d633fd0f45c3de27
+state #5f8bc27e661a05e9
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #4f2dfbd2da655ec8
-step 1 DECL P[1]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b7e90702684b79bc
-step 2 DECL P[2]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e386e738f09694f2
-step 3 DECL P[3]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0309b060ef65479f
-step 4 DECL P[0]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #8e07774d705e7047
-step 5 DECL P[1]: text t = [, ] | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c62a13995343a571
-step 6 DECL P[2]: text t = [, ] | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2d4b6d9f05f933aa
-step 7 DECL P[3]: text t = [, ] | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #7014ab232332f59a
-step 8 DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #70bb545ff5581896
-step 9 ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #5ffedb09856c1454
-step 10 BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #927ba93acc7a4396
-step 11 BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7a78eb4632a49578
-step 12 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #dfcd7eb7ad734d1d
-step 13 ASSIGN P[1]: n++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #7bd6611b751b93b9
-step 14 ASSIGN P[1]: r = 10 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #dcb2aa798112c012
-step 15 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #00c3778408a14000
-step 16 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #f1ca9cfe988e5c60
-step 17 ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #ac840b0461a7a246
-step 18 ASSIGN P[0]: n++ => 2 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #bffa7d11bf8c9798
-step 19 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[0]: r = 20 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #fff445a8df1073cd
-step 20 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #04b6a213ef1042ad
-step 21 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #478392fe72e6bfa4
-step 22 ASSIGN P[1]: n++ => 3 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #a530ad715950a542
-step 23 ASSIGN P[1]: r = 30 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #85d69e5d56691fdc
-step 24 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #1df60ba1f4077ab6
-step 25 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #e6b8142cabb2f4bc
-step 26 BLOCKED P[0]: espera para entrar a M.dar | RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #254c3353f672f10e
-step 27 ASSIGN P[2]: n++ => 4 | ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ca01bb8ad65fe69e
-step 28 BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #f238749875544ccc
-step 29 ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d045cdfd300ac395
-step 30 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #be32382932f9131a
-step 31 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #4e313549a6ea1389
-step 32 ASSIGN P[1]: n++ => 5 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #7aed6c6ac7eb9dc4
-step 33 ASSIGN P[1]: r = 50 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #be9b6b27d1dd9a82
-step 34 ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #bc7152f8d1f2bcee
-step 35 ASSIGN P[1]: s = v | BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #050147acdbe3acf6
-step 36 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #f8e268add72a798a
-step 37 ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #330e2748b0a96e39
-step 38 ASSIGN P[0]: n++ => 6 | WRITE P[1]: write(10 30 50vv) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #73367c39f760dc4d
-step 39 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #8b0f1d2187751e44
-step 40 ASSIGN P[0]: r = 60 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #41da477a734d9753
-step 41 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #65364abe881662d8
-step 42 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #968450d9ab8b76b7
-step 43 ASSIGN P[0]: k++ => 2 | ASSIGN P[2]: n++ => 7 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #8eb164b480f19f44
-step 44 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #ee9c7515746a64c8
-step 45 ASSIGN P[2]: r = 70 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #c83ab290dd23499f
-step 46 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #73e2911e809301bb
-step 47 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #2aea956fd8efa57e
-step 48 ASSIGN P[0]: n++ => 8 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #1753e8590261317a
-step 49 ASSIGN P[0]: r = 80 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #cefbcdc427dc2f53
-step 50 BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #bfd03431b6d339b5
-step 51 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #961e132c904e8e30
-step 52 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #d31daf2d63b91e56
-step 53 ASSIGN P[3]: n++ => 9 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #5b698c0196788b16
-step 54 ASSIGN P[0]: k++ => 3 | ASSIGN P[3]: r = 90 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #5771d32a8f127f52
-step 55 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #a1d97c6399111b3e
-step 56 WRITE P[0]: write(20 60 80vv) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #dad196b6e5e756ee
-step 57 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #edcac1dff54a078e
-step 58 ASSIGN P[2]: n++ => 10 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #3ad1d9aa885c8ff1
-step 59 ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #71f29f2632596662
-step 60 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[2]: r = 100 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #51d9969258ce719b
-step 61 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #0d37208b7e028ca7
-step 62 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #599f4b5cec1fb9d0
-step 63 ASSIGN P[3]: n++ => 11 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #9bddef29a57e55ca
-step 64 ASSIGN P[3]: r = 110 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #d78f9f3300fb34ac
-step 65 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #d2f6b814bee158b4
-step 66 WRITE P[2]: write(40 70 100vv) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #8590c1e021d6283c
-step 67 RETURN P[3]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #fb97c81fdc44ed32
-step 68 TERMINATED P[2]: termina | ASSIGN P[3]: k++ => 2 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #88e91d9cbae0eae0
-step 69 ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #c227ee053c7633b7
-step 70 ASSIGN P[3]: n++ => 12 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #f0f654aa01e7e0c3
-step 71 ASSIGN P[3]: r = 120 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #fa7f658f3969da50
-step 72 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #5f94592dcf81f657
-step 73 RETURN P[3]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #9f7d529423a0b55e
-step 74 ASSIGN P[3]: k++ => 3 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #fce7f1ad879c9cff
-step 75 WRITE P[3]: write(90 110 120vv) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #60d672aa1a61986b
-step 76 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":76,"waiting":false} #c1c8034ce47bc0c0
-state #111a014ca60502f9
+create {"finished":false,"deadlock":false} #a06f8b98c43f91a2
+step 1 DECL P[1]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a250c6b54e43897c
+step 2 DECL P[2]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2c9b76ef335dc9da
+step 3 DECL P[3]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #61fe23a8c2c7a4ca
+step 4 DECL P[0]: int a = [0, 0, 0] | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #8b4cd7a443f26ef9
+step 5 DECL P[1]: text t = [, ] | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b6503b240282ce4a
+step 6 DECL P[2]: text t = [, ] | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2a7eb68f2b8314b2
+step 7 DECL P[3]: text t = [, ] | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #4a1581a7b39d2a99
+step 8 DECL P[0]: text t = [, ] | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #053614fe2a281640
+step 9 ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #4f8e1b1f91baa43d
+step 10 BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #fae4a504cd93c138
+step 11 BLOCKED P[3]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ab6a7063492b9bcc
+step 12 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #30ad1dff746b188e
+step 13 ASSIGN P[1]: n++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #287b2a0ac3566741
+step 14 ASSIGN P[1]: r = 10 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #de5da4ac2bcf3860
+step 15 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #64de3cac537bfa21
+step 16 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #d014c5cbd8ecea3e
+step 17 ASSIGN P[1]: k++ => 1 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #cdf304482ef2c34f
+step 18 ASSIGN P[0]: n++ => 2 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c0d410a6f3be4328
+step 19 BLOCKED P[1]: espera para entrar a M.dar | ASSIGN P[0]: r = 20 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #85d90af5630ae1e3
+step 20 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9c6b8aca92879c48
+step 21 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #b119496bdd5c375b
+step 22 ASSIGN P[1]: n++ => 3 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #38a12e949bd33e22
+step 23 ASSIGN P[1]: r = 30 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #cccc75b483b78088
+step 24 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #085b5b52dfa5228e
+step 25 ASSIGN P[1]: s = v | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #8d679fc193da66e8
+step 26 BLOCKED P[0]: espera para entrar a M.dar | RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #1eb7a97a7c63d0ee
+step 27 ASSIGN P[2]: n++ => 4 | ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #9887ac297ff49d22
+step 28 BLOCKED P[1]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b578c099b63f1dd2
+step 29 ASSIGN P[2]: r = 40 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #918884a5e028caaa
+step 30 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #9e9c098d750ddf4d
+step 31 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[1]: entra a M.dar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #d508ab2dce65d383
+step 32 ASSIGN P[1]: n++ => 5 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #ba9116840e8cbbc0
+step 33 ASSIGN P[1]: r = 50 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #9db6afb7f8785b1d
+step 34 ASSIGN P[2]: k++ => 1 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #77376325c7973fa3
+step 35 ASSIGN P[1]: s = v | BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #fabc1385b3b5b938
+step 36 RETURN P[1]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #97feda98e90e3973
+step 37 ASSIGN P[1]: k++ => 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #31a652d0ff49a445
+step 38 ASSIGN P[0]: n++ => 6 | WRITE P[1]: write(10 30 50vv) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #381033596084f020
+step 39 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #416e0c047b578332
+step 40 ASSIGN P[0]: r = 60 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #35b2318bb36de12c
+step 41 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #e9c4334a01e0aa81
+step 42 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #109271e7b5487344
+step 43 ASSIGN P[0]: k++ => 2 | ASSIGN P[2]: n++ => 7 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #2426983eadc426ac
+step 44 BLOCKED P[0]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4a0feadc32f13c0f
+step 45 ASSIGN P[2]: r = 70 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #221189c393da2ba1
+step 46 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #d8f346ca4f227dcb
+step 47 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[0]: entra a M.dar | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #0e308f793fcae1db
+step 48 ASSIGN P[0]: n++ => 8 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #3503bb664bec1f1a
+step 49 ASSIGN P[0]: r = 80 | ASSIGN P[2]: k++ => 2 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #94404e01d811512f
+step 50 BLOCKED P[2]: espera para entrar a M.dar | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #c7dc3e13e24326a1
+step 51 ASSIGN P[0]: s = v | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #aa3780966ff45895
+step 52 RETURN P[0]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #cb7fb4ada9694d03
+step 53 ASSIGN P[3]: n++ => 9 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #af519791c870321f
+step 54 ASSIGN P[0]: k++ => 3 | ASSIGN P[3]: r = 90 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #6c055685b654e185
+step 55 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c5a21f887413545c
+step 56 WRITE P[0]: write(20 60 80vv) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #458c5f238cff9bb4
+step 57 RETURN P[3]: retorna de M.dar, libera el monitor | ENTER P[2]: entra a M.dar | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #8be3fea6f17b2602
+step 58 ASSIGN P[2]: n++ => 10 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #bf6f54a72abec6e1
+step 59 ASSIGN P[3]: k++ => 1 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #474367c8d2ac58ba
+step 60 BLOCKED P[3]: espera para entrar a M.dar | ASSIGN P[2]: r = 100 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #3187d3cb39212ba6
+step 61 ASSIGN P[2]: s = v | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #c3464574f14c31b0
+step 62 RETURN P[2]: retorna de M.dar, libera el monitor | ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #4d9a5225e2a076f8
+step 63 ASSIGN P[3]: n++ => 11 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f01a8fcea76e164e
+step 64 ASSIGN P[3]: r = 110 | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #1de2f65be0c657b8
+step 65 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #700343df0cf8c32c
+step 66 WRITE P[2]: write(40 70 100vv) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #0367f5489c7d89e4
+step 67 RETURN P[3]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #ebbf480344ac20e4
+step 68 TERMINATED P[2]: termina | ASSIGN P[3]: k++ => 2 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #b227ba4f92440749
+step 69 ENTER P[3]: entra a M.dar | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #3dbaaa19137d2b0e
+step 70 ASSIGN P[3]: n++ => 12 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #cd045e32d86ff794
+step 71 ASSIGN P[3]: r = 120 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #72a6ef7345dcb7c2
+step 72 ASSIGN P[3]: s = v | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #2ebc1a26648bdcc4
+step 73 RETURN P[3]: retorna de M.dar, libera el monitor | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #b45b5e553aaa38b4
+step 74 ASSIGN P[3]: k++ => 3 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #adf8b33be1028c7a
+step 75 WRITE P[3]: write(90 110 120vv) | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #88f9e41a273e3c90
+step 76 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":76,"waiting":false} #41bebcfdef9efacc
+state #fd3f3eb8ccf36648

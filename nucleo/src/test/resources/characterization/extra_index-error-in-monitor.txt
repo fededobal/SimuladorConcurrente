@@ -1,79 +1,79 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #4cf688e990ead07b
-step 1 ENTER P[4]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fb86863e0c470562
-step 2 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[1]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7c6d049bc6c5e305
-step 3 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5d8d3ce52b32e61f
-step 4 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ff2a6038a217f90a
-step 5 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #5658e07a5d351830
-step 6 ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #56822b9e2dbb0cd2
-step 7 ASSIGN P[2]: a[2] = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d4e51840d90490ab
-step 8 RETURN P[2]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7781dbbd23ab6c5a
-step 9 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #3c74b35a76fb0a81
-state #0e8b6f961894cba3
+create {"finished":false,"deadlock":false} #63ec55175c2b9df1
+step 1 ENTER P[4]: entra a M.f | BLOCKED P[1]: espera para entrar a M.f | BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #1dab2540243d9af1
+step 2 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[1]: entra a M.f | BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b35c920af24b6cef
+step 3 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #317d72e38427d3b2
+step 4 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #7833694b4a7e779c
+step 5 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1c9c8446ed705f1e
+step 6 ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4e9237f7a9117395
+step 7 ASSIGN P[2]: a[2] = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #04fc3dfbb0ef8f9c
+step 8 RETURN P[2]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2ed492ac11c40dfc
+step 9 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #b0940e555347cdf2
+state #68b968435c0c18b1
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #b8aa52d3b3963af0
-step 1 #7b85156f0cfe5a5b
-step 2 #047ff10963e3dc86
-step 3 #a0ed298527390a79
-step 4 #26a029a16c72cf5d
-step 5 #329af066cea8f770
-step 6 #29c8cdb20cf327ce
-step 7 #344efae016c1414d
-step 8 #0f55360971978608
-state #d79bd99e9d54d16f
+create {"finished":false,"deadlock":false} #cac8363e8d470797
+step 1 #482fee03eaab1960
+step 2 #68da7afae18e35ba
+step 3 #ccc5cf14fcc5d16f
+step 4 #a0591485217212ab
+step 5 #4fb06f6a5f1f57e0
+step 6 #4a629d3f9dfe308f
+step 7 #dafe252fc725d29d
+step 8 #75a74bec3602636a
+state #116d819e8c7f0537
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #d6ea7dd4457fc8b5
-step 1 #64964985ff292f40
-step 2 #848afe0a3ae3bcd7
-step 3 #5e360bd5eb5c525e
-step 4 #5f8ba6aa8ae2b1c0
-step 5 #a6bc5d4b45b14e60
-step 6 #e23f2afb785ae909
-step 7 #d4e51840d90490ab
-step 8 #7781dbbd23ab6c5a
-step 9 #3c74b35a76fb0a81
-state #2586dcd69d393715
+create {"finished":false,"deadlock":false} #9f86ec19ca118e32
+step 1 #00191bf86f1f61d4
+step 2 #62bbac70d4d8c040
+step 3 #afdd46a6b6a6bd95
+step 4 #58771c8b434576dd
+step 5 #4e683abbc433899a
+step 6 #5519167796c04507
+step 7 #04fc3dfbb0ef8f9c
+step 8 #2ed492ac11c40dfc
+step 9 #b0940e555347cdf2
+state #c514f2076e46b60f
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #4cf688e990ead07b
-step 1 ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[3]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a07c96e9d3e90385
-step 2 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a65ba2b25daad765
-step 3 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e3b88bd1c8c72f21
-step 4 ASSIGN P[2]: a[2] = 1 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f6ab91681d033b3a
-step 5 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c0f265c5fcdd53c2
-step 6 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[3]: entra a M.f | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #59bbc110f917b10c
-step 7 ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":7,"waiting":false} #7d3c0e0762ca7cfd
-state #8676d54a55704920
+create {"finished":false,"deadlock":false} #63ec55175c2b9df1
+step 1 ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[3]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d04cc18f29203dcc
+step 2 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #3c3d9d575ff3df86
+step 3 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #3952797abc4a40b8
+step 4 ASSIGN P[2]: a[2] = 1 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #533b4ba3d6ff49b6
+step 5 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #13abd93024275cf5
+step 6 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[3]: entra a M.f | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bfe4e43b535665cf
+step 7 ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":7,"waiting":false} #508d85ef386d05c5
+state #4b5538b302cafb6d
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #b8aa52d3b3963af0
-step 1 #a07c96e9d3e90385
-step 2 #a65ba2b25daad765
-step 3 #e3b88bd1c8c72f21
-step 4 #f6ab91681d033b3a
-step 5 #7d4946209244bb66
-step 6 #75e181edd96f8d09
-step 7 #aa600dd8688008cc
-state #7f47e2db7179be00
+create {"finished":false,"deadlock":false} #cac8363e8d470797
+step 1 #d04cc18f29203dcc
+step 2 #3c3d9d575ff3df86
+step 3 #3952797abc4a40b8
+step 4 #533b4ba3d6ff49b6
+step 5 #d6aa1a71e1e46427
+step 6 #0f178af37ac8a56c
+step 7 #8cdcf3219d7b1567
+state #0dbfe8a4a0162f4b
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #d6ea7dd4457fc8b5
-step 1 #a07c96e9d3e90385
-step 2 #a65ba2b25daad765
-step 3 #db89e915de8a28a5
-step 4 #7c02d0351338019e
-step 5 #37ce63818cc886b1
-step 6 #3b3d2fa85a64de44
-step 7 #1e7f42a156fc92d3
-state #4cee6032e272ffa6
+create {"finished":false,"deadlock":false} #9f86ec19ca118e32
+step 1 #d04cc18f29203dcc
+step 2 #3c3d9d575ff3df86
+step 3 #bc06b0d26cff592c
+step 4 #fa60e50e27d96d67
+step 5 #10f12faa11107a61
+step 6 #4f040caf9e2e83da
+step 7 #2a171228e550c0d2
+state #ca0375f8560d7016
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #4cf688e990ead07b
-step 1 ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #41684a4ab2e1122d
-step 2 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1b8face59862190f
-step 3 BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f802fafbe0a9bda5
-step 4 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f4f758a0eeb19d16
-step 5 ASSIGN P[2]: a[2] = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b35f50bc09d78ac3
-step 6 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #856fd171f282fdce
-step 7 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9f3f04dc28e4d72a
-step 8 TERMINATED P[2]: termina | ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #61d94da6ec7b7161
-step 9 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a12972056e891791
-step 10 RETURN P[1]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #627f4c46686778a1
-step 11 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":11,"waiting":false} #75805ed5c1f21c36
-state #d3917177883bae6f
+create {"finished":false,"deadlock":false} #63ec55175c2b9df1
+step 1 ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #35ff8723832aed9a
+step 2 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #3abe30a326bc8e31
+step 3 BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #499357009053e458
+step 4 BLOCKED P[1]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #4268d749ff683228
+step 5 ASSIGN P[2]: a[2] = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #8eb23cf450d7536b
+step 6 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #de6aa5d0a7986e6e
+step 7 ERROR P[4]: error de ejecución - Índice 4 fuera de rango para 'a' (tamaño 3) | RELEASE P[4]: libera M al terminar con error | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #262366fd99651de3
+step 8 TERMINATED P[2]: termina | ERROR P[3]: error de ejecución - Índice 3 fuera de rango para 'a' (tamaño 3) | RELEASE P[3]: libera M al terminar con error | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #59f81bb20cb28adb
+step 9 ASSIGN P[1]: a[1] = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #9d83b55964c16710
+step 10 RETURN P[1]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #71fc624992b5f04b
+step 11 TERMINATED P[1]: termina | {"finished":true,"deadlock":false,"instant":11,"waiting":false} #abe2dc8e6619bb06
+state #1a9c272820ebf4a2

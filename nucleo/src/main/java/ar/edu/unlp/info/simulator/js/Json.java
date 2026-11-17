@@ -77,6 +77,7 @@ final class Json {
         field(sb, "value");        quoted(sb, v.value()); sb.append(',');
         field(sb, "isArray");      sb.append(v.isArray()).append(',');
         field(sb, "lastWriterId"); num(sb, v.lastWriterId()); sb.append(',');
+        field(sb, "lastWriteInstant"); num(sb, v.lastWriteInstant()); sb.append(',');
         field(sb, "elements");
         if (v.elements() == null) sb.append("null");
         else list(sb, v.elements(), Json::quoted);

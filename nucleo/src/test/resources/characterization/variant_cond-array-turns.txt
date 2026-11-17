@@ -1,581 +1,581 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #ea9a262064466ca9
-step 1 ENTER P[4]: entra a T.pedir | BLOCKED P[8]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[3]: espera para entrar a T.pedir | BLOCKED P[2]: espera para entrar a T.pedir | BLOCKED P[7]: espera para entrar a T.pedir | BLOCKED P[0]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #881fe0f65b00da0e
-step 2 BLOCKED P[1]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5a01ee18c57f523c
-step 3 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2d1286b94a143740
-step 4 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d10ba15a0e71edd6
-step 5 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f86d84ce176fc4d7
-step 6 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #694780e31ae14484
-step 7 WAIT P[1]: wait(c[1]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #e62b2cbddef247d2
-step 8 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[3]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #bfc7a54624493e15
-step 9 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[0]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e133522a448b88b2
-step 10 ASSIGN P[0]: orden[0] = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #b4f0e7c8007ebdb9
-step 11 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e3223e522ea92ea2
-step 12 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a58886cffd59fce1
-step 13 WAIT P[7]: wait(c[7]) - libera el monitor y se demora | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #508c42d2fa74a345
-step 14 BLOCKED P[0]: espera para entrar a T.liberar | WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #73933860c59415d4
-step 15 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #a511465c5ea486cf
-step 16 SIGNAL P[0]: signal(c[1]) - despierta a P[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b65bd4f389b91a44
-step 17 RETURN P[0]: retorna de T.liberar, libera el monitor | REENTER P[1]: reingresa a T | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #417a14e2f112ca0c
-step 18 ASSIGN P[1]: orden[1] = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #7036839b63d712d7
-step 19 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #50604f96e8f1f402
-step 20 RETURN P[1]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #3180d48d1335b5e6
-step 21 ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #737c6c27aeace51b
-step 22 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c9c9e75ef871e2b9
-step 23 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #e5bd9767ad66c8b1
-step 24 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a1257bc1c64f7765
-step 25 ASSIGN P[2]: orden[2] = 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #a779aaafaadb7d19
-step 26 TERMINATED P[1]: termina | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5e008f6db91b5eff
-step 27 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #a91d93f712915ca1
-step 28 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #23dc5a44ce17a525
-step 29 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #324ff3239cde3ad8
-step 30 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #ba0536abaf130991
-step 31 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #14e3fe366b9517d1
-step 32 TERMINATED P[2]: termina | ASSIGN P[3]: orden[3] = 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #4cda2354d643e504
-step 33 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #dcab1bc697013173
-step 34 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #bb590d64dbec8f98
-step 35 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #09678f229021588f
-step 36 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #2546eeda064e8466
-step 37 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #addfef04b61b5277
-step 38 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #ed5e951c1f1f7c08
-step 39 TERMINATED P[3]: termina | ASSIGN P[4]: orden[4] = 4 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #bb133709421f69a8
-step 40 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #2a3b07d565a3b161
-step 41 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #cd6e71417f8a84f0
-step 42 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #647f97906e452818
-step 43 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #c09431adac7e1ac1
-step 44 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #48d7f52ee4ff2211
-step 45 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #7d97fa10575dc6d8
-step 46 ASSIGN P[5]: orden[5] = 5 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #01186120a095fcfa
-step 47 ASSIGN P[5]: k++ => 6 | TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #3969a89b23f00eec
-step 48 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #4878f6ab6933a757
-step 49 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #1fb0084da27043f0
-step 50 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #8d67a7b611d4b08d
-step 51 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #0bec57a8752bdd82
-step 52 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #c8a48d0473a12c88
-step 53 ASSIGN P[6]: orden[6] = 6 | TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #c98b7276d1fe5a70
-step 54 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #cc4b1c1762f323e7
-step 55 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #415f7802dbb73902
-step 56 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #f69d80e93f4ed21a
-step 57 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #2086fa6ffc6000d7
-step 58 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #bdbc003d4bd3faff
-step 59 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #42747434739af4eb
-step 60 TERMINATED P[6]: termina | ASSIGN P[7]: orden[7] = 7 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #ebeadfdda48f529e
-step 61 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #6ddd3f13775dde2e
-step 62 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #0d0a92ffa4ab0dbf
-step 63 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #24a4acc0afaa4240
-step 64 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #7328b624c7293b1c
-step 65 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #8ba9b16e301f0ee2
-step 66 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #c654da1acd9292c3
-step 67 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #0fbb89f5411ac662
-step 68 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #cbb9c86d2dee5bba
-step 69 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #d21fb4c7f7db200f
-step 70 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #35aa10c6f7003908
-step 71 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #f5ec31a7bc9dcb3f
-step 72 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #6870462e9803bd25
-step 73 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #179ffdc2b537c4e8
-step 74 ASSIGN P[9]: orden[9] = 9 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #5c2f433834ce2367
-step 75 ASSIGN P[9]: k++ => 10 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #a7ebf43707c4af64
-step 76 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #004a4ba277ed4017
-step 77 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #5411d16bb14de09a
-step 78 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #5c621145e68828f6
-step 79 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #29e35f5bc925122d
-step 80 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":80,"waiting":false} #8481252f8e7d1c9c
-state #6f43971ed3c15e45
+create {"finished":false,"deadlock":false} #6b86167a264703ae
+step 1 ENTER P[4]: entra a T.pedir | BLOCKED P[8]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[3]: espera para entrar a T.pedir | BLOCKED P[2]: espera para entrar a T.pedir | BLOCKED P[7]: espera para entrar a T.pedir | BLOCKED P[0]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #23edd4ada1cf25e1
+step 2 BLOCKED P[1]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #3a6760d193977910
+step 3 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #23fde14fce54117f
+step 4 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #300fbdb8fa8db1fb
+step 5 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a645340fa627de0c
+step 6 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #b03947c97c603b04
+step 7 WAIT P[1]: wait(c[1]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #b9477b8fa7b479af
+step 8 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[3]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #90df55d3abd3b757
+step 9 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[0]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #9022e5ac578d10e1
+step 10 ASSIGN P[0]: orden[0] = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #2b811c8ea0220438
+step 11 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #076c7154111ad5ae
+step 12 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b58725fcecf70c44
+step 13 WAIT P[7]: wait(c[7]) - libera el monitor y se demora | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #dbaa3dc93d141d7d
+step 14 BLOCKED P[0]: espera para entrar a T.liberar | WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #4a5a6891067f3bf4
+step 15 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #39b134f5c1b65aee
+step 16 SIGNAL P[0]: signal(c[1]) - despierta a P[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #a546c3e5bbf58c47
+step 17 RETURN P[0]: retorna de T.liberar, libera el monitor | REENTER P[1]: reingresa a T | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #65868cf8f80cadef
+step 18 ASSIGN P[1]: orden[1] = 1 | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #9b7e956a5f033f46
+step 19 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #e51b8b68f6c78371
+step 20 RETURN P[1]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #187881c6f48c1e52
+step 21 ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #3622b42d812f0eb7
+step 22 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0d35f3541fa58c4c
+step 23 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #e2c334be685e74e2
+step 24 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #07597453837e67e2
+step 25 ASSIGN P[2]: orden[2] = 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #260984371451e1d7
+step 26 TERMINATED P[1]: termina | ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #4c709c0ae740cdd2
+step 27 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #418d5cc6130559ee
+step 28 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #5a8c9c8d59d30fe4
+step 29 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #7b46cbfe69ecd7e2
+step 30 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #389e646454481501
+step 31 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #8269a99b7f23a323
+step 32 TERMINATED P[2]: termina | ASSIGN P[3]: orden[3] = 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #52d40a9f98480c46
+step 33 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #aebce0582230a678
+step 34 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #bb7f31cb9f71d1ba
+step 35 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #7e985a43525aaee0
+step 36 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #cee57feeeb1a1b87
+step 37 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #87cc9b85613d0d9c
+step 38 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #8604ad440beeac4a
+step 39 TERMINATED P[3]: termina | ASSIGN P[4]: orden[4] = 4 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #aaf43676a734f11a
+step 40 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #dae767706ad34bda
+step 41 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #8887cbf0cc0f3cd1
+step 42 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #d4fe5fb4f3eff584
+step 43 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #dbb04458ef79733c
+step 44 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #e05c901e30659da1
+step 45 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #6b0d9c899167421a
+step 46 ASSIGN P[5]: orden[5] = 5 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #ec0166edb2488acb
+step 47 ASSIGN P[5]: k++ => 6 | TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #f291f85433edf967
+step 48 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #c0f4c4c0a70e113d
+step 49 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #0156d6aae11a8f5d
+step 50 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #4ed416103a64973b
+step 51 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #9dec45af844f4137
+step 52 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #ee06ea2b9dce59ca
+step 53 ASSIGN P[6]: orden[6] = 6 | TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #25cc016597442c66
+step 54 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #30295017a39ad792
+step 55 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #cde52fc21d7a3bca
+step 56 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #198ba08081d25340
+step 57 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #fed69a30239fcf63
+step 58 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #a871be7757edf0eb
+step 59 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #11789c2579b0442f
+step 60 TERMINATED P[6]: termina | ASSIGN P[7]: orden[7] = 7 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #18c2ecbef5d4425e
+step 61 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #c365b8ce74c657a1
+step 62 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #f12ba3c509e3b66a
+step 63 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #ddae4e59408e5234
+step 64 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #b9cfc7f4b1aba838
+step 65 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #72fb844f1fbbd6e8
+step 66 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #f8548a5889974ee2
+step 67 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #5865a147bd9afb24
+step 68 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #fbb856df4a120e56
+step 69 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #2fe3d5b72a1439a2
+step 70 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #23d1d73648e8f9ea
+step 71 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #5688e68741716d92
+step 72 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #d36d20f5c12c801e
+step 73 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #3a1f7844950e2b2c
+step 74 ASSIGN P[9]: orden[9] = 9 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #9d5ed73e711edb2d
+step 75 ASSIGN P[9]: k++ => 10 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #d655bd9d02e4186e
+step 76 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #5dc6414742d6894c
+step 77 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #6c488b3eb63c6121
+step 78 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #33d76c1a05f487dc
+step 79 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #27d02d004d1ce687
+step 80 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":80,"waiting":false} #b4a591b5def2a8a8
+state #b05ab474d5a9d2d9
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #601be33bc3b87fa3
-step 1 #cd2ba493d07cd1b0
-step 2 #841cd4d806c335cc
-step 3 #8f2438be0b6730e4
-step 4 #26b8ca0d93938c89
-step 5 #ac0d13f443891c3c
-step 6 #b81992566301683c
-step 7 #eacbf78f3ea586ff
-step 8 #31c4e87eaa638126
-step 9 #5a8ef064ca0e193b
-step 10 #d26c88e1a4467bee
-step 11 #2966890cff5301b5
-step 12 #e8b99285813ec569
-step 13 #e453a5c62e9b1773
-step 14 #2377ac0894b71394
-step 15 #46e0df0f5321dcdc
-step 16 #21060f612384db34
-step 17 #adee4d3dc25eae2d
-step 18 #55fe6382ab948671
-step 19 #f6118dd8b5f20d31
-step 20 #5cf246ad2b1fc526
-step 21 #5649ec2758ecd821
-step 22 #4e79efc5bb6a78bb
-step 23 #ac082844b95af6f6
-step 24 #4adeece1301fe474
-step 25 #4c9422a92394727f
-step 26 #a0b02ac2c263eea7
-step 27 #fc8d54953b93dea4
-step 28 #3acd583024430976
-step 29 #5ed6d967755e5bb5
-step 30 #f56cb4b1947df0c5
-step 31 #24243c0f7c960b10
-step 32 #4cc1ad451cf02f19
-step 33 #29bd7f6172304c90
-step 34 #fdf37811831b6fcc
-step 35 #77c9d4b1f091cd06
-step 36 #ad737f9726e90c07
-step 37 #2831fbfc3363d425
-step 38 #84f77e33c81a645c
-step 39 #bb712f445b9cbd71
-step 40 #588a57a07cc61bd1
-step 41 #70b96797138a0edf
-step 42 #659e3f3df9542054
-step 43 #adc9b9818914f04d
-step 44 #56a44ed2aa98f2b7
-step 45 #a6a035103d0a2e16
-step 46 #d28365015345ebb1
-step 47 #014c97ab5c586203
-step 48 #b1a26fcff65de01e
-step 49 #acad69df013d59ac
-step 50 #5d72325be992cf48
-step 51 #f163abeadfef8d4b
-step 52 #1af1e3883c710166
-step 53 #b7c77b9ebe2a008a
-step 54 #dd45618d704d74f4
-step 55 #ec2a7c0f84fa7219
-step 56 #efee789fa468b354
-step 57 #77f5491b68725d90
-step 58 #aa06f6ba0903ad13
-step 59 #370f75dc2a2a6628
-step 60 #d8c1e91c0c0d2cf9
-step 61 #115eb4dc6dea0023
-step 62 #5fb2e27b41d56d6e
-step 63 #1253d4457cf60711
-step 64 #5f9c66f330e7a353
-step 65 #4273fd152e06eec0
-step 66 #be935860959c6dff
-step 67 #8ff43337bdab79fa
-step 68 #1dc8f63bcafbb532
-step 69 #2597b70f3794fdf3
-step 70 #558de04da52c0869
-step 71 #ebb6aec5444dca9c
-step 72 #92b2c0bc0df112a0
-step 73 #678ae43e08cd258c
-step 74 #8e1fac7e3d5f3d04
-step 75 #80ec2d82d39e852f
-step 76 #a9419ceb345cec97
-step 77 #6ec5455a2a1faef2
-step 78 #9ed7fb87573825f1
-step 79 #4d935b08cd3eaf48
-step 80 #a93c619c66fb46f0
-state #3543914de4802893
+create {"finished":false,"deadlock":false} #c70a7b586b3fcfb6
+step 1 #49abe2f29660d423
+step 2 #d018b0bc37780501
+step 3 #cae9a8bcc8555c22
+step 4 #8fd7a9eac6aedce6
+step 5 #33426fc759a730ef
+step 6 #f1cc5ff8fcc9cc05
+step 7 #a475bdb03f5552cc
+step 8 #7ddafb4b5b6bafc5
+step 9 #e3907572705317da
+step 10 #d9a56bf5effb0fab
+step 11 #438b0bf2a2b16563
+step 12 #55a76586f9c94038
+step 13 #6beba7edac78f0f8
+step 14 #3562b0a933f4c730
+step 15 #685b96b83075ebe1
+step 16 #dfe4a50ccfffdc7d
+step 17 #d753a19894026938
+step 18 #41ea5025cc48c049
+step 19 #a9528c997011424f
+step 20 #37f0f41348ef2ff3
+step 21 #bf39d8512c1f6037
+step 22 #32024bc8e65ffa2b
+step 23 #f4bb41b53288e93a
+step 24 #ba85c8e085f3f33d
+step 25 #da0dbc44105082ac
+step 26 #f18169291e10befa
+step 27 #ab5cfb3101b7d2ff
+step 28 #72f354588b8ba8ce
+step 29 #e44936327e4af50d
+step 30 #61d1cf6494b2698a
+step 31 #0ddade096621cf65
+step 32 #b55a018675345d63
+step 33 #f5287fad17b053ba
+step 34 #f9ef94856a8cbb5b
+step 35 #7a05b3d61a3960e6
+step 36 #c7d6ab6cd689a949
+step 37 #45d8e009390da802
+step 38 #0a92d219ac19fb3c
+step 39 #eb0727d8eac284df
+step 40 #1dffa55912b2ef6c
+step 41 #0bbea8c678caee16
+step 42 #65729a5b2b938488
+step 43 #a684a4c1c0e5ff03
+step 44 #a5dde68b73bce9ea
+step 45 #3c3ab0e37118373b
+step 46 #768f176078cd0794
+step 47 #8bfe5c3edcd002b9
+step 48 #57d8827aa67ae9ef
+step 49 #a89e757642a0bcf3
+step 50 #b7e352cbb5fb05fa
+step 51 #c8366f5a0887f640
+step 52 #caf09d03b63712b6
+step 53 #663bf930af04e9ef
+step 54 #d8fb04293dc9c7e5
+step 55 #14b0c9037ec3341d
+step 56 #c9d4edea47f07ab8
+step 57 #8e36aa48525e12f1
+step 58 #9f228496af199618
+step 59 #ec186051494e2595
+step 60 #351ffd544b379d9f
+step 61 #ab6898be52afae5a
+step 62 #b95ecb22effc3df0
+step 63 #384d9b4880fc2ffc
+step 64 #725690e549e13b93
+step 65 #9b6c393b607335ab
+step 66 #0e118a7b4faf5b76
+step 67 #db878b70979208eb
+step 68 #79224028ea820549
+step 69 #bb3a8cdd3d10b500
+step 70 #4e1eef614ce78935
+step 71 #297760c826d2e127
+step 72 #c535cb6f54880123
+step 73 #36b6ee6d19ed25af
+step 74 #cd0c2b38e2fa122c
+step 75 #33744c15e8fa2f4b
+step 76 #e1fe9ada165c5425
+step 77 #38007a074b50524c
+step 78 #26848660a222cd07
+step 79 #3ec09920228d7e9f
+step 80 #eb48102d03e89d0a
+state #27aa264c008c70b7
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #976487a7be182d83
-step 1 #5c9e1320eaf8304c
-step 2 #cfee8ad50ab33ca5
-step 3 #326f6613a8f19c6e
-step 4 #4dc4448795241733
-step 5 #f088de217f3af402
-step 6 #26f5e89a5ad93171
-step 7 #bbe3dcef4d1e3b6b
-step 8 #a761298d95b510ee
-step 9 #332c0e195445fc94
-step 10 #66cb36bcf96f3cea
-step 11 #2fbbe2d3cb1decad
-step 12 #92c2167de9e04ac2
-step 13 #8a9ec418331989e8
-step 14 #6defe1166f511e11
-step 15 #ac2e137a21a693c2
-step 16 #340f048730ec30ea
-step 17 #fe811752808ff46e
-step 18 #3cce43589157ad80
-step 19 #d9ac5e786d2816f4
-step 20 #034409ce2f6fc6e4
-step 21 #c471f34153dd7511
-step 22 #ff56c13a0898efff
-step 23 #4ad4aa285fb22ed1
-step 24 #1adc98d19a1b602b
-step 25 #fe7dede2440b5e25
-step 26 #ea89d9ec02f0e7b1
-step 27 #fd39199134096eab
-step 28 #d15478f239ea2190
-step 29 #ec54092bbb11dce4
-step 30 #fd6dc3bcf93eafd3
-step 31 #3978e8c148e74b45
-step 32 #e5998f1dac821f9f
-step 33 #f56f770f6d4a0d62
-step 34 #d18ebd3a37cadc68
-step 35 #c4301bd3ab8195bc
-step 36 #33a16b64219b155f
-step 37 #d94bb23d27ba837f
-step 38 #969500e2a1182a99
-step 39 #8d666cdc1dafe8e1
-step 40 #0f87305203bdf820
-step 41 #5d2a54c6b758a194
-step 42 #910e617f380b7feb
-step 43 #24d61d1561b3b994
-step 44 #b9e3ec963468dc75
-step 45 #7e3e7f3ccdfd3463
-step 46 #4d9bbe5a350c6c39
-step 47 #672948e75e718b59
-step 48 #35a44b747524fbed
-step 49 #65ae11b996b65a66
-step 50 #0f57533cba330aeb
-step 51 #9c20bcfd0301f9e5
-step 52 #729f2bad564b7d66
-step 53 #7f4503dcc78b236f
-step 54 #397f086270f88304
-step 55 #fe7bf9b17a458fd6
-step 56 #d60d833cddd8acfd
-step 57 #4301603084a4c6e6
-step 58 #96ca0d5e4e762e4a
-step 59 #f0693fa9996252c3
-step 60 #7b7e2b3791c193e8
-step 61 #6d7898edc1a2e9de
-step 62 #a2326b2660c04e50
-step 63 #6b653c3fbf4ae4c9
-step 64 #49b32eeda48bd89f
-step 65 #5a33b6ac0f196973
-step 66 #40f65b52b60a0ab2
-step 67 #3ecfbef1310094a2
-step 68 #40ea4b513d65a6ff
-step 69 #76fc752b9292c19b
-step 70 #72739d012ce5e80a
-step 71 #b39d75ff078a4629
-step 72 #630101ce99b5f58f
-step 73 #98e824041049a96a
-step 74 #a2d4f8f51ac67ac3
-step 75 #96188d483f86de0f
-step 76 #0f335e90d0b95ecc
-step 77 #a6f83c03b1bc3f4f
-step 78 #518a934ee6e1ae98
-step 79 #0163c57159272f28
-step 80 #858d125048d8acde
-step 81 #db6b24ede81cd337
-step 82 #ed454cba89c1c1ed
-step 83 #8ca13949da2694aa
-state #51f55d334ae9c617
+create {"finished":false,"deadlock":false} #9911937a2f506fdd
+step 1 #1ce468b6c259f9b7
+step 2 #6234403a8ea21483
+step 3 #e16b56a94b5407c1
+step 4 #1a90b82b56bd121a
+step 5 #61c9eb7e88a3d292
+step 6 #b7192d2a27922292
+step 7 #9e7e7348ffde6f87
+step 8 #d619a7a7d284f7d3
+step 9 #23776b80d89a3a40
+step 10 #630b8b25850dc821
+step 11 #a79e589fa0e6c341
+step 12 #09da258abc12dc5e
+step 13 #33e00ec8f4c17e78
+step 14 #f0c8de7515224e77
+step 15 #289acb2697322c7e
+step 16 #54e8f49cde11f4eb
+step 17 #4396ce68370e451e
+step 18 #8e3bc223d918edbd
+step 19 #fc249653f3c76e70
+step 20 #312a4270f0dde23e
+step 21 #1d32d39b9a843519
+step 22 #57fe1174c841a425
+step 23 #7252d5e963ab9700
+step 24 #585543893043de64
+step 25 #9127210f3e66fa23
+step 26 #67945a7f3c3e1990
+step 27 #33f74eac6025f9f0
+step 28 #0a235fc61e3ffef5
+step 29 #3ff8d205124da19f
+step 30 #abecbd81d763f530
+step 31 #cada8031dc6ee3e3
+step 32 #fd9e5a1aa0d3a5fb
+step 33 #00cde62523b79c75
+step 34 #2f97be92d721427b
+step 35 #0f5ecdc4cfbf4fd2
+step 36 #4792d13c1e712145
+step 37 #c27a41c18948e201
+step 38 #c33acd87335a2cf7
+step 39 #4d4c9e67a7d6537d
+step 40 #73d06a6ce58c05e0
+step 41 #cfe0c87bae047151
+step 42 #42ef1111cbb6944f
+step 43 #3ef04f5aa56adfd3
+step 44 #596d597f525ebd47
+step 45 #5744c1ac8d0f23ed
+step 46 #6c2d18ef4a086ef1
+step 47 #4e2a937807b45617
+step 48 #663a68cd44b93611
+step 49 #e5906584f80a5d71
+step 50 #910d918d84efeeda
+step 51 #509ef497c7e662ec
+step 52 #4d704825d3ca9046
+step 53 #2948ebf5365e960e
+step 54 #e76cdcafc5ff927a
+step 55 #f20bc5021dda7561
+step 56 #e9936098a15221a3
+step 57 #f474be6f7d5e7956
+step 58 #0e6a605737f6805b
+step 59 #b5ee6980070c206e
+step 60 #b59a94a80f011a65
+step 61 #3c8852668f54e4bf
+step 62 #f11857fc8da955e2
+step 63 #ea12d14ae06958eb
+step 64 #d896a1a01b4b5652
+step 65 #17e399f0762936d6
+step 66 #66e6b17401dff745
+step 67 #23157e969664d531
+step 68 #90aff45aa78ba2b3
+step 69 #83379b2eabefe607
+step 70 #71fbcfe31b7bf1a7
+step 71 #fe4c96f34801fdd4
+step 72 #a06e0d66a78e8a51
+step 73 #e9251284cad1ca47
+step 74 #e5553e6cfacebf8a
+step 75 #73617342c351c748
+step 76 #41cf29cebcde6adc
+step 77 #2b935f2f2936b6a6
+step 78 #1a32641e82831033
+step 79 #a8fafb6370c63445
+step 80 #a9b4d39587382f9c
+step 81 #fa5b81ce7d259c34
+step 82 #52e35eef5a74781d
+step 83 #60492e7e2b75ef7e
+state #522a8b35b08177cf
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #ea9a262064466ca9
-step 1 ENTER P[0]: entra a T.pedir | BLOCKED P[1]: espera para entrar a T.pedir | BLOCKED P[2]: espera para entrar a T.pedir | BLOCKED P[3]: espera para entrar a T.pedir | BLOCKED P[4]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[7]: espera para entrar a T.pedir | BLOCKED P[8]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #939e4104adc3db84
-step 2 ASSIGN P[0]: orden[0] = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #22aefe8a4c7f1c7f
-step 3 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #b03f391e81ec86cb
-step 4 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2d4b785971ba7083
-step 5 WAIT P[7]: wait(c[7]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | BLOCKED P[0]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3e32477443dafc5a
-step 6 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #94ac2732e10c0275
-step 7 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[4]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8dd2aeeb4380c2ee
-step 8 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d13d2ed851df7c86
-step 9 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #7dad69dc965cec86
-step 10 SIGNAL P[0]: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #9b0ec02d9ffcd3aa
-step 11 RETURN P[0]: retorna de T.liberar, libera el monitor | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e1f69b3df9d6624e
-step 12 WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #8931e752b7e90fd3
-step 13 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #8cda2227292ccb82
-step 14 ASSIGN P[1]: orden[1] = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #45aa377fe980e376
-step 15 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #053d24f1ffb10d2d
-step 16 RETURN P[1]: retorna de T.pedir, libera el monitor | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #dc9860d3737d42cc
-step 17 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[3]: entra a T.pedir | BLOCKED P[1]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #c8f6a9ac0fb4030a
-step 18 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #40260f765480d3a7
-step 19 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #0a2e13d21f1bcd97
-step 20 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #1ff02a7e46e306d8
-step 21 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #d5c99380476ef9a9
-step 22 ASSIGN P[2]: orden[2] = 2 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #7becd352a1418c4d
-step 23 ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #44942994b280cba8
-step 24 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #93b280a72243d727
-step 25 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #57d83732298d2b4b
-step 26 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b5b846e05f7963bd
-step 27 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #fec388dddbddd13e
-step 28 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #00ca7320216fc8ec
-step 29 ASSIGN P[3]: orden[3] = 3 | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #7e3e25d48b7a9cca
-step 30 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #375e42d02dbd054a
-step 31 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #b0578496cce90dfa
-step 32 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #58cfe60b456a9ba3
-step 33 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #908451d4852ebaa4
-step 34 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e096e350d4312eaf
-step 35 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #ed53b8113538beee
-step 36 ASSIGN P[4]: orden[4] = 4 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #3572d56082ef6450
-step 37 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #d12d39c01acc789e
-step 38 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #b726b0b7b70abf55
-step 39 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #c7d29a5612b12ccd
-step 40 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #c10e991f4d44ac41
-step 41 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #9da71b6e64bbd484
-step 42 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #58661a8ee4236b70
-step 43 ASSIGN P[5]: orden[5] = 5 | TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #99589b737e9fab52
-step 44 ASSIGN P[5]: k++ => 6 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #6462a3f448f7a14a
-step 45 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #3a98d9a613cddd05
-step 46 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #d5a02d6dc5a1935f
-step 47 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #448e834df7c65bc2
-step 48 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #ec8b1d934155fc19
-step 49 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #17e96d0c6bff43d9
-step 50 ASSIGN P[6]: orden[6] = 6 | TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #e258ad35c46d11a0
-step 51 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #5ed493bfb4608abb
-step 52 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #98944fb96b1d35f6
-step 53 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #463e484d837e39ea
-step 54 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #9ed5e73ee917a58b
-step 55 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #7e57f612b7415cba
-step 56 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #705618b2ebaf54e3
-step 57 ASSIGN P[7]: orden[7] = 7 | TERMINATED P[6]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #ed3a208315631795
-step 58 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #7d09677faa0a21a1
-step 59 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #c965d7bc7c22c80c
-step 60 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #f1dc352b11984c86
-step 61 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #171fc3e13fb9fe7e
-step 62 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #d4570f555bc8381a
-step 63 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #cf75efb6821f1cd9
-step 64 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #943e4cab03768c62
-step 65 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #b45401d96c493a91
-step 66 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #9b12f59031c6f316
-step 67 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #ad91c62530cb9ca0
-step 68 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #967b7a897a524fd4
-step 69 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #b17179f6f19b651d
-step 70 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #aa44905a1a45f5c5
-step 71 ASSIGN P[9]: orden[9] = 9 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #68c75f4e02c34abd
-step 72 ASSIGN P[9]: k++ => 10 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #ee2de3789d2f374b
-step 73 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #f1082ca4e092225c
-step 74 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #d9e228b104556669
-step 75 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #d5873f1da43145f6
-step 76 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #f544357980dcac0d
-step 77 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":77,"waiting":false} #a43c2a58f240bb19
-state #d5ccfd4e211d2bc1
+create {"finished":false,"deadlock":false} #6b86167a264703ae
+step 1 ENTER P[0]: entra a T.pedir | BLOCKED P[1]: espera para entrar a T.pedir | BLOCKED P[2]: espera para entrar a T.pedir | BLOCKED P[3]: espera para entrar a T.pedir | BLOCKED P[4]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[7]: espera para entrar a T.pedir | BLOCKED P[8]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0b433cfa579e1741
+step 2 ASSIGN P[0]: orden[0] = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f47af1ecc37c9ba7
+step 3 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #07996097735f160a
+step 4 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #efe1b102baff3b96
+step 5 WAIT P[7]: wait(c[7]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | BLOCKED P[0]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #90b18d54e10aac2f
+step 6 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #28439c6b002cfffb
+step 7 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[4]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #f68acca15a01587b
+step 8 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d7f26c9a7d0faf89
+step 9 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #048f374a542a5dda
+step 10 SIGNAL P[0]: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #dba122c3143f9d0a
+step 11 RETURN P[0]: retorna de T.liberar, libera el monitor | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #468401458a7f8fab
+step 12 WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b138b3f88dfa6fca
+step 13 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f048980ec74b4282
+step 14 ASSIGN P[1]: orden[1] = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #edfdf1beec95732c
+step 15 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #83ccd930623eb5f6
+step 16 RETURN P[1]: retorna de T.pedir, libera el monitor | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b5bfe1769791c9ca
+step 17 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[3]: entra a T.pedir | BLOCKED P[1]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #980532770643cda1
+step 18 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #36fa548f28147547
+step 19 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d8f6d9f94c564961
+step 20 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2b67d1ec6ca4e0f8
+step 21 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #8226909bc9b89dc2
+step 22 ASSIGN P[2]: orden[2] = 2 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #7187edf9c6172ba6
+step 23 ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #3495bbf9dae2d666
+step 24 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #37d19f23195082f3
+step 25 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #a70d3825de35ef4a
+step 26 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5dc5b4f2dad837d0
+step 27 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #70e6704917cf7fab
+step 28 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b0a15409db1fa472
+step 29 ASSIGN P[3]: orden[3] = 3 | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #0d95a423a5b91e58
+step 30 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #447913782d30491c
+step 31 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #97ec17206134354f
+step 32 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #8a3ae58fcd949248
+step 33 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e76bf506c99b0827
+step 34 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e555864f30ef3320
+step 35 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #80ecedb1315b878e
+step 36 ASSIGN P[4]: orden[4] = 4 | TERMINATED P[3]: termina | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #4ed2f05215e211ef
+step 37 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #fb3aceb094a52fe7
+step 38 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #9b230d8ac0c793b9
+step 39 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #89d4f2380c080aea
+step 40 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #53e688040477466f
+step 41 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #6d48e31416bf1fa7
+step 42 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #05a49d039af4599e
+step 43 ASSIGN P[5]: orden[5] = 5 | TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #2b1966448f685731
+step 44 ASSIGN P[5]: k++ => 6 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #a91293fc15e6241d
+step 45 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #6ae350dea5d1483d
+step 46 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #97ad662f5f21feb8
+step 47 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #58ae9801bd5a2b1a
+step 48 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #7e6f302060c5e5f3
+step 49 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #c4d2d2076bdc447a
+step 50 ASSIGN P[6]: orden[6] = 6 | TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #39e621b2480b2eea
+step 51 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #5dfbdd1443878a9e
+step 52 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #b8d5ee54ffd65b2a
+step 53 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #53756440228b0211
+step 54 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #50f5678dbf84ae7f
+step 55 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #81c3a6a20698ee18
+step 56 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #ac473a62cd6a1edb
+step 57 ASSIGN P[7]: orden[7] = 7 | TERMINATED P[6]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #09e1b4ae9bdf434b
+step 58 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #ca89a8827070f99f
+step 59 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #101b30e2f2e2bc8c
+step 60 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #7bec738b94158149
+step 61 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #e506a5b7bf57e3ca
+step 62 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #13e6b72787b6277e
+step 63 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f691d223493d11c5
+step 64 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #dd1cccad4f878606
+step 65 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #7e48bc157036bbdb
+step 66 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #ef5a92d595b93955
+step 67 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #5c3bb22bb572f663
+step 68 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #da3b2ee8172e2f68
+step 69 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #fa86f49ec672cfe9
+step 70 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #2bfd9e2ea84b88f2
+step 71 ASSIGN P[9]: orden[9] = 9 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #fb9bfeed3007a7d0
+step 72 ASSIGN P[9]: k++ => 10 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #d203a725aefa8a7a
+step 73 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #5b1577e860b60157
+step 74 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #5db84aa54f301ed1
+step 75 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #31715ad83b4dcdfd
+step 76 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #a043e1a9587daa7c
+step 77 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":77,"waiting":false} #7af44267beccd2a6
+state #35745671798c9c96
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #601be33bc3b87fa3
-step 1 #939e4104adc3db84
-step 2 #22aefe8a4c7f1c7f
-step 3 #b03f391e81ec86cb
-step 4 #2d4b785971ba7083
-step 5 #6170401ae95bff2d
-step 6 #1cd494deb1b4e451
-step 7 #4a523033b95b631b
-step 8 #565b441a756bd9ee
-step 9 #5981413001f7e7b0
-step 10 #34d50188df9a9410
-step 11 #78d2c070dec9eaa8
-step 12 #6865d28129bfd1c1
-step 13 #b431151beef43efb
-step 14 #e83c17bfd85f3ecc
-step 15 #0eb0720fbb565555
-step 16 #6b9d557e38c73ce3
-step 17 #68eb81dbff0602a4
-step 18 #61fbfee53476f227
-step 19 #6a1abd55273f393f
-step 20 #109bb71822867512
-step 21 #81b9293efd2e7311
-step 22 #d5b70878ffed16ad
-step 23 #1c7c3621ce2bbfda
-step 24 #bd3e0b066658ffb6
-step 25 #552ed4e053e18372
-step 26 #1c13565fc0a02e8f
-step 27 #223f002112cc8d18
-step 28 #1625ebcecdb92a84
-step 29 #8a4ab6a52f4e9ad0
-step 30 #470fe5d957eda11b
-step 31 #6249f981b623423f
-step 32 #62cd29cb17fa26a1
-step 33 #7414fb56aa67e4b6
-step 34 #979f4335acdf0e2c
-step 35 #8d23b7ac2dac8751
-step 36 #10b49478131cdc6f
-step 37 #a27aa927ebbff663
-step 38 #497173343a70c6ae
-step 39 #93bfbf3c578ff29f
-step 40 #5716733b41d0021e
-step 41 #cdbaa5e8ea77d848
-step 42 #baa7c091488681f8
-step 43 #7ee728f38e6846b6
-step 44 #f02fc8badf0cc5e1
-step 45 #c3d49e14e81b3d28
-step 46 #4311f19c4a44e5e3
-step 47 #6dc38d80ff04d958
-step 48 #30ba3691e15ee967
-step 49 #233c2706829b5ce4
-step 50 #839fbd92cf86475c
-step 51 #a0493329a564ac04
-step 52 #ae009293f2e1a6e1
-step 53 #1088086461492a66
-step 54 #3d13546a0329d585
-step 55 #b4128df1a42d574f
-step 56 #2c68e932bcca2359
-step 57 #0c989169c85058ce
-step 58 #6050da70b429cd86
-step 59 #2cade76d1a59c94c
-step 60 #fa7a3e74de2c293a
-step 61 #e9353c4bebfe357a
-step 62 #a7df0e7e4026701c
-step 63 #0b351ac6d88cf844
-step 64 #6f9d7e6d881d2d84
-step 65 #7bf5bfdc14416b07
-step 66 #24af1129cc840faa
-step 67 #9cd7dcb9ee25ea7e
-step 68 #7f169f4b2857a3fe
-step 69 #d8cda2ba68524608
-step 70 #4fd915d93a26288b
-step 71 #72c4687a035eb358
-step 72 #233bd2cff8a9e149
-step 73 #5c8446502fcdf1c6
-step 74 #eddcd7e048cb0789
-step 75 #2ea6dcd637797719
-step 76 #7b48b0f57bc00167
-step 77 #5a4769f65de17155
-step 78 #3d0266584f80e832
-state #e108d86439e36c88
+create {"finished":false,"deadlock":false} #c70a7b586b3fcfb6
+step 1 #0b433cfa579e1741
+step 2 #f47af1ecc37c9ba7
+step 3 #07996097735f160a
+step 4 #efe1b102baff3b96
+step 5 #1987f36f151c0cc5
+step 6 #83ed41b94b493eb8
+step 7 #bd5933de7e359a14
+step 8 #df2796daeca57842
+step 9 #329671c5c237b08f
+step 10 #6da005c6f0661a0d
+step 11 #6d5af6d8ebf7f620
+step 12 #7c3dfa7a7f384033
+step 13 #b5a54cd770a8759b
+step 14 #c6559944d68fb965
+step 15 #96150b442d17af40
+step 16 #0e4eb3f27c5f9f4e
+step 17 #996b498fb3c97c9c
+step 18 #138b592570717518
+step 19 #1715f4757d22a756
+step 20 #881ee445416ccd0e
+step 21 #9321027b9bb9a1d4
+step 22 #2a3e7581dfb49b6c
+step 23 #94c133d9d1991767
+step 24 #6f3cf24d3a1b166c
+step 25 #956b43ee669ce288
+step 26 #121ffc5260bd32d7
+step 27 #850f6798f5f6b64c
+step 28 #ccf0b554ea24dc2d
+step 29 #7a3af89bccd545c8
+step 30 #996e38c9e8506fc5
+step 31 #37a7a6936c2f1629
+step 32 #c8f4ea1ed60e80ce
+step 33 #3c63f56312f22f07
+step 34 #53df6791d8985461
+step 35 #f811ddcdee92cfe2
+step 36 #5bb81e030d82bdb6
+step 37 #920ed1de978dbac6
+step 38 #47a387b57a0685c8
+step 39 #bfd1d55e6b1b7257
+step 40 #98ea9785fae64eb5
+step 41 #d840cf80d4c9f282
+step 42 #0ea35c72877f635e
+step 43 #e7d7904a002c7d89
+step 44 #af013e5248c9b6aa
+step 45 #95c0d5ca8ee838d6
+step 46 #e94f7852b81204bd
+step 47 #85bca78217643472
+step 48 #e5dcab2ca5f5e390
+step 49 #9052838d17952b7f
+step 50 #0f9ace3278c8936c
+step 51 #05eefbad63c0db9d
+step 52 #fdb3df23aebc3e10
+step 53 #c8e30f9ebfb71aba
+step 54 #7347b92d128e8606
+step 55 #1cf7c1a0a4ac28ae
+step 56 #f69c68d6a0240553
+step 57 #84f4b62c25172032
+step 58 #16180feab99583d9
+step 59 #e59f52737341c2a6
+step 60 #98c645db20658ec3
+step 61 #fa9490d45f00403f
+step 62 #79be50a55a7cffcb
+step 63 #5b3ed7317a14d839
+step 64 #d516107f00a7b14c
+step 65 #50f129085f572dc8
+step 66 #c65dacf8088e6648
+step 67 #4d703d5ec5fea91e
+step 68 #6ffbdcd975f3c852
+step 69 #39bcaa052494775a
+step 70 #fb779a4fec27cd25
+step 71 #4ba06ad7e920f41f
+step 72 #ade9aef0c58ba7c8
+step 73 #88ff5e5451b3f138
+step 74 #26fca6f77657496e
+step 75 #0678ecfbf8091bb4
+step 76 #d7843d0970a9a320
+step 77 #da74b87f2043c14f
+step 78 #61266e64061694a7
+state #a28b88e9c9bc7637
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #976487a7be182d83
-step 1 #939e4104adc3db84
-step 2 #22aefe8a4c7f1c7f
-step 3 #b03f391e81ec86cb
-step 4 #9eb61dc1cc614f84
-step 5 #ee91bedc6d8afcdd
-step 6 #c0eb8b756a9d8de0
-step 7 #2862cd324197a00a
-step 8 #63bf5e4622c3693c
-step 9 #36250f75b24c4018
-step 10 #65018ca50b8d2868
-step 11 #31cd61ba4b3967c4
-step 12 #1b2412bb6be57291
-step 13 #f4f86f2384c9274a
-step 14 #c1f30fae249f62c8
-step 15 #f3f53842e32ae19c
-step 16 #ec832051b458b31c
-step 17 #6ba8244947dc0e75
-step 18 #48920f442ad92547
-step 19 #fa8433136c002753
-step 20 #4919ae3339f29db2
-step 21 #29811ae5cad0c9c9
-step 22 #360bcd60c7d19f11
-step 23 #3918e3c7e62098a2
-step 24 #2112720a5e910140
-step 25 #6ba3002512cbca5a
-step 26 #bb5de575d66e81b2
-step 27 #9350c13ac05013f3
-step 28 #d0d0b57d1593b68f
-step 29 #fb621f8e854f7ff0
-step 30 #367e4e8530d04752
-step 31 #3a98047b048934f7
-step 32 #d299a8ef6065a9af
-step 33 #6379737e2b88fc4c
-step 34 #1b8895f7dc9bdc4b
-step 35 #e9338cde691576b8
-step 36 #6611363a915284c7
-step 37 #4dfbafa0c260a9df
-step 38 #fe031b81edf8a6c1
-step 39 #2efd40a87770cf62
-step 40 #d21c35c54aca2d1f
-step 41 #49a76f89676c5aec
-step 42 #a5f8a9a303fb384d
-step 43 #d92d93eb78d2d3d4
-step 44 #86b00cdab4340233
-step 45 #73235faae26a52bc
-step 46 #2cbf7798cabe1524
-step 47 #58cd34f5521338c7
-step 48 #a6b265d97de0762a
-step 49 #239c46aa4c920b46
-step 50 #53739d8c339ab364
-step 51 #6034284f4768a834
-step 52 #f60228256fbaf8c6
-step 53 #2bd0ca2e930550c9
-step 54 #73952af918e3ebb8
-step 55 #481aacae58cffc1d
-step 56 #807f6c35a01407e1
-step 57 #89c1960ec9f9e9a6
-step 58 #315d3f80f8abd62e
-step 59 #91f52336b14d13e3
-step 60 #e7d744c66fc7896a
-step 61 #746e1f5962aa9b35
-step 62 #d3316861891d89e7
-step 63 #9c0aeffe424efeba
-step 64 #3292b24c3a5e926b
-step 65 #eeb35f9aed1ac20f
-step 66 #a214a27c2e370da3
-step 67 #bfb3fd995affdc74
-step 68 #acc2a1f6ef9aed3b
-step 69 #47c9e4a047b98eff
-step 70 #414425b95b3042cc
-step 71 #493865f142e15f52
-step 72 #d831c6b0b05ed5f9
-step 73 #bef96a82d16fcd96
-step 74 #c3ad3338751ab487
-step 75 #92f5b8c123bdd6c7
-step 76 #3d8cbf2205e45c51
-state #f0d227527188376a
+create {"finished":false,"deadlock":false} #9911937a2f506fdd
+step 1 #0b433cfa579e1741
+step 2 #f47af1ecc37c9ba7
+step 3 #07996097735f160a
+step 4 #751a29a509721c0c
+step 5 #be93a6ab843bab3b
+step 6 #d30f45963d349dfe
+step 7 #6de4eb67e68148c2
+step 8 #a236303be3d39bcb
+step 9 #2116512fb214c08d
+step 10 #50f91593e2918f2c
+step 11 #ee6ec0a6d347d3ca
+step 12 #df487706d65c2229
+step 13 #d4eb939be8197989
+step 14 #230ca414eb2bde02
+step 15 #fef0282dfbb31fd1
+step 16 #e5d3ce2a6283155d
+step 17 #46193c8e33030ef0
+step 18 #0233ceec02f03cf9
+step 19 #8ca92aef76ace6e3
+step 20 #35973dc118bab8de
+step 21 #69096bbe99776f71
+step 22 #a1ed55a126209f5d
+step 23 #18336393449c0b9a
+step 24 #5e2fce973292e327
+step 25 #e53a2e3a89aa11aa
+step 26 #42a8a4edcb445dea
+step 27 #d8c496d8cb3d66ee
+step 28 #ffc5ae9fa3c76d6c
+step 29 #1bdf89d432c4ff11
+step 30 #859bc302e167abf8
+step 31 #92331ed7ed867758
+step 32 #97936501ba387dd3
+step 33 #cee933ffbea189b0
+step 34 #55244a9b6505cf83
+step 35 #8bab63be612f62ce
+step 36 #823f42070c89ad9d
+step 37 #ed9cc98bf09a9e8d
+step 38 #6dfb8b3e73e8b2b8
+step 39 #ef30423bcf156573
+step 40 #54468d78931213ab
+step 41 #d659befdbc1a3110
+step 42 #5a0afc61424bff4b
+step 43 #be278e554c77c28e
+step 44 #cd2c050241a533a4
+step 45 #0d22382dca0cdb9d
+step 46 #8263efa563b32a06
+step 47 #9c4635be52bc25a6
+step 48 #c5e1bbc7a24ded27
+step 49 #2438a5cfd58d025b
+step 50 #6d74c9cf654bddf4
+step 51 #a928c1e83aad971a
+step 52 #a2a92b85579c5f2c
+step 53 #280851d993ebc073
+step 54 #08d8bb58fafa4c6d
+step 55 #7eaca24cbe4eb005
+step 56 #b26a30c85c1be8fd
+step 57 #dbba80fe33696b1f
+step 58 #2ee97ed3f7779de9
+step 59 #ba5500e2eadb9842
+step 60 #422850cdd38cf1bb
+step 61 #ce83f85566413501
+step 62 #5dc9e63cbe9bb9f3
+step 63 #72b9dd93a0f6d2b9
+step 64 #a1b9c79c23df79e5
+step 65 #19e0dbc13b5eb627
+step 66 #a328e4c4d3e1ce81
+step 67 #6921acc97040a311
+step 68 #e37cb594646f0f9e
+step 69 #d51dc770d9f8b65a
+step 70 #ed9572abea05a424
+step 71 #6f8b01c7ff8302f4
+step 72 #cfc705d22d0575e3
+step 73 #160cfac66665f5fb
+step 74 #62c9a3ea49983c62
+step 75 #c79d430c5cd0e79c
+step 76 #5a611f292a0dfed9
+state #ae22aa4a11f30d8e
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #ea9a262064466ca9
-step 1 ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #4fa1a2f0afe69f25
-step 2 BLOCKED P[2]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #fb7e718a62c61486
-step 3 BLOCKED P[3]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1f1116002f244015
-step 4 BLOCKED P[0]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #9f543b83f40dbe5c
-step 5 WAIT P[1]: wait(c[1]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c57bb0ff23eebdf9
-step 6 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[0]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #96e3440ac38b8972
-step 7 BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | BLOCKED P[4]: espera para entrar a T.pedir | ASSIGN P[0]: orden[0] = 0 | BLOCKED P[8]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #39fcf289ce2fb282
-step 8 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #0ed274d979de9629
-step 9 BLOCKED P[7]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #6891dcbba7cab763
-step 10 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[3]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d78207a1157ef09b
-step 11 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #2f3bf04b12357b10
-step 12 BLOCKED P[0]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #16329dc8993f478c
-step 13 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[4]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #7d6a8dab96094913
-step 14 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b8e6f4442a2326b5
-step 15 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #a945ec09efa59bf2
-step 16 WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #5d2cbb22a69b32e2
-step 17 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #12be4f1ac188a7d8
-step 18 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #28405fbcae4a108a
-step 19 SIGNAL P[0]: signal(c[1]) - despierta a P[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d727cd2182e8bce3
-step 20 RETURN P[0]: retorna de T.liberar, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #b3003000b2ad293a
-step 21 TERMINATED P[0]: termina | WAIT P[7]: wait(c[7]) - libera el monitor y se demora | REENTER P[1]: reingresa a T | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #7fe969380cb7dfa9
-step 22 ASSIGN P[1]: orden[1] = 1 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0984c6f2c813fce9
-step 23 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #a72cf076242d670b
-step 24 RETURN P[1]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #afa77ddd3958c648
-step 25 ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #0d930c4802f0b69c
-step 26 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #be838bc8f5678ae8
-step 27 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #8c2f6b639bdd61e8
-step 28 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #1a7df1890d06174b
-step 29 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #3ce31061ddedccbd
-step 30 ASSIGN P[2]: orden[2] = 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #95942e601a2e9df9
-step 31 ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #3800222ee500de1d
-step 32 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #1ae24877dc5db32e
-step 33 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #6935e7c6722a7e83
-step 34 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #fb99ae17ee8d3335
-step 35 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #4df73ad51fd23514
-step 36 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #b3f2cc91d956f56a
-step 37 TERMINATED P[2]: termina | ASSIGN P[3]: orden[3] = 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #6c4dd994fd0e7e59
-step 38 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #3de030629f26e24b
-step 39 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #97718f9cdd9ee0f5
-step 40 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #8f54974cccf035d0
-step 41 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #c0eaca3f6b488bd8
-step 42 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #81aeb7e1d4f2a66b
-step 43 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #792ae847477b49ff
-step 44 TERMINATED P[3]: termina | ASSIGN P[4]: orden[4] = 4 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #5a117cad773f970a
-step 45 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #2034d680e439b5fb
-step 46 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0d202709f147f990
-step 47 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #4fd08760fb45f9db
-step 48 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #5d5bf1a564cfe462
-step 49 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #6c3917b7af9585e3
-step 50 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #75014922aa6bd450
-step 51 TERMINATED P[4]: termina | ASSIGN P[5]: orden[5] = 5 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #dddee130abd133cb
-step 52 ASSIGN P[5]: k++ => 6 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #750cad573df59420
-step 53 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #c626fe1fed8ff833
-step 54 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #92bf9b3d5c8b6668
-step 55 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #389e33dab4dbe79e
-step 56 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #db94ce1c6bcc2c32
-step 57 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #70f3f7f554e80637
-step 58 TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #2e33cef0572c9624
-step 59 ASSIGN P[6]: orden[6] = 6 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #6beb4308813a70ea
-step 60 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #66f0883bda226b08
-step 61 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #5062fdf534ac2f5f
-step 62 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #aafdda91257e9fce
-step 63 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #a77bf0cea7f3a2e3
-step 64 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #03a333e14b5075b9
-step 65 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #787908dd65de69c5
-step 66 TERMINATED P[6]: termina | ASSIGN P[7]: orden[7] = 7 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #7992824926c40b48
-step 67 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #d54cd74b584639ab
-step 68 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #ef0f2dd7749245e4
-step 69 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #bb777312bc59bc08
-step 70 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #72eef0ac003004c3
-step 71 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #4e9a4a57abac27cf
-step 72 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #69e238571ca4b1b1
-step 73 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #01b4b7e9f6435bfd
-step 74 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #a8a0f53b41a2d45d
-step 75 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #50442814cf872dfb
-step 76 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #d2f0e760b80ada20
-step 77 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #c3ded1de44bf271c
-step 78 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #065dc0556c461dd7
-step 79 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #16954d38a4df3e89
-step 80 ASSIGN P[9]: orden[9] = 9 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #dbfc2fa937053b14
-step 81 ASSIGN P[9]: k++ => 10 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #f3575902cb10ab45
-step 82 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #cf4856040545e9d2
-step 83 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #30f926fa806ede7e
-step 84 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #e8d5243d21b24823
-step 85 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #7011fe64b586dd78
-step 86 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":86,"waiting":false} #79f115ef3a6a91f5
-state #cbf114d84f33c738
+create {"finished":false,"deadlock":false} #6b86167a264703ae
+step 1 ENTER P[1]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7502f8c705e2fc65
+step 2 BLOCKED P[2]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8066747b26cf79fd
+step 3 BLOCKED P[3]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #89140eebab8da9e5
+step 4 BLOCKED P[0]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #53fc19e0bdf2178c
+step 5 WAIT P[1]: wait(c[1]) - libera el monitor y se demora | ENTER P[2]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #055c0ac8b86499bf
+step 6 WAIT P[2]: wait(c[2]) - libera el monitor y se demora | ENTER P[0]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2d3bc18a118ba0f5
+step 7 BLOCKED P[6]: espera para entrar a T.pedir | BLOCKED P[9]: espera para entrar a T.pedir | BLOCKED P[5]: espera para entrar a T.pedir | BLOCKED P[4]: espera para entrar a T.pedir | ASSIGN P[0]: orden[0] = 0 | BLOCKED P[8]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #15dba01cc891dcf9
+step 8 ASSIGN P[0]: k++ => 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #62988c4b8cbaaa16
+step 9 BLOCKED P[7]: espera para entrar a T.pedir | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #2d7ebfba998c5e46
+step 10 RETURN P[0]: retorna de T.pedir, libera el monitor | ENTER P[3]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ce0c3c2f17f9de95
+step 11 WAIT P[3]: wait(c[3]) - libera el monitor y se demora | ENTER P[9]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #bac1b13ff9531e91
+step 12 BLOCKED P[0]: espera para entrar a T.liberar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #2e1fe0a2a01063da
+step 13 WAIT P[9]: wait(c[9]) - libera el monitor y se demora | ENTER P[4]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #959e394d662a9638
+step 14 WAIT P[4]: wait(c[4]) - libera el monitor y se demora | ENTER P[8]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #59343422ad40197a
+step 15 WAIT P[8]: wait(c[8]) - libera el monitor y se demora | ENTER P[6]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #d69a754076a78d81
+step 16 WAIT P[6]: wait(c[6]) - libera el monitor y se demora | ENTER P[5]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #50187821e7291efe
+step 17 WAIT P[5]: wait(c[5]) - libera el monitor y se demora | ENTER P[0]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #cdc4206ce367435a
+step 18 ASSIGN P[0]: turno = 1 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #16dd49b6e7149a19
+step 19 SIGNAL P[0]: signal(c[1]) - despierta a P[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #766b4b841a959ec6
+step 20 RETURN P[0]: retorna de T.liberar, libera el monitor | ENTER P[7]: entra a T.pedir | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #147013b17fffb64d
+step 21 TERMINATED P[0]: termina | WAIT P[7]: wait(c[7]) - libera el monitor y se demora | REENTER P[1]: reingresa a T | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #5a3e98f090831893
+step 22 ASSIGN P[1]: orden[1] = 1 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c222b1f312adaa9b
+step 23 ASSIGN P[1]: k++ => 2 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #7d30ae246e7d9220
+step 24 RETURN P[1]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #d595e004dd701b1d
+step 25 ENTER P[1]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #d575d4370336a82b
+step 26 ASSIGN P[1]: turno = 2 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #08c6bff6d5c7b42f
+step 27 SIGNAL P[1]: signal(c[2]) - despierta a P[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b3d101f1c32e329f
+step 28 RETURN P[1]: retorna de T.liberar, libera el monitor | REENTER P[2]: reingresa a T | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #85a1659438be11fa
+step 29 TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #b0b0403d885f2b2f
+step 30 ASSIGN P[2]: orden[2] = 2 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #76c44461a02edf42
+step 31 ASSIGN P[2]: k++ => 3 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #297dde74784935c0
+step 32 RETURN P[2]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #09e846a6bc50e4c6
+step 33 ENTER P[2]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e615aa2ca47a97e5
+step 34 ASSIGN P[2]: turno = 3 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #5482ad8b59ab1517
+step 35 SIGNAL P[2]: signal(c[3]) - despierta a P[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #869e55a257c83c8a
+step 36 RETURN P[2]: retorna de T.liberar, libera el monitor | REENTER P[3]: reingresa a T | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #bd9eda00eaf9a4f9
+step 37 TERMINATED P[2]: termina | ASSIGN P[3]: orden[3] = 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #8dc209e674cbd2a0
+step 38 ASSIGN P[3]: k++ => 4 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #185ed6bc98a608e2
+step 39 RETURN P[3]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #11f9e7fdf4905dc5
+step 40 ENTER P[3]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #ae206ef13c4afd1e
+step 41 ASSIGN P[3]: turno = 4 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #d6de4173341b0fe8
+step 42 SIGNAL P[3]: signal(c[4]) - despierta a P[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #62c1e78034737085
+step 43 RETURN P[3]: retorna de T.liberar, libera el monitor | REENTER P[4]: reingresa a T | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a65b809e04fd1295
+step 44 TERMINATED P[3]: termina | ASSIGN P[4]: orden[4] = 4 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #c8063ce00795387c
+step 45 ASSIGN P[4]: k++ => 5 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #2f76fe539bc6468d
+step 46 RETURN P[4]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #b2d461f88c92201c
+step 47 ENTER P[4]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #ed97a572f0138d05
+step 48 ASSIGN P[4]: turno = 5 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #dac9cb2b06b5f98c
+step 49 SIGNAL P[4]: signal(c[5]) - despierta a P[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #97ca6a01a8bab6ce
+step 50 RETURN P[4]: retorna de T.liberar, libera el monitor | REENTER P[5]: reingresa a T | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #1765eef5dd9ea4ec
+step 51 TERMINATED P[4]: termina | ASSIGN P[5]: orden[5] = 5 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #ed57bbfcde4bf0c0
+step 52 ASSIGN P[5]: k++ => 6 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #7c7b4c6ee6390a41
+step 53 RETURN P[5]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #3fa17fbd3f95ec5d
+step 54 ENTER P[5]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #f09dd02316036f07
+step 55 ASSIGN P[5]: turno = 6 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #11c8543e466cec39
+step 56 SIGNAL P[5]: signal(c[6]) - despierta a P[6] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #8ff27eade84ce502
+step 57 RETURN P[5]: retorna de T.liberar, libera el monitor | REENTER P[6]: reingresa a T | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #12b330f5e10795fe
+step 58 TERMINATED P[5]: termina | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #b7b77ce50f34c5f9
+step 59 ASSIGN P[6]: orden[6] = 6 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #734c0b386cb36b75
+step 60 ASSIGN P[6]: k++ => 7 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #6fe3cb47e77d3b6a
+step 61 RETURN P[6]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #43a403adfecd0312
+step 62 ENTER P[6]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #67f4649cdb8c25f9
+step 63 ASSIGN P[6]: turno = 7 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #5ec4c7effcaf9ff0
+step 64 SIGNAL P[6]: signal(c[7]) - despierta a P[7] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #c16f0eb680c60299
+step 65 RETURN P[6]: retorna de T.liberar, libera el monitor | REENTER P[7]: reingresa a T | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #b1cc4c2135002c36
+step 66 TERMINATED P[6]: termina | ASSIGN P[7]: orden[7] = 7 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #b51615ba2ff5f8ce
+step 67 ASSIGN P[7]: k++ => 8 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #aba828b36641f1cb
+step 68 RETURN P[7]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #e873b28aa19bafde
+step 69 ENTER P[7]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #1257d0cf962db305
+step 70 ASSIGN P[7]: turno = 8 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #a4a87f4c58dc43d8
+step 71 SIGNAL P[7]: signal(c[8]) - despierta a P[8] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #a56a933a92118126
+step 72 RETURN P[7]: retorna de T.liberar, libera el monitor | REENTER P[8]: reingresa a T | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #e35ffd255d559d7d
+step 73 ASSIGN P[8]: orden[8] = 8 | TERMINATED P[7]: termina | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #186a26ae2e484a0f
+step 74 ASSIGN P[8]: k++ => 9 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #11186e62cd731fc9
+step 75 RETURN P[8]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #5b9f4723e87e1b0f
+step 76 ENTER P[8]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #64014a78e29cc67e
+step 77 ASSIGN P[8]: turno = 9 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #3c36acaa224860c4
+step 78 SIGNAL P[8]: signal(c[9]) - despierta a P[9] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #b23c410f930d3e5d
+step 79 RETURN P[8]: retorna de T.liberar, libera el monitor | REENTER P[9]: reingresa a T | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #cdbf077dc7234626
+step 80 ASSIGN P[9]: orden[9] = 9 | TERMINATED P[8]: termina | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #ab946b299b092d41
+step 81 ASSIGN P[9]: k++ => 10 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #4beddf32f98536ac
+step 82 RETURN P[9]: retorna de T.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #a5ab0c858c3891da
+step 83 ENTER P[9]: entra a T.liberar | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #aa543839f322acf4
+step 84 ASSIGN P[9]: turno = 10 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #e1aa21ceb14ea4c1
+step 85 RETURN P[9]: retorna de T.liberar, libera el monitor | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #ba7e29da4ea5c023
+step 86 TERMINATED P[9]: termina | {"finished":true,"deadlock":false,"instant":86,"waiting":false} #a331f350300ef7bc
+state #24fff276955e17de

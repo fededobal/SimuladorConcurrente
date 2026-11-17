@@ -1,125 +1,125 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #aedb0c0992c914f1
-step 1 ENTER Suma: entra a TOTAL.incrementar | DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #3f3e9c07826374c5
-step 2 ASSIGN Suma: cant = 1 | BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8a378565de5b6a4b
-step 3 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7b27cba66bcb3083
-step 4 ASSIGN Chequeo: R = 1 | ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #01def0f1b18f98ab
-step 5 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #2419b2a49b1aaaab
-step 6 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #22505f824f12181b
-step 7 ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c6d143cd009a1be8
-step 8 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e250a49a1a4bda1e
-step 9 ASSIGN Suma: i++ => 3 | ASSIGN Chequeo: R = 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #01d030e522b55545
-step 10 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #775f58810d64acf9
-step 11 TERMINATED Chequeo: termina | ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ac99bccb33dfb8cd
-step 12 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ba7bdce5f411bf62
-step 13 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #45f430de06bc12d0
-step 14 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":14,"waiting":false} #f31c4ba619c705d9
-state #d542409e708282bc
+create {"finished":false,"deadlock":false} #d1d2bf73cee172ea
+step 1 ENTER Suma: entra a TOTAL.incrementar | DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bea666201b7240e0
+step 2 ASSIGN Suma: cant = 1 | BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8ce3e43117f38e76
+step 3 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1b05b856e6abc8c2
+step 4 ASSIGN Chequeo: R = 1 | ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #659edc0f4f7ffef7
+step 5 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7260053f6629dbd2
+step 6 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4dbc5541bf7c2dae
+step 7 ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8f88c05be86c7426
+step 8 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #ddd7f4f76540afcb
+step 9 ASSIGN Suma: i++ => 3 | ASSIGN Chequeo: R = 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #2763946eebbf0cee
+step 10 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #70e6059fcdea4a82
+step 11 TERMINATED Chequeo: termina | ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f2cae1a373bc2ee7
+step 12 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a7daaa9205fd28c9
+step 13 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #39940ba66422751e
+step 14 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":14,"waiting":false} #ad49140dde7f9d62
+state #23262b686f660cc1
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #c6f7da97e687c52b
-step 1 #0781f736913dedfc
-step 2 #3b2169ccbce5c3b5
-step 3 #4721680b842f1de2
-step 4 #eb024815b95d38b2
-step 5 #a574d8cf23b24018
-step 6 #b66cabc4ac2ac96a
-step 7 #c5e4806c0e493f20
-step 8 #3697f6ab16446ac8
-step 9 #0fcf3fe8e49c7ca1
-step 10 #82426bcf1a015b94
-step 11 #807c5b75dd85bc3c
-step 12 #fc1aa08623850524
-step 13 #f2cafaf1bb71e1ce
-step 14 #f7a5337a98ac9f24
-step 15 #1edefdf1b0eab3a1
-step 16 #9b3103a8401ab9cf
-step 17 #b937216b3b235910
-step 18 #ea3b742baea19075
-state #7e184e46048c7b27
+create {"finished":false,"deadlock":false} #419cab981ac44dd8
+step 1 #a9ef5777eb89e03a
+step 2 #5753fac80e584ba6
+step 3 #3090fa35ad9a2443
+step 4 #3f06f50dfd012eee
+step 5 #9f71903950647e21
+step 6 #93ad14cc6ca81797
+step 7 #1beffd717f2ddaad
+step 8 #2031561db80e5adc
+step 9 #1e6d60f4bed57350
+step 10 #88bfafafcad739b5
+step 11 #69f65391d5c2906c
+step 12 #f408e23f8a85f60b
+step 13 #ed8bbda9fd60be71
+step 14 #d51dffa28b6469d5
+step 15 #ab4659ddbf276914
+step 16 #d823051c9a3167a4
+step 17 #5db32f38592646ed
+step 18 #bc0dfadcc8c9021f
+state #f7dfb8787d606add
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #1230a22949b62504
-step 1 #3f3e9c07826374c5
-step 2 #2029bc0f2c82c002
-step 3 #fa3c89b1b5f9e4aa
-step 4 #e411b733f9bc94d2
-step 5 #3bbf47b242eafe78
-step 6 #cc84831fbfabd88e
-step 7 #83b8f482470ec742
-step 8 #04ffa80c7939232b
-step 9 #35b54a1a50a43d03
-step 10 #49772415c1794a0c
-step 11 #387c747ca09b90af
-step 12 #f1a1acdf1283ba6d
-step 13 #b7fd17e6f48b5280
-step 14 #0b9106775a24275c
-step 15 #1999412e63413647
-step 16 #fd13da996e4b4a93
-state #41730251e0425b06
+create {"finished":false,"deadlock":false} #04a5d8fe9b80feb8
+step 1 #bea666201b7240e0
+step 2 #adddf05b3819eb87
+step 3 #83abd00ea7a82682
+step 4 #071e4a466d2cf524
+step 5 #122b2883de6d90db
+step 6 #40e3b105a72c871f
+step 7 #e36e2ad6e2a77654
+step 8 #3fe28380792ed028
+step 9 #3ec6abe748c286c9
+step 10 #405196229a0a9c0f
+step 11 #489f11ced1bc3c71
+step 12 #050e50ba813cc8d2
+step 13 #e163ae316f671265
+step 14 #e96db2d3c1b4c9c1
+step 15 #7c4a6e9404162d6e
+step 16 #a0eab1d8c26d19c1
+state #8a522c53108bbe27
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #aedb0c0992c914f1
-step 1 ENTER Suma: entra a TOTAL.incrementar | DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #3f3e9c07826374c5
-step 2 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | ASSIGN Suma: cant = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9dc5da2c857d9ce0
-step 3 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7b27cba66bcb3083
-step 4 ASSIGN Chequeo: R = 1 | ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #01def0f1b18f98ab
-step 5 BLOCKED Suma: espera para entrar a TOTAL.incrementar | RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #85a34a4624489faa
-step 6 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6b702f0ffe0d7eb7
-step 7 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c2771ef69e2c9771
-step 8 ASSIGN Chequeo: R = 2 | ASSIGN Suma: i++ => 3 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #038044dd8498070d
-step 9 BLOCKED Suma: espera para entrar a TOTAL.incrementar | RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #71f2faea953b7c47
-step 10 TERMINATED Chequeo: termina | ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #a191ef843f5466e0
-step 11 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #4795c78be17a056a
-step 12 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #714178cd6c107bc4
-step 13 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":13,"waiting":false} #f172bd42c3ee88d9
-state #0a1d0b288d2aab32
+create {"finished":false,"deadlock":false} #d1d2bf73cee172ea
+step 1 ENTER Suma: entra a TOTAL.incrementar | DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bea666201b7240e0
+step 2 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | ASSIGN Suma: cant = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e2d04b0d819e58ae
+step 3 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1b05b856e6abc8c2
+step 4 ASSIGN Chequeo: R = 1 | ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #659edc0f4f7ffef7
+step 5 BLOCKED Suma: espera para entrar a TOTAL.incrementar | RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #828ee4eee8a36dec
+step 6 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #aa90e789cdb7b337
+step 7 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #62f77a78117c1151
+step 8 ASSIGN Chequeo: R = 2 | ASSIGN Suma: i++ => 3 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #4c5ceb0c1742e538
+step 9 BLOCKED Suma: espera para entrar a TOTAL.incrementar | RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e3aa5976314c3996
+step 10 TERMINATED Chequeo: termina | ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ba95409ce3205eb7
+step 11 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #92a84a8d453c07b6
+step 12 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d798787f22aed277
+step 13 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":13,"waiting":false} #e9b8459b755d552d
+state #d519f2c875ba5d61
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #c6f7da97e687c52b
-step 1 #3f3e9c07826374c5
-step 2 #9dc5da2c857d9ce0
-step 3 #7b27cba66bcb3083
-step 4 #01def0f1b18f98ab
-step 5 #85a34a4624489faa
-step 6 #6b702f0ffe0d7eb7
-step 7 #c2771ef69e2c9771
-step 8 #038044dd8498070d
-step 9 #71f2faea953b7c47
-step 10 #a191ef843f5466e0
-step 11 #4795c78be17a056a
-step 12 #714178cd6c107bc4
-step 13 #f172bd42c3ee88d9
-state #0a1d0b288d2aab32
+create {"finished":false,"deadlock":false} #419cab981ac44dd8
+step 1 #bea666201b7240e0
+step 2 #e2d04b0d819e58ae
+step 3 #1b05b856e6abc8c2
+step 4 #659edc0f4f7ffef7
+step 5 #828ee4eee8a36dec
+step 6 #aa90e789cdb7b337
+step 7 #62f77a78117c1151
+step 8 #4c5ceb0c1742e538
+step 9 #e3aa5976314c3996
+step 10 #ba95409ce3205eb7
+step 11 #92a84a8d453c07b6
+step 12 #d798787f22aed277
+step 13 #e9b8459b755d552d
+state #d519f2c875ba5d61
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #1230a22949b62504
-step 1 #3f3e9c07826374c5
-step 2 #9dc5da2c857d9ce0
-step 3 #7b27cba66bcb3083
-step 4 #01def0f1b18f98ab
-step 5 #85a34a4624489faa
-step 6 #6b702f0ffe0d7eb7
-step 7 #c2771ef69e2c9771
-step 8 #038044dd8498070d
-step 9 #71f2faea953b7c47
-step 10 #a191ef843f5466e0
-step 11 #4795c78be17a056a
-step 12 #714178cd6c107bc4
-step 13 #f172bd42c3ee88d9
-state #0a1d0b288d2aab32
+create {"finished":false,"deadlock":false} #04a5d8fe9b80feb8
+step 1 #bea666201b7240e0
+step 2 #e2d04b0d819e58ae
+step 3 #1b05b856e6abc8c2
+step 4 #659edc0f4f7ffef7
+step 5 #828ee4eee8a36dec
+step 6 #aa90e789cdb7b337
+step 7 #62f77a78117c1151
+step 8 #4c5ceb0c1742e538
+step 9 #e3aa5976314c3996
+step 10 #ba95409ce3205eb7
+step 11 #92a84a8d453c07b6
+step 12 #d798787f22aed277
+step 13 #e9b8459b755d552d
+state #d519f2c875ba5d61
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #aedb0c0992c914f1
-step 1 DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0781f736913dedfc
-step 2 ENTER Suma: entra a TOTAL.incrementar | BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ca7e70442c68fe1d
-step 3 ASSIGN Suma: cant = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #bf94cea4e39a7266
-step 4 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1f24a9494eacdd2f
-step 5 ASSIGN Chequeo: R = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f10a6bb7c5f96a13
-step 6 ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0ea5381b3b01a160
-step 7 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #f2834e0fcb931dd1
-step 8 ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #1370777919b5d228
-step 9 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #abdd7cf98c16dfce
-step 10 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #f9cf6b3ab612d3e5
-step 11 ASSIGN Chequeo: R = 2 | ASSIGN Suma: i++ => 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #3cedef30a3057e66
-step 12 BLOCKED Suma: espera para entrar a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e22427a95fbac4e6
-step 13 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #3ed956ee970e80f6
-step 14 ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #6d9ae1371288d5f5
-step 15 TERMINATED Chequeo: termina | RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #d8fb4fafb43adb83
-step 16 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #904c2e17dcff3bd9
-step 17 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #b368f8bd30e50f8c
-state #314811d7237c6433
+create {"finished":false,"deadlock":false} #d1d2bf73cee172ea
+step 1 DECL Chequeo: int leido = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a9ef5777eb89e03a
+step 2 ENTER Suma: entra a TOTAL.incrementar | BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #22811396735fedf0
+step 3 ASSIGN Suma: cant = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1e4489fbabca8c40
+step 4 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f945d12041141395
+step 5 ASSIGN Chequeo: R = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #82d33995bfe82584
+step 6 ASSIGN Suma: i++ => 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #8adf15cab6a4dc41
+step 7 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8a030f8eb574a30f
+step 8 ASSIGN Suma: cant = 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #31cf17235085f958
+step 9 BLOCKED Chequeo: espera para entrar a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #64985656c7e3ea04
+step 10 RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | ENTER Chequeo: entra a TOTAL.verificar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #aa01c37b53aa2f46
+step 11 ASSIGN Chequeo: R = 2 | ASSIGN Suma: i++ => 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f9f1b26363a00d62
+step 12 BLOCKED Suma: espera para entrar a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #094b3c57fc7f54a6
+step 13 RETURN Chequeo: retorna de TOTAL.verificar, libera el monitor | ENTER Suma: entra a TOTAL.incrementar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #69ca1987d73ac4d3
+step 14 ASSIGN Suma: cant = 3 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #2c489fae15635422
+step 15 TERMINATED Chequeo: termina | RETURN Suma: retorna de TOTAL.incrementar, libera el monitor | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #6683dd22745d1f57
+step 16 ASSIGN Suma: i++ => 4 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #88c457b02b35bdcf
+step 17 TERMINATED Suma: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #8392cd4afb37ec44
+state #1ee8322c94755861

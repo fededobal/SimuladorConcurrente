@@ -632,6 +632,27 @@ class VirtualMachineTest {
                 r.vm().snapshot().processes().get(0).error());
     }
 
+    /** Cada variable permanente dice quien la escribio por ultima vez y en que instante. */
+    @Test
+    void snapshotTellsWhenEachVariableWasWritten() {
+        VirtualMachine vm = TestSupport.compileAndBuild("""
+                monitor M { int a = 7; int b = 0; procedure f() { b = 1; b = 2; } }
+                process P { skip; M.f(); }
+                """, 0);
+        Snapshot.MonitorView before = vm.snapshot().monitors().get(0);
+        assertEquals(null, before.vars().get(1).lastWriterId(), "b todavia no se escribio");
+        assertEquals(null, before.vars().get(1).lastWriteInstant());
+
+        // skip (1), entra (2), b = 1 (3), b = 2 (4)
+        for (int i = 0; i < 4; i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        Snapshot.VarView b = vm.snapshot().monitors().get(0).vars().get(1);
+        assertEquals("2", b.value());
+        assertEquals(1, b.lastWriterId());
+        assertEquals(4, b.lastWriteInstant(), "el instante de la ultima escritura, no de la primera");
+        // a nunca se escribio despues de declararla
+        assertEquals(null, vm.snapshot().monitors().get(0).vars().get(0).lastWriteInstant());
+    }
+
     /** delay(n) ocupa un instante y despues el proceso no avanza durante los n siguientes (ADR 0008). */
     @Test
     void delayLastsTheGivenInstants() {

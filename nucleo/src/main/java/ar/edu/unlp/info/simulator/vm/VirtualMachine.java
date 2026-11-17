@@ -32,12 +32,12 @@ public final class VirtualMachine {
     private final List<Process> processes = new ArrayList<>();
     private final OutputBuffer output = new OutputBuffer();
     private final Map<String, Monitor> monitors = new LinkedHashMap<>();
-    private final VariableAccess vars = new VariableAccess(monitors);
     private final Map<String, MonitorDef> monitorDefs = new LinkedHashMap<>();
 
     private final EventLog events = new EventLog();
 
     private final SimulationClock clock = new SimulationClock();
+    private final VariableAccess vars = new VariableAccess(monitors, clock);
     /**
      * Ids de los procesos que avanzaron en el ultimo instante, en el orden en que les toco el
      * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo. Un

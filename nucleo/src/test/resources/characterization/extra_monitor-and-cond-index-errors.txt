@@ -1,59 +1,59 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #04c5ef144d0bee69
-step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #82fb08801498b21b
-step 2 ASSIGN P: v = 1 | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #6ace0c757647680c
-step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a600d422af3b9efa
-step 4 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #eec839198e89d7ea
-step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #a0cfaa36c0e36205
-state #c2d5e4befc071d40
+create {"finished":false,"deadlock":false} #53f55f6f0192d997
+step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #160106e3d41ca591
+step 2 ASSIGN P: v = 1 | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e68502c3bf2044ed
+step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #8aea7e86d89b4924
+step 4 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #a192951269457023
+step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #2d5ada3f6df57afd
+state #5a8e27f296b1b737
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #2fa2a3269fe94511
-step 1 #469d6a02905f38f4
-step 2 #83683a074e984623
-step 3 #f5df239765bb84e9
-step 4 #d038728e3816f812
-step 5 #72387561002e0b11
-state #02369e922e3d55a1
+create {"finished":false,"deadlock":false} #6c511a8a6e099f29
+step 1 #649ec7328407c413
+step 2 #0354b32520bedb61
+step 3 #1919c11d50510e77
+step 4 #4a577ea6b1959c62
+step 5 #45c365ce7cb4e065
+state #2491005996cd26a5
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #481f4b0dd6b233c5
-step 1 #82fb08801498b21b
-step 2 #6d3387f991c05aeb
-step 3 #1c4d4ac4cbfb2f96
-step 4 #75e1e7a0e6b2c281
-step 5 #3d5198fb1f008346
-step 6 #100f1e914fafce5e
-step 7 #16373515ea9a2e82
-state #ee912399afbd1a0e
+create {"finished":false,"deadlock":false} #004916c203b91f37
+step 1 #160106e3d41ca591
+step 2 #45899d41d40399d2
+step 3 #1837a24ddb152878
+step 4 #e5c03b4ec3c54ca5
+step 5 #0c8f2bf1e8474837
+step 6 #53c03753d35fead3
+step 7 #32834640b85ec60c
+state #90a5a9fcdbea17f4
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #04c5ef144d0bee69
-step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #82fb08801498b21b
-step 2 SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | ASSIGN P: v = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #12e6faccfc701a8c
-step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a600d422af3b9efa
-step 4 ENTER Q: entra a C.g | ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e6c306bd04f2765f
-step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #a0cfaa36c0e36205
-state #7b3994d51b4e1106
+create {"finished":false,"deadlock":false} #53f55f6f0192d997
+step 1 ENTER P: entra a B[1].f | ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #160106e3d41ca591
+step 2 SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | ASSIGN P: v = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7cc4b35bf6087625
+step 3 RETURN P: retorna de B[1].f, libera el monitor | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #8aea7e86d89b4924
+step 4 ENTER Q: entra a C.g | ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fd7aa69a557c11fc
+step 5 ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":5,"waiting":false} #2d5ada3f6df57afd
+state #463e18e0277f9bc3
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #2fa2a3269fe94511
-step 1 #82fb08801498b21b
-step 2 #12e6faccfc701a8c
-step 3 #a600d422af3b9efa
-step 4 #e6c306bd04f2765f
-step 5 #a0cfaa36c0e36205
-state #7b3994d51b4e1106
+create {"finished":false,"deadlock":false} #6c511a8a6e099f29
+step 1 #160106e3d41ca591
+step 2 #7cc4b35bf6087625
+step 3 #8aea7e86d89b4924
+step 4 #fd7aa69a557c11fc
+step 5 #2d5ada3f6df57afd
+state #463e18e0277f9bc3
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #481f4b0dd6b233c5
-step 1 #82fb08801498b21b
-step 2 #12e6faccfc701a8c
-step 3 #a600d422af3b9efa
-step 4 #e6c306bd04f2765f
-step 5 #a0cfaa36c0e36205
-state #7b3994d51b4e1106
+create {"finished":false,"deadlock":false} #004916c203b91f37
+step 1 #160106e3d41ca591
+step 2 #7cc4b35bf6087625
+step 3 #8aea7e86d89b4924
+step 4 #fd7aa69a557c11fc
+step 5 #2d5ada3f6df57afd
+state #463e18e0277f9bc3
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #04c5ef144d0bee69
-step 1 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #469d6a02905f38f4
-step 2 ENTER P: entra a B[1].f | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #39c8babee90f265e
-step 3 ASSIGN P: v = 1 | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c84e5f1c4337ac14
-step 4 RETURN P: retorna de B[1].f, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e680a830c2e64899
-step 5 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #47ccdc176734729f
-step 6 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #0787b2d56d8a11a0
-state #bc6a5cb5f6525b63
+create {"finished":false,"deadlock":false} #53f55f6f0192d997
+step 1 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #649ec7328407c413
+step 2 ENTER P: entra a B[1].f | SIGNAL Q: signal(c[1]) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4eafb7fd9e6e448d
+step 3 ASSIGN P: v = 1 | RETURN Q: retorna de C.g, libera el monitor | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #340da28c68cd0def
+step 4 RETURN P: retorna de B[1].f, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3e543d2274ad55e9
+step 5 ENTER Q: entra a C.g | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b1d974e0a0e416e4
+step 6 ERROR P: error de ejecución - Índice 2 fuera de rango para el monitor 'B' (va de 0 a 1) | ERROR Q: error de ejecución - Índice 5 fuera de rango para la cond 'c' (tamaño 2) | RELEASE Q: libera C al terminar con error | {"finished":true,"deadlock":false,"instant":6,"waiting":false} #31674edff70b5ead
+state #6cabf718369b03c3

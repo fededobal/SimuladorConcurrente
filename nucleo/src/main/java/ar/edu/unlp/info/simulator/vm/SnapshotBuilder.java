@@ -46,7 +46,7 @@ final class SnapshotBuilder {
             for (Map.Entry<String, Value> e : act.locals().entrySet()) {
                 // los nombres con '#' son internos (iterador de for (1..n), cota de rango)
                 if (e.getKey().indexOf('#') >= 0) continue;
-                locals.add(varView(e.getKey(), e.getValue(), null));
+                locals.add(varView(e.getKey(), e.getValue(), null, null));
             }
         }
         return new Snapshot.ProcessView(
@@ -67,7 +67,8 @@ final class SnapshotBuilder {
     private static Snapshot.MonitorView monitorView(Monitor m) {
         List<Snapshot.VarView> vars = new ArrayList<>();
         for (Map.Entry<String, Value> e : m.vars().entrySet()) {
-            vars.add(varView(e.getKey(), e.getValue(), m.lastWriter(e.getKey())));
+            vars.add(varView(e.getKey(), e.getValue(), m.lastWriter(e.getKey()),
+                    m.lastWriteInstant(e.getKey())));
         }
         List<Snapshot.CondView> conds = new ArrayList<>();
         for (ConditionVariable cv : m.conds().values()) {
@@ -79,7 +80,8 @@ final class SnapshotBuilder {
                 refs(m.entryQueueSnapshot()));
     }
 
-    private static Snapshot.VarView varView(String name, Value v, Integer writer) {
+    private static Snapshot.VarView varView(String name, Value v, Integer writer,
+                                            Integer writeInstant) {
         List<Value> items = switch (v) {
             case Value.ArrayVal a -> List.of(a.raw());
             case Value.QueueVal q -> q.snapshot();
@@ -96,7 +98,7 @@ final class SnapshotBuilder {
             }
         }
         return new Snapshot.VarView(name, v.typeName(), v.display(), v instanceof Value.ArrayVal,
-                writer, elements, items == null ? 0 : items.size());
+                writer, writeInstant, elements, items == null ? 0 : items.size());
     }
 
     private static Snapshot.ProcRef ref(Process p) {

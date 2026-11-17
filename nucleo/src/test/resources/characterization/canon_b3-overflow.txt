@@ -1,35 +1,35 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #b010094aa8d8c401
-step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bba20a5980b48787
-step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #10463726ef117229
+step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #360f860c894bb32f
+step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #f61b443834d0a748
+state #4af609e6da70c2fb
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #9020efe80cc87b92
-step 1 #bba20a5980b48787
-step 2 #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #d84aea2ae4a4b6d4
+step 1 #360f860c894bb32f
+step 2 #f61b443834d0a748
+state #4af609e6da70c2fb
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #08af73da2a672861
-step 1 #bba20a5980b48787
-step 2 #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #6a4ecaf8887d0dd3
+step 1 #360f860c894bb32f
+step 2 #f61b443834d0a748
+state #4af609e6da70c2fb
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #b010094aa8d8c401
-step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bba20a5980b48787
-step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #10463726ef117229
+step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #360f860c894bb32f
+step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #f61b443834d0a748
+state #4af609e6da70c2fb
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #9020efe80cc87b92
-step 1 #bba20a5980b48787
-step 2 #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #d84aea2ae4a4b6d4
+step 1 #360f860c894bb32f
+step 2 #f61b443834d0a748
+state #4af609e6da70c2fb
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #08af73da2a672861
-step 1 #bba20a5980b48787
-step 2 #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #6a4ecaf8887d0dd3
+step 1 #360f860c894bb32f
+step 2 #f61b443834d0a748
+state #4af609e6da70c2fb
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #b010094aa8d8c401
-step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #bba20a5980b48787
-step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #941d0e1938283f47
-state #45b4678cbcb661e3
+create {"finished":false,"deadlock":false} #10463726ef117229
+step 1 ENTER A: entra a M.f | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #360f860c894bb32f
+step 2 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | {"finished":true,"deadlock":false,"instant":2,"waiting":false} #f61b443834d0a748
+state #4af609e6da70c2fb

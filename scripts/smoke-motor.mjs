@@ -267,6 +267,13 @@ const CANONICOS = [
     monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
     process P[k: 0..2] { E[k].f(k); }`,
     (r) => r.finished && r.vars['E[0].n'] === '0' && r.vars['E[1].n'] === '11' && r.vars['E[2].n'] === '22'],
+  ['cada variable del monitor trae quien la escribio y en que instante', `
+    monitor M { int a = 7; int b = 0; procedure f() { b = 1; b = 2; } }
+    process P { skip; M.f(); }`,
+    (r) => {
+      const [a, b] = r.snapshot.monitors[0].vars;
+      return r.finished && a.lastWriteInstant === null && b.lastWriterId === 1 && b.lastWriteInstant === 4;
+    }],
   ['delay se mide en instantes y no es deadlock (ADR 0008)', `
     monitor M { int n = 0; procedure f() { delay(1); n++; } }
     process P { M.f(); } process Q { skip; M.f(); }`,
