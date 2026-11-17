@@ -37,7 +37,7 @@ jobs:
       - run: node scripts/smoke-motor.mjs
 
   frontend:
-    name: Frontend (lint + tipos + build)
+    name: Frontend (lint + tests + tipos + build)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -51,4 +51,5 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run lint
+      - run: npm run test
       - run: npm run build
