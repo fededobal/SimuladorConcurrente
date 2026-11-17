@@ -1,6 +1,8 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitepress';
 import type { Plugin } from 'vite';
+import { barraLateral, guia } from './guia';
+import { abrirEnElSimulador, numeroDeSeccion } from './markdown';
 import { monitoresDark, monitoresLanguage, monitoresLight } from './monitoresLanguage';
 
 const FRONTEND = fileURLToPath(new URL('../../', import.meta.url));
@@ -30,7 +32,7 @@ function resolverDesdeFrontend(): Plugin {
 // este el sitio en frontend/dist/docs.
 export default defineConfig({
   lang: 'es-AR',
-  title: 'Simulador de Monitores',
+  title: 'Guía del Simulador de Monitores',
   description: 'Documentación del simulador de monitores, desarrollado como PPS en la Facultad de Informática (UNLP).',
   srcDir: '../../docs',
   base: '/docs/',
@@ -52,6 +54,11 @@ export default defineConfig({
     // los ejemplos se colorean con la gramatica del lenguaje y los colores del editor
     languages: [monitoresLanguage],
     theme: { light: monitoresLight, dark: monitoresDark },
+    codeCopyButtonTitle: 'Copiar',
+    config(md) {
+      md.use(numeroDeSeccion);
+      md.use(abrirEnElSimulador);
+    },
     container: {
       tipLabel: 'Nota',
       warningLabel: 'Atención',
@@ -66,101 +73,13 @@ export default defineConfig({
   appearance: true,
   head: [['link', { rel: 'icon', href: '/docs/favicon.svg' }]],
   themeConfig: {
-    // sin titulo en la barra: a la izquierda va solo el boton "Volver al simulador"
-    siteTitle: false,
-    sidebar: [
-      {
-        text: 'Introducción',
-        items: [
-          { text: 'Presentación', link: '/' },
-          { text: 'Primer programa', link: '/introduccion/primer-programa' },
-          { text: 'Notación de la cátedra', link: '/introduccion/notacion-de-la-catedra' },
-        ],
-      },
-      {
-        text: 'Lenguaje',
-        items: [
-          { text: 'Estructura del programa', link: '/lenguaje/' },
-          { text: 'Tipos y arreglos', link: '/lenguaje/tipos' },
-          { text: 'Colas', link: '/lenguaje/colas' },
-          { text: 'Monitores', link: '/lenguaje/monitores' },
-          { text: 'Procesos', link: '/lenguaje/procesos' },
-          { text: 'Expresiones', link: '/lenguaje/expresiones' },
-          { text: 'Alcance de los nombres', link: '/lenguaje/alcance' },
-          { text: 'Palabras reservadas', link: '/lenguaje/palabras-reservadas' },
-          {
-            text: 'Instrucciones',
-            link: '/lenguaje/instrucciones/',
-            collapsed: true,
-            items: [
-              { text: 'Asignación', link: '/lenguaje/instrucciones/asignacion' },
-              { text: 'Intercambio :=:', link: '/lenguaje/instrucciones/intercambio' },
-              { text: 'Llamada a monitor', link: '/lenguaje/instrucciones/llamada' },
-              { text: 'if', link: '/lenguaje/instrucciones/if' },
-              { text: 'while', link: '/lenguaje/instrucciones/while' },
-              { text: 'for', link: '/lenguaje/instrucciones/for' },
-              { text: 'skip', link: '/lenguaje/instrucciones/skip' },
-              { text: 'wait', link: '/lenguaje/instrucciones/wait' },
-              { text: 'signal', link: '/lenguaje/instrucciones/signal' },
-              { text: 'signal_all', link: '/lenguaje/instrucciones/signal-all' },
-              { text: 'push', link: '/lenguaje/instrucciones/push' },
-              { text: 'pop', link: '/lenguaje/instrucciones/pop' },
-              { text: 'empty', link: '/lenguaje/instrucciones/empty' },
-              { text: 'write', link: '/lenguaje/instrucciones/write' },
-              { text: 'delay', link: '/lenguaje/instrucciones/delay' },
-            ],
-          },
-        ],
-      },
-      {
-        text: 'Ejecución',
-        items: [
-          { text: 'Instantes y turnos', link: '/ejecucion/instantes-y-turnos' },
-          { text: 'Estados de un proceso', link: '/ejecucion/estados' },
-          { text: 'Acceso al monitor', link: '/ejecucion/acceso-al-monitor' },
-          { text: 'Variables condición', link: '/ejecucion/variables-condicion' },
-          { text: 'Finalización', link: '/ejecucion/finalizacion' },
-        ],
-      },
-      {
-        text: 'Interfaz',
-        items: [
-          { text: 'Disposición de la pantalla', link: '/interfaz/' },
-          { text: 'Barra de controles', link: '/interfaz/barra' },
-          { text: 'Editor', link: '/interfaz/editor' },
-          { text: 'Panel de monitores', link: '/interfaz/monitores' },
-          { text: 'Línea de tiempo', link: '/interfaz/linea-de-tiempo' },
-          { text: 'Salida', link: '/interfaz/salida' },
-        ],
-      },
-      {
-        text: 'Operación',
-        items: [
-          { text: 'Ejecución paso a paso', link: '/operacion/paso-a-paso' },
-          { text: 'Comparación de ejecuciones', link: '/operacion/comparar-ejecuciones' },
-          { text: 'Diagnóstico de un interbloqueo', link: '/operacion/interbloqueo' },
-          { text: 'Inspección de un monitor', link: '/operacion/inspeccion-de-monitores' },
-        ],
-      },
-      {
-        text: 'Solución de problemas',
-        items: [
-          { text: 'Errores de compilación', link: '/problemas/errores-de-compilacion' },
-          { text: 'Errores en tiempo de ejecución', link: '/problemas/errores-en-tiempo-de-ejecucion' },
-          { text: 'El programa se detiene', link: '/problemas/el-programa-se-detiene' },
-          { text: 'Resultados que varían', link: '/problemas/resultados-que-varian' },
-        ],
-      },
-      {
-        text: 'Referencia',
-        items: [
-          { text: 'Límites', link: '/referencia/limites' },
-          { text: 'Atajos de teclado', link: '/referencia/atajos' },
-          { text: 'Glosario', link: '/referencia/glosario' },
-          { text: 'Programas de ejemplo', link: '/referencia/ejemplos' },
-        ],
-      },
-    ],
+    // la marca y el nombre de la guia llevan a la portada; el boton "Abrir el simulador"
+    // lo agrega el tema, a la derecha
+    siteTitle: 'Guía',
+    logo: '/favicon.svg',
+    sidebar: barraLateral,
+    // lo que el tema necesita de la estructura: numeros de seccion, migas, portada
+    guia,
     outline: { label: 'En esta página', level: [2, 3] },
     docFooter: { prev: 'Anterior', next: 'Siguiente' },
     returnToTopLabel: 'Volver arriba',
@@ -172,7 +91,7 @@ export default defineConfig({
       provider: 'local',
       options: {
         translations: {
-          button: { buttonText: 'Buscar', buttonAriaLabel: 'Buscar en la documentación' },
+          button: { buttonText: 'Buscar instrucción, error o concepto', buttonAriaLabel: 'Buscar en la guía' },
           modal: {
             displayDetails: 'Mostrar detalles',
             resetButtonTitle: 'Borrar la búsqueda',

@@ -1,6 +1,15 @@
+---
+relacionadas:
+  - /ejecucion/instantes-y-turnos
+  - /ejecucion/estados
+  - /ejecucion/finalizacion
+---
+
 # `delay`
 
 Demora al proceso una cantidad de instantes.
+
+<Chips :items="['Tiempo', 'Procedure o proceso', 'Se mide en instantes', 'Conserva el monitor']" />
 
 ## Sintaxis
 

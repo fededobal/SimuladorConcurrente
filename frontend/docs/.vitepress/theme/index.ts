@@ -1,6 +1,11 @@
 import { h, watch } from 'vue';
 import DefaultTheme from 'vitepress/theme';
 import { useData, type Theme } from 'vitepress';
+import Chips from './components/Chips.vue';
+import FiguraMonitor from './components/FiguraMonitor.vue';
+import Migas from './components/Migas.vue';
+import Portada from './components/Portada.vue';
+import Relacionadas from './components/Relacionadas.vue';
 import { instalarResaltadoDeBusqueda } from './resaltarBusqueda';
 import './custom.css';
 
@@ -47,29 +52,31 @@ function fijarTemaElegido() {
 }
 
 /**
- * Tema por defecto con un botón "Volver al simulador" en lugar del título de la barra. El
- * simulador vive en la raíz del mismo sitio; como el enrutador de VitePress intercepta los
- * clics a la misma dirección y buscaría "/" dentro de la documentación, la navegación se
- * hace a mano con location.assign.
+ * Tema por defecto, vestido como un libro: migas con el numero de seccion en la barra
+ * superior, el boton "Abrir el simulador" a la derecha, capitulos numerados en la barra
+ * lateral y paginas relacionadas bajo el indice de cada pagina.
+ *
+ * El simulador vive en la raiz del mismo sitio. El enrutador de VitePress intercepta los
+ * clics a la misma direccion y buscaria "/" dentro de la guia; por eso los enlaces al
+ * simulador llevan target="_self", que el enrutador deja pasar.
  */
 export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      // fuera del enlace del titulo (que el tema deja aunque no haya titulo): un enlace
-      // adentro de otro dejaba un area clicable vacia y una linea divisoria de mas
-      'nav-bar-content-before': () =>
-        h('a', {
-          class: 'volver-simulador',
-          href: '/',
-          onClick: (e: MouseEvent) => {
-            e.preventDefault();
-            window.location.assign('/');
-          },
-        }, [h('span', { 'aria-hidden': 'true' }, '←'), ' Volver al simulador']),
+      'nav-bar-content-before': () => h(Migas),
+      'nav-bar-content-after': () =>
+        h('a', { class: 'abrir-simulador', href: '/', target: '_self' },
+          ['Abrir el simulador ', h('span', { 'aria-hidden': 'true' }, '↗')]),
+      'sidebar-nav-before': () => h('p', { class: 'capitulos-titulo' }, 'Capítulos'),
+      'aside-outline-after': () => h(Relacionadas),
     });
   },
-  enhanceApp({ router }) {
+  enhanceApp({ app, router }) {
+    // componentes que se usan desde el Markdown de las paginas
+    app.component('Chips', Chips);
+    app.component('FiguraMonitor', FiguraMonitor);
+    app.component('Portada', Portada);
     instalarResaltadoDeBusqueda(router);
   },
   setup() {

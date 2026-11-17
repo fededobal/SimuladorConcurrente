@@ -69,3 +69,12 @@ export function decodeShare(hash: string): SharedProgram | null {
     policy,
   };
 }
+
+/**
+ * Id del ejemplo que pide abrir un fragmento "#ejemplo=01-buffer-un-dato" (lo usan los
+ * botones "Abrir en el simulador" de la guia), o null si el fragmento no lo pide.
+ */
+export function exampleIdFromHash(hash: string): string | null {
+  const id = new URLSearchParams(hash.replace(/^#/, '')).get('ejemplo');
+  return id && /^[\w-]{1,80}$/.test(id) ? id : null;
+}

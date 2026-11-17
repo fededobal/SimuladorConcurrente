@@ -56,6 +56,7 @@ interface Palette {
   readonly text: string;
   readonly comment: string;
   readonly keyword: string;
+  readonly sync: string;
   readonly typeName: string;
   readonly literal: string;
 }
@@ -67,11 +68,13 @@ function themeOf(name: string, c: Palette): ThemeRegistration {
     colors: { 'editor.background': c.background, 'editor.foreground': c.text },
     tokenColors: [
       { scope: ['comment'], settings: { foreground: c.comment, fontStyle: 'italic' } },
-      // declaraciones y sincronizacion en el acento y en negrita, como en el editor
+      // declaraciones en el acento y sincronizacion en violeta, las dos en negrita, como en
+      // el editor
       {
-        scope: ['keyword.declaration', 'keyword.sync', 'entity.name.tag', 'support.function'],
+        scope: ['keyword.declaration', 'entity.name.tag', 'support.function'],
         settings: { foreground: c.keyword, fontStyle: 'bold' },
       },
+      { scope: ['keyword.sync'], settings: { foreground: c.sync, fontStyle: 'bold' } },
       { scope: ['keyword.control', 'keyword.operator'], settings: { foreground: c.text } },
       { scope: ['storage.type', 'storage.modifier'], settings: { foreground: c.typeName } },
       {
@@ -87,21 +90,23 @@ function themeOf(name: string, c: Palette): ThemeRegistration {
 /** Tema claro de los bloques de codigo; mismos valores que :root en index.css. */
 export const monitoresLight = themeOf('monitores-claro', {
   type: 'light',
-  background: '#f5f7fa',
-  text: '#1f2933',
+  background: '#f6f7f9',
+  text: '#16191f',
   comment: '#677080',
-  keyword: '#2456a4',
-  typeName: '#5f6b7a',
-  literal: '#8a5a1f',
+  keyword: '#2f55d4',
+  sync: '#7b3fc4',
+  typeName: '#0f766e',
+  literal: '#b45309',
 });
 
 /** Tema oscuro; mismos valores que :root[data-theme="dark"] en index.css. */
 export const monitoresDark = themeOf('monitores-oscuro', {
   type: 'dark',
-  background: '#1e232a',
-  text: '#dde3ea',
-  comment: '#7f8996',
-  keyword: '#8fb0e6',
-  typeName: '#95a0ad',
-  literal: '#d0a066',
+  background: '#1d2229',
+  text: '#e3e8ee',
+  comment: '#8792a0',
+  keyword: '#8aa6f5',
+  sync: '#c19af5',
+  typeName: '#4fc4b6',
+  literal: '#e0a560',
 });

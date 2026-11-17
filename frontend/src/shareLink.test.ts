@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { decodeShare, encodeShare, type SharedProgram } from './shareLink';
+import { decodeShare, encodeShare, exampleIdFromHash, type SharedProgram } from './shareLink';
 
 const PROGRAM: SharedProgram = {
   name: 'Barrera con señal',
@@ -50,5 +50,21 @@ describe('shareLink', () => {
   it('windowsLineEndingsAreNormalized', () => {
     const shared = decodeShare(encodeShare({ ...PROGRAM, code: 'a\r\nb' }));
     expect(shared?.code).toBe('a\nb');
+  });
+});
+
+describe('exampleIdFromHash', () => {
+  it('readsTheExampleId', () => {
+    expect(exampleIdFromHash('#ejemplo=01-buffer-un-dato')).toBe('01-buffer-un-dato');
+  });
+
+  it('otherHashesAreNotAnExample', () => {
+    expect(exampleIdFromHash('')).toBeNull();
+    expect(exampleIdFromHash('#codigo=abc')).toBeNull();
+  });
+
+  it('rejectsIdsThatCouldNotBeAFileName', () => {
+    expect(exampleIdFromHash('#ejemplo=../../etc')).toBeNull();
+    expect(exampleIdFromHash('#ejemplo=')).toBeNull();
   });
 });

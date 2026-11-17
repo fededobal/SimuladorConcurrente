@@ -65,7 +65,7 @@ process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x)
 
 ## Documentación
 
-- [Presentación](docs/index.md): portada del sitio y organización de la guía.
+- [Presentación](docs/introduccion/presentacion.md): qué es el simulador y cómo se organiza la guía.
 - [Lenguaje](docs/lenguaje/index.md): qué se puede escribir, con una página por instrucción y ejemplos.
 - [Solución de problemas](docs/problemas/errores-de-compilacion.md): mensajes de error y qué hacer con cada uno.
 - [Especificación](docs/lenguaje/especificacion.md): gramática (EBNF) y semántica.

@@ -1,6 +1,16 @@
+---
+relacionadas:
+  - /lenguaje/instrucciones/wait
+  - /lenguaje/instrucciones/signal-all
+  - /ejecucion/variables-condicion
+  - /problemas/el-programa-se-detiene
+---
+
 # `signal`
 
 Despierta al primer proceso que espera en una variable condición.
+
+<Chips :items="['Sincronización', 'Solo dentro de un procedure', 'Despierta a uno', 'Quien avisa sigue adentro']" />
 
 ## Sintaxis
 

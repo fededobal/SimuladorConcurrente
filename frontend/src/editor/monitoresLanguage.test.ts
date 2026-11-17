@@ -19,16 +19,20 @@ async function colorsOf(code: string): Promise<Record<string, string | undefined
   return colors;
 }
 
-const KEYWORD = '#2456a4';
-const TEXT = '#1f2933';
-const LITERAL = '#8a5a1f';
+const KEYWORD = '#2f55d4';
+const SYNC = '#7b3fc4';
+const TEXT = '#16191f';
+const LITERAL = '#b45309';
 const COMMENT = '#677080';
 
 describe('monitoresLanguage', () => {
   it('syncAndDeclarationWordsAreKeywords', async () => {
     const colors = await colorsOf('monitor M { cond c; procedure f() { wait(c); signal_all(c); } }');
-    for (const word of ['monitor', 'cond', 'procedure', 'wait', 'signal_all']) {
+    for (const word of ['monitor', 'cond', 'procedure']) {
       expect(colors[word], word).toBe(KEYWORD);
+    }
+    for (const word of ['wait', 'signal_all']) {
+      expect(colors[word], word).toBe(SYNC);
     }
   });
 

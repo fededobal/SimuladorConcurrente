@@ -1,6 +1,15 @@
+---
+relacionadas:
+  - /lenguaje/instrucciones/wait
+  - /lenguaje/instrucciones/signal
+  - /ejecucion/variables-condicion
+---
+
 # `signal_all`
 
 Despierta a todos los procesos que esperan en una variable condición.
+
+<Chips :items="['Sincronización', 'Solo dentro de un procedure', 'Despierta a todos', 'Quien avisa sigue adentro']" />
 
 ## Sintaxis
 

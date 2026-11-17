@@ -14,7 +14,7 @@ import { EJEMPLOS } from './ejemplos';
 import { downloadText, readTextFile } from './files';
 import { visibleState, whereOf } from './processStates';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
-import { decodeShare, encodeShare } from './shareLink';
+import { decodeShare, encodeShare, exampleIdFromHash, type SharedProgram } from './shareLink';
 import { statusTextOf } from './statusText';
 import { timelineHeight } from './timelineLayout';
 import { useDragSize } from './useDragSize';
@@ -166,7 +166,12 @@ export function App() {
   // para que recargar la pestana no vuelva a pisar lo que se escriba despues.
   useEffect(() => {
     const openShared = (askFirst: boolean) => {
-      const shared = decodeShare(window.location.hash);
+      // desde la guia: "#ejemplo=<id>" abre uno de los programas del menu Ejemplos
+      const exampleId = exampleIdFromHash(window.location.hash);
+      const example = exampleId === null ? undefined : EJEMPLOS.find((e) => e.id === exampleId);
+      const shared: SharedProgram | null = example
+        ? { name: example.titulo, code: example.codigo, seed: null, policy: null }
+        : decodeShare(window.location.hash);
       if (!shared) return;
       window.history.replaceState(null, '', window.location.pathname + window.location.search);
       const current = storeRef.current.program;
@@ -181,7 +186,7 @@ export function App() {
       storeRef.current.open({ id: null, name: shared.name, code: shared.code });
       simRef.current.reset(shared.seed);
       if (shared.policy) simRef.current.setPolicy(shared.policy);
-      setNotice(`Se abrió "${shared.name}" desde un enlace.`);
+      setNotice(example ? `Se abrió el ejemplo "${shared.name}".` : `Se abrió "${shared.name}" desde un enlace.`);
     };
     openShared(false);
     const onHashChange = () => openShared(true);

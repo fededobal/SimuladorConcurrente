@@ -1,6 +1,16 @@
+---
+relacionadas:
+  - /lenguaje/instrucciones/signal
+  - /lenguaje/instrucciones/signal-all
+  - /ejecucion/variables-condicion
+  - /operacion/interbloqueo
+---
+
 # `wait`
 
 Demora al proceso en una variable condición y libera el monitor.
+
+<Chips :items="['Sincronización', 'Solo dentro de un procedure', 'Libera el monitor', 'Siempre se demora']" />
 
 ## Sintaxis
 
@@ -17,8 +27,23 @@ competir por el monitor cuando otro proceso hace [`signal`](./signal) o
 [`signal_all`](./signal-all) sobre esa variable, y al reingresar continúa en la sentencia
 siguiente al `wait`.
 
-Solo se usa dentro de un procedure. El dibujo del monitor muestra al proceso en la zona
-**En wait** ([Variables condición](/ejecucion/variables-condicion)).
+Solo se usa dentro de un procedure.
+
+<FiguraMonitor flecha="wait" :espera="{ cv: 'P' }">
+Al hacer <code>wait(cv)</code>, P sale de la zona Adentro, queda al final de la cola de <code>cv</code> y el monitor queda libre.
+</FiguraMonitor>
+
+::: tip En el simulador
+El dibujo del monitor muestra al proceso en la zona **En wait**, en la fila de su variable
+condición; en la línea de tiempo, su tramo pasa a «wait». Ver
+[Variables condición](/ejecucion/variables-condicion).
+:::
+
+::: warning Atención
+Cuando el proceso despierta, la condición que esperaba puede haber dejado de cumplirse: otro
+proceso pudo entrar antes. Por eso se vuelve a verificar con `while` y no con `if`
+([Comparación de ejecuciones](/operacion/comparar-ejecuciones)).
+:::
 
 ## Errores
 
@@ -33,7 +58,7 @@ Solo se usa dentro de un procedure. El dibujo del monitor muestra al proceso en 
 
 ## Ejemplo
 
-```monitores
+```monitores ejemplo=01-buffer-un-dato
 procedure depositar(d: in int) {
   while (hayDato) wait(libre);
   dato = d;
