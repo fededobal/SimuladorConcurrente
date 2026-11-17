@@ -5,7 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  // la cache de VitePress guarda dependencias precompiladas: no es codigo del proyecto
+  { ignores: ['dist', 'docs/.vitepress/cache'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],

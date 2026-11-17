@@ -120,6 +120,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- La aplicación no tenía ícono (el navegador pedía un `favicon.ico` que no existe). Ahora el simulador y la documentación comparten el ícono nuevo, y los cuadros de aviso de la documentación dicen «Nota» y «Atención» en lugar de «TIP» y «WARNING». (Federico Dobal, 2026-11-17)
 - Accesibilidad: el estado de la simulación se anuncia a los lectores de pantalla cuando cambia (`aria-live`) y el error de compilación se anuncia como alerta, igual que los de ejecución; el área de código tiene nombre accesible. (Federico Dobal, 2026-11-17)
 - Legibilidad: el gris de los textos secundarios pasa de un contraste de 2,5:1 a más de 4,5:1, y ningún texto de la interfaz mide menos de 12 px (rótulos de la línea de tiempo, tipos de las variables, notas de las colas, leyendas). El dibujo del monitor ocupa el ancho del panel para que sus rótulos se lean en un proyector. (Federico Dobal, 2026-11-17)
 - Editor: las franjas rayadas de varios procesos en un mismo renglón se sumaban hasta tapar el código, y en un renglón largo el nombre del proceso quedaba fuera de la vista. La etiqueta ahora se ancla al borde visible del editor y los botones de zoom quedan por encima. (Federico Dobal, 2026-11-17)
@@ -244,6 +245,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- ESLint deja de revisar la caché de VitePress (`npm run lint` terminaba con tres avisos ajenos al proyecto) y se quita la dependencia `react-resizable-panels`, que no se usaba. (Federico Dobal, 2026-11-17)
 - Tests de la interfaz con Vitest (`npm run test` en `frontend/`, incluido en `npm run check` y en el CI): prueban la lógica pura, sin navegador. Los primeros cubren el coloreado del editor y el armado de las marcas de los procesos. (Federico Dobal, 2026-11-17)
 - Partir el editor de código en módulos: el coloreado (`editor/highlight.ts`), las ayudas de edición (`editor/editing.ts`) y la medición de los renglones (`editor/useLineMetrics.ts`) salen de `CodeEditor.tsx`, que queda con el componente y las marcas de los procesos. (Federico Dobal, 2026-11-17)
 - Unificar en un solo lugar (`Place`, creado por `VariableAccess.place`) la lectura y escritura de una variable o de un elemento de arreglo, que estaba repetida en la asignación, `++`/`--`, el intercambio `:=:` y los parámetros `out`; se elimina `LValue`. Sin cambios de comportamiento: los tests de caracterización pasan sin regenerarse. (Federico Dobal, 2026-11-16)

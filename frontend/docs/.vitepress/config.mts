@@ -46,6 +46,16 @@ export default defineConfig({
     server: { fs: { allow: ['../..'] } },
   },
   cleanUrls: true,
+  // rotulos de los cuadros de aviso (::: tip, ::: warning...), que por defecto salen en inglés
+  markdown: {
+    container: {
+      tipLabel: 'Nota',
+      warningLabel: 'Atención',
+      dangerLabel: 'Peligro',
+      infoLabel: 'Información',
+      detailsLabel: 'Detalles',
+    },
+  },
   // claro u oscuro, como el simulador. VitePress guarda la elección en localStorage, con la
   // clave vitepress-theme-appearance, que el simulador también lee (src/useTheme.ts): elegir
   // el tema en uno lo cambia en el otro.
