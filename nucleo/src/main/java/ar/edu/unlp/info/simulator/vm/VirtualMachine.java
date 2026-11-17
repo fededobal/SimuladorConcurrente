@@ -4,8 +4,10 @@ import ar.edu.unlp.info.simulator.lang.parser.ast.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Maquina virtual del simulador de monitores. Ejecuta un {@link Program} por instantes: en
@@ -38,9 +40,11 @@ public final class VirtualMachine {
     private final SimulationClock clock = new SimulationClock();
     /**
      * Ids de los procesos que avanzaron en el ultimo instante, en el orden en que les toco el
-     * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo.
+     * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo. Un
+     * conjunto ordenado y no una lista: se consulta por cada proceso del turno y del estado,
+     * y con una lista cada consulta la recorria entera (cuadratico con miles de procesos).
      */
-    private final List<Integer> advancedLastStep = new ArrayList<>();
+    private final Set<Integer> advancedLastStep = new LinkedHashSet<>();
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {

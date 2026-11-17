@@ -3,6 +3,7 @@ package ar.edu.unlp.info.simulator.vm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Protocolo de los monitores: exclusion mutua implicita, cola de entrada, traspaso del
@@ -25,11 +26,11 @@ final class MonitorProtocol {
      * Los procesos que avanzaron en el instante (la lista es de la VM): el que recibe el
      * monitor por traspaso cuenta como que avanzo.
      */
-    private final List<Integer> advancedLastStep;
+    private final Set<Integer> advancedLastStep;
     private final EventSink events;
 
     MonitorProtocol(Map<String, Monitor> monitors, SeededRandom random,
-            List<Integer> advancedLastStep, EventSink events) {
+            Set<Integer> advancedLastStep, EventSink events) {
         this.monitors = monitors;
         this.random = random;
         this.advancedLastStep = advancedLastStep;
@@ -118,7 +119,7 @@ final class MonitorProtocol {
             int n = m.entrantCount();
             Process w = m.removeEntrant(n == 1 ? 0 : random.nextInt(n));
             w.unblock();
-            if (!advancedLastStep.contains(w.id())) advancedLastStep.add(w.id());
+            advancedLastStep.add(w.id());
             try {
                 takeMonitor(w, w.current(), m);
             } catch (RuntimeError re) {

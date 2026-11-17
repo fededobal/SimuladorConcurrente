@@ -2,6 +2,7 @@ package ar.edu.unlp.info.simulator.vm;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +15,16 @@ final class SnapshotBuilder {
      * @param advanced ids de los procesos que avanzaron en el ultimo instante, en orden de turno
      */
     static Snapshot build(int instant, List<Process> processes, Collection<Monitor> monitors,
-                          List<Integer> advanced, List<Snapshot.OutputLine> output) {
+                          Collection<Integer> advanced, List<Snapshot.OutputLine> output) {
+        // posicion de cada proceso en el turno, armada una vez: buscarla en la coleccion por
+        // cada proceso era cuadratico
+        Map<Integer, Integer> turnOrder = new HashMap<>();
+        for (Integer id : advanced) {
+            turnOrder.put(id, turnOrder.size());
+        }
         List<Snapshot.ProcessView> pv = new ArrayList<>();
         for (Process p : processes) {
-            pv.add(processView(p, instant, advanced, monitors));
+            pv.add(processView(p, instant, turnOrder, monitors));
         }
         List<Snapshot.MonitorView> mv = new ArrayList<>();
         for (Monitor m : monitors) {
@@ -26,7 +33,8 @@ final class SnapshotBuilder {
         return new Snapshot(instant, pv, mv, output);
     }
 
-    private static Snapshot.ProcessView processView(Process p, int instant, List<Integer> advanced,
+    private static Snapshot.ProcessView processView(Process p, int instant,
+                                                    Map<Integer, Integer> turnOrder,
                                                     Collection<Monitor> monitors) {
         List<String> holding = new ArrayList<>();
         for (Monitor m : monitors) {
@@ -50,8 +58,8 @@ final class SnapshotBuilder {
                 p.currentLine(),
                 locals,
                 p.errorMessage(),
-                advanced.contains(p.id()),
-                advanced.indexOf(p.id()),
+                turnOrder.containsKey(p.id()),
+                turnOrder.getOrDefault(p.id(), -1),
                 holding,
                 p.isDelayed() ? Math.max(0, p.delayEndsAt() - instant) : null);
     }
