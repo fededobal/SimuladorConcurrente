@@ -1,159 +1,159 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #2d4f0c5df4bd1ca1
-step 1 ENTER Trabajador[4]: entra a Barrera.esperar | BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[0]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #ab4f92b409386b23
-step 2 WAIT Trabajador[4]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Barrera.esperar | BLOCKED Trabajador[1]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ea276cb7c498c20e
-step 3 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #760d0995c9a9e885
-step 4 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #da9b1cf5c520bb5b
-step 5 WAIT Trabajador[3]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #05c3bc661390f0c3
-step 6 WAIT Trabajador[2]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #73666dfb80580e26
-step 7 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #7b88d95923e0ed90
-step 8 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 5 proceso(s) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #ff8cabc5611d9594
-step 9 RETURN Portero: retorna de Barrera.abrir, libera el monitor | REENTER Trabajador[4]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #b1ad787533653c6e
-step 10 TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #6d6b758f37a07367
-step 11 ASSIGN Trabajador[4]: pasaron = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #3b57f9f09d75e8ff
-step 12 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[3]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #3423d012bd3bcf6c
-step 13 ASSIGN Trabajador[3]: pasaron = 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #66cb23f8c39e6a74
-step 14 TERMINATED Trabajador[4]: termina | RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f3bb56fe897d6765
-step 15 ASSIGN Trabajador[1]: pasaron = 3 | TERMINATED Trabajador[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #82bed3ab39c5beda
-step 16 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[2]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #5eb6956707e7705b
-step 17 ASSIGN Trabajador[2]: pasaron = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #7c7205966ed1ca68
-step 18 TERMINATED Trabajador[1]: termina | RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #106aaeb5ffed812d
-step 19 ASSIGN Trabajador[0]: pasaron = 5 | TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #e3bf9cc5d1b6a25b
-step 20 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2c0ab21f7b65176f
-step 21 TERMINATED Trabajador[0]: termina | {"finished":true,"deadlock":false,"instant":21,"waiting":false} #d93c89f95ef02358
-state #ff7ab7f15cb2e2de
+create {"finished":false,"deadlock":false} #ffd65e6fb72db763
+step 1 ENTER Trabajador[4]: entra a Barrera.esperar | BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[0]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8aadecb1bf63f5c0
+step 2 WAIT Trabajador[4]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Barrera.esperar | BLOCKED Trabajador[1]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c89f727009e6992b
+step 3 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7d990c42fa699025
+step 4 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d97c808ef257b66b
+step 5 WAIT Trabajador[3]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3f1dfc540b97cc22
+step 6 WAIT Trabajador[2]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #259cd91ff9a62352
+step 7 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #88663ffeaa670d28
+step 8 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 5 proceso(s) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d5ce381bf62fc3b9
+step 9 RETURN Portero: retorna de Barrera.abrir, libera el monitor | REENTER Trabajador[4]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #0752264df69651c3
+step 10 TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4ae9cbfe725bba50
+step 11 ASSIGN Trabajador[4]: pasaron = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #44be1a89b3df377a
+step 12 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[3]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #1dead69c7358fe5e
+step 13 ASSIGN Trabajador[3]: pasaron = 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f4d5870a2b3a9f0a
+step 14 TERMINATED Trabajador[4]: termina | RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #ef168b5ddd9b8d6c
+step 15 ASSIGN Trabajador[1]: pasaron = 3 | TERMINATED Trabajador[3]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #67bfc9c78f0152c9
+step 16 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[2]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #2a116b5ef942ca44
+step 17 ASSIGN Trabajador[2]: pasaron = 4 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #fd72d4c324be4e45
+step 18 TERMINATED Trabajador[1]: termina | RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #cf53ca87ef08ad53
+step 19 ASSIGN Trabajador[0]: pasaron = 5 | TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d4b729c00fd84e18
+step 20 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6b53d06132793fd2
+step 21 TERMINATED Trabajador[0]: termina | {"finished":true,"deadlock":false,"instant":21,"waiting":false} #6b8f9941fbe16cba
+state #d0d3f2dc752d73db
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #253e6256a7389da8
-step 1 #82462af962f3b407
-step 2 #0f2039393dc5af30
-step 3 #f590fe3eca6729cd
-step 4 #22c4138b1d3fb251
-step 5 #f761e767b35110a2
-step 6 #c7f3f7cd429f21d0
-step 7 #7a54715a283eb1ba
-step 8 #85d40065474a8d1e
-step 9 #2377c998ba7290fc
-step 10 #8f663399e07b8a33
-step 11 #f1d0fcca21bef741
-step 12 #6ec22a0e5d797db3
-step 13 #bc3b5170e3760503
-step 14 #b80abc164bdf530b
-step 15 #23f678cc51c98e03
-step 16 #168e3feadc32ef23
-step 17 #0e7d3407645c0d1d
-step 18 #d0cbd8b2ae81d6d8
-step 19 #b7fdfc33dd380578
-step 20 #c127a63ac116c738
-step 21 #b1b88f660f576fab
-state #269da151d6de4320
+create {"finished":false,"deadlock":false} #93e2782c654d7a78
+step 1 #570b2ddeff4694cd
+step 2 #eca2ab64f4252d03
+step 3 #bf93cba1900f194a
+step 4 #26054640598dce6d
+step 5 #b1a48c824063f6b6
+step 6 #6999e659618945eb
+step 7 #7c55605a70b12093
+step 8 #0128cda976dfd50d
+step 9 #6fc3d978bb6fbe16
+step 10 #04024d2dcdb48724
+step 11 #9e7217043855ff7e
+step 12 #f57e872e0f303748
+step 13 #56745310efc57897
+step 14 #2264774e4beaf52e
+step 15 #25241e7144ec2018
+step 16 #ec0b8778ab6c8def
+step 17 #0a4bc33d712f6774
+step 18 #e9976345016ab966
+step 19 #970683143787f1b7
+step 20 #9764e92f959df09a
+step 21 #f663713f08481dd5
+state #ad911124f7e78867
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #2d3ad89228681f41
-step 1 #85992387281f58d7
-step 2 #76c07ee545b338a3
-step 3 #ecaf96b5e5c31024
-step 4 #177d0ce3d1e10206
-step 5 #c5957f82a1737e33
-step 6 #f61449081b42244a
-step 7 #5c0cd1df32c0f557
-step 8 #5a94c0eac009a0e2
-step 9 #9a6b7b2af06aa9d6
-step 10 #f7558f7ffef176a4
-step 11 #d113ec5268f7fed7
-step 12 #a842d62e309bfe3c
-step 13 #868bdb95a8510329
-step 14 #b66167beeae9f470
-step 15 #15e99f88a6ab631d
-state #e33608c0716e6aa2
+create {"finished":false,"deadlock":false} #c5f3d90972fcb14f
+step 1 #fcfabedee9665396
+step 2 #600e32429799bea3
+step 3 #106138aedfe889da
+step 4 #c18adee43faed46c
+step 5 #50a1801911c882e6
+step 6 #5598c42f3f852efc
+step 7 #1978a8b5e79bc07e
+step 8 #768e7a2e6d615573
+step 9 #ffcfe6a247e5fef7
+step 10 #a34c6a1745b2220b
+step 11 #a803c7b53dd914eb
+step 12 #83f130ce20673741
+step 13 #3c7f608b5e735f13
+step 14 #194943197a0a32a5
+step 15 #21478565d6641782
+state #5691c50f37ba3289
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #2d4f0c5df4bd1ca1
-step 1 ENTER Trabajador[0]: entra a Barrera.esperar | BLOCKED Trabajador[1]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[4]: espera para entrar a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #116091452303c32a
-step 2 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ecf891476e4f84d6
-step 3 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f7679158093b38bb
-step 4 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #75ba5ffcdce3f2f0
-step 5 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #e3ffae245cbca096
-step 6 RETURN Portero: retorna de Barrera.abrir, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #01d2167ffdfda8ae
-step 7 ASSIGN Trabajador[1]: pasaron = 1 | TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #26049fe9885c8e2d
-step 8 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[4]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #eadd4e13ff4ae14a
-step 9 ASSIGN Trabajador[4]: pasaron = 2 | TERMINATED Trabajador[1]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3f303324995b135a
-step 10 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d819767aee359176
-step 11 ASSIGN Trabajador[0]: pasaron = 3 | TERMINATED Trabajador[4]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #adbf35c7d4b70620
-step 12 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c6d4bdae1fb0357b
-step 13 ASSIGN Trabajador[2]: pasaron = 4 | TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #e22406b916d44394
-step 14 RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[3]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b6e2d1a885e0d050
-step 15 ASSIGN Trabajador[3]: pasaron = 5 | TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #823956e111f85a7f
-step 16 RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6fed84d74120e506
-step 17 TERMINATED Trabajador[3]: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #d4768b0541d68423
-state #8c3cddfc6758bd33
+create {"finished":false,"deadlock":false} #ffd65e6fb72db763
+step 1 ENTER Trabajador[0]: entra a Barrera.esperar | BLOCKED Trabajador[1]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | BLOCKED Trabajador[4]: espera para entrar a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #2bb74368d8316c70
+step 2 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #0f1f93fe153c0991
+step 3 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e056b289f20fa29b
+step 4 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #5d76fdee730da4c1
+step 5 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #454e17e7ca01f4ea
+step 6 RETURN Portero: retorna de Barrera.abrir, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6e7da44301ed59a8
+step 7 ASSIGN Trabajador[1]: pasaron = 1 | TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #201733988ab55848
+step 8 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[4]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #31d147138b4e56bb
+step 9 ASSIGN Trabajador[4]: pasaron = 2 | TERMINATED Trabajador[1]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a9001dab73ee56d7
+step 10 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #017169ad65b47b2f
+step 11 ASSIGN Trabajador[0]: pasaron = 3 | TERMINATED Trabajador[4]: termina | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #2580cb021cf12a49
+step 12 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #4a83ba2bc84c2f9b
+step 13 ASSIGN Trabajador[2]: pasaron = 4 | TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #15262ffc14b56e4a
+step 14 RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | ENTER Trabajador[3]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b56645c110d6a11a
+step 15 ASSIGN Trabajador[3]: pasaron = 5 | TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #a1417f7d8cdb936a
+step 16 RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #76426ab5fa2ff7ac
+step 17 TERMINATED Trabajador[3]: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #268aa8b54e82d7db
+state #1066d611478cde8d
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #253e6256a7389da8
-step 1 #116091452303c32a
-step 2 #ecf891476e4f84d6
-step 3 #a373288ed6f4b9f1
-step 4 #8dffdf78d92c3d96
-step 5 #d4bf9cd3b71183b5
-step 6 #653ad582d85bcc8a
-step 7 #fcfec85cd8622b7d
-step 8 #d1fb0d0312de51dd
-step 9 #492d462103f3f1e7
-step 10 #e5ace7f37ba8d717
-step 11 #645e94e90385194b
-step 12 #4a919fdea090e64c
-step 13 #c42aa1bf0980b184
-step 14 #3d7d20445102ed78
-step 15 #fff1788b2c392b12
-step 16 #4cbcf71e49a2a04b
-step 17 #df3cff92acdb2a47
-step 18 #bfabacc65a5e1b8e
-step 19 #4ae96043f63e1916
-step 20 #a28f985cdb2fea9f
-state #606d6c8f58c2aa50
+create {"finished":false,"deadlock":false} #93e2782c654d7a78
+step 1 #2bb74368d8316c70
+step 2 #0f1f93fe153c0991
+step 3 #7a7c48be1570ad32
+step 4 #c660311184a8ccae
+step 5 #cf3de432d53169ac
+step 6 #d66e1ab35c462187
+step 7 #27f71a1c6c67f06a
+step 8 #c3523e303cd4b4f6
+step 9 #6f3020f6d75a5e3c
+step 10 #2f841e336cc223c1
+step 11 #1c5a069a4430ca0f
+step 12 #a7eef03be155acd7
+step 13 #1143ba4b1b209b2e
+step 14 #258efbbb20cc4914
+step 15 #1adea5b3d8407a9a
+step 16 #0efc93999e936a0b
+step 17 #a487ecf2c79feac9
+step 18 #092e3c2b111ae881
+step 19 #936987d3ea89f845
+step 20 #5e3aebcacf998bc5
+state #42bb0239694d304d
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #2d3ad89228681f41
-step 1 #116091452303c32a
-step 2 #dcbd3543ded93c42
-step 3 #a501a84ba666b8eb
-step 4 #22f48da77fbe540d
-step 5 #8e0a998a8b0e94a1
-step 6 #52e3b5102ccd2868
-step 7 #d15a52e44d48a5d9
-step 8 #8a2cf4daf5fa83cc
-step 9 #c66bfba1d67b891c
-step 10 #2ec39e89f85d3ae8
-step 11 #35b3b904314a7000
-step 12 #b860270cf72fe018
-step 13 #347f17f31514b3fe
-step 14 #c93ac3c6968790d7
-step 15 #38e48f6ae8d4bda5
-step 16 #05127ab5951bdd12
-step 17 #30a2cb1f4877aebb
-step 18 #bba938e81d920a95
-state #6d3e70851f26dced
+create {"finished":false,"deadlock":false} #c5f3d90972fcb14f
+step 1 #2bb74368d8316c70
+step 2 #25e8c98e5f54cc8d
+step 3 #b74b35da9cb2875e
+step 4 #ddc246df8ef815a2
+step 5 #d549e505ab5d6dd3
+step 6 #c1ba1c66217c76a6
+step 7 #637e540af75582e1
+step 8 #ff02e14b86d34dce
+step 9 #d8de3efeca80c8b1
+step 10 #97a38ccf930a1c79
+step 11 #f2004df350568d55
+step 12 #a489f4545652f2fd
+step 13 #076fc9cc480aeda2
+step 14 #fbca608640456777
+step 15 #febb0b92a379a330
+step 16 #70a11b80dae1c32c
+step 17 #d278d4d477fea3bb
+step 18 #31e9fe2a092f937a
+state #f3690025e6e2fb7a
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #2d4f0c5df4bd1ca1
-step 1 ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d6aa9a3746852c97
-step 2 BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7d86b15958bf1db5
-step 3 BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #228dd20bcbf5cd19
-step 4 BLOCKED Trabajador[0]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #49d3209841c98eea
-step 5 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #65b94be426cc1b46
-step 6 WAIT Trabajador[2]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #1cb6125a74767272
-step 7 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #3bf7e23c8f37fa2b
-step 8 BLOCKED Trabajador[4]: espera para entrar a Barrera.esperar | WAIT Trabajador[3]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #05e6b0085b077261
-step 9 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #4c77827e3e8b94a9
-step 10 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 4 proceso(s) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5bba12d1798b1cf5
-step 11 RETURN Portero: retorna de Barrera.abrir, libera el monitor | ENTER Trabajador[4]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #64c9805af02a239b
-step 12 TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e7dafc52573a5172
-step 13 ASSIGN Trabajador[4]: pasaron = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #ff3302953ec8d0b3
-step 14 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[2]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #6fa7f43b8825fba9
-step 15 TERMINATED Trabajador[4]: termina | ASSIGN Trabajador[2]: pasaron = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1f71d2296a7ab9b2
-step 16 RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #5fd103056f30c8f7
-step 17 TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #484b79461e8f8ade
-step 18 ASSIGN Trabajador[0]: pasaron = 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #e228f7e832b1d89a
-step 19 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[3]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #3ffb861ca554bb53
-step 20 TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #b670c38be20eb585
-step 21 ASSIGN Trabajador[3]: pasaron = 4 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e7dcf0b23c0ddb62
-step 22 RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #9f47309f58fa3f69
-step 23 TERMINATED Trabajador[3]: termina | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #c9765a3e74376e7d
-step 24 ASSIGN Trabajador[1]: pasaron = 5 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #967ff63cd7e73977
-step 25 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #052345295f4d288b
-step 26 TERMINATED Trabajador[1]: termina | {"finished":true,"deadlock":false,"instant":26,"waiting":false} #db4640787664a3a8
-state #302a67327ed35663
+create {"finished":false,"deadlock":false} #ffd65e6fb72db763
+step 1 ENTER Trabajador[1]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e87a0636d5ae9e61
+step 2 BLOCKED Trabajador[2]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c5a9cc66ef90f79b
+step 3 BLOCKED Trabajador[3]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #413ae5c3a18e9f17
+step 4 BLOCKED Trabajador[0]: espera para entrar a Barrera.esperar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #703c32b783b2417e
+step 5 WAIT Trabajador[1]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c283a29097d8ff6d
+step 6 WAIT Trabajador[2]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #21d30e2fb473d97a
+step 7 WAIT Trabajador[0]: wait(puerta) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Barrera.esperar | BLOCKED Portero: espera para entrar a Barrera.abrir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #78c0bb3b2e9eaa22
+step 8 BLOCKED Trabajador[4]: espera para entrar a Barrera.esperar | WAIT Trabajador[3]: wait(puerta) - libera el monitor y se demora | ENTER Portero: entra a Barrera.abrir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2899c0d5f0b2c8a8
+step 9 ASSIGN Portero: abierta = true | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1a61b5bdc9867395
+step 10 SIGNAL_ALL Portero: signal_all(puerta) - despierta a 4 proceso(s) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #dadbf82bea9aad3a
+step 11 RETURN Portero: retorna de Barrera.abrir, libera el monitor | ENTER Trabajador[4]: entra a Barrera.esperar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #cbf46ea9066f14a5
+step 12 TERMINATED Portero: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #6eb134d46720c4e8
+step 13 ASSIGN Trabajador[4]: pasaron = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #7fffd429c1ff2ed5
+step 14 RETURN Trabajador[4]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[2]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #ebe00519e836616e
+step 15 TERMINATED Trabajador[4]: termina | ASSIGN Trabajador[2]: pasaron = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #d3ec0f9a61e512c5
+step 16 RETURN Trabajador[2]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[0]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #996147ca99ffefc3
+step 17 TERMINATED Trabajador[2]: termina | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #546cfa407a857c3e
+step 18 ASSIGN Trabajador[0]: pasaron = 3 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #0cc635b61c25d38e
+step 19 RETURN Trabajador[0]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[3]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c7ffbc12cdc20001
+step 20 TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #51ab93e154b7ae77
+step 21 ASSIGN Trabajador[3]: pasaron = 4 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #bc7c0bcf699c7066
+step 22 RETURN Trabajador[3]: retorna de Barrera.esperar, libera el monitor | REENTER Trabajador[1]: reingresa a Barrera | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #072cc2fb947a88f1
+step 23 TERMINATED Trabajador[3]: termina | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #60c7e643cbfc6ee8
+step 24 ASSIGN Trabajador[1]: pasaron = 5 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #efe14a0cb7904503
+step 25 RETURN Trabajador[1]: retorna de Barrera.esperar, libera el monitor | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #af7cc59a8a1154e9
+step 26 TERMINATED Trabajador[1]: termina | {"finished":true,"deadlock":false,"instant":26,"waiting":false} #6250186283f6cf41
+state #5209bff84c76b9ea

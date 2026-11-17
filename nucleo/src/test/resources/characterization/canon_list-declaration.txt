@@ -1,77 +1,77 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #4ad253927684be44
-step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #312a346d75268ad6
-step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #68e038bd43cfbc1c
-step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #aa463ec17dd78bb6
-step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #49343b18cf44403f
-step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #8ef0aa7919e29d88
-step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #9bab98efbafbfa63
-step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29173119dc430c62
-step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #4810a2b934ea7d5a
+step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #95b3e9c06b1a595f
+step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1b17d195f2d3967f
+step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6ab6623d6b69f55c
+step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #6f870316556b1c36
+step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #6d0e8ee422eb5812
+step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #85bb7191b64a2320
+step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e9ef0ee66a39288
+step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #c5c55910684ff3d7
-step 1 #312a346d75268ad6
-step 2 #68e038bd43cfbc1c
-step 3 #aa463ec17dd78bb6
-step 4 #49343b18cf44403f
-step 5 #8ef0aa7919e29d88
-step 6 #9bab98efbafbfa63
-step 7 #29173119dc430c62
-step 8 #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #9206d9bbf0616c6d
+step 1 #95b3e9c06b1a595f
+step 2 #1b17d195f2d3967f
+step 3 #6ab6623d6b69f55c
+step 4 #6f870316556b1c36
+step 5 #6d0e8ee422eb5812
+step 6 #85bb7191b64a2320
+step 7 #2e9ef0ee66a39288
+step 8 #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #af161aa070d8535e
-step 1 #312a346d75268ad6
-step 2 #68e038bd43cfbc1c
-step 3 #aa463ec17dd78bb6
-step 4 #49343b18cf44403f
-step 5 #8ef0aa7919e29d88
-step 6 #9bab98efbafbfa63
-step 7 #29173119dc430c62
-step 8 #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #159c0110c3118c5a
+step 1 #95b3e9c06b1a595f
+step 2 #1b17d195f2d3967f
+step 3 #6ab6623d6b69f55c
+step 4 #6f870316556b1c36
+step 5 #6d0e8ee422eb5812
+step 6 #85bb7191b64a2320
+step 7 #2e9ef0ee66a39288
+step 8 #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #4ad253927684be44
-step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #312a346d75268ad6
-step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #68e038bd43cfbc1c
-step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #aa463ec17dd78bb6
-step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #49343b18cf44403f
-step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #8ef0aa7919e29d88
-step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #9bab98efbafbfa63
-step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29173119dc430c62
-step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #4810a2b934ea7d5a
+step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #95b3e9c06b1a595f
+step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1b17d195f2d3967f
+step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6ab6623d6b69f55c
+step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #6f870316556b1c36
+step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #6d0e8ee422eb5812
+step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #85bb7191b64a2320
+step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e9ef0ee66a39288
+step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #c5c55910684ff3d7
-step 1 #312a346d75268ad6
-step 2 #68e038bd43cfbc1c
-step 3 #aa463ec17dd78bb6
-step 4 #49343b18cf44403f
-step 5 #8ef0aa7919e29d88
-step 6 #9bab98efbafbfa63
-step 7 #29173119dc430c62
-step 8 #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #9206d9bbf0616c6d
+step 1 #95b3e9c06b1a595f
+step 2 #1b17d195f2d3967f
+step 3 #6ab6623d6b69f55c
+step 4 #6f870316556b1c36
+step 5 #6d0e8ee422eb5812
+step 6 #85bb7191b64a2320
+step 7 #2e9ef0ee66a39288
+step 8 #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #af161aa070d8535e
-step 1 #312a346d75268ad6
-step 2 #68e038bd43cfbc1c
-step 3 #aa463ec17dd78bb6
-step 4 #49343b18cf44403f
-step 5 #8ef0aa7919e29d88
-step 6 #9bab98efbafbfa63
-step 7 #29173119dc430c62
-step 8 #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #159c0110c3118c5a
+step 1 #95b3e9c06b1a595f
+step 2 #1b17d195f2d3967f
+step 3 #6ab6623d6b69f55c
+step 4 #6f870316556b1c36
+step 5 #6d0e8ee422eb5812
+step 6 #85bb7191b64a2320
+step 7 #2e9ef0ee66a39288
+step 8 #072b69d63ddf69ba
+state #fb711f289b0ea5c4
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #4ad253927684be44
-step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #312a346d75268ad6
-step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #68e038bd43cfbc1c
-step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #aa463ec17dd78bb6
-step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #49343b18cf44403f
-step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #8ef0aa7919e29d88
-step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #9bab98efbafbfa63
-step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29173119dc430c62
-step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #dcb90e3b5d8e65fa
-state #77f2d7d6571118e8
+create {"finished":false,"deadlock":false} #4810a2b934ea7d5a
+step 1 DECL P: text lista =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #95b3e9c06b1a595f
+step 2 DECL P: text comp =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #1b17d195f2d3967f
+step 3 DECL P: int x = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6ab6623d6b69f55c
+step 4 DECL P: int y = 7 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #6f870316556b1c36
+step 5 ENTER P: entra a M.guardar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #6d0e8ee422eb5812
+step 6 ASSIGN P: recibido = 7 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #85bb7191b64a2320
+step 7 RETURN P: retorna de M.guardar, libera el monitor | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2e9ef0ee66a39288
+step 8 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #072b69d63ddf69ba
+state #fb711f289b0ea5c4

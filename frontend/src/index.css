@@ -1122,8 +1122,8 @@ button { cursor: pointer; }
    monitor. En la leyenda no hay un proceso: las muestras usan un color de la paleta. */
 .tl-tramo.st-running-process { background: color-mix(in srgb, var(--st) 38%, var(--mix-base)); color: var(--text); }
 .tl-tramo.st-running-monitor { background: var(--st); color: var(--on-accent); font-weight: 600; }
-.tl-muestra.st-running-process { background: color-mix(in srgb, #4f6d9e 38%, var(--mix-base)); }
-.tl-muestra.st-running-monitor { background: #4f6d9e; }
+.tl-muestra.st-running-process { background: color-mix(in srgb, #2f6fe0 38%, var(--mix-base)); }
+.tl-muestra.st-running-monitor { background: #2f6fe0; }
 
 /* esperas en un tono de fondo: lo que resalta es la ejecucion; el rotulo dice la causa */
 .tl-tramo.st-competing, .tl-muestra.st-competing,

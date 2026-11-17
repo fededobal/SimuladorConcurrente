@@ -1,85 +1,85 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #81c19566b12fb23f
-step 1 DECL E: double d = -2.5 | DECL C: int r = 0 | DECL D: double r = 0.0 | ENTER A: entra a M.inc | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #5714d4ef6f526739
-step 2 BLOCKED D: espera para entrar a M.modd | BLOCKED C: espera para entrar a M.div | DECL E: int i = -3 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #bf76e23c14fb6a8c
-step 3 DECL B: int r = 0 | DECL E: bool b = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7dd841fd6564c86b
-step 4 BLOCKED B: espera para entrar a M.neg | ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #aa8d87be16487f8c
-step 5 DECL E: bool c = true | ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #bb34cc1353cdd424
-step 6 DECL E: double m = 1.5 | ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #947d7d5d06bb38e3
-step 7 WRITE E: write(-2.5-3falsetrue1.5) | ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9f97d27f5cbfdd01
-step 8 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #62a4afe4ee71fa04
-state #dfd2de99684e2e66
+create {"finished":false,"deadlock":false} #e7df019218ef0e31
+step 1 DECL E: double d = -2.5 | DECL C: int r = 0 | DECL D: double r = 0.0 | ENTER A: entra a M.inc | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b9153c68e29d1c6f
+step 2 BLOCKED D: espera para entrar a M.modd | BLOCKED C: espera para entrar a M.div | DECL E: int i = -3 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ee5b3c79e34a3435
+step 3 DECL B: int r = 0 | DECL E: bool b = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e0c35afa774900f6
+step 4 BLOCKED B: espera para entrar a M.neg | ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #4bec53cf7a565127
+step 5 DECL E: bool c = true | ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #9463cb8d19f26d34
+step 6 DECL E: double m = 1.5 | ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #8d0c5766abfaf7ce
+step 7 WRITE E: write(-2.5-3falsetrue1.5) | ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #decccd8a40ffe295
+step 8 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":8,"waiting":false} #28cf2063d0ed7441
+state #e444d2134afbdb9b
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #37d60aaf2b172796
-step 1 #f11d155c3d121db7
-step 2 #c4929dfedfc72df9
-step 3 #b9305f6857522b9c
-step 4 #194ea757daf9f6df
-step 5 #7f336ba812826b0a
-step 6 #fe50668608c7e447
-step 7 #2a3da0f075d5cf3b
-step 8 #c01562c4e30521e8
-step 9 #70be3b8fe6bf3e40
-state #876e57618cf4811a
+create {"finished":false,"deadlock":false} #ca5ee18470892157
+step 1 #995fd8b1c5e9c866
+step 2 #13e328d622febb19
+step 3 #691f1b3c955ab86f
+step 4 #2a959533e0e39717
+step 5 #9920f1f756f182f0
+step 6 #bfa7a3e6c6457b3c
+step 7 #fa0232b6fb1c3d91
+step 8 #ffaaa09a04fcef1e
+step 9 #e76e19b627cc3b4f
+state #5328ea744e80de64
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #9d13d78f94430f0c
-step 1 #3c3a2abe8c03e4fc
-step 2 #52521570c47365c1
-step 3 #96df6f164cd6dfbb
-step 4 #db07f9f1b6ccb453
-step 5 #6e0ec5cd250a6040
-step 6 #1a9b9e95e6f338af
-step 7 #4a7b81dcf9ed2e0c
-step 8 #c01562c4e30521e8
-step 9 #70be3b8fe6bf3e40
-state #423ae6b7e52a8106
+create {"finished":false,"deadlock":false} #a7844f2fa599f390
+step 1 #eb85b049ed791d7d
+step 2 #adc895e92cbd9601
+step 3 #92ecc5511ec32cfd
+step 4 #0a91abec10b18ac5
+step 5 #6fb39bd5c384e315
+step 6 #c9856c0a9122d305
+step 7 #2d07ca5f934d2c8c
+step 8 #ffaaa09a04fcef1e
+step 9 #e76e19b627cc3b4f
+state #60cfa7e05850dd18
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #81c19566b12fb23f
-step 1 ENTER A: entra a M.inc | DECL B: int r = 0 | DECL C: int r = 0 | DECL D: double r = 0.0 | DECL E: double d = -2.5 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7412415c97fac5b3
-step 2 BLOCKED B: espera para entrar a M.neg | BLOCKED C: espera para entrar a M.div | BLOCKED D: espera para entrar a M.modd | DECL E: int i = -3 | ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #cb387532e3f97be9
-step 3 DECL E: bool b = false | ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #3cd85a8ea2b4dda5
-step 4 ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | DECL E: bool c = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c3f54171a59cf6f1
-step 5 DECL E: double m = 1.5 | ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #9e210b1e24af2195
-step 6 WRITE E: write(-2.5-3falsetrue1.5) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #3c0d3098d3b391ee
-step 7 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":7,"waiting":false} #6199561addd39242
-state #ffce7a8d08e0bd3f
+create {"finished":false,"deadlock":false} #e7df019218ef0e31
+step 1 ENTER A: entra a M.inc | DECL B: int r = 0 | DECL C: int r = 0 | DECL D: double r = 0.0 | DECL E: double d = -2.5 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #83f1581009a0ab9c
+step 2 BLOCKED B: espera para entrar a M.neg | BLOCKED C: espera para entrar a M.div | BLOCKED D: espera para entrar a M.modd | DECL E: int i = -3 | ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9ed65e35e974f0e7
+step 3 DECL E: bool b = false | ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7da8a843f54cbcaf
+step 4 ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | DECL E: bool c = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #9040ea923f1c4405
+step 5 DECL E: double m = 1.5 | ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1b4e7bf7e639f57a
+step 6 WRITE E: write(-2.5-3falsetrue1.5) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #434750ffafcdf04f
+step 7 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":7,"waiting":false} #c0a7cad0b2ca62dc
+state #71774fc85554b2ce
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #37d60aaf2b172796
-step 1 #7412415c97fac5b3
-step 2 #cb387532e3f97be9
-step 3 #0e4b87f35dc91d2f
-step 4 #dba2582d46b425d5
-step 5 #56c5adf8a715b98c
-step 6 #3c0d3098d3b391ee
-step 7 #6199561addd39242
-state #708a03dc5f29df05
+create {"finished":false,"deadlock":false} #ca5ee18470892157
+step 1 #83f1581009a0ab9c
+step 2 #9ed65e35e974f0e7
+step 3 #4655ae2a6b9ac655
+step 4 #4054087df2f179ce
+step 5 #de207aa591393732
+step 6 #434750ffafcdf04f
+step 7 #c0a7cad0b2ca62dc
+state #4a9fc5321f9005ef
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #9d13d78f94430f0c
-step 1 #7412415c97fac5b3
-step 2 #c294552d1192decc
-step 3 #fc60bac2e5d1752e
-step 4 #c3d9e6a782b9c4e4
-step 5 #56c5adf8a715b98c
-step 6 #3c0d3098d3b391ee
-step 7 #6199561addd39242
-state #7591e05ffd5579e5
+create {"finished":false,"deadlock":false} #a7844f2fa599f390
+step 1 #83f1581009a0ab9c
+step 2 #713ee5191dcd53bb
+step 3 #f93a2b07f30eb2bb
+step 4 #8bb100d513cc8ec8
+step 5 #de207aa591393732
+step 6 #434750ffafcdf04f
+step 7 #c0a7cad0b2ca62dc
+state #6c9048b8eee48a08
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #81c19566b12fb23f
-step 1 DECL B: int r = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #37b51d279a891089
-step 2 DECL C: int r = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #204df50ce3e7fb7f
-step 3 DECL D: double r = 0.0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2a5de8d36e135362
-step 4 ENTER A: entra a M.inc | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #54a98974b03c62b3
-step 5 BLOCKED B: espera para entrar a M.neg | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #65c8f268fb216b28
-step 6 BLOCKED C: espera para entrar a M.div | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a4638f0df5641aac
-step 7 BLOCKED D: espera para entrar a M.modd | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1e300ba4ff7e81b0
-step 8 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #a8d7af0833cf5658
-step 9 ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e23e03b8cbd13f72
-step 10 DECL E: double d = -2.5 | ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4c76a518c0eb133f
-step 11 ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f4ae12b599ac1864
-step 12 DECL E: int i = -3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #300685d6ebf16e0e
-step 13 DECL E: bool b = false | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #4f85da708a3dcc84
-step 14 DECL E: bool c = true | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cdb0a3679207e842
-step 15 DECL E: double m = 1.5 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #3aa839c891aa318b
-step 16 WRITE E: write(-2.5-3falsetrue1.5) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #53f6dd83333499be
-step 17 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #b80b640e1e3d9f94
-state #8c96f8ed4bafd0cb
+create {"finished":false,"deadlock":false} #e7df019218ef0e31
+step 1 DECL B: int r = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #78e2abb13b5c6555
+step 2 DECL C: int r = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b6bd3dac497602d0
+step 3 DECL D: double r = 0.0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #85586be5f645f78d
+step 4 ENTER A: entra a M.inc | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #aaced555c47cd912
+step 5 BLOCKED B: espera para entrar a M.neg | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #752e9b6c2cb2977a
+step 6 BLOCKED C: espera para entrar a M.div | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #03f6c09468fc2566
+step 7 BLOCKED D: espera para entrar a M.modd | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #4f5c1acb5a23d19e
+step 8 ERROR A: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE A: libera M al terminar con error | ENTER B: entra a M.neg | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #4d97a1a800d19b04
+step 9 ERROR B: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE B: libera M al terminar con error | ENTER D: entra a M.modd | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #71d4898831a1967d
+step 10 DECL E: double d = -2.5 | ERROR D: error de ejecución - Módulo por cero | RELEASE D: libera M al terminar con error | ENTER C: entra a M.div | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4ce687e040b67175
+step 11 ERROR C: error de ejecución - Desborde de entero: el resultado no entra en un int | RELEASE C: libera M al terminar con error | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #42ee8e37e6147d30
+step 12 DECL E: int i = -3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d8f903806cb0e2ad
+step 13 DECL E: bool b = false | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #a522fec840ff2aed
+step 14 DECL E: bool c = true | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #677a81599f885f38
+step 15 DECL E: double m = 1.5 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #58ec91f0a475693c
+step 16 WRITE E: write(-2.5-3falsetrue1.5) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #079a6f5e273334a5
+step 17 TERMINATED E: termina | {"finished":true,"deadlock":false,"instant":17,"waiting":false} #b1065d738894e58b
+state #51c1bed7a968b730

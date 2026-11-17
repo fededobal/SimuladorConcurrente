@@ -1,188 +1,188 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #53d566bc986e58ac
-step 1 DECL P[4]: double r = 0.0 | DECL P[2]: double r = 0.0 | DECL P[3]: double r = 0.0 | DECL P[0]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #76a3a76862c32ae0
-step 2 ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ce4646cfa11d897a
-step 3 DECL P[1]: double r = 0.0 | ASSIGN P[3]: a[3]-- => -1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #35277a73d479df70
-step 4 BLOCKED P[1]: espera para entrar a M.f | BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c770a434fe3de854
-step 5 ASSIGN P[3]: r = 0.0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #354687d137dad066
-step 6 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #39223bf84ae83f1b
-step 7 ASSIGN P[0]: a[0]++ => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8c9d5bd703aa357c
-step 8 ASSIGN P[0]: d = 0.5 | WRITE P[3]: write(3: 0.0) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b22e3c7d754c7b18
-step 9 TERMINATED P[3]: termina | ASSIGN P[0]: r = 0.5 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #93d5c3dfe653b2b5
-step 10 RETURN P[0]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #8040e18f7fb54285
-step 11 ASSIGN P[4]: a[4]++ => 17 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #27658a7de5aa0ab6
-step 12 WRITE P[0]: write(0: 0.5) | ASSIGN P[4]: d = 1.0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #1c5bb884e0486095
-step 13 TERMINATED P[0]: termina | ASSIGN P[4]: r = 1.0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #5c3d641547322ae7
-step 14 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b1e4963c0a08915c
-step 15 ASSIGN P[1]: a[1]-- => -1 | WRITE P[4]: write(4: 1.0) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #3be5f592bfcbc9bd
-step 16 TERMINATED P[4]: termina | ASSIGN P[1]: r = 1.0 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #587e1c8109db6874
-step 17 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #7e878b26f8545fc3
-step 18 ASSIGN P[2]: a[2]++ => 5 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2a2c5472ce23b3e0
-step 19 WRITE P[1]: write(1: 1.0) | ASSIGN P[2]: d = 1.5 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #98d46ac823a08e2d
-step 20 ASSIGN P[2]: r = 1.5 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #7fb3ea40cca7cb27
-step 21 RETURN P[2]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #9855d54adb921416
-step 22 WRITE P[2]: write(2: 1.5) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #01f17b039ba56bc5
-step 23 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":23,"waiting":false} #8f9b452e31080a09
-state #9925b1eaeae53666
+create {"finished":false,"deadlock":false} #273793b0fb56bc50
+step 1 DECL P[4]: double r = 0.0 | DECL P[2]: double r = 0.0 | DECL P[3]: double r = 0.0 | DECL P[0]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7819f1836f2ece66
+step 2 ENTER P[3]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8c29a2d5a3279ec4
+step 3 DECL P[1]: double r = 0.0 | ASSIGN P[3]: a[3]-- => -1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #445513e1169e583b
+step 4 BLOCKED P[1]: espera para entrar a M.f | BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #446e4817b9081db7
+step 5 ASSIGN P[3]: r = 0.0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #17089ac00b95b26d
+step 6 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2ab3444a9ecb975a
+step 7 ASSIGN P[0]: a[0]++ => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #b0150c2595bb5fec
+step 8 ASSIGN P[0]: d = 0.5 | WRITE P[3]: write(3: 0.0) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #46e44cab50ba79ac
+step 9 TERMINATED P[3]: termina | ASSIGN P[0]: r = 0.5 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #6ea38f088e3e9f48
+step 10 RETURN P[0]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #a2677fb3813dd3ad
+step 11 ASSIGN P[4]: a[4]++ => 17 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #eb4f5e0ae73998b3
+step 12 WRITE P[0]: write(0: 0.5) | ASSIGN P[4]: d = 1.0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d9fe367e4448288d
+step 13 TERMINATED P[0]: termina | ASSIGN P[4]: r = 1.0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #70964ed7668a3a90
+step 14 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #849bff93b94b7b39
+step 15 ASSIGN P[1]: a[1]-- => -1 | WRITE P[4]: write(4: 1.0) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #39dea6c7db572405
+step 16 TERMINATED P[4]: termina | ASSIGN P[1]: r = 1.0 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #ef89522c8fc3d4aa
+step 17 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #eccd544d7e1501aa
+step 18 ASSIGN P[2]: a[2]++ => 5 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #a7a66c67309232f1
+step 19 WRITE P[1]: write(1: 1.0) | ASSIGN P[2]: d = 1.5 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9bebfdb2c32c3746
+step 20 ASSIGN P[2]: r = 1.5 | TERMINATED P[1]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f3d545fe57c9fe8a
+step 21 RETURN P[2]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #fe3ed212133d8bcc
+step 22 WRITE P[2]: write(2: 1.5) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #4c8b9952c1ebe6ed
+step 23 TERMINATED P[2]: termina | {"finished":true,"deadlock":false,"instant":23,"waiting":false} #d3bd4ebca3e66d24
+state #2d94d48d4a62c2f6
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #528600b01d3fe82d
-step 1 #557ea8f276353331
-step 2 #2a8c6cdee82f8e32
-step 3 #89e23e963ec0d382
-step 4 #073d771380c57838
-step 5 #8c9cc7f559d6bef6
-step 6 #9567d92d430d25a6
-step 7 #60df1ccf222fe963
-step 8 #173820dee842ff95
-step 9 #8377a31b7d27e8fc
-step 10 #ee6fe3c9ef07cd8b
-step 11 #d4b1cc606615d91f
-step 12 #db50d76286f07553
-step 13 #5736069f47af4f3d
-step 14 #c94322f2f3bb4c3b
-step 15 #a3967b666798f8cd
-step 16 #1362d84213048d37
-step 17 #5e5648f2b5189a99
-step 18 #c02bb83095f45deb
-step 19 #952a03f989d3fffd
-step 20 #431d3c7a4c2e3df2
-step 21 #ca3dfc2646ceefd4
-step 22 #27d162f3f455f498
-step 23 #2c6c0cc5f28a6211
-step 24 #609462d91bb069ed
-state #6f16da8136c4155c
+create {"finished":false,"deadlock":false} #4885736479cba5e3
+step 1 #d7ae5878b725dac2
+step 2 #38e5c74729a58506
+step 3 #7440592c557d4dae
+step 4 #68db8f72e200de2e
+step 5 #c759588a4b3feea5
+step 6 #40cd99df4e374b68
+step 7 #15b6674f1d151f9b
+step 8 #2bab5e7a1e1e2da3
+step 9 #7fe80a5437a5cb34
+step 10 #7d882e0baa89b06a
+step 11 #52a8aebce2c99bd9
+step 12 #5b2f8daf74ff9d18
+step 13 #6243cce1b837d1bd
+step 14 #39af12e9bb37486b
+step 15 #a7d5205a63bf23ac
+step 16 #2107947fc25ac71a
+step 17 #65a41e69ce4c2573
+step 18 #2fbdcdd92fe21195
+step 19 #d45d0b599047dafb
+step 20 #1eabc5477b372185
+step 21 #598dceb9be03bc48
+step 22 #9c15400c15876afb
+step 23 #6e17b4da6d254a1a
+step 24 #ca9de95d125e86cd
+state #519aec2e645c9e8a
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #46b29c6ae923de0e
-step 1 #cab08c1073319919
-step 2 #56b180ce1400b0ad
-step 3 #57898b9a235b48bd
-step 4 #ae2b76a7a5f4bbf3
-step 5 #e49689d00dbf0d6e
-step 6 #6a6c56aa2fa5ff06
-step 7 #8d3c94f3dc79731f
-step 8 #e32cafc805510a30
-step 9 #247f20d3d6b573d5
-step 10 #76548877a20ba50a
-step 11 #de523313ec0b85e1
-step 12 #c9eba4c331991ed9
-step 13 #fd177304729229c0
-step 14 #eaf4d11e318c6b58
-step 15 #57f2b88e03bc8c34
-step 16 #35500e298113fcc2
-step 17 #09050650b49ef23f
-step 18 #9bbbbc6d27034f53
-step 19 #2c24bf8b34675f79
-step 20 #f9754075915901f3
-step 21 #87be91ebd7b6de99
-step 22 #0ef1691aa8966a55
-step 23 #f0c36f86cc015c7d
-state #f3cd44f8f793baed
+create {"finished":false,"deadlock":false} #f57266c45686ccdb
+step 1 #2cc67a8a1c887c47
+step 2 #251d1ae26918d9b8
+step 3 #c8fd0f9e483b80a1
+step 4 #e218f00c594fea73
+step 5 #d38f599799f53346
+step 6 #e39ad505a1792481
+step 7 #c7ea4eb768b7359b
+step 8 #fa8bed26397e2994
+step 9 #5b93d6354b7826ae
+step 10 #74d737d89120fd92
+step 11 #f40e2a9232f11b0b
+step 12 #dfb42f928d95fc34
+step 13 #8780006489a1c2d0
+step 14 #6d49e123eed878ec
+step 15 #8ca83b238bd7faee
+step 16 #ad773de282b3f6d1
+step 17 #0159c5ea51b34d07
+step 18 #8a9634885c56dc06
+step 19 #cf79f52a00b9c598
+step 20 #1773219954116327
+step 21 #5d22e408fba3be36
+step 22 #e919a44828fcd353
+step 23 #a0ba3395c3894a35
+state #47f56379b8b4314f
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #53d566bc986e58ac
-step 1 DECL P[0]: double r = 0.0 | DECL P[1]: double r = 0.0 | DECL P[2]: double r = 0.0 | DECL P[3]: double r = 0.0 | DECL P[4]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0d0086f059855a8c
-step 2 ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[3]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a6b3a678660d13bb
-step 3 ASSIGN P[1]: a[1]-- => -1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0e0e30b97375069f
-step 4 ASSIGN P[1]: r = 0.0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3a79e3fb711f8927
-step 5 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a6b88d57b45e2e67
-step 6 ASSIGN P[4]: a[4]++ => 17 | WRITE P[1]: write(1: 0.0) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #06f3ffe55c92107b
-step 7 TERMINATED P[1]: termina | ASSIGN P[4]: d = 0.5 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #78fee364fb9047d5
-step 8 ASSIGN P[4]: r = 0.5 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b4e224d15e01c0c2
-step 9 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #13982b344eea9109
-step 10 ASSIGN P[3]: a[3]-- => -1 | WRITE P[4]: write(4: 0.5) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #c101e56338403158
-step 11 TERMINATED P[4]: termina | ASSIGN P[3]: r = 0.5 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f3f6edbe7dfd70d4
-step 12 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #27ed8960f4293bb5
-step 13 ASSIGN P[2]: a[2]++ => 5 | WRITE P[3]: write(3: 0.5) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #dc7c648f28281785
-step 14 TERMINATED P[3]: termina | ASSIGN P[2]: d = 1.0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f2cb628e4b0f6e48
-step 15 ASSIGN P[2]: r = 1.0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #eac896152b1edc7f
-step 16 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #7f0d0b612e5bb4b1
-step 17 ASSIGN P[0]: a[0]++ => 1 | WRITE P[2]: write(2: 1.0) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #47ed0cbb084b6e69
-step 18 TERMINATED P[2]: termina | ASSIGN P[0]: d = 1.5 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2ff9b5d4f5743e1c
-step 19 ASSIGN P[0]: r = 1.5 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #21bf8b7ef2e6b6ac
-step 20 RETURN P[0]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #260e57615c5cc11f
-step 21 WRITE P[0]: write(0: 1.5) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #d6eef2eef8d24bb3
-step 22 TERMINATED P[0]: termina | {"finished":true,"deadlock":false,"instant":22,"waiting":false} #db76c7d0fd743d25
-state #3641fc918df0677a
+create {"finished":false,"deadlock":false} #273793b0fb56bc50
+step 1 DECL P[0]: double r = 0.0 | DECL P[1]: double r = 0.0 | DECL P[2]: double r = 0.0 | DECL P[3]: double r = 0.0 | DECL P[4]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #93470427c987d0ac
+step 2 ENTER P[1]: entra a M.f | BLOCKED P[2]: espera para entrar a M.f | BLOCKED P[3]: espera para entrar a M.f | BLOCKED P[4]: espera para entrar a M.f | BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #80b4371e98e7afe5
+step 3 ASSIGN P[1]: a[1]-- => -1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #3f99c9d67307b448
+step 4 ASSIGN P[1]: r = 0.0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #df29a1037cfefe8e
+step 5 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #5a170a5b5d8e5d58
+step 6 ASSIGN P[4]: a[4]++ => 17 | WRITE P[1]: write(1: 0.0) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #24204cb14029ea50
+step 7 TERMINATED P[1]: termina | ASSIGN P[4]: d = 0.5 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d82b61e18743518a
+step 8 ASSIGN P[4]: r = 0.5 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #69a81f51c646b1ad
+step 9 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #7b2a1be05740aeea
+step 10 ASSIGN P[3]: a[3]-- => -1 | WRITE P[4]: write(4: 0.5) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #72bd15610d7b122c
+step 11 TERMINATED P[4]: termina | ASSIGN P[3]: r = 0.5 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #055f8c1ffc52ac1f
+step 12 RETURN P[3]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #66dac6645cf505f2
+step 13 ASSIGN P[2]: a[2]++ => 5 | WRITE P[3]: write(3: 0.5) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #1ca481d9dbc7b597
+step 14 TERMINATED P[3]: termina | ASSIGN P[2]: d = 1.0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cf9e5c53a57f046a
+step 15 ASSIGN P[2]: r = 1.0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #2a6b1864ae2673aa
+step 16 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b174d950ff9e6290
+step 17 ASSIGN P[0]: a[0]++ => 1 | WRITE P[2]: write(2: 1.0) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #c836687b75e626e4
+step 18 TERMINATED P[2]: termina | ASSIGN P[0]: d = 1.5 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c86ded56a8e77185
+step 19 ASSIGN P[0]: r = 1.5 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ce997da68fc8ecd5
+step 20 RETURN P[0]: retorna de M.f, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f2dab5d24e53b61b
+step 21 WRITE P[0]: write(0: 1.5) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #89f990cd9c7b77de
+step 22 TERMINATED P[0]: termina | {"finished":true,"deadlock":false,"instant":22,"waiting":false} #db8e8e0a3fbd10e4
+state #a73865fc607e876b
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #528600b01d3fe82d
-step 1 #0d0086f059855a8c
-step 2 #a6b3a678660d13bb
-step 3 #0e0e30b97375069f
-step 4 #3a79e3fb711f8927
-step 5 #a6b88d57b45e2e67
-step 6 #06f3ffe55c92107b
-step 7 #78fee364fb9047d5
-step 8 #b4e224d15e01c0c2
-step 9 #13982b344eea9109
-step 10 #c101e56338403158
-step 11 #f3f6edbe7dfd70d4
-step 12 #27ed8960f4293bb5
-step 13 #dc7c648f28281785
-step 14 #f2cb628e4b0f6e48
-step 15 #eac896152b1edc7f
-step 16 #7f0d0b612e5bb4b1
-step 17 #47ed0cbb084b6e69
-step 18 #2ff9b5d4f5743e1c
-step 19 #21bf8b7ef2e6b6ac
-step 20 #260e57615c5cc11f
-step 21 #d6eef2eef8d24bb3
-step 22 #db76c7d0fd743d25
-state #3641fc918df0677a
+create {"finished":false,"deadlock":false} #4885736479cba5e3
+step 1 #93470427c987d0ac
+step 2 #80b4371e98e7afe5
+step 3 #3f99c9d67307b448
+step 4 #df29a1037cfefe8e
+step 5 #5a170a5b5d8e5d58
+step 6 #24204cb14029ea50
+step 7 #d82b61e18743518a
+step 8 #69a81f51c646b1ad
+step 9 #7b2a1be05740aeea
+step 10 #72bd15610d7b122c
+step 11 #055f8c1ffc52ac1f
+step 12 #66dac6645cf505f2
+step 13 #1ca481d9dbc7b597
+step 14 #cf9e5c53a57f046a
+step 15 #2a6b1864ae2673aa
+step 16 #b174d950ff9e6290
+step 17 #c836687b75e626e4
+step 18 #c86ded56a8e77185
+step 19 #ce997da68fc8ecd5
+step 20 #f2dab5d24e53b61b
+step 21 #89f990cd9c7b77de
+step 22 #db8e8e0a3fbd10e4
+state #a73865fc607e876b
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #46b29c6ae923de0e
-step 1 #0d0086f059855a8c
-step 2 #a6b3a678660d13bb
-step 3 #0e0e30b97375069f
-step 4 #3a79e3fb711f8927
-step 5 #a6b88d57b45e2e67
-step 6 #06f3ffe55c92107b
-step 7 #78fee364fb9047d5
-step 8 #b4e224d15e01c0c2
-step 9 #ac712735568393c4
-step 10 #facee3e6ccea9d83
-step 11 #c1f1587e1c480630
-step 12 #6d5587ba0f40825b
-step 13 #17325ffc8d421069
-step 14 #40c737bc9d5a9a9a
-step 15 #00dd9f2817a6b670
-step 16 #51d91f651a99eb17
-step 17 #5f5b1420bc2f4981
-step 18 #229c3fd335128f83
-step 19 #0cf8420321ccf2ed
-step 20 #2bdf869ea6706729
-step 21 #84ccf2a588e19689
-step 22 #d7de27c0012392b4
-state #0937bacc10ba59f9
+create {"finished":false,"deadlock":false} #f57266c45686ccdb
+step 1 #93470427c987d0ac
+step 2 #80b4371e98e7afe5
+step 3 #3f99c9d67307b448
+step 4 #df29a1037cfefe8e
+step 5 #5a170a5b5d8e5d58
+step 6 #24204cb14029ea50
+step 7 #d82b61e18743518a
+step 8 #69a81f51c646b1ad
+step 9 #7b22dea5ba371d63
+step 10 #e57e6d10e8a327d9
+step 11 #ba8f35cfc3932589
+step 12 #ffdede6af3e059c9
+step 13 #a83a90fb309132ab
+step 14 #50fc1ba774801dd5
+step 15 #b2cab2bf2723cd60
+step 16 #99e2e085859383bb
+step 17 #feb619c888181d12
+step 18 #78426407c4e6952e
+step 19 #3694d6997b6924ce
+step 20 #9e529c577eb86f19
+step 21 #d9a5dc3446557aa4
+step 22 #2fd52187f4e34026
+state #71c6c477567abad5
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #53d566bc986e58ac
-step 1 DECL P[1]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b31ad22ca47acea3
-step 2 DECL P[2]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f4ec5a3c7e6630c9
-step 3 DECL P[3]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #01c1f269b54dbfc6
-step 4 DECL P[0]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #a6c8581c3cc6e621
-step 5 ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #d1e66393dcd34e6a
-step 6 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #afa5a172d4749c7c
-step 7 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #18ba7a565ba7e818
-step 8 BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3cced3e0efb2e907
-step 9 ASSIGN P[1]: a[1]-- => -1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8b8837183ce0181b
-step 10 ASSIGN P[1]: r = 0.0 | DECL P[4]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #c736a7b04edc92fb
-step 11 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #5079d5647eeed243
-step 12 ASSIGN P[0]: a[0]++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #6f6bdff8de6a5761
-step 13 WRITE P[1]: write(1: 0.0) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #180148da1a275d39
-step 14 TERMINATED P[1]: termina | ASSIGN P[0]: d = 0.5 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d2aa038841a011ba
-step 15 ASSIGN P[0]: r = 0.5 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #8f3edc2846faa704
-step 16 RETURN P[0]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #7968b55c3166be07
-step 17 ASSIGN P[4]: a[4]++ => 17 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #1cc5365647d341e2
-step 18 ASSIGN P[4]: d = 1.0 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #dee844fd5e6cde41
-step 19 WRITE P[0]: write(0: 0.5) | ASSIGN P[4]: r = 1.0 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #7c26ea1561db011b
-step 20 TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #fd5b4bba2bfc8682
-step 21 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #7a08cd303a598d0b
-step 22 ASSIGN P[2]: a[2]++ => 5 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #cfc512641462de92
-step 23 WRITE P[4]: write(4: 1.0) | ASSIGN P[2]: d = 1.5 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #095478ef1f29df18
-step 24 TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #aea248d20e9d0eb1
-step 25 ASSIGN P[2]: r = 1.5 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #cc4c3f6f2f25641c
-step 26 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #401efbabd4503863
-step 27 ASSIGN P[3]: a[3]-- => -1 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #05ba398665630321
-step 28 WRITE P[2]: write(2: 1.5) | ASSIGN P[3]: r = 1.5 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #57afea99ce39e2a0
-step 29 RETURN P[3]: retorna de M.f, libera el monitor | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #cbc78ff3d1f937e3
-step 30 WRITE P[3]: write(3: 1.5) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #2b82a13c1df87bea
-step 31 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":31,"waiting":false} #fd37a4d12bab146b
-state #c0b2a2e22ae4e526
+create {"finished":false,"deadlock":false} #273793b0fb56bc50
+step 1 DECL P[1]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8e01b7c75770be61
+step 2 DECL P[2]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7565272bb755f968
+step 3 DECL P[3]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5b6470c0ce0f6b53
+step 4 DECL P[0]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #aaa44fc7ac0d765b
+step 5 ENTER P[1]: entra a M.f | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1992fb8462335064
+step 6 BLOCKED P[2]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #8e465a9094399b03
+step 7 BLOCKED P[3]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #f541bd23a38f7869
+step 8 BLOCKED P[0]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5d2eefa1758fb9db
+step 9 ASSIGN P[1]: a[1]-- => -1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8a70a9b1336e4627
+step 10 ASSIGN P[1]: r = 0.0 | DECL P[4]: double r = 0.0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5214b1cdc7aaf611
+step 11 RETURN P[1]: retorna de M.f, libera el monitor | ENTER P[0]: entra a M.f | BLOCKED P[4]: espera para entrar a M.f | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #a9f3c46e739cc36d
+step 12 ASSIGN P[0]: a[0]++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c076efef0c684068
+step 13 WRITE P[1]: write(1: 0.0) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #245af4390778be47
+step 14 TERMINATED P[1]: termina | ASSIGN P[0]: d = 0.5 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #94e7853eb7cd913d
+step 15 ASSIGN P[0]: r = 0.5 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #7b08c5f7c5de361a
+step 16 RETURN P[0]: retorna de M.f, libera el monitor | ENTER P[4]: entra a M.f | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c8ba5012d5450a07
+step 17 ASSIGN P[4]: a[4]++ => 17 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #8ff1a68c23a7893c
+step 18 ASSIGN P[4]: d = 1.0 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #364e1df0469dbb7d
+step 19 WRITE P[0]: write(0: 0.5) | ASSIGN P[4]: r = 1.0 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #f4c628a09799afb9
+step 20 TERMINATED P[0]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9fb92c952325b261
+step 21 RETURN P[4]: retorna de M.f, libera el monitor | ENTER P[2]: entra a M.f | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6f777a14d78d9f16
+step 22 ASSIGN P[2]: a[2]++ => 5 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #cd855ffac2a2437a
+step 23 WRITE P[4]: write(4: 1.0) | ASSIGN P[2]: d = 1.5 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #945e015f1c39fce3
+step 24 TERMINATED P[4]: termina | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #27faa474107b340a
+step 25 ASSIGN P[2]: r = 1.5 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #43d7181e74135eb2
+step 26 RETURN P[2]: retorna de M.f, libera el monitor | ENTER P[3]: entra a M.f | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #6e092a261c330226
+step 27 ASSIGN P[3]: a[3]-- => -1 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #d7fd4ce5ad65c977
+step 28 WRITE P[2]: write(2: 1.5) | ASSIGN P[3]: r = 1.5 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #df983b20d6c19523
+step 29 RETURN P[3]: retorna de M.f, libera el monitor | TERMINATED P[2]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d88f2089465766a5
+step 30 WRITE P[3]: write(3: 1.5) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #f3b17151176f8d32
+step 31 TERMINATED P[3]: termina | {"finished":true,"deadlock":false,"instant":31,"waiting":false} #ca6a6b0caa8dbb45
+state #4041f234506f60d1

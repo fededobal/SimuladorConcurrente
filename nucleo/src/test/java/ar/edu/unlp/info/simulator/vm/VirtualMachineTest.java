@@ -376,8 +376,9 @@ class VirtualMachineTest {
     }
 
     /**
-     * Rojo, amarillo y verde son de los estados en la interfaz: ningun proceso los recibe.
-     * Se controla el tono (HSL) de los colores de doce procesos, uno por color de la paleta.
+     * Rojo, ambar y verde son del error y de los estados en la interfaz, y el violeta es el
+     * de "en wait": ningun proceso los recibe. Se controla el tono (HSL) de los colores de
+     * doce procesos, uno por color de la paleta.
      */
     @Test
     void processColorsAvoidStateColors() {
@@ -385,7 +386,18 @@ class VirtualMachineTest {
         for (Snapshot.ProcessView p : vm.snapshot().processes()) {
             double hue = hue(p.color());
             assertTrue(hue >= 180 && hue <= 335, p.name() + " tiene el color " + p.color());
+            assertTrue(hue < 245 || hue > 270,
+                    p.name() + " tiene el violeta de los procesos en wait: " + p.color());
         }
+    }
+
+    /** Los dos primeros colores, los de un programa de dos procesos, no se parecen. */
+    @Test
+    void firstTwoProcessColorsAreFarApart() {
+        VirtualMachine vm = TestSupport.compileAndBuild("process A { skip; } process B { skip; }", 0);
+        double a = hue(vm.snapshot().processes().get(0).color());
+        double b = hue(vm.snapshot().processes().get(1).color());
+        assertTrue(Math.abs(a - b) >= 90, "tonos " + a + " y " + b);
     }
 
     /**

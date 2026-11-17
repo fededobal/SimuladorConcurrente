@@ -67,6 +67,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Colores de los procesos más vivos y más distintos entre sí: en un programa de dos procesos, uno es azul y el otro rosa fuerte. Siguen fuera de la paleta el rojo, el ámbar, el verde y, ahora, el violeta, que identifican el error y los estados. (Federico Dobal, 2026-11-17)
 - `delay(n)` se mide en instantes y no en segundos: ejecutarlo ocupa un instante y el proceso no avanza durante los `n` siguientes (ADR 0008). Si nadie puede avanzar pero alguno está demorado, los instantes pasan igual, así la demora se ve con su duración en la línea de tiempo y se puede recorrer paso a paso. Un programa con `delay` ahora se repite igual con la misma semilla. La etiqueta del proceso dice cuántos instantes le faltan. Los programas que usaban `delay` como segundos conservan el valor, que pasa a contarse en instantes. (Federico Dobal, 2026-11-17)
 - El estado de la barra dice «interbloqueo» en lugar de «deadlock», como el resto de los textos y la documentación. (Federico Dobal, 2026-11-17)
 - Editor: cada renglón con procesos lleva una sola franja lisa, un chip con la inicial del proceso en el margen y, al final del código, una etiqueta que dice quién está ahí y qué hace ("Productor · en Buffer", "Cliente ×8 · dormidos en wait(esperaCli[…])"), con un ícono por estado. Los procesos en el mismo estado y lugar comparten etiqueta. Los estados usan colores más separados: ámbar para el que compite, violeta para el que espera y verde azulado para el delay. (Federico Dobal, 2026-11-17)

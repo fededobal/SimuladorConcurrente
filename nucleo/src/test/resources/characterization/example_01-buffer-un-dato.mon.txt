@@ -1,369 +1,369 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #ac67fb8130b4d266
-step 1 DECL Productor: int i = 1 | DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #5e69a54814bfe75e
-step 2 ENTER Productor: entra a Buffer.depositar | DECL Consumidor: int n = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #bb03286f9fd53d6f
-step 3 ASSIGN Productor: dato = 1 | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fd2b911c6e72e8da
-step 4 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ce12a890a8948d2c
-step 5 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f21067d57283a84f
-step 6 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e021b660afc91674
-step 7 ASSIGN Consumidor: r = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c3cbd0f0fce7f9f0
-step 8 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3ed1d44282d83eb2
-step 9 WRITE Productor: write(deposite 1) | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e85eb3e4d9422157
-step 10 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ASSIGN Productor: i++ => 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #104b46131794b9e3
-step 11 WRITE Consumidor: write(retire 1) | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #4b7f09e47b813ca7
-step 12 ASSIGN Productor: dato = 2 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #bd0399f23c9c259b
-step 13 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #fa21cc6f3e4d0678
-step 14 BLOCKED Consumidor: espera para entrar a Buffer.retirar | SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #8fcddf43343b09a3
-step 15 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #5aaa12ff733741e4
-step 16 ASSIGN Consumidor: r = 2 | WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c4987b1196886949
-step 17 ASSIGN Productor: i++ => 3 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a86a10f5ab3d2fa1
-step 18 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #fcbfa9354827617b
-step 19 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #7e6d1a48a1f0483f
-step 20 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6e38b2761a6d6b75
-step 21 ASSIGN Productor: dato = 3 | WRITE Consumidor: write(retire 2) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #1c89d7597d15dd39
-step 22 ASSIGN Consumidor: n++ => 2 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #e30682166346146d
-step 23 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #de33a85b7c88d76f
-step 24 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #52c3916ecfdf494c
-step 25 ASSIGN Consumidor: r = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #0daa5858da384882
-step 26 ASSIGN Consumidor: hayDato = false | WRITE Productor: write(deposite 3) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #fb924e60512c1bac
-step 27 ASSIGN Productor: i++ => 4 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #da5e3e52d0e9dcd4
-step 28 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #c0cabd1eb506f88b
-step 29 WRITE Consumidor: write(retire 3) | ASSIGN Productor: dato = 4 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #c436b166aa6d7a8d
-step 30 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #f31413eabfd487a3
-step 31 ASSIGN Consumidor: n++ => 3 | SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #29d204c0961de29b
-step 32 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #06be17378bd073d2
-step 33 WRITE Productor: write(deposite 4) | ASSIGN Consumidor: r = 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #87eec191d0b9183b
-step 34 ASSIGN Productor: i++ => 5 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #28aefa36f75823c8
-step 35 ASSIGN Consumidor: hayDato = false | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #cccffba5dae6ea4d
-step 36 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #9a9e640c9c92130a
-step 37 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #51695b3a7b9b2461
-step 38 WRITE Consumidor: write(retire 4) | ASSIGN Productor: dato = 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #0fad54ae42bf6761
-step 39 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 4 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #d5734db914ce728d
-step 40 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #88b7787cde4d3b6a
-step 41 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #13f494be5be80001
-step 42 ASSIGN Consumidor: r = 5 | WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #bec254dcedd04f83
-step 43 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #c2b6af348f7c562f
-step 44 ASSIGN Productor: i++ => 6 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #c3fde5cddc270f6c
-step 45 TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #2466dce0caf9c20f
-step 46 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #5c6d970f5e570249
-step 47 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #659e1b0f8986ce94
-step 48 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #a9153bad03873faa
-step 49 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":49,"waiting":false} #3c6706c6f2c58442
-state #43821d7e10f33c6f
+create {"finished":false,"deadlock":false} #2575239d8940b32f
+step 1 DECL Productor: int i = 1 | DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #590379dc861b46a4
+step 2 ENTER Productor: entra a Buffer.depositar | DECL Consumidor: int n = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9261271b37498e11
+step 3 ASSIGN Productor: dato = 1 | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f1e40010d1852fd1
+step 4 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #65177c7f2d285198
+step 5 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7b1353bbf749c073
+step 6 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e3ad62a3a5082ccd
+step 7 ASSIGN Consumidor: r = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #f13ff557037ac3d9
+step 8 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #8a56b9926b6452de
+step 9 WRITE Productor: write(deposite 1) | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #da9cace403a6eebd
+step 10 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ASSIGN Productor: i++ => 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d8f8f68786160bac
+step 11 WRITE Consumidor: write(retire 1) | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #a4bb4ae8239be864
+step 12 ASSIGN Productor: dato = 2 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #0c9d63c5d22c712a
+step 13 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #01ee8f14c7ed3487
+step 14 BLOCKED Consumidor: espera para entrar a Buffer.retirar | SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #85f0ef2755662fad
+step 15 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #0b807a3b8ad67976
+step 16 ASSIGN Consumidor: r = 2 | WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #29777cd8da82e59c
+step 17 ASSIGN Productor: i++ => 3 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #084c2136cdfcc69e
+step 18 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #d62c3af6bf73e549
+step 19 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #088fea889baf5a40
+step 20 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #fb64446e59bb427d
+step 21 ASSIGN Productor: dato = 3 | WRITE Consumidor: write(retire 2) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #13002fa649d9f2c7
+step 22 ASSIGN Consumidor: n++ => 2 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #4b041c291690fd6d
+step 23 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #a6b01da2d5bf5019
+step 24 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #b74f06cebf754b9b
+step 25 ASSIGN Consumidor: r = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #4eaf136250ff8ffb
+step 26 ASSIGN Consumidor: hayDato = false | WRITE Productor: write(deposite 3) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #660c2fa74df9fd25
+step 27 ASSIGN Productor: i++ => 4 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #c6f1084719146d0b
+step 28 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #051bfc256b8c3e44
+step 29 WRITE Consumidor: write(retire 3) | ASSIGN Productor: dato = 4 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #ceca253fa77d3925
+step 30 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #97fdeeac38611fb5
+step 31 ASSIGN Consumidor: n++ => 3 | SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c8b416fbc75b9a7b
+step 32 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #9a0521c352bcb95d
+step 33 WRITE Productor: write(deposite 4) | ASSIGN Consumidor: r = 4 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #07fa91cfef1ffc5c
+step 34 ASSIGN Productor: i++ => 5 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #db1d71942aa47b1a
+step 35 ASSIGN Consumidor: hayDato = false | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #8ef28a2b9b8338b5
+step 36 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #0a3526656f294601
+step 37 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #19f862cabd6be227
+step 38 WRITE Consumidor: write(retire 4) | ASSIGN Productor: dato = 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #7deea5af9877e2b1
+step 39 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 4 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #b62f075f276cbe35
+step 40 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #5324a61189798a66
+step 41 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #d04bc56bef531c3b
+step 42 ASSIGN Consumidor: r = 5 | WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #60a406bca1d3b42d
+step 43 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #191cb6976acd4eeb
+step 44 ASSIGN Productor: i++ => 6 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #7a9a103fd850ecf3
+step 45 TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #0f8d852a07b6b665
+step 46 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #363b69f1d5e43725
+step 47 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #ab17a2be254eaabb
+step 48 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #60d203af968da797
+step 49 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":49,"waiting":false} #9e5cff588ede32a0
+state #d155dfaea8aa21dd
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #909e0c3fe29f1b26
-step 1 #0ed89ff5c458210d
-step 2 #73cd039c4befb7eb
-step 3 #2300a59a8b2411f2
-step 4 #3ce61ce540553cbc
-step 5 #6c88ba069d95b2e2
-step 6 #bd850f154dd083f2
-step 7 #d0d753278efdc6ff
-step 8 #f518d0011336f4fd
-step 9 #76585ebada7d4a4f
-step 10 #ab176930a0018b28
-step 11 #c6cea184605128a6
-step 12 #63f15faa66b43f65
-step 13 #d364139441a9896f
-step 14 #84e7cf556ef5b0b9
-step 15 #2f493308ca83ca77
-step 16 #9344ade382f74f13
-step 17 #54090a3b651fabaa
-step 18 #434dabdcff57591b
-step 19 #6fc0f03fe6ed7228
-step 20 #e861dbea8ffec5fc
-step 21 #cb91d1ecd9f565e6
-step 22 #603a83156ad21f40
-step 23 #d0543e433207c357
-step 24 #f3a030d16e8c190c
-step 25 #7000ff0a5c51e668
-step 26 #437332d57faf0fd6
-step 27 #566327e75887f459
-step 28 #5aba8107aaf6f597
-step 29 #55ccb81e1b967ffd
-step 30 #aff60194c9a8bc3e
-step 31 #7a2eb769c633f1f0
-step 32 #3196d9b0f2d1d772
-step 33 #8cefb760b82d02ae
-step 34 #bf8be95c8c43d994
-step 35 #e46dea64b0d141d4
-step 36 #d48cdb5538310f16
-step 37 #10e1a604360e9cef
-step 38 #8ff866cb467695af
-step 39 #d959b32c0549fac7
-step 40 #96f5446f869944f8
-step 41 #200496798c89dd3b
-step 42 #9174c76757c9fa80
-step 43 #c22971cb7e8c1620
-step 44 #019d4f8632c765d3
-step 45 #3dc626734fe5b488
-step 46 #6ef0240afe2e83f5
-step 47 #1e7e06ad859c85f9
-step 48 #0f8152a15a2d2180
-step 49 #0127131a9d605931
-step 50 #445d30039749c84c
-step 51 #1e6b714bc7bf3332
-step 52 #4f00207468e713c1
-step 53 #c5f714a9f0406a71
-step 54 #0f3fd8509fd7b743
-state #9f5df9cf7e965fa1
+create {"finished":false,"deadlock":false} #ce36d5ef8473f4c0
+step 1 #b667de3a86ba848e
+step 2 #ca88c63e80dadaaf
+step 3 #a3d7278a052ea9f3
+step 4 #51f512bb843b52d1
+step 5 #691dc64e7d261e6e
+step 6 #689f20d8a5ba5737
+step 7 #3744941d58faffbf
+step 8 #9b3198a31b7e247b
+step 9 #1c1237bab8403a50
+step 10 #7f8ee5e9e473c602
+step 11 #8946a9be46408303
+step 12 #733b49359fe644b4
+step 13 #a90b3fd36d6d15d9
+step 14 #85bbadf14a834c11
+step 15 #b7bf4150aa07468c
+step 16 #650b4927b1b32af7
+step 17 #55ec35c193bae2d0
+step 18 #767e84647f321d2c
+step 19 #509e991c462381bf
+step 20 #f4b70665080ffc04
+step 21 #c956fb04998cbc86
+step 22 #771bef3e2408bdd2
+step 23 #2f922391f2377b94
+step 24 #c498555993bbc2b6
+step 25 #6a6dec19ca35345d
+step 26 #326ccc154d614862
+step 27 #a98ac72ae9a87732
+step 28 #d0115fdfd6ef9628
+step 29 #3c8f7d0719715d3f
+step 30 #1a112525b4448f62
+step 31 #2a0168a493a7a719
+step 32 #881c45ca3f2a08a8
+step 33 #98f24ce1746b4494
+step 34 #d0e3f5d56378d046
+step 35 #4f8833b8dad7d40a
+step 36 #b56b305a881bb4d9
+step 37 #5484c14331ed5580
+step 38 #88e4fa573ca5570a
+step 39 #8410c38d379ad7a6
+step 40 #72d83cb3b22e5f4d
+step 41 #8b2dd5f9b7a3f1cc
+step 42 #04c428c213fe08fb
+step 43 #c3628d11f4d0ad43
+step 44 #c0827fd97797de55
+step 45 #c9739887dc615f00
+step 46 #196d608b16b8834e
+step 47 #9eec93174a8e06e1
+step 48 #f2ee74356f06bec8
+step 49 #d03368130d427d88
+step 50 #b500ca8d7c34b3de
+step 51 #fa0812c960a1a516
+step 52 #eb0205d85a150ed0
+step 53 #48b5585ac4f925fb
+step 54 #c5146c61795c8e32
+state #01477d5397289339
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #ab001e29062b403d
-step 1 #5e69a54814bfe75e
-step 2 #7951751b2660fbd5
-step 3 #3654299b2dc89790
-step 4 #dcf6c0ed6acbeea2
-step 5 #0aa1b4d74aeddc32
-step 6 #e021b660afc91674
-step 7 #c3cbd0f0fce7f9f0
-step 8 #d3261926c44aeb14
-step 9 #12fb2179c397bc8c
-step 10 #8015d885557c45eb
-step 11 #56fe22b3ddda7e49
-step 12 #3d45df3f623bd0d9
-step 13 #1f39a339687a9e9b
-step 14 #13b5b6f687cb96f4
-step 15 #3af012a893d95682
-step 16 #7dd69a55e4c27dd1
-step 17 #4a193c5958591212
-step 18 #54b4f155346c4816
-step 19 #797904b61f991297
-step 20 #eee27f39f058c51f
-step 21 #75c4950826255bcc
-step 22 #f30a70d74d78373e
-step 23 #102428d49fa592e2
-step 24 #52ffddeb09be0c3e
-step 25 #57acec408affffd3
-step 26 #bdf1202da5349c76
-step 27 #bfdd58772c7690a1
-step 28 #96880cc5f455bb06
-step 29 #5970b7acb7bfa5bb
-step 30 #5bdc4c90cb8c640f
-step 31 #77575e1429302b53
-step 32 #36cf4e0667ac62bd
-step 33 #609faf3efdb93156
-step 34 #2112ff8d6dc8274a
-step 35 #f7837c283c84de35
-step 36 #c9b9abb86a588503
-step 37 #c394f55caa46565b
-step 38 #3682f4bb05fffe95
-step 39 #758bd01adedf9c97
-step 40 #cf2e3f9928867da6
-step 41 #59ba8bb5a0edbb99
-step 42 #35de42d17e6dda6b
-step 43 #5e63e4efe64c3603
-step 44 #1247643bd261de70
-step 45 #e528928411f122f7
-step 46 #73172b9debd3eeb6
-step 47 #3e1192c94349fad8
-step 48 #4aa2f8cd3d6e0af7
-step 49 #0ec4df3725b30a86
-step 50 #51f8771591b73fab
-step 51 #a4efc015c3402770
-state #374979647065289b
+create {"finished":false,"deadlock":false} #db47508de35d82c8
+step 1 #590379dc861b46a4
+step 2 #8622b61d81ec9f4e
+step 3 #633d264e8e89417b
+step 4 #2d1154c6fe832fc0
+step 5 #ea1bcb29d6241d45
+step 6 #e3ad62a3a5082ccd
+step 7 #f13ff557037ac3d9
+step 8 #3fa9db5ba661cb6e
+step 9 #da5c55132235544e
+step 10 #03d36d0e1d85c111
+step 11 #d256e07353fb4be6
+step 12 #8e7c260b0d3ad8b7
+step 13 #b44add7ae8871601
+step 14 #25393bf096df82e2
+step 15 #8d56c552b6408d77
+step 16 #1f20873bdd9a4a61
+step 17 #81c8fce43d204db8
+step 18 #b9bbfd5036d3a922
+step 19 #d8bd6f339388fb40
+step 20 #fc0ab2bdbceff311
+step 21 #a6a48f5e68b7c1fe
+step 22 #764def639292adc7
+step 23 #6957d51e8354364b
+step 24 #3587a32d8de4555e
+step 25 #de0e98a5a6722736
+step 26 #fc50fb097b8b7f55
+step 27 #1c265de675748ef9
+step 28 #8fe0f82b9b55b23b
+step 29 #0acecfc39a64ab6c
+step 30 #9d3026ed9ec58618
+step 31 #30487465c0f401ad
+step 32 #c75ca110afae8eaa
+step 33 #64d7205263fc6416
+step 34 #9074043868e8cc1f
+step 35 #6e92f03aa649060e
+step 36 #b255d6988acadd1a
+step 37 #135b46442410bc03
+step 38 #cf79e1491b8250d3
+step 39 #89b44930d537a8c6
+step 40 #8b7bc9ab47a60e4d
+step 41 #4773e46c375d3af6
+step 42 #496a1c9ebb888db3
+step 43 #59eadb664965aa8f
+step 44 #7bf49abc9899aa69
+step 45 #64039aef770bddfc
+step 46 #3986b105de957f7a
+step 47 #a9ac55a25262ec72
+step 48 #c98eefc6e996a15d
+step 49 #6d9d3226909ce3e9
+step 50 #cbaa58b360280b72
+step 51 #9bde51bfa5e9546a
+state #c44b0a61211c4160
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #ac67fb8130b4d266
-step 1 DECL Productor: int i = 1 | DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #5e69a54814bfe75e
-step 2 DECL Consumidor: int n = 0 | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4e29d768744061e8
-step 3 ASSIGN Productor: dato = 1 | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fd2b911c6e72e8da
-step 4 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ce12a890a8948d2c
-step 5 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f21067d57283a84f
-step 6 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e021b660afc91674
-step 7 ASSIGN Consumidor: r = 1 | WRITE Productor: write(deposite 1) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d032288e34e3864c
-step 8 ASSIGN Productor: i++ => 2 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5975a21d8ecb3fcd
-step 9 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #bf32cc93dda2dc2b
-step 10 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d9100458a1d57872
-step 11 ASSIGN Productor: dato = 2 | WRITE Consumidor: write(retire 1) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #24a6ecc24094663c
-step 12 ASSIGN Consumidor: n++ => 1 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e1ece232a1f9b782
-step 13 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #e54715107bcdea53
-step 14 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #3e98e5967e0ac892
-step 15 ASSIGN Consumidor: r = 2 | WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #45b57755d33daf34
-step 16 ASSIGN Productor: i++ => 3 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #bd980647570a4831
-step 17 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #9f1d4fd3f2d25a05
-step 18 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2f00e92851680763
-step 19 ASSIGN Productor: dato = 3 | WRITE Consumidor: write(retire 2) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ed6ea710af6f5599
-step 20 ASSIGN Consumidor: n++ => 2 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #4a36e8b27291f7fb
-step 21 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6127aebd9628fe74
-step 22 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #ca47c3b8adbbbbc8
-step 23 ASSIGN Consumidor: r = 3 | WRITE Productor: write(deposite 3) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #4328f2c1397fef0f
-step 24 ASSIGN Productor: i++ => 4 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #dc1344b52dc5b9fe
-step 25 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #2a0b58ed295c745e
-step 26 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #2df95e9479dc0a77
-step 27 ASSIGN Productor: dato = 4 | WRITE Consumidor: write(retire 3) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #efb6975d7f5988f4
-step 28 ASSIGN Consumidor: n++ => 3 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #c8f99c4ff032d4e3
-step 29 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #57c96328449c2857
-step 30 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #fa2bb0ff6a128081
-step 31 ASSIGN Consumidor: r = 4 | WRITE Productor: write(deposite 4) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a482060c64da4a6e
-step 32 ASSIGN Productor: i++ => 5 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #690a3ea65919bdd4
-step 33 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e7f222c990fc6379
-step 34 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e556b83933afb588
-step 35 ASSIGN Productor: dato = 5 | WRITE Consumidor: write(retire 4) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #2bf1de487eceff11
-step 36 ASSIGN Consumidor: n++ => 4 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #aede2a2020368c0a
-step 37 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #f3c558ceba7c57c4
-step 38 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #7ce124566114775e
-step 39 ASSIGN Consumidor: r = 5 | WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #159e346635a1e5c1
-step 40 ASSIGN Productor: i++ => 6 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #cf3e7505acf5df56
-step 41 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #cf5b892310366231
-step 42 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #1133176a7111bbb2
-step 43 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #8c046d4f82c4902a
-step 44 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #94ecedb1997a81c8
-step 45 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":45,"waiting":false} #f647bd5eca129efe
-state #2c0f3f59b1619c6d
+create {"finished":false,"deadlock":false} #2575239d8940b32f
+step 1 DECL Productor: int i = 1 | DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #590379dc861b46a4
+step 2 DECL Consumidor: int n = 0 | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #358acd2c17d1e9df
+step 3 ASSIGN Productor: dato = 1 | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f1e40010d1852fd1
+step 4 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #65177c7f2d285198
+step 5 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7b1353bbf749c073
+step 6 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e3ad62a3a5082ccd
+step 7 ASSIGN Consumidor: r = 1 | WRITE Productor: write(deposite 1) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #338a549bd268c482
+step 8 ASSIGN Productor: i++ => 2 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e41162355da2a336
+step 9 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f53b83f4e1237f44
+step 10 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #fe57848e899012c4
+step 11 ASSIGN Productor: dato = 2 | WRITE Consumidor: write(retire 1) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #79375c6365628059
+step 12 ASSIGN Consumidor: n++ => 1 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #01ff6158ab07b991
+step 13 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #1bd5c9cc84e26e2e
+step 14 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d3a1432003467cd1
+step 15 ASSIGN Consumidor: r = 2 | WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #d037f06b6086f66f
+step 16 ASSIGN Productor: i++ => 3 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #70b23b1cbd12a5bb
+step 17 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #5839a7dd3de1eb4c
+step 18 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #55b59122df217e38
+step 19 ASSIGN Productor: dato = 3 | WRITE Consumidor: write(retire 2) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #2281d746beef6d28
+step 20 ASSIGN Consumidor: n++ => 2 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #a8eed2029ff0fb11
+step 21 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e5841a9caa47323f
+step 22 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b3e8bbad2ebde4bb
+step 23 ASSIGN Consumidor: r = 3 | WRITE Productor: write(deposite 3) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #4f076fcf708ed0bc
+step 24 ASSIGN Productor: i++ => 4 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #ca01755ec3d1dadb
+step 25 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #5c2ec3497fa24f34
+step 26 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b5510451ab1af5f2
+step 27 ASSIGN Productor: dato = 4 | WRITE Consumidor: write(retire 3) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #5f7470895891767b
+step 28 ASSIGN Consumidor: n++ => 3 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #f2554b830a8cbe6f
+step 29 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #b09fdf638d7e9210
+step 30 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #919e30fd180ded6b
+step 31 ASSIGN Consumidor: r = 4 | WRITE Productor: write(deposite 4) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #0886a5ecbeec1077
+step 32 ASSIGN Productor: i++ => 5 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #7b2eb3a45560ae48
+step 33 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #62fec5ca2dd1d71d
+step 34 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #6349e3a04272fffe
+step 35 ASSIGN Productor: dato = 5 | WRITE Consumidor: write(retire 4) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #60cd86dfe79304fe
+step 36 ASSIGN Consumidor: n++ => 4 | ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #49b571ece162ea24
+step 37 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #89eb2117068c328e
+step 38 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #5991e83f6a75bb0d
+step 39 ASSIGN Consumidor: r = 5 | WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #3357ff6df06876ca
+step 40 ASSIGN Productor: i++ => 6 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #8679480748d0a5c8
+step 41 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #ce5da4e6dbbacc70
+step 42 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #65d5c56f00faaff8
+step 43 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #4baa1d129f960973
+step 44 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #53e55048f07de299
+step 45 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":45,"waiting":false} #4460706ebfb083f0
+state #176c0b249038c246
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #909e0c3fe29f1b26
-step 1 #5e69a54814bfe75e
-step 2 #4e29d768744061e8
-step 3 #fd2b911c6e72e8da
-step 4 #ce12a890a8948d2c
-step 5 #f21067d57283a84f
-step 6 #e021b660afc91674
-step 7 #d032288e34e3864c
-step 8 #5975a21d8ecb3fcd
-step 9 #bf32cc93dda2dc2b
-step 10 #d9100458a1d57872
-step 11 #24a6ecc24094663c
-step 12 #e1ece232a1f9b782
-step 13 #e54715107bcdea53
-step 14 #3e98e5967e0ac892
-step 15 #45b57755d33daf34
-step 16 #bd980647570a4831
-step 17 #9f1d4fd3f2d25a05
-step 18 #2f00e92851680763
-step 19 #ed6ea710af6f5599
-step 20 #4a36e8b27291f7fb
-step 21 #6127aebd9628fe74
-step 22 #ca47c3b8adbbbbc8
-step 23 #4328f2c1397fef0f
-step 24 #dc1344b52dc5b9fe
-step 25 #2a0b58ed295c745e
-step 26 #2df95e9479dc0a77
-step 27 #efb6975d7f5988f4
-step 28 #c8f99c4ff032d4e3
-step 29 #57c96328449c2857
-step 30 #fa2bb0ff6a128081
-step 31 #a482060c64da4a6e
-step 32 #690a3ea65919bdd4
-step 33 #e7f222c990fc6379
-step 34 #e556b83933afb588
-step 35 #2bf1de487eceff11
-step 36 #aede2a2020368c0a
-step 37 #f3c558ceba7c57c4
-step 38 #7ce124566114775e
-step 39 #159e346635a1e5c1
-step 40 #cf3e7505acf5df56
-step 41 #cf5b892310366231
-step 42 #1133176a7111bbb2
-step 43 #8c046d4f82c4902a
-step 44 #94ecedb1997a81c8
-step 45 #f647bd5eca129efe
-state #2c0f3f59b1619c6d
+create {"finished":false,"deadlock":false} #ce36d5ef8473f4c0
+step 1 #590379dc861b46a4
+step 2 #358acd2c17d1e9df
+step 3 #f1e40010d1852fd1
+step 4 #65177c7f2d285198
+step 5 #7b1353bbf749c073
+step 6 #e3ad62a3a5082ccd
+step 7 #338a549bd268c482
+step 8 #e41162355da2a336
+step 9 #f53b83f4e1237f44
+step 10 #fe57848e899012c4
+step 11 #79375c6365628059
+step 12 #01ff6158ab07b991
+step 13 #1bd5c9cc84e26e2e
+step 14 #d3a1432003467cd1
+step 15 #d037f06b6086f66f
+step 16 #70b23b1cbd12a5bb
+step 17 #5839a7dd3de1eb4c
+step 18 #55b59122df217e38
+step 19 #2281d746beef6d28
+step 20 #a8eed2029ff0fb11
+step 21 #e5841a9caa47323f
+step 22 #b3e8bbad2ebde4bb
+step 23 #4f076fcf708ed0bc
+step 24 #ca01755ec3d1dadb
+step 25 #5c2ec3497fa24f34
+step 26 #b5510451ab1af5f2
+step 27 #5f7470895891767b
+step 28 #f2554b830a8cbe6f
+step 29 #b09fdf638d7e9210
+step 30 #919e30fd180ded6b
+step 31 #0886a5ecbeec1077
+step 32 #7b2eb3a45560ae48
+step 33 #62fec5ca2dd1d71d
+step 34 #6349e3a04272fffe
+step 35 #60cd86dfe79304fe
+step 36 #49b571ece162ea24
+step 37 #89eb2117068c328e
+step 38 #5991e83f6a75bb0d
+step 39 #3357ff6df06876ca
+step 40 #8679480748d0a5c8
+step 41 #ce5da4e6dbbacc70
+step 42 #65d5c56f00faaff8
+step 43 #4baa1d129f960973
+step 44 #53e55048f07de299
+step 45 #4460706ebfb083f0
+state #176c0b249038c246
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #ab001e29062b403d
-step 1 #5e69a54814bfe75e
-step 2 #4e29d768744061e8
-step 3 #fd2b911c6e72e8da
-step 4 #ce12a890a8948d2c
-step 5 #f21067d57283a84f
-step 6 #e021b660afc91674
-step 7 #d032288e34e3864c
-step 8 #5975a21d8ecb3fcd
-step 9 #bf32cc93dda2dc2b
-step 10 #d9100458a1d57872
-step 11 #24a6ecc24094663c
-step 12 #e1ece232a1f9b782
-step 13 #e54715107bcdea53
-step 14 #3e98e5967e0ac892
-step 15 #45b57755d33daf34
-step 16 #bd980647570a4831
-step 17 #9f1d4fd3f2d25a05
-step 18 #2f00e92851680763
-step 19 #ed6ea710af6f5599
-step 20 #4a36e8b27291f7fb
-step 21 #6127aebd9628fe74
-step 22 #ca47c3b8adbbbbc8
-step 23 #4328f2c1397fef0f
-step 24 #dc1344b52dc5b9fe
-step 25 #2a0b58ed295c745e
-step 26 #2df95e9479dc0a77
-step 27 #efb6975d7f5988f4
-step 28 #c8f99c4ff032d4e3
-step 29 #57c96328449c2857
-step 30 #fa2bb0ff6a128081
-step 31 #a482060c64da4a6e
-step 32 #690a3ea65919bdd4
-step 33 #e7f222c990fc6379
-step 34 #e556b83933afb588
-step 35 #2bf1de487eceff11
-step 36 #aede2a2020368c0a
-step 37 #f3c558ceba7c57c4
-step 38 #7ce124566114775e
-step 39 #159e346635a1e5c1
-step 40 #cf3e7505acf5df56
-step 41 #cf5b892310366231
-step 42 #1133176a7111bbb2
-step 43 #8c046d4f82c4902a
-step 44 #94ecedb1997a81c8
-step 45 #f647bd5eca129efe
-state #2c0f3f59b1619c6d
+create {"finished":false,"deadlock":false} #db47508de35d82c8
+step 1 #590379dc861b46a4
+step 2 #358acd2c17d1e9df
+step 3 #f1e40010d1852fd1
+step 4 #65177c7f2d285198
+step 5 #7b1353bbf749c073
+step 6 #e3ad62a3a5082ccd
+step 7 #338a549bd268c482
+step 8 #e41162355da2a336
+step 9 #f53b83f4e1237f44
+step 10 #fe57848e899012c4
+step 11 #79375c6365628059
+step 12 #01ff6158ab07b991
+step 13 #1bd5c9cc84e26e2e
+step 14 #d3a1432003467cd1
+step 15 #d037f06b6086f66f
+step 16 #70b23b1cbd12a5bb
+step 17 #5839a7dd3de1eb4c
+step 18 #55b59122df217e38
+step 19 #2281d746beef6d28
+step 20 #a8eed2029ff0fb11
+step 21 #e5841a9caa47323f
+step 22 #b3e8bbad2ebde4bb
+step 23 #4f076fcf708ed0bc
+step 24 #ca01755ec3d1dadb
+step 25 #5c2ec3497fa24f34
+step 26 #b5510451ab1af5f2
+step 27 #5f7470895891767b
+step 28 #f2554b830a8cbe6f
+step 29 #b09fdf638d7e9210
+step 30 #919e30fd180ded6b
+step 31 #0886a5ecbeec1077
+step 32 #7b2eb3a45560ae48
+step 33 #62fec5ca2dd1d71d
+step 34 #6349e3a04272fffe
+step 35 #60cd86dfe79304fe
+step 36 #49b571ece162ea24
+step 37 #89eb2117068c328e
+step 38 #5991e83f6a75bb0d
+step 39 #3357ff6df06876ca
+step 40 #8679480748d0a5c8
+step 41 #ce5da4e6dbbacc70
+step 42 #65d5c56f00faaff8
+step 43 #4baa1d129f960973
+step 44 #53e55048f07de299
+step 45 #4460706ebfb083f0
+state #176c0b249038c246
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #ac67fb8130b4d266
-step 1 DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0ed89ff5c458210d
-step 2 DECL Productor: int i = 1 | DECL Consumidor: int n = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #25b7ef5f8f826d07
-step 3 ENTER Productor: entra a Buffer.depositar | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #975ab5e4ee65bac9
-step 4 ASSIGN Productor: dato = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f75ed29d8c67ed38
-step 5 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #cb62e2fb6d3afdb7
-step 6 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2e95fb64b0ed6d1e
-step 7 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1d0300e226623821
-step 8 WRITE Productor: write(deposite 1) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b4cbf4defd0e8c77
-step 9 ASSIGN Consumidor: r = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #2f2713550dbe37f5
-step 10 ASSIGN Productor: i++ => 2 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #2f0ef5f248b42e42
-step 11 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #134c51f915e4927b
-step 12 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #75953cb7c800ab09
-step 13 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #42bad07a81322cf0
-step 14 WRITE Consumidor: write(retire 1) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0b16af893126826d
-step 15 ASSIGN Productor: dato = 2 | ASSIGN Consumidor: n++ => 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #512ea2edd1ccf984
-step 16 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #9c223675b3025715
-step 17 BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #9368c1ae339d21db
-step 18 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #e512634e8a7ee8c3
-step 19 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #48c1555555ed6ebf
-step 20 WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #510e1d42526cf5a7
-step 21 ASSIGN Consumidor: r = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e77b070a1852635e
-step 22 ASSIGN Consumidor: hayDato = false | ASSIGN Productor: i++ => 3 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #00cdaefad9d517cb
-step 23 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #62fd7e91f57a3823
-step 24 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #ce649b5e1c5a99b6
-step 25 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #0a34d24dd7070bb9
-step 26 WRITE Consumidor: write(retire 2) | ASSIGN Productor: dato = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #0cf9946436c60e8f
-step 27 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #fc3329ae5d1fadc2
-step 28 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #fbcfa3210b1c1067
-step 29 ASSIGN Consumidor: n++ => 2 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #23978d0e7d371459
-step 30 BLOCKED Consumidor: espera para entrar a Buffer.retirar | RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #ae2e28b7aaba477a
-step 31 WRITE Productor: write(deposite 3) | ASSIGN Consumidor: r = 3 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #b7e757c9d733d8fe
-step 32 ASSIGN Productor: i++ => 4 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #6cf07526f9f7c0a1
-step 33 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #c1bf8563e477796a
-step 34 BLOCKED Productor: espera para entrar a Buffer.depositar | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #17c5936d4654e7e3
-step 35 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #6efe32b2aebe7656
-step 36 ASSIGN Productor: dato = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #7d922642fd49eda9
-step 37 WRITE Consumidor: write(retire 3) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #712982f2b2c0edc3
-step 38 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 3 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #90b162a9beab34b7
-step 39 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #e953534843c2fbfe
-step 40 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #0dee2ec6cb3dcc99
-step 41 ASSIGN Consumidor: r = 4 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #cfeceb7f2034d331
-step 42 ASSIGN Consumidor: hayDato = false | WRITE Productor: write(deposite 4) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #4108cd97153fee57
-step 43 ASSIGN Productor: i++ => 5 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a2eae50def1d3693
-step 44 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #23565169175fa043
-step 45 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #a6b27093d68e6d4c
-step 46 ASSIGN Productor: dato = 5 | WRITE Consumidor: write(retire 4) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #dd807878dab05b8d
-step 47 ASSIGN Consumidor: n++ => 4 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #043db207f799958f
-step 48 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #d3281862f70635c5
-step 49 BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #0f6eacb8211e4ca6
-step 50 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #adfbbc4dbaeb62b8
-step 51 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #edfddcbe66c7f3c8
-step 52 WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #1e46809d4f6c1095
-step 53 ASSIGN Consumidor: r = 5 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #3c6694fb77f54930
-step 54 ASSIGN Consumidor: hayDato = false | ASSIGN Productor: i++ => 6 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #8b36a080243e4cab
-step 55 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3dea74fd3d8ee888
-step 56 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #f8dc421907455f4a
-step 57 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #68d48a99a894e800
-step 58 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #3203fc5a2902edf8
-step 59 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":59,"waiting":false} #eb7ede6a22c060d1
-state #6d0a5553f0149255
+create {"finished":false,"deadlock":false} #2575239d8940b32f
+step 1 DECL Consumidor: int x = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b667de3a86ba848e
+step 2 DECL Productor: int i = 1 | DECL Consumidor: int n = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2fabc6020c745f79
+step 3 ENTER Productor: entra a Buffer.depositar | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5a3d70c2c6e02091
+step 4 ASSIGN Productor: dato = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #5216e06e3c200c1a
+step 5 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #560b4c0be27a73b3
+step 6 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #499b447c68764026
+step 7 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #219d4b6cac08cc70
+step 8 WRITE Productor: write(deposite 1) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #0cc9cfcc3a07b582
+step 9 ASSIGN Consumidor: r = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ac7142b743f5c53c
+step 10 ASSIGN Productor: i++ => 2 | ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #94ac98ddb47e7c9e
+step 11 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #9f9cb5c25b7b1b22
+step 12 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ea50cd2b9fa96621
+step 13 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #a6b2a10e55f76168
+step 14 WRITE Consumidor: write(retire 1) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e53971314e125414
+step 15 ASSIGN Productor: dato = 2 | ASSIGN Consumidor: n++ => 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #92b6f494095de86b
+step 16 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #db56aeff378e017b
+step 17 BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #512b668ec69f502b
+step 18 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2c52fdcdc8f28fab
+step 19 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ebf3d50e7045997a
+step 20 WRITE Productor: write(deposite 2) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #887362225b820323
+step 21 ASSIGN Consumidor: r = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #237bcf2c7a1f40be
+step 22 ASSIGN Consumidor: hayDato = false | ASSIGN Productor: i++ => 3 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #db4ff8a07512d081
+step 23 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #eddf77350059bb0d
+step 24 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #1f46deef950c8096
+step 25 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #e4c04f0b307fc73f
+step 26 WRITE Consumidor: write(retire 2) | ASSIGN Productor: dato = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #fe2cf219aa4ee522
+step 27 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #bd69e1327940e246
+step 28 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a34fc9df16178724
+step 29 ASSIGN Consumidor: n++ => 2 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #ce4fcc3792c4d160
+step 30 BLOCKED Consumidor: espera para entrar a Buffer.retirar | RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #29295e7adc3e51da
+step 31 WRITE Productor: write(deposite 3) | ASSIGN Consumidor: r = 3 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a2799787c976db04
+step 32 ASSIGN Productor: i++ => 4 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #26066225e29bc534
+step 33 ASSIGN Consumidor: hayDato = false | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #4381a2173dc93cac
+step 34 BLOCKED Productor: espera para entrar a Buffer.depositar | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #7da248dd270eade1
+step 35 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #57367a3f28ce511c
+step 36 ASSIGN Productor: dato = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #d781c044ffb14cd6
+step 37 WRITE Consumidor: write(retire 3) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #68e7ddb15b976cda
+step 38 ASSIGN Productor: hayDato = true | ASSIGN Consumidor: n++ => 3 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #2cc617ad67cbd622
+step 39 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #0787f533e51af9b7
+step 40 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #fa038bac3c583b24
+step 41 ASSIGN Consumidor: r = 4 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #10fcae16db7bda65
+step 42 ASSIGN Consumidor: hayDato = false | WRITE Productor: write(deposite 4) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #da1713b670984a73
+step 43 ASSIGN Productor: i++ => 5 | SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #6c6472cb69315ac8
+step 44 BLOCKED Productor: espera para entrar a Buffer.depositar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #090c2b89b51dc076
+step 45 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | ENTER Productor: entra a Buffer.depositar | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #f14f7a88388ae7a0
+step 46 ASSIGN Productor: dato = 5 | WRITE Consumidor: write(retire 4) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #55f3b17105d2f1ec
+step 47 ASSIGN Consumidor: n++ => 4 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b90f3537c71c2ff7
+step 48 ASSIGN Productor: hayDato = true | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #c1026e50c9752d5c
+step 49 BLOCKED Consumidor: espera para entrar a Buffer.retirar | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #d7cb2aca44bddbad
+step 50 SIGNAL Productor: signal(ocupado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #3107f819d74e26a4
+step 51 RETURN Productor: retorna de Buffer.depositar, libera el monitor | ENTER Consumidor: entra a Buffer.retirar | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #3de2af73dbbb81ef
+step 52 WRITE Productor: write(deposite 5) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #637dd8a102894315
+step 53 ASSIGN Consumidor: r = 5 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #32fc1261c8757adb
+step 54 ASSIGN Consumidor: hayDato = false | ASSIGN Productor: i++ => 6 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #1b9df3e013063eb6
+step 55 SIGNAL Consumidor: signal(libre) - sin efecto (cola vacía) | TERMINATED Productor: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3fa37a2c50e25c4c
+step 56 RETURN Consumidor: retorna de Buffer.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #364e3695c316b5ae
+step 57 WRITE Consumidor: write(retire 5) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #ef42f70b8435bf90
+step 58 ASSIGN Consumidor: n++ => 5 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #fb5125e1ce716db2
+step 59 TERMINATED Consumidor: termina | {"finished":true,"deadlock":false,"instant":59,"waiting":false} #97ec8c2a1fab0cae
+state #22a8581fe08c2dc1

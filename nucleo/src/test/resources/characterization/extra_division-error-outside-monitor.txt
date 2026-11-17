@@ -1,91 +1,91 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #6b3d6c471d274fa5
-step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b62bdb4a560d1160
-step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7998d54b09fef4c6
-step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2f688576feb57930
-step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d135f0111db2a1ae
-step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1bf9c42a2c6ecef3
-step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c3ce7028602c4ba9
-step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #17bae5ecb1b5a715
-step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2fd0de63ea077cc8
-step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #510d501a30e4e5dd
-step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #3628a1627618ab9c
+step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #dca1106517382b07
+step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #82d49caba27de52f
+step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a2157eadc744932c
+step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b2009bcb671321eb
+step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #00cbe34b85644a2b
+step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #60a91859ef00bed8
+step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #62bee930d67d83da
+step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b3b79cd419153622
+step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #26749570a517e1d4
+step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #16b527285dd12306
+state #7077acf50af776c6
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #76d9c69db8bbd5b5
-step 1 #b62bdb4a560d1160
-step 2 #7998d54b09fef4c6
-step 3 #2f688576feb57930
-step 4 #d135f0111db2a1ae
-step 5 #1bf9c42a2c6ecef3
-step 6 #c3ce7028602c4ba9
-step 7 #17bae5ecb1b5a715
-step 8 #2fd0de63ea077cc8
-step 9 #510d501a30e4e5dd
-step 10 #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #a8f3b7311fa8b3a9
+step 1 #dca1106517382b07
+step 2 #82d49caba27de52f
+step 3 #a2157eadc744932c
+step 4 #b2009bcb671321eb
+step 5 #00cbe34b85644a2b
+step 6 #60a91859ef00bed8
+step 7 #62bee930d67d83da
+step 8 #b3b79cd419153622
+step 9 #26749570a517e1d4
+step 10 #16b527285dd12306
+state #7077acf50af776c6
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #47e7d0583e3edb8e
-step 1 #b62bdb4a560d1160
-step 2 #7998d54b09fef4c6
-step 3 #2f688576feb57930
-step 4 #d135f0111db2a1ae
-step 5 #1bf9c42a2c6ecef3
-step 6 #c3ce7028602c4ba9
-step 7 #17bae5ecb1b5a715
-step 8 #2fd0de63ea077cc8
-step 9 #510d501a30e4e5dd
-step 10 #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #fd87a5117c0c29ff
+step 1 #dca1106517382b07
+step 2 #82d49caba27de52f
+step 3 #a2157eadc744932c
+step 4 #b2009bcb671321eb
+step 5 #00cbe34b85644a2b
+step 6 #60a91859ef00bed8
+step 7 #62bee930d67d83da
+step 8 #b3b79cd419153622
+step 9 #26749570a517e1d4
+step 10 #16b527285dd12306
+state #7077acf50af776c6
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #6b3d6c471d274fa5
-step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b62bdb4a560d1160
-step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7998d54b09fef4c6
-step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2f688576feb57930
-step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d135f0111db2a1ae
-step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1bf9c42a2c6ecef3
-step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c3ce7028602c4ba9
-step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #17bae5ecb1b5a715
-step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2fd0de63ea077cc8
-step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #510d501a30e4e5dd
-step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #3628a1627618ab9c
+step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #dca1106517382b07
+step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #82d49caba27de52f
+step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a2157eadc744932c
+step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b2009bcb671321eb
+step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #00cbe34b85644a2b
+step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #60a91859ef00bed8
+step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #62bee930d67d83da
+step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b3b79cd419153622
+step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #26749570a517e1d4
+step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #16b527285dd12306
+state #7077acf50af776c6
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #76d9c69db8bbd5b5
-step 1 #b62bdb4a560d1160
-step 2 #7998d54b09fef4c6
-step 3 #2f688576feb57930
-step 4 #d135f0111db2a1ae
-step 5 #1bf9c42a2c6ecef3
-step 6 #c3ce7028602c4ba9
-step 7 #17bae5ecb1b5a715
-step 8 #2fd0de63ea077cc8
-step 9 #510d501a30e4e5dd
-step 10 #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #a8f3b7311fa8b3a9
+step 1 #dca1106517382b07
+step 2 #82d49caba27de52f
+step 3 #a2157eadc744932c
+step 4 #b2009bcb671321eb
+step 5 #00cbe34b85644a2b
+step 6 #60a91859ef00bed8
+step 7 #62bee930d67d83da
+step 8 #b3b79cd419153622
+step 9 #26749570a517e1d4
+step 10 #16b527285dd12306
+state #7077acf50af776c6
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #47e7d0583e3edb8e
-step 1 #b62bdb4a560d1160
-step 2 #7998d54b09fef4c6
-step 3 #2f688576feb57930
-step 4 #d135f0111db2a1ae
-step 5 #1bf9c42a2c6ecef3
-step 6 #c3ce7028602c4ba9
-step 7 #17bae5ecb1b5a715
-step 8 #2fd0de63ea077cc8
-step 9 #510d501a30e4e5dd
-step 10 #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #fd87a5117c0c29ff
+step 1 #dca1106517382b07
+step 2 #82d49caba27de52f
+step 3 #a2157eadc744932c
+step 4 #b2009bcb671321eb
+step 5 #00cbe34b85644a2b
+step 6 #60a91859ef00bed8
+step 7 #62bee930d67d83da
+step 8 #b3b79cd419153622
+step 9 #26749570a517e1d4
+step 10 #16b527285dd12306
+state #7077acf50af776c6
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #6b3d6c471d274fa5
-step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b62bdb4a560d1160
-step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7998d54b09fef4c6
-step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2f688576feb57930
-step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d135f0111db2a1ae
-step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1bf9c42a2c6ecef3
-step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #c3ce7028602c4ba9
-step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #17bae5ecb1b5a715
-step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2fd0de63ea077cc8
-step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #510d501a30e4e5dd
-step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #0626ee28e3e5a938
-state #ebf5e80b34619d2c
+create {"finished":false,"deadlock":false} #3628a1627618ab9c
+step 1 DECL P: int a = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #dca1106517382b07
+step 2 DECL P: int b = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #82d49caba27de52f
+step 3 ASSIGN P: a-- => 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a2157eadc744932c
+step 4 ASSIGN P: b = 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #b2009bcb671321eb
+step 5 ASSIGN P: a-- => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #00cbe34b85644a2b
+step 6 ASSIGN P: b = 5 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #60a91859ef00bed8
+step 7 ASSIGN P: a-- => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #62bee930d67d83da
+step 8 ASSIGN P: b = 10 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #b3b79cd419153622
+step 9 ASSIGN P: a-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #26749570a517e1d4
+step 10 ERROR P: error de ejecución - División por cero | {"finished":true,"deadlock":false,"instant":10,"waiting":false} #16b527285dd12306
+state #7077acf50af776c6

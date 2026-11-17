@@ -1,35 +1,35 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #6c5ada80b17b46a7
-step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #19d723cfb6372933
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #651ad10f55ac449c
+step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f128f46b993b28b7
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #5d40e17c59fc818d
-step 1 #19d723cfb6372933
-step 2 #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #78434c7274c828a4
+step 1 #f128f46b993b28b7
+step 2 #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #8ac96c23bb275e08
-step 1 #19d723cfb6372933
-step 2 #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #d91c2ead84825ca9
+step 1 #f128f46b993b28b7
+step 2 #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #6c5ada80b17b46a7
-step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #19d723cfb6372933
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #651ad10f55ac449c
+step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f128f46b993b28b7
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #5d40e17c59fc818d
-step 1 #19d723cfb6372933
-step 2 #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #78434c7274c828a4
+step 1 #f128f46b993b28b7
+step 2 #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #8ac96c23bb275e08
-step 1 #19d723cfb6372933
-step 2 #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #d91c2ead84825ca9
+step 1 #f128f46b993b28b7
+step 2 #8514a88425c886e1
+state #ddf512f8cb0624f9
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #6c5ada80b17b46a7
-step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #19d723cfb6372933
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #a0aff09b9a6feeca
-state #7af60fcb2ad0ae5d
+create {"finished":false,"deadlock":false} #651ad10f55ac449c
+step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f128f46b993b28b7
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #8514a88425c886e1
+state #ddf512f8cb0624f9

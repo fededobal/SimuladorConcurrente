@@ -1,382 +1,382 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #b4b12a7d504cc144
-step 1 ENTER Prod: entra a Buf.enviar | DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #34c3ec577479ba70
-step 2 ASSIGN Prod: dato = 1 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #581abe7e0fd78f47
-step 3 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9da2c79280b64a3c
-step 4 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2960909da1bb132a
-step 5 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #28fff572a0c0fd77
-step 6 ASSIGN Prod: i++ => 2 | ASSIGN Cons: suma = 1 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #2170b68955927413
-step 7 ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #a803e60966d7d7ad
-step 8 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e45e2da2a7f68f82
-step 9 BLOCKED Prod: espera para entrar a Buf.enviar | SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #150455c1442d8148
-step 10 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d2fedba6e55b7368
-step 11 ASSIGN Cons: k++ => 2 | ASSIGN Prod: dato = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7db224e34ade44e6
-step 12 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #5b6b8ba930c96321
-step 13 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #23def5ae8507babb
-step 14 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #af63c7fd13ef58a5
-step 15 ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #7b32bb8df860c9ec
-step 16 ASSIGN Cons: suma = 3 | BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b749d8d4a341313c
-step 17 ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #f5e30069ae310057
-step 18 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #7c9b889bac071eda
-step 19 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #7fc9e0da7c95eaa5
-step 20 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #06ae9273114bf178
-step 21 ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6e0679def4c79688
-step 22 ASSIGN Prod: dato = 3 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0a30446f362680ea
-step 23 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #1302887331adc9f7
-step 24 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #fcfeba60d64e3816
-step 25 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #de84c507d56d9e82
-step 26 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #30e5c5864a48fe6c
-step 27 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #5a5132cd12d077c7
-step 28 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #b493d6cfc3fa03b2
-step 29 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #5aedc2028e04a209
-step 30 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #6048e71ed30695bc
-step 31 ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #1af15253e67e5bfb
-step 32 ASSIGN Prod: dato = 4 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #66c9cbe9e5013079
-step 33 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #400bcda62fa36bd9
-step 34 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #a68dcf75a55d6c4b
-step 35 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #d4a4aead2569c6f7
-step 36 ASSIGN Cons: suma = 10 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #13bf59e0202ffd50
-step 37 ASSIGN Cons: recibidos = 4 | BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #1570c417b46c729a
-step 38 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #55f5436d430fca3a
-step 39 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #f21bd91fe7080bfb
-step 40 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #4bd82a424a9c582c
-step 41 ASSIGN Prod: dato = 5 | ASSIGN Cons: k++ => 5 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #a155b96f72fe893c
-step 42 ASSIGN Prod: hay = true | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #820635f652ce357c
-step 43 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #d1c417e5f579f108
-step 44 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #5dce97c3f6e768c5
-step 45 ASSIGN Cons: suma = 15 | ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #de0cee2d3f7e9a19
-step 46 ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0a985f4c94f8ee3d
-step 47 ASSIGN Cons: hay = false | TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b3b4108a71b8a8c6
-step 48 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #430df9fa79bea9d6
-step 49 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #bb2d1989082807e1
-step 50 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #820570ed1d8948b4
-step 51 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":51,"waiting":false} #8494525c8e985e11
-state #e626e938c687f122
+create {"finished":false,"deadlock":false} #432433207124eb3b
+step 1 ENTER Prod: entra a Buf.enviar | DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #73c74aaf3d7dc727
+step 2 ASSIGN Prod: dato = 1 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #31740835ab3dffa9
+step 3 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #8daf2cf002f60208
+step 4 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #56677e6d67903c71
+step 5 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #dae0cbf20daef203
+step 6 ASSIGN Prod: i++ => 2 | ASSIGN Cons: suma = 1 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #aac76275fc3ae9d7
+step 7 ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c738e6be95c8a824
+step 8 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #fef443322055627f
+step 9 BLOCKED Prod: espera para entrar a Buf.enviar | SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f4b6621c871bb882
+step 10 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5b7c46b0f036bc2b
+step 11 ASSIGN Cons: k++ => 2 | ASSIGN Prod: dato = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ea1b4b1a707d11df
+step 12 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #4369884247234b16
+step 13 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #dea39f07ff1a6127
+step 14 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #49a19052bd411101
+step 15 ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #2c320dab674436f4
+step 16 ASSIGN Cons: suma = 3 | BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #1d3a7101bc34d1d8
+step 17 ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #48930dcf12b8ad1f
+step 18 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #cc393b4e98973b23
+step 19 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #1b5066433b18a93c
+step 20 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #28505ef83811c203
+step 21 ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #5426901a46ad71ed
+step 22 ASSIGN Prod: dato = 3 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #fdccf46eafe4a080
+step 23 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #1c33dd04a52f5309
+step 24 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #6a1f03b2f5e1be5e
+step 25 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #35ac229b78cc83e8
+step 26 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #ede0fec9aad1d412
+step 27 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #d44f1b4fecf82991
+step 28 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #8d93ce019a24c684
+step 29 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #3cee0694033710dd
+step 30 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d96dcfc97c66c20b
+step 31 ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #fcb9440e4b691a19
+step 32 ASSIGN Prod: dato = 4 | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #e62f7547fef4ad6c
+step 33 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #0d866cb17da45e1a
+step 34 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #8e371365c5a43716
+step 35 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #a864f408286a8b07
+step 36 ASSIGN Cons: suma = 10 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #7513961688af70eb
+step 37 ASSIGN Cons: recibidos = 4 | BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #3e1248192604f88d
+step 38 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #0af264c537495842
+step 39 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #ad7e3b70842597fb
+step 40 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #5709191858cb02ff
+step 41 ASSIGN Prod: dato = 5 | ASSIGN Cons: k++ => 5 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #035939b1de0d0d42
+step 42 ASSIGN Prod: hay = true | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #2c253783507c2dfa
+step 43 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #39f3dfdd91f1b17a
+step 44 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #9dacf9cf6a3085d1
+step 45 ASSIGN Cons: suma = 15 | ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #3deab8b1861e5fec
+step 46 ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #7be529b79f883ee0
+step 47 ASSIGN Cons: hay = false | TERMINATED Prod: termina | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #c37904fbbf51604e
+step 48 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #a28a99cca9ec1cf8
+step 49 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #9198cb53bd6dd617
+step 50 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #2929fe6337040615
+step 51 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":51,"waiting":false} #9e48bf06ecd58f9c
+state #aad39ed72afa2a4d
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #865b6e54820d274f
-step 1 #54d6493395e37c96
-step 2 #dc2c826937cda26a
-step 3 #25698154a51aa54a
-step 4 #0eaeba9de53d53b3
-step 5 #ec5301b8e6e2c0a4
-step 6 #a82872a84fc3bc8b
-step 7 #c44ce3ffd0a106bf
-step 8 #77891f347e66ae1b
-step 9 #fc906f507ba9d92b
-step 10 #af8038657787fef9
-step 11 #ace0768f0f26c38f
-step 12 #4a17047d9ab79fa3
-step 13 #94677e90629413d1
-step 14 #776a4f6856701492
-step 15 #bb05c64e0f9b24ce
-step 16 #3709321ae84b85eb
-step 17 #62419c18d21ccf0a
-step 18 #d9f7739da3345b05
-step 19 #a70dfc425c2cf6bc
-step 20 #df83ba8888ef7857
-step 21 #ce1379faa08d0637
-step 22 #eec5a9eaa095ca6b
-step 23 #ba1f5467372e117c
-step 24 #5ea1aa7bb0405610
-step 25 #ca6b1155b8059c7f
-step 26 #7284ea0e693ff563
-step 27 #ec062dec765fb9a7
-step 28 #6be19c1a382c382a
-step 29 #1a2a0330b901ab12
-step 30 #f26c63d7898ce9a8
-step 31 #f5b8920402248d8a
-step 32 #8a5247599bf41257
-step 33 #79acda17e0d8472d
-step 34 #67e27a6797fde763
-step 35 #214f6bcd03beb799
-step 36 #804e1fdf63d1d5c4
-step 37 #5c8ee74e42ba12f5
-step 38 #ca2b82a51426d515
-step 39 #e462da318187ddb2
-step 40 #588cf65d0c6896ca
-step 41 #bd4b843520edafb6
-step 42 #85f47f046d846f80
-step 43 #f24c1ef69eec452a
-step 44 #99704fcdbd352f55
-step 45 #757468e43e1e2826
-step 46 #eb881eb0b538e6e5
-step 47 #f4ef1aea8521e606
-step 48 #22f2af219cef42a5
-step 49 #65d30e34adca1dc8
-step 50 #f8111d0f46bac9fb
-step 51 #ed9535e2f40ca7ae
-step 52 #813b6cad4a58fb7d
-step 53 #c48f197da9decb31
-step 54 #b4a68925305dcfde
-step 55 #27fc3bf428e73a82
-step 56 #86dd69023214d042
-step 57 #f80f3c3751d9c30b
-state #5fbcb8713d9afb61
+create {"finished":false,"deadlock":false} #38e37890de74f955
+step 1 #7320b524898fecef
+step 2 #fcd6b43516793883
+step 3 #6fb83f023b222fe3
+step 4 #67a0c5914b452c36
+step 5 #5f52c2a16399f867
+step 6 #668fd17a53032a5b
+step 7 #fb8bec42e5ecdbf9
+step 8 #f691465bad45d557
+step 9 #07083c1916ee9269
+step 10 #5cfd2973c4c3564d
+step 11 #7e8dddcb031e549b
+step 12 #a4ac7cfa3307dc85
+step 13 #d2ed0b04573f4e82
+step 14 #226593878715b98a
+step 15 #7a3e03eec8f4c634
+step 16 #e6820ae5d20bf9cf
+step 17 #23c6f97352c983d0
+step 18 #9fe9ed6d45d0813d
+step 19 #496101dbee030273
+step 20 #3436d261b9dc4379
+step 21 #5b63cff9ad751c8b
+step 22 #ecef851894d01b47
+step 23 #a9563989683e4fdc
+step 24 #e508df32fcaff98d
+step 25 #493597cc7cc8c5d1
+step 26 #24992432c1755704
+step 27 #e1533c22fa7c2cfc
+step 28 #b2d68fb7e0630f09
+step 29 #13a49ebf2460efb4
+step 30 #6915afdfa644b030
+step 31 #b11f50f7c32f4d8a
+step 32 #5521784b0e857231
+step 33 #00417fb57475cabd
+step 34 #d5a9deb2649e8b14
+step 35 #d2979d4e2b9d1a26
+step 36 #829d8d1a6fcd3233
+step 37 #97f76ea059102353
+step 38 #8fbf823d71c8c0eb
+step 39 #f3177e83507968ac
+step 40 #859f21496e9a26eb
+step 41 #6b4a750f96ba0f92
+step 42 #c2be24711579005e
+step 43 #e96f13955565b7da
+step 44 #f0a3d3a475c2166d
+step 45 #f6106bec2a89919f
+step 46 #0664a483fa0f8bf4
+step 47 #2d820d8bcde3c5f3
+step 48 #66c6c0af44c87484
+step 49 #5f426f7d57777c07
+step 50 #a1947bc9cbd38a11
+step 51 #ebf649d427762a0a
+step 52 #9657ebbde284a2ca
+step 53 #b63baccc8e102690
+step 54 #32d6c98f55c17db4
+step 55 #efe11e54a7f80670
+step 56 #01fc237b9fb86fd1
+step 57 #7bcdf515c2f4e0d3
+state #04f614f367a2183a
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #1b7ee0193e9798d5
-step 1 #34c3ec577479ba70
-step 2 #26189b87cc5cd716
-step 3 #2c07f13e9cb889c5
-step 4 #2960909da1bb132a
-step 5 #28fff572a0c0fd77
-step 6 #44bebea5e684eb82
-step 7 #967b2dd7f1834e3c
-step 8 #7221e3a8aef8e516
-step 9 #c95f60ecc1351f5d
-step 10 #d2fedba6e55b7368
-step 11 #3cac7973d17797e2
-step 12 #ff4960391fcbc232
-step 13 #d6ea85147c622691
-step 14 #047cf7950550e9c8
-step 15 #2f13351af9e25694
-step 16 #1208a90188759513
-step 17 #05f5ac5a458e7e37
-step 18 #7c9b889bac071eda
-step 19 #7fc9e0da7c95eaa5
-step 20 #06ae9273114bf178
-step 21 #e359a00fedb06c8b
-step 22 #894b5d9bd8c079a9
-step 23 #74b1775a3a90bc84
-step 24 #79c940162cd9e09e
-step 25 #2a355049376467c7
-step 26 #1a5afc1a09a01b4a
-step 27 #5afc8f6d6c944424
-step 28 #f90035b506b9f857
-step 29 #1e59e547264d07f1
-step 30 #22ff645f2736c297
-step 31 #fcc0176c4bb5abb1
-step 32 #d427534b5ceefdd9
-step 33 #43c8b061de96881f
-step 34 #5770ad8897820392
-step 35 #897896015bc59079
-step 36 #2b066e121e62d48f
-step 37 #8874f9641bf33921
-step 38 #683ae03b6e4e221d
-step 39 #37aa0c6db5eff7b8
-step 40 #600624f9b1079d37
-step 41 #7b7bbb2eadf18e9f
-step 42 #5c3d9765080bfec6
-step 43 #e52ab36c0f68fa3a
-step 44 #447ac18ea18b038b
-step 45 #41eeb029b1c164cb
-step 46 #46d45b839ad0be47
-step 47 #39f4d48af2f5c3df
-step 48 #d1b19e7f77669299
-step 49 #e4267c8ab2bbf3b6
-step 50 #4cf33ec3badb0b49
-state #25d1266ed56b9d53
+create {"finished":false,"deadlock":false} #1c840ec16a62c4dc
+step 1 #73c74aaf3d7dc727
+step 2 #62e7068268f2d72e
+step 3 #d10f56e7485c742b
+step 4 #56677e6d67903c71
+step 5 #dae0cbf20daef203
+step 6 #472db191aaf10903
+step 7 #54da0868ef5c12ff
+step 8 #790f8b306de6fc12
+step 9 #49d65c546459d98c
+step 10 #5b7c46b0f036bc2b
+step 11 #dbe5058af3d40e33
+step 12 #4a3940ed70d31b3c
+step 13 #c41b8a1ad722be9a
+step 14 #1251fdd5693c6e06
+step 15 #1ee956ba39cb7878
+step 16 #b249e1ebf248c599
+step 17 #7d209ea8cdbc737b
+step 18 #cc393b4e98973b23
+step 19 #1b5066433b18a93c
+step 20 #28505ef83811c203
+step 21 #a0fef30290478b82
+step 22 #8cc79b939e476091
+step 23 #9cf993ebb5f1112f
+step 24 #27e3ca7e92006a56
+step 25 #6b7829ba0b71cf55
+step 26 #5780c2bf0843b391
+step 27 #7e88210bbc97c912
+step 28 #8d4fd686e1ae3740
+step 29 #8088653f2d526623
+step 30 #05c043fdbfadbcbc
+step 31 #28e8623c77f39eb0
+step 32 #4e438dc5541399d4
+step 33 #36536d8d22756579
+step 34 #5a55f10b80cba282
+step 35 #3d07d80eb14cb4d8
+step 36 #c93b13c771729ac6
+step 37 #22dc64350448a844
+step 38 #4a6c59e7948db4f6
+step 39 #72aacc248c7de7ce
+step 40 #17ab535aef2d0c6e
+step 41 #3553a2c390fb2460
+step 42 #d37adf44c84e9d9d
+step 43 #fa3f3e1dde1423d9
+step 44 #68a3805958085f59
+step 45 #3d977c6061e33bf3
+step 46 #c8fdca1ecb6c5465
+step 47 #9d43d0ebca7aeb01
+step 48 #35a48cb3f7c86ed4
+step 49 #14840c1dfa548386
+step 50 #a8b3a22f0602169b
+state #b3c547ccc9bf2272
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #b4b12a7d504cc144
-step 1 ENTER Prod: entra a Buf.enviar | DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #34c3ec577479ba70
-step 2 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: dato = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #dc86a20a4b94a3ce
-step 3 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9da2c79280b64a3c
-step 4 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2960909da1bb132a
-step 5 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #28fff572a0c0fd77
-step 6 ASSIGN Cons: suma = 1 | ASSIGN Prod: i++ => 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #44bebea5e684eb82
-step 7 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #087c4c993bdbc578
-step 8 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7221e3a8aef8e516
-step 9 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #c95f60ecc1351f5d
-step 10 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d2fedba6e55b7368
-step 11 ASSIGN Prod: dato = 2 | ASSIGN Cons: k++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #b07b48d3068c3713
-step 12 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #fddb2a305cf1ad71
-step 13 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #8291b62fa9fdf75f
-step 14 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #af63c7fd13ef58a5
-step 15 ASSIGN Cons: suma = 3 | ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4ce14b29792aba5c
-step 16 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #405cf4a2b99abd82
-step 17 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #734fcf086a5745d9
-step 18 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #c08ecac3d44eebe3
-step 19 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #b254fcc70a2b11e6
-step 20 ASSIGN Prod: dato = 3 | ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2bd79e75358d3a12
-step 21 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #cb505b52ee01e497
-step 22 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #0aeb811805fdfbae
-step 23 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #8748cac4ccc074b7
-step 24 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #614a326d302794c8
-step 25 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #8e0d5fe828cf8b94
-step 26 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #7811130cc0b05185
-step 27 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #7c175c574b6f5fe8
-step 28 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #31a47d0ea4895a30
-step 29 ASSIGN Prod: dato = 4 | ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #2dd5e539486e3c01
-step 30 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #41182527f6886ee7
-step 31 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #4ad62f51e9ebe9f0
-step 32 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #4743202eacf38066
-step 33 ASSIGN Cons: suma = 10 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #427d824cd69a68cb
-step 34 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 4 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #8374d37afb178b15
-step 35 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #22bf36ef6f7c6937
-step 36 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a6796c77c5e6e63d
-step 37 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #5fb134284c060f13
-step 38 ASSIGN Prod: dato = 5 | ASSIGN Cons: k++ => 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #07b16b819a2f91d7
-step 39 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #9613aeb7459b673c
-step 40 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #34d3c0dd4df72f6b
-step 41 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #4ec8736b84f8ac7e
-step 42 ASSIGN Cons: suma = 15 | ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #0c2c26f3a077cd5b
-step 43 TERMINATED Prod: termina | ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #8f13afb9f9774ed1
-step 44 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #a48390da73333c7d
-step 45 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e177bbe9913d87af
-step 46 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0fd63047f30eb687
-step 47 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #ea1d296dae54d7d4
-step 48 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":48,"waiting":false} #b49ca46f48be1354
-state #5cf58f99abb5751c
+create {"finished":false,"deadlock":false} #432433207124eb3b
+step 1 ENTER Prod: entra a Buf.enviar | DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #73c74aaf3d7dc727
+step 2 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: dato = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #984c437722ad8d4b
+step 3 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #8daf2cf002f60208
+step 4 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #56677e6d67903c71
+step 5 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #dae0cbf20daef203
+step 6 ASSIGN Cons: suma = 1 | ASSIGN Prod: i++ => 2 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #472db191aaf10903
+step 7 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #7c22e66be17bc618
+step 8 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #790f8b306de6fc12
+step 9 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #49d65c546459d98c
+step 10 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5b7c46b0f036bc2b
+step 11 ASSIGN Prod: dato = 2 | ASSIGN Cons: k++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e66da195bc16e1ed
+step 12 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #6cc70444317e8f25
+step 13 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #1f92276255982f13
+step 14 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #49a19052bd411101
+step 15 ASSIGN Cons: suma = 3 | ASSIGN Prod: i++ => 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1a0fcf1be228c8c6
+step 16 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #59713ff476d26fc3
+step 17 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #c92363cbc8d0a723
+step 18 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #31d15cd2ed23f0e1
+step 19 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #7ef945b6f0925f22
+step 20 ASSIGN Prod: dato = 3 | ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #103b07cc9474865b
+step 21 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #9da73617966e89e5
+step 22 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c56b0fabd41fdca2
+step 23 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #1b6fc009374646a3
+step 24 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #f1c0cb5bdedf6d8a
+step 25 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #eb1f29f16640e274
+step 26 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5e0dde7570a26770
+step 27 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #6ec522bc5eb88b5f
+step 28 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #1104baf3452d139d
+step 29 ASSIGN Prod: dato = 4 | ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #867441d90c321932
+step 30 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #0008ec6e7000594f
+step 31 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #f96b9b8d9e05da2e
+step 32 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #b7a5cd425ed2b76a
+step 33 ASSIGN Cons: suma = 10 | ASSIGN Prod: i++ => 5 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #ee4c2e000b0be969
+step 34 BLOCKED Prod: espera para entrar a Buf.enviar | ASSIGN Cons: recibidos = 4 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #b84eae497bdb795d
+step 35 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #9c27b8e9cb4462bf
+step 36 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #96ad0fa5d749194e
+step 37 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #aabc7d8a3311886c
+step 38 ASSIGN Prod: dato = 5 | ASSIGN Cons: k++ => 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #7a481f961df9cb1a
+step 39 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #4c766ff79a6b1f82
+step 40 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #f58b8ae1901004de
+step 41 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #26d826c98b7b3b3c
+step 42 ASSIGN Cons: suma = 15 | ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #35f648917bae68e2
+step 43 TERMINATED Prod: termina | ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #9db427f8b4aeff10
+step 44 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #6fa9f7377aa081fe
+step 45 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #92a95b19f2b9cb2e
+step 46 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #e4bb497f5895d48e
+step 47 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #f50032b8b3e1ac55
+step 48 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":48,"waiting":false} #2b0368f578871505
+state #04ad0b54d20a2234
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #865b6e54820d274f
-step 1 #34c3ec577479ba70
-step 2 #dc86a20a4b94a3ce
-step 3 #9da2c79280b64a3c
-step 4 #2960909da1bb132a
-step 5 #28fff572a0c0fd77
-step 6 #44bebea5e684eb82
-step 7 #087c4c993bdbc578
-step 8 #7221e3a8aef8e516
-step 9 #c95f60ecc1351f5d
-step 10 #d2fedba6e55b7368
-step 11 #b07b48d3068c3713
-step 12 #fddb2a305cf1ad71
-step 13 #8291b62fa9fdf75f
-step 14 #af63c7fd13ef58a5
-step 15 #4ce14b29792aba5c
-step 16 #405cf4a2b99abd82
-step 17 #734fcf086a5745d9
-step 18 #c08ecac3d44eebe3
-step 19 #b254fcc70a2b11e6
-step 20 #2bd79e75358d3a12
-step 21 #cb505b52ee01e497
-step 22 #0aeb811805fdfbae
-step 23 #8748cac4ccc074b7
-step 24 #614a326d302794c8
-step 25 #8e0d5fe828cf8b94
-step 26 #7811130cc0b05185
-step 27 #7c175c574b6f5fe8
-step 28 #31a47d0ea4895a30
-step 29 #2dd5e539486e3c01
-step 30 #41182527f6886ee7
-step 31 #4ad62f51e9ebe9f0
-step 32 #4743202eacf38066
-step 33 #427d824cd69a68cb
-step 34 #8374d37afb178b15
-step 35 #22bf36ef6f7c6937
-step 36 #a6796c77c5e6e63d
-step 37 #5fb134284c060f13
-step 38 #07b16b819a2f91d7
-step 39 #9613aeb7459b673c
-step 40 #34d3c0dd4df72f6b
-step 41 #4ec8736b84f8ac7e
-step 42 #0c2c26f3a077cd5b
-step 43 #8f13afb9f9774ed1
-step 44 #a48390da73333c7d
-step 45 #e177bbe9913d87af
-step 46 #0fd63047f30eb687
-step 47 #ea1d296dae54d7d4
-step 48 #b49ca46f48be1354
-state #5cf58f99abb5751c
+create {"finished":false,"deadlock":false} #38e37890de74f955
+step 1 #73c74aaf3d7dc727
+step 2 #984c437722ad8d4b
+step 3 #8daf2cf002f60208
+step 4 #56677e6d67903c71
+step 5 #dae0cbf20daef203
+step 6 #472db191aaf10903
+step 7 #7c22e66be17bc618
+step 8 #790f8b306de6fc12
+step 9 #49d65c546459d98c
+step 10 #5b7c46b0f036bc2b
+step 11 #e66da195bc16e1ed
+step 12 #6cc70444317e8f25
+step 13 #1f92276255982f13
+step 14 #49a19052bd411101
+step 15 #1a0fcf1be228c8c6
+step 16 #59713ff476d26fc3
+step 17 #c92363cbc8d0a723
+step 18 #31d15cd2ed23f0e1
+step 19 #7ef945b6f0925f22
+step 20 #103b07cc9474865b
+step 21 #9da73617966e89e5
+step 22 #c56b0fabd41fdca2
+step 23 #1b6fc009374646a3
+step 24 #f1c0cb5bdedf6d8a
+step 25 #eb1f29f16640e274
+step 26 #5e0dde7570a26770
+step 27 #6ec522bc5eb88b5f
+step 28 #1104baf3452d139d
+step 29 #867441d90c321932
+step 30 #0008ec6e7000594f
+step 31 #f96b9b8d9e05da2e
+step 32 #b7a5cd425ed2b76a
+step 33 #ee4c2e000b0be969
+step 34 #b84eae497bdb795d
+step 35 #9c27b8e9cb4462bf
+step 36 #96ad0fa5d749194e
+step 37 #aabc7d8a3311886c
+step 38 #7a481f961df9cb1a
+step 39 #4c766ff79a6b1f82
+step 40 #f58b8ae1901004de
+step 41 #26d826c98b7b3b3c
+step 42 #35f648917bae68e2
+step 43 #9db427f8b4aeff10
+step 44 #6fa9f7377aa081fe
+step 45 #92a95b19f2b9cb2e
+step 46 #e4bb497f5895d48e
+step 47 #f50032b8b3e1ac55
+step 48 #2b0368f578871505
+state #04ad0b54d20a2234
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #1b7ee0193e9798d5
-step 1 #34c3ec577479ba70
-step 2 #dc86a20a4b94a3ce
-step 3 #9da2c79280b64a3c
-step 4 #2960909da1bb132a
-step 5 #28fff572a0c0fd77
-step 6 #44bebea5e684eb82
-step 7 #087c4c993bdbc578
-step 8 #7221e3a8aef8e516
-step 9 #c95f60ecc1351f5d
-step 10 #d2fedba6e55b7368
-step 11 #b07b48d3068c3713
-step 12 #fddb2a305cf1ad71
-step 13 #8291b62fa9fdf75f
-step 14 #af63c7fd13ef58a5
-step 15 #4ce14b29792aba5c
-step 16 #405cf4a2b99abd82
-step 17 #734fcf086a5745d9
-step 18 #c08ecac3d44eebe3
-step 19 #b254fcc70a2b11e6
-step 20 #2bd79e75358d3a12
-step 21 #cb505b52ee01e497
-step 22 #0aeb811805fdfbae
-step 23 #8748cac4ccc074b7
-step 24 #614a326d302794c8
-step 25 #8e0d5fe828cf8b94
-step 26 #7811130cc0b05185
-step 27 #7c175c574b6f5fe8
-step 28 #31a47d0ea4895a30
-step 29 #2dd5e539486e3c01
-step 30 #41182527f6886ee7
-step 31 #4ad62f51e9ebe9f0
-step 32 #4743202eacf38066
-step 33 #427d824cd69a68cb
-step 34 #8374d37afb178b15
-step 35 #22bf36ef6f7c6937
-step 36 #a6796c77c5e6e63d
-step 37 #5fb134284c060f13
-step 38 #07b16b819a2f91d7
-step 39 #9613aeb7459b673c
-step 40 #34d3c0dd4df72f6b
-step 41 #4ec8736b84f8ac7e
-step 42 #0c2c26f3a077cd5b
-step 43 #8f13afb9f9774ed1
-step 44 #a48390da73333c7d
-step 45 #e177bbe9913d87af
-step 46 #0fd63047f30eb687
-step 47 #ea1d296dae54d7d4
-step 48 #b49ca46f48be1354
-state #5cf58f99abb5751c
+create {"finished":false,"deadlock":false} #1c840ec16a62c4dc
+step 1 #73c74aaf3d7dc727
+step 2 #984c437722ad8d4b
+step 3 #8daf2cf002f60208
+step 4 #56677e6d67903c71
+step 5 #dae0cbf20daef203
+step 6 #472db191aaf10903
+step 7 #7c22e66be17bc618
+step 8 #790f8b306de6fc12
+step 9 #49d65c546459d98c
+step 10 #5b7c46b0f036bc2b
+step 11 #e66da195bc16e1ed
+step 12 #6cc70444317e8f25
+step 13 #1f92276255982f13
+step 14 #49a19052bd411101
+step 15 #1a0fcf1be228c8c6
+step 16 #59713ff476d26fc3
+step 17 #c92363cbc8d0a723
+step 18 #31d15cd2ed23f0e1
+step 19 #7ef945b6f0925f22
+step 20 #103b07cc9474865b
+step 21 #9da73617966e89e5
+step 22 #c56b0fabd41fdca2
+step 23 #1b6fc009374646a3
+step 24 #f1c0cb5bdedf6d8a
+step 25 #eb1f29f16640e274
+step 26 #5e0dde7570a26770
+step 27 #6ec522bc5eb88b5f
+step 28 #1104baf3452d139d
+step 29 #867441d90c321932
+step 30 #0008ec6e7000594f
+step 31 #f96b9b8d9e05da2e
+step 32 #b7a5cd425ed2b76a
+step 33 #ee4c2e000b0be969
+step 34 #b84eae497bdb795d
+step 35 #9c27b8e9cb4462bf
+step 36 #96ad0fa5d749194e
+step 37 #aabc7d8a3311886c
+step 38 #7a481f961df9cb1a
+step 39 #4c766ff79a6b1f82
+step 40 #f58b8ae1901004de
+step 41 #26d826c98b7b3b3c
+step 42 #35f648917bae68e2
+step 43 #9db427f8b4aeff10
+step 44 #6fa9f7377aa081fe
+step 45 #92a95b19f2b9cb2e
+step 46 #e4bb497f5895d48e
+step 47 #f50032b8b3e1ac55
+step 48 #2b0368f578871505
+state #04ad0b54d20a2234
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #b4b12a7d504cc144
-step 1 DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #54d6493395e37c96
-step 2 ENTER Prod: entra a Buf.enviar | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2ae8c7c8cb0e0e6f
-step 3 ASSIGN Prod: dato = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #d076f8d7fdb137e1
-step 4 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #59d2642c588b23fa
-step 5 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #38f3034acf00373b
-step 6 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e8b7a93f0ea4c777
-step 7 ASSIGN Prod: i++ => 2 | ASSIGN Cons: suma = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #fd9e5ff99f0adabb
-step 8 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #96c1da1f92555034
-step 9 ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #437649613face4d9
-step 10 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #8bdadeb485afc661
-step 11 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #2ddc23b4f491e799
-step 12 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #766f82c5539ab4b3
-step 13 ASSIGN Cons: k++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #141a8d61b318abf9
-step 14 BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f65249dc622ba603
-step 15 ASSIGN Prod: dato = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #102a13928db34226
-step 16 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #11ec7208c0d3a43c
-step 17 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #ae82ee08ed0d2869
-step 18 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #89d3490533d1036e
-step 19 ASSIGN Prod: i++ => 3 | ASSIGN Cons: suma = 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #f09c7e6dcf8a4d37
-step 20 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #5435c39abe24b0c4
-step 21 ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #72a631aee5c1fe65
-step 22 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #224e89f6944fd3a9
-step 23 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #c20b68dd02393538
-step 24 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #4c081eea77a7e686
-step 25 ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #9550a1df736a59ac
-step 26 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: dato = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #c90732e4b7226c6e
-step 27 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b002c15068e7d0b1
-step 28 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #67652dddd412753a
-step 29 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #724cbf4cf4f81f65
-step 30 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #60e184b1f9ed2451
-step 31 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #586b3ff025096258
-step 32 ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #d48f2a60d315e4a3
-step 33 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #ef2ece1a3d17cc8b
-step 34 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #979a0d864d3083a5
-step 35 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #0ac24131792440ed
-step 36 ASSIGN Prod: dato = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #4153710a6d546df5
-step 37 ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #0a0e713c33e06325
-step 38 ASSIGN Prod: hay = true | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #23a2a9000dfff106
-step 39 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #1312ce4ea5957d68
-step 40 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #b8baa419bf74a8bf
-step 41 ASSIGN Cons: suma = 10 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #ffaecb249b764666
-step 42 ASSIGN Cons: recibidos = 4 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #a7df31e093f91cce
-step 43 ASSIGN Prod: i++ => 5 | ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #441087fa4d72f9c9
-step 44 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #9cfe85bfae0f2ddf
-step 45 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #b1e38cef93f56bcd
-step 46 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #2c67d42a5f4183d3
-step 47 ASSIGN Cons: k++ => 5 | ASSIGN Prod: dato = 5 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #1d46f26af9b84577
-step 48 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #b1ddc63474b11e5f
-step 49 BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #19ed413fb0ed873c
-step 50 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #c43dae2fdd1b4321
-step 51 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #b9b781b8f2e43557
-step 52 ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #149acfbbd5db4113
-step 53 ASSIGN Cons: suma = 15 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #0256c00868844c2a
-step 54 TERMINATED Prod: termina | ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #9ca5bdb13d85e0b5
-step 55 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3189b7d65c066c38
-step 56 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #591a1103d962055e
-step 57 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #7f897a31c33ab047
-step 58 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #4442aee49e702924
-step 59 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":59,"waiting":false} #2bcdf08c6de78b8c
-state #f8fa587e2a4a893a
+create {"finished":false,"deadlock":false} #432433207124eb3b
+step 1 DECL Cons: int k = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7320b524898fecef
+step 2 ENTER Prod: entra a Buf.enviar | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5ee4636827bcd299
+step 3 ASSIGN Prod: dato = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #773317d32e7133d1
+step 4 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d735417e514bf444
+step 5 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ce367717d12004e7
+step 6 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #af2ed6395c9efaba
+step 7 ASSIGN Prod: i++ => 2 | ASSIGN Cons: suma = 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #aa2fbb6614c5aa68
+step 8 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #dae9d3d7ca9ae6d8
+step 9 ASSIGN Cons: recibidos = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #13a8f02b81c1b4b3
+step 10 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #745bae583036938c
+step 11 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e3d0e74ba1cb771c
+step 12 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #f88d45d0f1f13569
+step 13 ASSIGN Cons: k++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #391492b877c5fc70
+step 14 BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d8bf62ab08cdcc36
+step 15 ASSIGN Prod: dato = 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #6e025cc940777e5f
+step 16 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c6d3e7604b361f6c
+step 17 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #2af4b591c1ab5144
+step 18 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #b68eef2772b63d17
+step 19 ASSIGN Prod: i++ => 3 | ASSIGN Cons: suma = 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #7d473eb7e97814e1
+step 20 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #5f37452595efc93d
+step 21 ASSIGN Cons: recibidos = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #e4295805870fda87
+step 22 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #38f2e9fedaced360
+step 23 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #e9159d58e13a4c87
+step 24 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #0ed758e54850bec0
+step 25 ASSIGN Cons: k++ => 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #9e6645341bc43c78
+step 26 BLOCKED Cons: espera para entrar a Buf.recibir | ASSIGN Prod: dato = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #7e04fb69e7195b3b
+step 27 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #fbc31997f1c547f4
+step 28 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #188f5744f653f3b4
+step 29 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #9065889166a4181e
+step 30 ASSIGN Cons: suma = 6 | ASSIGN Prod: i++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #f35acc615f72a6dc
+step 31 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #fa9f9a854556821c
+step 32 ASSIGN Cons: recibidos = 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #294ed4b3b99e2d16
+step 33 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #244553818a0f1bcb
+step 34 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #10b56b88f3a58922
+step 35 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #f095d5695df97eee
+step 36 ASSIGN Prod: dato = 4 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #96224794b6a827bf
+step 37 ASSIGN Cons: k++ => 4 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #8cdd9e5c8c4c222b
+step 38 ASSIGN Prod: hay = true | BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #b8c7e5520892d924
+step 39 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #737935ff2a83a71d
+step 40 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #fe9047dd4898910a
+step 41 ASSIGN Cons: suma = 10 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #e06858f64b44c4a7
+step 42 ASSIGN Cons: recibidos = 4 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #996f4bb1ff6a41b9
+step 43 ASSIGN Prod: i++ => 5 | ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #78dfe027c81a22d1
+step 44 BLOCKED Prod: espera para entrar a Buf.enviar | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #e84121fab72307e1
+step 45 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #771c6cdc47818dd5
+step 46 RETURN Cons: retorna de Buf.recibir, libera el monitor | ENTER Prod: entra a Buf.enviar | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #27b7d2b971dda22b
+step 47 ASSIGN Cons: k++ => 5 | ASSIGN Prod: dato = 5 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #2887ff4f97525870
+step 48 ASSIGN Prod: hay = true | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #5d38a43baff0ba93
+step 49 BLOCKED Cons: espera para entrar a Buf.recibir | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #deb0be8c8f0006bb
+step 50 SIGNAL Prod: signal(c) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #7b3a4f3c888ef7e4
+step 51 RETURN Prod: retorna de Buf.enviar, libera el monitor | ENTER Cons: entra a Buf.recibir | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #df0962dc86b7155a
+step 52 ASSIGN Prod: i++ => 6 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #1e834a0972529305
+step 53 ASSIGN Cons: suma = 15 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #402f1902b242ecab
+step 54 TERMINATED Prod: termina | ASSIGN Cons: recibidos = 5 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #536d8712de2f79b7
+step 55 ASSIGN Cons: hay = false | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #cbcadd6bbf9930c9
+step 56 SIGNAL Cons: signal(p) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #af0ebd81f40a15ea
+step 57 RETURN Cons: retorna de Buf.recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #78bacfed17a0734c
+step 58 ASSIGN Cons: k++ => 6 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #87f6073fbcd986ed
+step 59 TERMINATED Cons: termina | {"finished":true,"deadlock":false,"instant":59,"waiting":false} #54aa037726940844
+state #69b20cd28e6d3b42

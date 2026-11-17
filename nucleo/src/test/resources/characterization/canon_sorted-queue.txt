@@ -1,84 +1,84 @@
 ## RANDOM seed=0
-create {"finished":false,"deadlock":false} #792b05b0fed6734b
-step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c6c47b08b19b0b07
-step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c280734a98cca319
-step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f2161ed700b693d0
-step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2525e369c7dc082a
-step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3054e994bc875a43
-step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #07012bd3a7ab9843
-step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1c7e568e6560094d
-step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7ac7f87c07b3e738
-step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #a4b1154520871200
+step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cc106917f70f277e
+step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #39402e07aee02487
+step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #52d293f419cb7b95
+step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cde34bb48ce9143c
+step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b86470a24516d25f
+step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6ab305688befb1d3
+step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29660eef714175ad
+step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2acf99e76010e3c8
+step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## RANDOM seed=1
-create {"finished":false,"deadlock":false} #9c6436348dbc6a76
-step 1 #c6c47b08b19b0b07
-step 2 #c280734a98cca319
-step 3 #f2161ed700b693d0
-step 4 #2525e369c7dc082a
-step 5 #3054e994bc875a43
-step 6 #07012bd3a7ab9843
-step 7 #1c7e568e6560094d
-step 8 #7ac7f87c07b3e738
-step 9 #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #6ddf24ad7eb4e6ba
+step 1 #cc106917f70f277e
+step 2 #39402e07aee02487
+step 3 #52d293f419cb7b95
+step 4 #cde34bb48ce9143c
+step 5 #b86470a24516d25f
+step 6 #6ab305688befb1d3
+step 7 #29660eef714175ad
+step 8 #2acf99e76010e3c8
+step 9 #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## RANDOM seed=2
-create {"finished":false,"deadlock":false} #4e5b38c68df5f1a6
-step 1 #c6c47b08b19b0b07
-step 2 #c280734a98cca319
-step 3 #f2161ed700b693d0
-step 4 #2525e369c7dc082a
-step 5 #3054e994bc875a43
-step 6 #07012bd3a7ab9843
-step 7 #1c7e568e6560094d
-step 8 #7ac7f87c07b3e738
-step 9 #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #081b4b33178dfd91
+step 1 #cc106917f70f277e
+step 2 #39402e07aee02487
+step 3 #52d293f419cb7b95
+step 4 #cde34bb48ce9143c
+step 5 #b86470a24516d25f
+step 6 #6ab305688befb1d3
+step 7 #29660eef714175ad
+step 8 #2acf99e76010e3c8
+step 9 #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## ROUND_ROBIN seed=0
-create {"finished":false,"deadlock":false} #792b05b0fed6734b
-step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c6c47b08b19b0b07
-step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c280734a98cca319
-step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f2161ed700b693d0
-step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2525e369c7dc082a
-step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3054e994bc875a43
-step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #07012bd3a7ab9843
-step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1c7e568e6560094d
-step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7ac7f87c07b3e738
-step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #a4b1154520871200
+step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cc106917f70f277e
+step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #39402e07aee02487
+step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #52d293f419cb7b95
+step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cde34bb48ce9143c
+step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b86470a24516d25f
+step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6ab305688befb1d3
+step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29660eef714175ad
+step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2acf99e76010e3c8
+step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## ROUND_ROBIN seed=1
-create {"finished":false,"deadlock":false} #9c6436348dbc6a76
-step 1 #c6c47b08b19b0b07
-step 2 #c280734a98cca319
-step 3 #f2161ed700b693d0
-step 4 #2525e369c7dc082a
-step 5 #3054e994bc875a43
-step 6 #07012bd3a7ab9843
-step 7 #1c7e568e6560094d
-step 8 #7ac7f87c07b3e738
-step 9 #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #6ddf24ad7eb4e6ba
+step 1 #cc106917f70f277e
+step 2 #39402e07aee02487
+step 3 #52d293f419cb7b95
+step 4 #cde34bb48ce9143c
+step 5 #b86470a24516d25f
+step 6 #6ab305688befb1d3
+step 7 #29660eef714175ad
+step 8 #2acf99e76010e3c8
+step 9 #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## ROUND_ROBIN seed=2
-create {"finished":false,"deadlock":false} #4e5b38c68df5f1a6
-step 1 #c6c47b08b19b0b07
-step 2 #c280734a98cca319
-step 3 #f2161ed700b693d0
-step 4 #2525e369c7dc082a
-step 5 #3054e994bc875a43
-step 6 #07012bd3a7ab9843
-step 7 #1c7e568e6560094d
-step 8 #7ac7f87c07b3e738
-step 9 #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #081b4b33178dfd91
+step 1 #cc106917f70f277e
+step 2 #39402e07aee02487
+step 3 #52d293f419cb7b95
+step 4 #cde34bb48ce9143c
+step 5 #b86470a24516d25f
+step 6 #6ab305688befb1d3
+step 7 #29660eef714175ad
+step 8 #2acf99e76010e3c8
+step 9 #c389678641f1b77f
+state #b7ef2adcf83f14e9
 ## step by step, RANDOM seed=0
-create {"finished":false,"deadlock":false} #792b05b0fed6734b
-step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c6c47b08b19b0b07
-step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c280734a98cca319
-step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f2161ed700b693d0
-step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2525e369c7dc082a
-step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3054e994bc875a43
-step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #07012bd3a7ab9843
-step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1c7e568e6560094d
-step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #7ac7f87c07b3e738
-step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #f15b66cf5b6743ae
-state #d1ef244aaf80b379
+create {"finished":false,"deadlock":false} #a4b1154520871200
+step 1 ENTER P: entra a M.cargar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cc106917f70f277e
+step 2 PUSH P: push(c, 3) | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #39402e07aee02487
+step 3 PUSH P: push(c, 1) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #52d293f419cb7b95
+step 4 PUSH P: push(c, 2) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cde34bb48ce9143c
+step 5 RETURN P: retorna de M.cargar, libera el monitor | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b86470a24516d25f
+step 6 ENTER P: entra a M.sacar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #6ab305688befb1d3
+step 7 POP P: pop(c) => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #29660eef714175ad
+step 8 RETURN P: retorna de M.sacar, libera el monitor | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2acf99e76010e3c8
+step 9 TERMINATED P: termina | {"finished":true,"deadlock":false,"instant":9,"waiting":false} #c389678641f1b77f
+state #b7ef2adcf83f14e9
