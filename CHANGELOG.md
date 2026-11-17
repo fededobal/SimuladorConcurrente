@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- El trabajo se guarda: el programa del editor se guarda solo en el navegador y sigue ahí al recargar la pestaña. El botón con el nombre del programa abre un menú para ponerle nombre, empezar uno nuevo, abrir y descargar archivos `.mon`, guardarlo en «Mis programas» (desde ahí sus cambios se guardan en esa copia) y abrir cualquiera de los propios o de los ejemplos, que antes estaban en un menú aparte. (Federico Dobal, 2026-11-17)
 - Avanzar un proceso elegido: el botón Paso tiene al lado un menú con los procesos del programa; al elegir uno, en ese instante avanza solo ese (los demás no se mueven). Sirve para armar a mano un entrelazado puntual. Solo se pueden elegir los procesos que están listos; de los demás se indica el estado. (Federico Dobal, 2026-11-17)
 - Botón Repetir: vuelve al instante 0 con la misma semilla, así la ejecución se repite igual (con la misma política de turnos) y se puede volver a mirar un entrelazado o un interbloqueo paso a paso. La semilla de la ejecución se muestra junto al instante y ahora tiene cinco cifras, para poder anotarla o dictarla. (Federico Dobal, 2026-11-17)
 - Intercambio `x :=: y`, la notación de la cátedra para intercambiar dos variables (`v_actual :=: v_proxima`): vale con variables y elementos de arreglo del mismo tipo, ocupa un solo paso y se controla como una asignación (no se puede usar con un parámetro `in`, un iterador, un arreglo completo ni una cola). (Federico Dobal, 2026-11-16)

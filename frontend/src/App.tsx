@@ -5,11 +5,15 @@ import {
 import { CodeEditor } from './components/CodeEditor';
 import type { ActiveLine } from './editor/lineMarks';
 import { Dock } from './components/Dock';
+import { ProgramMenu } from './components/ProgramMenu';
 import { StepMenu } from './components/StepMenu';
 import { OutputPanel } from './components/OutputPanel';
 import { MonitorPanel } from './components/MonitorPanel';
 import { useSimulation, type SimStatus } from './useSimulation';
 import { EJEMPLOS } from './ejemplos';
+import { downloadText, readTextFile } from './files';
+import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
+import { useProgram } from './useProgram';
 import { Timeline } from './components/Timeline';
 import { visibleState, whereOf } from './processStates';
 import { useDragSize } from './useDragSize';
@@ -43,9 +47,30 @@ const STATUS_LABEL: Record<SimStatus, string> = {
   error: 'error',
 };
 
+/** Programa con el que arranca quien entra por primera vez: el primer ejemplo. */
+const FIRST_PROGRAM: Program = {
+  id: null,
+  name: EJEMPLOS[0]?.titulo ?? DEFAULT_NAME,
+  code: EJEMPLOS[0]?.codigo ?? '',
+};
+
+/** Cuanto queda en pantalla un aviso corto, en ms. */
+const NOTICE_MS = 4000;
+
 export function App() {
-  const sim = useSimulation(EJEMPLOS[0]?.codigo ?? '');
+  const store = useProgram(FIRST_PROGRAM);
+  const { program } = store;
+  const sim = useSimulation(program.code);
   const { snapshot, status } = sim;
+
+  // aviso corto abajo a la derecha (archivo que no se pudo abrir, enlace copiado)
+  const [notice, setNotice] = useState<string | null>(null);
+  useEffect(() => {
+    if (notice === null) return;
+    const timer = window.setTimeout(() => setNotice(null), NOTICE_MS);
+    return () => window.clearTimeout(timer);
+  }, [notice]);
+
   const zoom = useEditorZoom();
   const tema = useTheme();
   const otroTema = tema.theme === 'dark' ? 'claro' : 'oscuro';
@@ -101,15 +126,37 @@ export function App() {
       : status === 'finished' ? 'fin con errores' : STATUS_LABEL[status];
   const mal = status === 'deadlock' || status === 'error' || fallidos.length > 0;
 
-  const cargarEjemplo = (id: string) => {
-    const ejemplo = EJEMPLOS.find((e) => e.id === id);
-    if (!ejemplo) return;
-    // Si el editor tiene un programa propio, avisar antes de pisarlo.
-    const propio = !EJEMPLOS.some((e) => e.codigo === sim.code);
-    if (propio && !window.confirm('Se reemplaza el programa del editor por el ejemplo. ¿Seguir?')) {
-      return;
+  const changeCode = (code: string) => {
+    store.setCode(code);
+    sim.invalidate();
+  };
+
+  /**
+   * Abre otro programa en el editor. Si el actual es trabajo propio que no esta en "Mis
+   * programas", avisa antes de pisarlo: el guardado automatico solo conserva el abierto.
+   */
+  const openProgram = (next: Program) => {
+    const ownWork = program.id === null && program.code.trim() !== ''
+      && !EJEMPLOS.some((e) => e.codigo === program.code);
+    if (ownWork && !window.confirm(
+      `"${program.name}" no está en Mis programas y se va a reemplazar. ¿Seguir?`,
+    )) return;
+    store.open(next);
+    sim.reset();
+  };
+
+  const openFile = async (file: File) => {
+    try {
+      openProgram({ id: null, name: nameFromFile(file.name), code: await readTextFile(file) });
+    } catch (e) {
+      setNotice(e instanceof Error ? e.message : 'No se pudo abrir el archivo.');
     }
-    sim.setCode(ejemplo.codigo);
+  };
+
+  const removeSaved = (p: SavedProgram) => {
+    if (window.confirm(`¿Borrar "${p.name}" de Mis programas? No se puede deshacer.`)) {
+      store.removeFromLibrary(p.id);
+    }
   };
 
   const panel = (id: PanelId) => {
@@ -188,18 +235,19 @@ export function App() {
           </select>
         </label>
 
-        <select
-          className="sel sel-ejemplos"
-          value=""
-          onChange={(e) => cargarEjemplo(e.target.value)}
+        <ProgramMenu
+          program={program}
+          library={store.library}
+          examples={EJEMPLOS}
           disabled={running}
-          aria-label="Cargar un programa de ejemplo"
-        >
-          <option value="" disabled>Ejemplos…</option>
-          {EJEMPLOS.map((e) => (
-            <option key={e.id} value={e.id}>{e.titulo}</option>
-          ))}
-        </select>
+          onRename={store.rename}
+          onNew={() => openProgram({ id: null, name: DEFAULT_NAME, code: '' })}
+          onOpen={openProgram}
+          onOpenFile={openFile}
+          onDownload={() => downloadText(fileNameOf(program.name), program.code)}
+          onSave={store.saveToLibrary}
+          onRemove={removeSaved}
+        />
 
         <div className="spacer" />
 
@@ -255,8 +303,8 @@ export function App() {
               </button>
             </div>
             <CodeEditor
-              code={sim.code}
-              onChange={sim.setCode}
+              code={program.code}
+              onChange={changeCode}
               readOnly={running}
               activeLines={activeLines}
               errorLines={errorLines}
@@ -292,6 +340,8 @@ export function App() {
           <Dock drag={ampliado} className="dock-ampliado">{panel(expanded)}</Dock>
         )}
       </div>
+
+      <div className="aviso" role="status" aria-live="polite">{notice}</div>
     </div>
   );
 }

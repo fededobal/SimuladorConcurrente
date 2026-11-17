@@ -22,8 +22,13 @@ function newSeed(): number {
   return 10000 + Math.floor(Math.random() * 90000);
 }
 
-export function useSimulation(initialCode: string) {
-  const [code, setCodeState] = useState(initialCode);
+/**
+ * La simulacion del programa del editor: compilar, avanzar, pausar, repetir.
+ *
+ * @param code el programa abierto; quien lo cambia llama a `invalidate` (o a `reset` si
+ *             abre otro programa), porque la simulacion en curso deja de corresponderle
+ */
+export function useSimulation(code: string) {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [timeline, setTimeline] = useState<Timeline>(EMPTY_TIMELINE);
   const [status, setStatus] = useState<SimStatus>('idle');
@@ -80,10 +85,16 @@ export function useSimulation(initialCode: string) {
   // detiene la simulacion y devuelve el editor a modo edicion
   const stop = useCallback(() => drop(), [drop]);
 
-  // editar el codigo invalida la simulacion en curso
-  const setCode = useCallback((next: string) => {
-    setCodeState(next);
+  /** Editar el codigo invalida la simulacion en curso; la semilla se conserva para Repetir. */
+  const invalidate = useCallback(() => {
     if (activaRef.current || statusRef.current !== 'idle') drop();
+  }, [drop]);
+
+  /** Al abrir otro programa: descarta la simulacion y tambien la semilla de la anterior. */
+  const reset = useCallback(() => {
+    drop();
+    seedRef.current = null;
+    setSeed(null);
   }, [drop]);
 
   /** Compila y arranca en el instante 0; con `withSeed` repite el azar de esa ejecucion. */
@@ -193,7 +204,7 @@ export function useSimulation(initialCode: string) {
   useEffect(() => () => clearTimer(), []);
 
   return {
-    code, setCode,
+    invalidate, reset,
     snapshot, timeline, status, error, waiting, entries, seed,
     speed, setSpeed, speeds: SPEEDS,
     policy, setPolicy,

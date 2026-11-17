@@ -242,9 +242,51 @@ button { cursor: pointer; }
 
 .spacer { flex: 1; }
 
-/* Un select toma el ancho de su opcion mas larga, y los titulos de los ejemplos son largos:
-   sin tope empujaba al resto de la barra. */
-.sel-ejemplos { flex: 0 1 190px; min-width: 120px; max-width: 190px; text-overflow: ellipsis; }
+/* Boton del programa abierto: el nombre se recorta para que un titulo largo no empuje al
+   resto de la barra. */
+.btn-programa { max-width: 240px; font-weight: 600; }
+.btn-programa-nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-programa svg { flex-shrink: 0; color: var(--dim); }
+
+.menu-programa { width: 300px; }
+.menu-campo { display: flex; align-items: center; gap: 8px; padding: 4px 8px 8px; font-size: 12px; color: var(--dim); }
+.menu-campo input {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+.menu-programa .menu-titulo { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line-soft); }
+.menu-programa .menu-item { white-space: normal; }
+.menu-item svg { flex-shrink: 0; color: var(--dim); }
+.menu-item.actual { font-weight: 600; }
+.menu-nota { display: flex; gap: 8px; padding: 6px 8px; font-size: 12px; color: var(--dim); }
+.menu-nota svg { flex-shrink: 0; color: var(--st-delayed); }
+.menu-fila { display: flex; align-items: center; gap: 2px; }
+.menu-fila .menu-item { flex: 1; min-width: 0; }
+.menu-fila .amp { margin-left: 0; }
+
+/* aviso corto, abajo a la derecha; vacio no ocupa lugar */
+.aviso {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  max-width: 360px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--panel);
+  font-size: 13px;
+  box-shadow: var(--popover-shadow);
+}
+.aviso:empty { display: none; }
 
 /* un select con su rotulo a la izquierda, en gris, dentro del mismo borde */
 .campo {
