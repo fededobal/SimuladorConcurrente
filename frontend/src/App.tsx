@@ -300,6 +300,7 @@ export function App() {
         saveState={store.saveState}
         inLibrary={program.id !== null}
         running={running}
+        ended={status === 'finished' || status === 'deadlock'}
         onShowShortcuts={() => setShortcutsOpen(true)}
       />
 

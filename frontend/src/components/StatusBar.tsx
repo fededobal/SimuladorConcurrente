@@ -16,6 +16,8 @@ interface Props {
   readonly inLibrary: boolean;
   /** true si la simulacion esta corriendo: F5 la pausa en vez de ejecutarla. */
   readonly running: boolean;
+  /** true si la ejecucion termino (fin o interbloqueo): F5 la ejecuta de nuevo. */
+  readonly ended: boolean;
   readonly onShowShortcuts: () => void;
 }
 
@@ -34,7 +36,7 @@ function plural(n: number, one: string, many: string): string {
  * memorizarlos.
  */
 export function StatusBar({
-  cursor, counts, policy, seed, saveState, inLibrary, running, onShowShortcuts,
+  cursor, counts, policy, seed, saveState, inLibrary, running, ended, onShowShortcuts,
 }: Props) {
   return (
     <footer className={s.bar}>
@@ -66,7 +68,7 @@ export function StatusBar({
       {SHORTCUTS.filter((k) => k.action !== 'help').map((k) => (
         <span key={k.action} className={`${s.shortcut} ${s.optional}`}>
           <kbd>{k.keys}</kbd>
-          {k.action === 'toggle-run' ? (running ? 'Pausar' : 'Ejecutar') : k.label}
+          {k.action === 'toggle-run' ? (running ? 'Pausar' : ended ? 'Ejecutar de nuevo' : 'Ejecutar') : k.label}
         </span>
       ))}
       <button type="button" className={s.help} onClick={onShowShortcuts}>
