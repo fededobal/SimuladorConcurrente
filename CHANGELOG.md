@@ -119,6 +119,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Barra de controles: a 1280 px de ancho (la resolución de muchos proyectores) el estado, el instante y el botón de tema quedaban fuera de la pantalla. Ahora los controles bajan a un segundo renglón, el menú de ejemplos tiene un ancho máximo y la píldora de estado ya no se parte en dos líneas. (Federico Dobal, 2026-11-17)
 - En pantallas angostas (un teléfono), la barra de controles baja de línea en lugar de estirar la página: antes velocidad, turnos, Ejemplos, Salida y Documentación quedaban fuera de la pantalla. (Federico Dobal, 2026-11-16)
 - Documentación: debajo del botón "Volver al simulador" aparecía una segunda línea divisoria y, al lado, un área vacía con cursor de enlace; eran restos del enlace del título que el tema deja aunque no haya título. El botón pasa fuera de ese enlace, alineado con el texto de la barra lateral. (Federico Dobal, 2026-11-14)
 - Documentación: al plegar o desplegar la barra lateral ya no se mueve la barra superior; solo se deslizan la barra lateral y el contenido. (Federico Dobal, 2026-11-14)

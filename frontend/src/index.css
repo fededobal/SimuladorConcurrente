@@ -146,10 +146,14 @@ button { cursor: pointer; }
 
 /* ------------------------------------------------------------------ bar */
 
+/* Los controles bajan a un segundo renglon antes que salirse de la pantalla: a 1280 px (la
+   resolucion de muchos proyectores) el estado y el instante quedaban fuera de la vista. */
 .bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+  row-gap: 6px;
   padding: 8px 12px;
   flex-shrink: 0;
 }
@@ -190,6 +194,10 @@ button { cursor: pointer; }
 
 .spacer { flex: 1; }
 
+/* Un select toma el ancho de su opcion mas larga, y los titulos de los ejemplos son largos:
+   sin tope empujaba al resto de la barra. */
+.sel-ejemplos { flex: 0 1 190px; min-width: 120px; max-width: 190px; text-overflow: ellipsis; }
+
 /* un select con su rotulo a la izquierda, en gris, dentro del mismo borde */
 .campo {
   display: inline-flex;
@@ -216,8 +224,10 @@ button { cursor: pointer; }
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
   color: var(--dim);
   font-size: 12.5px;
+  white-space: nowrap;
 }
 .meta .rotulo { font-size: 11.5px; color: var(--dimmer); }
 .meta .n { font-family: var(--mono); color: var(--text); font-weight: 600; margin-left: -4px; }
@@ -983,7 +993,6 @@ button { cursor: pointer; }
 @media (max-width: 720px) {
   /* en un telefono los controles no entran en una fila: bajan a la siguiente en lugar de
      estirar la pagina y dejar fuera de la pantalla los selectores y la documentacion */
-  .bar { flex-wrap: wrap; row-gap: 6px; }
   .bar-sep, .spacer { display: none; }
   .cuerpo { flex-direction: column; }
   .dock-monitores, .dock-ampliado { width: auto; max-height: 45%; }

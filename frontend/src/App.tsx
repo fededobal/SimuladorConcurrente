@@ -173,7 +173,7 @@ export function App() {
         </label>
 
         <select
-          className="sel"
+          className="sel sel-ejemplos"
           value=""
           onChange={(e) => cargarEjemplo(e.target.value)}
           disabled={running}
