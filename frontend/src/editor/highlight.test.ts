@@ -32,6 +32,33 @@ describe('highlight', () => {
     expect(highlight('a < b && c')).toBe('a &lt; b &amp;&amp; c');
   });
 
+  it('colaIsATypeOnlyWhenItDeclares', () => {
+    // la catedra usa cola como tipo (cola elibres;) y como nombre (cond cola;)
+    expect(highlight('Cola c(int);')).toBe(
+      '<span class="tok-type">Cola</span> c(<span class="tok-type">int</span>);');
+    expect(highlight('cond cola;')).toBe('<span class="tok-decl">cond</span> cola;');
+    expect(highlight('wait(cola)')).toBe('<span class="tok-sync">wait</span>(cola)');
+    expect(highlight('cola mod 2')).toBe(
+      'cola <span class="tok-ctrl">mod</span> <span class="tok-lit">2</span>');
+    expect(highlight('Cola cola(int);')).toBe(
+      '<span class="tok-type">Cola</span> cola(<span class="tok-type">int</span>);');
+  });
+
+  it('sortedQueueOrderIsAKeyword', () => {
+    expect(highlight('ColaOrdenada f(int) desc;')).toBe(
+      '<span class="tok-type">ColaOrdenada</span> f(<span class="tok-type">int</span>) '
+      + '<span class="tok-type">desc</span>;');
+  });
+
+  it('constantsAreColoredAsNumbers', () => {
+    expect(highlight('#define N 5\ncond espera[N]; int n;')).toBe(
+      '<span class="tok-decl">#define</span> <span class="tok-lit">N</span> '
+      + '<span class="tok-lit">5</span>\n<span class="tok-decl">cond</span> '
+      + 'espera[<span class="tok-lit">N</span>]; <span class="tok-type">int</span> n;');
+    // sin #define, N es un nombre cualquiera
+    expect(highlight('espera[N]')).toBe('espera[N]');
+  });
+
   it('inheritedNamesAreNotKeywords', () => {
     // 'constructor' existe en cualquier objeto: no por eso es una palabra reservada
     expect(highlight('constructor toString')).toBe('constructor toString');

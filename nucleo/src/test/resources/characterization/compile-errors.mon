@@ -497,3 +497,83 @@ monitor M { cond c[2]; procedure f() { if (empty(c[1])) skip; } }
 process P { M.f(); }
 ### asignacion/indice-al-final
 process P { int a[2]; a[1
+### constante/despues-del-programa
+process P { skip; }
+#define N 5
+### constante/directiva-desconocida
+#include N
+process P { skip; }
+### constante/sin-nombre
+#define 5 N
+process P { skip; }
+### constante/sin-valor
+#define N
+process P { skip; }
+### constante/valor-con-decimales
+#define N 2.5
+process P { skip; }
+### constante/valor-negativo
+#define N -1
+process P { skip; }
+### constante/con-punto-y-coma
+#define N 5;
+process P { skip; }
+### constante/repetida
+#define N 5
+#define N 6
+process P { skip; }
+### constante/palabra-reservada
+#define while 5
+process P { skip; }
+### constante/declarada-como-variable
+#define N 5
+process P { int N = 1; }
+### constante/asignada
+#define N 5
+process P { N = 1; }
+### constante/como-nombre-de-proceso
+#define N 5
+process N { skip; }
+### constante/en-un-mensaje
+#define N 5
+process P { int x; x = 1 N; }
+### constante/fuera-de-rango
+#define N 99999999999999999999
+process P { int x = N; }
+### validos/constantes
+// comentario antes
+#define N 3
+#DEFINE Lugares 2   // comentario al final
+monitor M { cond espera[N]; int buf[Lugares]; int n = N * 2; procedure f() { skip; } }
+monitor E[id: 0..N-1] { procedure g() { skip; } }
+process P[i: 0..N-1] { M.f(); E[i].g(); }
+### cond/wait-con-prioridad
+monitor S { bool libre = true; cond turno;
+  procedure request(int tiempo) { if (libre) libre = false; else wait(turno, tiempo); } }
+process A { S.request(3); }
+### cond/wait-con-prioridad-en-arreglo
+monitor S { cond scan[2]; procedure pedir(int cil) { wait(scan[0], cil); } }
+process A { S.pedir(3); }
+### cola/orden-en-cola-fifo
+process P { Cola c(int) desc; }
+### cola/orden-como-nombre
+process P { int desc = 0; }
+### validos/cola-ordenada-con-orden
+monitor M { ColaOrdenada a(int, text) desc; ColaOrdenada b(int) asc; ColaOrdenada c(double);
+  push(a, 1, "uno"); push(a, 3, "tres"); push(a, 2, "dos"); push(b, 2); push(b, 1);
+  procedure f() { skip; } }
+process P { M.f(); }
+### validos/cola-como-nombre
+monitor Cajero { bool libre = true; cond cola; Cola fila(int); int Cola = 0;
+  procedure Pasar() { if (not libre) wait(cola); libre = false; push(fila, Cola mod 2); } }
+process P { int cola = 1; Cajero.Pasar(); }
+### if/else-sin-punto-y-coma-antes
+monitor S { int s = 1; cond pos;
+  procedure P() { if (s == 0) wait(pos) else s = s-1; } }
+process A { S.P(); if (true) skip else skip; }
+### if/falta-punto-y-coma-sin-else
+process P { int x; if (x == 0) x = 1 x = 2; }
+### if/falta-punto-y-coma-dentro-de-llaves
+process P { int x; if (x == 0) { x = 1 } else x = 2; }
+### if/else-sin-if
+process P { int x; x = 1 else x = 2; }

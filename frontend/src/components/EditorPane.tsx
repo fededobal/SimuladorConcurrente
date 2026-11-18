@@ -1,5 +1,6 @@
 import { ZoomIn, ZoomOut } from 'lucide-react';
 import { CodeEditor, type CursorPosition } from './CodeEditor';
+import { ConstantsMenu } from './ConstantsMenu';
 import { DeadlockBanner } from './DeadlockBanner';
 import type { BlockedProcess } from '../deadlock';
 import type { ActiveLine } from '../editor/lineMarks';
@@ -57,7 +58,7 @@ function legendOf(processes: readonly ProcessView[]): { name: string; color: str
 
 /**
  * Columna del editor. El encabezado muestra el programa como un archivo abierto, la leyenda
- * de los procesos y el zoom; debajo, el cartel de interbloqueo cuando corresponde, el codigo
+ * de los procesos, las constantes del programa y el zoom; debajo, el cartel de deadlock cuando corresponde, el codigo
  * y los errores.
  */
 export function EditorPane(p: Props) {
@@ -81,6 +82,7 @@ export function EditorPane(p: Props) {
             ))}
             {legend.length > MAX_LEGEND && <li>+{legend.length - MAX_LEGEND}</li>}
           </ul>
+          <ConstantsMenu code={p.code} onChange={p.onChange} disabled={p.readOnly} />
           <button type="button" className="btn btn-icono btn-plano btn-chico" onClick={p.zoom.zoomOut}
             disabled={!p.zoom.canZoomOut} aria-label="Achicar la letra del código" title="Achicar la letra del código">
             <ZoomOut size={14} />

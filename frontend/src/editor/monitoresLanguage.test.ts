@@ -56,6 +56,22 @@ describe('monitoresLanguage', () => {
     expect(colors['// un comentario']).toBe(COMMENT);
   });
 
+  it('colaIsATypeOnlyWhenItDeclares', async () => {
+    const TYPE = '#0f766e';
+    expect((await colorsOf('Cola fila(int);')).Cola).toBe(TYPE);
+    const colors = await colorsOf('cond cola;\nwait(cola);');
+    const named = Object.entries(colors).filter(([text]) => text.includes('cola'));
+    expect(named.length).toBeGreaterThan(0);
+    for (const [text, color] of named) expect(color, text).toBe(TEXT);
+  });
+
+  it('defineDeclaresAConstant', async () => {
+    const colors = await colorsOf('#define N 5\nprocess P { skip; }');
+    expect(colors['#define']).toBe(KEYWORD);
+    expect(colors.N).toBe(LITERAL);
+    expect(colors['5']).toBe(LITERAL);
+  });
+
   it('rangeIsTwoIntegersNotADecimal', async () => {
     const colors = await colorsOf('for (i = 1..5) skip;');
     expect(colors['1']).toBe(LITERAL);

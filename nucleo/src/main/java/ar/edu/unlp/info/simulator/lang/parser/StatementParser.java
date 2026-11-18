@@ -29,10 +29,13 @@ final class StatementParser {
 
     Stmt.Block parseBlock() {
         Token open = tokens.consume("{", "Se esperaba '{'");
+        // dentro de las llaves cada sentencia lleva su ';', aunque el bloque sea el cuerpo de un if
+        boolean outer = tokens.elseEndsStatement(false);
         List<Stmt> statements = new ArrayList<>();
         while (!tokens.check("}") && !tokens.atEnd()) {
             statements.addAll(parseStatements());
         }
+        tokens.elseEndsStatement(outer);
         tokens.consume("}", "Se esperaba '}'");
         return new Stmt.Block(statements, open.line());
     }
@@ -97,12 +100,15 @@ final class StatementParser {
             }
             return parseAssignOrIncDec();
         }
+        if (t.constant() != null) {
+            throw tokens.constantAsName(t);
+        }
         throw tokens.error("Sentencia no válida");
     }
 
     private Stmt parseSkip() {
         Token kw = tokens.advance();
-        tokens.consume(";", "Se esperaba ';' después de 'skip'");
+        tokens.endStatement("Se esperaba ';' después de 'skip'");
         return new Stmt.Skip(kw.line());
     }
 
@@ -111,7 +117,7 @@ final class StatementParser {
         tokens.consume("(", "Se esperaba '(' después de 'delay'");
         Expr seconds = parseExpr();
         tokens.consume(")", "Se esperaba ')' al cerrar el delay");
-        tokens.consume(";", "Se esperaba ';' al final del delay");
+        tokens.endStatement("Se esperaba ';' al final del delay");
         return new Stmt.Delay(seconds, kw.line());
     }
 
@@ -136,7 +142,8 @@ final class StatementParser {
         String name = tokens.consumeIdent("Se esperaba el nombre de la variable");
 
         if (type.isQueue()) {
-            return VarDecl.queue(name, type, queues.parseElementTypes(type, name), line);
+            List<Type> elementTypes = queues.parseElementTypes(type, name);
+            return VarDecl.queue(name, type, elementTypes, queues.parseOrder(type, name), line);
         }
 
         boolean isArray = false;
@@ -157,7 +164,7 @@ final class StatementParser {
         } else if (tokens.match("=")) {
             init = parseExpr();
         }
-        return new VarDecl(name, type, null, isArray, size, init, line);
+        return new VarDecl(name, type, null, false, isArray, size, init, line);
     }
 
     private Stmt parseCondOp() {
@@ -174,8 +181,12 @@ final class StatementParser {
             index = parseExpr();
             tokens.consume("]", "Se esperaba ']' en el índice de la variable condición");
         }
+        if (kind == Stmt.CondOpKind.WAIT && tokens.check(",")) {
+            throw tokens.error("En la práctica no se permite el wait con prioridad "
+                    + "(wait(cv, rank)): se escribe wait(" + name + ")");
+        }
         tokens.consume(")", "Se esperaba ')'");
-        tokens.consume(";", "Se esperaba ';'");
+        tokens.endStatement("Se esperaba ';'");
         return new Stmt.CondOp(kind, name, index, kw.line());
     }
 
@@ -184,7 +195,7 @@ final class StatementParser {
         tokens.consume("(", "Se esperaba '(' después de 'write'");
         List<Expr> args = parseArguments();
         tokens.consume(")", "Se esperaba ')' al cerrar el write");
-        tokens.consume(";", "Se esperaba ';' al final del write");
+        tokens.endStatement("Se esperaba ';' al final del write");
         return new Stmt.Write(args, kw.line());
     }
 
@@ -193,7 +204,10 @@ final class StatementParser {
         tokens.consume("(", "Se esperaba '(' después de 'if'");
         Expr cond = parseExpr();
         tokens.consume(")", "Se esperaba ')' después de la condición del 'if'");
+        // el cuerpo sin llaves puede ir seguido del else sin ';' (ver TokenCursor.endStatement)
+        boolean outer = tokens.elseEndsStatement(true);
         Stmt.Block thenB = parseBlockOrStatement();
+        tokens.elseEndsStatement(outer);
         Stmt.Block elseB = null;
         if (tokens.match("else")) {
             elseB = parseBlockOrStatement();
@@ -318,7 +332,7 @@ final class StatementParser {
         tokens.consume("(", "Se esperaba '(' en la llamada al monitor");
         List<Expr> args = parseArguments();
         tokens.consume(")", "Se esperaba ')' en la llamada al monitor");
-        tokens.consume(";", "Se esperaba ';' al final de la llamada al monitor");
+        tokens.endStatement("Se esperaba ';' al final de la llamada al monitor");
         return new Stmt.MonitorCall(monTok.lexeme(), index, proc, args, monTok.line());
     }
 
@@ -341,11 +355,11 @@ final class StatementParser {
             tokens.consume("]", "Se esperaba ']' en el índice");
         }
         if (tokens.match("++")) {
-            tokens.consume(";", "Se esperaba ';'");
+            tokens.endStatement("Se esperaba ';'");
             return new Stmt.IncDec(nameTok.lexeme(), index, true, nameTok.line());
         }
         if (tokens.match("--")) {
-            tokens.consume(";", "Se esperaba ';'");
+            tokens.endStatement("Se esperaba ';'");
             return new Stmt.IncDec(nameTok.lexeme(), index, false, nameTok.line());
         }
         if (tokens.match(Lexer.SWAP)) {
@@ -353,7 +367,7 @@ final class StatementParser {
         }
         tokens.consume("=", "Se esperaba '=', '++' o '--'");
         Expr value = parseExpr();
-        tokens.consume(";", "Se esperaba ';'");
+        tokens.endStatement("Se esperaba ';'");
         return new Stmt.Assign(nameTok.lexeme(), index, value, nameTok.line());
     }
 
@@ -366,7 +380,7 @@ final class StatementParser {
             rightIndex = parseExpr();
             tokens.consume("]", "Se esperaba ']' en el índice");
         }
-        tokens.consume(";", "Se esperaba ';'");
+        tokens.endStatement("Se esperaba ';'");
         return new Stmt.Swap(leftTok.lexeme(), leftIndex, rightTok.lexeme(), rightIndex,
                 leftTok.line());
     }

@@ -9,20 +9,23 @@ import java.util.List;
  * @param type         tipo
  * @param elementTypes tipos de las componentes de cada elemento, si es una cola
  *                     ({@code Cola c(int, text)}); null si no lo es
+ * @param descending   true si es una ColaOrdenada declarada {@code desc}: ordena de mayor a
+ *                     menor
  * @param isArray      true si es un arreglo
  * @param sizeExpr     expresion de tamano (constante) si es arreglo, si no null
  * @param initExpr     expresion de inicializacion (para arreglos, el valor de relleno), o null
  * @param line         linea
  */
-public record VarDecl(String name, Type type, List<Type> elementTypes, boolean isArray,
-                      Expr sizeExpr, Expr initExpr, int line)
+public record VarDecl(String name, Type type, List<Type> elementTypes, boolean descending,
+                      boolean isArray, Expr sizeExpr, Expr initExpr, int line)
         implements Stmt {
 
     public static VarDecl scalar(String name, Type type, Expr initExpr, int line) {
-        return new VarDecl(name, type, null, false, null, initExpr, line);
+        return new VarDecl(name, type, null, false, false, null, initExpr, line);
     }
 
-    public static VarDecl queue(String name, Type type, List<Type> elementTypes, int line) {
-        return new VarDecl(name, type, elementTypes, false, null, null, line);
+    public static VarDecl queue(String name, Type type, List<Type> elementTypes,
+                                boolean descending, int line) {
+        return new VarDecl(name, type, elementTypes, descending, false, null, null, line);
     }
 }

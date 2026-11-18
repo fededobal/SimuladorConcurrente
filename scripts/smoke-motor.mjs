@@ -263,6 +263,37 @@ const CANONICOS = [
   ['intercambio entre tipos distintos se rechaza', `
     process P { int a = 1; double d = 2; a :=: d; }`,
     (r) => !!r.compilacion?.endsWith("':=:' necesita dos valores del mismo tipo")],
+  ['#define: una constante dimensiona familias, arreglos y arreglos de monitores', `
+    #define N 4
+    monitor Cancha { int cant = 0; cond espera; int llegaron[N];
+      procedure llegada(id: in int) { cant ++; llegaron[id] = 1;
+        if (cant < N) wait (espera) else signal_all (espera); } }
+    monitor Caja[id: 0..N-1] { int usos = 0; procedure usar() { usos = usos + N; } }
+    process Jugador[id: 0..N-1] { Cancha.llegada(id); Caja[id].usar(); }`,
+    (r) => r.finished && r.vars['Cancha.cant'] === '4' && r.vars['Caja[3].usos'] === '4'
+      && r.snapshot.processes.length === 4],
+  ['#define: una constante no se declara ni se asigna', `
+    #define N 5
+    process P { N = 1; }`,
+    (r) => !!r.compilacion?.includes("'N' es una constante del programa (#define N 5)") && r.linea === 3],
+  ['ColaOrdenada desc entrega primero la clave mayor', `
+    monitor M { ColaOrdenada fila(int, int) desc; int edad = 0, primero = 0;
+      procedure cargar() { push(fila, 30, 0); push(fila, 70, 1); push(fila, 45, 2); push(fila, 70, 3); }
+      procedure sacar() { pop(fila, edad, primero); } }
+    process P { M.cargar(); M.sacar(); }`,
+    (r) => r.finished && r.vars['M.primero'] === '1' && r.vars['M.edad'] === '70'
+      && r.vars['M.fila'] === '<(70, 3), (45, 2), (30, 0)>'],
+  ['notacion de la catedra: cond cola y else sin ; antes', `
+    Monitor Cajero { bool libre = true; cond cola; int esperando = 0;
+      Procedure Pasar() { if (not libre) { esperando ++; wait (cola); } else libre = false; }
+      Procedure Salir() { if (esperando == 0) libre = true else { esperando --; signal (cola); } } }
+    Process Persona [id: 0..3] { Cajero.Pasar(); delay(1); Cajero.Salir(); }`,
+    (r) => r.finished && r.vars['Cajero.libre'] === 'true' && r.vars['Cajero.esperando'] === '0'],
+  ['wait con prioridad: mensaje propio', `
+    monitor S { bool libre = true; cond turno;
+      procedure request(int tiempo) { if (libre) libre = false; else wait(turno, tiempo); } }
+    process A { S.request(3); }`,
+    (r) => !!r.compilacion?.includes('En la práctica no se permite el wait con prioridad')],
   ['arreglo de monitores: cada indice tiene su propio estado', `
     monitor E[id: 0..2] { int n = 0; procedure f(x: in int) { n = id * 10 + x; } }
     process P[k: 0..2] { E[k].f(k); }`,

@@ -61,26 +61,31 @@ public sealed interface Value {
 
     /**
      * Cola FIFO ({@code Cola}) o cola de prioridad ({@code ColaOrdenada}). La ordenada
-     * inserta segun la primera componente del elemento y, a igualdad, respeta el orden de
-     * llegada (insercion estable): entre dos elementos con la misma clave sale antes el que
-     * se encolo primero.
+     * inserta segun la primera componente del elemento, de menor a mayor o, si se declaró
+     * {@code desc}, de mayor a menor. A igualdad respeta el orden de llegada (insercion
+     * estable): entre dos elementos con la misma clave sale antes el que se encolo primero.
      */
     final class QueueVal implements Value {
         private final List<Value> items;
         private final boolean sorted;
+        /** true si ordena de mayor a menor; solo tiene sentido en una cola ordenada. */
+        private final boolean descending;
         /** Tipos de las componentes de cada elemento, como se declaro la cola. */
         private final List<Type> elementTypes;
 
-        public QueueVal(boolean sorted, List<Type> elementTypes) {
-            this(new ArrayList<>(), sorted, elementTypes);
+        public QueueVal(boolean sorted, boolean descending, List<Type> elementTypes) {
+            this(new ArrayList<>(), sorted, descending, elementTypes);
         }
-        private QueueVal(List<Value> items, boolean sorted, List<Type> elementTypes) {
+        private QueueVal(List<Value> items, boolean sorted, boolean descending,
+                         List<Type> elementTypes) {
             this.items = items;
             this.sorted = sorted;
+            this.descending = descending;
             this.elementTypes = elementTypes;
         }
 
         public boolean isSorted() { return sorted; }
+        public boolean isDescending() { return descending; }
         public List<Type> elementTypes() { return elementTypes; }
 
         public void push(Value v) {
@@ -90,7 +95,8 @@ public sealed interface Value {
             }
             Value key = keyOf(v);
             int i = 0;
-            while (i < items.size() && compare(keyOf(items.get(i)), key, -1) <= 0) i++;
+            // pasa de largo los que van antes y los de la misma clave, que llegaron primero
+            while (i < items.size() && !goesBefore(key, keyOf(items.get(i)))) i++;
             items.add(i, v);
         }
 
@@ -100,7 +106,13 @@ public sealed interface Value {
         public List<Value> snapshot() { return new ArrayList<>(items); }
 
         public QueueVal copy() {
-            return new QueueVal(new ArrayList<>(items), sorted, elementTypes);
+            return new QueueVal(new ArrayList<>(items), sorted, descending, elementTypes);
+        }
+
+        /** true si un elemento de clave {@code key} sale antes que uno de clave {@code other}. */
+        private boolean goesBefore(Value key, Value other) {
+            int order = compare(key, other, -1);
+            return descending ? order > 0 : order < 0;
         }
 
         /** El criterio de orden es la primera componente: la 'x' de push(c, x, y, z). */
@@ -148,7 +160,7 @@ public sealed interface Value {
             case BoolVal ignored -> "bool";
             case TextVal ignored -> "text";
             case QueueVal q -> Type.queueName(q.isSorted() ? Type.COLA_ORDENADA : Type.COLA,
-                    q.elementTypes());
+                    q.elementTypes()) + (q.isDescending() ? " desc" : "");
             case ArrayVal a -> a.isTuple() ? "tupla" : a.elementType().name().toLowerCase() + "[]";
         };
     }
@@ -211,7 +223,8 @@ public sealed interface Value {
 
     /** La cola vacia que declara {@code vd}, con los tipos de sus componentes. */
     static QueueVal queueFor(VarDecl vd) {
-        return new QueueVal(vd.type() == Type.COLA_ORDENADA, vd.elementTypes());
+        return new QueueVal(vd.type() == Type.COLA_ORDENADA, vd.descending(),
+                vd.elementTypes());
     }
 
     /**

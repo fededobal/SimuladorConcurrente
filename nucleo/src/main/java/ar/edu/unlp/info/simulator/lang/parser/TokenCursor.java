@@ -26,6 +26,8 @@ final class TokenCursor {
     private final List<Token> tokens;
     private int position = 0;
     private int nesting = 0;
+    /** true mientras se analiza el cuerpo sin llaves de un if: ver {@link #endStatement}. */
+    private boolean elseEndsStatement = false;
 
     TokenCursor(List<Token> tokens) {
         this.tokens = tokens;
@@ -93,7 +95,36 @@ final class TokenCursor {
 
     Token consumeIdentToken(String message) {
         if (peek().is(TokenType.IDENTIFIER)) return advance();
+        if (peek().constant() != null) throw constantAsName(peek());
         throw error(message + " (se encontró '" + describe(peek()) + "')");
+    }
+
+    /** El error de usar una constante donde va un nombre que se declara o se modifica. */
+    CompilationException constantAsName(Token t) {
+        return new CompilationException("'" + t.constant() + "' es una constante del programa "
+                + "(#define " + t.constant() + " " + t.lexeme() + "): no se puede usar como "
+                + "nombre ni cambiarle el valor", t.line());
+    }
+
+    /**
+     * Fin de una sentencia: el {@code ;}. Como en la cátedra, puede faltar cuando la sentencia
+     * es el cuerpo sin llaves de un if y sigue su else:
+     * {@code if (s == 0) wait(pos) else s = s - 1;}.
+     */
+    void endStatement(String message) {
+        if (elseEndsStatement && check("else")) return;
+        consume(";", message);
+    }
+
+    /**
+     * Indica si un else puede terminar la sentencia que se está analizando.
+     *
+     * @return el valor anterior, para restaurarlo al salir
+     */
+    boolean elseEndsStatement(boolean allowed) {
+        boolean previous = elseEndsStatement;
+        elseEndsStatement = allowed;
+        return previous;
     }
 
     /**
@@ -152,6 +183,8 @@ final class TokenCursor {
 
     /** Como se nombra un token en un mensaje de error. */
     static String describe(Token t) {
-        return t.is(TokenType.EOF) ? "fin del archivo" : t.lexeme();
+        if (t.is(TokenType.EOF)) return "fin del archivo";
+        // una constante se nombra como la escribió el alumno, no por su valor
+        return t.constant() != null ? t.constant() : t.lexeme();
     }
 }

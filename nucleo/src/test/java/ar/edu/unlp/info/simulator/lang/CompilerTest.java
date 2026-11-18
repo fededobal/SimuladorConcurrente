@@ -524,8 +524,9 @@ class CompilerTest {
     /** Un nombre que coincide con una palabra reservada, con otras mayusculas, ya no es un nombre. */
     @Test
     void keywordInOtherCaseIsNotAnIdentifier() {
-        errorOf("monitor M { cond cola; procedure p() { skip; } } process P { M.p(); }");
+        errorOf("monitor M { cond Monitor; procedure p() { skip; } } process P { M.p(); }");
         errorOf("process P { int Out = 0; }");
+        errorOf("process P { int colaOrdenada = 0; }");
         assertEquals("Línea 1: El tipo se llama bool, no Boolean",
                 errorOf("process P { Boolean listo = true; }"));
     }
@@ -628,5 +629,136 @@ class CompilerTest {
         assertTrue(errorOf("process P { int x; x :=: 3; }")
                 .contains("Se esperaba una variable después de ':=:'"));
         assertTrue(errorOf("process P { int x, y; x :=: y }").contains("Se esperaba ';'"));
+    }
+
+    /**
+     * La cátedra usa {@code cola} como tipo ({@code cola elibres;}) y como nombre
+     * ({@code cond cola;}, ejercicio 2 de la Explicación 3). No se confunden: el tipo va
+     * seguido del nombre que declara.
+     */
+    @Test
+    void colaIsATypeAndAlsoAName() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                Monitor Cajero { bool libre = true; cond cola; int esperando = 0;
+                  Procedure Pasar() { if (not libre) { esperando ++; wait (cola); } else libre = false; }
+                  Procedure Salir() { if (esperando > 0) { esperando --; signal (cola); } else libre = true; }
+                }
+                Process Persona[id: 0..2] { Cajero.Pasar(); Cajero.Salir(); }
+                """));
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M { Cola cola(int); int Cola = 0;
+                  procedure f(v: in int) { push(cola, v); if (not empty cola and Cola mod 2 == 0) pop(cola, Cola); } }
+                process P { int cola = 3; cola = cola + 1; M.f(cola); }
+                """));
+        // sigue siendo el tipo cuando declara: el mensaje de la cola sin tipos no cambia
+        assertEquals("Línea 1: Declarar la cola con los tipos de sus componentes: Cola elibres(tipo, ...)",
+                errorOf("monitor M { cola elibres; procedure f() { skip; } } process P { M.f(); }"));
+    }
+
+    /**
+     * Como en la cátedra, el cuerpo sin llaves de un if puede ir seguido del else sin ';':
+     * {@code if (s == 0) wait(pos) else s = s-1;}.
+     */
+    @Test
+    void elseMayFollowASingleStatementWithoutSemicolon() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor Semaforo { int s = 1, espera = 0; cond pos; Cola c(int);
+                  procedure P() { if (s == 0) wait(pos) else s = s-1; }
+                  procedure V() { if (espera == 0) s = s+1 else { espera --; signal(pos); } }
+                  procedure otros(v: in int) {
+                    if (v == 0) s++ else s--;
+                    if (v == 1) push(c, v) else skip;
+                    if (v == 2) signal_all(pos) else if (v == 3) write(v) else delay(1);
+                    if (v > 3) while (s < 0) s++ else s = 0;
+                  }
+                }
+                process A { Semaforo.P(); if (true) Semaforo.V() else skip; Semaforo.otros(4); }
+                """));
+        // sin else que la siga, la sentencia sigue necesitando su ';'
+        assertTrue(errorOf("process P { int x; if (x == 0) x = 1 x = 2; }").contains("Se esperaba ';'"));
+        // dentro de las llaves, también
+        assertTrue(errorOf("process P { int x; if (x == 0) { x = 1 } else x = 2; }")
+                .contains("Se esperaba ';'"));
+        // un else sin if que lo preceda no pasa a ser válido
+        assertTrue(errorOf("process P { int x; x = 1 else x = 2; }").contains("Se esperaba ';'"));
+    }
+
+    /** {@code #define N 5}: una constante del programa; el compilador pone el número en su lugar. */
+    @Test
+    void constantsStandForNumbers() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                // los comentarios pueden ir antes
+                #define N 3
+                #DEFINE Lugares 2   // y al final de la línea
+                monitor Admin { cond espera[N]; text res[N]; int buf[Lugares]; int usados = 0;
+                  procedure Pedido(IdC: in int) { if (usados == N) wait(espera[IdC]); usados = usados + N; }
+                }
+                monitor Escritorio[id: 0..N-1] { procedure f() { skip; } }
+                process Cliente[id: 0..N-1] { Admin.Pedido(id); Escritorio[id].f(); delay(N); }
+                """));
+        assertEquals("Línea 2: Las constantes (#define) se escriben al principio del programa, "
+                        + "antes de los monitores y los procesos",
+                errorOf("process P { skip; }\n#define N 5"));
+        assertEquals("Línea 1: Directiva desconocida '#include': la única es #define, por ejemplo "
+                + "#define N 5", errorOf("#include N\nprocess P { skip; }"));
+        assertEquals("Línea 1: Después de #define va el nombre de la constante, por ejemplo "
+                + "#define N 5", errorOf("#define 5 N\nprocess P { skip; }"));
+        assertEquals("Línea 1: La constante 'N' necesita un valor entero sin signo, por ejemplo "
+                + "#define N 5", errorOf("#define N\nprocess P { skip; }"));
+        assertTrue(errorOf("#define N 2.5\nprocess P { skip; }").contains("valor entero sin signo"));
+        assertTrue(errorOf("#define N -1\nprocess P { skip; }").contains("valor entero sin signo"));
+        assertEquals("Línea 1: Después del valor de la constante 'N' no va nada más en la línea "
+                + "(un #define no lleva ';')", errorOf("#define N 5;\nprocess P { skip; }"));
+        assertEquals("Línea 2: La constante 'N' ya está definida",
+                errorOf("#define N 5\n#define N 6\nprocess P { skip; }"));
+        assertEquals("Línea 1: 'while' es una palabra reservada: no puede ser el nombre de una "
+                + "constante", errorOf("#define while 5\nprocess P { skip; }"));
+    }
+
+    /** Una constante no es una variable: no se declara de nuevo ni se le asigna. */
+    @Test
+    void constantsAreNotVariables() {
+        String expected = "'N' es una constante del programa (#define N 5): no se puede usar "
+                + "como nombre ni cambiarle el valor";
+        assertEquals("Línea 2: " + expected, errorOf("#define N 5\nprocess P { int N = 1; }"));
+        assertEquals("Línea 2: " + expected, errorOf("#define N 5\nprocess P { N = 1; }"));
+        assertEquals("Línea 2: " + expected, errorOf("#define N 5\nprocess P { N++; }"));
+        assertEquals("Línea 2: " + expected, errorOf("#define N 5\nprocess N { skip; }"));
+        assertEquals("Línea 2: " + expected,
+                errorOf("#define N 5\nmonitor M { cond N; procedure f() { skip; } } process P { M.f(); }"));
+        // los nombres distinguen mayúsculas: n no es N
+        assertDoesNotThrow(() -> Compiler.compile("#define N 5\nprocess P { int n = N; n = n + 1; }"));
+        // los mensajes nombran la constante como se escribió, no su valor
+        assertTrue(errorOf("#define N 5\nprocess P { int x; x = 1 N; }").contains("se encontró 'N'"));
+    }
+
+    /** El wait con prioridad de la teoría no se usa en la práctica: el mensaje lo dice. */
+    @Test
+    void waitWithPriorityIsNotAllowed() {
+        assertEquals("Línea 2: En la práctica no se permite el wait con prioridad "
+                        + "(wait(cv, rank)): se escribe wait(turno)",
+                errorOf("monitor S { bool libre = true; cond turno;\n"
+                        + "procedure request(int tiempo) { if (libre) libre = false; else wait(turno, tiempo); } }\n"
+                        + "process A { S.request(3); }"));
+        assertTrue(errorOf("monitor S { cond scan[2];\n"
+                + "procedure pedir(int cil) { wait(scan[0], cil); } }\nprocess A { S.pedir(3); }")
+                .contains("wait con prioridad"));
+    }
+
+    /** {@code asc} y {@code desc} eligen el orden de una ColaOrdenada al declararla. */
+    @Test
+    void sortedQueueOrderIsChosenInItsDeclaration() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor Cajero { ColaOrdenada fila(int, int) desc; ColaOrdenada espera(int) ASC;
+                  colaOrdenada a(text) Desc, b(int, (int, text)) asc, c(double);
+                  procedure Pasar(idP, edad: in int) { push(fila, edad, idP); push(espera, idP); } }
+                process P { ColaOrdenada local(int) desc; Cajero.Pasar(1, 70); }
+                """));
+        assertEquals("Línea 1: 'desc' indica el orden de una ColaOrdenada; 'c' es una Cola, que no "
+                + "ordena: sale primero lo que se encoló primero",
+                errorOf("process P { Cola c(int) desc; }"));
+        // asc y desc son palabras reservadas
+        errorOf("process P { int desc = 0; }");
+        errorOf("process P { int Asc = 0; }");
     }
 }

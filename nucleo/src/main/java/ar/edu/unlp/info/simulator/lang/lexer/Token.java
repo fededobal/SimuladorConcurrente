@@ -7,8 +7,14 @@ package ar.edu.unlp.info.simulator.lang.lexer;
  * @param lexeme texto exacto (para STRING, sin las comillas)
  * @param line   linea 1-based donde empieza el token
  * @param column columna 1-based
+ * @param constant nombre de la constante ({@code #define}) que el programa escribió en
+ *                 lugar de este número; null si el token está escrito tal cual
  */
-public record Token(TokenType type, String lexeme, int line, int column) {
+public record Token(TokenType type, String lexeme, int line, int column, String constant) {
+
+    public Token(TokenType type, String lexeme, int line, int column) {
+        this(type, lexeme, line, column, null);
+    }
 
     public boolean is(TokenType t) {
         return this.type == t;

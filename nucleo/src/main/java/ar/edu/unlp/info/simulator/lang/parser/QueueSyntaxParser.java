@@ -73,6 +73,23 @@ final class QueueSyntaxParser {
         return types;
     }
 
+    /**
+     * El orden de una ColaOrdenada, después de sus tipos: {@code asc} (de menor a mayor, el
+     * que rige si no se escribe nada) o {@code desc} (de mayor a menor).
+     *
+     * @return true si la cola se declaró {@code desc}
+     */
+    boolean parseOrder(Type queue, String name) {
+        if (!tokens.checkAny("asc", "desc")) return false;
+        Token order = tokens.advance();
+        if (queue != Type.COLA_ORDENADA) {
+            throw new CompilationException("'" + order.lexeme() + "' indica el orden de una "
+                    + "ColaOrdenada; '" + name + "' es una Cola, que no ordena: sale primero "
+                    + "lo que se encoló primero", order.line());
+        }
+        return order.is("desc");
+    }
+
     private Type parseElementType() {
         Token t = tokens.peek();
         if (!TokenCursor.isScalarType(t)) {
@@ -102,7 +119,7 @@ final class QueueSyntaxParser {
             op = new Stmt.QueuePop(queue, parsePopTargets(queue), kw.line());
         }
         tokens.consume(")", "Se esperaba ')'");
-        tokens.consume(";", "Se esperaba ';'");
+        tokens.endStatement("Se esperaba ';'");
         return op;
     }
 

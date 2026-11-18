@@ -414,6 +414,56 @@
 {"error":"Línea 1: En la práctica no se permite preguntar si una variable condición está vacía","line":1}
 ### asignacion/indice-al-final
 {"error":"Línea 1: Se esperaba ']' en el índice (se encontró 'fin del archivo')","line":1}
+### constante/despues-del-programa
+{"error":"Línea 2: Las constantes (#define) se escriben al principio del programa, antes de los monitores y los procesos","line":2}
+### constante/directiva-desconocida
+{"error":"Línea 1: Directiva desconocida '#include': la única es #define, por ejemplo #define N 5","line":1}
+### constante/sin-nombre
+{"error":"Línea 1: Después de #define va el nombre de la constante, por ejemplo #define N 5","line":1}
+### constante/sin-valor
+{"error":"Línea 1: La constante 'N' necesita un valor entero sin signo, por ejemplo #define N 5","line":1}
+### constante/valor-con-decimales
+{"error":"Línea 1: La constante 'N' necesita un valor entero sin signo, por ejemplo #define N 5","line":1}
+### constante/valor-negativo
+{"error":"Línea 1: La constante 'N' necesita un valor entero sin signo, por ejemplo #define N 5","line":1}
+### constante/con-punto-y-coma
+{"error":"Línea 1: Después del valor de la constante 'N' no va nada más en la línea (un #define no lleva ';')","line":1}
+### constante/repetida
+{"error":"Línea 2: La constante 'N' ya está definida","line":2}
+### constante/palabra-reservada
+{"error":"Línea 1: 'while' es una palabra reservada: no puede ser el nombre de una constante","line":1}
+### constante/declarada-como-variable
+{"error":"Línea 2: 'N' es una constante del programa (#define N 5): no se puede usar como nombre ni cambiarle el valor","line":2}
+### constante/asignada
+{"error":"Línea 2: 'N' es una constante del programa (#define N 5): no se puede usar como nombre ni cambiarle el valor","line":2}
+### constante/como-nombre-de-proceso
+{"error":"Línea 2: 'N' es una constante del programa (#define N 5): no se puede usar como nombre ni cambiarle el valor","line":2}
+### constante/en-un-mensaje
+{"error":"Línea 2: Se esperaba ';' (se encontró 'N')","line":2}
+### constante/fuera-de-rango
+{"error":"Línea 2: Número fuera de rango: 99999999999999999999 no entra en un int (máximo 9223372036854775807)","line":2}
+### validos/constantes
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P[0]","color":"#2f6fe0","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":6,"locals":[{"name":"i","type":"int","value":"0","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null},{"id":2,"name":"P[1]","color":"#d42f7c","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":6,"locals":[{"name":"i","type":"int","value":"1","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null},{"id":3,"name":"P[2]","color":"#0f79b5","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":6,"locals":[{"name":"i","type":"int","value":"2","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[{"name":"buf","type":"int[]","value":"[0, 0]","isArray":true,"lastWriterId":null,"lastWriteInstant":null,"elements":["0","0"],"size":2},{"name":"n","type":"int","value":"6","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[{"name":"espera[0]","queue":[]},{"name":"espera[1]","queue":[]},{"name":"espera[2]","queue":[]}],"lockOwner":null,"entryQueue":[]},{"name":"E[0]","vars":[{"name":"id","type":"int","value":"0","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]},{"name":"E[1]","vars":[{"name":"id","type":"int","value":"1","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]},{"name":"E[2]","vars":[{"name":"id","type":"int","value":"2","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+### cond/wait-con-prioridad
+{"error":"Línea 2: En la práctica no se permite el wait con prioridad (wait(cv, rank)): se escribe wait(turno)","line":2}
+### cond/wait-con-prioridad-en-arreglo
+{"error":"Línea 1: En la práctica no se permite el wait con prioridad (wait(cv, rank)): se escribe wait(scan)","line":1}
+### cola/orden-en-cola-fifo
+{"error":"Línea 1: 'desc' indica el orden de una ColaOrdenada; 'c' es una Cola, que no ordena: sale primero lo que se encoló primero","line":1}
+### cola/orden-como-nombre
+{"error":"Línea 1: Se esperaba el nombre de la variable (se encontró 'desc')","line":1}
+### validos/cola-ordenada-con-orden
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#2f6fe0","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":4,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"M","vars":[{"name":"a","type":"ColaOrdenada(int, text) desc","value":"<(3, tres), (2, dos), (1, uno)>","isArray":false,"lastWriterId":-1,"lastWriteInstant":0,"elements":["(3, tres)","(2, dos)","(1, uno)"],"size":3},{"name":"b","type":"ColaOrdenada(int)","value":"<1, 2>","isArray":false,"lastWriterId":-1,"lastWriteInstant":0,"elements":["1","2"],"size":2},{"name":"c","type":"ColaOrdenada(double)","value":"<>","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":[],"size":0}],"conds":[],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+### validos/cola-como-nombre
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"P","color":"#2f6fe0","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":3,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"Cajero","vars":[{"name":"libre","type":"bool","value":"true","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0},{"name":"fila","type":"Cola(int)","value":"<>","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":[],"size":0},{"name":"Cola","type":"int","value":"0","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[{"name":"cola","queue":[]}],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+### if/else-sin-punto-y-coma-antes
+{"id":"local","seed":0,"snapshot":{"instant":0,"processes":[{"id":1,"name":"A","color":"#2f6fe0","state":"READY","blockReason":null,"blockedOn":null,"location":null,"line":3,"locals":[],"error":null,"advanced":false,"advanceOrder":-1,"holding":[],"delayRemaining":null}],"monitors":[{"name":"S","vars":[{"name":"s","type":"int","value":"1","isArray":false,"lastWriterId":null,"lastWriteInstant":null,"elements":null,"size":0}],"conds":[{"name":"pos","queue":[]}],"lockOwner":null,"entryQueue":[]}],"output":[]},"finished":false,"deadlock":false}
+### if/falta-punto-y-coma-sin-else
+{"error":"Línea 1: Se esperaba ';' (se encontró 'x')","line":1}
+### if/falta-punto-y-coma-dentro-de-llaves
+{"error":"Línea 1: Se esperaba ';' (se encontró '}')","line":1}
+### if/else-sin-if
+{"error":"Línea 1: Se esperaba ';' (se encontró 'else')","line":1}
 ### generado/bloques-anidados-de-mas
 {"error":"Línea 1: El programa tiene demasiados niveles de anidamiento (máximo 100)","line":1}
 ### generado/bloques-anidados-al-limite

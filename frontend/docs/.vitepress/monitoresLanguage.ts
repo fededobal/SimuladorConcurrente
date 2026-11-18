@@ -1,5 +1,5 @@
 import type { LanguageRegistration, ThemeRegistration } from 'shiki';
-import { KEYWORDS, type TokenClass } from '../../src/editor/highlight';
+import { KEYWORDS, QUEUE_WORD, type TokenClass } from '../../src/editor/highlight';
 
 // Coloreado de los ejemplos de la documentacion con el lenguaje del simulador. Antes los
 // bloques se marcaban como C: `while` salia como en C, pero `wait`, `cond` o `process` no
@@ -23,6 +23,8 @@ const SCOPE: Record<TokenClass, string> = {
 function keywordPatterns(): { name: string; match: string }[] {
   const byClass = new Map<TokenClass, string[]>();
   for (const [word, cls] of Object.entries(KEYWORDS)) {
+    // `cola` es el tipo solo cuando declara: tiene su propia regla, mas abajo
+    if (word === QUEUE_WORD) continue;
     byClass.set(cls, [...(byClass.get(cls) ?? []), word]);
   }
   return [...byClass].map(([cls, words]) => ({
@@ -45,6 +47,17 @@ export const monitoresLanguage: LanguageRegistration = {
     { name: 'string.quoted.double.monitores', begin: '"', end: '"|$' },
     // "1..5" son dos enteros y un rango, no un decimal
     { name: 'constant.numeric.monitores', match: '\\b\\d+(\\.\\d+)?\\b' },
+    // una constante del programa: #define N 5
+    {
+      match: '^\\s*(#(?i:define))\\s+([A-Za-z_]\\w*)',
+      captures: { 1: { name: SCOPE['tok-decl'] }, 2: { name: SCOPE['tok-lit'] } },
+    },
+    // `cola` como tipo: seguida del nombre que declara (`Cola c(int);`), no de un operador.
+    // Como nombre de una variable (`cond cola;`) queda sin colorear, igual que en el editor.
+    {
+      name: SCOPE['tok-type'],
+      match: `(?i)\\b${QUEUE_WORD}\\b(?=\\s+(?!(?:${Object.keys(KEYWORDS).filter((w) => w !== QUEUE_WORD).join('|')})\\b)[A-Za-z_])`,
+    },
     ...keywordPatterns(),
   ],
 };
