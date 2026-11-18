@@ -16,6 +16,19 @@ export function slideMs(stepMs: number): number {
   return Math.min(Math.round(stepMs * SLIDE_SHARE), MAX_SLIDE_MS);
 }
 
+/** Tope del recorrido de una flecha, en ms. */
+const MAX_TRAVEL_MS = 450;
+/** Parte de la duracion del instante que ocupa el recorrido de una flecha. */
+const TRAVEL_SHARE = 0.8;
+
+/**
+ * Duracion del recorrido de una flecha del dibujo de un monitor. Es mas largo que el
+ * deslizamiento: el punto que viaja de una zona a otra tiene que alcanzar a verse.
+ */
+export function travelMs(stepMs: number): number {
+  return Math.min(Math.round(stepMs * TRAVEL_SHARE), MAX_TRAVEL_MS);
+}
+
 /** Puntos de control de la curva del deslizamiento; los mismos que `--ease-step` en index.css. */
 export const STEP_EASING = [0.4, 0, 0.2, 1] as const;
 

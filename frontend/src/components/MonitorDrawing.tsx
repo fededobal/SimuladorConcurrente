@@ -1,12 +1,11 @@
-import { useId } from 'react';
-import type { Arrow } from '../monitorDiagram';
+import type { Arrow, Travel } from '../monitorDiagram';
 import type { MonitorView, ProcRef } from '../types';
 import s from './MonitorCard.module.css';
 
 interface Props {
   readonly monitor: MonitorView;
-  /** Flechas recorridas en el ultimo instante. */
-  readonly active: ReadonlySet<Arrow>;
+  /** Recorridos del ultimo instante: que flechas se usaron y quien las recorrio. */
+  readonly travels: readonly Travel[];
   /** Linea en la que esta el proceso que tiene el monitor, o null. */
   readonly ownerLine: number | null;
   /** true si la simulacion termino en interbloqueo: las flechas de salida de la espera no se pueden recorrer. */
@@ -30,6 +29,35 @@ const ROW_H = 15;
 const ROWS = 3;
 /** Caracteres de un nombre que entran en una zona. */
 const NAME_CHARS = 16;
+/** Puntos que recorren una misma flecha a la vez; con mas procesos, el resto no se dibuja. */
+const MAX_TRAVELERS = 4;
+/** Separacion entre dos puntos que recorren la misma flecha, en ms. */
+const TRAVELER_GAP_MS = 70;
+
+/** Trazo de una flecha, donde termina y hacia donde apunta (grados; 0 es hacia la derecha). */
+interface ArrowShape {
+  readonly d: string;
+  readonly tip: readonly [number, number];
+  readonly angle: number;
+}
+
+const ARROWS: Record<Arrow, ArrowShape> = {
+  call: { d: `M2,${MID_Y} L${ZONE1.x - 3},${MID_Y}`, tip: [ZONE1.x - 2, MID_Y], angle: 0 },
+  entra: {
+    d: `M${ZONE1.x + ZONE_W + 2},${MID_Y} L${ZONE3.x - 3},${MID_Y}`, tip: [ZONE3.x - 2, MID_Y], angle: 0,
+  },
+  return: { d: `M${ZONE3.x + ZONE_W + 2},${MID_Y} L${W - 2},${MID_Y}`, tip: [W - 1, MID_Y], angle: 0 },
+  wait: {
+    d: `M${ZONE3.x + 76},${ZONE3.y - 2} C${ZONE3.x + 76},60 ${ZONE3.x + 60},44 ${ZONE2.x + ZONE_W + 4},44`,
+    tip: [ZONE2.x + ZONE_W + 3, 44],
+    angle: 180,
+  },
+  signal: {
+    d: `M${ZONE2.x - 2},44 C${ZONE1.x + 66},44 ${ZONE1.x + 50},60 ${ZONE1.x + 50},${ZONE1.y - 4}`,
+    tip: [ZONE1.x + 50, ZONE1.y - 3],
+    angle: 90,
+  },
+};
 
 function fit(text: string, max = NAME_CHARS): string {
   return text.length <= max ? text : `${text.slice(0, max - 1)}…`;
@@ -39,20 +67,30 @@ function fit(text: string, max = NAME_CHARS): string {
  * Dibujo de un monitor, como el de la teoria: tres zonas grandes con el nombre completo de
  * cada proceso (no un punto con dos letras) y las flechas entre ellas; la que se recorrio en
  * el ultimo instante queda resaltada.
+ *
+ * De un instante al otro nada salta: un punto del color del proceso recorre la flecha que
+ * uso, el nombre aparece en la zona de llegada cuando el punto esta por llegar, los que
+ * quedan en una cola suben a ocupar el lugar libre, y las flechas y las zonas cambian de
+ * color con una transicion.
  */
-export function MonitorDrawing({ monitor, active, ownerLine, deadlocked }: Props) {
-  const id = useId();
-  const head = `${id}-punta`;
-  const headActive = `${id}-punta-activa`;
+export function MonitorDrawing({ monitor, travels, ownerLine, deadlocked }: Props) {
   const waiting = monitor.conds.reduce((n, c) => n + c.queue.length, 0);
+  const active = new Set(travels.map((t) => t.arrow));
 
-  const arrow = (a: Arrow, d: string, dead = false) => (
-    <path
-      d={d}
-      className={`${s.arrow}${active.has(a) ? ` ${s.arrowActive}` : ''}${dead ? ` ${s.arrowDead}` : ''}`}
-      markerEnd={`url(#${active.has(a) ? headActive : head})`}
-    />
-  );
+  // La punta se dibuja a mano (no con un marcador de SVG) para que cambie de color y de
+  // tamano con la misma transicion que el trazo.
+  const arrow = (a: Arrow, dead = false) => {
+    const { d, tip, angle } = ARROWS[a];
+    const on = active.has(a);
+    return (
+      <>
+        <path d={d} className={`${s.arrow}${on ? ` ${s.arrowActive}` : ''}${dead ? ` ${s.arrowDead}` : ''}`} />
+        <g transform={`translate(${tip[0]} ${tip[1]}) rotate(${angle})`}>
+          <path d="M-7.5,-3.9 L0,0 L-7.5,3.9 z" className={`${s.arrowHead}${on ? ` ${s.arrowHeadActive}` : ''}`} />
+        </g>
+      </>
+    );
+  };
   const label = (a: Arrow, text: string, x: number, y: number, anchor: 'start' | 'middle' | 'end') => (
     <text x={x} y={y} textAnchor={anchor}
       className={`${s.arrowLabel}${active.has(a) ? ` ${s.arrowLabelActive}` : ''}`}>
@@ -63,25 +101,15 @@ export function MonitorDrawing({ monitor, active, ownerLine, deadlocked }: Props
   return (
     <svg className={s.drawing} viewBox={`0 0 ${W} ${H}`} role="img"
       aria-label={describe(monitor)}>
-      <defs>
-        <marker id={head} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L6,3 L0,6 z" className={s.arrowHead} />
-        </marker>
-        <marker id={headActive} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M0,0 L6,3 L0,6 z" className={s.arrowHeadActive} />
-        </marker>
-      </defs>
-
-      {arrow('call', `M2,${MID_Y} L${ZONE1.x - 3},${MID_Y}`)}
+      {arrow('call')}
       {label('call', 'call', 2, MID_Y - 7, 'start')}
-      {arrow('entra', `M${ZONE1.x + ZONE_W + 2},${MID_Y} L${ZONE3.x - 3},${MID_Y}`)}
+      {arrow('entra')}
       {label('entra', 'entra', (ZONE1.x + ZONE_W + ZONE3.x) / 2, MID_Y + 15, 'middle')}
-      {arrow('return', `M${ZONE3.x + ZONE_W + 2},${MID_Y} L${W - 2},${MID_Y}`)}
+      {arrow('return')}
       {label('return', 'return', W - 2, MID_Y - 7, 'end')}
-      {arrow('wait', `M${ZONE3.x + 76},${ZONE3.y - 2} C${ZONE3.x + 76},60 ${ZONE3.x + 60},44 ${ZONE2.x + ZONE_W + 4},44`)}
+      {arrow('wait')}
       {label('wait', 'wait', ZONE3.x + 84, 74, 'start')}
-      {arrow('signal', `M${ZONE2.x - 2},44 C${ZONE1.x + 66},44 ${ZONE1.x + 50},60 ${ZONE1.x + 50},${ZONE1.y - 4}`,
-        deadlocked && waiting > 0)}
+      {arrow('signal', deadlocked && waiting > 0)}
       {label('signal', 'signal', ZONE1.x + 42, 74, 'end')}
 
       {/* 2: una fila por variable condicion, con quien espera en cada una */}
@@ -104,7 +132,34 @@ export function MonitorDrawing({ monitor, active, ownerLine, deadlocked }: Props
       {monitor.lockOwner && ownerLine !== null && ownerLine > 0 && (
         <text x={ZONE3.x + 9} y={ZONE3.y + 35 + ROW_H} className={s.note}>línea {ownerLine}</text>
       )}
+
+      <Travelers travels={travels} />
     </svg>
+  );
+}
+
+/**
+ * Los puntos que recorren las flechas usadas en el ultimo instante. Cada uno se monta una
+ * sola vez (su clave es el evento que lo causo), recorre su flecha y se desvanece.
+ */
+function Travelers({ travels }: { travels: readonly Travel[] }) {
+  const perArrow = new Map<Arrow, number>();
+  return (
+    <>
+      {travels.map((t) => {
+        const turn = perArrow.get(t.arrow) ?? 0;
+        perArrow.set(t.arrow, turn + 1);
+        if (turn >= MAX_TRAVELERS) return null;
+        return (
+          <circle key={t.key} r="4.5" className={s.traveler}
+            style={{
+              offsetPath: `path('${ARROWS[t.arrow].d}')`,
+              animationDelay: `${turn * TRAVELER_GAP_MS}ms`,
+              fill: t.color ?? undefined,
+            }} />
+        );
+      })}
+    </>
   );
 }
 
@@ -119,14 +174,16 @@ function describe(m: MonitorView): string {
 
 /** Hasta ROWS nombres con el punto de su color; "nadie" si no hay, "+n más" si sobran. */
 function NameRows({ procs, x, y }: { procs: readonly ProcRef[]; x: number; y: number }) {
-  if (procs.length === 0) return <text x={x} y={y} className={s.note}>nadie</text>;
+  if (procs.length === 0) return <text x={x} y={y} className={`${s.note} ${s.fadeIn}`}>nadie</text>;
   const shown = procs.length > ROWS ? procs.slice(0, ROWS - 1) : procs;
   return (
     <>
+      {/* El renglon de cada fila va en un transform: cuando el primero de la cola se va, los
+          demas suben con una transicion en vez de saltar. */}
       {shown.map((p, i) => (
-        <g key={p.id}>
-          <circle cx={x + 3} cy={y - 4 + i * ROW_H} r="3.5" fill={p.color} />
-          <text x={x + 11} y={y + i * ROW_H} className={s.procName}>{fit(p.name)}</text>
+        <g key={p.id} className={s.nameRow} style={{ transform: `translateY(${i * ROW_H}px)` }}>
+          <circle cx={x + 3} cy={y - 4} r="3.5" fill={p.color} />
+          <text x={x + 11} y={y} className={s.procName}>{fit(p.name)}</text>
         </g>
       ))}
       {procs.length > shown.length && (
@@ -146,19 +203,18 @@ function CondRows({ monitor, x, y }: { monitor: MonitorView; x: number; y: numbe
     <>
       {shown.map((c, i) => {
         const first = c.queue[0];
-        const rowY = y + i * ROW_H;
         return (
-          <g key={c.name}>
-            <text x={x} y={rowY} className={s.condName}>{fit(c.name, 8)}</text>
+          <g key={c.name} className={s.nameRow} style={{ transform: `translateY(${i * ROW_H}px)` }}>
+            <text x={x} y={y} className={s.condName}>{fit(c.name, 8)}</text>
             {first ? (
-              <>
-                <circle cx={x + 55} cy={rowY - 4} r="3.5" fill={first.color} />
-                <text x={x + 62} y={rowY} className={s.procName}>
+              <g key={first.id} className={s.arrive}>
+                <circle cx={x + 55} cy={y - 4} r="3.5" fill={first.color} />
+                <text x={x + 62} y={y} className={s.procName}>
                   {fit(first.name, 7)}{c.queue.length > 1 ? ` +${c.queue.length - 1}` : ''}
                 </text>
-              </>
+              </g>
             ) : (
-              <text x={x + 52} y={rowY} className={s.note}>vacía</text>
+              <text x={x + 52} y={y} className={`${s.note} ${s.fadeIn}`}>vacía</text>
             )}
           </g>
         );

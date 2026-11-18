@@ -14,28 +14,47 @@ function isAbout(e: LogEntry, monitor: string): boolean {
   return e.resource === monitor || e.resource.startsWith(monitor + '.');
 }
 
-/** Flechas que recorrio algun proceso en el ultimo paso, para resaltarlas. */
-export function arrowsOf(monitor: string, entries: readonly LogEntry[]): Set<Arrow> {
-  const out = new Set<Arrow>();
+/** Un recorrido: un proceso que paso por una flecha del dibujo en el ultimo instante. */
+export interface Travel {
+  /** Identifica al recorrido de un instante al otro (el id del evento que lo causo). */
+  readonly key: string;
+  readonly arrow: Arrow;
+  /**
+   * Color del proceso que recorre la flecha. Null en "signal": el que la recorre es el
+   * proceso despertado, y el evento es del que hizo el signal.
+   */
+  readonly color: string | null;
+}
+
+/** La flecha que recorre un evento de este monitor, o null si no mueve a nadie. */
+function arrowOf(e: LogEntry): Arrow | null {
+  switch (e.kind) {
+    case 'BLOCKED': return 'call';
+    case 'ENTER':
+    case 'REENTER': return 'entra';
+    case 'WAIT': return 'wait';
+    case 'SIGNAL': return e.message.includes('despierta') ? 'signal' : null;
+    case 'SIGNAL_ALL': return /despierta a 0 /.test(e.message) ? null : 'signal';
+    case 'RETURN':
+    case 'RELEASE': return 'return';
+    default: return null;
+  }
+}
+
+/** Los recorridos del ultimo paso en este monitor, en el orden en que ocurrieron. */
+export function travelsOf(monitor: string, entries: readonly LogEntry[]): Travel[] {
+  const out: Travel[] = [];
   for (const e of entries) {
     if (e.processId === null || !isAbout(e, monitor)) continue;
-    switch (e.kind) {
-      case 'BLOCKED': out.add('call'); break;
-      case 'ENTER':
-      case 'REENTER': out.add('entra'); break;
-      case 'WAIT': out.add('wait'); break;
-      case 'SIGNAL':
-        if (e.message.includes('despierta')) out.add('signal');
-        break;
-      case 'SIGNAL_ALL':
-        if (!/despierta a 0 /.test(e.message)) out.add('signal');
-        break;
-      case 'RETURN':
-      case 'RELEASE': out.add('return'); break;
-      default: break;
-    }
+    const arrow = arrowOf(e);
+    if (arrow) out.push({ key: e.id, arrow, color: arrow === 'signal' ? null : e.processColor });
   }
   return out;
+}
+
+/** Flechas que recorrio algun proceso en el ultimo paso, para resaltarlas. */
+export function arrowsOf(monitor: string, entries: readonly LogEntry[]): Set<Arrow> {
+  return new Set(travelsOf(monitor, entries).map((t) => t.arrow));
 }
 
 /** Eventos que ocurren dentro del monitor y cuyo recurso es una variable, no el monitor. */

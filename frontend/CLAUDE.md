@@ -16,6 +16,6 @@ el snapshot que llega por `useSimulation`; no llaman al motor.
 - La lógica sin DOM va en módulos `.ts` con su `.test.ts` (Vitest): `programs`, `shareLink`,
   `deadlock`, `timelineLayout`, `editor/lineMarks`, `reuse`, `motion`.
 - Lo que se mueve entre un instante y el siguiente usa la duración y la curva de `motion.ts`
-  (`--desliz` y `--ease-step` en el CSS) y se apaga con `prefers-reduced-motion`.
+  (`--desliz`, `--viaje` y `--ease-step` en el CSS) y se apaga con `prefers-reduced-motion`.
 - Textos de la UI en español rioplatense neutro, pensados para un alumno que está aprendiendo.
 - Antes de commitear: `npm run check`.

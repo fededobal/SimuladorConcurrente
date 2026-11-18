@@ -28,6 +28,7 @@ Las tres zonas de la cátedra, numeradas:
 | Borde resaltado en la zona 3 | El monitor está ocupado |
 | Borde violeta en la zona 2 | Hay procesos esperando en alguna variable condición |
 | Flecha resaltada (call, entra, wait, signal, return) | Algún proceso la recorrió en el último instante |
+| Punto que recorre una flecha | El proceso que pasó de una zona a otra en ese instante, con su color; en signal lleva el color de acento, porque quien se mueve es el proceso despertado |
 | Flecha signal punteada | La simulación terminó en interbloqueo: nadie puede despertar a los que esperan |
 
 El encabezado de la tarjeta aclara cuando el dueño no está ejecutando: está en `delay` o
@@ -56,6 +57,9 @@ más de seis variables condición, las vacías se pliegan en un botón que dice 
 | Nombre y tipo | Como se declararon |
 | Valor | Un escalar, su valor en la misma fila. Un arreglo o una cola se dibuja en un renglón propio, debajo de su fila y a todo el ancho: el arreglo, como celdas con el índice debajo; una `Cola` o `ColaOrdenada`, como casilleros con el frente a la izquierda y las tuplas entre paréntesis |
 | Escribió | El proceso que escribió la variable por última vez y en qué instante; «valor inicial» si nadie la escribió todavía |
+
+El valor de una variable simple y el elemento de un arreglo se destacan un momento cuando
+cambian.
 
 ## Interbloqueo
 

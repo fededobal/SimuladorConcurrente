@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cubicBezier, slideMs, stepEasing } from './motion';
+import { cubicBezier, slideMs, stepEasing, travelMs } from './motion';
 
 describe('slideMs', () => {
   it('slideTakesPartOfTheInstant', () => {
@@ -10,6 +10,18 @@ describe('slideMs', () => {
   it('slideIsCappedOnLongInstants', () => {
     expect(slideMs(600)).toBe(320);
     expect(slideMs(1200)).toBe(320);
+  });
+});
+
+describe('travelMs', () => {
+  it('travelIsLongerThanTheSlideAndCapped', () => {
+    for (const step of [120, 300, 600, 1200]) expect(travelMs(step)).toBeGreaterThan(slideMs(step));
+    expect(travelMs(300)).toBe(240);
+    expect(travelMs(1200)).toBe(450);
+  });
+
+  it('travelFitsInsideTheInstant', () => {
+    for (const step of [120, 300, 600, 1200]) expect(travelMs(step)).toBeLessThan(step);
   });
 });
 

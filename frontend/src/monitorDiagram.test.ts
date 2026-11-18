@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { arrowsOf, eventsAbout } from './monitorDiagram';
+import { arrowsOf, eventsAbout, travelsOf } from './monitorDiagram';
 import type { LogEntry, MonitorView } from './types';
 
 let nextId = 0;
@@ -13,6 +13,27 @@ function monitor(name: string, ownerId: number | null): MonitorView {
     lockOwner: ownerId === null ? null : { id: ownerId, name: `P${ownerId}`, color: '#000' },
   };
 }
+
+describe('travelsOf', () => {
+  it('oneTravelPerEventInOrderWithTheProcessColor', () => {
+    const enter = { ...event('ENTER', 2, 'M'), processColor: '#abc' };
+    const call = { ...event('BLOCKED', 1, 'M'), processColor: '#123' };
+    expect(travelsOf('M', [call, enter])).toEqual([
+      { key: call.id, arrow: 'call', color: '#123' },
+      { key: enter.id, arrow: 'entra', color: '#abc' },
+    ]);
+  });
+
+  it('signalTravelHasNoColorBecauseTheWokenProcessTravels', () => {
+    const [travel] = travelsOf('M', [event('SIGNAL', 1, 'M.c', 'P: signal(c) - despierta a Q')]);
+    expect(travel.arrow).toBe('signal');
+    expect(travel.color).toBeNull();
+  });
+
+  it('eventsThatMoveNobodyAreNotTravels', () => {
+    expect(travelsOf('M', [event('ASSIGN', 1, 'M'), event('SIGNAL', 1, 'M.c', 'sin efecto')])).toEqual([]);
+  });
+});
 
 describe('arrowsOf', () => {
   it('eachEventLightsItsArrow', () => {

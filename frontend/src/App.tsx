@@ -294,6 +294,7 @@ export function App() {
               entries={sim.entries}
               blocked={blocked}
               running={running}
+              pasoMs={sim.speed}
               wide={inspectorWide}
               onToggleWide={() => setInspectorWide((w) => !w)}
               onStepProcess={sim.step}

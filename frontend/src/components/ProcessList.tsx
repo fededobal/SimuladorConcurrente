@@ -2,7 +2,8 @@ import { memo, useState } from 'react';
 import { SkipForward } from 'lucide-react';
 import { processTextColor } from '../processColor';
 import { delayLeft, stateDetail, visibleState, whereOf } from '../processStates';
-import type { ProcessView } from '../types';
+import type { ProcessView, VarView } from '../types';
+import { useChangeCount } from '../useChangeCount';
 import s from './Inspector.module.css';
 
 interface Props {
@@ -67,7 +68,7 @@ const ProcessRow = memo(function ProcessRow({ process: p, running, onStep }: Row
       <div className={s.procMain}>
         <i className="punto" style={{ background: p.color }} />
         <span className={s.procName} style={{ color: processTextColor(p.color) }}>{p.name}</span>
-        <span className={s.procState} title={summary(p)}>{summary(p)}</span>
+        <State text={summary(p)} />
         <span className={s.procEnd}>
           {p.line > 0 && p.state !== 'TERMINATED' && <span className={s.procLine}>línea {p.line}</span>}
           {p.state !== 'TERMINATED' && (
@@ -82,13 +83,28 @@ const ProcessRow = memo(function ProcessRow({ process: p, running, onStep }: Row
       {p.error && <p className={s.procError}>Error de ejecución: {p.error}</p>}
       {p.locals.length > 0 && p.state !== 'TERMINATED' && (
         <div className={s.locals} aria-label={`Variables locales de ${p.name}`}>
-          {p.locals.map((v) => (
-            <span key={v.name} className={s.local} title={`${v.type} ${v.name}`}>
-              <b>{v.name}</b> = {v.value}
-            </span>
-          ))}
+          {p.locals.map((v) => <Local key={v.name} v={v} />)}
         </div>
       )}
     </div>
   );
 });
+
+/** Lo que esta haciendo el proceso; cuando cambia, el texto nuevo entra con un fundido. */
+function State({ text }: { text: string }) {
+  const changes = useChangeCount(text);
+  return (
+    <span key={changes} className={`${s.procState}${changes > 0 ? ` ${s.stateIn}` : ''}`} title={text}>{text}</span>
+  );
+}
+
+/** Una variable local; cuando cambia su valor, se destaca un momento. */
+function Local({ v }: { v: VarView }) {
+  const changes = useChangeCount(v.value);
+  return (
+    <span key={changes} className={`${s.local}${changes > 0 ? ` ${s.localChanged}` : ''}`}
+      title={`${v.type} ${v.name}`}>
+      <b>{v.name}</b> = {v.value}
+    </span>
+  );
+}

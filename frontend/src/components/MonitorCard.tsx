@@ -1,9 +1,10 @@
 import { memo, useState } from 'react';
 import { MonitorDrawing } from './MonitorDrawing';
-import { arrowsOf } from '../monitorDiagram';
+import { travelsOf } from '../monitorDiagram';
 import { processTextColor } from '../processColor';
 import { delayLeft } from '../processStates';
 import type { CondView, LogEntry, MonitorView, ProcessView, ProcRef, VarView } from '../types';
+import { useChangeCount } from '../useChangeCount';
 import s from './MonitorCard.module.css';
 
 interface Props {
@@ -33,27 +34,29 @@ const MAX_STORY = 3;
 export const MonitorCard = memo(function MonitorCard({
   monitor, owner, events, procRefs, deadlocked,
 }: Props) {
-  const active = arrowsOf(monitor.name, events);
+  const travels = travelsOf(monitor.name, events);
   return (
     <section className={s.card} aria-label={`Monitor ${monitor.name}`}>
       <header className={s.head}>
         <span className={s.name}>{monitor.name}</span>
-        {monitor.lockOwner ? (
-          <span className={`${s.pill} ${s.pillBusy}`}>
-            <i className="punto" style={{ background: monitor.lockOwner.color }} />
-            <span className={s.pillText} title={`Ocupado por ${monitor.lockOwner.name}${ownerNote(owner)}`}>
-              Ocupado por {monitor.lockOwner.name}{ownerNote(owner)}
-            </span>
-          </span>
-        ) : (
-          <span className={s.pill}>Libre</span>
-        )}
+        {/* una sola pastilla para libre y ocupado: asi el cambio de color es una transicion */}
+        <span className={`${s.pill}${monitor.lockOwner ? ` ${s.pillBusy}` : ''}`}>
+          {monitor.lockOwner ? (
+            <>
+              <i className="punto" style={{ background: monitor.lockOwner.color }} />
+              <span className={s.pillText} title={`Ocupado por ${monitor.lockOwner.name}${ownerNote(owner)}`}>
+                Ocupado por {monitor.lockOwner.name}{ownerNote(owner)}
+              </span>
+            </>
+          ) : 'Libre'}
+        </span>
       </header>
 
-      <MonitorDrawing monitor={monitor} active={active} ownerLine={owner?.line ?? null}
+      <MonitorDrawing monitor={monitor} travels={travels} ownerLine={owner?.line ?? null}
         deadlocked={deadlocked} />
 
-      {events.length > 0 && <Story events={events} />}
+      {/* la clave es el instante: el relato de cada uno entra con un fundido */}
+      {events.length > 0 && <Story key={events[0].instant} events={events} />}
 
       <div className={s.section}>
         <h3 className={s.sectionTitle}>Colas</h3>
@@ -193,7 +196,7 @@ function VarRows({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, Pr
       <tr>
         <td className={s.varName}>{v.name}</td>
         <td><span className={s.varType}>{v.type}</span></td>
-        <td><span className={s.varValue}>{v.value}</span></td>
+        <td><ScalarValue value={v.value} /></td>
         <td><Writer v={v} procRefs={procRefs} /></td>
       </tr>
     );
@@ -212,6 +215,26 @@ function VarRows({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, Pr
   );
 }
 
+/** Valor de una variable simple; cuando cambia, se destaca un momento. */
+function ScalarValue({ value }: { value: string }) {
+  const changes = useChangeCount(value);
+  return <span key={changes} className={`${s.varValue}${changes > 0 ? ` ${s.changed}` : ''}`}>{value}</span>;
+}
+
+/**
+ * Celda de un arreglo o de una cola. En un arreglo, el elemento que cambia se destaca un
+ * momento; en una cola no, porque al sacar el frente cambian todos los casilleros a la vez.
+ */
+function Cell({ value, note, flash }: { value: string; note: string; flash: boolean }) {
+  const changes = useChangeCount(value);
+  return (
+    <span className={s.cell}>
+      <span key={changes} className={`${s.cellValue}${flash && changes > 0 ? ` ${s.changed}` : ''}`}>{value}</span>
+      <span className={s.cellNote}>{note}</span>
+    </span>
+  );
+}
+
 /**
  * Un arreglo o una cola, como celdas: plegado, las primeras y un boton para abrir el resto.
  * El nucleo manda hasta 50 elementos; si hay mas, se dice cuantos faltan.
@@ -224,12 +247,9 @@ function Cells({ v, elements }: { v: VarView; elements: readonly string[] }) {
   const notReceived = v.size - elements.length;
   return (
     <span className={`${s.cells}${queue ? ` ${s.cellsQueue}` : ''}`}>
+      {/* en un arreglo cada celda lleva su indice; en una cola solo se marca el frente */}
       {shown.map((e, i) => (
-        <span key={i} className={s.cell}>
-          <span className={s.cellValue}>{e}</span>
-          {/* en un arreglo cada celda lleva su indice; en una cola solo se marca el frente */}
-          <span className={s.cellNote}>{queue ? (i === 0 ? 'frente' : ' ') : i}</span>
-        </span>
+        <Cell key={i} value={e} note={queue ? (i === 0 ? 'frente' : ' ') : String(i)} flash={!queue} />
       ))}
       {open && notReceived > 0 && <span className={`${s.empty} ${s.cellsMore}`}>… {notReceived} más</span>}
       {v.size > MAX_SHOWN && (

@@ -6,6 +6,7 @@ import { OutputPanel } from './OutputPanel';
 import { ProcessList } from './ProcessList';
 import type { BlockedProcess } from '../deadlock';
 import { eventsAbout } from '../monitorDiagram';
+import { slideMs, travelMs } from '../motion';
 import type { LogEntry, ProcessView, ProcRef, Snapshot } from '../types';
 import s from './Inspector.module.css';
 
@@ -18,6 +19,8 @@ interface Props {
   /** Procesos bloqueados si la simulacion termino en interbloqueo; vacio si no. */
   readonly blocked: readonly BlockedProcess[];
   readonly running: boolean;
+  /** Duracion de un instante, en ms: las animaciones se acompasan a la simulacion. */
+  readonly pasoMs: number;
   /** true si el panel esta ensanchado. */
   readonly wide: boolean;
   readonly onToggleWide: () => void;
@@ -36,7 +39,7 @@ const TAB_LABEL: Record<TabId, string> = {
  * perder de vista el codigo.
  */
 export function Inspector({
-  snapshot, entries, blocked, running, wide, onToggleWide, onStepProcess,
+  snapshot, entries, blocked, running, pasoMs, wide, onToggleWide, onStepProcess,
 }: Props) {
   const [tab, setTab] = useState<TabId>('monitors');
   const processes = snapshot?.processes;
@@ -65,7 +68,8 @@ export function Inspector({
   };
 
   return (
-    <aside className={s.inspector} aria-label="Inspector">
+    <aside className={s.inspector} aria-label="Inspector"
+      style={{ ['--desliz' as string]: `${slideMs(pasoMs)}ms`, ['--viaje' as string]: `${travelMs(pasoMs)}ms` }}>
       <div className={s.tabs} role="tablist" aria-label="Qué mirar">
         {(Object.keys(TAB_LABEL) as TabId[]).map((id) => (
           <button key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={tab === id}
