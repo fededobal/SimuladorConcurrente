@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp, Hourglass, Minus, Moon, Play, Timer } from 'lucide-react';
+import { caretPlaceOf, type CaretPlace } from '../editor/caret';
 import { handleEditingKey } from '../editor/editing';
 import { highlight } from '../editor/highlight';
+import { activeGuideOf, indentGuidesOf } from '../editor/indentGuides';
 import {
   gutterChipsOf, isRunning, lineMarksOf, type ActiveLine, type LineMark, type LineTag,
 } from '../editor/lineMarks';
@@ -68,7 +70,7 @@ interface Viewport {
  * un chip con la inicial del proceso en el margen y una etiqueta al final del codigo que dice
  * quien es y que esta haciendo. De un instante al otro las tres se deslizan hasta el renglon
  * nuevo. Si el renglon de un proceso queda fuera de la vista, un aviso lo dice y lleva hasta
- * ahi.
+ * ahi. Como un editor de codigo, dibuja las guias de sangria y recuadra el renglon del cursor.
  */
 export function CodeEditor({
   code, onChange, readOnly, activeLines, errorLines, pasoMs, instant, fontSize, onCursor,
@@ -79,6 +81,12 @@ export function CodeEditor({
   const metrics = useLineMetrics(layerRef);
   const lines = useMemo(() => code.split('\n'), [code]);
   const yOf = (line: number) => metrics.top + (line - 1) * metrics.lineHeight;
+
+  const guides = useMemo(() => indentGuidesOf(lines), [lines]);
+  // lugar del cursor, para dibujarlo y recuadrar su renglon; null sin foco o con texto seleccionado
+  const [caret, setCaret] = useState<CaretPlace | null>(null);
+  const caretLine = caret?.line ?? null;
+  const activeGuide = caretLine === null ? null : activeGuideOf(guides, lines, caretLine);
 
   const marks = useMemo(() => lineMarksOf(activeLines), [activeLines]);
   // solo los chips que se ven: con mil procesos en un renglon, los otros 998 no se dibujan
@@ -127,10 +135,12 @@ export function CodeEditor({
   };
 
   const reportCursor = (ta: HTMLTextAreaElement) => {
-    if (!onCursor) return;
     const before = ta.value.slice(0, ta.selectionStart);
+    const line = before.split('\n').length;
+    const focused = document.activeElement === ta;
+    setCaret(focused ? caretPlaceOf(ta.value, ta.selectionStart, ta.selectionEnd) : null);
     const lineStart = before.lastIndexOf('\n') + 1;
-    onCursor({ line: before.split('\n').length, column: before.length - lineStart + 1 });
+    onCursor?.({ line, column: before.length - lineStart + 1 });
   };
 
   return (
@@ -170,9 +180,45 @@ export function CodeEditor({
                 {c.advanced && <b key={instant} className={s.chipPulse} />}
               </span>
             ))}
+            {caretLine !== null && (
+              <span className={s.currentNumber} style={{ top: yOf(caretLine), height: metrics.lineHeight }}
+                aria-hidden="true">
+                {caretLine}
+              </span>
+            )}
           </div>
           <div className={s.area}>
             <pre ref={layerRef} className={s.layer} dangerouslySetInnerHTML={{ __html: highlight(code) + '\n' }} />
+
+            {/* guias de sangria: una linea por nivel; la del bloque del cursor, destacada */}
+            {guides.map((g) => (
+              <div
+                key={`guia-${g.column}-${g.fromLine}`}
+                className={`${s.indentGuide}${g === activeGuide ? ` ${s.indentGuideActive}` : ''}`}
+                style={{
+                  left: TEXT_PAD + g.column * metrics.charWidth,
+                  top: yOf(g.fromLine),
+                  height: (g.toLine - g.fromLine + 1) * metrics.lineHeight,
+                }}
+              />
+            ))}
+            {caret !== null && (
+              <div className={s.currentLine} style={{ top: yOf(caret.line), height: metrics.lineHeight }} />
+            )}
+            {/* Cursor propio, alineado con el recuadro: el del navegador queda transparente porque
+                Safari lo dibuja corrido hacia arriba. La clave cambia en cada movimiento, asi el
+                parpadeo vuelve a empezar y el cursor se ve fijo mientras se escribe. */}
+            {caret !== null && (
+              <div
+                key={`${caret.line}:${caret.column}:${code.length}`}
+                className={s.caret}
+                style={{
+                  left: TEXT_PAD + caret.column * metrics.charWidth,
+                  top: yOf(caret.line),
+                  height: metrics.lineHeight,
+                }}
+              />
+            )}
 
             {/* Franjas y etiquetas van por proceso (el mas activo del renglon), no por renglon:
                 cuando avanza, sobrevive el mismo nodo y la transicion lo desliza. */}
@@ -215,9 +261,11 @@ export function CodeEditor({
               spellCheck={false}
               readOnly={readOnly}
               aria-label="Código del programa"
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => { onChange(e.target.value); reportCursor(e.target); }}
               onKeyDown={readOnly ? undefined : handleEditingKey}
               onSelect={(e) => reportCursor(e.currentTarget)}
+              onFocus={(e) => reportCursor(e.currentTarget)}
+              onBlur={() => setCaret(null)}
             />
           </div>
         </div>

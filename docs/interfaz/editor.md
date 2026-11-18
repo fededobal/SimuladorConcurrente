@@ -3,6 +3,11 @@
 El editor muestra el programa con resaltado de sintaxis. Mientras la simulación se ejecuta,
 es de solo lectura; en pausa se puede modificar ([Barra de controles](./barra)).
 
+Como en un editor de código, unas líneas verticales finas marcan cada nivel de sangría, y la
+del bloque en el que está el cursor se ve más marcada. El renglón del cursor lleva un
+recuadro y su número se destaca en el margen; el recuadro no aparece con texto seleccionado
+ni cuando el editor no tiene el foco.
+
 ## Atajos
 
 | Tecla | Qué hace |

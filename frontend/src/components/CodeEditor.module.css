@@ -74,10 +74,58 @@
   height: 100%;
   background: transparent;
   color: transparent;
-  caret-color: var(--text);
+  /* el cursor lo dibuja el editor (.caret): el de Safari sale corrido hacia arriba */
+  caret-color: transparent;
   resize: none;
   outline: none;
   overflow: hidden;
+}
+
+/* Guias de sangria: una linea fina por nivel, debajo del texto. La del bloque en el que esta
+   el cursor se destaca, como en VS Code. Colores en index.css, uno por tema. */
+.indentGuide {
+  position: absolute;
+  width: 1px;
+  pointer-events: none;
+  background: var(--indent-guide);
+  transition: background-color 0.12s linear;
+}
+.indentGuideActive { background: var(--indent-guide-active); }
+
+/* Renglon del cursor: un recuadro de borde fino, sin relleno, para no tapar las franjas de los
+   procesos; el numero del margen se ve con el color del texto. */
+.currentLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--current-line);
+  pointer-events: none;
+}
+/* Cursor propio: una barra de 2 px dentro del recuadro del renglon, que parpadea como el del
+   sistema. Va por encima de las franjas y debajo del textarea, que sigue recibiendo los clics. */
+.caret {
+  position: absolute;
+  z-index: 1;
+  width: 2px;
+  margin-left: -1px;
+  box-sizing: border-box;
+  border-block: 3px solid transparent;
+  background: var(--text) content-box;
+  border-radius: 1px;
+  pointer-events: none;
+  animation: caret-blink 1.06s steps(1) 0.5s infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+.currentNumber {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  background: var(--panel);
+  color: var(--text);
+  pointer-events: none;
 }
 
 /* Una franja lisa por renglon, del color del proceso mas activo que esta ahi. Sin rayado:
@@ -246,4 +294,6 @@
 /* quien pide menos movimiento ve cada instante de una vez, sin deslizamientos */
 @media (prefers-reduced-motion: reduce) {
   .lineBand, .lineTags, .lineTagsGap, .gutterChip { animation: none; transition: none; }
+  /* el cursor queda fijo: con la regla global, su parpadeo infinito titilaria sin parar */
+  .caret { animation: none; }
 }
