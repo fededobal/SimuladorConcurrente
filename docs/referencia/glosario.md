@@ -378,7 +378,7 @@ desde los procedures de ese monitor.
 **En el simulador.** Sección Variables del monitor, con un punto del color del último
 proceso que la escribió. {.g-sim}
 
-Véase [Panel de monitores](/interfaz/monitores#variables-del-monitor). {.g-vease}
+Véase [Panel de monitores](/interfaz/monitores#variables). {.g-vease}
 
 </div>
 

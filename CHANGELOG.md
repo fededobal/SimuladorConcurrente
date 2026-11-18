@@ -143,6 +143,12 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Buscador de la guía: el número de sección quedaba pegado al título en los resultados («7.4Programas de ejemplo»); ahora los separa un espacio («7.4 Programas de ejemplo»). En la página el título se ve igual. (Federico Dobal, 2026-11-18)
+- Guía: al llegar desde el buscador, el resaltado de la palabra buscada partía el título de la página («As ignación»), y los títulos con código separaban cada pieza. El texto del título va ahora en un solo bloque al lado del número. (Federico Dobal, 2026-11-18)
+- Guía: al tocar «Copiar» en un ejemplo de código, con el mouse todavía sobre el botón aparecía además el cartel «Copied» de VitePress al lado; ahora solo el botón dice «Copiado». (Federico Dobal, 2026-11-18)
+- Guía: entre 1025 y 1440 px de ancho (el de muchos proyectores), las migas de una página con título largo empujaban el botón «Abrir el simulador» fuera de la pantalla. Ahora se acortan con «…»: primero los capítulos intermedios, después la página actual. (Federico Dobal, 2026-11-18)
+- Guía en un teléfono: seis páginas con tablas anchas (Notación de la cátedra, Errores de compilación y de ejecución, Programas de ejemplo, Instrucciones y Variables condición) se desplazaban de costado y la última columna quedaba fuera de la pantalla; ahora la tabla se desplaza dentro de su recuadro. Un título largo se parte al lado del número de sección, en vez de dejar el número solo en un renglón. (Federico Dobal, 2026-11-18)
+- Glosario: el enlace a las variables del panel de monitores llevaba a una sección que no existe. (Federico Dobal, 2026-11-18)
 - Línea de tiempo: con el zoom más chico, los tramos de un instante se encimaban con el siguiente. (Federico Dobal, 2026-11-17)
 - Inspector: la tabla de variables ya no se sale de la tarjeta ni hace desplazar el panel de costado (un arreglo o una cola lleva sus celdas en un renglón propio), el panel no se puede angostar por debajo de 340 px y las pastillas no pasan a dos renglones. La barra superior se compacta de a poco en anchos medios en vez de mandar botones al renglón de abajo. (Federico Dobal, 2026-11-17)
 - Buscador de la guía: las teclas del atajo quedaban fuera del recuadro porque el texto no entraba en el ancho fijo; ahora el ancho sale del texto y el alto coincide con el del botón «Abrir el simulador». (Federico Dobal, 2026-11-17)

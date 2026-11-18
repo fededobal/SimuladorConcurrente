@@ -1,4 +1,5 @@
 import type MarkdownIt from 'markdown-it';
+import type { StateCore, Token } from 'markdown-it';
 import { ejemploIgualA, ejemploPorId, esProgramaCompleto, fragmentoPara, guia } from './guia';
 
 // Dos agregados al Markdown de la guia:
@@ -10,7 +11,21 @@ function enlaceDe(rutaRelativa: string): string {
   return '/' + rutaRelativa.replace(/\.md$/, '').replace(/(^|\/)index$/, '$1');
 }
 
-/** Pone el numero de seccion de la pagina delante de su primer titulo. */
+function htmlEnLinea(state: StateCore, contenido: string): Token {
+  const token = new state.Token('html_inline', '', 0);
+  token.content = contenido;
+  return token;
+}
+
+/**
+ * Pone el numero de seccion de la pagina delante de su primer titulo:
+ * <h1><span class="sec-num">7.4</span> <span class="sec-titulo">Programas de ejemplo</span></h1>.
+ * El h1 es flex, asi que el texto va en un solo span: si no, cada pieza (un `codigo`, o el
+ * <mark> del resaltado de la busqueda) seria un elemento aparte y el gap partiria las palabras
+ * ("As ignación"). El espacio entre los dos span separa el numero del titulo en el buscador,
+ * que indexa el texto sin etiquetas ("7.4 Programas", no "7.4Programas"); en pantalla no se
+ * ve, porque el espacio entre elementos flex se descarta.
+ */
 export function numeroDeSeccion(md: MarkdownIt): void {
   md.core.ruler.push('numero-de-seccion', (state) => {
     const pagina = guia.paginas[enlaceDe((state.env as { relativePath?: string }).relativePath ?? '')];
@@ -18,9 +33,14 @@ export function numeroDeSeccion(md: MarkdownIt): void {
     const i = state.tokens.findIndex((t) => t.type === 'heading_open' && t.tag === 'h1');
     const texto = state.tokens[i + 1];
     if (i < 0 || !texto?.children) return;
-    const numero = new state.Token('html_inline', '', 0);
-    numero.content = `<span class="sec-num">${pagina.numero}</span>`;
-    texto.children.unshift(numero);
+    const hijos = texto.children;
+    // el ancla "#" del titulo, si ya esta, queda fuera del span del texto
+    const ancla = hijos.findIndex((t) => t.type === 'link_open' && t.attrGet('class') === 'header-anchor');
+    hijos.splice(ancla < 0 ? hijos.length : ancla, 0, htmlEnLinea(state, '</span>'));
+    hijos.unshift(
+      htmlEnLinea(state, `<span class="sec-num">${pagina.numero}</span> `),
+      htmlEnLinea(state, '<span class="sec-titulo">'),
+    );
   });
 }
 

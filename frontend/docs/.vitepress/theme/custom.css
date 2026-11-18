@@ -121,7 +121,19 @@
 }
 .migas a { color: var(--vp-c-text-2); text-decoration: none; }
 .migas a:hover { color: var(--vp-c-brand-1); }
-.migas b { overflow: hidden; text-overflow: ellipsis; font-weight: 600; color: var(--vp-c-text-1); }
+.migas b { font-weight: 600; color: var(--vp-c-text-1); }
+/* Si no entran, se cortan con "…": primero los capitulos intermedios y por ultimo la pagina
+   actual; "Guia" queda entera. Sin el min-width del bloque de la barra (VitePress lo deja en
+   auto), las migas no se achicaban y empujaban "Abrir el simulador" fuera de la pantalla
+   entre 1025 y 1440 px de ancho. */
+.VPNavBar .content { min-width: 0; }
+.migas a, .migas b { overflow: hidden; text-overflow: ellipsis; }
+/* los intermedios se achican antes, pero conservan el numero ("6 S…"); el factor de la pagina
+   actual no puede ser menor que 1: con una suma de factores menor que 1, flex reparte solo esa
+   fraccion de lo que falta y el texto se corta sin "…" */
+.migas a { flex-shrink: 4; min-width: 3em; }
+.migas a:first-child { flex-shrink: 0; min-width: auto; }
+.migas b { flex-shrink: 1; min-width: 0; }
 @media (min-width: 1100px) {
   .migas { display: flex; }
 }
@@ -197,7 +209,10 @@
 /* ------------------------------------------------------------------ pagina */
 
 /* titulo con su numero de seccion en una pastilla, y una raya de tres tramos debajo */
-.vp-doc h1 { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding-bottom: 14px; position: relative; }
+.vp-doc h1 { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; position: relative; }
+/* un titulo largo se parte al lado del numero, en vez de pasar entero al renglon de abajo y
+   dejar el numero solo */
+.vp-doc h1 .sec-titulo { flex: 1 1 0; min-width: 0; }
 .vp-doc h1::after {
   content: '';
   position: absolute;
@@ -299,7 +314,11 @@
 .vp-doc div[class*='language-'] > button.copy.copied::after { content: 'Copiado'; }
 .vp-doc div[class*='language-'] > button.copy.copied,
 .vp-doc div[class*='language-'] > button.copy:hover.copied { border-radius: 6px; }
-.vp-doc div[class*='language-'] > button.copy.copied::before { display: none; }
+/* el cartel "Copied" de VitePress sobra: el boton ya dice "Copiado". Va tambien con :hover,
+   porque la regla del tema que lo muestra lo lleva y, si no, gana mientras el mouse sigue
+   sobre el boton despues del clic */
+.vp-doc div[class*='language-'] > button.copy.copied::before,
+.vp-doc div[class*='language-'] > button.copy:hover.copied::before { display: none; }
 .vp-doc div[class*='language-'] > a.abrir-sim {
   position: absolute;
   z-index: 3;
@@ -330,6 +349,11 @@
 
 /* tablas: sin rejilla, con una linea por fila */
 .vp-doc table { display: table; width: 100%; border-collapse: collapse; border: 1px solid var(--vp-c-divider); border-radius: 10px; overflow: hidden; }
+/* en un telefono, la tabla que no entra se desplaza de costado dentro de su recuadro; si no,
+   su ultima columna quedaba fuera de la pantalla y la pagina entera se movia de costado */
+@media (max-width: 767px) {
+  .vp-doc table { display: block; overflow-x: auto; }
+}
 .vp-doc tr { border-top: 1px solid var(--vp-c-divider); background: transparent !important; }
 .vp-doc th { border: 0; border-bottom: 2px solid var(--vp-c-brand-3); background: var(--vp-c-bg-soft); text-align: left; font-size: 13.5px; }
 .vp-doc td { border: 0; font-size: 14.5px; vertical-align: top; }
