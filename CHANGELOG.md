@@ -237,6 +237,7 @@ Reglas:
 - Quitar las skills de terceros "caveman" y sus copias duplicadas. (Federico Dobal, 2026-09-18)
 
 ### Documentación
+- Capturas de la guía regeneradas con el botón de ampliar de la línea de tiempo y la tabla de variables nueva. (Federico Dobal, 2026-11-17)
 - Guía actualizada a la pantalla nueva: se reescriben las páginas de la interfaz (disposición, barra, editor, monitores, procesos y salida, línea de tiempo) y se agrega «Programas y archivos»; los procedimientos de operación usan el cartel de interbloqueo, la tabla «Por qué nadie avanza», Repetir y el avance de un proceso elegido; la referencia de atajos suma F5, F10 y Shift+F5. Las doce capturas se regeneraron. (Federico Dobal, 2026-11-17)
 - ADR 0008 (delay medido en instantes); referencia de `delay`, especificación (semántica y EBNF) y páginas de ejecución, límites y solución de problemas actualizadas. (Federico Dobal, 2026-11-17)
 - La portada aclara, en la sección «Origen del simulador», que el simulador es un trabajo de la PPS y no una herramienta de la materia Programación Concurrente ni de su cátedra, y que de esa materia toma la notación, el modelo de monitores y los problemas de los ejemplos. Se reescriben las frases de la portada, de Primer programa, de Notación de la cátedra, del README y de la descripción del sitio que daban a entender lo contrario. (Federico Dobal, 2026-11-16)
