@@ -14,8 +14,11 @@ el snapshot que llega por `useSimulation`; no llaman al motor.
 - Estilos: un `Componente.module.css` por componente; `index.css` tiene solo los tokens y
   las piezas compartidas (botones, menús, colores de estado `st-*`).
 - La lógica sin DOM va en módulos `.ts` con su `.test.ts` (Vitest): `programs`, `shareLink`,
-  `deadlock`, `timelineLayout`, `editor/lineMarks`, `reuse`, `motion`.
-- Lo que se mueve entre un instante y el siguiente usa la duración y la curva de `motion.ts`
-  (`--desliz`, `--viaje` y `--ease-step` en el CSS) y se apaga con `prefers-reduced-motion`.
+  `deadlock`, `timelineLayout`, `editor/lineMarks`, `reuse`, `motion`, `lingering`.
+- Nada de lo que cambia entre un instante y el siguiente aparece de golpe: se desliza, se
+  funde o se destaca. La duración y la curva salen de `motion.ts` (`--desliz`, `--viaje` y
+  `--ease-step` en el CSS); `useChangeCount` destaca un dato cuando cambia y `useLingering`
+  deja animar la salida de un elemento de una lista. Todo se apaga con
+  `prefers-reduced-motion` (regla global en `index.css`).
 - Textos de la UI en español rioplatense neutro, pensados para un alumno que está aprendiendo.
 - Antes de commitear: `npm run check`.

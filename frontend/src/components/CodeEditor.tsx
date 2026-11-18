@@ -25,6 +25,8 @@ interface Props {
   readonly errorLines: readonly number[];
   /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
   readonly pasoMs: number;
+  /** Instante de la simulacion: reinicia el latido del chip de cada proceso que avanzo. */
+  readonly instant: number;
   /** Tamano de letra del codigo, en px (zoom del editor). */
   readonly fontSize: number;
   /** Se llama cuando el cursor cambia de lugar (para la barra de estado). */
@@ -69,7 +71,7 @@ interface Viewport {
  * ahi.
  */
 export function CodeEditor({
-  code, onChange, readOnly, activeLines, errorLines, pasoMs, fontSize, onCursor,
+  code, onChange, readOnly, activeLines, errorLines, pasoMs, instant, fontSize, onCursor,
 }: Props) {
 
   const editorRef = useRef<HTMLDivElement>(null);
@@ -164,6 +166,8 @@ export function CodeEditor({
                 aria-hidden="true"
               >
                 <i>{c.name.charAt(0).toUpperCase()}</i>
+                {/* un anillo que late una vez por instante en el que el proceso avanzo */}
+                {c.advanced && <b key={instant} className={s.chipPulse} />}
               </span>
             ))}
           </div>
@@ -193,7 +197,9 @@ export function CodeEditor({
                   style={{ flexBasis: TEXT_PAD + (lines[m.line - 1]?.length ?? 0) * metrics.charWidth + TAG_GAP }}
                 />
                 <span className={s.lineTagsList}>
-                  {m.tags.map((t) => <Tag key={t.key} tag={t} />)}
+                  {/* la clave es el primer proceso de la etiqueta: si cambia de estado, es el mismo
+                      nodo y el color pasa de uno a otro */}
+                  {m.tags.map((t) => <Tag key={t.names[0]} tag={t} />)}
                   {m.hiddenNames.length > 0 && (
                     <span className={`${s.lineTag} ${s.varios} st-ready`}
                       title={`También en este renglón: ${listNames(m.hiddenNames)}`}>

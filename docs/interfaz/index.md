@@ -28,6 +28,27 @@ orden de la tabla, con el ejemplo Corralón pausado en el instante 14.
 | Guardado | Si el programa ya se guardó en el navegador ([Programas y archivos](./programas)) |
 | Atajos | F5, F10 y Shift + F5; **Todos los atajos** abre la lista completa ([Atajos de teclado](/referencia/atajos)) |
 
+## Continuidad entre instantes
+
+De un instante al siguiente, lo que cambia en la pantalla se mueve o se destaca en lugar de
+reemplazarse de golpe, para poder seguir a cada proceso con la vista.
+
+| Dónde | Qué se ve |
+|---|---|
+| Barra de controles | El número de instante entra desde abajo; el estado cambia de color con una transición |
+| Editor | La franja, el chip y la etiqueta de cada proceso se deslizan a su renglón; el chip del que avanzó late una vez ([Editor](./editor)) |
+| Pestaña Monitores | Un punto recorre la flecha que usó cada proceso; los nombres entran y salen de las zonas y de las colas; el valor que cambia se destaca ([Monitores](./monitores)) |
+| Pestaña Procesos | Una barra de color marca a los que avanzaron; el estado, la línea y las variables locales que cambian se destacan ([Procesos y salida](./salida)) |
+| Pestaña Salida | Cada línea nueva entra con un fundido; el contador de la pestaña da un salto cuando cambia |
+| Línea de tiempo | Los tramos se alargan, el cursor se corre una columna y el desplazamiento lo acompaña ([Línea de tiempo](./linea-de-tiempo)) |
+
+Todos los movimientos duran una parte del instante, según la velocidad elegida.
+
+::: tip Nota
+Si el sistema operativo tiene activada la opción de reducir el movimiento, los cambios se
+muestran de una vez, sin animaciones.
+:::
+
 ## Tamaño de los paneles
 
 | Acción | Cómo |

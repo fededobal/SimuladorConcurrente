@@ -34,7 +34,8 @@ function summary(p: ProcessView): string {
 
 /**
  * Pestana Procesos: cada proceso con lo que esta haciendo, su linea y sus variables locales,
- * y un boton para avanzar un instante solo con el.
+ * y un boton para avanzar un instante solo con el. Los que avanzaron en el ultimo instante
+ * quedan marcados con una barra de su color.
  */
 export function ProcessList({ processes, running, onStep }: Props) {
   const [shown, setShown] = useState(PAGE);
@@ -64,13 +65,14 @@ interface RowProps {
 /** Una fila; memorizada: el proceso que no cambio en el instante no se vuelve a dibujar. */
 const ProcessRow = memo(function ProcessRow({ process: p, running, onStep }: RowProps) {
   return (
-    <div className={s.proc}>
+    <div className={`${s.proc}${p.advanced && p.state !== 'TERMINATED' ? ` ${s.procAdvanced}` : ''}`}
+      style={{ ['--st-proceso' as string]: p.color }}>
       <div className={s.procMain}>
         <i className="punto" style={{ background: p.color }} />
         <span className={s.procName} style={{ color: processTextColor(p.color) }}>{p.name}</span>
-        <State text={summary(p)} />
+        <Changing className={s.procState} text={summary(p)} />
         <span className={s.procEnd}>
-          {p.line > 0 && p.state !== 'TERMINATED' && <span className={s.procLine}>línea {p.line}</span>}
+          {p.line > 0 && p.state !== 'TERMINATED' && <Changing className={s.procLine} text={`línea ${p.line}`} />}
           {p.state !== 'TERMINATED' && (
             <button type="button" className="btn btn-chico" disabled={running || !canAdvance(p)}
               onClick={() => onStep(p.id)}
@@ -90,11 +92,11 @@ const ProcessRow = memo(function ProcessRow({ process: p, running, onStep }: Row
   );
 });
 
-/** Lo que esta haciendo el proceso; cuando cambia, el texto nuevo entra con un fundido. */
-function State({ text }: { text: string }) {
+/** Un texto de la fila (lo que hace el proceso, su linea); cuando cambia, entra con un fundido. */
+function Changing({ text, className }: { text: string; className: string }) {
   const changes = useChangeCount(text);
   return (
-    <span key={changes} className={`${s.procState}${changes > 0 ? ` ${s.stateIn}` : ''}`} title={text}>{text}</span>
+    <span key={changes} className={`${className}${changes > 0 ? ` ${s.stateIn}` : ''}`} title={text}>{text}</span>
   );
 }
 

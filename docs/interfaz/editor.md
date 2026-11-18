@@ -27,7 +27,10 @@ elementos que no tapan el código:
 
 Cuando un proceso avanza, su franja, su chip y su etiqueta se deslizan hasta el renglón nuevo.
 El deslizamiento dura una parte del instante, de modo que cada marca queda quieta antes del
-paso siguiente.
+paso siguiente. Además, el chip de cada proceso que avanzó en el instante late una vez (un
+anillo de su color que se abre y se desvanece): señala quién se movió aunque haya quedado en
+el mismo renglón. Si el proceso cambia de estado sin cambiar de renglón, su etiqueta pasa de
+un color al otro.
 
 La figura reúne los seis estados en un mismo instante.
 

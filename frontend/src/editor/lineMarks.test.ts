@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { gutterChipsOf, lineMarksOf, MAX_TAGS, type ActiveLine } from './lineMarks';
 
 function active(name: string, line: number, extra: Partial<ActiveLine> = {}): ActiveLine {
-  return { name, line, color: '#000', state: 'READY', where: null, delayRemaining: null, ...extra };
+  return {
+    name, line, color: '#000', state: 'READY', where: null, delayRemaining: null, advanced: false, ...extra,
+  };
 }
 
 describe('lineMarksOf', () => {
@@ -89,5 +91,10 @@ describe('gutterChipsOf', () => {
     ]);
     const slot = Object.fromEntries(chips.map((c) => [c.name, c.slot]));
     expect(slot).toEqual({ B: 0, A: 1, C: 0 });
+  });
+
+  it('chipTellsWhetherItsProcessAdvanced', () => {
+    const chips = gutterChipsOf([active('A', 1, { advanced: true }), active('B', 2)]);
+    expect(Object.fromEntries(chips.map((c) => [c.name, c.advanced]))).toEqual({ A: true, B: false });
   });
 });

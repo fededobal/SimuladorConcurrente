@@ -24,7 +24,7 @@
   display: flex;
 }
 
-.inspectorDock { width: 404px; border-left: 1px solid var(--line); }
+.inspectorDock { width: 404px; border-left: 1px solid var(--line); animation: dock-b 0.2s ease-out; }
 .inspectorWide { width: 56%; }
 
 /* La linea de tiempo toma el alto de sus filas (baja al abrir, crece con los procesos) hasta
@@ -33,13 +33,18 @@
   min-height: 120px;
   max-height: 44vh;
   border-top: 1px solid var(--line);
+  animation: dock-a 0.2s ease-out;
 }
 
 /* Linea de tiempo ampliada: pasa al costado del editor, a toda altura, y el inspector se
    oculta (sigue montado, para volver a la misma pestana). */
 .bodyExpanded { flex-direction: row; }
 .bodyExpanded .inspectorDock { display: none; }
-.timelineExpanded { width: 58%; border-left: 1px solid var(--line); }
+.timelineExpanded { width: 58%; border-left: 1px solid var(--line); animation: dock-b 0.2s ease-out; }
+/* Al ampliar o volver, el panel cambia de lugar: entra con un fundido en vez de aparecer de
+   golpe. Son dos animaciones iguales con nombre distinto para que cada cambio la dispare. */
+@keyframes dock-a { from { opacity: 0.35; } }
+@keyframes dock-b { from { opacity: 0.35; } }
 
 /* aviso corto, abajo a la derecha, sobre la barra de estado; vacio no ocupa lugar */
 .notice {
@@ -57,6 +62,8 @@
   box-shadow: var(--popover-shadow);
 }
 .notice:empty { display: none; }
+.notice:not(:empty) { animation: notice-in 0.2s var(--ease-step); }
+@keyframes notice-in { from { opacity: 0; transform: translateY(8px); } }
 
 /* en una pantalla angosta los paneles se apilan y cada uno ocupa el ancho */
 @media (max-width: 760px) {

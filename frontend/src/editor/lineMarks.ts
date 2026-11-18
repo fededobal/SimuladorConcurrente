@@ -11,6 +11,8 @@ export interface ActiveLine {
   readonly where: string | null;
   /** Instantes que le quedan demorado por un delay, o null si no esta demorado. */
   readonly delayRemaining: number | null;
+  /** true si avanzo en el ultimo instante: su chip late una vez para que se vea quien se movio. */
+  readonly advanced: boolean;
 }
 
 /**
@@ -136,6 +138,8 @@ export interface GutterChip {
   readonly state: VisibleState;
   /** Posicion entre los procesos del mismo renglon (0 el mas activo). */
   readonly slot: number;
+  /** true si avanzo en el ultimo instante. */
+  readonly advanced: boolean;
 }
 
 /** Un chip por proceso; el `slot` permite encimar los que comparten renglon. */
@@ -145,6 +149,6 @@ export function gutterChipsOf(active: readonly ActiveLine[]): GutterChip[] {
   return sorted.map((a) => {
     const slot = used.get(a.line) ?? 0;
     used.set(a.line, slot + 1);
-    return { name: a.name, color: a.color, line: a.line, state: a.state, slot };
+    return { name: a.name, color: a.color, line: a.line, state: a.state, slot, advanced: a.advanced };
   });
 }

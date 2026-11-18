@@ -7,6 +7,7 @@ import { ProcessList } from './ProcessList';
 import type { BlockedProcess } from '../deadlock';
 import { eventsAbout } from '../monitorDiagram';
 import { slideMs, travelMs } from '../motion';
+import { useChangeCount } from '../useChangeCount';
 import type { LogEntry, ProcessView, ProcRef, Snapshot } from '../types';
 import s from './Inspector.module.css';
 
@@ -76,7 +77,7 @@ export function Inspector({
             aria-controls="inspector-panel"
             className={`${s.tab}${tab === id ? ` ${s.tabActive}` : ''}`} onClick={() => setTab(id)}>
             {TAB_LABEL[id]}
-            {snapshot && <span className={s.count}>{counts[id]}</span>}
+            {snapshot && <Count value={counts[id]} />}
           </button>
         ))}
         <div className={s.tabsEnd}>
@@ -88,7 +89,8 @@ export function Inspector({
         </div>
       </div>
 
-      <div className={s.body} role="tabpanel" id="inspector-panel" aria-labelledby={`tab-${tab}`}>
+      {/* la clave es la pestana: al cambiar, el contenido entra con un fundido */}
+      <div key={tab} className={s.body} role="tabpanel" id="inspector-panel" aria-labelledby={`tab-${tab}`}>
         {!snapshot && tab !== 'output' && (
           <p className="panel-vacio">
             {tab === 'monitors'
@@ -123,4 +125,10 @@ export function Inspector({
       </div>
     </aside>
   );
+}
+
+/** Contador de una pestana; cuando cambia da un saltito, para que se note desde otra pestana. */
+function Count({ value }: { value: number }) {
+  const changes = useChangeCount(value);
+  return <span key={changes} className={`${s.count}${changes > 0 ? ` ${s.countPop}` : ''}`}>{value}</span>;
 }

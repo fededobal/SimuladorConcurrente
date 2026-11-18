@@ -21,6 +21,8 @@ interface Props {
   readonly activeLines: readonly ActiveLine[];
   readonly errorLines: readonly number[];
   readonly pasoMs: number;
+  /** Instante de la simulacion; 0 si no hay una. */
+  readonly instant: number;
   readonly zoom: EditorZoom;
   readonly onCursor: (position: CursorPosition) => void;
   /** Procesos de la simulacion, para la leyenda del encabezado. */
@@ -108,6 +110,7 @@ export function EditorPane(p: Props) {
         activeLines={p.activeLines}
         errorLines={p.errorLines}
         pasoMs={p.pasoMs}
+        instant={p.instant}
         fontSize={p.zoom.fontSize}
         onCursor={p.onCursor}
       />

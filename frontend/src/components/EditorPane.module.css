@@ -57,7 +57,9 @@
   background: var(--danger-bg);
   color: var(--danger);
   font: 500 12.5px/1.5 var(--mono);
+  animation: err-in 0.2s var(--ease-step);
 }
+@keyframes err-in { from { opacity: 0; transform: translateY(8px); } }
 
 /* --- cartel de interbloqueo --- */
 
@@ -72,7 +74,9 @@
   background: var(--danger-bg);
   font-size: 13px;
   line-height: 1.5;
+  animation: banner-in 0.26s var(--ease-step);
 }
+@keyframes banner-in { from { opacity: 0; transform: translateY(-10px); } }
 .deadlockIcon { flex-shrink: 0; margin-top: 2px; color: var(--danger); }
 .deadlockBody { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .deadlock h2 { font-size: 14px; font-weight: 700; color: var(--danger); }

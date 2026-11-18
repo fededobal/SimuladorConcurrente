@@ -15,6 +15,7 @@ pestaña indica cuántos elementos tiene.
 | Elemento | Qué muestra |
 |---|---|
 | Nombre | El proceso, con su color |
+| Barra del color del proceso, a la izquierda de la fila | El proceso avanzó en el último instante |
 | Estado | Lo que está haciendo: ejecutando su código, dentro de un monitor, compitiendo por uno, dormido en un `wait`, en `delay` con los instantes que faltan, sin turno o terminado |
 | Línea | La línea del programa en la que está |
 | **Avanzar** | Da un paso en el que solo avanza ese proceso. Está deshabilitado si el proceso no puede avanzar o si la simulación está corriendo |

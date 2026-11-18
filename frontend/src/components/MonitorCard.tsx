@@ -5,6 +5,7 @@ import { processTextColor } from '../processColor';
 import { delayLeft } from '../processStates';
 import type { CondView, LogEntry, MonitorView, ProcessView, ProcRef, VarView } from '../types';
 import { useChangeCount } from '../useChangeCount';
+import { useLingering } from '../useLingering';
 import s from './MonitorCard.module.css';
 
 interface Props {
@@ -163,15 +164,20 @@ function QueueRow({ name, procs }: { name: string; procs: readonly ProcRef[] }) 
   );
 }
 
-/** Los procesos de una cola, en orden, como chips; "vacía" si no hay nadie. */
+/**
+ * Los procesos de una cola, en orden, como chips; "vacía" si no hay nadie. El que sale de la
+ * cola se queda un momento y se achica hasta desaparecer: los de atras se corren a su lugar
+ * en vez de saltar.
+ */
 function Queue({ procs }: { procs: readonly ProcRef[] }) {
   const [open, setOpen] = useState(false);
-  if (procs.length === 0) return <span className={s.empty}>vacía</span>;
-  const shown = open ? procs : procs.slice(0, MAX_SHOWN);
+  const all = useLingering(procs, (p) => p.id);
+  if (all.length === 0) return <span className={`${s.empty} ${s.fadeIn}`}>vacía</span>;
+  const shown = open ? all : all.slice(0, MAX_SHOWN);
   return (
     <>
-      {shown.map((p) => (
-        <span key={p.id} className={s.chip}>
+      {shown.map(({ item: p, leaving }) => (
+        <span key={p.id} className={`${s.chip}${leaving ? ` ${s.chipOut}` : ''}`} aria-hidden={leaving || undefined}>
           <i className="punto" style={{ background: p.color }} />
           {p.name}
         </span>

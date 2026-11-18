@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { prefersReducedMotion } from '../motion';
 import { processTextColor } from '../processColor';
 import type { OutputLine } from '../types';
 import s from './Inspector.module.css';
@@ -15,9 +16,13 @@ interface Props {
 export function OutputPanel({ lines }: Props) {
   const end = useRef<HTMLDivElement>(null);
 
-  // seguir la ultima linea, como una consola
+  // Seguir la ultima linea, como una consola. Al abrir la pestana va directo al final; despues,
+  // cada linea nueva se alcanza con un desplazamiento suave.
+  const opened = useRef(false);
   useEffect(() => {
-    end.current?.scrollIntoView({ block: 'end' });
+    const smooth = opened.current && !prefersReducedMotion();
+    opened.current = true;
+    end.current?.scrollIntoView({ block: 'end', behavior: smooth ? 'smooth' : 'auto' });
   }, [lines.length]);
 
   if (lines.length === 0) {

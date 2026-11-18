@@ -117,7 +117,8 @@
 .pinned { border-color: var(--accent); }
 
 /* marca del instante del interbloqueo: una raya roja y su rotulo */
-.deadlock { position: absolute; top: 0; bottom: 0; z-index: 4; border-left: 2px solid var(--danger); pointer-events: none; }
+.deadlock { position: absolute; top: 0; bottom: 0; z-index: 4; border-left: 2px solid var(--danger); pointer-events: none; animation: tl-in 0.3s ease-out; }
+@keyframes tl-in { from { opacity: 0; } }
 .deadlock span {
   position: sticky;
   top: 4px;
@@ -142,6 +143,8 @@
   right: 0;
   height: var(--row-h);
   border-bottom: 1px solid var(--line-soft);
+  /* las filas entran con un fundido al empezar una ejecucion */
+  animation: tl-in 0.2s ease-out;
 }
 /* corte entre familias de procesos */
 .cut { border-bottom-color: var(--line-strong); }
@@ -242,6 +245,7 @@
   font-size: 12.5px;
   line-height: 1.5;
   pointer-events: none;
+  animation: tl-in 0.14s ease-out;
 }
 .card b { display: block; margin-bottom: 2px; }
 .who { font-family: var(--mono); font-size: 12px; font-weight: 600; }

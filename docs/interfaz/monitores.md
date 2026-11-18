@@ -47,7 +47,8 @@ nada en el monitor, la línea no aparece.
 | Entrada | La cola de entrada, en orden de llegada |
 | Una por variable condición | Los procesos que esperan en ella, en orden; «vacía» si no hay ninguno |
 
-Cada cola muestra hasta seis procesos y un botón despliega el resto. Cuando el monitor tiene
+Cada cola muestra hasta seis procesos y un botón despliega el resto. El proceso que sale de
+una cola se achica hasta desaparecer y los que siguen se corren a su lugar. Cuando el monitor tiene
 más de seis variables condición, las vacías se pliegan en un botón que dice cuántas son.
 
 ## Variables

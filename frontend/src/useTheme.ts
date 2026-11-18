@@ -9,6 +9,8 @@ export type Theme = 'light' | 'dark';
  * sistema). La lee tambien el guion de index.html, que pinta el tema antes que React.
  */
 const STORAGE_KEY = 'vitepress-theme-appearance';
+/** Cuanto dura la transicion de colores al cambiar de tema, con un margen. */
+const THEME_SWITCH_MS = 320;
 
 /** El tema que dejo puesto index.html al cargar: lo elegido antes o, si no hay, el del sistema. */
 function readApplied(): Theme {
@@ -24,6 +26,9 @@ export function useTheme() {
   const toggle = useCallback(() => {
     setTheme((actual) => {
       const next: Theme = actual === 'dark' ? 'light' : 'dark';
+      // los colores cambian con una transicion (ver index.css) solo mientras dura el cambio
+      document.documentElement.dataset.themeSwitch = '';
+      window.setTimeout(() => { delete document.documentElement.dataset.themeSwitch; }, THEME_SWITCH_MS);
       document.documentElement.dataset.theme = next;
       try {
         localStorage.setItem(STORAGE_KEY, next);

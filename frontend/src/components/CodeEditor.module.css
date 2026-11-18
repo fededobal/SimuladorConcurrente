@@ -122,8 +122,27 @@
   color: var(--on-accent);
   font: 700 12px/1 var(--sans);
 }
+.gutterChip i { transition: opacity 0.2s linear; }
 /* el que no esta ejecutando va apagado: mismo color, menos presencia */
 .gutterChip:not(.activo) i { opacity: 0.55; }
+/* Latido del chip del proceso que avanzo en el instante: un anillo de su color que se abre
+   y se desvanece. Marca quien se movio aunque haya quedado en el mismo renglon. */
+.chipPulse {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  border: 2px solid var(--st-proceso);
+  border-radius: 50%;
+  opacity: 0;
+  animation: chip-pulse 0.5s ease-out;
+}
+@keyframes chip-pulse {
+  from { opacity: 0.75; transform: scale(1); }
+  to { opacity: 0; transform: scale(2); }
+}
 
 /* Etiquetas al final del codigo. La fila ocupa todo el ancho del texto; el hueco mide lo que
    el codigo del renglon y se achica si no hay lugar, y la lista se pega al borde visible
@@ -161,6 +180,9 @@
   color: color-mix(in oklab, var(--st) 55%, var(--text));
   font: 500 12px/1 var(--sans);
   white-space: nowrap;
+  /* al cambiar de estado, la etiqueta pasa de un color al otro */
+  transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+  animation: band-in 0.18s ease-out;
 }
 .lineTag b { font-weight: 600; }
 .lineTag:global(.st-running-process), .lineTag:global(.st-running-monitor) {
@@ -202,6 +224,8 @@
   font: 500 12px/1 var(--sans);
   white-space: nowrap;
   box-shadow: var(--popover-shadow);
+  animation: band-in 0.2s ease-out;
+  transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
 }
 .notice:global(.st-competing) { border-style: dashed; }
 .notice:global(.st-ready) { border-color: var(--line-strong); background: var(--panel); color: var(--dim); }

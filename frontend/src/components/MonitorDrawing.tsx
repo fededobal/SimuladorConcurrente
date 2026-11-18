@@ -1,5 +1,6 @@
 import type { Arrow, Travel } from '../monitorDiagram';
 import type { MonitorView, ProcRef } from '../types';
+import { useLingering } from '../useLingering';
 import s from './MonitorCard.module.css';
 
 interface Props {
@@ -172,22 +173,28 @@ function describe(m: MonitorView): string {
     + `Adentro: ${m.lockOwner?.name ?? 'nadie'}.`;
 }
 
-/** Hasta ROWS nombres con el punto de su color; "nadie" si no hay, "+n más" si sobran. */
+/**
+ * Hasta ROWS nombres con el punto de su color; "nadie" si no hay, "+n más" si sobran. El que
+ * deja la zona se desvanece en su lugar mientras los demas suben a ocupar el renglon libre.
+ */
 function NameRows({ procs, x, y }: { procs: readonly ProcRef[]; x: number; y: number }) {
-  if (procs.length === 0) return <text x={x} y={y} className={`${s.note} ${s.fadeIn}`}>nadie</text>;
-  const shown = procs.length > ROWS ? procs.slice(0, ROWS - 1) : procs;
+  const all = useLingering(procs, (p) => p.id);
+  if (all.length === 0) return <text x={x} y={y} className={`${s.note} ${s.fadeIn}`}>nadie</text>;
+  // con mas nombres que renglones, el ultimo renglon es para el "+n más"
+  const rows = procs.length > ROWS ? ROWS - 1 : ROWS;
   return (
     <>
       {/* El renglon de cada fila va en un transform: cuando el primero de la cola se va, los
           demas suben con una transicion en vez de saltar. */}
-      {shown.map((p, i) => (
-        <g key={p.id} className={s.nameRow} style={{ transform: `translateY(${i * ROW_H}px)` }}>
+      {all.filter((r) => r.index < rows).map(({ item: p, leaving, index }) => (
+        <g key={p.id} className={`${s.nameRow}${leaving ? ` ${s.leave}` : ''}`}
+          style={{ transform: `translateY(${index * ROW_H}px)` }}>
           <circle cx={x + 3} cy={y - 4} r="3.5" fill={p.color} />
           <text x={x + 11} y={y} className={s.procName}>{fit(p.name)}</text>
         </g>
       ))}
-      {procs.length > shown.length && (
-        <text x={x} y={y + shown.length * ROW_H} className={s.note}>+{procs.length - shown.length} más</text>
+      {procs.length > rows && (
+        <text x={x} y={y + rows * ROW_H} className={s.note}>+{procs.length - rows} más</text>
       )}
     </>
   );

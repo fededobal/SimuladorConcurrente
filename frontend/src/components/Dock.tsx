@@ -13,7 +13,8 @@ interface Props {
 
 /**
  * Envoltorio de un panel con asa de arrastre en el borde que mira al editor. Mientras no
- * se lo arrastro, el tamano lo da el CSS (o `autoSize`); despues manda el elegido.
+ * se lo arrastro, el tamano lo da el CSS (o `autoSize`) y cambia con una transicion; despues
+ * manda el elegido, sin transicion, para que siga al puntero.
  */
 export function Dock({ drag, className, autoSize, children }: Props) {
   const style = drag.size !== null
@@ -21,7 +22,8 @@ export function Dock({ drag, className, autoSize, children }: Props) {
     : autoSize === undefined ? undefined
       : drag.axis === 'y' ? { height: autoSize } : { width: autoSize };
   return (
-    <div ref={drag.panelRef} className={`${s.dock} ${className}`} style={style}>
+    <div ref={drag.panelRef} className={`${s.dock} ${className}${drag.size === null ? ` ${s.auto}` : ''}`}
+      style={style}>
       <div className={`${s.asa} ${drag.axis === 'y' ? s.asaY : s.asaX}`} {...drag.handleProps} />
       {children}
     </div>

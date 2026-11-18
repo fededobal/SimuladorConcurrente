@@ -125,6 +125,29 @@ button, select, input { font-family: inherit; font-size: inherit; color: inherit
 button { cursor: pointer; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
+/* Cambio de tema: los colores pasan de uno a otro en vez de saltar. El atributo lo pone
+   useTheme solo mientras dura el cambio, para no frenar el resto de las transiciones. */
+:root[data-theme-switch] *,
+:root[data-theme-switch] *::before,
+:root[data-theme-switch] *::after {
+  transition: background-color 0.25s linear, color 0.25s linear, border-color 0.25s linear,
+              fill 0.25s linear, stroke 0.25s linear !important;
+}
+
+/* Quien pide menos movimiento ve cada cambio de una vez: vale para toda la pantalla. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* fundido corto con el que entra lo que aparece: paneles, carteles, lineas nuevas */
+@keyframes aparecer { from { opacity: 0; } }
+@keyframes aparecer-abajo { from { opacity: 0; transform: translateY(-6px); } }
+
 /* ------------------------------------------------------------------ botones */
 
 .btn {
@@ -187,6 +210,8 @@ kbd {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   box-shadow: var(--popover-shadow);
+  transform-origin: top;
+  animation: aparecer-abajo 0.14s var(--ease-step);
 }
 .popover-left { left: 0; }
 .popover-right { right: 0; }
@@ -264,4 +289,5 @@ kbd {
   font-size: 12.5px;
   line-height: 1.5;
   color: var(--dimmer);
+  animation: aparecer 0.2s ease-out;
 }

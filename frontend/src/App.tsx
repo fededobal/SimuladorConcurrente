@@ -98,7 +98,7 @@ export function App() {
         const state = visibleState(p);
         return {
           line: p.line, color: p.color, state, name: p.name, where: whereOf(p, state),
-          delayRemaining: p.delayRemaining,
+          delayRemaining: p.delayRemaining, advanced: p.advanced,
         };
       });
   }, [snapshot]);
@@ -276,6 +276,7 @@ export function App() {
             onChange={changeCode}
             readOnly={running}
             activeLines={activeLines}
+            instant={snapshot?.instant ?? 0}
             errorLines={errorLines}
             pasoMs={sim.speed}
             zoom={zoom}

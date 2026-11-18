@@ -108,7 +108,7 @@ export function TopBar(p: Props) {
         <span className={s.statusDot} aria-hidden="true" />
         <span className={s.statusText} role="status" aria-live="polite">{p.statusText}</span>
         <span className={s.statusLabel}>instante</span>
-        <span className={s.instant}>{p.instant}</span>
+        <span key={p.instant} className={`${s.instant}${p.instant > 0 ? ` ${s.instantTick}` : ''}`}>{p.instant}</span>
       </div>
 
       <button className="btn btn-icono btn-plano" onClick={p.onShare}
