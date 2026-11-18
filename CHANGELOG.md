@@ -135,6 +135,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Buscador de la guía: las teclas del atajo quedaban fuera del recuadro porque el texto no entraba en el ancho fijo; ahora el ancho sale del texto y el alto coincide con el del botón «Abrir el simulador». (Federico Dobal, 2026-11-17)
 - Botón para ampliar la línea de tiempo al costado del editor, a toda altura, que se había perdido en el rediseño de la pantalla; Escape o el mismo botón la devuelven a su lugar, y el inspector conserva su pestaña. (Federico Dobal, 2026-11-17)
 - Editor: el aviso que resume los renglones con procesos fuera de la vista decía «+1 renglones más»; ahora concuerda en singular. (Federico Dobal, 2026-11-17)
 - Con muchos procesos la interfaz ya llega a la velocidad «muy rápido»: la línea de tiempo dibuja solo las filas visibles y el editor solo los chips que se ven. Con 1000 procesos, cada paso pasó de 46 ms y 5500 nodos en pantalla a 16 ms y 500. (Federico Dobal, 2026-11-17)

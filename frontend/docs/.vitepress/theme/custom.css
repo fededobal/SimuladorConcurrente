@@ -129,8 +129,16 @@
 .VPNavBarSearch { flex: 0 0 auto !important; padding-left: 0 !important; }
 .VPNavBar .VPNavBarAppearance { margin-left: 4px; }
 @media (min-width: 768px) {
-  .VPNavBarSearch .DocSearch-Button { width: 300px; justify-content: flex-start; }
-  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Keys { margin-left: auto; }
+  /* El ancho sale del texto: con un ancho fijo, las teclas del atajo quedaban fuera del
+     recuadro. Mismo alto que el boton "Abrir el simulador". */
+  .VPNavBarSearch .DocSearch-Button { width: auto; height: 32px; justify-content: flex-start; }
+  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Container { min-width: 0; }
+  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Keys { flex-shrink: 0; margin-left: auto; }
 }
 /* sin migas (portada), el buscador se corre a la derecha */
 .VPNavBar .content-body > .VPNavBarSearch:first-child { margin-left: auto; }
