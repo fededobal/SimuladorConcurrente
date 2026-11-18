@@ -1,35 +1,35 @@
 ## RANDOM seed=0
 create {"finished":false,"deadlock":false} #1669f9085f45a91b
 step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f581f7e666a3697f
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## RANDOM seed=1
 create {"finished":false,"deadlock":false} #7447d6d6e2889777
 step 1 #f581f7e666a3697f
-step 2 #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## RANDOM seed=2
 create {"finished":false,"deadlock":false} #79a13dfff681263a
 step 1 #f581f7e666a3697f
-step 2 #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## ROUND_ROBIN seed=0
 create {"finished":false,"deadlock":false} #1669f9085f45a91b
 step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f581f7e666a3697f
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## ROUND_ROBIN seed=1
 create {"finished":false,"deadlock":false} #7447d6d6e2889777
 step 1 #f581f7e666a3697f
-step 2 #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## ROUND_ROBIN seed=2
 create {"finished":false,"deadlock":false} #79a13dfff681263a
 step 1 #f581f7e666a3697f
-step 2 #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 #dd945c21fcc067cb
+state #f3f0f320637b2687
 ## step by step, RANDOM seed=0
 create {"finished":false,"deadlock":false} #1669f9085f45a91b
 step 1 ENTER P: entra a M.bloquear | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f581f7e666a3697f
-step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #6ace250b7ca1f637
-state #4b7afaf9cacbbcd1
+step 2 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":2,"waiting":false} #dd945c21fcc067cb
+state #f3f0f320637b2687

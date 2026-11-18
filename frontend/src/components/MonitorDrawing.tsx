@@ -9,7 +9,7 @@ interface Props {
   readonly travels: readonly Travel[];
   /** Linea en la que esta el proceso que tiene el monitor, o null. */
   readonly ownerLine: number | null;
-  /** true si la simulacion termino en interbloqueo: las flechas de salida de la espera no se pueden recorrer. */
+  /** true si la simulacion termino en deadlock: las flechas de salida de la espera no se pueden recorrer. */
   readonly deadlocked: boolean;
 }
 

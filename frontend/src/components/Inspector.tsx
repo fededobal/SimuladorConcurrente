@@ -17,7 +17,7 @@ interface Props {
   readonly snapshot: Snapshot | null;
   /** Eventos del ultimo instante. */
   readonly entries: readonly LogEntry[];
-  /** Procesos bloqueados si la simulacion termino en interbloqueo; vacio si no. */
+  /** Procesos bloqueados si la simulacion termino en deadlock; vacio si no. */
   readonly blocked: readonly BlockedProcess[];
   readonly running: boolean;
   /** Duracion de un instante, en ms: las animaciones se acompasan a la simulacion. */

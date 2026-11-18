@@ -1,4 +1,4 @@
-/* Columna del editor: encabezado con el archivo y los procesos, cartel de interbloqueo,
+/* Columna del editor: encabezado con el archivo y los procesos, cartel de deadlock,
    el codigo y, al pie, el error si lo hay. */
 
 .pane {
@@ -61,7 +61,7 @@
 }
 @keyframes err-in { from { opacity: 0; transform: translateY(8px); } }
 
-/* --- cartel de interbloqueo --- */
+/* --- cartel de deadlock --- */
 
 .deadlock {
   flex-shrink: 0;

@@ -84,7 +84,7 @@
 .arrowActive { stroke: var(--accent); stroke-width: 2; }
 .arrowHeadActive { fill: var(--accent); transform: scale(1.3); }
 .arrowLabelActive { fill: var(--accent); font-weight: 700; }
-/* flecha que no se puede recorrer (interbloqueo): punteada */
+/* flecha que no se puede recorrer (deadlock): punteada */
 .arrowDead { stroke-dasharray: 3 3; }
 
 /* Punto que recorre una flecha: el proceso que paso de una zona a otra en el ultimo

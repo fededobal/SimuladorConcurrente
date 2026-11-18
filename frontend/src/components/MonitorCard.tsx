@@ -95,11 +95,12 @@ function sameEvents(a: readonly LogEntry[], b: readonly LogEntry[]): boolean {
   return a.length === b.length && a.every((e, i) => e.id === b[i].id);
 }
 
-/** Aclaracion sobre el dueno cuando no esta ejecutando: en delay, o esperando en otro monitor. */
+/** Aclaracion sobre el dueno cuando no esta ejecutando: en delay, o demorado en otro monitor. */
 function ownerNote(p: ProcessView | undefined): string {
   if (!p || p.state !== 'BLOCKED') return '';
   if (p.delayRemaining !== null) return `, en delay (${delayLeft(p.delayRemaining)})`;
-  return `, esperando en ${p.blockedOn ?? 'otro monitor'}`;
+  if (p.blockReason === 'COND_WAIT') return `, dormido en ${p.blockedOn ?? 'otro monitor'}`;
+  return `, compite por ${p.blockedOn ?? 'otro monitor'}`;
 }
 
 /** Que paso en el ultimo instante, en palabras: los eventos del motor, con el proceso en su color. */
@@ -145,7 +146,7 @@ function CondQueues({ conds }: { conds: readonly CondView[] }) {
           <dt />
           <dd>
             <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}
-              title={open ? undefined : 'Mostrar también las variables condición sin nadie esperando'}>
+              title={open ? undefined : 'Mostrar también las variables condición sin procesos dormidos'}>
               {open ? 'ocultar las vacías' : `+${empty} cond vacías`}
             </button>
           </dd>

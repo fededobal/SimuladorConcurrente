@@ -262,7 +262,7 @@ class VirtualMachineTest {
 
     /**
      * ADR 0007, llamada cerrada: P llama de A a B y espera en B; Q necesita A para avisarle.
-     * P retiene A mientras espera en B, asi que Q no entra nunca: es el interbloqueo del que
+     * P retiene A mientras espera en B, asi que Q no entra nunca: es el deadlock del que
      * advierte la catedra, y el mensaje dice quien retiene que.
      */
     @Test
@@ -287,7 +287,7 @@ class VirtualMachineTest {
             assertTrue(lastMessage.contains("P espera en B.c y retiene A"), lastMessage);
             assertEquals(java.util.List.of("A"), r.vm().snapshot().processes().get(0).holding());
         }
-        assertTrue(deadlocks >= 20, "interbloqueos: " + deadlocks);
+        assertTrue(deadlocks >= 20, "deadlocks: " + deadlocks);
         assertTrue(TestSupport.run(program, SchedulingPolicy.ROUND_ROBIN, 0, 5000).deadlock());
     }
 

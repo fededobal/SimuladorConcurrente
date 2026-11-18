@@ -43,7 +43,7 @@ class VmRegressionTest {
                 process A { M.f(); }
                 process B { M.g(); }
                 """, SchedulingPolicy.ROUND_ROBIN, 0, 1000);
-        assertFalse(r.deadlock(), "A fallo por division por cero; no es un interbloqueo");
+        assertFalse(r.deadlock(), "A fallo por division por cero; no es un deadlock");
         assertTrue(r.finished());
         assertEquals("1", TestSupport.finalVar(r, "M", "x"), "B tuvo que poder entrar");
         assertTrue(r.logs().stream().anyMatch(l -> l.kind().equals("ERROR")));

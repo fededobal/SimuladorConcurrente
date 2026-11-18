@@ -6,22 +6,22 @@ import s from './EditorPane.module.css';
 interface Props {
   readonly instant: number;
   readonly blocked: readonly BlockedProcess[];
-  /** Mensaje completo del motor ("Interbloqueo: ... P espera en B.c y retiene A"), si lo hay. */
+  /** Mensaje completo del motor ("Deadlock: ... P espera en B.c y retiene A"), si lo hay. */
   readonly engineMessage: string | null;
-  /** true si antes del interbloqueo algun proceso termino con un error de ejecucion. */
+  /** true si antes del deadlock algun proceso termino con un error de ejecucion. */
   readonly afterError: boolean;
   readonly onShowInstant: () => void;
   readonly onReplay: () => void;
 }
 
-/** Comienzo del mensaje del motor, igual en todos los interbloqueos. */
-const GENERIC_MESSAGE = /^Interbloqueo: ningún proceso puede avanzar\.?/;
+/** Comienzo del mensaje del motor, igual en todos los deadlocks. */
+const GENERIC_MESSAGE = /^Deadlock: ningún proceso puede avanzar\.?/;
 
 /** Procesos que se explican uno por uno; con mas, el resto se resume. */
 const MAX_EXPLAINED = 3;
 
 /**
- * Cartel de interbloqueo, arriba del editor. Es el momento mas didactico de una ejecucion y
+ * Cartel de deadlock, arriba del editor. Es el momento mas didactico de una ejecucion y
  * antes se avisaba solo con una pildora en la esquina: aca dice quien espera, donde, y por
  * que nadie puede despertarlo, con las acciones para investigarlo.
  */
@@ -33,10 +33,10 @@ export function DeadlockBanner({
   const detail = engineMessage?.replace(GENERIC_MESSAGE, '').trim() ?? '';
   const sleeping = blocked.filter((b) => b.kind === 'cond');
   return (
-    <section className={s.deadlock} role="alert" aria-label="Interbloqueo">
+    <section className={s.deadlock} role="alert" aria-label="Deadlock">
       <TriangleAlert size={18} className={s.deadlockIcon} aria-hidden="true" />
       <div className={s.deadlockBody}>
-        <h2>Interbloqueo en el instante {instant}</h2>
+        <h2>Deadlock en el instante {instant}</h2>
         <p>
           Ningún proceso puede avanzar.{' '}
           {explained.map((b) => <Sentence key={b.id} b={b} />)}
@@ -60,8 +60,8 @@ export function DeadlockBanner({
           <button type="button" className="btn" onClick={onReplay}>
             <RotateCcw size={13} /> Repetir con la misma semilla
           </button>
-          <a className={s.help} href="/docs/operacion/interbloqueo" target="_blank" rel="noreferrer">
-            Qué es un interbloqueo <ExternalLink size={12} />
+          <a className={s.help} href="/docs/operacion/deadlock" target="_blank" rel="noreferrer">
+            Qué es un deadlock <ExternalLink size={12} />
           </a>
         </div>
       </div>

@@ -51,7 +51,7 @@ final class EventLog {
                 p.isSystem() ? null : p.color(), kind.name(), resource, message));
     }
 
-    /** Un evento de la simulacion, sin proceso (el interbloqueo). Se registra siempre. */
+    /** Un evento de la simulacion, sin proceso (el deadlock). Se registra siempre. */
     void systemEvent(int instant, EventKind kind, String message) {
         record(new LogEntry("e" + nextEventId++, instant, null, null, kind.name(), "", message));
     }

@@ -75,7 +75,7 @@ export function labelsOf(s: Segment): string[] {
     case 'RUNNING_MONITOR': return s.where ? [`en ${s.where}`, s.where] : ['en el monitor'];
     case 'RUNNING_PROCESS': return ['en el proceso'];
     case 'COMPETING': return s.where ? [`compite por ${s.where}`, 'compite'] : ['compite'];
-    case 'WAITING': return s.where ? [`wait(${s.where})`, 'wait'] : ['en wait'];
+    case 'WAITING': return s.where ? [`wait(${s.where})`, 'wait'] : ['dormido'];
     case 'DELAYED': return ['en delay', 'delay'];
     default: return [];
   }

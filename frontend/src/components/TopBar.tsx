@@ -103,7 +103,7 @@ export function TopBar(p: Props) {
 
       <div className={s.spacer} />
 
-      {/* aria-live: un lector de pantalla anuncia el cambio de estado (pausa, fin, interbloqueo) */}
+      {/* aria-live: un lector de pantalla anuncia el cambio de estado (pausa, fin, deadlock) */}
       <div className={`${s.status} ${s[`${p.statusTone}-tone`] ?? ''}`}>
         <span className={s.statusDot} aria-hidden="true" />
         <span className={s.statusText} role="status" aria-live="polite">{p.statusText}</span>

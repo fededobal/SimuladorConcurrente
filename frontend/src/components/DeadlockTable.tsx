@@ -7,7 +7,7 @@ interface Props {
 }
 
 /**
- * "Por que nadie avanza": cada proceso bloqueado del interbloqueo, donde esta y que lo
+ * "Por que nadie avanza": cada proceso bloqueado del deadlock, donde esta y que lo
  * despertaria. Es la tabla que el alumno armaba a mano mirando el dibujo de cada monitor.
  */
 export function DeadlockTable({ blocked }: Props) {

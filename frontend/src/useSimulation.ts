@@ -12,10 +12,10 @@ export interface SimError {
   line: number | null;
 }
 
-/** Lo que informa el motor cuando detecta un interbloqueo. */
+/** Lo que informa el motor cuando detecta un deadlock. */
 export interface DeadlockInfo {
   readonly instant: number;
-  /** Mensaje del evento DEADLOCK; null si el programa ya arranca interbloqueado. */
+  /** Mensaje del evento DEADLOCK; null si el programa ya arranca en deadlock. */
   readonly message: string | null;
 }
 

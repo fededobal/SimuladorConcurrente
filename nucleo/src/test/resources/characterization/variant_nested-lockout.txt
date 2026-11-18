@@ -2,44 +2,44 @@
 create {"finished":false,"deadlock":false} #efaf3d51809d3e30
 step 1 ENTER P: entra a A.f | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #adc802a721fc6b9f
 step 2 ENTER P: entra a B.esperar | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #005f4b267362ba58
-step 3 WAIT P: wait(c) - libera el monitor y se demora | BLOCKED Q: espera para entrar a A.g | DEADLOCK Interbloqueo: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":3,"waiting":false} #e5e4fb1f2952511a
-state #fd9a92fa90b021e1
+step 3 WAIT P: wait(c) - libera el monitor y se demora | BLOCKED Q: espera para entrar a A.g | DEADLOCK Deadlock: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":3,"waiting":false} #380e762f70d966d0
+state #f362c4603b31e4fc
 ## RANDOM seed=1
 create {"finished":false,"deadlock":false} #52600ff7a4846f35
 step 1 #c15402eddf327ffe
 step 2 #78cc0f4faa83151b
 step 3 #3c2f072af2dcd95b
-step 4 #857a7816f08ef28a
-state #0cee814b58143c25
+step 4 #2f3700d112b7ff30
+state #8d2883efd0dcc842
 ## RANDOM seed=2
 create {"finished":false,"deadlock":false} #dad2c4fcc2785684
 step 1 #adc802a721fc6b9f
 step 2 #30310c4d3a01bc23
 step 3 #eef93846a81ea9cf
-step 4 #ba40684c2d54ffde
-state #e3a0ccc3ac316824
+step 4 #e1f3cce97a96c5f1
+state #63a9168437706a48
 ## ROUND_ROBIN seed=0
 create {"finished":false,"deadlock":false} #efaf3d51809d3e30
 step 1 ENTER P: entra a A.f | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #adc802a721fc6b9f
 step 2 SKIP Q: skip | ENTER P: entra a B.esperar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5645c54b7fe4bd42
-step 3 WAIT P: wait(c) - libera el monitor y se demora | BLOCKED Q: espera para entrar a A.g | DEADLOCK Interbloqueo: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":3,"waiting":false} #e5e4fb1f2952511a
-state #b711e5e1a77b9ef3
+step 3 WAIT P: wait(c) - libera el monitor y se demora | BLOCKED Q: espera para entrar a A.g | DEADLOCK Deadlock: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":3,"waiting":false} #380e762f70d966d0
+state #d8d41a6f72a16e08
 ## ROUND_ROBIN seed=1
 create {"finished":false,"deadlock":false} #52600ff7a4846f35
 step 1 #adc802a721fc6b9f
 step 2 #5645c54b7fe4bd42
-step 3 #e5e4fb1f2952511a
-state #b711e5e1a77b9ef3
+step 3 #380e762f70d966d0
+state #d8d41a6f72a16e08
 ## ROUND_ROBIN seed=2
 create {"finished":false,"deadlock":false} #dad2c4fcc2785684
 step 1 #adc802a721fc6b9f
 step 2 #5645c54b7fe4bd42
-step 3 #e5e4fb1f2952511a
-state #b711e5e1a77b9ef3
+step 3 #380e762f70d966d0
+state #d8d41a6f72a16e08
 ## step by step, RANDOM seed=0
 create {"finished":false,"deadlock":false} #efaf3d51809d3e30
 step 1 SKIP Q: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c15402eddf327ffe
 step 2 ENTER P: entra a A.f | SKIP Q: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ab56048b0ce79585
 step 3 ENTER P: entra a B.esperar | BLOCKED Q: espera para entrar a A.g | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #b87593aa204f0a3d
-step 4 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Interbloqueo: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #857a7816f08ef28a
-state #bab333bb5b7369f7
+step 4 WAIT P: wait(c) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar. P espera en B.c y retiene A | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #2f3700d112b7ff30
+state #24a1b048e1f7ba8f

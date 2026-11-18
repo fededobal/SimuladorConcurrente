@@ -116,7 +116,7 @@
 }
 .pinned { border-color: var(--accent); }
 
-/* marca del instante del interbloqueo: una raya roja y su rotulo */
+/* marca del instante del deadlock: una raya roja y su rotulo */
 .deadlock { position: absolute; top: 0; bottom: 0; z-index: 4; border-left: 2px solid var(--danger); pointer-events: none; animation: tl-in 0.3s ease-out; }
 @keyframes tl-in { from { opacity: 0; } }
 .deadlock span {

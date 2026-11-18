@@ -3,48 +3,48 @@ create {"finished":false,"deadlock":false} #55a7dd97f5c145a0
 step 1 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #6c93c2c6dcf7c7b2
 step 2 WAIT A: wait(c) - libera el monitor y se demora | SKIP B: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #eee16736cc3b23d2
 step 3 ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7819e23ad423dd55
-step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #135876b890fe6225
-state #4c37ad035e41d7a0
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #0a6176fb67110896
+state #4a55a569e1d4d605
 ## RANDOM seed=1
 create {"finished":false,"deadlock":false} #f065c48df1115281
 step 1 #a440671221afb775
 step 2 #57db676f967944e9
 step 3 #d069ccd6c0483ad2
-step 4 #626fb8e54f25f578
-state #8364a1c5a155244d
+step 4 #35856515aa9a12a5
+state #ed888817b6ecb106
 ## RANDOM seed=2
 create {"finished":false,"deadlock":false} #ea3dfaf202d03e4f
 step 1 #6c93c2c6dcf7c7b2
 step 2 #346b9f2261c969a0
 step 3 #7c62aa7bb232800f
 step 4 #39383703e81169dd
-step 5 #ec3868166c70fe86
-state #a50f30d478f1f566
+step 5 #901136fcf798d0eb
+state #0091c46a3dc82ba5
 ## ROUND_ROBIN seed=0
 create {"finished":false,"deadlock":false} #55a7dd97f5c145a0
 step 1 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #6c93c2c6dcf7c7b2
 step 2 SKIP B: skip | WAIT A: wait(c) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #84da013f6578a2db
 step 3 ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7819e23ad423dd55
-step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #135876b890fe6225
-state #850a76bd40976bc6
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #0a6176fb67110896
+state #462b3480ed7a2503
 ## ROUND_ROBIN seed=1
 create {"finished":false,"deadlock":false} #f065c48df1115281
 step 1 #6c93c2c6dcf7c7b2
 step 2 #84da013f6578a2db
 step 3 #7819e23ad423dd55
-step 4 #135876b890fe6225
-state #850a76bd40976bc6
+step 4 #0a6176fb67110896
+state #462b3480ed7a2503
 ## ROUND_ROBIN seed=2
 create {"finished":false,"deadlock":false} #ea3dfaf202d03e4f
 step 1 #6c93c2c6dcf7c7b2
 step 2 #84da013f6578a2db
 step 3 #7819e23ad423dd55
-step 4 #135876b890fe6225
-state #850a76bd40976bc6
+step 4 #0a6176fb67110896
+state #462b3480ed7a2503
 ## step by step, RANDOM seed=0
 create {"finished":false,"deadlock":false} #55a7dd97f5c145a0
 step 1 SKIP B: skip | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a440671221afb775
 step 2 ENTER A: entra a M.esperar | SKIP B: skip | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #970bca3c45f212d1
 step 3 WAIT A: wait(c) - libera el monitor y se demora | ENTER B: entra a M.avisar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #220bc88cb391d4e9
-step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Interbloqueo: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #135876b890fe6225
-state #847bfee6ea52bc37
+step 4 ERROR B: error de ejecución - División por cero | RELEASE B: libera M al terminar con error | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":4,"waiting":false} #0a6176fb67110896
+state #b9d0b8ccd2f56884

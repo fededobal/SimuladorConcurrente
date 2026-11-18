@@ -1,10 +1,10 @@
-// Explicacion de un interbloqueo a partir del snapshot: que espera cada proceso bloqueado y
+// Explicacion de un deadlock a partir del snapshot: que espera cada proceso bloqueado y
 // que haria falta para que siguiera. No decide nada de la simulacion (eso lo hace el
-// nucleo, que es quien informa el interbloqueo): solo pone en palabras el estado final.
+// nucleo, que es quien informa el deadlock): solo pone en palabras el estado final.
 
 import type { ProcessView, Snapshot } from './types';
 
-/** Un proceso que quedo bloqueado en el interbloqueo. */
+/** Un proceso que quedo bloqueado en el deadlock. */
 export interface BlockedProcess {
   readonly id: number;
   readonly name: string;

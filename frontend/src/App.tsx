@@ -113,12 +113,12 @@ export function App() {
     return failed.filter((p) => p.line > 0).map((p) => p.line);
   }, [status, sim.error, failed]);
 
-  // Interbloqueo: que espera cada proceso bloqueado, para el cartel y la tabla del panel.
+  // Deadlock: que espera cada proceso bloqueado, para el cartel y la tabla del panel.
   const blocked = useMemo(
     () => (status === 'deadlock' && snapshot ? blockedProcesses(snapshot) : []),
     [status, snapshot],
   );
-  // pedido a la linea de tiempo de mostrar un instante (el del interbloqueo)
+  // pedido a la linea de tiempo de mostrar un instante (el del deadlock)
   const [timelineFocus, setTimelineFocus] = useState<{ instant: number; nonce: number } | null>(null);
   const showInstant = (instant: number) => {
     setTimelineFocus((prev) => ({ instant, nonce: (prev?.nonce ?? 0) + 1 }));

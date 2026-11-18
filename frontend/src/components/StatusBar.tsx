@@ -16,7 +16,7 @@ interface Props {
   readonly inLibrary: boolean;
   /** true si la simulacion esta corriendo: F5 la pausa en vez de ejecutarla. */
   readonly running: boolean;
-  /** true si la ejecucion termino (fin o interbloqueo): F5 la ejecuta de nuevo. */
+  /** true si la ejecucion termino (fin o deadlock): F5 la ejecuta de nuevo. */
   readonly ended: boolean;
   readonly onShowShortcuts: () => void;
 }

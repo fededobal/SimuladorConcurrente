@@ -133,7 +133,7 @@ public final class VirtualMachine {
                 clock.tick();
                 advancedLastStep.clear();
             } else if (!deadlockLogged) {
-                // interbloqueo: ocupa un instante propio y se informa una sola vez
+                // deadlock: ocupa un instante propio y se informa una sola vez
                 clock.tick();
                 logDeadlock();
             }
@@ -172,7 +172,7 @@ public final class VirtualMachine {
         } catch (Throwable t) {
             // Un error que no es del alumno (un bug del simulador, o memoria/pila agotada)
             // igual termina solo ese proceso: si quedara RUNNING, el instante siguiente lo
-            // tomaria por un interbloqueo que el programa no tiene.
+            // tomaria por un deadlock que el programa no tiene.
             monitorProtocol.fail(p, "error interno del simulador");
         }
         if (p.state() == Process.State.RUNNING) {
@@ -180,7 +180,7 @@ public final class VirtualMachine {
         }
     }
 
-    /** Registra el interbloqueo; se hace una sola vez por ejecucion. */
+    /** Registra el deadlock; se hace una sola vez por ejecucion. */
     private void logDeadlock() {
         deadlockLogged = true;
         events.systemEvent(clock.instant(), EventKind.DEADLOCK, deadlockMessage());
@@ -192,7 +192,7 @@ public final class VirtualMachine {
         int guard = 0;
         while (true) {
             if (++guard > STRUCTURAL_CAP) {
-                event(p, EventKind.SPIN, "", p.name() + ": espera activa (bucle sin avanzar)");
+                event(p, EventKind.SPIN, "", p.name() + ": busy waiting (bucle sin avanzar)");
                 return;
             }
             Activation act = p.current();
@@ -244,12 +244,12 @@ public final class VirtualMachine {
     }
 
     /**
-     * Describe el interbloqueo. Con llamadas cerradas, un proceso puede quedar esperando en
+     * Describe el deadlock. Con llamadas cerradas, un proceso puede quedar esperando en
      * un monitor mientras retiene otro; eso se nombra, porque es lo que el alumno tiene que
      * ver para entender por que nadie avanza.
      */
     private String deadlockMessage() {
-        StringBuilder sb = new StringBuilder("Interbloqueo: ningún proceso puede avanzar");
+        StringBuilder sb = new StringBuilder("Deadlock: ningún proceso puede avanzar");
         for (Process p : processes) {
             List<Monitor> held = monitorProtocol.heldBy(p);
             if (p.state() != Process.State.BLOCKED || held.isEmpty()) continue;

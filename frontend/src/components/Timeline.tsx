@@ -14,7 +14,7 @@ interface Props {
   readonly timeline: TimelineData;
   /** Procesos del snapshot actual: de aca salen el nombre y el color de cada fila. */
   readonly processes: readonly ProcessView[];
-  /** Instante del interbloqueo, para marcarlo; null si no hubo. */
+  /** Instante del deadlock, para marcarlo; null si no hubo. */
   readonly deadlockInstant: number | null;
   /**
    * Pedido de mostrar un instante: la linea de tiempo se desplaza hasta el y deja fija su
@@ -50,7 +50,7 @@ const LEGEND: readonly [VisibleState, string][] = [
   ['RUNNING_PROCESS', 'en el proceso'],
   ['RUNNING_MONITOR', 'en el monitor'],
   ['COMPETING', 'compite'],
-  ['WAITING', 'en wait'],
+  ['WAITING', 'dormido'],
   ['DELAYED', 'en delay'],
   ['READY', 'sin turno'],
 ];
@@ -188,7 +188,7 @@ export function Timeline({
     if (columns.length === 0) setPinned(null);
   }, [columns.length]);
 
-  // Pedido de afuera ("ver el instante del interbloqueo"): fijar su tarjeta y traerlo a la vista.
+  // Pedido de afuera ("ver el instante del deadlock"): fijar su tarjeta y traerlo a la vista.
   useEffect(() => {
     if (!focus) return;
     const i = columns.findIndex((c) => c.instant === focus.instant);
@@ -290,7 +290,7 @@ export function Timeline({
           {last >= 0 && <div className={s.cursor} style={{ left: NAME_W + last * cell, top: RULER_H }} />}
           {deadlockColumn >= 0 && (
             <div className={s.deadlock} style={{ left: NAME_W + (deadlockColumn + 1) * cell }}>
-              <span>Interbloqueo: nadie puede avanzar</span>
+              <span>Deadlock: nadie puede avanzar</span>
             </div>
           )}
           {shown !== null && (
