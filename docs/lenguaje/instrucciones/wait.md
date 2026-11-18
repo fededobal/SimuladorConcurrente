@@ -58,11 +58,12 @@ proceso pudo entrar antes. Por eso se vuelve a verificar con `while` y no con `i
 
 ## Ejemplo
 
-```monitores ejemplo=01-buffer-un-dato
-procedure depositar(d: in int) {
-  while (hayDato) wait(libre);
-  dato = d;
-  hayDato = true;
-  signal(ocupado);
+```monitores ejemplo=06-buffer-limitado
+procedure depositar(datos: in int) {
+  while (cantidad == n) wait(not_lleno);
+  buf[libre] = datos;
+  libre = (libre + 1) mod n;
+  cantidad++;
+  signal(not_vacio);
 }
 ```

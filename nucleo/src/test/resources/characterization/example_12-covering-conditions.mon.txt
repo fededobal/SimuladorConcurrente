@@ -1,0 +1,571 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #754b753ef9dee2d2
+step 1 DELAY Reloj: delay(1) - se demora 1 instante | ENTER Dormilon[0]: entra a Timer.demorar | BLOCKED Dormilon[1]: espera para entrar a Timer.demorar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #cbd27a7f93e54bfd
+step 2 BLOCKED Dormilon[2]: espera para entrar a Timer.demorar | DECL Dormilon[0]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ce394421f5c99ddf
+step 3 BLOCKED Reloj: espera para entrar a Timer.tick | ASSIGN Dormilon[0]: hora_de_despertar = 2 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fbbd0a90ab8cb17e
+step 4 WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #65024baaa4e6a760
+step 5 ASSIGN Reloj: hora_actual = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ab16ea54fb078246
+step 6 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #d03d3ae4a73e247b
+step 7 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[0]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #e8de423e6b231958
+step 8 ASSIGN Reloj: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #0b7821f4ffa0acef
+step 9 DELAY Reloj: delay(1) - se demora 1 instante | WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | ENTER Dormilon[2]: entra a Timer.demorar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #838ef9e5143a5794
+step 10 DECL Dormilon[2]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #4572afaaa8c6fa65
+step 11 ASSIGN Dormilon[2]: hora_de_despertar = 5 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #47f657af2b8497b7
+step 12 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | ENTER Dormilon[1]: entra a Timer.demorar | BLOCKED Reloj: espera para entrar a Timer.tick | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #83bceeaa5ea82ccc
+step 13 DECL Dormilon[1]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #52a5cf9b8bdc3dc9
+step 14 ASSIGN Dormilon[1]: hora_de_despertar = 4 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #6ca41ecc0d29ff66
+step 15 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #3a44555dd7d61d7a
+step 16 ASSIGN Reloj: hora_actual = 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #c1b1d30af4a68a57
+step 17 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #fc17baa54f965acf
+step 18 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[0]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #fdd06c9746472eba
+step 19 RETURN Dormilon[0]: retorna de Timer.demorar, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | ASSIGN Reloj: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c789fc329096bc60
+step 20 WRITE Dormilon[0]: write(Dormilon 0: desperté) | DELAY Reloj: delay(1) - se demora 1 instante | WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #449fb0b7eb659edc
+step 21 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | TERMINATED Dormilon[0]: termina | {"finished":false,"deadlock":false,"instant":21,"waiting":true} #0ffe273a65084585
+step 22 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #c645d3958e8c202e
+step 23 ASSIGN Reloj: hora_actual = 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #4cda39bac74c2992
+step 24 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #70f0223ed2e7542c
+step 25 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c36dd6f8c31e9d6c
+step 26 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[2]: reingresa a Timer | ASSIGN Reloj: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #568eead26ebed30c
+step 27 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #60671a7c080cada2
+step 28 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #fbe94c712e927c1f
+step 29 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #ccea3f6e582cd97a
+step 30 ASSIGN Reloj: hora_actual = 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #c9b68ec28fab5cf5
+step 31 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #95ea008f5cef1162
+step 32 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #bdd06220ab0c9d8b
+step 33 ASSIGN Reloj: for#1++ => 5 | RETURN Dormilon[1]: retorna de Timer.demorar, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #46e6a1f52afdd6bd
+step 34 WRITE Dormilon[1]: write(Dormilon 1: desperté) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e34f969f656a9a89
+step 35 DELAY Reloj: delay(1) - se demora 1 instante | WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | TERMINATED Dormilon[1]: termina | {"finished":false,"deadlock":false,"instant":35,"waiting":true} #a7f4e81e5e7574c2
+step 36 {"finished":false,"deadlock":false,"instant":36,"waiting":true} #aac4999b3e00f1ee
+step 37 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #2f65afa0f2667776
+step 38 ASSIGN Reloj: hora_actual = 5 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #eccac43cafdabec5
+step 39 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #571ba486aded8eca
+step 40 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #0968e9243b9f5cc4
+step 41 ASSIGN Reloj: for#1++ => 6 | RETURN Dormilon[2]: retorna de Timer.demorar, libera el monitor | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #1c7018f4c66351e3
+step 42 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #37760e010be9f757
+step 43 WRITE Dormilon[2]: write(Dormilon 2: desperté) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #76093667ebdf7da7
+step 44 ENTER Reloj: entra a Timer.tick | TERMINATED Dormilon[2]: termina | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #3cfc9b3ee838357d
+step 45 ASSIGN Reloj: hora_actual = 6 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #78dcbc8805422b43
+step 46 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #5ec0a52f0bc972c6
+step 47 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #0e3af670db03236b
+step 48 ASSIGN Reloj: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #1703923ee93a7f88
+step 49 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":49,"waiting":true} #ca457354272fe2d8
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #2171216e298b1fe7
+step 51 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #34b43fc8bea218de
+step 52 ASSIGN Reloj: hora_actual = 7 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #f81b8880f0c5abf5
+step 53 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #c0c3bbd48bbab472
+step 54 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #1b11fe35c8135aa0
+step 55 ASSIGN Reloj: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c46c16f7146b2771
+step 56 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":56,"waiting":true} #5acfa0c2cdf16009
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #4c365729155e10ca
+step 58 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #822cb8d99fde1951
+step 59 ASSIGN Reloj: hora_actual = 8 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #07f44098cb4045ea
+step 60 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #2d876eef86aa176f
+step 61 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #bee5a79221985cfe
+step 62 ASSIGN Reloj: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #cc6f83458fc82edc
+step 63 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":63,"waiting":true} #385624335ac68356
+step 64 {"finished":false,"deadlock":false,"instant":64,"waiting":true} #9d94a3e9fb4da1d0
+step 65 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #cc0573b07b792170
+step 66 ASSIGN Reloj: hora_actual = 9 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #6b33c57de86b2dba
+step 67 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #07ff96d7550185df
+step 68 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #aaa83f54a1ac698f
+step 69 ASSIGN Reloj: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #bdc4005a9b836fee
+step 70 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":70,"waiting":true} #d3cb1409fe3c7e90
+step 71 {"finished":false,"deadlock":false,"instant":71,"waiting":true} #dfb13e77434fea17
+step 72 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #f0dfce95b1d4a5d4
+step 73 ASSIGN Reloj: hora_actual = 10 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #2d8cd124a3b30b36
+step 74 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #56b20f421ce795dc
+step 75 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #7b000284528c5b72
+step 76 ASSIGN Reloj: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #d53c258e439b4864
+step 77 TERMINATED Reloj: termina | {"finished":true,"deadlock":false,"instant":77,"waiting":false} #1812a08cd0c5e48b
+state #d4ce5699b3e57421
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #4455fbd378a6d7fb
+step 1 #7edd2454314eb7db
+step 2 #2452487c20536c3e
+step 3 #345d67786eb009bf
+step 4 #c78d593fd4b0ec28
+step 5 #33c4ecbde2b9dd51
+step 6 #50c02600a40d6792
+step 7 #ef498442e4c681b6
+step 8 #03feb84675797634
+step 9 #acd85b250ab7fcb1
+step 10 #7c6190800f06755c
+step 11 #482da42e966093e3
+step 12 #b57d544715a96432
+step 13 #73e0ff78722a8f43
+step 14 #07fbef9add649e1e
+step 15 #079a496b85ef658a
+step 16 #4f3ab8727e343f68
+step 17 #c03c919738fc1326
+step 18 #a7749a3ddf0e03b8
+step 19 #a525b7315c4cd005
+step 20 #c332ecfda89a1448
+step 21 #080603a606ad854f
+step 22 #f3b3bf4c78e5c4b9
+step 23 #e167b567a803094e
+step 24 #6d4c5ff5efd16f56
+step 25 #4aeebfdcf3fcd6cc
+step 26 #5937fe6b08726e16
+step 27 #00e2b8736bc3d947
+step 28 #5decc4028ea8b615
+step 29 #5629198e76e79a1c
+step 30 #a7394ccb900506b5
+step 31 #104b575766625440
+step 32 #6cc64c84187dac29
+step 33 #69cb07edc662c7b2
+step 34 #b4b1cbe0bf3ba91c
+step 35 #a12ffd757f15bc34
+step 36 #c8e2f8be74613247
+step 37 #20fac339245ed15f
+step 38 #410177433f17ab05
+step 39 #4a444de6fefdf3d2
+step 40 #0103abb542a3842d
+step 41 #6f9d9513248740b0
+step 42 #9437452a3722334c
+step 43 #a415f0ddbfca2902
+step 44 #2a078e37c9cbb8eb
+step 45 #a6027f29df0c5aa0
+step 46 #16e0744715dd24f5
+step 47 #5e7dac3e616fb570
+step 48 #48f8969b21f9cad9
+step 49 #dd1c2d1ae1fba2af
+step 50 #925ccff03441c76b
+step 51 #4d44bc4d04b8a723
+step 52 #a8875b5bc73f0a0a
+step 53 #0b4cc31b43fab7cf
+step 54 #961b60bcfde0575c
+step 55 #f620104a8b894a12
+step 56 #9a3342cd82bc489e
+step 57 #af7ce9c8c4844083
+step 58 #f7def6d781da1951
+step 59 #ff41d04cfbdc363c
+step 60 #887d135da08ed43e
+step 61 #8b7d98f947ef1ea5
+step 62 #b3e40086aa5ec33f
+step 63 #b092dd064a70edbd
+step 64 #50cb8255bc36aec4
+step 65 #db0020fdfada1387
+step 66 #9dcee861fa11ea97
+step 67 #6bccb0f5cfaecb01
+step 68 #8ab9f8e2927b815b
+step 69 #696fede20a5b5f10
+step 70 #f4759014a7258adc
+step 71 #11109fc20ee6017c
+step 72 #905fa9959dabe0a8
+step 73 #852c7c4d3590bbf5
+step 74 #2e1242fd822ed652
+step 75 #c634554046470e8f
+step 76 #07bab09713a16a3e
+step 77 #01fff79b9f96f7f3
+step 78 #7891b57150ab8d5b
+step 79 #cf17dd4eb674ae4d
+state #29e2b47dbd3f453f
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #abba7c7af3fd8264
+step 1 #436fc78369095ec4
+step 2 #4f13cf9cd971d966
+step 3 #895168d6e0937126
+step 4 #c8049cf78c681bd2
+step 5 #2c6fdd3c9b8e5ef0
+step 6 #f1228d585d452141
+step 7 #4c13a3c128d7bed8
+step 8 #d8bc5c41fdc781eb
+step 9 #1ba3beb53b14d8c6
+step 10 #9662f98333bebd22
+step 11 #d21b0b3eec20cc52
+step 12 #11ac7ff3b412eca4
+step 13 #862e64ca991f5753
+step 14 #003d975e8c711a9d
+step 15 #c829db2a85d0f9cd
+step 16 #277415b09f75a6a3
+step 17 #a5376914634bee13
+step 18 #ff060266b2cc77ef
+step 19 #c7237405e73c1275
+step 20 #f86cb9e7e0eaf4fa
+step 21 #e12faf5ff2290651
+step 22 #3d584dffd301b0de
+step 23 #71d353b9b3a9306f
+step 24 #105736c13331d9da
+step 25 #860b1ddce4803adf
+step 26 #a2baa28d72ac54f6
+step 27 #d7c4e85d4f99e164
+step 28 #fd38445d71f543ef
+step 29 #65dbff6df2cc50b1
+step 30 #7980cdbcaabc2f3a
+step 31 #e19ed12f9582316a
+step 32 #1e60f25ab307401a
+step 33 #9d2860d0f387adca
+step 34 #b27dcd7d5245e69f
+step 35 #0608ecf1990076f1
+step 36 #89dc6693b299a73a
+step 37 #e7c4fe0bb561a5d4
+step 38 #aae9e9baab99fcab
+step 39 #ec6953725f48dcbe
+step 40 #0d00e203979b4300
+step 41 #b0075a43760aa237
+step 42 #945da0c88aea5355
+step 43 #fdc8a7f8f28e3aed
+step 44 #ccad07a8ba7821a0
+step 45 #ae94ce1a2f7dcc51
+step 46 #6fb632a70c88f847
+step 47 #e7a6a0cd70828c83
+step 48 #11dd3d2164d13112
+step 49 #a365de0d9db56ba8
+step 50 #2b71c053d6ca2c30
+step 51 #5a5abe503c23ed4c
+step 52 #e514e848dad27161
+step 53 #33aed6d822954f6e
+step 54 #c366daff0d75739d
+step 55 #7cc7a70b61f61f8a
+step 56 #60031f58013292e6
+step 57 #d05b04f8f671f5e0
+step 58 #7d558d51a29639c9
+step 59 #0c0c84728371de58
+step 60 #3008af2d90678e21
+step 61 #20a67cff2d17885e
+step 62 #41261d5ee13d2240
+step 63 #352b39e3677b9c10
+step 64 #0becbff1f82bed8e
+step 65 #d7d14f888920e0b1
+step 66 #2bdef5f6809d600f
+step 67 #e1f3670140ef3fed
+step 68 #95ec2d2e6f8ad7e1
+step 69 #2f3ffb42959ddc9a
+step 70 #c4af3c4552fc87e2
+step 71 #b6e6f19b5c205ada
+step 72 #d9cc9e4db39d099d
+step 73 #a7ab78c0e32b703c
+step 74 #63f60118a7711e93
+step 75 #51dcf6c1a0fbbe56
+step 76 #d7a1833209f6c3d3
+step 77 #d7754772490bc2fa
+step 78 #fb90088293619adb
+state #44b6a89057dec0a9
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #754b753ef9dee2d2
+step 1 ENTER Dormilon[0]: entra a Timer.demorar | BLOCKED Dormilon[1]: espera para entrar a Timer.demorar | BLOCKED Dormilon[2]: espera para entrar a Timer.demorar | DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #e91887093630949b
+step 2 DECL Dormilon[0]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #2452487c20536c3e
+step 3 BLOCKED Reloj: espera para entrar a Timer.tick | ASSIGN Dormilon[0]: hora_de_despertar = 2 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fbbd0a90ab8cb17e
+step 4 WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | ENTER Dormilon[1]: entra a Timer.demorar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #83c9d35beb70eb81
+step 5 DECL Dormilon[1]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4df6e168aa9f0041
+step 6 ASSIGN Dormilon[1]: hora_de_despertar = 3 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #eded1572f67aba8e
+step 7 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8c5751a1a86b5c48
+step 8 ASSIGN Reloj: hora_actual = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #68513f31376a7494
+step 9 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #3db3f843cb41de57
+step 10 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[0]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #fed6f1f8ed026f1f
+step 11 WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[1]: reingresa a Timer | ASSIGN Reloj: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #0ebd799c62a3e028
+step 12 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Dormilon[2]: entra a Timer.demorar | DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #111b8fc9e1d91bda
+step 13 DECL Dormilon[2]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0f98be61eb6a7465
+step 14 BLOCKED Reloj: espera para entrar a Timer.tick | ASSIGN Dormilon[2]: hora_de_despertar = 5 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #8359bad21e6ff026
+step 15 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #3bb2cf423592aa05
+step 16 ASSIGN Reloj: hora_actual = 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #2db631efe2e1fc4f
+step 17 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #683ffea74c7f6cfc
+step 18 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #eb6ad06058f5a760
+step 19 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[0]: reingresa a Timer | ASSIGN Reloj: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #0e70beb09777aec6
+step 20 DELAY Reloj: delay(1) - se demora 1 instante | RETURN Dormilon[0]: retorna de Timer.demorar, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9c277133ef16aa56
+step 21 WRITE Dormilon[0]: write(Dormilon 0: desperté) | WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #60f1e2511167ed5e
+step 22 ENTER Reloj: entra a Timer.tick | TERMINATED Dormilon[0]: termina | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #66eaa5fa56a03cee
+step 23 ASSIGN Reloj: hora_actual = 3 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #7aeea9c1c1c8fc62
+step 24 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a7c669e2289e82da
+step 25 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #7752b07d75bf2324
+step 26 RETURN Dormilon[1]: retorna de Timer.demorar, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | ASSIGN Reloj: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5b19da5c29188a27
+step 27 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | DELAY Reloj: delay(1) - se demora 1 instante | WRITE Dormilon[1]: write(Dormilon 1: desperté) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #d7f2a6f870593130
+step 28 TERMINATED Dormilon[1]: termina | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #81d28c18d38ac2d0
+step 29 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #2cf909d15ca6ab31
+step 30 ASSIGN Reloj: hora_actual = 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #95affdeae43a6e4a
+step 31 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #f4ad7ed81177d969
+step 32 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #ca818d7463b8be13
+step 33 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | ASSIGN Reloj: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #b282b1472a85abcc
+step 34 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":34,"waiting":true} #56965bcfed3b1de3
+step 35 {"finished":false,"deadlock":false,"instant":35,"waiting":true} #2e469a1f0bd870dd
+step 36 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #85a1ee7a0f9182bf
+step 37 ASSIGN Reloj: hora_actual = 5 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #d62cb7fe9c021033
+step 38 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #eb94e72d0034b823
+step 39 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #934069e5c6f512eb
+step 40 RETURN Dormilon[2]: retorna de Timer.demorar, libera el monitor | ASSIGN Reloj: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #33375f70e374d106
+step 41 DELAY Reloj: delay(1) - se demora 1 instante | WRITE Dormilon[2]: write(Dormilon 2: desperté) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #dff6e3d6b04d2eda
+step 42 TERMINATED Dormilon[2]: termina | {"finished":false,"deadlock":false,"instant":42,"waiting":true} #fe3036b876aefc39
+step 43 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #87b8a8ee3b579a6a
+step 44 ASSIGN Reloj: hora_actual = 6 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #5c01446af43c490a
+step 45 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e63c674552b92271
+step 46 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #fce527070cdffbc7
+step 47 ASSIGN Reloj: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #f509f482b06bdbb9
+step 48 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":48,"waiting":true} #fb5ecdf6c8bfa85e
+step 49 {"finished":false,"deadlock":false,"instant":49,"waiting":true} #b196bd1bf74f3dc8
+step 50 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #50befa0c13cc9b26
+step 51 ASSIGN Reloj: hora_actual = 7 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #172fdc213995165d
+step 52 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #ba6d1f5084a4a787
+step 53 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #e8084d2ef845129b
+step 54 ASSIGN Reloj: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #ab4f442ce82ccaa1
+step 55 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":55,"waiting":true} #07b897e4e41e0bbb
+step 56 {"finished":false,"deadlock":false,"instant":56,"waiting":true} #bb8d23f1ca545b19
+step 57 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #7384c383f778959f
+step 58 ASSIGN Reloj: hora_actual = 8 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #46ff75aba49128ca
+step 59 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #a490aada0ba280bc
+step 60 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #e3359285f245dc93
+step 61 ASSIGN Reloj: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #5f191add246caa14
+step 62 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":62,"waiting":true} #16e6da989f26342b
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #2ff999b775f3398f
+step 64 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #6b7f555444d370be
+step 65 ASSIGN Reloj: hora_actual = 9 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #9c69f916751246b5
+step 66 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #d32def00ea9baa28
+step 67 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #f8250483349d3c0c
+step 68 ASSIGN Reloj: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #baaf662c8833f380
+step 69 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":69,"waiting":true} #2e1159a7b0433b00
+step 70 {"finished":false,"deadlock":false,"instant":70,"waiting":true} #138cc20e3474c92e
+step 71 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #cc8c34156152e05a
+step 72 ASSIGN Reloj: hora_actual = 10 | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #7a8d2a3ea0be1535
+step 73 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #07ee96e2f047a7b1
+step 74 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #5503f304079ba3e7
+step 75 ASSIGN Reloj: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #a33f333b6bea017e
+step 76 TERMINATED Reloj: termina | {"finished":true,"deadlock":false,"instant":76,"waiting":false} #636f909391139f6e
+state #8a6ce2524e13bb59
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #4455fbd378a6d7fb
+step 1 #e91887093630949b
+step 2 #2452487c20536c3e
+step 3 #fbbd0a90ab8cb17e
+step 4 #83c9d35beb70eb81
+step 5 #4df6e168aa9f0041
+step 6 #eded1572f67aba8e
+step 7 #99ac3c12e4f89ae5
+step 8 #2e7bdbc8ba397fa6
+step 9 #493c90091ca30c34
+step 10 #12818218d48124e9
+step 11 #af0c7d72dd15272e
+step 12 #4850780796a5ad19
+step 13 #7b77215d36c55ea0
+step 14 #2a0ad53730377a94
+step 15 #7cdbea3daa7cb318
+step 16 #6db502fdd1c33f5a
+step 17 #c73a3aecad60530e
+step 18 #c64f86e449280fb0
+step 19 #11e00298d4f1782c
+step 20 #4d34a464d78c7795
+step 21 #af2bc700f6f04f31
+step 22 #4f2cee2406e324d1
+step 23 #dbf9e8cc1793c680
+step 24 #25bf5fe5ca5180a2
+step 25 #f1f6708a2c1e8965
+step 26 #35a7140d513ca8a3
+step 27 #8234c73b9ecf8ad6
+step 28 #325cb116fd8f3cad
+step 29 #5612cf844f49add1
+step 30 #72444271d9b2c116
+step 31 #562bf52e7de215c1
+step 32 #064162d8ceb60dec
+step 33 #284532c19521058e
+step 34 #687d71527c89f9fc
+step 35 #b165faa9d360b6bf
+step 36 #ceb321b3fa32d26c
+step 37 #4031080450a62189
+step 38 #582eb3eee8928401
+step 39 #cc70ace9dd809747
+step 40 #234b68e3695e69f5
+step 41 #204f37c262f39b03
+step 42 #9db4b80a46abf458
+step 43 #2d6d4bac85337196
+step 44 #bbeb3f6637527c7e
+step 45 #f34506d8ad312732
+step 46 #773c1800e413d310
+step 47 #ec6ad24eee324f25
+step 48 #c8194e740d10e194
+step 49 #d3e91fc52f32f83c
+step 50 #4aea37bc382f1a63
+step 51 #aa818665e501ea7c
+step 52 #8827813f2c90d06b
+step 53 #5280ba7c7d257d89
+step 54 #3803209e580cfd95
+step 55 #4a799fd10cf3aef3
+step 56 #f0f75a372356fd14
+step 57 #7031a9ff24d6aaea
+step 58 #d94d84b5bdd2aff3
+step 59 #dba46d08509ffc4c
+step 60 #478d96a7e21c4804
+step 61 #367d77bd41fd02ea
+step 62 #a4b7f743efadc8b2
+step 63 #89f2c07b5865ec84
+step 64 #b96882de41519e86
+step 65 #2ceb825547b53e9a
+step 66 #73bb627104559ee3
+step 67 #ffdef9d3728d3cb2
+step 68 #145751ca82c7a5b1
+step 69 #5390fa09a8aee66c
+step 70 #d8702613050b3523
+step 71 #dadf62f97edcb1b3
+step 72 #225aecc610bf5ca9
+step 73 #465142c3e3e8f83a
+step 74 #dd3bf94e633da3ca
+step 75 #492ffbcb089b572e
+step 76 #8bbda1f22fbde510
+step 77 #1172e214eb363382
+step 78 #32a151b112dde962
+state #20942c173c170546
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #abba7c7af3fd8264
+step 1 #e91887093630949b
+step 2 #2452487c20536c3e
+step 3 #fbbd0a90ab8cb17e
+step 4 #c78d593fd4b0ec28
+step 5 #33c4ecbde2b9dd51
+step 6 #50c02600a40d6792
+step 7 #ada60fba0515bebc
+step 8 #005d9b30136ea3e8
+step 9 #2b84951b725e1646
+step 10 #6b17e9a34faccf74
+step 11 #286e417cc214cec0
+step 12 #c91724106dd466d9
+step 13 #7b77215d36c55ea0
+step 14 #2a0ad53730377a94
+step 15 #7cdbea3daa7cb318
+step 16 #6db502fdd1c33f5a
+step 17 #c73a3aecad60530e
+step 18 #c64f86e449280fb0
+step 19 #11e00298d4f1782c
+step 20 #e5123d3db42af513
+step 21 #84336bbc96255938
+step 22 #a205949b4b9170c7
+step 23 #e30093e6a62ef808
+step 24 #cf4a039e6078d836
+step 25 #456ab3c06a1cc32f
+step 26 #26622c0959c8b468
+step 27 #8234c73b9ecf8ad6
+step 28 #325cb116fd8f3cad
+step 29 #5612cf844f49add1
+step 30 #72444271d9b2c116
+step 31 #562bf52e7de215c1
+step 32 #064162d8ceb60dec
+step 33 #284532c19521058e
+step 34 #687d71527c89f9fc
+step 35 #b165faa9d360b6bf
+step 36 #ceb321b3fa32d26c
+step 37 #4031080450a62189
+step 38 #582eb3eee8928401
+step 39 #cc70ace9dd809747
+step 40 #234b68e3695e69f5
+step 41 #204f37c262f39b03
+step 42 #9db4b80a46abf458
+step 43 #2d6d4bac85337196
+step 44 #bbeb3f6637527c7e
+step 45 #f34506d8ad312732
+step 46 #773c1800e413d310
+step 47 #ec6ad24eee324f25
+step 48 #c8194e740d10e194
+step 49 #d3e91fc52f32f83c
+step 50 #4aea37bc382f1a63
+step 51 #aa818665e501ea7c
+step 52 #8827813f2c90d06b
+step 53 #5280ba7c7d257d89
+step 54 #3803209e580cfd95
+step 55 #4a799fd10cf3aef3
+step 56 #f0f75a372356fd14
+step 57 #7031a9ff24d6aaea
+step 58 #d94d84b5bdd2aff3
+step 59 #dba46d08509ffc4c
+step 60 #478d96a7e21c4804
+step 61 #367d77bd41fd02ea
+step 62 #a4b7f743efadc8b2
+step 63 #89f2c07b5865ec84
+step 64 #b96882de41519e86
+step 65 #2ceb825547b53e9a
+step 66 #73bb627104559ee3
+step 67 #ffdef9d3728d3cb2
+step 68 #145751ca82c7a5b1
+step 69 #5390fa09a8aee66c
+step 70 #d8702613050b3523
+step 71 #dadf62f97edcb1b3
+step 72 #225aecc610bf5ca9
+step 73 #465142c3e3e8f83a
+step 74 #dd3bf94e633da3ca
+step 75 #492ffbcb089b572e
+step 76 #8bbda1f22fbde510
+step 77 #1172e214eb363382
+step 78 #32a151b112dde962
+state #bf54e6a82c35d49f
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #754b753ef9dee2d2
+step 1 ENTER Dormilon[1]: entra a Timer.demorar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #77b07758c6e532ce
+step 2 BLOCKED Dormilon[2]: espera para entrar a Timer.demorar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9da1f98503b166e5
+step 3 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1d6b1684f743df08
+step 4 BLOCKED Dormilon[0]: espera para entrar a Timer.demorar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e9732d0b65bde65b
+step 5 DECL Dormilon[1]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #7d93191355922269
+step 6 ASSIGN Dormilon[1]: hora_de_despertar = 3 | BLOCKED Reloj: espera para entrar a Timer.tick | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #530da37f0d0a84c5
+step 7 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #923ab18eab74cdbb
+step 8 ASSIGN Reloj: hora_actual = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2e3dbb9819db459c
+step 9 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ed8bd918f0a92665
+step 10 RETURN Reloj: retorna de Timer.tick, libera el monitor | ENTER Dormilon[2]: entra a Timer.demorar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d6737062383d1255
+step 11 ASSIGN Reloj: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #5635b67d056afbb0
+step 12 DECL Dormilon[2]: int hora_de_despertar = 0 | DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #8983c018f2e285cb
+step 13 ASSIGN Dormilon[2]: hora_de_despertar = 5 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #9738391bc270bf2c
+step 14 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #c32a41af09fd5e99
+step 15 BLOCKED Reloj: espera para entrar a Timer.tick | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1d94c5d513437acd
+step 16 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #624ea38824a9749c
+step 17 ASSIGN Reloj: hora_actual = 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #630dc382d6887a91
+step 18 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #88a7b228cce1c56f
+step 19 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5f9524e2b2825177
+step 20 ASSIGN Reloj: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9c6ee65ba9c6e9d7
+step 21 WAIT Dormilon[1]: wait(chequear) - libera el monitor y se demora | ENTER Dormilon[0]: entra a Timer.demorar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #09fd1658795b5475
+step 22 DELAY Reloj: delay(1) - se demora 1 instante | DECL Dormilon[0]: int hora_de_despertar = 0 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #bf8d668c7f6d57cc
+step 23 ASSIGN Dormilon[0]: hora_de_despertar = 4 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #454fa2192077fb58
+step 24 WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #2892d52beeeb77c1
+step 25 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #7b91016bbacc6112
+step 26 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #8160dac25e705d23
+step 27 ASSIGN Reloj: hora_actual = 3 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #8049476ebff165e6
+step 28 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #712c7077ebec7d9b
+step 29 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #0eb5690a602ae006
+step 30 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[0]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #16f48a68dbb31b66
+step 31 ASSIGN Reloj: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #ad61b5ab9ca126a4
+step 32 WAIT Dormilon[0]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[1]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #428f42aaac3b8a82
+step 33 RETURN Dormilon[1]: retorna de Timer.demorar, libera el monitor | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #955ada43a6c63a83
+step 34 DELAY Reloj: delay(1) - se demora 1 instante | WRITE Dormilon[1]: write(Dormilon 1: desperté) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #b861c468220dbfac
+step 35 TERMINATED Dormilon[1]: termina | {"finished":false,"deadlock":false,"instant":35,"waiting":true} #85a5d1ff4f5ce073
+step 36 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #8a39d041781879c8
+step 37 ASSIGN Reloj: hora_actual = 4 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #c553246e8ed73436
+step 38 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 2 proceso(s) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #a6a34a7b8bc188e7
+step 39 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #20003feeee15023a
+step 40 WAIT Dormilon[2]: wait(chequear) - libera el monitor y se demora | REENTER Dormilon[0]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #1ff41ebe2f88390c
+step 41 RETURN Dormilon[0]: retorna de Timer.demorar, libera el monitor | ASSIGN Reloj: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #7f025023a7a7e09b
+step 42 DELAY Reloj: delay(1) - se demora 1 instante | WRITE Dormilon[0]: write(Dormilon 0: desperté) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #b324b78e48ffd326
+step 43 TERMINATED Dormilon[0]: termina | {"finished":false,"deadlock":false,"instant":43,"waiting":true} #1eba42c4c80707af
+step 44 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #033c6a3855f76cdd
+step 45 ASSIGN Reloj: hora_actual = 5 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #1528bd248c93196a
+step 46 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 1 proceso(s) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #21e8e7a37d7d16ff
+step 47 RETURN Reloj: retorna de Timer.tick, libera el monitor | REENTER Dormilon[2]: reingresa a Timer | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b63fcd698f775438
+step 48 ASSIGN Reloj: for#1++ => 6 | RETURN Dormilon[2]: retorna de Timer.demorar, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #d2699a65efa5d026
+step 49 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #f8b0d8a14b72d3ca
+step 50 WRITE Dormilon[2]: write(Dormilon 2: desperté) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #3df5132201d3ab87
+step 51 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #f816066ec77ceb7b
+step 52 TERMINATED Dormilon[2]: termina | ASSIGN Reloj: hora_actual = 6 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #a6d79cfe308ad819
+step 53 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #18b05e0fe901e0ae
+step 54 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #896fce5888bc1c69
+step 55 ASSIGN Reloj: for#1++ => 7 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #a1a25b82f45542c2
+step 56 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":56,"waiting":true} #5a2e8b77035f84d5
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #1af530f1845d56dd
+step 58 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #f39acb8799f33ca0
+step 59 ASSIGN Reloj: hora_actual = 7 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #c89559009f4e3623
+step 60 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #f532c421d4f92b9a
+step 61 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #c6c0dfeb68b1c745
+step 62 ASSIGN Reloj: for#1++ => 8 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #f2866203137ac7d0
+step 63 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":63,"waiting":true} #d707cdb9eda1f5ee
+step 64 {"finished":false,"deadlock":false,"instant":64,"waiting":true} #1e37aa63e294bf90
+step 65 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #0a65ddfa7944f9c9
+step 66 ASSIGN Reloj: hora_actual = 8 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #7bcb390f3a0ec330
+step 67 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #84952f23b39ed628
+step 68 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #766a06e9289cb12e
+step 69 ASSIGN Reloj: for#1++ => 9 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #41d926e827f95051
+step 70 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":70,"waiting":true} #b216b6f15faf3b79
+step 71 {"finished":false,"deadlock":false,"instant":71,"waiting":true} #2fdc2607a1c9e07e
+step 72 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #6c42ac5fb6495efc
+step 73 ASSIGN Reloj: hora_actual = 9 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #32b8d302ee242175
+step 74 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #64b8e84d01a8c1be
+step 75 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #dd105629e774c498
+step 76 ASSIGN Reloj: for#1++ => 10 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #59fbb98fc3154914
+step 77 DELAY Reloj: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":77,"waiting":true} #39ccfd9217b572d9
+step 78 {"finished":false,"deadlock":false,"instant":78,"waiting":true} #a3dce88a14e72e7d
+step 79 ENTER Reloj: entra a Timer.tick | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #12f4b5f6545acebc
+step 80 ASSIGN Reloj: hora_actual = 10 | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #060558e663cd20fb
+step 81 SIGNAL_ALL Reloj: signal_all(chequear) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #324a1c303cab05bb
+step 82 RETURN Reloj: retorna de Timer.tick, libera el monitor | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #f8cb660fca03df03
+step 83 ASSIGN Reloj: for#1++ => 11 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #8fe0d2ebb5301ff1
+step 84 TERMINATED Reloj: termina | {"finished":true,"deadlock":false,"instant":84,"waiting":false} #58efa0829dcb3a14
+state #def054ceba84bbb1

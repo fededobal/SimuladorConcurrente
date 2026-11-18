@@ -1,0 +1,39 @@
+// Variables condición: wait y signal
+// espera: fin Buffer.hayDato=false Buffer.dato=3
+// Ejemplo de la Teoría 4: el mismo problema que Busy waiting, con sincronización por
+// condición. El proceso que no puede seguir se duerme con wait y deja el monitor;
+// el otro lo despierta con signal y continúa adentro (signal and continue).
+monitor Buffer {
+  int dato;
+  bool hayDato = false;
+  cond P, C;
+
+  procedure Enviar(D: in int) {
+    if (hayDato) wait(P);
+    dato = D;
+    hayDato = true;
+    signal(C);
+  }
+
+  procedure Recibir(R: out int) {
+    if (not hayDato) wait(C);
+    R = dato;
+    hayDato = false;
+    signal(P);
+  }
+}
+
+process A {
+  int aux;
+  for (aux = 1..3) {       // genera el valor a enviar en aux
+    Buffer.Enviar(aux);
+  }
+}
+
+process B {
+  int aux;
+  for (1..3) {
+    Buffer.Recibir(aux);
+    write("recibí ", aux);     // trabaja con el valor recibido
+  }
+}

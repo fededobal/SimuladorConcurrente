@@ -1,0 +1,1052 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #3cb7863086901b9d
+step 1 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | DELAY Trabajador[2]: delay(2) - se demora 2 instantes | DELAY Trabajador[3]: delay(3) - se demora 3 instantes | DELAY Trabajador[0]: delay(0) - se demora 0 instantes | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #817bb2302e715ded
+step 2 ENTER Trabajador[0]: entra a Semaforo.P | DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #30f4222f8f55d8e0
+step 3 ASSIGN Trabajador[0]: s = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7087fc579dfbdd4c
+step 4 RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #7b2605d266751158
+step 5 WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | BLOCKED Trabajador[2]: espera para entrar a Semaforo.P | BLOCKED Trabajador[3]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #33b200c9dae205fa
+step 6 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4eb850f47e02a855
+step 7 DELAY Trabajador[0]: delay(1) - se demora 1 instante | BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #cfcf5aa2fa7a9519
+step 8 WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d80982e761e6011f
+step 9 WRITE Trabajador[0]: write(Trabajador 0: salgo) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #22bd4101f2151790
+step 10 BLOCKED Trabajador[0]: espera para entrar a Semaforo.V | WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #3765fffd72f17c10
+step 11 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #792f28cf951bc981
+step 12 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #6038c922da57cc63
+step 13 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #11df5747a4b14286
+step 14 ASSIGN Trabajador[0]: for#1++ => 2 | ASSIGN Trabajador[1]: s = 0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #778953098b52dacc
+step 15 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #5f3c8749ad4b8b3e
+step 16 ENTER Trabajador[0]: entra a Semaforo.P | WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8e1e9c40007caeeb
+step 17 DELAY Trabajador[1]: delay(1) - se demora 1 instante | WAIT Trabajador[0]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":17,"waiting":true} #c10a951233c793ac
+step 18 {"finished":false,"deadlock":false,"instant":18,"waiting":true} #fe2fc5ad4a0ca5fe
+step 19 WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #49a095d84947d74c
+step 20 ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ea5c371f859e8022
+step 21 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #4abc27ed4fa8b488
+step 22 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #6a6064ab1599fd59
+step 23 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #b9ff5bdfbd12e61f
+step 24 ASSIGN Trabajador[1]: for#1++ => 2 | ASSIGN Trabajador[3]: s = 0 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #dfda15cec77da831
+step 25 RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #aabd02b9c251ec69
+step 26 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #1706b7820e31dfc9
+step 27 ENTER Trabajador[1]: entra a Semaforo.P | DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #0d145840ff1dc374
+step 28 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #f80ae5f51a7ad81d
+step 29 WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #8aa369345d06e99e
+step 30 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #a50c21f7a1567da5
+step 31 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #7dcd70382f5b93f9
+step 32 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #2c339f134c309f9b
+step 33 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #f5475afc0fe531bc
+step 34 ASSIGN Trabajador[2]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #71d466cac059fd7d
+step 35 RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | DELAY Trabajador[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #daa7fdea8f9a2d04
+step 36 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a66fa46efc3b6167
+step 37 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":37,"waiting":true} #af524236f0affde9
+step 38 {"finished":false,"deadlock":false,"instant":38,"waiting":true} #729deab2d48aac78
+step 39 ENTER Trabajador[3]: entra a Semaforo.P | WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #b1aa5da39836fc55
+step 40 WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #ca5a579f4e0c4698
+step 41 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #87711dc36ea56128
+step 42 SIGNAL Trabajador[2]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #fbccdd751ce32574
+step 43 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #ae41d00e6ed39b39
+step 44 ASSIGN Trabajador[2]: for#1++ => 2 | ASSIGN Trabajador[4]: s = 0 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #6c0a72f43349c0a1
+step 45 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | DELAY Trabajador[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #70221e2a800b76ee
+step 46 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #656eae6942b024e3
+step 47 DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":47,"waiting":true} #f081a39b36151d58
+step 48 ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #7899bea8b1bc4410
+step 49 WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #f2c3cea7f79de0a6
+step 50 WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #81fc2f2d2249bda1
+step 51 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #bc9068dad58f40f6
+step 52 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #1db17484d2c19ebc
+step 53 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[0]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #94ee9505da035278
+step 54 ASSIGN Trabajador[0]: s = 0 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #65448527c94dc591
+step 55 ASSIGN Trabajador[4]: for#1++ => 2 | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #b6eef6b299c821e9
+step 56 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #e78d22fc1c146b81
+step 57 DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":57,"waiting":true} #9c4a308dc4268531
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #741df7a020e563cc
+step 59 WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #4491218831098931
+step 60 ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #a9d71853fad37544
+step 61 BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #4295b59f1f96698a
+step 62 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #e12b3922e3ab9f38
+step 63 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #6664f195baba51f3
+step 64 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #7324866376c1c160
+step 65 ASSIGN Trabajador[0]: for#1++ => 3 | ASSIGN Trabajador[4]: s = 0 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #1d54d563eed6529e
+step 66 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #dc6826f0e3e453fd
+step 67 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | DELAY Trabajador[0]: delay(0) - se demora 0 instantes | ASSIGN Trabajador[1]: s = -1 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #f067c8e73962480a
+step 68 DELAY Trabajador[4]: delay(1) - se demora 1 instante | BLOCKED Trabajador[0]: espera para entrar a Semaforo.P | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #a9618624fc8cbc72
+step 69 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #a2209f9496ca8b99
+step 70 ASSIGN Trabajador[0]: s = -2 | DELAY Trabajador[1]: delay(1) - se demora 1 instante | WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #9af4986e392969f1
+step 71 BLOCKED Trabajador[4]: espera para entrar a Semaforo.V | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #5030aebf98ec2dda
+step 72 ASSIGN Trabajador[4]: s = -1 | WRITE Trabajador[1]: write(Trabajador 1: salgo) | WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #d208b2504cdd7656
+step 73 BLOCKED Trabajador[1]: espera para entrar a Semaforo.V | DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #f5a1f1c9a44723ce
+step 74 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #c1556165708bcf2f
+step 75 WRITE Trabajador[0]: write(Trabajador 0: salgo) | RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #43241e3c5bcb1636
+step 76 ASSIGN Trabajador[4]: for#1++ => 3 | BLOCKED Trabajador[0]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #3e26debc34841fa9
+step 77 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | ASSIGN Trabajador[3]: s = -2 | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #939545061afc9dce
+step 78 RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #6d4c925a31cefbf6
+step 79 ASSIGN Trabajador[0]: s = -1 | WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #3cee54e7875973be
+step 80 DELAY Trabajador[3]: delay(1) - se demora 1 instante | SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #2952cd885bb8c8e6
+step 81 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #3e96ba4cb37da7b1
+step 82 ASSIGN Trabajador[0]: for#1++ => 4 | BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | WRITE Trabajador[3]: write(Trabajador 3: salgo) | ASSIGN Trabajador[1]: s = 0 | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #080a758acb11553a
+step 83 SIGNAL Trabajador[1]: signal(pos) - sin efecto (cola vacía) | TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #844bcc771eefb043
+step 84 BLOCKED Trabajador[3]: espera para entrar a Semaforo.V | RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #4e315ca3931266ce
+step 85 WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #92f0f633c4ca89ed
+step 86 ASSIGN Trabajador[1]: for#1++ => 3 | ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #062fda7695c8ea53
+step 87 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #60090c20a44e43e8
+step 88 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #9e6eae778cb03b11
+step 89 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | BLOCKED Trabajador[1]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #e5d755c906517d2e
+step 90 ASSIGN Trabajador[2]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #11d15e7a5673dfb4
+step 91 RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | DELAY Trabajador[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #965a6d6878d77e00
+step 92 ASSIGN Trabajador[4]: s = -1 | WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #62dbc03da8c8ada8
+step 93 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #1e94d3d395162fce
+step 94 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #59945f1a32dc007a
+step 95 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | WRITE Trabajador[2]: write(Trabajador 2: salgo) | ASSIGN Trabajador[1]: s = -2 | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #2da93b2433153bdd
+step 96 RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #5ac6eccf118480a3
+step 97 ENTER Trabajador[2]: entra a Semaforo.V | BLOCKED Trabajador[3]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #e67b00d762541875
+step 98 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | WRITE Trabajador[4]: write(Trabajador 4: salgo) | ASSIGN Trabajador[2]: s = -1 | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #2df4e5e270b7e208
+step 99 BLOCKED Trabajador[4]: espera para entrar a Semaforo.V | SIGNAL Trabajador[2]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #5fc0666161cfa8cd
+step 100 DELAY Trabajador[1]: delay(1) - se demora 1 instante | RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #69bb3c01a0a5b7d0
+step 101 ASSIGN Trabajador[2]: for#1++ => 3 | ASSIGN Trabajador[4]: s = 0 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #86c588624634fda7
+step 102 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | WRITE Trabajador[1]: write(Trabajador 1: salgo) | SIGNAL Trabajador[4]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #1d7053560bf11741
+step 103 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #92024ecd803b47b1
+step 104 BLOCKED Trabajador[1]: espera para entrar a Semaforo.V | ASSIGN Trabajador[4]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #6ad4bc329957594b
+step 105 WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Semaforo.V | BLOCKED Trabajador[2]: espera para entrar a Semaforo.P | TERMINATED Trabajador[4]: termina | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #2bb62978c920ba56
+step 106 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #ab92fbc52d286cf8
+step 107 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #be5f1075971bbe53
+step 108 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #86d30aa9e4595ca8
+step 109 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #2d53d2db8aebb88e
+step 110 RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[2]: entra a Semaforo.P | TERMINATED Trabajador[1]: termina | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #b5230d673b2148eb
+step 111 WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #9322623899726e34
+step 112 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":112,"waiting":true} #0d1b6489b9cdbb48
+step 113 {"finished":false,"deadlock":false,"instant":113,"waiting":true} #7cdec96cba93db1a
+step 114 WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #0c94cb119c3b78b2
+step 115 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #519d6d346febe7b6
+step 116 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #76b50a340c0bc86c
+step 117 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #0fe92dadc919f710
+step 118 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #29bf317c495a509d
+step 119 ASSIGN Trabajador[3]: for#1++ => 4 | ASSIGN Trabajador[2]: s = 0 | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #39f1c029aa22ccc7
+step 120 TERMINATED Trabajador[3]: termina | RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #ea37e6dbd0ff9776
+step 121 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #5390c4f0e9e2754f
+step 122 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":122,"waiting":true} #493c40ec750e8eab
+step 123 {"finished":false,"deadlock":false,"instant":123,"waiting":true} #716d58b2a063ec8a
+step 124 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #51da6f42c39d394f
+step 125 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #06b8cce2b77866f9
+step 126 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #7e3236702f4cfcf6
+step 127 SIGNAL Trabajador[2]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #ae14dba9dae43ef5
+step 128 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #a0514442103cbddf
+step 129 ASSIGN Trabajador[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #96e879f9a3d66bde
+step 130 TERMINATED Trabajador[2]: termina | {"finished":true,"deadlock":false,"instant":130,"waiting":false} #8ec7378e5fdba225
+state #86004533900e136f
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #7d687dbe4ad6b593
+step 1 #fdcb09802a8655ad
+step 2 #88ccc9a1907dec07
+step 3 #195e4b5ba47cfc78
+step 4 #810c5c45ff05a53c
+step 5 #35960f4bd0477cd0
+step 6 #903e02139b045999
+step 7 #ef5c68cf4aa5df2b
+step 8 #93c26a0a2fa4a0b2
+step 9 #694e0e51741293fc
+step 10 #c2f1a467caea3aa1
+step 11 #9d7186eb4e80c15b
+step 12 #81d24f41d6e375f1
+step 13 #05cd6358816d4a83
+step 14 #7b2aaafce814e3dc
+step 15 #2f033a802fb407af
+step 16 #828736e78345c775
+step 17 #5ed45da0a84fcac8
+step 18 #5d433d4fb8069359
+step 19 #070f3b72547ce595
+step 20 #7dc46485ad2e768d
+step 21 #6d624e6c6cb02b94
+step 22 #a36bbb4dab269676
+step 23 #431fcc8fe6f2d5ab
+step 24 #55c3f15b3039cf53
+step 25 #17e1fdfe90add4c3
+step 26 #959d72a39170b325
+step 27 #900842f8d6096430
+step 28 #cfc0a602a07ae824
+step 29 #8ec4426289a310e0
+step 30 #5e66efe28c06e3e3
+step 31 #d670082b19548563
+step 32 #084a635a20385c55
+step 33 #950e2688f5632df5
+step 34 #28587ec344788c21
+step 35 #4649922ddc59be11
+step 36 #69c26b3eb24c4900
+step 37 #af7f9174de3f7d7b
+step 38 #3764b48a0a0df9d1
+step 39 #2d944080319fc1ea
+step 40 #1fba564e142a2b44
+step 41 #0b188622fa06bfc3
+step 42 #0320fcd4aefba5e0
+step 43 #ccd6ac2d5cf72f9f
+step 44 #2fb950910013986b
+step 45 #191d6791a924f9f2
+step 46 #86da41745c34ff36
+step 47 #98dca76b58b41998
+step 48 #a9c57619a12a7a8c
+step 49 #9e713b3e395f9a75
+step 50 #42c0ffe4a4d76418
+step 51 #726523a7f07887e8
+step 52 #40267674d2d526a9
+step 53 #58d5df373064f63b
+step 54 #026fc5e49c0eee1e
+step 55 #2f67733df47b2c77
+step 56 #e7fd3db2a7951156
+step 57 #be39d42df15d1820
+step 58 #f877f7791bc1639b
+step 59 #4e2ddc87728cc77c
+step 60 #0f277de837adb86b
+step 61 #b7f966f1bb0a7e5b
+step 62 #7fd30680841e96ef
+step 63 #bd1041918541ff53
+step 64 #9700f37a2b14ed3b
+step 65 #4e5cb16c9603ea27
+step 66 #37fcfe73f97ad720
+step 67 #9aee7f0674788ed5
+step 68 #4f0a937b53989f97
+step 69 #e1201d676b714611
+step 70 #986c69df6aba55d2
+step 71 #e17c342ab1526269
+step 72 #6f014fb83c86806a
+step 73 #110c080cb1802428
+step 74 #15bc0d66acda99d2
+step 75 #054e54d05e8aefc3
+step 76 #56cd1f9f524dc862
+step 77 #cd21cfc3eda68f3f
+step 78 #91eab9b168d45a2d
+step 79 #3c70ce6733537b0f
+step 80 #7bc138c6adb743da
+step 81 #68fc6b9f578f43c2
+step 82 #97461286fdbbc1db
+step 83 #c613bcc6967beb04
+step 84 #ad476d8d63636c96
+step 85 #7e6e05f9be65e4c0
+step 86 #2cf77345ec8b1faf
+step 87 #0f198d1cd8c9d5e5
+step 88 #ed9c784b7e7b95f0
+step 89 #85c7bfd3c1568d2e
+step 90 #4061ce464c7d1bfc
+step 91 #7e3492395d7f604f
+step 92 #8469eff97594a20d
+step 93 #e6e7d004d9d2d7d5
+step 94 #c60181dd0755ce10
+step 95 #df8a6be98cf6f037
+step 96 #fbd97a984cf388bf
+step 97 #e7ad8abba38e46f2
+step 98 #7af281a87ca9fa98
+step 99 #76a120d33f168b25
+step 100 #e3e55fdf0d9237e6
+step 101 #fd33a0e62f44b75a
+step 102 #9a85b736eb0f2b5d
+step 103 #400655a12e65440a
+step 104 #657dab470899f09a
+step 105 #03d6dafaf02a65ce
+step 106 #ba0627ad9f7832b8
+step 107 #1b514d32fef78a40
+step 108 #7dd015a11b6ac167
+step 109 #b5870abfa40a0789
+step 110 #ad644cb1d6d46586
+step 111 #2efa312e464584c5
+step 112 #8ce705ddf7c67403
+step 113 #561a4b5ea3e33a7c
+step 114 #e443bc4967d568fd
+step 115 #1b991452d6b5aee1
+step 116 #c36385d5af6a0335
+step 117 #94f4bb4463d1c68b
+step 118 #f925ffed0d38c605
+step 119 #a48a88fc32856f6f
+step 120 #f23ddf96f46163d0
+step 121 #9cff3877c6d94887
+state #8bea4af943a385cf
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #154cce2cd5346603
+step 1 #cf0629c5fb356bb5
+step 2 #e0649d25a635e494
+step 3 #0a69273ba9e89dd4
+step 4 #92fe12fc3acc96ae
+step 5 #29e6d898708e48c6
+step 6 #433a83db87368377
+step 7 #34238c9cde7c01f0
+step 8 #966d450e9f0f1d11
+step 9 #a4545721d4c33044
+step 10 #427e52c5bcee13de
+step 11 #b6bcff2e5896d4fb
+step 12 #7c6fee104a1a2f32
+step 13 #0e7e3190c76fee61
+step 14 #5e3edc122062e0eb
+step 15 #903a5bea2d7e3e85
+step 16 #e752a1eebcc46c9b
+step 17 #12903d67993c2b8b
+step 18 #4c5ef7e241a9b924
+step 19 #9ec1d75487d19e7f
+step 20 #a9e10f26821b8862
+step 21 #49fc095cd8b41349
+step 22 #a0238f22ca1b2686
+step 23 #f380d02de33352b2
+step 24 #999dee2ef92e7908
+step 25 #5edd7d5ff8e8dc9d
+step 26 #1afe426c242b8dcc
+step 27 #910f634fa759b4da
+step 28 #2464621bf1ab1ed8
+step 29 #cc50a70766c497f2
+step 30 #e82fb302041a63bd
+step 31 #5d4d7221f004fde6
+step 32 #68d5a31eb78081af
+step 33 #93b5c9adb14a89d5
+step 34 #a41c1974b99b7fb3
+step 35 #da1642fd9acf330b
+step 36 #8f314ef377072576
+step 37 #641dad675150b792
+step 38 #56bf8b4f3e332d21
+step 39 #1a311617724d50b5
+step 40 #435f6c533f03aa0e
+step 41 #624529ab108ba750
+step 42 #c62cba0c8ed5b071
+step 43 #9da556aa0e9b8204
+step 44 #2e9bf757c28ceb30
+step 45 #edb4e5c8d51e6aa4
+step 46 #f605a4c37d18b017
+step 47 #c01974eca32e9195
+step 48 #8f8ed5749d9d797f
+step 49 #a2395bfb110b0ff3
+step 50 #a00fa00eddd076d2
+step 51 #7c81ddab6744b2d5
+step 52 #83653a568a96f76b
+step 53 #ba0186ed6aa303ee
+step 54 #51828f41e9c5ee37
+step 55 #3e4cabc6da7a09f6
+step 56 #b7f092171568883f
+step 57 #16be7f4b47cc050f
+step 58 #e1acfd946452505b
+step 59 #90f91eeb82d82af7
+step 60 #e13f9f398f796df4
+step 61 #77c4bbfb345498bc
+step 62 #f0a74fcb87e5ec21
+step 63 #52467f0506ad6e66
+step 64 #e505563dcbf0e3bd
+step 65 #19d0b6148526a633
+step 66 #e1069906aef8b97e
+step 67 #300fd3ac2e1b5bfb
+step 68 #e5706567fc546aec
+step 69 #642179fea5dcca2c
+step 70 #81e66bf56c77be51
+step 71 #713c1ff56d0ea9c0
+step 72 #5de501c69fc628c9
+step 73 #352c5698a4226e78
+step 74 #53a535fbd8ec22e0
+step 75 #cdf8663b090f256a
+step 76 #986cf03e84db8761
+step 77 #5ad36cb278765a9f
+step 78 #f65e71a6e494d46b
+step 79 #4f81f4e3aa580934
+step 80 #1128b0cc7d1910dd
+step 81 #a446678735736031
+step 82 #fcb3b8757d11de85
+step 83 #158ced33701f4a06
+step 84 #7b7541912971bf97
+step 85 #34e32ee23de2b5ce
+step 86 #d5d17e4d02938869
+step 87 #8af793bd362126f8
+step 88 #76649bc647040e99
+step 89 #c8bb36fa7d908dd9
+step 90 #131f95674b486d02
+step 91 #5b3b6a62d799f471
+step 92 #83a778964511bb7f
+step 93 #ae75ece3c7572ac9
+step 94 #728017ff401f849f
+step 95 #4284869cb4e68e72
+step 96 #6f91f357ab3c5321
+step 97 #155cc0f2016d83ff
+step 98 #e284711dc8f48ea5
+step 99 #1439f3a9a9bce241
+step 100 #b1404b698c92ff8c
+step 101 #8b9167299d5fc5e8
+step 102 #4be122c5b34f2796
+step 103 #7ebd8d21d520d1f6
+step 104 #d4e49791053a7784
+step 105 #47364495d619c2c3
+step 106 #9d94d25dd59b11d3
+step 107 #a04cbf13d75d2ded
+step 108 #a66397ebdd5dbba5
+step 109 #82aa67c085eaa130
+step 110 #6da0b93e2f908cff
+step 111 #6c511b17b6c08a1a
+step 112 #57435ff51a215a18
+step 113 #bc124e903f8d4ddf
+step 114 #8db58b78e5eac2be
+step 115 #c64a55b3bc9f8d64
+step 116 #f1aee257338f99a8
+step 117 #007e900ff2e3c407
+step 118 #b1456c21ff2cfb29
+step 119 #cac4ae9aa0579bdd
+step 120 #d9aad79d75f5b397
+step 121 #dd8c3a62a6efb3cc
+step 122 #b5b107ba14b8a4be
+step 123 #92b11384d97567f5
+step 124 #2a87831ba75a3c00
+step 125 #222fe865257c310b
+step 126 #76fadb34af73b9ac
+step 127 #6de817a9f20beaf8
+step 128 #928260a68d36aceb
+step 129 #a67efb987f6199a7
+step 130 #cda1b7793cb6cdb2
+step 131 #01d7ae2583504e61
+step 132 #52e5e08cd9885f9d
+step 133 #84372dca8b694894
+step 134 #01a5e4d8b0a68c3e
+step 135 #9b8fe6f854160090
+step 136 #b8cb541045838a37
+step 137 #f27e1ee25df81928
+step 138 #e3f958bcef13a6d3
+step 139 #22c01c0e1c9f2f72
+step 140 #4db69f23fe97572e
+step 141 #4df8ad44d38d9233
+step 142 #94e5f8dc831187d5
+step 143 #1d5ffd1b97106710
+step 144 #df98b1a6f05db04c
+step 145 #c373d07717142c14
+step 146 #1f4e858fe58178c9
+step 147 #66313c52bed9ef14
+step 148 #d96e5fae2c34ca49
+step 149 #23d51704bbe7c91b
+step 150 #adf618911d44be0f
+state #1ffa4ce13d8a095c
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #3cb7863086901b9d
+step 1 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | DELAY Trabajador[1]: delay(1) - se demora 1 instante | DELAY Trabajador[2]: delay(2) - se demora 2 instantes | DELAY Trabajador[3]: delay(3) - se demora 3 instantes | DELAY Trabajador[4]: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":1,"waiting":true} #57c761d8d45b7264
+step 2 ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #88ccc9a1907dec07
+step 3 BLOCKED Trabajador[1]: espera para entrar a Semaforo.P | ASSIGN Trabajador[0]: s = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #195e4b5ba47cfc78
+step 4 BLOCKED Trabajador[2]: espera para entrar a Semaforo.P | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #810c5c45ff05a53c
+step 5 BLOCKED Trabajador[3]: espera para entrar a Semaforo.P | WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #558c545f0eab534d
+step 6 BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | DELAY Trabajador[0]: delay(1) - se demora 1 instante | WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #7ef7f597dfeab138
+step 7 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #7ab5885880849678
+step 8 WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #69db9b3967a48cc3
+step 9 ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e87b6784c90cb67e
+step 10 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #e73765321a47f4f0
+step 11 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #b6e4c1b8641ef575
+step 12 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #4402652bbf338af2
+step 13 ASSIGN Trabajador[2]: s = 0 | ASSIGN Trabajador[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #bd95d430493b2b7f
+step 14 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #df51d04273e423b6
+step 15 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #57136f709d5961eb
+step 16 WAIT Trabajador[0]: wait(pos) - libera el monitor y se demora | DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":16,"waiting":true} #ba27017ed1b65396
+step 17 {"finished":false,"deadlock":false,"instant":17,"waiting":true} #c2760538c7e9c643
+step 18 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #aa1041c71c8abf80
+step 19 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #4316b22a2ba8e046
+step 20 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #d0ad1f4d6b0855d5
+step 21 SIGNAL Trabajador[2]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #eb8d36a46ffb9e56
+step 22 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #8a5f857c8eb838f7
+step 23 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #51420a68d5b40242
+step 24 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #fdac6aebe8f5f5d3
+step 25 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #aa163bcb20297b31
+step 26 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":26,"waiting":true} #386021b93d2413c3
+step 27 ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b489f3c6c6eea769
+step 28 WRITE Trabajador[3]: write(Trabajador 3: salgo) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #2197cabc911632b4
+step 29 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #f878998faf58d117
+step 30 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #60d141d4bd000af7
+step 31 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #a80609006e53b9fd
+step 32 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #a185a5240d51a5d8
+step 33 ASSIGN Trabajador[1]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #912aa210e7ab46e7
+step 34 DELAY Trabajador[3]: delay(3) - se demora 3 instantes | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e53f586dd2368817
+step 35 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #58b1c168a69cada5
+step 36 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":36,"waiting":true} #44d224716ea29bba
+step 37 {"finished":false,"deadlock":false,"instant":37,"waiting":true} #fc2b576cd1a86918
+step 38 ENTER Trabajador[3]: entra a Semaforo.P | WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #bb49e863771de416
+step 39 BLOCKED Trabajador[1]: espera para entrar a Semaforo.V | WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #911ef5a77d4fa8e5
+step 40 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #a2f279b25d45e7b1
+step 41 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #977834bd5fa0d903
+step 42 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #dfdb452284eec1ac
+step 43 ASSIGN Trabajador[4]: s = 0 | ASSIGN Trabajador[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #746a9c342a83e541
+step 44 DELAY Trabajador[1]: delay(1) - se demora 1 instante | RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #8111141df94c10f4
+step 45 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #4cd9008cb5ead08b
+step 46 ENTER Trabajador[1]: entra a Semaforo.P | DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #bf1226a1134b2daa
+step 47 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":47,"waiting":true} #c1bd05504a5ad4f7
+step 48 WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #74ae6155b1f8e531
+step 49 ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #be9f3bd707dd86aa
+step 50 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #ddac9a6cfb7f2e3c
+step 51 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #5c5805e732bd4296
+step 52 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[0]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #026889495370caf1
+step 53 ASSIGN Trabajador[0]: s = 0 | ASSIGN Trabajador[4]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #24b21ea4c4e3fdd4
+step 54 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #547c3700426559a7
+step 55 WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #f62dc7117d19f6c8
+step 56 DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":56,"waiting":true} #ca37e39500296a96
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #a2f9e9cfb89b424a
+step 58 WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #b5d381885da36718
+step 59 ENTER Trabajador[4]: entra a Semaforo.P | BLOCKED Trabajador[0]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #be051d99ed4e86c1
+step 60 WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #2e9eda29c1ad2421
+step 61 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #9de1ee8777203077
+step 62 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #ffe4121723f69e02
+step 63 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #2a454854fc4975f3
+step 64 ASSIGN Trabajador[2]: s = 0 | ASSIGN Trabajador[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #215e89d016f9514c
+step 65 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #06a9fb967f93f7bf
+step 66 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #67a20ea234a5505a
+step 67 WAIT Trabajador[0]: wait(pos) - libera el monitor y se demora | DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":67,"waiting":true} #fcd2645a15653583
+step 68 {"finished":false,"deadlock":false,"instant":68,"waiting":true} #41f0528087497557
+step 69 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #87441472bfb5f90d
+step 70 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #992cf4fbd4ec002c
+step 71 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #5b851e9d46f07426
+step 72 SIGNAL Trabajador[2]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #bd190084cbcfa9c3
+step 73 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #4cf6abd33051c8fb
+step 74 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #d8b661a40b5a644d
+step 75 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #27eddc21710290a1
+step 76 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #b10df172df8a9516
+step 77 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":77,"waiting":true} #abe90f379c094275
+step 78 ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #dced35423813fb63
+step 79 WRITE Trabajador[3]: write(Trabajador 3: salgo) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #e947ac86583898fe
+step 80 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #35667bf9607577dd
+step 81 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #f2cbe6053524fa02
+step 82 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #66156318a34b5d66
+step 83 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #57c8ae635179adcf
+step 84 ASSIGN Trabajador[1]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #98e55567feb945ed
+step 85 DELAY Trabajador[3]: delay(3) - se demora 3 instantes | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #a4abb72a43e48186
+step 86 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #8b00308352e62f1d
+step 87 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":87,"waiting":true} #da0ffa05d32650f5
+step 88 {"finished":false,"deadlock":false,"instant":88,"waiting":true} #c1f15440f1aa83f4
+step 89 ENTER Trabajador[3]: entra a Semaforo.P | WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #128fcc095d57f9a9
+step 90 BLOCKED Trabajador[1]: espera para entrar a Semaforo.V | WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #81f77f1508affe35
+step 91 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #f577675291e3ff1a
+step 92 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #97c9786f99402f88
+step 93 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #e694be5655ced368
+step 94 ASSIGN Trabajador[4]: s = 0 | ASSIGN Trabajador[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #31b9e10be3052969
+step 95 DELAY Trabajador[1]: delay(1) - se demora 1 instante | RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #8a7080ea14e5a760
+step 96 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #73c4d775c1c2e370
+step 97 ENTER Trabajador[1]: entra a Semaforo.P | DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #b5402d581a5e3e8a
+step 98 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":98,"waiting":true} #19073ec6c734424b
+step 99 WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #39df992e48a7b5fe
+step 100 ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #77ad49b056da8ba1
+step 101 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #3f25f876bcbedaea
+step 102 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #c1d3a79e5236f3c1
+step 103 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[0]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #c09ff129a917846b
+step 104 ASSIGN Trabajador[0]: s = 0 | ASSIGN Trabajador[4]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #655dab6205005e50
+step 105 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #f257939a6c7430ad
+step 106 WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #5513e18031e8b7bc
+step 107 DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":107,"waiting":true} #0ee7807072cc4e50
+step 108 {"finished":false,"deadlock":false,"instant":108,"waiting":true} #057cf5d2aa28e742
+step 109 WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #f292ce82fde37a67
+step 110 ENTER Trabajador[4]: entra a Semaforo.P | BLOCKED Trabajador[0]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #60981b7bfcf08fbf
+step 111 WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #3e7c250c80e1c6ff
+step 112 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #1343d8180bba389e
+step 113 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #7ae6150b3673c5f0
+step 114 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #ca5aed09b093efa7
+step 115 ASSIGN Trabajador[2]: s = 0 | ASSIGN Trabajador[0]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #a3a51eff36641924
+step 116 TERMINATED Trabajador[0]: termina | RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #ce364dad0b64cdd3
+step 117 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #e1cebe7d683544fc
+step 118 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":118,"waiting":true} #66583273a29683c5
+step 119 {"finished":false,"deadlock":false,"instant":119,"waiting":true} #79e65caf24f2a0c6
+step 120 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #c26dddcdc2b337f3
+step 121 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #43624e2dce637365
+step 122 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #b3c2d4e54728bd19
+step 123 SIGNAL Trabajador[2]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #d94b5a7a9aa6e699
+step 124 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #3f5da476c1b0ab21
+step 125 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #7967cf12fdb4b527
+step 126 TERMINATED Trabajador[2]: termina | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #9b8220955baf7f68
+step 127 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #abdebe76ddcb1b90
+step 128 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":128,"waiting":true} #5809d91a86bfcd7b
+step 129 {"finished":false,"deadlock":false,"instant":129,"waiting":true} #b96bfd5ab9150543
+step 130 WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #f07126a04f7966c1
+step 131 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #ef4cb724d0c74676
+step 132 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #ee331fa74e27d4a6
+step 133 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":133,"waiting":false} #347a820f51ce9991
+step 134 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":134,"waiting":false} #84b17a0ba07386e4
+step 135 ASSIGN Trabajador[1]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #48cb17a92d6f6111
+step 136 TERMINATED Trabajador[3]: termina | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #ca32bb667c98adcf
+step 137 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #9e659e9693794a0d
+step 138 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":138,"waiting":true} #6435c7ea7e3c04dc
+step 139 {"finished":false,"deadlock":false,"instant":139,"waiting":true} #bbb7b845e77f2beb
+step 140 WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #b119c94f4f5a7d61
+step 141 ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #54cbb681efd853df
+step 142 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #5a77f96c88d3c12b
+step 143 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":143,"waiting":false} #7e80bc553b7019d2
+step 144 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":144,"waiting":false} #122eff34654bbb91
+step 145 ASSIGN Trabajador[4]: s = 0 | ASSIGN Trabajador[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #57a896b7bd40d79f
+step 146 TERMINATED Trabajador[1]: termina | RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #5832b0da9a6d4d7b
+step 147 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #cb671fcee5a4f025
+step 148 DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":148,"waiting":true} #f8d006588a912e9e
+step 149 {"finished":false,"deadlock":false,"instant":149,"waiting":true} #a2a3963d28e6d828
+step 150 WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #71a2a9f0bf71f5e5
+step 151 ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #0495a79f901d2881
+step 152 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #8ef9955e34dded54
+step 153 SIGNAL Trabajador[4]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #9e68814b7e4a7930
+step 154 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #f1dc9578e51b117d
+step 155 ASSIGN Trabajador[4]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":155,"waiting":false} #9d26f7455faef689
+step 156 TERMINATED Trabajador[4]: termina | {"finished":true,"deadlock":false,"instant":156,"waiting":false} #f392522244a1fc7d
+state #1ff67427d133dc5b
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #7d687dbe4ad6b593
+step 1 #57c761d8d45b7264
+step 2 #88ccc9a1907dec07
+step 3 #195e4b5ba47cfc78
+step 4 #810c5c45ff05a53c
+step 5 #3ef7b0eab2922793
+step 6 #d0bea2d22ee934a3
+step 7 #3c8d5752ee3245f4
+step 8 #690bf81a32083a7e
+step 9 #4fb4c5dc35090e3f
+step 10 #ef38929f2e13e9b7
+step 11 #e58bd1fb15287a8a
+step 12 #638208d4afb3bb1d
+step 13 #7aceb28e922c2a02
+step 14 #a3dab5d9bcf0dfae
+step 15 #2e0d4cdc0cf936df
+step 16 #383b3d7c78b97d3d
+step 17 #0c08a425d4d771bc
+step 18 #c07359d65440a923
+step 19 #8a4f4edb1a2fb6d8
+step 20 #5d9e7f81b3d37597
+step 21 #0524b64db7813704
+step 22 #b6c29e51cabc8787
+step 23 #a37bfd4d1e6d4e7a
+step 24 #b74a598b6612c1f4
+step 25 #e38741b30138590b
+step 26 #fafaf2a19a711987
+step 27 #009ed06f57415cfb
+step 28 #07f6e82677970f66
+step 29 #f2626b4413ac7e26
+step 30 #9b0146814e44f447
+step 31 #84b56548c61942aa
+step 32 #3aeb4d0dd6d63468
+step 33 #b518a75b39e9314b
+step 34 #6da2241fc793beda
+step 35 #d9d7935350095167
+step 36 #7146e8350d5dd4ef
+step 37 #d078a607b9e3c711
+step 38 #278db6cc5dd1330f
+step 39 #53bfed8e7955fba4
+step 40 #dae81cc0df986aeb
+step 41 #80147d0ac6234e8b
+step 42 #f89ad507c31ec153
+step 43 #6202df0574c61538
+step 44 #32c3b90a3fae748d
+step 45 #b73071271de791ac
+step 46 #77550826fd3e419d
+step 47 #e72fe07fd84f1178
+step 48 #021554ba0c33638f
+step 49 #0ac8db6301d5bfde
+step 50 #d0f970d89aded9ba
+step 51 #051845b02c75dfc8
+step 52 #43b28a8af8c3ab27
+step 53 #faba5f57232a3155
+step 54 #ad239252ec8538fc
+step 55 #105c9d5820a5f8db
+step 56 #22f7a89fb5a67ad8
+step 57 #2976011840add9de
+step 58 #e6ec94285037154c
+step 59 #b06da167127a93ba
+step 60 #0b3d8a2466d0240f
+step 61 #596bd80014e72dbc
+step 62 #dc33f485e057f0f0
+step 63 #f7aa84a3865e3ca4
+step 64 #23c0532ba9adb434
+step 65 #2572067f38abf136
+step 66 #fd8cd1600797695d
+step 67 #69e7f19bd5210df9
+step 68 #6ad83aaebf0bc8e4
+step 69 #c7d4dfdec95cfd89
+step 70 #40b277be140d44f6
+step 71 #6ec5b4cff848e8fd
+step 72 #f2d2629575735a9d
+step 73 #5d89c21afee676fb
+step 74 #b97e4ed247372c8b
+step 75 #799a4eced99c8071
+step 76 #5d6661eaef3da4c3
+step 77 #0083200f7b47e090
+step 78 #11cce0ea46e30b99
+step 79 #1367102c894475f2
+step 80 #afdab8ed4759141b
+step 81 #8cd3511148289586
+step 82 #382dd18f8130d1b8
+step 83 #f79d48de55ca8bfb
+step 84 #03a230ba618d489e
+step 85 #8d17e4676dcfa2f6
+step 86 #b7e83a48e064d275
+step 87 #9f890b81661d4bcb
+step 88 #2b22a189c538699b
+step 89 #7355a9e94492f083
+step 90 #91a75dddcfa4f39a
+step 91 #9955e927daff67fa
+step 92 #7f055eb8b629bf10
+step 93 #3782c3e52f376a3e
+step 94 #058500bfb2c4634e
+step 95 #21fc0eab163f898b
+step 96 #f19da1c9aec7a2d6
+step 97 #97696c58638f72b7
+step 98 #c46de8221863b19d
+step 99 #dc831f3c02c55031
+step 100 #58d8510eb6bb4df8
+step 101 #b03f6586e748b8dd
+step 102 #42555d2740152868
+step 103 #c1b15e17bf492441
+step 104 #0a2b1cf6e8d4a60c
+step 105 #3210864140d7e656
+step 106 #9a3cc1eb2ce74df1
+step 107 #202560474a6594a3
+step 108 #299bb6de33ea6749
+step 109 #904becc8dc04b495
+step 110 #3fcf52ab111b9c6b
+step 111 #06ccfe7093a58bea
+step 112 #5684e53162841834
+step 113 #f151670aeab6135b
+step 114 #23c69d984b425da6
+step 115 #b6c5a022e936e1be
+step 116 #2b65eb1befde837a
+step 117 #48599dc2161addee
+step 118 #ed07ce5578535f82
+step 119 #c1895239b2ae3077
+step 120 #a38ec84fbab44da0
+step 121 #74464a620972dd1b
+step 122 #602ad30aa4b82edb
+step 123 #77de53049954e3a4
+step 124 #ac31e3e4e702a7ef
+step 125 #522ef8968c2598e9
+step 126 #81783fb75f282a8b
+step 127 #a1d525c8e2b390ed
+step 128 #360f2d5798a2587a
+step 129 #891106d3aa1b3830
+step 130 #ec466704b6749507
+step 131 #77be021800e5af08
+step 132 #fc43b87fd92b02e0
+step 133 #405f2ee74bc0606d
+step 134 #867a29e70a699771
+step 135 #4aa32e7f01107a49
+step 136 #e74ea645f7f942c2
+step 137 #c927bd3e34f6e537
+step 138 #21c262ed3198ae39
+step 139 #e6ba8bcd641e70c5
+step 140 #3bdb876f4a9a0f30
+step 141 #39b8136808748027
+step 142 #ede6e92dae175a68
+step 143 #4ec2c59c11d25beb
+step 144 #db37d16c1d719d4b
+step 145 #f2da9a6e91bcb3d4
+step 146 #d35c6c97ffc2fc32
+step 147 #71ee1abfa7ca13ad
+step 148 #1746358192a6f024
+step 149 #1ba81fb9073a77e2
+step 150 #002677b740690bf0
+step 151 #95ece67a9286bbdf
+step 152 #218d9bdcab60612f
+step 153 #5186a75e89c418e0
+step 154 #960ae9f8661a8358
+step 155 #c6a21358c1448456
+step 156 #ef686f1a1705dedd
+state #ee6b952734548513
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #154cce2cd5346603
+step 1 #57c761d8d45b7264
+step 2 #88ccc9a1907dec07
+step 3 #195e4b5ba47cfc78
+step 4 #810c5c45ff05a53c
+step 5 #3ef7b0eab2922793
+step 6 #09906e3421c9e116
+step 7 #8bbebcf6d607fb6a
+step 8 #cd356215bc337f6c
+step 9 #b12688110493ce91
+step 10 #2b9d60012a50536d
+step 11 #2a6816aaf88576d2
+step 12 #235d7dda85b2945d
+step 13 #c1f7ddf9b8f0ae69
+step 14 #d530448554900791
+step 15 #c24258218b9d9aaf
+step 16 #a239b4c80953f829
+step 17 #634e964287468f97
+step 18 #45591ea29a638b06
+step 19 #6e60b69aea305a04
+step 20 #8798756b37877174
+step 21 #9c7b3c0dbd80dc9e
+step 22 #d04c57a316f94f49
+step 23 #791cf9c976aa7e3c
+step 24 #d182cd6ab7725b32
+step 25 #e4e2bc48e1826697
+step 26 #f4d05448f23755de
+step 27 #173b42c35281015c
+step 28 #bc87b2a6ba2df9a2
+step 29 #401d322a0d22f4bc
+step 30 #89c0e718e219013c
+step 31 #85122d674084e544
+step 32 #4c5af5067685f7e4
+step 33 #056ae2a0f2a98fb1
+step 34 #ff71dd92183e55dd
+step 35 #09b8fa5d0c29d27d
+step 36 #69f44aa49486440f
+step 37 #05b1358d3c4e2e12
+step 38 #c6ca222b666ed4ad
+step 39 #594e8db123c261d2
+step 40 #8601e1022a06d03b
+step 41 #9a8a25e1d0aeba03
+step 42 #7d8ad2d40917acb6
+step 43 #8f5a1eebd70981ad
+step 44 #e668e8beef73c1b9
+step 45 #69c71e6c6c76034f
+step 46 #4c6e245f5b68a09f
+step 47 #ec5ca2c964e99209
+step 48 #6048d7c1b325be91
+step 49 #2f63876e26f07576
+step 50 #d5de355d6a6b8a07
+step 51 #2e6ce1cc76332e17
+step 52 #4929458e7b4ed130
+step 53 #e2e008ec6fcebaae
+step 54 #24affedbf98f9aaa
+step 55 #7f49ba4bebd6fce5
+step 56 #07b592801d1de69e
+step 57 #a6d03e414951f69a
+step 58 #6f3161541bac404e
+step 59 #f9dff0823d79a3a7
+step 60 #9c71760a8e9f07a6
+step 61 #3bf793182b46389c
+step 62 #10c7d4ad93c7fab5
+step 63 #5f11a865ffa595b8
+step 64 #1b13d6dde0aff40c
+step 65 #9e67bcc5780730c1
+step 66 #32c5657e548d64c5
+step 67 #e35d6aeea46e28a7
+step 68 #ed4220c4a2d6c6c5
+step 69 #77c44718ea22f177
+step 70 #323bebe0d6186e8b
+step 71 #0665560da67a621b
+step 72 #14dc230e9caa2076
+step 73 #cfe84474f2e02812
+step 74 #902117310efddd2b
+step 75 #3d54d4a84a2ce129
+step 76 #e5529ae14ade7db1
+step 77 #2655479bfe7d6f12
+step 78 #62448eef9a641944
+step 79 #3a8b65e998b7ef00
+step 80 #f9faf0fe6dc5a5a7
+step 81 #91c72a20b97a3adb
+step 82 #6d2ae7a392a5916d
+step 83 #98f0651877ce82cf
+step 84 #321bfa5367e50eac
+step 85 #da5a8fdd8388eb99
+step 86 #7d2543b948b8fc3e
+step 87 #b223a8343adb88ec
+step 88 #45917b09b1cf9778
+step 89 #5cdf977a61525bfd
+step 90 #6cdd536d7e389cf9
+step 91 #0f5d0746d3f4085f
+step 92 #c23c9bd7dbea07ba
+step 93 #14ec2451500e176a
+step 94 #e0890a5543bfc48f
+step 95 #88c8a94da515d337
+step 96 #dd0d67735bd260e9
+step 97 #4028421aebc2b178
+step 98 #5b6ef63fc3a66b3e
+step 99 #45b317d067cf5365
+step 100 #d34bc67d3dfdd1ad
+step 101 #e2b893b021a30830
+step 102 #480e9971d2f94f8b
+step 103 #48a858cefcb6d44d
+step 104 #25e255f4f8fdff1a
+step 105 #d0ae263a8458a568
+step 106 #4206c2b5cc26e32b
+step 107 #f0b6d37a8beec8cb
+step 108 #0fee4c3b8e4f7a1a
+step 109 #3ae7ff1e957b90de
+step 110 #1855850d1f27f853
+step 111 #86bbc3c5d0531d69
+step 112 #f327fecf5b2cda3f
+step 113 #14fe9f617f2259ea
+step 114 #3ddb01ad5da4db08
+step 115 #2e6fda2525e1885d
+step 116 #eff92b05148d5b4d
+step 117 #ff623cd7a45a8850
+step 118 #d52342fbc233e978
+step 119 #9148a183a80f0b5f
+step 120 #a34f5295c2827cf9
+step 121 #77c65e7335c28790
+step 122 #cdb87286a9940055
+step 123 #58df913fcd709f66
+step 124 #082c7a025b98ffb3
+step 125 #87fe248fb53162fa
+step 126 #503998f8cde57669
+step 127 #8ca96b1645804155
+step 128 #db4c5cacf1a7aaca
+step 129 #6ea04c4b03ae1058
+step 130 #204d71e3159d0e71
+step 131 #74f941be8eff1bfd
+step 132 #db2516f6c3533e28
+step 133 #5f64c64cd0c20ec3
+step 134 #452155d2493554de
+step 135 #ddeea6f7c09397de
+step 136 #a09d6503009edffa
+step 137 #b1f1d79d9bdd8e25
+step 138 #a353a2b7476e8219
+step 139 #44827068641c8080
+step 140 #11917130de73e2b3
+step 141 #00cd0b8d364d069c
+step 142 #8a75f4ec62c219e2
+step 143 #393aa7eadb26f20d
+step 144 #de40d9a6c24346b4
+step 145 #cfa50eff8dba590b
+step 146 #03c740f81cba43c9
+step 147 #1ad33109baceb886
+step 148 #5561269b95afed7f
+step 149 #415583efbc43aee2
+step 150 #9ca0d3a18b38a302
+step 151 #fc2afd0fd6e0e439
+step 152 #ac04af871400fd60
+step 153 #5bc3801fe9b54c98
+step 154 #0577d276e6007c05
+step 155 #eda8ca3b76f6d7eb
+step 156 #2bb02ac046483d77
+state #a62f60be3f3c1a17
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #3cb7863086901b9d
+step 1 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0ec9a10d0b9718e6
+step 2 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #05a409d0a5987167
+step 3 DELAY Trabajador[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #f05d3390db6e2c60
+step 4 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #253ac1fcc1b91dc7
+step 5 ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #735c39873b0ec416
+step 6 BLOCKED Trabajador[2]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #35e48e8d7696d593
+step 7 BLOCKED Trabajador[3]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #7029d997b9da01cb
+step 8 BLOCKED Trabajador[0]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #8b7d8471e97e5ba0
+step 9 ASSIGN Trabajador[1]: s = 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ec8da94cfb6c6830
+step 10 RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[0]: entra a Semaforo.P | DELAY Trabajador[4]: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #f6ddb2b5f91488c2
+step 11 WAIT Trabajador[0]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #05a71dcd5b8c5fd5
+step 12 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #9e4b70feb851f2c8
+step 13 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #9e841764d83795a5
+step 14 WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":14,"waiting":true} #340c0fde1085a55a
+step 15 ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #23a5300599f39391
+step 16 WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #9cd0fbf74f6f87bb
+step 17 WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #d7f9cb85c6489628
+step 18 ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #af66114177db43c2
+step 19 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #1cec88f2907566cc
+step 20 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #add4d9b5923b30d9
+step 21 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[0]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #89a7fd3bce44b7a3
+step 22 ASSIGN Trabajador[1]: for#1++ => 2 | ASSIGN Trabajador[0]: s = 0 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #53dce9091a368d59
+step 23 DELAY Trabajador[1]: delay(1) - se demora 1 instante | RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #acaaf224b80bb657
+step 24 WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #d126969f0020a005
+step 25 ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #b2f11b92588f55d5
+step 26 DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #4dce54d06a50f345
+step 27 WAIT Trabajador[1]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":27,"waiting":true} #fb80971b05e08ed0
+step 28 WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #d27f5da868508b20
+step 29 ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #1bf24e3047c24479
+step 30 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #2feabb4f6d038d60
+step 31 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #ec882942032a6b90
+step 32 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #5b2b1d94a67b4a6b
+step 33 ASSIGN Trabajador[0]: for#1++ => 2 | ASSIGN Trabajador[2]: s = 0 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #3c1637a6b87277a1
+step 34 RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #d69faf3a6005d01b
+step 35 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | DELAY Trabajador[0]: delay(0) - se demora 0 instantes | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #bc7b79484aafe213
+step 36 ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #76211bc07209c34a
+step 37 WAIT Trabajador[0]: wait(pos) - libera el monitor y se demora | DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":37,"waiting":true} #f61d61e14bc953cb
+step 38 {"finished":false,"deadlock":false,"instant":38,"waiting":true} #5057c2b43a88e3a4
+step 39 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #2029644eebe70f31
+step 40 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #f4a76b55593c1d67
+step 41 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #b4ed2cc177ba4e56
+step 42 SIGNAL Trabajador[2]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #ffb1f9ae25ac8ebd
+step 43 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #ec329f01d76c1036
+step 44 ASSIGN Trabajador[2]: for#1++ => 2 | ASSIGN Trabajador[3]: s = 0 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #75f3baec8070e49a
+step 45 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #fecbf55a8f738f1a
+step 46 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #d89af50c9eafbe08
+step 47 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":47,"waiting":true} #bc65cf145fcc9ac0
+step 48 ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #f58ff3621a9fa717
+step 49 WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #612194320e547308
+step 50 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #4b75c14f5e2262be
+step 51 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #2bc83cceae13c5bf
+step 52 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #308e22608fb09dda
+step 53 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #411c227eb007c978
+step 54 ASSIGN Trabajador[4]: s = 0 | ASSIGN Trabajador[3]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #dc8a8e7439baa591
+step 55 DELAY Trabajador[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #bf9b44a175307b91
+step 56 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #19484e63165e5167
+step 57 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #380aeb0a0c04fc3b
+step 58 DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":58,"waiting":true} #88f899e6b86e252d
+step 59 ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #0ecc3904320d1a77
+step 60 WRITE Trabajador[4]: write(Trabajador 4: salgo) | WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #ae86f615f65f7f24
+step 61 ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #9d2920bd332d65ed
+step 62 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #d60eea42bafdf645
+step 63 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #382db09fcfabd3d5
+step 64 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[1]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #fdbae18575dd65b3
+step 65 ASSIGN Trabajador[1]: s = 0 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #d4ee9da19fa904a0
+step 66 ASSIGN Trabajador[4]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #e9f6f6cfa8e482e4
+step 67 RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | DELAY Trabajador[4]: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #a5058647248775c5
+step 68 WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #689a863a075ee98b
+step 69 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":69,"waiting":true} #2070885324df98d7
+step 70 {"finished":false,"deadlock":false,"instant":70,"waiting":true} #e5cc3983c52184b7
+step 71 WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #9f9b3ca9366b5232
+step 72 ENTER Trabajador[1]: entra a Semaforo.V | BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #c33dc0e0d22aeb8f
+step 73 ASSIGN Trabajador[1]: s = 1 | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #00eec01c4dec0a5c
+step 74 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #54fc69658889edda
+step 75 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #a93f38382f73f755
+step 76 ASSIGN Trabajador[4]: s = 0 | ASSIGN Trabajador[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #cdbe4ee704dce13d
+step 77 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #75bf322e124c7dbb
+step 78 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | REENTER Trabajador[0]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #0f4273ae4b7ae35f
+step 79 BLOCKED Trabajador[1]: espera para entrar a Semaforo.P | WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | ASSIGN Trabajador[0]: s = -1 | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #eebc2c2f53bfd301
+step 80 RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[1]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #e5c1d5a59518f508
+step 81 ASSIGN Trabajador[1]: s = -2 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #6dc17caf4b4e3515
+step 82 DELAY Trabajador[4]: delay(1) - se demora 1 instante | RETURN Trabajador[1]: retorna de Semaforo.P, libera el monitor | WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #c68803c4cd0cd542
+step 83 DELAY Trabajador[0]: delay(1) - se demora 1 instante | WRITE Trabajador[1]: write(Trabajador 1: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #e9a4eb2b229359ec
+step 84 DELAY Trabajador[1]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #7d28226f75a5c0d4
+step 85 WRITE Trabajador[4]: write(Trabajador 4: salgo) | WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #45e993f225385471
+step 86 ENTER Trabajador[0]: entra a Semaforo.V | BLOCKED Trabajador[4]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #81b8105db62a3069
+step 87 ASSIGN Trabajador[0]: s = -1 | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #ef273e7b186f9ee6
+step 88 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #e548c4889446fb52
+step 89 WRITE Trabajador[1]: write(Trabajador 1: salgo) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #459ab2b3fa2ed9ba
+step 90 BLOCKED Trabajador[1]: espera para entrar a Semaforo.V | RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[1]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #9ddb629fbced3fb8
+step 91 ASSIGN Trabajador[1]: s = 0 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #d6995b1297f08f50
+step 92 ASSIGN Trabajador[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #4ef78f23ab8ebbd7
+step 93 SIGNAL Trabajador[1]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #af1600574eac7e7e
+step 94 DELAY Trabajador[0]: delay(0) - se demora 0 instantes | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #83d98b847003c51e
+step 95 RETURN Trabajador[1]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.V | BLOCKED Trabajador[0]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #022d2c95e50f662c
+step 96 ASSIGN Trabajador[4]: s = 1 | ASSIGN Trabajador[1]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #7bce557d5c47cf72
+step 97 TERMINATED Trabajador[1]: termina | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #c45fa81eea47415f
+step 98 SIGNAL Trabajador[4]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #3ee964212dc16636
+step 99 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #645b555c01299c73
+step 100 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[4]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #8c5702b5fc848e79
+step 101 DELAY Trabajador[4]: delay(4) - se demora 4 instantes | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #8d502ffc17188a07
+step 102 ASSIGN Trabajador[2]: s = -1 | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #926e9e60730ebdfe
+step 103 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #edf88e4b310a79e3
+step 104 DELAY Trabajador[3]: delay(1) - se demora 1 instante | RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[0]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #1b5b043d5295be2a
+step 105 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #15c4682c2cce4cfa
+step 106 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #4127b5388d9b4ab5
+step 107 WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #171b8fb19505ebe2
+step 108 ASSIGN Trabajador[0]: s = -2 | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #385fb2a0505c11e5
+step 109 RETURN Trabajador[0]: retorna de Semaforo.P, libera el monitor | WRITE Trabajador[2]: write(Trabajador 2: salgo) | ENTER Trabajador[3]: entra a Semaforo.V | BLOCKED Trabajador[4]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #7ccc5b390a47d82b
+step 110 BLOCKED Trabajador[2]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #5ee84a31417e2e61
+step 111 ASSIGN Trabajador[3]: s = -1 | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #bf5bbb9bdbec442e
+step 112 WRITE Trabajador[0]: write(Trabajador 0: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #7533b56083063c72
+step 113 SIGNAL Trabajador[3]: signal(pos) - sin efecto (cola vacía) | DELAY Trabajador[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #29a079c918f7056c
+step 114 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #6b52025b758c8228
+step 115 ASSIGN Trabajador[3]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #71d8f367cc793427
+step 116 WRITE Trabajador[0]: write(Trabajador 0: salgo) | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #4c2d4790a5d599bb
+step 117 ASSIGN Trabajador[2]: s = 0 | DELAY Trabajador[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #55fa9027d58ce5c5
+step 118 SIGNAL Trabajador[2]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #cf5d1d6658e4d9b6
+step 119 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | ENTER Trabajador[4]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #7733f01d274e8358
+step 120 BLOCKED Trabajador[0]: espera para entrar a Semaforo.V | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #4fc1b51b8183d4e4
+step 121 ASSIGN Trabajador[2]: for#1++ => 3 | BLOCKED Trabajador[3]: espera para entrar a Semaforo.P | WAIT Trabajador[4]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[3]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #fa6281560c272688
+step 122 DELAY Trabajador[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #7bccf1ff6d5ebc0a
+step 123 WAIT Trabajador[3]: wait(pos) - libera el monitor y se demora | ENTER Trabajador[0]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":123,"waiting":false} #24bb704a61bd369e
+step 124 ASSIGN Trabajador[0]: s = 1 | {"finished":false,"deadlock":false,"instant":124,"waiting":false} #2caa838c731cf5d7
+step 125 BLOCKED Trabajador[2]: espera para entrar a Semaforo.P | {"finished":false,"deadlock":false,"instant":125,"waiting":false} #3dc9a1cb09dd1bbd
+step 126 SIGNAL Trabajador[0]: signal(pos) - despierta a Trabajador[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":126,"waiting":false} #45864a927416f7ad
+step 127 RETURN Trabajador[0]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[4]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":127,"waiting":false} #f333b49bc973691a
+step 128 ASSIGN Trabajador[0]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":128,"waiting":false} #8db4d5cccdd79e91
+step 129 TERMINATED Trabajador[0]: termina | {"finished":false,"deadlock":false,"instant":129,"waiting":false} #55823062c683f094
+step 130 ASSIGN Trabajador[4]: s = 0 | {"finished":false,"deadlock":false,"instant":130,"waiting":false} #d0410825f9e5ee6d
+step 131 RETURN Trabajador[4]: retorna de Semaforo.P, libera el monitor | ENTER Trabajador[2]: entra a Semaforo.P | {"finished":false,"deadlock":false,"instant":131,"waiting":false} #abba0e7e97d74913
+step 132 WRITE Trabajador[4]: write(Trabajador 4: entro a la sección crítica) | WAIT Trabajador[2]: wait(pos) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":132,"waiting":false} #a5daea0a4c19f531
+step 133 DELAY Trabajador[4]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":133,"waiting":true} #f48112b2c4bdb811
+step 134 {"finished":false,"deadlock":false,"instant":134,"waiting":true} #4e9286ccb1a96620
+step 135 WRITE Trabajador[4]: write(Trabajador 4: salgo) | {"finished":false,"deadlock":false,"instant":135,"waiting":false} #2273c3f633688365
+step 136 ENTER Trabajador[4]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":136,"waiting":false} #6fe636887aac5c22
+step 137 ASSIGN Trabajador[4]: s = 1 | {"finished":false,"deadlock":false,"instant":137,"waiting":false} #10b06d8d84064385
+step 138 SIGNAL Trabajador[4]: signal(pos) - despierta a Trabajador[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":138,"waiting":false} #a5ace0ae2dc0c17e
+step 139 RETURN Trabajador[4]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[3]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":139,"waiting":false} #03c539059b40287c
+step 140 ASSIGN Trabajador[3]: s = 0 | ASSIGN Trabajador[4]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":140,"waiting":false} #6edc5f73295f16a3
+step 141 TERMINATED Trabajador[4]: termina | RETURN Trabajador[3]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":141,"waiting":false} #014daaa05803c6e7
+step 142 WRITE Trabajador[3]: write(Trabajador 3: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":142,"waiting":false} #c5cfeed99be35be1
+step 143 DELAY Trabajador[3]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":143,"waiting":true} #fb2efa62e6287400
+step 144 {"finished":false,"deadlock":false,"instant":144,"waiting":true} #cec306683c662a28
+step 145 WRITE Trabajador[3]: write(Trabajador 3: salgo) | {"finished":false,"deadlock":false,"instant":145,"waiting":false} #3b0e064d5d1cd87d
+step 146 ENTER Trabajador[3]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":146,"waiting":false} #8190b7e3d822d770
+step 147 ASSIGN Trabajador[3]: s = 1 | {"finished":false,"deadlock":false,"instant":147,"waiting":false} #acbab833944d1069
+step 148 SIGNAL Trabajador[3]: signal(pos) - despierta a Trabajador[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":148,"waiting":false} #d0d545193fc5fb31
+step 149 RETURN Trabajador[3]: retorna de Semaforo.V, libera el monitor | REENTER Trabajador[2]: reingresa a Semaforo | {"finished":false,"deadlock":false,"instant":149,"waiting":false} #69fa15b4816259fa
+step 150 ASSIGN Trabajador[2]: s = 0 | {"finished":false,"deadlock":false,"instant":150,"waiting":false} #237233639c0eaee3
+step 151 ASSIGN Trabajador[3]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":151,"waiting":false} #89e3b119923ec73d
+step 152 RETURN Trabajador[2]: retorna de Semaforo.P, libera el monitor | {"finished":false,"deadlock":false,"instant":152,"waiting":false} #4d5c646b16839493
+step 153 WRITE Trabajador[2]: write(Trabajador 2: entro a la sección crítica) | {"finished":false,"deadlock":false,"instant":153,"waiting":false} #1ca12db153d221ab
+step 154 DELAY Trabajador[2]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":154,"waiting":false} #90506e65ee2f5e75
+step 155 TERMINATED Trabajador[3]: termina | {"finished":false,"deadlock":false,"instant":155,"waiting":true} #1319a9c3b378d4d0
+step 156 WRITE Trabajador[2]: write(Trabajador 2: salgo) | {"finished":false,"deadlock":false,"instant":156,"waiting":false} #9de67522b3393d90
+step 157 ENTER Trabajador[2]: entra a Semaforo.V | {"finished":false,"deadlock":false,"instant":157,"waiting":false} #2ba283dad1040f6a
+step 158 ASSIGN Trabajador[2]: s = 1 | {"finished":false,"deadlock":false,"instant":158,"waiting":false} #bd2e57b30c0bd2c0
+step 159 SIGNAL Trabajador[2]: signal(pos) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":159,"waiting":false} #3cea481cc9461d79
+step 160 RETURN Trabajador[2]: retorna de Semaforo.V, libera el monitor | {"finished":false,"deadlock":false,"instant":160,"waiting":false} #99e1e89def699c00
+step 161 ASSIGN Trabajador[2]: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":161,"waiting":false} #c55aeab572c28b7e
+step 162 TERMINATED Trabajador[2]: termina | {"finished":true,"deadlock":false,"instant":162,"waiting":false} #7af5610bd4b5e998
+state #b520819deb60b7c8

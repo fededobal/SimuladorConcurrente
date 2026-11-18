@@ -1,0 +1,19 @@
+// Vector de monitores
+// espera: fin Caja[0].atendidos=2 Caja[1].atendidos=2 Caja[2].atendidos=2
+// Un vector de monitores declara un monitor por índice, cada uno con sus variables
+// permanentes y su propia exclusión mutua. Dos clientes de la misma caja nunca pagan
+// a la vez; dos clientes de cajas distintas sí.
+monitor Caja[id: 0..2] {
+  int atendidos = 0;
+
+  procedure pagar() {
+    delay(2);                  // cobra la compra
+    atendidos++;
+  }
+}
+
+process Cliente[c: 0..5] {
+  int caja = c mod 3;
+  Caja[caja].pagar();
+  write("Cliente ", c, ": pagué en la caja ", caja);
+}

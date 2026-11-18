@@ -1,0 +1,30 @@
+// Simulación de semáforos
+// espera: fin Semaforo.s=1
+// Ejemplo de la Teoría 4 (condición básica): un monitor que se comporta como un semáforo.
+// Es el ejemplo anterior con while en lugar de if: el proceso despertado vuelve a chequear
+// la condición, y s nunca queda con un valor menor a 0.
+monitor Semaforo {
+  int s = 1;
+  cond pos;
+
+  procedure P() {
+    while (s == 0) wait(pos);
+    s = s - 1;
+  }
+
+  procedure V() {
+    s = s + 1;
+    signal(pos);
+  }
+}
+
+process Trabajador[id: 0..4] {
+  for (1..3) {
+    delay(id);             // trabaja fuera de la sección crítica
+    Semaforo.P();
+    write("Trabajador ", id, ": entro a la sección crítica");
+    delay(1);
+    write("Trabajador ", id, ": salgo");
+    Semaforo.V();
+  }
+}

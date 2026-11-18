@@ -1,0 +1,242 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #e889a438cae0ce46
+step 1 DECL A: int aux = 0 | DECL B: int aux = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #ca4c9e50eb96636c
+step 2 ENTER A: entra a Buffer.Enviar | BLOCKED B: espera para entrar a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #4eeb27675b83400a
+step 3 ASSIGN A: dato = 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #16d4a2097ce15d99
+step 4 ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #2009d3e676e279f7
+step 5 SIGNAL A: signal(C) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1e47fe90d9e5d27e
+step 6 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #ca42839c67193ff2
+step 7 ASSIGN B: R = 1 | ASSIGN A: aux++ => 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8f7e11e01354ede0
+step 8 ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #1bd6af13ece9940f
+step 9 BLOCKED A: espera para entrar a Buffer.Enviar | SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #edbd8d1093d1acb3
+step 10 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #907ce58d365870f2
+step 11 ASSIGN A: dato = 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #cc1e6a6c086a25b0
+step 12 WRITE B: write(recibí 1) | ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #141d89cb4360d81f
+step 13 ASSIGN B: for#2++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #634f5cf32787755b
+step 14 BLOCKED B: espera para entrar a Buffer.Recibir | SIGNAL A: signal(C) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0d575a8072fa6639
+step 15 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #8be7e59e03e185d5
+step 16 ASSIGN B: R = 2 | ASSIGN A: aux++ => 3 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #78bbdb870108ba2f
+step 17 ASSIGN B: hayDato = false | BLOCKED A: espera para entrar a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #bfdd41a01e447413
+step 18 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #96509c07ced2d427
+step 19 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #163c7ef85e7b020a
+step 20 ASSIGN A: dato = 3 | WRITE B: write(recibí 2) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f75925c6c7d21318
+step 21 ASSIGN B: for#2++ => 3 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #92626a903de3b113
+step 22 ASSIGN A: hayDato = true | BLOCKED B: espera para entrar a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #cab66e18210694ab
+step 23 SIGNAL A: signal(C) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #39a2098a7b051e40
+step 24 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #cce37fda99d9c9c7
+step 25 ASSIGN A: aux++ => 4 | ASSIGN B: R = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #3c90b57fc9e92a22
+step 26 TERMINATED A: termina | ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #53f62ed456654583
+step 27 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #9f800934a0cec7cf
+step 28 RETURN B: retorna de Buffer.Recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #ea451e7c03d48002
+step 29 WRITE B: write(recibí 3) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #d18126458fe164b2
+step 30 ASSIGN B: for#2++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #f69463a15644727c
+step 31 TERMINATED B: termina | {"finished":true,"deadlock":false,"instant":31,"waiting":false} #dec8a07d5b49c884
+state #d9ca1671b4a35f69
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #11eccd78c70a6d62
+step 1 #c246c0c2eadaf955
+step 2 #985869c941b1a5ea
+step 3 #03751105e40bddac
+step 4 #f2ae7b18b87dd4d2
+step 5 #5d9438f5412aa545
+step 6 #33c7f46f7baad6ba
+step 7 #33ad5c2518e7e584
+step 8 #53e24ad45ebc0636
+step 9 #cb5430835e0f2808
+step 10 #ea56020f0b2fbc5f
+step 11 #a4a0e89511a05594
+step 12 #fbff37ac40090c7b
+step 13 #fecc99dc7d03296b
+step 14 #8ea31b5be2d9e6bf
+step 15 #65bc0a0612a0aab1
+step 16 #4989eba3fe956029
+step 17 #b2a296336e98fce1
+step 18 #935d472ee2c99ff4
+step 19 #516c418fb9419715
+step 20 #bc35797cef7605e9
+step 21 #7ba12ca4dc12c812
+step 22 #2145632f7d147231
+step 23 #5334907fcc6b075e
+step 24 #3c433fa12c54f160
+step 25 #3bbbf4d7e1885a26
+step 26 #cbcc3ca3f81ca8be
+step 27 #4aa4d106352dc9c9
+step 28 #92fe7062206031ea
+step 29 #d4b0636a62ee7a23
+step 30 #45b3c43ead1fc78c
+step 31 #6eba72611d9fe52f
+step 32 #3f7e5085b9ec12a7
+step 33 #918c8fb45ea55500
+step 34 #c9527c84f5cc25b6
+state #0d774e6b9860d1da
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #00db709b08ea2a82
+step 1 #ca4c9e50eb96636c
+step 2 #c3ca36ff3b563fa6
+step 3 #c491859ea343f04c
+step 4 #2009d3e676e279f7
+step 5 #1e47fe90d9e5d27e
+step 6 #ca42839c67193ff2
+step 7 #8f7e11e01354ede0
+step 8 #450e026fc1b5fc22
+step 9 #458c717854484da7
+step 10 #292c6deb3c723ce5
+step 11 #426a86b11a079514
+step 12 #de1ce8b15b521a7b
+step 13 #0d43ab70fda99412
+step 14 #a0a1f8dc2ed731a1
+step 15 #179bb6a06ee0e134
+step 16 #01c13318d00c8b35
+step 17 #e1874baad0cb980f
+step 18 #260ce12ab5d4cb42
+step 19 #6893c34b7466782f
+step 20 #fbf3736654f99fcd
+step 21 #c297056c01487771
+step 22 #51dd3e86acd7bb4d
+step 23 #66bb9f7983180a39
+step 24 #8ba051973746bde5
+step 25 #cbe4e936b3f52dbb
+step 26 #e1ab4412f7ab6530
+step 27 #c528f09c3b732bb7
+step 28 #58cd4a64220e91fe
+step 29 #fde8c4ab53d5f9b3
+step 30 #3823c55150f0327b
+state #250ce1feff3bcf15
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #e889a438cae0ce46
+step 1 DECL A: int aux = 0 | DECL B: int aux = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #ca4c9e50eb96636c
+step 2 ENTER B: entra a Buffer.Recibir | BLOCKED A: espera para entrar a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #db3246a1a95e233a
+step 3 WAIT B: wait(C) - libera el monitor y se demora | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6f4880530d46842d
+step 4 ASSIGN A: dato = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3b3b35c02d92c182
+step 5 ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #25942b7418b7bc3d
+step 6 SIGNAL A: signal(C) - despierta a B (compite por el monitor) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0bfbc6b3a40309a1
+step 7 RETURN A: retorna de Buffer.Enviar, libera el monitor | REENTER B: reingresa a Buffer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1f105abcedac85ab
+step 8 ASSIGN B: R = 1 | ASSIGN A: aux++ => 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #10f8eedcc0d0478a
+step 9 BLOCKED A: espera para entrar a Buffer.Enviar | ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #510088fe8f61b938
+step 10 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d357a87bda56640a
+step 11 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #3bb90cea11d29631
+step 12 ASSIGN A: dato = 2 | WRITE B: write(recibí 1) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ec1d116f79bbfd48
+step 13 ASSIGN B: for#2++ => 2 | ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #22beef94037b852a
+step 14 SIGNAL A: signal(C) - sin efecto (cola vacía) | BLOCKED B: espera para entrar a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #18ed821c9e760599
+step 15 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #7452c9915655e1e2
+step 16 ASSIGN B: R = 2 | ASSIGN A: aux++ => 3 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8e949645da511725
+step 17 BLOCKED A: espera para entrar a Buffer.Enviar | ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #30f901e7586d30f9
+step 18 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #55972918d99bac3e
+step 19 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #dec6f73702e2923b
+step 20 ASSIGN A: dato = 3 | WRITE B: write(recibí 2) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #3d2cce840e70036b
+step 21 ASSIGN B: for#2++ => 3 | ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #87d49f9a56b4b9bb
+step 22 SIGNAL A: signal(C) - sin efecto (cola vacía) | BLOCKED B: espera para entrar a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b8c7ab4f7afe3b8b
+step 23 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #3d4940796d39d0fc
+step 24 ASSIGN B: R = 3 | ASSIGN A: aux++ => 4 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #bb2644a4c6a23a71
+step 25 TERMINATED A: termina | ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #3136a57f07a8d9d9
+step 26 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #1348eff52c4412ef
+step 27 RETURN B: retorna de Buffer.Recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #0ad28f7329b6c6e7
+step 28 WRITE B: write(recibí 3) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #485dff2e83fcb670
+step 29 ASSIGN B: for#2++ => 4 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #92efb49f95fb3e77
+step 30 TERMINATED B: termina | {"finished":true,"deadlock":false,"instant":30,"waiting":false} #c1324540f1191b2f
+state #1d072d250c109dfa
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #11eccd78c70a6d62
+step 1 #ca4c9e50eb96636c
+step 2 #db3246a1a95e233a
+step 3 #6f4880530d46842d
+step 4 #3b3b35c02d92c182
+step 5 #25942b7418b7bc3d
+step 6 #0bfbc6b3a40309a1
+step 7 #1f105abcedac85ab
+step 8 #10f8eedcc0d0478a
+step 9 #510088fe8f61b938
+step 10 #d357a87bda56640a
+step 11 #3bb90cea11d29631
+step 12 #ec1d116f79bbfd48
+step 13 #22beef94037b852a
+step 14 #18ed821c9e760599
+step 15 #7452c9915655e1e2
+step 16 #8e949645da511725
+step 17 #30f901e7586d30f9
+step 18 #55972918d99bac3e
+step 19 #dec6f73702e2923b
+step 20 #3d2cce840e70036b
+step 21 #87d49f9a56b4b9bb
+step 22 #b8c7ab4f7afe3b8b
+step 23 #3d4940796d39d0fc
+step 24 #bb2644a4c6a23a71
+step 25 #3136a57f07a8d9d9
+step 26 #1348eff52c4412ef
+step 27 #0ad28f7329b6c6e7
+step 28 #485dff2e83fcb670
+step 29 #92efb49f95fb3e77
+step 30 #c1324540f1191b2f
+state #1d072d250c109dfa
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #00db709b08ea2a82
+step 1 #ca4c9e50eb96636c
+step 2 #db3246a1a95e233a
+step 3 #6f4880530d46842d
+step 4 #3b3b35c02d92c182
+step 5 #25942b7418b7bc3d
+step 6 #0bfbc6b3a40309a1
+step 7 #1f105abcedac85ab
+step 8 #10f8eedcc0d0478a
+step 9 #510088fe8f61b938
+step 10 #d357a87bda56640a
+step 11 #3bb90cea11d29631
+step 12 #ec1d116f79bbfd48
+step 13 #22beef94037b852a
+step 14 #18ed821c9e760599
+step 15 #7452c9915655e1e2
+step 16 #8e949645da511725
+step 17 #30f901e7586d30f9
+step 18 #55972918d99bac3e
+step 19 #dec6f73702e2923b
+step 20 #3d2cce840e70036b
+step 21 #87d49f9a56b4b9bb
+step 22 #b8c7ab4f7afe3b8b
+step 23 #3d4940796d39d0fc
+step 24 #bb2644a4c6a23a71
+step 25 #3136a57f07a8d9d9
+step 26 #1348eff52c4412ef
+step 27 #0ad28f7329b6c6e7
+step 28 #485dff2e83fcb670
+step 29 #92efb49f95fb3e77
+step 30 #c1324540f1191b2f
+state #1d072d250c109dfa
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #e889a438cae0ce46
+step 1 DECL B: int aux = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c246c0c2eadaf955
+step 2 DECL A: int aux = 0 | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5bf6b3a9d4b1ff1c
+step 3 BLOCKED A: espera para entrar a Buffer.Enviar | WAIT B: wait(C) - libera el monitor y se demora | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #63d99c8139ea14a8
+step 4 ASSIGN A: dato = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3b3b35c02d92c182
+step 5 ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #25942b7418b7bc3d
+step 6 SIGNAL A: signal(C) - despierta a B (compite por el monitor) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #0bfbc6b3a40309a1
+step 7 RETURN A: retorna de Buffer.Enviar, libera el monitor | REENTER B: reingresa a Buffer | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #1f105abcedac85ab
+step 8 ASSIGN A: aux++ => 2 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #59ab3a4b4b6262aa
+step 9 ASSIGN B: R = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a0bb7ff093bdff07
+step 10 BLOCKED A: espera para entrar a Buffer.Enviar | ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #54ed2facd719365c
+step 11 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #c18777fc4283db05
+step 12 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #51a2d8e14a6ff95e
+step 13 WRITE B: write(recibí 1) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #167e34a4d191a6a1
+step 14 ASSIGN A: dato = 2 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #0b0284f377021cbc
+step 15 ASSIGN B: for#2++ => 2 | ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #5ef9e321d446305b
+step 16 SIGNAL A: signal(C) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #ebb54a6b083ebb6a
+step 17 BLOCKED B: espera para entrar a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #254efcbff3fa4e4a
+step 18 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #9982829b0e20ec45
+step 19 ASSIGN B: R = 2 | ASSIGN A: aux++ => 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #28ae0de1cd6568d3
+step 20 BLOCKED A: espera para entrar a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #d043deb9e8a83bb4
+step 21 ASSIGN B: hayDato = false | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6c0be74bfb4c20e6
+step 22 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #2ce38837c80ff748
+step 23 RETURN B: retorna de Buffer.Recibir, libera el monitor | ENTER A: entra a Buffer.Enviar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #ad6ab28879580725
+step 24 ASSIGN A: dato = 3 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a17a4768ae7f7c20
+step 25 WRITE B: write(recibí 2) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f3ec1ae151fb3714
+step 26 ASSIGN B: for#2++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b1f43b182ba70446
+step 27 BLOCKED B: espera para entrar a Buffer.Recibir | ASSIGN A: hayDato = true | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #6cad1c27d2220bb9
+step 28 SIGNAL A: signal(C) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #251db8d9d112e99a
+step 29 RETURN A: retorna de Buffer.Enviar, libera el monitor | ENTER B: entra a Buffer.Recibir | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #6ee1a5d3a50437a0
+step 30 ASSIGN B: R = 3 | ASSIGN A: aux++ => 4 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #4c2b3f34582f85ae
+step 31 ASSIGN B: hayDato = false | TERMINATED A: termina | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c3d9aa99b9d15c0c
+step 32 SIGNAL B: signal(P) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #6262593c1d8a97aa
+step 33 RETURN B: retorna de Buffer.Recibir, libera el monitor | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #cd7d505ab0dff57e
+step 34 WRITE B: write(recibí 3) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #048c25c4994f6a1b
+step 35 ASSIGN B: for#2++ => 4 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #f5f15514c0872ce1
+step 36 TERMINATED B: termina | {"finished":true,"deadlock":false,"instant":36,"waiting":false} #165d53dc4b7378f7
+state #04f7de0581596d6c

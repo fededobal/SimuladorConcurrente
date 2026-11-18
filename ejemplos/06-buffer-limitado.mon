@@ -1,0 +1,42 @@
+// Arreglos: buffer limitado
+// espera: fin Buffer_Limitado.cantidad=0 Buffer_Limitado.libre=2 Buffer_Limitado.ocupado=2
+// Ejemplo de la Teoría 4 (sincronización por condición básica). Con varios productores
+// y consumidores, al continuar después de ser despertado podría no darse la condición:
+// por eso se vuelve a chequear con while. Con if, cantidad puede llegar a n + 1 o a -1.
+#define n 3
+
+monitor Buffer_Limitado {
+  int buf[n];
+  int ocupado = 0, libre = 0, cantidad = 0;
+  cond not_lleno, not_vacio;
+
+  procedure depositar(datos: in int) {
+    while (cantidad == n) wait(not_lleno);
+    buf[libre] = datos;
+    libre = (libre + 1) mod n;
+    cantidad++;
+    signal(not_vacio);
+  }
+
+  procedure retirar(resultado: out int) {
+    while (cantidad == 0) wait(not_vacio);
+    resultado = buf[ocupado];
+    ocupado = (ocupado + 1) mod n;
+    cantidad--;
+    signal(not_lleno);
+  }
+}
+
+process Productor[id: 0..1] {
+  for (int i = 1..4) {
+    Buffer_Limitado.depositar(id * 10 + i);
+  }
+}
+
+process Consumidor[id: 0..1] {
+  int dato;
+  for (1..4) {
+    Buffer_Limitado.retirar(dato);
+    write("Consumidor ", id, ": retiré ", dato);
+  }
+}

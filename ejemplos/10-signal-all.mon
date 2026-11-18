@@ -1,0 +1,36 @@
+// Barrera con signal_all
+// espera: fin Cancha.cant=6
+// Ejercicio 5 de la Explicación 3, con N = 6 jugadores en lugar de 22. Los jugadores se
+// duermen en espera hasta que llegan todos; el último despierta al partido, que se
+// juega una sola vez y después despierta a todos juntos con signal_all.
+#define N 6
+
+monitor Cancha {
+  int cant = 0;
+  cond espera, inicio;
+
+  procedure llegada() {
+    cant++;
+    if (cant == N) signal(inicio);
+    wait(espera);
+  }
+
+  procedure Iniciar() {
+    if (cant < N) wait(inicio);
+  }
+
+  procedure Terminar() {
+    signal_all(espera);
+  }
+}
+
+process Jugador[id: 0..N-1] {
+  Cancha.llegada();
+  write("Jugador ", id, ": me retiro");
+}
+
+process Partido {
+  Cancha.Iniciar();
+  delay(9);                // se juega el partido
+  Cancha.Terminar();
+}

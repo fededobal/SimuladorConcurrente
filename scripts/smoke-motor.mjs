@@ -355,11 +355,11 @@ for (const archivo of readdirSync(DIR_EJEMPLOS).filter((f) => f.endsWith('.mon')
 }
 
 // Paridad del azar (VB-1): misma semilla, mismo entrelazado que la JVM. La traza es la de
-// AzarTest#trazaDelEjemploDeExclusionConSemillaFija; si una cambia, tiene que cambiar la otra.
+// SeededRandomTest#exclusionExampleTraceWithFixedSeed; si una cambia, tiene que cambiar la otra.
 console.log('Paridad con la JVM');
 {
-  const TRAZA = '4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 3E |';
-  motor.create(readFileSync(join(DIR_EJEMPLOS, '02-exclusion-mutua.mon'), 'utf8'), 0);
+  const TRAZA = '5E 3B 4B 1B | 2B 5D | | | 5A | 5R 2E |';
+  motor.create(readFileSync(join(DIR_EJEMPLOS, '01-exclusion-mutua.mon'), 'utf8'), 0);
   let traza = '';
   for (let i = 0; i < 6; i++) {
     for (const e of JSON.parse(motor.step('RANDOM', -1)).entries) traza += `${e.processId}${e.kind[0]} `;

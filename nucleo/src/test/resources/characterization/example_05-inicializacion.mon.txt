@@ -1,0 +1,175 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #8dd9b01167040b99
+step 1 DECL Cliente[3]: int quedan = 0 | DECL Cliente[0]: int quedan = 0 | DECL Cliente[1]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #697775dcacd8c569
+step 2 DECL Cliente[2]: int quedan = 0 | ENTER Cliente[1]: entra a Deposito.retirar | BLOCKED Cliente[3]: espera para entrar a Deposito.retirar | BLOCKED Cliente[0]: espera para entrar a Deposito.retirar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #62a947c43be7e8ae
+step 3 ASSIGN Cliente[1]: stock[1] = 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6c8923dd91b82dc6
+step 4 BLOCKED Cliente[2]: espera para entrar a Deposito.retirar | ASSIGN Cliente[1]: total = 19 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1c8ab95c703975b1
+step 5 ASSIGN Cliente[1]: quedan = 3 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #eade6fcd9d0f79f1
+step 6 RETURN Cliente[1]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[2]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #92a2cccfacdf5543
+step 7 ASSIGN Cliente[2]: stock[2] = 5 | WRITE Cliente[1]: write(Cliente 1: retiré una unidad y quedan 3) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c1b3c6e8d46ccc12
+step 8 ASSIGN Cliente[2]: total = 18 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e242bff11cb6e6f1
+step 9 ASSIGN Cliente[2]: quedan = 5 | TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f52f21f03a131272
+step 10 RETURN Cliente[2]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[3]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #f440b36acf32a598
+step 11 WRITE Cliente[2]: write(Cliente 2: retiré una unidad y quedan 5) | ASSIGN Cliente[3]: stock[3] = 7 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #0d3c1b43e4ca4db1
+step 12 ASSIGN Cliente[3]: total = 17 | TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #d7a9f37d5f2f6ef8
+step 13 ASSIGN Cliente[3]: quedan = 7 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #ab7146c5cc8dc56e
+step 14 RETURN Cliente[3]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[0]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #be73629d6e8015f5
+step 15 WRITE Cliente[3]: write(Cliente 3: retiré una unidad y quedan 7) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4524e048db3987fe
+step 16 ASSIGN Cliente[0]: stock[0] = 1 | TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #a78e3ce51754cc3c
+step 17 ASSIGN Cliente[0]: total = 16 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #fd37fa5698a5eeb2
+step 18 ASSIGN Cliente[0]: quedan = 1 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #66e1912e1b49537c
+step 19 RETURN Cliente[0]: retorna de Deposito.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ba6fa4a4a06000a9
+step 20 WRITE Cliente[0]: write(Cliente 0: retiré una unidad y quedan 1) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #1ab9b759b0d17c3e
+step 21 TERMINATED Cliente[0]: termina | {"finished":true,"deadlock":false,"instant":21,"waiting":false} #6fd5c658552c93ec
+state #efad2ad3daa92f9c
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #a543303e21409cd1
+step 1 #dfddf7851b5251f2
+step 2 #f90256189f13674a
+step 3 #316ba223fbb2be1c
+step 4 #f47f277e07479f12
+step 5 #a225d470e45695ec
+step 6 #f69bc06560ef35ed
+step 7 #f041af21b1ee3a1a
+step 8 #39cc588045c78d6d
+step 9 #7844d5b80857b00b
+step 10 #b837278766cbd577
+step 11 #d08295ba9de6f81f
+step 12 #5a185237d92d2e06
+step 13 #b78faaf00755d9fe
+step 14 #78d503c957c16be5
+step 15 #52380e2a669465f4
+step 16 #b21dd1864907e856
+step 17 #3879f3bdfc920a29
+step 18 #f09b88bedbaf5a66
+step 19 #ad89dbbb7fde8159
+step 20 #23400da3eb79f76e
+step 21 #96e714e90f2fe617
+state #f775a2a930f73ab8
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #5fb6da0a813aaf49
+step 1 #3d2ba07148367a34
+step 2 #13660b6a43e8d389
+step 3 #3f7d3fd2232b2ebc
+step 4 #6fbef8a5642e5e03
+step 5 #72031749db6e265d
+step 6 #a1613b7355c64d15
+step 7 #bd1a469e264ed668
+step 8 #4d932c5c536250f9
+step 9 #8a073af16afe85ec
+step 10 #8986b4e0c3e45ba1
+step 11 #f13c4df8c6dfb15e
+step 12 #5c09189c99fadad5
+step 13 #950928efae02f0ad
+step 14 #8458299c01061103
+step 15 #4fc068bf54170343
+step 16 #3f868085eca95e47
+step 17 #34b1c371954c9d97
+step 18 #d87700917bd06eff
+step 19 #4ba4dc453660ec5a
+step 20 #23114fe437b92919
+step 21 #a89850d6b90c00ff
+step 22 #b8d2472d2e15484a
+state #31ae1e2e80f10ee4
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #8dd9b01167040b99
+step 1 DECL Cliente[0]: int quedan = 0 | DECL Cliente[1]: int quedan = 0 | DECL Cliente[2]: int quedan = 0 | DECL Cliente[3]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #9b264c0b27196267
+step 2 ENTER Cliente[1]: entra a Deposito.retirar | BLOCKED Cliente[2]: espera para entrar a Deposito.retirar | BLOCKED Cliente[3]: espera para entrar a Deposito.retirar | BLOCKED Cliente[0]: espera para entrar a Deposito.retirar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #7d253f6d74f33277
+step 3 ASSIGN Cliente[1]: stock[1] = 3 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e7ecc21062d0d2e3
+step 4 ASSIGN Cliente[1]: total = 19 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d9f67e6d55008b44
+step 5 ASSIGN Cliente[1]: quedan = 3 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #3f8d2514e2f4ac4b
+step 6 RETURN Cliente[1]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[2]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #92a2cccfacdf5543
+step 7 ASSIGN Cliente[2]: stock[2] = 5 | WRITE Cliente[1]: write(Cliente 1: retiré una unidad y quedan 3) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #c1b3c6e8d46ccc12
+step 8 TERMINATED Cliente[1]: termina | ASSIGN Cliente[2]: total = 18 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #f48b98a17c245752
+step 9 ASSIGN Cliente[2]: quedan = 5 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #43e44fe8607cf148
+step 10 RETURN Cliente[2]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[0]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #cf103fed8146fc57
+step 11 ASSIGN Cliente[0]: stock[0] = 1 | WRITE Cliente[2]: write(Cliente 2: retiré una unidad y quedan 5) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #d410d4da203bd670
+step 12 TERMINATED Cliente[2]: termina | ASSIGN Cliente[0]: total = 17 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #bf379d7fbf864342
+step 13 ASSIGN Cliente[0]: quedan = 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #fac855c2726220dd
+step 14 RETURN Cliente[0]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[3]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f74cdf1819a7e8e9
+step 15 ASSIGN Cliente[3]: stock[3] = 7 | WRITE Cliente[0]: write(Cliente 0: retiré una unidad y quedan 1) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #bec85eaf0cbfcf6b
+step 16 TERMINATED Cliente[0]: termina | ASSIGN Cliente[3]: total = 16 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #98a09b8c7cda3147
+step 17 ASSIGN Cliente[3]: quedan = 7 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #efc5dbaf841dd247
+step 18 RETURN Cliente[3]: retorna de Deposito.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #1bb188205b8a5005
+step 19 WRITE Cliente[3]: write(Cliente 3: retiré una unidad y quedan 7) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #184ff7f704c8a63e
+step 20 TERMINATED Cliente[3]: termina | {"finished":true,"deadlock":false,"instant":20,"waiting":false} #1831c66eeb3c35a6
+state #3c00c13acfe7a3f8
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #a543303e21409cd1
+step 1 #9b264c0b27196267
+step 2 #7d253f6d74f33277
+step 3 #e7ecc21062d0d2e3
+step 4 #d9f67e6d55008b44
+step 5 #3f8d2514e2f4ac4b
+step 6 #92a2cccfacdf5543
+step 7 #c1b3c6e8d46ccc12
+step 8 #f48b98a17c245752
+step 9 #43e44fe8607cf148
+step 10 #f440b36acf32a598
+step 11 #6f15551ceb474072
+step 12 #12a67be60ee8ae0a
+step 13 #ab7146c5cc8dc56e
+step 14 #be73629d6e8015f5
+step 15 #7899384e8084a9c0
+step 16 #d011b815640d71bb
+step 17 #16a47a58a4fe95c4
+step 18 #8f73070d656c4904
+step 19 #338b90ec18c2190a
+step 20 #7c0a0254a1daf19c
+state #acc4ed1dec86f114
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #5fb6da0a813aaf49
+step 1 #9b264c0b27196267
+step 2 #7d253f6d74f33277
+step 3 #e7ecc21062d0d2e3
+step 4 #d9f67e6d55008b44
+step 5 #3f8d2514e2f4ac4b
+step 6 #8b72eab7baac75ac
+step 7 #a09d0d411c185989
+step 8 #244943947a8fd048
+step 9 #4fee501d05885906
+step 10 #5633fb575bdd7214
+step 11 #83afd1e2cd0127ac
+step 12 #9d35af48ef496f23
+step 13 #a603baf9707e5b5c
+step 14 #209fbbe2bac93051
+step 15 #abb8fd4ef26efc94
+step 16 #64b0d97e57bb6a74
+step 17 #0db9b9fb93b8dbb2
+step 18 #a930d2f7afe48e95
+step 19 #fed5141f3a3a1afd
+step 20 #7f6cc8e232476553
+state #22895e5c7f597365
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #8dd9b01167040b99
+step 1 DECL Cliente[1]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #3e736d511d32c5da
+step 2 DECL Cliente[2]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #f780b7f34b8c23a9
+step 3 DECL Cliente[3]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #d5d8f074beaaa8b4
+step 4 DECL Cliente[0]: int quedan = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ffc15b295f8b92c1
+step 5 ENTER Cliente[1]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ff2a3a1fac6a75e0
+step 6 BLOCKED Cliente[2]: espera para entrar a Deposito.retirar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #13d17de6b2824256
+step 7 BLOCKED Cliente[3]: espera para entrar a Deposito.retirar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #146db362c2594caa
+step 8 BLOCKED Cliente[0]: espera para entrar a Deposito.retirar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c9b59713243b3fb3
+step 9 ASSIGN Cliente[1]: stock[1] = 3 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #d7a171eefb8425a6
+step 10 ASSIGN Cliente[1]: total = 19 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #8df1f9fa4e408bd2
+step 11 ASSIGN Cliente[1]: quedan = 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #008623abf6f0360f
+step 12 RETURN Cliente[1]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[0]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #17bb257c6a157d21
+step 13 WRITE Cliente[1]: write(Cliente 1: retiré una unidad y quedan 3) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0d76132df74df7e0
+step 14 ASSIGN Cliente[0]: stock[0] = 1 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #62ef988dfcebcf77
+step 15 TERMINATED Cliente[1]: termina | ASSIGN Cliente[0]: total = 18 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #397aed649c7aa2ba
+step 16 ASSIGN Cliente[0]: quedan = 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #e829cf193af8aa77
+step 17 RETURN Cliente[0]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[2]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #d5e65799a28a34f4
+step 18 ASSIGN Cliente[2]: stock[2] = 5 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #d0344fd8dc1c63a6
+step 19 ASSIGN Cliente[2]: total = 17 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5269c8232bb91b06
+step 20 WRITE Cliente[0]: write(Cliente 0: retiré una unidad y quedan 1) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #08496fa087b05b76
+step 21 ASSIGN Cliente[2]: quedan = 5 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #7ae850b5ccc85864
+step 22 RETURN Cliente[2]: retorna de Deposito.retirar, libera el monitor | ENTER Cliente[3]: entra a Deposito.retirar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #f814186f7e184870
+step 23 ASSIGN Cliente[3]: stock[3] = 7 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #da3fb27a67c2405f
+step 24 TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #0965ad00a4d6f1a6
+step 25 WRITE Cliente[2]: write(Cliente 2: retiré una unidad y quedan 5) | ASSIGN Cliente[3]: total = 16 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #aae50849e2d90358
+step 26 TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #621908d860a7ebc1
+step 27 ASSIGN Cliente[3]: quedan = 7 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ff1229376cd08412
+step 28 RETURN Cliente[3]: retorna de Deposito.retirar, libera el monitor | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #115aa85a78515ff6
+step 29 WRITE Cliente[3]: write(Cliente 3: retiré una unidad y quedan 7) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #6fe8386b116217d2
+step 30 TERMINATED Cliente[3]: termina | {"finished":true,"deadlock":false,"instant":30,"waiting":false} #8e68ddf41c009d7d
+state #eacbd1a2170e1e4f

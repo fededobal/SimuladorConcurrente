@@ -1,0 +1,499 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #3160c011f06e2003
+step 1 DECL Usuario[4]: int paginas = 3 | DECL Usuario[2]: int paginas = 2 | DECL Impresora: int id = 0 | DECL Usuario[3]: int paginas = 5 | DECL Usuario[0]: int paginas = 1 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #1106bb8e4b17b8c8
+step 2 DECL Usuario[1]: int paginas = 4 | ENTER Usuario[4]: entra a Impresion.pedir | BLOCKED Usuario[2]: espera para entrar a Impresion.pedir | BLOCKED Usuario[3]: espera para entrar a Impresion.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #00eb0f47af8b22bd
+step 3 BLOCKED Usuario[1]: espera para entrar a Impresion.pedir | DECL Impresora: int paginas = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #143c097380d44163
+step 4 BLOCKED Usuario[0]: espera para entrar a Impresion.pedir | PUSH Usuario[4]: push(trabajos, (3, 4)) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #870dc8e0c0435ef3
+step 5 SIGNAL Usuario[4]: signal(hayTrabajo) - sin efecto (cola vacía) | DELAY Impresora: delay(8) - se demora 8 instantes | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #ed6e575d405ec722
+step 6 RETURN Usuario[4]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[0]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #42dbee43c75e8529
+step 7 PUSH Usuario[0]: push(trabajos, (1, 0)) | TERMINATED Usuario[4]: termina | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #d5bf240fca984f97
+step 8 SIGNAL Usuario[0]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3fa96911b8ecd44c
+step 9 RETURN Usuario[0]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[3]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f0b2604441017391
+step 10 TERMINATED Usuario[0]: termina | PUSH Usuario[3]: push(trabajos, (5, 3)) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #278939322ba58b3f
+step 11 SIGNAL Usuario[3]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #01ee9886f6f86200
+step 12 RETURN Usuario[3]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[1]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c9cba97ce7ab1071
+step 13 TERMINATED Usuario[3]: termina | PUSH Usuario[1]: push(trabajos, (4, 1)) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #f2f8488ca69d40d0
+step 14 SIGNAL Usuario[1]: signal(hayTrabajo) - sin efecto (cola vacía) | BLOCKED Impresora: espera para entrar a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #b2925c3f2b940a5d
+step 15 RETURN Usuario[1]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[2]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #fc2602cdf88781cf
+step 16 PUSH Usuario[2]: push(trabajos, (2, 2)) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #995123d540dbe98d
+step 17 TERMINATED Usuario[1]: termina | SIGNAL Usuario[2]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #01ce250db5d112e3
+step 18 RETURN Usuario[2]: retorna de Impresion.pedir, libera el monitor | ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #14756e3a154a1ed4
+step 19 POP Impresora: pop(trabajos) => (1, 0) | TERMINATED Usuario[2]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #def8b3f943c81d32
+step 20 ASSIGN Impresora: impresos++ => 1 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ca3ad0d8c65ca106
+step 21 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #6db645320af8f535
+step 22 WRITE Impresora: write(imprimo 1 página(s) del usuario 0) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #513ff8f24d665648
+step 23 DELAY Impresora: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":23,"waiting":true} #953c5c772465892e
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #63281983ce62a8dd
+step 25 ASSIGN Impresora: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #6b27cbb9fe6e2d98
+step 26 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #e6dbda681ad90ebe
+step 27 POP Impresora: pop(trabajos) => (2, 2) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #912dff2689ad08ab
+step 28 ASSIGN Impresora: impresos++ => 2 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #8e5557bc397f8c60
+step 29 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #008f7aed751ea1a3
+step 30 WRITE Impresora: write(imprimo 2 página(s) del usuario 2) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #7907e9d8c2e207e0
+step 31 DELAY Impresora: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":31,"waiting":true} #7e846b778643f0f9
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #469359326ff33436
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #87f61e01d06323c6
+step 34 ASSIGN Impresora: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #22704a42729f86c4
+step 35 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #df0cff935dce9f41
+step 36 POP Impresora: pop(trabajos) => (3, 4) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #999db00e8881a9c8
+step 37 ASSIGN Impresora: impresos++ => 3 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #5d0403e68e5e38a0
+step 38 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #7eec93d1f63f64da
+step 39 WRITE Impresora: write(imprimo 3 página(s) del usuario 4) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #2f33388a0a3c2943
+step 40 DELAY Impresora: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":40,"waiting":true} #32117d533a8f1acb
+step 41 {"finished":false,"deadlock":false,"instant":41,"waiting":true} #9bf4a0caae6791c6
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #a049d4ead23e2b60
+step 43 {"finished":false,"deadlock":false,"instant":43,"waiting":true} #d6b0b986b23fd2c4
+step 44 ASSIGN Impresora: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #8b84697b597a94cf
+step 45 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #a2d9d991d1ba7d29
+step 46 POP Impresora: pop(trabajos) => (4, 1) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #28fd2c42f5e5ff0c
+step 47 ASSIGN Impresora: impresos++ => 4 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #164941812c7ecabf
+step 48 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #35afb002ac8ac567
+step 49 WRITE Impresora: write(imprimo 4 página(s) del usuario 1) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #69344859c3db25e6
+step 50 DELAY Impresora: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":50,"waiting":true} #9bb15ad3ceda872b
+step 51 {"finished":false,"deadlock":false,"instant":51,"waiting":true} #2f654e670026e642
+step 52 {"finished":false,"deadlock":false,"instant":52,"waiting":true} #4a96ea4e0fb9bfa5
+step 53 {"finished":false,"deadlock":false,"instant":53,"waiting":true} #b140aecc3c05afc6
+step 54 {"finished":false,"deadlock":false,"instant":54,"waiting":true} #0c50769a78368d67
+step 55 ASSIGN Impresora: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #f2113df41b5ac4d9
+step 56 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #be0edf47004f65e4
+step 57 POP Impresora: pop(trabajos) => (5, 3) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #be03773e1a29b6a0
+step 58 ASSIGN Impresora: impresos++ => 5 | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #df531bdab55e65cf
+step 59 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #0bb79d00a571c381
+step 60 WRITE Impresora: write(imprimo 5 página(s) del usuario 3) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #c9bb964ef14190c6
+step 61 DELAY Impresora: delay(5) - se demora 5 instantes | {"finished":false,"deadlock":false,"instant":61,"waiting":true} #60b4b9385c61891c
+step 62 {"finished":false,"deadlock":false,"instant":62,"waiting":true} #ce594d6235ab9262
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #7d48e21d740541aa
+step 64 {"finished":false,"deadlock":false,"instant":64,"waiting":true} #0bf1e69a0511df00
+step 65 {"finished":false,"deadlock":false,"instant":65,"waiting":true} #2360f84249f27d63
+step 66 {"finished":false,"deadlock":false,"instant":66,"waiting":true} #69ada2d5990ebce7
+step 67 ASSIGN Impresora: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #07de8603c6f2db35
+step 68 TERMINATED Impresora: termina | {"finished":true,"deadlock":false,"instant":68,"waiting":false} #643405df42187237
+state #0920ab97531dc3fb
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #91990e767ba9c930
+step 1 #931ffc7c4c0e7fce
+step 2 #42cfe1af50f72f7a
+step 3 #a4c1c8a35f44c157
+step 4 #85345669f8b250fe
+step 5 #f0ca3f89bbb9f479
+step 6 #4d5dde599332bbab
+step 7 #e59dadb07c5730d1
+step 8 #5e169314f45a9763
+step 9 #7c53c05fc103e6bc
+step 10 #e72ddb5f6e20d842
+step 11 #fca1fef9f1748935
+step 12 #4a498a057b3a2f10
+step 13 #734026d72a093f7d
+step 14 #87f3eac445587e41
+step 15 #47df086634f19739
+step 16 #16546fc65c401dfa
+step 17 #4c527e53281c1ed5
+step 18 #ae10a5e59fcae99f
+step 19 #d30a7098a3ac8a61
+step 20 #e81445ddb9b20c8b
+step 21 #ddbaf044cd04fca4
+step 22 #15296af04462f5d3
+step 23 #ea9ba7b5567e5218
+step 24 #bdc19c03e823e589
+step 25 #9b3096acf54434a6
+step 26 #28e5d3314f6eac47
+step 27 #f5c86f388929d344
+step 28 #8e5557bc397f8c60
+step 29 #008f7aed751ea1a3
+step 30 #7907e9d8c2e207e0
+step 31 #7e846b778643f0f9
+step 32 #469359326ff33436
+step 33 #87f61e01d06323c6
+step 34 #22704a42729f86c4
+step 35 #df0cff935dce9f41
+step 36 #999db00e8881a9c8
+step 37 #5d0403e68e5e38a0
+step 38 #7eec93d1f63f64da
+step 39 #2f33388a0a3c2943
+step 40 #32117d533a8f1acb
+step 41 #9bf4a0caae6791c6
+step 42 #a049d4ead23e2b60
+step 43 #d6b0b986b23fd2c4
+step 44 #8b84697b597a94cf
+step 45 #a2d9d991d1ba7d29
+step 46 #28fd2c42f5e5ff0c
+step 47 #164941812c7ecabf
+step 48 #35afb002ac8ac567
+step 49 #69344859c3db25e6
+step 50 #9bb15ad3ceda872b
+step 51 #2f654e670026e642
+step 52 #4a96ea4e0fb9bfa5
+step 53 #b140aecc3c05afc6
+step 54 #0c50769a78368d67
+step 55 #f2113df41b5ac4d9
+step 56 #be0edf47004f65e4
+step 57 #be03773e1a29b6a0
+step 58 #df531bdab55e65cf
+step 59 #0bb79d00a571c381
+step 60 #c9bb964ef14190c6
+step 61 #60b4b9385c61891c
+step 62 #ce594d6235ab9262
+step 63 #7d48e21d740541aa
+step 64 #0bf1e69a0511df00
+step 65 #2360f84249f27d63
+step 66 #69ada2d5990ebce7
+step 67 #07de8603c6f2db35
+step 68 #643405df42187237
+state #af4eb3aa12a6be17
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #c442efb9551c13fb
+step 1 #9d1827bd08ba1b88
+step 2 #77cc4f757cbe55b7
+step 3 #533d733284b0dc1b
+step 4 #dd05ba0c7af3d5d7
+step 5 #b0f05270f2ef7017
+step 6 #8ef6162697f95690
+step 7 #c54b6a37ea386cda
+step 8 #3d572497226930a6
+step 9 #14be9fa6e0d312e4
+step 10 #72941c03d58b7064
+step 11 #d356c93d4e6b2b47
+step 12 #9e88903aa12f88b6
+step 13 #eba3a77b8a7ba100
+step 14 #9cef35d999fa559c
+step 15 #ff57dc985dc29ae5
+step 16 #65e931d9c64e6c6f
+step 17 #820ac83079dea4e3
+step 18 #bb1b08cfa59ff975
+step 19 #c003b7ba2d55ef97
+step 20 #059c32af11c4a2b1
+step 21 #b8a11c44c30a8979
+step 22 #549d3de95cd9047b
+step 23 #08aff680c21e9347
+step 24 #b503bfd6b38f28bc
+step 25 #254c5026b31ad8e9
+step 26 #052ffe190d6770a5
+step 27 #66a8345651be7f03
+step 28 #e61e18f485a78d3a
+step 29 #1391b55b668d16b9
+step 30 #e31819dc619c83bc
+step 31 #e5620d2b3ad8f39e
+step 32 #bca2c43c51236c4f
+step 33 #0dd0de396bd046df
+step 34 #bff26d82f84dd5fc
+step 35 #a99d9aa409842748
+step 36 #b7a03241c310040f
+step 37 #acf47052ce2ea08d
+step 38 #bf134e6491a0a111
+step 39 #e60110b65a69455d
+step 40 #444bb269182e3729
+step 41 #ccfd86207a84ac68
+step 42 #9a4ceac9b5685a9b
+step 43 #4e2b7270da130a66
+step 44 #44cde6a056888c21
+step 45 #b22c31eb890d87d5
+step 46 #9d4ed2002ab0f72c
+step 47 #0b8ce81224d5bfba
+step 48 #9bc69088378c5b8a
+step 49 #5ec11aa892160cc1
+step 50 #ecfd78b73565ce4f
+step 51 #2c2e4c2cf36755e9
+step 52 #456ed66a64f546a4
+step 53 #6120a5a7083dd547
+step 54 #bbb0af4a81e1a631
+step 55 #0922c8d83fb7c02e
+step 56 #be8cb1480cb31c74
+step 57 #270e410fadab1176
+step 58 #0bb6f3f09e940637
+step 59 #49982fa0a7444a33
+step 60 #2551df0d15da0c89
+step 61 #a830ec850d8354c5
+step 62 #70c8f538c2483129
+step 63 #c4055a7dbb92323f
+step 64 #ed27634520c48a82
+step 65 #8d2f51c26ee44e22
+step 66 #4916abb9cf27942c
+step 67 #e2bb08d192f77107
+state #e83610cdc9866fea
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #3160c011f06e2003
+step 1 DECL Usuario[0]: int paginas = 1 | DECL Usuario[1]: int paginas = 4 | DECL Usuario[2]: int paginas = 2 | DECL Usuario[3]: int paginas = 5 | DECL Usuario[4]: int paginas = 3 | DECL Impresora: int id = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7b9abea72acad32b
+step 2 ENTER Usuario[1]: entra a Impresion.pedir | BLOCKED Usuario[2]: espera para entrar a Impresion.pedir | BLOCKED Usuario[3]: espera para entrar a Impresion.pedir | BLOCKED Usuario[4]: espera para entrar a Impresion.pedir | DECL Impresora: int paginas = 0 | BLOCKED Usuario[0]: espera para entrar a Impresion.pedir | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #bd9fc643cbe9d552
+step 3 DELAY Impresora: delay(8) - se demora 8 instantes | PUSH Usuario[1]: push(trabajos, (4, 1)) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7f23eeb3b90f8c58
+step 4 SIGNAL Usuario[1]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #674422899855f702
+step 5 RETURN Usuario[1]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[4]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c50a0f0188a7e51d
+step 6 PUSH Usuario[4]: push(trabajos, (3, 4)) | TERMINATED Usuario[1]: termina | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #60093ffadd20e1e0
+step 7 SIGNAL Usuario[4]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #6471549cb0ffe956
+step 8 RETURN Usuario[4]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[3]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d3609508b5a53d20
+step 9 PUSH Usuario[3]: push(trabajos, (5, 3)) | TERMINATED Usuario[4]: termina | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #f2044ee2bd1bdc9c
+step 10 SIGNAL Usuario[3]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #a960033ba0205d65
+step 11 RETURN Usuario[3]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[2]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #f035623a690cf5b6
+step 12 BLOCKED Impresora: espera para entrar a Impresion.siguiente | PUSH Usuario[2]: push(trabajos, (2, 2)) | TERMINATED Usuario[3]: termina | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b33d439fe6f46243
+step 13 SIGNAL Usuario[2]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0670231986cd7a54
+step 14 RETURN Usuario[2]: retorna de Impresion.pedir, libera el monitor | ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #3b368a9fec70cc4d
+step 15 POP Impresora: pop(trabajos) => (2, 2) | TERMINATED Usuario[2]: termina | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #9674ae89cd1af8d4
+step 16 ASSIGN Impresora: impresos++ => 1 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #4b917b3124e09ad2
+step 17 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | ENTER Usuario[0]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #e302304c7c667b06
+step 18 PUSH Usuario[0]: push(trabajos, (1, 0)) | WRITE Impresora: write(imprimo 2 página(s) del usuario 2) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #8fa27f8c3f151e54
+step 19 DELAY Impresora: delay(2) - se demora 2 instantes | SIGNAL Usuario[0]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #eba62cee57823f26
+step 20 RETURN Usuario[0]: retorna de Impresion.pedir, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #f372a5bd68d6c50a
+step 21 TERMINATED Usuario[0]: termina | {"finished":false,"deadlock":false,"instant":21,"waiting":true} #63c02a57169ca913
+step 22 ASSIGN Impresora: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #aef3a7ce0d8185df
+step 23 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #fd9ba9e75c2e660a
+step 24 POP Impresora: pop(trabajos) => (1, 0) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #cc49499d875637ff
+step 25 ASSIGN Impresora: impresos++ => 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c89514ba69d46195
+step 26 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #add1917f5840bc51
+step 27 WRITE Impresora: write(imprimo 1 página(s) del usuario 0) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #827a0212fbc548e0
+step 28 DELAY Impresora: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #2d5713d7dcabc1ec
+step 29 {"finished":false,"deadlock":false,"instant":29,"waiting":true} #84dffcec29e2b722
+step 30 ASSIGN Impresora: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #53d5c9f0e9be09e0
+step 31 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #354f09ae32e35f45
+step 32 POP Impresora: pop(trabajos) => (3, 4) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #5ea55f38aa560cf6
+step 33 ASSIGN Impresora: impresos++ => 3 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e56ab7d4623dd856
+step 34 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #34f164fd3b755c08
+step 35 WRITE Impresora: write(imprimo 3 página(s) del usuario 4) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #28284afcea034b73
+step 36 DELAY Impresora: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":36,"waiting":true} #31d83b7be3fcbaa8
+step 37 {"finished":false,"deadlock":false,"instant":37,"waiting":true} #2d02619b9cd2f6fa
+step 38 {"finished":false,"deadlock":false,"instant":38,"waiting":true} #ec489042121d5195
+step 39 {"finished":false,"deadlock":false,"instant":39,"waiting":true} #328960b45eddb882
+step 40 ASSIGN Impresora: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #6c90ac6a1c5351bd
+step 41 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #088e55ce4a8750bb
+step 42 POP Impresora: pop(trabajos) => (4, 1) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #8691ec88e08149c7
+step 43 ASSIGN Impresora: impresos++ => 4 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #2f47ebe73dc82f00
+step 44 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4cb92f26549c1ef2
+step 45 WRITE Impresora: write(imprimo 4 página(s) del usuario 1) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #66d2ffcafb1e9c7a
+step 46 DELAY Impresora: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":46,"waiting":true} #2a8f539fa9fd9ccf
+step 47 {"finished":false,"deadlock":false,"instant":47,"waiting":true} #439f18243e36b452
+step 48 {"finished":false,"deadlock":false,"instant":48,"waiting":true} #7a5d9bb06d18a417
+step 49 {"finished":false,"deadlock":false,"instant":49,"waiting":true} #6e148d1c2753bc82
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #0cc0bc1db9dc6b66
+step 51 ASSIGN Impresora: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #6d997ec783e2bfe5
+step 52 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #8ee7926e4fdf0487
+step 53 POP Impresora: pop(trabajos) => (5, 3) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #6f72638355a1dca5
+step 54 ASSIGN Impresora: impresos++ => 5 | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #53ba9a284745b0d8
+step 55 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #d49b67c0cc169873
+step 56 WRITE Impresora: write(imprimo 5 página(s) del usuario 3) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #d5354c561e3eb440
+step 57 DELAY Impresora: delay(5) - se demora 5 instantes | {"finished":false,"deadlock":false,"instant":57,"waiting":true} #90d12a9e1e9b7516
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #f0c8d5515da8e8e2
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #144e91630d2d720e
+step 60 {"finished":false,"deadlock":false,"instant":60,"waiting":true} #a701ea1f8b214b0a
+step 61 {"finished":false,"deadlock":false,"instant":61,"waiting":true} #4ba3eb56501ba0a5
+step 62 {"finished":false,"deadlock":false,"instant":62,"waiting":true} #536d606f06675d17
+step 63 ASSIGN Impresora: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #3796e14af2d5f966
+step 64 TERMINATED Impresora: termina | {"finished":true,"deadlock":false,"instant":64,"waiting":false} #e2f8c946539cf569
+state #fa69e5a71eecb746
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #91990e767ba9c930
+step 1 #7b9abea72acad32b
+step 2 #bd9fc643cbe9d552
+step 3 #7f23eeb3b90f8c58
+step 4 #674422899855f702
+step 5 #c50a0f0188a7e51d
+step 6 #60093ffadd20e1e0
+step 7 #6471549cb0ffe956
+step 8 #d3609508b5a53d20
+step 9 #f2044ee2bd1bdc9c
+step 10 #a960033ba0205d65
+step 11 #f035623a690cf5b6
+step 12 #b33d439fe6f46243
+step 13 #0670231986cd7a54
+step 14 #82867b770f8b1cf8
+step 15 #cd627b58a9165eb7
+step 16 #4b25b2d63079937f
+step 17 #c21e239f88ef2d74
+step 18 #8823a611faf815ba
+step 19 #2b25de9e499a37b2
+step 20 #80c1c1ae089fc803
+step 21 #086d673b85f998ea
+step 22 #c0de3b88c30c2892
+step 23 #da56ed014c74f099
+step 24 #34874c2205499e90
+step 25 #71081414eab51728
+step 26 #ff203a106959bf3f
+step 27 #10c0480d02041682
+step 28 #64d4996626e2bb23
+step 29 #f1f014069eece611
+step 30 #538257d5cbba15af
+step 31 #d2f36fc43bbafe5a
+step 32 #c8ef41098786eda2
+step 33 #2c80fcace22774b4
+step 34 #61b36f838079fef8
+step 35 #7b218165094b2917
+step 36 #e6207a4ea6f1b89a
+step 37 #456f41266d58b3b5
+step 38 #7de85e2ac7647bcb
+step 39 #e352c8673d26b228
+step 40 #da4a1550d6a1c3d1
+step 41 #3f363af308c40583
+step 42 #cdc48b3b130e4b79
+step 43 #508b0d52051d660c
+step 44 #05bb271d9030834f
+step 45 #50159c0f3b97886f
+step 46 #8a319c9bd0598553
+step 47 #294a4d5f85c75565
+step 48 #df192c6c5e2e2412
+step 49 #102e15746c625d80
+step 50 #0b085d9b5195f69a
+step 51 #8a1edfa2117df615
+step 52 #c82e0dfdc95fd277
+step 53 #0e8ba4fe8721337d
+step 54 #c02b596d0c2925fa
+step 55 #5f1f9915846025ff
+step 56 #ab260abe8fd575e3
+step 57 #e33927edf80b7df9
+step 58 #78eedfa03d922c0b
+step 59 #1f13869a1de792d9
+step 60 #85d28aeb4a049881
+step 61 #577d0f80f7dc11de
+step 62 #9dfec4412d5f06c2
+step 63 #1467254542712890
+step 64 #db226bc539ba5402
+step 65 #a138ba657852e85b
+step 66 #5336c21b7135909d
+step 67 #18b39395caaab871
+state #e5a4240fe2a2d06e
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #c442efb9551c13fb
+step 1 #7b9abea72acad32b
+step 2 #bd9fc643cbe9d552
+step 3 #7f23eeb3b90f8c58
+step 4 #674422899855f702
+step 5 #c50a0f0188a7e51d
+step 6 #60093ffadd20e1e0
+step 7 #6471549cb0ffe956
+step 8 #c92afcb2d7ada147
+step 9 #47f7265b304de97d
+step 10 #4d46d941b97eda56
+step 11 #5156897ade040d94
+step 12 #726133a2508071c8
+step 13 #330caffdeadb2606
+step 14 #14ce806d71d1a727
+step 15 #6f26f704eea3d0fe
+step 16 #f18cd8cb9722045d
+step 17 #a768847e9f01f5d0
+step 18 #30c7308c2c32cff9
+step 19 #2b25de9e499a37b2
+step 20 #80c1c1ae089fc803
+step 21 #086d673b85f998ea
+step 22 #c0de3b88c30c2892
+step 23 #da56ed014c74f099
+step 24 #34874c2205499e90
+step 25 #71081414eab51728
+step 26 #ff203a106959bf3f
+step 27 #10c0480d02041682
+step 28 #64d4996626e2bb23
+step 29 #f1f014069eece611
+step 30 #538257d5cbba15af
+step 31 #d2f36fc43bbafe5a
+step 32 #c8ef41098786eda2
+step 33 #2c80fcace22774b4
+step 34 #61b36f838079fef8
+step 35 #7b218165094b2917
+step 36 #e6207a4ea6f1b89a
+step 37 #456f41266d58b3b5
+step 38 #7de85e2ac7647bcb
+step 39 #e352c8673d26b228
+step 40 #da4a1550d6a1c3d1
+step 41 #3f363af308c40583
+step 42 #cdc48b3b130e4b79
+step 43 #508b0d52051d660c
+step 44 #05bb271d9030834f
+step 45 #50159c0f3b97886f
+step 46 #8a319c9bd0598553
+step 47 #294a4d5f85c75565
+step 48 #df192c6c5e2e2412
+step 49 #102e15746c625d80
+step 50 #0b085d9b5195f69a
+step 51 #8a1edfa2117df615
+step 52 #c82e0dfdc95fd277
+step 53 #0e8ba4fe8721337d
+step 54 #c02b596d0c2925fa
+step 55 #5f1f9915846025ff
+step 56 #ab260abe8fd575e3
+step 57 #e33927edf80b7df9
+step 58 #78eedfa03d922c0b
+step 59 #1f13869a1de792d9
+step 60 #85d28aeb4a049881
+step 61 #577d0f80f7dc11de
+step 62 #9dfec4412d5f06c2
+step 63 #1467254542712890
+step 64 #db226bc539ba5402
+step 65 #a138ba657852e85b
+step 66 #5336c21b7135909d
+step 67 #18b39395caaab871
+state #702d852ac87ad50a
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #3160c011f06e2003
+step 1 DECL Usuario[1]: int paginas = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b2ed33d68b8d6366
+step 2 DECL Usuario[2]: int paginas = 2 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #0654ad9aef20b56d
+step 3 DECL Usuario[3]: int paginas = 5 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7eef056b6740dc1b
+step 4 DECL Usuario[0]: int paginas = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #d18f681888046813
+step 5 ENTER Usuario[1]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a531907ae367194a
+step 6 BLOCKED Usuario[2]: espera para entrar a Impresion.pedir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #60bf98770103b4df
+step 7 BLOCKED Usuario[3]: espera para entrar a Impresion.pedir | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #493be383b04f7997
+step 8 BLOCKED Usuario[0]: espera para entrar a Impresion.pedir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #6068c6ea266ad49c
+step 9 PUSH Usuario[1]: push(trabajos, (4, 1)) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1a0db7b20559d04f
+step 10 DECL Impresora: int id = 0 | DECL Usuario[4]: int paginas = 3 | SIGNAL Usuario[1]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ee0bb5d394c311d6
+step 11 RETURN Usuario[1]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[0]: entra a Impresion.pedir | BLOCKED Usuario[4]: espera para entrar a Impresion.pedir | DECL Impresora: int paginas = 0 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #231dd7a8a2dd2617
+step 12 PUSH Usuario[0]: push(trabajos, (1, 0)) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a09fa3af588016b5
+step 13 TERMINATED Usuario[1]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #9de6cd0d69e6c6d1
+step 14 DELAY Impresora: delay(8) - se demora 8 instantes | SIGNAL Usuario[0]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #8bab76d19d1076da
+step 15 RETURN Usuario[0]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[4]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #cec011d1b5e9d4ad
+step 16 TERMINATED Usuario[0]: termina | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #13cf5809f1813711
+step 17 PUSH Usuario[4]: push(trabajos, (3, 4)) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #0379f57f299ef7ef
+step 18 SIGNAL Usuario[4]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #5d1f0264e69815f3
+step 19 RETURN Usuario[4]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[2]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #e998bb75e6ddceef
+step 20 PUSH Usuario[2]: push(trabajos, (2, 2)) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #6bf4717393820aea
+step 21 TERMINATED Usuario[4]: termina | SIGNAL Usuario[2]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #d08186ee741e56d3
+step 22 RETURN Usuario[2]: retorna de Impresion.pedir, libera el monitor | ENTER Usuario[3]: entra a Impresion.pedir | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #bb2a61d534bdf898
+step 23 PUSH Usuario[3]: push(trabajos, (5, 3)) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #533e4d91fa32659b
+step 24 BLOCKED Impresora: espera para entrar a Impresion.siguiente | TERMINATED Usuario[2]: termina | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #8bc48fcb3e2c9528
+step 25 SIGNAL Usuario[3]: signal(hayTrabajo) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f35b475ebf6082be
+step 26 RETURN Usuario[3]: retorna de Impresion.pedir, libera el monitor | ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b5550e156abf4aa7
+step 27 TERMINATED Usuario[3]: termina | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #c33fa9a585632545
+step 28 POP Impresora: pop(trabajos) => (1, 0) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #2a1c1731800d8405
+step 29 ASSIGN Impresora: impresos++ => 1 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #09e4c146f4548367
+step 30 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #b5f69b30bdeed22a
+step 31 WRITE Impresora: write(imprimo 1 página(s) del usuario 0) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #604cc8089ebf3ce0
+step 32 DELAY Impresora: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":32,"waiting":true} #a38a336b1de3a7be
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #286a48522c387b44
+step 34 ASSIGN Impresora: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #4687d7606a75e018
+step 35 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #0acbd2d39eb41daf
+step 36 POP Impresora: pop(trabajos) => (2, 2) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #48bdd4ead1efacd9
+step 37 ASSIGN Impresora: impresos++ => 2 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #ce3e181c7ff03833
+step 38 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #f4a8ab30e9ca8dc2
+step 39 WRITE Impresora: write(imprimo 2 página(s) del usuario 2) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #0031ca68fabf8942
+step 40 DELAY Impresora: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":40,"waiting":true} #5d8b59b4759ccc1a
+step 41 {"finished":false,"deadlock":false,"instant":41,"waiting":true} #dd4508abf8b38dac
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #068bc2c78bb44d1e
+step 43 ASSIGN Impresora: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #b63dd69cb4e14f1e
+step 44 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #8696d3495a42f69c
+step 45 POP Impresora: pop(trabajos) => (3, 4) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #e58a3017445d761f
+step 46 ASSIGN Impresora: impresos++ => 3 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #7f886cc2116853f6
+step 47 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #5d5460f9083dbd31
+step 48 WRITE Impresora: write(imprimo 3 página(s) del usuario 4) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #10a6ad401691ff70
+step 49 DELAY Impresora: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":49,"waiting":true} #6f9be0b9fcb2960b
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #589230c2ee8dbabf
+step 51 {"finished":false,"deadlock":false,"instant":51,"waiting":true} #9b62186f51350532
+step 52 {"finished":false,"deadlock":false,"instant":52,"waiting":true} #c2a0a6005dbbcd2c
+step 53 ASSIGN Impresora: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #27e3c09d2baade49
+step 54 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #3abdea7ec0a1fe1d
+step 55 POP Impresora: pop(trabajos) => (4, 1) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c780f9a18854f419
+step 56 ASSIGN Impresora: impresos++ => 4 | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #54fd628be9da49d6
+step 57 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #8e8d50da798c534e
+step 58 WRITE Impresora: write(imprimo 4 página(s) del usuario 1) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #006b1a368e1a544e
+step 59 DELAY Impresora: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":59,"waiting":true} #77bde269e8f63502
+step 60 {"finished":false,"deadlock":false,"instant":60,"waiting":true} #4c034152af856d42
+step 61 {"finished":false,"deadlock":false,"instant":61,"waiting":true} #c3fd82f2763c2e02
+step 62 {"finished":false,"deadlock":false,"instant":62,"waiting":true} #5ad37b972b58cbef
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #a2241fa1cc61c741
+step 64 ASSIGN Impresora: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #cbb705c1c0a498b0
+step 65 ENTER Impresora: entra a Impresion.siguiente | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #438921e410892359
+step 66 POP Impresora: pop(trabajos) => (5, 3) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #008ee9ea0fcaed80
+step 67 ASSIGN Impresora: impresos++ => 5 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #4e22db100922c499
+step 68 RETURN Impresora: retorna de Impresion.siguiente, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #d5b278989ef35d97
+step 69 WRITE Impresora: write(imprimo 5 página(s) del usuario 3) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #a73a672e13560f33
+step 70 DELAY Impresora: delay(5) - se demora 5 instantes | {"finished":false,"deadlock":false,"instant":70,"waiting":true} #ff7c9ca09587ae77
+step 71 {"finished":false,"deadlock":false,"instant":71,"waiting":true} #c35faae7f96031a2
+step 72 {"finished":false,"deadlock":false,"instant":72,"waiting":true} #19ddd58c87af3c95
+step 73 {"finished":false,"deadlock":false,"instant":73,"waiting":true} #37da7768a1bffca6
+step 74 {"finished":false,"deadlock":false,"instant":74,"waiting":true} #4c48542c87a421f7
+step 75 {"finished":false,"deadlock":false,"instant":75,"waiting":true} #490c0592637c1acd
+step 76 ASSIGN Impresora: for#1++ => 6 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #25d1201f92b5b39c
+step 77 TERMINATED Impresora: termina | {"finished":true,"deadlock":false,"instant":77,"waiting":false} #608a1bfb099bef81
+state #63caa3c11fee125c

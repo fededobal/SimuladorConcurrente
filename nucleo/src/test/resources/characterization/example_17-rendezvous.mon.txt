@@ -1,0 +1,449 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #146da90f66cf8a60
+step 1 ENTER Peluquero: entra a Peluqueria.proximo_cliente | BLOCKED Cliente[0]: espera para entrar a Peluqueria.corte_de_pelo | BLOCKED Cliente[1]: espera para entrar a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #9ae6112221e75941
+step 2 ASSIGN Peluquero: peluquero = 1 | BLOCKED Cliente[2]: espera para entrar a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8cd03587f20cf06f
+step 3 SIGNAL Peluquero: signal(peluquero_disponible) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e36cf424af709ee9
+step 4 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | ENTER Cliente[2]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #5450da8ba76a0ab0
+step 5 ASSIGN Cliente[2]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #462fdb11b0f9dc41
+step 6 SIGNAL Cliente[2]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #a87f62f979a3c209
+step 7 WAIT Cliente[2]: wait(puerta_abierta) - libera el monitor y se demora | ENTER Cliente[1]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #de52e1cd5c1986cb
+step 8 WAIT Cliente[1]: wait(peluquero_disponible) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #8095a88cc3369cec
+step 9 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | ENTER Cliente[0]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1e526c1d331f1581
+step 10 WAIT Cliente[0]: wait(peluquero_disponible) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #01bbbc98195d9a4f
+step 11 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":11,"waiting":true} #fc1652ce6c773855
+step 12 {"finished":false,"deadlock":false,"instant":12,"waiting":true} #f5ab55ca4af6c627
+step 13 {"finished":false,"deadlock":false,"instant":13,"waiting":true} #15721dba95429fc8
+step 14 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #3c798359bf7d0ec6
+step 15 ASSIGN Peluquero: cortes = 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #599976412a7eba08
+step 16 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8065f956d236151e
+step 17 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #9c3a426dd7d761b2
+step 18 SIGNAL Cliente[2]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #2103b0b27f0da755
+step 19 RETURN Cliente[2]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d449809d47aefdef
+step 20 WRITE Cliente[2]: write(Cliente 2: me cortaron el pelo) | RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #c137363274cf1c5e
+step 21 ASSIGN Peluquero: for#1++ => 2 | TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #effb6d9184383f23
+step 22 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #29e81157eeebcef2
+step 23 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #d60d72eb069a673b
+step 24 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #b88b1e9a52e0a5a3
+step 25 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c77a2f2e76a1ac2d
+step 26 ASSIGN Cliente[1]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #caba8c7b014f76f0
+step 27 SIGNAL Cliente[1]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #7029ab4582bb8cb8
+step 28 WAIT Cliente[1]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #98ed010dc19cc6ce
+step 29 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #9746a2e9c94634e7
+step 30 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":30,"waiting":true} #605902668851f384
+step 31 {"finished":false,"deadlock":false,"instant":31,"waiting":true} #2ddc71f53ad0ce06
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #294474f4e48c6cc4
+step 33 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #ab0c6a19363e9d83
+step 34 ASSIGN Peluquero: cortes = 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #f6c74cd21aea3379
+step 35 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #2dcc8cf1a0c94a9f
+step 36 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #eb6ece9ac0229ac5
+step 37 SIGNAL Cliente[1]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #818491f063ec4923
+step 38 RETURN Cliente[1]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #69b40b261b38a233
+step 39 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[1]: write(Cliente 1: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #cc90a6a266852857
+step 40 TERMINATED Cliente[1]: termina | ASSIGN Peluquero: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #b2f4248637eea5c5
+step 41 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #c8149949681bc20f
+step 42 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #17f9bb37cb0adab6
+step 43 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a414616b8579c64f
+step 44 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #95bba06e12aaf03d
+step 45 ASSIGN Cliente[0]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #577fcdd82ae9cc98
+step 46 SIGNAL Cliente[0]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #a5cedb46b6ea8a98
+step 47 WAIT Cliente[0]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #321319721fe1c655
+step 48 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #68c6f0c23f997046
+step 49 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":49,"waiting":true} #cc03ad47ce22e34a
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #27b9339311f19fe4
+step 51 {"finished":false,"deadlock":false,"instant":51,"waiting":true} #a3e3559d05e0b423
+step 52 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #6968cd746d885c1d
+step 53 ASSIGN Peluquero: cortes = 3 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #dc0348b7f7496df4
+step 54 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #e31d5a041dfcddca
+step 55 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #6af34918a074d50f
+step 56 SIGNAL Cliente[0]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #3843dd720862d89c
+step 57 RETURN Cliente[0]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #ea0649ea323be766
+step 58 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[0]: write(Cliente 0: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #06fc952872d51a2e
+step 59 ASSIGN Peluquero: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #32a3c79a54e83414
+step 60 TERMINATED Cliente[0]: termina | TERMINATED Peluquero: termina | {"finished":true,"deadlock":false,"instant":60,"waiting":false} #b907fbfadbb53062
+state #e1f7b42accac8bf0
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #d76033d7dc1d73ff
+step 1 #a53f3bc2d97aec28
+step 2 #159b8961651fbc40
+step 3 #e36cf424af709ee9
+step 4 #2e49451dc5c272a3
+step 5 #8dcdedb0d06b3658
+step 6 #b84bf84df446e0db
+step 7 #2371940aebea6ca4
+step 8 #889a5455dac199f6
+step 9 #bb65f6ef6fb91ba6
+step 10 #0657481c2c181b6c
+step 11 #3be6f313dc217958
+step 12 #2f46a263a2381c3c
+step 13 #e3b5d811ff0bf831
+step 14 #c46af6354c168767
+step 15 #8e26c570376ba7e1
+step 16 #4ec0c864beffa8f5
+step 17 #efa02551e3309a62
+step 18 #31833e903d7916aa
+step 19 #6acb4337ad3a9b41
+step 20 #371267e2d40efcd4
+step 21 #13f263ed9e3477fd
+step 22 #7fe665c45eaba6fe
+step 23 #506d1ce0223fc0d1
+step 24 #efdb3c97a4d27f2a
+step 25 #8ad837e122160278
+step 26 #4f864eef959092fd
+step 27 #3506e25f1baa23d1
+step 28 #2a683929bd059d6a
+step 29 #033e21e38d041ef3
+step 30 #b7bc18557331b13b
+step 31 #f825aa4920dfce7b
+step 32 #04b30527f66486ed
+step 33 #a1c3aadbff93b526
+step 34 #031cd6deb3b911b4
+step 35 #058e484f8a42dbb1
+step 36 #6ae0170d9d16fd92
+step 37 #011df9ab67e208c8
+step 38 #36fa98f09338530f
+step 39 #06a4994c188ab474
+step 40 #19b31280bdb21741
+step 41 #b61e53595d700ec3
+step 42 #e607d7bfefe5e3a2
+step 43 #1d935da248b116c9
+step 44 #da9f523b689f2ef9
+step 45 #820442ed9917987e
+step 46 #c781d4493afca205
+step 47 #959f50737fe5b775
+step 48 #bd02ae4058a71f88
+step 49 #06bbbe91ec2d40dd
+step 50 #464b0901b907b84e
+step 51 #13d43f95bb3a49ce
+step 52 #163d01dc10c2ddd0
+step 53 #54ea15a97603f6ad
+step 54 #03b93ac1a5dfd9f0
+step 55 #bb416738d4bfcff2
+step 56 #8d6dead9b1264985
+step 57 #d0e3f3be512dc99a
+step 58 #400bbc202d67c382
+step 59 #806ef5bb91ca7758
+state #398361b468193272
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #9ac6ef553566fc36
+step 1 #faa0833b8f427a53
+step 2 #b040c97989e2926b
+step 3 #7b3f5aa32ca36fd5
+step 4 #5450da8ba76a0ab0
+step 5 #462fdb11b0f9dc41
+step 6 #a87f62f979a3c209
+step 7 #de52e1cd5c1986cb
+step 8 #8095a88cc3369cec
+step 9 #1e526c1d331f1581
+step 10 #a46a25c5455604a1
+step 11 #f3175a16067293dd
+step 12 #ad3ba63946054306
+step 13 #3739425a9ce401b0
+step 14 #7b8651f37323216f
+step 15 #692748239c1d3930
+step 16 #e4f7c71e0b9bfa8c
+step 17 #25dcd7de3ab32328
+step 18 #8ccd936924223d5d
+step 19 #0e2e2637ee74cc7e
+step 20 #5ac89cf0d5470ab1
+step 21 #9513d39d546f2b9c
+step 22 #f88a34d58b19c1dc
+step 23 #3b8a9669261ddf0d
+step 24 #b0743bedf0500ca1
+step 25 #2f062171fe347e2f
+step 26 #e699bcce6e07a171
+step 27 #6bd09982f11fd463
+step 28 #3acde7477e986139
+step 29 #27de5a37e6306dbe
+step 30 #82392105be4a1809
+step 31 #a5d46a8e71e61694
+step 32 #cc5e3b3eb46b9837
+step 33 #98f0655ab01829f5
+step 34 #224b2943c3a6db78
+step 35 #23810ad4591595cd
+step 36 #0be6071596f3b42d
+step 37 #b35521d58d9662e3
+step 38 #dea62b28e1e20d52
+step 39 #e5a54dc074c47103
+step 40 #b42f2542c346d92d
+step 41 #3e36046e9c0e934a
+step 42 #654e7273aede8067
+step 43 #13df4c793265f764
+step 44 #df329ff7d823d9fb
+step 45 #04c75f3ec0e7f872
+step 46 #404115802fc11a66
+step 47 #1b440b0b9b99fa81
+step 48 #72a357c017576dbb
+step 49 #1652fe88a99ebebc
+step 50 #363ff1db081080e4
+step 51 #dd98228200b4c219
+step 52 #f17d414733477e7e
+step 53 #ac16d332cfc22227
+step 54 #969b171a47f19322
+step 55 #789e5de0c826e13c
+step 56 #257ba175ccf423de
+step 57 #257271a6ed2b44b2
+step 58 #27efa19850c954e7
+step 59 #b1199cb7f407b8ae
+state #edec2f19fefb7c50
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #146da90f66cf8a60
+step 1 ENTER Cliente[0]: entra a Peluqueria.corte_de_pelo | BLOCKED Cliente[1]: espera para entrar a Peluqueria.corte_de_pelo | BLOCKED Cliente[2]: espera para entrar a Peluqueria.corte_de_pelo | BLOCKED Peluquero: espera para entrar a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #68c4da8a37fbad0c
+step 2 WAIT Cliente[0]: wait(peluquero_disponible) - libera el monitor y se demora | ENTER Cliente[1]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #b00afe231ccb796b
+step 3 WAIT Cliente[1]: wait(peluquero_disponible) - libera el monitor y se demora | ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #6823d878b974e5af
+step 4 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #3945625143b1d15b
+step 5 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #82a6d50d217d12c9
+step 6 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | ENTER Cliente[2]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #eef51cb7092d6749
+step 7 ASSIGN Cliente[2]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9cb5e5c41ac4ed28
+step 8 SIGNAL Cliente[2]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #6a9576df6d17e50e
+step 9 WAIT Cliente[2]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #8d88125f75c0fe76
+step 10 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #6ddbac19a1fa385d
+step 11 WAIT Cliente[0]: wait(peluquero_disponible) - libera el monitor y se demora | DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":11,"waiting":true} #69af6dad81400b19
+step 12 {"finished":false,"deadlock":false,"instant":12,"waiting":true} #d6d93840dc101e3e
+step 13 {"finished":false,"deadlock":false,"instant":13,"waiting":true} #b8a93b3ab232d319
+step 14 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #6fbf080b45b5e8ff
+step 15 ASSIGN Peluquero: cortes = 1 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #437a5cad517fb25d
+step 16 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6a94850e6e2c855a
+step 17 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a9b41db7fb2309ce
+step 18 SIGNAL Cliente[2]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #ee4cd7e5df2e82c5
+step 19 RETURN Cliente[2]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #2910bfea498b5b28
+step 20 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[2]: write(Cliente 2: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #1d952440ba05662a
+step 21 TERMINATED Cliente[2]: termina | ASSIGN Peluquero: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #335b13359a33b849
+step 22 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #714ee030cdaaf891
+step 23 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #d16a20d87bdeec2e
+step 24 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #f5072f73278faf0a
+step 25 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #3c1eb0c7a2bc7ff7
+step 26 ASSIGN Cliente[1]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #6ae9a0256d5f152f
+step 27 SIGNAL Cliente[1]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #77dab3f47a5417e6
+step 28 WAIT Cliente[1]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #813b9087af38b0ac
+step 29 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #dd475289a4849d11
+step 30 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":30,"waiting":true} #a33c84275836f788
+step 31 {"finished":false,"deadlock":false,"instant":31,"waiting":true} #2ddc71f53ad0ce06
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #294474f4e48c6cc4
+step 33 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #bcaaf518b9f4da63
+step 34 ASSIGN Peluquero: cortes = 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #87218bf66f2f99ea
+step 35 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #16993a28ed4bb4a1
+step 36 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #fd28ab71936a122b
+step 37 SIGNAL Cliente[1]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #bd76542559d2c648
+step 38 RETURN Cliente[1]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #7e871f1e4d82a3fd
+step 39 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[1]: write(Cliente 1: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #67ad68cc0f700a7e
+step 40 TERMINATED Cliente[1]: termina | ASSIGN Peluquero: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #3c03fd03b09a4c9e
+step 41 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #6e153c33b4bd6106
+step 42 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #b8d9ebb738897727
+step 43 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #2850dd05b09dde27
+step 44 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #76f6e5fcf0e22c0d
+step 45 ASSIGN Cliente[0]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #3e0fcb12a2e6f580
+step 46 SIGNAL Cliente[0]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #9889f857916e62f2
+step 47 WAIT Cliente[0]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #e3566d653f22ba50
+step 48 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #670881d32da67e2c
+step 49 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":49,"waiting":true} #162b028a209970a0
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #27b9339311f19fe4
+step 51 {"finished":false,"deadlock":false,"instant":51,"waiting":true} #a3e3559d05e0b423
+step 52 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #81cd851279d630ae
+step 53 ASSIGN Peluquero: cortes = 3 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #ba547f82d2e4507f
+step 54 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #139a7bb514d99133
+step 55 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #6f31ec6c1fe930f8
+step 56 SIGNAL Cliente[0]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #712c1ca4202747dc
+step 57 RETURN Cliente[0]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #92fd665c56af2333
+step 58 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[0]: write(Cliente 0: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #8e48a52998b208c2
+step 59 TERMINATED Cliente[0]: termina | ASSIGN Peluquero: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #bd2b181fcef584a8
+step 60 TERMINATED Peluquero: termina | {"finished":true,"deadlock":false,"instant":60,"waiting":false} #5e35d9da876f8341
+state #6c0102b271ae1509
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #d76033d7dc1d73ff
+step 1 #68c4da8a37fbad0c
+step 2 #b00afe231ccb796b
+step 3 #e51e192b485ce9b8
+step 4 #390057fa9f5aa3a9
+step 5 #400c7347c36a52e6
+step 6 #bde25c6166caa773
+step 7 #68b165ec7be84ee3
+step 8 #11f39fc3ff81e2b2
+step 9 #28bbc2817a733a9d
+step 10 #cea0a8e48ed02dcf
+step 11 #4ffb4bc4816929fb
+step 12 #7b577ea6baa4f533
+step 13 #75318e3c5e44b78a
+step 14 #3c8d5ca4a9f46354
+step 15 #a0fc89262135df93
+step 16 #8f7bb9e0ad47a13a
+step 17 #c4f6a080e33c79ff
+step 18 #f26a5740956d2e9b
+step 19 #421bbfccb71296fa
+step 20 #d6306063b4025e0f
+step 21 #d90fd8912eb8640f
+step 22 #17d9b64c2c80db8b
+step 23 #e7f8dfee8b5ed707
+step 24 #839f409ecf3a1b39
+step 25 #e71004863edde531
+step 26 #96b8af3f79a6e9d3
+step 27 #17aa60d8e1de2897
+step 28 #1606852be1372011
+step 29 #a46b8fc63555867d
+step 30 #4f04a9f6fee6762a
+step 31 #bec0d5caf2d138ce
+step 32 #d20bbd0e7aa304a4
+step 33 #47728283cfffa72f
+step 34 #473889bb180c3b7b
+step 35 #2a0f0c5357bf860c
+step 36 #091f75ad68204f34
+step 37 #6cd625f6bfa660c6
+step 38 #321df505444e99b9
+step 39 #bb93f1700844f9e1
+step 40 #1fa7cc7f625e67d5
+step 41 #0f0c5924f3c872e6
+step 42 #3861ec94b7b79a5a
+step 43 #93fe66f25972618a
+step 44 #a03c30c081af8b88
+step 45 #bfec354eb90a7845
+step 46 #08963f016959468e
+step 47 #850b4233b61f7326
+step 48 #2c988d9258d4aa7b
+step 49 #d757e49f4f97544d
+step 50 #6b5d2eb621ee02fe
+step 51 #82095e1dfa979132
+step 52 #4ee6c146add0c363
+step 53 #5658be3ea93e0dcd
+step 54 #da2add9959fabfd6
+step 55 #0e6fb61a575b8d8f
+step 56 #11977f3e5cc40f28
+step 57 #14cd1a22799d652d
+step 58 #194b0a28c80538a0
+step 59 #8d99cb04285b396f
+step 60 #d1923b1b437ec41c
+step 61 #f02f476dc4ec7879
+state #27849a2c0cf2ef90
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #9ac6ef553566fc36
+step 1 #68c4da8a37fbad0c
+step 2 #ca641403095df44a
+step 3 #1f43a6d19dae5fb8
+step 4 #b73d55cba9673ce5
+step 5 #3c2af10fc7041369
+step 6 #5b8835c7b904e972
+step 7 #95ad9fcef34863f0
+step 8 #c66b0677197e41c9
+step 9 #5ee2fb53b8e6c186
+step 10 #6404914c6614f535
+step 11 #3ab2695f614a5190
+step 12 #811d699f95c62457
+step 13 #58d299d4eec986e6
+step 14 #21dee2ffeaf54d17
+step 15 #889a065fe6cd44f0
+step 16 #3eb22bff0ac163e3
+step 17 #29f7c315034f5aac
+step 18 #25dfa1e86af6eb5d
+step 19 #7df669d6a684e023
+step 20 #0b51116013200bc8
+step 21 #793ca1e20a0434f5
+step 22 #a7ceaf8c11d7db5b
+step 23 #f728caa68152c376
+step 24 #de3c56c21dcba4c8
+step 25 #f1e4dc6058774003
+step 26 #7b0d4580e5c7dc2f
+step 27 #9e31fb01eae1d1b8
+step 28 #973ff618eb70d348
+step 29 #e8e308dde7d31e48
+step 30 #491b3be23c4964ab
+step 31 #5b1fe8786c92ffac
+step 32 #ce8b7490a4e0fff2
+step 33 #00b137213fa201be
+step 34 #db24ca5997d91c14
+step 35 #683402ae1ba2db76
+step 36 #daece2ed868f1768
+step 37 #8c76b5b2a87fae4f
+step 38 #80f3a04a51484b1a
+step 39 #a702e28918e9abc0
+step 40 #84fb2963f853f992
+step 41 #fcdbd1d1119e02e1
+step 42 #2d4e3dc808c02c66
+step 43 #ff988c08d4fa3196
+step 44 #3188ecfae6a721e8
+step 45 #28fe9022ab97baf3
+step 46 #6e5b0d1682ca075a
+step 47 #62fc53cda553e6aa
+step 48 #43b39c12de234432
+step 49 #593a156b1f4c71ee
+step 50 #eac82ce6561a09c4
+step 51 #22f40d36ab80bfe6
+step 52 #f9115ba004ad43e3
+step 53 #8de2fa260101719c
+step 54 #215d3209fa127ca1
+step 55 #43afe40eca4f99ea
+step 56 #82f7ea66cce7ec66
+step 57 #7aeaac09e9184466
+step 58 #aa17c282d43750e0
+step 59 #efcb6154698b53fb
+step 60 #a9516c6f595b8b87
+step 61 #a2c07e579a195e04
+state #0e8f1422306ae82b
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #146da90f66cf8a60
+step 1 ENTER Cliente[1]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #59bfe03b2913de5c
+step 2 BLOCKED Cliente[2]: espera para entrar a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d580fd17a547d7e0
+step 3 BLOCKED Peluquero: espera para entrar a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fb9a8d30be1673ff
+step 4 BLOCKED Cliente[0]: espera para entrar a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #12851bbc6e92abc7
+step 5 WAIT Cliente[1]: wait(peluquero_disponible) - libera el monitor y se demora | ENTER Cliente[2]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #76b472c87f6f5bee
+step 6 WAIT Cliente[2]: wait(peluquero_disponible) - libera el monitor y se demora | ENTER Cliente[0]: entra a Peluqueria.corte_de_pelo | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #77bdb18629d6b093
+step 7 WAIT Cliente[0]: wait(peluquero_disponible) - libera el monitor y se demora | ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #842d2fef28d0ab78
+step 8 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c6a58fa1a13cb0c9
+step 9 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #65b0d01a833d05b1
+step 10 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #1ac6b58eb28356e4
+step 11 ASSIGN Cliente[1]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ba0e58bac9466f2c
+step 12 SIGNAL Cliente[1]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #7011c2812c135977
+step 13 WAIT Cliente[1]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #b0be89afe9d8ca6c
+step 14 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f2283697f933943e
+step 15 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":15,"waiting":true} #555a4e0f2c9367a4
+step 16 {"finished":false,"deadlock":false,"instant":16,"waiting":true} #4981dd5356597052
+step 17 {"finished":false,"deadlock":false,"instant":17,"waiting":true} #b0b4c1bc20d42b68
+step 18 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #6c440dea978cf743
+step 19 ASSIGN Peluquero: cortes = 1 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d1fad473d21d7060
+step 20 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #9d77fceb97b7c2a7
+step 21 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #10cb66bcf3ce7011
+step 22 SIGNAL Cliente[1]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #f5b36320106b829b
+step 23 RETURN Cliente[1]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #95c22906effe8a25
+step 24 WRITE Cliente[1]: write(Cliente 1: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #a45fa084ff5068ae
+step 25 TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #698f6060a9eb7810
+step 26 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5a71a7c1c60867ff
+step 27 ASSIGN Peluquero: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b85e020c468c5b8a
+step 28 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #acf2bf8804396c59
+step 29 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #0ca7c84f0aa2eabf
+step 30 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #415e34ba6c2994e0
+step 31 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #77e7799b1039e12a
+step 32 ASSIGN Cliente[2]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #8307efa88129f510
+step 33 SIGNAL Cliente[2]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #ff7a7437ec36a144
+step 34 WAIT Cliente[2]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #1c6507b3bf046a2c
+step 35 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #adcd4749e87c38dc
+step 36 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":36,"waiting":true} #2d859d6ef98c5fd8
+step 37 {"finished":false,"deadlock":false,"instant":37,"waiting":true} #55ed2f4239126d45
+step 38 {"finished":false,"deadlock":false,"instant":38,"waiting":true} #690edafd8a6dcc3f
+step 39 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #61df13d088c82656
+step 40 ASSIGN Peluquero: cortes = 2 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #f38ec1e6026eb62a
+step 41 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #d5e14003a0de79fe
+step 42 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #40508a5122a2c24e
+step 43 SIGNAL Cliente[2]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #27a9bf5b92ab7e27
+step 44 RETURN Cliente[2]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #e7ad8123d15d8664
+step 45 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | WRITE Cliente[2]: write(Cliente 2: me cortaron el pelo) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #bd0700697cd42947
+step 46 TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #a40a7cb0ac532219
+step 47 ASSIGN Peluquero: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #3a30cd12ae5cf5b3
+step 48 ENTER Peluquero: entra a Peluqueria.proximo_cliente | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #0ad608a66b40dbd7
+step 49 ASSIGN Peluquero: peluquero = 1 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #fde9e0def940231b
+step 50 SIGNAL Peluquero: signal(peluquero_disponible) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #6e348565d840d408
+step 51 WAIT Peluquero: wait(silla_ocupada) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #e4d3a2b5a0824bae
+step 52 ASSIGN Cliente[0]: peluquero = 0 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #757db69956cffe3f
+step 53 SIGNAL Cliente[0]: signal(silla_ocupada) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #d32c3b502bc31c11
+step 54 WAIT Cliente[0]: wait(puerta_abierta) - libera el monitor y se demora | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #6ade95582586b85a
+step 55 RETURN Peluquero: retorna de Peluqueria.proximo_cliente, libera el monitor | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #805094dd5e26337e
+step 56 DELAY Peluquero: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":56,"waiting":true} #dc1da6eca9ae610e
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #793fb5e4f2e68e88
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #5b33f9bc8813f553
+step 59 ENTER Peluquero: entra a Peluqueria.corte_terminado | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #40e366d31d91e413
+step 60 ASSIGN Peluquero: cortes = 3 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #17c96466f31d1113
+step 61 SIGNAL Peluquero: signal(puerta_abierta) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #caa5b1b62957e9b2
+step 62 WAIT Peluquero: wait(salio_cliente) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #f0c0c91754403521
+step 63 SIGNAL Cliente[0]: signal(salio_cliente) - despierta a Peluquero (compite por el monitor) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #4bea09678a8af3e1
+step 64 RETURN Cliente[0]: retorna de Peluqueria.corte_de_pelo, libera el monitor | REENTER Peluquero: reingresa a Peluqueria | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #9c4af4175722b5d3
+step 65 RETURN Peluquero: retorna de Peluqueria.corte_terminado, libera el monitor | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #46a87dd8eda9f6ca
+step 66 WRITE Cliente[0]: write(Cliente 0: me cortaron el pelo) | ASSIGN Peluquero: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #da150726596d1d0f
+step 67 TERMINATED Peluquero: termina | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #15f38009be5833aa
+step 68 TERMINATED Cliente[0]: termina | {"finished":true,"deadlock":false,"instant":68,"waiting":false} #19f1816653a51216
+state #8bb98199c9d6b598

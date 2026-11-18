@@ -1,0 +1,37 @@
+// Vector de cond: variables condición privadas
+// espera: fin Shortest_Job_Next.libre=true Shortest_Job_Next.espera=<>
+// Ejemplo de la Teoría 4 (alocación SJN): cada proceso se duerme en su propia variable
+// condición, turno[id]. Al liberar el recurso se saca de la cola ordenada al que lo
+// usará menos tiempo y se despierta a ese proceso en particular (passing the condition).
+#define N 5
+
+monitor Shortest_Job_Next {
+  bool libre = true;
+  cond turno[N];
+  ColaOrdenada espera(int, int);
+
+  procedure request(int id, tiempo) {
+    if (libre) libre = false;
+    else {
+      push(espera, (tiempo, id));      // insertar_ordenado(espera, id, tiempo)
+      wait(turno[id]);
+    }
+  }
+
+  procedure release() {
+    int id, tiempo;
+    if (empty(espera)) libre = true;
+    else {
+      pop(espera, (tiempo, id));       // sacar(espera, id)
+      signal(turno[id]);
+    }
+  }
+}
+
+process Trabajo[id: 0..N-1] {
+  int tiempo = (id * 3) mod 5 + 1;
+  Shortest_Job_Next.request(id, tiempo);
+  write("Trabajo ", id, ": uso el recurso ", tiempo, " instante(s)");
+  delay(tiempo);
+  Shortest_Job_Next.release();
+}

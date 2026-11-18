@@ -1,0 +1,36 @@
+// Passing the condition
+// espera: fin Cajero.libre=true Cajero.esperando=0
+// Ejercicio 2 de la Explicación 3: las personas usan el cajero en orden de llegada.
+// El monitor administra el acceso y el uso se hace afuera. Al salir, si hay alguien
+// dormido se lo despierta sin marcar el cajero como libre: así no entra uno que no
+// estaba en la cola. Como no hay empty sobre una cond, esperando cuenta los dormidos.
+#define N 4
+
+monitor Cajero {
+  bool libre = true;
+  cond cola;
+  int esperando = 0;
+
+  procedure Pasar() {
+    if (not libre) {
+      esperando++;
+      wait(cola);
+    }
+    else libre = false;
+  }
+
+  procedure Salir() {
+    if (esperando > 0) {
+      esperando--;
+      signal(cola);
+    }
+    else libre = true;
+  }
+}
+
+process Persona[id: 0..N-1] {
+  Cajero.Pasar();
+  write("Persona ", id, ": uso el cajero");
+  delay(2);                // UsarCajero()
+  Cajero.Salir();
+}

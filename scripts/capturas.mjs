@@ -40,8 +40,9 @@ function enlace({ nombre, codigo, semilla, turnos = 'azar' }) {
   return `#${new URLSearchParams({ nombre, semilla: String(semilla), turnos })}&codigo=${base64}`;
 }
 
-const CORRALON = { nombre: 'Punto 4a) Corralón', codigo: ejemplo('08-corralon.mon'), semilla: 48213, turnos: 'ronda' };
-const BUFFER = { nombre: 'Productor/Consumidor', codigo: ejemplo('01-buffer-un-dato.mon'), semilla: 48213 };
+const BANCO = { nombre: 'Problema completo: banco y escritorios', codigo: ejemplo('21-banco.mon'), semilla: 48213, turnos: 'ronda' };
+const CAJERO = { nombre: 'Exclusión mutua implícita', codigo: ejemplo('01-exclusion-mutua.mon'), semilla: 48213 };
+const BUFFER = { nombre: 'Variables condición: wait y signal', codigo: ejemplo('04-variables-condicion.mon'), semilla: 48213 };
 
 const IMPRESORA = `monitor Impresora {
   bool libre = true;
@@ -114,7 +115,7 @@ process Trabajador[i: 1..3] {
 }
 `;
 
-const SIN_PUNTO_Y_COMA = BUFFER.codigo.replace('dato = d;', 'dato = d');
+const SIN_PUNTO_Y_COMA = BUFFER.codigo.replace('dato = D;', 'dato = D');
 
 /**
  * Las capturas. `pasos`: veces que se da Paso; `antes`: codigo que corre en la pagina antes
@@ -122,22 +123,26 @@ const SIN_PUNTO_Y_COMA = BUFFER.codigo.replace('dato = d;', 'dato = d');
  * que se captura (sin el, la ventana entera).
  */
 const CAPTURAS = {
-  pantalla: { programa: CORRALON, pasos: 14, numeros: true },
+  pantalla: { programa: BANCO, pasos: 14, numeros: true },
   barra: { programa: BUFFER, pasos: 14, recorte: 'header' },
-  'primer-programa': { programa: BUFFER, pasos: 7 },
+  'primer-programa': { programa: CAJERO, pasos: 7 },
   'editor-estados': { programa: { nombre: 'Impresora compartida', codigo: IMPRESORA, semilla: 7 }, pasos: 9, recorte: 'section[aria-label="Editor"]', alto: 1180 },
-  'editor-error': { programa: { nombre: 'Productor/Consumidor', codigo: SIN_PUNTO_Y_COMA, semilla: 48213 }, pasos: 1, recorte: 'section[aria-label="Editor"]', alto: 520 },
+  'editor-error': { programa: { nombre: BUFFER.nombre, codigo: SIN_PUNTO_Y_COMA, semilla: 48213 }, pasos: 1, recorte: 'section[aria-label="Editor"]', alto: 700 },
   'editor-error-ejecucion': { programa: { nombre: 'Registro', codigo: FUERA_DE_RANGO, semilla: 48213, turnos: 'ronda' }, pasos: 30, recorte: 'section[aria-label="Editor"]', alto: 600 },
-  monitores: { programa: CORRALON, pasos: 14, recorte: 'aside[aria-label="Inspector"]', alto: 1000 },
-  procesos: { programa: CORRALON, pasos: 14, antes: "document.getElementById('tab-processes').click()", recorte: 'aside[aria-label="Inspector"]' },
-  salida: { programa: BUFFER, pasos: 200, antes: "document.getElementById('tab-output').click()", recorte: 'aside[aria-label="Inspector"]', alto: 620 },
+  monitores: { programa: BANCO, pasos: 14, recorte: 'aside[aria-label="Inspector"]', alto: 1000 },
+  procesos: { programa: BANCO, pasos: 14, antes: "document.getElementById('tab-processes').click()", recorte: 'aside[aria-label="Inspector"]' },
+  salida: { programa: CAJERO, pasos: 200, antes: "document.getElementById('tab-output').click()", recorte: 'aside[aria-label="Inspector"]', alto: 620 },
   'linea-de-tiempo': {
-    programa: CORRALON, pasos: 22, recorte: 'section[aria-label="Línea de tiempo"]',
+    programa: BANCO, pasos: 22, recorte: 'section[aria-label="Línea de tiempo"]',
     antes: `(() => { const p = document.querySelector('section[aria-label="Línea de tiempo"] [class*="plane"]'); const r = p.getBoundingClientRect();
       p.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: r.left + 156 + 9.5 * 26, clientY: r.top + 60 })); })()`,
   },
   deadlock: { programa: { nombre: 'Dos monitores', codigo: DOS_MONITORES, semilla: 48213, turnos: 'ronda' }, pasos: 6 },
-  programas: { programa: BUFFER, pasos: 0, antes: `document.querySelector('button[aria-label^="Programa:"]').click()`, alto: 640, ancho: 760 },
+  constantes: {
+    programa: CAJERO, pasos: 0, recorte: 'section[aria-label="Editor"]', alto: 560,
+    antes: `[...document.querySelectorAll('section[aria-label="Editor"] button')].find((b) => b.textContent.includes('Constantes')).click()`,
+  },
+  programas: { programa: CAJERO, pasos: 0, antes: `document.querySelector('button[aria-label^="Programa:"]').click()`, alto: 640, ancho: 760 },
 };
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -184,7 +189,7 @@ async function capturar(nombre, { programa, pasos, antes, recorte, numeros, anch
     for (let i = 0; i < pasos; i++) {
       // un Paso de mas despues del fin volveria a empezar, con otra semilla
       const estado = await evaluar("document.querySelector('header [role=status]').textContent");
-      if (/Terminó|Interbloqueo|Fin con errores|Error/.test(estado)) break;
+      if (/Terminó|Deadlock|Fin con errores|Error/.test(estado)) break;
       await evaluar("[...document.querySelectorAll('header button')].find((b) => b.textContent.trim().startsWith('Paso')).click()");
       await esperar(60);
     }

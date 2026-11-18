@@ -1,0 +1,621 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #40814f76c02ea3d3
+step 1 DECL Cliente[3]: int idE = 0 | DECL Empleado[1]: text datos =  | DECL Cliente[2]: int idE = 0 | DECL Cliente[1]: int idE = 0 | DECL Cliente[0]: int idE = 0 | DECL Cliente[5]: int idE = 0 | DECL Empleado[2]: text datos =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #ecf9eef7184f324a
+step 2 DECL Cliente[5]: text papel =  | DECL Cliente[4]: int idE = 0 | DECL Cliente[3]: text papel =  | DECL Cliente[1]: text papel =  | DECL Cliente[0]: text papel =  | DECL Empleado[1]: text res =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9cb54dd9788d66f5
+step 3 DECL Cliente[0]: text res =  | DECL Cliente[1]: text res =  | DECL Empleado[0]: text datos =  | DECL Empleado[2]: text res =  | DECL Cliente[3]: text res =  | DECL Cliente[2]: text papel =  | DECL Cliente[5]: text res =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #7aff1ca23ec2a8f1
+step 4 ENTER Empleado[1]: entra a Banco.Proximo | ASSIGN Cliente[0]: papel = papeles de 0 | ASSIGN Cliente[1]: papel = papeles de 1 | BLOCKED Empleado[2]: espera para entrar a Banco.Proximo | ASSIGN Cliente[5]: papel = papeles de 5 | DECL Cliente[4]: text papel =  | ASSIGN Cliente[3]: papel = papeles de 3 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c448dd4ef981736c
+step 5 DECL Cliente[4]: text res =  | BLOCKED Cliente[0]: espera para entrar a Banco.Llegada | BLOCKED Cliente[5]: espera para entrar a Banco.Llegada | DECL Cliente[2]: text res =  | PUSH Empleado[1]: push(elibres, 1) | BLOCKED Cliente[3]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #2fd6e72f246638bb
+step 6 ASSIGN Cliente[2]: papel = papeles de 2 | DECL Empleado[0]: text res =  | BLOCKED Cliente[1]: espera para entrar a Banco.Llegada | ASSIGN Cliente[4]: papel = papeles de 4 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #1c6a1cb5bcf183bf
+step 7 BLOCKED Empleado[0]: espera para entrar a Banco.Proximo | BLOCKED Cliente[4]: espera para entrar a Banco.Llegada | ASSIGN Empleado[1]: cantLibres++ => 1 | BLOCKED Cliente[2]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #0c9b413fc0530381
+step 8 RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | ENTER Cliente[0]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c97f762c012b67c0
+step 9 ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | ASSIGN Cliente[0]: cantLibres-- => 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #bb6ac15fc9d9909e
+step 10 POP Cliente[0]: pop(elibres) => 1 | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #64c7a5e7c44865f2
+step 11 RETURN Cliente[0]: retorna de Banco.Llegada, libera el monitor | ENTER Cliente[3]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #57538126f9bb502a
+step 12 ENTER Cliente[0]: entra a Escritorio[1].Atencion | ASSIGN Cliente[3]: esperando++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #1290e5e25a594d7d
+step 13 ASSIGN Cliente[0]: datos = papeles de 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #eb708b9e8017c564
+step 14 ASSIGN Cliente[0]: listo = true | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f0866770baa009e2
+step 15 WAIT Cliente[3]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[1]: entra a Banco.Llegada | SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #cc202e08dac6d4fd
+step 16 WAIT Cliente[0]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #b3d3521ac65e5b58
+step 17 ASSIGN Cliente[1]: esperando++ => 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #331a1eb5b1569ec7
+step 18 ASSIGN Empleado[1]: D = papeles de 0 | WAIT Cliente[1]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[4]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #44b28e94a0670377
+step 19 ASSIGN Cliente[4]: esperando++ => 3 | RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #be91e040fc080cc4
+step 20 WAIT Cliente[4]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[2]: entra a Banco.Llegada | ASSIGN Empleado[1]: res = papeles de 0: resuelto | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #00f281ca64e73700
+step 21 ASSIGN Cliente[2]: esperando++ => 4 | ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #9eb08f4dbd18671b
+step 22 ASSIGN Empleado[1]: resultados = papeles de 0: resuelto | WAIT Cliente[2]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[5]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #d699716436cf7a81
+step 23 SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[0] (compite por el monitor) | ASSIGN Cliente[5]: esperando++ => 5 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #39e48188af1e91b9
+step 24 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #25b2a17ec0b70a93
+step 25 ASSIGN Cliente[0]: R = papeles de 0: resuelto | WAIT Cliente[5]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[0]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #9e202fe7f2de9d54
+step 26 SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | PUSH Empleado[0]: push(elibres, 0) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #fb5fd905990abf20
+step 27 ASSIGN Empleado[0]: esperando-- => 4 | RETURN Cliente[0]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #261859749cae70e1
+step 28 ASSIGN Empleado[1]: listo = false | SIGNAL Empleado[0]: signal(esperaC) - despierta a Cliente[3] (compite por el monitor) | WRITE Cliente[0]: write(Cliente 0: me atendió el empleado 1) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #158eca69872cb280
+step 29 RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[3]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #7742a2c635ddd089
+step 30 TERMINATED Cliente[0]: termina | POP Cliente[3]: pop(elibres) => 0 | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #1840d70bfca87b5b
+step 31 ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | RETURN Cliente[3]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[2]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #737dea175637e723
+step 32 BLOCKED Cliente[3]: espera para entrar a Escritorio[0].Atencion | ASSIGN Empleado[1]: for#1++ => 2 | WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | ENTER Cliente[3]: entra a Escritorio[0].Atencion | PUSH Empleado[2]: push(elibres, 2) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #4ce6989d4dac528e
+step 33 ASSIGN Empleado[2]: esperando-- => 3 | ASSIGN Cliente[3]: datos = papeles de 3 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #b69ed1cdaa6ce2f8
+step 34 ASSIGN Cliente[3]: listo = true | SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #44c0e69f82f9467d
+step 35 RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[1]: reingresa a Banco | SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #33b1d4c43ef31972
+step 36 POP Cliente[1]: pop(elibres) => 2 | BLOCKED Empleado[1]: espera para entrar a Banco.Proximo | WAIT Cliente[3]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #2227b91367757d8e
+step 37 ASSIGN Empleado[0]: D = papeles de 3 | ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | RETURN Cliente[1]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[1]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #30f276c8a7eae5e7
+step 38 PUSH Empleado[1]: push(elibres, 1) | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | ENTER Cliente[1]: entra a Escritorio[2].Atencion | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #224f3af3986b12c6
+step 39 ASSIGN Empleado[1]: esperando-- => 2 | ASSIGN Cliente[1]: datos = papeles de 1 | ASSIGN Empleado[0]: res = papeles de 3: resuelto | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #f152e9a3141e21df
+step 40 SIGNAL Empleado[1]: signal(esperaC) - despierta a Cliente[4] (compite por el monitor) | ASSIGN Cliente[1]: listo = true | ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #cfeb2749e7cc2cc5
+step 41 RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[4]: reingresa a Banco | ASSIGN Empleado[0]: resultados = papeles de 3: resuelto | SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #e069a8d05ce54e0a
+step 42 WAIT Cliente[1]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[3] (compite por el monitor) | POP Cliente[4]: pop(elibres) => 1 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #8e642b42423d2400
+step 43 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Escritorio[0] | ASSIGN Empleado[2]: D = papeles de 1 | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #d9496fec439d405d
+step 44 ASSIGN Cliente[3]: R = papeles de 3: resuelto | RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4357d51209dc3f4a
+step 45 ASSIGN Empleado[2]: res = papeles de 1: resuelto | SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #c7465b9d710eb81b
+step 46 RETURN Cliente[4]: retorna de Banco.Llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #694b4676437c155d
+step 47 ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ENTER Cliente[4]: entra a Escritorio[1].Atencion | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #9119029bc9524750
+step 48 ASSIGN Cliente[4]: datos = papeles de 4 | RETURN Cliente[3]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | ASSIGN Empleado[2]: resultados = papeles de 1: resuelto | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #70973657d0769b0c
+step 49 ASSIGN Cliente[4]: listo = true | ASSIGN Empleado[0]: listo = false | WRITE Cliente[3]: write(Cliente 3: me atendió el empleado 0) | SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #af61438074ecbc8b
+step 50 SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | TERMINATED Cliente[3]: termina | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #fe9e7a32e760c8c4
+step 51 RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | ASSIGN Cliente[1]: R = papeles de 1: resuelto | WAIT Cliente[4]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #9dec102c20f99aab
+step 52 ASSIGN Empleado[1]: D = papeles de 4 | SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | ASSIGN Empleado[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #f9096cb7729b463a
+step 53 ENTER Empleado[0]: entra a Banco.Proximo | RETURN Cliente[1]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #1683a510904f6d7a
+step 54 ASSIGN Empleado[1]: res = papeles de 4: resuelto | ASSIGN Empleado[2]: listo = false | WRITE Cliente[1]: write(Cliente 1: me atendió el empleado 2) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #ce6d1b8c131a10b1
+step 55 PUSH Empleado[0]: push(elibres, 0) | ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #7001ff4bc62c5860
+step 56 ASSIGN Empleado[0]: esperando-- => 1 | RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | ASSIGN Empleado[1]: resultados = papeles de 4: resuelto | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #193a08fce98c812e
+step 57 ASSIGN Empleado[2]: for#1++ => 2 | SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[4] (compite por el monitor) | SIGNAL Empleado[0]: signal(esperaC) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #1e5fcb8f79c0d884
+step 58 RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[2]: reingresa a Banco | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Escritorio[1] | BLOCKED Empleado[2]: espera para entrar a Banco.Proximo | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #3070482df889dadb
+step 59 ASSIGN Cliente[4]: R = papeles de 4: resuelto | ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | POP Cliente[2]: pop(elibres) => 0 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #b14d89fce9bf4bfa
+step 60 SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #df3e598f27bf66e2
+step 61 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | RETURN Cliente[4]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #25bfefd0e5878c32
+step 62 WRITE Cliente[4]: write(Cliente 4: me atendió el empleado 1) | ASSIGN Empleado[1]: listo = false | RETURN Cliente[2]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[2]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #09e8f378ed32f132
+step 63 PUSH Empleado[2]: push(elibres, 2) | ENTER Cliente[2]: entra a Escritorio[0].Atencion | TERMINATED Cliente[4]: termina | RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #cbbc71fb928496ce
+step 64 ASSIGN Cliente[2]: datos = papeles de 2 | ASSIGN Empleado[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #bec11d655579d0a8
+step 65 ASSIGN Empleado[2]: esperando-- => 0 | TERMINATED Empleado[1]: termina | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #a9a019d96f1b4ffa
+step 66 SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[5] (compite por el monitor) | ASSIGN Cliente[2]: listo = true | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #4601269171ddfa97
+step 67 RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[5]: reingresa a Banco | SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #1ce0fd2051dc4b40
+step 68 ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | POP Cliente[5]: pop(elibres) => 2 | WAIT Cliente[2]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #6fc96c72835fed7d
+step 69 WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | RETURN Cliente[5]: retorna de Banco.Llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #feee14c55ea0a981
+step 70 ENTER Cliente[5]: entra a Escritorio[2].Atencion | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #57e081b348c38e63
+step 71 ASSIGN Empleado[0]: D = papeles de 2 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #e0ad5eaf8657afc7
+step 72 ASSIGN Cliente[5]: datos = papeles de 5 | RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #f8bdad9f6f4ad25a
+step 73 ASSIGN Empleado[0]: res = papeles de 2: resuelto | ASSIGN Cliente[5]: listo = true | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #0fa17fb50206d2e6
+step 74 SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #8bfe97085d633c78
+step 75 WAIT Cliente[5]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | ASSIGN Empleado[0]: resultados = papeles de 2: resuelto | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #bf8adccf267c2ac7
+step 76 ASSIGN Empleado[2]: D = papeles de 5 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #7f7a031dab77364d
+step 77 RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #48839268f35a41f9
+step 78 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Escritorio[0] | ASSIGN Empleado[2]: res = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #7917e421f42d7877
+step 79 ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ASSIGN Cliente[2]: R = papeles de 2: resuelto | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #6e5c41747938ccc8
+step 80 ASSIGN Empleado[2]: resultados = papeles de 5: resuelto | SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #fcbd18e72f7ec739
+step 81 RETURN Cliente[2]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #e7192ba340eb3b43
+step 82 WRITE Cliente[2]: write(Cliente 2: me atendió el empleado 0) | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #6af37fb271e01053
+step 83 ASSIGN Empleado[0]: listo = false | TERMINATED Cliente[2]: termina | ASSIGN Cliente[5]: R = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #bc5c58483b604bac
+step 84 SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #fb704e070bd94f18
+step 85 RETURN Cliente[5]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #61fc578640ff2033
+step 86 WRITE Cliente[5]: write(Cliente 5: me atendió el empleado 2) | ASSIGN Empleado[2]: listo = false | ASSIGN Empleado[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #8a0eb38ea2482f08
+step 87 TERMINATED Cliente[5]: termina | TERMINATED Empleado[0]: termina | RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #c4dcf300f6d4789d
+step 88 ASSIGN Empleado[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #291e19f75b58d0c1
+step 89 TERMINATED Empleado[2]: termina | {"finished":true,"deadlock":false,"instant":89,"waiting":false} #43b90bab487564f2
+state #da7516a58d562d71
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #03945a95e1e4c23b
+step 1 #fc246dc33856187a
+step 2 #dd8b0ae9aae53b56
+step 3 #1b140ade2fb42af6
+step 4 #681fafbf4eb1be35
+step 5 #4ac4a11f02dc1ac4
+step 6 #262393b88a2a676f
+step 7 #b3d5ed8882aa1559
+step 8 #4a3bd1cc40a3fe18
+step 9 #3e089eda120cc5f1
+step 10 #645706749116af13
+step 11 #824f43522aea1d98
+step 12 #6fed07364ad584b5
+step 13 #3f4fdda60710adac
+step 14 #446b8d44d2c24f6c
+step 15 #b940b9c09541bc3d
+step 16 #163408b28d4e4410
+step 17 #db41fa00f54ccb58
+step 18 #2caedfbed276bc3f
+step 19 #d34bddfe77198e7c
+step 20 #151802aad3a7c64c
+step 21 #daaed6356667c3c7
+step 22 #8106a435a99caff3
+step 23 #00463a77858d23de
+step 24 #da6dc4f9a84734f3
+step 25 #bcb7a88fa61af25c
+step 26 #2e4fcd29bc4f09f5
+step 27 #c5e33b9798e87114
+step 28 #bf27130ed15bde38
+step 29 #954f1d97baa61030
+step 30 #375ed5d6a79cbc47
+step 31 #ed17bd3f0e8d5205
+step 32 #2e5746fe549870d2
+step 33 #76e80f1f5d9efd0f
+step 34 #bf004356b642e49c
+step 35 #662c1ffd4f176f80
+step 36 #7d09a762c2a2e77a
+step 37 #882e88f087eb2a8d
+step 38 #5f27de1de19b2d79
+step 39 #8644b5c07336bd43
+step 40 #9050a358362c3154
+step 41 #dfa1429bcac28843
+step 42 #f843e69634c9b146
+step 43 #d5fa1c30008297fb
+step 44 #eee63d17ccb60068
+step 45 #6b05623b2e2abd12
+step 46 #295ee00a1c56fa46
+step 47 #4b7b2eea7cea2902
+step 48 #023159925a26623d
+step 49 #85b104913ec91021
+step 50 #97cf4f7365c020ae
+step 51 #d29112a5f75c8e4b
+step 52 #248088ef7c374b9b
+step 53 #4fc95c086bd6e084
+step 54 #ff2f97504349a558
+step 55 #d72aa4e82b5403f0
+step 56 #fa466fc637a6bb8b
+step 57 #ac658cf4dbe433ee
+step 58 #d56985b8492f0ad5
+step 59 #fd4de525055e8523
+step 60 #af81b3bc51baaa87
+step 61 #a08dc06cef7bcec3
+step 62 #93ca295f4d74d0df
+step 63 #5bdecd5b39b45536
+step 64 #aa8240ed24f65a31
+step 65 #eb667d9cd41a8573
+step 66 #84d1197a86d35bdb
+step 67 #7a22b922a618a049
+step 68 #42cd3774d44e397f
+step 69 #94f7833ab113441e
+step 70 #ee1c04b3771ffa01
+step 71 #ae6dc81a327bbfe2
+step 72 #a2b87eda1d433b65
+step 73 #57c2a83dae8a7375
+step 74 #78ac8dc203f9ef08
+step 75 #a2e0408ba567894c
+step 76 #25d7e1bdb05f2cab
+step 77 #ca7c2cb75d521756
+step 78 #b068eb8daac29cfe
+step 79 #0d3fc87c402405fa
+step 80 #763fee0501244e39
+step 81 #1783a0c8c6073bd8
+step 82 #119c0f719cb54e3d
+step 83 #7bbd0b6da370e445
+step 84 #7dfc90bf728a9a4d
+step 85 #e5fd0059a3dd7743
+step 86 #50ec45dfa6d9edf3
+step 87 #f36ca90e7e84a758
+step 88 #fa177c8e6df0aec2
+step 89 #c13360a7eb980913
+step 90 #86a4dbd576dd4523
+step 91 #283749f097e20978
+step 92 #0a640c969409cfca
+step 93 #d3dce807f32e7840
+state #1d8b2a302e2a9f51
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #181a392a0656e76b
+step 1 #cbd29f19b9ff2cea
+step 2 #0350592a8daea9ec
+step 3 #17effba841a59b64
+step 4 #7c7098daaf8b2034
+step 5 #412bbe9eaebe26b7
+step 6 #19edd60ddc2557f5
+step 7 #1a896953f1369ae2
+step 8 #e2c6ee3f4d51822f
+step 9 #af2317aebc1e3159
+step 10 #3683e2de931f7b01
+step 11 #3219d6688448641c
+step 12 #16bba8e62c03182e
+step 13 #7bfc426600897ad1
+step 14 #01838b7e265d2c93
+step 15 #15cfdee521690873
+step 16 #119405675fb048c4
+step 17 #2219c12d608ab400
+step 18 #017466beb6a29749
+step 19 #c6b209f908bcfb4f
+step 20 #26b1634f033af1c1
+step 21 #f13c5f1dcdf9be76
+step 22 #f23052fc3489b0f5
+step 23 #4241c7d8b36d6c96
+step 24 #56ee78c5a4a110b5
+step 25 #6960802e3f81a689
+step 26 #10aa50db97b1578b
+step 27 #5fbbc77f0a4dc3fe
+step 28 #49219d56667b9d54
+step 29 #03a30e9e51a8af03
+step 30 #37b1181af71f9bf6
+step 31 #5804f8abf74b5511
+step 32 #133fba4d79c5e0d1
+step 33 #26ae08c22cc20fa0
+step 34 #4a9d4696e53e0652
+step 35 #48296b93d53456b3
+step 36 #9d3b4ab4c73db3bd
+step 37 #11edff20c069d047
+step 38 #e86bb1bd0c091a97
+step 39 #beb981606dfad34d
+step 40 #993a31bdebd7484f
+step 41 #fa6051ee67fa4424
+step 42 #6085e1591dbd3274
+step 43 #2b94963bfa92f08c
+step 44 #bc49e951a571a1ea
+step 45 #e9f032a0fbc3d987
+step 46 #8140cdd2a5b244b6
+step 47 #9835ddf38de8df78
+step 48 #0df831dc1227fd4f
+step 49 #9705bf3fd7e14faf
+step 50 #07238096cf84cd48
+step 51 #2f7e1c11a548b613
+step 52 #04efed86b0090aa3
+step 53 #06827cd3554ce6db
+step 54 #1744b580da943077
+step 55 #d14f8e69f3abb360
+step 56 #5773c0fb472955c2
+step 57 #b24d8c9f9ccd4bbe
+step 58 #7f653a6a664f0483
+step 59 #9493dc3299bbe48e
+step 60 #9dbc93d38c199d35
+step 61 #a369c27f275f1a1b
+step 62 #d6e3bf60e18cf442
+step 63 #649082fbe95f910a
+step 64 #3311ffb401f9eebc
+step 65 #559ebbf078e93632
+step 66 #d0d832b52e26d47d
+step 67 #17312192128b39e2
+step 68 #212fb724b43ae416
+step 69 #b3cff5c184a74bb9
+step 70 #e88ff9764989abcf
+step 71 #dbe615d36fb25f08
+step 72 #f022205a1dee0a8a
+step 73 #3c45d95c035a6143
+step 74 #730eaf6c6e1cfe2c
+step 75 #82391c042602761f
+step 76 #8657e3c92dc7e70c
+step 77 #139c2e6c2efe7d2d
+step 78 #807adee8b82d8478
+step 79 #730628f93e2fb29a
+step 80 #e6d96f6cddd95081
+step 81 #ad0582a5d0542824
+step 82 #1de54527f5e1d617
+state #0eb6722a11a78279
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #40814f76c02ea3d3
+step 1 DECL Cliente[0]: int idE = 0 | DECL Cliente[1]: int idE = 0 | DECL Cliente[2]: int idE = 0 | DECL Cliente[3]: int idE = 0 | DECL Cliente[4]: int idE = 0 | DECL Cliente[5]: int idE = 0 | DECL Empleado[0]: text datos =  | DECL Empleado[1]: text datos =  | DECL Empleado[2]: text datos =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #fe904077ddaea1fa
+step 2 DECL Cliente[1]: text papel =  | DECL Cliente[2]: text papel =  | DECL Cliente[3]: text papel =  | DECL Cliente[4]: text papel =  | DECL Cliente[5]: text papel =  | DECL Empleado[0]: text res =  | DECL Empleado[1]: text res =  | DECL Empleado[2]: text res =  | DECL Cliente[0]: text papel =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #52b04aa63df1ffe0
+step 3 DECL Cliente[2]: text res =  | DECL Cliente[3]: text res =  | DECL Cliente[4]: text res =  | DECL Cliente[5]: text res =  | ENTER Empleado[0]: entra a Banco.Proximo | BLOCKED Empleado[1]: espera para entrar a Banco.Proximo | BLOCKED Empleado[2]: espera para entrar a Banco.Proximo | DECL Cliente[0]: text res =  | DECL Cliente[1]: text res =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #81f21a1d40c7cab0
+step 4 ASSIGN Cliente[3]: papel = papeles de 3 | ASSIGN Cliente[4]: papel = papeles de 4 | ASSIGN Cliente[5]: papel = papeles de 5 | PUSH Empleado[0]: push(elibres, 0) | ASSIGN Cliente[0]: papel = papeles de 0 | ASSIGN Cliente[1]: papel = papeles de 1 | ASSIGN Cliente[2]: papel = papeles de 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #4f908c756b063ba7
+step 5 BLOCKED Cliente[4]: espera para entrar a Banco.Llegada | BLOCKED Cliente[5]: espera para entrar a Banco.Llegada | ASSIGN Empleado[0]: cantLibres++ => 1 | BLOCKED Cliente[0]: espera para entrar a Banco.Llegada | BLOCKED Cliente[1]: espera para entrar a Banco.Llegada | BLOCKED Cliente[2]: espera para entrar a Banco.Llegada | BLOCKED Cliente[3]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #1017b4285dea2b00
+step 6 RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | ENTER Cliente[1]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4928a211daaa3f20
+step 7 ASSIGN Cliente[1]: cantLibres-- => 0 | ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #90bdb7a72f4c880d
+step 8 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | POP Cliente[1]: pop(elibres) => 0 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5adcf125e8151265
+step 9 RETURN Cliente[1]: retorna de Banco.Llegada, libera el monitor | ENTER Cliente[4]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #0bb8e934317f2b49
+step 10 ASSIGN Cliente[4]: esperando++ => 1 | ENTER Cliente[1]: entra a Escritorio[0].Atencion | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #ed7a5d2178c2a8a1
+step 11 ASSIGN Cliente[1]: datos = papeles de 1 | WAIT Cliente[4]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[2]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #394275e5282594f5
+step 12 PUSH Empleado[2]: push(elibres, 2) | ASSIGN Cliente[1]: listo = true | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #a4b04e448595643c
+step 13 SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | ASSIGN Empleado[2]: esperando-- => 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #196d2bb903a434f2
+step 14 SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[4] (compite por el monitor) | WAIT Cliente[1]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #a637db12db1ca172
+step 15 ASSIGN Empleado[0]: D = papeles de 1 | RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[4]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #c1d3c53db6d1ae9f
+step 16 ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | POP Cliente[4]: pop(elibres) => 2 | RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #2850ac2e838a38ab
+step 17 RETURN Cliente[4]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[1]: entra a Banco.Proximo | ASSIGN Empleado[0]: res = papeles de 1: resuelto | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #0493e3691c3e7e4d
+step 18 ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | PUSH Empleado[1]: push(elibres, 1) | ENTER Cliente[4]: entra a Escritorio[2].Atencion | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #9acaf887a7993005
+step 19 ASSIGN Empleado[1]: cantLibres++ => 1 | ASSIGN Cliente[4]: datos = papeles de 4 | ASSIGN Empleado[0]: resultados = papeles de 1: resuelto | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #27373e307696d7ba
+step 20 ASSIGN Cliente[4]: listo = true | SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[1] (compite por el monitor) | RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | ENTER Cliente[0]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #50387cf4ff8621cc
+step 21 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Escritorio[0] | ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | ASSIGN Cliente[0]: cantLibres-- => 0 | SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #a1545443801fce1e
+step 22 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | POP Cliente[0]: pop(elibres) => 1 | ASSIGN Cliente[1]: R = papeles de 1: resuelto | WAIT Cliente[4]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #6f8805d1aaaf6349
+step 23 ASSIGN Empleado[2]: D = papeles de 4 | RETURN Cliente[0]: retorna de Banco.Llegada, libera el monitor | ENTER Cliente[3]: entra a Banco.Llegada | SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #93f16b112e6f686f
+step 24 ENTER Cliente[0]: entra a Escritorio[1].Atencion | RETURN Cliente[1]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | ASSIGN Cliente[3]: esperando++ => 1 | RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #2926ce6657018547
+step 25 WRITE Cliente[1]: write(Cliente 1: me atendió el empleado 0) | WAIT Cliente[3]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[5]: entra a Banco.Llegada | ASSIGN Empleado[0]: listo = false | ASSIGN Empleado[2]: res = papeles de 4: resuelto | ASSIGN Cliente[0]: datos = papeles de 0 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #d7bfe9ca037d3f93
+step 26 ASSIGN Cliente[5]: esperando++ => 2 | RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ASSIGN Cliente[0]: listo = true | TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #d86d1a503e46cde9
+step 27 ASSIGN Empleado[0]: for#1++ => 2 | ASSIGN Empleado[2]: resultados = papeles de 4: resuelto | SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | WAIT Cliente[5]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[2]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #5e6c27ff34c28abb
+step 28 SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[4] (compite por el monitor) | WAIT Cliente[0]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | ASSIGN Cliente[2]: esperando++ => 3 | BLOCKED Empleado[0]: espera para entrar a Banco.Proximo | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #1ddfc21ae7e922a6
+step 29 WAIT Cliente[2]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[0]: entra a Banco.Proximo | ASSIGN Empleado[1]: D = papeles de 0 | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #3e2df40f2996a555
+step 30 ASSIGN Cliente[4]: R = papeles de 4: resuelto | PUSH Empleado[0]: push(elibres, 0) | RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #5982ab5caedf3e08
+step 31 ASSIGN Empleado[0]: esperando-- => 2 | ASSIGN Empleado[1]: res = papeles de 0: resuelto | SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #889a59a3112ae8a0
+step 32 ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | RETURN Cliente[4]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | SIGNAL Empleado[0]: signal(esperaC) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #2b67572dcc1bd448
+step 33 ASSIGN Empleado[2]: listo = false | WRITE Cliente[4]: write(Cliente 4: me atendió el empleado 2) | RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[3]: reingresa a Banco | ASSIGN Empleado[1]: resultados = papeles de 0: resuelto | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #bd58b9eccad3f35f
+step 34 POP Cliente[3]: pop(elibres) => 0 | TERMINATED Cliente[4]: termina | ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[0] (compite por el monitor) | RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #eb4b5b5e2999c7e3
+step 35 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Escritorio[1] | ASSIGN Empleado[2]: for#1++ => 2 | RETURN Cliente[3]: retorna de Banco.Llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #1c43fc29dd39c23d
+step 36 ENTER Empleado[2]: entra a Banco.Proximo | ASSIGN Cliente[0]: R = papeles de 0: resuelto | ENTER Cliente[3]: entra a Escritorio[0].Atencion | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #c6c6eb5582e44d7f
+step 37 SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | ASSIGN Cliente[3]: datos = papeles de 3 | PUSH Empleado[2]: push(elibres, 2) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #f2182c2dbe2cbc8a
+step 38 ASSIGN Cliente[3]: listo = true | ASSIGN Empleado[2]: esperando-- => 1 | RETURN Cliente[0]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #44e85560ec9959f3
+step 39 ASSIGN Empleado[1]: listo = false | SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[5] (compite por el monitor) | WRITE Cliente[0]: write(Cliente 0: me atendió el empleado 1) | SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #be81554b6e0b6d63
+step 40 RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[5]: reingresa a Banco | TERMINATED Cliente[0]: termina | WAIT Cliente[3]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #3a690c5646b51ac9
+step 41 POP Cliente[5]: pop(elibres) => 2 | ASSIGN Empleado[0]: D = papeles de 3 | ASSIGN Empleado[1]: for#1++ => 2 | ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #67b01737301d556f
+step 42 RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | BLOCKED Empleado[1]: espera para entrar a Banco.Proximo | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | RETURN Cliente[5]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[1]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #a4ce7fc943516615
+step 43 PUSH Empleado[1]: push(elibres, 1) | ENTER Cliente[5]: entra a Escritorio[2].Atencion | ASSIGN Empleado[0]: res = papeles de 3: resuelto | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #e9866f342d78785b
+step 44 ASSIGN Cliente[5]: datos = papeles de 5 | ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | ASSIGN Empleado[1]: esperando-- => 0 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #715222d6835964f2
+step 45 ASSIGN Empleado[0]: resultados = papeles de 3: resuelto | SIGNAL Empleado[1]: signal(esperaC) - despierta a Cliente[2] (compite por el monitor) | ASSIGN Cliente[5]: listo = true | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #757a7cf40bf2b1a5
+step 46 RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[2]: reingresa a Banco | SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0d55cd121a653a12
+step 47 POP Cliente[2]: pop(elibres) => 1 | WAIT Cliente[5]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Escritorio[0] | ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #10c07e41990e3375
+step 48 ASSIGN Cliente[3]: R = papeles de 3: resuelto | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | ASSIGN Empleado[2]: D = papeles de 5 | RETURN Cliente[2]: retorna de Banco.Llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #6ff73538f1c20f11
+step 49 RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | ENTER Cliente[2]: entra a Escritorio[1].Atencion | SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #8e927f9eb3fe1ba2
+step 50 ASSIGN Cliente[2]: datos = papeles de 2 | RETURN Cliente[3]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | ASSIGN Empleado[2]: res = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #57f640c5d70aa299
+step 51 WRITE Cliente[3]: write(Cliente 3: me atendió el empleado 0) | ASSIGN Empleado[0]: listo = false | ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ASSIGN Cliente[2]: listo = true | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #1ffea47803d34e72
+step 52 RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | ASSIGN Empleado[2]: resultados = papeles de 5: resuelto | SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #8bca144cbb61ca3d
+step 53 SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[5] (compite por el monitor) | WAIT Cliente[2]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | ASSIGN Empleado[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #b70339460ad9fa9d
+step 54 TERMINATED Empleado[0]: termina | ASSIGN Empleado[1]: D = papeles de 2 | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #87ab2934cc20b34f
+step 55 RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | ASSIGN Cliente[5]: R = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #2b58855e864faa67
+step 56 SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | ASSIGN Empleado[1]: res = papeles de 2: resuelto | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #f376fadea19e107d
+step 57 ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | RETURN Cliente[5]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #606553e9da74647d
+step 58 ASSIGN Empleado[2]: listo = false | WRITE Cliente[5]: write(Cliente 5: me atendió el empleado 2) | ASSIGN Empleado[1]: resultados = papeles de 2: resuelto | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #c6e4b303db3e2929
+step 59 TERMINATED Cliente[5]: termina | SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[2] (compite por el monitor) | RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #3a01860b51a8d07b
+step 60 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Escritorio[1] | ASSIGN Empleado[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #cbaf4216d078054a
+step 61 TERMINATED Empleado[2]: termina | ASSIGN Cliente[2]: R = papeles de 2: resuelto | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #7ea6c3117c030237
+step 62 SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #853b8d61a9e5224f
+step 63 RETURN Cliente[2]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #b1e9f279447ea8ed
+step 64 ASSIGN Empleado[1]: listo = false | WRITE Cliente[2]: write(Cliente 2: me atendió el empleado 1) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #31bae5cf1bfa9cc4
+step 65 TERMINATED Cliente[2]: termina | RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #0e977c4f3b8ff8b3
+step 66 ASSIGN Empleado[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #a1b1b43903a92003
+step 67 TERMINATED Empleado[1]: termina | {"finished":true,"deadlock":false,"instant":67,"waiting":false} #b224278fd4372678
+state #be7000cd0eb72e7a
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #03945a95e1e4c23b
+step 1 #fe904077ddaea1fa
+step 2 #52b04aa63df1ffe0
+step 3 #81f21a1d40c7cab0
+step 4 #4f908c756b063ba7
+step 5 #1017b4285dea2b00
+step 6 #4928a211daaa3f20
+step 7 #90bdb7a72f4c880d
+step 8 #5adcf125e8151265
+step 9 #6d17febb55fdf375
+step 10 #d1c651529103193f
+step 11 #cf8d75285b20ecef
+step 12 #126371b015f6081c
+step 13 #162b1753da940f3c
+step 14 #bea7363eacf4529d
+step 15 #ddb4540f5de21281
+step 16 #d14c4a2c504529ef
+step 17 #f73ad8a48cdbc4cc
+step 18 #924ae556aa674e2d
+step 19 #aaa4e45589c7f499
+step 20 #741c5bb795104fd6
+step 21 #5de8c4ad11a1f914
+step 22 #e1e7bd62bfee4416
+step 23 #f93609589f2caa5c
+step 24 #64a2aa047a6fca52
+step 25 #36923b0221c61cfd
+step 26 #8b5ec5eef35f5e25
+step 27 #54d90aac05edc3cc
+step 28 #14b5b7f5d6459e0e
+step 29 #7e400d5dcb936413
+step 30 #a1eb619c275df076
+step 31 #cabefc1c01ded965
+step 32 #9f78e80da500bcad
+step 33 #4f242743ec98d3cd
+step 34 #3600ed7e842c549b
+step 35 #99ad939f01d35708
+step 36 #b812ed3c5ab22b63
+step 37 #4e1d7e22c34ebc79
+step 38 #ca140a0df8b62c8f
+step 39 #3289c53bc59ebc58
+step 40 #1927a86b17b28ebe
+step 41 #9b7dd994f9ff223a
+step 42 #deba252716ece795
+step 43 #c112b0fd33fe5619
+step 44 #9cb168206697040d
+step 45 #0946237f5d257b83
+step 46 #d2a4eea7ce9b9a0e
+step 47 #e281596cd9e5396f
+step 48 #e01f47242c4514ff
+step 49 #da438c0f01239210
+step 50 #3303225316620ee6
+step 51 #b4441de8d98c7633
+step 52 #239d214cb0c85199
+step 53 #6b1bf95bdf52d1f4
+step 54 #9f3d355e3e343e04
+step 55 #83256a368c65a297
+step 56 #0489fd7774d35079
+step 57 #85d9de18171fb90a
+step 58 #57e37dc47415d4c2
+step 59 #edd984cf7548eb5c
+step 60 #3e8f3ac565c4b72b
+step 61 #26ece98169193c88
+step 62 #65acc147671645cb
+step 63 #9c643c85c808fb96
+step 64 #2b3bada4cadffde6
+step 65 #12e3fb68d1f1efa1
+step 66 #0570cf26abc532c8
+step 67 #e3c7a962110449b4
+step 68 #231b3c69f04e7524
+step 69 #3158e6423a9b4171
+step 70 #6c54e1beb3d5d551
+step 71 #07733bcc31c3eb6d
+step 72 #4409b0974b96c74a
+step 73 #395bc999e8a176f2
+state #d2820437dfd09587
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #181a392a0656e76b
+step 1 #fe904077ddaea1fa
+step 2 #52b04aa63df1ffe0
+step 3 #81f21a1d40c7cab0
+step 4 #4f908c756b063ba7
+step 5 #1017b4285dea2b00
+step 6 #4928a211daaa3f20
+step 7 #90bdb7a72f4c880d
+step 8 #5adcf125e8151265
+step 9 #249e2f592dd13d01
+step 10 #dfa6b592dc4e1e9d
+step 11 #7707cc063add06ed
+step 12 #1a35110512f488ff
+step 13 #fe829319942dfa4a
+step 14 #e3b6001b587cd827
+step 15 #7b4c76b744785117
+step 16 #3fc1c55cff2613d5
+step 17 #8ef0caca793f44f2
+step 18 #7e916282e38e01d5
+step 19 #932db26242610882
+step 20 #f06fddd6c1857f53
+step 21 #a21a86cbe8252df4
+step 22 #a5ba7de4b59eeba4
+step 23 #c07b15405d6b0993
+step 24 #4c12a439a6688632
+step 25 #d416d282d7bab2be
+step 26 #0d36131906368108
+step 27 #da2a7633c2200f9c
+step 28 #202c49b1f1b4ed16
+step 29 #660515dd43f4ea8e
+step 30 #4e27813783875536
+step 31 #c9b15b62f0f8af24
+step 32 #18598095560c057c
+step 33 #ec7c999bd55b3cf7
+step 34 #b16c2e27e0ce1ff2
+step 35 #8783724406a8a5dc
+step 36 #b9b397af8bfb9d4f
+step 37 #77701189b65b6051
+step 38 #9ae843109ae3280d
+step 39 #906841d2f4c18401
+step 40 #fe5e853e6f94e96f
+step 41 #aa39488cc97a6783
+step 42 #8da18aca619284ab
+step 43 #ddbcd19b1a5a4fc0
+step 44 #e48cb6f65019edbe
+step 45 #7f449deaf99e84a7
+step 46 #737713b3046deb16
+step 47 #da3d8b8fb3ed2c28
+step 48 #4e7e4bc6a7943917
+step 49 #8235fbcd99c08d9d
+step 50 #08093a2525009bfa
+step 51 #75fb2c326e495730
+step 52 #ff1b6734df958606
+step 53 #8a4cf2b7c8dc095a
+step 54 #0cdd71f4a75789b2
+step 55 #cbf36b057eb8e460
+step 56 #7ebc523bcc644b0c
+step 57 #ff1101d92ae7f1ff
+step 58 #5234923965eccc1e
+step 59 #d6efd958a67191b3
+step 60 #2b9704e274906d59
+step 61 #8bacd227a7b0aab2
+step 62 #05f9348a53bb9123
+step 63 #5a7005630fcbc6cb
+step 64 #d9b5234db090a312
+step 65 #f909756ed014cd64
+step 66 #5cdd7a3c2da973d0
+step 67 #8c37f5af86c2144c
+step 68 #898ee1cd57bec01b
+step 69 #978c6c9594e3ddeb
+step 70 #7a2493c60ac5bb34
+step 71 #d7d29c89db536e4d
+step 72 #4112a35a99f6c9df
+step 73 #64ba42fe41be7f32
+state #f9d701259a8be21d
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #40814f76c02ea3d3
+step 1 DECL Cliente[1]: int idE = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8325da3e1100c5fd
+step 2 DECL Cliente[2]: int idE = 0 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #d624349bbf93c48a
+step 3 DECL Cliente[3]: int idE = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9fffd2130cee9fdd
+step 4 DECL Cliente[0]: int idE = 0 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #f8c47817e00c8aa8
+step 5 DECL Cliente[1]: text papel =  | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #095d07dcb97b8059
+step 6 DECL Cliente[2]: text papel =  | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #e672c95b4ac80ea3
+step 7 DECL Cliente[3]: text papel =  | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #88176bef97acb31b
+step 8 DECL Cliente[0]: text papel =  | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #48ac2c190a372936
+step 9 DECL Cliente[1]: text res =  | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #d67448d13128bb7b
+step 10 DECL Cliente[2]: text res =  | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #2e4643411a280a9f
+step 11 DECL Cliente[3]: text res =  | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e3fa93b28291da6a
+step 12 DECL Cliente[0]: text res =  | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #801fd36db11822eb
+step 13 ASSIGN Cliente[1]: papel = papeles de 1 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #6f3be62bcb456ccd
+step 14 ASSIGN Cliente[2]: papel = papeles de 2 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #c178aea0246a1280
+step 15 ASSIGN Cliente[3]: papel = papeles de 3 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #45799b7ceaab4a68
+step 16 ASSIGN Cliente[0]: papel = papeles de 0 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #e59780aafb95aaed
+step 17 ENTER Cliente[1]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #e514c919bb76353a
+step 18 BLOCKED Cliente[2]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #868933d6f068d38c
+step 19 BLOCKED Cliente[3]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #24dc182fa1264370
+step 20 BLOCKED Cliente[0]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ac8d46d4cb9930e1
+step 21 ASSIGN Cliente[1]: esperando++ => 1 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #ac9bae8e2853ec24
+step 22 DECL Empleado[1]: text datos =  | DECL Cliente[5]: int idE = 0 | DECL Empleado[2]: text datos =  | DECL Empleado[0]: text datos =  | WAIT Cliente[1]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[0]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #7b1977593d73b73a
+step 23 ASSIGN Cliente[0]: esperando++ => 2 | DECL Cliente[4]: int idE = 0 | DECL Empleado[1]: text res =  | DECL Empleado[0]: text res =  | DECL Empleado[2]: text res =  | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #92cbd4470123e70e
+step 24 WAIT Cliente[0]: wait(esperaC) - libera el monitor y se demora | ENTER Cliente[2]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #7bc40362564657ee
+step 25 BLOCKED Empleado[0]: espera para entrar a Banco.Proximo | BLOCKED Empleado[2]: espera para entrar a Banco.Proximo | DECL Cliente[4]: text papel =  | BLOCKED Empleado[1]: espera para entrar a Banco.Proximo | DECL Cliente[5]: text papel =  | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #852563c946fe2e92
+step 26 ASSIGN Cliente[2]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #a70a39790ede11ac
+step 27 DECL Cliente[4]: text res =  | WAIT Cliente[2]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[1]: entra a Banco.Proximo | DECL Cliente[5]: text res =  | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #ca0ab126eb801ab0
+step 28 PUSH Empleado[1]: push(elibres, 1) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #3431731d7f6859f9
+step 29 ASSIGN Cliente[4]: papel = papeles de 4 | ASSIGN Empleado[1]: esperando-- => 2 | ASSIGN Cliente[5]: papel = papeles de 5 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #165512e9c97f3062
+step 30 SIGNAL Empleado[1]: signal(esperaC) - despierta a Cliente[1] (compite por el monitor) | BLOCKED Cliente[5]: espera para entrar a Banco.Llegada | BLOCKED Cliente[4]: espera para entrar a Banco.Llegada | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #e7758c7cb7c8d3d6
+step 31 RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | ENTER Cliente[4]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #f4be9ea1f6191f88
+step 32 ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #366508a44c7585d7
+step 33 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | ASSIGN Cliente[4]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #30ba5468a38b444b
+step 34 WAIT Cliente[4]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[2]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #4cd5178c3927321a
+step 35 PUSH Empleado[2]: push(elibres, 2) | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #441691e612968cb5
+step 36 ASSIGN Empleado[2]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #65d6125e84abe5a7
+step 37 SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #1e8b57962dc7b386
+step 38 RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | ENTER Cliente[5]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #0496920ba1d4313c
+step 39 ASSIGN Cliente[5]: esperando++ => 3 | ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #564373af2ec9576a
+step 40 WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #d4a0236e4d0b00be
+step 41 WAIT Cliente[5]: wait(esperaC) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #5631100718296aea
+step 42 POP Cliente[0]: pop(elibres) => 1 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #e287c052c26e2b1e
+step 43 RETURN Cliente[0]: retorna de Banco.Llegada, libera el monitor | ENTER Cliente[3]: entra a Banco.Llegada | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #f2eca646cb267263
+step 44 ENTER Cliente[0]: entra a Escritorio[1].Atencion | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #fead66d07fee2dda
+step 45 ASSIGN Cliente[0]: datos = papeles de 0 | ASSIGN Cliente[3]: esperando++ => 4 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #c4594f2ab158d871
+step 46 ASSIGN Cliente[0]: listo = true | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #099e0db58c4d4f53
+step 47 WAIT Cliente[3]: wait(esperaC) - libera el monitor y se demora | ENTER Empleado[0]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #6df2a9e48bf0fb41
+step 48 SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #cd027831133e6425
+step 49 PUSH Empleado[0]: push(elibres, 0) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #48df3dfec066304a
+step 50 ASSIGN Empleado[0]: esperando-- => 3 | WAIT Cliente[0]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #de7f0cd13d8e83ba
+step 51 ASSIGN Empleado[1]: D = papeles de 0 | SIGNAL Empleado[0]: signal(esperaC) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #20281bb571c7dfe5
+step 52 RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[1]: reingresa a Banco | RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #f0fe994fe1f6e8e5
+step 53 POP Cliente[1]: pop(elibres) => 2 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #71aa4c60e5025368
+step 54 ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | RETURN Cliente[1]: retorna de Banco.Llegada, libera el monitor | REENTER Cliente[2]: reingresa a Banco | ASSIGN Empleado[1]: res = papeles de 0: resuelto | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #f49171ac29081ab1
+step 55 ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | POP Cliente[2]: pop(elibres) => 0 | WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #a54a08640bea407e
+step 56 ENTER Cliente[1]: entra a Escritorio[2].Atencion | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #44a41dc62ea9bb8e
+step 57 ASSIGN Cliente[1]: datos = papeles de 1 | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #0f032fa660d24605
+step 58 RETURN Cliente[2]: retorna de Banco.Llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #ba855acc381f7ee5
+step 59 ASSIGN Empleado[1]: resultados = papeles de 0: resuelto | ENTER Cliente[2]: entra a Escritorio[0].Atencion | ASSIGN Cliente[1]: listo = true | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #42ee7b186a5b584b
+step 60 SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #9138f3de40dc7075
+step 61 WAIT Cliente[1]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #a4433e98248e125a
+step 62 ASSIGN Cliente[2]: datos = papeles de 2 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #ec0a76eefa63bf3c
+step 63 SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[0] (compite por el monitor) | ASSIGN Empleado[2]: D = papeles de 1 | ASSIGN Cliente[2]: listo = true | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #ff2124676593b272
+step 64 SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #4213951d51137cf6
+step 65 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[0]: reingresa a Escritorio[1] | ASSIGN Empleado[2]: res = papeles de 1: resuelto | WAIT Cliente[2]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #0de76e37c7412ee6
+step 66 ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ASSIGN Cliente[0]: R = papeles de 0: resuelto | ASSIGN Empleado[0]: D = papeles de 2 | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #726b8ebf51dc75a9
+step 67 RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | ASSIGN Empleado[2]: resultados = papeles de 1: resuelto | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #3a00bd0388f3eda2
+step 68 SIGNAL Cliente[0]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #3471254074cbf08c
+step 69 RETURN Cliente[0]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | ASSIGN Empleado[0]: res = papeles de 2: resuelto | SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #c0b7f16499a06b30
+step 70 WRITE Cliente[0]: write(Cliente 0: me atendió el empleado 1) | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[1]: reingresa a Escritorio[2] | ASSIGN Empleado[1]: listo = false | ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #119ba5de44a0bc60
+step 71 ASSIGN Empleado[0]: resultados = papeles de 2: resuelto | ASSIGN Cliente[1]: R = papeles de 1: resuelto | TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #c1ad262297a4a9ad
+step 72 SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[2] (compite por el monitor) | RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #edf6dce19b575929
+step 73 SIGNAL Cliente[1]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #82ed1b9def8eec82
+step 74 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[2]: reingresa a Escritorio[0] | RETURN Cliente[1]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #afc56c8093a7e769
+step 75 ASSIGN Empleado[1]: for#1++ => 2 | ASSIGN Cliente[2]: R = papeles de 2: resuelto | ASSIGN Empleado[2]: listo = false | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #6ce50d8ccb01e385
+step 76 ENTER Empleado[1]: entra a Banco.Proximo | SIGNAL Cliente[2]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #10bfadd32ce926e9
+step 77 WRITE Cliente[1]: write(Cliente 1: me atendió el empleado 2) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #23f608b534fbaf0f
+step 78 RETURN Cliente[2]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #24b4b15be2d53a79
+step 79 TERMINATED Cliente[1]: termina | WRITE Cliente[2]: write(Cliente 2: me atendió el empleado 0) | ASSIGN Empleado[0]: listo = false | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #c7d20dbcaf234393
+step 80 PUSH Empleado[1]: push(elibres, 1) | TERMINATED Cliente[2]: termina | RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #1496e72e72eb0d78
+step 81 RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | ASSIGN Empleado[1]: esperando-- => 2 | ASSIGN Empleado[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #0a4436b04d0180a6
+step 82 BLOCKED Empleado[0]: espera para entrar a Banco.Proximo | SIGNAL Empleado[1]: signal(esperaC) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #0552ab7b958de520
+step 83 RETURN Empleado[1]: retorna de Banco.Proximo, libera el monitor | ENTER Empleado[0]: entra a Banco.Proximo | ASSIGN Empleado[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":83,"waiting":false} #352f11a49cd6ccae
+step 84 BLOCKED Empleado[2]: espera para entrar a Banco.Proximo | ENTER Empleado[1]: entra a Escritorio[1].EsperarDatos | PUSH Empleado[0]: push(elibres, 0) | {"finished":false,"deadlock":false,"instant":84,"waiting":false} #6f4256fbd2d9809f
+step 85 WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | ASSIGN Empleado[0]: esperando-- => 1 | {"finished":false,"deadlock":false,"instant":85,"waiting":false} #0d11e679868090b3
+step 86 SIGNAL Empleado[0]: signal(esperaC) - despierta a Cliente[5] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #89b665fdc7d82e9d
+step 87 RETURN Empleado[0]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[4]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #a69dc82b239b9613
+step 88 ENTER Empleado[0]: entra a Escritorio[0].EsperarDatos | POP Cliente[4]: pop(elibres) => 1 | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #3e482a92ad58dac0
+step 89 RETURN Cliente[4]: retorna de Banco.Llegada, libera el monitor | REENTER Cliente[5]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #e5f295fd48608d59
+step 90 WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | POP Cliente[5]: pop(elibres) => 0 | ENTER Cliente[4]: entra a Escritorio[1].Atencion | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #87dd50bddfe07152
+step 91 RETURN Cliente[5]: retorna de Banco.Llegada, libera el monitor | ENTER Empleado[2]: entra a Banco.Proximo | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #b6981a6a4958c878
+step 92 ENTER Cliente[5]: entra a Escritorio[0].Atencion | PUSH Empleado[2]: push(elibres, 2) | {"finished":false,"deadlock":false,"instant":92,"waiting":false} #048fa6f91ff08d77
+step 93 ASSIGN Cliente[4]: datos = papeles de 4 | ASSIGN Empleado[2]: esperando-- => 0 | ASSIGN Cliente[5]: datos = papeles de 5 | {"finished":false,"deadlock":false,"instant":93,"waiting":false} #395905bab38be1ec
+step 94 SIGNAL Empleado[2]: signal(esperaC) - despierta a Cliente[3] (compite por el monitor) | ASSIGN Cliente[5]: listo = true | {"finished":false,"deadlock":false,"instant":94,"waiting":false} #e69e8fdcba44c851
+step 95 SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | RETURN Empleado[2]: retorna de Banco.Proximo, libera el monitor | REENTER Cliente[3]: reingresa a Banco | {"finished":false,"deadlock":false,"instant":95,"waiting":false} #5b5e8d4081bc0a4d
+step 96 ENTER Empleado[2]: entra a Escritorio[2].EsperarDatos | ASSIGN Cliente[4]: listo = true | POP Cliente[3]: pop(elibres) => 2 | {"finished":false,"deadlock":false,"instant":96,"waiting":false} #fb6f9d45bc7375b1
+step 97 SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | WAIT Cliente[5]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[0]: reingresa a Escritorio[0] | RETURN Cliente[3]: retorna de Banco.Llegada, libera el monitor | WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":97,"waiting":false} #1555ca5e81d68fd2
+step 98 ASSIGN Empleado[0]: D = papeles de 5 | ENTER Cliente[3]: entra a Escritorio[2].Atencion | WAIT Cliente[4]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":98,"waiting":false} #0589f05183338114
+step 99 ASSIGN Cliente[3]: datos = papeles de 3 | {"finished":false,"deadlock":false,"instant":99,"waiting":false} #742f6fbcea358733
+step 100 RETURN Empleado[0]: retorna de Escritorio[0].EsperarDatos, libera el monitor | ASSIGN Cliente[3]: listo = true | {"finished":false,"deadlock":false,"instant":100,"waiting":false} #06e88dbf11aeb1f1
+step 101 SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | ASSIGN Empleado[1]: D = papeles de 4 | ASSIGN Empleado[0]: res = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":101,"waiting":false} #286c40e375927f86
+step 102 WAIT Cliente[3]: wait(vcCliente) - libera el monitor y se demora | REENTER Empleado[2]: reingresa a Escritorio[2] | ENTER Empleado[0]: entra a Escritorio[0].EnviarResultados | RETURN Empleado[1]: retorna de Escritorio[1].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":102,"waiting":false} #dcbca54460cae307
+step 103 ASSIGN Empleado[2]: D = papeles de 3 | ASSIGN Empleado[0]: resultados = papeles de 5: resuelto | {"finished":false,"deadlock":false,"instant":103,"waiting":false} #3cad23ea04828cc8
+step 104 ASSIGN Empleado[1]: res = papeles de 4: resuelto | SIGNAL Empleado[0]: signal(vcCliente) - despierta a Cliente[5] (compite por el monitor) | RETURN Empleado[2]: retorna de Escritorio[2].EsperarDatos, libera el monitor | {"finished":false,"deadlock":false,"instant":104,"waiting":false} #62ae93a77620361c
+step 105 ENTER Empleado[1]: entra a Escritorio[1].EnviarResultados | ASSIGN Empleado[2]: res = papeles de 3: resuelto | WAIT Empleado[0]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[5]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":105,"waiting":false} #fb47b65204399417
+step 106 ENTER Empleado[2]: entra a Escritorio[2].EnviarResultados | ASSIGN Empleado[1]: resultados = papeles de 4: resuelto | {"finished":false,"deadlock":false,"instant":106,"waiting":false} #0b5228d2b8548d33
+step 107 ASSIGN Cliente[5]: R = papeles de 5: resuelto | ASSIGN Empleado[2]: resultados = papeles de 3: resuelto | SIGNAL Empleado[1]: signal(vcCliente) - despierta a Cliente[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":107,"waiting":false} #0fc1b5a8801f2df1
+step 108 SIGNAL Empleado[2]: signal(vcCliente) - despierta a Cliente[3] (compite por el monitor) | WAIT Empleado[1]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[4]: reingresa a Escritorio[1] | SIGNAL Cliente[5]: signal(vcEmpleado) - despierta a Empleado[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":108,"waiting":false} #c4181c3e95192611
+step 109 WAIT Empleado[2]: wait(vcEmpleado) - libera el monitor y se demora | REENTER Cliente[3]: reingresa a Escritorio[2] | RETURN Cliente[5]: retorna de Escritorio[0].Atencion, libera el monitor | REENTER Empleado[0]: reingresa a Escritorio[0] | {"finished":false,"deadlock":false,"instant":109,"waiting":false} #b5679e78ba3fdbe4
+step 110 ASSIGN Cliente[4]: R = papeles de 4: resuelto | WRITE Cliente[5]: write(Cliente 5: me atendió el empleado 0) | {"finished":false,"deadlock":false,"instant":110,"waiting":false} #3ddb367f34560e42
+step 111 ASSIGN Cliente[3]: R = papeles de 3: resuelto | {"finished":false,"deadlock":false,"instant":111,"waiting":false} #0e5c1595657dee97
+step 112 SIGNAL Cliente[3]: signal(vcEmpleado) - despierta a Empleado[2] (compite por el monitor) | ASSIGN Empleado[0]: listo = false | TERMINATED Cliente[5]: termina | {"finished":false,"deadlock":false,"instant":112,"waiting":false} #10e776e6fd53a174
+step 113 RETURN Cliente[3]: retorna de Escritorio[2].Atencion, libera el monitor | REENTER Empleado[2]: reingresa a Escritorio[2] | RETURN Empleado[0]: retorna de Escritorio[0].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":113,"waiting":false} #c391e5a9c7a9f22e
+step 114 ASSIGN Empleado[0]: for#1++ => 3 | WRITE Cliente[3]: write(Cliente 3: me atendió el empleado 2) | {"finished":false,"deadlock":false,"instant":114,"waiting":false} #5a7d3975f8d202ce
+step 115 TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":115,"waiting":false} #97c7805402215474
+step 116 TERMINATED Empleado[0]: termina | {"finished":false,"deadlock":false,"instant":116,"waiting":false} #e5264ff709122f18
+step 117 SIGNAL Cliente[4]: signal(vcEmpleado) - despierta a Empleado[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":117,"waiting":false} #3722139e84908d6f
+step 118 ASSIGN Empleado[2]: listo = false | RETURN Cliente[4]: retorna de Escritorio[1].Atencion, libera el monitor | REENTER Empleado[1]: reingresa a Escritorio[1] | {"finished":false,"deadlock":false,"instant":118,"waiting":false} #e5f06cc3c8219614
+step 119 ASSIGN Empleado[1]: listo = false | RETURN Empleado[2]: retorna de Escritorio[2].EnviarResultados, libera el monitor | {"finished":false,"deadlock":false,"instant":119,"waiting":false} #531ab1ed23ccb141
+step 120 RETURN Empleado[1]: retorna de Escritorio[1].EnviarResultados, libera el monitor | ASSIGN Empleado[2]: for#1++ => 3 | WRITE Cliente[4]: write(Cliente 4: me atendió el empleado 1) | {"finished":false,"deadlock":false,"instant":120,"waiting":false} #c92d591604a759eb
+step 121 TERMINATED Cliente[4]: termina | ASSIGN Empleado[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":121,"waiting":false} #e839c4bcb209ddb3
+step 122 TERMINATED Empleado[2]: termina | {"finished":false,"deadlock":false,"instant":122,"waiting":false} #0710682d847f6b16
+step 123 TERMINATED Empleado[1]: termina | {"finished":true,"deadlock":false,"instant":123,"waiting":false} #3afca3eb4c907f8b
+state #b81598a07e3d0bda

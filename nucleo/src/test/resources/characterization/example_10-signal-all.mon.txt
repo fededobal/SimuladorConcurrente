@@ -1,0 +1,288 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #87894278ad3306b4
+step 1 ENTER Jugador[0]: entra a Cancha.llegada | BLOCKED Jugador[3]: espera para entrar a Cancha.llegada | BLOCKED Jugador[2]: espera para entrar a Cancha.llegada | BLOCKED Partido: espera para entrar a Cancha.Iniciar | BLOCKED Jugador[4]: espera para entrar a Cancha.llegada | BLOCKED Jugador[5]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a4c4f42d1489d695
+step 2 BLOCKED Jugador[1]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #93f45d5d946ad9cc
+step 3 ASSIGN Jugador[0]: cant++ => 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #fe6450798ce02593
+step 4 WAIT Jugador[0]: wait(espera) - libera el monitor y se demora | ENTER Jugador[1]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #8a2aae78b72b4286
+step 5 ASSIGN Jugador[1]: cant++ => 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #8fcdabb614e6b1a6
+step 6 WAIT Jugador[1]: wait(espera) - libera el monitor y se demora | ENTER Jugador[4]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #f66dc89962f7d9ad
+step 7 ASSIGN Jugador[4]: cant++ => 3 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ddb8af8ff5a2ca5f
+step 8 WAIT Jugador[4]: wait(espera) - libera el monitor y se demora | ENTER Jugador[3]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #ece3a4aa41b7b765
+step 9 ASSIGN Jugador[3]: cant++ => 4 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #62705ea12ce3d6a5
+step 10 WAIT Jugador[3]: wait(espera) - libera el monitor y se demora | ENTER Partido: entra a Cancha.Iniciar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #acd8055e754b952a
+step 11 WAIT Partido: wait(inicio) - libera el monitor y se demora | ENTER Jugador[2]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #750c98a34f774769
+step 12 ASSIGN Jugador[2]: cant++ => 5 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #29aaa44315517edf
+step 13 WAIT Jugador[2]: wait(espera) - libera el monitor y se demora | ENTER Jugador[5]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #10e3e3b05cb52a5e
+step 14 ASSIGN Jugador[5]: cant++ => 6 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d13fa1e654b8038c
+step 15 SIGNAL Jugador[5]: signal(inicio) - despierta a Partido (compite por el monitor) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #daa4fd205f98bd22
+step 16 WAIT Jugador[5]: wait(espera) - libera el monitor y se demora | REENTER Partido: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #251f9577e008d3a2
+step 17 RETURN Partido: retorna de Cancha.Iniciar, libera el monitor | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #992978076b74b0b5
+step 18 DELAY Partido: delay(9) - se demora 9 instantes | {"finished":false,"deadlock":false,"instant":18,"waiting":true} #8b14bfbb36001c08
+step 19 {"finished":false,"deadlock":false,"instant":19,"waiting":true} #dfdfaf9d5dddb919
+step 20 {"finished":false,"deadlock":false,"instant":20,"waiting":true} #cf6d11473793c6a8
+step 21 {"finished":false,"deadlock":false,"instant":21,"waiting":true} #b46ff9041140056b
+step 22 {"finished":false,"deadlock":false,"instant":22,"waiting":true} #6f84bc68d3a1a6a5
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #7840e84f1990665f
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #932386bb5ab7cc71
+step 25 {"finished":false,"deadlock":false,"instant":25,"waiting":true} #05922b6f284ece06
+step 26 {"finished":false,"deadlock":false,"instant":26,"waiting":true} #de3ea3707f671729
+step 27 {"finished":false,"deadlock":false,"instant":27,"waiting":true} #dc7f18aec45e8dec
+step 28 ENTER Partido: entra a Cancha.Terminar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #57ece868ccbd3090
+step 29 SIGNAL_ALL Partido: signal_all(espera) - despierta a 6 proceso(s) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #ef65f2aa790f09bf
+step 30 RETURN Partido: retorna de Cancha.Terminar, libera el monitor | REENTER Jugador[4]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #cb3454ba5a639dda
+step 31 RETURN Jugador[4]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[2]: reingresa a Cancha | TERMINATED Partido: termina | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c3d58f44e5828230
+step 32 RETURN Jugador[2]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[5]: reingresa a Cancha | WRITE Jugador[4]: write(Jugador 4: me retiro) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #0438637bb05b4e0e
+step 33 RETURN Jugador[5]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[0]: reingresa a Cancha | TERMINATED Jugador[4]: termina | WRITE Jugador[2]: write(Jugador 2: me retiro) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #c5771438af8ba216
+step 34 WRITE Jugador[5]: write(Jugador 5: me retiro) | RETURN Jugador[0]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[3]: reingresa a Cancha | TERMINATED Jugador[2]: termina | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #e443dda170cf32f1
+step 35 WRITE Jugador[0]: write(Jugador 0: me retiro) | TERMINATED Jugador[5]: termina | RETURN Jugador[3]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[1]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #cccc3f9622989603
+step 36 WRITE Jugador[3]: write(Jugador 3: me retiro) | TERMINATED Jugador[0]: termina | RETURN Jugador[1]: retorna de Cancha.llegada, libera el monitor | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #670b5fe4e8d17f65
+step 37 WRITE Jugador[1]: write(Jugador 1: me retiro) | TERMINATED Jugador[3]: termina | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #5c48146f3492fedb
+step 38 TERMINATED Jugador[1]: termina | {"finished":true,"deadlock":false,"instant":38,"waiting":false} #31e9de3e7b9255b5
+state #efc544ad627874bf
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #34dc9bf077624afc
+step 1 #a19e9df7a352d5d1
+step 2 #f9a9388fbdfead48
+step 3 #21e120c0152a65cf
+step 4 #b779539641ad2547
+step 5 #9d68d5e25b99a0b0
+step 6 #96b7a8201436ee5c
+step 7 #08027bbd7877a524
+step 8 #00e5b58aa2a3e6db
+step 9 #dcb249ea02bede19
+step 10 #ccae239616b30658
+step 11 #f040f0067a274271
+step 12 #aa1cb20f3a3f954d
+step 13 #b59193d2722f2716
+step 14 #60b0255d4cd28254
+step 15 #52c11ad06a25151f
+step 16 #1b142ad1c0e0f29d
+step 17 #d7cae01094a8465c
+step 18 #8ffbd7afefe2be16
+step 19 #bc81038af7f64c98
+step 20 #ea1017724a5c3a19
+step 21 #c5cf9ec51b3b7d14
+step 22 #5e54e2ee60314d9a
+step 23 #6e88928f5939777b
+step 24 #1a3c5d7c22b7daca
+step 25 #ee933aec62aae9ba
+step 26 #a333dc92435c7efc
+step 27 #3de83ba374e1abd7
+step 28 #66c2dc53cdebe3a4
+step 29 #a9487af0c54f4f4d
+step 30 #334bfc18cd96213b
+step 31 #91b3757c54900cae
+step 32 #9e547e05096be7b2
+step 33 #e1e7b2fd127ba982
+step 34 #f5f2d063d274086e
+step 35 #e9c6fc48c89e7edd
+step 36 #a53db29faed66a04
+step 37 #16b617670f8a63f4
+step 38 #bee91c0546683c4f
+state #1cc87d92762e08fb
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #7c2322e5edfcb17d
+step 1 #19f53c8155c86ef8
+step 2 #64c5ab031a17d133
+step 3 #aca830b48c1459cf
+step 4 #c7a9cd2606366d18
+step 5 #3e7465a87ff52e58
+step 6 #d78900ee4e1e2fcf
+step 7 #dc5a9c1313792452
+step 8 #49c2af6d25a67d88
+step 9 #80c9f3dfbf785d7a
+step 10 #d8001913571b42d9
+step 11 #fa9ac89c2824615c
+step 12 #030cd2f15926a9e5
+step 13 #69563a04a71db3f5
+step 14 #11aa20d837954740
+step 15 #5c24ec0d34e6666c
+step 16 #5413d053c2098576
+step 17 #c3c36f13b2f54967
+step 18 #dcdd93ad90eee829
+step 19 #9a26d57ea83a9c9c
+step 20 #8cd81acb15e04451
+step 21 #bbee71f9b5a06ff0
+step 22 #1e104fcb0a71bc06
+step 23 #9ed44869f732ea5f
+step 24 #e34e358ad1ae3865
+step 25 #02589de673816856
+step 26 #1ab3f3ef127b41a3
+step 27 #601721350432abc2
+step 28 #283aa28f0401c6cf
+step 29 #86f9da5e36998fec
+step 30 #0907f418ec5e9fb5
+step 31 #c654b6d1ce3496a9
+step 32 #7d5fb8243a77c81c
+step 33 #3ac69e5bbdc4de13
+step 34 #feb2e221147ed850
+step 35 #566e50e81b33d075
+step 36 #2a34398085b91baf
+step 37 #ee5ce93b9f090a89
+step 38 #075a77fb008dca02
+step 39 #12c7378fb862add4
+state #d54ba4f474f3857c
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #87894278ad3306b4
+step 1 ENTER Jugador[0]: entra a Cancha.llegada | BLOCKED Jugador[1]: espera para entrar a Cancha.llegada | BLOCKED Jugador[2]: espera para entrar a Cancha.llegada | BLOCKED Jugador[3]: espera para entrar a Cancha.llegada | BLOCKED Jugador[4]: espera para entrar a Cancha.llegada | BLOCKED Jugador[5]: espera para entrar a Cancha.llegada | BLOCKED Partido: espera para entrar a Cancha.Iniciar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #43ae2692e2f891c3
+step 2 ASSIGN Jugador[0]: cant++ => 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #353bf6df92bd9abe
+step 3 WAIT Jugador[0]: wait(espera) - libera el monitor y se demora | ENTER Jugador[1]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #d14cd0d39321f6fc
+step 4 ASSIGN Jugador[1]: cant++ => 2 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e22f04e47b603373
+step 5 WAIT Jugador[1]: wait(espera) - libera el monitor y se demora | ENTER Jugador[5]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #b6e78f780555388a
+step 6 ASSIGN Jugador[5]: cant++ => 3 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #382d3296aebcdeb1
+step 7 WAIT Jugador[5]: wait(espera) - libera el monitor y se demora | ENTER Jugador[2]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #08fbc341f0c8c5fd
+step 8 ASSIGN Jugador[2]: cant++ => 4 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #d5681647a3dbc98e
+step 9 WAIT Jugador[2]: wait(espera) - libera el monitor y se demora | ENTER Partido: entra a Cancha.Iniciar | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #33553904a8fc5074
+step 10 WAIT Partido: wait(inicio) - libera el monitor y se demora | ENTER Jugador[4]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #15877a7520a70cc5
+step 11 ASSIGN Jugador[4]: cant++ => 5 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #989171fa40417eba
+step 12 WAIT Jugador[4]: wait(espera) - libera el monitor y se demora | ENTER Jugador[3]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #86a1a8196aa10971
+step 13 ASSIGN Jugador[3]: cant++ => 6 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #95da7df607789678
+step 14 SIGNAL Jugador[3]: signal(inicio) - despierta a Partido (compite por el monitor) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #408105dd4297d10f
+step 15 WAIT Jugador[3]: wait(espera) - libera el monitor y se demora | REENTER Partido: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #264a68ee1de37faf
+step 16 RETURN Partido: retorna de Cancha.Iniciar, libera el monitor | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #fea8d316898d5c09
+step 17 DELAY Partido: delay(9) - se demora 9 instantes | {"finished":false,"deadlock":false,"instant":17,"waiting":true} #bc4639135eb49c96
+step 18 {"finished":false,"deadlock":false,"instant":18,"waiting":true} #9483cd7c569d3c08
+step 19 {"finished":false,"deadlock":false,"instant":19,"waiting":true} #866a477c0cbc4999
+step 20 {"finished":false,"deadlock":false,"instant":20,"waiting":true} #d545fe0cb0996f76
+step 21 {"finished":false,"deadlock":false,"instant":21,"waiting":true} #49d7ca19008be39f
+step 22 {"finished":false,"deadlock":false,"instant":22,"waiting":true} #79a63810e556d23d
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #3e39a62acdda4e7d
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #4814eb529ed2fb26
+step 25 {"finished":false,"deadlock":false,"instant":25,"waiting":true} #812321f6fdb8b7b9
+step 26 {"finished":false,"deadlock":false,"instant":26,"waiting":true} #45a6b35b00b5791b
+step 27 ENTER Partido: entra a Cancha.Terminar | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #0b6fa2851ac42ac9
+step 28 SIGNAL_ALL Partido: signal_all(espera) - despierta a 6 proceso(s) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #a86991ef582d85d5
+step 29 RETURN Partido: retorna de Cancha.Terminar, libera el monitor | REENTER Jugador[3]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #b45e9438e72328da
+step 30 RETURN Jugador[3]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[1]: reingresa a Cancha | TERMINATED Partido: termina | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #03dd585dc003bebf
+step 31 RETURN Jugador[1]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[0]: reingresa a Cancha | WRITE Jugador[3]: write(Jugador 3: me retiro) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #28eda8920ea68600
+step 32 TERMINATED Jugador[3]: termina | RETURN Jugador[0]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[5]: reingresa a Cancha | WRITE Jugador[1]: write(Jugador 1: me retiro) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #4ff2af60fcda6ea9
+step 33 RETURN Jugador[5]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[4]: reingresa a Cancha | WRITE Jugador[0]: write(Jugador 0: me retiro) | TERMINATED Jugador[1]: termina | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #113f33ca526f28cb
+step 34 TERMINATED Jugador[0]: termina | RETURN Jugador[4]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[2]: reingresa a Cancha | WRITE Jugador[5]: write(Jugador 5: me retiro) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #8cff5e0f2b5fa421
+step 35 RETURN Jugador[2]: retorna de Cancha.llegada, libera el monitor | WRITE Jugador[4]: write(Jugador 4: me retiro) | TERMINATED Jugador[5]: termina | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #a980757ebe294608
+step 36 TERMINATED Jugador[4]: termina | WRITE Jugador[2]: write(Jugador 2: me retiro) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #e3ff78db7f8179e8
+step 37 TERMINATED Jugador[2]: termina | {"finished":true,"deadlock":false,"instant":37,"waiting":false} #9d661c56455f6a21
+state #da6a458aaac7f534
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #34dc9bf077624afc
+step 1 #43ae2692e2f891c3
+step 2 #353bf6df92bd9abe
+step 3 #c505d85846b3384e
+step 4 #34e1d42478cac58e
+step 5 #b451b82852281264
+step 6 #7aa76f1fa4d076dc
+step 7 #c2e4db0f37264051
+step 8 #00bc2666a23a79c8
+step 9 #0b60d35f1e41b88a
+step 10 #59df5a677a256429
+step 11 #073a8bbc92bf4a02
+step 12 #610b03abcfeeb97a
+step 13 #b592d63b6baa0cbc
+step 14 #9fcf7ccda8e753b1
+step 15 #8d27bcb027b1795c
+step 16 #a5240105b1c3e1ab
+step 17 #ed20cd715b62848d
+step 18 #ec994da925d88699
+step 19 #df45ecf523a181c4
+step 20 #38d4557533bc9d8a
+step 21 #cad8ec95361c819a
+step 22 #fdb78a0308fb4e4e
+step 23 #506f1a77bd01545f
+step 24 #a74f42a82999704c
+step 25 #4d2ff6749d5b7866
+step 26 #410c2344fc5af545
+step 27 #4227e000a0c97df5
+step 28 #04de27f1a89db1fc
+step 29 #d81bd91377ddf6bc
+step 30 #e4e05e6eb84daedc
+step 31 #10aa1e500c067681
+step 32 #d153c6f357bef57d
+step 33 #d5b026d4a01bf709
+step 34 #38c8ae7083624d6b
+step 35 #75ccdff76c6c0c82
+step 36 #7e81501872558498
+state #646bdafcb5950c0e
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #7c2322e5edfcb17d
+step 1 #43ae2692e2f891c3
+step 2 #353bf6df92bd9abe
+step 3 #7096691b64e12b52
+step 4 #f2473281f3e48ac9
+step 5 #e493905b5728a113
+step 6 #2e3d72bb16620fe5
+step 7 #904d337d23307d17
+step 8 #c7591df4d2d7e63e
+step 9 #d6e33ffe5a1e9861
+step 10 #c8e2497a8bcdb21f
+step 11 #d8f6de85d59deec5
+step 12 #3c8fbad510403a78
+step 13 #ebf7d7ee56350d6d
+step 14 #e94545dcbaee588c
+step 15 #d18e719f9cfa8c26
+step 16 #95199939609c17f5
+step 17 #692817eac92150ce
+step 18 #2739055d0485f13a
+step 19 #a1dd9f5d449b76ba
+step 20 #1bbed546d3741eaf
+step 21 #e69095cbbdc7a2a9
+step 22 #86a06d448fafe690
+step 23 #a4ca6655ab8df580
+step 24 #3b0223a9902d44b4
+step 25 #68ea138a6df5e19a
+step 26 #22fd39a2be9c02a4
+step 27 #a6e4236051071803
+step 28 #bdf659cc447c3445
+step 29 #832a60d70d1948c4
+step 30 #85ac277b76440a2c
+step 31 #0fa4475565847a55
+step 32 #ccf8b897c73aa6c4
+step 33 #0e3a6bbd2dbd9826
+step 34 #099ebf0fa721776e
+step 35 #48ea429facab5691
+step 36 #720efd537f2d6410
+step 37 #bd1f2f68ae38202f
+state #221ed0e40adf363a
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #87894278ad3306b4
+step 1 ENTER Jugador[1]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c2932aa92a378bca
+step 2 BLOCKED Jugador[2]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #43c3c5d134a32a3f
+step 3 BLOCKED Jugador[3]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #2bd2f65fd858f961
+step 4 BLOCKED Jugador[0]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1040770d4a1f8331
+step 5 ASSIGN Jugador[1]: cant++ => 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #df7a709026048310
+step 6 BLOCKED Partido: espera para entrar a Cancha.Iniciar | WAIT Jugador[1]: wait(espera) - libera el monitor y se demora | ENTER Jugador[2]: entra a Cancha.llegada | BLOCKED Jugador[4]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4ffe36d57f2f998d
+step 7 ASSIGN Jugador[2]: cant++ => 2 | BLOCKED Jugador[5]: espera para entrar a Cancha.llegada | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #8ed7a07d403641af
+step 8 WAIT Jugador[2]: wait(espera) - libera el monitor y se demora | ENTER Jugador[4]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5fa01a65a0e0d87a
+step 9 ASSIGN Jugador[4]: cant++ => 3 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1bfe4a3a6ff06669
+step 10 WAIT Jugador[4]: wait(espera) - libera el monitor y se demora | ENTER Jugador[5]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #de4f0cc28e5b1a8b
+step 11 ASSIGN Jugador[5]: cant++ => 4 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #56b3e9f67bcb2bdc
+step 12 WAIT Jugador[5]: wait(espera) - libera el monitor y se demora | ENTER Partido: entra a Cancha.Iniciar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ca6f951307a22ef6
+step 13 WAIT Partido: wait(inicio) - libera el monitor y se demora | ENTER Jugador[3]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #9a23b95855a45748
+step 14 ASSIGN Jugador[3]: cant++ => 5 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #f9ef1e957e8f02db
+step 15 WAIT Jugador[3]: wait(espera) - libera el monitor y se demora | ENTER Jugador[0]: entra a Cancha.llegada | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f0cdf95e5faa8f18
+step 16 ASSIGN Jugador[0]: cant++ => 6 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #8a288eb12ed6989b
+step 17 SIGNAL Jugador[0]: signal(inicio) - despierta a Partido (compite por el monitor) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #d4e204279b4f6139
+step 18 WAIT Jugador[0]: wait(espera) - libera el monitor y se demora | REENTER Partido: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f43105bf2c1097de
+step 19 RETURN Partido: retorna de Cancha.Iniciar, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #ead3a64a29e76fab
+step 20 DELAY Partido: delay(9) - se demora 9 instantes | {"finished":false,"deadlock":false,"instant":20,"waiting":true} #b0acd46b32576489
+step 21 {"finished":false,"deadlock":false,"instant":21,"waiting":true} #7e60897b7c6f0ec1
+step 22 {"finished":false,"deadlock":false,"instant":22,"waiting":true} #d56713f3fb59c058
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #0ab82b37902d706a
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #bf38a6ff8a93bc89
+step 25 {"finished":false,"deadlock":false,"instant":25,"waiting":true} #6631bd11254adc56
+step 26 {"finished":false,"deadlock":false,"instant":26,"waiting":true} #f6b89f346af2bbe4
+step 27 {"finished":false,"deadlock":false,"instant":27,"waiting":true} #43aab64ab3ee168e
+step 28 {"finished":false,"deadlock":false,"instant":28,"waiting":true} #ba4ad0b0cab3152c
+step 29 {"finished":false,"deadlock":false,"instant":29,"waiting":true} #35a69ab25d152677
+step 30 ENTER Partido: entra a Cancha.Terminar | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #3faf6b34f7e24f7b
+step 31 SIGNAL_ALL Partido: signal_all(espera) - despierta a 6 proceso(s) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #d70c55df4e0765ea
+step 32 RETURN Partido: retorna de Cancha.Terminar, libera el monitor | REENTER Jugador[0]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #9950f2628618ffa6
+step 33 RETURN Jugador[0]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[4]: reingresa a Cancha | TERMINATED Partido: termina | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #a87350f41bd65ccc
+step 34 WRITE Jugador[0]: write(Jugador 0: me retiro) | RETURN Jugador[4]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[1]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #aa4f27f8cbbd1881
+step 35 TERMINATED Jugador[0]: termina | WRITE Jugador[4]: write(Jugador 4: me retiro) | RETURN Jugador[1]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[3]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #2f7c05607d7a2c5d
+step 36 WRITE Jugador[1]: write(Jugador 1: me retiro) | TERMINATED Jugador[4]: termina | RETURN Jugador[3]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[2]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #5bd9d3b97cfad0c9
+step 37 TERMINATED Jugador[1]: termina | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #448908ce05eb21aa
+step 38 RETURN Jugador[2]: retorna de Cancha.llegada, libera el monitor | REENTER Jugador[5]: reingresa a Cancha | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #a92c07d21ccce4d0
+step 39 WRITE Jugador[3]: write(Jugador 3: me retiro) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #1a0f5863c93b16bb
+step 40 RETURN Jugador[5]: retorna de Cancha.llegada, libera el monitor | WRITE Jugador[2]: write(Jugador 2: me retiro) | TERMINATED Jugador[3]: termina | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #e2ebcea32df284c9
+step 41 TERMINATED Jugador[2]: termina | WRITE Jugador[5]: write(Jugador 5: me retiro) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #d4b6278a21bcad54
+step 42 TERMINATED Jugador[5]: termina | {"finished":true,"deadlock":false,"instant":42,"waiting":false} #3c68ca48ed4bf73b
+state #1871c98d7e31fb1a

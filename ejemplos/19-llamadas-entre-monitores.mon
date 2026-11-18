@@ -1,0 +1,39 @@
+// Llamadas entre monitores
+// espera: fin Cuenta.saldo=30 Registro.anotados=3
+// Un procedure de un monitor puede llamar a un procedure de otro monitor. El monitor
+// desde donde se hizo el llamado se mantiene ocupado hasta que el procedure llamado
+// termina por completo: mientras un cliente está en Registro, nadie más entra a Cuenta.
+monitor Registro {
+  int anotados = 0;
+
+  procedure anotar() {
+    delay(2);                  // escribe en el registro
+    anotados = anotados + 1;
+  }
+
+  procedure consultar(n: out int) {
+    n = anotados;
+  }
+}
+
+monitor Cuenta {
+  int saldo = 0;
+
+  procedure depositar(monto: in int) {
+    saldo = saldo + monto;
+    Registro.anotar();         // Cuenta sigue ocupado durante todo el llamado
+  }
+}
+
+process Cliente[id: 0..2] {
+  Cuenta.depositar(10);
+}
+
+process Auditor {
+  int n;
+  for (1..2) {
+    Registro.consultar(n);
+    write("depósitos anotados: ", n);
+    delay(3);
+  }
+}

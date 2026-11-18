@@ -1,0 +1,32 @@
+// Covering conditions: reloj lógico
+// espera: fin Timer.hora_actual=10
+// Ejemplo de la Teoría 4: un timer que permite a los procesos dormirse una cantidad de
+// ticks. En cada tick se despierta a todos con signal_all y cada uno vuelve a chequear
+// si ya llegó su hora; el que todavía no debe despertar se duerme otra vez.
+monitor Timer {
+  int hora_actual = 0;
+  cond chequear;
+
+  procedure demorar(int intervalo) {
+    int hora_de_despertar;
+    hora_de_despertar = hora_actual + intervalo;
+    while (hora_de_despertar > hora_actual) wait(chequear);
+  }
+
+  procedure tick() {
+    hora_actual = hora_actual + 1;
+    signal_all(chequear);
+  }
+}
+
+process Dormilon[id: 0..2] {
+  Timer.demorar(id + 2);
+  write("Dormilon ", id, ": desperté");
+}
+
+process Reloj {
+  for (1..10) {
+    delay(1);
+    Timer.tick();
+  }
+}

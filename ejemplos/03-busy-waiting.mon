@@ -1,0 +1,44 @@
+// Busy waiting
+// espera: fin Buffer.hayDato=false Buffer.dato=3
+// Ejemplo de la Teoría 4: A le comunica valores a B sin variables condición.
+// Cada procedure devuelve en Ok si pudo hacer la operación; si no pudo, el proceso
+// sale del monitor y vuelve a llamar una y otra vez: eso es busy waiting.
+monitor Buffer {
+  int dato;
+  bool hayDato = false;
+
+  procedure Enviar(D: in int; Ok: out bool) {
+    Ok = not hayDato;
+    if (Ok) {
+      dato = D;
+      hayDato = true;
+    }
+  }
+
+  procedure Recibir(R: out int; Ok: out bool) {
+    Ok = hayDato;
+    if (Ok) {
+      R = dato;
+      hayDato = false;
+    }
+  }
+}
+
+process A {
+  bool ok;
+  int aux;
+  for (aux = 1..3) {       // genera el valor a enviar en aux
+    ok = false;
+    while (not ok) Buffer.Enviar(aux, ok);
+  }
+}
+
+process B {
+  bool ok;
+  int aux;
+  for (1..3) {
+    ok = false;
+    while (not ok) Buffer.Recibir(aux, ok);
+    write("recibí ", aux);     // trabaja con el valor recibido
+  }
+}

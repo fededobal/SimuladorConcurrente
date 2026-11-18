@@ -1,0 +1,77 @@
+// Problema completo: banco y escritorios
+// espera: fin Banco.esperando=0 Banco.cantLibres=0 Banco.elibres=<>
+// Ejercicio 4 de la Explicación 3 completo: tres empleados atienden a los clientes en
+// orden de llegada. Banco ordena a los clientes y les asigna un empleado (cola y
+// passing the condition); cada empleado atiende en su monitor Escritorio (vector de
+// monitores), donde listo evita el deadlock cuando el cliente llega primero.
+#define N 6
+
+monitor Banco {
+  Cola elibres(int);
+  cond esperaC;
+  int esperando = 0, cantLibres = 0;
+
+  procedure Llegada(idE: out int) {
+    if (cantLibres == 0) {
+      esperando++;
+      wait(esperaC);
+    }
+    else cantLibres--;
+    pop(elibres, idE);
+  }
+
+  procedure Proximo(idE: in int) {
+    push(elibres, idE);
+    if (esperando > 0) {
+      esperando--;
+      signal(esperaC);
+    }
+    else cantLibres++;
+  }
+}
+
+monitor Escritorio[id: 0..2] {
+  cond vcCliente, vcEmpleado;
+  text datos, resultados;
+  bool listo = false;
+
+  procedure Atencion(D: in text; R: out text) {
+    datos = D;
+    listo = true;              // marca que llegó el cliente
+    signal(vcEmpleado);
+    wait(vcCliente);
+    R = resultados;
+    signal(vcEmpleado);
+  }
+
+  procedure EsperarDatos(D: out text) {
+    if (not listo) wait(vcEmpleado);   // sólo se duerme si el cliente no llegó
+    D = datos;
+  }
+
+  procedure EnviarResultados(R: in text) {
+    resultados = R;
+    signal(vcCliente);
+    wait(vcEmpleado);
+    listo = false;             // resetea para atender al próximo cliente
+  }
+}
+
+process Cliente[id: 0..N-1] {
+  int idE;
+  text papel, res;
+  papel = "papeles de " + id;
+  Banco.Llegada(idE);
+  Escritorio[idE].Atencion(papel, res);
+  write("Cliente ", id, ": me atendió el empleado ", idE);
+}
+
+process Empleado[id: 0..2] {
+  text datos, res;
+  for (1..2) {
+    Banco.Proximo(id);
+    Escritorio[id].EsperarDatos(datos);
+    res = datos + ": resuelto";    // resuelve la solicitud en base a datos
+    Escritorio[id].EnviarResultados(res);
+  }
+}

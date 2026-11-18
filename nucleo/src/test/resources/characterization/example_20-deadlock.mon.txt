@@ -1,0 +1,100 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #fffc104c50deb4ec
+step 1 DECL Cliente: text res =  | DECL Empleado: text datos =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d3d69f90b9f25751
+step 2 ENTER Cliente: entra a Escritorio.Atencion | DECL Empleado: text res =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e0f12f6f90f059fb
+step 3 ASSIGN Cliente: datos = papeles | DELAY Empleado: delay(6) - se demora 6 instantes | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5669251ccf408dc6
+step 4 SIGNAL Cliente: signal(vcEmpleado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #9e7431742e71e1c2
+step 5 WAIT Cliente: wait(vcCliente) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":5,"waiting":true} #8adf759230ac4063
+step 6 {"finished":false,"deadlock":false,"instant":6,"waiting":true} #8f3d45cf0a669e04
+step 7 {"finished":false,"deadlock":false,"instant":7,"waiting":true} #1af14bd2362cec79
+step 8 {"finished":false,"deadlock":false,"instant":8,"waiting":true} #70b82fa8ac73e623
+step 9 {"finished":false,"deadlock":false,"instant":9,"waiting":true} #bd89f01da4d384d2
+step 10 ENTER Empleado: entra a Escritorio.EsperarDatos | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #0340d82469239c1e
+step 11 WAIT Empleado: wait(vcEmpleado) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":11,"waiting":false} #a034075264e31de7
+state #8e5470bdf5acf4ed
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #be6863c5f44ebde1
+step 1 #f54d311e781ee3f8
+step 2 #38f218508c51388a
+step 3 #61d289a57d3c1437
+step 4 #fe87e8d3e82cea2c
+step 5 #9eee8a363415e753
+step 6 #c4c5dba14215ce77
+step 7 #ad56422fd583b9a8
+step 8 #765739486f63d4df
+step 9 #da0670b57e3c77ba
+step 10 #d3e2790323612694
+step 11 #0349bb75fbe9e240
+state #21a5d76923014db5
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #64479afae16a06b3
+step 1 #d3d69f90b9f25751
+step 2 #0888b5597ba92d0a
+step 3 #867fa1887030eb8c
+step 4 #e2764b95917ed7cc
+step 5 #844e9be48e8f7660
+step 6 #bea43c563c3ca265
+step 7 #8c7ee3e3a4196d6a
+step 8 #ad8e263358c35030
+step 9 #979dc8b104a55b07
+step 10 #dd11b7d82d346c63
+step 11 #5ec995c82ae310b7
+step 12 #b824eb6bf2b02bc2
+step 13 #2d611d2521e4719b
+state #aacd164b0b0c6b16
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #fffc104c50deb4ec
+step 1 DECL Cliente: text res =  | DECL Empleado: text datos =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #d3d69f90b9f25751
+step 2 DECL Empleado: text res =  | ENTER Cliente: entra a Escritorio.Atencion | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #576137360c8cee5f
+step 3 ASSIGN Cliente: datos = papeles | DELAY Empleado: delay(6) - se demora 6 instantes | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5669251ccf408dc6
+step 4 SIGNAL Cliente: signal(vcEmpleado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #9e7431742e71e1c2
+step 5 WAIT Cliente: wait(vcCliente) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":5,"waiting":true} #8adf759230ac4063
+step 6 {"finished":false,"deadlock":false,"instant":6,"waiting":true} #8f3d45cf0a669e04
+step 7 {"finished":false,"deadlock":false,"instant":7,"waiting":true} #1af14bd2362cec79
+step 8 {"finished":false,"deadlock":false,"instant":8,"waiting":true} #70b82fa8ac73e623
+step 9 {"finished":false,"deadlock":false,"instant":9,"waiting":true} #bd89f01da4d384d2
+step 10 ENTER Empleado: entra a Escritorio.EsperarDatos | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #0340d82469239c1e
+step 11 WAIT Empleado: wait(vcEmpleado) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":11,"waiting":false} #a034075264e31de7
+state #44739384c36eb515
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #be6863c5f44ebde1
+step 1 #d3d69f90b9f25751
+step 2 #576137360c8cee5f
+step 3 #5669251ccf408dc6
+step 4 #9e7431742e71e1c2
+step 5 #8adf759230ac4063
+step 6 #8f3d45cf0a669e04
+step 7 #1af14bd2362cec79
+step 8 #70b82fa8ac73e623
+step 9 #bd89f01da4d384d2
+step 10 #0340d82469239c1e
+step 11 #a034075264e31de7
+state #44739384c36eb515
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #64479afae16a06b3
+step 1 #d3d69f90b9f25751
+step 2 #576137360c8cee5f
+step 3 #5669251ccf408dc6
+step 4 #9e7431742e71e1c2
+step 5 #8adf759230ac4063
+step 6 #8f3d45cf0a669e04
+step 7 #1af14bd2362cec79
+step 8 #70b82fa8ac73e623
+step 9 #bd89f01da4d384d2
+step 10 #0340d82469239c1e
+step 11 #a034075264e31de7
+state #44739384c36eb515
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #fffc104c50deb4ec
+step 1 DECL Empleado: text datos =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f54d311e781ee3f8
+step 2 DECL Cliente: text res =  | DECL Empleado: text res =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e0477d4a56c8f2ce
+step 3 ENTER Cliente: entra a Escritorio.Atencion | DELAY Empleado: delay(6) - se demora 6 instantes | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #1ee56b565794abb4
+step 4 ASSIGN Cliente: datos = papeles | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #fe87e8d3e82cea2c
+step 5 SIGNAL Cliente: signal(vcEmpleado) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #9eee8a363415e753
+step 6 WAIT Cliente: wait(vcCliente) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":6,"waiting":true} #c4c5dba14215ce77
+step 7 {"finished":false,"deadlock":false,"instant":7,"waiting":true} #ad56422fd583b9a8
+step 8 {"finished":false,"deadlock":false,"instant":8,"waiting":true} #765739486f63d4df
+step 9 {"finished":false,"deadlock":false,"instant":9,"waiting":true} #da0670b57e3c77ba
+step 10 ENTER Empleado: entra a Escritorio.EsperarDatos | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d3e2790323612694
+step 11 WAIT Empleado: wait(vcEmpleado) - libera el monitor y se demora | DEADLOCK Deadlock: ningún proceso puede avanzar | {"finished":false,"deadlock":true,"instant":11,"waiting":false} #0349bb75fbe9e240
+state #7e9afa79e222b80d

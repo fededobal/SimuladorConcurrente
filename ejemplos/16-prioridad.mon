@@ -1,0 +1,41 @@
+// Prioridad: ColaOrdenada de mayor a menor
+// espera: fin Cajero.libre=true Cajero.esperando=0 Cajero.fila=<>
+// Ejercicio 3 de la Explicación 3: el cajero del ejercicio 2, pero las personas de más
+// edad tienen prioridad. La fila es una ColaOrdenada declarada desc, que ordena por edad
+// de mayor a menor, y cada persona se duerme en su variable condición privada para que
+// al salir se pueda despertar justo a la que está primera en la fila.
+#define N 5
+
+monitor Cajero {
+  bool libre = true;
+  cond espera[N];
+  int idAux, esperando = 0;
+  ColaOrdenada fila(int, int) desc;
+
+  procedure Pasar(idP, edad: in int) {
+    if (not libre) {
+      push(fila, edad, idP);           // insertar(fila, idP, edad)
+      esperando++;
+      wait(espera[idP]);
+    }
+    else libre = false;
+  }
+
+  procedure Salir() {
+    int edad;
+    if (esperando > 0) {
+      esperando--;
+      pop(fila, edad, idAux);          // sacar(fila, idAux)
+      signal(espera[idAux]);
+    }
+    else libre = true;
+  }
+}
+
+process Persona[id: 0..N-1] {
+  int edad = 20 + (id * 37) mod 60;
+  Cajero.Pasar(id, edad);
+  write("Persona ", id, " (", edad, " años): uso el cajero");
+  delay(3);                // UsarCajero()
+  Cajero.Salir();
+}

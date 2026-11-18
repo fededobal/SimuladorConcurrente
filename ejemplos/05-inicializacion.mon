@@ -1,0 +1,27 @@
+// Monitor con código de inicialización
+// espera: fin Deposito.total=16
+// El código de inicialización son las sentencias del monitor que están fuera de los
+// procedures. Se ejecuta una sola vez y, hasta que no termina, el monitor no atiende
+// llamados: cuando entra el primer cliente, stock y total ya están cargados.
+monitor Deposito {
+  int stock[4];
+  int total = 0;
+
+  // código de inicialización
+  for (int i = 0..3) {
+    stock[i] = (i + 1) * 2;
+    total = total + stock[i];
+  }
+
+  procedure retirar(producto: in int; quedan: out int) {
+    stock[producto] = stock[producto] - 1;
+    total = total - 1;
+    quedan = stock[producto];
+  }
+}
+
+process Cliente[id: 0..3] {
+  int quedan;
+  Deposito.retirar(id, quedan);
+  write("Cliente ", id, ": retiré una unidad y quedan ", quedan);
+}

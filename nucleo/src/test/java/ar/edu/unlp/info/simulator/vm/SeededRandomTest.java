@@ -44,7 +44,7 @@ class SeededRandomTest {
     @Test
     void exclusionExampleTraceWithFixedSeed() throws Exception {
         String code = java.nio.file.Files.readString(java.nio.file.Path.of("..", "ejemplos",
-                "02-exclusion-mutua.mon"));
+                "01-exclusion-mutua.mon"));
         VirtualMachine vm = ar.edu.unlp.info.simulator.TestSupport.compileAndBuild(code, 0);
         StringBuilder trace = new StringBuilder();
         for (int i = 0; i < 6; i++) {
@@ -53,8 +53,8 @@ class SeededRandomTest {
             }
             trace.append("| ");
         }
-        assertEquals(TRACE_02_SEED_0, trace.toString().trim());
+        assertEquals(TRACE_01_SEED_0, trace.toString().trim());
     }
 
-    static final String TRACE_02_SEED_0 = "4E 1B 2B | 4A 3B | 4A | 4A | 4A | 4R 3E |";
+    static final String TRACE_01_SEED_0 = "5E 3B 4B 1B | 2B 5D | | | 5A | 5R 2E |";
 }

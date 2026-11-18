@@ -1,0 +1,505 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #3633e0c44f9aa408
+step 1 DECL Persona[4]: int edad = 48 | DECL Persona[2]: int edad = 34 | DECL Persona[3]: int edad = 71 | DECL Persona[0]: int edad = 20 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f1ec76930ae93c29
+step 2 ENTER Persona[3]: entra a Cajero.Pasar | BLOCKED Persona[2]: espera para entrar a Cajero.Pasar | BLOCKED Persona[4]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #675bc70bfc0d6135
+step 3 DECL Persona[1]: int edad = 57 | ASSIGN Persona[3]: libre = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #dd9115ddaa5d160c
+step 4 BLOCKED Persona[1]: espera para entrar a Cajero.Pasar | BLOCKED Persona[0]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1f71a65a020068ef
+step 5 RETURN Persona[3]: retorna de Cajero.Pasar, libera el monitor | ENTER Persona[2]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #af1f2bb35c0b4b3c
+step 6 PUSH Persona[2]: push(fila, (34, 2)) | WRITE Persona[3]: write(Persona 3 (71 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #23f24dd4787af729
+step 7 DELAY Persona[3]: delay(3) - se demora 3 instantes | ASSIGN Persona[2]: esperando++ => 1 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #3eeba74567402f71
+step 8 WAIT Persona[2]: wait(espera[2]) - libera el monitor y se demora | ENTER Persona[0]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #0fa54bb8b2a5936a
+step 9 PUSH Persona[0]: push(fila, (20, 0)) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #ad0c1ad733a512d2
+step 10 ASSIGN Persona[0]: esperando++ => 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #7c7c78328abb435f
+step 11 WAIT Persona[0]: wait(espera[0]) - libera el monitor y se demora | ENTER Persona[1]: entra a Cajero.Pasar | BLOCKED Persona[3]: espera para entrar a Cajero.Salir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #ffc20120e65c31db
+step 12 PUSH Persona[1]: push(fila, (57, 1)) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e38018d3fe102b22
+step 13 ASSIGN Persona[1]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #c61a8768f0f37a92
+step 14 WAIT Persona[1]: wait(espera[1]) - libera el monitor y se demora | ENTER Persona[3]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d17a01e610c3fc58
+step 15 DECL Persona[3]: int edad = 0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #6b978f8373f24e17
+step 16 ASSIGN Persona[3]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #75514a5a22b8f3e1
+step 17 POP Persona[3]: pop(fila) => (57, 1) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #dba3b67770bbc6ad
+step 18 SIGNAL Persona[3]: signal(espera[1]) - despierta a Persona[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #6bc890c9ab25450e
+step 19 RETURN Persona[3]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[1]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #897d2baeccaa3ff7
+step 20 RETURN Persona[1]: retorna de Cajero.Pasar, libera el monitor | ENTER Persona[4]: entra a Cajero.Pasar | TERMINATED Persona[3]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #c7b3bf59551a4ed4
+step 21 WRITE Persona[1]: write(Persona 1 (57 años): uso el cajero) | PUSH Persona[4]: push(fila, (48, 4)) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #704499b125f52667
+step 22 ASSIGN Persona[4]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #5de6da05c8479bff
+step 23 DELAY Persona[1]: delay(3) - se demora 3 instantes | WAIT Persona[4]: wait(espera[4]) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":23,"waiting":true} #16e383a27e285b78
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #68c0024d421f61ba
+step 25 {"finished":false,"deadlock":false,"instant":25,"waiting":true} #e9990ffef992f78d
+step 26 {"finished":false,"deadlock":false,"instant":26,"waiting":true} #d125ce1f65451393
+step 27 ENTER Persona[1]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #604091474fd4e0cc
+step 28 DECL Persona[1]: int edad = 0 | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #3e386db1847aac2c
+step 29 ASSIGN Persona[1]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #07803ef90a68aacf
+step 30 POP Persona[1]: pop(fila) => (48, 4) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #10addf3960e65a9e
+step 31 SIGNAL Persona[1]: signal(espera[4]) - despierta a Persona[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #c9955aec6fc198a5
+step 32 RETURN Persona[1]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[4]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #d186e9b719cf84a1
+step 33 RETURN Persona[4]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[1]: termina | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #feb4e4119cf2905d
+step 34 WRITE Persona[4]: write(Persona 4 (48 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #40da4def478de6ec
+step 35 DELAY Persona[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":35,"waiting":true} #ed61d490dae21d6c
+step 36 {"finished":false,"deadlock":false,"instant":36,"waiting":true} #e29ebc0754f3ed3f
+step 37 {"finished":false,"deadlock":false,"instant":37,"waiting":true} #c36779e50aa22c59
+step 38 {"finished":false,"deadlock":false,"instant":38,"waiting":true} #3959b527f38cd394
+step 39 ENTER Persona[4]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #9ca82eaad3eedfc7
+step 40 DECL Persona[4]: int edad = 0 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #4da3131add22eb6b
+step 41 ASSIGN Persona[4]: esperando-- => 1 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #c612ae6027dc3810
+step 42 POP Persona[4]: pop(fila) => (34, 2) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #b26fefed10eb1126
+step 43 SIGNAL Persona[4]: signal(espera[2]) - despierta a Persona[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #057488eb3a418f67
+step 44 RETURN Persona[4]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[2]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #443c5793d21891b5
+step 45 RETURN Persona[2]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[4]: termina | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #eb76772735cc0293
+step 46 WRITE Persona[2]: write(Persona 2 (34 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #cf7fbed8e9454ac7
+step 47 DELAY Persona[2]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":47,"waiting":true} #e26a0229de3337cd
+step 48 {"finished":false,"deadlock":false,"instant":48,"waiting":true} #7c0663a900d0d379
+step 49 {"finished":false,"deadlock":false,"instant":49,"waiting":true} #7a238b0608bfd433
+step 50 {"finished":false,"deadlock":false,"instant":50,"waiting":true} #c95f8ea6122d4f18
+step 51 ENTER Persona[2]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #14792c69d484b57e
+step 52 DECL Persona[2]: int edad = 0 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #cf65f2e71dd7a297
+step 53 ASSIGN Persona[2]: esperando-- => 0 | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #4e7b10ce586b1672
+step 54 POP Persona[2]: pop(fila) => (20, 0) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #4276c1ef638d68a0
+step 55 SIGNAL Persona[2]: signal(espera[0]) - despierta a Persona[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #c060e7dda86b80cf
+step 56 RETURN Persona[2]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[0]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #f377ab0722623537
+step 57 RETURN Persona[0]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[2]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #cba369c7b5357aec
+step 58 WRITE Persona[0]: write(Persona 0 (20 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #dfd3f63a551e3185
+step 59 DELAY Persona[0]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":59,"waiting":true} #0c5f08be544fd3c7
+step 60 {"finished":false,"deadlock":false,"instant":60,"waiting":true} #7f84eebe99b28a06
+step 61 {"finished":false,"deadlock":false,"instant":61,"waiting":true} #e06abcc025c66077
+step 62 {"finished":false,"deadlock":false,"instant":62,"waiting":true} #66d2b78d6569d1c0
+step 63 ENTER Persona[0]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #29d2861e55686ca4
+step 64 DECL Persona[0]: int edad = 0 | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #c1f208769e52b6ef
+step 65 ASSIGN Persona[0]: libre = true | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #90d62b6d1123a72f
+step 66 RETURN Persona[0]: retorna de Cajero.Salir, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #51749e01dfc10952
+step 67 TERMINATED Persona[0]: termina | {"finished":true,"deadlock":false,"instant":67,"waiting":false} #ea4b73dcd859d886
+state #13f1ef6b6a8b0e47
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #31c63e0e88fc4f2f
+step 1 #a61add462ca7019a
+step 2 #bac0e9e6f9036f2f
+step 3 #78b8fc8cbf8dddd6
+step 4 #e5a360211c108154
+step 5 #99527658c6226e57
+step 6 #0d4a46977d9a2ea6
+step 7 #e1bb450a58ed488e
+step 8 #b7312358cc9d7023
+step 9 #52f292b2ae18a43e
+step 10 #cb3ee2ad90990872
+step 11 #1bc0351bb2c14e95
+step 12 #d4be2be0cacc3cc3
+step 13 #c33516c2ba085ffb
+step 14 #47b0edd71bc0534c
+step 15 #e431e8b7f20a506e
+step 16 #099eb62b4c23a923
+step 17 #ef1be59d2d3d2fb2
+step 18 #121e8f5af09f919f
+step 19 #16eba49e577f0e3e
+step 20 #d12f9e48f173c9d1
+step 21 #dcfa44f545ace58b
+step 22 #1d49395ad121dc76
+step 23 #d4a020f87be605d1
+step 24 #94f8ba4498198446
+step 25 #110c56320596d84f
+step 26 #e8f000fc1e053846
+step 27 #9276e80bf08b025a
+step 28 #077578fe96de606f
+step 29 #81f9771ddc047c97
+step 30 #9cdcc15b58bdd856
+step 31 #1d0696b0a9391651
+step 32 #3edc4dae441c4b9e
+step 33 #88128f2ce7ca9fb4
+step 34 #0351ed64b7f0a042
+step 35 #b79feeb33d498829
+step 36 #9807dbc57ba01788
+step 37 #8e7f8ad985f130ef
+step 38 #f327feb4553de8cc
+step 39 #82c6e7def568f0ce
+step 40 #836f67f83a74e9e7
+step 41 #a343e1ce7255773d
+step 42 #f1d77e7fb84f5a75
+step 43 #08ce27bb32654eb3
+step 44 #49b2a970fb5434c3
+step 45 #af195c03ab1572c4
+step 46 #7cdf81503434b764
+step 47 #5986bd38386e517e
+step 48 #133ac86b533255ae
+step 49 #bd8a6daaf6ca1df9
+step 50 #ffe030a93fe916d1
+step 51 #f22c785502db9f65
+step 52 #95f62a3a0f44dc81
+step 53 #4284968c17b4847e
+step 54 #852decdff4b34530
+step 55 #7cbc0429305916c9
+step 56 #42d93ce597ce2d60
+step 57 #f9fb886191515eab
+step 58 #5155b0deb3c96839
+step 59 #f0a0899685520dff
+step 60 #28905987b440767c
+step 61 #513f178bdc036d6a
+step 62 #de890461a1060b0a
+step 63 #513522c4026e0ccc
+step 64 #bbf10b43af94e7d9
+step 65 #1a421584ed9d0003
+step 66 #77018b8cee4112be
+step 67 #baa28376e4ecce62
+step 68 #295b67448e367347
+step 69 #d06c0342be4475ed
+step 70 #d77b1eeb06885f27
+state #e227e4e932f817c4
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #9393cb5e0699981e
+step 1 #5d251838f156bb6a
+step 2 #c7d39411ac418788
+step 3 #2e74de5370368ba0
+step 4 #e744e13e0cb8057e
+step 5 #b4af22627aacf03f
+step 6 #9a51448b2fbf3d80
+step 7 #cc9590c3e1d50fad
+step 8 #ab877ddc6566e64c
+step 9 #751da2431116d365
+step 10 #582e5bfead4489fe
+step 11 #323af0c87fbdc110
+step 12 #64f70563a35b8902
+step 13 #9a5195fc4327ccd9
+step 14 #8ce7c6f00d6b9628
+step 15 #a868df89a29db4d4
+step 16 #3cf5e3856f8ac666
+step 17 #bedc686b4b04dbb0
+step 18 #663c1483d6425cac
+step 19 #e74f3d1ea73f4773
+step 20 #210e54be913f9a3d
+step 21 #895e5b4962a119dd
+step 22 #52dc40b4495659eb
+step 23 #60dc5db938f073f4
+step 24 #994c22fed28d34d5
+step 25 #c1381779cc8defa2
+step 26 #7fbcda326e9f2c7e
+step 27 #05d6cce1477f95a1
+step 28 #83e2240d61a87553
+step 29 #349a7bdab2c97b70
+step 30 #f52cd0ca3d20e7d1
+step 31 #2a3bfaddfea9720e
+step 32 #3209caec6e25b2cc
+step 33 #f53a47322120df2f
+step 34 #d169a23977b028fb
+step 35 #fba1dd84a3d51148
+step 36 #7af84d5b28de703e
+step 37 #a095ab1cf3b7dd88
+step 38 #b3bad21ad076a483
+step 39 #2190017e0e5d68ba
+step 40 #001583aa410bd839
+step 41 #d76cc6ecb9bffb82
+step 42 #dcc3083af51af3f0
+step 43 #4508a5c5ed605931
+step 44 #0f1c47f5bb58ec72
+step 45 #c1250689bfaa4b03
+step 46 #729c0ebefce27225
+step 47 #c7e9cfbbe3759d5d
+step 48 #66557249700a210c
+step 49 #6b13964f317aef6b
+step 50 #24b4aa5974a900a1
+step 51 #ab3519e47ff0e2f0
+step 52 #59d17e5b708c5177
+step 53 #070114a82be22842
+step 54 #43aa578a03311423
+step 55 #b427a5cc0d1f345e
+step 56 #490d724c9e90da7c
+step 57 #906884a074715bf1
+step 58 #231945cb8d9a7683
+step 59 #a0909210b6b621bd
+step 60 #6cb5d9e6fe195e93
+step 61 #f10f0a364cc76492
+step 62 #579cb5509e1bc16e
+step 63 #954e0e12b9140ef1
+step 64 #2c57be9845315c4a
+step 65 #001590d005c5a9b5
+step 66 #e621564d97ea2b3a
+step 67 #2fe02106c33363c4
+step 68 #724218d92dcb8849
+step 69 #2c90fe5d333ec863
+state #201ca419ac40b0cc
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #3633e0c44f9aa408
+step 1 DECL Persona[0]: int edad = 20 | DECL Persona[1]: int edad = 57 | DECL Persona[2]: int edad = 34 | DECL Persona[3]: int edad = 71 | DECL Persona[4]: int edad = 48 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #2f89c1545f822397
+step 2 ENTER Persona[1]: entra a Cajero.Pasar | BLOCKED Persona[2]: espera para entrar a Cajero.Pasar | BLOCKED Persona[3]: espera para entrar a Cajero.Pasar | BLOCKED Persona[4]: espera para entrar a Cajero.Pasar | BLOCKED Persona[0]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #8f5d7b78e2db40c8
+step 3 ASSIGN Persona[1]: libre = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #cf797a44fde187c5
+step 4 RETURN Persona[1]: retorna de Cajero.Pasar, libera el monitor | ENTER Persona[4]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #5747b8c9822f0b89
+step 5 PUSH Persona[4]: push(fila, (48, 4)) | WRITE Persona[1]: write(Persona 1 (57 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #a0b91b3efda0f8df
+step 6 DELAY Persona[1]: delay(3) - se demora 3 instantes | ASSIGN Persona[4]: esperando++ => 1 | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #3ea477845f47d572
+step 7 WAIT Persona[4]: wait(espera[4]) - libera el monitor y se demora | ENTER Persona[3]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #92c98988f5a2de19
+step 8 PUSH Persona[3]: push(fila, (71, 3)) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #a62fb133590f6b97
+step 9 ASSIGN Persona[3]: esperando++ => 2 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #87a48d3e31da5675
+step 10 BLOCKED Persona[1]: espera para entrar a Cajero.Salir | WAIT Persona[3]: wait(espera[3]) - libera el monitor y se demora | ENTER Persona[0]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #7030566f97c82cc0
+step 11 PUSH Persona[0]: push(fila, (20, 0)) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #e524adb69310dec4
+step 12 ASSIGN Persona[0]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #9045e7d82e132d64
+step 13 WAIT Persona[0]: wait(espera[0]) - libera el monitor y se demora | ENTER Persona[1]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0f48d43eb450f36d
+step 14 DECL Persona[1]: int edad = 0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #5877086169f19437
+step 15 ASSIGN Persona[1]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #c7d2f4a025f076f3
+step 16 POP Persona[1]: pop(fila) => (71, 3) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #5a6d79572c044d97
+step 17 SIGNAL Persona[1]: signal(espera[3]) - despierta a Persona[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #58b412979111ec61
+step 18 RETURN Persona[1]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[3]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #cf216add6143e375
+step 19 RETURN Persona[3]: retorna de Cajero.Pasar, libera el monitor | ENTER Persona[2]: entra a Cajero.Pasar | TERMINATED Persona[1]: termina | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #26d3192a221671c9
+step 20 PUSH Persona[2]: push(fila, (34, 2)) | WRITE Persona[3]: write(Persona 3 (71 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #87f37d70b8cd906f
+step 21 DELAY Persona[3]: delay(3) - se demora 3 instantes | ASSIGN Persona[2]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #74111cb3cf288746
+step 22 WAIT Persona[2]: wait(espera[2]) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":22,"waiting":true} #0fd7ed69513ca9ad
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #77af805fe19b0af1
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #987ad6cdc14460d1
+step 25 ENTER Persona[3]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #abcd3be411cbd8dc
+step 26 DECL Persona[3]: int edad = 0 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #0cdf0cc59e9e835b
+step 27 ASSIGN Persona[3]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #718e9a20e08c129a
+step 28 POP Persona[3]: pop(fila) => (48, 4) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #7a14412817df41a1
+step 29 SIGNAL Persona[3]: signal(espera[4]) - despierta a Persona[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #993427d8c31dd1c6
+step 30 RETURN Persona[3]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[4]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #727af8cc5ff4e05f
+step 31 RETURN Persona[4]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[3]: termina | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #9c425a83e104b5a1
+step 32 WRITE Persona[4]: write(Persona 4 (48 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #0bd4f9cb798879ad
+step 33 DELAY Persona[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":33,"waiting":true} #142a76eb39f25a58
+step 34 {"finished":false,"deadlock":false,"instant":34,"waiting":true} #b600b7fb8a0af902
+step 35 {"finished":false,"deadlock":false,"instant":35,"waiting":true} #51de265179ee78b0
+step 36 {"finished":false,"deadlock":false,"instant":36,"waiting":true} #1ca720ad7bcc1a8d
+step 37 ENTER Persona[4]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #032731467a548b3a
+step 38 DECL Persona[4]: int edad = 0 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #4d6f99156f8f389b
+step 39 ASSIGN Persona[4]: esperando-- => 1 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #57ddebd37b330e73
+step 40 POP Persona[4]: pop(fila) => (34, 2) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #d3d6e65dcbdc1c64
+step 41 SIGNAL Persona[4]: signal(espera[2]) - despierta a Persona[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #05b625aab1c5ee5f
+step 42 RETURN Persona[4]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[2]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #614eca2018fff21f
+step 43 RETURN Persona[2]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[4]: termina | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #a033441b8a5a1928
+step 44 WRITE Persona[2]: write(Persona 2 (34 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #edd0378eda09afb3
+step 45 DELAY Persona[2]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":45,"waiting":true} #3038a778574f2feb
+step 46 {"finished":false,"deadlock":false,"instant":46,"waiting":true} #65fc24d1c4c0dca5
+step 47 {"finished":false,"deadlock":false,"instant":47,"waiting":true} #5eec200eaedbfd95
+step 48 {"finished":false,"deadlock":false,"instant":48,"waiting":true} #073a12e71b76e34e
+step 49 ENTER Persona[2]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #9b2352c1499de67b
+step 50 DECL Persona[2]: int edad = 0 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #a9e44a665f3e6c85
+step 51 ASSIGN Persona[2]: esperando-- => 0 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #7e21785e81e3984c
+step 52 POP Persona[2]: pop(fila) => (20, 0) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #0b3e02e281495904
+step 53 SIGNAL Persona[2]: signal(espera[0]) - despierta a Persona[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #d651d9fb7c54c3d1
+step 54 RETURN Persona[2]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[0]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #9ce658e357a3556b
+step 55 RETURN Persona[0]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[2]: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #fb90eca4e70f929a
+step 56 WRITE Persona[0]: write(Persona 0 (20 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #c026d30644f6ac93
+step 57 DELAY Persona[0]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":57,"waiting":true} #fe50fc85fe369986
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #ae51552201d04611
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #8b6d71627a5bca46
+step 60 {"finished":false,"deadlock":false,"instant":60,"waiting":true} #c810e826e456ecb6
+step 61 ENTER Persona[0]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #a2d5126ecbf923fc
+step 62 DECL Persona[0]: int edad = 0 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #d36ef53c899887ac
+step 63 ASSIGN Persona[0]: libre = true | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #6d54ead31a8f4318
+step 64 RETURN Persona[0]: retorna de Cajero.Salir, libera el monitor | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #c12f5618dc041978
+step 65 TERMINATED Persona[0]: termina | {"finished":true,"deadlock":false,"instant":65,"waiting":false} #390151a15e0861ae
+state #4d913b86b441d1dc
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #31c63e0e88fc4f2f
+step 1 #2f89c1545f822397
+step 2 #8f5d7b78e2db40c8
+step 3 #cf797a44fde187c5
+step 4 #5747b8c9822f0b89
+step 5 #a0b91b3efda0f8df
+step 6 #3ea477845f47d572
+step 7 #92c98988f5a2de19
+step 8 #a62fb133590f6b97
+step 9 #87a48d3e31da5675
+step 10 #7030566f97c82cc0
+step 11 #e524adb69310dec4
+step 12 #9045e7d82e132d64
+step 13 #2a2849a31b347dde
+step 14 #ba0af784b469569b
+step 15 #d4d27b154dc2efbd
+step 16 #fbae28fe1bcafc8c
+step 17 #00d6645ebb553027
+step 18 #c361bf6e2cebf0ee
+step 19 #69ce723e98a6de51
+step 20 #19d622c5704d61ba
+step 21 #443d754790a0e7ad
+step 22 #b62b0de09e60fd8d
+step 23 #71366852ba4d2d87
+step 24 #38d0b2fb9cb4535c
+step 25 #b71cd3c9ec9bdb78
+step 26 #76bdde1949366410
+step 27 #7f57f89ae2a9f1b6
+step 28 #bacdc232575e2745
+step 29 #6f2aa6c1c189035c
+step 30 #42de18695714764c
+step 31 #fb31cde3fede7873
+step 32 #cb4eb64dc6b00f00
+step 33 #5120ca53acbbcef9
+step 34 #f0d91f25baf82499
+step 35 #02278d57aebfaff4
+step 36 #7c01273f4e2bbef8
+step 37 #149b38d306365cf2
+step 38 #73f503220ab5d80c
+step 39 #ca6a651a80c50c41
+step 40 #7bf9fa29697439c9
+step 41 #f9569a547e88cd5a
+step 42 #f60b2dfb2d4a8f15
+step 43 #e8c86a37ecc88819
+step 44 #d522567dd552da33
+step 45 #840a26c03133d00a
+step 46 #67f7e4d039df4494
+step 47 #74fb0b9646d8eef6
+step 48 #76e1d3b228d965c8
+step 49 #aa6ee2fcd18ae5d1
+step 50 #b396abdc98b3fb56
+step 51 #df7617d313aa170c
+step 52 #52e5f4730ad5a0c3
+step 53 #ddc03030f3bd6bc6
+step 54 #0522171b410da205
+step 55 #a974bab03a84acc2
+step 56 #3ebd0da008dc5513
+step 57 #339748260479f1d1
+step 58 #ae6990180d3e8663
+step 59 #aa1e42876fd37919
+step 60 #d3d9609152e372b0
+step 61 #97f0234e8d5ae4c5
+step 62 #9a5a02ba81e8e3aa
+step 63 #b5db07c22b04056b
+step 64 #ddc45f7b222c02b6
+step 65 #b06e248d4bd732cc
+step 66 #b5c9f97781a559ef
+step 67 #5c131f6a75ee460d
+step 68 #cf54e4ab51d9c779
+state #6ee670e23ea3b4a0
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #9393cb5e0699981e
+step 1 #2f89c1545f822397
+step 2 #8f5d7b78e2db40c8
+step 3 #cf797a44fde187c5
+step 4 #5747b8c9822f0b89
+step 5 #a0b91b3efda0f8df
+step 6 #3ea477845f47d572
+step 7 #9ee07be9e3515739
+step 8 #7afe90339abd7fc7
+step 9 #606dd16ca107e99c
+step 10 #a58d86fa17fe5070
+step 11 #bad0e40a7da58231
+step 12 #e5d7a216ff4dc8d0
+step 13 #ee42297783c8af21
+step 14 #2caf25833162fb8e
+step 15 #89aa0af62b3ce001
+step 16 #d0b5ea2442485a6c
+step 17 #8ab9748b47984cad
+step 18 #da0d86c76aaccb30
+step 19 #1d91496f066fcbf1
+step 20 #70d86236ceb38164
+step 21 #e2b870aadc201b12
+step 22 #485047e2b96c69c8
+step 23 #22b936cde10bfe5c
+step 24 #4a8e02665cfd8ff9
+step 25 #bab689048628d35a
+step 26 #8430df32172bb878
+step 27 #357ece503fa75d4e
+step 28 #d7bd940590010427
+step 29 #fa796472497a704d
+step 30 #c7444c6574df92da
+step 31 #39f76a920414a7ad
+step 32 #bef78c10af456ad1
+step 33 #c908cd2a2012f3d4
+step 34 #ede0b64be6c95625
+step 35 #68f80d7af55842e9
+step 36 #d0be8cebf68ab25e
+step 37 #8f8b08f8d139eacf
+step 38 #a179199589111575
+step 39 #1668e3e0be23ba10
+step 40 #a5ef26df78aed276
+step 41 #c9efd3a6119b03c8
+step 42 #d54787ffd14ace9c
+step 43 #c884c95d9832fde4
+step 44 #3188a5018f2a68a2
+step 45 #87723c6e49c71d24
+step 46 #6a4bd11d8a8c23c2
+step 47 #a1bc299280c006f9
+step 48 #2713f18917f928e8
+step 49 #1ea80e654a94ec6e
+step 50 #38c3e9b549b99fc9
+step 51 #5a08cd1d1dd30c1f
+step 52 #83a11cb720f2781a
+step 53 #9e0ccc874f962015
+step 54 #c51667a7a8cac861
+step 55 #b835ccffa1e902c0
+step 56 #41b97c7b252ba8e9
+step 57 #b22def805237ab85
+step 58 #b22e9beb0af9ab35
+step 59 #a68af0e230c36f9e
+step 60 #ab01038db95c8692
+step 61 #e3a0cd9fa7183a47
+step 62 #e34ad2e2976b20de
+step 63 #d0a052fcb6dc257e
+step 64 #d0ac45e11b4a223a
+step 65 #0bdb573bfae084c5
+step 66 #fa465dc0ef03b67a
+step 67 #4bed8bc659c386aa
+step 68 #6a68672c37589e74
+state #bcfd48b330fa8849
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #3633e0c44f9aa408
+step 1 DECL Persona[1]: int edad = 57 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #b3e3b20ffa1b7d65
+step 2 DECL Persona[2]: int edad = 34 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c1176969107b994e
+step 3 DECL Persona[3]: int edad = 71 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #9a375f9ced592429
+step 4 DECL Persona[0]: int edad = 20 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #cb70c74be4a07661
+step 5 ENTER Persona[1]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #4bd8452d219d211e
+step 6 BLOCKED Persona[2]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #34ff53b9aac892c5
+step 7 BLOCKED Persona[3]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #353fb4a8d23a4ae5
+step 8 BLOCKED Persona[0]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #5ed21bfd2dff1aea
+step 9 ASSIGN Persona[1]: libre = false | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #7fa746caa303bf71
+step 10 RETURN Persona[1]: retorna de Cajero.Pasar, libera el monitor | ENTER Persona[0]: entra a Cajero.Pasar | DECL Persona[4]: int edad = 48 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #e81279fe78e6e2bc
+step 11 PUSH Persona[0]: push(fila, (20, 0)) | BLOCKED Persona[4]: espera para entrar a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #4d32599d681ef37e
+step 12 ASSIGN Persona[0]: esperando++ => 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #ac90c1131d3e5733
+step 13 WRITE Persona[1]: write(Persona 1 (57 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #64e76e4760ec17cf
+step 14 WAIT Persona[0]: wait(espera[0]) - libera el monitor y se demora | ENTER Persona[4]: entra a Cajero.Pasar | DELAY Persona[1]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #16e82e2a4f37c577
+step 15 PUSH Persona[4]: push(fila, (48, 4)) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #a01a9c00fa8ff038
+step 16 ASSIGN Persona[4]: esperando++ => 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6b954efb87743138
+step 17 WAIT Persona[4]: wait(espera[4]) - libera el monitor y se demora | ENTER Persona[3]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #d7e0c804b262affb
+step 18 PUSH Persona[3]: push(fila, (71, 3)) | BLOCKED Persona[1]: espera para entrar a Cajero.Salir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #76e4279515243556
+step 19 ASSIGN Persona[3]: esperando++ => 3 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #4438fd0289b207ef
+step 20 WAIT Persona[3]: wait(espera[3]) - libera el monitor y se demora | ENTER Persona[2]: entra a Cajero.Pasar | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #ba89fbdc92ab24bc
+step 21 PUSH Persona[2]: push(fila, (34, 2)) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #11f93545c664ddba
+step 22 ASSIGN Persona[2]: esperando++ => 4 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #d2a227fe73f5b439
+step 23 WAIT Persona[2]: wait(espera[2]) - libera el monitor y se demora | ENTER Persona[1]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #2d123073f69924c8
+step 24 DECL Persona[1]: int edad = 0 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #2a2e8d63c35e8c20
+step 25 ASSIGN Persona[1]: esperando-- => 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #e2d5a3183e5654e2
+step 26 POP Persona[1]: pop(fila) => (71, 3) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #b4c4cfef52ae3b76
+step 27 SIGNAL Persona[1]: signal(espera[3]) - despierta a Persona[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #29d7e7b2bd7625dd
+step 28 RETURN Persona[1]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[3]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #d22f811ff54f9f7e
+step 29 TERMINATED Persona[1]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #f11bdfee64574c3d
+step 30 RETURN Persona[3]: retorna de Cajero.Pasar, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #bdff0d7b890ca949
+step 31 WRITE Persona[3]: write(Persona 3 (71 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #539c418aa1a7f57b
+step 32 DELAY Persona[3]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":32,"waiting":true} #4ac95d6a29e60912
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #f8bfc4e62eba8803
+step 34 {"finished":false,"deadlock":false,"instant":34,"waiting":true} #66bb5f2f76d964f7
+step 35 {"finished":false,"deadlock":false,"instant":35,"waiting":true} #7c4c95ba3c8ee928
+step 36 ENTER Persona[3]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #ede8607e458031fc
+step 37 DECL Persona[3]: int edad = 0 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #c5b80ba2502af14d
+step 38 ASSIGN Persona[3]: esperando-- => 2 | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #54a327c6b10a23f2
+step 39 POP Persona[3]: pop(fila) => (48, 4) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #730c635e694d6a40
+step 40 SIGNAL Persona[3]: signal(espera[4]) - despierta a Persona[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #330bdd474acff7d5
+step 41 RETURN Persona[3]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[4]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #42808cb7b1d5dc26
+step 42 RETURN Persona[4]: retorna de Cajero.Pasar, libera el monitor | TERMINATED Persona[3]: termina | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #c3287a074c86dbd6
+step 43 WRITE Persona[4]: write(Persona 4 (48 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #4438d229d5064220
+step 44 DELAY Persona[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":44,"waiting":true} #cd85524f1babca71
+step 45 {"finished":false,"deadlock":false,"instant":45,"waiting":true} #adcea0b4053080a3
+step 46 {"finished":false,"deadlock":false,"instant":46,"waiting":true} #6f531f93e1ec4e7a
+step 47 {"finished":false,"deadlock":false,"instant":47,"waiting":true} #899fdd21c7a61a7b
+step 48 ENTER Persona[4]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #b440bac7feca82a9
+step 49 DECL Persona[4]: int edad = 0 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #3bed6fff85ba083c
+step 50 ASSIGN Persona[4]: esperando-- => 1 | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #7652331776957180
+step 51 POP Persona[4]: pop(fila) => (34, 2) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #91fb8d8b52fc2c4f
+step 52 SIGNAL Persona[4]: signal(espera[2]) - despierta a Persona[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #d573ed4670b5ec9e
+step 53 RETURN Persona[4]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[2]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #42209d332f8c42cb
+step 54 RETURN Persona[2]: retorna de Cajero.Pasar, libera el monitor | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #086f47b57cf83278
+step 55 WRITE Persona[2]: write(Persona 2 (34 años): uso el cajero) | TERMINATED Persona[4]: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #7fcc264a6c2468b1
+step 56 DELAY Persona[2]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":56,"waiting":true} #2aabc84061f65e50
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #1cb42d0fff865992
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #8dc106c1498bd9ef
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #50023cde6235ce06
+step 60 ENTER Persona[2]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #2fd47e0cff9e3ef1
+step 61 DECL Persona[2]: int edad = 0 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #5326bb8fa5d4b98f
+step 62 ASSIGN Persona[2]: esperando-- => 0 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #bf89d1641f37e5f8
+step 63 POP Persona[2]: pop(fila) => (20, 0) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f59952da2cd0f6f6
+step 64 SIGNAL Persona[2]: signal(espera[0]) - despierta a Persona[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #5b4b3ca1a798c2ca
+step 65 RETURN Persona[2]: retorna de Cajero.Salir, libera el monitor | REENTER Persona[0]: reingresa a Cajero | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #3b1dc688c2fcec4a
+step 66 TERMINATED Persona[2]: termina | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #175100f46ba9cc70
+step 67 RETURN Persona[0]: retorna de Cajero.Pasar, libera el monitor | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #176d3f45cbe87849
+step 68 WRITE Persona[0]: write(Persona 0 (20 años): uso el cajero) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #15399b3f58e59f93
+step 69 DELAY Persona[0]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":69,"waiting":true} #7a72625ee0436fb7
+step 70 {"finished":false,"deadlock":false,"instant":70,"waiting":true} #d02e9af73ef55d35
+step 71 {"finished":false,"deadlock":false,"instant":71,"waiting":true} #dc272097a85b5e01
+step 72 {"finished":false,"deadlock":false,"instant":72,"waiting":true} #2bd1373de4deff9e
+step 73 ENTER Persona[0]: entra a Cajero.Salir | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #be949048eba7ad31
+step 74 DECL Persona[0]: int edad = 0 | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #354a0a1671a6dd42
+step 75 ASSIGN Persona[0]: libre = true | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #1c888d99ec6fb7d0
+step 76 RETURN Persona[0]: retorna de Cajero.Salir, libera el monitor | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #4d15e27c5019eb93
+step 77 TERMINATED Persona[0]: termina | {"finished":true,"deadlock":false,"instant":77,"waiting":false} #97240080bfa6cb0a
+state #7f6fff4e3ef88e41

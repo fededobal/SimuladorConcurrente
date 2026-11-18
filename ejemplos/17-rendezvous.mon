@@ -1,0 +1,42 @@
+// Rendezvous: peluquero dormilón
+// espera: fin Peluqueria.peluquero=0 Peluqueria.cortes=3
+// Ejemplo de la Teoría 4: el peluquero y cada cliente atraviesan una serie de etapas de
+// sincronización. El peluquero espera que un cliente se siente, el cliente espera que
+// le abran la puerta y el peluquero espera que el cliente salga antes de seguir.
+monitor Peluqueria {
+  int peluquero = 0, cortes = 0;
+  cond peluquero_disponible, silla_ocupada, puerta_abierta, salio_cliente;
+
+  procedure corte_de_pelo() {
+    while (peluquero == 0) wait(peluquero_disponible);
+    peluquero = peluquero - 1;
+    signal(silla_ocupada);
+    wait(puerta_abierta);
+    signal(salio_cliente);
+  }
+
+  procedure proximo_cliente() {
+    peluquero = peluquero + 1;
+    signal(peluquero_disponible);
+    wait(silla_ocupada);
+  }
+
+  procedure corte_terminado() {
+    cortes = cortes + 1;
+    signal(puerta_abierta);
+    wait(salio_cliente);
+  }
+}
+
+process Cliente[id: 0..2] {
+  Peluqueria.corte_de_pelo();
+  write("Cliente ", id, ": me cortaron el pelo");
+}
+
+process Peluquero {
+  for (1..3) {
+    Peluqueria.proximo_cliente();
+    delay(2);                  // corta el pelo
+    Peluqueria.corte_terminado();
+  }
+}

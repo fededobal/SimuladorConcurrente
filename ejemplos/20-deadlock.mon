@@ -1,0 +1,43 @@
+// Deadlock
+// espera: deadlock
+// Ejercicio 4 de la Explicación 3, antes de corregirlo. El cliente llega al escritorio
+// antes que el empleado: su signal no despierta a nadie y no tiene efecto posterior.
+// Cuando el empleado llega, se duerme y nadie lo despierta. La corrección (una variable
+// listo que indica si el cliente ya llegó) está en el ejemplo siguiente.
+monitor Escritorio {
+  cond vcCliente, vcEmpleado;
+  text datos, resultados;
+
+  procedure Atencion(D: in text; R: out text) {
+    datos = D;
+    signal(vcEmpleado);        // avisa que ya dejó los datos
+    wait(vcCliente);           // espera los resultados
+    R = resultados;
+    signal(vcEmpleado);        // avisa que ya tomó los resultados
+  }
+
+  procedure EsperarDatos(D: out text) {
+    wait(vcEmpleado);          // espera que llegue el cliente
+    D = datos;
+  }
+
+  procedure EnviarResultados(R: in text) {
+    resultados = R;
+    signal(vcCliente);         // avisa que están los resultados
+    wait(vcEmpleado);          // espera que el cliente los tome
+  }
+}
+
+process Cliente {
+  text res;
+  Escritorio.Atencion("papeles", res);
+  write("Cliente: recibí ", res);
+}
+
+process Empleado {
+  text datos, res;
+  delay(6);                    // llega al escritorio después que el cliente
+  Escritorio.EsperarDatos(datos);
+  res = datos + " resueltos";
+  Escritorio.EnviarResultados(res);
+}

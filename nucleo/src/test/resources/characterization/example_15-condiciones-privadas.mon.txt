@@ -1,0 +1,483 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #4a1ebce511de8932
+step 1 DECL Trabajo[4]: int tiempo = 3 | DECL Trabajo[2]: int tiempo = 2 | DECL Trabajo[3]: int tiempo = 5 | DECL Trabajo[0]: int tiempo = 1 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #f64c23a47afb2abe
+step 2 ENTER Trabajo[3]: entra a Shortest_Job_Next.request | BLOCKED Trabajo[2]: espera para entrar a Shortest_Job_Next.request | BLOCKED Trabajo[4]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #ea85d8c9a656ed2b
+step 3 DECL Trabajo[1]: int tiempo = 4 | ASSIGN Trabajo[3]: libre = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #14a05d5cf2ee91e7
+step 4 BLOCKED Trabajo[1]: espera para entrar a Shortest_Job_Next.request | BLOCKED Trabajo[0]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #5db8549fde813cb1
+step 5 RETURN Trabajo[3]: retorna de Shortest_Job_Next.request, libera el monitor | ENTER Trabajo[2]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #29206db89f7dded7
+step 6 PUSH Trabajo[2]: push(espera, (2, 2)) | WRITE Trabajo[3]: write(Trabajo 3: uso el recurso 5 instante(s)) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #97f8ef2d0b1693de
+step 7 DELAY Trabajo[3]: delay(5) - se demora 5 instantes | WAIT Trabajo[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Trabajo[4]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #ace7021187aecf54
+step 8 PUSH Trabajo[4]: push(espera, (3, 4)) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #313a6bd6f3af7ad3
+step 9 WAIT Trabajo[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Trabajo[0]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #31199f350a710018
+step 10 PUSH Trabajo[0]: push(espera, (1, 0)) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #30c6017287e6d071
+step 11 WAIT Trabajo[0]: wait(turno[0]) - libera el monitor y se demora | ENTER Trabajo[1]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #6c99f279947ce057
+step 12 PUSH Trabajo[1]: push(espera, (4, 1)) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #eeb93a9f261f8f11
+step 13 WAIT Trabajo[1]: wait(turno[1]) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #873a589cc4e6df90
+step 14 ENTER Trabajo[3]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #65a048280e022b5e
+step 15 DECL Trabajo[3]: int id = 0 | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #42b78baaf20b52cc
+step 16 DECL Trabajo[3]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #bced648a626c8453
+step 17 POP Trabajo[3]: pop(espera) => (1, 0) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #734d1f43fb7f0eac
+step 18 SIGNAL Trabajo[3]: signal(turno[0]) - despierta a Trabajo[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #fb78fb2b14498f47
+step 19 RETURN Trabajo[3]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[0]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5a6b67eb8557b7a4
+step 20 RETURN Trabajo[0]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[3]: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #2060c400d4a03b3a
+step 21 WRITE Trabajo[0]: write(Trabajo 0: uso el recurso 1 instante(s)) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #91d763ef0635887c
+step 22 DELAY Trabajo[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":22,"waiting":true} #d45da6e85203cce1
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #ee2815549336c9b3
+step 24 ENTER Trabajo[0]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #e0f96224ca72360e
+step 25 DECL Trabajo[0]: int id = 0 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #0e6f6ccf271c8c9f
+step 26 DECL Trabajo[0]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #a197585b47a7e3ca
+step 27 POP Trabajo[0]: pop(espera) => (2, 2) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #a6d0b769c1fa511c
+step 28 SIGNAL Trabajo[0]: signal(turno[2]) - despierta a Trabajo[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #4be3ad5012e1d71d
+step 29 RETURN Trabajo[0]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[2]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #33b821886d0cbbd6
+step 30 TERMINATED Trabajo[0]: termina | RETURN Trabajo[2]: retorna de Shortest_Job_Next.request, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #01ae233315cad0c9
+step 31 WRITE Trabajo[2]: write(Trabajo 2: uso el recurso 2 instante(s)) | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #08b47137464f8111
+step 32 DELAY Trabajo[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":32,"waiting":true} #fa33ec5e12501a9d
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #1c5dac17c04feff9
+step 34 {"finished":false,"deadlock":false,"instant":34,"waiting":true} #1fd84e57bbdc292a
+step 35 ENTER Trabajo[2]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #7f7a254254f684ed
+step 36 DECL Trabajo[2]: int id = 0 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #42d4e102bbd00db6
+step 37 DECL Trabajo[2]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #4f19dd89f7295d36
+step 38 POP Trabajo[2]: pop(espera) => (3, 4) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #90dc38ab054e9e52
+step 39 SIGNAL Trabajo[2]: signal(turno[4]) - despierta a Trabajo[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #277941a1b4068c0d
+step 40 RETURN Trabajo[2]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[4]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #8337d9bd39bdfe93
+step 41 RETURN Trabajo[4]: retorna de Shortest_Job_Next.request, libera el monitor | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #28609c8d1b0e3862
+step 42 TERMINATED Trabajo[2]: termina | WRITE Trabajo[4]: write(Trabajo 4: uso el recurso 3 instante(s)) | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #f35484febd823d33
+step 43 DELAY Trabajo[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":43,"waiting":true} #2ea24dc6df110f38
+step 44 {"finished":false,"deadlock":false,"instant":44,"waiting":true} #cd4e46aec5b74007
+step 45 {"finished":false,"deadlock":false,"instant":45,"waiting":true} #37b04aa9461ef552
+step 46 {"finished":false,"deadlock":false,"instant":46,"waiting":true} #c493274825a9ff0c
+step 47 ENTER Trabajo[4]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #7485da7c5efd829d
+step 48 DECL Trabajo[4]: int id = 0 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #d079e14f889dca45
+step 49 DECL Trabajo[4]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #e27d16cab2b0cd2e
+step 50 POP Trabajo[4]: pop(espera) => (4, 1) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #9feb38e53694e029
+step 51 SIGNAL Trabajo[4]: signal(turno[1]) - despierta a Trabajo[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #6299a059242caf39
+step 52 RETURN Trabajo[4]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[1]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #be53c73d2d5b9285
+step 53 TERMINATED Trabajo[4]: termina | RETURN Trabajo[1]: retorna de Shortest_Job_Next.request, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #68b441e421ff4718
+step 54 WRITE Trabajo[1]: write(Trabajo 1: uso el recurso 4 instante(s)) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #4dd59cf983c17dd2
+step 55 DELAY Trabajo[1]: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":55,"waiting":true} #71292fce7752bdaa
+step 56 {"finished":false,"deadlock":false,"instant":56,"waiting":true} #63b197c13297ba59
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #a7ece94904fe1c3d
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #dc9a755f5d3094be
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #ab3275d81654429b
+step 60 ENTER Trabajo[1]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #95ea23934d8f9768
+step 61 DECL Trabajo[1]: int id = 0 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #af754b58e1b32352
+step 62 DECL Trabajo[1]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #019eb88193457a8d
+step 63 ASSIGN Trabajo[1]: libre = true | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #f50220782cba3176
+step 64 RETURN Trabajo[1]: retorna de Shortest_Job_Next.release, libera el monitor | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #03ce7342c01beef8
+step 65 TERMINATED Trabajo[1]: termina | {"finished":true,"deadlock":false,"instant":65,"waiting":false} #de5a7bab2aa5c4af
+state #18c97a97e058db65
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #e9b39f73f0aeb36f
+step 1 #7286db484af299cd
+step 2 #e192e4edb0bd178b
+step 3 #1be7bb8d6a28de6e
+step 4 #71cafbee28fef5ba
+step 5 #89c55b08351d215e
+step 6 #004d986d4b3c47f5
+step 7 #b1715d35aefb1d71
+step 8 #be9875d67c233bdb
+step 9 #daea16c54535f6ed
+step 10 #cb1dcb157660cf6f
+step 11 #b493f48ef22495b4
+step 12 #5feb630c80391b16
+step 13 #d2820569c847efc5
+step 14 #73255eb0813bd081
+step 15 #cc275be5651ec40a
+step 16 #4c3af99d5d1b61d4
+step 17 #9fc5a1387c9867de
+step 18 #e2ff521c2122b999
+step 19 #4c1247ef3c369809
+step 20 #2e3bb5efa737b920
+step 21 #3430b75510a92dda
+step 22 #fee58f7405846ff8
+step 23 #c1402fe68ea9d4a1
+step 24 #83e0da79e02f3418
+step 25 #716fa20d46877911
+step 26 #f59af4b49c9c96ac
+step 27 #699102b73b9dfb08
+step 28 #3e69c3321baa7625
+step 29 #313ad65094c64638
+step 30 #3f7c059ef83d4bb9
+step 31 #3650c12679627435
+step 32 #9399635225d1594c
+step 33 #517f31221a49634a
+step 34 #c82dfdec4fd86aae
+step 35 #8c4b9aec13df1ce6
+step 36 #9eb7495700d3a4f6
+step 37 #e2d1d175d9d5ee61
+step 38 #870a3a9a39f8adce
+step 39 #03504d3d8619ebba
+step 40 #73befd8e8fea775b
+step 41 #70fda7f1126705b9
+step 42 #2f9411a81a360689
+step 43 #1503740f1c694ca9
+step 44 #d39e53b050d9f633
+step 45 #2bb50880e27e087b
+step 46 #be550eb2fed1b9c9
+step 47 #37d0f2923a278a5e
+step 48 #369e5100c3f3c4d5
+step 49 #d48633e06b39ac1b
+step 50 #f279591a978507c8
+step 51 #fc7adb14dd1907e9
+step 52 #e21bb2aa481f8aa9
+step 53 #5f1d6b62b3b4ade7
+step 54 #600be8cbce0e73d9
+step 55 #1ac5bec007caec5a
+step 56 #6fb18f2f48f9b8bf
+step 57 #cf1f414509311237
+step 58 #138dec6d308c3b98
+step 59 #9f0f0fac74b46a52
+step 60 #50373238f222970a
+step 61 #cf234f035d51dda8
+step 62 #76fc713704535d1c
+step 63 #199d201f102f0910
+step 64 #70d4212e1c612a42
+step 65 #dbe3cc6f615af2f7
+step 66 #b321a1505254881b
+step 67 #f48a9a7076039132
+state #8fa201145ed4c3be
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #d2a16eb0eb39c9fe
+step 1 #3fef57444acce818
+step 2 #4ca90cd64808fa36
+step 3 #83293eea6d9a75cd
+step 4 #613dc17bd153799a
+step 5 #a031c9a11575b500
+step 6 #228812e7d9f4ff81
+step 7 #23bf0a37f3f47b94
+step 8 #64b77c47287d8a0b
+step 9 #791191e560e565f6
+step 10 #f540c17c4d5dac8f
+step 11 #9f51e144c221e7e1
+step 12 #ab81e59a063f4cfc
+step 13 #cd3968915d214e6a
+step 14 #9601ce4b3e65ccb9
+step 15 #7ff18793e93eb139
+step 16 #871b50710b9bf3ae
+step 17 #1a3dc22560c0abf1
+step 18 #1595847bb5bd449c
+step 19 #c39f2cc9efced7e0
+step 20 #66bd9df763caef87
+step 21 #7e655fe8022e5fbd
+step 22 #568e18d6bfd0b4fe
+step 23 #ca064d4c866f75f5
+step 24 #0619672b534bb15c
+step 25 #0aa9d62797dbc939
+step 26 #6920af4ddaee17b3
+step 27 #c6bf0a2327b76853
+step 28 #bb4f72690aa5f51a
+step 29 #6a925d22d4657d4b
+step 30 #2ffb837a8197f901
+step 31 #73b531569aa4c3cd
+step 32 #d7e37db16322f8b4
+step 33 #7cf53ebfd114da4d
+step 34 #91855f372b09358e
+step 35 #394237385dc707e0
+step 36 #a6cb783c3564ed80
+step 37 #65acdc17ab5b6c51
+step 38 #99db8b856e34f954
+step 39 #dfbf2ef14afee4d4
+step 40 #c75440d38e568563
+step 41 #64b996e24cea72c6
+step 42 #909ea82719d386da
+step 43 #52fb79b6aa1d7f28
+step 44 #d5eace1e27e72cb1
+step 45 #783c5c44e93f7c0b
+step 46 #b634e7c8d4e17864
+step 47 #9df7c9ce98e2f90b
+step 48 #84f5caf730d719ad
+step 49 #bd2a01d281d2c1d8
+step 50 #4497f5b718a94a4d
+step 51 #181e7270b29497ca
+step 52 #83bf7dcdf9dbf234
+step 53 #e64515725ab11deb
+step 54 #4413103769a58b04
+step 55 #eb9d5ab4dced3f5e
+step 56 #997b183cea217ca6
+step 57 #5eb8d914b3e57588
+step 58 #94f2a9d0d5b53e81
+step 59 #17e93f96ee2e0131
+step 60 #dec4897528ec6457
+step 61 #e68ffe6b7a949409
+step 62 #a67a00f519e70c47
+step 63 #d84552396874af8d
+step 64 #5c4665f04fb18713
+step 65 #3cdde6c864e67036
+state #3aaa1d06624b0e44
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #4a1ebce511de8932
+step 1 DECL Trabajo[0]: int tiempo = 1 | DECL Trabajo[1]: int tiempo = 4 | DECL Trabajo[2]: int tiempo = 2 | DECL Trabajo[3]: int tiempo = 5 | DECL Trabajo[4]: int tiempo = 3 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #afb017f02eb32d82
+step 2 ENTER Trabajo[1]: entra a Shortest_Job_Next.request | BLOCKED Trabajo[2]: espera para entrar a Shortest_Job_Next.request | BLOCKED Trabajo[3]: espera para entrar a Shortest_Job_Next.request | BLOCKED Trabajo[4]: espera para entrar a Shortest_Job_Next.request | BLOCKED Trabajo[0]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #176cf2ed2f82332e
+step 3 ASSIGN Trabajo[1]: libre = false | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #0a60277d959222df
+step 4 RETURN Trabajo[1]: retorna de Shortest_Job_Next.request, libera el monitor | ENTER Trabajo[4]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #c9e9a8991e95e069
+step 5 PUSH Trabajo[4]: push(espera, (3, 4)) | WRITE Trabajo[1]: write(Trabajo 1: uso el recurso 4 instante(s)) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #cd5d986b0a2f4648
+step 6 DELAY Trabajo[1]: delay(4) - se demora 4 instantes | WAIT Trabajo[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Trabajo[3]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #291365674833d3a3
+step 7 PUSH Trabajo[3]: push(espera, (5, 3)) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #49f92f063b5a8cfb
+step 8 WAIT Trabajo[3]: wait(turno[3]) - libera el monitor y se demora | ENTER Trabajo[2]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #be0ae64f0b73bdab
+step 9 PUSH Trabajo[2]: push(espera, (2, 2)) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #bbdeeb3e7239586d
+step 10 WAIT Trabajo[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Trabajo[0]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #dfa98bf795f834a5
+step 11 PUSH Trabajo[0]: push(espera, (1, 0)) | BLOCKED Trabajo[1]: espera para entrar a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #834046df56f18aa4
+step 12 WAIT Trabajo[0]: wait(turno[0]) - libera el monitor y se demora | ENTER Trabajo[1]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #fbb5b08fb39758ba
+step 13 DECL Trabajo[1]: int id = 0 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #373a765fb98509a2
+step 14 DECL Trabajo[1]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e9c193e5da0143f0
+step 15 POP Trabajo[1]: pop(espera) => (1, 0) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #7ff18793e93eb139
+step 16 SIGNAL Trabajo[1]: signal(turno[0]) - despierta a Trabajo[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #871b50710b9bf3ae
+step 17 RETURN Trabajo[1]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[0]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #1a3dc22560c0abf1
+step 18 RETURN Trabajo[0]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[1]: termina | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #1595847bb5bd449c
+step 19 WRITE Trabajo[0]: write(Trabajo 0: uso el recurso 1 instante(s)) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #c39f2cc9efced7e0
+step 20 DELAY Trabajo[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":20,"waiting":true} #66bd9df763caef87
+step 21 {"finished":false,"deadlock":false,"instant":21,"waiting":true} #7e655fe8022e5fbd
+step 22 ENTER Trabajo[0]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #568e18d6bfd0b4fe
+step 23 DECL Trabajo[0]: int id = 0 | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #ca064d4c866f75f5
+step 24 DECL Trabajo[0]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #0619672b534bb15c
+step 25 POP Trabajo[0]: pop(espera) => (2, 2) | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #0aa9d62797dbc939
+step 26 SIGNAL Trabajo[0]: signal(turno[2]) - despierta a Trabajo[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #6920af4ddaee17b3
+step 27 RETURN Trabajo[0]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[2]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #c6bf0a2327b76853
+step 28 RETURN Trabajo[2]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[0]: termina | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #bb4f72690aa5f51a
+step 29 WRITE Trabajo[2]: write(Trabajo 2: uso el recurso 2 instante(s)) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #6a925d22d4657d4b
+step 30 DELAY Trabajo[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":30,"waiting":true} #2ffb837a8197f901
+step 31 {"finished":false,"deadlock":false,"instant":31,"waiting":true} #73b531569aa4c3cd
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #d7e37db16322f8b4
+step 33 ENTER Trabajo[2]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #7cf53ebfd114da4d
+step 34 DECL Trabajo[2]: int id = 0 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #91855f372b09358e
+step 35 DECL Trabajo[2]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #394237385dc707e0
+step 36 POP Trabajo[2]: pop(espera) => (3, 4) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #a6cb783c3564ed80
+step 37 SIGNAL Trabajo[2]: signal(turno[4]) - despierta a Trabajo[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #65acdc17ab5b6c51
+step 38 RETURN Trabajo[2]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[4]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #99db8b856e34f954
+step 39 RETURN Trabajo[4]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[2]: termina | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #7568d6ee86fa5b95
+step 40 WRITE Trabajo[4]: write(Trabajo 4: uso el recurso 3 instante(s)) | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #c75440d38e568563
+step 41 DELAY Trabajo[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":41,"waiting":true} #64b996e24cea72c6
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #909ea82719d386da
+step 43 {"finished":false,"deadlock":false,"instant":43,"waiting":true} #52fb79b6aa1d7f28
+step 44 {"finished":false,"deadlock":false,"instant":44,"waiting":true} #d5eace1e27e72cb1
+step 45 ENTER Trabajo[4]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #783c5c44e93f7c0b
+step 46 DECL Trabajo[4]: int id = 0 | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #b634e7c8d4e17864
+step 47 DECL Trabajo[4]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #9df7c9ce98e2f90b
+step 48 POP Trabajo[4]: pop(espera) => (5, 3) | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #84f5caf730d719ad
+step 49 SIGNAL Trabajo[4]: signal(turno[3]) - despierta a Trabajo[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #bd2a01d281d2c1d8
+step 50 RETURN Trabajo[4]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[3]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #4497f5b718a94a4d
+step 51 RETURN Trabajo[3]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[4]: termina | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #b9c682ec4e79d5c7
+step 52 WRITE Trabajo[3]: write(Trabajo 3: uso el recurso 5 instante(s)) | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #a0ab215b676482ae
+step 53 DELAY Trabajo[3]: delay(5) - se demora 5 instantes | {"finished":false,"deadlock":false,"instant":53,"waiting":true} #0a18c19577114b3b
+step 54 {"finished":false,"deadlock":false,"instant":54,"waiting":true} #07a60122637b68ce
+step 55 {"finished":false,"deadlock":false,"instant":55,"waiting":true} #a8f778fc159afc68
+step 56 {"finished":false,"deadlock":false,"instant":56,"waiting":true} #be3f72d3e9dd63bd
+step 57 {"finished":false,"deadlock":false,"instant":57,"waiting":true} #e5fbadd1bbb9374d
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #8f92e6ce3cc3fb20
+step 59 ENTER Trabajo[3]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #8f78bcfec4043c4d
+step 60 DECL Trabajo[3]: int id = 0 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #0b4b9666b1f5c906
+step 61 DECL Trabajo[3]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #41df2b3a1bc201b3
+step 62 ASSIGN Trabajo[3]: libre = true | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #11b6696837cce311
+step 63 RETURN Trabajo[3]: retorna de Shortest_Job_Next.release, libera el monitor | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #8c95f1edbf6254cd
+step 64 TERMINATED Trabajo[3]: termina | {"finished":true,"deadlock":false,"instant":64,"waiting":false} #d47ee3b36bf730ba
+state #62054d09a5c5759d
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #e9b39f73f0aeb36f
+step 1 #afb017f02eb32d82
+step 2 #176cf2ed2f82332e
+step 3 #0a60277d959222df
+step 4 #c9e9a8991e95e069
+step 5 #cd5d986b0a2f4648
+step 6 #291365674833d3a3
+step 7 #49f92f063b5a8cfb
+step 8 #be0ae64f0b73bdab
+step 9 #bbdeeb3e7239586d
+step 10 #dfa98bf795f834a5
+step 11 #834046df56f18aa4
+step 12 #fbb5b08fb39758ba
+step 13 #373a765fb98509a2
+step 14 #e9c193e5da0143f0
+step 15 #7ff18793e93eb139
+step 16 #871b50710b9bf3ae
+step 17 #1a3dc22560c0abf1
+step 18 #1595847bb5bd449c
+step 19 #c39f2cc9efced7e0
+step 20 #66bd9df763caef87
+step 21 #7e655fe8022e5fbd
+step 22 #568e18d6bfd0b4fe
+step 23 #ca064d4c866f75f5
+step 24 #0619672b534bb15c
+step 25 #0aa9d62797dbc939
+step 26 #6920af4ddaee17b3
+step 27 #c6bf0a2327b76853
+step 28 #bb4f72690aa5f51a
+step 29 #6a925d22d4657d4b
+step 30 #2ffb837a8197f901
+step 31 #73b531569aa4c3cd
+step 32 #d7e37db16322f8b4
+step 33 #7cf53ebfd114da4d
+step 34 #91855f372b09358e
+step 35 #394237385dc707e0
+step 36 #a6cb783c3564ed80
+step 37 #65acdc17ab5b6c51
+step 38 #99db8b856e34f954
+step 39 #7568d6ee86fa5b95
+step 40 #c75440d38e568563
+step 41 #64b996e24cea72c6
+step 42 #909ea82719d386da
+step 43 #52fb79b6aa1d7f28
+step 44 #d5eace1e27e72cb1
+step 45 #783c5c44e93f7c0b
+step 46 #b634e7c8d4e17864
+step 47 #9df7c9ce98e2f90b
+step 48 #84f5caf730d719ad
+step 49 #bd2a01d281d2c1d8
+step 50 #4497f5b718a94a4d
+step 51 #b9c682ec4e79d5c7
+step 52 #a0ab215b676482ae
+step 53 #0a18c19577114b3b
+step 54 #07a60122637b68ce
+step 55 #a8f778fc159afc68
+step 56 #be3f72d3e9dd63bd
+step 57 #e5fbadd1bbb9374d
+step 58 #8f92e6ce3cc3fb20
+step 59 #8f78bcfec4043c4d
+step 60 #0b4b9666b1f5c906
+step 61 #41df2b3a1bc201b3
+step 62 #11b6696837cce311
+step 63 #8c95f1edbf6254cd
+step 64 #d47ee3b36bf730ba
+state #62054d09a5c5759d
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #d2a16eb0eb39c9fe
+step 1 #afb017f02eb32d82
+step 2 #176cf2ed2f82332e
+step 3 #0a60277d959222df
+step 4 #c9e9a8991e95e069
+step 5 #cd5d986b0a2f4648
+step 6 #b325d4a391e0bc73
+step 7 #1686f0dde38893d8
+step 8 #daa2d17233e5166f
+step 9 #791191e560e565f6
+step 10 #f540c17c4d5dac8f
+step 11 #62ef1d585dfaed3c
+step 12 #ab81e59a063f4cfc
+step 13 #cd3968915d214e6a
+step 14 #9601ce4b3e65ccb9
+step 15 #7ff18793e93eb139
+step 16 #871b50710b9bf3ae
+step 17 #1a3dc22560c0abf1
+step 18 #1595847bb5bd449c
+step 19 #c39f2cc9efced7e0
+step 20 #66bd9df763caef87
+step 21 #7e655fe8022e5fbd
+step 22 #568e18d6bfd0b4fe
+step 23 #ca064d4c866f75f5
+step 24 #0619672b534bb15c
+step 25 #0aa9d62797dbc939
+step 26 #6920af4ddaee17b3
+step 27 #c6bf0a2327b76853
+step 28 #bb4f72690aa5f51a
+step 29 #6a925d22d4657d4b
+step 30 #2ffb837a8197f901
+step 31 #73b531569aa4c3cd
+step 32 #d7e37db16322f8b4
+step 33 #7cf53ebfd114da4d
+step 34 #91855f372b09358e
+step 35 #394237385dc707e0
+step 36 #a6cb783c3564ed80
+step 37 #65acdc17ab5b6c51
+step 38 #99db8b856e34f954
+step 39 #7568d6ee86fa5b95
+step 40 #c75440d38e568563
+step 41 #64b996e24cea72c6
+step 42 #909ea82719d386da
+step 43 #52fb79b6aa1d7f28
+step 44 #d5eace1e27e72cb1
+step 45 #783c5c44e93f7c0b
+step 46 #b634e7c8d4e17864
+step 47 #9df7c9ce98e2f90b
+step 48 #84f5caf730d719ad
+step 49 #bd2a01d281d2c1d8
+step 50 #4497f5b718a94a4d
+step 51 #b9c682ec4e79d5c7
+step 52 #a0ab215b676482ae
+step 53 #0a18c19577114b3b
+step 54 #07a60122637b68ce
+step 55 #a8f778fc159afc68
+step 56 #be3f72d3e9dd63bd
+step 57 #e5fbadd1bbb9374d
+step 58 #8f92e6ce3cc3fb20
+step 59 #8f78bcfec4043c4d
+step 60 #0b4b9666b1f5c906
+step 61 #41df2b3a1bc201b3
+step 62 #11b6696837cce311
+step 63 #8c95f1edbf6254cd
+step 64 #d47ee3b36bf730ba
+state #6d50e7813e3164d3
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #4a1ebce511de8932
+step 1 DECL Trabajo[1]: int tiempo = 4 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #989ec14460e2af77
+step 2 DECL Trabajo[2]: int tiempo = 2 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #a0c3895c24250bbd
+step 3 DECL Trabajo[3]: int tiempo = 5 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #b14a1eea7cd22caf
+step 4 DECL Trabajo[0]: int tiempo = 1 | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1f15f9285a8b6aee
+step 5 ENTER Trabajo[1]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #0330e6d87a73355f
+step 6 BLOCKED Trabajo[2]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4cd3a29518cad9c7
+step 7 BLOCKED Trabajo[3]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #2ba41033c35571eb
+step 8 BLOCKED Trabajo[0]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #e7cdd63fa8a71200
+step 9 ASSIGN Trabajo[1]: libre = false | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #19ec10ae3a25e588
+step 10 RETURN Trabajo[1]: retorna de Shortest_Job_Next.request, libera el monitor | ENTER Trabajo[0]: entra a Shortest_Job_Next.request | DECL Trabajo[4]: int tiempo = 3 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #034974221153390a
+step 11 PUSH Trabajo[0]: push(espera, (1, 0)) | BLOCKED Trabajo[4]: espera para entrar a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7373fb535433dc5a
+step 12 WAIT Trabajo[0]: wait(turno[0]) - libera el monitor y se demora | ENTER Trabajo[4]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #8c8dbae71b30675e
+step 13 WRITE Trabajo[1]: write(Trabajo 1: uso el recurso 4 instante(s)) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #2f3d061f102b0b41
+step 14 PUSH Trabajo[4]: push(espera, (3, 4)) | DELAY Trabajo[1]: delay(4) - se demora 4 instantes | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #c9f84b9d0dbe6973
+step 15 WAIT Trabajo[4]: wait(turno[4]) - libera el monitor y se demora | ENTER Trabajo[3]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #1c0f502207f7bcdd
+step 16 PUSH Trabajo[3]: push(espera, (5, 3)) | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #cdbbd67cbbf9954f
+step 17 WAIT Trabajo[3]: wait(turno[3]) - libera el monitor y se demora | ENTER Trabajo[2]: entra a Shortest_Job_Next.request | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #104758ee1bbca93c
+step 18 PUSH Trabajo[2]: push(espera, (2, 2)) | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #df29e2bab2f93546
+step 19 WAIT Trabajo[2]: wait(turno[2]) - libera el monitor y se demora | ENTER Trabajo[1]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #99f899447b760c02
+step 20 DECL Trabajo[1]: int id = 0 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #684e09b6b833a3e4
+step 21 DECL Trabajo[1]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #fea601e5eaa3ceb4
+step 22 POP Trabajo[1]: pop(espera) => (1, 0) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #fe50645be87d1561
+step 23 SIGNAL Trabajo[1]: signal(turno[0]) - despierta a Trabajo[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #9e58c8ddd9819ac5
+step 24 RETURN Trabajo[1]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[0]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #1bf7300e5ea167e1
+step 25 TERMINATED Trabajo[1]: termina | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #14bf3aa4b3eb9539
+step 26 RETURN Trabajo[0]: retorna de Shortest_Job_Next.request, libera el monitor | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #41803be413d92bd0
+step 27 WRITE Trabajo[0]: write(Trabajo 0: uso el recurso 1 instante(s)) | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #7342ae434865123a
+step 28 DELAY Trabajo[0]: delay(1) - se demora 1 instante | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #49019b8be16abdd2
+step 29 {"finished":false,"deadlock":false,"instant":29,"waiting":true} #228170e07bf6d64f
+step 30 ENTER Trabajo[0]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #96cf2b46fd2c6adc
+step 31 DECL Trabajo[0]: int id = 0 | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #15dd252bb1c4aeae
+step 32 DECL Trabajo[0]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #0e90086b7eb8da97
+step 33 POP Trabajo[0]: pop(espera) => (2, 2) | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #3805883626ea69b4
+step 34 SIGNAL Trabajo[0]: signal(turno[2]) - despierta a Trabajo[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #d09b175bcdaf13fd
+step 35 RETURN Trabajo[0]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[2]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #d4e7b36989c22fc8
+step 36 TERMINATED Trabajo[0]: termina | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #02bf067331943b10
+step 37 RETURN Trabajo[2]: retorna de Shortest_Job_Next.request, libera el monitor | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #5dd7cdda3398a525
+step 38 WRITE Trabajo[2]: write(Trabajo 2: uso el recurso 2 instante(s)) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #23a47360415e4c6a
+step 39 DELAY Trabajo[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":39,"waiting":true} #00b28f5f59e331d8
+step 40 {"finished":false,"deadlock":false,"instant":40,"waiting":true} #10591ec8b9691886
+step 41 {"finished":false,"deadlock":false,"instant":41,"waiting":true} #5194aaa04934ee92
+step 42 ENTER Trabajo[2]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #6522444ec199a834
+step 43 DECL Trabajo[2]: int id = 0 | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #de795df59772060e
+step 44 DECL Trabajo[2]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #4a2a75731ba3fed9
+step 45 POP Trabajo[2]: pop(espera) => (3, 4) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #1e1cce03f7df6bc5
+step 46 SIGNAL Trabajo[2]: signal(turno[4]) - despierta a Trabajo[4] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #73910e5e27031eae
+step 47 RETURN Trabajo[2]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[4]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #8ad06337ec7804eb
+step 48 RETURN Trabajo[4]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[2]: termina | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #76cf87bb6bc9e37d
+step 49 WRITE Trabajo[4]: write(Trabajo 4: uso el recurso 3 instante(s)) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #5ba24562085cee47
+step 50 DELAY Trabajo[4]: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":50,"waiting":true} #540adb08875bb178
+step 51 {"finished":false,"deadlock":false,"instant":51,"waiting":true} #5b92a599360cd499
+step 52 {"finished":false,"deadlock":false,"instant":52,"waiting":true} #ce0ebfe587281b85
+step 53 {"finished":false,"deadlock":false,"instant":53,"waiting":true} #ee6a104f0159adb3
+step 54 ENTER Trabajo[4]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #17d48ee59663813a
+step 55 DECL Trabajo[4]: int id = 0 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #0ac42780c1dc5e86
+step 56 DECL Trabajo[4]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #9214f93503ebb3bb
+step 57 POP Trabajo[4]: pop(espera) => (5, 3) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #a26ff6366bcd6e45
+step 58 SIGNAL Trabajo[4]: signal(turno[3]) - despierta a Trabajo[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #ad224fcaff33b58b
+step 59 RETURN Trabajo[4]: retorna de Shortest_Job_Next.release, libera el monitor | REENTER Trabajo[3]: reingresa a Shortest_Job_Next | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #08e07c14fe4594e4
+step 60 RETURN Trabajo[3]: retorna de Shortest_Job_Next.request, libera el monitor | TERMINATED Trabajo[4]: termina | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #683b1d5cddd013d9
+step 61 WRITE Trabajo[3]: write(Trabajo 3: uso el recurso 5 instante(s)) | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #5cb34eddcd7ac844
+step 62 DELAY Trabajo[3]: delay(5) - se demora 5 instantes | {"finished":false,"deadlock":false,"instant":62,"waiting":true} #9b213868794a97c2
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #0e48222ecadf66fd
+step 64 {"finished":false,"deadlock":false,"instant":64,"waiting":true} #823f364a0b323955
+step 65 {"finished":false,"deadlock":false,"instant":65,"waiting":true} #26515fe8074e592e
+step 66 {"finished":false,"deadlock":false,"instant":66,"waiting":true} #3cd03fac768b46da
+step 67 {"finished":false,"deadlock":false,"instant":67,"waiting":true} #cae8c01aa6639716
+step 68 ENTER Trabajo[3]: entra a Shortest_Job_Next.release | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #da4bd656a77eb238
+step 69 DECL Trabajo[3]: int id = 0 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #2a1052c4c2643c7b
+step 70 DECL Trabajo[3]: int tiempo = 0 | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #fed3a8446421877b
+step 71 ASSIGN Trabajo[3]: libre = true | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #19d69959cc4d9a06
+step 72 RETURN Trabajo[3]: retorna de Shortest_Job_Next.release, libera el monitor | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #9ff8ac73fe91e569
+step 73 TERMINATED Trabajo[3]: termina | {"finished":true,"deadlock":false,"instant":73,"waiting":false} #3cc741133f92dfac
+state #5a11a38a5d06cecb

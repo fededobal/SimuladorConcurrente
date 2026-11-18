@@ -1,0 +1,558 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #a0120fc8ec1bd7af
+step 1 ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | BLOCKED Escritor[0]: espera para entrar a Controlador_RW.pedido_escribir | BLOCKED Lector[0]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #371c3494e377b05a
+step 2 BLOCKED Lector[1]: espera para entrar a Controlador_RW.pedido_leer | ASSIGN Escritor[1]: nw = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5014f2373eead898
+step 3 RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #b70ab7ca66f9578d
+step 4 WAIT Lector[0]: wait(ok_leer) - libera el monitor y se demora | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #ea534b06ac5c642b
+step 5 WAIT Lector[2]: wait(ok_leer) - libera el monitor y se demora | ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | DELAY Escritor[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #e6d0a6fa231f3c36
+step 6 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #4ea024065325fd4f
+step 7 WAIT Lector[1]: wait(ok_leer) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":7,"waiting":true} #5b6647a84e96a19a
+step 8 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #c960b26e974cb1b9
+step 9 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #32b872b83d6f1756
+step 10 SIGNAL Escritor[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #d6c2e17dcbfc1178
+step 11 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #37f6e4746636a9f7
+step 12 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #201cb4977bf4f69d
+step 13 ASSIGN Escritor[0]: nw = 1 | ASSIGN Escritor[1]: for#3++ => 2 | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #bd6191a77bc0f310
+step 14 BLOCKED Escritor[1]: espera para entrar a Controlador_RW.pedido_escribir | RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | REENTER Lector[2]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #1b10731276983b60
+step 15 DELAY Escritor[0]: delay(2) - se demora 2 instantes | WAIT Lector[2]: wait(ok_leer) - libera el monitor y se demora | ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #134e50f7d4d363fb
+step 16 WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | REENTER Lector[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #24c7c0aeece8f2f2
+step 17 WAIT Lector[0]: wait(ok_leer) - libera el monitor y se demora | REENTER Lector[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #b175e19a0b72fa1e
+step 18 BLOCKED Escritor[0]: espera para entrar a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #0fd36f885961adec
+step 19 WAIT Lector[1]: wait(ok_leer) - libera el monitor y se demora | ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #add2a4d0650e40f1
+step 20 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #7d8e57c0ea999fb7
+step 21 SIGNAL Escritor[0]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #25e91bac1e44e2fb
+step 22 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 3 proceso(s) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #3bc001d4588087c6
+step 23 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Lector[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #5b321551804f113e
+step 24 ASSIGN Lector[0]: nr = 1 | ASSIGN Escritor[0]: for#3++ => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #93ba2d34d52beb75
+step 25 BLOCKED Escritor[0]: espera para entrar a Controlador_RW.pedido_escribir | RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #c13c87023d49d77f
+step 26 WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | REENTER Lector[2]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #99ed37afa0b05904
+step 27 DELAY Lector[0]: delay(2) - se demora 2 instantes | ASSIGN Lector[2]: nr = 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #f433407e1d032bd0
+step 28 RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | REENTER Lector[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #15d77726a689376d
+step 29 DELAY Lector[2]: delay(2) - se demora 2 instantes | ASSIGN Lector[1]: nr = 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #cabc551a6fea864b
+step 30 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #679c43c71bdd1f8a
+step 31 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #e2972bac426ca955
+step 32 ASSIGN Lector[0]: nr = 2 | BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #d4e48e86a871cf91
+step 33 RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #d8f3775a30c10177
+step 34 ASSIGN Lector[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #6b38da6d44df5dfa
+step 35 ASSIGN Lector[2]: nr = 1 | BLOCKED Lector[0]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #b627bd9582785116
+step 36 RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.pedido_leer | BLOCKED Lector[1]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #4ae472d9849232c5
+step 37 ASSIGN Lector[2]: for#1++ => 2 | ASSIGN Lector[0]: nr = 2 | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #d222c0c184b6524f
+step 38 RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.libera_leer | BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #1f4928d9cc601d12
+step 39 ASSIGN Lector[1]: nr = 1 | DELAY Lector[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #05100967b4351ce4
+step 40 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #c9a4a26dd62eebeb
+step 41 ASSIGN Lector[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #90d9acea4b655dbc
+step 42 ASSIGN Lector[2]: nr = 2 | BLOCKED Lector[1]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #2c43a14bb35399aa
+step 43 RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #3fe1b6a41e732446
+step 44 DELAY Lector[2]: delay(2) - se demora 2 instantes | BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #e09c5592be086c35
+step 45 ASSIGN Lector[1]: nr = 3 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #30539d515366f27f
+step 46 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #872f77d74536b8a1
+step 47 ASSIGN Lector[0]: nr = 2 | DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #7f14bffd0cb60e87
+step 48 BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #067bcf0b4ec66342
+step 49 ASSIGN Lector[2]: nr = 1 | ASSIGN Lector[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #94f8d0c7f934362b
+step 50 TERMINATED Lector[0]: termina | RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #a7b81a3379920ce8
+step 51 ENTER Lector[1]: entra a Controlador_RW.libera_leer | ASSIGN Lector[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #587d66d7b342ac6e
+step 52 TERMINATED Lector[2]: termina | ASSIGN Lector[1]: nr = 0 | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #948ac46b33da8a30
+step 53 SIGNAL Lector[1]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #65973b4c03ffb9ce
+step 54 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #1e676c47883921fb
+step 55 ASSIGN Escritor[1]: nw = 1 | ASSIGN Lector[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #770c6458c8893641
+step 56 RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #770644ed26c285db
+step 57 DELAY Escritor[1]: delay(2) - se demora 2 instantes | TERMINATED Lector[1]: termina | {"finished":false,"deadlock":false,"instant":57,"waiting":true} #5bc7e75d90a3be4a
+step 58 {"finished":false,"deadlock":false,"instant":58,"waiting":true} #2a972cdb5b23b7d4
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #c7cf5f7f7cf98a4e
+step 60 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #994dd399c36f9696
+step 61 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #a09386727ab15b2c
+step 62 SIGNAL Escritor[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #81e94ef76dc8afd8
+step 63 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #b8571147acafaa5d
+step 64 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #6dc9d751edb0c660
+step 65 ASSIGN Escritor[0]: nw = 1 | ASSIGN Escritor[1]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #ad6ff3d80c4fd9d7
+step 66 TERMINATED Escritor[1]: termina | RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #c57091c4a7213a6a
+step 67 DELAY Escritor[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":67,"waiting":true} #6166a0d22b0929af
+step 68 {"finished":false,"deadlock":false,"instant":68,"waiting":true} #2066f29413fa36ee
+step 69 {"finished":false,"deadlock":false,"instant":69,"waiting":true} #72471aaebc4fe846
+step 70 ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #1e8b06b085f0eb03
+step 71 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #048d9c2bd1a8ad9f
+step 72 SIGNAL Escritor[0]: signal(ok_escribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #8271710223f8504c
+step 73 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #4600f5a7b672bf76
+step 74 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #2284b02b7bbd7173
+step 75 ASSIGN Escritor[0]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #c1e9bbf14a1f635a
+step 76 TERMINATED Escritor[0]: termina | {"finished":true,"deadlock":false,"instant":76,"waiting":false} #957ca4a39fb5c6fa
+state #4016ccd6a5f139fa
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #294cc0ba55fdc7e0
+step 1 #5b47748301000d2a
+step 2 #635bf2fc6656134c
+step 3 #9ef8f3b661bc7c06
+step 4 #699982f4e18d5d61
+step 5 #89a9e87c1afc3e62
+step 6 #f8f126ad2f12cbe8
+step 7 #2bbcba13621a7dfb
+step 8 #7da07dd1186d3db3
+step 9 #f08b2ec2cfc1695e
+step 10 #2f8d399467215597
+step 11 #f7669feaae88a143
+step 12 #b3cb4d9279be9dda
+step 13 #721ac5c1f9f7b020
+step 14 #7b167c603d6abf63
+step 15 #896bfe45200f7f92
+step 16 #98a78dbeb43ceb02
+step 17 #cd2180be57ae35a5
+step 18 #a51e6d0d084d6e3b
+step 19 #11e92e83484a25bc
+step 20 #30c1606c3c256f35
+step 21 #180e3ab971407991
+step 22 #9b7c66e57ee23eb5
+step 23 #e21110685bd45df1
+step 24 #73dc75a923d60e30
+step 25 #8bb43d0434c00a88
+step 26 #9ee32eb19b61558c
+step 27 #32133bf1ae8a6b38
+step 28 #6cd76f2cf267e33f
+step 29 #aa10f2dc5e7f1d51
+step 30 #7a68582ef55cccb2
+step 31 #029b0e6eda703035
+step 32 #09b9ca76c4ac062b
+step 33 #bc26aa2a45807c14
+step 34 #3eea3210c2f7a94d
+step 35 #e748d86b7cbaf4cb
+step 36 #23754e1a61118b89
+step 37 #d799faf90fabe16b
+step 38 #4eb08c8e0b267931
+step 39 #1dd51851a8efa07c
+step 40 #5dda5552952fc00e
+step 41 #3f8e611e5eb9c469
+step 42 #35d5c2f219e40e21
+step 43 #a3e0701f8b33c157
+step 44 #33b3d987175d0a89
+step 45 #621dc2b86819d2df
+step 46 #7f431a6310977af3
+step 47 #f712b8e3827b9dec
+step 48 #15651dfa9f76f927
+step 49 #43d337fe4a82d1cc
+step 50 #5ea2dbb92d164a35
+step 51 #5df963c0c11764cd
+step 52 #7acfc404e9487dce
+step 53 #620a0fcfa4189dc9
+step 54 #c6fab1b761e928a6
+step 55 #e0c31886160da24c
+step 56 #5866c922064d44f3
+step 57 #a2057e2ff666c193
+step 58 #dc72645d4fe85042
+step 59 #58e03091bc9cbd2e
+step 60 #77ad697c0f735365
+step 61 #c238ae915fe8781e
+step 62 #eef3447d8e4244cb
+step 63 #6fc33af459ecce25
+step 64 #1dfdda8e33ee633f
+step 65 #55aa334ca9664751
+step 66 #40dcaeab8f568dc6
+step 67 #e2f2893764e5e8f3
+step 68 #0fd83804adf16898
+step 69 #b67b27ad7ba5338b
+step 70 #de5c5fec3c7176d4
+step 71 #7f29f3f58af32981
+step 72 #9334bf3227ac1c1f
+step 73 #feb16b91ab565e0f
+step 74 #88a7f63c5c075b8f
+step 75 #4dcd8e5dc725fc30
+step 76 #b21df48803da32c6
+step 77 #13073de06334cad8
+state #8f8ff818e8d2548d
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #91b707c639d9dd57
+step 1 #a3335c82a31758c1
+step 2 #3cf649812228ee20
+step 3 #6221807a0b7adcc7
+step 4 #145e62bb71b97ae9
+step 5 #33f7111618b198c7
+step 6 #1d4b24be41b5315f
+step 7 #fc401b0dd120f3f0
+step 8 #49e7e73dd7fe6223
+step 9 #3d93cf6592010aea
+step 10 #5f42a1e216e3d295
+step 11 #8fd8f368e4719391
+step 12 #4881006f38e32b46
+step 13 #e0d8462727e9c963
+step 14 #70141f92854ea344
+step 15 #a9e9353d6bfdaf84
+step 16 #20e1a9336173f0b3
+step 17 #ff5233ff62446bb0
+step 18 #c2c5ac40fe30ad31
+step 19 #a0c5e88282a814e4
+step 20 #5c63f16ddba25a22
+step 21 #c906be4d5409dca5
+step 22 #43821c9b2a7944dd
+step 23 #c8953886a0447c44
+step 24 #f3fa8eb372d9f9da
+step 25 #517682a2bd8ebd43
+step 26 #458dece8896ad5c3
+step 27 #3d7123cc92e2b8b9
+step 28 #fdb318b9127f30a7
+step 29 #6d181585b823ce1d
+step 30 #4a2b3a4a8b24a056
+step 31 #37c2bc6bccb5658b
+step 32 #03e6c51a699a196f
+step 33 #0509bb72761022cd
+step 34 #89756ea7b9691ea2
+step 35 #d9e68d1094a36056
+step 36 #0375cbe30c38e088
+step 37 #f3f8806efe3e33c3
+step 38 #403d4f01da8ceff0
+step 39 #be915d19b5961818
+step 40 #ef890592280e9ec6
+step 41 #b5c813d98155f7f2
+step 42 #d79b79af2f9bf83d
+step 43 #c72718a9ea061cac
+step 44 #3506e91f5f4da528
+step 45 #f475b319f2f578bb
+step 46 #190940713f7e1e59
+step 47 #c5af06267840258d
+step 48 #c5c944c19dc786a0
+step 49 #485b67b6175a6673
+step 50 #9cae9af4edc51d47
+step 51 #cec5e3415fd6c985
+step 52 #ad0768c5649c1d0c
+step 53 #f50386890ea6e3e7
+step 54 #477df8cba5058960
+step 55 #57f8989fb6f6dc98
+step 56 #93cbe6835d9de91c
+step 57 #0aa8ffe7aa64d570
+step 58 #9babc34200174d0f
+step 59 #0561df89fb5e7c14
+step 60 #2207053b1003e56a
+step 61 #23e44418f62522c9
+step 62 #53189cfeca98d866
+step 63 #618b449f23741004
+step 64 #4e7ec99d8a789846
+step 65 #1647d010e303e0da
+step 66 #16911a2149fee849
+step 67 #d83f28a5912fdead
+step 68 #521098be690fef25
+step 69 #bea983881006c3d8
+step 70 #b4c59a090312ccea
+step 71 #f8150f1d6a1c4520
+step 72 #5c7bddf4c08b8bd7
+step 73 #fd7e8446d4953e0e
+step 74 #4d1510ab4d1b495e
+step 75 #2cbefd48ab13a21a
+state #8114db071877cff9
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #a0120fc8ec1bd7af
+step 1 ENTER Lector[0]: entra a Controlador_RW.pedido_leer | BLOCKED Lector[1]: espera para entrar a Controlador_RW.pedido_leer | BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | BLOCKED Escritor[0]: espera para entrar a Controlador_RW.pedido_escribir | BLOCKED Escritor[1]: espera para entrar a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #079303c6fde30629
+step 2 ASSIGN Lector[0]: nr = 1 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #0b01d29af6302726
+step 3 RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #a32e6b532ce9cb39
+step 4 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | DELAY Lector[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #1057689cc1afb41d
+step 5 ASSIGN Lector[2]: nr = 2 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #fbb557f9d60b76eb
+step 6 RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #284c7fe7e5868014
+step 7 BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | ASSIGN Lector[1]: nr = 3 | DELAY Lector[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9781afabae9da325
+step 8 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #8958a8e567b3c3a7
+step 9 ASSIGN Lector[0]: nr = 2 | DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #e39714cd6fb59d17
+step 10 BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #50fd258228c5e5a0
+step 11 ASSIGN Lector[0]: for#1++ => 2 | ASSIGN Lector[2]: nr = 1 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #6113b63946f18c8e
+step 12 BLOCKED Lector[1]: espera para entrar a Controlador_RW.libera_leer | RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | BLOCKED Lector[0]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #54fcb70b5364478e
+step 13 ASSIGN Lector[2]: for#1++ => 2 | WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[0]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #d00f324cc11a27e4
+step 14 ASSIGN Lector[0]: nr = 2 | BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #d46ff52db0126595
+step 15 RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #fd41a826140cba23
+step 16 ASSIGN Lector[1]: nr = 1 | DELAY Lector[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #e8e4c7e602a89c54
+step 17 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #ad9ee3997900d45a
+step 18 ASSIGN Lector[2]: nr = 2 | ASSIGN Lector[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f73ad977fad4bd6c
+step 19 BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | BLOCKED Lector[1]: espera para entrar a Controlador_RW.pedido_leer | RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #40313bec85cf901e
+step 20 ASSIGN Lector[1]: nr = 3 | DELAY Lector[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #256704b51406eb01
+step 21 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #18ae056c9723b403
+step 22 ASSIGN Lector[0]: nr = 2 | DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #6b60381e39c3a528
+step 23 BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #d8b4a4560a7b83c6
+step 24 ASSIGN Lector[0]: for#1++ => 3 | ASSIGN Lector[2]: nr = 1 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #9aca96aee7142da8
+step 25 BLOCKED Lector[1]: espera para entrar a Controlador_RW.libera_leer | RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.libera_leer | TERMINATED Lector[0]: termina | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #efeb1a1ee9e1b721
+step 26 ASSIGN Lector[2]: for#1++ => 3 | ASSIGN Lector[1]: nr = 0 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #5214357528ef76b4
+step 27 SIGNAL Lector[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | TERMINATED Lector[2]: termina | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #61a8a67d5bf3e497
+step 28 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #3218a29ec2d0e8a3
+step 29 ASSIGN Escritor[0]: nw = 1 | ASSIGN Lector[1]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #5ad37176cd5edc2f
+step 30 TERMINATED Lector[1]: termina | RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #d3c958103b2e080a
+step 31 DELAY Escritor[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":31,"waiting":true} #fd97402c1a2de065
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #e9acbbed6a2969e6
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #3721fec1f97c8617
+step 34 ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #a1770f9b2c1cbe97
+step 35 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #c2502d1fa2f23107
+step 36 SIGNAL Escritor[0]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #96a7e7e5d783f688
+step 37 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #2d839b14aed4dbdc
+step 38 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #75e107c5778843ab
+step 39 ASSIGN Escritor[1]: nw = 1 | ASSIGN Escritor[0]: for#3++ => 2 | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #2ef74f9bf21fcfe9
+step 40 BLOCKED Escritor[0]: espera para entrar a Controlador_RW.pedido_escribir | RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #15daf2ab0e2f8979
+step 41 DELAY Escritor[1]: delay(2) - se demora 2 instantes | WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":41,"waiting":true} #a91661aa2a6518d6
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #859452ce7d290b2b
+step 43 {"finished":false,"deadlock":false,"instant":43,"waiting":true} #5faaf8dd3bad95b2
+step 44 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #f20ae98d7bcd0b99
+step 45 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #c722b43f11963949
+step 46 SIGNAL Escritor[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #832b03e1fb5059b6
+step 47 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #16f2e4caf29df6ea
+step 48 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #0d09b6295fcc8849
+step 49 ASSIGN Escritor[0]: nw = 1 | ASSIGN Escritor[1]: for#3++ => 2 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #e645ce890b7081f6
+step 50 BLOCKED Escritor[1]: espera para entrar a Controlador_RW.pedido_escribir | RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #5aa251a411dfd4fc
+step 51 DELAY Escritor[0]: delay(2) - se demora 2 instantes | WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":51,"waiting":true} #d036cea47795f225
+step 52 {"finished":false,"deadlock":false,"instant":52,"waiting":true} #0c853e3cf6fcd3d2
+step 53 {"finished":false,"deadlock":false,"instant":53,"waiting":true} #e6d2139da25dc75e
+step 54 ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #240448b015a716ef
+step 55 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #69e72251de501a38
+step 56 SIGNAL Escritor[0]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #95bec03c7c311456
+step 57 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #fc69786bb59e8d20
+step 58 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #f2722806a545a79f
+step 59 ASSIGN Escritor[1]: nw = 1 | ASSIGN Escritor[0]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #6ed6ed75dcd1e9e9
+step 60 TERMINATED Escritor[0]: termina | RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #2fd04259404aba03
+step 61 DELAY Escritor[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":61,"waiting":true} #c9081cf97ff7753b
+step 62 {"finished":false,"deadlock":false,"instant":62,"waiting":true} #f9d32b186924124a
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #fc941ee172a15153
+step 64 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #d0ffe9c7848778ec
+step 65 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #a121c59139709692
+step 66 SIGNAL Escritor[1]: signal(ok_escribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #f2e6dc15c865686c
+step 67 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #ecdd5aa024e2a9fc
+step 68 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #03a95cdf7aa7206b
+step 69 ASSIGN Escritor[1]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #4516df30574e1106
+step 70 TERMINATED Escritor[1]: termina | {"finished":true,"deadlock":false,"instant":70,"waiting":false} #fbce82e052261d98
+state #31c15f97e93f15c6
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #294cc0ba55fdc7e0
+step 1 #079303c6fde30629
+step 2 #0b01d29af6302726
+step 3 #a32e6b532ce9cb39
+step 4 #1057689cc1afb41d
+step 5 #fbb557f9d60b76eb
+step 6 #284c7fe7e5868014
+step 7 #9781afabae9da325
+step 8 #b0a9157984b4a27a
+step 9 #57677de62046da5b
+step 10 #8e3ab7c6c5d0fb6f
+step 11 #28f4b6328c270cc6
+step 12 #4e969ad8a56dffa4
+step 13 #a579f41eebec92f9
+step 14 #c62db74bae7f68eb
+step 15 #42032f4909bbcbb1
+step 16 #36840cc2dd3232a1
+step 17 #05aaf56fc153df90
+step 18 #63c34b9c8e0efc88
+step 19 #6c5b084cf45800d6
+step 20 #96235aaa0dd9f0e6
+step 21 #ca459362cc10df77
+step 22 #e9fdc824ef7b1c52
+step 23 #bf56a0c2dea635cf
+step 24 #7c1c0c7ee7453b6a
+step 25 #84240b3871fa9ad6
+step 26 #240cb6cf9ba84d4f
+step 27 #8180f1b79b785d81
+step 28 #e51b31a57c0e8fe6
+step 29 #c92dcd8176d180ef
+step 30 #9ed4a7b854da7566
+step 31 #14d96c7449e28ddd
+step 32 #f0ef597cd96796cb
+step 33 #fdfef9d93f627bd1
+step 34 #f724511172d58e83
+step 35 #91129c9e07ae1d52
+step 36 #179ae77554710e51
+step 37 #0d4d352747360387
+step 38 #3f8d4a9f7d348b81
+step 39 #361e4359d561f394
+step 40 #c35d84d5dab7d659
+step 41 #5a3d38fb9e28a684
+step 42 #64a6abf244d203d1
+step 43 #08252d63277f2dc3
+step 44 #8f723542721e1115
+step 45 #dc08f5b538d5058e
+step 46 #628997efbd9c9b9b
+step 47 #3109591a585c1b6c
+step 48 #b9c880275f9ec262
+step 49 #e2c1e03f9139d299
+step 50 #e9f002a395914d8d
+step 51 #1c3946a9189ef33c
+step 52 #30714aa93addc297
+step 53 #c5468fc706fb4159
+step 54 #c6d7772afecabcb4
+step 55 #30d03f6251540c75
+step 56 #5e3065836d7645ec
+step 57 #a6f21c504217c653
+step 58 #1dbdd748ee84202d
+step 59 #748dae7fd2e9e95f
+step 60 #703d1ac0b6d73e6f
+step 61 #ab090bf856455b07
+step 62 #911ea0d88f9ee227
+step 63 #30b84175ba151c72
+step 64 #8d95f16ba781eec8
+step 65 #c90bb22fa59528c7
+step 66 #2af1912f015cfcd0
+step 67 #ca9e41731ec6a66a
+step 68 #1c26468d285aa406
+step 69 #0dc6945a8752f9e5
+step 70 #94bdb3a530e33371
+step 71 #9732f2f31f7e03ab
+step 72 #7c51a9499ee1b6f6
+step 73 #0a42e9537d7a60ae
+step 74 #660332368e16f998
+step 75 #fbeff278385728ae
+state #615db821cba15581
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #91b707c639d9dd57
+step 1 #079303c6fde30629
+step 2 #0b01d29af6302726
+step 3 #a32e6b532ce9cb39
+step 4 #e51363be54e9ff4e
+step 5 #cfe382f8bdd60f73
+step 6 #568cb5e2599732cd
+step 7 #94633ad5a73f97ba
+step 8 #56647b55de8e67c8
+step 9 #6b4e7891d3639f87
+step 10 #57e65961b4c401d0
+step 11 #ab65e10ad7059442
+step 12 #1bf9914f92e2916b
+step 13 #933f0cd04b9c55f0
+step 14 #85ad093d2442e183
+step 15 #e34092d867c8a30a
+step 16 #d979135e8c20cb7a
+step 17 #1ac5135547408347
+step 18 #af3c179b3280012a
+step 19 #598f7495c2152841
+step 20 #bc9ba91f45efa446
+step 21 #e7375af68427c009
+step 22 #357de10b3d9c5362
+step 23 #dd613f5e421bd48a
+step 24 #00086f4ace2f74ed
+step 25 #0ef5365b8a38ba89
+step 26 #c848bc7ba8842d6e
+step 27 #155c2ba5a5fa7b5e
+step 28 #89a52b42fc1b8800
+step 29 #333956fded77476b
+step 30 #62c7ad61666c839f
+step 31 #b5f8d63651b08efc
+step 32 #239ed3c88ff09a1e
+step 33 #0db87b74c0e04e82
+step 34 #4c6a20e0d752dd0f
+step 35 #cfa9647a06d5afcb
+step 36 #a1254830e90336a0
+step 37 #4245bba53aa84ed9
+step 38 #784c015b266a2980
+step 39 #7cd420cbf6a491ed
+step 40 #b2bc60d6af3ea9b4
+step 41 #81b9db79fae72180
+step 42 #ba32d0fb23f559b3
+step 43 #4cf7568b4d231d6b
+step 44 #3b8c650952d04a7b
+step 45 #1ee7574bbe35f828
+step 46 #554f577b45615fed
+step 47 #18e91030c174803b
+step 48 #5f31bbb4e3bdfd69
+step 49 #ddb723f021d225a5
+step 50 #13e044efef8e571f
+step 51 #e06231308c3a184d
+step 52 #a563248e4bfadaed
+step 53 #9ade6c0eedc0bdbe
+step 54 #5f063b5581590a0e
+step 55 #fb85ac50ab7da4a5
+step 56 #4de341b120647afd
+step 57 #bf58f6c56c7d39da
+step 58 #c39a8fccd5234cb4
+step 59 #b51bc6e81c8e156f
+step 60 #d6d2c736bd31fb06
+step 61 #8dcb10b1cfadda80
+step 62 #add5a6c1d7881e8f
+step 63 #4a1f803d576c1ec5
+step 64 #dce62ddbe550c205
+step 65 #6ce98c127057ef36
+step 66 #9b10bc8666d80bc9
+step 67 #e6e9d255bcb4f443
+step 68 #28362b5f0763700a
+step 69 #8d1358a72eadcb18
+step 70 #e8d6d12c439765fb
+step 71 #06ccf4a00dc316fd
+step 72 #4851f3ec9d36ba1a
+state #e880115524c9180a
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #a0120fc8ec1bd7af
+step 1 ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #7c2dd695b2298194
+step 2 BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c01ce43af119a6c4
+step 3 BLOCKED Escritor[0]: espera para entrar a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #24a4e611c8deb034
+step 4 BLOCKED Lector[0]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #be9a98824008db95
+step 5 ASSIGN Lector[1]: nr = 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #913d589f3a8a179f
+step 6 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.pedido_leer | BLOCKED Escritor[1]: espera para entrar a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #b289b48bd28ef79c
+step 7 ASSIGN Lector[0]: nr = 2 | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #479720da0e016b50
+step 8 RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3d072293dae38aa6
+step 9 DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #37ad5316070f3c5b
+step 10 ASSIGN Lector[2]: nr = 3 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #c54f81231f637a1c
+step 11 DELAY Lector[0]: delay(2) - se demora 2 instantes | RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #6e5955d3a266e7ea
+step 12 DELAY Lector[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #086e886d858f4178
+step 13 BLOCKED Lector[1]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #5f83903e0baec80f
+step 14 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #a42fd4f659bfd7a6
+step 15 WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[1]: entra a Controlador_RW.libera_leer | BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #032221eeca217d49
+step 16 ASSIGN Lector[1]: nr = 2 | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #56619b90ac3d0a77
+step 17 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #a72ad20915b93a66
+step 18 ASSIGN Lector[0]: nr = 1 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f7fb4ac9bdaa5738
+step 19 RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | ASSIGN Lector[1]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #9243aa5c4d5b689d
+step 20 ASSIGN Lector[0]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #c9d43ab70e9c58f8
+step 21 BLOCKED Lector[1]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #4e66e6606e9a1e00
+step 22 ASSIGN Lector[2]: nr = 0 | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #17dfbd19ab12c86b
+step 23 SIGNAL Lector[2]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | BLOCKED Lector[0]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #7ffff2035080e3d2
+step 24 RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #39a71b5df5b44f7c
+step 25 ASSIGN Lector[0]: nr = 1 | ASSIGN Lector[2]: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #f4c029fdf68bd357
+step 26 BLOCKED Lector[2]: espera para entrar a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #27ae6db1af448f07
+step 27 RETURN Lector[0]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #82ebdd364fea6628
+step 28 DELAY Lector[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #8550ca0b34ee40df
+step 29 ASSIGN Lector[2]: nr = 2 | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #a428a674b894683a
+step 30 RETURN Lector[2]: retorna de Controlador_RW.pedido_leer, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #6feff5c5722d706e
+step 31 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | ENTER Lector[1]: entra a Controlador_RW.pedido_leer | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #89526ff4df0bd87f
+step 32 BLOCKED Lector[0]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #ecd6876959613558
+step 33 ASSIGN Lector[1]: nr = 3 | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #31e46209fcac568b
+step 34 DELAY Lector[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #0b48809c5bc65606
+step 35 RETURN Lector[1]: retorna de Controlador_RW.pedido_leer, libera el monitor | ENTER Lector[0]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #59bb665d704992f6
+step 36 ASSIGN Lector[0]: nr = 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #fb2ab6deb27f5cb0
+step 37 DELAY Lector[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #81a50798ce15ad57
+step 38 BLOCKED Lector[2]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #a3db3ed9e3556029
+step 39 RETURN Lector[0]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[2]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #cf62bd8f16d48ee5
+step 40 ASSIGN Lector[0]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #fd67912eafd0eca8
+step 41 BLOCKED Lector[1]: espera para entrar a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #78965aa90931d08c
+step 42 ASSIGN Lector[2]: nr = 1 | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #64cda85583449bfd
+step 43 TERMINATED Lector[0]: termina | RETURN Lector[2]: retorna de Controlador_RW.libera_leer, libera el monitor | ENTER Lector[1]: entra a Controlador_RW.libera_leer | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #9dc950c90f5e2ec8
+step 44 ASSIGN Lector[1]: nr = 0 | ASSIGN Lector[2]: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #5b27cbf1423acffc
+step 45 SIGNAL Lector[1]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #817bf60fb2889d68
+step 46 TERMINATED Lector[2]: termina | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #517ac45358910bb7
+step 47 RETURN Lector[1]: retorna de Controlador_RW.libera_leer, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #740b4f2eee0fb649
+step 48 ASSIGN Lector[1]: for#1++ => 3 | ASSIGN Escritor[1]: nw = 1 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #f44d18bb5ffae4d0
+step 49 TERMINATED Lector[1]: termina | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #5cee9572862d8848
+step 50 RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #38abbfff11c9dd30
+step 51 DELAY Escritor[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":51,"waiting":true} #4c54b23306053d97
+step 52 {"finished":false,"deadlock":false,"instant":52,"waiting":true} #03fc21017b7d64b0
+step 53 {"finished":false,"deadlock":false,"instant":53,"waiting":true} #89f17faa58052a6c
+step 54 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #5d3b3d0a633fd4c3
+step 55 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #3116660f4ca691e7
+step 56 SIGNAL Escritor[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #7024d952ef9e8b36
+step 57 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #ac65e399fec3e378
+step 58 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #6893350d94d00ff2
+step 59 ASSIGN Escritor[0]: nw = 1 | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #08541d8bf0f1b9c2
+step 60 RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | ASSIGN Escritor[1]: for#3++ => 2 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #0c0b47cbc8cb746f
+step 61 ENTER Escritor[1]: entra a Controlador_RW.pedido_escribir | DELAY Escritor[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #29da422370167ba2
+step 62 WAIT Escritor[1]: wait(ok_escribir) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":62,"waiting":true} #2e2a8de9e29cd40b
+step 63 {"finished":false,"deadlock":false,"instant":63,"waiting":true} #c22f1dc1b78a91a2
+step 64 ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #6ab44094ca7ec045
+step 65 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #02e81ea8366ee16f
+step 66 SIGNAL Escritor[0]: signal(ok_escribir) - despierta a Escritor[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #88244d6c1e271c51
+step 67 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #e6a43bc4d1bec3fa
+step 68 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[1]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #c88a6a1c4af1d931
+step 69 ASSIGN Escritor[1]: nw = 1 | {"finished":false,"deadlock":false,"instant":69,"waiting":false} #7620dbd5a36f7fc3
+step 70 ASSIGN Escritor[0]: for#3++ => 2 | RETURN Escritor[1]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #2f8336aa15d36b91
+step 71 ENTER Escritor[0]: entra a Controlador_RW.pedido_escribir | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #8b9a91b61e90a4c2
+step 72 WAIT Escritor[0]: wait(ok_escribir) - libera el monitor y se demora | DELAY Escritor[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":72,"waiting":true} #3569b2a4962c6799
+step 73 {"finished":false,"deadlock":false,"instant":73,"waiting":true} #c15156c4d6c6e2cc
+step 74 {"finished":false,"deadlock":false,"instant":74,"waiting":true} #3d261ca055d3b3b8
+step 75 ENTER Escritor[1]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #0f444ad970daa75e
+step 76 ASSIGN Escritor[1]: nw = 0 | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #c6f3f10ec36cad06
+step 77 SIGNAL Escritor[1]: signal(ok_escribir) - despierta a Escritor[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #0cc4abe611897d4e
+step 78 SIGNAL_ALL Escritor[1]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":78,"waiting":false} #a63f5836d0a92f26
+step 79 RETURN Escritor[1]: retorna de Controlador_RW.libera_escribir, libera el monitor | REENTER Escritor[0]: reingresa a Controlador_RW | {"finished":false,"deadlock":false,"instant":79,"waiting":false} #77753f8c48b04b0c
+step 80 ASSIGN Escritor[1]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":80,"waiting":false} #56facc3e27626cf2
+step 81 TERMINATED Escritor[1]: termina | ASSIGN Escritor[0]: nw = 1 | {"finished":false,"deadlock":false,"instant":81,"waiting":false} #3cd87456b34c8c21
+step 82 RETURN Escritor[0]: retorna de Controlador_RW.pedido_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":82,"waiting":false} #0880f33fa776e9fb
+step 83 DELAY Escritor[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":83,"waiting":true} #5158ea2d1e2d63e5
+step 84 {"finished":false,"deadlock":false,"instant":84,"waiting":true} #953ee46301da53b4
+step 85 {"finished":false,"deadlock":false,"instant":85,"waiting":true} #8c6407e6293054c4
+step 86 ENTER Escritor[0]: entra a Controlador_RW.libera_escribir | {"finished":false,"deadlock":false,"instant":86,"waiting":false} #6003afe96c0a3846
+step 87 ASSIGN Escritor[0]: nw = 0 | {"finished":false,"deadlock":false,"instant":87,"waiting":false} #3aad65bfb9522828
+step 88 SIGNAL Escritor[0]: signal(ok_escribir) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":88,"waiting":false} #572a5681f745b6ee
+step 89 SIGNAL_ALL Escritor[0]: signal_all(ok_leer) - despierta a 0 proceso(s) | {"finished":false,"deadlock":false,"instant":89,"waiting":false} #3c75ba44da6a4ff3
+step 90 RETURN Escritor[0]: retorna de Controlador_RW.libera_escribir, libera el monitor | {"finished":false,"deadlock":false,"instant":90,"waiting":false} #be8920d0a4916586
+step 91 ASSIGN Escritor[0]: for#3++ => 3 | {"finished":false,"deadlock":false,"instant":91,"waiting":false} #110d460ac14889c1
+step 92 TERMINATED Escritor[0]: termina | {"finished":true,"deadlock":false,"instant":92,"waiting":false} #1f6bc41bb67c068c
+state #fe1bdea0a2cc78d6

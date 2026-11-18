@@ -71,7 +71,7 @@ export function decodeShare(hash: string): SharedProgram | null {
 }
 
 /**
- * Id del ejemplo que pide abrir un fragmento "#ejemplo=01-buffer-un-dato" (lo usan los
+ * Id del ejemplo que pide abrir un fragmento "#ejemplo=04-variables-condicion" (lo usan los
  * botones "Abrir en el simulador" de la guia), o null si el fragmento no lo pide.
  */
 export function exampleIdFromHash(hash: string): string | null {

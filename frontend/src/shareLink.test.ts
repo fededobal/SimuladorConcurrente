@@ -55,7 +55,7 @@ describe('shareLink', () => {
 
 describe('exampleIdFromHash', () => {
   it('readsTheExampleId', () => {
-    expect(exampleIdFromHash('#ejemplo=01-buffer-un-dato')).toBe('01-buffer-un-dato');
+    expect(exampleIdFromHash('#ejemplo=04-variables-condicion')).toBe('04-variables-condicion');
   });
 
   it('otherHashesAreNotAnExample', () => {

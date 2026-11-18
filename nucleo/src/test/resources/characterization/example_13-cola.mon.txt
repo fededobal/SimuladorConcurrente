@@ -1,0 +1,487 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #616bf42467b9c35c
+step 1 DECL Servidor: text sec =  | DECL Cliente[2]: text S =  | DECL Cliente[3]: text S =  | DECL Cliente[0]: text S =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #8812c74c07449b6c
+step 2 DECL Cliente[3]: text res =  | DECL Cliente[2]: text res =  | DECL Servidor: text res =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #58e78f95cce5bd93
+step 3 ASSIGN Cliente[2]: S = secuencia 2 | ASSIGN Cliente[3]: S = secuencia 3 | DECL Servidor: int aux = 0 | DECL Cliente[0]: text res =  | DECL Cliente[1]: text S =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #c189822c100a8520
+step 4 ASSIGN Cliente[0]: S = secuencia 0 | DECL Cliente[1]: text res =  | ENTER Servidor: entra a Admin.Sig | BLOCKED Cliente[2]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #a7ddb2a28a46510c
+step 5 BLOCKED Cliente[0]: espera para entrar a Admin.Pedido | WAIT Servidor: wait(HayPedido) - libera el monitor y se demora | ENTER Cliente[0]: entra a Admin.Pedido | BLOCKED Cliente[3]: espera para entrar a Admin.Pedido | ASSIGN Cliente[1]: S = secuencia 1 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #e16bb5d70095e063
+step 6 BLOCKED Cliente[1]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #be6d9f39f59e3427
+step 7 PUSH Cliente[0]: push(C, (0, secuencia 0)) | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #e2ba217d18bc6e3b
+step 8 SIGNAL Cliente[0]: signal(HayPedido) - despierta a Servidor (compite por el monitor) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #2000693ed4a6bb51
+step 9 WAIT Cliente[0]: wait(espera) - libera el monitor y se demora | REENTER Servidor: reingresa a Admin | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #1c52a7873079d63c
+step 10 POP Servidor: pop(C) => (0, secuencia 0) | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #a1751c3a1f8b7629
+step 11 RETURN Servidor: retorna de Admin.Sig, libera el monitor | ENTER Cliente[2]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #c19b97ffbcecfeab
+step 12 PUSH Cliente[2]: push(C, (2, secuencia 2)) | DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #054db44aecec0eeb
+step 13 SIGNAL Cliente[2]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #e2a1ab8a0fb88130
+step 14 WAIT Cliente[2]: wait(espera) - libera el monitor y se demora | ENTER Cliente[3]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #dc6aea76fdf3c2bd
+step 15 ASSIGN Servidor: res = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #87158db0283aa0a4
+step 16 PUSH Cliente[3]: push(C, (3, secuencia 3)) | BLOCKED Servidor: espera para entrar a Admin.Resultado | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #67b0af6ee6181a23
+step 17 SIGNAL Cliente[3]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #9d699a9e325e8bb7
+step 18 WAIT Cliente[3]: wait(espera) - libera el monitor y se demora | ENTER Cliente[1]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #8873b49562b106e1
+step 19 PUSH Cliente[1]: push(C, (1, secuencia 1)) | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #77f953e5a80ed533
+step 20 SIGNAL Cliente[1]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #5b6b9ab62d0a6552
+step 21 WAIT Cliente[1]: wait(espera) - libera el monitor y se demora | ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #72e0870f6109f20b
+step 22 ASSIGN Servidor: res[0] = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #52d08b2cd5c478bb
+step 23 SIGNAL Servidor: signal(espera) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #64e5487aa1f7ace4
+step 24 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[0]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #300090ca1e3f4bf9
+step 25 ASSIGN Servidor: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #1a62bc9d7bb7d483
+step 26 ASSIGN Cliente[0]: R = secuencia 0 analizada | BLOCKED Servidor: espera para entrar a Admin.Sig | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #236c09b0925af214
+step 27 RETURN Cliente[0]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #1ec4e6519bfb519a
+step 28 WRITE Cliente[0]: write(Cliente 0: recibí secuencia 0 analizada) | POP Servidor: pop(C) => (2, secuencia 2) | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #7e59afa8614be0d8
+step 29 TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #1dd029e713673624
+step 30 RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #46341dcbad55458d
+step 31 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":31,"waiting":true} #fbfd1be7cbabb81d
+step 32 {"finished":false,"deadlock":false,"instant":32,"waiting":true} #4395ac36b2a765b3
+step 33 {"finished":false,"deadlock":false,"instant":33,"waiting":true} #c7c42c0c993b7602
+step 34 ASSIGN Servidor: res = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #8957771a443e968a
+step 35 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #302ebfaff5773472
+step 36 ASSIGN Servidor: res[2] = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #d3902f404ebb070f
+step 37 SIGNAL Servidor: signal(espera) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #95194e49b0599ea7
+step 38 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[2]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #cf4162ca6ef86794
+step 39 ASSIGN Servidor: for#1++ => 3 | ASSIGN Cliente[2]: R = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #1e949b6cfe41124f
+step 40 RETURN Cliente[2]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #63a1b57d9f8ba97b
+step 41 POP Servidor: pop(C) => (3, secuencia 3) | WRITE Cliente[2]: write(Cliente 2: recibí secuencia 2 analizada) | {"finished":false,"deadlock":false,"instant":41,"waiting":false} #b4e5928d6b636155
+step 42 TERMINATED Cliente[2]: termina | RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":42,"waiting":false} #83e62dfdcf5152d2
+step 43 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":43,"waiting":true} #280805518cd3272b
+step 44 {"finished":false,"deadlock":false,"instant":44,"waiting":true} #3153996d74ec90b0
+step 45 {"finished":false,"deadlock":false,"instant":45,"waiting":true} #87f7c10270a91ff6
+step 46 ASSIGN Servidor: res = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #f086e48dd4945ea8
+step 47 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b477e19a2b4c8009
+step 48 ASSIGN Servidor: res[3] = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #48c60e4cdc0ff40e
+step 49 SIGNAL Servidor: signal(espera) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #d6b10662b4b53c97
+step 50 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[3]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #c4593a2eed1563a5
+step 51 ASSIGN Servidor: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #c11391c4c965bf0d
+step 52 ASSIGN Cliente[3]: R = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #fdb3d47d8036abea
+step 53 BLOCKED Servidor: espera para entrar a Admin.Sig | RETURN Cliente[3]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #8870c5722665d765
+step 54 WRITE Cliente[3]: write(Cliente 3: recibí secuencia 3 analizada) | {"finished":false,"deadlock":false,"instant":54,"waiting":false} #9cafbafb862ab09e
+step 55 TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #4eb5152ee2792765
+step 56 POP Servidor: pop(C) => (1, secuencia 1) | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #3126d46535ea32f6
+step 57 RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #eb8363b124b23253
+step 58 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":58,"waiting":true} #8c38017104b8f4c9
+step 59 {"finished":false,"deadlock":false,"instant":59,"waiting":true} #ecde61dc61896278
+step 60 {"finished":false,"deadlock":false,"instant":60,"waiting":true} #3696c177c2f63580
+step 61 ASSIGN Servidor: res = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #c4ab9e91529b9e76
+step 62 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #2edc0bc6d8934a73
+step 63 ASSIGN Servidor: res[1] = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #87eb297863a75dd5
+step 64 SIGNAL Servidor: signal(espera) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #763f2e8d14aa1225
+step 65 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[1]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #2944ca991a74b100
+step 66 ASSIGN Cliente[1]: R = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #e68ad5d2665261e0
+step 67 RETURN Cliente[1]: retorna de Admin.Pedido, libera el monitor | ASSIGN Servidor: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":67,"waiting":false} #edcfae1e4535576a
+step 68 TERMINATED Servidor: termina | WRITE Cliente[1]: write(Cliente 1: recibí secuencia 1 analizada) | {"finished":false,"deadlock":false,"instant":68,"waiting":false} #d3504455effaaa19
+step 69 TERMINATED Cliente[1]: termina | {"finished":true,"deadlock":false,"instant":69,"waiting":false} #eee2066165a6ec7a
+state #aea805483dd5b549
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #1a0482cc94ff213a
+step 1 #21cc6a4664ba5e68
+step 2 #532756f0511d5856
+step 3 #b5f78f7a2e7dd21d
+step 4 #b0d90abab6717e0c
+step 5 #f78e5fb88d6dd12f
+step 6 #f564fe8423d9d410
+step 7 #e69b05362ffc08b4
+step 8 #3868483163931a79
+step 9 #7171f1350881dac8
+step 10 #b4d8d60fcadfdce9
+step 11 #1f1980934e99d12c
+step 12 #ecec0f302525fa70
+step 13 #47aef2cba9a04bfc
+step 14 #67493f37c26c6a64
+step 15 #bf81104dcd64e2d5
+step 16 #b02286638c724174
+step 17 #1554090f4f1f245d
+step 18 #75a42261bb1a0a7f
+step 19 #68313f3ce60d797f
+step 20 #810b7c8fba5e4aff
+step 21 #d2af494104ca9684
+step 22 #37e0c6f0223fd406
+step 23 #56c3d97811adce37
+step 24 #612328cb0551c0ec
+step 25 #8fcea80afa0b0bb5
+step 26 #1c008d6cc19102e7
+step 27 #453eb0708ef52149
+step 28 #9ab5a8db544decb2
+step 29 #dba7d35373622d99
+step 30 #c564bb91a0e30e25
+step 31 #bd8c686127e322c0
+step 32 #b7ef1adfca73ebd9
+step 33 #ba9b1627a8b67963
+step 34 #58ce8dcb620fed6b
+step 35 #c2bb10ad9aa20a89
+step 36 #a371fbeef65e72c1
+step 37 #7d52ef307ded6585
+step 38 #97621cfe615343f7
+step 39 #6f6d9462f77f8cdc
+step 40 #0340ef67e63fcd25
+step 41 #a0b5301684ada41d
+step 42 #f1d3935e434c90a4
+step 43 #e4ede96b978af0df
+step 44 #1de44b74c98e8bf7
+step 45 #a1d1c4499153e561
+step 46 #933ca1b877649272
+step 47 #8f246b5e062c0662
+step 48 #d8fc647a16012c43
+step 49 #9f2f07a3341f3993
+step 50 #2b07106a0b9b8f31
+step 51 #d8046be867e80994
+step 52 #3630af2d930d9482
+step 53 #d151cf96d5f8ac84
+step 54 #cf3f58e6fb49df45
+step 55 #9b27b36879c017d4
+step 56 #2b1efbb65e69044b
+step 57 #a2498639b83a2ceb
+step 58 #ebc1f9c9352e0bb9
+step 59 #f74bff6402d8320c
+step 60 #9c7e392ff7b4a28e
+step 61 #dd364481bca868d6
+step 62 #c4a80e5b97092e65
+step 63 #c1cee53f40312486
+step 64 #d8570af5138bb5c9
+step 65 #d2e1a2528ba79263
+step 66 #d1ced2db8be4ec00
+step 67 #03b4318f469f0514
+state #0177e4f9ac11e862
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #a2d94c646d5a2973
+step 1 #758a90309b8f7065
+step 2 #a25927d798122cda
+step 3 #da3087212731ec1a
+step 4 #4f69fb7ecec371ba
+step 5 #3074b4d84043afcf
+step 6 #f9774e4d3e6d53d3
+step 7 #9f00a72307c8361f
+step 8 #1474863e44067ed9
+step 9 #4ae9898955c6688b
+step 10 #521758a40fb293ba
+step 11 #bf19a751695bee85
+step 12 #b1408e5eb953da9f
+step 13 #409eb291a4edc741
+step 14 #a2a50ba176c1150b
+step 15 #23b7c96f65d4db0a
+step 16 #8c26d0110690b030
+step 17 #dbec2c6772c961a3
+step 18 #5e9d31900655ff38
+step 19 #649b72381368f49c
+step 20 #9f358f059f74f793
+step 21 #c26d1c9bc6f32b5c
+step 22 #19cfa2e70410b0a2
+step 23 #65c746d1a95e6a37
+step 24 #0accd2a059fc7f8f
+step 25 #05cfedf93bd15318
+step 26 #bff3142cf627b2e7
+step 27 #4ca7d742e4dc0a3b
+step 28 #95e4ce86101cb868
+step 29 #0dd378a793024e46
+step 30 #b1c8ebf7ae46c623
+step 31 #c4818a79f03459c2
+step 32 #28df046c774cb246
+step 33 #dbb67719a038f20b
+step 34 #f18eb2377bd4a0b2
+step 35 #eb1b1b232cbab6a1
+step 36 #edd992815018a78d
+step 37 #148ef1e60ad6c2bb
+step 38 #88bf266939956ab3
+step 39 #479c7feb7efd1042
+step 40 #b1c27305d89565af
+step 41 #dfdfe85dc65411a2
+step 42 #2a1b6baabb3d1079
+step 43 #01a3c9dff688d2cc
+step 44 #53553c3162060955
+step 45 #fd3825f02c5621a7
+step 46 #44d3f3a93c681f11
+step 47 #b8817a98858797fa
+step 48 #77ea746c7ac515ec
+step 49 #2ae728c8c1035803
+step 50 #ab8fb7cb029a070f
+step 51 #5584c08839ac14c2
+step 52 #988c8e8fada27f8d
+step 53 #9fd7794af955a6a3
+step 54 #8e5556e8eef57022
+step 55 #be80e128e46ff87c
+step 56 #72a12d0c43d11b63
+step 57 #2d6f0673db276968
+step 58 #474611d773f6d41c
+step 59 #0e743e365d56b1b5
+step 60 #bf8d27a0e6f066b1
+step 61 #018b9f13cabfd965
+step 62 #722122f57d344be6
+step 63 #d4fbe385aff7ba83
+step 64 #8d044f58647148e6
+step 65 #780b04c8c72d434c
+state #c2a6e863ad4afe08
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #616bf42467b9c35c
+step 1 DECL Cliente[0]: text S =  | DECL Cliente[1]: text S =  | DECL Cliente[2]: text S =  | DECL Cliente[3]: text S =  | DECL Servidor: text sec =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #4ab8d8153b6664ac
+step 2 DECL Cliente[1]: text res =  | DECL Cliente[2]: text res =  | DECL Cliente[3]: text res =  | DECL Servidor: text res =  | DECL Cliente[0]: text res =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #e0e40c143933e84f
+step 3 ASSIGN Cliente[2]: S = secuencia 2 | ASSIGN Cliente[3]: S = secuencia 3 | DECL Servidor: int aux = 0 | ASSIGN Cliente[0]: S = secuencia 0 | ASSIGN Cliente[1]: S = secuencia 1 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #281b319813850659
+step 4 ENTER Cliente[3]: entra a Admin.Pedido | BLOCKED Servidor: espera para entrar a Admin.Sig | BLOCKED Cliente[0]: espera para entrar a Admin.Pedido | BLOCKED Cliente[1]: espera para entrar a Admin.Pedido | BLOCKED Cliente[2]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #e73d25f5f196d0ac
+step 5 PUSH Cliente[3]: push(C, (3, secuencia 3)) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #370c2b502bb3ee42
+step 6 SIGNAL Cliente[3]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bbdd7cc5b8342075
+step 7 WAIT Cliente[3]: wait(espera) - libera el monitor y se demora | ENTER Cliente[1]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #abced51d93f003bf
+step 8 PUSH Cliente[1]: push(C, (1, secuencia 1)) | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #228a8a1ab6cdf6ed
+step 9 SIGNAL Cliente[1]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #d40cb50d55e58870
+step 10 WAIT Cliente[1]: wait(espera) - libera el monitor y se demora | ENTER Cliente[0]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #41f2749ad863f1d7
+step 11 PUSH Cliente[0]: push(C, (0, secuencia 0)) | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #46a63bcff3f3b0bf
+step 12 SIGNAL Cliente[0]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #c84ce0ae8a761da4
+step 13 WAIT Cliente[0]: wait(espera) - libera el monitor y se demora | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #6e70114aa7b2cda2
+step 14 POP Servidor: pop(C) => (3, secuencia 3) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cf59ee24eb998007
+step 15 RETURN Servidor: retorna de Admin.Sig, libera el monitor | ENTER Cliente[2]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #e64f3f505588395f
+step 16 PUSH Cliente[2]: push(C, (2, secuencia 2)) | DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #9b0b077b26cf3e98
+step 17 SIGNAL Cliente[2]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #0fd965a09eccfb4b
+step 18 WAIT Cliente[2]: wait(espera) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":18,"waiting":true} #194896c282ed72ac
+step 19 ASSIGN Servidor: res = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #5c4bd5b27455d5c2
+step 20 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #d156253035121344
+step 21 ASSIGN Servidor: res[3] = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #1975df1bbcc48096
+step 22 SIGNAL Servidor: signal(espera) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #18b6b63f94a9ba2f
+step 23 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[3]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #4970063e81291f82
+step 24 ASSIGN Cliente[3]: R = secuencia 3 analizada | ASSIGN Servidor: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #39adad0eebd82811
+step 25 BLOCKED Servidor: espera para entrar a Admin.Sig | RETURN Cliente[3]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #ad0d45fa6b8eba5c
+step 26 WRITE Cliente[3]: write(Cliente 3: recibí secuencia 3 analizada) | POP Servidor: pop(C) => (1, secuencia 1) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #3d6c08106127e3c4
+step 27 RETURN Servidor: retorna de Admin.Sig, libera el monitor | TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #22fddebdbc9e8ef4
+step 28 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":28,"waiting":true} #debe64cd27563eca
+step 29 {"finished":false,"deadlock":false,"instant":29,"waiting":true} #679082b1e157b8b7
+step 30 {"finished":false,"deadlock":false,"instant":30,"waiting":true} #3cad0e771c81d444
+step 31 ASSIGN Servidor: res = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #36ddf35f9cd3f2b2
+step 32 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #f5da661498ce94c8
+step 33 ASSIGN Servidor: res[1] = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #767a63e6966cecf7
+step 34 SIGNAL Servidor: signal(espera) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #9b147be42f2810e7
+step 35 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[1]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #5e8dc23a4eaf2387
+step 36 ASSIGN Cliente[1]: R = secuencia 1 analizada | ASSIGN Servidor: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #cbfac844a20b57fa
+step 37 BLOCKED Servidor: espera para entrar a Admin.Sig | RETURN Cliente[1]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #f1847292fb9d11ef
+step 38 WRITE Cliente[1]: write(Cliente 1: recibí secuencia 1 analizada) | POP Servidor: pop(C) => (0, secuencia 0) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #579a3f5c0e4d8bbf
+step 39 RETURN Servidor: retorna de Admin.Sig, libera el monitor | TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #a0d5f8af39983602
+step 40 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":40,"waiting":true} #7db0ed92e09ef980
+step 41 {"finished":false,"deadlock":false,"instant":41,"waiting":true} #cf9526a3ed293f15
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #e9f41e35d4e0c8e2
+step 43 ASSIGN Servidor: res = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":43,"waiting":false} #595a1944b9771182
+step 44 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #7887d2692a9aef06
+step 45 ASSIGN Servidor: res[0] = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #fbb0c0b97394966b
+step 46 SIGNAL Servidor: signal(espera) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #0e699538d05bbe8e
+step 47 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[0]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #a463a7396d109d59
+step 48 ASSIGN Cliente[0]: R = secuencia 0 analizada | ASSIGN Servidor: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #578b647e5c31ca7b
+step 49 BLOCKED Servidor: espera para entrar a Admin.Sig | RETURN Cliente[0]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #7a193c1d84eece21
+step 50 WRITE Cliente[0]: write(Cliente 0: recibí secuencia 0 analizada) | POP Servidor: pop(C) => (2, secuencia 2) | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #a6ab9cdd9465f97b
+step 51 RETURN Servidor: retorna de Admin.Sig, libera el monitor | TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #430c090e1b982628
+step 52 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":52,"waiting":true} #6417fe42d0d85593
+step 53 {"finished":false,"deadlock":false,"instant":53,"waiting":true} #efe321e3268a1b33
+step 54 {"finished":false,"deadlock":false,"instant":54,"waiting":true} #390619c0a97967df
+step 55 ASSIGN Servidor: res = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":55,"waiting":false} #b6771792a01bf940
+step 56 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":56,"waiting":false} #69f8ff7ce8bfc663
+step 57 ASSIGN Servidor: res[2] = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #1f5e54de47481f21
+step 58 SIGNAL Servidor: signal(espera) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #4c26e74f84b61660
+step 59 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[2]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #da3903ce587c813a
+step 60 ASSIGN Cliente[2]: R = secuencia 2 analizada | ASSIGN Servidor: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #f57f2fcfe09e9831
+step 61 TERMINATED Servidor: termina | RETURN Cliente[2]: retorna de Admin.Pedido, libera el monitor | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #a84ad7215bf7f695
+step 62 WRITE Cliente[2]: write(Cliente 2: recibí secuencia 2 analizada) | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #6619ea936ee09f48
+step 63 TERMINATED Cliente[2]: termina | {"finished":true,"deadlock":false,"instant":63,"waiting":false} #815e1e2e0068b63e
+state #921533ab6b05973a
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #1a0482cc94ff213a
+step 1 #4ab8d8153b6664ac
+step 2 #e0e40c143933e84f
+step 3 #281b319813850659
+step 4 #e73d25f5f196d0ac
+step 5 #370c2b502bb3ee42
+step 6 #bbdd7cc5b8342075
+step 7 #abced51d93f003bf
+step 8 #228a8a1ab6cdf6ed
+step 9 #d40cb50d55e58870
+step 10 #41f2749ad863f1d7
+step 11 #46a63bcff3f3b0bf
+step 12 #c84ce0ae8a761da4
+step 13 #6e70114aa7b2cda2
+step 14 #cf59ee24eb998007
+step 15 #e64f3f505588395f
+step 16 #9b0b077b26cf3e98
+step 17 #0fd965a09eccfb4b
+step 18 #194896c282ed72ac
+step 19 #5c4bd5b27455d5c2
+step 20 #d156253035121344
+step 21 #1975df1bbcc48096
+step 22 #18b6b63f94a9ba2f
+step 23 #4970063e81291f82
+step 24 #39adad0eebd82811
+step 25 #ad0d45fa6b8eba5c
+step 26 #3d6c08106127e3c4
+step 27 #22fddebdbc9e8ef4
+step 28 #debe64cd27563eca
+step 29 #679082b1e157b8b7
+step 30 #3cad0e771c81d444
+step 31 #36ddf35f9cd3f2b2
+step 32 #f5da661498ce94c8
+step 33 #767a63e6966cecf7
+step 34 #9b147be42f2810e7
+step 35 #5e8dc23a4eaf2387
+step 36 #cbfac844a20b57fa
+step 37 #f1847292fb9d11ef
+step 38 #579a3f5c0e4d8bbf
+step 39 #a0d5f8af39983602
+step 40 #7db0ed92e09ef980
+step 41 #cf9526a3ed293f15
+step 42 #e9f41e35d4e0c8e2
+step 43 #595a1944b9771182
+step 44 #7887d2692a9aef06
+step 45 #fbb0c0b97394966b
+step 46 #0e699538d05bbe8e
+step 47 #a463a7396d109d59
+step 48 #578b647e5c31ca7b
+step 49 #7a193c1d84eece21
+step 50 #a6ab9cdd9465f97b
+step 51 #430c090e1b982628
+step 52 #6417fe42d0d85593
+step 53 #efe321e3268a1b33
+step 54 #390619c0a97967df
+step 55 #b6771792a01bf940
+step 56 #69f8ff7ce8bfc663
+step 57 #1f5e54de47481f21
+step 58 #4c26e74f84b61660
+step 59 #da3903ce587c813a
+step 60 #f57f2fcfe09e9831
+step 61 #a84ad7215bf7f695
+step 62 #6619ea936ee09f48
+step 63 #815e1e2e0068b63e
+state #921533ab6b05973a
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #a2d94c646d5a2973
+step 1 #4ab8d8153b6664ac
+step 2 #e0e40c143933e84f
+step 3 #281b319813850659
+step 4 #e73d25f5f196d0ac
+step 5 #370c2b502bb3ee42
+step 6 #bbdd7cc5b8342075
+step 7 #abced51d93f003bf
+step 8 #228a8a1ab6cdf6ed
+step 9 #d40cb50d55e58870
+step 10 #dff040e9aaca9ef3
+step 11 #75e24656cde87f76
+step 12 #f9fb884250ce5e5e
+step 13 #ddb2cbfc8840684c
+step 14 #a44aa51b5c74cd60
+step 15 #490c50358d864deb
+step 16 #2ab67b0acc2816c1
+step 17 #9a2cdabcdaed4cf7
+step 18 #c120917f4d97432a
+step 19 #00a041c8e20eb1d5
+step 20 #2842a0996945fd6b
+step 21 #65a9804f590135a8
+step 22 #31fef93f6b260cc9
+step 23 #f84d981cf82b320a
+step 24 #e57d236654252bed
+step 25 #842b481524ac51e7
+step 26 #142e3d3f3a1d88cb
+step 27 #bfe6f1b49c3eaf80
+step 28 #3cf856e911c15426
+step 29 #25a223c5880f291f
+step 30 #d62f0fba912695b8
+step 31 #0b0b8ea1c7af6612
+step 32 #ee9138236e7a2a83
+step 33 #c543bf7f79f7967c
+step 34 #07c707292aaf0495
+step 35 #db40f63f600c9ba8
+step 36 #af1d30e5151626b3
+step 37 #2c299c93d27bbbcd
+step 38 #a8631c70a23a5daa
+step 39 #2858379dbdf531b8
+step 40 #250833efc4f1224e
+step 41 #53ee3f776a4bd78a
+step 42 #389a2c3079f29840
+step 43 #2bb86fc647063a48
+step 44 #89d8cdd956488634
+step 45 #ebd84f72792d315e
+step 46 #022a485528178522
+step 47 #0f2b798bbadd2ea3
+step 48 #49b976a4f8c9d649
+step 49 #16dce1e8f41a2081
+step 50 #5290cbc214db6b89
+step 51 #0717de54c1af40d5
+step 52 #3dcbd1d183aba66a
+step 53 #5734403e9fa2f6c6
+step 54 #fa3a1d4c913479ec
+step 55 #216e395f59252bad
+step 56 #cc93642a83aabdaa
+step 57 #c44e5388eb1ce2d0
+step 58 #f166700bca78b969
+step 59 #30b7ca408f2a8038
+step 60 #fa35ac79dceddeae
+step 61 #4f3f043366d3fb72
+state #baeb77655f59647a
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #616bf42467b9c35c
+step 1 DECL Cliente[1]: text S =  | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #c5c92aff492e85af
+step 2 DECL Cliente[2]: text S =  | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #9fe20e921734caaa
+step 3 DECL Cliente[3]: text S =  | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #4c426798f7bbe777
+step 4 DECL Cliente[0]: text S =  | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #03748c90a1ab74fe
+step 5 DECL Cliente[1]: text res =  | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #6618c2351e7c9e2a
+step 6 DECL Cliente[2]: text res =  | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #bfa1b3b4edff2a4e
+step 7 DECL Cliente[3]: text res =  | {"finished":false,"deadlock":false,"instant":7,"waiting":false} #9cc2ad454ada1902
+step 8 DECL Cliente[0]: text res =  | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #1a86a618f8ec7ce3
+step 9 ASSIGN Cliente[1]: S = secuencia 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #a8f249b7824a6a28
+step 10 ASSIGN Cliente[2]: S = secuencia 2 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #8ca3a644a1007a63
+step 11 ASSIGN Cliente[3]: S = secuencia 3 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #8f7fc54c51ee94d7
+step 12 ASSIGN Cliente[0]: S = secuencia 0 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #b4e46e6acbac0b50
+step 13 ENTER Cliente[1]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #72b7c92fe37fc361
+step 14 BLOCKED Cliente[2]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #cb00a2e85ec74cc0
+step 15 BLOCKED Cliente[3]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #a5a6fc2240e1b7b6
+step 16 BLOCKED Cliente[0]: espera para entrar a Admin.Pedido | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #99e36a452e172a8e
+step 17 PUSH Cliente[1]: push(C, (1, secuencia 1)) | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #88e79184641ce142
+step 18 SIGNAL Cliente[1]: signal(HayPedido) - sin efecto (cola vacía) | DECL Servidor: text sec =  | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #974529510bc55b6a
+step 19 WAIT Cliente[1]: wait(espera) - libera el monitor y se demora | ENTER Cliente[0]: entra a Admin.Pedido | DECL Servidor: text res =  | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #3b4d135122a7c1b8
+step 20 PUSH Cliente[0]: push(C, (0, secuencia 0)) | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #dd5892b04eaf1784
+step 21 DECL Servidor: int aux = 0 | SIGNAL Cliente[0]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #b5f3f506079ae342
+step 22 BLOCKED Servidor: espera para entrar a Admin.Sig | WAIT Cliente[0]: wait(espera) - libera el monitor y se demora | ENTER Cliente[3]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #fe5421acf980971d
+step 23 PUSH Cliente[3]: push(C, (3, secuencia 3)) | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #5a6c250b1fc1fc92
+step 24 SIGNAL Cliente[3]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #e1e538172604aaa9
+step 25 WAIT Cliente[3]: wait(espera) - libera el monitor y se demora | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #2cc1d41a26cb2af9
+step 26 POP Servidor: pop(C) => (1, secuencia 1) | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #4910bc7fe1998653
+step 27 RETURN Servidor: retorna de Admin.Sig, libera el monitor | ENTER Cliente[2]: entra a Admin.Pedido | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #2c71ebcbf80258f5
+step 28 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #529e86d248c7efba
+step 29 PUSH Cliente[2]: push(C, (2, secuencia 2)) | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #8d64b2d306a4a2d7
+step 30 SIGNAL Cliente[2]: signal(HayPedido) - sin efecto (cola vacía) | {"finished":false,"deadlock":false,"instant":30,"waiting":false} #b35f7fdd0cbde67b
+step 31 ASSIGN Servidor: res = secuencia 1 analizada | WAIT Cliente[2]: wait(espera) - libera el monitor y se demora | {"finished":false,"deadlock":false,"instant":31,"waiting":false} #ca3860deedd44c9b
+step 32 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #aa623bd59f756b1d
+step 33 ASSIGN Servidor: res[1] = secuencia 1 analizada | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #e62d057e888f861f
+step 34 SIGNAL Servidor: signal(espera) - despierta a Cliente[1] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #6872993dbdfa8b4a
+step 35 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[1]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #54fea0a8efc10446
+step 36 ASSIGN Cliente[1]: R = secuencia 1 analizada | ASSIGN Servidor: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":36,"waiting":false} #834b139ec19fff7d
+step 37 RETURN Cliente[1]: retorna de Admin.Pedido, libera el monitor | {"finished":false,"deadlock":false,"instant":37,"waiting":false} #301ad07eec1cff6a
+step 38 ENTER Servidor: entra a Admin.Sig | WRITE Cliente[1]: write(Cliente 1: recibí secuencia 1 analizada) | {"finished":false,"deadlock":false,"instant":38,"waiting":false} #25749ef90551780a
+step 39 POP Servidor: pop(C) => (0, secuencia 0) | TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":39,"waiting":false} #66929e3632949bc1
+step 40 RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":40,"waiting":false} #5e828b45d16664ff
+step 41 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":41,"waiting":true} #78277d497ef10255
+step 42 {"finished":false,"deadlock":false,"instant":42,"waiting":true} #d19cdff6441285ff
+step 43 {"finished":false,"deadlock":false,"instant":43,"waiting":true} #89fd5a8a79c41e88
+step 44 ASSIGN Servidor: res = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":44,"waiting":false} #9c24724ce370ddbb
+step 45 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":45,"waiting":false} #8edcb23e8db10d72
+step 46 ASSIGN Servidor: res[0] = secuencia 0 analizada | {"finished":false,"deadlock":false,"instant":46,"waiting":false} #1e3f91b8ab9feb14
+step 47 SIGNAL Servidor: signal(espera) - despierta a Cliente[0] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":47,"waiting":false} #b24c85c95b4d3e97
+step 48 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[0]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":48,"waiting":false} #2a5f62bbf9f48de0
+step 49 ASSIGN Cliente[0]: R = secuencia 0 analizada | ASSIGN Servidor: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":49,"waiting":false} #1e40949717649d46
+step 50 BLOCKED Servidor: espera para entrar a Admin.Sig | RETURN Cliente[0]: retorna de Admin.Pedido, libera el monitor | ENTER Servidor: entra a Admin.Sig | {"finished":false,"deadlock":false,"instant":50,"waiting":false} #9789f010d90aed7b
+step 51 WRITE Cliente[0]: write(Cliente 0: recibí secuencia 0 analizada) | POP Servidor: pop(C) => (3, secuencia 3) | {"finished":false,"deadlock":false,"instant":51,"waiting":false} #3c4e0bfc78cab979
+step 52 TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":52,"waiting":false} #389d7f1748effd11
+step 53 RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":53,"waiting":false} #c56526a39f63340d
+step 54 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":54,"waiting":true} #d337bf735843bb7b
+step 55 {"finished":false,"deadlock":false,"instant":55,"waiting":true} #e924fefabf1d370e
+step 56 {"finished":false,"deadlock":false,"instant":56,"waiting":true} #65515e114b4b0fee
+step 57 ASSIGN Servidor: res = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":57,"waiting":false} #b20ff3f99d94a210
+step 58 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":58,"waiting":false} #c11eaf1e86fcd48b
+step 59 ASSIGN Servidor: res[3] = secuencia 3 analizada | {"finished":false,"deadlock":false,"instant":59,"waiting":false} #9b5029a420fde250
+step 60 SIGNAL Servidor: signal(espera) - despierta a Cliente[3] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":60,"waiting":false} #59054a66e0b12939
+step 61 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[3]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":61,"waiting":false} #78ae0f45fe8c4fcd
+step 62 ASSIGN Cliente[3]: R = secuencia 3 analizada | ASSIGN Servidor: for#1++ => 4 | {"finished":false,"deadlock":false,"instant":62,"waiting":false} #b8858aa49aa3d9f0
+step 63 RETURN Cliente[3]: retorna de Admin.Pedido, libera el monitor | {"finished":false,"deadlock":false,"instant":63,"waiting":false} #b65d106373721d46
+step 64 ENTER Servidor: entra a Admin.Sig | WRITE Cliente[3]: write(Cliente 3: recibí secuencia 3 analizada) | {"finished":false,"deadlock":false,"instant":64,"waiting":false} #303888a822143a06
+step 65 POP Servidor: pop(C) => (2, secuencia 2) | TERMINATED Cliente[3]: termina | {"finished":false,"deadlock":false,"instant":65,"waiting":false} #bbc8b5e544af5751
+step 66 RETURN Servidor: retorna de Admin.Sig, libera el monitor | {"finished":false,"deadlock":false,"instant":66,"waiting":false} #b1549815f0a5a6fd
+step 67 DELAY Servidor: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":67,"waiting":true} #8401bc3f61455ded
+step 68 {"finished":false,"deadlock":false,"instant":68,"waiting":true} #53f5225bb580f6e7
+step 69 {"finished":false,"deadlock":false,"instant":69,"waiting":true} #fd8e5d07d3f4de3b
+step 70 ASSIGN Servidor: res = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":70,"waiting":false} #b7898ad0a543f3e1
+step 71 ENTER Servidor: entra a Admin.Resultado | {"finished":false,"deadlock":false,"instant":71,"waiting":false} #77bca5a346de8586
+step 72 ASSIGN Servidor: res[2] = secuencia 2 analizada | {"finished":false,"deadlock":false,"instant":72,"waiting":false} #f6fc281decaa2a11
+step 73 SIGNAL Servidor: signal(espera) - despierta a Cliente[2] (compite por el monitor) | {"finished":false,"deadlock":false,"instant":73,"waiting":false} #84773fd9cebd1a9c
+step 74 RETURN Servidor: retorna de Admin.Resultado, libera el monitor | REENTER Cliente[2]: reingresa a Admin | {"finished":false,"deadlock":false,"instant":74,"waiting":false} #bd0f81831c07f887
+step 75 ASSIGN Cliente[2]: R = secuencia 2 analizada | ASSIGN Servidor: for#1++ => 5 | {"finished":false,"deadlock":false,"instant":75,"waiting":false} #35c60640d36f9f2e
+step 76 RETURN Cliente[2]: retorna de Admin.Pedido, libera el monitor | TERMINATED Servidor: termina | {"finished":false,"deadlock":false,"instant":76,"waiting":false} #58249d8a54cc16aa
+step 77 WRITE Cliente[2]: write(Cliente 2: recibí secuencia 2 analizada) | {"finished":false,"deadlock":false,"instant":77,"waiting":false} #2016f0917e507b4d
+step 78 TERMINATED Cliente[2]: termina | {"finished":true,"deadlock":false,"instant":78,"waiting":false} #c814a9333129c770
+state #1786f5785a10959c

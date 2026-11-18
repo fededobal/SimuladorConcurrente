@@ -1,0 +1,20 @@
+// Exclusión mutua implícita
+// espera: fin Cajero.usos=5
+// Ejercicio 1 de la Explicación 3: N personas usan un cajero automático, sin orden.
+// El monitor representa al cajero. Mientras una persona lo usa, el monitor está ocupado
+// y las demás compiten por entrar: nunca hay dos procesos adentro a la vez.
+#define N 5
+
+monitor Cajero {
+  int usos = 0;
+
+  procedure PasarAlCajero() {
+    delay(2);              // UsarCajero()
+    usos = usos + 1;
+  }
+}
+
+process Persona[id: 0..N-1] {
+  Cajero.PasarAlCajero();
+  write("Persona ", id, ": usé el cajero");
+}

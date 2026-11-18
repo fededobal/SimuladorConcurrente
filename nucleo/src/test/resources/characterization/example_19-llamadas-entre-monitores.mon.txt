@@ -1,0 +1,229 @@
+## RANDOM seed=0
+create {"finished":false,"deadlock":false} #1eb4045df9326e36
+step 1 DECL Auditor: int n = 0 | ENTER Cliente[0]: entra a Cuenta.depositar | BLOCKED Cliente[1]: espera para entrar a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #064239465f591c6f
+step 2 ENTER Auditor: entra a Registro.consultar | BLOCKED Cliente[2]: espera para entrar a Cuenta.depositar | ASSIGN Cliente[0]: saldo = 10 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #c1557aab99f5a8b2
+step 3 ASSIGN Auditor: n = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #5b35f6933d1bd777
+step 4 RETURN Auditor: retorna de Registro.consultar, libera el monitor | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #38b68d190edcebbf
+step 5 ENTER Cliente[0]: entra a Registro.anotar | WRITE Auditor: write(depósitos anotados: 0) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #c741f8b5882a0cd1
+step 6 DELAY Auditor: delay(3) - se demora 3 instantes | DELAY Cliente[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":6,"waiting":true} #e797dd3653fda7a5
+step 7 {"finished":false,"deadlock":false,"instant":7,"waiting":true} #af2eda1b1e977965
+step 8 {"finished":false,"deadlock":false,"instant":8,"waiting":true} #bf36fa12819592dc
+step 9 ASSIGN Cliente[0]: anotados = 1 | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #257684f5f399843d
+step 10 RETURN Cliente[0]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #42cc495be19463dd
+step 11 RETURN Cliente[0]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[2]: entra a Cuenta.depositar | ASSIGN Auditor: for#1++ => 2 | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #046695ee7854d620
+step 12 ASSIGN Cliente[2]: saldo = 20 | TERMINATED Cliente[0]: termina | ENTER Auditor: entra a Registro.consultar | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #bd9de4426a76ecd8
+step 13 ASSIGN Auditor: n = 1 | BLOCKED Cliente[2]: espera para entrar a Registro.anotar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #19cacd926f7b998f
+step 14 RETURN Auditor: retorna de Registro.consultar, libera el monitor | ENTER Cliente[2]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #20160066b1d0451c
+step 15 DELAY Cliente[2]: delay(2) - se demora 2 instantes | WRITE Auditor: write(depósitos anotados: 1) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #f04a5d29ce00bf8a
+step 16 DELAY Auditor: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":16,"waiting":true} #75e9f6fa7b1ec5ed
+step 17 {"finished":false,"deadlock":false,"instant":17,"waiting":true} #25453f0ebbbb6aee
+step 18 ASSIGN Cliente[2]: anotados = 2 | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #f6787292267540b6
+step 19 RETURN Cliente[2]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #a721fd4c9189c9e0
+step 20 RETURN Cliente[2]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[1]: entra a Cuenta.depositar | ASSIGN Auditor: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #cacb04bb601ba017
+step 21 TERMINATED Auditor: termina | ASSIGN Cliente[1]: saldo = 30 | TERMINATED Cliente[2]: termina | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #2f226e646bae989e
+step 22 ENTER Cliente[1]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b4cfdf606d507a06
+step 23 DELAY Cliente[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":23,"waiting":true} #955a08e2ff2935dd
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #643ea5cffb21b6db
+step 25 {"finished":false,"deadlock":false,"instant":25,"waiting":true} #815b6ad383c5814c
+step 26 ASSIGN Cliente[1]: anotados = 3 | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #dfec18ab6469295a
+step 27 RETURN Cliente[1]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #3eeef41ab7fd72b9
+step 28 RETURN Cliente[1]: retorna de Cuenta.depositar, libera el monitor | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #37e2938f85a1f0e1
+step 29 TERMINATED Cliente[1]: termina | {"finished":true,"deadlock":false,"instant":29,"waiting":false} #e99661a147bd4b60
+state #0a16d751b8e8d770
+## RANDOM seed=1
+create {"finished":false,"deadlock":false} #5d9e8f1c421710bb
+step 1 #f778c29a97b4c8b9
+step 2 #b1bb5e02050989fc
+step 3 #16efaefd938f29b8
+step 4 #0b1bd43da0333c34
+step 5 #962cbb0dee8f2026
+step 6 #17bc8eb6849d0739
+step 7 #e96df5b7a092319f
+step 8 #cce581b1d0ffdba9
+step 9 #fc24e7e99c370e33
+step 10 #c708eb072778d98c
+step 11 #b75706fb08197e5a
+step 12 #bd0fc6a3a909b893
+step 13 #8de99eade750c608
+step 14 #93f7e26bd3bb0689
+step 15 #884ce1ca5f5b92ab
+step 16 #c583ef3053b90d4d
+step 17 #4baaf62704548d35
+step 18 #1c61bf341e394b7d
+step 19 #1dbda6b16108a230
+step 20 #2ff277304aee7209
+step 21 #e0eb63820959295d
+step 22 #fc45f02ec4815d37
+step 23 #fbf91abbc9b92f46
+step 24 #69a8b75cfe403ff7
+step 25 #48839651318083e0
+step 26 #61718b15c1c0ab39
+step 27 #08dd22b0badacdb8
+step 28 #94ec10c3683275cc
+step 29 #48a8ba5c31c062bd
+step 30 #b1065cee763bd67b
+state #45f4f8e2baef0a52
+## RANDOM seed=2
+create {"finished":false,"deadlock":false} #6b976257b95b1942
+step 1 #92e66f1e9a3aef4c
+step 2 #6e814cde87abcfe6
+step 3 #2e2316b30186623d
+step 4 #631ba97aa5866f0a
+step 5 #abb4a53bdc87f19c
+step 6 #11ede0a5394e58e6
+step 7 #a19bdef822afe727
+step 8 #7125b94e9f8d8491
+step 9 #a693aecb335584c5
+step 10 #391796a46e096e49
+step 11 #5bdfe146badda419
+step 12 #b6eeb38b7a56b270
+step 13 #fc65d6491fdaa2b4
+step 14 #bac5f327a2a2c700
+step 15 #d6ee9dc327f1a0ba
+step 16 #3e05b47f2fbceab7
+step 17 #e51beef54ffcb318
+step 18 #c0294b3abcc8d64b
+step 19 #4daf4afc51da2977
+step 20 #67a2721805eeae35
+step 21 #88d21c11053ae9bc
+step 22 #1fe10d48ea3bdc5e
+step 23 #019b0164fcd5d1dd
+step 24 #726de89857c83701
+step 25 #ff0650d88b0977bb
+step 26 #25e181700affe51e
+step 27 #1a0e94696bb479f1
+step 28 #0ea374394be2b98a
+step 29 #aba1142a0990d278
+state #ba4bde97c8f6faba
+## ROUND_ROBIN seed=0
+create {"finished":false,"deadlock":false} #1eb4045df9326e36
+step 1 ENTER Cliente[0]: entra a Cuenta.depositar | BLOCKED Cliente[1]: espera para entrar a Cuenta.depositar | BLOCKED Cliente[2]: espera para entrar a Cuenta.depositar | DECL Auditor: int n = 0 | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #0e95d621188fb624
+step 2 ENTER Auditor: entra a Registro.consultar | ASSIGN Cliente[0]: saldo = 10 | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #171b794bb2309378
+step 3 BLOCKED Cliente[0]: espera para entrar a Registro.anotar | ASSIGN Auditor: n = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #46dad6f4e1475f85
+step 4 RETURN Auditor: retorna de Registro.consultar, libera el monitor | ENTER Cliente[0]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #0b1bd43da0333c34
+step 5 DELAY Cliente[0]: delay(2) - se demora 2 instantes | WRITE Auditor: write(depósitos anotados: 0) | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #2b65d06754c508ac
+step 6 DELAY Auditor: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":6,"waiting":true} #4d64d5f4ec34a259
+step 7 {"finished":false,"deadlock":false,"instant":7,"waiting":true} #c342b73365712179
+step 8 ASSIGN Cliente[0]: anotados = 1 | {"finished":false,"deadlock":false,"instant":8,"waiting":false} #3e1b5214c9fceb6b
+step 9 RETURN Cliente[0]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":9,"waiting":false} #b1623df61af0437e
+step 10 ASSIGN Auditor: for#1++ => 2 | RETURN Cliente[0]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[2]: entra a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5da7d4c1aa747053
+step 11 TERMINATED Cliente[0]: termina | ASSIGN Cliente[2]: saldo = 20 | ENTER Auditor: entra a Registro.consultar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #7f6884caf6e2ac1e
+step 12 BLOCKED Cliente[2]: espera para entrar a Registro.anotar | ASSIGN Auditor: n = 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #1800598684829b24
+step 13 RETURN Auditor: retorna de Registro.consultar, libera el monitor | ENTER Cliente[2]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #bb46ccdca8ae3868
+step 14 DELAY Cliente[2]: delay(2) - se demora 2 instantes | WRITE Auditor: write(depósitos anotados: 1) | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #e148026515e14384
+step 15 DELAY Auditor: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":15,"waiting":true} #0b43b7f8a0107b3a
+step 16 {"finished":false,"deadlock":false,"instant":16,"waiting":true} #947c8a935645ad8d
+step 17 ASSIGN Cliente[2]: anotados = 2 | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #64437b68d995d656
+step 18 RETURN Cliente[2]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":18,"waiting":false} #e48cfc8ff5f90526
+step 19 ASSIGN Auditor: for#1++ => 3 | RETURN Cliente[2]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[1]: entra a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":19,"waiting":false} #d5360e21aed1e58b
+step 20 ASSIGN Cliente[1]: saldo = 30 | TERMINATED Cliente[2]: termina | TERMINATED Auditor: termina | {"finished":false,"deadlock":false,"instant":20,"waiting":false} #4bd9f870250239c5
+step 21 ENTER Cliente[1]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #d7a6cf5acc0eaa85
+step 22 DELAY Cliente[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":22,"waiting":true} #0cea81467a6949df
+step 23 {"finished":false,"deadlock":false,"instant":23,"waiting":true} #93045ccecba02751
+step 24 {"finished":false,"deadlock":false,"instant":24,"waiting":true} #088e5c879d83c1a2
+step 25 ASSIGN Cliente[1]: anotados = 3 | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #bf02913f9dccd138
+step 26 RETURN Cliente[1]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #59253d187af46632
+step 27 RETURN Cliente[1]: retorna de Cuenta.depositar, libera el monitor | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #b6e5703352e55999
+step 28 TERMINATED Cliente[1]: termina | {"finished":true,"deadlock":false,"instant":28,"waiting":false} #6bc2400946ea9f56
+state #fe804ff3f406005c
+## ROUND_ROBIN seed=1
+create {"finished":false,"deadlock":false} #5d9e8f1c421710bb
+step 1 #0e95d621188fb624
+step 2 #171b794bb2309378
+step 3 #46dad6f4e1475f85
+step 4 #0b1bd43da0333c34
+step 5 #2b65d06754c508ac
+step 6 #4d64d5f4ec34a259
+step 7 #c342b73365712179
+step 8 #3e1b5214c9fceb6b
+step 9 #b1623df61af0437e
+step 10 #5da7d4c1aa747053
+step 11 #7f6884caf6e2ac1e
+step 12 #1800598684829b24
+step 13 #bb46ccdca8ae3868
+step 14 #e148026515e14384
+step 15 #0b43b7f8a0107b3a
+step 16 #947c8a935645ad8d
+step 17 #64437b68d995d656
+step 18 #e48cfc8ff5f90526
+step 19 #d5360e21aed1e58b
+step 20 #4bd9f870250239c5
+step 21 #d7a6cf5acc0eaa85
+step 22 #0cea81467a6949df
+step 23 #93045ccecba02751
+step 24 #088e5c879d83c1a2
+step 25 #bf02913f9dccd138
+step 26 #59253d187af46632
+step 27 #b6e5703352e55999
+step 28 #6bc2400946ea9f56
+state #fe804ff3f406005c
+## ROUND_ROBIN seed=2
+create {"finished":false,"deadlock":false} #6b976257b95b1942
+step 1 #0e95d621188fb624
+step 2 #171b794bb2309378
+step 3 #46dad6f4e1475f85
+step 4 #0b1bd43da0333c34
+step 5 #2b65d06754c508ac
+step 6 #4d64d5f4ec34a259
+step 7 #c342b73365712179
+step 8 #3e1b5214c9fceb6b
+step 9 #b1623df61af0437e
+step 10 #5da7d4c1aa747053
+step 11 #7f6884caf6e2ac1e
+step 12 #1800598684829b24
+step 13 #bb46ccdca8ae3868
+step 14 #e148026515e14384
+step 15 #0b43b7f8a0107b3a
+step 16 #947c8a935645ad8d
+step 17 #64437b68d995d656
+step 18 #e48cfc8ff5f90526
+step 19 #d5360e21aed1e58b
+step 20 #4bd9f870250239c5
+step 21 #d7a6cf5acc0eaa85
+step 22 #0cea81467a6949df
+step 23 #93045ccecba02751
+step 24 #088e5c879d83c1a2
+step 25 #bf02913f9dccd138
+step 26 #59253d187af46632
+step 27 #b6e5703352e55999
+step 28 #6bc2400946ea9f56
+state #fe804ff3f406005c
+## step by step, RANDOM seed=0
+create {"finished":false,"deadlock":false} #1eb4045df9326e36
+step 1 ENTER Cliente[1]: entra a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":1,"waiting":false} #a63c15cfe3bde74a
+step 2 BLOCKED Cliente[2]: espera para entrar a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":2,"waiting":false} #5717a1b3c3c3428f
+step 3 DECL Auditor: int n = 0 | {"finished":false,"deadlock":false,"instant":3,"waiting":false} #e754c4c70cf33747
+step 4 BLOCKED Cliente[0]: espera para entrar a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":4,"waiting":false} #4762d378b6338e87
+step 5 ASSIGN Cliente[1]: saldo = 10 | {"finished":false,"deadlock":false,"instant":5,"waiting":false} #f2445380f09d6db1
+step 6 ENTER Cliente[1]: entra a Registro.anotar | BLOCKED Auditor: espera para entrar a Registro.consultar | {"finished":false,"deadlock":false,"instant":6,"waiting":false} #90894939b70e616a
+step 7 DELAY Cliente[1]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":7,"waiting":true} #b8e14bac966f1dac
+step 8 {"finished":false,"deadlock":false,"instant":8,"waiting":true} #6f4c5dbd19af30f4
+step 9 {"finished":false,"deadlock":false,"instant":9,"waiting":true} #e1f2c53f11d309d8
+step 10 ASSIGN Cliente[1]: anotados = 1 | {"finished":false,"deadlock":false,"instant":10,"waiting":false} #5999fcbd87e87928
+step 11 RETURN Cliente[1]: retorna de Registro.anotar, libera el monitor | ENTER Auditor: entra a Registro.consultar | {"finished":false,"deadlock":false,"instant":11,"waiting":false} #a1c144483ab686f0
+step 12 RETURN Cliente[1]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[0]: entra a Cuenta.depositar | ASSIGN Auditor: n = 1 | {"finished":false,"deadlock":false,"instant":12,"waiting":false} #e7c0b848c7984f6d
+step 13 TERMINATED Cliente[1]: termina | {"finished":false,"deadlock":false,"instant":13,"waiting":false} #0bd9a404704a3d05
+step 14 RETURN Auditor: retorna de Registro.consultar, libera el monitor | ASSIGN Cliente[0]: saldo = 20 | {"finished":false,"deadlock":false,"instant":14,"waiting":false} #8fab1a4d8c3bad14
+step 15 WRITE Auditor: write(depósitos anotados: 1) | {"finished":false,"deadlock":false,"instant":15,"waiting":false} #4554cfc082bf3b69
+step 16 ENTER Cliente[0]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":16,"waiting":false} #6d450b566bbba927
+step 17 DELAY Auditor: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":17,"waiting":false} #4f77427ce1c77e46
+step 18 DELAY Cliente[0]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":18,"waiting":true} #b1a89064d0cc1d8d
+step 19 {"finished":false,"deadlock":false,"instant":19,"waiting":true} #21421b46a7543d48
+step 20 {"finished":false,"deadlock":false,"instant":20,"waiting":true} #9fcf76b941bb9ba8
+step 21 ASSIGN Auditor: for#1++ => 2 | ASSIGN Cliente[0]: anotados = 2 | {"finished":false,"deadlock":false,"instant":21,"waiting":false} #a1b7a0759fc362ad
+step 22 RETURN Cliente[0]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":22,"waiting":false} #b08fa197c2f3ba12
+step 23 ENTER Auditor: entra a Registro.consultar | {"finished":false,"deadlock":false,"instant":23,"waiting":false} #9ddde64771e0f808
+step 24 RETURN Cliente[0]: retorna de Cuenta.depositar, libera el monitor | ENTER Cliente[2]: entra a Cuenta.depositar | {"finished":false,"deadlock":false,"instant":24,"waiting":false} #eed2273dbbe597e6
+step 25 ASSIGN Cliente[2]: saldo = 30 | TERMINATED Cliente[0]: termina | {"finished":false,"deadlock":false,"instant":25,"waiting":false} #39ca87a625ec22b8
+step 26 BLOCKED Cliente[2]: espera para entrar a Registro.anotar | {"finished":false,"deadlock":false,"instant":26,"waiting":false} #640d1c400fce7e77
+step 27 ASSIGN Auditor: n = 2 | {"finished":false,"deadlock":false,"instant":27,"waiting":false} #f06583b10df81b46
+step 28 RETURN Auditor: retorna de Registro.consultar, libera el monitor | ENTER Cliente[2]: entra a Registro.anotar | {"finished":false,"deadlock":false,"instant":28,"waiting":false} #46785d81c6de8231
+step 29 WRITE Auditor: write(depósitos anotados: 2) | DELAY Cliente[2]: delay(2) - se demora 2 instantes | {"finished":false,"deadlock":false,"instant":29,"waiting":false} #49fc4ed4f0f359cf
+step 30 DELAY Auditor: delay(3) - se demora 3 instantes | {"finished":false,"deadlock":false,"instant":30,"waiting":true} #c2883ae1e76435f4
+step 31 {"finished":false,"deadlock":false,"instant":31,"waiting":true} #3a8affc401ffefb3
+step 32 ASSIGN Cliente[2]: anotados = 3 | {"finished":false,"deadlock":false,"instant":32,"waiting":false} #bbdea25b574a901a
+step 33 RETURN Cliente[2]: retorna de Registro.anotar, libera el monitor | {"finished":false,"deadlock":false,"instant":33,"waiting":false} #833e639b0c88bf4d
+step 34 RETURN Cliente[2]: retorna de Cuenta.depositar, libera el monitor | {"finished":false,"deadlock":false,"instant":34,"waiting":false} #1aa3bebf61912084
+step 35 ASSIGN Auditor: for#1++ => 3 | {"finished":false,"deadlock":false,"instant":35,"waiting":false} #c13b743400513926
+step 36 TERMINATED Auditor: termina | TERMINATED Cliente[2]: termina | {"finished":true,"deadlock":false,"instant":36,"waiting":false} #dc697e2d09ad7907
+state #28363380a2e08367

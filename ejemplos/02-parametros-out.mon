@@ -1,0 +1,32 @@
+// Parámetros de salida (out)
+// espera: fin TOTAL.cant=6
+// Ejemplo de la Teoría 4: los empleados hacen productos y el coordinador consulta el total.
+// Los procesos no ven la variable permanente cant: su valor sale del monitor por el
+// parámetro out R y queda en la variable c del coordinador.
+monitor TOTAL {
+  int cant = 0;
+
+  procedure incrementar() {
+    cant = cant + 1;
+  }
+
+  procedure verificar(R: out int) {
+    R = cant;
+  }
+}
+
+process empleado[id: 0..2] {
+  for (1..2) {
+    delay(1);              // hace un producto
+    TOTAL.incrementar();
+  }
+}
+
+process coordinador {
+  int c;
+  for (1..3) {
+    delay(2);              // cada cierto tiempo
+    TOTAL.verificar(c);
+    write("productos hechos hasta ahora: ", c);
+  }
+}

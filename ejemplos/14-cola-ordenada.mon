@@ -1,0 +1,36 @@
+// ColaOrdenada: primero el más corto
+// espera: fin Impresion.impresos=5 Impresion.trabajos=<>
+// Una ColaOrdenada inserta cada elemento ordenado por su primera componente, de menor
+// a mayor. Los usuarios encolan (páginas, id) y la impresora saca siempre el trabajo
+// de menos páginas, sin importar el orden en que llegaron.
+monitor Impresion {
+  ColaOrdenada trabajos(int, int);
+  cond hayTrabajo;
+  int impresos = 0;
+
+  procedure pedir(id, paginas: in int) {
+    push(trabajos, (paginas, id));
+    signal(hayTrabajo);
+  }
+
+  procedure siguiente(id, paginas: out int) {
+    if (empty(trabajos)) wait(hayTrabajo);
+    pop(trabajos, (paginas, id));
+    impresos++;
+  }
+}
+
+process Usuario[id: 0..4] {
+  int paginas = (id * 3) mod 5 + 1;
+  Impresion.pedir(id, paginas);
+}
+
+process Impresora {
+  int id, paginas;
+  delay(8);                    // empieza cuando ya hay varios trabajos en la cola
+  for (1..5) {
+    Impresion.siguiente(id, paginas);
+    write("imprimo ", paginas, " página(s) del usuario ", id);
+    delay(paginas);
+  }
+}

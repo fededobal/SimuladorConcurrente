@@ -1,0 +1,46 @@
+// Lectores y escritores (broadcast signal)
+// espera: fin Controlador_RW.nr=0 Controlador_RW.nw=0
+// Ejemplo de la Teoría 4: el monitor arbitra el acceso a la base de datos. Varios
+// lectores pueden leer a la vez; un escritor necesita acceso exclusivo. Al terminar
+// de escribir se despierta a todos los lectores demorados con signal_all.
+monitor Controlador_RW {
+  int nr = 0, nw = 0;
+  cond ok_leer, ok_escribir;
+
+  procedure pedido_leer() {
+    while (nw > 0) wait(ok_leer);
+    nr = nr + 1;
+  }
+
+  procedure libera_leer() {
+    nr = nr - 1;
+    if (nr == 0) signal(ok_escribir);
+  }
+
+  procedure pedido_escribir() {
+    while (nr > 0 or nw > 0) wait(ok_escribir);
+    nw = nw + 1;
+  }
+
+  procedure libera_escribir() {
+    nw = nw - 1;
+    signal(ok_escribir);
+    signal_all(ok_leer);
+  }
+}
+
+process Lector[id: 0..2] {
+  for (1..2) {
+    Controlador_RW.pedido_leer();
+    delay(2);              // lee la base de datos
+    Controlador_RW.libera_leer();
+  }
+}
+
+process Escritor[id: 0..1] {
+  for (1..2) {
+    Controlador_RW.pedido_escribir();
+    delay(2);              // escribe en la base de datos
+    Controlador_RW.libera_escribir();
+  }
+}

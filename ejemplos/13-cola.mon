@@ -1,0 +1,48 @@
+// Cola: pedidos en orden de llegada
+// espera: fin Admin.C=<>
+// Ejercicio 6 de la Explicación 3: un servidor resuelve los pedidos de los clientes en
+// el orden en que llegan. El monitor guarda cada pedido en una Cola, que es FIFO, y el
+// servidor resuelve afuera del monitor para que mientras tanto se sigan encolando pedidos.
+#define N 4
+
+monitor Admin {
+  Cola C(int, text);
+  cond espera;
+  cond HayPedido;
+  text res[N];
+
+  procedure Pedido(IdC: in int; S: in text; R: out text) {
+    push(C, (IdC, S));
+    signal(HayPedido);
+    wait(espera);
+    R = res[IdC];
+  }
+
+  procedure Sig(IdC: out int; S: out text) {
+    if (empty(C)) wait(HayPedido);
+    pop(C, (IdC, S));
+  }
+
+  procedure Resultado(IdC: in int; R: in text) {
+    res[IdC] = R;
+    signal(espera);
+  }
+}
+
+process Cliente[id: 0..N-1] {
+  text S, res;
+  S = "secuencia " + id;       // genera la secuencia S
+  Admin.Pedido(id, S, res);
+  write("Cliente ", id, ": recibí ", res);
+}
+
+process Servidor {
+  text sec, res;
+  int aux;
+  for (1..N) {
+    Admin.Sig(aux, sec);
+    delay(2);                  // AnalizarSec(sec)
+    res = sec + " analizada";
+    Admin.Resultado(aux, res);
+  }
+}
