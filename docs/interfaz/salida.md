@@ -7,9 +7,9 @@ pestaña indica cuántos elementos tiene.
 
 <figure>
 
-![Pestaña Procesos con el Empleado y los clientes del Corralón: cada fila tiene el nombre en su color, lo que está haciendo, la línea, el botón Avanzar y, debajo, las variables locales](/capturas/procesos.png)
+![Pestaña Procesos con los clientes del ejemplo del banco: cada fila tiene el nombre en su color, lo que está haciendo, la línea, el botón Avanzar y, debajo, las variables locales](/capturas/procesos.png)
 
-<figcaption>Procesos del ejemplo Corralón en el instante 14.</figcaption>
+<figcaption>Procesos del ejemplo Problema completo: banco y escritorios en el instante 14.</figcaption>
 </figure>
 
 | Elemento | Qué muestra |
@@ -30,9 +30,9 @@ La pestaña **Salida** muestra lo que escriben los procesos con
 
 <figure>
 
-![Pestaña Salida con diez líneas: a la izquierda el instante, luego el nombre del proceso en su color (Productor o Consumidor) y el texto, de "deposite 1" a "retire 5"](/capturas/salida.png)
+![Pestaña Salida con cinco líneas: a la izquierda el instante, luego el nombre del proceso en su color, de Persona[0] a Persona[4], y el texto "usé el cajero"](/capturas/salida.png)
 
-<figcaption>Salida del ejemplo Productor/Consumidor al terminar.</figcaption>
+<figcaption>Salida del ejemplo Exclusión mutua implícita al terminar.</figcaption>
 </figure>
 
 | Qué | Cómo |

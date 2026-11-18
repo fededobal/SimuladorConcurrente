@@ -4,8 +4,8 @@ Un error en tiempo de ejecución ocurre con el programa ya compilado. Termina so
 que lo provocó, que queda marcado en rojo en el editor con su línea y el mensaje; los demás
 procesos siguen. Si el proceso estaba dentro de monitores, los libera.
 
-La barra indica **Fin con errores** o **Interbloqueo tras un error**
-([Finalización](/ejecucion/finalizacion)). En el segundo caso, el interbloqueo suele ser
+La barra indica **Fin con errores** o **Deadlock tras un error**
+([Finalización](/ejecucion/finalizacion)). En el segundo caso, el deadlock suele ser
 consecuencia del error: un proceso esperaba un `signal` que el proceso terminado no llegó a
 ejecutar.
 

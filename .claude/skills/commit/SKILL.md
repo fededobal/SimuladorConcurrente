@@ -94,7 +94,7 @@ Diff: `VirtualMachine.java` libera el lock en el `catch`, test nuevo, motor rege
 CHANGELOG:
 ```
 ### Corregido
-- Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación se informaba como interbloqueo. (Federico Dobal, 2026-09-20)
+- Liberar el monitor cuando un proceso falla dentro de un procedimiento; antes la simulación se informaba como deadlock. (Federico Dobal, 2026-09-20)
 ```
 
 Mensaje:

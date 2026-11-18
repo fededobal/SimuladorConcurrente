@@ -9,13 +9,13 @@ cátedra (`docs/monitores/`) no trata el caso. Hasta esta decisión, el simulado
 implementaba la llamada cerrada: el proceso retenía A mientras ejecutaba en B, incluso si
 hacía `wait` en B. La verificación del 23/09/2026 mostró la consecuencia con un programa
 de dos monitores: P llama de A a B y espera en B, y Q necesita entrar a A para avisarle.
-Con la llamada cerrada el programa quedaba en interbloqueo en 194 de 200 semillas con
+Con la llamada cerrada el programa quedaba en deadlock en 194 de 200 semillas con
 turnos al azar y en todas con turnos en ronda, aunque la sincronización de cada monitor
 era correcta.
 
 ## Alternativas
 1. **Llamada cerrada.** El proceso retiene A durante la llamada. Es el comportamiento
-   anterior. Hace aparecer interbloqueos que el alumno no puede explicar a partir de un
+   anterior. Hace aparecer deadlocks que el alumno no puede explicar a partir de un
    solo monitor.
 2. **Llamada abierta.** El proceso libera A al llamar a B y vuelve a competir por A al
    retornar, como después de un `wait`. Cada monitor se razona por separado; el costo es
@@ -36,7 +36,7 @@ Se adopta la alternativa 2. Al ejecutar `B.g()` dentro de un procedure de A:
 Una llamada desde un procedure a su propio monitor es error de compilación.
 
 ## Consecuencias
-- Desaparece el interbloqueo por llamadas anidadas; un proceso tiene a lo sumo un monitor
+- Desaparece el deadlock por llamadas anidadas; un proceso tiene a lo sumo un monitor
   tomado a la vez.
 - Después de volver de B, el procedure de A no puede suponer que el estado de A sigue igual
   que antes de la llamada: vale el mismo criterio que después de un `wait`.

@@ -14,6 +14,30 @@ es de solo lectura; en pausa se puede modificar ([Barra de controles](./barra)).
 | `(` `[` `{` `"` | Se cierran solos |
 | Botones del encabezado del editor | Agrandan o achican la letra (se recuerda entre visitas) |
 
+## Constantes
+
+El botón **Constantes** del encabezado del editor abre un menú con las
+[constantes](/lenguaje/constantes) del programa, como la `N` de los enunciados. El número
+junto al botón indica cuántas tiene.
+
+| Acción | Resultado |
+|---|---|
+| **Agregar una constante** | Suma una fila con un nombre libre (`N`, `M`, `P`...) y el valor 5 |
+| Cambiar el nombre o el valor de una fila | La línea `#define` del código se reescribe al instante |
+| Ícono de la derecha de una fila | Quita la constante |
+
+<figure>
+
+![Encabezado del editor con el menú Constantes abierto: explica que las constantes no son variables y muestra una fila con el nombre N y el valor 5, el ícono para quitarla y la opción Agregar una constante; en el código se ve la línea #define N 5](/capturas/constantes.png)
+
+<figcaption>Menú Constantes del ejemplo Exclusión mutua implícita. La fila <code>N = 5</code> corresponde a la línea <code>#define N 5</code> del código.</figcaption>
+</figure>
+
+El menú escribe las líneas `#define` al principio del código; también se pueden escribir a
+mano. Un nombre repetido o reservado, o un valor que no es un entero sin signo, se marca en
+rojo y no se guarda hasta corregirlo. Durante una ejecución el menú está deshabilitado, igual
+que el resto del editor.
+
 ## Marcas de los procesos
 
 Mientras hay una simulación, el editor marca la línea en la que está cada proceso con tres
@@ -45,12 +69,12 @@ La figura reúne los seis estados en un mismo instante.
 |---|---|
 | Del color del proceso, con un triángulo | Ejecutando; dentro de un monitor dice en cuál |
 | Ámbar con borde punteado, con un reloj de arena | Compitiendo por entrar a un monitor |
-| Violeta, con una luna | Esperando en una variable condición |
+| Violeta, con una luna | Dormido en una variable condición |
 | Verde azulado, con un cronómetro | En `delay`, con los instantes que faltan |
 | Gris, con una raya | Sin turno en este instante |
 
 Los procesos que están en la misma línea, en el mismo estado y en el mismo lugar comparten
-una etiqueta («Cliente ×8 · dormidos en wait(esperaCli[…])»). Por renglón se muestran hasta
+una etiqueta («Jugador ×5 · dormidos en wait(espera)»). Por renglón se muestran hasta
 dos etiquetas y un «+n» con el resto. En un renglón largo, la etiqueta se ancla al borde
 visible del editor.
 
@@ -67,9 +91,9 @@ inicial y el nombre de cada proceso o familia.
 
 <figure>
 
-![Error de compilación: falta el punto y coma al final de la línea 9, la línea 10 aparece marcada en rojo y debajo del editor se lee "línea 10: Se esperaba ';' (se encontró 'hayDato')"](/capturas/editor-error.png)
+![Error de compilación: falta el punto y coma al final de la línea 12, la línea 13 aparece marcada en rojo y debajo del editor se lee "línea 13: Se esperaba ';' (se encontró 'hayDato')"](/capturas/editor-error.png)
 
-<figcaption>Error de compilación. Falta el <code>;</code> de la línea 9, pero el error se detecta al leer la línea 10, que es la que se marca.</figcaption>
+<figcaption>Error de compilación. Falta el <code>;</code> de la línea 12, pero el error se detecta al leer la línea 13, que es la que se marca.</figcaption>
 </figure>
 
 <figure>

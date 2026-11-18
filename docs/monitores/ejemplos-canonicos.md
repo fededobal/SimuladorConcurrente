@@ -80,4 +80,4 @@ monitor ControladorRW {
 `signal_all(okLeer)` despierta a todos los lectores demorados.
 
 Los programas completos que ofrece el menú Ejemplos del simulador están en
-[Programas de ejemplo](/ejemplos).
+[Programas de ejemplo](/referencia/ejemplos).

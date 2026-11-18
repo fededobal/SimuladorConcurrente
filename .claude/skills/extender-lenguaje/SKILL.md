@@ -18,7 +18,8 @@ Antes de codificar, escribí en 3–5 líneas y mostrale al usuario:
    procedure, proceso?),
 3. qué errores de compilación nuevos aparecen y con qué mensaje,
 4. si rompe programas existentes (⇒ commit con `!` y `BREAKING CHANGE`).
-Si contradice `docs/monitores/`, frená y preguntá: la notación la define la cátedra.
+Si contradice el material de la cátedra (`docs/clases-materia/`), frená y preguntá: la
+notación la define la cátedra.
 
 ## Lugares a tocar, en orden
 

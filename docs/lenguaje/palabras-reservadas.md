@@ -1,9 +1,17 @@
 # Palabras reservadas y símbolos
 
-Son 31. Se aceptan con cualquier combinación de mayúsculas (`Monitor`, `OR`, `OUT`,
-`colaOrdenada`), como aparecen en el material de la cátedra. Ninguna puede usarse como
-nombre de variable, monitor, procedure o proceso, en ninguna combinación de mayúsculas
-(`int out = 0;` e `int Out = 0;` son errores de sintaxis).
+Son 33. Se aceptan con cualquier combinación de mayúsculas (`Monitor`, `OR`, `OUT`,
+`colaOrdenada`), como aparecen en el material de la cátedra. No pueden usarse como nombre de
+variable, monitor, procedure o proceso, en ninguna combinación de mayúsculas (`int out = 0;`
+e `int Out = 0;` son errores de sintaxis). La única excepción es `cola`.
+
+## `cola` como nombre
+
+La cátedra usa `cola` como tipo (`cola elibres;`) y también como nombre de una variable
+condición (`cond cola;`, en el ejercicio 2 de la Explicación 3). El simulador acepta las dos
+formas, que no se confunden: la palabra es el tipo cuando va seguida del nombre que declara
+(`Cola fila(int);`), y es un nombre en cualquier otro lugar (`cond cola;`, `wait(cola);`,
+`signal(cola);`). `ColaOrdenada` sí es reservada siempre.
 
 Los nombres que declara el programa sí distinguen mayúsculas: si se declara `process P`,
 `p` es otro nombre.
@@ -16,6 +24,7 @@ Los nombres que declara el programa sí distinguen mayúsculas: si se declara `p
 | Control | `if` `else` `while` `for` `skip` |
 | Sincronización | `wait` `signal` `signal_all` |
 | Colas | `push` `pop` `empty` |
+| Orden de una `ColaOrdenada` | `asc` `desc` |
 | Salida | `write` |
 | Tiempo | `delay` |
 | Operadores | `and` `or` `not` `mod` |
@@ -36,4 +45,5 @@ identificadores comunes y se pueden usar como nombre de variable.
 | Asignación | `=` `++` `--` `:=:` (intercambio) |
 | Agrupación | `(` `)` `{` `}` `[` `]` |
 | Separadores | `;` `,` `:` `.` |
+| Directiva | `#define` ([Constantes](./constantes)) |
 | Rango | `..` |

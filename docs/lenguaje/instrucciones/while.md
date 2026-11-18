@@ -15,9 +15,10 @@ while (not hayDato) wait(ocupado);
 La condición tiene que ser `bool` y se evalúa antes de cada vuelta. Su evaluación no ocupa
 un paso propio. No existe `break`: el ciclo termina cuando la condición es falsa.
 
-Es la forma habitual de esperar dentro de un monitor: el proceso despertado por un `signal`
-vuelve a evaluar la condición y, si otro proceso la cambió mientras tanto, se duerme de
-nuevo ([Variables condición](/ejecucion/variables-condicion)).
+Dentro de un monitor, esperar con `while` hace que el proceso despertado por un `signal`
+vuelva a evaluar la condición y, si otro proceso la cambió mientras tanto, se duerma de
+nuevo. Esperar con [`if`](./if) también es válido, pero el despertado no vuelve a chequear
+([Variables condición](/ejecucion/variables-condicion)).
 
 ## Errores
 

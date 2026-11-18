@@ -9,7 +9,11 @@
 - Español neutro formal. Sin voseo, sin coloquialismos, sin anglicismos evitables
   ("implementar" sí; "deployar", "setear", "testear" no → "desplegar", "configurar",
   "probar"). Términos técnicos sin traducción aceptada, en cursiva la primera vez
-  (*signal and continue*, *deadlock* → mejor "interbloqueo (*deadlock*)").
+  (*signal and continue*).
+- Los conceptos de la materia se nombran como en el material de la cátedra
+  (`docs/clases-materia/`), aunque exista una traducción: *deadlock* (no «interbloqueo»),
+  *busy waiting* (no «espera activa»), *passing the condition* (no «pasaje de la
+  condición»), variables condición privadas. Un proceso que hizo `wait` está «dormido».
 - Definir cada término técnico la primera vez que aparece. Mantener un glosario.
 
 ## 2. Rasgos de texto generado por IA que se eliminan

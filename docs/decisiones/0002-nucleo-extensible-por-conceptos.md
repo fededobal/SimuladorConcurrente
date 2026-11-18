@@ -8,7 +8,7 @@ El simulador implementa hoy un único concepto, monitores con disciplina *signal
 continue*. El objetivo del proyecto es abarcar otros temas de la materia, como semáforos,
 barreras, variables compartidas con sentencias `await` y pasaje de mensajes. La lógica de
 monitores está implementada dentro de `VirtualMachine`, que concentra además el
-planificador, los instantes, la detección de interbloqueo y la generación de estados. Si
+planificador, los instantes, la detección de deadlock y la generación de estados. Si
 cada concepto nuevo se incorpora de la misma manera, la clase crece sin límite y un cambio
 en un concepto puede alterar el comportamiento de otro.
 
@@ -19,7 +19,7 @@ en un concepto puede alterar el comportamiento de otro.
    el planificador, los estados de proceso y la visualización, y obliga a mantener varias
    versiones de la misma semántica común.
 3. **Una máquina virtual común con primitivas por concepto.** El planificador, los
-   procesos, los instantes, el interbloqueo y los estados son comunes; cada concepto
+   procesos, los instantes, el deadlock y los estados son comunes; cada concepto
    aporta sus primitivas en un paquete propio y las ejecuta a través de una interfaz
    acotada de la máquina virtual. Cada programa se compila bajo un modelo explícito que
    determina qué construcciones del lenguaje están habilitadas.

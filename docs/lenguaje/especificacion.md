@@ -18,6 +18,11 @@ Debe haber **al menos un proceso**. **No existen las variables globales**: toda 
 declara dentro de un monitor (permanente) o dentro de un proceso (local). El estado
 compartido, por lo tanto, solo puede vivir dentro de un monitor.
 
+Antes de la primera declaración pueden ir **constantes**: `#define NOMBRE valor`, una por
+línea, con un entero sin signo como valor. No son variables: el lexer entrega el número en
+cada lugar donde el programa escribe el nombre, y el resto del compilador y la máquina
+virtual no las ven. Declarar o asignar un nombre que es una constante es error de compilación.
+
 **Comentarios:** `// línea` y `/* bloque */`.
 
 ---
@@ -76,6 +81,10 @@ local, cada nombre es una declaración aparte y ocupa un paso del scheduler.
   asignación: `int` en `double`, número en `text`). Las componentes se escriben sueltas, como
   tupla entre paréntesis o con la clave separada del resto: `push(c, a, b, d)`,
   `push(c, (a, b, d))`, `push(c, (a, (b, d)))`; igual `pop`. Más paréntesis es error.
+- **Orden de una `ColaOrdenada`**: `asc` o `desc` después de los tipos,
+  `ColaOrdenada fila(int, int) desc;`. Sin modificador ordena de menor a mayor (`asc`); con
+  `desc`, de mayor a menor. En los dos casos la inserción es estable. En una `Cola` es error
+  de compilación.
 - `empty cola` o `empty(cola)`: expresión `bool`, `true` si la cola no tiene elementos.
 - La clave de una `ColaOrdenada` (su primera componente) es `int`, `double` o `text` y se
   compara como número o como texto (orden alfabético); declararla `bool` es error de
@@ -141,7 +150,8 @@ procedure nombre(p1, p2: modo tipo; p3: modo tipo; ...) {
 
 Solo válidas dentro de un procedure (con el monitor tomado):
 
-- `wait(cv);`: siempre demora; libera el monitor.
+- `wait(cv);`: siempre demora; libera el monitor. El wait con prioridad de la teoría,
+  `wait(cv, rank)`, no se usa en la práctica y es error de compilación, igual que `empty(cv)`.
 - `signal(cv);`: despierta al primero de `cv` (no-op si está vacía); el que señaliza sigue.
 - `signal_all(cv);`: despierta a todos los de `cv`.
 - Con arreglos: `wait(turno[id]); signal(turno[id]);`
@@ -180,7 +190,7 @@ process Nombre[iterador: desde..hasta] {   // familia de procesos
 | Operación de condición | `wait(cv);` `signal(cv);` `signal_all(cv);` |
 | Cola / ColaOrdenada | `push(c, e);` `push(c, e1, e2);` `push(c, (e1, e2));` `pop(c, x);` `pop(c, x, y);` `pop(c, (x, y));` |
 | Salida | `write(e);` `write(e1, e2, ...);` (concatena y escribe una línea) |
-| Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales) |
+| Condicional | `if (cond) { ... } else { ... }` (el `else` y las llaves son opcionales; sin llaves, el `;` de la sentencia puede omitirse antes del `else`: `if (c) wait(v) else x = 1;`) |
 | Mientras | `while (cond) { ... }` |
 | For (contador) | `for (int i = 0; i < n; i++) { ... }` |
 | For (rango) | `for (int i = 1..n) { ... }` · `for (i = 1..n) { ... }` (iterador `int`; la cota se evalúa una vez al entrar) |
@@ -225,7 +235,7 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
   interfaz todavía no ofrece.
 - **Exclusión mutua implícita:** a lo sumo un proceso dentro de cada monitor.
   - `Monitor.op(args)` con el monitor libre: el proceso entra y ejecuta el cuerpo.
-  - Con el monitor ocupado: el proceso queda `BLOCKED` en la cola de entrada.
+  - Con el monitor ocupado: el proceso queda en la cola de entrada, compitiendo.
   - Al liberarse el monitor (retorno, `wait`, llamada a otro monitor o error), un proceso de
     la cola de entrada, elegido al azar, lo toma en ese mismo instante y el resto sigue
     esperando. No se respeta el orden de llegada.
@@ -238,9 +248,9 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 - **`delay(n)`:** ejecutarlo ocupa un instante; después el proceso queda demorado durante
   los `n` instantes siguientes y conserva los monitores que tenga tomados. Si ningún proceso
   está listo pero alguno está demorado, el instante pasa sin eventos. Un proceso en `delay`
-  no cuenta para el interbloqueo (ADR 0008).
-- **Deadlock:** ningún proceso listo y no todos terminados → se informa, junto con los
-  monitores que retiene cada proceso bloqueado.
+  no cuenta para el deadlock (ADR 0008).
+- **Deadlock:** ningún proceso listo ni en `delay`, y no todos terminados → se informa, junto
+  con los monitores que retiene cada proceso demorado.
 - **Errores de ejecución:** terminan el proceso que los provoca y liberan su monitor.
 - **Topes:** hasta 5000 procesos, 100 000 elementos por arreglo, 100 niveles de anidamiento
   y 200 operaciones encadenadas por expresión; la pantalla de salida guarda las últimas 500
@@ -251,7 +261,12 @@ Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+
 ## 8. Gramática (EBNF)
 
 ```ebnf
-programa      = { monitor | proceso } ;
+programa      = { constante } { monitor | proceso } ;
+
+(* ---------- constantes ---------- *)
+constante     = "#define" ident entero fin_de_linea ;   (* una por línea, sin ';' *)
+entero        = digito { digito } ;
+                (* cada ident definido asi se lee, en el resto del programa, como su numero *)
 
 (* ---------- monitores ---------- *)
 monitor       = "monitor" ident [ "[" ident ":" expr ".." expr "]" ] "{" { miembro_monitor } "}" ;
@@ -288,8 +303,10 @@ sentencia     = decl_local
 decl_local    = decl_var ;
 decl_var      = tipo_escalar item_decl { "," item_decl } ";"
               | tipo_cola item_cola { "," item_cola } ";" ;
-item_cola     = ident "(" tipo_escalar [ "," ( tipos_escalares | "(" tipos_escalares ")" ) ] ")" ;
+item_cola     = ident "(" tipo_escalar [ "," ( tipos_escalares | "(" tipos_escalares ")" ) ] ")"
+                [ "asc" | "desc" ] ;
                 (* el grupo entre parentesis solo agrupa: (int, (text, text)) = (int, text, text) *)
+                (* asc y desc: solo en una ColaOrdenada; sin ninguna, asc *)
 tipos_escalares = tipo_escalar { "," tipo_escalar } ;
 item_decl     = ident [ "=" expr ]                                    (* escalar *)
               | ident "[" expr "]" [ "=" "(" "[" expr "]" expr ")" ] ;  (* arreglo *)
@@ -311,6 +328,8 @@ exprs         = expr { "," expr } ;
 idents        = ident { "," ident } ;
 escritura     = "write" "(" [ expr { "," expr } ] ")" ";" ;
 condicional   = "if" "(" expr ")" cuerpo [ "else" cuerpo ] ;
+                (* si el primer cuerpo es una sentencia sin llaves y sigue "else", el ";" que
+                   la termina es opcional: if (s == 0) wait(pos) else s = s - 1; *)
 mientras      = "while" "(" expr ")" cuerpo ;
 para          = "for" "(" iterador "=" expr ";" [ expr ] ";" inc_step ")" cuerpo
               | "for" "(" iterador "=" expr ".." expr ")" cuerpo
@@ -341,6 +360,7 @@ tipo          = tipo_escalar | tipo_cola ;
 tipo_escalar  = "int" | "double" | "bool" | "text" ;
 tipo_cola     = "Cola" | "ColaOrdenada" ;
 ident         = ( letra | "_" ) { letra | digito | "_" } ;   (* que no sea palabra reservada *)
+                (* excepcion: "cola" es ident salvo cuando la sigue el nombre que declara *)
 letra         = (* cualquier letra, incluidas ñ y las vocales con tilde *) ;
 digito        = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 numero        = digito { digito } [ "." digito { digito } ] ;
@@ -350,13 +370,15 @@ comentario    = "//" { caracter } fin_de_linea | "/*" { caracter } "*/" ;
                    marca BOM cuentan como espacio *)
 ```
 
-**Palabras reservadas (31):** `monitor procedure cond process if else while for skip
+**Palabras reservadas (33):** `monitor procedure cond process if else while for skip
 wait signal signal_all push pop empty write in out true false int double bool text Cola
-ColaOrdenada and or not mod delay`. Las palabras reservadas no distinguen mayúsculas de
+ColaOrdenada asc desc and or not mod delay`. Las palabras reservadas no distinguen mayúsculas de
 minúsculas: `OR`, `Out`, `cola` y `colaOrdenada` se leen como `or`, `out`, `Cola` y
 `ColaOrdenada`. Los identificadores sí las distinguen: `P` y `p` son nombres distintos, y un
 identificador no puede coincidir con una palabra reservada en ninguna combinación de
-mayúsculas (`cond cola;` es error). `boolean` y el símbolo `%` no existen: el compilador
+mayúsculas (`int Out = 0;` es error). La excepción es `cola`, que la cátedra usa también como
+nombre (`cond cola;`): es el tipo solo cuando la sigue el nombre que declara
+(`Cola fila(int);`), y un identificador en cualquier otro lugar. `boolean` y el símbolo `%` no existen: el compilador
 indica que se escriben `bool` y `mod`.
 
 No hay palabras reservadas de semáforos: `sem`, `await`, `p` y `v` son identificadores

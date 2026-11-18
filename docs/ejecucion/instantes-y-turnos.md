@@ -16,7 +16,7 @@ en paralelo y no de a uno.
 
 Lo que no ocupa un paso se resuelve junto con la sentencia siguiente. Un ciclo cuyo cuerpo
 no tiene ninguna sentencia que ocupe un paso, como `while (true) { }`, no avanzaría nunca;
-el simulador lo corta y registra el evento `espera activa (bucle sin avanzar)`.
+el simulador lo corta y registra el evento `busy waiting (bucle sin avanzar)`.
 
 ## Políticas de turnos
 

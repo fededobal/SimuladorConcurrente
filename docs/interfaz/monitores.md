@@ -7,9 +7,9 @@ colas y las variables permanentes. El significado de cada zona del dibujo se exp
 
 <figure>
 
-![Pestaña Monitores con el monitor Corralon ocupado por un cliente: dibujo con las zonas Compiten, En wait y Adentro, el relato del instante 14, las colas de entrada y de cada variable condición y la tabla de variables con cAtenciones, comprobantes y listas](/capturas/monitores.png)
+![Pestaña Monitores con el monitor Banco ocupado por Cliente[2]: dibujo con las zonas Compiten, En wait y Adentro, el relato del instante 14, la cola de entrada con cinco procesos, la variable condición esperaC vacía y el comienzo de la tabla de variables, con la cola elibres](/capturas/monitores.png)
 
-<figcaption>Monitor <code>Corralon</code> en el instante 14: el dibujo, el relato del instante, las colas y las variables permanentes.</figcaption>
+<figcaption>Monitor <code>Banco</code> en el instante 14: el dibujo, el relato del instante, las colas y las variables permanentes.</figcaption>
 </figure>
 
 ## Dibujo
@@ -29,10 +29,10 @@ Las tres zonas de la cátedra, numeradas:
 | Borde violeta en la zona 2 | Hay procesos esperando en alguna variable condición |
 | Flecha resaltada (call, entra, wait, signal, return) | Algún proceso la recorrió en el último instante |
 | Punto que recorre una flecha | El proceso que pasó de una zona a otra en ese instante, con su color; en signal lleva el color de acento, porque quien se mueve es el proceso despertado |
-| Flecha signal punteada | La simulación terminó en interbloqueo: nadie puede despertar a los que esperan |
+| Flecha signal punteada | La simulación terminó en deadlock: nadie puede despertar a los que esperan |
 
-El encabezado de la tarjeta aclara cuando el dueño no está ejecutando: está en `delay` o
-esperando dentro de otro monitor.
+El encabezado de la tarjeta aclara cuando el dueño no está ejecutando: está en `delay`,
+dormido en una variable condición de otro monitor o compitiendo por entrar a otro.
 
 ## Relato del instante
 
@@ -62,8 +62,8 @@ más de seis variables condición, las vacías se pliegan en un botón que dice 
 El valor de una variable simple y el elemento de un arreglo se destacan un momento cuando
 cambian.
 
-## Interbloqueo
+## Deadlock
 
-Cuando la simulación termina en interbloqueo, debajo de las tarjetas aparece la tabla
+Cuando la simulación termina en deadlock, debajo de las tarjetas aparece la tabla
 **Por qué nadie avanza**, con cada proceso bloqueado, dónde está y qué lo despertaría
-([Diagnóstico de un interbloqueo](/operacion/interbloqueo)).
+([Diagnóstico de un deadlock](/operacion/deadlock)).

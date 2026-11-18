@@ -45,7 +45,8 @@ process Cliente[c: 0..5] {
 ```monitores
 cond libre;
 cond libre, ocupado;   // varias en una línea
-cond turno[3];         // arreglo de condiciones (condiciones privadas)
+cond turno[3];         // arreglo de cond (variables condición privadas)
+cond espera[N];        // el tamaño puede ser una constante (#define N 5)
 ```
 
 Si la `cond` es un arreglo hay que indexarla siempre: `wait(turno[i])`, `signal(turno[i])`.
@@ -80,4 +81,4 @@ procedure request(int id, tiempo; text nombre) { ... }  // estilo C: siempre in
   llamar a otro monitor, y conserva el suyo hasta que esa llamada termina, aunque haga
   `wait` en el otro: mientras tanto nadie más entra al primero. Si el proceso espera en el
   segundo algo que solo puede hacer otro proceso que necesita entrar al primero, nadie
-  avanza y el simulador informa el interbloqueo con los monitores que retiene cada uno.
+  avanza y el simulador informa el deadlock con los monitores que retiene cada uno.

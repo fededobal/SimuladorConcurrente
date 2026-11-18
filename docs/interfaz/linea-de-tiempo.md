@@ -5,9 +5,9 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 
 <figure>
 
-![Línea de tiempo del ejemplo Corralón: carril del monitor con los clientes en sucesión; filas de procesos con tramos rotulados "compite por Corralon", "Corralon" y "wait(esperaCli[1])"; el instante actual destacado y la tarjeta fija de un instante](/capturas/linea-de-tiempo.png)
+![Línea de tiempo del ejemplo del banco: un carril para el monitor Banco y uno para cada Escritorio, con los procesos que los ocuparon en sucesión; filas de los clientes con tramos rotulados "compite por Banco", "en Banco", "Escritorio[0]", "wait(vcCliente)" y "wait(esperaC)"; el instante 22 destacado y la tarjeta fija del instante 10](/capturas/linea-de-tiempo.png)
 
-<figcaption>Ejemplo Corralón con turnos en ronda. El carril muestra que el monitor pasa de un proceso a otro sin superposiciones; la tarjeta fija describe un instante.</figcaption>
+<figcaption>Ejemplo Problema completo: banco y escritorios, con turnos en ronda. Cada carril muestra que su monitor pasa de un proceso a otro sin superposiciones; la tarjeta fija describe el instante 10.</figcaption>
 </figure>
 
 | Parte | Qué muestra |
@@ -25,7 +25,7 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 | Color pleno del proceso | Ejecutando dentro de un monitor |
 | Tono claro del color del proceso | Ejecutando su propio código |
 | Borde punteado ámbar | Compitiendo por entrar a un monitor |
-| Borde violeta | Esperando en una variable condición |
+| Borde violeta | Dormido en una variable condición |
 | Borde verde azulado | En `delay` |
 | Raya gris fina | Sin turno en ese instante |
 
@@ -36,7 +36,7 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 | Pasar el puntero por una columna | Una tarjeta describe los eventos de ese instante, cada proceso en su color |
 | Clic en la columna | La tarjeta queda fija; otro clic la suelta |
 
-Un interbloqueo queda marcado con una raya roja en su instante y el rótulo «Interbloqueo:
+Un deadlock queda marcado con una raya roja en su instante y el rótulo «Deadlock:
 nadie puede avanzar».
 
 ## Zoom y desplazamiento

@@ -12,7 +12,7 @@
 | Instantes de un `delay` | De 0 a 3600 | Error de ejecución |
 | Líneas del panel de salida | Las últimas 500 | Las anteriores se descartan, con un aviso |
 | Instantes de la línea de tiempo | Los últimos 1000 | Los anteriores dejan de mostrarse |
-| Iteraciones sin sentencias observables en un instante | 4000 | El proceso registra una espera activa y pierde el turno |
+| Iteraciones sin sentencias observables en un instante | 4000 | El proceso registra un evento de *busy waiting* y pierde el turno |
 
 ## Parámetros de la simulación
 

@@ -8,7 +8,7 @@ en B. Es una llamada cerrada
 otro proceso puede entrar a A.
 
 Hay que tener cuidado: si el proceso espera en B algo que solo puede hacer otro proceso que
-necesita entrar a A, nadie avanza. En ese caso el simulador informa el interbloqueo y dice
+necesita entrar a A, nadie avanza. En ese caso el simulador informa el deadlock y dice
 qué monitor retiene cada proceso bloqueado, por ejemplo "P espera en B.c y retiene A".
 
 Un procedure no puede llamar a otro procedure de su propio monitor: es error de

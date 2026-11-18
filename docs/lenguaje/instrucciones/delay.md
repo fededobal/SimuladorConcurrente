@@ -28,7 +28,7 @@ editor, la etiqueta del proceso indica cuántos instantes le faltan. `delay(0)` 
 
 Mientras tanto los demás procesos siguen avanzando. Si ninguno puede hacerlo pero alguno
 está en `delay`, los instantes pasan igual, sin que avance nadie, y no se informa un
-interbloqueo.
+deadlock.
 
 Dentro de un procedure, el proceso conserva el monitor durante la demora y los demás
 esperan en la cola de entrada.

@@ -36,6 +36,7 @@ const CAPITULOS: readonly CapituloDef[] = [
     descripcion: 'Qué se puede escribir: estructura, tipos, monitores, procesos y una página por instrucción.',
     paginas: [
       { titulo: 'Estructura del programa', enlace: '/lenguaje/' },
+      { titulo: 'Constantes', enlace: '/lenguaje/constantes' },
       { titulo: 'Tipos y arreglos', enlace: '/lenguaje/tipos' },
       { titulo: 'Colas', enlace: '/lenguaje/colas' },
       { titulo: 'Monitores', enlace: '/lenguaje/monitores' },
@@ -96,7 +97,7 @@ const CAPITULOS: readonly CapituloDef[] = [
     paginas: [
       { titulo: 'Ejecución paso a paso', enlace: '/operacion/paso-a-paso' },
       { titulo: 'Comparación de ejecuciones', enlace: '/operacion/comparar-ejecuciones' },
-      { titulo: 'Diagnóstico de un interbloqueo', enlace: '/operacion/interbloqueo' },
+      { titulo: 'Diagnóstico de un deadlock', enlace: '/operacion/deadlock' },
       { titulo: 'Inspección de un monitor', enlace: '/operacion/inspeccion-de-monitores' },
     ],
   },

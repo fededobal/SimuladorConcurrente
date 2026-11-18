@@ -18,8 +18,8 @@ los demás. Al liberarse el monitor entra uno elegido al azar, sin respetar el o
 llegada. Un proceso que llamó después puede entrar antes que el despertado y cambiar el
 estado ([Variables condición](/ejecucion/variables-condicion)).
 
-Si el programa necesita que el despertado encuentre el estado intacto, se usa la técnica de
-pasaje de la condición; si alcanza con que vuelva a comprobarlo, se espera con `while`.
+Si el programa necesita que el despertado encuentre el estado intacto, se usa la técnica
+*passing the condition*; si alcanza con que vuelva a comprobarlo, se espera con `while`.
 
 ## Un proceso pasa a otro que llegó antes
 
@@ -32,7 +32,8 @@ privada ([Acceso al monitor](/ejecucion/acceso-al-monitor)).
 Un `wait` dentro de un `if` puede dar el resultado correcto en muchas ejecuciones y fallar
 en otras, cuando otro proceso se adelanta al despertado. Ejecutar el programa varias veces
 con turnos **Al azar** permite detectarlo; la corrección habitual es reemplazar el `if` por
-un `while`.
+un `while`. El ejemplo **Espera con if: un semáforo que falla** muestra el caso
+([Comparación de ejecuciones](/operacion/comparar-ejecuciones)).
 
 ## Con turnos en ronda también hay diferencias
 

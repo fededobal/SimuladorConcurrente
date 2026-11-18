@@ -13,8 +13,8 @@ description: >
 
 El simulador ejecuta programas con **monitores** bajo *signal and continue* y nada más
 (ADR 0003). Acá está el modelo general de la VM; las reglas de los monitores, sus
-invariantes y los programas canónicos están en `references/monitores.md` (teoría de la
-cátedra: `docs/monitores/`).
+invariantes y los programas canónicos están en `references/monitores.md`. La fuente de
+verdad es el material de la cátedra, en `docs/clases-materia/` (Teoría 4 y Explicación 3).
 
 ## Modelo de la VM
 
@@ -41,7 +41,7 @@ cátedra: `docs/monitores/`).
    ejecución, en la JVM y en el navegador (el azar sale de `vm/SeededRandom`, no de
    `java.util.Random`; `delay` se mide en instantes, ADR 0008). La interfaz usa una semilla
    nueva en cada ejecución, la muestra, y permite repetirla con el botón Repetir.
-5. `DEADLOCK` es siempre un interbloqueo del programa del alumno, nunca un error interno.
+5. `DEADLOCK` es siempre un deadlock del programa del alumno, nunca un error interno.
 6. Nada crece sin tope durante una ejecución larga (log, salida, snapshots). Los eventos no
    llevan el estado; el log guarda los últimos `MAX_ENTRIES` y la salida los últimos `MAX_LINES`.
 7. La semántica implementada coincide con la de la cátedra. Si hay que apartarse (por
@@ -57,5 +57,6 @@ cátedra: `docs/monitores/`).
 
 1. Reproducir con la misma semilla.
 2. Recorrer el log por instantes y señalar el evento clave.
-3. Relacionarlo con la teoría (`docs/monitores/`, página correspondiente).
+3. Relacionarlo con la teoría (`docs/clases-materia/`; en la guía,
+   `docs/ejecucion/variables-condicion.md`).
 4. Si contradice la teoría, es bug del simulador: primero el test que lo muestra.

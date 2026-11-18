@@ -13,8 +13,9 @@ simulador cuenta con:
   procedures con parámetros `in` y `out`, además de arreglos de monitores
   ([Monitores](/lenguaje/monitores));
 - procesos sueltos y familias de procesos ([Procesos](/lenguaje/procesos));
-- los tipos `int`, `double`, `bool` y `text`, arreglos y las colas `Cola` y `ColaOrdenada`
-  ([Tipos y arreglos](/lenguaje/tipos), [Colas](/lenguaje/colas));
+- los tipos `int`, `double`, `bool` y `text`, arreglos, las colas `Cola` y `ColaOrdenada` y
+  constantes como `N` ([Tipos y arreglos](/lenguaje/tipos), [Colas](/lenguaje/colas),
+  [Constantes](/lenguaje/constantes));
 - las instrucciones `wait`, `signal`, `signal_all`, `push`, `pop`, `write` y `delay`, el
   intercambio `:=:` y las estructuras `if`, `while` y `for`
   ([Instrucciones](/lenguaje/instrucciones/));
@@ -23,7 +24,7 @@ simulador cuenta con:
   ([Panel de monitores](/interfaz/monitores));
 - una línea de tiempo con una fila por proceso y un carril por monitor
   ([Línea de tiempo](/interfaz/linea-de-tiempo));
-- dos políticas de turnos, al azar y en ronda, y la detección del interbloqueo
+- dos políticas de turnos, al azar y en ronda, y la detección del deadlock
   ([Ejecución](/ejecucion/instantes-y-turnos));
 - programas de ejemplo con casos tomados del material de la materia
   ([Programas de ejemplo](/referencia/ejemplos)).

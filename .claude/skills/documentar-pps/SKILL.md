@@ -41,9 +41,10 @@ es: **podría firmarlo un profesional del área y defenderlo oralmente línea po
 | `README.md` | quien llega al repo | cambia cómo se ejecuta, la arquitectura o el alcance |
 | `docs/lenguaje/*.md` (una página por tema e instrucción) | alumno | cambia el lenguaje |
 | `docs/lenguaje/especificacion.md` | docente, desarrollador | cambia el lenguaje (EBNF y semántica) |
-| `docs/monitores/*.md` | alumno | la cátedra cambia la notación o la teoría |
-| `docs/simulador/*.md` | alumno, docente | cambia la interfaz |
-| `docs/ejemplos.md` | alumno | cambian los programas de `ejemplos/` |
+| `docs/clases-materia/*.pdf` | fuente de verdad | lo entrega la cátedra; no se edita |
+| `docs/monitores/*.md` | desarrollador | resumen de la teoría; se corrige si difiere de los PDF |
+| `docs/interfaz/*.md`, `docs/operacion/*.md` | alumno, docente | cambia la interfaz |
+| `docs/referencia/ejemplos.md` | alumno | cambian los programas de `ejemplos/` |
 | `docs/decisiones/NNNN-*.md` | tribunal, futuros desarrolladores | cada decisión de arquitectura o alcance |
 | `CHANGELOG.md` | todos | cada commit (ver skill `commit`) |
 | `docs/pps/*` | cátedra de PPS | hitos de la PPS |

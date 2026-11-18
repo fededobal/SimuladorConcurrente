@@ -3,20 +3,25 @@
 Esta sección describe todo lo que acepta el simulador. Los ejemplos de cada página compilan
 y se comportan como se describe.
 
-Un programa tiene dos clases de declaraciones, en cualquier orden, y al menos un proceso:
+Un programa tiene dos clases de declaraciones, en cualquier orden, y al menos un proceso.
+Antes de ellas pueden ir las constantes del programa:
 
 ```monitores
+#define N 5                   // constantes: cantidades fijas, como la N de los enunciados
+
 monitor Recurso { ... }       // monitores: el estado compartido y sus operaciones
 
-process Cliente[i: 1..5] { }  // procesos: el código que se ejecuta concurrentemente
+process Cliente[i: 1..N] { }  // procesos: el código que se ejecuta concurrentemente
 ```
 
 No hay variables globales. Toda variable vive dentro de un monitor (permanente y
 compartida) o dentro de un proceso o un procedure (local y privada). Es la regla central del
-modelo: el estado compartido solo se modifica dentro de un monitor, con exclusión mutua.
+modelo: el estado compartido solo se modifica dentro de un monitor, con exclusión mutua. Una
+constante no es una variable: el compilador la reemplaza por su número.
 
 | Construcción | Página |
 |---|---|
+| Constantes (`#define N 5`) | [Constantes](./constantes) |
 | Monitores, variables condición, procedures y parámetros | [Monitores](./monitores) |
 | Procesos y familias de procesos | [Procesos](./procesos) |
 | `int`, `double`, `bool`, `text` y arreglos | [Tipos y arreglos](./tipos) |

@@ -1,11 +1,12 @@
 # Disposición de la pantalla
 
 La pantalla del simulador se divide en cinco zonas. La figura las muestra numeradas en el
-orden de la tabla, con el ejemplo Corralón pausado en el instante 14.
+orden de la tabla, con el ejemplo Problema completo: banco y escritorios pausado en el
+instante 14.
 
 <figure>
 
-![Pantalla del simulador con el ejemplo Corralón en pausa: barra arriba, editor a la izquierda, inspector a la derecha, línea de tiempo abajo a todo el ancho y barra de estado al pie, con las zonas numeradas del 1 al 5](/capturas/pantalla.png)
+![Pantalla del simulador con el ejemplo del banco en pausa: barra arriba, editor a la izquierda, inspector a la derecha, línea de tiempo abajo a todo el ancho y barra de estado al pie, con las zonas numeradas del 1 al 5](/capturas/pantalla.png)
 
 <figcaption>Zonas de la pantalla: 1, barra de controles; 2, editor; 3, inspector; 4, línea de tiempo; 5, barra de estado.</figcaption>
 </figure>

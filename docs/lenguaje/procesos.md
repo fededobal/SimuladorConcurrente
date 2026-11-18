@@ -11,6 +11,8 @@ process Cliente[i: 1..5] {   // familia: instancia Cliente[1] .. Cliente[5]
 ```
 
 - El iterador es de solo lectura dentro del cuerpo.
+- Los límites pueden usar una [constante](./constantes) del programa:
+  `process Cliente[id: 0..N-1]`, con `#define N 5` al principio.
 - Si `desde > hasta` no se instancia ningún proceso. Entre todas las familias y procesos
   sueltos, el programa admite hasta 5000 procesos.
 - En el cuerpo se ven las locales del proceso y el iterador. Los nombres de monitor solo

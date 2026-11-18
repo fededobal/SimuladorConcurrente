@@ -1,7 +1,7 @@
 
 # Conceptos previos de concurrencia
 
-Resumen de los conceptos de concurrencia, sincronización por variables compartidas, *locks* y barreras que la cátedra presenta en las teorías 1 y 2, sin semáforos. Es el contexto en el que aparecen los monitores; el simulador no implementa las construcciones de esta página (`co ... oc`, `< await >`, *spin locks*, barreras), que se incluyen solo como referencia.
+Resumen de los conceptos de concurrencia, sincronización por variables compartidas, *locks* y barreras que la cátedra presenta en las teorías 1 y 2, sin semáforos. Es el contexto en el que aparecen los monitores; el simulador no implementa las construcciones de esta página (`co ... oc`, `< await >`, *spin locks*, barreras), que se incluyen solo como referencia. Las teorías 1 y 2 no están en `docs/clases-materia/`, de modo que este resumen no se contrastó con ellas.
 
 ## 1. Introducción a la Concurrencia
 * **Concurrencia:** Capacidad de ejecutar múltiples actividades en paralelo o simultáneamente. No está restringido a una arquitectura de hardware particular ni a un número determinado de procesadores.
@@ -15,7 +15,7 @@ Resumen de los conceptos de concurrencia, sincronización por variables comparti
   * **Hilos:** Comparten el mismo espacio de direcciones y recursos dentro de un proceso.
 * **Comportamientos de los procesos:**
   * **Independientes:** Raros y poco interesantes.
-  * **Competencia:** Compiten por recursos (típico en SO). Pueden generar *Deadlocks* (abrazo mortal) o *Inanición* (starvation).
+  * **Competencia:** Compiten por recursos (típico en SO). Pueden generar *deadlock* o inanición (*starvation*).
   * **Cooperación:** Se combinan para resolver una tarea. Requieren sincronización y comunicación.
 
 ## 2. Comunicación y Sincronización
@@ -54,7 +54,7 @@ Para proteger variables compartidas, se requieren protocolos de entrada y salida
 3. **Ausencia de Demora Innecesaria:** Un proceso no debe ser impedido de entrar si no hay nadie más en la SC.
 4. **Eventual Entrada (No inanición):** Un proceso que intenta entrar eventualmente lo hará (depende del scheduler).
 
-### Soluciones por Busy Waiting (Espera Activa)
+### Soluciones por *busy waiting*
 * **Spin Locks:** Uso de instrucciones atómicas de hardware como `Test-and-Set (TS)` o `Fetch-and-Add (FA)`.
   * *Spin Lock Simple:* `while (TS(lock)) skip;` (Causa alta contención de memoria).
   * *Test-and-Test-and-Set:* `while (lock) skip; while (TS(lock)) while (lock) skip;` (Reduce la contención leyendo desde caché hasta que lock pase a false).

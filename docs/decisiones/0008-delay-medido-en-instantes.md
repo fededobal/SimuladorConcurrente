@@ -39,7 +39,7 @@ listo en el instante `n + 1` contado desde el `delay`. `delay(0)` equivale a un 
 valor sigue siendo un `int` de 0 a 3600.
 
 Si ningún proceso está listo pero alguno está demorado, el instante pasa igual, sin eventos.
-El interbloqueo se sigue informando solo cuando no hay procesos listos ni demorados. Un
+El deadlock se sigue informando solo cuando no hay procesos listos ni demorados. Un
 proceso demorado dentro de un procedure conserva el monitor, como antes.
 
 El núcleo deja de recibir la hora: `step` vuelve a tener dos parámetros y el reloj de la

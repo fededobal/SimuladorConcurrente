@@ -65,6 +65,7 @@ Línea 3: Declarar la cola con los tipos de sus componentes: Cola p(tipo, ...)
 Línea 5: La cola 'p' guarda (int, text): este pop tiene 1 componente y se esperaban 2
 Línea 6: La componente 2 de 'p' es text y se está encolando un bool
 Línea 7: La componente 1 de 'p' es int y no se puede guardar en 'b', que es bool
+Línea 8: 'desc' indica el orden de una ColaOrdenada; 'p' es una Cola, que no ordena: sale primero lo que se encoló primero
 ```
 
 - `pop` sobre cola vacía es error de ejecución.
@@ -84,15 +85,39 @@ push(c, 2, "segundo");
 pop(c, p, d);          // p=1, d="primero"
 ```
 
+### Orden: `asc` y `desc`
+
+El orden se elige al declarar la cola, después de los tipos. Sin ninguna de las dos palabras,
+la cola ordena de menor a mayor.
+
+```monitores
+ColaOrdenada espera(int, int);        // de menor a mayor
+ColaOrdenada espera(int, int) asc;    // lo mismo, dicho explícitamente
+ColaOrdenada fila(int, int) desc;     // de mayor a menor
+```
+
+| Declaración | Sale primero | Uso en las clases |
+|---|---|---|
+| Sin modificador o `asc` | El elemento de clave menor | El pedido más corto (SJN), la hora de despertar más próxima |
+| `desc` | El elemento de clave mayor | La persona de más edad (ejercicio 3 de la Explicación 3) |
+
+Con las edades 30, 70 y 45 encoladas en una cola `desc`, el primer `pop` devuelve 70. `push`
+y `pop` se escriben igual en los dos casos. En una `Cola` no se admite ninguna de las dos
+palabras, porque no ordena.
+
 - Ordena por la primera componente (`x` en `push(c, x, y, z)`). Las demás viajan con ella
   como un registro y salen por los destinos restantes del `pop`.
 - A igual clave, sale primero el que se encoló antes (inserción estable, FIFO entre
-  iguales). Encolar `(1,"a") (1,"b") (0,"cero") (1,"c")` desencola `cero a b c`.
+  iguales), también con `desc`. Encolar `(1,"a") (1,"b") (0,"cero") (1,"c")` desencola
+  `cero a b c`.
 - Con una sola componente, ordena por el valor: `5 1 4 1 3` sale `1 1 3 4 5`.
 - La clave, la primera componente de la declaración, tiene que ser `int`, `double` o
   `text`: se compara como número o en orden alfabético. Declararla `bool` es error de
   compilación.
 - `Cola` sigue siendo FIFO pura: el tipo de la variable es lo único que cambia.
 
-El programa de ejemplo [Guardia](/referencia/ejemplos#guardia-colaordenada-con-tuplas) usa
-una `ColaOrdenada` de tuplas (gravedad, id).
+El programa de ejemplo
+[ColaOrdenada: primero el más corto](/referencia/ejemplos#colaordenada-primero-el-mas-corto)
+usa una `ColaOrdenada` de tuplas (páginas, id), y
+[Prioridad: ColaOrdenada de mayor a menor](/referencia/ejemplos#prioridad-colaordenada-de-mayor-a-menor),
+una declarada `desc`.

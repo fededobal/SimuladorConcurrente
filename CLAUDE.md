@@ -58,12 +58,23 @@ frontend/docs/.vitepress/  guía: guia.ts (capítulos), markdown.ts, tema y comp
 
 ## Semántica
 
-Fuente de verdad: la teoría de la cátedra en `docs/monitores/` (sitio VitePress; los `.md` de `docs/` son sus fuentes). Modelo, invariantes y
-casos canónicos: skill `semantica-concurrencia`.
-Decisiones vigentes: *signal and continue* en monitores; un instante puede avanzar varios
-procesos (`ADVANCE_PROBABILITY`); no hay variables globales; al liberarse un monitor entra uno de
-la cola al azar (ADR 0006); llamadas cerradas entre monitores (ADR 0007); `delay` se mide en instantes (ADR 0008); tipos controlados al compilar (solo `int`→`double` y número→`text`); el azar
-sale de `vm/SeededRandom` para que la JVM y el navegador coincidan.
+Fuente de verdad: el material de la cátedra en `docs/clases-materia/` (Teoría 4, Clase 4 y
+Explicación 3 de monitores, en PDF). Nada del simulador ni de su documentación lo
+contradice, y se usan sus términos: se dice *deadlock* (no «interbloqueo»), *busy waiting*,
+*passing the condition*, variables condición privadas, y un proceso en una `cond` está
+«dormido». La descripción vigente del simulador es la guía (`docs/introduccion`, `lenguaje`,
+`ejecucion`, `interfaz`, `operacion`, `problemas`, `referencia`) y la especificación;
+`docs/monitores/` es un resumen anterior de la teoría, subordinado a los PDF. Modelo,
+invariantes y casos canónicos: skill `semantica-concurrencia`.
+Decisiones vigentes: *signal and continue* en monitores; la espera se puede escribir con
+`while` o con `if` (el `if` falla a propósito cuando otro se adelanta al despertado); un
+instante puede avanzar varios procesos (`ADVANCE_PROBABILITY`); no hay variables globales,
+y las cantidades como `N` son constantes del compilador (`#define N 5`, ADR 0009); al
+liberarse un monitor entra uno de la cola al azar (ADR 0006); llamadas cerradas entre
+monitores (ADR 0007); `delay` se mide en instantes (ADR 0008); una `ColaOrdenada` ordena de
+menor a mayor o, con `desc`, de mayor a menor (ADR 0010); tipos controlados al compilar
+(solo `int`→`double` y número→`text`); el azar sale de `vm/SeededRandom` para que la JVM y
+el navegador coincidan.
 
 ## Skills (`.claude/skills/`)
 
@@ -81,6 +92,7 @@ sale de `vm/SeededRandom` para que la JVM y el navegador coincidan.
 
 - Cambio de más de un archivo: plan corto primero, esperar OK.
 - Mostrar diff/resumen antes de commitear; nunca `git push` sin pedido.
-- Si un pedido contradice la teoría de la cátedra o estas reglas, decirlo antes de hacerlo.
+- Si un pedido contradice el material de la cátedra (`docs/clases-materia/`) o estas reglas,
+  decirlo antes de hacerlo.
 - Informe de revisión (bugs B1–B6, ya corregidos, y propuestas): `docs/informe-revision.md`.
   Decisiones vigentes: `docs/decisiones/`.

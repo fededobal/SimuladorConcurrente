@@ -5,7 +5,7 @@ simulación.
 
 <figure>
 
-![Barra de controles: marca, menú del programa Productor/Consumidor, grupo con Ejecutar, Paso, Detener y Repetir, menús Normal y Al azar, estado "En pausa" con el instante 14, enlace para compartir, Guía y cambio de tema](/capturas/barra.png)
+![Barra de controles: marca, menú del programa Variables condición: wait y signal, grupo con Ejecutar, Paso, Detener y Repetir, menús Normal y Al azar, estado "En pausa" con el instante 14, enlace para compartir, Guía y cambio de tema](/capturas/barra.png)
 
 <figcaption>Barra de controles con la simulación en pausa en el instante 14.</figcaption>
 </figure>

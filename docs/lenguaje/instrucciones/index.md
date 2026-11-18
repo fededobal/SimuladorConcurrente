@@ -6,11 +6,11 @@ Cada sentencia ocupa un paso del proceso que la ejecuta. Las guardas de `if`, `w
 
 | Instrucción | Formas aceptadas | Dónde |
 |---|---|---|
-| [Declaración](/lenguaje/tipos#declaraciones) | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c(int);` · `text lista, comp;` | Monitor, procedure, proceso |
+| [Declaración](/lenguaje/tipos#declaraciones) | `int x;` · `int x = 0;` · `int a[3];` · `int a[3] = ([3] 0);` · `Cola c(int);` · `ColaOrdenada f(int, int) desc;` · `text lista, comp;` | Monitor, procedure, proceso |
 | [Asignación](./asignacion) | `x = expr;` · `a[i] = expr;` · `x++;` · `x--;` | Todas |
 | [Intercambio](./intercambio) | `x :=: y;` · `a[i] :=: a[j];` | Todas |
 | [Llamada a monitor](./llamada) | `M.op();` · `M.op(a, b);` · `Escritorio[i].op(a);` | Procedure, proceso |
-| [`if`](./if) | `if (e) S` · `if (e) S else S` | Todas |
+| [`if`](./if) | `if (e) S` · `if (e) S else S` (el `;` antes del `else` es opcional) | Todas |
 | [`while`](./while) | `while (e) S` | Todas |
 | [`for`](./for) | Cinco formas | Todas |
 | [`skip`](./skip) | `skip;` | Todas |

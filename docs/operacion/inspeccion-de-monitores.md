@@ -35,6 +35,6 @@ despertado, y los valores de las variables coinciden con las últimas asignacion
 - La cola de entrada se muestra en orden de llegada, pero al liberarse el monitor entra un
   proceso elegido al azar ([Acceso al monitor](/ejecucion/acceso-al-monitor)).
 - El encabezado de la tarjeta aclara cuando el proceso que ocupa el monitor no está
-  ejecutando: está en `delay` o esperando dentro de otro monitor.
+  ejecutando: está en `delay`, dormido en otro monitor o compitiendo por entrar a otro.
 - Las listas largas muestran seis elementos y un botón para ver el resto.
 - La pestaña **Procesos** muestra, para cada proceso, sus variables locales.

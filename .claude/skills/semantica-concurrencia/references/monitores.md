@@ -1,7 +1,8 @@
 # Monitores: modelo, invariantes y casos canónicos
 
-Fuente de verdad: `docs/monitores/` (notación y teoría de la cátedra). Si este archivo y
-ese documento difieren, gana el documento y hay que actualizar este archivo.
+Fuente de verdad: el material de la cátedra en `docs/clases-materia/` (Teoría 4, Clase 4 y
+Explicación 3). Si este archivo y esos documentos difieren, ganan los documentos y hay que
+actualizar este archivo.
 
 ## Modelo
 
@@ -43,7 +44,7 @@ ese documento difieren, gana el documento y hay que actualizar este archivo.
 4. Con la misma semilla y la misma política, la ejecución es idéntica, en la JVM y en el
    navegador (`AzarTest` y el smoke fijan una traza). La interfaz no expone la semilla: cada
    ejecución usa una nueva y la reproducción se hace desde el núcleo.
-5. `DEADLOCK` significa interbloqueo del programa del alumno, nunca un error interno del
+5. `DEADLOCK` significa deadlock del programa del alumno, nunca un error interno del
    simulador. Un error de ejecución se informa como `ERROR` con línea.
 6. El log y la salida no crecen sin tope en ejecuciones largas (`MAX_ENTRIES`, `MAX_LINES`);
    los eventos no guardan el estado completo.
@@ -65,7 +66,8 @@ Para cambios al scheduler, probá además con `RANDOM` en semillas 0..24 y con
 1. Reproducí con la misma semilla.
 2. Recorré el log por instantes y señalá el evento clave (`SIGNAL` a cola vacía,
    `WAIT` con `if` en lugar de `while`, dos procesos compitiendo en la cola de entrada).
-3. Relacionalo con la teoría (`docs/monitores/variables-condicion.md`, signal and continue: por qué la
-   condición se re-evalúa con `while`).
+3. Relacionalo con la teoría (`docs/clases-materia/`; en la guía,
+   `docs/ejecucion/variables-condicion.md`: signal and continue, y cuándo la espera con `if`
+   falla y con `while` no).
 4. Si el comportamiento contradice la teoría, es un bug del simulador: escribí el test que
    lo muestra antes de arreglarlo.

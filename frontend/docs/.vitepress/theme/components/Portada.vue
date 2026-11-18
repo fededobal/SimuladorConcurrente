@@ -13,7 +13,7 @@ const RECORRIDO = [
   { enlace: '/introduccion/primer-programa', nota: 'ejecutarlo y seguirlo' },
   { enlace: '/ejecucion/instantes-y-turnos', nota: 'por qué cada corrida cambia' },
   { enlace: '/ejecucion/variables-condicion', nota: 'wait y signal' },
-  { enlace: '/operacion/interbloqueo', nota: 'qué hacer cuando nadie avanza' },
+  { enlace: '/operacion/deadlock', nota: 'qué hacer cuando nadie avanza' },
 ];
 const recorrido = computed(() => RECORRIDO
   .map((r) => ({ ...r, pagina: guia.value.paginas[r.enlace] }))
@@ -22,7 +22,7 @@ const recorrido = computed(() => RECORRIDO
 /** Terminos del glosario que mas se consultan, con la letra bajo la que estan. */
 const TERMINOS = [
   ['Monitor', 'm'], ['Variable condición', 'v'], ['Cola de entrada', 'c'],
-  ['Signal and continue', 's'], ['Interbloqueo', 'i'], ['Entrelazado', 'e'],
+  ['Signal and continue', 's'], ['Deadlock', 'd'], ['Entrelazado', 'e'],
   ['Instante', 'i'], ['Familia de procesos', 'f'],
 ];
 

@@ -3,7 +3,7 @@ relacionadas:
   - /lenguaje/instrucciones/signal
   - /lenguaje/instrucciones/signal-all
   - /ejecucion/variables-condicion
-  - /operacion/interbloqueo
+  - /operacion/deadlock
 ---
 
 # `wait`
@@ -41,8 +41,9 @@ condición; en la línea de tiempo, su tramo pasa a «wait». Ver
 
 ::: warning Atención
 Cuando el proceso despierta, la condición que esperaba puede haber dejado de cumplirse: otro
-proceso pudo entrar antes. Por eso se vuelve a verificar con `while` y no con `if`
-([Comparación de ejecuciones](/operacion/comparar-ejecuciones)).
+proceso pudo entrar antes. Con `while` el proceso la vuelve a chequear; con `if` sigue sin
+chequearla, y el programa falla en las ejecuciones en que otro se adelantó
+([Variables condición](/ejecucion/variables-condicion#espera-con-while-o-con-if)).
 :::
 
 ## Errores
@@ -54,7 +55,7 @@ proceso pudo entrar antes. Por eso se vuelve a verificar con `while` y no con `i
 | Variable no declarada | `Variable condición no declarada: c` |
 | Arreglo sin índice | `La cond 'c' es un arreglo: falta el índice` |
 | Índice fuera de rango (ejecución) | `Índice 5 fuera de rango para la cond 'c' (tamaño 2)` |
-| Con prioridad: `wait(cv, rank)` | `Se esperaba ')' (se encontró ',')` |
+| Con prioridad: `wait(cv, rank)` | `En la práctica no se permite el wait con prioridad (wait(cv, rank)): se escribe wait(turno)` |
 
 ## Ejemplo
 

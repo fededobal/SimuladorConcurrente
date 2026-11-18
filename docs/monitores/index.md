@@ -4,6 +4,10 @@ Esta sección resume los conceptos de monitores tal como los presenta la cátedr
 Programación Concurrente (Teoría 4) y aclara, en cada punto, qué implementa el simulador y
 qué queda afuera de esta versión.
 
+La fuente de verdad es el material de la cátedra, en `docs/clases-materia/`: ante una
+diferencia entre este resumen y esos documentos, valen los documentos. La descripción vigente
+del simulador está en la guía (`docs/lenguaje/`, `docs/ejecucion/`) y en la especificación.
+
 Un **monitor** es un módulo de programa con más estructura que los semáforos: un mecanismo
 de abstracción de datos que encapsula la representación de un recurso compartido y ofrece
 un conjunto de operaciones, los *procedures*, que son el único medio para manipularlo.
@@ -68,9 +72,10 @@ monitor NombreMonitor {
   `TOTAL.verificar(c)` deja el resultado en la variable `c` del llamador.
 - Las variables permanentes solo se ven dentro del monitor. Las variables locales de un
   `process` no son visibles dentro de un procedure.
-- Todo el estado compartido del programa vive dentro de algún monitor. No hay variables ni
-  constantes globales: el tamaño de un arreglo o el rango de una familia de procesos se
-  escribe con un número o con una expresión que no depende de variables compartidas.
+- Todo el estado compartido del programa vive dentro de algún monitor. No hay variables
+  globales: el tamaño de un arreglo o el rango de una familia de procesos se escribe con un
+  número o con una constante del programa (`#define N 5`), que el compilador reemplaza por
+  su valor.
 
 La descripción completa de lo que se puede escribir está en la sección
 [Lenguaje](/lenguaje/).

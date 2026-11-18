@@ -31,9 +31,9 @@ con los identificadores y una variable condición por proceso, por ejemplo.
 Un procedure puede llamar a un procedure de otro monitor. Mientras esa llamada dura, el
 proceso conserva el primer monitor, aunque haga `wait` en el segundo: nadie más puede entrar
 al primero. En la tarjeta del primer monitor, el encabezado aclara que el proceso que lo
-ocupa está esperando en el otro.
+ocupa está demorado en el otro.
 
-Esta regla puede producir un interbloqueo: si el proceso espera en el segundo monitor algo
+Esta regla puede producir un deadlock: si el proceso espera en el segundo monitor algo
 que solo puede hacer otro proceso que necesita entrar al primero, ninguno avanza. El
 simulador lo informa con los monitores que retiene cada proceso
 ([El programa se detiene](/problemas/el-programa-se-detiene)).

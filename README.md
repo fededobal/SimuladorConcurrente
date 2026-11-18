@@ -12,9 +12,10 @@ Todo corre en el navegador.
 La documentación es una guía de referencia y operación que se
 publica junto con el simulador en `/docs/`: lenguaje, modelo de ejecución, interfaz,
 procedimientos paso a paso y solución de problemas. Las fuentes son los Markdown de
-`docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`). La teoría de
-monitores (`docs/monitores/`), la especificación y las decisiones de diseño quedan en el
-repositorio y no se publican.
+`docs/`; el sitio se genera con VitePress (`cd frontend && npm run docs:dev`). El material de
+la cátedra (`docs/clases-materia/`), que es la fuente de verdad de la notación y de la
+semántica, la especificación y las decisiones de diseño quedan en el repositorio y no se
+publican.
 
 ## Qué permite hacer
 
@@ -34,19 +35,24 @@ repositorio y no se publican.
   locales, y lo que escriben con `write(...)`.
 - Recorrer la ejecución en una línea de tiempo, con una fila por proceso y un carril por
   monitor.
-- Entender un interbloqueo (*deadlock*): un cartel dice qué espera cada proceso y por qué
+- Entender un deadlock: un cartel dice qué espera cada proceso y por qué
   nadie puede despertarlo.
 - Leer los errores de compilación y de ejecución en español, con la línea donde ocurrieron
   (marcada en rojo). El compilador también controla los tipos y el alcance de los nombres.
-- Abrir programas de ejemplo (buffer, exclusión mutua, `signal_all`, colas, interbloqueo,
-  entre otros), también desde la guía.
+- Abrir programas de ejemplo, uno por tema (exclusión mutua implícita, variables condición,
+  código de inicialización, colas, vector de `cond`, vector de monitores, *deadlock*, entre
+  otros), también desde la guía.
 
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y
-`signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N]`), parámetros `in` y `out`, `if`, `while`, `for`, el intercambio `x :=: y`, los tipos `int`,
-`double`, `bool` y `text`, arreglos, `Cola` y `ColaOrdenada` declaradas con los tipos de sus
-componentes (`Cola c(int, text)`). No hay variables globales. Las palabras reservadas no
-distinguen mayúsculas (`OR`, `OUT`, `colaOrdenada`); los nombres del programa sí.
+`signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N-1]`), parámetros
+`in` y `out`, `if`, `while`, `for`, el intercambio `x :=: y`, los tipos `int`, `double`,
+`bool` y `text`, arreglos, `Cola` y `ColaOrdenada` declaradas con los tipos de sus
+componentes (`Cola c(int, text)`) y, la ordenada, con su orden
+(`ColaOrdenada fila(int, int) desc`). Las cantidades fijas de los enunciados, como `N`, se
+declaran como constantes del programa (`#define N 5`); no hay variables globales. Las
+palabras reservadas no distinguen mayúsculas (`OR`, `OUT`, `colaOrdenada`); los nombres del
+programa sí.
 
 ```c
 monitor Buffer {
@@ -76,7 +82,7 @@ process Consumidor { int x; for (1..5) { Buffer.retirar(x); write("recibí ", x)
 - [Lenguaje](docs/lenguaje/index.md): qué se puede escribir, con una página por instrucción y ejemplos.
 - [Solución de problemas](docs/problemas/errores-de-compilacion.md): mensajes de error y qué hacer con cada uno.
 - [Especificación](docs/lenguaje/especificacion.md): gramática (EBNF) y semántica.
-- [Monitores](docs/monitores/index.md): la teoría de la cátedra y cómo la implementa el simulador.
+- [Material de la cátedra](docs/clases-materia/): la Teoría 4 y la Explicación 3 de monitores, fuente de verdad de la notación y de la semántica.
 - [Decisiones de diseño](docs/decisiones/): ADR del proyecto.
 
 ## Cómo correrlo

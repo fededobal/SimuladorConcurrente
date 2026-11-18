@@ -8,7 +8,7 @@ El valor asociado a `cv` es una **cola de procesos demorados**, no visible direc
 para el programador. Operaciones:
 
 - **`wait(cv)`**: el proceso se demora al final de la cola de `cv` y **libera el acceso
-  exclusivo al monitor**. Siempre se bloquea, a diferencia del `P` de un semáforo.
+  exclusivo al monitor**. Siempre se duerme, a diferencia del `P` de un semáforo.
 - **`signal(cv)`**: despierta al proceso que está al frente de la cola de `cv`, si hay
   alguno, y lo saca de ella. Si la cola está vacía, `signal` **no tiene efecto**, a
   diferencia del `V` de un semáforo, que incrementa el contador.
@@ -25,15 +25,23 @@ Es la única disciplina que usa la cátedra y la única que implementa el simula
   en la instrucción que lógicamente sigue al `wait`.
 
 Consecuencia práctica: entre el `signal` y el momento en que el proceso despertado
-realmente reanuda, otros procesos pudieron entrar al monitor y cambiar el estado. Por eso
-la condición **debe re-evaluarse en un `while`**, no en un `if`:
+realmente reanuda, otros procesos pudieron entrar al monitor y cambiar el estado. Si eso
+puede ocurrir, la condición se vuelve a chequear con un `while`; la teoría lo muestra con el
+buffer limitado ("al continuar la ejecución después de ser despertados podría no darse la
+condición"):
 
 ```monitores
 procedure retirar(...) {
-    while (cantidad == 0) wait(not_vacio);   // while, no if
+    while (cantidad == 0) wait(not_vacio);
     ...
 }
 ```
+
+Un `if` es correcto cuando nadie puede adelantarse al despertado (el buffer de un dato con
+un proceso de cada lado) o cuando se hace *passing the condition*: "wait no se pone en un
+loop pues la decisión de cuándo puede continuar un proceso la hace el proceso que libera el
+recurso". El simulador acepta las dos formas, para que se pueda comprobar cuándo falla la
+espera con `if`.
 
 ::: warning No implementado
 *Signal and wait* (el que señaliza cede el monitor y el despertado entra de inmediato).
@@ -50,9 +58,9 @@ variable condición.
 3. **Ejecutando dentro del monitor**: tiene el acceso exclusivo.
 
 El panel Monitores del simulador dibuja cada monitor con estas tres zonas, rotuladas
-Compitiendo, En wait y En monitor, como en la teoría (Teoría 4, diapositivas 12 a 19). Los
+Compiten, En wait y Adentro, como en la teoría (Teoría 4, diapositivas 12 a 19). Los
 procesos son puntos de su color y se resalta la flecha que se recorrió en el último
 instante (Call, entra, wait, signal o Return). Debajo del dibujo se listan los procesos de
 cada zona; los que están en wait, agrupados por variable condición y en el orden de su
 cola. Cómo leer ese panel y la línea de tiempo se explica en la sección
-[Simulador](/simulador/).
+[Interfaz](/interfaz/).

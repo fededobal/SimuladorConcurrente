@@ -46,6 +46,7 @@ En una declaración con varios nombres, el valor inicial es solo del nombre que 
 int a[3];                 // los 3 en 0
 int b[3] = ([3] 0);       // forma explícita de la cátedra
 int c[n];                 // el tamaño es una expresión int
+text res[N];              // o una constante del programa (#define N 5)
 ```
 
 Índice base 0: `a[0]`, `a[(i + 1) mod 3]`. Un índice fuera de rango es error de ejecución

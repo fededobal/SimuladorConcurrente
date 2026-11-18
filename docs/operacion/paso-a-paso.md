@@ -8,7 +8,7 @@ produce en los procesos y en los monitores.
 ## Procedimiento
 
 1. Cargar el programa en el editor. Para practicar, abrir el menú del programa y elegir
-   **Productor/Consumidor** en **Ejemplos**.
+   **Variables condición: wait y signal** en **Ejemplos**.
 2. Elegir **En ronda** en **Turnos**. Con esta política avanzan todos los procesos que
    pueden hacerlo, en un orden previsible.
 3. Presionar **Paso** (o la tecla F10). El programa se compila y avanza un instante.
@@ -39,9 +39,9 @@ semilla.
 ## Resultado esperado
 
 En cada instante, la tarjeta de la línea de tiempo, la etiqueta del editor y el dibujo del
-monitor coinciden. Por ejemplo, cuando el consumidor ejecuta `wait(ocupado)`, la tarjeta lo
-indica, la etiqueta del consumidor pasa a violeta con el texto «dormido en wait(ocupado)» y
-su nombre aparece en la zona **2 · En wait** del monitor `Buffer`.
+monitor coinciden. Por ejemplo, cuando el proceso `B` ejecuta `wait(C)`, la tarjeta lo
+indica, la etiqueta de `B` pasa a violeta con el texto «dormido en wait(C)» y su nombre
+aparece en la zona **2 · En wait** del monitor `Buffer`.
 
 ## Observaciones
 

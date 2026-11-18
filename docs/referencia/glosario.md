@@ -10,8 +10,29 @@ en el simulador y qué páginas lo amplían.
 </div>
 
 <nav class="g-letras" aria-label="Índice alfabético">
-<span>A</span><span>B</span><a href="#c">C</a><span>D</span><a href="#e">E</a><a href="#f">F</a><span>G</span><span>H</span><a href="#i">I</a><span>J</span><span>K</span><a href="#l">L</a><a href="#m">M</a><span>N</span><span>O</span><a href="#p">P</a><span>Q</span><span>R</span><a href="#s">S</a><a href="#t">T</a><span>U</span><a href="#v">V</a><span>W</span><span>X</span><span>Y</span><span>Z</span>
+<span>A</span><a href="#b">B</a><a href="#c">C</a><a href="#d">D</a><a href="#e">E</a><a href="#f">F</a><span>G</span><span>H</span><a href="#i">I</a><span>J</span><span>K</span><a href="#l">L</a><a href="#m">M</a><span>N</span><span>O</span><a href="#p">P</a><span>Q</span><span>R</span><a href="#s">S</a><a href="#t">T</a><span>U</span><a href="#v">V</a><span>W</span><span>X</span><span>Y</span><span>Z</span>
 </nav>
+
+## B
+
+<div class="g-termino g-ejecucion">
+
+<span class="g-cat">Ejecución</span>
+
+### *Busy waiting*
+
+Espera en la que el proceso comprueba una condición una y otra vez en lugar de dormirse:
+llama al monitor, no puede hacer la operación, sale y vuelve a llamar. Se evita con variables
+condición, que duermen al proceso y liberan el monitor mientras espera.
+
+**En el simulador.** El ejemplo Busy waiting muestra las entradas y salidas repetidas en la
+línea de tiempo. Un ciclo sin sentencias que ocupen un paso registra el evento
+`busy waiting (bucle sin avanzar)`. {.g-sim}
+
+Véase [Instantes y turnos](/ejecucion/instantes-y-turnos) y
+[Programas de ejemplo](/referencia/ejemplos#busy-waiting). {.g-vease}
+
+</div>
 
 ## C
 
@@ -55,8 +76,8 @@ Véase [Acceso al monitor](/ejecucion/acceso-al-monitor). {.g-vease}
 
 ### `ColaOrdenada`
 
-Cola cuyo `push` inserta cada elemento ordenado de menor a mayor por su primera componente.
-A igual clave, sale primero el que se encoló antes.
+Cola cuyo `push` inserta cada elemento ordenado por su primera componente: de menor a mayor
+o, si se declara `desc`, de mayor a menor. A igual clave, sale primero el que se encoló antes.
 
 **En el simulador.** Casilleros con el frente a la izquierda, entre las variables del
 monitor. {.g-sim}
@@ -65,20 +86,38 @@ Véase [Colas](/lenguaje/colas). {.g-vease}
 
 </div>
 
-<div class="g-termino g-sincronizacion">
+<div class="g-termino g-modelo">
 
-<span class="g-cat">Sincronización</span>
+<span class="g-cat">Modelo</span>
 
-### Condición privada
+### Constante
 
-Variable condición que usa un solo proceso, habitualmente como elemento de un arreglo
-(`cond espera[5];`). Permite despertar a un proceso determinado y, junto con una cola de
-identificadores, atender en un orden establecido.
+Cantidad fija del programa, como la `N` de los enunciados, declarada con `#define N 5` al
+principio. No es una variable: el compilador pone el número en cada lugar donde aparece el
+nombre.
 
-**En el simulador.** Una fila `En wait(espera[i])` por cada elemento con un proceso
-dormido. {.g-sim}
+**En el simulador.** Menú Constantes del encabezado del editor; en el código, el nombre se
+colorea como un número. {.g-sim}
 
-Véase [Variables condición](/ejecucion/variables-condicion). {.g-vease}
+Véase [Constantes](/lenguaje/constantes). {.g-vease}
+
+</div>
+
+## D
+
+<div class="g-termino g-ejecucion">
+
+<span class="g-cat">Ejecución</span>
+
+### Deadlock
+
+Situación en la que ningún proceso puede avanzar y no todos terminaron: cada uno espera en
+una cola de entrada o en una variable condición.
+
+**En el simulador.** La barra indica «Deadlock» y un cartel sobre el editor dice dónde
+espera cada proceso, qué monitores retiene y por qué nadie puede despertarlo. {.g-sim}
+
+Véase [Diagnóstico de un deadlock](/operacion/deadlock). {.g-vease}
 
 </div>
 
@@ -104,26 +143,10 @@ Véase [Comparación de ejecuciones](/operacion/comparar-ejecuciones). {.g-vease
 
 <span class="g-cat">Ejecución</span>
 
-### Espera activa
-
-Ciclo que comprueba una condición repetidamente sin dormir al proceso. Dentro de un monitor
-se evita con variables condición, que liberan el monitor mientras se espera.
-
-**En el simulador.** Un ciclo sin sentencias que ocupen un paso registra el evento
-`espera activa (bucle sin avanzar)`. {.g-sim}
-
-Véase [Instantes y turnos](/ejecucion/instantes-y-turnos). {.g-vease}
-
-</div>
-
-<div class="g-termino g-ejecucion">
-
-<span class="g-cat">Ejecución</span>
-
 ### Estado
 
 Situación de un proceso en un instante: ejecutando en el proceso o en el monitor,
-compitiendo, esperando, en `delay` o sin turno.
+compitiendo, dormido en una variable condición, en `delay` o sin turno.
 
 **En el simulador.** El color y el ícono de la etiqueta del editor y el aspecto de cada
 tramo de la línea de tiempo. {.g-sim}
@@ -184,22 +207,6 @@ Véase [Instantes y turnos](/ejecucion/instantes-y-turnos). {.g-vease}
 
 </div>
 
-<div class="g-termino g-ejecucion">
-
-<span class="g-cat">Ejecución</span>
-
-### Interbloqueo (*deadlock*)
-
-Situación en la que ningún proceso puede avanzar y no todos terminaron: cada uno espera en
-una cola de entrada o en una variable condición.
-
-**En el simulador.** La barra indica «Interbloqueo» y un cartel sobre el editor dice dónde
-espera cada proceso, qué monitores retiene y por qué nadie puede despertarlo. {.g-sim}
-
-Véase [Diagnóstico de un interbloqueo](/operacion/interbloqueo). {.g-vease}
-
-</div>
-
 ## L
 
 <div class="g-termino g-sincronizacion">
@@ -212,7 +219,7 @@ Llamada desde un procedure a otro monitor durante la cual el proceso conserva el
 monitor, aunque haga `wait` en el segundo.
 
 **En el simulador.** La tarjeta del primer monitor indica que el proceso que lo ocupa está
-esperando en el otro. {.g-sim}
+demorado en el otro. {.g-sim}
 
 Véase [Acceso al monitor](/ejecucion/acceso-al-monitor#llamadas-a-otro-monitor). {.g-vease}
 
@@ -259,7 +266,7 @@ Véase [Monitores](/lenguaje/monitores#procedures). {.g-vease}
 
 <span class="g-cat">Sincronización</span>
 
-### Pasaje de la condición
+### *Passing the condition*
 
 Técnica en la que quien despierta a un proceso deja el estado resuelto para él (por
 ejemplo, no marca el recurso como libre), de modo que el despertado no necesita volver a
@@ -313,8 +320,9 @@ Véase [Procesos](/lenguaje/procesos). {.g-vease}
 ### *Signal and continue*
 
 Disciplina de señalización de la cátedra: quien ejecuta `signal` sigue dentro del monitor
-y el despertado pasa a competir por volver a entrar. Por eso la espera se escribe con
-`while`.
+y el despertado pasa a competir por volver a entrar. Cuando lo logra, la condición que
+esperaba pudo haber cambiado: con `while` la vuelve a chequear; con `if` sigue sin
+chequearla, lo que solo es correcto si nadie pudo adelantársele.
 
 **En el simulador.** Tras un `signal`, el despertado pasa de la zona «2 · En wait» a la zona
 «1 · Compiten», y el que señalizó sigue en «3 · Adentro». {.g-sim}
@@ -371,5 +379,22 @@ desde los procedures de ese monitor.
 proceso que la escribió. {.g-sim}
 
 Véase [Panel de monitores](/interfaz/monitores#variables-del-monitor). {.g-vease}
+
+</div>
+
+<div class="g-termino g-sincronizacion">
+
+<span class="g-cat">Sincronización</span>
+
+### Variables condición privadas
+
+Variables condición que usa un solo proceso cada una, declaradas como un arreglo
+(`cond espera[N];`). Permiten despertar a un proceso en particular y, junto con una cola de
+identificadores, atender en un orden establecido.
+
+**En el simulador.** Una fila `En wait(espera[i])` por cada elemento con un proceso
+dormido. {.g-sim}
+
+Véase [Variables condición](/ejecucion/variables-condicion). {.g-vease}
 
 </div>
