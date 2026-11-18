@@ -73,9 +73,17 @@
 .bad-tone .statusText { color: var(--danger); }
 @keyframes pulso { 50% { opacity: 0.35; } }
 
-/* con poco ancho se va lo que no hace falta para operar */
+/* Con poco ancho se va, de a poco, lo que no hace falta para operar: asi la barra sigue en
+   un renglon en vez de mandar dos botones sueltos al de abajo. Lo que se esconde sigue en
+   el texto emergente y en el nombre accesible de cada boton. */
 @media (max-width: 1340px) {
   .brandName { display: none; }
+}
+@media (max-width: 1200px) {
+  .guideLabel, .run kbd { display: none; }
+}
+@media (max-width: 1080px) {
+  .statusLabel, .bar :global(.menu-valor) { display: none; }
 }
 @media (max-width: 760px) {
   .spacer { display: none; }

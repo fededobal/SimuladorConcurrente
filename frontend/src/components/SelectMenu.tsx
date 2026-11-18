@@ -30,7 +30,7 @@ export function SelectMenu<T extends string | number>({
   return (
     <Popover
       className="btn"
-      label={<>{icon}{current?.label ?? String(value)}<ChevronDown size={13} /></>}
+      label={<>{icon}<span className="menu-valor">{current?.label ?? String(value)}</span><ChevronDown size={13} /></>}
       ariaLabel={`${name}: ${current?.label ?? value}`}
       title={title}
     >

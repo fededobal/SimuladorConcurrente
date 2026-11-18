@@ -3,6 +3,9 @@
 .programa { max-width: 250px; font-weight: 600; }
 .programa svg { color: var(--dim); }
 .nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 1200px) {
+  .programa { max-width: 180px; }
+}
 
 .menu { width: 300px; }
 .menu :global(.menu-item) { white-space: normal; }

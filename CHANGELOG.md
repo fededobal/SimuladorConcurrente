@@ -135,6 +135,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Inspector: la tabla de variables ya no se sale de la tarjeta ni hace desplazar el panel de costado (un arreglo o una cola lleva sus celdas en un renglón propio), el panel no se puede angostar por debajo de 340 px y las pastillas no pasan a dos renglones. La barra superior se compacta de a poco en anchos medios en vez de mandar botones al renglón de abajo. (Federico Dobal, 2026-11-17)
 - Buscador de la guía: las teclas del atajo quedaban fuera del recuadro porque el texto no entraba en el ancho fijo; ahora el ancho sale del texto y el alto coincide con el del botón «Abrir el simulador». (Federico Dobal, 2026-11-17)
 - Botón para ampliar la línea de tiempo al costado del editor, a toda altura, que se había perdido en el rediseño de la pantalla; Escape o el mismo botón la devuelven a su lugar, y el inspector conserva su pestaña. (Federico Dobal, 2026-11-17)
 - Editor: el aviso que resume los renglones con procesos fuera de la vista decía «+1 renglones más»; ahora concuerda en singular. (Federico Dobal, 2026-11-17)

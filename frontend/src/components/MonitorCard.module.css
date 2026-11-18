@@ -2,6 +2,8 @@
    colas completas y la tabla de variables. */
 
 .card {
+  /* la tabla de variables se acomoda al ancho de la tarjeta (ver el final del archivo) */
+  container-type: inline-size;
   margin: 10px 12px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -15,18 +17,23 @@
   gap: 8px;
   padding: 10px 12px 2px;
 }
-.name { font: 700 14px/1.2 var(--mono); }
+.name { font: 700 14px/1.2 var(--mono); overflow-wrap: anywhere; }
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
   padding: 2px 9px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
   color: var(--dim);
+  white-space: nowrap;
 }
+/* un nombre largo se corta con puntos: la pastilla no pasa a dos renglones */
+.pillText { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .pillBusy { border-color: var(--accent-line); background: var(--accent-soft); color: var(--accent); }
 
 /* --- dibujo --- */
@@ -59,7 +66,9 @@
 
 .story {
   display: flex;
-  gap: 10px;
+  /* en una tarjeta angosta el texto baja debajo del rotulo en vez de quedar en una columna fina */
+  flex-wrap: wrap;
+  gap: 2px 10px;
   margin: 2px 12px 0;
   padding: 7px 10px;
   border-radius: 6px;
@@ -77,6 +86,7 @@
   color: var(--dimmer);
   white-space: nowrap;
 }
+.storyText { flex: 1 1 200px; min-width: 0; overflow-wrap: anywhere; }
 .story b { font-weight: 700; }
 
 /* --- secciones: colas y variables --- */
@@ -111,6 +121,7 @@
 }
 .more {
   padding: 1px 8px;
+  white-space: nowrap;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   background: var(--panel-soft);
@@ -119,6 +130,10 @@
 }
 .more:hover { color: var(--text); border-color: var(--dimmer); }
 
+/* Tabla de variables. Un arreglo o una cola lleva sus celdas en un renglon propio, a todo el
+   ancho, y ahi el tipo ocupa tambien la columna del valor: con cuatro columnas, un tipo como
+   ColaOrdenada(int, int) empujaba la tabla fuera de la tarjeta. */
+.varsWrap { overflow-x: auto; }
 .vars { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .vars th {
   padding: 2px 10px 4px 0;
@@ -127,10 +142,14 @@
   font-weight: 500;
   color: var(--dimmer);
   border-bottom: 1px solid var(--line);
+  white-space: nowrap;
 }
 .vars td { padding: 6px 10px 6px 0; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
 .vars tr:last-child td { border-bottom: 0; }
 .vars td:last-child, .vars th:last-child { padding-right: 0; }
+/* la fila de una estructura sigue en el renglon de sus celdas: sin raya entre las dos */
+.vars tr.hasCells td { padding-bottom: 2px; border-bottom: 0; }
+.vars td.cellsRow { padding-top: 2px; }
 .varName { font: 600 12.5px var(--mono); white-space: nowrap; }
 .varType {
   display: inline-block;
@@ -141,8 +160,11 @@
   font: 500 12px/18px var(--mono);
   white-space: nowrap;
 }
-.varValue { font-family: var(--mono); font-weight: 600; word-break: break-word; }
-.writer { display: inline-flex; align-items: center; gap: 6px; color: var(--dim); white-space: nowrap; }
+.varValue { font-family: var(--mono); font-weight: 600; overflow-wrap: anywhere; }
+/* quien y cuando: en un renglon si entra; si no, el instante baja */
+.writer { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 6px; color: var(--dim); }
+.writer span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.writerWhen { color: var(--dimmer); }
 
 /* un arreglo o una cola, como celdas */
 .cells { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 3px; }
@@ -169,3 +191,8 @@
 .cellsQueue .cell:last-child .cellValue { border-radius: 0 4px 4px 0; }
 .cellNote { font-size: 12px; line-height: 1.3; color: var(--dimmer); }
 .cellsMore { align-self: center; padding-left: 6px; }
+
+/* tarjeta angosta: un tipo largo se parte (en la coma, si se puede) antes que salirse */
+@container (max-width: 350px) {
+  .varType { white-space: normal; overflow-wrap: break-word; }
+}

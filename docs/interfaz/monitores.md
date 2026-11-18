@@ -54,7 +54,7 @@ más de seis variables condición, las vacías se pliegan en un botón que dice 
 | Columna | Qué muestra |
 |---|---|
 | Nombre y tipo | Como se declararon |
-| Valor | Un escalar, su valor; un arreglo, celdas con el índice debajo; una `Cola` o `ColaOrdenada`, casilleros con el frente a la izquierda y las tuplas entre paréntesis |
+| Valor | Un escalar, su valor en la misma fila. Un arreglo o una cola se dibuja en un renglón propio, debajo de su fila y a todo el ancho: el arreglo, como celdas con el índice debajo; una `Cola` o `ColaOrdenada`, como casilleros con el frente a la izquierda y las tuplas entre paréntesis |
 | Escribió | El proceso que escribió la variable por última vez y en qué instante; «valor inicial» si nadie la escribió todavía |
 
 ## Interbloqueo

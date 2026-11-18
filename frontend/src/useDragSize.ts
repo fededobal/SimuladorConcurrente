@@ -3,8 +3,11 @@ import { useCallback, useRef, useState } from 'react';
 /** Eje del arrastre: 'y' cambia el alto (borde de arriba), 'x' el ancho (borde izquierdo). */
 export type DragAxis = 'x' | 'y';
 
-/** Tamano minimo de un panel: el encabezado, la regla y una fila; o un nombre de proceso. */
-const MIN_SIZE: Record<DragAxis, number> = { y: 80, x: 180 };
+/**
+ * Tamano minimo de un panel: de alto, el encabezado, la regla y una fila; de ancho, lo que
+ * ocupan las tres pestanas del inspector (mas angosto, su contenido se corta).
+ */
+const MIN_SIZE: Record<DragAxis, number> = { y: 80, x: 340 };
 /** Espacio que siempre le queda al resto de la pantalla (la barra y algo de editor). */
 const ROOM: Record<DragAxis, number> = { y: 160, x: 360 };
 /** Cuanto cambia el tamano con cada flecha del teclado. */

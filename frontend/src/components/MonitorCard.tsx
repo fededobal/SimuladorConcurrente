@@ -41,7 +41,9 @@ export const MonitorCard = memo(function MonitorCard({
         {monitor.lockOwner ? (
           <span className={`${s.pill} ${s.pillBusy}`}>
             <i className="punto" style={{ background: monitor.lockOwner.color }} />
-            Ocupado por {monitor.lockOwner.name}{ownerNote(owner)}
+            <span className={s.pillText} title={`Ocupado por ${monitor.lockOwner.name}${ownerNote(owner)}`}>
+              Ocupado por {monitor.lockOwner.name}{ownerNote(owner)}
+            </span>
           </span>
         ) : (
           <span className={s.pill}>Libre</span>
@@ -67,21 +69,16 @@ export const MonitorCard = memo(function MonitorCard({
         {monitor.vars.length === 0 ? (
           <p className={s.empty}>Este monitor no tiene variables permanentes.</p>
         ) : (
-          <table className={s.vars}>
-            <thead>
-              <tr><th>Nombre</th><th>Tipo</th><th>Valor</th><th>Escribió</th></tr>
-            </thead>
-            <tbody>
-              {monitor.vars.map((v) => (
-                <tr key={v.name}>
-                  <td className={s.varName}>{v.name}</td>
-                  <td><span className={s.varType}>{v.type}</span></td>
-                  <td><Value v={v} /></td>
-                  <td><Writer v={v} procRefs={procRefs} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className={s.varsWrap}>
+            <table className={s.vars}>
+              <thead>
+                <tr><th>Nombre</th><th>Tipo</th><th>Valor</th><th>Escribió</th></tr>
+              </thead>
+              <tbody>
+                {monitor.vars.map((v) => <VarRows key={v.name} v={v} procRefs={procRefs} />)}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </section>
@@ -107,7 +104,7 @@ function Story({ events }: { events: readonly LogEntry[] }) {
   return (
     <p className={s.story}>
       <span className={s.storyLabel}>Instante {events[0].instant}</span>
-      <span>
+      <span className={s.storyText}>
         {shown.map((e, i) => {
           const cut = e.message.indexOf(': ');
           const who = cut < 0 ? '' : e.message.slice(0, cut);
@@ -143,8 +140,9 @@ function CondQueues({ conds }: { conds: readonly CondView[] }) {
         <>
           <dt />
           <dd>
-            <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}>
-              {open ? 'ocultar las vacías' : `+${empty} variables condición vacías`}
+            <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}
+              title={open ? undefined : 'Mostrar también las variables condición sin nadie esperando'}>
+              {open ? 'ocultar las vacías' : `+${empty} cond vacías`}
             </button>
           </dd>
         </>
@@ -185,17 +183,45 @@ function Queue({ procs }: { procs: readonly ProcRef[] }) {
 }
 
 /**
- * El valor de una variable. Un arreglo o una cola se dibuja como celdas: plegado, las
- * primeras y un boton para abrir el resto. El nucleo manda hasta 50 elementos; si hay mas,
- * se dice cuantos faltan.
+ * Las filas de una variable en la tabla. Una variable simple ocupa una fila. Un arreglo o
+ * una cola ocupa dos: en la primera el tipo toma tambien la columna del valor, y las celdas
+ * van debajo, a todo el ancho de la tabla.
  */
-function Value({ v }: { v: VarView }) {
+function VarRows({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, ProcRef> }) {
+  if (v.elements === null) {
+    return (
+      <tr>
+        <td className={s.varName}>{v.name}</td>
+        <td><span className={s.varType}>{v.type}</span></td>
+        <td><span className={s.varValue}>{v.value}</span></td>
+        <td><Writer v={v} procRefs={procRefs} /></td>
+      </tr>
+    );
+  }
+  return (
+    <>
+      <tr className={s.hasCells}>
+        <td className={s.varName}>{v.name}</td>
+        <td colSpan={2}><span className={s.varType}>{v.type}</span></td>
+        <td><Writer v={v} procRefs={procRefs} /></td>
+      </tr>
+      <tr>
+        <td colSpan={4} className={s.cellsRow}><Cells v={v} elements={v.elements} /></td>
+      </tr>
+    </>
+  );
+}
+
+/**
+ * Un arreglo o una cola, como celdas: plegado, las primeras y un boton para abrir el resto.
+ * El nucleo manda hasta 50 elementos; si hay mas, se dice cuantos faltan.
+ */
+function Cells({ v, elements }: { v: VarView; elements: readonly string[] }) {
   const [open, setOpen] = useState(false);
-  if (v.elements === null) return <span className={s.varValue}>{v.value}</span>;
   const queue = !v.isArray;
   if (v.size === 0) return <span className={s.empty}>{queue ? 'vacía' : 'sin elementos'}</span>;
-  const shown = open ? v.elements : v.elements.slice(0, MAX_SHOWN);
-  const notReceived = v.size - v.elements.length;
+  const shown = open ? elements : elements.slice(0, MAX_SHOWN);
+  const notReceived = v.size - elements.length;
   return (
     <span className={`${s.cells}${queue ? ` ${s.cellsQueue}` : ''}`}>
       {shown.map((e, i) => (
@@ -223,8 +249,8 @@ function Writer({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, Pro
   if (!writer) return <span className={s.empty}>valor inicial</span>;
   return (
     <span className={s.writer}>
-      <i className="punto" style={{ background: writer.color }} />
-      {writer.name}{v.lastWriteInstant !== null && `, inst. ${v.lastWriteInstant}`}
+      <span><i className="punto" style={{ background: writer.color }} />{writer.name}</span>
+      {v.lastWriteInstant !== null && <span className={s.writerWhen}>inst. {v.lastWriteInstant}</span>}
     </span>
   );
 }

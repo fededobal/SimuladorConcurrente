@@ -118,7 +118,7 @@ export function TopBar(p: Props) {
       </button>
       {/* la guia se publica junto con la aplicacion, bajo /docs/ */}
       <a className="btn btn-plano" href="/docs/" title="Guía: lenguaje, ejecución y uso del simulador">
-        <BookOpen size={15} /> Guía
+        <BookOpen size={15} /> <span className={s.guideLabel}>Guía</span>
       </a>
       {/* el icono muestra el tema al que se pasa, no el actual */}
       <button className="btn btn-icono btn-plano" onClick={p.onToggleTheme}

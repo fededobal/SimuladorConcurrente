@@ -44,7 +44,8 @@
 }
 .tabsEnd { margin-left: auto; display: flex; align-items: center; }
 
-.body { flex: 1; min-height: 0; overflow-y: auto; }
+/* solo se desplaza hacia abajo: lo que no entra de ancho se acomoda adentro de su tarjeta */
+.body { flex: 1; min-height: 0; overflow-x: hidden; overflow-y: auto; }
 
 /* --- pestana Procesos --- */
 
