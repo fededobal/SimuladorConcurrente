@@ -60,6 +60,20 @@ const ARROWS: Record<Arrow, ArrowShape> = {
   },
 };
 
+/** Punto de color del primer nombre de una zona (ver NameRows). */
+const OWNER_DOT: readonly [number, number] = [ZONE3.x + 12, ZONE3.y + 31];
+
+/**
+ * Camino del punto que recorre cada flecha: el de la flecha, salvo en return. Esa flecha
+ * empieza en el borde de la zona 3 y es corta; el punto sale del nombre del proceso que deja
+ * el monitor, cruza el borde y sigue por la flecha, asi se lo ve irse hacia la derecha.
+ */
+const TRAVEL_PATHS: Record<Arrow, string> = {
+  ...Object.fromEntries(Object.entries(ARROWS).map(([a, shape]) => [a, shape.d])) as Record<Arrow, string>,
+  return: `M${OWNER_DOT[0]},${OWNER_DOT[1]} C${ZONE3.x + ZONE_W - 24},${OWNER_DOT[1]} `
+    + `${ZONE3.x + ZONE_W - 12},${MID_Y} ${ZONE3.x + ZONE_W + 2},${MID_Y} L${W - 2},${MID_Y}`,
+};
+
 function fit(text: string, max = NAME_CHARS): string {
   return text.length <= max ? text : `${text.slice(0, max - 1)}…`;
 }
@@ -152,9 +166,10 @@ function Travelers({ travels }: { travels: readonly Travel[] }) {
         perArrow.set(t.arrow, turn + 1);
         if (turn >= MAX_TRAVELERS) return null;
         return (
-          <circle key={t.key} r="4.5" className={s.traveler}
+          <circle key={t.key} r="4.5"
+            className={`${s.traveler}${t.arrow === 'return' ? ` ${s.travelerOut}` : ''}`}
             style={{
-              offsetPath: `path('${ARROWS[t.arrow].d}')`,
+              offsetPath: `path('${TRAVEL_PATHS[t.arrow]}')`,
               animationDelay: `${turn * TRAVELER_GAP_MS}ms`,
               fill: t.color ?? undefined,
             }} />

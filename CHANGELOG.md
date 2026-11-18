@@ -145,6 +145,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Visor de monitores: cuando un proceso salía del monitor (return), su punto recorría solo la flecha corta de afuera, apareciendo y desvaneciéndose, y casi no se veía. Ahora sale del nombre del proceso en la zona 3, cruza el borde y se va por la flecha hacia la derecha. (Federico Dobal, 2026-11-18)
 - Buscador de la guía: el número de sección quedaba pegado al título en los resultados («7.4Programas de ejemplo»); ahora los separa un espacio («7.4 Programas de ejemplo»). En la página el título se ve igual. (Federico Dobal, 2026-11-18)
 - Guía: al llegar desde el buscador, el resaltado de la palabra buscada partía el título de la página («As ignación»), y los títulos con código separaban cada pieza. El texto del título va ahora en un solo bloque al lado del número. (Federico Dobal, 2026-11-18)
 - Guía: al tocar «Copiar» en un ejemplo de código, con el mouse todavía sobre el botón aparecía además el cartel «Copied» de VitePress al lado; ahora solo el botón dice «Copiado». (Federico Dobal, 2026-11-18)

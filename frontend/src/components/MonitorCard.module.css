@@ -105,6 +105,13 @@
   80% { opacity: 1; }
   100% { offset-distance: 100%; opacity: 0; }
 }
+/* el que sale del monitor arranca visible: es el punto de su nombre, que se va hacia la derecha */
+.travelerOut { animation-name: travel-out; }
+@keyframes travel-out {
+  0% { offset-distance: 0%; opacity: 1; }
+  85% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
 
 /* --- que paso --- */
 
