@@ -61,6 +61,8 @@
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius: 8px;
+  /* curva de lo que se mueve entre un instante y el siguiente (ver motion.ts) */
+  --ease-step: cubic-bezier(0.4, 0, 0.2, 1);
   color-scheme: light;
 }
 

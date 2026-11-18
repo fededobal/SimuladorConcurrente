@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Transiciones entre instantes: en el editor, la franja y la etiqueta de cada proceso se deslizan con su chip hasta el renglón nuevo; en la línea de tiempo, el tramo que sigue se alarga, el que empieza se descubre, y el cursor del instante y el desplazamiento se corren juntos. La duración sigue a la velocidad elegida y se apaga con la preferencia de reducir el movimiento. (Federico Dobal, 2026-11-17)
 - Guía: botón «Abrir en el simulador» en los ejemplos de código (abre el programa completo, o el ejemplo del que sale un fragmento) y botón «Copiar» siempre visible; figura con el dibujo del monitor y la flecha destacada en `wait`; lo esencial de `wait`, `signal`, `signal_all` y `delay` en etiquetas; avisos «En el simulador» y «Atención»; los mensajes de error se muestran como en el simulador. El simulador abre un ejemplo del menú desde un enlace `#ejemplo=…`. (Federico Dobal, 2026-11-17)
 - Pestaña Procesos: cada proceso con lo que está haciendo, su línea, sus variables locales y un botón para avanzar un instante solo con él. Aviso en el editor cuando el renglón de un proceso queda fuera de la vista, que lleva hasta esa línea con un clic. Leyenda de los procesos en el encabezado del editor. Diálogo con todos los atajos (tecla «?»). (Federico Dobal, 2026-11-17)
 - Atajos de teclado para la simulación, los de un depurador: F5 ejecuta o pausa, F10 da un paso y Shift+F5 detiene. Funcionan también con el cursor en el código. F5 deja de recargar la pestaña (Ctrl/Cmd+R sigue haciéndolo); «?» abre la lista de atajos. (Federico Dobal, 2026-11-17)
@@ -135,6 +136,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Línea de tiempo: con el zoom más chico, los tramos de un instante se encimaban con el siguiente. (Federico Dobal, 2026-11-17)
 - Inspector: la tabla de variables ya no se sale de la tarjeta ni hace desplazar el panel de costado (un arreglo o una cola lleva sus celdas en un renglón propio), el panel no se puede angostar por debajo de 340 px y las pastillas no pasan a dos renglones. La barra superior se compacta de a poco en anchos medios en vez de mandar botones al renglón de abajo. (Federico Dobal, 2026-11-17)
 - Buscador de la guía: las teclas del atajo quedaban fuera del recuadro porque el texto no entraba en el ancho fijo; ahora el ancho sale del texto y el alto coincide con el del botón «Abrir el simulador». (Federico Dobal, 2026-11-17)
 - Botón para ampliar la línea de tiempo al costado del editor, a toda altura, que se había perdido en el rediseño de la pantalla; Escape o el mismo botón la devuelven a su lugar, y el inspector conserva su pestaña. (Federico Dobal, 2026-11-17)

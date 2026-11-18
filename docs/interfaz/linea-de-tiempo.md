@@ -45,6 +45,7 @@ nadie puede avanzar».
 |---|---|
 | Botones de la cabecera | Columnas más angostas (más instantes) o más anchas (más detalle) |
 | Desplazar hacia atrás | Se deja de seguir al último instante hasta volver al final |
+| Paso de un instante al siguiente | El tramo que continúa se alarga, el que empieza se descubre desde la izquierda y el cursor del instante actual se corre una columna, con el mismo ritmo que las marcas del editor |
 | Botón de ampliar, a la derecha de la cabecera | La línea de tiempo pasa al costado del editor, a toda altura, y el inspector se oculta. El mismo botón o Escape la devuelven a su lugar |
 
 ::: tip Nota

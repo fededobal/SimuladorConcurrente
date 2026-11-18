@@ -6,6 +6,7 @@ import {
   gutterChipsOf, isRunning, lineMarksOf, type ActiveLine, type LineMark, type LineTag,
 } from '../editor/lineMarks';
 import { useLineMetrics } from '../editor/useLineMetrics';
+import { slideMs } from '../motion';
 import { delayLeft, STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 import s from './CodeEditor.module.css';
 
@@ -63,15 +64,13 @@ interface Viewport {
  * Editor del programa: un textarea transparente sobre el codigo coloreado. Mientras corre la
  * simulacion marca donde esta cada proceso sin tapar el texto: una franja lisa por renglon,
  * un chip con la inicial del proceso en el margen y una etiqueta al final del codigo que dice
- * quien es y que esta haciendo. Si el renglon de un proceso queda fuera de la vista, un aviso
- * lo dice y lleva hasta ahi.
+ * quien es y que esta haciendo. De un instante al otro las tres se deslizan hasta el renglon
+ * nuevo. Si el renglon de un proceso queda fuera de la vista, un aviso lo dice y lleva hasta
+ * ahi.
  */
 export function CodeEditor({
   code, onChange, readOnly, activeLines, errorLines, pasoMs, fontSize, onCursor,
 }: Props) {
-  // El chip llega enseguida al renglon y se queda ahi: si el deslizamiento ocupara casi todo
-  // el instante, pasaria mas tiempo entre dos renglones que sobre el que se esta ejecutando.
-  const slideMs = Math.min(Math.round(pasoMs * 0.45), 260);
 
   const editorRef = useRef<HTMLDivElement>(null);
   const layerRef = useRef<HTMLPreElement>(null);
@@ -139,7 +138,7 @@ export function CodeEditor({
         className={s.editor}
         onScroll={readViewport}
         style={{
-          ['--desliz' as string]: `${slideMs}ms`,
+          ['--desliz' as string]: `${slideMs(pasoMs)}ms`,
           // el interlineado acompana a la letra; las marcas se miden del DOM, asi que siguen
           ['--line-h' as string]: `${Math.round(fontSize * 1.7)}px`,
           ['--gutter-w' as string]: `${Math.ceil(gutterWidth)}px`,
@@ -171,9 +170,11 @@ export function CodeEditor({
           <div className={s.area}>
             <pre ref={layerRef} className={s.layer} dangerouslySetInnerHTML={{ __html: highlight(code) + '\n' }} />
 
+            {/* Franjas y etiquetas van por proceso (el mas activo del renglon), no por renglon:
+                cuando avanza, sobrevive el mismo nodo y la transicion lo desliza. */}
             {marks.map((m) => (
               <div
-                key={m.line}
+                key={`franja-${m.leader}`}
                 className={`${s.lineBand} ${STATE_CLASS[m.state]}`}
                 style={{ top: yOf(m.line), height: metrics.lineHeight, ['--st-proceso' as string]: m.color }}
               />
@@ -185,7 +186,8 @@ export function CodeEditor({
             ))}
 
             {marks.map((m) => (
-              <div key={m.line} className={s.lineTags} style={{ top: yOf(m.line), height: metrics.lineHeight }}>
+              <div key={`etiquetas-${m.leader}`} className={s.lineTags}
+                style={{ top: yOf(m.line), height: metrics.lineHeight }}>
                 <span
                   className={s.lineTagsGap}
                   style={{ flexBasis: TEXT_PAD + (lines[m.line - 1]?.length ?? 0) * metrics.charWidth + TAG_GAP }}

@@ -90,6 +90,9 @@
   background: color-mix(in srgb, var(--st) 10%, transparent);
   border-left: 3px solid var(--st);
   animation: band-in 0.18s ease-out;
+  /* --desliz lo fija el editor segun la velocidad: la franja acompana al chip y a la etiqueta */
+  transition: top var(--desliz, 150ms) var(--ease-step), background-color 0.15s linear,
+              border-color 0.15s linear;
 }
 .lineBand:global(.st-ready) { background: color-mix(in srgb, var(--st) 8%, transparent); }
 .lineError {
@@ -104,8 +107,7 @@
   display: flex;
   align-items: center;
   pointer-events: none;
-  /* --desliz lo fija el editor segun la velocidad: llega rapido y se asienta */
-  transition: top var(--desliz, 150ms) cubic-bezier(0.22, 1, 0.36, 1), left var(--desliz, 150ms) ease-out,
+  transition: top var(--desliz, 150ms) var(--ease-step), left var(--desliz, 150ms) var(--ease-step),
               opacity 0.12s linear;
 }
 .gutterChip i {
@@ -134,8 +136,11 @@
   display: flex;
   align-items: center;
   pointer-events: none;
+  animation: band-in 0.18s ease-out;
+  transition: top var(--desliz, 150ms) var(--ease-step);
 }
-.lineTagsGap { flex: 0 1 auto; min-width: 0; }
+/* el hueco mide lo que el codigo del renglon: al cambiar de renglon se ajusta sin saltar */
+.lineTagsGap { flex: 0 1 auto; min-width: 0; transition: flex-basis var(--desliz, 150ms) var(--ease-step); }
 .lineTagsList {
   position: sticky;
   left: calc(var(--gutter-w, 48px) + 8px);
@@ -212,4 +217,9 @@
   color: var(--on-accent);
   font: 700 12px/1 var(--sans);
   font-style: normal;
+}
+
+/* quien pide menos movimiento ve cada instante de una vez, sin deslizamientos */
+@media (prefers-reduced-motion: reduce) {
+  .lineBand, .lineTags, .lineTagsGap, .gutterChip { animation: none; transition: none; }
 }

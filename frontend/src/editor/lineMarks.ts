@@ -35,6 +35,11 @@ export interface LineTag {
 /** Todo lo que se dibuja sobre un renglon con procesos. */
 export interface LineMark {
   readonly line: number;
+  /**
+   * Nombre del proceso mas activo del renglon. Identifica a la marca de un instante al otro:
+   * cuando ese proceso cambia de renglon, su franja y sus etiquetas se deslizan con el.
+   */
+  readonly leader: string;
   /** Estado que da el color de la franja: el del proceso mas activo del renglon. */
   readonly state: VisibleState;
   readonly color: string;
@@ -113,6 +118,7 @@ export function lineMarksOf(active: readonly ActiveLine[]): LineMark[] {
     });
     marks.push({
       line,
+      leader: procs[0].name,
       state: procs[0].state,
       color: procs[0].color,
       tags: tags.slice(0, MAX_TAGS),

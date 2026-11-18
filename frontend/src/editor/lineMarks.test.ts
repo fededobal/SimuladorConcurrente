@@ -6,6 +6,14 @@ function active(name: string, line: number, extra: Partial<ActiveLine> = {}): Ac
 }
 
 describe('lineMarksOf', () => {
+  it('markCarriesItsMostActiveProcess', () => {
+    const [mark] = lineMarksOf([
+      active('A', 3, { state: 'WAITING', where: 'c' }),
+      active('B', 3, { state: 'RUNNING_MONITOR', where: 'M' }),
+    ]);
+    expect(mark.leader).toBe('B');
+  });
+
   it('oneMarkPerLine', () => {
     const marks = lineMarksOf([active('A', 3), active('B', 3), active('C', 1)]);
     expect(marks.map((m) => m.line)).toEqual([1, 3]);

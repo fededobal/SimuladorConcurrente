@@ -307,6 +307,7 @@ export function App() {
             : timelineHeight(sim.timeline.monitors.length + sim.timeline.order.length)}>
           <Timeline timeline={sim.timeline} processes={snapshot?.processes ?? []}
             deadlockInstant={sim.deadlock?.instant ?? null} focus={timelineFocus}
+            pasoMs={sim.speed}
             expanded={timelineExpanded} onToggleExpand={() => setTimelineExpanded((e) => !e)} />
         </Dock>
       </div>

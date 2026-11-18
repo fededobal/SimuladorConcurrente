@@ -22,8 +22,12 @@ elementos que no tapan el código:
 | Elemento | Dónde | Qué indica |
 |---|---|---|
 | Franja lisa | Todo el renglón | Que hay procesos en esa línea; toma el color del más activo |
-| Chip con la inicial | Margen, junto al número de línea | Qué proceso es, con su color; se desliza de un renglón a otro cuando el proceso avanza |
+| Chip con la inicial | Margen, junto al número de línea | Qué proceso es, con su color |
 | Etiqueta | Al final del código | El nombre del proceso y lo que está haciendo, con el ícono y el color de su [estado](/ejecucion/estados) |
+
+Cuando un proceso avanza, su franja, su chip y su etiqueta se deslizan hasta el renglón nuevo.
+El deslizamiento dura una parte del instante, de modo que cada marca queda quieta antes del
+paso siguiente.
 
 La figura reúne los seis estados en un mismo instante.
 

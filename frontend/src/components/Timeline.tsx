@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Maximize2, Minimize2, ZoomIn, ZoomOut } from 'lucide-react';
+import { prefersReducedMotion, slideMs, stepEasing } from '../motion';
 import { STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 import { processTextColor } from '../processColor';
 import { familyOf, type Timeline as TimelineData, type TimelineColumn } from '../timeline';
@@ -20,6 +21,8 @@ interface Props {
    * tarjeta. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
    */
   readonly focus: { readonly instant: number; readonly nonce: number } | null;
+  /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
+  readonly pasoMs: number;
   /** true si esta ampliada: al costado del editor y a toda altura. */
   readonly expanded: boolean;
   readonly onToggleExpand: () => void;
@@ -77,9 +80,14 @@ type Row = { readonly kind: 'monitor'; readonly name: string } | { readonly kind
  * por una columna, una tarjeta cuenta en palabras que paso en ese instante, y un clic la
  * deja fija. Solo se dibujan las filas que se ven: con mil procesos son las mismas veinte.
  * El boton de la cabecera la amplia: pasa al costado del editor, a toda altura.
+ *
+ * De un instante al siguiente nada salta: el tramo que sigue se alarga, el que empieza se
+ * descubre desde su borde izquierdo, el cursor del instante actual se corre una columna y el
+ * desplazamiento lo acompana. Solo se anima el paso de un instante al que le sigue; un cambio
+ * de zoom o una ejecucion nueva se muestran de una vez.
  */
 export function Timeline({
-  timeline, processes, deadlockInstant, focus, expanded, onToggleExpand,
+  timeline, processes, deadlockInstant, focus, pasoMs, expanded, onToggleExpand,
 }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { columns, order, monitors } = timeline;
@@ -123,16 +131,55 @@ export function Timeline({
   }, [readView]);
   const range = visibleRows(Math.max(0, view.top - RULER_H), view.height, ROW_H, rows.length);
 
+  // Solo el paso de un instante al que le sigue se anima. Se compara con lo que se dibujo la
+  // vez anterior: si cambio el zoom, o los instantes no son consecutivos (ejecucion nueva),
+  // todo va a su lugar sin transicion.
+  const lastInstant = columns[columns.length - 1]?.instant ?? 0;
+  const [drawn, setDrawn] = useState({ lastInstant, cell });
+  const [gliding, setGliding] = useState(false);
+  if (drawn.lastInstant !== lastInstant || drawn.cell !== cell) {
+    setDrawn({ lastInstant, cell });
+    setGliding(drawn.cell === cell && lastInstant === drawn.lastInstant + 1);
+  }
+  const slide = slideMs(pasoMs);
+
   // Seguir el ultimo instante, como la salida; salvo que el alumno se haya ido hacia atras
-  // para mirar un instante viejo.
+  // para mirar un instante viejo. El desplazamiento se anima a mano (scrollLeft no admite
+  // transiciones de CSS), con la misma duracion y curva que el cursor y los tramos.
   const following = useRef(true);
+  const glide = useRef<number | null>(null);
+  const stopGlide = useCallback(() => {
+    if (glide.current !== null) cancelAnimationFrame(glide.current);
+    glide.current = null;
+  }, []);
   useLayoutEffect(() => {
     const el = scrollRef.current;
-    if (el && following.current) el.scrollLeft = el.scrollWidth;
-  }, [columns.length, cell]);
+    if (!el || !following.current) return;
+    stopGlide();
+    const from = el.scrollLeft;
+    const distance = el.scrollWidth - el.clientWidth - from;
+    // sin animacion si no corresponde, o si quedo tan atras que deslizarse marearia
+    if (!gliding || slide === 0 || distance <= 0 || distance > cell * 4 || prefersReducedMotion()) {
+      el.scrollLeft = el.scrollWidth;
+      return;
+    }
+    const start = performance.now();
+    const frameStep = (now: number) => {
+      const t = Math.min(1, (now - start) / slide);
+      el.scrollLeft = from + distance * stepEasing(t);
+      glide.current = t < 1 ? requestAnimationFrame(frameStep) : null;
+    };
+    glide.current = requestAnimationFrame(frameStep);
+    // `gliding` y `slide` se leen del mismo render que cambio las columnas: no son disparadores
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columns.length, lastInstant, cell, stopGlide]);
+  useEffect(() => stopGlide, [stopGlide]);
   const onScroll = () => {
     const el = scrollRef.current;
-    if (el) following.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
+    // mientras se desliza sola todavia no llego al final: no cuenta como "se fue hacia atras"
+    if (el && glide.current === null) {
+      following.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
+    }
     readView();
   };
 
@@ -208,14 +255,16 @@ export function Timeline({
         </div>
       </header>
 
-      <div className={s.scroll} ref={scrollRef} onScroll={onScroll}>
+      {/* si el alumno toma el desplazamiento (rueda, barra o dedo), deja de moverse sola */}
+      <div className={s.scroll} ref={scrollRef} onScroll={onScroll}
+        onWheel={stopGlide} onPointerDown={stopGlide} onTouchStart={stopGlide}>
         {columns.length === 0 && (
           <p className={s.emptyText}>Con Ejecutar o Paso, acá se dibuja cómo avanza cada proceso instante a instante.</p>
         )}
         <div
-          className={s.plane}
+          className={`${s.plane}${gliding ? '' : ` ${s.still}`}`}
           style={{
-            width, height,
+            width, height, ['--desliz' as string]: `${slide}ms`,
             ['--cell' as string]: `${cell}px`, ['--row-h' as string]: `${ROW_H}px`,
             ['--ruler-h' as string]: `${RULER_H}px`, ['--name-w' as string]: `${NAME_W}px`,
           }}
@@ -225,12 +274,17 @@ export function Timeline({
         >
           <div className={s.ruler}>
             <div className={s.corner}>Instante</div>
-            {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || c.instant === 1 || i === last) && (
-              <span key={c.instant} className={`${s.tick}${i === last ? ` ${s.now}` : ''}`}
-                style={{ left: NAME_W + i * cell }}>
+            {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || c.instant === 1) && i !== last && (
+              <span key={c.instant} className={s.tick} style={{ left: NAME_W + i * cell }}>
                 <span>{c.instant}</span>
               </span>
             ))}
+            {/* el instante actual: un solo nodo que se corre de columna, no uno nuevo por instante */}
+            {last >= 0 && (
+              <span className={`${s.tick} ${s.now}`} style={{ left: NAME_W + last * cell }}>
+                <span>{columns[last].instant}</span>
+              </span>
+            )}
           </div>
 
           {last >= 0 && <div className={s.cursor} style={{ left: NAME_W + last * cell, top: RULER_H }} />}
@@ -295,8 +349,8 @@ function MonitorLane({ name, top, cell, columns, byId, last }: LaneProps) {
         const width = seg.length * cell - 2;
         return (
           <div
-            key={seg.from}
-            className={`${s.seg} ${owner ? s.owner : s.free}`}
+            key={columns[seg.from].instant}
+            className={`${s.seg} ${owner ? s.owner : s.free}${seg.from === columns.length - 1 ? ` ${s.fresh}` : ''}`}
             style={{ left: NAME_W + seg.from * cell + 1, width, background: owner?.color }}
             title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
           >
@@ -333,8 +387,8 @@ function ProcessRow({ process: p, top, cell, columns, cut }: RowProps) {
         const labels = labelsOf(seg);
         return (
           <div
-            key={seg.from}
-            className={`${s.seg} ${STATE_CLASS[seg.state]}`}
+            key={columns[seg.from].instant}
+            className={`${s.seg} ${STATE_CLASS[seg.state]}${seg.from === columns.length - 1 ? ` ${s.fresh}` : ''}`}
             style={{ left: NAME_W + seg.from * cell + 1, width }}
             title={labels[0]}
           >
