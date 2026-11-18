@@ -8,6 +8,8 @@ import Portada from './components/Portada.vue';
 import Relacionadas from './components/Relacionadas.vue';
 import { instalarResaltadoDeBusqueda } from './resaltarBusqueda';
 import './custom.css';
+// la misma barra de desplazamiento que el simulador
+import '../../../src/scrollbar.css';
 
 /** Clave donde VitePress guarda el tema; el simulador lee la misma (src/useTheme.ts). */
 const CLAVE_TEMA = 'vitepress-theme-appearance';

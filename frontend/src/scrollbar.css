@@ -1,0 +1,63 @@
+/*
+ * Barra de desplazamiento comun al simulador y a la guia (la importan src/main.tsx y el tema
+ * de VitePress): carril invisible, pulgar fino y redondeado que se marca al pasar el mouse, y
+ * en las barras verticales una flecha arriba y otra abajo que desplazan de a poco (apretadas,
+ * repiten).
+ *
+ * Se dibuja con los pseudoelementos ::-webkit-scrollbar (Chrome, Edge, Safari), que conservan
+ * todo lo nativo: arrastrar, clic en el carril, rueda. Firefox no deja dibujar flechas: ahi
+ * queda la barra fina del sistema con los mismos colores. Chrome ignora ::-webkit-scrollbar
+ * en un elemento con scrollbar-width o scrollbar-color, por eso esas dos van solo para
+ * Firefox.
+ */
+
+:root {
+  --scroll-thumb: rgba(22, 25, 31, 0.2);
+  --scroll-thumb-hover: rgba(22, 25, 31, 0.38);
+  /* las flechas son SVG, que no leen variables: un color por estado y por tema */
+  --scroll-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 6.5 5 3.5l3 3' fill='none' stroke='%23808a98' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5 5 6.5l3-3' fill='none' stroke='%23808a98' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-up-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 6.5 5 3.5l3 3' fill='none' stroke='%2316191f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-down-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5 5 6.5l3-3' fill='none' stroke='%2316191f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* tema oscuro: el simulador lo marca con data-theme y VitePress con la clase .dark */
+:root[data-theme="dark"],
+:root.dark {
+  --scroll-thumb: rgba(227, 232, 238, 0.18);
+  --scroll-thumb-hover: rgba(227, 232, 238, 0.34);
+  --scroll-up: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 6.5 5 3.5l3 3' fill='none' stroke='%237d8796' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5 5 6.5l3-3' fill='none' stroke='%237d8796' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-up-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 6.5 5 3.5l3 3' fill='none' stroke='%23e3e8ee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --scroll-down-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5 5 6.5l3-3' fill='none' stroke='%23e3e8ee' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb {
+  min-height: 32px;
+  min-width: 32px;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: var(--scroll-thumb) padding-box;
+}
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active { background-color: var(--scroll-thumb-hover); }
+
+/* una flecha en cada punta de las barras verticales; las horizontales, sin flechas */
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+  height: 16px;
+  background: center / 10px no-repeat;
+}
+::-webkit-scrollbar-button:vertical:start:decrement { background-image: var(--scroll-up); }
+::-webkit-scrollbar-button:vertical:end:increment { background-image: var(--scroll-down); }
+::-webkit-scrollbar-button:vertical:start:decrement:hover { background-image: var(--scroll-up-hover); }
+::-webkit-scrollbar-button:vertical:end:increment:hover { background-image: var(--scroll-down-hover); }
+
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
+}
