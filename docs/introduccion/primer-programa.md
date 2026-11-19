@@ -23,6 +23,11 @@ process Persona[id: 0..N-1] {
 }
 ```
 
+El programa se puede ejecutar en esta misma página, con los botones que están debajo del
+código ([Ejemplos de código](/introduccion/presentacion#ejemplos-de-codigo)). El
+procedimiento que sigue usa el simulador, que además muestra el dibujo del monitor y la
+línea de tiempo.
+
 ## Procedimiento
 
 1. Abrir el simulador. Si el editor tiene otro programa, abrir el menú del programa, en la

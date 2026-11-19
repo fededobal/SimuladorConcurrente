@@ -55,12 +55,6 @@
   --warn-bg: #fdf6e3;
   --warn-line: #f0dca6;
 
-  /* estados de proceso: los comparten el editor, el panel y la linea de tiempo */
-  --st-competing: #c2851a;
-  --st-waiting: #7b5bd6;
-  --st-delayed: #1f9a8a;
-  --st-ready: #9aa3af;
-
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -108,11 +102,6 @@
   --warn: #e0b354;
   --warn-bg: #2a2416;
   --warn-line: #5c4c22;
-
-  --st-competing: #d9a441;
-  --st-waiting: #a58bf0;
-  --st-delayed: #4cc0b0;
-  --st-ready: #5d6773;
 
   color-scheme: dark;
 }
@@ -276,16 +265,6 @@ kbd {
   font-size: 13px;
 }
 .menu-seccion { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line-soft); }
-
-/* ------------------------------------------------------------------ estados de proceso */
-
-/* Color por estado. El icono y el texto distinguen los estados sin depender solo del color.
-   --st-proceso lo fija cada marca y cada fila con el color de su proceso. */
-.st-running-process, .st-running-monitor { --st: var(--st-proceso, var(--text)); }
-.st-competing { --st: var(--st-competing); }
-.st-waiting   { --st: var(--st-waiting); }
-.st-delayed   { --st: var(--st-delayed); }
-.st-ready     { --st: var(--st-ready); }
 
 /* ------------------------------------------------------------------ codigo */
 

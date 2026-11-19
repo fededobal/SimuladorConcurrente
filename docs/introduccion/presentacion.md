@@ -46,6 +46,30 @@ La guía tiene siete capítulos numerados. La [portada](/) los muestra con todas
 | 6 Solución de problemas | Qué significa cada error y qué hacer cuando el programa se detiene |
 | 7 Referencia | Límites, atajos de teclado, glosario y programas de ejemplo |
 
+## Ejemplos de código
+
+Los ejemplos de la guía llevan botones en su encabezado y, si son un programa completo, una
+barra debajo del código para ejecutarlos en la misma página.
+
+| Botón | Qué hace |
+|---|---|
+| **Copiar** | Copia el código |
+| **Abrir en el simulador** | Abre el programa en el simulador; en un fragmento, abre el ejemplo del que sale |
+| **Ejecutar** | Corre el programa en la página, con turnos al azar y una semilla nueva cada vez. Mientras corre pasa a **Pausar** y, en pausa, a **Seguir** |
+| **Paso** | Avanza un instante |
+| **Reiniciar** | Vuelve al programa sin ejecutar |
+
+Durante la ejecución, cada renglón con procesos lleva una franja del color del
+[estado](/ejecucion/estados) y una etiqueta con el nombre del proceso y lo que está haciendo,
+como en el [editor](/interfaz/editor) del simulador; cuando un proceso avanza, su franja y
+su etiqueta se deslizan hasta el renglón nuevo. La barra indica el estado de la
+ejecución y el instante, y debajo aparece lo que escriben los procesos con `write`. Con un
+programa largo, la barra queda a la vista en el borde inferior de la ventana.
+
+Se ejecuta un programa por vez: al ejecutar otro ejemplo, el anterior vuelve a quedar sin
+ejecutar. Un fragmento, como un procedure suelto, no se puede ejecutar solo. El dibujo de
+los monitores, la línea de tiempo y la elección de turnos y velocidad están en el simulador.
+
 ::: tip Simplificaciones
 El simulador no reproduce un sistema operativo ni un lenguaje real: muestra cómo se
 comportan los monitores. Un instante es un paso en el que cada proceso con turno ejecuta

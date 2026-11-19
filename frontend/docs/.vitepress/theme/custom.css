@@ -682,3 +682,178 @@ mark.busqueda {
   line-height: 1.5;
   color: var(--vp-c-text-2);
 }
+
+/* ------------------------------------------------------------------ ejemplos ejecutables */
+
+/* Un programa que se ejecuta en la pagina (EjemploEjecutable.vue): el bloque de codigo, una
+   barra con los botones y el estado, y la salida. El borde lo lleva la caja de afuera y el
+   bloque de adentro lo pierde, asi las tres partes se leen como una sola pieza. */
+.vp-doc .ejecutable {
+  margin: 16px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  /* cuanto blanco se le mezcla al color de un proceso para escribir su nombre (ver
+     src/processColor.ts): nada sobre fondo claro, lo justo sobre el oscuro */
+  --ej-mezcla: 100%;
+}
+.dark .vp-doc .ejecutable { --ej-mezcla: 60%; }
+.vp-doc .ejecutable > div[class*='language-'] {
+  margin: 0;
+  border: 0;
+  border-radius: 9px 9px 0 0;
+}
+.vp-doc .ejecutable > :last-child { border-radius: 0 0 9px 9px; }
+
+/* Barra de la ejecucion. Con un programa largo se queda pegada al borde de abajo de la
+   ventana mientras el bloque esta a la vista: los botones y el estado no se pierden al
+   mirar los renglones de arriba. */
+.vp-doc .ej-barra {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+}
+.vp-doc .ej-boton {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font: 600 12.5px var(--vp-font-family-base);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.vp-doc .ej-boton:hover:not(:disabled) { border-color: var(--vp-c-border); color: var(--vp-c-text-1); }
+.vp-doc .ej-boton:disabled { opacity: 0.5; cursor: not-allowed; }
+.vp-doc .ej-boton.ej-principal { border-color: transparent; background: var(--vp-c-brand-3); color: #fff; }
+.vp-doc .ej-boton.ej-principal::before { content: '▸'; margin-right: 6px; }
+.vp-doc .ej-boton.ej-principal:hover { background: var(--vp-c-brand-2); color: #fff; }
+.dark .vp-doc .ej-boton.ej-principal:hover { background: #4a6ee6; }
+.vp-doc .ej-ayuda { margin-left: 4px; font-size: 12.5px; color: var(--vp-c-text-3); }
+
+/* estado de la ejecucion: un punto del color del tono y el texto, como en la barra del simulador */
+.vp-doc .ej-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  font: 600 12.5px var(--vp-font-family-base);
+  color: var(--ej-tono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.vp-doc .ej-punto { width: 8px; height: 8px; border-radius: 50%; background: var(--ej-tono); }
+.vp-doc .ej-tono-idle { --ej-tono: var(--vp-c-text-3); }
+.vp-doc .ej-tono-run { --ej-tono: var(--vp-c-brand-1); }
+.vp-doc .ej-tono-pause { --ej-tono: #a16207; }
+.vp-doc .ej-tono-ok { --ej-tono: #17803d; }
+.vp-doc .ej-tono-bad { --ej-tono: #c0352b; }
+.dark .vp-doc .ej-tono-pause { --ej-tono: #e0b354; }
+.dark .vp-doc .ej-tono-ok { --ej-tono: #5fc98a; }
+.dark .vp-doc .ej-tono-bad { --ej-tono: #f08a80; }
+
+/* error de compilacion o de ejecucion, con su linea */
+.vp-doc .ej-fallo {
+  padding: 8px 14px;
+  border-top: 1px solid var(--vp-custom-block-danger-border);
+  background: var(--vp-custom-block-danger-bg);
+  color: #c0352b;
+  font: 500 12.5px/1.5 var(--vp-font-family-mono);
+  overflow-wrap: anywhere;
+}
+.dark .vp-doc .ej-fallo { color: #f08a80; }
+
+/* salida de los write: el instante, el proceso en su color y el texto; se desplaza sola */
+.vp-doc .ej-salida {
+  max-height: 190px;
+  overflow-y: auto;
+  padding: 8px 0;
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-code-block-bg);
+  font: 400 12.5px/1.65 var(--vp-font-family-mono);
+}
+.vp-doc .ej-vacia { margin: 0; padding: 0 14px; font-family: var(--vp-font-family-base); color: var(--vp-c-text-3); }
+/* la linea nueva, y la salida y los errores al aparecer, entran con un fundido */
+.vp-doc .ej-linea { display: flex; gap: 10px; padding: 0 14px; white-space: pre-wrap; overflow-wrap: anywhere; animation: ej-entra 0.22s ease-out; }
+.vp-doc .ej-salida, .vp-doc .ej-fallo { animation: ej-entra 0.22s ease-out; }
+.vp-doc .ej-estado { transition: color 0.2s linear; }
+.vp-doc .ej-punto { transition: background-color 0.2s linear; }
+.vp-doc .ej-instante { flex-shrink: 0; min-width: 3ch; color: var(--vp-c-text-3); text-align: right; }
+.vp-doc .ej-quien { flex-shrink: 0; font-weight: 600; color: color-mix(in oklab, var(--st-proceso) var(--ej-mezcla), white); }
+
+/* Franja de un renglon con procesos: del color del estado, de borde a borde del bloque y
+   con una raya a la izquierda, como en el editor del simulador (.lineBand en
+   CodeEditor.module.css). Va posicionada sobre el bloque, detras del codigo; el lugar lo
+   pone el componente y la transicion la desliza cuando su proceso cambia de renglon.
+   --ej-desliz sale de la duracion de un instante (src/motion.ts). */
+.vp-doc .ejecutable pre code { position: relative; z-index: 1; }
+.vp-doc .ej-franja {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  border-left: 3px solid var(--st);
+  background: color-mix(in srgb, var(--st) 12%, transparent);
+  pointer-events: none;
+  transition: top var(--ej-desliz, 200ms) cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.15s linear, border-color 0.15s linear, opacity 0.18s linear;
+  animation: ej-entra 0.18s ease-out;
+}
+.vp-doc .ej-franja.st-ready { background: color-mix(in srgb, var(--st) 8%, transparent); }
+.vp-doc .ej-franja.ej-error {
+  border-left-color: #c0352b;
+  background: color-mix(in srgb, #c0352b 16%, transparent);
+}
+/* las etiquetas que no pueden deslizarse de costado sin salirse (ver el componente) */
+.vp-doc .ej-etiquetas.ej-sin-costado { transition-property: top, opacity; }
+@keyframes ej-entra { from { opacity: 0; } }
+/* lo que se va se desvanece antes de borrarse (SALIDA_MS en el componente) */
+.vp-doc .ej-sale { opacity: 0; }
+
+/* Etiquetas al final del renglon: quien esta ahi y que esta haciendo (.lineTag en el editor).
+   Van posicionadas sobre el bloque, por encima del codigo y sin ocupar ancho; se deslizan
+   con la franja. */
+.vp-doc .ej-etiquetas {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+  transition: top var(--ej-desliz, 200ms) cubic-bezier(0.4, 0, 0.2, 1),
+              left var(--ej-desliz, 200ms) cubic-bezier(0.4, 0, 0.2, 1), opacity 0.18s linear;
+  animation: ej-entra 0.18s ease-out;
+}
+.vp-doc .ej-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  padding: 0 8px;
+  border: 1px solid var(--st);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--st) 14%, var(--vp-code-block-bg));
+  color: color-mix(in oklab, var(--st) 55%, var(--vp-c-text-1));
+  font: 500 12px/1 var(--vp-font-family-base);
+  white-space: pre;
+  /* al cambiar de estado, la etiqueta pasa de un color al otro; una nueva entra con un fundido */
+  transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+  animation: ej-entra 0.18s ease-out;
+}
+.vp-doc .ej-etiqueta b { font-weight: 600; }
+.vp-doc .ej-etiqueta.st-running-process, .vp-doc .ej-etiqueta.st-running-monitor { background: var(--st); color: #fff; }
+.vp-doc .ej-etiqueta.st-competing { border-style: dashed; }
+.vp-doc .ej-etiqueta.st-ready { border-color: var(--vp-c-border); background: var(--vp-c-bg); color: var(--vp-c-text-2); }
+
+/* quien pide menos movimiento ve cada instante de una vez */
+@media (prefers-reduced-motion: reduce) {
+  .vp-doc .ej-franja, .vp-doc .ej-etiquetas, .vp-doc .ej-etiqueta, .vp-doc .ej-estado, .vp-doc .ej-punto { transition: none; animation: none; }
+  .vp-doc .ej-linea, .vp-doc .ej-salida, .vp-doc .ej-fallo { animation: none; }
+}

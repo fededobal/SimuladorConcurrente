@@ -9,11 +9,10 @@ import { StatusBar } from './components/StatusBar';
 import { Timeline } from './components/Timeline';
 import { TopBar } from './components/TopBar';
 import { blockedProcesses } from './deadlock';
-import type { ActiveLine } from './editor/lineMarks';
+import { activeLinesOf, type ActiveLine } from './editor/lineMarks';
 import { EJEMPLOS, EJEMPLOS_ANTERIORES } from './ejemplos';
 import { updatedExample } from './exampleUpdates';
 import { downloadText, readTextFile } from './files';
-import { visibleState, whereOf } from './processStates';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
 import { decodeShare, encodeShare, exampleIdFromHash, type SharedProgram } from './shareLink';
 import { statusTextOf } from './statusText';
@@ -101,18 +100,10 @@ export function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [anyExpanded, shortcutsOpen]);
 
-  const activeLines: ActiveLine[] = useMemo(() => {
-    if (!snapshot) return [];
-    return snapshot.processes
-      .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
-      .map((p) => {
-        const state = visibleState(p);
-        return {
-          line: p.line, color: p.color, state, name: p.name, where: whereOf(p, state),
-          delayRemaining: p.delayRemaining, advanced: p.advanced,
-        };
-      });
-  }, [snapshot]);
+  const activeLines: ActiveLine[] = useMemo(
+    () => (snapshot ? activeLinesOf(snapshot.processes) : []),
+    [snapshot],
+  );
 
   // Procesos que terminaron por un error de ejecucion: se muestran con su linea.
   const failed = useMemo(

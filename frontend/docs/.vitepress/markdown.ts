@@ -2,9 +2,10 @@ import type MarkdownIt from 'markdown-it';
 import type { StateCore, Token } from 'markdown-it';
 import { ejemploIgualA, ejemploPorId, esProgramaCompleto, fragmentoPara, guia } from './guia';
 
-// Dos agregados al Markdown de la guia:
+// Agregados al Markdown de la guia:
 //  - el numero de seccion delante del titulo de cada pagina ("2.9.8 wait");
-//  - el boton "Abrir en el simulador" en los ejemplos de codigo.
+//  - el boton "Abrir en el simulador" en los ejemplos de codigo;
+//  - la ejecucion en el lugar de los ejemplos que son un programa completo.
 
 /** "lenguaje/instrucciones/wait.md" -> "/lenguaje/instrucciones/wait"; "lenguaje/index.md" -> "/lenguaje/". */
 function enlaceDe(rutaRelativa: string): string {
@@ -48,6 +49,12 @@ function escapar(texto: string): string {
   return texto.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 }
 
+/** El programa en base64 para URL: viaja en un atributo del bloque (ver theme/ejecucion.ts). */
+function enBase64(codigo: string): string {
+  return Buffer.from(codigo, 'utf8').toString('base64')
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
 /**
  * Agrega "Abrir en el simulador" a los bloques ```monitores:
  *  - si el bloque es un programa completo (compila), el boton abre ese mismo programa;
@@ -55,6 +62,9 @@ function escapar(texto: string): string {
  *    dice de cual salio.
  * El enlace va con target="_self": sin el, el enrutador de VitePress lo toma como una pagina
  * de la guia y no sale hacia el simulador.
+ *
+ * Ademas, un bloque que es un programa completo queda envuelto en <EjemploEjecutable>, que
+ * lo ejecuta en la misma pagina. Un fragmento no se puede ejecutar solo y queda como esta.
  */
 export function abrirEnElSimulador(md: MarkdownIt): void {
   const original = md.renderer.rules.fence;
@@ -72,17 +82,18 @@ export function abrirEnElSimulador(md: MarkdownIt): void {
     }
     const igual = marcado ? undefined : ejemploIgualA(token.content);
     const ejemplo = marcado ?? igual;
+    const completo = esProgramaCompleto(token.content);
 
     let destino: string | null = null;
     if (ejemplo) destino = `/#ejemplo=${ejemplo.id}`;
-    else if (esProgramaCompleto(token.content)) {
-      destino = `/#${fragmentoPara('Ejemplo de la guía', token.content)}`;
-    }
+    else if (completo) destino = `/#${fragmentoPara('Ejemplo de la guía', token.content)}`;
     if (destino === null) return html;
 
     const origen = marcado ? `<span class="origen">del ejemplo ${escapar(marcado.titulo)}</span>` : '';
     const boton = `<a class="abrir-sim" href="${escapar(destino)}" target="_self">Abrir en el simulador</a>`;
     // dentro del bloque, antes del codigo: el CSS los ubica en el encabezado
-    return html.replace('<pre', `${origen}${boton}<pre`);
+    const bloque = html.replace('<pre', `${origen}${boton}<pre`);
+    if (!completo) return bloque;
+    return `<EjemploEjecutable codigo="${enBase64(token.content)}">${bloque}</EjemploEjecutable>`;
   };
 }

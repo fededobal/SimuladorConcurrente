@@ -1,0 +1,25 @@
+/* Colores de los estados de un proceso. Los comparten el editor, el panel y la linea de tiempo
+   del simulador, y los ejemplos que se ejecutan en la guia: por eso estan en un archivo
+   aparte, que importan los dos (src/main.tsx y docs/.vitepress/theme/index.ts). El tema
+   oscuro es `data-theme="dark"` en el simulador y la clase `dark` en la guia. */
+
+:root {
+  --st-competing: #c2851a;
+  --st-waiting: #7b5bd6;
+  --st-delayed: #1f9a8a;
+  --st-ready: #9aa3af;
+}
+:root[data-theme="dark"], :root.dark {
+  --st-competing: #d9a441;
+  --st-waiting: #a58bf0;
+  --st-delayed: #4cc0b0;
+  --st-ready: #5d6773;
+}
+
+/* Color por estado. El icono y el texto distinguen los estados sin depender solo del color.
+   --st-proceso lo fija cada marca y cada fila con el color de su proceso. */
+.st-running-process, .st-running-monitor { --st: var(--st-proceso, var(--text, currentColor)); }
+.st-competing { --st: var(--st-competing); }
+.st-waiting   { --st: var(--st-waiting); }
+.st-delayed   { --st: var(--st-delayed); }
+.st-ready     { --st: var(--st-ready); }

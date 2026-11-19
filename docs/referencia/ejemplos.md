@@ -7,6 +7,10 @@ la Explicación 3 (explicación práctica de monitores) de la materia, con los c
 infinitos se reemplazan por una cantidad fija de repeticiones para que el programa termine, y
 las funciones sin definir, por `delay` o por una expresión.
 
+Cada programa se puede ejecutar en esta página, con los botones que están debajo de su
+código, o abrir en el simulador
+([Ejemplos de código](/introduccion/presentacion#ejemplos-de-codigo)).
+
 Todos forman parte de las pruebas del simulador: se ejecutan con turnos al azar y 25 semillas
 distintas, y una vez con turnos en ronda, y en todos los casos terminan con el resultado
 indicado.

@@ -16,6 +16,7 @@ Reglas:
 ## [Sin publicar]
 
 ### Agregado
+- Guía: los ejemplos que son un programa completo se ejecutan en la misma página. Una barra debajo del código tiene Ejecutar (que pasa a Pausar y Seguir), Paso y Reiniciar, el estado de la ejecución con el instante y la salida de los `write`. Mientras corre, cada renglón con procesos lleva la franja del color del estado y la etiqueta con quién está ahí, como en el editor, y de un instante al siguiente nada salta: la franja y la etiqueta de un proceso se deslizan hasta su renglón nuevo, cambian de color con una transición y entran y salen con un fundido (se apaga con la preferencia de reducir el movimiento). Usa el mismo motor que el simulador, que se descarga recién al ejecutar; corre un ejemplo por vez. (Federico Dobal, 2026-11-19)
 - Función `random(inf, sup)`: una expresión `int` que vale un entero al azar entre los dos límites, incluidos (`delay(random(1, 5))`, `int tiempo = random(1, 10);`). Sale de la semilla de la ejecución, así que Repetir vuelve a dar los mismos valores. Los límites al revés son error de ejecución, y no se admite en el rango de un arreglo de procesos o de monitores ni en el tamaño de un arreglo. `random` pasa a ser palabra reservada. No figura en el material de la cátedra. (Federico Dobal, 2026-11-19)
 - Topes en todas las listas de los paneles, con un botón para ver el resto: variables condición de un monitor (6, primero las que tienen procesos dormidos), variables permanentes (8), monitores del panel (8), variables locales de un proceso (8), procesos de la tabla «Por qué nadie avanza» (8) y el valor de un texto largo (60 caracteres). Se suman a los que ya tenían las colas, los arreglos y la lista de procesos. (Federico Dobal, 2026-11-19)
 - Línea de tiempo: la columna con los nombres de los procesos y los monitores se ensancha o se angosta arrastrando su borde derecho (también con las flechas del teclado); de entrada toma el ancho del nombre más largo y doble clic vuelve a ese ancho. Un nombre que no entra se abrevia sin perder el índice. (Federico Dobal, 2026-11-19)
@@ -301,6 +302,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Compartir entre el simulador y la guía los colores de los estados de un proceso (`src/states.css`) y el cálculo de los renglones con procesos (`activeLinesOf`). (Federico Dobal, 2026-11-19)
 - Script `scripts/desborde.mjs`: abre el simulador real con programas exigentes (nombres largos, vectores de monitores, colas y arreglos grandes, deadlock) en varios anchos de ventana y de panel, con los menús abiertos, y lista cada elemento cuyo contenido se corta o se sale de su lugar; termina con error si encuentra alguno. (Federico Dobal, 2026-11-19)
 - Partir el componente de la línea de tiempo: la fila (carril de monitor o proceso), el cartel del instante y la medición de texto pasan a archivos propios, sin cambio de comportamiento. (Federico Dobal, 2026-11-19)
 - `scripts/capturas.mjs` regenera las capturas de la guía con el simulador real: abre cada programa por enlace, con semilla fija, de modo que las imágenes salen iguales cada vez. (Federico Dobal, 2026-11-17)

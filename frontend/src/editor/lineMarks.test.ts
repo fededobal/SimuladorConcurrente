@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { gutterChipsOf, lineMarksOf, MAX_TAGS, type ActiveLine } from './lineMarks';
+import {
+  activeLinesOf, gutterChipsOf, lineMarksOf, MAX_TAGS, tagNote, type ActiveLine,
+} from './lineMarks';
+import type { ProcessView } from '../types';
 
 function active(name: string, line: number, extra: Partial<ActiveLine> = {}): ActiveLine {
   return {
@@ -96,5 +99,50 @@ describe('gutterChipsOf', () => {
   it('chipTellsWhetherItsProcessAdvanced', () => {
     const chips = gutterChipsOf([active('A', 1, { advanced: true }), active('B', 2)]);
     expect(Object.fromEntries(chips.map((c) => [c.name, c.advanced]))).toEqual({ A: true, B: false });
+  });
+});
+
+function process(name: string, extra: Partial<ProcessView> = {}): ProcessView {
+  return {
+    id: 1, name, color: '#123456', state: 'READY', line: 7, blockReason: null, blockedOn: null,
+    location: null, holding: [], delayRemaining: null, advanced: false, advanceOrder: -1,
+    error: null, locals: [], ...extra,
+  };
+}
+
+describe('activeLinesOf', () => {
+  it('oneLinePerProcessThatHasNotFinished', () => {
+    const lines = activeLinesOf([
+      process('A', { line: 4, advanced: true }),
+      process('B', { state: 'TERMINATED' }),
+      process('C', { line: 0 }),
+    ]);
+    expect(lines.map((l) => [l.name, l.line, l.state])).toEqual([['A', 4, 'RUNNING_PROCESS']]);
+  });
+
+  it('carriesWhereTheProcessIsAndItsDelay', () => {
+    const [asleep, delayed] = activeLinesOf([
+      process('A', { state: 'BLOCKED', blockReason: 'COND_WAIT', blockedOn: 'Buffer.libre' }),
+      process('B', { state: 'BLOCKED', blockReason: 'DELAY', delayRemaining: 2, holding: ['Cajero'] }),
+    ]);
+    expect([asleep.state, asleep.where]).toEqual(['WAITING', 'libre']);
+    expect([delayed.state, delayed.delayRemaining]).toEqual(['DELAYED', 2]);
+  });
+});
+
+describe('tagNote', () => {
+  it('saysWhereTheProcessIs', () => {
+    const [mark] = lineMarksOf([active('A', 3, { state: 'RUNNING_MONITOR', where: 'Cajero' })]);
+    expect(tagNote(mark.tags[0])).toBe('en Cajero');
+  });
+
+  it('addsWhatIsLeftOfADelay', () => {
+    const [mark] = lineMarksOf([active('A', 3, { state: 'DELAYED', delayRemaining: 2 })]);
+    expect(tagNote(mark.tags[0])).toBe('en delay · faltan 2 instantes');
+  });
+
+  it('isEmptyWhenThereIsNothingToExplain', () => {
+    const [mark] = lineMarksOf([active('A', 3, { state: 'RUNNING_PROCESS' })]);
+    expect(tagNote(mark.tags[0])).toBe('');
   });
 });

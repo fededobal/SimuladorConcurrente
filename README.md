@@ -41,7 +41,7 @@ publican.
   (marcada en rojo). El compilador también controla los tipos y el alcance de los nombres.
 - Abrir programas de ejemplo, uno por tema (exclusión mutua implícita, variables condición,
   código de inicialización, colas, vector de `cond`, vector de monitores, *deadlock*, entre
-  otros), también desde la guía.
+  otros), también desde la guía, que además los ejecuta en la misma página.
 
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y

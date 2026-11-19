@@ -1,5 +1,6 @@
 import { familyOf } from '../timeline';
-import { stateDetail, type VisibleState } from '../processStates';
+import { delayLeft, stateDetail, visibleState, whereOf, type VisibleState } from '../processStates';
+import type { ProcessView } from '../types';
 
 /** Renglon donde esta parado un proceso, con lo necesario para marcarlo en el editor. */
 export interface ActiveLine {
@@ -13,6 +14,22 @@ export interface ActiveLine {
   readonly delayRemaining: number | null;
   /** true si avanzo en el ultimo instante: su chip late una vez para que se vea quien se movio. */
   readonly advanced: boolean;
+}
+
+/**
+ * Los renglones donde esta parado cada proceso que todavia no termino. De aca salen las
+ * marcas del editor y las de los ejemplos que se ejecutan en la guia.
+ */
+export function activeLinesOf(processes: readonly ProcessView[]): ActiveLine[] {
+  return processes
+    .filter((p) => p.line > 0 && p.state !== 'TERMINATED')
+    .map((p) => {
+      const state = visibleState(p);
+      return {
+        line: p.line, color: p.color, state, name: p.name, where: whereOf(p, state),
+        delayRemaining: p.delayRemaining, advanced: p.advanced,
+      };
+    });
 }
 
 /**
@@ -32,6 +49,15 @@ export interface LineTag {
   readonly names: readonly string[];
   /** Instantes de delay que le quedan al unico proceso de la etiqueta, o null. */
   readonly delayRemaining: number | null;
+}
+
+/**
+ * Lo que dice una etiqueta despues del nombre: donde esta el proceso y, si esta en un delay,
+ * cuanto le falta ("en Cajero · faltan 2 instantes"). Vacio si no hay nada que aclarar.
+ */
+export function tagNote(tag: LineTag): string {
+  const left = tag.delayRemaining === null ? '' : delayLeft(tag.delayRemaining);
+  return [tag.detail, left].filter((part) => part !== '').join(' · ');
 }
 
 /** Todo lo que se dibuja sobre un renglon con procesos. */

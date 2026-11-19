@@ -2,6 +2,7 @@ import { h, watch } from 'vue';
 import DefaultTheme from 'vitepress/theme';
 import { useData, type Theme } from 'vitepress';
 import Chips from './components/Chips.vue';
+import EjemploEjecutable from './components/EjemploEjecutable.vue';
 import FiguraMonitor from './components/FiguraMonitor.vue';
 import Migas from './components/Migas.vue';
 import Portada from './components/Portada.vue';
@@ -10,6 +11,8 @@ import { instalarResaltadoDeBusqueda } from './resaltarBusqueda';
 import './custom.css';
 // la misma barra de desplazamiento que el simulador
 import '../../../src/scrollbar.css';
+// los colores de los estados de un proceso, para los ejemplos que se ejecutan en la guia
+import '../../../src/states.css';
 
 /** Clave donde VitePress guarda el tema; el simulador lee la misma (src/useTheme.ts). */
 const CLAVE_TEMA = 'vitepress-theme-appearance';
@@ -77,6 +80,7 @@ export default {
   enhanceApp({ app, router }) {
     // componentes que se usan desde el Markdown de las paginas
     app.component('Chips', Chips);
+    app.component('EjemploEjecutable', EjemploEjecutable);
     app.component('FiguraMonitor', FiguraMonitor);
     app.component('Portada', Portada);
     instalarResaltadoDeBusqueda(router);
