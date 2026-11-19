@@ -190,10 +190,28 @@ export function Timeline({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns.length, lastInstant, cell, stopGlide]);
   useEffect(() => stopGlide, [stopGlide]);
+
+  // Si el panel cambia de ancho (el inspector se amplia delante, o vuelve a su lugar) y venia
+  // siguiendo al ultimo instante, lo sigue teniendo a la vista: sin esto, al angostarse el
+  // instante actual quedaba fuera, a la derecha. `measuredWidth` deja distinguir, en onScroll,
+  // un desplazamiento del alumno de uno que llega mientras el panel todavia cambia de ancho.
+  const measuredWidth = useRef(0);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return undefined;
+    const observer = new ResizeObserver(() => {
+      measuredWidth.current = el.clientWidth;
+      if (following.current && glide.current === null) el.scrollLeft = el.scrollWidth;
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const onScroll = () => {
     const el = scrollRef.current;
-    // mientras se desliza sola todavia no llego al final: no cuenta como "se fue hacia atras"
-    if (el && glide.current === null) {
+    // Mientras se desliza sola todavia no llego al final: no cuenta como "se fue hacia atras".
+    // Tampoco mientras el panel cambia de ancho: el evento llega con un ancho que ya no es el
+    // que tenia cuando se acomodo el desplazamiento.
+    if (el && glide.current === null && el.clientWidth === measuredWidth.current) {
       following.current = el.scrollLeft + el.clientWidth >= el.scrollWidth - cell;
     }
     readView();

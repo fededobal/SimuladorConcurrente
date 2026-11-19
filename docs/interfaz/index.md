@@ -57,7 +57,7 @@ muestran de una vez, sin animaciones.
 | Agrandar o achicar el inspector o la línea de tiempo | Arrastrar el borde que mira al editor; también con las flechas del teclado cuando el borde tiene el foco |
 | Volver al tamaño automático | Doble clic en ese borde |
 | Ampliar la línea de tiempo | Botón de la esquina superior derecha de la línea de tiempo: pasa al costado del editor, a toda altura, y el inspector se oculta. El mismo botón o Escape la devuelven a su lugar |
-| Ensanchar el inspector | Botón de la esquina superior derecha del inspector; el mismo botón lo devuelve a su ancho |
+| Ampliar el inspector | Botón de la esquina superior derecha del inspector: queda más ancho y a toda la altura, delante de la línea de tiempo, que sigue a la vista debajo del editor. El mismo botón o Escape lo devuelven a su lugar |
 
 ::: tip Nota
 La línea de tiempo toma el alto de sus filas, hasta algo menos de la mitad de la pantalla.

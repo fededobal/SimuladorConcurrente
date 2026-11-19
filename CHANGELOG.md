@@ -79,6 +79,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Inspector: el botón de su esquina lo amplía como a la línea de tiempo: queda más ancho y a toda la altura, delante de la línea de tiempo, que sigue a la vista debajo del editor, hasta volverlo a su lugar con el mismo botón o con Escape. Antes solo se ensanchaba y la línea de tiempo lo cortaba por abajo. (Federico Dobal, 2026-11-19)
 - Línea de tiempo: al pasar el mouse por un instante el puntero cambia a la mano y la columna se resalta más, sin ningún texto emergente; lo que pasó se lee en el cartel que abre el clic. (Federico Dobal, 2026-11-19)
 - Línea de tiempo: el cartel de un instante aparece al hacer clic en él, no al pasar el mouse, y acompaña al puntero corrido hacia un costado, así no tapa lo que se está mirando; se cierra con otro clic en el mismo instante o con Escape. Pasar el mouse solo resalta la columna. (Federico Dobal, 2026-11-19)
 - Dibujo del monitor: las tres zonas pasan a llamarse «1 · Compitiendo», «2 · Bloqueado» y «3 · Ejecutando» (antes Compiten, En wait y Adentro), en el panel Monitores, en la figura de la guía y en las páginas que las nombran. (Federico Dobal, 2026-11-19)

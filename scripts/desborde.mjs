@@ -126,7 +126,7 @@ const INSPECTOR_MINIMO = ASA('Cambiar el ancho del inspector', 'ArrowRight', 6);
 const NOMBRES_ANCHOS = ASA('Cambiar el ancho de la columna de nombres', 'ArrowRight', 30);
 const NOMBRES_ANGOSTOS = ASA('Cambiar el ancho de la columna de nombres', 'ArrowLeft', 30);
 const AMPLIAR_LINEA = `document.querySelector('button[aria-label="Ampliar la línea de tiempo"]').click()`;
-const ENSANCHAR_INSPECTOR = `document.querySelector('button[aria-label="Ensanchar el panel"]').click()`;
+const AMPLIAR_INSPECTOR = `document.querySelector('button[aria-label="Ampliar el panel"]').click()`;
 /** Abre todos los "+n más" y "ver más" del inspector. */
 const ABRIR_TODO = `[...document.querySelectorAll('aside[aria-label="Inspector"] button[aria-expanded="false"]')]
   .filter((b) => !b.hasAttribute('aria-haspopup')).forEach((b) => b.click())`;
@@ -156,7 +156,8 @@ const ESCENARIOS = [
   { nombre: 'banco procesos', programa: BANCO, pasos: 14, antes: [TAB('processes')] },
   { nombre: 'banco salida', programa: BANCO, pasos: 200, antes: [TAB('output')] },
   { nombre: 'banco inspector angosto', programa: BANCO, pasos: 14, antes: [INSPECTOR_MINIMO] },
-  { nombre: 'banco inspector ancho', programa: BANCO, pasos: 14, antes: [ENSANCHAR_INSPECTOR] },
+  { nombre: 'banco inspector ampliado', programa: BANCO, pasos: 14, antes: [AMPLIAR_INSPECTOR] },
+  { nombre: 'nombres largos inspector ampliado', programa: NOMBRES_LARGOS, pasos: 60, antes: [AMPLIAR_INSPECTOR, ABRIR_TODO] },
   { nombre: 'banco linea ampliada', programa: BANCO, pasos: 30, antes: [AMPLIAR_LINEA, CLIC_INSTANTE()] },
   { nombre: 'banco cartel en la esquina', programa: BANCO, pasos: 30, antes: [CLIC_INSTANTE(0.99, 0.98)] },
   { nombre: 'banco nombres angostos', programa: BANCO, pasos: 30, antes: [NOMBRES_ANGOSTOS] },
@@ -164,7 +165,7 @@ const ESCENARIOS = [
   { nombre: 'banco ventana angosta', programa: BANCO, pasos: 14, ancho: 700, alto: 900 },
   { nombre: 'deadlock', programa: DEADLOCK, pasos: 60 },
   { nombre: 'deadlock inspector angosto', programa: DEADLOCK, pasos: 60, antes: [INSPECTOR_MINIMO] },
-  { nombre: 'deadlock inspector ancho', programa: DEADLOCK, pasos: 60, antes: [ENSANCHAR_INSPECTOR] },
+  { nombre: 'deadlock inspector ampliado', programa: DEADLOCK, pasos: 60, antes: [AMPLIAR_INSPECTOR] },
   { nombre: 'banco grande', programa: BANCO_GRANDE, pasos: 40 },
   { nombre: 'banco grande todo abierto', programa: BANCO_GRANDE, pasos: 40, antes: [ABRIR_TODO] },
   { nombre: 'banco grande procesos angosto', programa: BANCO_GRANDE, pasos: 40, antes: [TAB('processes'), INSPECTOR_MINIMO] },

@@ -24,9 +24,9 @@ interface Props {
   readonly running: boolean;
   /** Duracion de un instante, en ms: las animaciones se acompasan a la simulacion. */
   readonly pasoMs: number;
-  /** true si el panel esta ensanchado. */
-  readonly wide: boolean;
-  readonly onToggleWide: () => void;
+  /** true si esta ampliado: mas ancho y a toda altura, delante de la linea de tiempo. */
+  readonly expanded: boolean;
+  readonly onToggleExpand: () => void;
   readonly onStepProcess: (processId: number) => void;
 }
 
@@ -42,10 +42,11 @@ const TAB_LABEL: Record<TabId, string> = {
 /**
  * Panel de la derecha. Monitores, Procesos y Salida son pestanas del mismo panel: la salida
  * ya no tapa a los monitores ni a la linea de tiempo, y se puede pasar de una a otra sin
- * perder de vista el codigo.
+ * perder de vista el codigo. El boton de la esquina lo amplia: queda mas ancho y a toda
+ * altura, delante de la linea de tiempo, que sigue a la vista debajo del editor.
  */
 export function Inspector({
-  snapshot, entries, blocked, running, pasoMs, wide, onToggleWide, onStepProcess,
+  snapshot, entries, blocked, running, pasoMs, expanded, onToggleExpand, onStepProcess,
 }: Props) {
   const [tab, setTab] = useState<TabId>('monitors');
   // monitor elegido en el selector de cada vector de monitores, por nombre del vector; vive
@@ -100,10 +101,11 @@ export function Inspector({
           </button>
         ))}
         <div className={s.tabsEnd}>
-          <button type="button" className="btn btn-icono btn-plano btn-chico" onClick={onToggleWide}
-            aria-pressed={wide} aria-label={wide ? 'Volver el panel a su ancho' : 'Ensanchar el panel'}
-            title={wide ? 'Volver el panel a su ancho' : 'Ensanchar el panel'}>
-            {wide ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+          <button type="button" className="btn btn-icono btn-plano btn-chico" onClick={onToggleExpand}
+            aria-pressed={expanded}
+            aria-label={expanded ? 'Volver el panel a su lugar' : 'Ampliar el panel'}
+            title={expanded ? 'Volver el panel a su lugar (Esc)' : 'Ampliar el panel'}>
+            {expanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
           </button>
         </div>
       </div>

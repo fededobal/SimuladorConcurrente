@@ -10,7 +10,7 @@
 }
 
 /* tamano automatico: crece o se achica con una transicion (al empezar una ejecucion, al
-   ensanchar el inspector, al volver con doble clic); arrastrado, sigue al puntero */
+   ampliar el inspector, al volver con doble clic); arrastrado, sigue al puntero */
 .auto { transition: width 0.22s var(--ease-step), height 0.22s var(--ease-step); }
 
 .asa {

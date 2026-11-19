@@ -115,5 +115,5 @@ elemento abreviado.
 Cuando la simulación termina en deadlock, debajo de las tarjetas aparece la tabla
 **Por qué nadie avanza**, con cada proceso bloqueado, dónde está y qué lo despertaría
 ([Diagnóstico de un deadlock](/operacion/deadlock)). Con el inspector en su ancho habitual,
-cada proceso ocupa un bloque con sus dos datos; con el inspector ensanchado, una fila con
+cada proceso ocupa un bloque con sus dos datos; con el inspector ampliado, una fila con
 tres columnas.

@@ -33,6 +33,10 @@ const NAME_CHARS = 16;
 /** En la zona 2, caracteres del nombre de la variable condicion y del primer proceso de su cola. */
 const COND_CHARS = 8;
 const COND_PROC_CHARS = 7;
+/** Caracteres de la variable condicion cuando hay mas de un dormido: el "+n" necesita su lugar. */
+const COND_CHARS_CROWDED = 6;
+/** Ancho de un caracter del nombre de la variable condicion (letra de ancho fijo), en unidades del dibujo. */
+const COND_CHAR_W = 6.3;
 /** Puntos que recorren una misma flecha a la vez; con mas procesos, el resto no se dibuja. */
 const MAX_TRAVELERS = 4;
 /** Separacion entre dos puntos que recorren la misma flecha, en ms. */
@@ -224,13 +228,16 @@ function CondRows({ monitor, x, y }: { monitor: MonitorView; x: number; y: numbe
     <>
       {shown.map((c, i) => {
         const first = c.queue[0];
+        // con mas de un dormido, el nombre de la cond cede lugar al "+n" para que no se salga de la zona
+        const condChars = c.queue.length > 1 ? COND_CHARS_CROWDED : COND_CHARS;
+        const dotX = x + Math.round(condChars * COND_CHAR_W) + 8;
         return (
           <g key={c.name} className={s.nameRow} style={{ transform: `translateY(${i * ROW_H}px)` }}>
-            <text x={x} y={y} className={s.condName}>{fitName(c.name, COND_CHARS)}</text>
+            <text x={x} y={y} className={s.condName}>{fitName(c.name, condChars)}</text>
             {first ? (
               <g key={first.id} className={s.arrive}>
-                <circle cx={x + 58} cy={y - 4} r="3.5" fill={first.color} />
-                <text x={x + 65} y={y} className={s.procName}>
+                <circle cx={dotX} cy={y - 4} r="3.5" fill={first.color} />
+                <text x={dotX + 7} y={y} className={s.procName}>
                   {fitName(first.name, COND_PROC_CHARS)}{c.queue.length > 1 ? ` +${c.queue.length - 1}` : ''}
                 </text>
               </g>

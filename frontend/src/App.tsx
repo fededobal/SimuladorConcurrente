@@ -74,21 +74,27 @@ export function App() {
   // Los dos paneles se agrandan o achican arrastrando el borde que mira al editor.
   const timelineSize = useDragSize('y', 'Cambiar el alto de la línea de tiempo');
   const inspectorSize = useDragSize('x', 'Cambiar el ancho del inspector');
-  const [inspectorWide, setInspectorWide] = useState(false);
 
-  // La linea de tiempo ampliada ocupa la derecha del editor a toda altura y el inspector se
-  // oculta hasta volverla a su lugar, con el mismo boton o con Escape.
+  // Cada panel se puede ampliar: ocupa la derecha del editor a toda altura, hasta volverlo a
+  // su lugar con el mismo boton o con Escape. Con la linea de tiempo ampliada el inspector se
+  // oculta (sigue montado); con el inspector ampliado la linea de tiempo sigue a la vista,
+  // debajo del editor.
   const expandedSize = useDragSize('x', 'Cambiar el ancho de la línea de tiempo ampliada');
   const [timelineExpanded, setTimelineExpanded] = useState(false);
+  const inspectorExpandedSize = useDragSize('x', 'Cambiar el ancho del inspector ampliado');
+  const [inspectorExpanded, setInspectorExpanded] = useState(false);
+  const anyExpanded = timelineExpanded || inspectorExpanded;
   useEffect(() => {
-    if (!timelineExpanded) return;
+    if (!anyExpanded) return;
     const onKey = (e: KeyboardEvent) => {
       // con la lista de atajos abierta, Escape cierra la lista
-      if (e.key === 'Escape' && !shortcutsOpen) setTimelineExpanded(false);
+      if (e.key !== 'Escape' || shortcutsOpen) return;
+      setTimelineExpanded(false);
+      setInspectorExpanded(false);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [timelineExpanded, shortcutsOpen]);
+  }, [anyExpanded, shortcutsOpen]);
 
   const activeLines: ActiveLine[] = useMemo(() => {
     if (!snapshot) return [];
@@ -267,7 +273,7 @@ export function App() {
         onToggleTheme={theme.toggle}
       />
 
-      <div className={`${s.body}${timelineExpanded ? ` ${s.bodyExpanded}` : ''}`}>
+      <div className={`${s.body}${timelineExpanded ? ` ${s.bodyExpanded}` : ''}${inspectorExpanded ? ` ${s.bodyInspector}` : ''}`}>
         <div className={s.main}>
           <EditorPane
             programName={program.name}
@@ -289,15 +295,16 @@ export function App() {
             onShowInstant={showInstant}
             onReplay={sim.replay}
           />
-          <Dock drag={inspectorSize} className={`${s.inspectorDock}${inspectorWide ? ` ${s.inspectorWide}` : ''}`}>
+          <Dock drag={inspectorExpanded ? inspectorExpandedSize : inspectorSize}
+            className={`${s.inspectorDock}${inspectorExpanded ? ` ${s.inspectorExpanded}` : ''}`}>
             <Inspector
               snapshot={snapshot}
               entries={sim.entries}
               blocked={blocked}
               running={running}
               pasoMs={sim.speed}
-              wide={inspectorWide}
-              onToggleWide={() => setInspectorWide((w) => !w)}
+              expanded={inspectorExpanded}
+              onToggleExpand={() => setInspectorExpanded((e) => !e)}
               onStepProcess={sim.step}
             />
           </Dock>

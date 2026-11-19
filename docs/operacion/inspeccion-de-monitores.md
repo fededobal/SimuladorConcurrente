@@ -11,8 +11,10 @@ dónde, y el valor de sus variables permanentes.
 2. En la pestaña **Monitores** del inspector, ubicar la tarjeta del monitor. El encabezado
    indica si está libre o qué proceso lo ocupa. Si el monitor pertenece a un vector,
    elegirlo en el selector del panel de ese vector: se muestra solo su tarjeta.
-3. Para examinarlo con más espacio, ensanchar el inspector con el botón de su esquina
-   superior derecha o arrastrando su borde izquierdo.
+3. Para examinarlo con más espacio, ampliar el inspector con el botón de su esquina
+   superior derecha: queda más ancho y a toda la altura, delante de la línea de tiempo, que
+   sigue a la vista debajo del editor. El mismo botón o Escape lo devuelven a su lugar. También se puede ensanchar arrastrando su
+   borde izquierdo.
 4. Mirar el dibujo: la zona **1 · Compitiendo** tiene a los que esperan entrar, la
    **2 · Bloqueado** una fila por variable condición y la **3 · Ejecutando** al proceso que tiene
    el monitor, con su línea.

@@ -25,7 +25,18 @@
 }
 
 .inspectorDock { width: 404px; border-left: 1px solid var(--line); animation: dock-b 0.2s ease-out; }
-.inspectorWide { width: 56%; }
+/* Inspector ampliado: mas ancho y a toda altura, delante de la linea de tiempo, que sigue a
+   la vista debajo del editor y se angosta en vez de quedar tapada (su extremo derecho es el
+   instante actual). La pantalla pasa a una grilla: a la izquierda el editor y, debajo, la
+   linea de tiempo; a la derecha, el inspector en las dos filas. `.main` deja de ser una caja
+   para que el editor y el inspector sean celdas de esa grilla. */
+.inspectorExpanded { width: 56vw; }
+@media (min-width: 761px) {
+  .bodyInspector { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr) auto; }
+  .bodyInspector .main { display: contents; }
+  .bodyInspector .inspectorDock { grid-column: 2; grid-row: 1 / span 2; }
+  .bodyInspector .timelineDock { grid-column: 1; grid-row: 2; }
+}
 
 /* La linea de tiempo toma el alto de sus filas (baja al abrir, crece con los procesos) hasta
    algo menos de la mitad de la pantalla; arrastrando el asa manda el alto elegido. */
@@ -68,7 +79,8 @@
 /* en una pantalla angosta los paneles se apilan y cada uno ocupa el ancho */
 @media (max-width: 760px) {
   .main { flex-direction: column; }
-  .inspectorDock, .inspectorWide { width: auto; height: 42%; border-left: 0; border-top: 1px solid var(--line); }
+  .inspectorDock { width: auto; height: 42%; border-left: 0; border-top: 1px solid var(--line); }
+  .inspectorExpanded { width: auto; height: 62%; }
   .inspectorDock > :first-child { display: none; }
   .bodyExpanded { flex-direction: column; }
   .timelineExpanded { width: auto; height: 45%; border-left: 0; border-top: 1px solid var(--line); }
