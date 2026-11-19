@@ -1,0 +1,5 @@
+/* Nombre con indice: si no entra se abrevia el nombre y el indice no se achica. */
+
+.name { display: inline-flex; min-width: 0; max-width: 100%; white-space: nowrap; }
+.base { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.index { flex-shrink: 0; }

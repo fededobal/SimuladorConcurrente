@@ -2,13 +2,15 @@ import { useMemo, useState } from 'react';
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { DeadlockTable } from './DeadlockTable';
 import { MonitorCard } from './MonitorCard';
+import { MonitorGroupPanel } from './MonitorGroupPanel';
 import { OutputPanel } from './OutputPanel';
 import { ProcessList } from './ProcessList';
 import type { BlockedProcess } from '../deadlock';
 import { eventsAbout } from '../monitorDiagram';
+import { groupMonitors } from '../monitorGroups';
 import { slideMs, travelMs } from '../motion';
 import { useChangeCount } from '../useChangeCount';
-import type { LogEntry, ProcessView, ProcRef, Snapshot } from '../types';
+import type { LogEntry, MonitorView, ProcessView, ProcRef, Snapshot } from '../types';
 import s from './Inspector.module.css';
 
 type TabId = 'monitors' | 'processes' | 'output';
@@ -43,6 +45,9 @@ export function Inspector({
   snapshot, entries, blocked, running, pasoMs, wide, onToggleWide, onStepProcess,
 }: Props) {
   const [tab, setTab] = useState<TabId>('monitors');
+  // monitor elegido en el selector de cada vector de monitores, por nombre del vector; vive
+  // aca y no en el panel del vector para que no se pierda al cambiar de pestana
+  const [picked, setPicked] = useState<Readonly<Record<string, string | null>>>({});
   const processes = snapshot?.processes;
 
   const byId = useMemo(() => {
@@ -61,6 +66,13 @@ export function Inspector({
     // refsKey resume lo unico de `processes` que usa el mapa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refsKey]);
+
+  const monitorCard = (m: MonitorView) => (
+    <MonitorCard key={m.name} monitor={m}
+      owner={m.lockOwner ? byId.get(m.lockOwner.id) : undefined}
+      events={eventsAbout(m, entries)} procRefs={procRefs}
+      deadlocked={blocked.length > 0} />
+  );
 
   const counts: Record<TabId, number> = {
     monitors: snapshot?.monitors.length ?? 0,
@@ -104,12 +116,11 @@ export function Inspector({
             {snapshot.monitors.length === 0 && (
               <p className="panel-vacio">El programa no declara monitores.</p>
             )}
-            {snapshot.monitors.map((m) => (
-              <MonitorCard key={m.name} monitor={m}
-                owner={m.lockOwner ? byId.get(m.lockOwner.id) : undefined}
-                events={eventsAbout(m, entries)} procRefs={procRefs}
-                deadlocked={blocked.length > 0} />
-            ))}
+            {groupMonitors(snapshot.monitors).map((g) => (g.isArray ? (
+              <MonitorGroupPanel key={`${g.name}[]`} group={g} picked={picked[g.name] ?? null}
+                onPick={(name) => setPicked((prev) => ({ ...prev, [g.name]: name }))}
+                renderCard={monitorCard} />
+            ) : monitorCard(g.monitors[0])))}
             <DeadlockTable blocked={blocked} />
           </>
         )}

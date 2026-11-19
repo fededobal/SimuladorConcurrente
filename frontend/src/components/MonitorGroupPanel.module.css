@@ -1,0 +1,53 @@
+/* Panel de un vector de monitores: encabezado con el selector y, debajo, las tarjetas. */
+
+.group {
+  margin: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  /* entra con un fundido al empezar una ejecucion, como las tarjetas */
+  animation: group-in 0.2s ease-out;
+}
+@keyframes group-in { from { opacity: 0; } }
+
+.head {
+  /* el menu del selector se ubica respecto del encabezado: ver .picker */
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  padding: 8px 8px 6px 12px;
+}
+/* un nombre largo se abrevia antes que empujar al selector fuera del panel */
+.name { font: 700 14px/1.2 var(--mono); }
+.tag {
+  flex-shrink: 0;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  font: 500 12px/18px var(--sans);
+  color: var(--dim);
+  white-space: nowrap;
+}
+.picker { margin-left: auto; display: inline-flex; min-width: 0; max-width: 100%; }
+.picker :global(.popover), .picker :global(.btn) { min-width: 0; max-width: 100%; }
+/* El menu ocupa el ancho del encabezado en vez de colgar del boton: con nombres largos, un
+   menu alineado al boton se salia del panel por la izquierda. */
+.picker :global(.popover) { position: static; }
+.picker :global(.popover-panel) { left: 8px; right: 8px; min-width: 0; }
+.picker :global(.menu-item-nota) { flex-shrink: 0; }
+.picker :global(.menu-item svg) { margin-left: 0; }
+.pickerValue { font-family: var(--mono); }
+/* la tilde ocupa su lugar aunque no se vea: los nombres quedan alineados */
+.noCheck { visibility: hidden; }
+
+.order { padding: 0 12px 2px; font-size: 12px; line-height: 1.4; color: var(--dimmer); }
+
+/* las tarjetas van casi a todo el ancho del panel: el margen ya lo pone el borde del grupo */
+.cards > div > section { margin: 8px; }
+.moreRow { padding: 0 8px 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .group { animation: none; }
+}
