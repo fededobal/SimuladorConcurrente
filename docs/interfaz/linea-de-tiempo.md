@@ -5,9 +5,9 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 
 <figure>
 
-![Línea de tiempo del ejemplo del banco: un carril para el monitor Banco y uno para cada Escritorio, con los procesos que los ocuparon en sucesión; filas de los clientes con tramos rotulados "compite por Banco", "en Banco", "Escritorio[0]", "wait(vcCliente)" y "wait(esperaC)"; el instante 22 destacado y la tarjeta fija del instante 10](/capturas/linea-de-tiempo.png)
+![Línea de tiempo del ejemplo del banco: un carril para el monitor Banco y uno para cada Escritorio, con los procesos que los ocuparon en sucesión; filas de los clientes con tramos rotulados "compite por Banco", "en Banco", "Escritorio[0]" y "wait(vcCliente)"; el instante 22 destacado y, junto a la columna del instante 10, su cartel](/capturas/linea-de-tiempo.png)
 
-<figcaption>Ejemplo Problema completo: banco y escritorios, con turnos en ronda. Cada carril muestra que su monitor pasa de un proceso a otro sin superposiciones; la tarjeta fija describe el instante 10.</figcaption>
+<figcaption>Ejemplo Problema completo: banco y escritorios, con turnos en ronda. Cada carril muestra que su monitor pasa de un proceso a otro sin superposiciones; el cartel describe el instante 10, elegido con un clic.</figcaption>
 </figure>
 
 | Parte | Qué muestra |
@@ -33,11 +33,31 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 
 | Acción | Resultado |
 |---|---|
-| Pasar el puntero por una columna | Una tarjeta describe los eventos de ese instante, cada proceso en su color |
-| Clic en la columna | La tarjeta queda fija; otro clic la suelta |
+| Pasar el puntero por una columna | La columna se resalta |
+| Clic en la columna | Aparece un cartel con los eventos de ese instante, cada proceso en su color, y la columna queda marcada |
+| Mover el puntero sobre la línea de tiempo | El cartel acompaña al puntero, corrido hacia un costado, de modo que no tapa lo que se está mirando. Fuera de la línea de tiempo, el cartel se queda donde estaba |
+| Otro clic en la misma columna, o Escape | El cartel se cierra |
+| Clic en otra columna | El cartel pasa a describir ese instante |
+
+El cartel lista hasta seis eventos e indica cuántos más hubo.
 
 Un deadlock queda marcado con una raya roja en su instante y el rótulo «Deadlock:
 nadie puede avanzar».
+
+## Columna de nombres
+
+La columna de la izquierda, con los nombres de los monitores y de los procesos, toma al
+empezar el ancho del nombre más largo, hasta 300 px o el 40 % del panel.
+
+| Acción | Resultado |
+|---|---|
+| Arrastrar el borde derecho de la columna | La columna se ensancha o se angosta, entre 96 y 480 px |
+| Flechas izquierda y derecha, con el borde enfocado | Lo mismo, de a 16 px |
+| Doble clic en el borde | Vuelve al ancho automático |
+
+Un nombre que no entra se abrevia y conserva el índice (`Escrit…[2]`); el nombre completo
+aparece al dejar el puntero encima. Con la columna angosta, los carriles no llevan la
+etiqueta «monitor» y se distinguen por el fondo gris.
 
 ## Zoom y desplazamiento
 

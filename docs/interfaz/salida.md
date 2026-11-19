@@ -21,7 +21,8 @@ pestaña indica cuántos elementos tiene.
 | **Avanzar** | Da un paso en el que solo avanza ese proceso. Está deshabilitado si el proceso no puede avanzar o si la simulación está corriendo |
 | Variables locales | Las del proceso y las del procedure que está ejecutando, con su valor; la que cambia se destaca un momento |
 
-Con más de sesenta procesos, la lista se muestra por partes.
+Con más de sesenta procesos, la lista se muestra por partes. Un proceso con más de ocho
+variables locales muestra las primeras ocho y un botón despliega las demás.
 
 ## Salida
 

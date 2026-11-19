@@ -134,8 +134,16 @@ const CAPTURAS = {
   salida: { programa: CAJERO, pasos: 200, antes: "document.getElementById('tab-output').click()", recorte: 'aside[aria-label="Inspector"]', alto: 620 },
   'linea-de-tiempo': {
     programa: BANCO, pasos: 22, recorte: 'section[aria-label="Línea de tiempo"]',
+    // clic en el instante 10: el cartel aparece al lado del puntero
     antes: `(() => { const p = document.querySelector('section[aria-label="Línea de tiempo"] [class*="plane"]'); const r = p.getBoundingClientRect();
-      p.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: r.left + 156 + 9.5 * 26, clientY: r.top + 60 })); })()`,
+      const nombres = Number(document.querySelector('[aria-label="Cambiar el ancho de la columna de nombres"]').getAttribute('aria-valuenow'));
+      p.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: r.left + nombres + 9.5 * 26, clientY: r.top + 150 })); })()`,
+  },
+  'selector-de-monitores': {
+    programa: BANCO, pasos: 14, recorte: 'aside[aria-label="Inspector"]', alto: 900,
+    // el vector Escritorio arriba de todo, con su selector abierto
+    antes: `(() => { const v = document.querySelector('section[aria-label^="Vector de monitores"]');
+      v.scrollIntoView({ block: 'start' }); v.querySelector('button[aria-haspopup]').click(); })()`,
   },
   deadlock: { programa: { nombre: 'Dos monitores', codigo: DOS_MONITORES, semilla: 48213, turnos: 'ronda' }, pasos: 6 },
   constantes: {

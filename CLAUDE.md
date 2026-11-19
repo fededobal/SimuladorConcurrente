@@ -63,7 +63,9 @@ Fuente de verdad: el material de la cátedra en `docs/clases-materia/` (Teoría 
 Explicación 3 de monitores, en PDF). Nada del simulador ni de su documentación lo
 contradice, y se usan sus términos: se dice *deadlock* (no «interbloqueo»), *busy waiting*,
 *passing the condition*, variables condición privadas, y un proceso en una `cond` está
-«dormido». La descripción vigente del simulador es la guía (`docs/introduccion`, `lenguaje`,
+«dormido». Las tres zonas del dibujo del monitor se llaman Compitiendo, Bloqueado y
+Ejecutando (pedido del director de la PPS, 2026-11-19); el resto de la interfaz sigue
+diciendo «dormido en wait(c)». La descripción vigente del simulador es la guía (`docs/introduccion`, `lenguaje`,
 `ejecucion`, `interfaz`, `operacion`, `problemas`, `referencia`) y la especificación;
 `docs/monitores/` es un resumen anterior de la teoría, subordinado a los PDF. Modelo,
 invariantes y casos canónicos: skill `semantica-concurrencia`.

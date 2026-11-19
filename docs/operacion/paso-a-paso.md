@@ -15,9 +15,9 @@ produce en los procesos y en los monitores.
 4. En el editor, ubicar la etiqueta de cada proceso. Está en la línea que el proceso acaba
    de ejecutar o en la que está detenido, y dice su [estado](/ejecucion/estados). Si la línea
    quedó fuera de la vista, un aviso en el borde del editor lleva hasta ella.
-5. En la [línea de tiempo](/interfaz/linea-de-tiempo), pasar el puntero por la última
-   columna. La tarjeta describe lo que hizo cada proceso en ese instante; un clic la deja
-   fija.
+5. En la [línea de tiempo](/interfaz/linea-de-tiempo), hacer clic en la última columna.
+   Un cartel describe lo que hizo cada proceso en ese instante y acompaña al puntero; otro
+   clic en la misma columna lo cierra.
 6. En la pestaña [Monitores](/interfaz/monitores), observar qué flecha del dibujo se
    resaltó, en qué zona quedó cada proceso y qué dice el relato del instante.
 7. Repetir desde el paso 3. Para avanzar varios instantes seguidos, presionar
@@ -38,8 +38,8 @@ semilla.
 
 ## Resultado esperado
 
-En cada instante, la tarjeta de la línea de tiempo, la etiqueta del editor y el dibujo del
-monitor coinciden. Por ejemplo, cuando el proceso `B` ejecuta `wait(C)`, la tarjeta lo
+En cada instante, el cartel de la línea de tiempo, la etiqueta del editor y el dibujo del
+monitor coinciden. Por ejemplo, cuando el proceso `B` ejecuta `wait(C)`, el cartel lo
 indica, la etiqueta de `B` pasa a violeta con el texto «dormido en wait(C)» y su nombre
 aparece en la zona **2 · Bloqueado** del monitor `Buffer`.
 

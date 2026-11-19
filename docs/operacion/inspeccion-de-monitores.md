@@ -9,7 +9,8 @@ dónde, y el valor de sus variables permanentes.
 
 1. Pausar la simulación en el instante que se quiere examinar.
 2. En la pestaña **Monitores** del inspector, ubicar la tarjeta del monitor. El encabezado
-   indica si está libre o qué proceso lo ocupa.
+   indica si está libre o qué proceso lo ocupa. Si el monitor pertenece a un vector,
+   elegirlo en el selector del panel de ese vector: se muestra solo su tarjeta.
 3. Para examinarlo con más espacio, ensanchar el inspector con el botón de su esquina
    superior derecha o arrastrando su borde izquierdo.
 4. Mirar el dibujo: la zona **1 · Compitiendo** tiene a los que esperan entrar, la
@@ -22,7 +23,7 @@ dónde, y el valor de sus variables permanentes.
 7. Leer la tabla de variables. La columna **Escribió** indica qué proceso escribió cada una
    por última vez y en qué instante.
 8. Para saber cómo se llegó a ese estado, recorrer hacia atrás el carril del monitor en la
-   línea de tiempo y abrir la tarjeta de los instantes que interesen.
+   línea de tiempo y hacer clic en los instantes que interesen para ver su cartel.
 
 ## Resultado esperado
 
@@ -36,5 +37,6 @@ despertado, y los valores de las variables coinciden con las últimas asignacion
   proceso elegido al azar ([Acceso al monitor](/ejecucion/acceso-al-monitor)).
 - El encabezado de la tarjeta aclara cuando el proceso que ocupa el monitor no está
   ejecutando: está en `delay`, dormido en otro monitor o compitiendo por entrar a otro.
-- Las listas largas muestran seis elementos y un botón para ver el resto.
+- Las listas largas muestran los primeros elementos y un botón para ver el resto
+  ([Listas largas y nombres largos](/interfaz/monitores#listas-largas-y-nombres-largos)).
 - La pestaña **Procesos** muestra, para cada proceso, sus variables locales.
