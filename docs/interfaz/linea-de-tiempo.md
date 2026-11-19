@@ -33,7 +33,7 @@ Tiene una fila por proceso, una columna por instante y, arriba, un carril por mo
 
 | Acción | Resultado |
 |---|---|
-| Pasar el puntero por una columna | La columna se resalta |
+| Pasar el puntero por una columna | La columna se resalta y el puntero cambia a la mano; no aparece ningún texto |
 | Clic en la columna | Aparece un cartel con los eventos de ese instante, cada proceso en su color, y la columna queda marcada |
 | Mover el puntero sobre la línea de tiempo | El cartel acompaña al puntero, corrido hacia un costado, de modo que no tapa lo que se está mirando. Fuera de la línea de tiempo, el cartel se queda donde estaba |
 | Otro clic en la misma columna, o Escape | El cartel se cierra |

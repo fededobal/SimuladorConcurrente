@@ -295,7 +295,7 @@ export function Timeline({
         )}
         <div
           ref={setPlane}
-          className={`${s.plane}${gliding ? '' : ` ${s.still}`}`}
+          className={`${s.plane}${gliding ? '' : ` ${s.still}`}${hover !== null ? ` ${s.overInstant}` : ''}`}
           style={{
             width, height, ['--desliz' as string]: `${slide}ms`,
             ['--cell' as string]: `${cell}px`, ['--row-h' as string]: `${ROW_H}px`,

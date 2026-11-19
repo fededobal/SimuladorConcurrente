@@ -79,6 +79,7 @@ Reglas:
   en orden de llegada. (Federico Dobal, 2026-09-23)
 
 ### Cambiado
+- Línea de tiempo: al pasar el mouse por un instante el puntero cambia a la mano y la columna se resalta más, sin ningún texto emergente; lo que pasó se lee en el cartel que abre el clic. (Federico Dobal, 2026-11-19)
 - Línea de tiempo: el cartel de un instante aparece al hacer clic en él, no al pasar el mouse, y acompaña al puntero corrido hacia un costado, así no tapa lo que se está mirando; se cierra con otro clic en el mismo instante o con Escape. Pasar el mouse solo resalta la columna. (Federico Dobal, 2026-11-19)
 - Dibujo del monitor: las tres zonas pasan a llamarse «1 · Compitiendo», «2 · Bloqueado» y «3 · Ejecutando» (antes Compiten, En wait y Adentro), en el panel Monitores, en la figura de la guía y en las páginas que las nombran. (Federico Dobal, 2026-11-19)
 - Ejemplos rehechos: 21 programas, uno por tema de monitores, tomados de la Teoría 4 y de la Explicación 3 (exclusión mutua implícita, parámetros `out`, *busy waiting*, `wait` y `signal`, código de inicialización, buffer limitado con arreglos, espera con `if` que falla y su corrección con `while`, *passing the condition*, `signal_all`, lectores y escritores, *covering conditions*, `Cola`, `ColaOrdenada`, variables condición privadas, prioridad con `desc`, *rendezvous*, vector de monitores, llamadas entre monitores, *deadlock* y el problema completo del banco). Reemplazan a los nueve anteriores; el simulador abre con el de exclusión mutua. (Federico Dobal, 2026-11-18)

@@ -1,6 +1,6 @@
 import { IndexedName } from './IndexedName';
 import { textWidth } from '../measureText';
-import { STATE_CLASS, STATE_HINT } from '../processStates';
+import { STATE_CLASS } from '../processStates';
 import { processTextColor } from '../processColor';
 import type { TimelineColumn } from '../timeline';
 import { labelsOf, ownerSegmentsOf, segmentsOf } from '../timelineLayout';
@@ -43,7 +43,11 @@ function labelThatFits(labels: readonly string[], width: number): string {
   return labels.find((l) => width >= textWidth(l, LABEL_FONT) + 2 * LABEL_PAD) ?? '';
 }
 
-/** Una fila de la linea de tiempo: el carril de un monitor o la fila de un proceso. */
+/**
+ * Una fila de la linea de tiempo: el carril de un monitor o la fila de un proceso. Los tramos
+ * no llevan texto emergente: sobre la grilla, pasar el mouse solo resalta el instante, y lo
+ * que paso se lee en el cartel que abre un clic.
+ */
 export function TimelineRow(props: LaneProps | ProcessProps) {
   return props.kind === 'monitor' ? <MonitorLane {...props} /> : <ProcessRow {...props} />;
 }
@@ -51,8 +55,7 @@ export function TimelineRow(props: LaneProps | ProcessProps) {
 /** Carril de un monitor: quien lo tuvo en cada instante, o "libre". */
 function MonitorLane({ name, top, cell, nameWidth, columns, byId, last }: LaneProps) {
   return (
-    <div className={`${s.row} ${s.lane}${last ? ` ${s.laneLast}` : ''}`} style={{ top }}
-      title={`${name}: quién tiene el monitor en cada instante`}>
+    <div className={`${s.row} ${s.lane}${last ? ` ${s.laneLast}` : ''}`} style={{ top }}>
       <div className={s.name}>
         <IndexedName name={name} className={s.nameText} />
         {nameWidth >= TAG_MIN_NAME_W && <span className={s.tag}>monitor</span>}
@@ -65,7 +68,6 @@ function MonitorLane({ name, top, cell, nameWidth, columns, byId, last }: LanePr
             key={columns[seg.from].instant}
             className={`${s.seg} ${owner ? s.owner : s.free}${seg.from === columns.length - 1 ? ` ${s.fresh}` : ''}`}
             style={{ left: nameWidth + seg.from * cell + 1, width, background: owner?.color }}
-            title={owner ? `${owner.name} tiene ${name}` : `${name} libre`}
           >
             {labelThatFits(owner ? [owner.name] : ['libre'], width)}
           </div>
@@ -77,11 +79,9 @@ function MonitorLane({ name, top, cell, nameWidth, columns, byId, last }: LanePr
 
 /** Fila de un proceso: un tramo por cada racha de instantes en el mismo estado y lugar. */
 function ProcessRow({ process: p, top, cell, nameWidth, columns, cut }: ProcessProps) {
-  const state = columns[columns.length - 1]?.states[p.id];
   return (
     <div className={`${s.row}${cut ? ` ${s.cut}` : ''}`}
-      style={{ top, ['--st-proceso' as string]: p.color }}
-      title={state ? `${p.name}: ${STATE_HINT[state]}` : p.name}>
+      style={{ top, ['--st-proceso' as string]: p.color }}>
       <div className={s.name} style={{ color: processTextColor(p.color) }}>
         <i className="punto" style={{ background: p.color }} />
         <IndexedName name={p.name} className={s.nameText} />
@@ -94,7 +94,6 @@ function ProcessRow({ process: p, top, cell, nameWidth, columns, cut }: ProcessP
             key={columns[seg.from].instant}
             className={`${s.seg} ${STATE_CLASS[seg.state]}${seg.from === columns.length - 1 ? ` ${s.fresh}` : ''}`}
             style={{ left: nameWidth + seg.from * cell + 1, width }}
-            title={labels[0]}
           >
             {labelThatFits(labels, width)}
           </div>

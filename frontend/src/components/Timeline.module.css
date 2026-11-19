@@ -121,9 +121,12 @@
 .now { z-index: 1; transition: left var(--desliz, 150ms) var(--ease-step); }
 .now span { padding: 1px 6px; border-radius: 5px; background: var(--accent-fill); color: var(--on-accent); font-weight: 700; }
 
-/* columna del instante actual: fondo tenue y una raya en su borde derecho */
+/* Columna del instante actual: fondo tenue y una raya en su borde derecho. Va por encima de
+   las filas (y por debajo de los nombres y la regla): los carriles de los monitores tienen
+   fondo propio y, dibujada detras, la columna solo se veia sobre los procesos. */
 .cursor {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   width: var(--cell);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
@@ -131,14 +134,18 @@
   pointer-events: none;
   transition: left var(--desliz, 150ms) var(--ease-step);
 }
+/* con el mouse sobre un instante, el puntero es la mano: un clic muestra que paso */
+.overInstant { cursor: pointer; }
 /* columna bajo el mouse; la del instante elegido con un clic, con los bordes marcados */
 .column {
   position: absolute;
+  /* por encima de las filas, como el cursor: se resalta el instante de arriba abajo */
+  z-index: 1;
   bottom: 0;
   width: var(--cell);
-  background: color-mix(in srgb, var(--accent) 7%, transparent);
-  border-left: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  border-right: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
   pointer-events: none;
 }
 .pinned { border-color: var(--accent); }
