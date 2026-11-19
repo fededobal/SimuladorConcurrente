@@ -145,6 +145,7 @@ Reglas:
 - Títulos más cortos para los programas del menú "Ejemplos". (Federico Dobal, 2026-09-21)
 
 ### Corregido
+- Ejemplo «Problema completo: banco y escritorios»: termina con cualquier valor de `N`. Los empleados atendían una cantidad fija de clientes y, al cambiar `N` desde el menú Constantes, un empleado o un cliente quedaba dormido para siempre y la ejecución terminaba en deadlock. Ahora `Banco` cuenta los clientes que faltan y `Proximo` le avisa al empleado cuando no queda ninguno. Los tests corren cada ejemplo con sus constantes en otros valores. (Federico Dobal, 2026-11-19)
 - Visor de monitores: cuando un proceso salía del monitor (return), su punto recorría solo la flecha corta de afuera, apareciendo y desvaneciéndose, y casi no se veía. Ahora sale del nombre del proceso en la zona 3, cruza el borde y se va por la flecha hacia la derecha. (Federico Dobal, 2026-11-18)
 - Buscador de la guía: el número de sección quedaba pegado al título en los resultados («7.4Programas de ejemplo»); ahora los separa un espacio («7.4 Programas de ejemplo»). En la página el título se ve igual. (Federico Dobal, 2026-11-18)
 - Guía: al llegar desde el buscador, el resaltado de la palabra buscada partía el título de la página («As ignación»), y los títulos con código separaban cada pieza. El texto del título va ahora en un solo bloque al lado del número. (Federico Dobal, 2026-11-18)

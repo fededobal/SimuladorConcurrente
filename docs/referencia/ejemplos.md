@@ -835,7 +835,9 @@ process Empleado {
 
 Tres empleados atienden a `N` clientes en orden de llegada. El monitor `Banco` ordena a los clientes y le asigna a cada uno un empleado, con una cola de empleados libres y *passing the condition* sobre `cantLibres`. Cada empleado atiende en su propio monitor `Escritorio`, donde la variable `listo` evita el *deadlock* del ejemplo anterior. Reúne colas, vector de monitores y parámetros `in` y `out`.
 
-Resultado esperado: al terminar, `Banco.esperando` y `Banco.cantLibres` valen 0 y la cola `Banco.elibres` queda vacía.
+En el ejercicio los empleados atienden sin terminar nunca. Para que la ejecución termine con cualquier valor de `N`, `Banco` lleva en `faltan` la cantidad de clientes que todavía no tienen empleado, y `Proximo` devuelve en `hay` si queda alguno: el empleado repite mientras `hay` sea verdadero.
+
+Resultado esperado: al terminar, `Banco.esperando`, `Banco.cantLibres` y `Banco.faltan` valen 0 y la cola `Banco.elibres` queda vacía.
 
 ```monitores
 #define N 6
@@ -844,6 +846,7 @@ monitor Banco {
   Cola elibres(int);
   cond esperaC;
   int esperando = 0, cantLibres = 0;
+  int faltan = N;              // clientes que todavía no tienen empleado
 
   procedure Llegada(idE: out int) {
     if (cantLibres == 0) {
@@ -854,13 +857,17 @@ monitor Banco {
     pop(elibres, idE);
   }
 
-  procedure Proximo(idE: in int) {
-    push(elibres, idE);
-    if (esperando > 0) {
-      esperando--;
-      signal(esperaC);
+  procedure Proximo(idE: in int; hay: out bool) {
+    hay = faltan > 0;          // sin clientes por atender, el empleado termina
+    if (hay) {
+      faltan--;
+      push(elibres, idE);
+      if (esperando > 0) {
+        esperando--;
+        signal(esperaC);
+      }
+      else cantLibres++;
     }
-    else cantLibres++;
   }
 }
 
@@ -902,11 +909,14 @@ process Cliente[id: 0..N-1] {
 
 process Empleado[id: 0..2] {
   text datos, res;
-  for (1..2) {
-    Banco.Proximo(id);
-    Escritorio[id].EsperarDatos(datos);
-    res = datos + ": resuelto";    // resuelve la solicitud en base a datos
-    Escritorio[id].EnviarResultados(res);
+  bool hay = true;
+  while (hay) {
+    Banco.Proximo(id, hay);
+    if (hay) {
+      Escritorio[id].EsperarDatos(datos);
+      res = datos + ": resuelto";    // resuelve la solicitud en base a datos
+      Escritorio[id].EnviarResultados(res);
+    }
   }
 }
 ```

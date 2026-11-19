@@ -1,15 +1,18 @@
 // Problema completo: banco y escritorios
-// espera: fin Banco.esperando=0 Banco.cantLibres=0 Banco.elibres=<>
+// espera: fin Banco.esperando=0 Banco.cantLibres=0 Banco.elibres=<> Banco.faltan=0
 // Ejercicio 4 de la Explicación 3 completo: tres empleados atienden a los clientes en
 // orden de llegada. Banco ordena a los clientes y les asigna un empleado (cola y
 // passing the condition); cada empleado atiende en su monitor Escritorio (vector de
 // monitores), donde listo evita el deadlock cuando el cliente llega primero.
+// Para que el programa termine con cualquier N, Banco cuenta los clientes que faltan
+// atender y Proximo le avisa al empleado cuando ya no queda ninguno.
 #define N 6
 
 monitor Banco {
   Cola elibres(int);
   cond esperaC;
   int esperando = 0, cantLibres = 0;
+  int faltan = N;              // clientes que todavía no tienen empleado
 
   procedure Llegada(idE: out int) {
     if (cantLibres == 0) {
@@ -20,13 +23,17 @@ monitor Banco {
     pop(elibres, idE);
   }
 
-  procedure Proximo(idE: in int) {
-    push(elibres, idE);
-    if (esperando > 0) {
-      esperando--;
-      signal(esperaC);
+  procedure Proximo(idE: in int; hay: out bool) {
+    hay = faltan > 0;          // sin clientes por atender, el empleado termina
+    if (hay) {
+      faltan--;
+      push(elibres, idE);
+      if (esperando > 0) {
+        esperando--;
+        signal(esperaC);
+      }
+      else cantLibres++;
     }
-    else cantLibres++;
   }
 }
 
@@ -68,10 +75,13 @@ process Cliente[id: 0..N-1] {
 
 process Empleado[id: 0..2] {
   text datos, res;
-  for (1..2) {
-    Banco.Proximo(id);
-    Escritorio[id].EsperarDatos(datos);
-    res = datos + ": resuelto";    // resuelve la solicitud en base a datos
-    Escritorio[id].EnviarResultados(res);
+  bool hay = true;
+  while (hay) {
+    Banco.Proximo(id, hay);
+    if (hay) {
+      Escritorio[id].EsperarDatos(datos);
+      res = datos + ": resuelto";    // resuelve la solicitud en base a datos
+      Escritorio[id].EnviarResultados(res);
+    }
   }
 }
