@@ -58,7 +58,7 @@ variable condición.
 3. **Ejecutando dentro del monitor**: tiene el acceso exclusivo.
 
 El panel Monitores del simulador dibuja cada monitor con estas tres zonas, rotuladas
-Compiten, En wait y Adentro, como en la teoría (Teoría 4, diapositivas 12 a 19). Los
+Compitiendo, Bloqueado y Ejecutando, como en la teoría (Teoría 4, diapositivas 12 a 19). Los
 procesos son puntos de su color y se resalta la flecha que se recorrió en el último
 instante (Call, entra, wait, signal o Return). Debajo del dibujo se listan los procesos de
 cada zona; los que están en wait, agrupados por variable condición y en el orden de su

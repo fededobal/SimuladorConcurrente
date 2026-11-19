@@ -30,11 +30,11 @@ siguiente al `wait`.
 Solo se usa dentro de un procedure.
 
 <FiguraMonitor flecha="wait" :espera="{ cv: 'P' }">
-Al hacer <code>wait(cv)</code>, P sale de la zona Adentro, queda al final de la cola de <code>cv</code> y el monitor queda libre.
+Al hacer <code>wait(cv)</code>, P sale de la zona Ejecutando, queda al final de la cola de <code>cv</code> y el monitor queda libre.
 </FiguraMonitor>
 
 ::: tip En el simulador
-El dibujo del monitor muestra al proceso en la zona **En wait**, en la fila de su variable
+El dibujo del monitor muestra al proceso en la zona **Bloqueado**, en la fila de su variable
 condición; en la línea de tiempo, su tramo pasa a «wait». Ver
 [Variables condición](/ejecucion/variables-condicion).
 :::

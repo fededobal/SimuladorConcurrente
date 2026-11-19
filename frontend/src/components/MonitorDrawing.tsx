@@ -14,8 +14,8 @@ interface Props {
 }
 
 // Geometria del dibujo (unidades del viewBox, que a ancho normal del panel son casi px).
-// Copia la disposicion de la teoria: la zona 1 (compiten) a la izquierda, la 3 (adentro) a la
-// derecha y la 2 (en wait) arriba, entre las dos.
+// Copia la disposicion de la teoria: la zona 1 (compitiendo) a la izquierda, la 3 (ejecutando) a
+// la derecha y la 2 (bloqueado) arriba, entre las dos.
 const W = 400;
 const H = 196;
 const ZONE_W = 126;
@@ -130,19 +130,19 @@ export function MonitorDrawing({ monitor, travels, ownerLine, deadlocked }: Prop
       {/* 2: una fila por variable condicion, con quien espera en cada una */}
       <rect x={ZONE2.x} y={ZONE2.y} width={ZONE_W} height={ZONE2.h} rx="7"
         className={`${s.zone}${waiting > 0 ? ` ${s.zoneWaiting}` : ''}`} />
-      <text x={ZONE2.x + 9} y={ZONE2.y + 16} className={s.zoneTitle}>2 · EN WAIT</text>
+      <text x={ZONE2.x + 9} y={ZONE2.y + 16} className={s.zoneTitle}>2 · BLOQUEADO</text>
       <CondRows monitor={monitor} x={ZONE2.x + 9} y={ZONE2.y + 33} />
 
       {/* 1: los que compiten por entrar */}
       <rect x={ZONE1.x} y={ZONE1.y} width={ZONE_W} height={ZONE1.h} rx="7"
         className={s.zone} />
-      <text x={ZONE1.x + 9} y={ZONE1.y + 16} className={s.zoneTitle}>1 · COMPITEN</text>
+      <text x={ZONE1.x + 9} y={ZONE1.y + 16} className={s.zoneTitle}>1 · COMPITIENDO</text>
       <NameRows procs={monitor.entryQueue} x={ZONE1.x + 9} y={ZONE1.y + 35} />
 
       {/* 3: el que tiene el monitor */}
       <rect x={ZONE3.x} y={ZONE3.y} width={ZONE_W} height={ZONE3.h} rx="7"
         className={`${s.zone}${monitor.lockOwner ? ` ${s.zoneOwner}` : ''}`} />
-      <text x={ZONE3.x + 9} y={ZONE3.y + 16} className={s.zoneTitle}>3 · ADENTRO</text>
+      <text x={ZONE3.x + 9} y={ZONE3.y + 16} className={s.zoneTitle}>3 · EJECUTANDO</text>
       <NameRows procs={monitor.lockOwner ? [monitor.lockOwner] : []} x={ZONE3.x + 9} y={ZONE3.y + 35} />
       {monitor.lockOwner && ownerLine !== null && ownerLine > 0 && (
         <text x={ZONE3.x + 9} y={ZONE3.y + 35 + ROW_H} className={s.note}>línea {ownerLine}</text>
@@ -184,8 +184,8 @@ function describe(m: MonitorView): string {
   const names = (ps: readonly ProcRef[]) => (ps.length === 0 ? 'nadie' : ps.map((p) => p.name).join(', '));
   const waiting = m.conds.filter((c) => c.queue.length > 0)
     .map((c) => `${names(c.queue)} en ${c.name}`).join('; ');
-  return `Monitor ${m.name}. Compiten: ${names(m.entryQueue)}. En wait: ${waiting || 'nadie'}. `
-    + `Adentro: ${m.lockOwner?.name ?? 'nadie'}.`;
+  return `Monitor ${m.name}. Compitiendo: ${names(m.entryQueue)}. Bloqueado: ${waiting || 'nadie'}. `
+    + `Ejecutando: ${m.lockOwner?.name ?? 'nadie'}.`;
 }
 
 /**

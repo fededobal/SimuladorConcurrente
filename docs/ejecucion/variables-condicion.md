@@ -16,9 +16,9 @@ la cátedra:
 
 | Zona | Quiénes están | Cómo se llega |
 |---|---|---|
-| 1 · Compiten | La cola de entrada | Llamar con el monitor ocupado, o ser despertado |
-| 2 · En wait | Las colas de las variables condición | Ejecutar `wait` |
-| 3 · Adentro | El proceso con acceso exclusivo | Entrar con el monitor libre, o ser elegido de la cola de entrada |
+| 1 · Compitiendo | La cola de entrada | Llamar con el monitor ocupado, o ser despertado |
+| 2 · Bloqueado | Las colas de las variables condición | Ejecutar `wait` |
+| 3 · Ejecutando | El proceso con acceso exclusivo | Entrar con el monitor libre, o ser elegido de la cola de entrada |
 
 Las flechas del dibujo (call, entra, wait, signal, return) se resaltan cuando algún proceso
 las recorre en el último instante.

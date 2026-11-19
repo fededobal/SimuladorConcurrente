@@ -3,8 +3,8 @@ import type { LogEntry, MonitorView } from './types';
 // Lo que el panel muestra de cada monitor ademas de su estado: que flechas del dibujo se
 // recorrieron en el ultimo instante y que eventos de ese instante le corresponden.
 //
-// El dibujo sigue el de la teoria (Teoria 4, diapositivas 12 a 19): 1 compiten por el acceso,
-// 2 esperan en una variable condicion, 3 adentro, ejecutando en el monitor.
+// El dibujo sigue el de la teoria (Teoria 4, diapositivas 12 a 19): 1 compitiendo por el
+// acceso, 2 bloqueado en una variable condicion, 3 ejecutando en el monitor.
 
 /** Flechas del dibujo. "call" entra a la cola de entrada y "return" sale del monitor. */
 export type Arrow = 'call' | 'entra' | 'wait' | 'signal' | 'return';

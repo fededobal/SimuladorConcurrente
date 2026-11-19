@@ -38,7 +38,7 @@ process Persona[id: 0..N-1] {
 
    <figure>
 
-   ![Simulador con Exclusión mutua implícita en pausa en el instante 7: el editor marca a Persona[3] en el delay y a otras tres personas que compiten por Cajero, la pestaña Monitores muestra el monitor Cajero ocupado por Persona[3] con tres procesos en la zona Compiten, y la línea de tiempo tiene siete columnas](/capturas/primer-programa.png)
+   ![Simulador con Exclusión mutua implícita en pausa en el instante 7: el editor marca a Persona[3] en el delay y a otras tres personas que compiten por Cajero, la pestaña Monitores muestra el monitor Cajero ocupado por Persona[3] con tres procesos en la zona Compitiendo, y la línea de tiempo tiene siete columnas](/capturas/primer-programa.png)
 
    <figcaption>Instante 7 de una ejecución. <code>Persona[2]</code> ya usó el cajero y ahora lo ocupa <code>Persona[3]</code>, que está en el <code>delay</code>; las otras tres compiten por entrar.</figcaption>
    </figure>

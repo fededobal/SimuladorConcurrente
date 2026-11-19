@@ -41,7 +41,7 @@ semilla.
 En cada instante, la tarjeta de la línea de tiempo, la etiqueta del editor y el dibujo del
 monitor coinciden. Por ejemplo, cuando el proceso `B` ejecuta `wait(C)`, la tarjeta lo
 indica, la etiqueta de `B` pasa a violeta con el texto «dormido en wait(C)» y su nombre
-aparece en la zona **2 · En wait** del monitor `Buffer`.
+aparece en la zona **2 · Bloqueado** del monitor `Buffer`.
 
 ## Observaciones
 

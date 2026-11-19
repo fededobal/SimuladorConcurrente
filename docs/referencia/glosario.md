@@ -63,7 +63,7 @@ Cola de los procesos que llamaron a un monitor ocupado, o que fueron despertados
 no reingresaron. Cuando el monitor se libera entra uno de ellos, elegido al azar, sin
 respetar el orden de llegada.
 
-**En el simulador.** Zona «1 · Compiten» del dibujo del monitor y fila Entrada de sus colas;
+**En el simulador.** Zona «1 · Compitiendo» del dibujo del monitor y fila Entrada de sus colas;
 etiqueta ámbar en el editor. {.g-sim}
 
 Véase [Acceso al monitor](/ejecucion/acceso-al-monitor). {.g-vease}
@@ -324,8 +324,8 @@ y el despertado pasa a competir por volver a entrar. Cuando lo logra, la condici
 esperaba pudo haber cambiado: con `while` la vuelve a chequear; con `if` sigue sin
 chequearla, lo que solo es correcto si nadie pudo adelantársele.
 
-**En el simulador.** Tras un `signal`, el despertado pasa de la zona «2 · En wait» a la zona
-«1 · Compiten», y el que señalizó sigue en «3 · Adentro». {.g-sim}
+**En el simulador.** Tras un `signal`, el despertado pasa de la zona «2 · Bloqueado» a la zona
+«1 · Compitiendo», y el que señalizó sigue en «3 · Ejecutando». {.g-sim}
 
 Véase [Variables condición](/ejecucion/variables-condicion#signal-and-continue). {.g-vease}
 
@@ -359,7 +359,7 @@ Véase [Instantes y turnos](/ejecucion/instantes-y-turnos#politicas-de-turnos). 
 Cola de procesos demorados dentro de un monitor, declarada con `cond`. No tiene valor
 propio; se opera con `wait`, `signal` y `signal_all`.
 
-**En el simulador.** Zona «2 · En wait» del dibujo, con una fila por variable condición;
+**En el simulador.** Zona «2 · Bloqueado» del dibujo, con una fila por variable condición;
 etiqueta violeta en el editor. {.g-sim}
 
 Véase [Variables condición](/ejecucion/variables-condicion). {.g-vease}
@@ -392,7 +392,7 @@ Variables condición que usa un solo proceso cada una, declaradas como un arregl
 (`cond espera[N];`). Permiten despertar a un proceso en particular y, junto con una cola de
 identificadores, atender en un orden establecido.
 
-**En el simulador.** Una fila `En wait(espera[i])` por cada elemento con un proceso
+**En el simulador.** En **Colas**, una fila `espera[i]` por cada elemento con un proceso
 dormido. {.g-sim}
 
 Véase [Variables condición](/ejecucion/variables-condicion). {.g-vease}

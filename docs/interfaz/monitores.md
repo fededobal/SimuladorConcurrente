@@ -7,7 +7,7 @@ colas y las variables permanentes. El significado de cada zona del dibujo se exp
 
 <figure>
 
-![Pestaña Monitores con el monitor Banco ocupado por Cliente[2]: dibujo con las zonas Compiten, En wait y Adentro, el relato del instante 14, la cola de entrada con cinco procesos, la variable condición esperaC vacía y el comienzo de la tabla de variables, con la cola elibres](/capturas/monitores.png)
+![Pestaña Monitores con el monitor Banco ocupado por Cliente[2]: dibujo con las zonas Compitiendo, Bloqueado y Ejecutando, el relato del instante 14, la cola de entrada con cinco procesos, la variable condición esperaC vacía y el comienzo de la tabla de variables, con la cola elibres](/capturas/monitores.png)
 
 <figcaption>Monitor <code>Banco</code> en el instante 14: el dibujo, el relato del instante, las colas y las variables permanentes.</figcaption>
 </figure>
@@ -18,9 +18,9 @@ Las tres zonas de la cátedra, numeradas:
 
 | Zona | Quiénes están |
 |---|---|
-| **1 · Compiten** | Los de la cola de entrada: llamaron con el monitor ocupado, o fueron despertados y todavía no reentraron |
-| **2 · En wait** | Los dormidos en alguna variable condición, en la fila de esa variable |
-| **3 · Adentro** | El que tiene el acceso exclusivo, con la línea en la que está |
+| **1 · Compitiendo** | Los de la cola de entrada: llamaron con el monitor ocupado, o fueron despertados y todavía no reentraron |
+| **2 · Bloqueado** | Los dormidos en alguna variable condición, en la fila de esa variable |
+| **3 · Ejecutando** | El que tiene el acceso exclusivo, con la línea en la que está |
 
 | Elemento | Qué significa |
 |---|---|

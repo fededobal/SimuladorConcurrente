@@ -2,7 +2,7 @@
 // Figura con el dibujo de un monitor, el mismo que muestra el simulador: las tres zonas y
 // una flecha destacada. Uso:
 //   <FiguraMonitor flecha="wait" adentro="P" :espera="{ cv: 'P' }">
-//     Al hacer <code>wait(cv)</code>, P sale de la zona Adentro...
+//     Al hacer <code>wait(cv)</code>, P sale de la zona Ejecutando...
 //   </FiguraMonitor>
 // El numero de la figura es el de la seccion de la pagina.
 import { computed } from 'vue';
@@ -59,7 +59,7 @@ const activa = (f: Flecha) => (props.flecha === f ? 'activa' : '');
       <text x="78" y="74" text-anchor="end" :class="['rotulo', activa('signal')]">signal</text>
 
       <rect x="137" y="6" width="126" height="76" rx="7" :class="['zona', { espera: hayEspera }]" />
-      <text x="146" y="22" class="zona-titulo">2 · EN WAIT</text>
+      <text x="146" y="22" class="zona-titulo">2 · BLOQUEADO</text>
       <template v-for="([cond, proceso], i) in conds" :key="cond">
         <text x="146" :y="39 + i * 15" class="cond">{{ cond }}</text>
         <template v-if="proceso">
@@ -70,7 +70,7 @@ const activa = (f: Flecha) => (props.flecha === f ? 'activa' : '');
       </template>
 
       <rect x="36" y="108" width="126" height="80" rx="7" class="zona" />
-      <text x="45" y="124" class="zona-titulo">1 · COMPITEN</text>
+      <text x="45" y="124" class="zona-titulo">1 · COMPITIENDO</text>
       <template v-if="compiten?.length">
         <template v-for="(proceso, i) in compiten" :key="proceso">
           <circle cx="48" :cy="139 + i * 15" r="3.5" class="proceso-punto" />
@@ -80,7 +80,7 @@ const activa = (f: Flecha) => (props.flecha === f ? 'activa' : '');
       <text v-else x="45" y="143" class="nota">nadie</text>
 
       <rect x="238" y="108" width="126" height="80" rx="7" :class="['zona', { ocupada: adentro }]" />
-      <text x="247" y="124" class="zona-titulo">3 · ADENTRO</text>
+      <text x="247" y="124" class="zona-titulo">3 · EJECUTANDO</text>
       <template v-if="adentro">
         <circle cx="250" cy="139" r="3.5" class="proceso-punto" />
         <text x="258" y="143" class="proceso">{{ adentro }}</text>
