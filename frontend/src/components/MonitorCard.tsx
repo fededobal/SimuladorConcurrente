@@ -1,4 +1,5 @@
 import { memo, useState } from 'react';
+import { IndexedName } from './IndexedName';
 import { MonitorDrawing } from './MonitorDrawing';
 import { travelsOf } from '../monitorDiagram';
 import { processTextColor } from '../processColor';
@@ -19,10 +20,17 @@ interface Props {
   readonly deadlocked: boolean;
 }
 
-/** Elementos de una cola o de un arreglo que se muestran antes de ofrecer abrir el resto. */
+// Topes de lo que se muestra de cada lista antes de ofrecer abrir el resto: sin ellos, una
+// cola de cuarenta procesos o un arreglo de cien elementos estiran la tarjeta hasta que no
+// se ve otra cosa.
+/** Elementos de una cola o de un arreglo. */
 const MAX_SHOWN = 6;
-/** Variables condicion que se listan siempre; con mas, las vacias se pliegan. */
+/** Variables condicion; con mas, se listan primero las que tienen procesos dormidos. */
 const MAX_CONDS = 6;
+/** Variables permanentes. */
+const MAX_VARS = 8;
+/** Caracteres del valor de una variable simple (un texto puede ser tan largo como se quiera). */
+const MAX_VALUE_CHARS = 60;
 /** Eventos del instante que se cuentan; el resto se resume. */
 const MAX_STORY = 3;
 
@@ -70,20 +78,7 @@ export const MonitorCard = memo(function MonitorCard({
 
       <div className={s.section}>
         <h3 className={s.sectionTitle}>Variables</h3>
-        {monitor.vars.length === 0 ? (
-          <p className={s.empty}>Este monitor no tiene variables permanentes.</p>
-        ) : (
-          <div className={s.varsWrap}>
-            <table className={s.vars}>
-              <thead>
-                <tr><th>Nombre</th><th>Tipo</th><th>Valor</th><th>Escribió</th></tr>
-              </thead>
-              <tbody>
-                {monitor.vars.map((v) => <VarRows key={v.name} v={v} procRefs={procRefs} />)}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <Vars vars={monitor.vars} procRefs={procRefs} />
       </div>
     </section>
   );
@@ -131,13 +126,16 @@ function Story({ events }: { events: readonly LogEntry[] }) {
 
 /**
  * Una fila por variable condicion. Con muchas (un arreglo de cond por proceso), plegado
- * muestra solo las que tienen a alguien esperando y cuenta las vacias.
+ * muestra hasta MAX_CONDS de las que tienen a alguien dormido y cuenta las demas.
  */
 function CondQueues({ conds }: { conds: readonly CondView[] }) {
   const [open, setOpen] = useState(false);
-  const empty = conds.filter((c) => c.queue.length === 0).length;
-  const fold = conds.length > MAX_CONDS && empty > 0;
-  const shown = fold && !open ? conds.filter((c) => c.queue.length > 0) : conds;
+  const fold = conds.length > MAX_CONDS;
+  const busy = conds.filter((c) => c.queue.length > 0);
+  const shown = fold && !open ? busy.slice(0, MAX_CONDS) : conds;
+  const hidden = conds.length - shown.length;
+  // si entre las ocultas hay alguna con procesos, no se puede decir que estan vacias
+  const allEmpty = busy.length <= MAX_CONDS;
   return (
     <>
       {shown.map((c) => <QueueRow key={c.name} name={c.name} procs={c.queue} />)}
@@ -146,8 +144,8 @@ function CondQueues({ conds }: { conds: readonly CondView[] }) {
           <dt />
           <dd>
             <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}
-              title={open ? undefined : 'Mostrar también las variables condición sin procesos dormidos'}>
-              {open ? 'ocultar las vacías' : `+${empty} cond vacías`}
+              title={open ? undefined : 'Mostrar todas las variables condición del monitor'}>
+              {open ? 'ver menos' : `+${hidden} cond ${allEmpty ? 'vacías' : 'más'}`}
             </button>
           </dd>
         </>
@@ -159,7 +157,7 @@ function CondQueues({ conds }: { conds: readonly CondView[] }) {
 function QueueRow({ name, procs }: { name: string; procs: readonly ProcRef[] }) {
   return (
     <>
-      <dt className={s.cond}>{name}</dt>
+      <dt className={s.cond}><IndexedName name={name} /></dt>
       <dd><Queue procs={procs} /></dd>
     </>
   );
@@ -180,13 +178,44 @@ function Queue({ procs }: { procs: readonly ProcRef[] }) {
       {shown.map(({ item: p, leaving }) => (
         <span key={p.id} className={`${s.chip}${leaving ? ` ${s.chipOut}` : ''}`} aria-hidden={leaving || undefined}>
           <i className="punto" style={{ background: p.color }} />
-          {p.name}
+          <IndexedName name={p.name} />
         </span>
       ))}
       {procs.length > MAX_SHOWN && (
         <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}>
           {open ? 'ver menos' : `+${procs.length - MAX_SHOWN} más`}
         </button>
+      )}
+    </>
+  );
+}
+
+/**
+ * La tabla de variables permanentes. Con muchas, muestra las primeras y un boton abre el
+ * resto.
+ */
+function Vars({ vars, procRefs }: { vars: readonly VarView[]; procRefs: ReadonlyMap<number, ProcRef> }) {
+  const [open, setOpen] = useState(false);
+  if (vars.length === 0) return <p className={s.empty}>Este monitor no tiene variables permanentes.</p>;
+  const shown = open ? vars : vars.slice(0, MAX_VARS);
+  return (
+    <>
+      <div className={s.varsWrap}>
+        <table className={s.vars}>
+          <thead>
+            <tr><th>Nombre</th><th>Tipo</th><th>Valor</th><th>Escribió</th></tr>
+          </thead>
+          <tbody>
+            {shown.map((v) => <VarRows key={v.name} v={v} procRefs={procRefs} />)}
+          </tbody>
+        </table>
+      </div>
+      {vars.length > MAX_VARS && (
+        <p className={s.varsMore}>
+          <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}>
+            {open ? 'ver menos' : `+${vars.length - MAX_VARS} variables más`}
+          </button>
+        </p>
       )}
     </>
   );
@@ -222,10 +251,30 @@ function VarRows({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, Pr
   );
 }
 
-/** Valor de una variable simple; cuando cambia, se destaca un momento. */
+/**
+ * Valor de una variable simple; cuando cambia, se destaca un momento. Un texto largo se
+ * corta y un boton lo muestra entero.
+ */
 function ScalarValue({ value }: { value: string }) {
+  const [open, setOpen] = useState(false);
   const changes = useChangeCount(value);
-  return <span key={changes} className={`${s.varValue}${changes > 0 ? ` ${s.changed}` : ''}`}>{value}</span>;
+  const long = value.length > MAX_VALUE_CHARS;
+  return (
+    <>
+      <span key={changes} className={`${s.varValue}${changes > 0 ? ` ${s.changed}` : ''}`}
+        title={long && !open ? value : undefined}>
+        {long && !open ? `${value.slice(0, MAX_VALUE_CHARS)}…` : value}
+      </span>
+      {long && (
+        <>
+          {' '}
+          <button type="button" className={s.more} onClick={() => setOpen(!open)} aria-expanded={open}>
+            {open ? 'ver menos' : 'ver todo'}
+          </button>
+        </>
+      )}
+    </>
+  );
 }
 
 /**
@@ -235,7 +284,7 @@ function ScalarValue({ value }: { value: string }) {
 function Cell({ value, note, flash }: { value: string; note: string; flash: boolean }) {
   const changes = useChangeCount(value);
   return (
-    <span className={s.cell}>
+    <span className={s.cell} title={value}>
       <span key={changes} className={`${s.cellValue}${flash && changes > 0 ? ` ${s.changed}` : ''}`}>{value}</span>
       <span className={s.cellNote}>{note}</span>
     </span>
@@ -276,7 +325,10 @@ function Writer({ v, procRefs }: { v: VarView; procRefs: ReadonlyMap<number, Pro
   if (!writer) return <span className={s.empty}>valor inicial</span>;
   return (
     <span className={s.writer}>
-      <span><i className="punto" style={{ background: writer.color }} />{writer.name}</span>
+      <span className={s.writerName} title={writer.name}>
+        <i className="punto" style={{ background: writer.color }} />
+        <span>{writer.name}</span>
+      </span>
       {v.lastWriteInstant !== null && <span className={s.writerWhen}>inst. {v.lastWriteInstant}</span>}
     </span>
   );

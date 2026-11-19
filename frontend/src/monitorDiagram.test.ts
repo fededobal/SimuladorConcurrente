@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { arrowsOf, eventsAbout, travelsOf } from './monitorDiagram';
+import { arrowsOf, eventsAbout, fitName, travelsOf } from './monitorDiagram';
 import type { LogEntry, MonitorView } from './types';
 
 let nextId = 0;
@@ -70,5 +70,25 @@ describe('eventsAbout', () => {
 
   it('systemEventsAreLeftOut', () => {
     expect(eventsAbout(monitor('M', null), [event('DEADLOCK', null, 'M')])).toEqual([]);
+  });
+});
+
+describe('fitName', () => {
+  it('shortNameStaysAsItIs', () => {
+    expect(fitName('Cliente[3]', 16)).toBe('Cliente[3]');
+  });
+
+  it('longNameKeepsItsIndex', () => {
+    const fitted = fitName('ClientePreferencialDelBancoCentral[12]', 16);
+    expect(fitted).toBe('ClientePref…[12]');
+    expect(fitted.length).toBe(16);
+  });
+
+  it('longNameWithoutIndexIsCutAtTheEnd', () => {
+    expect(fitName('AdministradorGeneral', 8)).toBe('Adminis…');
+  });
+
+  it('indexTooLongToKeepIsCutLikeAnyText', () => {
+    expect(fitName('M[123456789]', 6)).toBe('M[123…');
   });
 });

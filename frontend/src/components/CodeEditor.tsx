@@ -327,7 +327,7 @@ function Notices({ marks, direction, onGo }: NoticesProps) {
             className={`${s.notice} ${STATE_CLASS[tag.state]}`}
             style={{ ['--st-proceso' as string]: tag.color }}
             onClick={() => onGo(m.line)}
-            title={`Ir a la línea ${m.line}`}
+            title={`Ir a la línea ${m.line}: ${tag.title}${tag.detail ? ` · ${tag.detail}` : ''}`}
           >
             <i className={s.noticeChip} aria-hidden="true">{tag.title.charAt(0).toUpperCase()}</i>
             <b>{tag.title}</b>

@@ -30,6 +30,9 @@ interface Props {
   readonly onStepProcess: (processId: number) => void;
 }
 
+/** Monitores (o vectores de monitores) que se muestran antes de ofrecer ver el resto. */
+const MAX_GROUPS = 8;
+
 const TAB_LABEL: Record<TabId, string> = {
   monitors: 'Monitores',
   processes: 'Procesos',
@@ -48,6 +51,7 @@ export function Inspector({
   // monitor elegido en el selector de cada vector de monitores, por nombre del vector; vive
   // aca y no en el panel del vector para que no se pierda al cambiar de pestana
   const [picked, setPicked] = useState<Readonly<Record<string, string | null>>>({});
+  const [allGroups, setAllGroups] = useState(false);
   const processes = snapshot?.processes;
 
   const byId = useMemo(() => {
@@ -66,6 +70,9 @@ export function Inspector({
     // refsKey resume lo unico de `processes` que usa el mapa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refsKey]);
+
+  const monitors = snapshot?.monitors;
+  const groups = useMemo(() => groupMonitors(monitors ?? []), [monitors]);
 
   const monitorCard = (m: MonitorView) => (
     <MonitorCard key={m.name} monitor={m}
@@ -116,11 +123,19 @@ export function Inspector({
             {snapshot.monitors.length === 0 && (
               <p className="panel-vacio">El programa no declara monitores.</p>
             )}
-            {groupMonitors(snapshot.monitors).map((g) => (g.isArray ? (
+            {(allGroups ? groups : groups.slice(0, MAX_GROUPS)).map((g) => (g.isArray ? (
               <MonitorGroupPanel key={`${g.name}[]`} group={g} picked={picked[g.name] ?? null}
                 onPick={(name) => setPicked((prev) => ({ ...prev, [g.name]: name }))}
                 renderCard={monitorCard} />
             ) : monitorCard(g.monitors[0])))}
+            {groups.length > MAX_GROUPS && (
+              <div className={s.moreRow}>
+                <button type="button" className="btn btn-chico" onClick={() => setAllGroups(!allGroups)}
+                  aria-expanded={allGroups}>
+                  {allGroups ? `Ver solo los primeros ${MAX_GROUPS}` : `Ver ${groups.length - MAX_GROUPS} monitores más`}
+                </button>
+              </div>
+            )}
             <DeadlockTable blocked={blocked} />
           </>
         )}

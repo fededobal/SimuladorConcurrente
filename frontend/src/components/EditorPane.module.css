@@ -37,8 +37,10 @@
 
 .end { margin-left: auto; display: flex; align-items: center; gap: 4px; min-width: 0; }
 /* leyenda de los procesos: la inicial que aparece en el margen y su nombre */
-.legend { display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: 8px; overflow: hidden; list-style: none; }
-.legend li { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--dim); white-space: nowrap; }
+/* Un solo renglon: la familia que no entra entera baja al renglon siguiente, que no se ve.
+   Asi nunca queda un nombre cortado por la mitad; la lista completa esta en el title. */
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; min-width: 0; height: 20px; margin-right: 8px; overflow: hidden; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 5px; height: 20px; font-size: 12px; color: var(--dim); white-space: nowrap; }
 .initial {
   display: inline-flex;
   align-items: center;

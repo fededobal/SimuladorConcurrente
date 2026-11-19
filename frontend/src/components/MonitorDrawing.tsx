@@ -1,4 +1,4 @@
-import type { Arrow, Travel } from '../monitorDiagram';
+import { fitName, type Arrow, type Travel } from '../monitorDiagram';
 import type { MonitorView, ProcRef } from '../types';
 import { useLingering } from '../useLingering';
 import s from './MonitorCard.module.css';
@@ -30,6 +30,9 @@ const ROW_H = 15;
 const ROWS = 3;
 /** Caracteres de un nombre que entran en una zona. */
 const NAME_CHARS = 16;
+/** En la zona 2, caracteres del nombre de la variable condicion y del primer proceso de su cola. */
+const COND_CHARS = 8;
+const COND_PROC_CHARS = 7;
 /** Puntos que recorren una misma flecha a la vez; con mas procesos, el resto no se dibuja. */
 const MAX_TRAVELERS = 4;
 /** Separacion entre dos puntos que recorren la misma flecha, en ms. */
@@ -73,10 +76,6 @@ const TRAVEL_PATHS: Record<Arrow, string> = {
   return: `M${OWNER_DOT[0]},${OWNER_DOT[1]} C${ZONE3.x + ZONE_W - 24},${OWNER_DOT[1]} `
     + `${ZONE3.x + ZONE_W - 12},${MID_Y} ${ZONE3.x + ZONE_W + 2},${MID_Y} L${W - 2},${MID_Y}`,
 };
-
-function fit(text: string, max = NAME_CHARS): string {
-  return text.length <= max ? text : `${text.slice(0, max - 1)}…`;
-}
 
 /**
  * Dibujo de un monitor, como el de la teoria: tres zonas grandes con el nombre completo de
@@ -205,7 +204,7 @@ function NameRows({ procs, x, y }: { procs: readonly ProcRef[]; x: number; y: nu
         <g key={p.id} className={`${s.nameRow}${leaving ? ` ${s.leave}` : ''}`}
           style={{ transform: `translateY(${index * ROW_H}px)` }}>
           <circle cx={x + 3} cy={y - 4} r="3.5" fill={p.color} />
-          <text x={x + 11} y={y} className={s.procName}>{fit(p.name)}</text>
+          <text x={x + 11} y={y} className={s.procName}>{fitName(p.name, NAME_CHARS)}</text>
         </g>
       ))}
       {procs.length > rows && (
@@ -227,16 +226,16 @@ function CondRows({ monitor, x, y }: { monitor: MonitorView; x: number; y: numbe
         const first = c.queue[0];
         return (
           <g key={c.name} className={s.nameRow} style={{ transform: `translateY(${i * ROW_H}px)` }}>
-            <text x={x} y={y} className={s.condName}>{fit(c.name, 8)}</text>
+            <text x={x} y={y} className={s.condName}>{fitName(c.name, COND_CHARS)}</text>
             {first ? (
               <g key={first.id} className={s.arrive}>
-                <circle cx={x + 55} cy={y - 4} r="3.5" fill={first.color} />
-                <text x={x + 62} y={y} className={s.procName}>
-                  {fit(first.name, 7)}{c.queue.length > 1 ? ` +${c.queue.length - 1}` : ''}
+                <circle cx={x + 58} cy={y - 4} r="3.5" fill={first.color} />
+                <text x={x + 65} y={y} className={s.procName}>
+                  {fitName(first.name, COND_PROC_CHARS)}{c.queue.length > 1 ? ` +${c.queue.length - 1}` : ''}
                 </text>
               </g>
             ) : (
-              <text x={x + 52} y={y} className={`${s.note} ${s.fadeIn}`}>vacía</text>
+              <text x={x + 55} y={y} className={`${s.note} ${s.fadeIn}`}>vacía</text>
             )}
           </g>
         );

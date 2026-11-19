@@ -141,7 +141,10 @@ export function Timeline({
     longestProcess === '' ? 0 : Math.ceil(textWidth(longestProcess, NAME_FONT)) + PROCESS_EXTRA,
     longestMonitor === '' ? 0 : Math.ceil(textWidth(longestMonitor, NAME_FONT)) + MONITOR_EXTRA,
   )), [longestProcess, longestMonitor]);
-  const nameColumn = useNameColumn(autoNameW, view.width);
+  // el ancho automatico no se lleva mas de un 40 % del panel: en una ventana angosta, los
+  // nombres largos se abrevian y el resto es para los instantes
+  const autoShare = view.width > 0 ? Math.max(NAME_W_DEFAULT, Math.round(view.width * 0.4)) : autoNameW;
+  const nameColumn = useNameColumn(Math.min(autoNameW, autoShare), view.width);
   const nameW = nameColumn.width;
 
   // Solo el paso de un instante al que le sigue se anima. Se compara con lo que se dibujo la

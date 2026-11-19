@@ -23,7 +23,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0 10px;
+  /* con el panel en su ancho minimo y contadores de tres cifras, las tres pestanas y el boton entran */
+  padding: 0 7px;
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
@@ -64,9 +65,11 @@
   box-shadow: inset 3px 0 0 var(--st-proceso);
 }
 .proc:last-child { border-bottom: 0; }
-.procMain { display: flex; align-items: center; gap: 8px; min-height: 26px; }
-.procName { font: 600 12.5px var(--mono); white-space: nowrap; }
-.procState { min-width: 0; color: var(--dim); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Con un nombre largo la fila pasa a dos renglones: el nombre entero arriba (lo que distingue
+   a un proceso de otro es el indice, que va al final) y lo que hace, debajo. */
+.procMain { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; min-height: 26px; }
+.procName { min-width: 0; max-width: calc(100% - 16px); font: 600 12.5px var(--mono); overflow-wrap: anywhere; }
+.procState { flex: 1 1 110px; min-width: 0; color: var(--dim); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .procState b { font-weight: 600; color: var(--text); }
 .procEnd { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .procLine { font-size: 12px; color: var(--dimmer); white-space: nowrap; }
@@ -84,6 +87,17 @@
   text-overflow: ellipsis;
 }
 .local b { font-weight: 600; }
+.localsMore {
+  padding: 0 7px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--panel-soft);
+  color: var(--dim);
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.localsMore:hover { color: var(--text); border-color: var(--dimmer); }
 /* una local recien escrita se destaca y vuelve a su fondo */
 .localChanged { animation: local-flash 0.8s ease-out; }
 @keyframes local-flash {
@@ -105,16 +119,34 @@
 
 /* --- por que nadie avanza (deadlock) --- */
 
-.why { margin: 10px 12px; padding: 10px 12px; border: 1px solid var(--danger-line); border-radius: var(--radius); background: var(--panel); }
+.why { container-type: inline-size; margin: 10px 12px; padding: 10px 12px; border: 1px solid var(--danger-line); border-radius: var(--radius); background: var(--panel); }
 /* la tabla aparece al detectarse el deadlock */
 .why { animation: fade-in 0.3s ease-out; }
 .why h3 { margin-bottom: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--danger); }
+/* ninguna celda tiene ancho minimo: un nombre largo se parte en vez de ensanchar la tabla,
+   que quedaba cortada por el borde del panel */
 .why table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .why th { padding: 2px 10px 4px 0; text-align: left; font-size: 12px; font-weight: 500; color: var(--dimmer); border-bottom: 1px solid var(--line); }
-.why td { padding: 6px 10px 6px 0; vertical-align: top; font-family: var(--mono); font-size: 12px; border-bottom: 1px solid var(--line-soft); }
+.why td { padding: 6px 10px 6px 0; vertical-align: top; font-family: var(--mono); font-size: 12px; border-bottom: 1px solid var(--line-soft); overflow-wrap: anywhere; }
+.why td:last-child, .why th:last-child { padding-right: 0; }
 .why tr:last-child td { border-bottom: 0; }
-.why td:first-child { white-space: nowrap; font-weight: 600; }
+.why td:first-child { font-weight: 600; }
 .why td :global(.punto) { margin-right: 6px; }
+.whyMore { margin-top: 8px; }
+/* En un panel angosto tres columnas no dan: cada proceso pasa a ser un bloque, con su nombre
+   arriba y debajo cada dato con su rotulo, a todo el ancho. */
+@container (max-width: 460px) {
+  .why thead { display: none; }
+  .why table, .why tbody, .why tr, .why td { display: block; }
+  .why tr { padding: 6px 0; border-bottom: 1px solid var(--line-soft); }
+  .why tr:last-child { border-bottom: 0; padding-bottom: 0; }
+  .why td { padding: 1px 0; border-bottom: 0; }
+  .why td[data-label]::before {
+    content: attr(data-label) ': ';
+    font-family: var(--sans);
+    color: var(--dimmer);
+  }
+}
 
 /* quien pide menos movimiento ve cada instante de una vez */
 @media (prefers-reduced-motion: reduce) {

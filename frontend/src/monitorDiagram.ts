@@ -70,3 +70,18 @@ export function eventsAbout(monitor: MonitorView, entries: readonly LogEntry[]):
     isAbout(e, monitor.name) || (e.processId === owner && INSIDE_KINDS.has(e.kind))
   ));
 }
+
+/**
+ * El nombre abreviado a `max` caracteres para el dibujo, que no tiene lugar para nombres
+ * largos. Se corta el nombre y se conserva el indice del final: en `ClientePref…[12]` lo que
+ * distingue a un proceso de otro es el indice.
+ */
+export function fitName(name: string, max: number): string {
+  if (name.length <= max) return name;
+  const cut = name.endsWith(']') ? name.lastIndexOf('[') : -1;
+  const index = cut > 0 ? name.slice(cut) : '';
+  const room = max - 1 - index.length;
+  // un indice tan largo que no deja lugar para el nombre: se corta como cualquier texto
+  if (room < 1) return `${name.slice(0, max - 1)}…`;
+  return `${name.slice(0, room)}…${index}`;
+}

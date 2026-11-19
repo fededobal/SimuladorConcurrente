@@ -71,7 +71,8 @@ export function EditorPane(p: Props) {
           <span className={s.fileName}>{fileNameOf(p.programName)}</span>
         </div>
         <div className={s.end}>
-          <ul className={s.legend} aria-label="Procesos">
+          <ul className={s.legend} aria-label="Procesos"
+            title={legend.map((f) => (f.count > 1 ? `${f.name} ×${f.count}` : f.name)).join(', ')}>
             {legend.slice(0, MAX_LEGEND).map((f) => (
               <li key={f.name}>
                 <span className={s.initial} style={{ background: f.color }} aria-hidden="true">

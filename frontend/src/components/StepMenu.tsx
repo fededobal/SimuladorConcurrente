@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react';
+import { IndexedName } from './IndexedName';
 import { Popover } from './Popover';
 import { STATE_LABEL, visibleState } from '../processStates';
 import { processTextColor } from '../processColor';
@@ -47,7 +48,9 @@ export function StepMenu({ processes, disabled, className = 'btn', onOpen, onSte
             <button key={p.id} type="button" role="menuitem" className="menu-item"
               disabled={!canAdvance(p)} onClick={() => onStep(p.id)}>
               <i className="punto" style={{ background: p.color }} />
-              <span className="menu-item-nombre" style={{ color: processTextColor(p.color) }}>{p.name}</span>
+              <span className="menu-item-nombre menu-item-largo" style={{ color: processTextColor(p.color) }}>
+                <IndexedName name={p.name} />
+              </span>
               <span className="menu-item-nota">
                 {canAdvance(p) ? (p.line > 0 ? `línea ${p.line}` : 'listo') : STATE_LABEL[visibleState(p)]}
               </span>

@@ -37,6 +37,7 @@ frontend/docs/.vitepress/  guía: guia.ts (capítulos), markdown.ts, tema y comp
 | Tests de la interfaz (Vitest) | `frontend/` | `npm run test` |
 | Chequeo completo del front | `frontend/` | `npm run check` |
 | Regenerar las capturas de la guía | raíz | `node scripts/capturas.mjs` (con el simulador levantado) |
+| Control de desborde visual | raíz | `node scripts/desborde.mjs` (con el simulador levantado) |
 | Estilo de un documento formal | raíz | `node scripts/revisar-estilo.mjs <archivo>` |
 
 ## Reglas que no se negocian
