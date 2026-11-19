@@ -1,3 +1,4 @@
+import { IndexedName } from './IndexedName';
 import { textWidth } from '../measureText';
 import { STATE_CLASS, STATE_HINT } from '../processStates';
 import { processTextColor } from '../processColor';
@@ -32,6 +33,8 @@ interface ProcessProps extends CommonProps {
 
 /** Tipografia de los rotulos de los tramos; igual a .seg en el modulo CSS. */
 const LABEL_FONT = "600 12px 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif";
+/** Ancho de la columna de nombres desde el que un carril lleva la etiqueta "monitor": mas angosta, no deja lugar al nombre. */
+const TAG_MIN_NAME_W = 150;
 /** Margen interno de un tramo a cada lado del rotulo, con su borde. */
 const LABEL_PAD = 7;
 
@@ -51,8 +54,8 @@ function MonitorLane({ name, top, cell, nameWidth, columns, byId, last }: LanePr
     <div className={`${s.row} ${s.lane}${last ? ` ${s.laneLast}` : ''}`} style={{ top }}
       title={`${name}: quién tiene el monitor en cada instante`}>
       <div className={s.name}>
-        <span className={s.nameText}>{name}</span>
-        <span className={s.tag}>monitor</span>
+        <IndexedName name={name} className={s.nameText} />
+        {nameWidth >= TAG_MIN_NAME_W && <span className={s.tag}>monitor</span>}
       </div>
       {ownerSegmentsOf(name, columns).map((seg) => {
         const owner = seg.owner === null ? undefined : byId.get(seg.owner);
@@ -81,7 +84,7 @@ function ProcessRow({ process: p, top, cell, nameWidth, columns, cut }: ProcessP
       title={state ? `${p.name}: ${STATE_HINT[state]}` : p.name}>
       <div className={s.name} style={{ color: processTextColor(p.color) }}>
         <i className="punto" style={{ background: p.color }} />
-        <span className={s.nameText}>{p.name}</span>
+        <IndexedName name={p.name} className={s.nameText} />
       </div>
       {segmentsOf(p.id, columns).map((seg) => {
         const width = seg.length * cell - 2;

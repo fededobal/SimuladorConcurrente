@@ -105,3 +105,60 @@ export function visibleRows(
   const end = Math.min(total, Math.floor(scrollTop / rowHeight) + visible + overscan);
   return { first: Math.min(first, Math.max(0, total - 1)), end: Math.max(end, Math.min(total, first + 1)) };
 }
+
+// --- columna de nombres ---
+
+/** Ancho de la columna de nombres (procesos y monitores): el menor, el mayor y el de arranque. */
+export const NAME_W_MIN = 96;
+export const NAME_W_MAX = 480;
+export const NAME_W_DEFAULT = 156;
+/** Tope del ancho automatico: mas alla, la columna se agranda a mano. */
+export const NAME_W_AUTO_MAX = 300;
+/** Ancho de instantes que siempre queda a la vista al lado de los nombres, en px. */
+const MIN_GRID = 160;
+
+/**
+ * El ancho pedido para la columna de nombres llevado a sus limites: ni tan angosta que no
+ * se lea nada, ni tan ancha que no queden instantes a la vista.
+ *
+ * @param available ancho visible de la linea de tiempo, en px (0 si todavia no se midio)
+ */
+export function clampNameWidth(width: number, available: number): number {
+  const room = available > 0 ? available - MIN_GRID : NAME_W_MAX;
+  const max = Math.max(NAME_W_MIN, Math.min(NAME_W_MAX, room));
+  return Math.round(Math.min(Math.max(width, NAME_W_MIN), max));
+}
+
+// --- cartel del instante ---
+
+/** Un punto de la ventana, en px. */
+export interface Point {
+  readonly x: number;
+  readonly y: number;
+}
+
+/** Un tamano, en px. */
+export interface Size {
+  readonly width: number;
+  readonly height: number;
+}
+
+/** Separacion entre el puntero y el cartel, y entre el cartel y el borde de la ventana. */
+const CARD_GAP = 16;
+const CARD_MARGIN = 8;
+
+/**
+ * Donde va el cartel del instante para acompanar al puntero sin taparlo: abajo y a la
+ * derecha; si ahi no entra en la ventana, del otro lado. Nunca queda fuera de la ventana.
+ */
+export function cardPosition(pointer: Point, card: Size, viewport: Size): { left: number; top: number } {
+  const place = (at: number, size: number, limit: number) => {
+    const after = at + CARD_GAP;
+    const wanted = after + size > limit - CARD_MARGIN ? at - CARD_GAP - size : after;
+    return Math.round(Math.max(CARD_MARGIN, Math.min(wanted, limit - CARD_MARGIN - size)));
+  };
+  return {
+    left: place(pointer.x, card.width, viewport.width),
+    top: place(pointer.y, card.height, viewport.height),
+  };
+}

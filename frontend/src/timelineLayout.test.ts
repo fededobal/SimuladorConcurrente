@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { VisibleState } from './processStates';
 import type { TimelineColumn } from './timeline';
-import { labelsOf, ownerSegmentsOf, segmentsOf, visibleRows } from './timelineLayout';
+import {
+  cardPosition, clampNameWidth, labelsOf, NAME_W_MAX, NAME_W_MIN, ownerSegmentsOf, segmentsOf, visibleRows,
+} from './timelineLayout';
 
 function column(instant: number, state: VisibleState, where: string | null, owner: number | null): TimelineColumn {
   return { instant, states: { 1: state }, where: { 1: where }, owners: { M: owner }, events: [] };
@@ -91,5 +93,64 @@ describe('visibleRows', () => {
     expect(range.first).toBe(0);
     expect(range.end).toBeGreaterThan(10);
     expect(range.end).toBeLessThan(100);
+  });
+});
+
+describe('clampNameWidth', () => {
+  it('keepsAWidthInsideTheLimits', () => {
+    expect(clampNameWidth(200, 1200)).toBe(200);
+  });
+
+  it('neverNarrowerThanTheMinimumNorWiderThanTheMaximum', () => {
+    expect(clampNameWidth(10, 1200)).toBe(NAME_W_MIN);
+    expect(clampNameWidth(5000, 3000)).toBe(NAME_W_MAX);
+  });
+
+  it('leavesRoomForTheInstantsInANarrowPanel', () => {
+    // con 400 px visibles quedan 160 para los instantes
+    expect(clampNameWidth(380, 400)).toBe(240);
+  });
+
+  it('inAPanelTooNarrowTheMinimumWins', () => {
+    expect(clampNameWidth(300, 180)).toBe(NAME_W_MIN);
+  });
+
+  it('withoutAMeasuredPanelOnlyTheFixedLimitsApply', () => {
+    expect(clampNameWidth(300, 0)).toBe(300);
+  });
+});
+
+describe('cardPosition', () => {
+  const card = { width: 320, height: 120 };
+  const viewport = { width: 1280, height: 780 };
+
+  it('goesBelowAndToTheRightOfThePointer', () => {
+    expect(cardPosition({ x: 400, y: 300 }, card, viewport)).toEqual({ left: 416, top: 316 });
+  });
+
+  it('flipsToTheLeftNearTheRightEdge', () => {
+    expect(cardPosition({ x: 1200, y: 300 }, card, viewport).left).toBe(1200 - 16 - 320);
+  });
+
+  it('flipsAboveNearTheBottomEdge', () => {
+    expect(cardPosition({ x: 400, y: 740 }, card, viewport).top).toBe(740 - 16 - 120);
+  });
+
+  it('neverCoversThePointer', () => {
+    for (const x of [0, 200, 640, 1100, 1279]) {
+      for (const y of [0, 100, 390, 700, 779]) {
+        const { left, top } = cardPosition({ x, y }, card, viewport);
+        const covers = x >= left && x <= left + card.width && y >= top && y <= top + card.height;
+        expect(covers).toBe(false);
+      }
+    }
+  });
+
+  it('staysInsideTheWindowEvenIfItDoesNotFitOnEitherSide', () => {
+    const narrow = { width: 360, height: 200 };
+    const { left, top } = cardPosition({ x: 180, y: 100 }, card, narrow);
+    expect(left).toBeGreaterThanOrEqual(8);
+    expect(left + card.width).toBeLessThanOrEqual(narrow.width - 8);
+    expect(top).toBeGreaterThanOrEqual(8);
   });
 });

@@ -2,11 +2,15 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { Maximize2, Minimize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { InstantCard } from './InstantCard';
 import { TimelineRow } from './TimelineRow';
+import { textWidth } from '../measureText';
 import { prefersReducedMotion, slideMs, stepEasing } from '../motion';
 import { STATE_CLASS, STATE_HINT, type VisibleState } from '../processStates';
 import { familyOf, type Timeline as TimelineData } from '../timeline';
-import { BOTTOM_PAD, ROW_H, RULER_H, visibleRows } from '../timelineLayout';
+import {
+  BOTTOM_PAD, NAME_W_AUTO_MAX, NAME_W_DEFAULT, ROW_H, RULER_H, visibleRows, type Point,
+} from '../timelineLayout';
 import type { ProcessView } from '../types';
+import { useNameColumn } from '../useNameColumn';
 import s from './Timeline.module.css';
 
 interface Props {
@@ -16,8 +20,8 @@ interface Props {
   /** Instante del deadlock, para marcarlo; null si no hubo. */
   readonly deadlockInstant: number | null;
   /**
-   * Pedido de mostrar un instante: la linea de tiempo se desplaza hasta el y deja fija su
-   * tarjeta. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
+   * Pedido de mostrar un instante: la linea de tiempo se desplaza hasta el y muestra su
+   * cartel. `nonce` cambia en cada pedido, para poder repetir el mismo instante.
    */
   readonly focus: { readonly instant: number; readonly nonce: number } | null;
   /** Duracion de un instante, en ms: el deslizamiento se acompasa a la simulacion. */
@@ -29,11 +33,16 @@ interface Props {
 
 // Medidas de la grilla, en px. Posicionan filas y tramos (que son absolutos) y viajan al CSS
 // como variables, asi no hay dos copias que se puedan desalinear.
-const NAME_W = 156;
 /** Anchos de columna que recorre el zoom; el del medio es el de arranque. */
 const CELL_WIDTHS = [12, 18, 26, 36, 50] as const;
 const DEFAULT_CELL = 2;
-const CARD_W = 320;
+/** Tipografia de los nombres de las filas; igual a .name en el modulo CSS. */
+const NAME_FONT = "600 12px ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace";
+/** Lo que ocupa una fila ademas del nombre: margenes y el punto de color o la etiqueta "monitor". */
+const PROCESS_EXTRA = 12 + 8 + 7 + 12 + 4;
+const MONITOR_EXTRA = 12 + 7 + 60 + 12 + 4;
+/** Lugar que ocupa el rotulo del deadlock a la derecha de su raya, en px. */
+const DEADLOCK_LABEL_W = 230;
 /** Cada cuantos instantes se rotula la regla. */
 const RULER_EVERY = 5;
 
@@ -47,16 +56,29 @@ const LEGEND: readonly [VisibleState, string][] = [
   ['READY', 'sin turno'],
 ];
 
+/** El texto mas largo de la lista. */
+function longest(names: readonly string[]): string {
+  return names.reduce((a, b) => (b.length > a.length ? b : a), '');
+}
+
+/** Un instante elegido con un clic: su columna y donde estaba el puntero. */
+interface Pinned {
+  readonly index: number;
+  readonly at: Point;
+}
+
 /** Una fila de la grilla: el carril de un monitor o un proceso. */
 type Row = { readonly kind: 'monitor'; readonly name: string } | { readonly kind: 'process'; readonly id: number };
 
 /**
  * Linea de tiempo: una fila por proceso y una columna por instante, con el estado en que
  * quedo cada proceso. Arriba, un carril por monitor con quien lo tuvo en cada instante. Las
- * filas no se mueven, asi se puede seguir a un proceso de punta a punta; al pasar el mouse
- * por una columna, una tarjeta cuenta en palabras que paso en ese instante, y un clic la
- * deja fija. Solo se dibujan las filas que se ven: con mil procesos son las mismas veinte.
- * El boton de la cabecera la amplia: pasa al costado del editor, a toda altura.
+ * filas no se mueven, asi se puede seguir a un proceso de punta a punta. Un clic en un
+ * instante muestra un cartel que cuenta en palabras que paso; el cartel acompana al puntero
+ * para no tapar lo que se mira, y se cierra con otro clic en el mismo instante o con Escape.
+ * La columna de nombres se ensancha arrastrando su borde derecho. Solo se dibujan las filas
+ * que se ven: con mil procesos son las mismas veinte. El boton de la cabecera la amplia: pasa
+ * al costado del editor, a toda altura.
  *
  * De un instante al siguiente nada salta: el tramo que sigue se alarga, el que empieza se
  * descubre desde su borde izquierdo, el cursor del instante actual se corre una columna y el
@@ -67,12 +89,14 @@ export function Timeline({
   timeline, processes, deadlockInstant, focus, pasoMs, expanded, onToggleExpand,
 }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  // la grilla, como estado y no como ref: el cartel se suscribe a sus movimientos del mouse
+  const [plane, setPlane] = useState<HTMLDivElement | null>(null);
   const { columns, order, monitors } = timeline;
   const [cellIndex, setCellIndex] = useState(DEFAULT_CELL);
   const cell = CELL_WIDTHS[cellIndex];
-  // columna bajo el mouse y columna fijada con un clic: la tarjeta muestra la fijada si hay
+  // columna bajo el mouse (solo se resalta) e instante elegido con un clic (muestra su cartel)
   const [hover, setHover] = useState<number | null>(null);
-  const [pinned, setPinned] = useState<number | null>(null);
+  const [pinned, setPinned] = useState<Pinned | null>(null);
 
   const byId = useMemo(() => new Map(processes.map((p) => [p.id, p])), [processes]);
   const rows = useMemo<Row[]>(() => [
@@ -80,9 +104,9 @@ export function Timeline({
     ...order.map((id): Row => ({ kind: 'process', id })),
   ], [monitors, order]);
 
-  // Desplazamiento vertical, para dibujar solo las filas visibles. Se lee a lo sumo una vez
-  // por cuadro.
-  const [view, setView] = useState({ top: 0, height: 0 });
+  // Desplazamiento vertical y tamano visible, para dibujar solo las filas que se ven y para
+  // limitar la columna de nombres. Se lee a lo sumo una vez por cuadro.
+  const [view, setView] = useState({ top: 0, height: 0, width: 0 });
   const frame = useRef<number | null>(null);
   const readView = useCallback(() => {
     if (frame.current !== null) return;
@@ -90,8 +114,8 @@ export function Timeline({
       frame.current = null;
       const el = scrollRef.current;
       if (!el) return;
-      setView((prev) => (prev.top === el.scrollTop && prev.height === el.clientHeight
-        ? prev : { top: el.scrollTop, height: el.clientHeight }));
+      setView((prev) => (prev.top === el.scrollTop && prev.height === el.clientHeight && prev.width === el.clientWidth
+        ? prev : { top: el.scrollTop, height: el.clientHeight, width: el.clientWidth }));
     });
   }, []);
   useEffect(() => {
@@ -108,15 +132,27 @@ export function Timeline({
   }, [readView]);
   const range = visibleRows(Math.max(0, view.top - RULER_H), view.height, ROW_H, rows.length);
 
+  // Columna de nombres: de entrada, el ancho que necesita el nombre mas largo (la letra es
+  // de ancho fijo, asi que alcanza con medir el que tiene mas caracteres).
+  const longestProcess = useMemo(() => longest(processes.map((p) => p.name)), [processes]);
+  const longestMonitor = useMemo(() => longest(monitors), [monitors]);
+  const autoNameW = useMemo(() => Math.min(NAME_W_AUTO_MAX, Math.max(
+    NAME_W_DEFAULT,
+    longestProcess === '' ? 0 : Math.ceil(textWidth(longestProcess, NAME_FONT)) + PROCESS_EXTRA,
+    longestMonitor === '' ? 0 : Math.ceil(textWidth(longestMonitor, NAME_FONT)) + MONITOR_EXTRA,
+  )), [longestProcess, longestMonitor]);
+  const nameColumn = useNameColumn(autoNameW, view.width);
+  const nameW = nameColumn.width;
+
   // Solo el paso de un instante al que le sigue se anima. Se compara con lo que se dibujo la
-  // vez anterior: si cambio el zoom, o los instantes no son consecutivos (ejecucion nueva),
-  // todo va a su lugar sin transicion.
+  // vez anterior: si cambio el zoom o el ancho de los nombres, o los instantes no son
+  // consecutivos (ejecucion nueva), todo va a su lugar sin transicion.
   const lastInstant = columns[columns.length - 1]?.instant ?? 0;
-  const [drawn, setDrawn] = useState({ lastInstant, cell });
+  const [drawn, setDrawn] = useState({ lastInstant, cell, nameW });
   const [gliding, setGliding] = useState(false);
-  if (drawn.lastInstant !== lastInstant || drawn.cell !== cell) {
-    setDrawn({ lastInstant, cell });
-    setGliding(drawn.cell === cell && lastInstant === drawn.lastInstant + 1);
+  if (drawn.lastInstant !== lastInstant || drawn.cell !== cell || drawn.nameW !== nameW) {
+    setDrawn({ lastInstant, cell, nameW });
+    setGliding(drawn.cell === cell && drawn.nameW === nameW && lastInstant === drawn.lastInstant + 1);
   }
   const slide = slideMs(pasoMs);
 
@@ -160,20 +196,40 @@ export function Timeline({
     readView();
   };
 
-  // Una simulacion nueva empieza sin columna fijada.
+  // Una simulacion nueva empieza sin instante elegido.
   useEffect(() => {
     if (columns.length === 0) setPinned(null);
   }, [columns.length]);
 
-  // Pedido de afuera ("ver el instante del deadlock"): fijar su tarjeta y traerlo a la vista.
+  // Escape cierra el cartel. Se atiende antes que el Escape de la pantalla, que vuelve la
+  // linea de tiempo ampliada a su lugar: primero se cierra el cartel.
+  const hasPinned = pinned !== null;
+  useEffect(() => {
+    if (!hasPinned) return undefined;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      e.stopPropagation();
+      setPinned(null);
+    };
+    document.addEventListener('keydown', onKeyDown, true);
+    return () => document.removeEventListener('keydown', onKeyDown, true);
+  }, [hasPinned]);
+
+  // Pedido de afuera ("ver el instante del deadlock"): traerlo a la vista y mostrar su
+  // cartel, que al no haber un clic va al lado de la columna.
   useEffect(() => {
     if (!focus) return;
     const i = columns.findIndex((c) => c.instant === focus.instant);
     if (i < 0) return;
-    setPinned(i);
     following.current = false;
     const el = scrollRef.current;
-    if (el) el.scrollLeft = Math.max(0, NAME_W + (i + 1) * cell - el.clientWidth + cell * 3);
+    if (!el) return;
+    el.scrollLeft = Math.max(0, nameW + (i + 1) * cell - el.clientWidth + cell * 3);
+    const box = el.getBoundingClientRect();
+    setPinned({
+      index: i,
+      at: { x: box.left + nameW + (i + 1) * cell - el.scrollLeft, y: box.top + RULER_H },
+    });
     // solo ante un pedido nuevo: no debe volver a ese instante cada vez que se agrega una columna
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus]);
@@ -183,19 +239,15 @@ export function Timeline({
 
   const columnAt = (e: React.MouseEvent<HTMLDivElement>): number | null => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const i = Math.floor((e.clientX - rect.left - NAME_W) / cell);
+    const i = Math.floor((e.clientX - rect.left - nameW) / cell);
     return i >= 0 && i < columns.length ? i : null;
   };
 
-  const width = NAME_W + Math.max(columns.length, 1) * cell + cell * 2;
+  // a la derecha del ultimo instante quedan dos columnas de aire, o el rotulo del deadlock
+  const width = nameW + Math.max(columns.length, 1) * cell
+    + (deadlockColumn >= 0 ? Math.max(cell * 2, DEADLOCK_LABEL_W) : cell * 2);
   const height = RULER_H + rows.length * ROW_H + BOTTOM_PAD;
-  const shown = pinned ?? hover;
-  // la tarjeta va a la derecha de la columna; si no entra en lo visible, a la izquierda
-  const visibleRight = (scrollRef.current?.scrollLeft ?? 0) + (scrollRef.current?.clientWidth ?? width);
-  const cardLeft = shown === null ? 0
-    : NAME_W + (shown + 1) * cell + 8 + CARD_W > visibleRight
-      ? Math.max(NAME_W, NAME_W + shown * cell - CARD_W - 8)
-      : NAME_W + (shown + 1) * cell + 8;
+  const pinnedColumn = pinned === null ? undefined : columns[pinned.index];
   const last = columns.length - 1;
 
   return (
@@ -239,40 +291,54 @@ export function Timeline({
           <p className={s.emptyText}>Con Ejecutar o Paso, acá se dibuja cómo avanza cada proceso instante a instante.</p>
         )}
         <div
+          ref={setPlane}
           className={`${s.plane}${gliding ? '' : ` ${s.still}`}`}
           style={{
             width, height, ['--desliz' as string]: `${slide}ms`,
             ['--cell' as string]: `${cell}px`, ['--row-h' as string]: `${ROW_H}px`,
-            ['--ruler-h' as string]: `${RULER_H}px`, ['--name-w' as string]: `${NAME_W}px`,
+            ['--ruler-h' as string]: `${RULER_H}px`, ['--name-w' as string]: `${nameW}px`,
           }}
           onMouseMove={(e) => setHover(columnAt(e))}
           onMouseLeave={() => setHover(null)}
-          onClick={(e) => { const i = columnAt(e); setPinned((p) => (i === null || p === i ? null : i)); }}
+          onClick={(e) => {
+            const i = columnAt(e);
+            const at = { x: e.clientX, y: e.clientY };
+            setPinned((p) => (i === null || p?.index === i ? null : { index: i, at }));
+          }}
         >
+          {/* Asa de la columna de nombres: una franja sobre su borde derecho, de todo el alto
+              visible. Va en una caja sin alto que se queda arriba a la izquierda al desplazar. */}
+          <div className={s.grip}>
+            <div className={`${s.gripHandle}${nameColumn.dragging ? ` ${s.gripActive}` : ''}`}
+              style={{ height: view.height }} {...nameColumn.handleProps} />
+          </div>
+
           <div className={s.ruler}>
             <div className={s.corner}>Instante</div>
             {columns.map((c, i) => (c.instant % RULER_EVERY === 0 || c.instant === 1) && i !== last && (
-              <span key={c.instant} className={s.tick} style={{ left: NAME_W + i * cell }}>
+              <span key={c.instant} className={s.tick} style={{ left: nameW + i * cell }}>
                 <span>{c.instant}</span>
               </span>
             ))}
             {/* el instante actual: un solo nodo que se corre de columna, no uno nuevo por instante */}
             {last >= 0 && (
-              <span className={`${s.tick} ${s.now}`} style={{ left: NAME_W + last * cell }}>
+              <span className={`${s.tick} ${s.now}`} style={{ left: nameW + last * cell }}>
                 <span>{columns[last].instant}</span>
               </span>
             )}
           </div>
 
-          {last >= 0 && <div className={s.cursor} style={{ left: NAME_W + last * cell, top: RULER_H }} />}
+          {last >= 0 && <div className={s.cursor} style={{ left: nameW + last * cell, top: RULER_H }} />}
           {deadlockColumn >= 0 && (
-            <div className={s.deadlock} style={{ left: NAME_W + (deadlockColumn + 1) * cell }}>
+            <div className={s.deadlock} style={{ left: nameW + (deadlockColumn + 1) * cell }}>
               <span>Deadlock: nadie puede avanzar</span>
             </div>
           )}
-          {shown !== null && (
-            <div className={`${s.column}${pinned !== null ? ` ${s.pinned}` : ''}`}
-              style={{ left: NAME_W + shown * cell, top: RULER_H }} />
+          {hover !== null && hover !== pinned?.index && (
+            <div className={s.column} style={{ left: nameW + hover * cell, top: RULER_H }} />
+          )}
+          {pinnedColumn && pinned && (
+            <div className={`${s.column} ${s.pinned}`} style={{ left: nameW + pinned.index * cell, top: RULER_H }} />
           )}
 
           {rows.slice(range.first, range.end).map((row, k) => {
@@ -281,7 +347,7 @@ export function Timeline({
             if (row.kind === 'monitor') {
               return (
                 <TimelineRow key={`m-${row.name}`} kind="monitor" name={row.name} top={top} cell={cell}
-                  nameWidth={NAME_W} columns={columns} byId={byId} last={index === monitors.length - 1} />
+                  nameWidth={nameW} columns={columns} byId={byId} last={index === monitors.length - 1} />
               );
             }
             const p = byId.get(row.id);
@@ -291,16 +357,14 @@ export function Timeline({
             const cut = nextProc !== undefined && familyOf(nextProc.name) !== familyOf(p.name);
             return (
               <TimelineRow key={row.id} kind="process" process={p} top={top} cell={cell}
-                nameWidth={NAME_W} columns={columns} cut={cut} />
+                nameWidth={nameW} columns={columns} cut={cut} />
             );
           })}
 
-          {shown !== null && columns[shown] && (
-            <InstantCard column={columns[shown]} left={cardLeft}
-              top={RULER_H + 6 + Math.max(0, view.top - RULER_H)} />
-          )}
         </div>
       </div>
+
+      {pinnedColumn && pinned && <InstantCard column={pinnedColumn} at={pinned.at} area={plane} />}
     </section>
   );
 }

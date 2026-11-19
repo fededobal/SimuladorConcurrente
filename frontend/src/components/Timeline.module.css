@@ -52,6 +52,33 @@
   pointer-events: none;
 }
 
+/* Asa para cambiar el ancho de la columna de nombres. La caja no tiene alto (no corre a la
+   regla) y se queda arriba a la izquierda aunque la grilla se desplace; el asa cuelga de
+   ella, sobre el borde derecho de la columna. */
+.grip { position: sticky; left: 0; top: 0; z-index: 6; width: var(--name-w); height: 0; }
+.gripHandle {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 9px;
+  cursor: col-resize;
+  touch-action: none;
+}
+/* una raya del color de acento marca el borde que se esta por mover */
+.gripHandle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.12s linear;
+}
+.gripHandle:hover::after, .gripHandle:focus-visible::after, .gripActive::after { opacity: 1; }
+.gripHandle:focus-visible { outline: none; }
+
 /* --- regla --- */
 
 .ruler {
@@ -104,7 +131,7 @@
   pointer-events: none;
   transition: left var(--desliz, 150ms) var(--ease-step);
 }
-/* columna bajo el mouse; fijada con un clic, con los bordes marcados */
+/* columna bajo el mouse; la del instante elegido con un clic, con los bordes marcados */
 .column {
   position: absolute;
   bottom: 0;
@@ -164,7 +191,8 @@
   white-space: nowrap;
   overflow: hidden;
 }
-.nameText { overflow: hidden; text-overflow: ellipsis; }
+/* si el nombre no entra se abrevia y el indice queda a la vista (ver IndexedName) */
+.nameText { flex: 0 1 auto; }
 
 /* Carril de un monitor: fondo gris y una etiqueta "monitor" junto al nombre. Lo que se dibuja
    no es un estado sino quien lo tiene. */
@@ -232,11 +260,16 @@
 .sample:global(.st-waiting), .sample:global(.st-delayed) { border: 1px solid var(--st); background: color-mix(in srgb, var(--st) 13%, var(--mix-base)); }
 .sample:global(.st-ready) { height: 2px; border-radius: 1px; background: var(--st); }
 
-/* tarjeta del instante: que paso, en palabras */
+/* Cartel del instante: que paso, en palabras. Va al final del documento, con posicion fija
+   junto al puntero (ver InstantCard); el lugar lo escribe el componente. */
 .card {
-  position: absolute;
-  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 45;
   width: 320px;
+  max-width: calc(100vw - 16px);
+  overflow-wrap: anywhere;
   padding: 9px 11px;
   background: var(--panel);
   border: 1px solid var(--line-strong);
