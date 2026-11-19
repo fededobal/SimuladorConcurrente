@@ -4,6 +4,10 @@ El programa del editor se guarda solo en el navegador: sigue ahí al recargar la
 al volver otro día. El menú con el nombre del programa, en la barra, reúne lo que se puede
 hacer con él.
 
+Si el programa guardado es un ejemplo sin modificar y ese ejemplo se actualizó después, al
+abrir el simulador se carga la versión actual, con los valores que tenían sus constantes, y
+un aviso lo indica. Un programa modificado o guardado en **Mis programas** no se reemplaza.
+
 <figure>
 
 ![Menú del programa abierto: campo Nombre, acciones Nuevo programa, Abrir un archivo .mon, Descargar como .mon y Guardar en Mis programas, y las listas Mis programas y Ejemplos](/capturas/programas.png)

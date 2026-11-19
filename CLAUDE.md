@@ -97,5 +97,8 @@ el navegador coincidan.
 - Mostrar diff/resumen antes de commitear; nunca `git push` sin pedido.
 - Si un pedido contradice el material de la cátedra (`docs/clases-materia/`) o estas reglas,
   decirlo antes de hacerlo.
+- Al cambiar un programa de `ejemplos/`, copiar la versión que se reemplaza a
+  `ejemplos/anteriores/` (ver su `LEEME.md`): así el simulador actualiza la copia vieja que
+  haya quedado guardada en el navegador de quien lo tenía abierto.
 - Informe de revisión (bugs B1–B6, ya corregidos, y propuestas): `docs/informe-revision.md`.
   Decisiones vigentes: `docs/decisiones/`.

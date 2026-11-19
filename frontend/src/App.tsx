@@ -10,7 +10,8 @@ import { Timeline } from './components/Timeline';
 import { TopBar } from './components/TopBar';
 import { blockedProcesses } from './deadlock';
 import type { ActiveLine } from './editor/lineMarks';
-import { EJEMPLOS } from './ejemplos';
+import { EJEMPLOS, EJEMPLOS_ANTERIORES } from './ejemplos';
+import { updatedExample } from './exampleUpdates';
 import { downloadText, readTextFile } from './files';
 import { visibleState, whereOf } from './processStates';
 import { DEFAULT_NAME, fileNameOf, nameFromFile, type Program, type SavedProgram } from './programs';
@@ -35,10 +36,14 @@ const FIRST_PROGRAM: Program = {
 /** Cuanto queda en pantalla un aviso corto, en ms. */
 const NOTICE_MS = 4000;
 
-/** true si el programa es trabajo propio que no esta en "Mis programas" ni es un ejemplo. */
+/**
+ * true si el programa es trabajo propio que no esta en "Mis programas" ni es un ejemplo (el
+ * actual o la copia sin tocar de una version anterior).
+ */
 function isUnsavedWork(program: Program): boolean {
   return program.id === null && program.code.trim() !== ''
-    && !EJEMPLOS.some((e) => e.codigo === program.code);
+    && !EJEMPLOS.some((e) => e.codigo === program.code)
+    && updatedExample(program, EJEMPLOS_ANTERIORES, EJEMPLOS) === null;
 }
 
 /**
@@ -181,6 +186,16 @@ export function App() {
       window.prompt('Copiá este enlace para compartir el programa:', url);
     }
   };
+
+  // Si lo que quedo guardado en el navegador es la copia sin tocar de una version anterior de
+  // un ejemplo, se abre el ejemplo actual: si no, quien lo tenia abierto seguiria viendo el
+  // viejo (con sus defectos ya corregidos) hasta volver a elegirlo en el menu.
+  useEffect(() => {
+    const updated = updatedExample(storeRef.current.program, EJEMPLOS_ANTERIORES, EJEMPLOS);
+    if (!updated) return;
+    storeRef.current.open(updated);
+    setNotice(`El ejemplo "${updated.name}" se actualizó: se abrió la versión nueva.`);
+  }, []);
 
   // Un enlace compartido trae el programa en el fragmento. Se abre y se limpia la direccion,
   // para que recargar la pestana no vuelva a pisar lo que se escriba despues.
