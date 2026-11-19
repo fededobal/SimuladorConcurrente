@@ -292,6 +292,7 @@ Reglas:
   (Federico Dobal, 2026-09-23)
 
 ### Interno
+- Partir el componente de la línea de tiempo: la fila (carril de monitor o proceso), el cartel del instante y la medición de texto pasan a archivos propios, sin cambio de comportamiento. (Federico Dobal, 2026-11-19)
 - `scripts/capturas.mjs` regenera las capturas de la guía con el simulador real: abre cada programa por enlace, con semilla fija, de modo que las imágenes salen iguales cada vez. (Federico Dobal, 2026-11-17)
 - Estilos por componente con CSS Modules (`Componente.module.css`); `index.css` conserva los tokens de color, los botones, los menús y los colores de estado, que son compartidos. `App.tsx` se parte en `TopBar`, `EditorPane`, `Inspector`, `Timeline` y `StatusBar`; los cálculos de la línea de tiempo pasan a `timelineLayout.ts`, con tests. (Federico Dobal, 2026-11-17)
 - Interfaz: el estado de cada paso reutiliza del anterior los objetos que no cambiaron (`reuse.ts`), de modo que los componentes memorizados de los monitores y procesos que no se movieron no se vuelven a dibujar. El motor sigue entregando el estado completo: medido, generarlo y leerlo cuesta 3 ms con 1000 procesos, así que la diferencia se calcula del lado de la interfaz, que es donde estaba el costo. (Federico Dobal, 2026-11-17)
