@@ -33,12 +33,16 @@ public sealed interface Expr {
     /** {@code empty cola} : true si la cola no tiene elementos. */
     record EmptyQueue(String queue, int line) implements Expr { }
 
+    /** {@code random(inf, sup)}: un entero al azar entre los dos limites, incluidos. */
+    record Random(Expr low, Expr high, int line) implements Expr { }
+
     /** Utilidad: lista de sub-expresiones directas (para recorridos del validador). */
     default List<Expr> children() {
         return switch (this) {
             case ArrayAccess a -> List.of(a.index());
             case Unary u -> List.of(u.operand());
             case Binary b -> List.of(b.left(), b.right());
+            case Random r -> List.of(r.low(), r.high());
             case IntLit ignored -> List.of();
             case DoubleLit ignored -> List.of();
             case BoolLit ignored -> List.of();

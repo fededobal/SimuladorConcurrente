@@ -158,6 +158,9 @@ final class ExpressionParser {
         if (t.isKeyword("empty")) {
             return parseEmpty();
         }
+        if (t.isKeyword("random")) {
+            return parseRandom();
+        }
         if (t.is("(")) {
             tokens.advance();
             Expr inner = parseExpr();
@@ -193,6 +196,17 @@ final class ExpressionParser {
             throw new CompilationException("Número fuera de rango: " + t.lexeme()
                     + " no entra en un int (máximo 9223372036854775807)", t.line());
         }
+    }
+
+    /** {@code random(inf, sup)}: los dos limites son expresiones enteras. */
+    private Expr parseRandom() {
+        Token kw = tokens.advance();
+        tokens.consume("(", "Se esperaba '(' después de 'random': se escribe random(inf, sup)");
+        Expr low = parseExpr();
+        tokens.consume(",", "Se esperaba ',' entre los dos límites: se escribe random(inf, sup)");
+        Expr high = parseExpr();
+        tokens.consume(")", "Se esperaba ')' después del límite superior de random");
+        return new Expr.Random(low, high, kw.line());
     }
 
     /** {@code empty c} o {@code empty(c)}: se acepta con y sin parentesis. */

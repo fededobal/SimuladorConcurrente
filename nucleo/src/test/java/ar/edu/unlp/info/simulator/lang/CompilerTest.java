@@ -761,4 +761,50 @@ class CompilerTest {
         errorOf("process P { int desc = 0; }");
         errorOf("process P { int Asc = 0; }");
     }
+
+    /** random(inf, sup) es una expresion entera; no vale donde el valor se fija antes de ejecutar. */
+    @Test
+    void randomIsAnIntExpressionWithTwoIntLimits() {
+        assertDoesNotThrow(() -> Compiler.compile("""
+                monitor M { int x = random(1, 6);
+                  procedure f(n: in int) { x = x + random(0, n); delay(random(1, 3)); } }
+                process P[i: 0..2] {
+                  int v = random(i, 10);
+                  double d = random(1, 2);
+                  for (int k = 1..random(1, 3)) { M.f(RANDOM(1, 2)); }
+                }
+                """));
+        assertTrue(errorOf("process P { int x = random(1); }").contains("random(inf, sup)"));
+        assertTrue(errorOf("process P { int x = random 5; }").contains("random(inf, sup)"));
+        assertTrue(errorOf("process P { int x = random(1, 2.5); }")
+                .contains("El límite superior de random tiene que ser int"));
+        assertTrue(errorOf("process P { int x = random(true, 2); }")
+                .contains("El límite inferior de random tiene que ser int"));
+        assertTrue(errorOf("process P { bool b = random(1, 2); }")
+                .contains("No se puede guardar un int"));
+    }
+
+    /** La cantidad de procesos, de monitores y de elementos se fija antes de ejecutar. */
+    @Test
+    void randomIsRejectedInSizesAndRanges() {
+        assertTrue(errorOf("process P[i: 0..random(1, 3)] { skip; }")
+                .contains("random no se puede usar en el rango de un arreglo de procesos"));
+        assertTrue(errorOf("""
+                monitor M[i: 0..random(1, 3)] { procedure f() { skip; } }
+                process P { M[0].f(); }
+                """).contains("random no se puede usar en el rango de un arreglo de monitores"));
+        assertTrue(errorOf("process P { int v[random(1, 3)]; }")
+                .contains("random no se puede usar en el tamaño de 'v'"));
+        assertTrue(errorOf("""
+                monitor M { cond c[1 + random(1, 3)]; procedure f() { skip; } }
+                process P { M.f(); }
+                """).contains("random no se puede usar en el tamaño de un arreglo de cond"));
+    }
+
+    /** random es palabra reservada, con cualquier combinacion de mayusculas. */
+    @Test
+    void randomIsAKeyword() {
+        errorOf("process P { int random = 0; }");
+        errorOf("process P { int Random = 0; }");
+    }
 }

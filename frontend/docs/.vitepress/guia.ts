@@ -63,6 +63,7 @@ const CAPITULOS: readonly CapituloDef[] = [
           { titulo: 'empty', enlace: '/lenguaje/instrucciones/empty' },
           { titulo: 'write', enlace: '/lenguaje/instrucciones/write' },
           { titulo: 'delay', enlace: '/lenguaje/instrucciones/delay' },
+          { titulo: 'random', enlace: '/lenguaje/instrucciones/random' },
         ],
       },
     ],

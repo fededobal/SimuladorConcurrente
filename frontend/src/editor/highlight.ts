@@ -17,6 +17,7 @@ export const KEYWORDS: Readonly<Record<string, TokenClass>> = {
   if: 'tok-ctrl', else: 'tok-ctrl', while: 'tok-ctrl', for: 'tok-ctrl', skip: 'tok-ctrl',
   and: 'tok-ctrl', or: 'tok-ctrl', not: 'tok-ctrl', mod: 'tok-ctrl',
   push: 'tok-ctrl', pop: 'tok-ctrl', empty: 'tok-ctrl', write: 'tok-ctrl', delay: 'tok-sync',
+  random: 'tok-ctrl',
 
   int: 'tok-type', double: 'tok-type', bool: 'tok-type', text: 'tok-type',
   cola: 'tok-type', colaordenada: 'tok-type', asc: 'tok-type', desc: 'tok-type',

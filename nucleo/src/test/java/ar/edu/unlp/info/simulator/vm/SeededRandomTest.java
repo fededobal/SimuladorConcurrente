@@ -57,4 +57,46 @@ class SeededRandomTest {
     }
 
     static final String TRACE_01_SEED_0 = "5E 3B 4B 1B | 2B 5D | | | 5A | 5R 2E |";
+
+    /** Con una cota que no entra en un int, coincide con {@code Random.nextLong(cota)}. */
+    @Test
+    void nextLongWithLargeBoundMatchesJavaUtilRandom() {
+        long[] bounds = {1L << 31, (1L << 31) + 1, 4_000_000_006L, 1L << 40, Long.MAX_VALUE};
+        for (long seed : new long[] {0, 1, 7, 42, -5, 1695480000000L}) {
+            SeededRandom rng = new SeededRandom(seed);
+            Random random = new Random(seed);
+            for (int i = 0; i < 500; i++) {
+                long bound = bounds[i % bounds.length];
+                assertEquals(random.nextLong(bound), rng.nextLong(bound), "semilla " + seed);
+            }
+        }
+    }
+
+    /** Con una cota chica es la misma tirada que nextInt. */
+    @Test
+    void nextLongWithSmallBoundIsNextInt() {
+        SeededRandom a = new SeededRandom(9);
+        SeededRandom b = new SeededRandom(9);
+        for (int bound = 1; bound < 300; bound++) {
+            assertEquals(a.nextInt(bound), b.nextLong(bound));
+        }
+    }
+
+    /**
+     * Los valores de random(inf, sup) con una semilla fija. Misma traza que
+     * scripts/smoke-motor.mjs: si cambia aca, tiene que cambiar en el navegador.
+     */
+    @Test
+    void randomValuesWithFixedSeed() {
+        VirtualMachine vm = ar.edu.unlp.info.simulator.TestSupport.compileAndBuild(RANDOM_PROGRAM, 0);
+        for (int i = 0; i < 200 && !vm.isFinished(); i++) vm.step(null, SchedulingPolicy.ROUND_ROBIN);
+        String values = vm.snapshot().monitors().get(0).vars().get(0).value();
+        assertEquals(RANDOM_VALUES_SEED_0, values);
+    }
+
+    static final String RANDOM_PROGRAM = """
+            monitor M { text valores = ""; procedure anotar(v: in int) { valores = valores + v + " "; } }
+            process P { for (1..10) { M.anotar(random(1, 100)); } M.anotar(random(-5, 4000000000)); }
+            """;
+    static final String RANDOM_VALUES_SEED_0 = "61 49 30 48 16 54 92 62 20 55 1431678132 ";
 }

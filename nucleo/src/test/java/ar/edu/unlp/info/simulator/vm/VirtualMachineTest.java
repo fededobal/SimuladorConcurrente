@@ -796,4 +796,87 @@ class VirtualMachineTest {
         assertEquals("Índice 4 fuera de rango para 'a' (tamaño 2)",
                 r.vm().snapshot().processes().get(0).error());
     }
+
+    // Anota el menor y el mayor de 200 valores de random(3, 6), y cuantos cayeron afuera.
+    private static final String RANDOM_RANGE = """
+            monitor M {
+                int menor = 99; int mayor = -99; int fuera = 0;
+                procedure anotar(v: in int) {
+                    if (v < menor) menor = v;
+                    if (v > mayor) mayor = v;
+                    if (v < 3 or v > 6) fuera = fuera + 1;
+                }
+            }
+            process P { for (1..200) { M.anotar(random(3, 6)); } }
+            """;
+
+    /** random(inf, sup) da un entero entre los dos limites, y los dos limites salen. */
+    @Test
+    void randomStaysInsideItsLimitsAndReachesBoth() {
+        for (int seed = 0; seed < 10; seed++) {
+            RunResult r = TestSupport.run(RANDOM_RANGE, SchedulingPolicy.RANDOM, seed, 5000);
+            assertEquals("0", TestSupport.finalVar(r, "M", "fuera"), "seed " + seed);
+            assertEquals("3", TestSupport.finalVar(r, "M", "menor"), "seed " + seed);
+            assertEquals("6", TestSupport.finalVar(r, "M", "mayor"), "seed " + seed);
+        }
+    }
+
+    /** Con la misma semilla la ejecucion se repite igual; con otra, los valores cambian. */
+    @Test
+    void sameSeedGivesTheSameRandomValues() {
+        String src = """
+                monitor M { text valores = ""; procedure anotar(v: in int) { valores = valores + v + " "; } }
+                process P { for (1..12) { M.anotar(random(0, 1000)); } }
+                """;
+        java.util.Set<String> distinct = new java.util.HashSet<>();
+        for (int seed = 0; seed < 8; seed++) {
+            String first = TestSupport.finalVar(
+                    TestSupport.run(src, SchedulingPolicy.RANDOM, seed, 5000), "M", "valores");
+            String again = TestSupport.finalVar(
+                    TestSupport.run(src, SchedulingPolicy.RANDOM, seed, 5000), "M", "valores");
+            assertEquals(first, again, "seed " + seed);
+            distinct.add(first);
+        }
+        assertTrue(distinct.size() > 1, "todas las semillas dieron los mismos valores");
+    }
+
+    /** Limites iguales, negativos, y un rango que no entra en un int. */
+    @Test
+    void randomAcceptsEqualNegativeAndWideLimits() {
+        String src = """
+                monitor M {
+                    int igual = 0; int negativo = 0; int ancho = 0; int inicial = random(10, 20);
+                    procedure anotar() {
+                        igual = random(7, 7);
+                        negativo = random(-3, -1);
+                        ancho = random(-5, 4000000000);
+                    }
+                }
+                process P { M.anotar(); }
+                """;
+        for (int seed = 0; seed < 20; seed++) {
+            RunResult r = TestSupport.run(src, SchedulingPolicy.RANDOM, seed, 100);
+            assertEquals("7", TestSupport.finalVar(r, "M", "igual"));
+            long negative = Long.parseLong(TestSupport.finalVar(r, "M", "negativo"));
+            assertTrue(negative >= -3 && negative <= -1, "negativo = " + negative);
+            long wide = Long.parseLong(TestSupport.finalVar(r, "M", "ancho"));
+            assertTrue(wide >= -5 && wide <= 4_000_000_000L, "ancho = " + wide);
+            long initial = Long.parseLong(TestSupport.finalVar(r, "M", "inicial"));
+            assertTrue(initial >= 10 && initial <= 20, "inicial = " + initial);
+        }
+    }
+
+    /** Los limites al reves, o un rango que no entra en un entero, son error de ejecucion. */
+    @Test
+    void randomWithInvalidLimitsIsARuntimeError() {
+        RunResult backwards = TestSupport.run("process P { int x = random(5, 2); }",
+                SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("random(5, 2): el límite inferior es mayor que el superior",
+                backwards.vm().snapshot().processes().get(0).error());
+        RunResult huge = TestSupport.run(
+                "process P { int x = random(-9000000000000000000, 9000000000000000000); }",
+                SchedulingPolicy.ROUND_ROBIN, 0, 100);
+        assertEquals("random(-9000000000000000000, 9000000000000000000): el rango es demasiado grande",
+                huge.vm().snapshot().processes().get(0).error());
+    }
 }

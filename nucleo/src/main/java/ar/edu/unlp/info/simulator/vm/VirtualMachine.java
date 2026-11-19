@@ -37,7 +37,8 @@ public final class VirtualMachine {
     private final EventLog events = new EventLog();
 
     private final SimulationClock clock = new SimulationClock();
-    private final VariableAccess vars = new VariableAccess(monitors, clock);
+    private final SeededRandom random;
+    private final VariableAccess vars;
     /**
      * Ids de los procesos que avanzaron en el ultimo instante, en el orden en que les toco el
      * turno: la UI los marca como "ejecutando" y los ordena asi en la linea de tiempo. Un
@@ -48,7 +49,8 @@ public final class VirtualMachine {
     private boolean deadlockLogged = false;
 
     public VirtualMachine(Program program, long seed) {
-        SeededRandom random = new SeededRandom(seed);
+        this.random = new SeededRandom(seed);
+        this.vars = new VariableAccess(monitors, clock, random);
         this.scheduler = new Scheduler(processes, random);
         this.monitorProtocol = new MonitorProtocol(monitors, random, advancedLastStep,
                 this::event);
@@ -62,7 +64,7 @@ public final class VirtualMachine {
     private void initialize(Program program) {
         for (MonitorDef md : program.monitors()) {
             monitorDefs.put(md.name(), md);
-            for (Monitor m : ProgramLoader.buildMonitors(md)) monitors.put(m.name(), m);
+            for (Monitor m : ProgramLoader.buildMonitors(md, random)) monitors.put(m.name(), m);
         }
         runInitCode();
         processes.addAll(ProgramLoader.buildProcesses(program.processes()));

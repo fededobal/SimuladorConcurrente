@@ -46,7 +46,8 @@ publican.
 El lenguaje admite monitores con variables permanentes y `cond` (también arreglos de
 `cond`), arreglos de monitores (`monitor Escritorio[id: 0..2]`), `wait`, `signal` y
 `signal_all`, `delay`, procesos y familias de procesos (`process P[i: 0..N-1]`), parámetros
-`in` y `out`, `if`, `while`, `for`, el intercambio `x :=: y`, los tipos `int`, `double`,
+`in` y `out`, `if`, `while`, `for`, el intercambio `x :=: y`, `random(inf, sup)` (un entero
+al azar entre dos límites), los tipos `int`, `double`,
 `bool` y `text`, arreglos, `Cola` y `ColaOrdenada` declaradas con los tipos de sus
 componentes (`Cola c(int, text)`) y, la ordenada, con su orden
 (`ColaOrdenada fila(int, int) desc`). Las cantidades fijas de los enunciados, como `N`, se

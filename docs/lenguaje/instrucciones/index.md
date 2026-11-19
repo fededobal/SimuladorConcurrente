@@ -22,6 +22,7 @@ Cada sentencia ocupa un paso del proceso que la ejecuta. Las guardas de `if`, `w
 | [`empty`](./empty) | `empty c` · `empty(c)` (expresión) | Todas |
 | [`write`](./write) | `write(e);` · `write(e1, e2, ...);` | Todas |
 | [`delay`](./delay) | `delay(instantes);` | Procedure, proceso |
+| [`random`](./random) | `random(inf, sup)` (expresión) | Todas |
 | Bloque | `{ ... }` | Todas |
 
 En la tabla, «Todas» comprende el código de inicialización del monitor, los procedures y

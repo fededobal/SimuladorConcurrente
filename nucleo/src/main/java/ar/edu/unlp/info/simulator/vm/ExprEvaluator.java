@@ -11,9 +11,17 @@ import java.util.function.Function;
 public final class ExprEvaluator {
 
     private final Function<String, Value> resolver;
+    /** De donde sale el azar de {@code random}; null donde no se puede usar (cotas y tamanos). */
+    private final SeededRandom random;
 
+    /** Evaluador para lo que se fija antes de ejecutar: no admite {@code random}. */
     public ExprEvaluator(Function<String, Value> resolver) {
+        this(resolver, null);
+    }
+
+    ExprEvaluator(Function<String, Value> resolver, SeededRandom random) {
         this.resolver = resolver;
+        this.random = random;
     }
 
     public Value eval(Expr e) {
@@ -25,6 +33,7 @@ public final class ExprEvaluator {
             case Expr.VarRef v -> resolve(v.name(), v.line());
             case Expr.ArrayAccess a -> evalArrayAccess(a);
             case Expr.EmptyQueue q -> evalEmpty(q);
+            case Expr.Random r -> evalRandom(r);
             case Expr.Unary u -> evalUnary(u);
             case Expr.Binary b -> evalBinary(b);
         };
@@ -70,6 +79,30 @@ public final class ExprEvaluator {
             throw new RuntimeError("'" + q.queue() + "' no es una cola", q.line());
         }
         return new Value.BoolVal(queueVal.isEmpty());
+    }
+
+    /**
+     * Un entero al azar entre los dos limites, incluidos. Sale del generador de la maquina
+     * virtual: con la misma semilla, la ejecucion se repite igual, tambien en el navegador.
+     */
+    private Value evalRandom(Expr.Random r) {
+        if (random == null) {
+            throw new RuntimeError("random no se puede usar acá: este valor se fija antes de "
+                    + "ejecutar", r.line());
+        }
+        long low = evalLong(r.low());
+        long high = evalLong(r.high());
+        if (low > high) {
+            throw new RuntimeError("random(" + low + ", " + high + "): el límite inferior es "
+                    + "mayor que el superior", r.line());
+        }
+        long span = high - low;
+        // con limites enormes la resta desborda; y span + 1 valores tienen que entrar en un long
+        if (span < 0 || span == Long.MAX_VALUE) {
+            throw new RuntimeError("random(" + low + ", " + high + "): el rango es demasiado "
+                    + "grande", r.line());
+        }
+        return new Value.IntVal(low + random.nextLong(span + 1));
     }
 
     private Value evalUnary(Expr.Unary u) {

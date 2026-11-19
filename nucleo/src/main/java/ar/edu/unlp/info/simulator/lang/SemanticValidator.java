@@ -58,6 +58,8 @@ public final class SemanticValidator {
             String boundLabel = "La cota del arreglo de monitores";
             ExprTyper.expect(m.quant().from(), Type.INT, bounds, boundLabel);
             ExprTyper.expect(m.quant().to(), Type.INT, bounds, boundLabel);
+            ExprTyper.rejectRandom(m.quant().from(), "el rango de un arreglo de monitores");
+            ExprTyper.rejectRandom(m.quant().to(), "el rango de un arreglo de monitores");
             root.declare(m.quant().iterator(), new Symbol(new VarType(Type.INT, false), true,
                     "el índice del monitor", null), m.line());
         }
@@ -67,6 +69,7 @@ public final class SemanticValidator {
         for (CondDecl c : m.conds()) {
             if (c.isArray()) {
                 ExprTyper.expect(c.sizeExpr(), Type.INT, root, "El tamaño de la cond");
+                ExprTyper.rejectRandom(c.sizeExpr(), "el tamaño de un arreglo de cond");
             }
         }
 
@@ -95,6 +98,8 @@ public final class SemanticValidator {
         if (p.isFamily()) {
             ExprTyper.expect(p.quant().from(), Type.INT, scope, "La cota de la familia");
             ExprTyper.expect(p.quant().to(), Type.INT, scope, "La cota de la familia");
+            ExprTyper.rejectRandom(p.quant().from(), "el rango de un arreglo de procesos");
+            ExprTyper.rejectRandom(p.quant().to(), "el rango de un arreglo de procesos");
             scope.declare(p.quant().iterator(), new Symbol(new VarType(Type.INT, false), true,
                     "el iterador de la familia", null), p.line());
         }
@@ -144,6 +149,7 @@ public final class SemanticValidator {
     private void checkVarDecl(VarDecl vd, Scope scope, String origin) {
         if (vd.sizeExpr() != null) {
             ExprTyper.expect(vd.sizeExpr(), Type.INT, scope, "El tamaño de '" + vd.name() + "'");
+            ExprTyper.rejectRandom(vd.sizeExpr(), "el tamaño de '" + vd.name() + "'");
         }
         if (vd.initExpr() != null) {
             ExprTyper.checkAssignable(vd.type(), vd.initExpr(), scope, vd.name(), vd.line());

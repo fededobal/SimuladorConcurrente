@@ -61,9 +61,9 @@ final class ProgramLoader {
      * Los monitores de una definicion: uno, o uno por indice si es un arreglo de monitores
      * ({@code Escritorio[0]}, {@code Escritorio[1]}...), cada uno con su propio estado.
      */
-    static List<Monitor> buildMonitors(MonitorDef md) {
+    static List<Monitor> buildMonitors(MonitorDef md, SeededRandom random) {
         if (!md.isFamily()) {
-            return List.of(buildMonitor(md, md.name(), null, 0));
+            return List.of(buildMonitor(md, md.name(), null, 0, random));
         }
         FamilyBounds bounds = familyBounds(md.quant());
         long count = bounds.count();
@@ -74,7 +74,8 @@ final class ProgramLoader {
         List<Monitor> family = new ArrayList<>();
         for (long k = 0; k < count; k++) {
             long i = bounds.from() + k;
-            family.add(buildMonitor(md, md.name() + "[" + i + "]", md.quant().iterator(), i));
+            family.add(buildMonitor(md, md.name() + "[" + i + "]", md.quant().iterator(), i,
+                    random));
         }
         return family;
     }
@@ -83,10 +84,12 @@ final class ProgramLoader {
      * El monitor con sus permanentes y condiciones ya inicializadas. En un arreglo de
      * monitores, el indice va primero entre las permanentes: las demas pueden usarlo.
      */
-    private static Monitor buildMonitor(MonitorDef md, String name, String iterator, long index) {
+    private static Monitor buildMonitor(MonitorDef md, String name, String iterator, long index,
+            SeededRandom random) {
         Monitor m = new Monitor(name, md.name());
         if (iterator != null) m.vars().put(iterator, new Value.IntVal(index));
-        ExprEvaluator ev = new ExprEvaluator(m::getVar);
+        // el valor inicial de una permanente puede usar random
+        ExprEvaluator ev = new ExprEvaluator(m::getVar, random);
         for (VarDecl vd : md.permanentVars()) {
             m.vars().put(vd.name(), initialValue(vd, ev));
         }

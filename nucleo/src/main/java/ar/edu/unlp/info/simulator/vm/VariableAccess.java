@@ -18,13 +18,17 @@ final class VariableAccess {
     /** Para anotar en que instante se escribe cada variable permanente. */
     private final SimulationClock clock;
 
-    VariableAccess(Map<String, Monitor> monitors, SimulationClock clock) {
+    /** El generador de la maquina virtual: de el sale el azar de {@code random}. */
+    private final SeededRandom random;
+
+    VariableAccess(Map<String, Monitor> monitors, SimulationClock clock, SeededRandom random) {
         this.monitors = monitors;
         this.clock = clock;
+        this.random = random;
     }
 
     ExprEvaluator evaluator(Activation act) {
-        return new ExprEvaluator(scopeOf(act));
+        return new ExprEvaluator(scopeOf(act), random);
     }
 
     private Function<String, Value> scopeOf(Activation act) {

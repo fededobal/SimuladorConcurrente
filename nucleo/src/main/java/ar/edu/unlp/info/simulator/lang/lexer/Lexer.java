@@ -21,7 +21,7 @@ public final class Lexer {
             "monitor", "procedure", "cond", "process",
             "if", "else", "while", "for", "skip",
             "wait", "signal", "signal_all",
-            "push", "pop", "empty", "write", "delay",
+            "push", "pop", "empty", "write", "delay", "random",
             "in", "out",
             "true", "false",
             "int", "double", "bool", "text", "Cola", "ColaOrdenada", "asc", "desc",

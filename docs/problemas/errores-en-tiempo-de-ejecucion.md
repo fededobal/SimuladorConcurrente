@@ -20,6 +20,7 @@ ejecutar.
 | `Resultado no representable: la cuenta con double se desborda o no está definida` | Un `double` infinito o indefinido | Revisar la cuenta |
 | `Tamaño de arreglo inválido: -1 (tiene que estar entre 0 y 100000)` | Tamaño negativo o demasiado grande | Ajustar el tamaño ([Límites](/referencia/limites)) |
 | `El delay tiene que ser de 0 a 3600 instantes y es de 4000` | Demora fuera de rango | Usar un valor de 0 a 3600 |
+| `random(5, 2): el límite inferior es mayor que el superior` | Los límites de [`random`](/lenguaje/instrucciones/random) están al revés | Escribir primero el menor |
 | `P ya está dentro de A y no puede volver a llamarlo desde otro monitor` | Un procedure de A llama a B, y B llama de nuevo a A | Reorganizar las llamadas entre monitores |
 
 ## Errores al iniciar

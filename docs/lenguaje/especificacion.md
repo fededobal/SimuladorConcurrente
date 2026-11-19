@@ -220,6 +220,12 @@ conversiones automáticas van en un solo sentido.
 - Booleanas: `and` `or` `not` (equivalentes: `&& || !`).
 - Acceso a arreglo: `a[expr]`.
 - `empty cola`.
+- `random(inf, sup)`: expresión `int`. Evalúa `inf` y después `sup`, los dos `int`, y vale un
+  entero uniforme en el intervalo cerrado `[inf, sup]`. Los valores salen del generador de la
+  máquina virtual, sembrado con la semilla de la ejecución: la misma semilla con los mismos
+  turnos da los mismos valores. `inf > sup` es error de ejecución. No se admite en las cotas
+  de un arreglo de procesos o de monitores ni en el tamaño de un arreglo o de un arreglo de
+  `cond` (error de compilación). No figura en el material de la cátedra.
 - Paréntesis para agrupar.
 
 Precedencia (de menor a mayor): `or` → `and` → `not` → comparación → `+ -` → `* / mod` → unario.
@@ -352,6 +358,7 @@ expr_mul      = expr_un { ( "*" | "/" | "mod" ) expr_un } ;
 expr_un       = { "-" } primario ;
 primario      = numero | texto | "true" | "false"
               | "empty" ( ident | "(" ident ")" )
+              | "random" "(" expr "," expr ")"
               | ident [ "[" expr "]" ]
               | "(" expr ")" ;
 
@@ -370,9 +377,9 @@ comentario    = "//" { caracter } fin_de_linea | "/*" { caracter } "*/" ;
                    marca BOM cuentan como espacio *)
 ```
 
-**Palabras reservadas (33):** `monitor procedure cond process if else while for skip
+**Palabras reservadas (34):** `monitor procedure cond process if else while for skip
 wait signal signal_all push pop empty write in out true false int double bool text Cola
-ColaOrdenada asc desc and or not mod delay`. Las palabras reservadas no distinguen mayúsculas de
+ColaOrdenada asc desc and or not mod delay random`. Las palabras reservadas no distinguen mayúsculas de
 minúsculas: `OR`, `Out`, `cola` y `colaOrdenada` se leen como `or`, `out`, `Cola` y
 `ColaOrdenada`. Los identificadores sí las distinguen: `P` y `p` son nombres distintos, y un
 identificador no puede coincidir con una palabra reservada en ninguna combinación de

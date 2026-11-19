@@ -59,6 +59,14 @@ const CANONICOS = [
       procedure guardar(v: in int) { recibido = v; } }
     process P { text lista, comp; int x, y = 7; M.guardar(x + y); }`,
     (r) => r.finished && r.vars['M.a'] === '0' && r.vars['M.b'] === '5' && r.vars['M.recibido'] === '7'],
+  ['random(inf, sup) queda entre sus limites', `
+    monitor M { int fuera = 0; int n = 0;
+      procedure anotar(v: in int) { n = n + 1; if (v < 3 or v > 6) fuera = fuera + 1; } }
+    process P { for (1..50) { M.anotar(random(3, 6)); } }`,
+    (r) => r.finished && r.vars['M.fuera'] === '0' && r.vars['M.n'] === '50'],
+  ['random con los limites al reves es error de ejecucion', `
+    process P { int x = random(5, 2); }`,
+    (r) => r.finished && r.kinds.has('ERROR')],
   ['deadlock real se detecta', `
     monitor M { cond c; procedure bloquear() { wait(c); } }
     process P { M.bloquear(); }`,
@@ -368,6 +376,20 @@ console.log('Paridad con la JVM');
   const bien = traza.trim() === TRAZA;
   if (!bien) fallas++;
   console.log(`  ${bien ? 'OK   ' : 'FALLA'} azar con semilla 0 igual que en la JVM${bien ? '' : '  -> ' + traza.trim()}`);
+}
+
+// Paridad de random(inf, sup): mismos valores que la JVM con la misma semilla, tambien con un
+// rango que no entra en un int. El programa y los valores son los de
+// SeededRandomTest#randomValuesWithFixedSeed; si uno cambia, tiene que cambiar el otro.
+{
+  const VALORES = '61 49 30 48 16 54 92 62 20 55 1431678132 ';
+  const r = correr(`
+    monitor M { text valores = ""; procedure anotar(v: in int) { valores = valores + v + " "; } }
+    process P { for (1..10) { M.anotar(random(1, 100)); } M.anotar(random(-5, 4000000000)); }`,
+  { seed: 0, policy: 'ROUND_ROBIN' });
+  const bien = r.vars?.['M.valores'] === VALORES;
+  if (!bien) fallas++;
+  console.log(`  ${bien ? 'OK   ' : 'FALLA'} random con semilla 0 igual que en la JVM${bien ? '' : '  -> ' + r.vars?.['M.valores']}`);
 }
 
 console.log('Bugs conocidos (se esperan en FALLA hasta arreglarlos)');

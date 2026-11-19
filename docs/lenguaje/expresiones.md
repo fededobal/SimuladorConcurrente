@@ -10,8 +10,9 @@
 | 6 | `*` `/` `mod` | Izquierda |
 | 7 (mayor) | `-` unario | Prefijo |
 
-Primarios: un número, una cadena, `true`, `false`, `empty cola` (o `empty(cola)`), una
-variable, un elemento de arreglo (`a[i]`) o una expresión entre paréntesis.
+Primarios: un número, una cadena, `true`, `false`, `empty cola` (o `empty(cola)`),
+[`random(inf, sup)`](./instrucciones/random), una variable, un elemento de arreglo (`a[i]`)
+o una expresión entre paréntesis.
 
 Tipos de las operaciones:
 

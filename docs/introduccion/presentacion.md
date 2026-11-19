@@ -17,7 +17,7 @@ simulador cuenta con:
   constantes como `N` ([Tipos y arreglos](/lenguaje/tipos), [Colas](/lenguaje/colas),
   [Constantes](/lenguaje/constantes));
 - las instrucciones `wait`, `signal`, `signal_all`, `push`, `pop`, `write` y `delay`, el
-  intercambio `:=:` y las estructuras `if`, `while` y `for`
+  intercambio `:=:`, la función `random` y las estructuras `if`, `while` y `for`
   ([Instrucciones](/lenguaje/instrucciones/));
 - un dibujo por monitor con las tres zonas que usa la cátedra: los procesos que compiten
   por entrar, los que esperan en cada variable condición y el que está adentro

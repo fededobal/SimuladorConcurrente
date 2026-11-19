@@ -39,9 +39,28 @@ final class ExprTyper {
                 }
                 yield Type.BOOLEAN;
             }
+            case Expr.Random r -> {
+                expect(r.low(), Type.INT, scope, "El límite inferior de random");
+                expect(r.high(), Type.INT, scope, "El límite superior de random");
+                yield Type.INT;
+            }
             case Expr.Unary u -> unary(u, scope);
             case Expr.Binary b -> binary(b, scope);
         };
+    }
+
+    /**
+     * Rechaza random en un tamano o en un rango: la cantidad de procesos, de monitores y de
+     * elementos de un arreglo se fija antes de ejecutar y no puede depender del azar.
+     *
+     * @param what que es la expresion, para el mensaje ("el tamaño de 'v'")
+     */
+    static void rejectRandom(Expr e, String what) {
+        if (e instanceof Expr.Random) {
+            throw error("random no se puede usar en " + what + ": se fija antes de ejecutar",
+                    e.line());
+        }
+        for (Expr child : e.children()) rejectRandom(child, what);
     }
 
     /** Argumento de write: ademas de escalares, se puede mostrar un arreglo o una cola enteros. */

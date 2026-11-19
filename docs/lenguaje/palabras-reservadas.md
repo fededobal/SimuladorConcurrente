@@ -1,6 +1,6 @@
 # Palabras reservadas y símbolos
 
-Son 33. Se aceptan con cualquier combinación de mayúsculas (`Monitor`, `OR`, `OUT`,
+Son 34. Se aceptan con cualquier combinación de mayúsculas (`Monitor`, `OR`, `OUT`,
 `colaOrdenada`), como aparecen en el material de la cátedra. No pueden usarse como nombre de
 variable, monitor, procedure o proceso, en ninguna combinación de mayúsculas (`int out = 0;`
 e `int Out = 0;` son errores de sintaxis). La única excepción es `cola`.
@@ -27,6 +27,7 @@ Los nombres que declara el programa sí distinguen mayúsculas: si se declara `p
 | Orden de una `ColaOrdenada` | `asc` `desc` |
 | Salida | `write` |
 | Tiempo | `delay` |
+| Azar | `random` |
 | Operadores | `and` `or` `not` `mod` |
 | Literales | `true` `false` |
 

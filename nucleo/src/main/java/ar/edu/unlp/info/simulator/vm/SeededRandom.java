@@ -3,7 +3,7 @@ package ar.edu.unlp.info.simulator.vm;
 import java.util.List;
 
 /**
- * Generador pseudoaleatorio del scheduler. Reproduce el algoritmo de {@link java.util.Random}
+ * Generador pseudoaleatorio del scheduler y de {@code random(inf, sup)}. Reproduce el algoritmo de {@link java.util.Random}
  * (congruencial de 48 bits) y el de {@link java.util.Collections#shuffle}, pero escrito aca.
  *
  * <p>Por que no usar la biblioteca: TeaVM trae su propia {@code Random}, con el mismo
@@ -40,6 +40,31 @@ final class SeededRandom {
             u = next(31);
         }
         return r;
+    }
+
+    /**
+     * Entero uniforme en [0, cota), para cotas que no entran en un int. Con una cota chica
+     * usa {@link #nextInt(int)}; con una mas grande, el algoritmo de
+     * {@code Random.nextLong(long)}: dos tiradas de 32 bits y descarte de las que sesgarian.
+     */
+    long nextLong(long bound) {
+        if (bound <= Integer.MAX_VALUE) {
+            return nextInt((int) bound);
+        }
+        long m = bound - 1;
+        long r = nextLong();
+        if ((bound & m) == 0L) {
+            return r & m;
+        }
+        long u = r >>> 1;
+        while (u + m - (r = u % bound) < 0L) {
+            u = nextLong() >>> 1;
+        }
+        return r;
+    }
+
+    private long nextLong() {
+        return ((long) next(32) << 32) + next(32);
     }
 
     /** Mezcla la lista en el lugar, como {@code Collections.shuffle(lista, random)}. */
